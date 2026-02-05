@@ -1,0 +1,614 @@
+{
+  "faccion": {
+    "nombre": "La Federación",
+    "estilo_juego": "La Federación es una fuerza militar disciplinada centrada en el disparo estable, el uso de coberturas y el control táctico del campo de batalla. Sus unidades funcionan mejor cuando se mantienen organizadas, aprovechando armas pesadas y fuego apoyado, aunque sacrifican movilidad y capacidad de combate cuerpo a cuerpo. Son ideales para jugadores que prefieren estrategias metódicas, fuego defensivo y ganar por posicionamiento.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Atrincheramiento",
+        "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene -1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación."
+      },
+      {
+        "habilidades_faccion2": "Refuerzos rasos",
+        "descripcion": "Una vez por partida, cuando una unidad de Línea de esta facción es eliminada por completo, puedes devolverla al campo a la zona de despliegue de tu siguiente fase de Iniciativa."
+      },
+      {
+        "habilidades_faccion3": "Furia de los Caídos",
+        "descripcion": "Cuando una unidad cae de una escuadra, la escuadra entera gana +1 de ataque adicional. En Escaramuza, las unidades a 6\" ganan un +1 de ataque adicional, hasta final de turno."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Soldados rasos",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil láser",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Armas pesadas",
+            "ataques": "3D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bayoneta",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Veteranos de guerra",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusiles láser Grand II",
+            "ataques": "3D",
+            "distancia": "15\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzallamas",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Lanza Granadas",
+            "ataques": "2D",
+            "distancia": "15\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Fusiles de plasma",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Anti +1 (Élite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bayoneta",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Soldado de choque",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola táctica",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Porrón Reforzado",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Embestida de Escudo",
+            "ataques": "1D3",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Bruto",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Mientras esta unidad esté en el campo, los ataques de Disparo dirigidos a unidades aliadas a 6\" pueden ser redirigidos a esta unidad a elección del jugador de la Federación.",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Escopeta",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Porrón Pesado",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Raiders",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "Esta unidad puede realizar la acción Carrera gastando una sola acción, en lugar de su coste normal.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusiles láser modificados",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+3",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Ametralladora Ligera",
+            "ataques": "1D6",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Vibra-espada",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanza demoledora",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Rameu-Russ",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad puede equipar dos armas de Disparo.",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón principal",
+            "ataques": "2D",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Explosiva",
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Ametralladoras laterales",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzallamas laterales",
+            "ataques": "2D6",
+            "distancia": "8\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Cañón barricade",
+            "ataques": "1D (3 munición)",
+            "distancia": "35\"",
+            "impactos": "D.Dirección + D6",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Indirect Fire",
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Embestida",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Cañón flatt-8",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 6,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 2
+        },
+        "especialidad": "Esta unidad no puede moverse. Requiere dos unidades de Línea aliadas para poder disparar. Dichas unidades pueden separarse de esta unidad, pero no podrán disparar ese turno.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Artillería",
+            "ataques": "1D6",
+            "distancia": "35\"",
+            "impactos": "D6 + D.Dirección",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Explosiva",
+              "Ignora Coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cañón auxiliar",
+            "ataques": "2D",
+            "distancia": "25\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Equipo de artillería",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "General",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 8,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Las unidades de la Federación en escuadra o a 6\" en escaramuza pueden repetir un dado de Impactos fallido en disparo durante su activación. Esta unidad puede ir dentro de un vehículo.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rifle de Mando",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pistola Reglamentaria",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada de general",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Bastión de Asedio",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "1\"",
+        "vidas": 26,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "valor": 40
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón de Asedio",
+            "ataques": "2D6 (3 munición)",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Batería Láser",
+            "ataques": "3D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzamisiles Táctico",
+            "ataques": "1D6",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Patada blindada",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "4a761793-28b1-403a-b2b5-697f94410a22_La_Federacin.pdf"
+}

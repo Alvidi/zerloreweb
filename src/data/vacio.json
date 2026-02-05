@@ -1,0 +1,517 @@
+{
+  "faccion": {
+    "nombre": "El Vacío",
+    "estilo_juego": "El Vacío es una facción de control, posicionamiento y daño de vacío, especializada en manipular el campo de batalla y castigar al enemigo desde ángulos inesperados. Sus unidades combinan armamento que ignora defensas, resistencia antinatural y efectos de desestabilización, sacrificando velocidad bruta por presión constante y letalidad puntual. Funciona mejor en manos de jugadores que disfrutan anticipándose al rival, forzando errores y dominando el ritmo de la partida mediante teletransportes y fuego selectivo.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Portales del vacío",
+        "descripcion": "Una vez por turno, una unidad línea/élite/héroe aliada puede intercambiar su posición con otra unidad aliada."
+      },
+      {
+        "habilidades_faccion2": "Ojos del más allá",
+        "descripcion": "Las unidades del Vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura."
+      },
+      {
+        "habilidades_faccion3": "Heraldos del vacío supremo",
+        "descripcion": "Esta facción puede usar dos héroes."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Aveformers",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 5,
+          "max": 10
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola sombría",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada ritual",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Armas ceremoniales",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Acólitos del Vacío",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+6",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 5,
+          "max": 10
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Proyector Sombrío",
+            "ataques": "1D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Daga Disforme",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Portadores",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "Esta unidad no puede realizar acciones de Retirada ni ser forzada a retirarse.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil del vacío",
+            "ataques": "2D",
+            "distancia": "15\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzallamas disforme",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo",
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Puño arcano",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Terminadores",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Esta unidad no puede realizar acciones de Retirada ni ser forzada a retirarse.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "cañón del Vacío",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cañón disforme",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada curva disforme",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Brutálido del vacío",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 12,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "No se ve afectado por descontrol.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Descarga aberrante",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Zarpas del Vacío",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Horror mayor",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad ignora los efectos de Descontrol.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Tormenta del Vacío",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Rayo disforme concentrado",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "-",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Martillo destino",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Heraldo del Vacío",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Tormenta del Vacío",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Rayo disforme concentrado",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "-",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hoja Disforme",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Váculo del Más Allá",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Avatar del Vacío",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 28,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad no puede beneficiarse de la habilidad Portales del Vacío. Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
+        "valor": 42
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rayo del No-Ser",
+            "ataques": "2D6",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Orbe Disforme",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+5",
+            "danio": "7",
+            "danio_critico": "9",
+            "habilidades_arma": [
+              "Explosiva",
+              "Munición limitada 3"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Grieta del Vacío",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "6",
+            "danio_critico": "8",
+            "habilidades_arma": [
+              "Directo",
+              "Anti +2 (Titán)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mandíbulas del Abismo",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "8",
+            "habilidades_arma": [
+              "Anti +2 (Titán)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Extremidades Disformes",
+            "ataques": "6D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "7ea4da35-a4b1-4d34-8172-b26c5f6fb4e5_El_Vaco.pdf"
+}

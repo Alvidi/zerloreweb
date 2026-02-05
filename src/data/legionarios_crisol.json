@@ -1,0 +1,278 @@
+{
+  "faccion": {
+    "nombre": "Legionarios del Crisol",
+    "estilo_juego": "Los Legionarios del Crisol son una élite imparable, fanática y extremadamente resistente, capaz de absorber daño que destruiría a tropas normales. Se apoyan en contraataques, salvaciones sólidas y habilidades defensivas que les permiten ganar duelos prolongados. Es la facción perfecta para quienes disfrutan de unidades duras, lentas pero devastadoras, que avanzan sin miedo hacia el enemigo.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Gloria del Crisol",
+        "descripcion": "Una unidad / escuadra puede ignorar la primera herida que reciban a distancia."
+      },
+      {
+        "habilidades_faccion2": "Caída heroica",
+        "descripcion": "Si la unidad muere, realiza antes de morir un contraataque, ya sea en disparo como en combate."
+      },
+      {
+        "habilidades_faccion3": "Voto sagrado",
+        "descripcion": "Una unidad / escuadra puede repetir un dado cuerpo a cuerpo fallido por turno."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Soronitas",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil de Crisol",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hoja devocional",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Custodio del Crisol",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "No se beneficia de la cobertura parcial. Las armas equipadas elegidas tienen que coincidir en disparo y cuerpo a cuerpo.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanza guardia",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Anti -1 (Línea)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada solar y escudo",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lanza guardia",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada solar y escudo",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Pretor del Crisol",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 2
+        },
+        "especialidad": "No se beneficia de la cobertura parcial.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanza tormenta",
+            "ataques": "3D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Puño de energía",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Órgano de batalla",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Destructor Solar",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque rápido +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cañón Solar",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": []
+      }
+    },
+    {
+      "nombre_unidad": "Paladín del Crisol",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 16,
+        "salvacion": "+2",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Mientras esté en mesa, todo el daño recibido por unidades del Crisol a 6\" se asigna primero a esta unidad. Esta unidad no puede ir en escuadra.",
+        "valor": 18
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola del Crisol",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada Bastión",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "7037687e-9777-4da4-9b82-d87fe70abe94_Legionarios_del_Crisol.pdf"
+}

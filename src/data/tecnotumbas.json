@@ -1,0 +1,510 @@
+{
+  "faccion": {
+    "nombre": "TecnoTumbas",
+    "estilo_juego": "Las Tecno-Tumbas son máquinas ancestrales que avanzan sin descanso, reviviendo una y otra vez mientras desatan disparos pesados de precisión calculada. Son lentos pero implacables, con unidades que regresan al combate y vehículos poderosos que dominan largas distancias. Perfectas para jugadores que quieren desgaste, inevitabilidad y presión constante sin depender de la moral o la velocidad.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Reanimación Mekánika",
+        "descripcion": "Si una unidad cae derrotada, su cuerpo se mantendrá en el campo de batalla; una vez comience la siguiente iniciativa, se tirará 1D6: con resultado 1-3 la unidad muere, si sale 3-6 la unidad revive con mitad de su vida. Esto solo se puede hacer una vez por unidad."
+      },
+      {
+        "habilidades_faccion2": "No conocen el miedo",
+        "descripcion": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse."
+      },
+      {
+        "habilidades_faccion3": "Protocolo de Aniquilación",
+        "descripcion": "Si una unidad/escuadra elimina o daña, esta gana una acción extra de movimiento de 2\" de inmediato."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Guardianes Tecno-Tumba",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rifle Gauss",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Desintegrador Ligero",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Rifle de Energía Estable",
+            "ataques": "3D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Brazo Metálico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Vigías",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusión Ligera",
+            "ataques": "1D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti -1 (Élite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Rifle Pesado Gauss",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lanza de Energía",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Destructores",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "-",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón Gauss Pesado",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti -1 (Línea)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Desintegrador Doble",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garra de Energía",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Lores de las tumbas",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Si elimina una unidad cuerpo a cuerpo, gana instantaneamente: Preparado",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola de energía",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Guadaña de Energía",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada de Fase",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Mecanoide",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 20,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Cuando esta unidad es destruida, vuelve a aparecer en la zona de despliegue.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón de Partículas",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Rayo de Desintegración",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastamiento",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Trilonoide",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rayo Oscuro",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti -2 (Todo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Pata Metálica",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Señor Necróforo",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Las unidades en escuadra o a 3\" en modo escaramuza de esta unidad reviven inmediatamente con la mitad de la vida.",
+        "valor": 15
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rayo Necrónico",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Emisor Gauss",
+            "ataques": "1D6",
+            "distancia": "18\"",
+            "impactos": "-",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Guadaña Mecánica",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Obelisco de Aniquilación",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "2\"",
+        "vidas": 30,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Gastando 2 de acción puede teletransportarse a 20\" de su posición.",
+        "valor": 0
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón del Juicio",
+            "ataques": "2D6",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Prisma Necrónico",
+            "ataques": "3D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Descarga de Entropía",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "6",
+            "danio_critico": "8",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Choque Monolítico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "effdc438-e775-4d66-9ef3-95216c3b6697_TecnoTumbas.pdf"
+}

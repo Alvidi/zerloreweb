@@ -1,0 +1,643 @@
+{
+  "faccion": {
+    "nombre": "Salvajes",
+    "estilo_juego": "Los Salvajes son la facción más impredecible y brutal del juego, una mezcla de chatarra, fuerza bruta y agresividad descontrolada. Sus unidades se mueven rápido, pegan fuerte y generan muchos dados aleatorios, capaces de causar estragos en combate cuerpo a cuerpo. Funcionan mejor en manos de jugadores que disfrutan del caos, el riesgo y la ofensiva constante, aunque sacrifican precisión y defensa.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Furia Incontrolada",
+        "descripcion": "Una unidad Salvaje que carga, gana +1 Ataque en cuerpo a cuerpo."
+      },
+      {
+        "habilidades_faccion2": "Descontrol de plebeyos",
+        "descripcion": "Si las unidades/escuadras de Línea que llegan a mitad de su vida, deben realizar una tirada de 1D6: 1-2 entran en retirada, 3-4 no pasa nada, 5-6 entran en modo asesino, añadiendo un dado más de ataque a todas sus armas. Esta tirada se hace en iniciativa y aplica el resultado solo ese turno, hasta el siguiente turno."
+      },
+      {
+        "habilidades_faccion3": "Violencia Tribal",
+        "descripcion": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\" (este movimiento no provoca chequeos ni cuenta como acción)."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Chatarreros",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 4,
+          "max": 10
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rifle Chatarroso",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Escopeta Salvaje",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Lanza-Kebabs",
+            "ataques": "1D",
+            "distancia": "16\"",
+            "impactos": "1D6",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Machete",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Tormentos",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "9\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "Esta unidad puede sumar 1D6 a su movimiento y subir a zonas de manera diagonal.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola Chisporroteante",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": []
+      }
+    },
+    {
+      "nombre_unidad": "Bestiajos",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 8,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "-",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Acribilladoras",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Honda de proyectil",
+            "ataques": "1D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": []
+      }
+    },
+    {
+      "nombre_unidad": "Grandes Makineros",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "-",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanzachispas",
+            "ataques": "3D",
+            "distancia": "10\"",
+            "impactos": "1D6",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Chispa-Rayo",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "2",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Kañón Bobina",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti +1 (Vehículo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Explosivo Pegado",
+            "ataques": "1D",
+            "distancia": "6\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Martillo Chatarroso",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti +1 (Vehículos)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cadenasierra Orca",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Pico Industrial",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Brutos del Clan",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 2,
+          "max": 3
+        },
+        "especialidad": "-",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Maza Brutal",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Tronkatank",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 14,
+        "salvacion": "+4",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ametralladora Cutre",
+            "ataques": "3D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Kañón de Bidones",
+            "ataques": "1D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Torreta de arpones",
+            "ataques": "2D6",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Acelerón",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Gran cañonazo",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 10,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Bomba destructora",
+            "ataques": "1D",
+            "distancia": "35\"",
+            "impactos": "dirección +1D6",
+            "danio": "7",
+            "danio_critico": "10",
+            "habilidades_arma": [
+              "Explosiva",
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Bomba racimo",
+            "ataques": "3D6",
+            "distancia": "35\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Equipo de artillería",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Jefe de la Horda",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 10,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Si juega en escuadra y esta unidad va en una, da +1 de ataque cuerpo a cuerpo; si juega en escaramuza, da +1 de ataque cuerpo a cuerpo a todas las unidades a 3\".",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola Tribal",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Escopeta Improvisada",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Lanzachatarra",
+            "ataques": "1D",
+            "distancia": "16\"",
+            "impactos": "1D6",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hacha Tribal Gigante",
+            "ataques": "5D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Hacha Zugkar",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Maza Brutal",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Debora- mundos",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "2\"",
+        "vidas": 25,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "valor": 38
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanzarrocas Gigante",
+            "ataques": "1D6",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Gatling demoledora",
+            "ataques": "6D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Rugido Ensordecedor",
+            "ataques": "2D6",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras Colosales",
+            "ataques": "6D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Puños Demoledores",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Mandíbulas Trituradoras",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti +2 (Titán)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "625518e3-58c0-4bc2-b5da-604ac4eed774_Salvajes.pdf"
+}

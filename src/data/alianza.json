@@ -1,0 +1,664 @@
+{
+  "faccion": {
+    "nombre": "La Alianza",
+    "estilo_juego": "La Alianza combina tropas versátiles con armamento de precisión y vehículos avanzados, destacándose por su flexibilidad y eficiencia en cualquier situación. Es una facción orientada a jugadores que buscan calidad por encima de cantidad, capaz de adaptarse a distancia o combate cercano mediante armas especializadas. Sus unidades son potentes y precisas, pero caras y menos numerosas.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Potencia blindada",
+        "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas"
+      },
+      {
+        "habilidades_faccion2": "Objetivo en la mira",
+        "descripcion": "La unidad tiene repetición de tiradas contra un objetivo específico marcado ese turno."
+      },
+      {
+        "habilidades_faccion3": "Resistencia marcial",
+        "descripcion": "Cuando una unidad/escuadra está en un punto de mando, las unidades ganan -1 de impacto en sus armas a distancia."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Infantería Táctica",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil de Batalla",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzallamas",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Arma Pesada",
+            "ataques": "3D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo de combate",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Especialistas",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "Pueden llevar dos armas de disparo.",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola de mano Especial",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Fusil Modificado",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Escopeta de barrido",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "MG Pesada",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Lanzacohetes",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti +5 (Vehículo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo de combate",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada relicario",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Juramentados",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 7,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 4
+        },
+        "especialidad": "No pueden usar la acción retirarse.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola de mano",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pistola plasma",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada reliquia y escudo",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Mandoble del noble",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Veteranos",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 9,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil tormenta",
+            "ataques": "3D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Gatling veterano",
+            "ataques": "1D6",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pesada",
+              "Anti +5 (Línea)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Puño de energía",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada relicario",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Aclamador",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ametralladoras acopladas",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cañón preciso",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Misiles balísticos",
+            "ataques": "4D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Cañón láser balístico",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+3",
+            "danio": "D6",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 4
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastar",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Centurión de Hierro",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ametralladoras acopladas",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Golpe de Profundidad",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Comandante Juramentado",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Pueden llevar dos armas de disparo. Las unidades en escuadra con este héroe o que estén a 3\" de él en escaramuza, ganan la posibilidad de usar las armas de este héroe en disparo o cuerpo a cuerpo, sustituyendo todas las que tienen en ese ataque.",
+        "valor": 15
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rifle de Juramento",
+            "ataques": "3D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Fusil Magnetizado",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti +5 (Vehículo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pistola de Pulsos",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Microcañón Táctico",
+            "ataques": "1D6",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lanza Energética",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada de Honor",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Arca de Supremacía",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 26,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "valor": 42
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón de Precisión Orbital",
+            "ataques": "2D6",
+            "distancia": "26\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Batería de Saturación",
+            "ataques": "4D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzamisiles Vectoriales",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Rayo de Anulación",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Ariete Blindado",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pinza Hidráulica",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "9ce7732e-9f1d-44ef-b626-f5576b6b30b0_La_Alianza.pdf"
+}

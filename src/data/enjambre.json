@@ -1,0 +1,583 @@
+{
+  "faccion": {
+    "nombre": "El Ejambre",
+    "estilo_juego": "El Enjambre se basa en la presión constante y el avance en bloque. Sus unidades funcionan mejor cuando se mantienen juntas, aprovechando la sinapsis para evitar la desorganización y sostener el ataque. Aunque sus tropas caen con facilidad, el Enjambre compensa las bajas con su capacidad de regresar al campo de batalla y saturar al enemigo, destacando en el combate cuerpo a cuerpo y el control del espacio.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "El enjambre eterno",
+        "descripcion": "Todas las unidades/escuadras de línea eliminadas vuelven a la partida desde la zona de despliegue."
+      },
+      {
+        "habilidades_faccion2": "Synapsis mental",
+        "descripcion": "Si las unidades/escuadras no se encuentran a 6\" entre ellas, deben tirar 1D6 en iniciativa: si sale 1 o 2, la unidad entra en retirada, siguiendo las reglas de retirada."
+      },
+      {
+        "habilidades_faccion3": "Voracidad",
+        "descripcion": "Cuando una unidad del Enjambre elimina una miniatura enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Zánganos",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 2,
+        "salvacion": "+6",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 6,
+          "max": 14
+        },
+        "especialidad": "-",
+        "valor": 2
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanza espinas",
+            "ataques": "3D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras simples",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Despedazadores",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "9\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 4,
+          "max": 12
+        },
+        "especialidad": "Estas unidades no atacan a distancia.",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras perforantes",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Anti -1 (Línea)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Esporeros de asedio",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "+6",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 2,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lluvia de esporas",
+            "ataques": "2D6",
+            "distancia": "20\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Disparo parabólico",
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Tentáculos débiles",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Guerreros sinápticos",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 2,
+          "max": 5
+        },
+        "especialidad": "-",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Bio-fusil",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzador de espinas",
+            "ataques": "1D6",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espadas óseas",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Acechadores sinápticos",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "10\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 6
+        },
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Esta unidad no ataca a distancia.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras saltadoras",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Zarpazo coordinado",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Coloso de Progenie",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 20,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Si mata una unidad cuerpo a cuerpo, puede devorarla y ganar +1 de vida.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rayo bioplasmático",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastamiento total",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Anti -2 (Todo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Destripador aullante",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 16,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Si la unidad daña (línea y élite), crea miedo provocando que la unidad entre en estado de retirada.",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rugido bio-sónico",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras trituradoras",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Neurovigia",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 12,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Si tus unidades/escuadras están a 6\" de esta, repiten tiradas fallidas de cualquier tipo. Esta unidad sí puede conquistar puestos de mando.",
+        "valor": 11
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pulso psiónico",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Tentáculos neuronales",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Nexo Sináptico",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 12,
+        "salvacion": "+4",
+        "velocidad": 6,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Puede subir estructuras con movimiento diagonal.",
+        "valor": 0
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Descarga Sináptica",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pulso Psíquico",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "-",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Aguijón Esporal",
+            "ataques": "1D3",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras Alfa",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Tentáculos Dominantes",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Reina mayor",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 30,
+        "salvacion": "+4",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad sirve como zona de despliegue. Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "valor": 40
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanzalarvas",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Escupesavia Ácida",
+            "ataques": "1D6",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "5",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Biocañón Esporal",
+            "ataques": "2D6",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Pisotón Biológico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Zarpas Trituradoras",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Mandíbulas de Colmena",
+            "ataques": "5D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti +1 (Élite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "4b105f46-39cf-4526-85a3-6d56947e2273_El_Ejambre.pdf"
+}

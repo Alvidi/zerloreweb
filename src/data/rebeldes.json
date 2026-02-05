@@ -1,0 +1,563 @@
+{
+  "faccion": {
+    "nombre": "Rebeldes",
+    "estilo_juego": "Los Rebeldes destacan por su movilidad extrema, armas exóticas y estilos de combate ágiles tanto a distancia como en melee. Sus tropas reposicionan con facilidad, esquivan daño y castigan al enemigo con ataques precisos o ráfagas de energía inestable, pero son frágiles y deben evitar enfrentamientos directos prolongados. Una facción ideal para jugadores tácticos que disfrutan del “golpea y muévete”, de romper líneas y de atacar desde ángulos inesperados.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Guerrilla en las sombras",
+        "descripcion": "Esta facción puede desplegar sus unidades/escuadras de línea y Vehículos fuera de la zona de despliegue, a 9\" del enemigo y de puestos de mando."
+      },
+      {
+        "habilidades_faccion2": "Finta",
+        "descripcion": "Las unidades/escuadras, cuando usan la acción prepararse en vez de contraatacar, ganan -1 de salvación cuando es disparada, no es acumulable si está en cobertura."
+      },
+      {
+        "habilidades_faccion3": "Nadie se para",
+        "descripcion": "Esta facción siempre tiene que gastar una acción de movimiento, a excepción si carga o está trabada en combate cuerpo a cuerpo."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Exploradores del Eco",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "9\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Carabina del Eco",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Arco de Energía",
+            "ataques": "1D3",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Mirada holo-lanza",
+            "ataques": "1D",
+            "distancia": "25\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hoja del eco",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Garra resonante",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Saqueadores del Vacío",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "-",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil fractal",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Torreta de impulso fractal",
+            "ataques": "1D3",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Cañón resonante",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo disruptor",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Anti -1 (Élite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Maza fractal",
+            "ataques": "1D3",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Espectros filo-sombra",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "-",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil fractal",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Filo-sombra",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espada de fase",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Daga de vértice",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          },
+          {
+            "nombre": "Martillo eléctrico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Inestable",
+              "Anti -1 (Élite/Línea)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Fenix",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "12\"",
+        "vidas": 12,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Puede pasar por encima de obstáculos",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón de luz fractal",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Batería pulsátil",
+            "ataques": "1D6",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Ataque rápido +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Cañón prisma móvil",
+            "ataques": "1D3",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Embestida cinética",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Caminante espectral",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón espectral",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Ráfaga de agujas",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Lanza fractal pesada",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti -1 (Vehículos)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Guantelete resonante",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Líder de la Insurrección",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Puede secuestrar vehículos enemigos si carga con éxito contra uno, se tira un 1D6, si sale 1,2 y 3 el vehículo pasa a formar parte de tus líneas.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fusil Rebelde",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Guerrilla"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Subfusil Ligero",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Asaltante",
+              "Guerrilla"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Arma Experimental Robada",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Escopeta Recortada",
+            "ataques": "1D6",
+            "distancia": "8\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Rifle de Tirador",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Lanzador Improvisado",
+            "ataques": "1D",
+            "distancia": "14\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo de Combate",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Culatazo",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Machete",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "786c047e-b3ba-48d0-bc12-f6e51f4e856f_Rebeldes.pdf"
+}

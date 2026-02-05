@@ -1,0 +1,721 @@
+{
+  "faccion": {
+    "nombre": "Tecnócratas",
+    "estilo_juego": "Los Tecnócratras son una facción de tecnología avanzada, fuego preciso y control táctico, especializada en el uso de drones, armamento experimental y retirada inteligente. Sus unidades destacan por su versatilidad y eficiencia, capaces de adaptarse rápidamente a la situación del campo de batalla mediante reposicionamiento y apoyo automatizado. No buscan el enfrentamiento frontal prolongado, sino desgastar al enemigo con superioridad técnica, sacrificando resistencia bruta a cambio de control, precisión y flexibilidad.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Retirada inteligente",
+        "descripcion": "Las unidades de esta facción pueden retirarse sin necesidad de realizar chequeo de retirada."
+      },
+      {
+        "habilidades_faccion2": "Apoyo dron",
+        "descripcion": "Se puede incluir en las escuadras de línea y élite hasta 2 drones ignorando el número de escuadra que tenga la unidad. En modo escaramuza se puede añadir un dron a una unidad."
+      },
+      {
+        "habilidades_faccion3": "Protocolos de Combate",
+        "descripcion": "Una vez por turno, cuando una unidad/escuadra Tecnócrata vaya a realizar una acción de Disparo, puede añadir +1 al resultado de Impactos si otra unidad/escuadra Tecnócrata (incluidos drones) está a 6\" del mismo objetivo."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Soldados de la Tecnounión",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Carabina de Impulso",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Rifle de Impulso",
+            "ataques": "3D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Rifle de Francotirador",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Rifle de Ultrapulso",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Culata de Arma",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Errantes",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "Puede usar Carrera como 1 acción.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rifle regio",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillas cyber-tribales",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Picos de agarre",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Servo-Dron de ataque",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 3,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Gatling de impulso",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzamisiles guiado",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti +5 (Vehículo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzallamas",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Golpe",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Servo-Dron escudo",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 3,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad no puede disparar. Este dron elimina del ataque enemigo un dado de ataque y los críticos se vuelven daño normal.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Golpe",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Mecha X",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 2,
+          "max": 3
+        },
+        "especialidad": "-",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ametralladora Burst",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzallamas",
+            "ataques": "1D6",
+            "distancia": "8\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Lanzamisiles",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Cañón de Plasma",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Patada pesada",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Mecha X-II",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 12,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "-",
+        "valor": 11
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Plasma Blaster",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cañón de Fusión Experimental",
+            "ataques": "1D",
+            "distancia": "14\"",
+            "impactos": "+3",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Anti +4 (Vehículo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hoja de la Aurora",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Hoja Resonante",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Mecha-destructor",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Hyper-cañon de partículas",
+            "ataques": "2D",
+            "distancia": "24\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Misiles guiados",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Cañón de plasma acoplado",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Golpe hidráulico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Mantex",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón automático doble",
+            "ataques": "4D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanza misiles frontal",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Embestida frontal",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Arquitecto de Guerra",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 8,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad transforma cualquier impacto crítico en normal a su escuadra o a unidades a 6\". Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rifle de Pulso",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pistola Neural",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Fusil Experimental",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Proyector de Microdrones",
+            "ataques": "1D6",
+            "distancia": "14\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Cañón de Fase",
+            "ataques": "1D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bastón Energético",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Coloso Autónomo",
+      "clase": "Titán",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 26,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad transforma cualquier impacto crítico en normal.",
+        "valor": 40
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón de Iones",
+            "ataques": "2D6",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Pesada"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Batería de Microdrones",
+            "ataques": "3D",
+            "distancia": "35\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanzador de Plasma",
+            "ataques": "1D6",
+            "distancia": "20\"",
+            "impactos": "+5",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastador Mecánico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "54dd078e-6dc6-47ee-ab3b-665a8305609f_Tecnocratras.pdf"
+}
