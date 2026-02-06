@@ -5,6 +5,7 @@ function Reglamento() {
   const contentRef = useRef(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [activeSection, setActiveSection] = useState('')
+  const [showBackToTop, setShowBackToTop] = useState(false)
 
   const { renderedHtml, tocItems } = useMemo(() => {
     if (typeof window === 'undefined') {
@@ -47,6 +48,7 @@ function Reglamento() {
       if (currentSection) {
         setActiveSection(currentSection)
       }
+      setShowBackToTop(window.scrollY > 600)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -76,11 +78,6 @@ function Reglamento() {
         <p>
           ZeroLore utiliza un sistema de activaciones alternas y combate simultaneo para mantener la tension en cada segundo.
         </p>
-      </div>
-      <div className="rules-topbar reveal">
-        <a className="primary rules-download" href="/reglamento.pdf" download>
-          Descargar PDF
-        </a>
       </div>
       <div className="rules-layout">
         <aside className="rules-toc reveal">
@@ -125,6 +122,17 @@ function Reglamento() {
           />
         </div>
       </div>
+      {showBackToTop && (
+        <button
+          type="button"
+          className="back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Subir arriba"
+          title="Subir arriba"
+        >
+          ↑
+        </button>
+      )}
     </section>
   )
 }

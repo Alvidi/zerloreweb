@@ -22,8 +22,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-src/images/*
 src/data/pdfs/*
-public/reglamento.pdf
-
-public/images/cabecera.png

@@ -4,17 +4,17 @@ import { jsPDF } from 'jspdf'
 const factionModules = import.meta.glob('../data/**/*.json', { eager: true })
 
 const factionImages = {
-  'La Alianza': new URL('../images/alianza.png', import.meta.url).href,
-  'Legionarios del Crisol': new URL('../images/legionarios_crisol.png', import.meta.url).href,
-  Salvajes: new URL('../images/salvajes.png', import.meta.url).href,
-  'El Vacío': new URL('../images/vacio.png', import.meta.url).href,
-  Rebeldes: new URL('../images/rebeldes.png', import.meta.url).href,
-  TecnoTumbas: new URL('../images/tecnotumbas.png', import.meta.url).href,
-  'El Ejambre': new URL('../images/enjambre.png', import.meta.url).href,
-  'La Federación': new URL('../images/federacion.png', import.meta.url).href,
-  Tecnócratas: new URL('../images/tecnocratas.png', import.meta.url).href,
+  'La Alianza': new URL('../images/alianza.webp', import.meta.url).href,
+  'Legionarios del Crisol': new URL('../images/legionarios_crisol.webp', import.meta.url).href,
+  Salvajes: new URL('../images/salvajes.webp', import.meta.url).href,
+  'El Vacío': new URL('../images/vacio.webp', import.meta.url).href,
+  Rebeldes: new URL('../images/rebeldes.webp', import.meta.url).href,
+  TecnoTumbas: new URL('../images/tecnotumbas.webp', import.meta.url).href,
+  'El Ejambre': new URL('../images/enjambre.webp', import.meta.url).href,
+  'La Federación': new URL('../images/federacion.webp', import.meta.url).href,
+  Tecnócratas: new URL('../images/tecnocratas.webp', import.meta.url).href,
 }
-const pdfLogo = new URL('../images/cabecera.png', import.meta.url).href
+const pdfLogo = new URL('../images/cabecera.webp', import.meta.url).href
 
 const slugify = (value) =>
   String(value || '')

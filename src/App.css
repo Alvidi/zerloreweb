@@ -112,7 +112,7 @@
   position: relative;
   background-image:
     linear-gradient(180deg, rgba(8, 8, 12, 0.35), rgba(8, 8, 12, 0.9)),
-    url('./images/cabecera.png');
+    url('./images/cabecera.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
