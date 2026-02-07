@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Portales del vacío",
-        "descripcion": "Una vez por turno, una unidad línea/élite/héroe aliada puede intercambiar su posición con otra unidad línea/élite/héroe aliada de esta facción a 18\" o menos. Consume 1 acción."
+        "descripcion": "Una vez por turno, una unidad línea/élite/héroe aliada puede intercambiar su posición con otra unidad línea/élite/héroe aliada de esta facción a 18\" o menos. No puede intercambiarse con unidades trabadas. Consume 1 acción."
       },
       {
         "habilidades_faccion2": "Ojos del más allá",
@@ -514,5 +514,5 @@
       }
     }
   ],
-  "_fuente": "40b22ad1-af21-4e42-8541-cf688a111c33_El_Vaco.pdf"
+  "_fuente": "0ddfb768-4637-437e-b0d5-e8e3c08824ef_El_Vaco.pdf"
 }

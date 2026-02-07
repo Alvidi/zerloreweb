@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Voracidad",
-        "descripcion": "Cuando una unidad del Enjambre elimina una miniatura enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño."
+        "descripcion": "Cuando una unidad/escuadra del Enjambre elimina una unidad enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño a una unidad."
       }
     ]
   },
@@ -88,7 +88,7 @@
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Anti 1+ (Línea)"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -570,7 +570,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Anti 1+ (Élite)"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -579,5 +579,5 @@
       }
     }
   ],
-  "_fuente": "4b105f46-39cf-4526-85a3-6d56947e2273_El_Ejambre.pdf"
+  "_fuente": "637497f3-c34b-4690-ad66-7fa408d69cb5_El_Ejambre.pdf"
 }

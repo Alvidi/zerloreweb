@@ -357,8 +357,12 @@ const mergeSquads = (units) => {
   return merged
 }
 
-const generateArmyByValue = (faction, target, gameMode) => {
+const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = null) => {
   if (!faction || !faction.unidades.length) return { faction: null, units: [], total: 0 }
+  const pool = unitTypeFilter && unitTypeFilter.size
+    ? faction.unidades.filter((unit) => unitTypeFilter.has(unit.tipo))
+    : faction.unidades
+  if (!pool.length) return { faction, units: [], total: 0 }
   const iterations = 200
   let best = { units: [], total: 0 }
 
@@ -369,7 +373,7 @@ const generateArmyByValue = (faction, target, gameMode) => {
 
     while (guard < 80) {
       guard += 1
-      const unit = randomPick(faction.unidades)
+      const unit = randomPick(pool)
       const squadSize =
         gameMode === 'escuadra'
           ? randomPick(
@@ -441,9 +445,29 @@ function Generador() {
   const [activeUnit, setActiveUnit] = useState(null)
   const [targetValue, setTargetValue] = useState(40)
   const [randomFactionId, setRandomFactionId] = useState('random')
+  const [unitTypeFiltersManual, setUnitTypeFiltersManual] = useState(() => new Set())
+  const [unitTypeFiltersRandom, setUnitTypeFiltersRandom] = useState(() => new Set())
 
   const selectedFaction = factions.find((faction) => faction.id === selectedFactionId) || null
   const armyFaction = factions.find((faction) => faction.id === armyFactionId) || selectedFaction
+  const availableUnitTypes = useMemo(() => {
+    if (!selectedFaction?.unidades?.length) return []
+    const types = new Set(selectedFaction.unidades.map((unit) => unit.tipo))
+    return Array.from(types)
+  }, [selectedFaction])
+  const randomFaction = randomFactionId === 'random'
+    ? null
+    : factions.find((faction) => faction.id === randomFactionId)
+  const availableUnitTypesRandom = useMemo(() => {
+    if (randomFaction) {
+      return Array.from(new Set(randomFaction.unidades.map((unit) => unit.tipo)))
+    }
+    const types = new Set()
+    factions.forEach((faction) => {
+      faction.unidades.forEach((unit) => types.add(unit.tipo))
+    })
+    return Array.from(types)
+  }, [randomFaction, factions, randomFactionId])
 
   const totalValue = armyUnits.reduce((total, unit) => total + unit.total, 0)
 
@@ -457,6 +481,46 @@ function Generador() {
     setSelectedFactionId(next)
     setArmyUnits([])
     setArmyFactionId(next)
+  }
+
+  useEffect(() => {
+    if (!availableUnitTypes.length) {
+      setUnitTypeFiltersManual(new Set())
+      return
+    }
+    setUnitTypeFiltersManual(new Set(availableUnitTypes))
+  }, [availableUnitTypes])
+
+  useEffect(() => {
+    if (!availableUnitTypesRandom.length) {
+      setUnitTypeFiltersRandom(new Set())
+      return
+    }
+    setUnitTypeFiltersRandom(new Set(availableUnitTypesRandom))
+  }, [availableUnitTypesRandom])
+
+  const handleToggleUnitTypeManual = (type) => {
+    setUnitTypeFiltersManual((prev) => {
+      const next = new Set(prev)
+      if (next.has(type)) {
+        next.delete(type)
+      } else {
+        next.add(type)
+      }
+      return next
+    })
+  }
+
+  const handleToggleUnitTypeRandom = (type) => {
+    setUnitTypeFiltersRandom((prev) => {
+      const next = new Set(prev)
+      if (next.has(type)) {
+        next.delete(type)
+      } else {
+        next.add(type)
+      }
+      return next
+    })
   }
 
   const handleOpenConfigurator = (unit) => {
@@ -500,7 +564,12 @@ function Generador() {
         ? randomPick(factions)
         : factions.find((item) => item.id === randomFactionId)
     const target = toNumber(targetValue)
-    const result = generateArmyByValue(faction, target, gameMode)
+    const result = generateArmyByValue(
+      faction,
+      target,
+      gameMode,
+      unitTypeFiltersRandom.size ? unitTypeFiltersRandom : null,
+    )
     setArmyUnits(result.units)
     setArmyFactionId(result.faction?.id || '')
   }
@@ -939,8 +1008,22 @@ function Generador() {
                       </div>
                     )}
                   </div>
+                  <div className="unit-type-filters">
+                    {availableUnitTypes.map((type) => (
+                      <label key={type} className="unit-type-filter">
+                        <input
+                          type="checkbox"
+                          checked={unitTypeFiltersManual.has(type)}
+                          onChange={() => handleToggleUnitTypeManual(type)}
+                        />
+                        <span>{type}</span>
+                      </label>
+                    ))}
+                  </div>
                   <div className="unit-list">
-                    {selectedFaction.unidades.map((unit) => (
+                    {selectedFaction.unidades
+                      .filter((unit) => unitTypeFiltersManual.has(unit.tipo))
+                      .map((unit) => (
                       <article className="unit-card" key={unit.id}>
                         <div>
                           <div className="unit-card-header">
@@ -1011,6 +1094,18 @@ function Generador() {
                   ))}
                 </select>
               </label>
+              <div className="unit-type-filters">
+                {availableUnitTypesRandom.map((type) => (
+                  <label key={`random-${type}`} className="unit-type-filter">
+                    <input
+                      type="checkbox"
+                      checked={unitTypeFiltersRandom.has(type)}
+                      onChange={() => handleToggleUnitTypeRandom(type)}
+                    />
+                    <span>{type}</span>
+                  </label>
+                ))}
+              </div>
                 <button type="button" className="primary" onClick={handleGenerateRandom}>
                   Generar
                 </button>

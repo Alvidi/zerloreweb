@@ -169,7 +169,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Anti 1+ (Élite)"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -399,7 +399,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Anti 1+ (Vehículos)"
+              "Anti 5+ (Vehículos)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -559,5 +559,5 @@
       }
     }
   ],
-  "_fuente": "786c047e-b3ba-48d0-bc12-f6e51f4e856f_Rebeldes.pdf"
+  "_fuente": "c6156854-24be-46b6-8a30-3bdf3ab31ab5_Rebeldes.pdf"
 }

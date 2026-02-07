@@ -533,6 +533,33 @@ button {
   color: var(--text-muted);
 }
 
+.unit-type-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.unit-type-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.6);
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.unit-type-filter input {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--accent);
+}
+
 .faction-summary {
   display: grid;
   gap: 12px;
