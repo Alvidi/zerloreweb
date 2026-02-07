@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Potencia blindada",
-        "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas"
+        "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas."
       },
       {
         "habilidades_faccion2": "Objetivo en la mira",
@@ -163,7 +163,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti +5 (Vehículo)"
+              "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -304,7 +304,7 @@
             "danio_critico": "3",
             "habilidades_arma": [
               "Pesada",
-              "Anti +5 (Línea)"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -501,7 +501,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti +5 (Vehículo)"
+              "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
             "valor_extra": 0

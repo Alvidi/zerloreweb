@@ -5,11 +5,11 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Portales del vacío",
-        "descripcion": "Una vez por turno, una unidad línea/élite/héroe aliada puede intercambiar su posición con otra unidad aliada."
+        "descripcion": "Una vez por turno, una unidad línea/élite/héroe aliada puede intercambiar su posición con otra unidad línea/élite/héroe aliada de esta facción a 18\" o menos. Consume 1 acción."
       },
       {
         "habilidades_faccion2": "Ojos del más allá",
-        "descripcion": "Las unidades del Vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura."
+        "descripcion": "Las unidades del Vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura parcial."
       },
       {
         "habilidades_faccion3": "Heraldos del vacío supremo",
@@ -145,7 +145,9 @@
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Ignora coberturas"
+            ],
             "especialidad": "-",
             "valor_extra": 0
           },
@@ -157,8 +159,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo",
-              "Ignora coberturas"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -476,7 +477,7 @@
             "danio_critico": "8",
             "habilidades_arma": [
               "Directo",
-              "Anti +2 (Titán)"
+              "Anti 4+ (Titán)"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -491,7 +492,7 @@
             "danio": "5",
             "danio_critico": "8",
             "habilidades_arma": [
-              "Anti +2 (Titán)"
+              "Anti 4+ (Titán)"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -513,5 +514,5 @@
       }
     }
   ],
-  "_fuente": "7ea4da35-a4b1-4d34-8172-b26c5f6fb4e5_El_Vaco.pdf"
+  "_fuente": "40b22ad1-af21-4e42-8541-cf688a111c33_El_Vaco.pdf"
 }

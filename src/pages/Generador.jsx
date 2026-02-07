@@ -14,7 +14,6 @@ const factionImages = {
   'La Federación': new URL('../images/federacion.webp', import.meta.url).href,
   Tecnócratas: new URL('../images/tecnocratas.webp', import.meta.url).href,
 }
-const pdfLogo = new URL('../images/cabecera.webp', import.meta.url).href
 
 const slugify = (value) =>
   String(value || '')
@@ -60,11 +59,36 @@ const normalizeWeapon = (weapon, tipo) => ({
   valor_extra: toNumber(weapon.valor_extra ?? 0),
 })
 
-const getAbilityValue = (raw) => {
-  const match = String(raw).match(/([+-]?\d+)/)
-  if (!match) return 'X'
-  const value = match[1]
-  return value.startsWith('+') || value.startsWith('-') ? value : `+${value}`
+const parseAbilityNumber = (raw) => {
+  const text = String(raw || '')
+  const plusMatch = text.match(/(\d+)\s*\+/)
+  if (plusMatch) return `${plusMatch[1]}+`
+  const signedMatch = text.match(/[+-]\s*\d+/)
+  if (signedMatch) return signedMatch[0].replace(/\s+/g, '')
+  const numMatch = text.match(/\d+/)
+  return numMatch ? numMatch[0] : null
+}
+
+const ensureSigned = (value) => {
+  if (!value) return 'X'
+  if (value.startsWith('+') || value.startsWith('-')) return value
+  if (value.endsWith('+')) return value
+  return `+${value}`
+}
+
+const normalizeAntiValue = (value) => {
+  if (!value) return 'X+'
+  if (value.endsWith('+')) return value
+  if (value.startsWith('+')) return `${value.slice(1)}+`
+  if (value.startsWith('-')) return `${value}+`
+  return `${value}+`
+}
+
+const normalizeLimitedValue = (value) => {
+  if (!value) return 'X'
+  if (value.endsWith('+')) return value.slice(0, -1)
+  if (value.startsWith('+')) return value.slice(1)
+  return value
 }
 
 const getAbilityDescription = (ability) => {
@@ -74,19 +98,19 @@ const getAbilityDescription = (ability) => {
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-  const value = getAbilityValue(raw)
+  const value = parseAbilityNumber(raw)
 
   if (key.startsWith('asaltante')) {
-    return `El objetivo pierde ${value} a su Salvación frente a ese ataque.`
+    return `El objetivo pierde ${ensureSigned(value)} a su Salvación frente a ese ataque.`
   }
   if (key.startsWith('pesada')) {
-    return 'Si se movió: -1 Impactos. Si no se movió: +1 Impactos.'
+    return 'Si se ha movido: +1 al valor de Impactos. Si no se ha movido: -1 al valor de Impactos.'
   }
   if (key.startsWith('ataque rapido')) {
-    return `A mitad o menos del alcance, suma ${value} Ataques.`
+    return `A mitad o menos del alcance, suma ${ensureSigned(value)} Ataques.`
   }
   if (key.startsWith('pistolero')) {
-    return 'Puede disparar trabada, solo a la unidad con la que combate.'
+    return 'Puede disparar trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
   }
   if (key.startsWith('explosiva')) {
     return 'Afecta a un radio de 3” desde el punto de impacto.'
@@ -95,34 +119,44 @@ const getAbilityDescription = (ability) => {
     return 'Los impactos críticos no pueden ser salvados.'
   }
   if (key.startsWith('impactos encadenados')) {
-    return 'Cada crítico genera un ataque adicional.'
+    return 'Cada ataque crítico genera un ataque adicional que se resuelve de forma normal.'
   }
   if (key.startsWith('precision')) {
     return 'Repite todas las tiradas fallidas de ataque.'
   }
   if (key.startsWith('anti')) {
-    return `Contra el tipo indicado, los resultados de ${value} son críticos.`
+    return `Contra el tipo indicado, los resultados de ${normalizeAntiValue(value)} son críticos.`
   }
   if (key.startsWith('ignora coberturas')) {
-    return 'El objetivo no se beneficia de cobertura parcial.'
+    return 'El objetivo no puede beneficiarse de ningún bono defensivo por cobertura parcial.'
   }
   if (key.startsWith('disparo parabolico')) {
-    return 'Puede disparar sin línea de visión si no está cubierta.'
+    return 'Puede disparar sin línea de visión, siempre que el objetivo no esté cubierto.'
   }
   if (key.startsWith('inestable')) {
-    return 'Tras atacar, 1-2: la unidad recibe el mismo daño que causó.'
+    return 'Tras atacar, tira 1D6: con 1-2, la unidad recibe el mismo daño que recibió el objetivo.'
   }
   if (key.startsWith('directo')) {
     return 'Impacta automáticamente, sin tirada de Impactos.'
   }
   if (key.startsWith('guerrilla')) {
-    return 'Puede hacer un disparo extra después de usar Carrera.'
+    return 'Puede hacer una acción extra de disparo después de usar Carrera.'
   }
   if (key.startsWith('municion limitada')) {
-    return `Tiene ${value} disparos limitados con esta arma.`
+    return `Tiene ${normalizeLimitedValue(value)} disparos limitados con esta arma.`
   }
 
   return ''
+}
+
+const formatAbilityLabel = (label) => {
+  const raw = String(label || '').trim()
+  if (!raw) return ''
+  return raw
+    .toLowerCase()
+    .split(' ')
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : ''))
+    .join(' ')
 }
 
 const getMaxDisparo = (unit) => {
@@ -386,8 +420,24 @@ function Generador() {
   const [mode, setMode] = useState('manual')
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
-  const [armyFactionId, setArmyFactionId] = useState('')
-  const [armyUnits, setArmyUnits] = useState([])
+  const getSavedArmy = () => {
+    if (typeof window === 'undefined') return { units: [], factionId: '' }
+    const saved = window.localStorage.getItem('zerolore_army_v1')
+    if (!saved) return { units: [], factionId: '' }
+    try {
+      const parsed = JSON.parse(saved)
+      if (parsed?.units && Array.isArray(parsed.units)) {
+        return { units: parsed.units, factionId: parsed.factionId || '' }
+      }
+    } catch {
+      // Ignore invalid cache
+    }
+    return { units: [], factionId: '' }
+  }
+
+  const initialSaved = getSavedArmy()
+  const [armyFactionId, setArmyFactionId] = useState(initialSaved.factionId)
+  const [armyUnits, setArmyUnits] = useState(initialSaved.units)
   const [activeUnit, setActiveUnit] = useState(null)
   const [targetValue, setTargetValue] = useState(40)
   const [randomFactionId, setRandomFactionId] = useState('random')
@@ -396,20 +446,6 @@ function Generador() {
   const armyFaction = factions.find((faction) => faction.id === armyFactionId) || selectedFaction
 
   const totalValue = armyUnits.reduce((total, unit) => total + unit.total, 0)
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem('zerolore_army_v1')
-    if (!saved) return
-    try {
-      const parsed = JSON.parse(saved)
-      if (parsed?.units && Array.isArray(parsed.units)) {
-        setArmyUnits(parsed.units)
-        setArmyFactionId(parsed.factionId || '')
-      }
-    } catch {
-      // Ignore invalid cache
-    }
-  }, [])
 
   useEffect(() => {
     const payload = JSON.stringify({ units: armyUnits, factionId: armyFactionId })
@@ -506,13 +542,6 @@ function Generador() {
       return doc.getTextDimensions('Mg').h * multiplier
     }
 
-    const measureTextBlock = (text, fontSize, width, multiplier = 1.2) => {
-      if (!text) return 0
-      doc.setFontSize(fontSize)
-      const lines = doc.splitTextToSize(text, width)
-      return lines.length * getLineHeight(fontSize, multiplier)
-    }
-
     const drawSectionTitle = (text, bold = false) => {
       ensureSpace(10)
       doc.setFontSize(12)
@@ -538,12 +567,31 @@ function Generador() {
       })
     }
 
+    const drawBulletItem = (title, description, fontSize = 9) => {
+      const lineHeight = getLineHeight(fontSize)
+      ensureSpace(lineHeight)
+      doc.setFontSize(fontSize)
+      doc.setTextColor(40)
+      doc.setFont('helvetica', 'bold')
+      doc.text(`• ${title}`, margin, y)
+      doc.setFont('helvetica', 'normal')
+      y += lineHeight
+      if (!description) return
+      const lines = doc.splitTextToSize(description, usableWidth - 6)
+      lines.forEach((line) => {
+        ensureSpace(lineHeight)
+        doc.text(line, margin + 6, y)
+        y += lineHeight
+      })
+    }
+
     const drawTable = ({
       columns,
       rows,
       columnWidths,
       compact = false,
       headerFill = [240, 246, 255],
+      rowFill = [252, 252, 252],
     }) => {
       const baseRowHeight = compact ? 5.2 : 6.5
       const headerHeight = compact ? 5.5 : 6.8
@@ -562,7 +610,7 @@ function Generador() {
       })
       y += headerHeight
 
-      rows.forEach((row) => {
+      rows.forEach((row, rowIndex) => {
         const rowLines = row.map((cell, idx) => {
           const width = columnWidths[idx] - 4
           const text = String(cell ?? '–')
@@ -573,6 +621,10 @@ function Generador() {
         const rowHeight = Math.max(baseRowHeight, Math.max(...rowLines.map((lines) => lines.length)) * lineHeight + 1)
         ensureSpace(rowHeight + 2)
         doc.setDrawColor(225)
+        if (rowIndex % 2 === 0) {
+          doc.setFillColor(...rowFill)
+          doc.rect(margin, y, usableWidth, rowHeight, 'F')
+        }
         doc.rect(margin, y, usableWidth, rowHeight)
         let cx = margin
         row.forEach((cell, idx) => {
@@ -661,42 +713,47 @@ function Generador() {
     }
     doc.setFontSize(18)
     doc.setTextColor(10)
+    const headerX = margin + (logoDataUrl ? 20 : 0)
     const headerText = `ROSTER – ${armyFaction?.nombre || 'Ejército'}`
-    doc.text(headerText, margin + (logoDataUrl ? 20 : 0), y + 6)
-    y += 10
+    doc.text(headerText, headerX, y + 6)
+    y += 12
     doc.setFontSize(10)
     doc.setTextColor(50)
-    doc.text(
-      `Facción: ${armyFaction?.nombre || '—'} | Puntos/Valor: ${totalValue}`,
-      margin,
-      y,
-    )
-    y += 6
-    if (armyFaction?.estilo) {
-      drawTextBlock(armyFaction.estilo, 9)
-      y += 2
+    if (logoDataUrl) {
+      y = Math.max(y, margin + 18)
     }
-
+    const headerMeta = `Facción: ${armyFaction?.nombre || '—'} | Puntos/Valor: ${totalValue}`
+    const metaLines = doc.splitTextToSize(headerMeta, usableWidth)
+    const metaLineHeight = getLineHeight(10)
+    metaLines.forEach((line) => {
+      ensureSpace(metaLineHeight)
+      doc.text(line, headerX, y)
+      y += metaLineHeight
+    })
+    y += 2
     if (armyFaction?.habilidades_faccion?.length) {
       drawSectionTitle('Doctrinas / Habilidades de facción', true)
-      const bullets = armyFaction.habilidades_faccion
-        .slice(0, 5)
-        .map((habilidad) => `• ${habilidad.nombre}: ${habilidad.descripcion}`)
-        .join(' ')
-        .slice(0, 400)
-      drawTextBlock(bullets, 9)
+      armyFaction.habilidades_faccion.slice(0, 6).forEach((habilidad) => {
+        drawBulletItem(habilidad.nombre, habilidad.descripcion, 9)
+      })
       y += 2
     }
 
     drawSectionTitle('Unidades')
 
-    armyUnits.forEach((unit) => {
-      ensureSpace(18)
+    armyUnits.forEach((unit, unitIndex) => {
+      ensureSpace(50)
+      if (y > pageHeight - margin - 60) {
+        doc.addPage()
+        y = margin
+      }
       y += 2
       doc.setFontSize(13)
       doc.setTextColor(20)
-      const squadLabel = gameMode === 'escuadra' ? ` x${unit.squadSize || 1}` : ''
-      doc.text(`${unit.base.nombre} (${unit.base.tipo})${squadLabel}`, margin, y)
+      const isSquad = gameMode === 'escuadra' && unit.squadSize > 1
+      const squadLabel = isSquad ? `Escuadra ${unitIndex + 1}: ` : ''
+      const squadCount = isSquad ? ` x${unit.squadSize || 1}` : ''
+      doc.text(`${squadLabel}${unit.base.nombre}${squadCount} (${unit.base.tipo})`, margin, y)
       doc.setFontSize(9.5)
       doc.setTextColor(60)
       doc.text(`${unit.total} valor`, pageWidth - margin - 25, y)
@@ -704,8 +761,34 @@ function Generador() {
 
       drawStatsTable(unit)
 
+      const buildGroupedWeapons = (loadouts, listKey) => {
+        const counts = new Map()
+        const weaponsByName = new Map()
+        loadouts.forEach((loadout) => {
+          const value = loadout[listKey]
+          const list = Array.isArray(value) ? value : value ? [value] : []
+          list.forEach((weapon) => {
+            const name = weapon?.nombre || '–'
+            counts.set(name, (counts.get(name) || 0) + 1)
+            if (weapon && !weaponsByName.has(name)) {
+              weaponsByName.set(name, weapon)
+            }
+          })
+        })
+        return Array.from(counts.entries()).map(([name, count]) => ({
+          name,
+          count,
+          weapon: weaponsByName.get(name) || null,
+        }))
+      }
+
       const drawWeaponTable = (title, weapons) => {
-        if (!weapons.length) return
+        if (!weapons.length) {
+          drawSubheader(title, [255, 240, 244])
+          drawTextBlock('Sin armas disponibles.', 8.6)
+          y += 2
+          return
+        }
         drawSubheader(title, [255, 240, 244])
         drawTable({
           columns: ['Arma', 'Atq', 'Dist', 'Imp', 'Daño / Crít', 'Habilidades', '+Valor'],
@@ -732,74 +815,37 @@ function Generador() {
           ],
           compact: true,
           headerFill: [232, 239, 250],
+          rowFill: [252, 252, 252],
         })
       }
 
       if (unit.shooting.length || unit.melee) {
-        drawWeaponTable('DISPARO', unit.shooting)
-        if (unit.melee) drawWeaponTable('CUERPO A CUERPO', [unit.melee])
-      }
-
-      const drawEquipamiento = () => {
-        const isSquad = gameMode === 'escuadra' && unit.squadSize > 1
-        const loadouts = unit.perMiniLoadouts || []
-        if (!isSquad || !loadouts.length) {
-          ensureSpace(10)
-          doc.setFontSize(9.5)
-          doc.setTextColor(20)
-          doc.text('Equipamiento elegido', margin, y)
-          y += 5
-          const shootingNames = unit.shooting.map((w) => w.nombre).join(', ') || '–'
-          const meleeName = unit.melee?.nombre || '–'
-          drawTextBlock(`Disparo: ${shootingNames}`, 8.6)
-          drawTextBlock(`CaC: ${meleeName}`, 8.6)
-          y += 2
-          return
+        if (isSquad && unit.perMiniLoadouts?.length) {
+          const shootingGroups = buildGroupedWeapons(unit.perMiniLoadouts, 'shooting')
+          const meleeGroups = buildGroupedWeapons(unit.perMiniLoadouts, 'melee')
+          const shootingRows = shootingGroups
+            .map((group) => {
+              const weapon = group.weapon
+              if (!weapon) return null
+              return { ...weapon, nombre: `${weapon.nombre} x${group.count}` }
+            })
+            .filter(Boolean)
+          const meleeRows = meleeGroups
+            .map((group) => {
+              const weapon = group.weapon
+              if (!weapon) return null
+              return { ...weapon, nombre: `${weapon.nombre} x${group.count}` }
+            })
+            .filter(Boolean)
+          drawWeaponTable('DISPARO', shootingRows)
+          if (meleeRows.length) drawWeaponTable('CUERPO A CUERPO', meleeRows)
+        } else {
+          drawWeaponTable('DISPARO', unit.shooting)
+          if (unit.melee) drawWeaponTable('CUERPO A CUERPO', [unit.melee])
         }
-
-        ensureSpace(10)
-        doc.setFontSize(9.5)
-        doc.setTextColor(20)
-        doc.text(`Resumen de la escuadra (x${unit.squadSize})`, margin, y)
-        y += 5
-
-        const groups = new Map()
-        loadouts.forEach((loadout) => {
-          const shooting = (loadout.shooting || []).map((w) => w.nombre).join(', ') || '–'
-          const melee = loadout.melee?.nombre || '–'
-          const key = `${shooting}||${melee}`
-          groups.set(key, { count: (groups.get(key)?.count || 0) + 1, shooting, melee })
-        })
-
-        Array.from(groups.values()).forEach((group) => {
-          drawTextBlock(`${group.count}x: ${group.shooting} + ${group.melee}`, 8.6)
-        })
-        y += 1
-
-        const needsDetail = groups.size > 1 && loadouts.length <= 10
-        if (!needsDetail) return
-
-        drawSubheader('Detalle por mini', [248, 242, 247])
-        const rows = loadouts.map((loadout, idx) => {
-          const shots = (loadout.shooting || []).map((w) => w.nombre)
-          return [
-            idx + 1,
-            shots[0] || '–',
-            shots[1] || '–',
-            loadout.melee?.nombre || '–',
-            loadout.notas || '–',
-          ]
-        })
-        drawTable({
-          columns: ['#', 'Disparo 1', 'Disparo 2', 'CaC', 'Notas'],
-          rows,
-          columnWidths: [8, usableWidth * 0.32, usableWidth * 0.22, usableWidth * 0.2, usableWidth * 0.18],
-          compact: true,
-          headerFill: [255, 240, 244],
-        })
       }
+      y += 4
 
-      drawEquipamiento()
     })
 
     ensureSpace(10)
@@ -1097,26 +1143,41 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
     return unit.max_armas_disparo > 1 ? [first.id, second.id] : [first.id]
   }, [unit])
 
+  const initialMeleeSelection = selected?.melee?.id || unit.armas_melee[0]?.id || ''
+  const initialSquadSize = gameMode === 'escuadra'
+    ? clampSquadSize(selected?.squadSize ?? unit.escuadra_min, unit)
+    : 1
+
+  const createBaseSelection = (shootingIds, meleeId) => ({
+    shootingIds: [...shootingIds],
+    meleeId,
+  })
+
+  const normalizePerMiniSelections = (list, size, baseFactory) => {
+    if (size <= 0) return []
+    if (list.length === size) return list
+    if (list.length < size) {
+      return [...list, ...Array.from({ length: size - list.length }, baseFactory)]
+    }
+    return list.slice(0, size)
+  }
+
   const [shootingSelection, setShootingSelection] = useState(
     selected?.shooting?.length ? selected.shooting.map((weapon) => weapon.id) : initialShooting,
   )
-  const [meleeSelection, setMeleeSelection] = useState(
-    selected?.melee?.id || unit.armas_melee[0]?.id || '',
-  )
-  const [squadSize, setSquadSize] = useState(
-    gameMode === 'escuadra'
-      ? clampSquadSize(selected?.squadSize ?? unit.escuadra_min, unit)
-      : 1,
-  )
+  const [meleeSelection, setMeleeSelection] = useState(initialMeleeSelection)
+  const [squadSize, setSquadSize] = useState(initialSquadSize)
   const [perMiniSelections, setPerMiniSelections] = useState(() => {
     if (gameMode !== 'escuadra') return []
-    if (selected?.perMiniLoadouts?.length) {
-      return selected.perMiniLoadouts.map((loadout) => ({
-        shootingIds: loadout.shooting.map((weapon) => weapon.id),
-        meleeId: loadout.melee?.id || '',
-      }))
-    }
-    return []
+    const selectedLoadouts = selected?.perMiniLoadouts?.map((loadout) => ({
+      shootingIds: loadout.shooting.map((weapon) => weapon.id),
+      meleeId: loadout.melee?.id || '',
+    })) || []
+    return normalizePerMiniSelections(
+      selectedLoadouts,
+      initialSquadSize,
+      () => createBaseSelection(initialShooting, initialMeleeSelection),
+    )
   })
   const squadOptions = useMemo(() => {
     if (gameMode !== 'escuadra') return []
@@ -1147,28 +1208,25 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
     gameMode,
   )
 
-  useEffect(() => {
+  const handleSquadSizeChange = (size) => {
+    setSquadSize(size)
     if (gameMode !== 'escuadra') return
-    setPerMiniSelections((prev) => {
-      const next = [...prev]
-      if (next.length === squadSize) return next
-      const baseSelection = {
-        shootingIds: [...shootingSelection],
-        meleeId: meleeSelection,
-      }
-      if (next.length < squadSize) {
-        return [...next, ...Array.from({ length: squadSize - next.length }, () => baseSelection)]
-      }
-      return next.slice(0, squadSize)
-    })
-  }, [squadSize, gameMode, shootingSelection, meleeSelection])
+    setPerMiniSelections((prev) =>
+      normalizePerMiniSelections(
+        [...prev],
+        size,
+        () => createBaseSelection(shootingSelection, meleeSelection),
+      ),
+    )
+  }
 
   const renderWeaponStats = (weapon) => {
     if (!weapon) return null
     const abilityNotes = (weapon.habilidades || [])
       .map((ability) => ({
-        label: ability,
+        label: formatAbilityLabel(ability),
         description: getAbilityDescription(ability),
+        raw: ability,
       }))
       .filter((item) => item.label)
 
@@ -1191,7 +1249,9 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
             <span>{weapon.danio}</span>
             <span>{weapon.danio_critico}</span>
             <span className="weapon-tags">
-              {weapon.habilidades?.length ? weapon.habilidades.join(', ') : '-'}
+              {weapon.habilidades?.length
+                ? weapon.habilidades.map((ability) => formatAbilityLabel(ability)).join(', ')
+                : '-'}
             </span>
             <span>{weapon.valor_extra > 0 ? `+${weapon.valor_extra}` : '0'}</span>
           </div>
@@ -1199,7 +1259,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
         {abilityNotes.length > 0 && (
           <div className="weapon-ability-notes">
             {abilityNotes.map((note) => (
-              <div key={note.label}>
+              <div key={note.raw || note.label}>
                 <strong>{note.label}:</strong>{' '}
                 {note.description || 'Descripción pendiente.'}
               </div>
@@ -1241,7 +1301,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
                     key={`squad-size-${size}`}
                     type="button"
                     className={`ghost small ${size === squadSize ? 'active' : ''}`}
-                    onClick={() => setSquadSize(size)}
+                    onClick={() => handleSquadSizeChange(size)}
                   >
                     {size}
                   </button>

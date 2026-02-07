@@ -113,7 +113,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti -1 (Élite)"
+              "Anti 1+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -174,7 +174,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti -1 (Línea)"
+              "Anti 1+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -351,7 +351,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti -2 (Todo)"
+              "Anti 2+ (Todo)"
             ],
             "especialidad": "-",
             "valor_extra": 0

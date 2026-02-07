@@ -792,7 +792,7 @@ button {
 }
 
 .unit-modal-card {
-  width: min(560px, 90vw);
+  width: min(720px, 94vw);
   max-height: 85vh;
   overflow: auto;
   background: var(--bg-2);
@@ -833,22 +833,40 @@ button {
 
 .mini-customizer {
   display: grid;
-  gap: 12px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
+  gap: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .mini-row {
   display: grid;
-  gap: 10px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  background: rgba(12, 12, 18, 0.5);
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .mini-row .field {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.mini-row .field label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.mini-row .field select {
+  width: 100%;
+  min-height: 42px;
+  line-height: 1.2;
 }
 
 .mini-row .weapon-stats-table {
@@ -870,10 +888,10 @@ button {
 }
 
 .mini-row-title {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-main);
+  color: var(--accent);
 }
 
 .weapon-select {
@@ -884,6 +902,7 @@ button {
 .weapon-stats-table {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.02);
+  overflow-x: auto;
 }
 
 .weapon-stats-row {
@@ -893,6 +912,7 @@ button {
   padding: 8px 10px;
   font-size: 0.8rem;
   color: var(--text-muted);
+  min-width: 520px;
 }
 
 .weapon-stats-row.head {
@@ -908,21 +928,25 @@ button {
 }
 
 .weapon-tags {
-  color: var(--accent);
+  color: #7fffd4;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .weapon-ability-notes {
   margin-top: 8px;
-  color: #ff8f45;
+  color: #7fffd4;
   font-size: 0.8rem;
   line-height: 1.4;
   display: grid;
   gap: 6px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .weapon-ability-notes strong {
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .unit-modal-footer {

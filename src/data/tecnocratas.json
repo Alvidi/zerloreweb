@@ -196,7 +196,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti +5 (Vehículo)"
+              "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -383,7 +383,7 @@
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Anti +4 (Vehículo)"
+              "Anti 4+ (Vehículo)"
             ],
             "especialidad": "-",
             "valor_extra": 3
