@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { jsPDF } from 'jspdf'
 
 const factionModules = import.meta.glob('../data/**/*.json', { eager: true })
@@ -967,23 +967,28 @@ function Generador() {
 
           {mode === 'manual' && (
             <div className="manual-panel">
-              <label className="field">
-                Modo de juego
-                <select value={gameMode} onChange={(event) => setGameMode(event.target.value)}>
-                  <option value="escaramuza">Escaramuza</option>
-                  <option value="escuadra">Escuadra</option>
-                </select>
-              </label>
-              <label className="field">
-                Facción
-                <select value={selectedFactionId} onChange={handleFactionChange}>
-                  {factions.map((faction) => (
-                    <option key={faction.id} value={faction.id}>
-                      {faction.nombre}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <div className="field">
+                <span>Modo de juego</span>
+                <CustomSelect
+                  value={gameMode}
+                  onChange={setGameMode}
+                  options={[
+                    { value: 'escaramuza', label: 'Escaramuza' },
+                    { value: 'escuadra', label: 'Escuadra' },
+                  ]}
+                />
+              </div>
+              <div className="field">
+                <span>Facción</span>
+                <CustomSelect
+                  value={selectedFactionId}
+                  onChange={(next) => handleFactionChange({ target: { value: next } })}
+                  options={factions.map((faction) => ({
+                    value: faction.id,
+                    label: faction.nombre,
+                  }))}
+                />
+              </div>
 
               {selectedFaction && (
                 <>
@@ -1067,13 +1072,17 @@ function Generador() {
 
           {mode === 'random' && (
             <div className="random-panel">
-              <label className="field">
-                Modo de juego
-                <select value={gameMode} onChange={(event) => setGameMode(event.target.value)}>
-                  <option value="escaramuza">Escaramuza</option>
-                  <option value="escuadra">Escuadra</option>
-                </select>
-              </label>
+              <div className="field">
+                <span>Modo de juego</span>
+                <CustomSelect
+                  value={gameMode}
+                  onChange={setGameMode}
+                  options={[
+                    { value: 'escaramuza', label: 'Escaramuza' },
+                    { value: 'escuadra', label: 'Escuadra' },
+                  ]}
+                />
+              </div>
               <label className="field">
                 Valor objetivo
                 <input
@@ -1083,17 +1092,20 @@ function Generador() {
                   onChange={(event) => setTargetValue(event.target.value)}
                 />
               </label>
-              <label className="field">
-                Facción
-                <select value={randomFactionId} onChange={(event) => setRandomFactionId(event.target.value)}>
-                  <option value="random">Aleatoria</option>
-                  {factions.map((faction) => (
-                    <option key={faction.id} value={faction.id}>
-                      {faction.nombre}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <div className="field">
+                <span>Facción</span>
+                <CustomSelect
+                  value={randomFactionId}
+                  onChange={setRandomFactionId}
+                  options={[
+                    { value: 'random', label: 'Aleatoria' },
+                    ...factions.map((faction) => ({
+                      value: faction.id,
+                      label: faction.nombre,
+                    })),
+                  ]}
+                />
+              </div>
               <div className="unit-type-filters">
                 {availableUnitTypesRandom.map((type) => (
                   <label key={`random-${type}`} className="unit-type-filter">
@@ -1414,16 +1426,17 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
                 const weapon = getWeaponById(unit.armas_disparo, value)
                 return (
                   <div className="weapon-select" key={`shooting-${index}`}>
-                    <label className="field">
-                      Selección {index + 1}
-                      <select value={value} onChange={(event) => handleShootingChange(index, event.target.value)}>
-                        {unit.armas_disparo.map((option) => (
-                          <option key={option.id} value={option.id}>
-                            {option.nombre} (+{option.valor_extra})
-                          </option>
-                        ))}
-                      </select>
-                    </label>
+                    <div className="field">
+                      <span>Selección {index + 1}</span>
+                      <CustomSelect
+                        value={value}
+                        onChange={(next) => handleShootingChange(index, next)}
+                        options={unit.armas_disparo.map((option) => ({
+                          value: option.id,
+                          label: `${option.nombre} (+${option.valor_extra})`,
+                        }))}
+                      />
+                    </div>
                     {renderWeaponStats(weapon)}
                   </div>
                 )
@@ -1433,19 +1446,17 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
 
           {gameMode !== 'escuadra' && unit.armas_melee.length > 0 && (
             <div className="weapon-select">
-              <label className="field">
-                Arma cuerpo a cuerpo
-                <select
+              <div className="field">
+                <span>Arma cuerpo a cuerpo</span>
+                <CustomSelect
                   value={meleeSelection}
-                  onChange={(event) => setMeleeSelection(event.target.value)}
-                >
-                  {unit.armas_melee.map((weapon) => (
-                    <option key={weapon.id} value={weapon.id}>
-                      {weapon.nombre} (+{weapon.valor_extra})
-                    </option>
-                  ))}
-                </select>
-              </label>
+                  onChange={setMeleeSelection}
+                  options={unit.armas_melee.map((weapon) => ({
+                    value: weapon.id,
+                    label: `${weapon.nombre} (+${weapon.valor_extra})`,
+                  }))}
+                />
+              </div>
               {renderWeaponStats(selectedMelee)}
             </div>
           )}
@@ -1458,29 +1469,27 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
                   <div className="mini-row-title">Unidad {index + 1}</div>
                   {(unit.armas_disparo.length ? shootingSelection : []).map((_, slotIndex) => (
                     <div className="field" key={`mini-${index}-shoot-${slotIndex}`}>
-                      <label>
-                        Disparo {slotIndex + 1}
-                        <select
+                      <div className="field">
+                        <span>Disparo {slotIndex + 1}</span>
+                        <CustomSelect
                           value={mini.shootingIds[slotIndex] || shootingSelection[slotIndex]}
-                          onChange={(event) =>
+                          onChange={(nextValue) =>
                             setPerMiniSelections((prev) => {
                               const next = [...prev]
                               const current = { ...next[index] }
                               const ids = [...(current.shootingIds || shootingSelection)]
-                              ids[slotIndex] = event.target.value
+                              ids[slotIndex] = nextValue
                               current.shootingIds = ids
                               next[index] = current
                               return next
                             })
                           }
-                        >
-                          {unit.armas_disparo.map((weapon) => (
-                            <option key={weapon.id} value={weapon.id}>
-                              {weapon.nombre} (+{weapon.valor_extra})
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                          options={unit.armas_disparo.map((weapon) => ({
+                            value: weapon.id,
+                            label: `${weapon.nombre} (+${weapon.valor_extra})`,
+                          }))}
+                        />
+                      </div>
                       {renderWeaponStats(
                         getWeaponById(
                           unit.armas_disparo,
@@ -1491,27 +1500,25 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
                   ))}
                   {unit.armas_melee.length > 0 && (
                     <div className="field">
-                      <label>
-                        Melee
-                        <select
+                      <div className="field">
+                        <span>Melee</span>
+                        <CustomSelect
                           value={mini.meleeId || meleeSelection}
-                          onChange={(event) =>
+                          onChange={(nextValue) =>
                             setPerMiniSelections((prev) => {
                               const next = [...prev]
                               const current = { ...next[index] }
-                              current.meleeId = event.target.value
+                              current.meleeId = nextValue
                               next[index] = current
                               return next
                             })
                           }
-                        >
-                          {unit.armas_melee.map((weapon) => (
-                            <option key={weapon.id} value={weapon.id}>
-                              {weapon.nombre} (+{weapon.valor_extra})
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                          options={unit.armas_melee.map((weapon) => ({
+                            value: weapon.id,
+                            label: `${weapon.nombre} (+${weapon.valor_extra})`,
+                          }))}
+                        />
+                      </div>
                       {renderWeaponStats(getWeaponById(unit.armas_melee, mini.meleeId || meleeSelection))}
                     </div>
                   )}
@@ -1540,6 +1547,66 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
           </button>
         </div>
       </div>
+    </div>
+  )
+}
+
+function CustomSelect({ value, onChange, options, disabled = false }) {
+  const rootRef = useRef(null)
+  const [open, setOpen] = useState(false)
+  const selected = options.find((option) => option.value === value) || options[0]
+
+  useEffect(() => {
+    if (!open) return
+    const handlePointerDown = (event) => {
+      if (rootRef.current && !rootRef.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [open])
+
+  const handleSelect = (next) => {
+    onChange(next)
+    setOpen(false)
+  }
+
+  return (
+    <div className={`custom-select${open ? ' open' : ''}${disabled ? ' disabled' : ''}`} ref={rootRef}>
+      <button
+        type="button"
+        className="custom-select-trigger"
+        onClick={() => setOpen((prev) => !prev)}
+        disabled={disabled || options.length === 0}
+      >
+        <span>{selected?.label || 'Seleccionar'}</span>
+      </button>
+      {open && options.length > 0 && (
+        <div className="custom-select-menu" role="listbox">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              className={`custom-select-option${option.value === value ? ' active' : ''}`}
+              onClick={() => handleSelect(option.value)}
+              role="option"
+              aria-selected={option.value === value}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -32,7 +32,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 6vw 10px;
+  width: min(100%, calc(var(--max-width) + (var(--page-gutter) * 2)));
+  margin: 0 auto;
+  padding: 28px var(--page-gutter) 10px;
   gap: 24px;
 }
 
@@ -110,25 +112,40 @@
 .hero {
   padding-bottom: 80px;
   position: relative;
+  overflow: hidden;
+  background: var(--bg-1);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: min(100%, calc(var(--max-width) + (var(--page-gutter) * 2)));
+  margin: 0 auto;
   background-image:
     linear-gradient(180deg, rgba(8, 8, 12, 0.35), rgba(8, 8, 12, 0.9)),
     url('./images/cabecera.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 0;
 }
 
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
+  width: min(100%, calc(var(--max-width) + (var(--page-gutter) * 2)));
+  margin: 0 auto;
   background: radial-gradient(circle at 20% 20%, rgba(255, 143, 69, 0.18), transparent 45%);
   opacity: 0.9;
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero>* {
   position: relative;
+  z-index: 1;
 }
 
 .hero-grid {
@@ -136,7 +153,7 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 40px;
   align-items: center;
-  padding: 32px 6vw 20px;
+  padding: 32px var(--page-gutter) 20px;
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -285,7 +302,7 @@ button {
 }
 
 .section {
-  padding: 64px 6vw;
+  padding: 64px var(--page-gutter);
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -301,7 +318,7 @@ button {
 .band-inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 64px 6vw;
+  padding: 64px var(--page-gutter);
 }
 
 .split {
@@ -518,6 +535,121 @@ button {
   border: 1px solid var(--line);
   color: var(--text-main);
   border-radius: 2px;
+  font-size: 1rem;
+}
+
+.custom-select {
+  position: relative;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 38px 12px 14px;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  color: var(--text-main);
+  border-radius: 2px;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.2;
+  position: relative;
+}
+
+.custom-select-trigger::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--metal);
+  border-bottom: 2px solid var(--metal);
+  transform: translateY(-60%) rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.custom-select.open .custom-select-trigger {
+  border-color: var(--accent);
+}
+
+.custom-select.open .custom-select-trigger::after {
+  transform: translateY(-35%) rotate(-135deg);
+}
+
+.custom-select-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 70;
+  max-height: 260px;
+  overflow-y: auto;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  padding: 6px;
+}
+
+.custom-select-option {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 3px;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.custom-select-option:hover {
+  background: rgba(255, 143, 69, 0.1);
+}
+
+.custom-select-option.active {
+  background: rgba(255, 143, 69, 0.18);
+  color: #fff;
+}
+
+.custom-select.disabled .custom-select-trigger {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.field select,
+.contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--metal) 50%),
+    linear-gradient(135deg, var(--metal) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+  min-height: 44px;
+  line-height: 1.2;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.field select option,
+.contact-form select option {
+  color: var(--text-main);
+  background: var(--bg-2);
+  font-size: 1rem;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--accent);
+  outline: none;
 }
 
 .field-group {
@@ -1155,7 +1287,9 @@ button {
 }
 
 .footer {
-  padding: 28px 6vw;
+  width: min(100%, calc(var(--max-width) + (var(--page-gutter) * 2)));
+  margin: 0 auto;
+  padding: 28px var(--page-gutter);
   display: flex;
   justify-content: space-between;
   border-top: 1px solid var(--line);
@@ -1459,21 +1593,51 @@ mark {
 }
 
 @media (max-width: 900px) {
+  .hero {
+    padding-bottom: 64px;
+  }
+
+  .hero-grid {
+    gap: 28px;
+    grid-template-columns: 1fr;
+    padding-top: 24px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero::before {
+    width: 100%;
+  }
+
+  .hero::after {
+    width: 100%;
+  }
+
   .nav {
     flex-direction: column;
-    padding: 20px 6vw;
+    padding: 20px var(--page-gutter);
   }
 
   .nav-links {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer {
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .section {
-    padding: 56px 6vw;
+    padding: 56px var(--page-gutter);
   }
 
   .band-inner {
-    padding: 56px 6vw;
+    padding: 56px var(--page-gutter);
   }
 
   .split {
@@ -1809,6 +1973,86 @@ mark {
 }
 
 @media (max-width: 700px) {
+  .field input,
+  .field select {
+    font-size: 16px;
+  }
+
+  .generator-page .section-head h2 {
+    font-size: clamp(1.8rem, 9vw, 2.2rem);
+  }
+
+  .mode-switch {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-button {
+    width: 100%;
+  }
+
+  .faction-header,
+  .unit-card-header,
+  .army-header,
+  .army-unit-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .faction-header h3,
+  .unit-card h4,
+  .army-unit-header h4 {
+    overflow-wrap: anywhere;
+  }
+
+  .unit-specialty,
+  .army-weapons,
+  .mini-loadout-item {
+    overflow-wrap: anywhere;
+  }
+
+  .army-actions,
+  .army-unit-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .army-actions .ghost.small,
+  .army-unit-actions .ghost.tiny {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero {
+    padding-bottom: 52px;
+  }
+
+  .hero-grid {
+    gap: 20px;
+    padding-top: 18px;
+    padding-bottom: 16px;
+  }
+
+  .hero .lead {
+    font-size: 1.05rem;
+  }
+
+  .hero-actions .primary,
+  .hero-actions .ghost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links {
+    font-size: 0.8rem;
+    gap: 12px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
   .rules-layout {
     grid-template-columns: 1fr;
   }
@@ -1824,5 +2068,105 @@ mark {
 
   .rules-html .page {
     max-width: 100%;
+  }
+
+  .unit-modal-card {
+    width: min(96vw, 720px);
+    max-height: 92vh;
+    padding: 18px 14px;
+  }
+
+  .unit-modal-footer {
+    position: sticky;
+    bottom: -1px;
+    padding-top: 10px;
+    padding-bottom: calc(2px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(180deg, rgba(16, 17, 22, 0), rgba(16, 17, 22, 0.95) 36%);
+  }
+
+  .unit-stats-table,
+  .weapon-stats-table {
+    overflow-x: visible;
+  }
+
+  .unit-stats-row.head,
+  .weapon-stats-row.head {
+    display: none;
+  }
+
+  .unit-stats-row,
+  .weapon-stats-row {
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .unit-stats-row:not(.head) span,
+  .weapon-stats-row:not(.head) span {
+    display: grid;
+    gap: 4px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .unit-stats-row:not(.head) span::before,
+  .weapon-stats-row:not(.head) span::before {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--metal);
+  }
+
+  .unit-stats-row:not(.head) span:nth-child(1)::before {
+    content: 'Mov';
+  }
+
+  .unit-stats-row:not(.head) span:nth-child(2)::before {
+    content: 'Vidas';
+  }
+
+  .unit-stats-row:not(.head) span:nth-child(3)::before {
+    content: 'Salv';
+  }
+
+  .unit-stats-row:not(.head) span:nth-child(4)::before {
+    content: 'Vel';
+  }
+
+  .unit-stats-row:not(.head) span:nth-child(5)::before {
+    content: 'Escuadra';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(1)::before {
+    content: 'Atq';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(2)::before {
+    content: 'Dist';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(3)::before {
+    content: 'Imp';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(4)::before {
+    content: 'Daño';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(5)::before {
+    content: 'Critico';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(6)::before {
+    content: 'Habilidades';
+  }
+
+  .weapon-stats-row:not(.head) span:nth-child(7)::before {
+    content: '+Valor';
   }
 }

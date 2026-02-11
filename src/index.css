@@ -18,6 +18,7 @@
   --line: rgba(255, 255, 255, 0.12);
   --glow: rgba(255, 159, 87, 0.35);
   --max-width: 1200px;
+  --page-gutter: clamp(20px, 6vw, 64px);
   --text-main: #ffffff;
   --text-muted: #a7b0c0;
 }
