@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { jsPDF } from 'jspdf'
+import { createPortal } from 'react-dom'
 
 const factionModules = import.meta.glob('../data/**/*.json', { eager: true })
 
@@ -586,6 +587,18 @@ function Generador() {
     })
     window.localStorage.setItem('zerolore_army_v1', payload)
   }, [armyUnits, armyFactionId, selectedDoctrines])
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return undefined
+    const hasOpenModal = Boolean(activeUnit) || isDoctrineModalOpen
+    const previousOverflow = document.body.style.overflow
+    if (hasOpenModal) {
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [activeUnit, isDoctrineModalOpen])
 
   const handleFactionChange = (event) => {
     const next = event.target.value
@@ -1435,7 +1448,7 @@ function Generador() {
 function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect }) {
   const available = doctrines.filter((item) => !selectedIds.has(item.id))
 
-  return (
+  const content = (
     <div className="unit-modal">
       <div className="unit-modal-card doctrine-modal-card">
         <div className="unit-modal-header">
@@ -1469,6 +1482,9 @@ function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect }) {
       </div>
     </div>
   )
+
+  if (typeof document === 'undefined') return content
+  return createPortal(content, document.body)
 }
 
 function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
@@ -1615,7 +1631,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
     })
   }
 
-  return (
+  const content = (
     <div className="unit-modal">
       <div className="unit-modal-card">
         <div className="unit-modal-header">
@@ -1778,6 +1794,9 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
       </div>
     </div>
   )
+
+  if (typeof document === 'undefined') return content
+  return createPortal(content, document.body)
 }
 
 function CustomSelect({ value, onChange, options, disabled = false }) {
