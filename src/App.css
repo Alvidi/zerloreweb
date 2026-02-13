@@ -5,22 +5,31 @@
 }
 
 .app::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 143, 69, 0.1), transparent 35%),
-    radial-gradient(circle at 80% 10%, rgba(167, 176, 192, 0.05), transparent 30%),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 143, 69, 0.1),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(167, 176, 192, 0.05),
+      transparent 30%
+    ),
     linear-gradient(160deg, rgba(12, 12, 18, 0.95), rgba(11, 12, 20, 0.98));
   pointer-events: none;
   z-index: -2;
 }
 
 .app::after {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 80px 80px;
   opacity: 0.2;
@@ -39,12 +48,30 @@
 }
 
 .logo {
-  font-family: 'Cinzel', serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Cinzel", serif;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 1.25rem;
   color: var(--text-main);
+}
+
+.logo-box {
+  width: 64px;
+  height: 48px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 64px;
+}
+
+.logo-mark {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-links {
@@ -67,7 +94,7 @@
 }
 
 .nav-links a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -117,14 +144,25 @@
 }
 
 .hero::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   width: min(100%, calc(var(--max-width) + (var(--page-gutter) * 2)));
   margin: 0 auto;
   background-image:
+    linear-gradient(
+      90deg,
+      rgba(11, 12, 20, 0.98) 0%,
+      rgba(11, 12, 20, 0.88) 8%,
+      rgba(11, 12, 20, 0.62) 14%,
+      rgba(11, 12, 20, 0) 24%,
+      rgba(11, 12, 20, 0) 76%,
+      rgba(11, 12, 20, 0.62) 86%,
+      rgba(11, 12, 20, 0.88) 92%,
+      rgba(11, 12, 20, 0.98) 100%
+    ),
     linear-gradient(180deg, rgba(8, 8, 12, 0.35), rgba(8, 8, 12, 0.9)),
-    url('./images/cabecera.webp');
+    url("./images/cabecera.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -132,18 +170,22 @@
 }
 
 .hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   width: min(100%, calc(var(--max-width) + (var(--page-gutter) * 2)));
   margin: 0 auto;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 143, 69, 0.18), transparent 45%);
+  background: radial-gradient(
+    circle at 20% 20%,
+    rgba(255, 143, 69, 0.18),
+    transparent 45%
+  );
   opacity: 0.9;
   pointer-events: none;
   z-index: 0;
 }
 
-.hero>* {
+.hero > * {
   position: relative;
   z-index: 1;
 }
@@ -159,7 +201,7 @@
 }
 
 .hero-copy h1 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   line-height: 1;
   margin: 16px 0;
@@ -167,7 +209,6 @@
   letter-spacing: 0.02em;
   color: var(--text-main);
 }
-
 
 .eyebrow {
   color: var(--accent);
@@ -238,7 +279,7 @@ button {
 }
 
 .stat-value {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--accent);
@@ -270,7 +311,7 @@ button {
 }
 
 .panel-title {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -310,7 +351,11 @@ button {
 .section.band {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  background: linear-gradient(180deg, rgba(20, 21, 28, 0.96), rgba(14, 15, 20, 0.98));
+  background: linear-gradient(
+    180deg,
+    rgba(20, 21, 28, 0.96),
+    rgba(14, 15, 20, 0.98)
+  );
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -344,7 +389,7 @@ button {
 
 .split-panel h3 {
   margin: 0 0 10px;
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -388,7 +433,11 @@ button {
 .manifesto-card {
   padding: 22px 22px 24px;
   border: 1px solid var(--line);
-  background: linear-gradient(160deg, rgba(255, 143, 69, 0.08), rgba(12, 12, 18, 0.2));
+  background: linear-gradient(
+    160deg,
+    rgba(255, 143, 69, 0.08),
+    rgba(12, 12, 18, 0.2)
+  );
   color: var(--text-main);
   font-size: 1rem;
   line-height: 1.7;
@@ -414,7 +463,9 @@ button {
   border: 1px solid var(--line);
   background: rgba(12, 12, 18, 0.6);
   border-radius: 6px;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .feature-card:hover {
@@ -424,7 +475,7 @@ button {
 
 .feature-card h3 {
   margin: 14px 0 10px;
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-main);
@@ -505,6 +556,24 @@ button {
   gap: 18px;
 }
 
+.mode-panel {
+  animation: modePanelIn 0.36s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: top center;
+}
+
+@keyframes modePanelIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
 .field {
   display: grid;
   gap: 8px;
@@ -557,7 +626,7 @@ button {
 }
 
 .custom-select-trigger::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 14px;
   top: 50%;
@@ -629,7 +698,9 @@ button {
   background-position:
     calc(100% - 18px) calc(50% - 2px),
     calc(100% - 12px) calc(50% - 2px);
-  background-size: 6px 6px, 6px 6px;
+  background-size:
+    6px 6px,
+    6px 6px;
   background-repeat: no-repeat;
   padding-right: 34px;
   min-height: 44px;
@@ -716,7 +787,7 @@ button {
 
 .faction-header h3 {
   margin: 0 0 6px;
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-main);
@@ -752,6 +823,60 @@ button {
 
 .faction-passives li strong {
   color: var(--text-main);
+}
+
+.doctrine-panel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.6);
+}
+
+.doctrine-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.doctrine-panel-header .faction-passives-title {
+  margin: 0;
+}
+
+.doctrine-list {
+  display: grid;
+  gap: 10px;
+}
+
+.doctrine-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+}
+
+.doctrine-name {
+  margin: 0;
+  color: var(--text-main);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.76rem;
+}
+
+.doctrine-description {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.doctrine-modal-card {
+  width: min(760px, 94vw);
 }
 
 .unit-list {
@@ -815,7 +940,7 @@ button {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.unit-stats-row+.unit-stats-row {
+.unit-stats-row + .unit-stats-row {
   border-top: 1px solid var(--line);
 }
 
@@ -849,7 +974,7 @@ button {
 }
 
 .army-total {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 1.2rem;
   color: var(--accent);
 }
@@ -1066,7 +1191,10 @@ button {
 
 .weapon-stats-row {
   display: grid;
-  grid-template-columns: repeat(5, minmax(50px, 1fr)) minmax(140px, 1.5fr) minmax(60px, 0.6fr);
+  grid-template-columns: repeat(5, minmax(50px, 1fr)) minmax(
+      140px,
+      1.5fr
+    ) minmax(60px, 0.6fr);
   gap: 6px;
   padding: 8px 10px;
   font-size: 0.8rem;
@@ -1082,7 +1210,7 @@ button {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.weapon-stats-row+.weapon-stats-row {
+.weapon-stats-row + .weapon-stats-row {
   border-top: 1px solid var(--line);
 }
 
@@ -1116,7 +1244,7 @@ button {
 }
 
 .unit-total {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   color: var(--accent);
 }
 
@@ -1126,7 +1254,7 @@ button {
 }
 
 .section h2 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
@@ -1161,12 +1289,86 @@ button {
 }
 
 .card h3 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
   margin-bottom: 16px;
   margin-top: 0;
+}
+
+.card-scale-feature {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  padding: 24px;
+  grid-column: 1 / -1;
+}
+
+.card-scale-media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 47%;
+  height: 100%;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.card-scale-media::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  background: linear-gradient(90deg, var(--bg-2) 0%, rgba(20, 21, 28, 0.95) 34%, rgba(20, 21, 28, 0) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card-scale-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    270deg,
+    rgba(4, 4, 6, 0.04) 0%,
+    rgba(4, 4, 6, 0.16) 82%,
+    rgba(12, 12, 18, 0.88) 100%
+  );
+  z-index: 1;
+}
+
+.card-scale-content {
+  position: relative;
+  z-index: 2;
+  width: min(55%, 620px);
+}
+
+.card-scale-content h3 {
+  margin-top: 0;
+}
+
+.card-scale-content p {
+  margin-bottom: 0;
+}
+
+.card-scale-feature--reverse .card-scale-media {
+  left: 0;
+  right: auto;
+}
+
+.card-scale-feature--reverse .card-scale-media::before {
+  left: auto;
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-2) 0%, rgba(20, 21, 28, 0.95) 34%, rgba(20, 21, 28, 0) 100%);
+}
+
+.card-scale-feature--reverse .card-scale-content {
+  margin-left: auto;
 }
 
 .faction-style {
@@ -1192,7 +1394,7 @@ button {
 }
 
 .rules-list li::before {
-  content: '▶';
+  content: "▶";
   position: absolute;
   left: 0;
   color: var(--accent);
@@ -1382,7 +1584,7 @@ button {
 
 .toc-container h3 {
   margin: 0 0 16px;
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -1453,7 +1655,7 @@ button {
 }
 
 .reading-section h3 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -1495,7 +1697,7 @@ button {
 }
 
 .rules-reading-list li::before {
-  content: '▶';
+  content: "▶";
   position: absolute;
   left: 0;
   color: var(--accent);
@@ -1513,7 +1715,7 @@ button {
 }
 
 .rules-reading-list ol li::before {
-  content: counter(item) '.';
+  content: counter(item) ".";
   color: var(--accent);
   font-weight: 600;
   font-size: 0.9rem;
@@ -1813,7 +2015,7 @@ mark {
 }
 
 .rules-toc button::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -1868,7 +2070,7 @@ mark {
 
 .rules-html .page-title {
   color: var(--text-main);
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   letter-spacing: 0.04em;
 }
 
@@ -1885,7 +2087,7 @@ mark {
 }
 
 .rules-html h1 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   color: var(--accent);
   font-size: 2rem;
   margin-top: 48px;
@@ -1896,7 +2098,7 @@ mark {
 }
 
 .rules-html h2 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   color: var(--text-main);
   font-size: 1.5rem;
   margin-top: 36px;
@@ -2042,9 +2244,36 @@ mark {
     text-align: center;
   }
 
+  .card-scale-feature {
+    padding: 0;
+    min-height: 0;
+  }
+
+  .card-scale-media {
+    position: relative;
+    width: 100%;
+    height: 150px;
+  }
+
+  .card-scale-media::before,
+  .card-scale-media::after {
+    display: none;
+  }
+
+  .card-scale-content {
+    width: 100%;
+    padding: 18px;
+  }
+
   .nav-links {
     font-size: 0.8rem;
     gap: 12px;
+  }
+
+  .logo-box {
+    width: 56px;
+    height: 42px;
+    flex-basis: 56px;
   }
 
   .footer {
@@ -2081,7 +2310,11 @@ mark {
     bottom: -1px;
     padding-top: 10px;
     padding-bottom: calc(2px + env(safe-area-inset-bottom, 0px));
-    background: linear-gradient(180deg, rgba(16, 17, 22, 0), rgba(16, 17, 22, 0.95) 36%);
+    background: linear-gradient(
+      180deg,
+      rgba(16, 17, 22, 0),
+      rgba(16, 17, 22, 0.95) 36%
+    );
   }
 
   .unit-stats-table,
@@ -2123,50 +2356,124 @@ mark {
   }
 
   .unit-stats-row:not(.head) span:nth-child(1)::before {
-    content: 'Mov';
+    content: "Mov";
   }
 
   .unit-stats-row:not(.head) span:nth-child(2)::before {
-    content: 'Vidas';
+    content: "Vidas";
   }
 
   .unit-stats-row:not(.head) span:nth-child(3)::before {
-    content: 'Salv';
+    content: "Salv";
   }
 
   .unit-stats-row:not(.head) span:nth-child(4)::before {
-    content: 'Vel';
+    content: "Vel";
   }
 
   .unit-stats-row:not(.head) span:nth-child(5)::before {
-    content: 'Escuadra';
+    content: "Escuadra";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(1)::before {
-    content: 'Atq';
+    content: "Atq";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(2)::before {
-    content: 'Dist';
+    content: "Dist";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(3)::before {
-    content: 'Imp';
+    content: "Imp";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(4)::before {
-    content: 'Daño';
+    content: "Daño";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(5)::before {
-    content: 'Critico';
+    content: "Critico";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(6)::before {
-    content: 'Habilidades';
+    content: "Habilidades";
   }
 
   .weapon-stats-row:not(.head) span:nth-child(7)::before {
-    content: '+Valor';
+    content: "+Valor";
   }
+}
+/* Passion Section */
+.section.passion {
+  padding: 48px var(--page-gutter);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 143, 69, 0.06),
+    rgba(12, 12, 18, 0.4)
+  );
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.passion-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.passion-content {
+  text-align: center;
+}
+
+.passion-content h2 {
+  margin: 0 0 8px;
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+}
+
+.passion-subtitle {
+  margin: 0 0 32px;
+  color: var(--text-muted);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.passion-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.pillar {
+  padding: 20px 18px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.5);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.pillar:hover {
+  border-color: var(--accent);
+  background: rgba(255, 143, 69, 0.05);
+  transform: translateY(-2px);
+}
+
+.pillar h4 {
+  margin: 0 0 8px;
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pillar p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }

@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom'
+import zeroloreLogo from '../images/zeroloreLogo.svg'
 
 function Nav() {
   return (
     <nav className="nav">
-      <Link className="logo" to="/">ZeroLore</Link>
+      <Link className="logo" to="/">
+        <span className="logo-box" aria-hidden="true">
+          <img src={zeroloreLogo} alt="" className="logo-mark" />
+        </span>
+        <span>ZeroLore</span>
+      </Link>
       <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/generador">Generador</Link>

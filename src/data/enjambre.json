@@ -406,7 +406,7 @@
           "max": 1
         },
         "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Puede subir estructuras con movimiento diagonal.",
-        "valor": 0
+        "valor": 11
       },
       "armas": {
         "disparo": [
