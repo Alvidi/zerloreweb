@@ -1,7 +1,11 @@
+import { useNavigate } from 'react-router-dom'
 import escaramuzaImg from '../images/imagen1.webp'
 import escaramuzaImg2 from '../images/imagen2.webp'
+import escaramuzaImg3 from '../images/imagen3.webp'
 
 function Home() {
+  const navigate = useNavigate()
+
   return (
     <>
       <header className="hero" id="landing">
@@ -18,7 +22,9 @@ function Home() {
             </p>
             <div className="hero-actions reveal">
               <button className="primary">Empezar a jugar</button>
-              <button className="ghost">Ver reglas</button>
+              <button className="ghost" onClick={() => navigate('/reglamento')}>
+                Ver reglas
+              </button>
             </div>
           </div>
         </div>
@@ -27,7 +33,7 @@ function Home() {
       <section className="section" id="escalas">
         <div className="section-head reveal">
           <p className="eyebrow">Escalas de juego</p>
-          <h2>Escaramuzas o grandes batallas</h2>
+          <h2>Tus minis. Tus reglas. Tu historia.</h2>
         </div>
         <div className="grid-three reveal">
           <article className="card card-scale-feature">
@@ -63,6 +69,28 @@ function Home() {
                 <br />
                 <br />
                 El mismo reglamento funciona en ambas escalas, sin duplicar reglas ni complicar el sistema.
+              </p>
+            </div>
+          </article>
+          <article className="card card-scale-feature">
+            <div
+              className="card-scale-media"
+              style={{ backgroundImage: `url(${escaramuzaImg3})`, backgroundPosition: '58% -140px', backgroundSize: '118%' }}
+            />
+            <div className="card-scale-content">
+              <h3>Crea tus propias historias</h3>
+              <p>
+                ZeroLore no te impone un mundo ni un canon cerrado.
+                <br />
+                <br />
+                Te ofrece facciones genéricas con estilos de juego distintos para que adaptes tus miniaturas al enfoque
+                que prefieras: más táctico, más agresivo, más resistente o más estratégico.
+                <br />
+                <br />
+                Usa tus minis. Construye tu propio universo. Cada partida puede ser un capítulo. Tú eres el creador
+                de tus historias.
+                <br />
+                <br />
               </p>
             </div>
           </article>

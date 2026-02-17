@@ -12,8 +12,8 @@ function Nav() {
       </Link>
       <div className="nav-links">
         <Link to="/">Home</Link>
-        <Link to="/generador">Generador</Link>
         <Link to="/reglamento">Reglamento</Link>
+        <Link to="/generador">Generador</Link>
       </div>
       <div className="nav-socials">
         <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon" title="YouTube">
