@@ -1,0 +1,664 @@
+{
+  "faccion": {
+    "nombre": "The Alliance",
+    "estilo_juego": "The Alliance combines versatile troops with precision weaponry and advanced vehicles, standing out for its flexibility and efficiency in any situation. It is a faction aimed at players looking for quality over quantity, capable of adapting to distance or close combat using specialized weapons. Their units are powerful and precise, but expensive and fewer in number.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Armored power",
+        "descripcion": "Vehicles can carry two ranged weapons equipped."
+      },
+      {
+        "habilidades_faccion2": "Target in sight",
+        "descripcion": "The unit has rerolls against a specific target marked that turn."
+      },
+      {
+        "habilidades_faccion3": "Martial resistance",
+        "descripcion": "When a unit/squad is at a command point, units gain -1 hit on their ranged weapons."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Tactical Infantry",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Battle Rifle",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Flamethrower",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Heavy Weapon",
+            "ataques": "3D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "combat knife",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Specialists",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "They can carry two shooting weapons.",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Special hand gun",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Modified Rifle",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "sweep shotgun",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Heavy MG",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Rocket launcher",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 5+ (Vehicle)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "combat knife",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "reliquary sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "sworn",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 7,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 4
+        },
+        "especialidad": "They cannot use the retreat action.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "hand gun",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Plasma gun",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Unstable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Relic sword and shield",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Noble's Greatsword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Veterans",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 9,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "This unit can be deployed anywhere within 9\" of the enemy on turn 2.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "storm rifle",
+            "ataques": "3D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Veteran Gatling",
+            "ataques": "1D6",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Heavy",
+              "Anti 5+ (Line)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "energy fist",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "reliquary sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Acclaimer",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Attached machine guns",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "precise cannon",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "ballistic missiles",
+            "ataques": "4D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Ballistic laser cannon",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+3",
+            "danio": "D6",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 4
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Crush",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Iron Centurion",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Attached machine guns",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Depth Strike",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Sworn Commander",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "They can carry two shooting weapons. Units in a squad with this hero or that are within 3\" of him in skirmish, gain the possibility of using this hero's weapons in shooting or melee, replacing all the ones they have in that attack.",
+        "valor": 15
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Oath Rifle",
+            "ataques": "3D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Magnetized Rifle",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 5+ (Vehicle)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pulse Gun",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Tactical Microcannon",
+            "ataques": "1D6",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Energy Lance",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Sword of Honor",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Ark of Supremacy",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 26,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
+        "valor": 42
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Orbital Precision Cannon",
+            "ataques": "2D6",
+            "distancia": "26\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Saturation Battery",
+            "ataques": "4D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Vector Missile Launchers",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Nullification Ray",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Armored Ram",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Hydraulic Gripper",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "5772f423-dbd2-462f-bdb5-bcaa0df8c77f_La_Alianza.pdf"
+}

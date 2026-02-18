@@ -1,0 +1,518 @@
+{
+  "faccion": {
+    "nombre": "The Void",
+    "estilo_juego": "The Void is a void control, positioning, and damage faction, specializing in manipulating the battlefield and punishing the enemy from unexpected angles. Their units combine defense-ignoring weaponry, unnatural resistance, and destabilization effects, sacrificing raw speed for constant pressure and punctual lethality. It works best in the hands of players who enjoy anticipating the opponent, forcing mistakes, and dominating the pace of the game through teleports and selective fire.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Void Portals",
+        "descripcion": "Once per turn, an allied line/elite/hero unit can swap positions with another allied line/elite/hero unit of this faction within 18\" of it. It cannot swap with locked units. Consumes 1 action."
+      },
+      {
+        "habilidades_faccion2": "eyes from beyond",
+        "descripcion": "Void units can re-roll failed hit rolls if the enemy unit is in partial cover."
+      },
+      {
+        "habilidades_faccion3": "Heralds of the supreme void",
+        "descripcion": "This faction can use two heroes."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Aveformers",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 5,
+          "max": 10
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "shadow gun",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "ritual sword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "ceremonial weapons",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Void Acolytes",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+6",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 5,
+          "max": 10
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Shadow Projector",
+            "ataques": "1D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Warp Dagger",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Carriers",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "This unit cannot take Retreat actions or be forced to retreat.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Void Rifle",
+            "ataques": "2D",
+            "distancia": "15\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Ignore coverage"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "warpflamethrower",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "arcane fist",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Terminators",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "This unit cannot take Retreat actions or be forced to retreat.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "void cannon",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "warp cannon",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "warp curved sword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Void Brutalid",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 12,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "It is not affected by lack of control.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "aberrant discharge",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Unstable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Void Claws",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "major horror",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit ignores the effects of Rampage.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Void Storm",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Focused Warp Ray",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "-",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "destiny hammer",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Herald of the Void",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Void Storm",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Focused Warp Ray",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "-",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Warp Blade",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Vacule of the Beyond",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Avatar of the Void",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 28,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit cannot benefit from the Void Portals ability. You can equip two Shooting weapons and fire twice in the same action, using the same or different weapons.",
+        "valor": 42
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ray of Non-Being",
+            "ataques": "2D6",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Ignore coverage"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Warp Orb",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+5",
+            "danio": "7",
+            "danio_critico": "9",
+            "habilidades_arma": [
+              "Explosive",
+              "Limited Ammo 3"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Void Rift",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "6",
+            "danio_critico": "8",
+            "habilidades_arma": [
+              "Straight",
+              "Anti 4+ (Titan)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Jaws of the Abyss",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "8",
+            "habilidades_arma": [
+              "Anti 4+ (Titan)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Warp Limbs",
+            "ataques": "6D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "0ddfb768-4637-437e-b0d5-e8e3c08824ef_El_Vaco.pdf"
+}

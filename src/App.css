@@ -110,6 +110,37 @@
   transform: scaleX(1);
 }
 
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lang-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.lang-btn:hover {
+  color: var(--text-main);
+}
+
+.lang-btn.active {
+  background: rgba(255, 143, 69, 0.18);
+  color: var(--accent);
+}
+
 .nav-socials {
   display: flex;
   gap: 16px;
@@ -1827,6 +1858,10 @@ mark {
     justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
+  }
+
+  .lang-switch {
+    order: 3;
   }
 
   .footer {

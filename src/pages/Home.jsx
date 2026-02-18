@@ -2,28 +2,30 @@ import { useNavigate } from 'react-router-dom'
 import escaramuzaImg from '../images/imagen1.webp'
 import escaramuzaImg2 from '../images/imagen2.webp'
 import escaramuzaImg3 from '../images/imagen3.webp'
+import { useI18n } from '../i18n/I18nContext.jsx'
 
 function Home() {
   const navigate = useNavigate()
+  const { t } = useI18n()
 
   return (
     <>
       <header className="hero" id="landing">
         <div className="hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow reveal">Wargame de miniaturas</p>
+            <p className="eyebrow reveal">{t('home.hero.eyebrow')}</p>
             <h1 className="reveal">ZEROLORE</h1>
             <p className="lead reveal">
-              Tus miniaturas.
+              {t('home.hero.lead1')}
               <br />
-              Tus historias.
+              {t('home.hero.lead2')}
               <br />
-              Nuestra mesa.
+              {t('home.hero.lead3')}
             </p>
             <div className="hero-actions reveal">
-              <button className="primary">Empezar a jugar</button>
+              <button className="primary">{t('home.hero.start')}</button>
               <button className="ghost" onClick={() => navigate('/reglamento')}>
-                Ver reglas
+                {t('home.hero.rules')}
               </button>
             </div>
           </div>
@@ -32,43 +34,43 @@ function Home() {
 
       <section className="section" id="escalas">
         <div className="section-head reveal">
-          <p className="eyebrow">Escalas de juego</p>
-          <h2>Tus minis. Tus reglas. Tu historia.</h2>
+          <p className="eyebrow">{t('home.scales.eyebrow')}</p>
+          <h2>{t('home.scales.title')}</h2>
         </div>
         <div className="grid-three reveal">
           <article className="card card-scale-feature">
             <div className="card-scale-media" style={{ backgroundImage: `url(${escaramuzaImg})` }} />
             <div className="card-scale-content">
-              <h3>Fácil de jugar</h3>
+              <h3>{t('home.cards.easyTitle')}</h3>
               <p>
-                ZeroLore está diseñado para que puedas empezar en poco tiempo.
+                {t('home.cards.easyText1')}
                 <br />
                 <br />
-                Reglas claras.
+                {t('home.cards.easyText2')}
                 <br />
-                Estructura coherente.
+                {t('home.cards.easyText3')}
                 <br />
-                Sin necesidad de memorizar decenas de excepciones ni consultar el manual cada turno.
+                {t('home.cards.easyText4')}
                 <br />
                 <br />
-                Aprender es rápido.
+                {t('home.cards.easyText5')}
                 <br />
-                Jugar es fluido.
+                {t('home.cards.easyText6')}
               </p>
             </div>
           </article>
           <article className="card card-scale-feature card-scale-feature--reverse">
             <div className="card-scale-media" style={{ backgroundImage: `url(${escaramuzaImg2})` }} />
             <div className="card-scale-content">
-              <h3>Escaramuzas o grandes batallas</h3>
+              <h3>{t('home.cards.battleTitle')}</h3>
               <p>
-                ¿Pocas miniaturas y partidas rápidas? <strong>Modo escaramuza.</strong>
+                {t('home.cards.battleText1')} <strong>{t('home.cards.battleMode1')}</strong>
                 <br />
                 <br />
-                ¿Grandes enfrentamientos con muchas unidades? <strong>Modo escuadras.</strong>
+                {t('home.cards.battleText2')} <strong>{t('home.cards.battleMode2')}</strong>
                 <br />
                 <br />
-                El mismo reglamento funciona en ambas escalas, sin duplicar reglas ni complicar el sistema.
+                {t('home.cards.battleText3')}
               </p>
             </div>
           </article>
@@ -78,19 +80,15 @@ function Home() {
               style={{ backgroundImage: `url(${escaramuzaImg3})`, backgroundPosition: '58% -140px', backgroundSize: '118%' }}
             />
             <div className="card-scale-content">
-              <h3>Crea tus propias historias</h3>
+              <h3>{t('home.cards.storiesTitle')}</h3>
               <p>
-                ZeroLore no te impone un mundo ni un canon cerrado.
+                {t('home.cards.storiesText1')}
                 <br />
                 <br />
-                Te ofrece facciones genéricas con estilos de juego distintos para que adaptes tus miniaturas al enfoque
-                que prefieras: más táctico, más agresivo, más resistente o más estratégico.
+                {t('home.cards.storiesText2')}
                 <br />
                 <br />
-                Usa tus minis. Construye tu propio universo. Cada partida puede ser un capítulo. Tú eres el creador
-                de tus historias.
-                <br />
-                <br />
+                {t('home.cards.storiesText3')}
               </p>
             </div>
           </article>
@@ -101,45 +99,45 @@ function Home() {
         <div className="contact-grid reveal">
           <form className="contact-form">
             <label>
-              Nombre
-              <input type="text" placeholder="Tu nombre" />
+              {t('home.contact.name')}
+              <input type="text" placeholder={t('home.contact.namePlaceholder')} />
             </label>
             <label>
-              Email
-              <input type="email" placeholder="tu@email.com" />
+              {t('home.contact.email')}
+              <input type="email" placeholder={t('home.contact.emailPlaceholder')} />
             </label>
             <label>
-              Rol
+              {t('home.contact.role')}
               <select>
-                <option>Playtester</option>
-                <option>Artista conceptual</option>
-                <option>Diseño narrativo</option>
-                <option>Otro</option>
+                <option>{t('home.contact.rolePlaytester')}</option>
+                <option>{t('home.contact.roleConcept')}</option>
+                <option>{t('home.contact.roleNarrative')}</option>
+                <option>{t('home.contact.roleOther')}</option>
               </select>
             </label>
             <label>
-              Mensaje
-              <textarea rows="4" placeholder="Cuéntanos tu enfoque..." />
+              {t('home.contact.message')}
+              <textarea rows="4" placeholder={t('home.contact.messagePlaceholder')} />
             </label>
             <button className="primary" type="submit">
-              Enviar solicitud
+              {t('home.contact.submit')}
             </button>
           </form>
           <div className="contact-panel">
-            <h3>Canales activos</h3>
-            <p>Discord, newsletter y sesiones privadas de prueba.</p>
+            <h3>{t('home.contact.channelsTitle')}</h3>
+            <p>{t('home.contact.channelsText')}</p>
             <div className="contact-list">
               <div>
-                <span>Discord</span>
-                <strong>Canal: zerolore-beta</strong>
+                <span>{t('home.contact.discord')}</span>
+                <strong>{t('home.contact.discordChannel')}</strong>
               </div>
               <div>
-                <span>Newsletter</span>
-                <strong>Actualizaciones quincenales</strong>
+                <span>{t('home.contact.newsletter')}</span>
+                <strong>{t('home.contact.newsletterFrequency')}</strong>
               </div>
               <div>
-                <span>Playtest</span>
-                <strong>Madrid + remoto</strong>
+                <span>{t('home.contact.playtest')}</span>
+                <strong>{t('home.contact.playtestMode')}</strong>
               </div>
             </div>
           </div>

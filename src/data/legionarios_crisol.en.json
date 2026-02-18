@@ -1,0 +1,278 @@
+{
+  "faccion": {
+    "nombre": "Legionnaires of the Crucible",
+    "estilo_juego": "The Crucible Legionnaires are an unstoppable, fanatical and extremely resilient elite, capable of absorbing damage that would destroy normal troops. They rely on counterattacks, solid saves, and defensive skills that allow them to win long duels. It is the perfect faction for those who enjoy tough, slow but devastating units that fearlessly advance towards the enemy.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Glory of the Crucible",
+        "descripcion": "A unit/squad can ignore the first ranged wound they receive."
+      },
+      {
+        "habilidades_faccion2": "heroic fall",
+        "descripcion": "If the unit dies, carry out a counterattack before dying, either in shooting or in combat."
+      },
+      {
+        "habilidades_faccion3": "sacred vow",
+        "descripcion": "A unit/squad can reroll one failed melee die per turn."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Soronites",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Crucible Rifle",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "devotional sheet",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Custodian of the Crucible",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "You do not benefit from partial coverage. The chosen equipped weapons have to match in shooting and melee.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lance guard",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Anti 1+ (Line)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Sun Sword and Shield",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lance guard",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Sun Sword and Shield",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Praetor of the Crucible",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 2
+        },
+        "especialidad": "You do not benefit from partial coverage.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Storm Lance",
+            "ataques": "3D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "energy fist",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Battle organ",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Solar Destroyer",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Quick attack +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Solar Cannon",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": []
+      }
+    },
+    {
+      "nombre_unidad": "Crucible Paladin",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 16,
+        "salvacion": "+2",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "While on the table, all damage taken by Crucible units within 6\" is assigned to this unit first. This unit cannot go in a squad.",
+        "valor": 18
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Crucible Gun",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bastion Sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "0acfe181-40fa-4f4f-9b03-8705ef722910_Legionarios_del_Crisol.pdf"
+}

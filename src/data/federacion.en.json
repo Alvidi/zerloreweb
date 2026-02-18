@@ -1,0 +1,614 @@
+{
+  "faccion": {
+    "nombre": "The Federation",
+    "estilo_juego": "The Federation is a disciplined military force focused on steady fire, the use of cover, and tactical control of the battlefield. Their units work best when they stay organized, taking advantage of heavy weapons and supported fire, although they sacrifice mobility and close combat ability. They are ideal for players who prefer methodical strategies, defensive fire and winning by positioning.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Entrenchment",
+        "descripcion": "A unit of this faction that has not taken any Move actions during its activation gains -1 Hit die on all of its Shooting attacks until the end of that activation."
+      },
+      {
+        "habilidades_faccion2": "Low reinforcements",
+        "descripcion": "Once per game, when a Line unit from this faction is completely eliminated, you may return it to the field to the deployment zone of your next Initiative phase."
+      },
+      {
+        "habilidades_faccion3": "Fury of the Fallen",
+        "descripcion": "When a unit falls from a squad, the entire squad gains +1 additional attack. In Skirmish, units within 6\" gain an additional +1 attack, until end of turn."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Private soldiers",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "laser rifle",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "heavy weapons",
+            "ataques": "3D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bayonet",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "war veterans",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Grand II laser rifles",
+            "ataques": "3D",
+            "distancia": "15\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Flamethrower",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Grenade launcher",
+            "ataques": "2D",
+            "distancia": "15\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "plasma rifles",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Anti 1+ (Elite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bayonet",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "shock trooper",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "tactical gun",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Reinforced Porrón",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Shield Rush",
+            "ataques": "1D3",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Rough",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "While this unit is on the field, Shooting attacks aimed at friendly units within 6\" can be redirected to this unit at the Federation player's choice.",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Shotgun",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Heavy Pochard",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Raiders",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "This unit can perform the Dash action by spending a single action, instead of its normal cost.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Modified laser rifles",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+3",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Light Machine Gun",
+            "ataques": "1D6",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Vibra-sword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "devastating spear",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Rameu-Russ",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 18,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit can equip two Shooting weapons.",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "main cannon",
+            "ataques": "2D",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Explosive",
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Side machine guns",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Side flamethrower",
+            "ataques": "2D6",
+            "distancia": "8\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "barricade cannon",
+            "ataques": "1D (3 ammo)",
+            "distancia": "35\"",
+            "impactos": "D.Address + D6",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Indirect Fire",
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Assault",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Flatt-8 cannon",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 6,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 2
+        },
+        "especialidad": "This unit cannot be moved. Requires two friendly Line units to fire. Such units may detach from this unit, but may not fire that turn.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Artillery",
+            "ataques": "1D6",
+            "distancia": "35\"",
+            "impactos": "D6 + D.Address",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Explosive",
+              "Ignore Coverages"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Auxiliary cannon",
+            "ataques": "2D",
+            "distancia": "25\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "artillery equipment",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "General",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 8,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Federation units in squad or within 6\" in skirmish can re-roll a failed Hit die during their activation. This unit can ride inside a vehicle.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Command Rifle",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Regulatory Pistol",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "general sword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Siege Bastion",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "1\"",
+        "vidas": 26,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
+        "valor": 40
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Siege Cannon",
+            "ataques": "2D6 (3 ammo)",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Laser Battery",
+            "ataques": "3D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Tactical Missile Launcher",
+            "ataques": "1D6",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "armored kick",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "7eb48379-9b31-4a4f-8391-cadc1abb7ef6_La_Federacin.pdf"
+}

@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { jsPDF } from 'jspdf'
 import { createPortal } from 'react-dom'
+import { useI18n } from '../i18n/I18nContext.jsx'
 
-const factionModules = import.meta.glob('../data/**/*.json', { eager: true })
+const factionModules = import.meta.glob('../data/*.json', { eager: true })
 
 const commandDoctrines = [
   {
@@ -72,15 +73,15 @@ const doctrinePriorityByMode = {
 }
 
 const factionImages = {
-  'La Alianza': new URL('../images/alianza.webp', import.meta.url).href,
-  'Legionarios del Crisol': new URL('../images/legionarios_crisol.webp', import.meta.url).href,
-  Salvajes: new URL('../images/salvajes.webp', import.meta.url).href,
-  'El Vacío': new URL('../images/vacio.webp', import.meta.url).href,
-  Rebeldes: new URL('../images/rebeldes.webp', import.meta.url).href,
-  TecnoTumbas: new URL('../images/tecnotumbas.webp', import.meta.url).href,
-  'El Ejambre': new URL('../images/enjambre.webp', import.meta.url).href,
-  'La Federación': new URL('../images/federacion.webp', import.meta.url).href,
-  Tecnócratas: new URL('../images/tecnocratas.webp', import.meta.url).href,
+  alianza: new URL('../images/alianza.webp', import.meta.url).href,
+  legionarios_crisol: new URL('../images/legionarios_crisol.webp', import.meta.url).href,
+  salvajes: new URL('../images/salvajes.webp', import.meta.url).href,
+  vacio: new URL('../images/vacio.webp', import.meta.url).href,
+  rebeldes: new URL('../images/rebeldes.webp', import.meta.url).href,
+  tecnotumbas: new URL('../images/tecnotumbas.webp', import.meta.url).href,
+  enjambre: new URL('../images/enjambre.webp', import.meta.url).href,
+  federacion: new URL('../images/federacion.webp', import.meta.url).href,
+  tecnocratas: new URL('../images/tecnocratas.webp', import.meta.url).href,
 }
 
 const slugify = (value) =>
@@ -159,7 +160,9 @@ const normalizeLimitedValue = (value) => {
   return value
 }
 
-const getAbilityDescription = (ability) => {
+const startsWithAny = (key, prefixes) => prefixes.some((prefix) => key.startsWith(prefix))
+
+const getAbilityDescription = (ability, lang = 'es') => {
   if (!ability) return ''
   const raw = String(ability).trim()
   const key = raw
@@ -168,50 +171,80 @@ const getAbilityDescription = (ability) => {
     .replace(/[\u0300-\u036f]/g, '')
   const value = parseAbilityNumber(raw)
 
-  if (key.startsWith('asaltante')) {
-    return `El objetivo pierde ${ensureSigned(value)} a su Salvación frente a ese ataque.`
+  if (startsWithAny(key, ['asaltante', 'raider'])) {
+    return lang === 'en'
+      ? `The target suffers ${ensureSigned(value)} to Save against this attack.`
+      : `El objetivo pierde ${ensureSigned(value)} a su Salvación frente a ese ataque.`
   }
-  if (key.startsWith('pesada')) {
-    return 'Si se ha movido: +1 al valor de Impactos. Si no se ha movido: -1 al valor de Impactos.'
+  if (key.startsWith('pesada') || key.startsWith('heavy')) {
+    return lang === 'en'
+      ? 'If it moved: +1 to Hit value. If it did not move: -1 to Hit value.'
+      : 'Si se ha movido: +1 al valor de Impactos. Si no se ha movido: -1 al valor de Impactos.'
   }
-  if (key.startsWith('ataque rapido')) {
-    return `A mitad o menos del alcance, suma ${ensureSigned(value)} Ataques.`
+  if (startsWithAny(key, ['ataque rapido', 'quick attack'])) {
+    return lang === 'en'
+      ? `At half range or less, gain ${ensureSigned(value)} Attacks.`
+      : `A mitad o menos del alcance, suma ${ensureSigned(value)} Ataques.`
   }
-  if (key.startsWith('pistolero')) {
-    return 'Puede disparar trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
+  if (key.startsWith('pistolero') || key.startsWith('gunslinger')) {
+    return lang === 'en'
+      ? 'Can shoot while engaged, only against the unit it is fighting in melee.'
+      : 'Puede disparar trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
   }
-  if (key.startsWith('explosiva')) {
-    return 'Afecta a un radio de 3” desde el punto de impacto.'
+  if (key.startsWith('explosiva') || key.startsWith('explosive')) {
+    return lang === 'en'
+      ? 'Affects a 3" radius from the impact point.'
+      : 'Afecta a un radio de 3” desde el punto de impacto.'
   }
-  if (key.startsWith('ataque critico')) {
-    return 'Los impactos críticos no pueden ser salvados.'
+  if (startsWithAny(key, ['ataque critico', 'critical attack'])) {
+    return lang === 'en'
+      ? 'Critical hits cannot be saved.'
+      : 'Los impactos críticos no pueden ser salvados.'
   }
-  if (key.startsWith('impactos encadenados')) {
-    return 'Cada ataque crítico genera un ataque adicional que se resuelve de forma normal.'
+  if (startsWithAny(key, ['impactos encadenados', 'chained impacts'])) {
+    return lang === 'en'
+      ? 'Each critical hit generates one additional attack resolved normally.'
+      : 'Cada ataque crítico genera un ataque adicional que se resuelve de forma normal.'
   }
   if (key.startsWith('precision')) {
-    return 'Repite todas las tiradas fallidas de ataque.'
+    return lang === 'en'
+      ? 'Reroll all failed attack rolls.'
+      : 'Repite todas las tiradas fallidas de ataque.'
   }
   if (key.startsWith('anti')) {
-    return `Contra el tipo indicado, los resultados de ${normalizeAntiValue(value)} son críticos.`
+    return lang === 'en'
+      ? `Against the listed type, results of ${normalizeAntiValue(value)} count as critical hits.`
+      : `Contra el tipo indicado, los resultados de ${normalizeAntiValue(value)} son críticos.`
   }
-  if (key.startsWith('ignora coberturas')) {
-    return 'El objetivo no puede beneficiarse de ningún bono defensivo por cobertura parcial.'
+  if (startsWithAny(key, ['ignora coberturas', 'ignora cobertura', 'ignore coverages', 'ignore coverage'])) {
+    return lang === 'en'
+      ? 'The target cannot benefit from defensive bonuses from partial cover.'
+      : 'El objetivo no puede beneficiarse de ningún bono defensivo por cobertura parcial.'
   }
-  if (key.startsWith('disparo parabolico')) {
-    return 'Puede disparar sin línea de visión, siempre que el objetivo no esté cubierto.'
+  if (startsWithAny(key, ['disparo parabolico', 'parabolic shot', 'indirect fire'])) {
+    return lang === 'en'
+      ? 'Can shoot without line of sight as long as the target is not in full cover.'
+      : 'Puede disparar sin línea de visión, siempre que el objetivo no esté cubierto.'
   }
-  if (key.startsWith('inestable')) {
-    return 'Tras atacar, tira 1D6: con 1-2, la unidad recibe el mismo daño que recibió el objetivo.'
+  if (key.startsWith('inestable') || key.startsWith('unstable')) {
+    return lang === 'en'
+      ? 'After attacking, roll 1D6: on 1-2, this unit suffers the same damage dealt to the target.'
+      : 'Tras atacar, tira 1D6: con 1-2, la unidad recibe el mismo daño que recibió el objetivo.'
   }
-  if (key.startsWith('directo')) {
-    return 'Impacta automáticamente, sin tirada de Impactos.'
+  if (key.startsWith('directo') || key.startsWith('straight')) {
+    return lang === 'en'
+      ? 'Hits automatically, no Hit roll required.'
+      : 'Impacta automáticamente, sin tirada de Impactos.'
   }
   if (key.startsWith('guerrilla')) {
-    return 'Puede hacer una acción extra de disparo después de usar Carrera.'
+    return lang === 'en'
+      ? 'Can perform an extra shooting action after using Sprint.'
+      : 'Puede hacer una acción extra de disparo después de usar Carrera.'
   }
-  if (key.startsWith('municion limitada')) {
-    return `Tiene ${normalizeLimitedValue(value)} disparos limitados con esta arma.`
+  if (startsWithAny(key, ['municion limitada', 'limited ammo'])) {
+    return lang === 'en'
+      ? `This weapon has ${normalizeLimitedValue(value)} limited shots.`
+      : `Tiene ${normalizeLimitedValue(value)} disparos limitados con esta arma.`
   }
 
   return ''
@@ -267,7 +300,7 @@ const normalizeUnit = (unit, index) => {
   }
 }
 
-const normalizeFaction = (data, index) => {
+const normalizeFaction = (data, index, baseId = '') => {
   const faccion = data.faccion || {}
   const habilidades = Array.isArray(faccion.habilidades_faccion)
     ? faccion.habilidades_faccion.map((item, idx) => {
@@ -284,7 +317,7 @@ const normalizeFaction = (data, index) => {
   const unidades = (data.unidades || []).map(normalizeUnit)
 
   return {
-    id: data.id || slugify(faccion.nombre || `faccion-${index}`),
+    id: data.id || baseId || slugify(faccion.nombre || `faccion-${index}`),
     nombre: faccion.nombre || `Facción ${index + 1}`,
     estilo: faccion.estilo_juego || faccion.estilo || '',
     habilidades_faccion: habilidades,
@@ -511,12 +544,30 @@ const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = null) =
 }
 
 function Generador() {
+  const { t, lang } = useI18n()
   const factions = useMemo(() => {
-    return Object.values(factionModules)
-      .map((module) => module.default || module)
-      .filter(isFactionData)
-      .map(normalizeFaction)
-  }, [])
+    const esByBase = new Map()
+    const enByBase = new Map()
+
+    Object.entries(factionModules).forEach(([path, module]) => {
+      const filename = path.split('/').pop() || ''
+      if (filename.endsWith('.en.json')) {
+        enByBase.set(filename.replace('.en.json', ''), module)
+      } else if (filename.endsWith('.json')) {
+        esByBase.set(filename.replace('.json', ''), module)
+      }
+    })
+
+    return Array.from(esByBase.keys())
+      .sort()
+      .map((base) => {
+        const selectedModule = lang === 'en' && enByBase.has(base) ? enByBase.get(base) : esByBase.get(base)
+        const data = selectedModule?.default || selectedModule
+        return data ? { data, base } : null
+      })
+      .filter((item) => item && isFactionData(item.data))
+      .map((item, index) => normalizeFaction(item.data, index, item.base))
+  }, [lang])
 
   const [mode, setMode] = useState('manual')
   const [gameMode, setGameMode] = useState('escaramuza')
@@ -578,6 +629,23 @@ function Generador() {
   }, [randomFaction, factions, randomFactionId])
 
   const totalValue = armyUnits.reduce((total, unit) => total + unit.total, 0)
+
+  useEffect(() => {
+    if (!factions.length) {
+      setSelectedFactionId('')
+      setArmyFactionId('')
+      setRandomFactionId('random')
+      return
+    }
+    setSelectedFactionId((prev) => (factions.some((faction) => faction.id === prev) ? prev : factions[0].id))
+    setArmyFactionId((prev) => {
+      if (!prev) return prev
+      return factions.some((faction) => faction.id === prev) ? prev : factions[0].id
+    })
+    setRandomFactionId((prev) =>
+      prev === 'random' || factions.some((faction) => faction.id === prev) ? prev : 'random',
+    )
+  }, [factions])
 
   useEffect(() => {
     const payload = JSON.stringify({
@@ -867,7 +935,7 @@ function Generador() {
       doc.rect(margin, y, usableWidth, headerHeight)
       doc.setFontSize(8)
       doc.setTextColor(20)
-      const columns = ['Mov', 'Vidas', 'Salv', 'Vel', 'Escuadra', 'Especialidad']
+      const columns = [t('generator.mov'), t('generator.vidas'), t('generator.salv'), t('generator.vel'), t('generator.squadLabel'), 'Especialidad']
       columns.forEach((label, idx) => {
         const width = columnWidths[idx]
         doc.text(label, x + 2, y + 4.5)
@@ -913,7 +981,7 @@ function Generador() {
       y += 7.5
     }
 
-    const logoSource = armyFaction?.nombre ? factionImages[armyFaction.nombre] : null
+    const logoSource = armyFaction?.id ? factionImages[armyFaction.id] : null
     const logoDataUrl = logoSource ? await loadImageAsDataUrl(logoSource).catch(() => null) : null
     if (logoDataUrl) {
       doc.addImage(logoDataUrl, 'PNG', margin, y - 2, 16, 16)
@@ -921,7 +989,7 @@ function Generador() {
     doc.setFontSize(18)
     doc.setTextColor(10)
     const headerX = margin + (logoDataUrl ? 20 : 0)
-    const headerText = `ROSTER – ${armyFaction?.nombre || 'Ejército'}`
+    const headerText = `${t('generator.roster')} – ${armyFaction?.nombre || t('generator.currentArmy')}`
     doc.text(headerText, headerX, y + 6)
     y += 12
     doc.setFontSize(10)
@@ -929,7 +997,7 @@ function Generador() {
     if (logoDataUrl) {
       y = Math.max(y, margin + 18)
     }
-    const headerMeta = `Facción: ${armyFaction?.nombre || '—'} | Puntos/Valor: ${totalValue}`
+    const headerMeta = `${t('generator.faction')}: ${armyFaction?.nombre || '—'} | ${t('generator.targetValue')}: ${totalValue}`
     const metaLines = doc.splitTextToSize(headerMeta, usableWidth)
     const metaLineHeight = getLineHeight(10)
     metaLines.forEach((line) => {
@@ -939,21 +1007,21 @@ function Generador() {
     })
     y += 2
     if (armyFaction?.habilidades_faccion?.length) {
-      drawSectionTitle('Doctrinas / Habilidades de facción', true)
+      drawSectionTitle(`${t('generator.doctrines')} / ${t('generator.passives')}`, true)
       armyFaction.habilidades_faccion.slice(0, 6).forEach((habilidad) => {
         drawBulletItem(habilidad.nombre, habilidad.descripcion, 9)
       })
       y += 2
     }
     if (selectedDoctrines.length) {
-      drawSectionTitle('Doctrinas de mando seleccionadas', true)
+      drawSectionTitle(`${t('generator.doctrines')} (${t('generator.add')})`, true)
       selectedDoctrines.forEach((doctrine) => {
         drawBulletItem(doctrine.nombre, doctrine.descripcion, 9)
       })
       y += 2
     }
 
-    drawSectionTitle('Unidades')
+    drawSectionTitle(t('generator.units'))
 
     armyUnits.forEach((unit, unitIndex) => {
       ensureSpace(50)
@@ -965,12 +1033,12 @@ function Generador() {
       doc.setFontSize(13)
       doc.setTextColor(20)
       const isSquad = gameMode === 'escuadra' && unit.squadSize > 1
-      const squadLabel = isSquad ? `Escuadra ${unitIndex + 1}: ` : ''
+      const squadLabel = isSquad ? `${t('generator.squadLabel')} ${unitIndex + 1}: ` : ''
       const squadCount = isSquad ? ` x${unit.squadSize || 1}` : ''
       doc.text(`${squadLabel}${unit.base.nombre}${squadCount} (${unit.base.tipo})`, margin, y)
       doc.setFontSize(9.5)
       doc.setTextColor(60)
-      doc.text(`${unit.total} valor`, pageWidth - margin - 25, y)
+      doc.text(`${unit.total} ${t('generator.valueUnit')}`, pageWidth - margin - 25, y)
       y += 6
 
       drawStatsTable(unit)
@@ -999,13 +1067,13 @@ function Generador() {
       const drawWeaponTable = (title, weapons) => {
         if (!weapons.length) {
           drawSubheader(title, [255, 240, 244])
-          drawTextBlock('Sin armas disponibles.', 8.6)
+          drawTextBlock(t('generator.noWeaponsAvailable'), 8.6)
           y += 2
           return
         }
         drawSubheader(title, [255, 240, 244])
         drawTable({
-          columns: ['Arma', 'Atq', 'Dist', 'Imp', 'Daño / Crít', 'Habilidades', '+Valor'],
+          columns: ['Arma', t('generator.weaponAtq'), t('generator.weaponDist'), t('generator.weaponImp'), `${t('generator.weaponDamage')} / ${t('generator.weaponCrit')}`, t('generator.weaponSkills'), t('generator.weaponValue')],
           rows: weapons.map((weapon) => [
             weapon.nombre,
             weapon.ataques,
@@ -1051,11 +1119,11 @@ function Generador() {
               return { ...weapon, nombre: `${weapon.nombre} x${group.count}` }
             })
             .filter(Boolean)
-          drawWeaponTable('DISPARO', shootingRows)
-          if (meleeRows.length) drawWeaponTable('CUERPO A CUERPO', meleeRows)
+          drawWeaponTable(t('generator.shooting').toUpperCase(), shootingRows)
+          if (meleeRows.length) drawWeaponTable(t('generator.melee').toUpperCase(), meleeRows)
         } else {
-          drawWeaponTable('DISPARO', unit.shooting)
-          if (unit.melee) drawWeaponTable('CUERPO A CUERPO', [unit.melee])
+          drawWeaponTable(t('generator.shooting').toUpperCase(), unit.shooting)
+          if (unit.melee) drawWeaponTable(t('generator.melee').toUpperCase(), [unit.melee])
         }
       }
       y += 4
@@ -1065,15 +1133,15 @@ function Generador() {
     ensureSpace(10)
     doc.setFontSize(12)
     doc.setTextColor(20)
-    doc.text(`Valor total: ${totalValue} valor`, margin, y)
+    doc.text(`${t('generator.targetValue')}: ${totalValue} ${t('generator.valueUnit')}`, margin, y)
 
     const totalPages = doc.getNumberOfPages()
     for (let page = 1; page <= totalPages; page += 1) {
       doc.setPage(page)
       doc.setFontSize(8)
       doc.setTextColor(90)
-      doc.text(`${armyFaction?.nombre || 'Ejército'} – ${armyFaction?.nombre || 'Facción'}`, margin, pageHeight - 6)
-      doc.text(`Página ${page} / ${totalPages}`, pageWidth - margin - 25, pageHeight - 6)
+      doc.text(`${armyFaction?.nombre || t('generator.currentArmy')} – ${armyFaction?.nombre || t('generator.faction')}`, margin, pageHeight - 6)
+      doc.text(`${t('generator.page')} ${page} / ${totalPages}`, pageWidth - margin - 25, pageHeight - 6)
     }
 
     doc.save(`zerolore_${armyFaction?.nombre || 'ejercito'}.pdf`)
@@ -1082,9 +1150,9 @@ function Generador() {
   return (
     <section className="section generator-page reveal" id="generador">
       <div className="section-head reveal">
-        <p className="eyebrow">Generador de ejércitos</p>
-        <h2>Construye tu roster.</h2>
-        <p>Elige facción, configura unidades y genera listas por valor objetivo.</p>
+        <p className="eyebrow">{t('generator.eyebrow')}</p>
+        <h2>{t('generator.title')}</h2>
+        <p>{t('generator.subtitle')}</p>
       </div>
 
       <div className="generator-layout reveal">
@@ -1095,37 +1163,39 @@ function Generador() {
               type="button"
               onClick={() => setMode('manual')}
             >
-              Crear Ejército
+              {t('generator.modeCreate')}
             </button>
             <button
               className={mode === 'random' ? 'mode-button active' : 'mode-button'}
               type="button"
               onClick={() => setMode('random')}
             >
-              Aleatorio
+              {t('generator.modeRandom')}
             </button>
           </div>
 
           {factions.length === 0 && (
-            <p className="empty-state">No hay facciones cargadas todavía.</p>
+            <p className="empty-state">{t('generator.emptyNoFactions')}</p>
           )}
 
           {mode === 'manual' && (
             <div className="manual-panel">
               <div className="field">
-                <span>Modo de juego</span>
+                <span>{t('generator.gameMode')}</span>
                 <CustomSelect
+                  t={t}
                   value={gameMode}
                   onChange={setGameMode}
                   options={[
-                    { value: 'escaramuza', label: 'Escaramuza' },
-                    { value: 'escuadra', label: 'Escuadra' },
+                    { value: 'escaramuza', label: t('generator.skirmish') },
+                    { value: 'escuadra', label: t('generator.squad') },
                   ]}
                 />
               </div>
               <div className="field">
-                <span>Facción</span>
+                <span>{t('generator.faction')}</span>
                 <CustomSelect
+                  t={t}
                   value={selectedFactionId}
                   onChange={(next) => handleFactionChange({ target: { value: next } })}
                   options={factions.map((faction) => ({
@@ -1139,15 +1209,15 @@ function Generador() {
                 <>
                   <div className="faction-summary">
                     <div className="faction-header">
-                      {factionImages[selectedFaction.nombre] && (
-                        <img src={factionImages[selectedFaction.nombre]} alt={selectedFaction.nombre} />
+                      {factionImages[selectedFaction.id] && (
+                        <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
                       )}
                       <h3>{selectedFaction.nombre}</h3>
                     </div>
                     <p className="faction-description">{selectedFaction.estilo}</p>
                     {selectedFaction.habilidades_faccion.length > 0 && (
                       <div className="faction-passives">
-                        <p className="faction-passives-title">Pasivas de facción</p>
+                        <p className="faction-passives-title">{t('generator.passives')}</p>
                         <ul>
                           {selectedFaction.habilidades_faccion.map((skill) => (
                             <li key={skill.id}>
@@ -1170,15 +1240,15 @@ function Generador() {
                       </label>
                     ))}
                   </div>
-                  <div className="doctrine-panel">
-                    <div className="doctrine-panel-header">
-                      <p className="faction-passives-title">Doctrinas</p>
+                    <div className="doctrine-panel">
+                      <div className="doctrine-panel-header">
+                        <p className="faction-passives-title">{t('generator.doctrines')}</p>
                       <button
                         type="button"
                         className="ghost tiny"
                         onClick={() => setIsDoctrineModalOpen(true)}
                       >
-                        Añadir
+                        {t('generator.add')}
                       </button>
                     </div>
                     {selectedDoctrines.length > 0 ? (
@@ -1194,13 +1264,13 @@ function Generador() {
                               className="ghost tiny"
                               onClick={() => handleRemoveDoctrine(doctrine.id)}
                             >
-                              Quitar
+                              {t('generator.remove')}
                             </button>
                           </article>
                         ))}
                       </div>
                     ) : (
-                      <p className="empty-state">No hay doctrinas añadidas.</p>
+                      <p className="empty-state">{t('generator.noDoctrinesAdded')}</p>
                     )}
                   </div>
                   <div className="unit-list">
@@ -1212,19 +1282,19 @@ function Generador() {
                           <div className="unit-card-header">
                             <h4>{unit.nombre}</h4>
                             <button type="button" className="ghost tiny" onClick={() => handleOpenConfigurator(unit)}>
-                              {gameMode === 'escuadra' ? 'Crear escuadra' : 'Configurar'}
+                              {gameMode === 'escuadra' ? t('generator.createSquad') : t('generator.configure')}
                             </button>
                           </div>
                           <p className="unit-meta">
-                            {unit.tipo} · <span className="unit-value">{unit.valor_base} valor</span>
+                            {unit.tipo} · <span className="unit-value">{unit.valor_base} {t('generator.valueUnit')}</span>
                           </p>
                           <div className="unit-stats-table">
                             <div className="unit-stats-row head">
-                              <span>Mov</span>
-                              <span>Vidas</span>
-                              <span>Salv</span>
-                              <span>Vel</span>
-                              {gameMode === 'escuadra' ? <span>Cap. escuadra</span> : null}
+                              <span>{t('generator.mov')}</span>
+                              <span>{t('generator.vidas')}</span>
+                              <span>{t('generator.salv')}</span>
+                              <span>{t('generator.vel')}</span>
+                              {gameMode === 'escuadra' ? <span>{t('generator.squadCap')}</span> : null}
                             </div>
                             <div className="unit-stats-row">
                               <span>{unit.movimiento}</span>
@@ -1251,18 +1321,19 @@ function Generador() {
           {mode === 'random' && (
             <div className="random-panel">
               <div className="field">
-                <span>Modo de juego</span>
+                <span>{t('generator.gameMode')}</span>
                 <CustomSelect
+                  t={t}
                   value={gameMode}
                   onChange={setGameMode}
                   options={[
-                    { value: 'escaramuza', label: 'Escaramuza' },
-                    { value: 'escuadra', label: 'Escuadra' },
+                    { value: 'escaramuza', label: t('generator.skirmish') },
+                    { value: 'escuadra', label: t('generator.squad') },
                   ]}
                 />
               </div>
               <label className="field">
-                Valor objetivo
+                {t('generator.targetValue')}
                 <input
                   type="number"
                   min="0"
@@ -1271,12 +1342,13 @@ function Generador() {
                 />
               </label>
               <div className="field">
-                <span>Doctrinas</span>
+                <span>{t('generator.doctrines')}</span>
                 <CustomSelect
+                  t={t}
                   value={String(doctrineCount)}
                   onChange={(next) => setDoctrineCount(Number(next))}
                   options={[
-                    { value: '0', label: 'Ninguna' },
+                    { value: '0', label: t('generator.none') },
                     ...Array.from({ length: 8 }, (_, idx) => ({
                       value: String(idx + 1),
                       label: String(idx + 1),
@@ -1285,12 +1357,13 @@ function Generador() {
                 />
               </div>
               <div className="field">
-                <span>Facción</span>
+                <span>{t('generator.faction')}</span>
                 <CustomSelect
+                  t={t}
                   value={randomFactionId}
                   onChange={setRandomFactionId}
                   options={[
-                    { value: 'random', label: 'Aleatoria' },
+                    { value: 'random', label: t('generator.randomFaction') },
                     ...factions.map((faction) => ({
                       value: faction.id,
                       label: faction.nombre,
@@ -1311,7 +1384,7 @@ function Generador() {
                 ))}
               </div>
                 <button type="button" className="primary" onClick={handleGenerateRandom}>
-                  Generar
+                  {t('generator.generate')}
                 </button>
             </div>
           )}
@@ -1320,23 +1393,23 @@ function Generador() {
         <aside className="army-panel">
           <div className="army-header">
             <div>
-              <p className="eyebrow">Ejército actual</p>
-              <h3>{armyFaction?.nombre || 'Sin facción'}</h3>
+              <p className="eyebrow">{t('generator.currentArmy')}</p>
+              <h3>{armyFaction?.nombre || t('generator.noFaction')}</h3>
             </div>
-            <span className="army-total">{totalValue} valor</span>
+            <span className="army-total">{totalValue} {t('generator.valueUnit')}</span>
           </div>
 
           <div className="army-actions">
             <button type="button" className="ghost small" onClick={handleReset}>
-              Resetear ejército
+              {t('generator.resetArmy')}
             </button>
             <button type="button" className="ghost small" onClick={exportPdf} disabled={!armyUnits.length}>
-              Descargar PDF
+              {t('generator.downloadPdf')}
             </button>
           </div>
 
           {armyUnits.length === 0 && (
-            <p className="empty-state">No hay unidades añadidas aún.</p>
+            <p className="empty-state">{t('generator.noUnitsYet')}</p>
           )}
 
           <div className="army-list">
@@ -1347,27 +1420,27 @@ function Generador() {
                     <h4>{unit.base.nombre}</h4>
                     <p>
                       {unit.base.tipo}
-                      {gameMode === 'escuadra' ? ` · Tamaño ${unit.squadSize || 1}` : ''}
-                  {unit.perMiniLoadouts?.length ? ' · Escuadra' : ''}
+                      {gameMode === 'escuadra' ? ` · ${t('generator.size')} ${unit.squadSize || 1}` : ''}
+                      {unit.perMiniLoadouts?.length ? ` · ${t('generator.squadLabel')}` : ''}
                     </p>
                   </div>
-                  <span>{unit.total} valor</span>
+                  <span>{unit.total} {t('generator.valueUnit')}</span>
                 </div>
                 <div className="army-weapons">
                   {unit.perMiniLoadouts?.length ? (
                     <div>
-                      <strong>Armas:</strong>
+                      <strong>{t('generator.weapons')}:</strong>
                       <div className="mini-loadout-list">
                         {unit.perMiniLoadouts.map((loadout, index) => {
                           return (
                             <div key={`loadout-${unit.uid}-${index}`} className="mini-loadout-item">
-                              <div className="mini-loadout-label">Unidad {index + 1}</div>
+                              <div className="mini-loadout-label">{t('generator.unit')} {index + 1}</div>
                               <div>
-                                <strong>Disparo:</strong>{' '}
+                                <strong>{t('generator.shooting')}:</strong>{' '}
                                 {(loadout.shooting || []).map((weapon) => weapon.nombre).join(', ') || '—'}
                               </div>
                               <div>
-                                <strong>Melee:</strong> {loadout.melee?.nombre || '—'}
+                                <strong>{t('generator.melee')}:</strong> {loadout.melee?.nombre || '—'}
                               </div>
                             </div>
                           )
@@ -1376,21 +1449,21 @@ function Generador() {
                     </div>
                   ) : unit.shooting.length > 0 ? (
                     <div>
-                      <strong>Disparo:</strong> {unit.shooting.map((weapon) => weapon.nombre).join(', ')}
+                      <strong>{t('generator.shooting')}:</strong> {unit.shooting.map((weapon) => weapon.nombre).join(', ')}
                     </div>
                   ) : null}
                   {!unit.perMiniLoadouts?.length && unit.melee && (
                     <div>
-                      <strong>Melee:</strong> {unit.melee.nombre}
+                      <strong>{t('generator.melee')}:</strong> {unit.melee.nombre}
                     </div>
                   )}
                 </div>
                 <div className="army-unit-actions">
                   <button type="button" className="ghost tiny" onClick={() => handleEditUnit(unit)}>
-                    Editar
+                    {t('generator.edit')}
                   </button>
                   <button type="button" className="ghost tiny" onClick={() => handleRemoveUnit(unit.uid)}>
-                    Eliminar
+                    {t('generator.delete')}
                   </button>
                 </div>
               </article>
@@ -1401,6 +1474,8 @@ function Generador() {
 
       {activeUnit && (
         <UnitConfigurator
+          t={t}
+          lang={lang}
           unit={activeUnit.base || activeUnit}
           selected={activeUnit.shooting || activeUnit.melee ? activeUnit : null}
           gameMode={gameMode}
@@ -1432,6 +1507,7 @@ function Generador() {
       )}
       {isDoctrineModalOpen && (
         <DoctrinePickerModal
+          t={t}
           selectedIds={new Set(selectedDoctrines.map((item) => item.id))}
           doctrines={commandDoctrines}
           onClose={() => setIsDoctrineModalOpen(false)}
@@ -1445,7 +1521,7 @@ function Generador() {
   )
 }
 
-function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect }) {
+function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t }) {
   const available = doctrines.filter((item) => !selectedIds.has(item.id))
 
   const content = (
@@ -1453,16 +1529,16 @@ function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect }) {
       <div className="unit-modal-card doctrine-modal-card">
         <div className="unit-modal-header">
           <div>
-            <p className="eyebrow">Doctrinas</p>
-            <h3>Añadir doctrina de mando</h3>
+            <p className="eyebrow">{t('generator.doctrines')}</p>
+            <h3>{t('generator.doctrineModalTitle')}</h3>
           </div>
           <button className="ghost tiny" type="button" onClick={onClose}>
-            Cerrar
+            {t('generator.close')}
           </button>
         </div>
         <div className="unit-modal-body">
           {available.length === 0 ? (
-            <p className="empty-state">Ya has añadido todas las doctrinas disponibles.</p>
+            <p className="empty-state">{t('generator.noDoctrinesAvailable')}</p>
           ) : (
             <div className="doctrine-list">
               {available.map((doctrine) => (
@@ -1472,7 +1548,7 @@ function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect }) {
                     <p className="doctrine-description">{doctrine.descripcion}</p>
                   </div>
                   <button type="button" className="ghost tiny" onClick={() => onSelect(doctrine)}>
-                    Añadir
+                    {t('generator.add')}
                   </button>
                 </article>
               ))}
@@ -1487,7 +1563,7 @@ function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect }) {
   return createPortal(content, document.body)
 }
 
-function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
+function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lang }) {
   const initialShooting = useMemo(() => {
     if (!unit.armas_disparo.length) return []
     const first = unit.armas_disparo[0]
@@ -1577,7 +1653,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
     const abilityNotes = (weapon.habilidades || [])
       .map((ability) => ({
         label: formatAbilityLabel(ability),
-        description: getAbilityDescription(ability),
+        description: getAbilityDescription(ability, lang),
         raw: ability,
       }))
       .filter((item) => item.label)
@@ -1586,13 +1662,13 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
       <div>
         <div className="weapon-stats-table">
           <div className="weapon-stats-row head">
-            <span>Atq</span>
-            <span>Dist</span>
-            <span>Imp</span>
-            <span>Daño</span>
-            <span>Crítico</span>
-            <span>Habilidades</span>
-            <span>+Valor</span>
+            <span>{t('generator.weaponAtq')}</span>
+            <span>{t('generator.weaponDist')}</span>
+            <span>{t('generator.weaponImp')}</span>
+            <span>{t('generator.weaponDamage')}</span>
+            <span>{t('generator.weaponCrit')}</span>
+            <span>{t('generator.weaponSkills')}</span>
+            <span>{t('generator.weaponValue')}</span>
           </div>
           <div className="weapon-stats-row">
             <span>{weapon.ataques}</span>
@@ -1613,7 +1689,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
             {abilityNotes.map((note) => (
               <div key={note.raw || note.label}>
                 <strong>{note.label}:</strong>{' '}
-                {note.description || 'Descripción pendiente.'}
+                {note.description || t('generator.pendingDescription')}
               </div>
             ))}
           </div>
@@ -1636,17 +1712,17 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
       <div className="unit-modal-card">
         <div className="unit-modal-header">
           <div>
-            <p className="eyebrow">{gameMode === 'escuadra' ? 'Crear escuadra' : 'Configurar unidad'}</p>
+            <p className="eyebrow">{gameMode === 'escuadra' ? t('generator.createSquad') : t('generator.configureUnit')}</p>
             <h3>{unit.nombre}</h3>
           </div>
           <button className="ghost tiny" type="button" onClick={onClose}>
-            Cerrar
+            {t('generator.close')}
           </button>
         </div>
         <div className="unit-modal-body">
           {gameMode === 'escuadra' && (
             <label className="field">
-              Tamaño de escuadra
+              {t('generator.squadSize')}
               <div className="squad-size-buttons">
                 {squadOptions.map((size) => (
                   <button
@@ -1662,18 +1738,19 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
             </label>
           )}
           {gameMode === 'escuadra' && (
-            <p className="field-label">Personaliza cada mini según el tamaño elegido.</p>
+            <p className="field-label">{t('generator.perMiniCustomize')}</p>
           )}
           {gameMode !== 'escuadra' && unit.armas_disparo.length > 0 && (
             <div className="field-group">
-              <p className="field-label">Armas de disparo</p>
+              <p className="field-label">{t('generator.shootingWeapons')}</p>
               {shootingSelection.map((value, index) => {
                 const weapon = getWeaponById(unit.armas_disparo, value)
                 return (
                   <div className="weapon-select" key={`shooting-${index}`}>
                     <div className="field">
-                      <span>Selección {index + 1}</span>
+                      <span>{t('generator.selection')} {index + 1}</span>
                       <CustomSelect
+                        t={t}
                         value={value}
                         onChange={(next) => handleShootingChange(index, next)}
                         options={unit.armas_disparo.map((option) => ({
@@ -1692,8 +1769,9 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
           {gameMode !== 'escuadra' && unit.armas_melee.length > 0 && (
             <div className="weapon-select">
               <div className="field">
-                <span>Arma cuerpo a cuerpo</span>
+                <span>{t('generator.meleeWeapon')}</span>
                 <CustomSelect
+                  t={t}
                   value={meleeSelection}
                   onChange={setMeleeSelection}
                   options={unit.armas_melee.map((weapon) => ({
@@ -1708,15 +1786,16 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
 
           {gameMode === 'escuadra' && (
             <div className="mini-customizer">
-              <p className="field-label">Escuadra (tamaño {squadSize})</p>
+              <p className="field-label">{t('generator.squadLabel')} ({t('generator.size').toLowerCase()} {squadSize})</p>
               {perMiniSelections.map((mini, index) => (
                 <div className="mini-row" key={`mini-${index}`}>
-                  <div className="mini-row-title">Unidad {index + 1}</div>
+                  <div className="mini-row-title">{t('generator.unit')} {index + 1}</div>
                   {(unit.armas_disparo.length ? shootingSelection : []).map((_, slotIndex) => (
                     <div className="field" key={`mini-${index}-shoot-${slotIndex}`}>
                       <div className="field">
-                        <span>Disparo {slotIndex + 1}</span>
+                        <span>{t('generator.shooting')} {slotIndex + 1}</span>
                         <CustomSelect
+                          t={t}
                           value={mini.shootingIds[slotIndex] || shootingSelection[slotIndex]}
                           onChange={(nextValue) =>
                             setPerMiniSelections((prev) => {
@@ -1746,8 +1825,9 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
                   {unit.armas_melee.length > 0 && (
                     <div className="field">
                       <div className="field">
-                        <span>Melee</span>
+                        <span>{t('generator.melee')}</span>
                         <CustomSelect
+                          t={t}
                           value={mini.meleeId || meleeSelection}
                           onChange={(nextValue) =>
                             setPerMiniSelections((prev) => {
@@ -1773,7 +1853,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
           )}
         </div>
         <div className="unit-modal-footer">
-          <span className="unit-total">Total unidad: {total} valor</span>
+          <span className="unit-total">{t('generator.totalUnit')}: {total} {t('generator.valueUnit')}</span>
           <button
             type="button"
             className="primary"
@@ -1788,7 +1868,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
               )
             }
           >
-            Confirmar
+            {t('generator.confirm')}
           </button>
         </div>
       </div>
@@ -1799,7 +1879,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode }) {
   return createPortal(content, document.body)
 }
 
-function CustomSelect({ value, onChange, options, disabled = false }) {
+function CustomSelect({ value, onChange, options, disabled = false, t }) {
   const rootRef = useRef(null)
   const [open, setOpen] = useState(false)
   const selected = options.find((option) => option.value === value) || options[0]
@@ -1837,7 +1917,7 @@ function CustomSelect({ value, onChange, options, disabled = false }) {
         onClick={() => setOpen((prev) => !prev)}
         disabled={disabled || options.length === 0}
       >
-        <span>{selected?.label || 'Seleccionar'}</span>
+        <span>{selected?.label || t('generator.select')}</span>
       </button>
       {open && options.length > 0 && (
         <div className="custom-select-menu" role="listbox">

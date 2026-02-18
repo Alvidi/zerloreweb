@@ -1,0 +1,563 @@
+{
+  "faccion": {
+    "nombre": "Rebels",
+    "estilo_juego": "The Rebels stand out for their extreme mobility, exotic weapons, and agile combat styles both at range and in melee. Their troops easily reposition, dodge damage, and punish the enemy with precise attacks or bursts of unstable energy, but they are fragile and must avoid prolonged direct confrontations. An ideal faction for tactical players who enjoy hit and move, breaking lines and attacking from unexpected angles.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Guerrilla in the shadows",
+        "descripcion": "This faction can deploy its line units/squads and Vehicles outside the deployment zone, 9\" from the enemy and command posts."
+      },
+      {
+        "habilidades_faccion2": "Feint",
+        "descripcion": "Units/squads, when using the prepare action instead of counterattack, gain -1 save when it is fired, it does not stack if it is in cover."
+      },
+      {
+        "habilidades_faccion3": "Nobody stops",
+        "descripcion": "This faction always has to spend a move action, except if it charges or is engaged in close combat."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Echo Explorers",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "9\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Echo Carbine",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Arc of Energy",
+            "ataques": "1D3",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ignore coverage"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "holo-spear look",
+            "ataques": "1D",
+            "distancia": "25\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "parabolic shot"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "echo sheet",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Resounding Claw",
+            "ataques": "1D6",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Void Reavers",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "-",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fractal rifle",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Fractal impulse turret",
+            "ataques": "1D3",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "resounding cannon",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Disruptor knife",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Anti 5+ (Elite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Fractal mace",
+            "ataques": "1D3",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Shadow-Edge Wraiths",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "-",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fractal rifle",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "shadow-edge",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Raider +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "phase sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Vertex Dagger",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Ignore coverage"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          },
+          {
+            "nombre": "electric hammer",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Unstable",
+              "Anti 1+ (Elite/Line)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Phoenix",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "12\"",
+        "vidas": 12,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Can go over obstacles",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fractal light cannon",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pulsatile battery",
+            "ataques": "1D6",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Quick attack +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Mobile prism cannon",
+            "ataques": "1D3",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "parabolic shot"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "kinetic lunge",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "spectral walker",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Spectral cannon",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Burst of needles",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Ignore coverage"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Heavy Fractal Spear",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti 5+ (Vehicles)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Resonant Gauntlet",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Leader of the Insurrection",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "You can hijack enemy vehicles if you successfully charge against one, roll a D6, if you roll 1,2 and 3 the vehicle becomes part of your lines.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rebel Rifle",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Guerrilla"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Light Submachine Gun",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Raider",
+              "Guerrilla"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Stolen Experimental Weapon",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Unstable"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Sawed-Off Shotgun",
+            "ataques": "1D6",
+            "distancia": "8\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Marksman Rifle",
+            "ataques": "1D",
+            "distancia": "24\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Improvised Launcher",
+            "ataques": "1D",
+            "distancia": "14\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Combat Knife",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Recoil",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Machete",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "c6156854-24be-46b6-8a30-3bdf3ab31ab5_Rebeldes.pdf"
+}

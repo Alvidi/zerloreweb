@@ -1,0 +1,510 @@
+{
+  "faccion": {
+    "nombre": "TechnoTombs",
+    "estilo_juego": "The Techno-Tombs are ancient machines that advance relentlessly, reviving again and again while unleashing heavy shots of calculated precision. They are slow but relentless, with units that return to combat and powerful vehicles that dominate long distances. Perfect for players who want wear and tear, inevitability and constant pressure without relying on morale or speed.",
+    "habilidades_faccion": [
+      {
+        "habilidades_faccion1": "Mek Resuscitation",
+        "descripcion": "If a unit is defeated, its body remains on the battlefield; Once the next initiative begins, 1D6 will be rolled: with a result of 1-3 the unit dies, if a result of 3-6 the unit revives with half of its life. This can only be done once per unit."
+      },
+      {
+        "habilidades_faccion2": "They don't know fear",
+        "descripcion": "This faction cannot retreat nor are they affected by any abilities that cause them to retreat."
+      },
+      {
+        "habilidades_faccion3": "Annihilation Protocol",
+        "descripcion": "If a unit/squad is eliminated or damaged, it gains an extra 2\" move action immediately."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Techno-Tomb Guardians",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "This unit can be deployed anywhere within 9\" of the enemy on turn 2.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Gauss rifle",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Light Blaster",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          },
+          {
+            "nombre": "Stable Energy Rifle",
+            "ataques": "3D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Metal Arm",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Lookouts",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Light Fusion",
+            "ataques": "1D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 1+ (Elite)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Gauss Heavy Rifle",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Energy Lance",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Destroyers",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "-",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Heavy Gauss Cannon",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 1+ (Line)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Double Disintegrator",
+            "ataques": "3D",
+            "distancia": "14\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Energy Claw",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Tomb Lords",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "If you eliminate a melee unit, you win instantly: Ready",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "energy gun",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Power Scythe",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Phase Sword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Mechanoid",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 20,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "When this unit is destroyed, it respawns in the deployment zone.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Particle Cannon",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Disintegration Ray",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Flattening",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Trilonoid",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "-",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Dark Ray",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 2+ (All)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Metal Leg",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Lord Necrophore",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Units in a squad or within 3\" in skirmish mode of this unit immediately revive at half health.",
+        "valor": 15
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Necron Ray",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Gauss Emitter",
+            "ataques": "1D6",
+            "distancia": "18\"",
+            "impactos": "-",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mechanical Scythe",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Obelisk of Annihilation",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "2\"",
+        "vidas": 30,
+        "salvacion": "+2",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "By spending 2 action you can teleport 20\" from your position.",
+        "valor": 40
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Judgment Canyon",
+            "ataques": "2D6",
+            "distancia": "24\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Heavy"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Necron Prism",
+            "ataques": "3D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ignore coverage"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Entropy Discharge",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "6",
+            "danio_critico": "8",
+            "habilidades_arma": [
+              "Straight"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Monolithic Clash",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ],
+  "_fuente": "4a77d496-5444-418a-a63d-7d17d426b54c_TecnoTumbas.pdf"
+}
