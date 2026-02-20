@@ -267,6 +267,17 @@
   margin-bottom: 28px;
 }
 
+.cta-actions {
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
 button {
   border: 0;
   cursor: pointer;
@@ -447,7 +458,7 @@ button {
 }
 
 .section.cta {
-  text-align: center;
+  text-align: left;
 }
 
 .section.manifesto {

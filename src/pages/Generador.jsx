@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
 import { jsPDF } from 'jspdf'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
@@ -545,6 +545,7 @@ const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = null) =
 
 function Generador() {
   const { t, lang } = useI18n()
+  const [, startTransition] = useTransition()
   const factions = useMemo(() => {
     const esByBase = new Map()
     const enByBase = new Map()
@@ -629,6 +630,18 @@ function Generador() {
   }, [randomFaction, factions, randomFactionId])
 
   const totalValue = armyUnits.reduce((total, unit) => total + unit.total, 0)
+  const visibleManualUnits = useMemo(() => {
+    if (!selectedFaction?.unidades?.length) return []
+    return selectedFaction.unidades.filter((unit) => unitTypeFiltersManual.has(unit.tipo))
+  }, [selectedFaction, unitTypeFiltersManual])
+
+  useEffect(() => {
+    if (typeof Image === 'undefined') return
+    Object.values(factionImages).forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
 
   useEffect(() => {
     if (!factions.length) {
@@ -670,10 +683,12 @@ function Generador() {
 
   const handleFactionChange = (event) => {
     const next = event.target.value
-    setSelectedFactionId(next)
-    setArmyUnits([])
-    setSelectedDoctrines([])
-    setArmyFactionId(next)
+    startTransition(() => {
+      setSelectedFactionId(next)
+      setArmyUnits([])
+      setSelectedDoctrines([])
+      setArmyFactionId(next)
+    })
   }
 
   useEffect(() => {
@@ -1274,9 +1289,7 @@ function Generador() {
                     )}
                   </div>
                   <div className="unit-list">
-                    {selectedFaction.unidades
-                      .filter((unit) => unitTypeFiltersManual.has(unit.tipo))
-                      .map((unit) => (
+                    {visibleManualUnits.map((unit) => (
                       <article className="unit-card" key={unit.id}>
                         <div>
                           <div className="unit-card-header">
