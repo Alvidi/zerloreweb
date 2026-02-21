@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import escaramuzaImg from '../images/imagen1.webp'
 import escaramuzaImg2 from '../images/imagen2.webp'
-import escaramuzaImg3 from '../images/imagen3.webp'
+import escaramuzaImg3 from '../images/image3.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 function Home() {

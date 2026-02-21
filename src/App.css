@@ -901,6 +901,39 @@ button {
   padding: 10px;
 }
 
+.doctrine-item-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.doctrine-icon-box {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  background: rgba(255, 143, 69, 0.12);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.doctrine-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.doctrine-content {
+  min-width: 0;
+}
+
 .doctrine-name {
   margin: 0;
   color: var(--text-main);
@@ -952,6 +985,61 @@ button {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.unit-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid currentColor;
+  padding: 3px 9px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+
+.unit-type-icon {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.unit-type-line {
+  color: #5dd66f;
+  background: rgba(93, 214, 111, 0.14);
+}
+
+.unit-type-elite {
+  color: #5ea6ff;
+  background: rgba(94, 166, 255, 0.14);
+}
+
+.unit-type-vehicle {
+  color: #b37aff;
+  background: rgba(179, 122, 255, 0.16);
+}
+
+.unit-type-monster {
+  color: #ff6fb6;
+  background: rgba(255, 111, 182, 0.16);
+}
+
+.unit-type-hero {
+  color: #f0d84a;
+  background: rgba(240, 216, 74, 0.16);
+}
+
+.unit-type-titan {
+  color: #ff5454;
+  background: rgba(255, 84, 84, 0.16);
 }
 
 .unit-value {

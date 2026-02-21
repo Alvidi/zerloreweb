@@ -260,6 +260,90 @@ const formatAbilityLabel = (label) => {
     .join(' ')
 }
 
+const getUnitTypeToken = (type) => {
+  const normalized = String(type || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+
+  if (normalized.includes('linea') || normalized.includes('line')) return 'line'
+  if (normalized.includes('elite')) return 'elite'
+  if (normalized.includes('vehiculo') || normalized.includes('vehicle')) return 'vehicle'
+  if (normalized.includes('monstruo') || normalized.includes('monster')) return 'monster'
+  if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
+  if (normalized.includes('titan') || normalized.includes('titante')) return 'titan'
+  return 'line'
+}
+
+function UnitTypeBadge({ type }) {
+  const token = getUnitTypeToken(type)
+  const iconProps = { viewBox: '0 0 24 24', className: 'unit-type-icon', 'aria-hidden': true }
+
+  const renderIcon = () => {
+    if (token === 'line') {
+      return (
+        <svg {...iconProps}>
+          <path d="M5 18H19L17 7H7Z" />
+          <path d="M9 7V5H15V7" />
+        </svg>
+      )
+    }
+    if (token === 'elite') {
+      return (
+        <svg {...iconProps}>
+          <path d="M12 3L16 8L21 12L16 16L12 21L8 16L3 12L8 8Z" />
+        </svg>
+      )
+    }
+    if (token === 'vehicle') {
+      return (
+        <svg {...iconProps}>
+          <rect x="4" y="8" width="16" height="8" rx="1" />
+          <circle cx="8" cy="17.5" r="1.5" />
+          <circle cx="16" cy="17.5" r="1.5" />
+        </svg>
+      )
+    }
+    if (token === 'monster') {
+      return (
+        <svg {...iconProps}>
+          <path d="M5 20L8 9L11 15L14 8L17 14L19 6" />
+        </svg>
+      )
+    }
+    if (token === 'hero') {
+      return (
+        <svg {...iconProps}>
+          <path d="M4 16L6 8L10 12L12 6L14 12L18 8L20 16Z" />
+          <path d="M7 18H17" />
+        </svg>
+      )
+    }
+    if (token === 'titan') {
+      return (
+        <svg {...iconProps}>
+          <rect x="7" y="4" width="10" height="16" />
+          <path d="M10 8H14" />
+          <path d="M10 12H14" />
+          <path d="M10 16H14" />
+        </svg>
+      )
+    }
+    return (
+      <svg {...iconProps}>
+        <circle cx="12" cy="12" r="7" />
+      </svg>
+    )
+  }
+
+  return (
+    <span className={`unit-type-badge unit-type-${token}`}>
+      {renderIcon()}
+      <span>{type}</span>
+    </span>
+  )
+}
+
 const getMaxDisparo = (unit) => {
   const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? unit.perfil?.max_armas_disparo
   if (explicit) return explicit
@@ -1270,9 +1354,14 @@ function Generador() {
                       <div className="doctrine-list">
                         {selectedDoctrines.map((doctrine) => (
                           <article key={doctrine.id} className="doctrine-item">
-                            <div>
-                              <p className="doctrine-name">{doctrine.nombre}</p>
-                              <p className="doctrine-description">{doctrine.descripcion}</p>
+                            <div className="doctrine-item-main">
+                              <div className="doctrine-icon-box">
+                                <DoctrineIcon id={doctrine.id} />
+                              </div>
+                              <div className="doctrine-content">
+                                <p className="doctrine-name">{doctrine.nombre}</p>
+                                <p className="doctrine-description">{doctrine.descripcion}</p>
+                              </div>
                             </div>
                             <button
                               type="button"
@@ -1299,7 +1388,8 @@ function Generador() {
                             </button>
                           </div>
                           <p className="unit-meta">
-                            {unit.tipo} · <span className="unit-value">{unit.valor_base} {t('generator.valueUnit')}</span>
+                            <UnitTypeBadge type={unit.tipo} /> ·{' '}
+                            <span className="unit-value">{unit.valor_base} {t('generator.valueUnit')}</span>
                           </p>
                           <div className="unit-stats-table">
                             <div className="unit-stats-row head">
@@ -1316,7 +1406,9 @@ function Generador() {
                               <span>{unit.velocidad}</span>
                               {gameMode === 'escuadra' ? (
                                 <span>
-                                  {unit.escuadra_min}-{unit.escuadra_max}
+                                  {unit.escuadra_min === unit.escuadra_max
+                                    ? '-'
+                                    : `${unit.escuadra_min}-${unit.escuadra_max}`}
                                 </span>
                               ) : null}
                             </div>
@@ -1432,7 +1524,7 @@ function Generador() {
                   <div>
                     <h4>{unit.base.nombre}</h4>
                     <p>
-                      {unit.base.tipo}
+                      <UnitTypeBadge type={unit.base.tipo} />
                       {gameMode === 'escuadra' ? ` · ${t('generator.size')} ${unit.squadSize || 1}` : ''}
                       {unit.perMiniLoadouts?.length ? ` · ${t('generator.squadLabel')}` : ''}
                     </p>
@@ -1534,6 +1626,92 @@ function Generador() {
   )
 }
 
+function DoctrineIcon({ id }) {
+  const commonProps = {
+    viewBox: '0 0 24 24',
+    className: 'doctrine-icon',
+    'aria-hidden': true,
+  }
+
+  if (id === 'garrotazo') {
+    return (
+      <svg {...commonProps}>
+        <path d="M5 19L19 5" />
+        <path d="M7 7L10 10" />
+        <path d="M14 14L17 17" />
+      </svg>
+    )
+  }
+  if (id === 'apuntado') {
+    return (
+      <svg {...commonProps}>
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="12" r="2" />
+        <path d="M12 3V6" />
+        <path d="M12 18V21" />
+        <path d="M3 12H6" />
+        <path d="M18 12H21" />
+      </svg>
+    )
+  }
+  if (id === 'frenesi') {
+    return (
+      <svg {...commonProps}>
+        <path d="M4 12H20" />
+        <path d="M14 6L20 12L14 18" />
+      </svg>
+    )
+  }
+  if (id === 'agilidad-en-combate') {
+    return (
+      <svg {...commonProps}>
+        <path d="M5 16L10 11L13 14L19 8" />
+        <path d="M16 8H19V11" />
+      </svg>
+    )
+  }
+  if (id === 'nuestra-es-la-victoria') {
+    return (
+      <svg {...commonProps}>
+        <path d="M12 4L14 9L20 9L15 13L17 19L12 15L7 19L9 13L4 9L10 9Z" />
+      </svg>
+    )
+  }
+  if (id === 'reaccion-inmediata') {
+    return (
+      <svg {...commonProps}>
+        <path d="M5 12H13" />
+        <path d="M10 8L14 12L10 16" />
+        <path d="M11 6H19" />
+        <path d="M16 2L20 6L16 10" />
+      </svg>
+    )
+  }
+  if (id === 'mas-que-preparado') {
+    return (
+      <svg {...commonProps}>
+        <path d="M6 12L10 16L18 8" />
+        <path d="M6 7L10 11L18 3" />
+      </svg>
+    )
+  }
+  if (id === 'alineacion-perfecta') {
+    return (
+      <svg {...commonProps}>
+        <path d="M4 7H20" />
+        <path d="M4 12H20" />
+        <path d="M4 17H20" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg {...commonProps}>
+      <circle cx="12" cy="12" r="7" />
+    </svg>
+  )
+}
+
 function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t }) {
   const available = doctrines.filter((item) => !selectedIds.has(item.id))
 
@@ -1556,9 +1734,14 @@ function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t }) {
             <div className="doctrine-list">
               {available.map((doctrine) => (
                 <article key={doctrine.id} className="doctrine-item">
-                  <div>
-                    <p className="doctrine-name">{doctrine.nombre}</p>
-                    <p className="doctrine-description">{doctrine.descripcion}</p>
+                  <div className="doctrine-item-main">
+                    <div className="doctrine-icon-box">
+                      <DoctrineIcon id={doctrine.id} />
+                    </div>
+                    <div className="doctrine-content">
+                      <p className="doctrine-name">{doctrine.nombre}</p>
+                      <p className="doctrine-description">{doctrine.descripcion}</p>
+                    </div>
                   </div>
                   <button type="button" className="ghost tiny" onClick={() => onSelect(doctrine)}>
                     {t('generator.add')}
