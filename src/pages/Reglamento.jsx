@@ -2,7 +2,7 @@ import { useMemo, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import reglamentoHtml from '../data/ZEROLORE - REGLAMENTO avanzado 2eb087d94b33800ea112ed9327b7e9c8.html?raw&v=advanced-20260227'
 import reglamentoEnHtml from '../data/ZEROLORE - REGULATIONS advanced 2eb087d94b33800ea112ed9327b7e9c8.en.html?raw&v=advanced-20260227'
-import reglamentoRapidoHtml from '../data/ZEROLORE - REGLAMENTO juego rápido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw&v=quick-20260227'
+import reglamentoRapidoHtml from '../data/ZEROLORE - REGLAMENTO juego rapido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw&v=quick-20260227'
 import reglamentoRapidoEnHtml from '../data/ZEROLORE - REGULATIONS quick game 313087d94b3380dc9c0ffd50e9ba8d50.en.html?raw&v=quick-20260227'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
