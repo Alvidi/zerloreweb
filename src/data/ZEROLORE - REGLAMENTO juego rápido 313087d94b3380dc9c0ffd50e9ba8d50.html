@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ZEROLORE - REGLAMENTO juego rápido</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="313087d9-4b33-80dc-9c0f-fd50e9ba8d50" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🤺</span></div><h1 class="page-title" dir="auto">ZEROLORE - REGLAMENTO juego rápido</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="313087d9-4b33-8087-af7a-c37b2db7eeab" class="">Usa cualquier miniatura. Acordad un Valor. Empezad a jugar.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80a8-9119-c8bc8a903d08" class="">Estas reglas es para empezar a jugar de una manera rapida y sencilla, siempre que se quiera añadir más reglas </p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-8062-a0c2-f4056c5adf26"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-8062-b425-efce35e5825e" class="">Tamaño de partida</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8028-891a-dab2505d0cde" class="">Antes de empezar, acordad el <strong>Valor total </strong>por jugador.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80e1-a8c5-fcf7fcb2959b" class="">Recomendado:</p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8046-8cca-daf24a006421" class="bulleted-list"><li style="list-style-type:disc">50–100 valor → Partida escaramuza</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-806c-9be8-f8664d7a6ac3" class="bulleted-list"><li style="list-style-type:disc">150–250 valor → Partida escuadra</li></ul></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8008-87ad-ce4b123b22aa" class="">El Valor representa:</p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-809e-be12-cd49fb8e689d" class="bulleted-list"><li style="list-style-type:disc">El coste de la unidad.</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8096-9115-d3ffc70868ca" class="bulleted-list"><li style="list-style-type:disc">Su peso estratégico al controlar objetivos.</li></ul></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-802e-95b2-fd76933c3439" class="">Se puede jugar en:</p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-80a7-b448-f8881ebe315e" class="bulleted-list"><li style="list-style-type:disc"><strong>Modo Individual</strong> (cada miniatura es una unidad).</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-80de-83db-dc8e740f9f44" class="bulleted-list"><li style="list-style-type:disc"><strong>Modo Escuadras</strong> (varias miniaturas forman una sola unidad).</li></ul></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-801e-99a0-f6b7d1b1b07e"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-803d-9b24-e580347da603" class="">Preparación</h2></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-8030-bddf-c7baeb19c220" class="numbered-list" start="1"><li>Colocad 3 objetivos en la mesa.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-8024-8881-d4f3f5ca4a94" class="numbered-list" start="2"><li>Desplegad en zonas opuestas.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-80cc-a3ff-fdb0a51a2df3" class="numbered-list" start="3"><li>Determinad quién empieza.</li></ol></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-80fb-8764-d4f6475bbdd2"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-80a4-8542-dd1f5d86fe00" class="">Estructura del turno</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8069-bbb4-e17aa3a55820" class="">Los jugadores activan <strong>una unidad cada vez</strong>, alternándose.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80cc-a4ae-eac5ceb94110" class="">Cuando una unidad se activa, puede realizar <strong>2 acciones distintas</strong>:</p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8096-8692-d884b17ec04a" class="bulleted-list"><li style="list-style-type:disc">Mover - 1 acción</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-80d5-8c38-d51a1c32378d" class="bulleted-list"><li style="list-style-type:disc">Disparar - 1 acción</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8021-a456-c15e73f97ce7" class="bulleted-list"><li style="list-style-type:disc">Cargar - 2 acciones</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-80d3-961b-fd5e7fdee138" class="bulleted-list"><li style="list-style-type:disc">Preparado - 2 acciones</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8043-b7dd-d64ee836492a" class="bulleted-list"><li style="list-style-type:disc">Cuerpo a cuerpo - 2 acciones</li></ul></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-803e-8b81-f79763d20223" class="">No puede repetir la misma acción.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8053-be73-d4709fc0eede" class="">Cuando todas las unidades han sido activadas, termina la ronda.</p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-8038-98c5-c8b3c6aeec95"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-80b7-a128-dd3983b2a8b0" class="">Movimiento</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80f8-95df-c18c73868f3c" class="">La unidad puede mover hasta su valor de <strong>MOV en “</strong>.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8065-b1e1-e7f43fed7e06" class="">Las escuadras deben mantener coherencia según las reglas básicas.</p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-8049-b871-df94ee4bee87"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-8012-b1cf-c07c6cb15e97" class="">Disparo (Ataque a distancia)</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-808f-a1d6-f3913879df58" class="">Todo ataque a distancia se resuelve siguiendo esta secuencia: </p></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-8069-9b31-f365d1a72878" class="numbered-list" start="1"><li><strong>Elegir objetivo</strong><div style="display:contents" dir="auto"><p id="313087d9-4b33-80db-8eb1-fa87d01f807f" class="">Elige una unidad enemiga visible y dentro del alcance del arma. </p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-80aa-bb0f-c6bc56b8d7d6" class="numbered-list" start="2"><li><strong>Determinar ataques</strong><div style="display:contents" dir="auto"><p id="313087d9-4b33-80a9-90b2-f8138fcbec67" class="">Lanza tantos dados como indique el valor de <strong>Ataques</strong> del arma. </p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-80bb-9df7-d2f9b218b413" class="numbered-list" start="3"><li><strong>Tirar impactos</strong><div style="display:contents" dir="auto"><p id="313087d9-4b33-801c-a9f3-d955b36d52b5" class="">Por cada dado: si el resultado es igual o superior a <strong>Impactos</strong>, impacta.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80a2-b632-fb25de8098bf" class="">Un resultado de <strong>6</strong> es un <strong>impacto crítico</strong>.</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-80d7-909f-fd3842d50086" class="numbered-list" start="4"><li><strong>Tirar salvaciones</strong><div style="display:contents" dir="auto"><p id="313087d9-4b33-8006-b942-ecf5626b4ae8" class="">El defensor lanza tantos dados como impactos haya recibido.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80f1-9872-ffdc1a7741e9" class="">Cada resultado igual o superior a <strong>Salvación</strong> bloquea un impacto.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-807a-8504-d9dd0630f846" class="">Solo un <strong>6 defensivo</strong> puede bloquear un impacto crítico. </p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-8057-9ec4-e734cba4dc8e" class="numbered-list" start="5"><li><strong>Aplicar daño</strong><div style="display:contents" dir="auto"><p id="313087d9-4b33-804c-bc79-da23a264fea2" class="">Cada impacto no bloqueado inflige el daño indicado por el arma.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8020-92c8-f335b4186af3" class="">Los impactos normales infligen el daño base.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8082-aa08-e3c033d850ae" class="">Los impactos críticos infligen el daño crítico del arma, si lo tiene. </p></div></li></ol></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80f8-a356-ee21d0abf775" class="">Cuando una unidad pierde todas sus Vidas, se retira del juego como destruida.</p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-8092-8e10-cfb166aead38"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-8085-b87b-ddc9050ab9c2" class="">Preparado</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80ed-a041-ca0878fd026d" class="">Una unidad puede elegir la acción <strong>Preparado</strong>.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-807b-8fcc-e9eef4fe97d5" class="">Si es objetivo de un disparo antes de su siguiente activación:</p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8084-a9aa-cda35671fac4" class="bulleted-list"><li style="list-style-type:disc">Puede realizar inmediatamente un disparo de respuesta contra el atacante.</li></ul></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8042-9680-f7629c196dcf" class="">Primero se resuelve el ataque enemigo.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80da-ad52-e3a3ecfbb417" class="">Después se resuelve el disparo de respuesta.</p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-80ae-b899-ca5341a1e198"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-805c-bc84-e464d48fbe51" class="">Cargar</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80b2-94dd-ce4cf7cf86bc" class="">Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar la acción <strong>Cargar</strong>, que consume <strong>2 acciones</strong>. </p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8025-b76e-c7a6197ac722" class="bulleted-list"><li style="list-style-type:disc">Lanza <strong>2D6</strong>: ese resultado es la distancia total que puede recorrer hacia el objetivo. </li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8040-86c1-c89d15cdf2cf" class="bulleted-list"><li style="list-style-type:disc">Si no alcanza al objetivo, la carga falla y la unidad permanece en su posición. </li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8005-ad29-f8c5b8d99b3f" class="bulleted-list"><li style="list-style-type:disc">Si la carga es exitosa, coloca su peana en contacto con el objetivo y se considera trabada.</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-80ac-a63f-c1d9235f7091" class="bulleted-list"><li style="list-style-type:disc"><strong>Una carga exitosa incluye automáticamente un ataque cuerpo a cuerpo</strong></li></ul></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-80c4-8e38-d24686b6ca82"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-80fb-938d-e8467a561f72" class="">Cuerpo a Cuerpo</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80b1-94ca-dfdd4bcf5044" class="">Ocurre cuando dos unidades están en contacto.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-804f-a244-c773052c08db" class="">Si una unidad ha cargado, ataca primero, si no, ataca primero la unidad con mayor velocidad.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-801b-8ac1-dbd8c1ba7323" class="">El combate se resuelve:</p></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-80d2-9b04-c99041773264" class="numbered-list" start="1"><li>Ataca; solo 1 y 2 se consideran fallos</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-800e-9186-d7771e565a56" class="numbered-list" start="2"><li>Salvación</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-8034-94eb-f5b89c12aab9" class="numbered-list" start="3"><li>Daño</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="313087d9-4b33-802f-86a3-f031a74a25fb" class="numbered-list" start="4"><li>Contraataque (siempre que tenga aún acciones la unidad)</li></ol></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8075-8845-cce461943688" class="">Si una unidad pierde todas sus vidas, es retirada. Si ambas sobreviven, permanecen trabadas hasta que una cae.</p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-808e-9334-f4d030489b98"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-80b9-bcbe-e51f1b1bb5b5" class="">Objetivos y victoria</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-809f-a28a-e0fd52dc7600" class="">La partida dura 4-5 rondas.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-801e-9535-d27f77320c71" class="">Al final de cada turno:</p></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-80cc-93a0-c4f51c1e32b4" class="bulleted-list"><li style="list-style-type:disc">Suma el valor de tus unidades en contacto con cada objetivo.</li></ul></div><div style="display:contents" dir="auto"><ul id="313087d9-4b33-8062-9e2f-edb18cccd4b4" class="bulleted-list"><li style="list-style-type:disc">El jugador con mayor VAL controla ese objetivo.</li></ul></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-8098-89cf-db62053c0131" class="">Gana quien controle más objetivos sumando puntos.</p></div><div style="display:contents" dir="auto"><hr id="313087d9-4b33-803c-ba84-e7986a08c650"/></div><div style="display:contents" dir="auto"><h2 id="313087d9-4b33-8036-8f7c-ea22a5c51178" class="">Regla general</h2></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80dd-b4bd-e38282bb4451" class="">Si una regla no aparece aquí, no se utiliza en juego Rápido.</p></div><div style="display:contents" dir="auto"><p id="313087d9-4b33-80f6-bb15-d6f97194b6d5" class="">Para reglas completas, consulta el reglamento oficial.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

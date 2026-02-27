@@ -7,7 +7,7 @@ import { useI18n } from '../i18n/I18nContext.jsx'
 function Home() {
   const navigate = useNavigate()
   const { t } = useI18n()
-  const whatsappUrl = 'https://wa.me/'
+  const whatsappUrl = 'https://chat.whatsapp.com/KQRhYqhV5yoF0EuhdAf4sh'
 
   return (
     <>
@@ -24,7 +24,9 @@ function Home() {
               {t('home.hero.lead3')}
             </p>
             <div className="hero-actions reveal">
-              <button className="primary">{t('home.hero.start')}</button>
+              <button className="primary" onClick={() => navigate('/reglamento?mode=quick')}>
+                {t('home.hero.start')}
+              </button>
               <button className="ghost" onClick={() => navigate('/reglamento')}>
                 {t('home.hero.rules')}
               </button>

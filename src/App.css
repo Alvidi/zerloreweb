@@ -2082,6 +2082,23 @@ mark {
   margin-bottom: 20px;
 }
 
+.rules-mode-switch {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.rules-mode-switch .ghost {
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+.rules-mode-switch .ghost.active {
+  background: rgba(255, 143, 69, 0.18);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .rules-toc-search {
   display: grid;
   gap: 8px;

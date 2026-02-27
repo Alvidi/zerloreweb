@@ -1,15 +1,26 @@
 import { useMemo, useEffect, useRef, useState } from 'react'
-import reglamentoHtml from '../data/reglamento.html?raw'
-import reglamentoEnHtml from '../data/reglamento.en.html?raw'
+import { useSearchParams } from 'react-router-dom'
+import reglamentoHtml from '../data/ZEROLORE - REGLAMENTO avanzado 2eb087d94b33800ea112ed9327b7e9c8.html?raw&v=advanced-20260227'
+import reglamentoEnHtml from '../data/ZEROLORE - REGULATIONS advanced 2eb087d94b33800ea112ed9327b7e9c8.en.html?raw&v=advanced-20260227'
+import reglamentoRapidoHtml from '../data/ZEROLORE - REGLAMENTO juego rápido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw&v=quick-20260227'
+import reglamentoRapidoEnHtml from '../data/ZEROLORE - REGULATIONS quick game 313087d94b3380dc9c0ffd50e9ba8d50.en.html?raw&v=quick-20260227'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 function Reglamento() {
   const { t, lang } = useI18n()
+  const [searchParams, setSearchParams] = useSearchParams()
   const contentRef = useRef(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [activeSection, setActiveSection] = useState('')
   const [showBackToTop, setShowBackToTop] = useState(false)
-  const rulesHtml = lang === 'en' ? reglamentoEnHtml : reglamentoHtml
+  const modeParam = searchParams.get('mode')
+  const rulesMode = modeParam === 'advanced' ? 'advanced' : 'quick'
+  const rulesHtml = useMemo(() => {
+    if (rulesMode === 'quick') {
+      return lang === 'en' ? reglamentoRapidoEnHtml : reglamentoRapidoHtml
+    }
+    return lang === 'en' ? reglamentoEnHtml : reglamentoHtml
+  }, [lang, rulesMode])
 
   const { renderedHtml, tocItems } = useMemo(() => {
     if (typeof window === 'undefined') {
@@ -61,6 +72,11 @@ function Reglamento() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [renderedHtml])
 
+  useEffect(() => {
+    setSearchTerm('')
+    setActiveSection('')
+  }, [rulesMode, lang])
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
@@ -74,6 +90,12 @@ function Reglamento() {
     return tocItems.filter((item) => item.title.toLowerCase().includes(q))
   }, [tocItems, searchTerm])
 
+  const setMode = (nextMode) => {
+    const nextParams = new URLSearchParams(searchParams)
+    nextParams.set('mode', nextMode)
+    setSearchParams(nextParams, { replace: true })
+  }
+
   return (
     <section className="section rules-page" id="reglamento">
       <div className="section-head reveal">
@@ -82,6 +104,22 @@ function Reglamento() {
         <p>
           {t('rules.intro')}
         </p>
+        <div className="rules-mode-switch" role="tablist" aria-label={t('rules.modeLabel')}>
+          <button
+            type="button"
+            className={`ghost ${rulesMode === 'quick' ? 'active' : ''}`}
+            onClick={() => setMode('quick')}
+          >
+            {t('rules.modeQuick')}
+          </button>
+          <button
+            type="button"
+            className={`ghost ${rulesMode === 'advanced' ? 'active' : ''}`}
+            onClick={() => setMode('advanced')}
+          >
+            {t('rules.modeAdvanced')}
+          </button>
+        </div>
       </div>
       <div className="rules-layout">
         <aside className="rules-toc reveal">

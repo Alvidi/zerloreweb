@@ -20,6 +20,9 @@ export const translations = {
       noMatches: 'Sin coincidencias',
       backToTop: 'Subir arriba',
       sectionFallback: 'Sección',
+      modeLabel: 'Modo de reglamento',
+      modeQuick: 'Reglamento rápido',
+      modeAdvanced: 'Reglamento avanzado',
     },
     generator: {
       eyebrow: 'Generador de ejércitos',
@@ -174,6 +177,9 @@ export const translations = {
       noMatches: 'No matches',
       backToTop: 'Back to top',
       sectionFallback: 'Section',
+      modeLabel: 'Rules mode',
+      modeQuick: 'Quick Rules',
+      modeAdvanced: 'Advanced Rules',
     },
     generator: {
       eyebrow: 'Army generator',
