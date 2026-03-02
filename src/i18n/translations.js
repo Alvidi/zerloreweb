@@ -4,6 +4,7 @@ export const translations = {
       home: 'Home',
       rules: 'Reglamento',
       generator: 'Generador',
+      whatsapp: 'WhatsApp',
     },
     footer: {
       tagline: 'Un universo en construcción.',
@@ -161,6 +162,7 @@ export const translations = {
       home: 'Home',
       rules: 'Rules',
       generator: 'Generator',
+      whatsapp: 'WhatsApp',
     },
     footer: {
       tagline: 'A universe under construction.',

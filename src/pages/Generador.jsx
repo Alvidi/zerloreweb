@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
 import { jsPDF } from 'jspdf'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
+import { formatAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
 
 const factionModules = import.meta.glob('../data/*.json', { eager: true })
 
@@ -127,138 +128,6 @@ const normalizeWeapon = (weapon, tipo) => ({
   habilidades: weapon.habilidades_arma || weapon.habilidades || [],
   valor_extra: toNumber(weapon.valor_extra ?? 0),
 })
-
-const parseAbilityNumber = (raw) => {
-  const text = String(raw || '')
-  const plusMatch = text.match(/(\d+)\s*\+/)
-  if (plusMatch) return `${plusMatch[1]}+`
-  const signedMatch = text.match(/[+-]\s*\d+/)
-  if (signedMatch) return signedMatch[0].replace(/\s+/g, '')
-  const numMatch = text.match(/\d+/)
-  return numMatch ? numMatch[0] : null
-}
-
-const ensureSigned = (value) => {
-  if (!value) return 'X'
-  if (value.startsWith('+') || value.startsWith('-')) return value
-  if (value.endsWith('+')) return value
-  return `+${value}`
-}
-
-const normalizeAntiValue = (value) => {
-  if (!value) return 'X+'
-  if (value.endsWith('+')) return value
-  if (value.startsWith('+')) return `${value.slice(1)}+`
-  if (value.startsWith('-')) return `${value}+`
-  return `${value}+`
-}
-
-const normalizeLimitedValue = (value) => {
-  if (!value) return 'X'
-  if (value.endsWith('+')) return value.slice(0, -1)
-  if (value.startsWith('+')) return value.slice(1)
-  return value
-}
-
-const startsWithAny = (key, prefixes) => prefixes.some((prefix) => key.startsWith(prefix))
-
-const getAbilityDescription = (ability, lang = 'es') => {
-  if (!ability) return ''
-  const raw = String(ability).trim()
-  const key = raw
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-  const value = parseAbilityNumber(raw)
-
-  if (startsWithAny(key, ['asaltante', 'raider'])) {
-    return lang === 'en'
-      ? `The target suffers ${ensureSigned(value)} to Save against this attack.`
-      : `El objetivo pierde ${ensureSigned(value)} a su Salvación frente a ese ataque.`
-  }
-  if (key.startsWith('pesada') || key.startsWith('heavy')) {
-    return lang === 'en'
-      ? 'If it moved: +1 to Hit value. If it did not move: -1 to Hit value.'
-      : 'Si se ha movido: +1 al valor de Impactos. Si no se ha movido: -1 al valor de Impactos.'
-  }
-  if (startsWithAny(key, ['ataque rapido', 'quick attack'])) {
-    return lang === 'en'
-      ? `At half range or less, gain ${ensureSigned(value)} Attacks.`
-      : `A mitad o menos del alcance, suma ${ensureSigned(value)} Ataques.`
-  }
-  if (key.startsWith('pistolero') || key.startsWith('gunslinger')) {
-    return lang === 'en'
-      ? 'Can shoot while engaged, only against the unit it is fighting in melee.'
-      : 'Puede disparar trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
-  }
-  if (key.startsWith('explosiva') || key.startsWith('explosive')) {
-    return lang === 'en'
-      ? 'Affects a 3" radius from the impact point.'
-      : 'Afecta a un radio de 3” desde el punto de impacto.'
-  }
-  if (startsWithAny(key, ['ataque critico', 'critical attack'])) {
-    return lang === 'en'
-      ? 'Critical hits cannot be saved.'
-      : 'Los impactos críticos no pueden ser salvados.'
-  }
-  if (startsWithAny(key, ['impactos encadenados', 'chained impacts'])) {
-    return lang === 'en'
-      ? 'Each critical hit generates one additional attack resolved normally.'
-      : 'Cada ataque crítico genera un ataque adicional que se resuelve de forma normal.'
-  }
-  if (key.startsWith('precision')) {
-    return lang === 'en'
-      ? 'Reroll all failed attack rolls.'
-      : 'Repite todas las tiradas fallidas de ataque.'
-  }
-  if (key.startsWith('anti')) {
-    return lang === 'en'
-      ? `Against the listed type, results of ${normalizeAntiValue(value)} count as critical hits.`
-      : `Contra el tipo indicado, los resultados de ${normalizeAntiValue(value)} son críticos.`
-  }
-  if (startsWithAny(key, ['ignora coberturas', 'ignora cobertura', 'ignore coverages', 'ignore coverage'])) {
-    return lang === 'en'
-      ? 'The target cannot benefit from defensive bonuses from partial cover.'
-      : 'El objetivo no puede beneficiarse de ningún bono defensivo por cobertura parcial.'
-  }
-  if (startsWithAny(key, ['disparo parabolico', 'parabolic shot', 'indirect fire'])) {
-    return lang === 'en'
-      ? 'Can shoot without line of sight as long as the target is not in full cover.'
-      : 'Puede disparar sin línea de visión, siempre que el objetivo no esté cubierto.'
-  }
-  if (key.startsWith('inestable') || key.startsWith('unstable')) {
-    return lang === 'en'
-      ? 'After attacking, roll 1D6: on 1-2, this unit suffers the same damage dealt to the target.'
-      : 'Tras atacar, tira 1D6: con 1-2, la unidad recibe el mismo daño que recibió el objetivo.'
-  }
-  if (key.startsWith('directo') || key.startsWith('straight')) {
-    return lang === 'en'
-      ? 'Hits automatically, no Hit roll required.'
-      : 'Impacta automáticamente, sin tirada de Impactos.'
-  }
-  if (key.startsWith('guerrilla')) {
-    return lang === 'en'
-      ? 'Can perform an extra shooting action after using Sprint.'
-      : 'Puede hacer una acción extra de disparo después de usar Carrera.'
-  }
-  if (startsWithAny(key, ['municion limitada', 'limited ammo'])) {
-    return lang === 'en'
-      ? `This weapon has ${normalizeLimitedValue(value)} limited shots.`
-      : `Tiene ${normalizeLimitedValue(value)} disparos limitados con esta arma.`
-  }
-
-  return ''
-}
-
-const formatAbilityLabel = (label) => {
-  const raw = String(label || '').trim()
-  if (!raw) return ''
-  return raw
-    .toLowerCase()
-    .split(' ')
-    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : ''))
-    .join(' ')
-}
 
 const getUnitTypeToken = (type) => {
   const normalized = String(type || '')
@@ -691,17 +560,31 @@ function Generador() {
   const [randomFactionId, setRandomFactionId] = useState('random')
   const [unitTypeFiltersManual, setUnitTypeFiltersManual] = useState(() => new Set())
   const [unitTypeFiltersRandom, setUnitTypeFiltersRandom] = useState(() => new Set())
+  const selectedFactionIdSafe = useMemo(() => {
+    if (!factions.length) return ''
+    return factions.some((faction) => faction.id === selectedFactionId) ? selectedFactionId : factions[0].id
+  }, [factions, selectedFactionId])
+  const armyFactionIdSafe = useMemo(() => {
+    if (!armyFactionId || !factions.length) return ''
+    return factions.some((faction) => faction.id === armyFactionId) ? armyFactionId : factions[0].id
+  }, [factions, armyFactionId])
+  const randomFactionIdSafe = useMemo(() => {
+    if (!factions.length) return 'random'
+    return randomFactionId === 'random' || factions.some((faction) => faction.id === randomFactionId)
+      ? randomFactionId
+      : 'random'
+  }, [factions, randomFactionId])
 
-  const selectedFaction = factions.find((faction) => faction.id === selectedFactionId) || null
-  const armyFaction = factions.find((faction) => faction.id === armyFactionId) || selectedFaction
+  const selectedFaction = factions.find((faction) => faction.id === selectedFactionIdSafe) || null
+  const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || selectedFaction
   const availableUnitTypes = useMemo(() => {
     if (!selectedFaction?.unidades?.length) return []
     const types = new Set(selectedFaction.unidades.map((unit) => unit.tipo))
     return Array.from(types)
   }, [selectedFaction])
-  const randomFaction = randomFactionId === 'random'
+  const randomFaction = randomFactionIdSafe === 'random'
     ? null
-    : factions.find((faction) => faction.id === randomFactionId)
+    : factions.find((faction) => faction.id === randomFactionIdSafe)
   const availableUnitTypesRandom = useMemo(() => {
     if (randomFaction) {
       return Array.from(new Set(randomFaction.unidades.map((unit) => unit.tipo)))
@@ -711,13 +594,25 @@ function Generador() {
       faction.unidades.forEach((unit) => types.add(unit.tipo))
     })
     return Array.from(types)
-  }, [randomFaction, factions, randomFactionId])
+  }, [randomFaction, factions])
+
+  const activeManualFilters = useMemo(() => {
+    if (!availableUnitTypes.length) return new Set()
+    if (unitTypeFiltersManual.size) return unitTypeFiltersManual
+    return new Set(availableUnitTypes)
+  }, [availableUnitTypes, unitTypeFiltersManual])
+
+  const activeRandomFilters = useMemo(() => {
+    if (!availableUnitTypesRandom.length) return new Set()
+    if (unitTypeFiltersRandom.size) return unitTypeFiltersRandom
+    return new Set(availableUnitTypesRandom)
+  }, [availableUnitTypesRandom, unitTypeFiltersRandom])
 
   const totalValue = armyUnits.reduce((total, unit) => total + unit.total, 0)
   const visibleManualUnits = useMemo(() => {
     if (!selectedFaction?.unidades?.length) return []
-    return selectedFaction.unidades.filter((unit) => unitTypeFiltersManual.has(unit.tipo))
-  }, [selectedFaction, unitTypeFiltersManual])
+    return selectedFaction.unidades.filter((unit) => activeManualFilters.has(unit.tipo))
+  }, [selectedFaction, activeManualFilters])
 
   useEffect(() => {
     if (typeof Image === 'undefined') return
@@ -728,30 +623,13 @@ function Generador() {
   }, [])
 
   useEffect(() => {
-    if (!factions.length) {
-      setSelectedFactionId('')
-      setArmyFactionId('')
-      setRandomFactionId('random')
-      return
-    }
-    setSelectedFactionId((prev) => (factions.some((faction) => faction.id === prev) ? prev : factions[0].id))
-    setArmyFactionId((prev) => {
-      if (!prev) return prev
-      return factions.some((faction) => faction.id === prev) ? prev : factions[0].id
-    })
-    setRandomFactionId((prev) =>
-      prev === 'random' || factions.some((faction) => faction.id === prev) ? prev : 'random',
-    )
-  }, [factions])
-
-  useEffect(() => {
     const payload = JSON.stringify({
       units: armyUnits,
-      factionId: armyFactionId,
+      factionId: armyFactionIdSafe,
       doctrines: selectedDoctrines.map((item) => item.id),
     })
     window.localStorage.setItem('zerolore_army_v1', payload)
-  }, [armyUnits, armyFactionId, selectedDoctrines])
+  }, [armyUnits, armyFactionIdSafe, selectedDoctrines])
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
@@ -767,33 +645,33 @@ function Generador() {
 
   const handleFactionChange = (event) => {
     const next = event.target.value
+    const nextFaction = factions.find((faction) => faction.id === next)
+    const nextTypes = nextFaction ? Array.from(new Set(nextFaction.unidades.map((unit) => unit.tipo))) : []
     startTransition(() => {
       setSelectedFactionId(next)
+      setUnitTypeFiltersManual(new Set(nextTypes))
       setArmyUnits([])
       setSelectedDoctrines([])
       setArmyFactionId(next)
     })
   }
 
-  useEffect(() => {
-    if (!availableUnitTypes.length) {
-      setUnitTypeFiltersManual(new Set())
-      return
-    }
-    setUnitTypeFiltersManual(new Set(availableUnitTypes))
-  }, [availableUnitTypes])
-
-  useEffect(() => {
-    if (!availableUnitTypesRandom.length) {
-      setUnitTypeFiltersRandom(new Set())
-      return
-    }
-    setUnitTypeFiltersRandom(new Set(availableUnitTypesRandom))
-  }, [availableUnitTypesRandom])
+  const handleRandomFactionChange = (next) => {
+    const nextFaction = next === 'random' ? null : factions.find((faction) => faction.id === next)
+    const nextTypes = nextFaction
+      ? Array.from(new Set(nextFaction.unidades.map((unit) => unit.tipo)))
+      : Array.from(
+        new Set(
+          factions.flatMap((faction) => faction.unidades.map((unit) => unit.tipo)),
+        ),
+      )
+    setRandomFactionId(next)
+    setUnitTypeFiltersRandom(new Set(nextTypes))
+  }
 
   const handleToggleUnitTypeManual = (type) => {
     setUnitTypeFiltersManual((prev) => {
-      const next = new Set(prev)
+      const next = prev.size ? new Set(prev) : new Set(availableUnitTypes)
       if (next.has(type)) {
         next.delete(type)
       } else {
@@ -805,7 +683,7 @@ function Generador() {
 
   const handleToggleUnitTypeRandom = (type) => {
     setUnitTypeFiltersRandom((prev) => {
-      const next = new Set(prev)
+      const next = prev.size ? new Set(prev) : new Set(availableUnitTypesRandom)
       if (next.has(type)) {
         next.delete(type)
       } else {
@@ -832,7 +710,7 @@ function Generador() {
       total,
     }
     setArmyUnits((prev) => [...prev, entry])
-    setArmyFactionId(selectedFactionId)
+    setArmyFactionId(selectedFactionIdSafe)
     setActiveUnit(null)
   }
 
@@ -864,15 +742,15 @@ function Generador() {
   const handleGenerateRandom = () => {
     if (!factions.length) return
     const faction =
-      randomFactionId === 'random'
+      randomFactionIdSafe === 'random'
         ? randomPick(factions)
-        : factions.find((item) => item.id === randomFactionId)
+        : factions.find((item) => item.id === randomFactionIdSafe)
     const target = toNumber(targetValue)
     const result = generateArmyByValue(
       faction,
       target,
       gameMode,
-      unitTypeFiltersRandom.size ? unitTypeFiltersRandom : null,
+      activeRandomFilters.size ? activeRandomFilters : null,
     )
     setArmyUnits(result.units)
     setSelectedDoctrines(buildRandomDoctrines(doctrineCount, gameMode))
@@ -1295,7 +1173,7 @@ function Generador() {
                 <span>{t('generator.faction')}</span>
                 <CustomSelect
                   t={t}
-                  value={selectedFactionId}
+                  value={selectedFactionIdSafe}
                   onChange={(next) => handleFactionChange({ target: { value: next } })}
                   options={factions.map((faction) => ({
                     value: faction.id,
@@ -1332,7 +1210,7 @@ function Generador() {
                       <label key={type} className="unit-type-filter">
                         <input
                           type="checkbox"
-                          checked={unitTypeFiltersManual.has(type)}
+                          checked={activeManualFilters.has(type)}
                           onChange={() => handleToggleUnitTypeManual(type)}
                         />
                         <span>{type}</span>
@@ -1465,8 +1343,8 @@ function Generador() {
                 <span>{t('generator.faction')}</span>
                 <CustomSelect
                   t={t}
-                  value={randomFactionId}
-                  onChange={setRandomFactionId}
+                  value={randomFactionIdSafe}
+                  onChange={handleRandomFactionChange}
                   options={[
                     { value: 'random', label: t('generator.randomFaction') },
                     ...factions.map((faction) => ({
@@ -1481,7 +1359,7 @@ function Generador() {
                   <label key={`random-${type}`} className="unit-type-filter">
                     <input
                       type="checkbox"
-                      checked={unitTypeFiltersRandom.has(type)}
+                      checked={activeRandomFilters.has(type)}
                       onChange={() => handleToggleUnitTypeRandom(type)}
                     />
                     <span>{type}</span>

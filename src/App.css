@@ -76,6 +76,7 @@
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 24px;
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -85,11 +86,15 @@
 
 .nav-links a {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 4px;
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a:focus-visible {
   color: var(--accent);
 }
 
@@ -106,8 +111,40 @@
   transition: transform 0.3s ease;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
   transform: scaleX(1);
+}
+
+.nav-whatsapp-link {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  color: var(--text-muted);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-whatsapp-link::after {
+  display: none;
+}
+
+.nav-whatsapp-link svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nav-whatsapp-link:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.nav-links a:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .lang-switch {
@@ -460,6 +497,67 @@ button {
 .section.cta {
   text-align: left;
   padding-top: 28px;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.cta-side {
+  display: grid;
+  gap: 12px;
+}
+
+.cta-form {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(12, 12, 18, 0.7);
+}
+
+.cta-form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.cta-form-field span {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cta-form-field input,
+.cta-form-field textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg-1);
+  color: var(--text-main);
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.cta-form-field textarea {
+  resize: vertical;
+  min-height: 88px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .section.manifesto {
@@ -1978,6 +2076,10 @@ mark {
   }
 
   .split {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-grid {
     grid-template-columns: 1fr;
   }
 

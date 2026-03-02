@@ -72,11 +72,6 @@ function Reglamento() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [renderedHtml])
 
-  useEffect(() => {
-    setSearchTerm('')
-    setActiveSection('')
-  }, [rulesMode, lang])
-
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
@@ -91,6 +86,8 @@ function Reglamento() {
   }, [tocItems, searchTerm])
 
   const setMode = (nextMode) => {
+    setSearchTerm('')
+    setActiveSection('')
     const nextParams = new URLSearchParams(searchParams)
     nextParams.set('mode', nextMode)
     setSearchParams(nextParams, { replace: true })
