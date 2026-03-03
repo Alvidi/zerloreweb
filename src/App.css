@@ -2742,6 +2742,10 @@ mark {
   margin-bottom: 16px;
 }
 
+.duel-charge-distance {
+  max-width: 220px;
+}
+
 .duel-attack-type > span {
   font-size: 0.74rem;
   text-transform: uppercase;
@@ -2833,11 +2837,20 @@ mark {
 }
 
 .duel-conditions {
-  margin-bottom: 12px;
+  display: grid;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.duel-conditions > span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--metal);
 }
 
 .duel-conditions .field {
-  max-width: 260px;
+  max-width: 320px;
 }
 
 .duel-weapon-multi {
@@ -2853,6 +2866,12 @@ mark {
 .duel-weapon-slot span {
   font-size: 0.72rem;
   color: var(--metal);
+}
+
+.duel-weapon-ammo {
+  margin: -2px 0 2px;
+  font-size: 0.74rem;
+  color: rgba(135, 223, 154, 0.92);
 }
 
 .battle-empty {
@@ -2933,6 +2952,10 @@ mark {
 .duel-weapon-stack {
   display: grid;
   gap: 10px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+  margin-top: 4px;
 }
 
 .duel-unit-divider {
@@ -2955,6 +2978,21 @@ mark {
 
 .duel-weapon-notes {
   margin: 6px 10px 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.duel-ability-note-item {
+  display: grid;
+  gap: 4px;
+}
+
+.duel-ability-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--metal);
+  font-size: 0.72rem;
 }
 
 .duel-actions {
@@ -3003,29 +3041,19 @@ mark {
   gap: 8px;
 }
 
-.duel-log-card {
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.02);
-  padding: 8px;
+.duel-log-entry {
+  padding: 2px 0 8px;
   display: grid;
   gap: 6px;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(8px) scale(0.99);
+  animation: duel-log-entry-in 280ms ease-out forwards;
 }
 
-.duel-log-card-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.duel-log-card-head strong {
-  color: var(--text-main);
-  font-size: 0.8rem;
-}
-
-.duel-log-card-head span {
-  color: var(--text-muted);
-  font-size: 0.72rem;
+.duel-log-entry:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .duel-log-row {
@@ -3033,6 +3061,32 @@ mark {
   gap: 6px;
   color: var(--text-muted);
   font-size: 0.74rem;
+}
+
+.duel-log-line {
+  display: grid;
+  gap: 4px;
+}
+
+.duel-log-line + .duel-log-line {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+
+.duel-log-line-label {
+  font-size: 0.72rem;
+  color: var(--metal);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.duel-log-line-label-attacker {
+  color: rgba(247, 88, 88, 0.9);
+}
+
+.duel-log-line-label-defender {
+  color: rgba(90, 156, 255, 0.9);
 }
 
 .duel-dice {
@@ -3052,6 +3106,116 @@ mark {
   color: var(--text-main);
   font-size: 0.72rem;
   font-weight: 700;
+  animation: duel-die-roll 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+}
+
+.duel-log-copy {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.duel-log-copy-result {
+  color: var(--text-main);
+  font-weight: 600;
+  animation: duel-result-in 340ms ease-out both;
+}
+
+.duel-result-block {
+  display: grid;
+  gap: 4px;
+}
+
+.duel-log-hp-remaining {
+  color: rgba(135, 223, 154, 0.95);
+  font-weight: 700;
+}
+
+.duel-log-defeated {
+  color: rgba(247, 88, 88, 0.95);
+  font-weight: 700;
+}
+
+.duel-log-copy-note {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
+.duel-log-ability-line {
+  display: block;
+  flex-basis: 100%;
+}
+
+@keyframes duel-log-entry-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes duel-die-roll {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) rotate(-12deg) scale(0.9);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-1px) rotate(2deg) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes duel-result-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.duel-die-tag {
+  min-width: 0;
+  padding: 0 8px;
+  color: var(--metal);
+  border-style: dashed;
+  font-size: 0.66rem;
+}
+
+.duel-die-attack {
+  border-color: rgba(247, 88, 88, 0.7);
+  background: rgba(247, 88, 88, 0.2);
+}
+
+.duel-die-crit {
+  border-color: rgba(255, 209, 85, 0.92);
+  box-shadow: inset 0 0 0 1px rgba(255, 209, 85, 0.38);
+}
+
+.duel-die-defense {
+  border-color: rgba(90, 156, 255, 0.68);
+  background: rgba(90, 156, 255, 0.18);
+}
+
+.duel-die-charge {
+  border-color: rgba(255, 164, 67, 0.74);
+  background: rgba(255, 164, 67, 0.24);
+}
+
+.duel-die-fail-gray {
+  border-color: rgba(158, 166, 182, 0.5);
+  background: rgba(132, 142, 158, 0.2);
+  color: rgba(230, 236, 244, 0.9);
 }
 
 .duel-log-outcome {
@@ -3089,8 +3253,14 @@ mark {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .duel-log-card-head {
-    flex-direction: column;
-    align-items: flex-start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duel-log-entry,
+  .duel-die,
+  .duel-log-copy-result {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
