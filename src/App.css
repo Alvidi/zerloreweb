@@ -2731,3 +2731,366 @@ mark {
   font-size: 0.9rem;
   line-height: 1.6;
 }
+
+.battle-page .section-head {
+  margin-bottom: 30px;
+}
+
+.duel-attack-type {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.duel-attack-type > span {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--metal);
+}
+
+.duel-attack-type-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.duel-attack-type-btn {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.58);
+  color: var(--text-muted);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.duel-attack-type-btn.active {
+  border-color: var(--accent);
+  color: var(--text-main);
+  background: rgba(195, 163, 96, 0.16);
+}
+
+.battle-duel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.duel-panel {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.65);
+  align-content: start;
+}
+
+.duel-panel h3 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+}
+
+.duel-panel.attacker-panel h3 {
+  color: #ff6b6b;
+}
+
+.duel-panel.defender-panel h3 {
+  color: #6fa8ff;
+}
+
+.duel-panel .field {
+  font-size: 0.76rem;
+}
+
+.duel-panel .field input,
+.duel-panel .field select {
+  min-height: 42px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.duel-faction-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duel-faction-select img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.duel-faction-select select {
+  flex: 1;
+}
+
+.duel-conditions {
+  margin-bottom: 12px;
+}
+
+.duel-conditions .field {
+  max-width: 260px;
+}
+
+.duel-weapon-multi {
+  display: grid;
+  gap: 8px;
+}
+
+.duel-weapon-slot {
+  display: grid;
+  gap: 6px;
+}
+
+.duel-weapon-slot span {
+  font-size: 0.72rem;
+  color: var(--metal);
+}
+
+.battle-empty {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.duel-unit-card {
+  margin-top: 4px;
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.duel-unit-card h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.duel-unit-card .unit-stats-table {
+  margin-top: 0;
+}
+
+.duel-unit-card .unit-stats-row {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.duel-unit-card .unit-stats-row span {
+  overflow-wrap: anywhere;
+}
+
+.duel-unit-specialty {
+  margin-top: 2px;
+  font-size: 0.8rem;
+}
+
+.duel-hp-select {
+  width: 74px;
+  max-width: 100%;
+  min-height: 30px;
+  border: 1px solid var(--line);
+  background: var(--bg-1);
+  color: var(--text-main);
+  padding: 4px 8px;
+  font: inherit;
+  line-height: 1.2;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.duel-hp-select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.duel-weapon-table {
+  overflow-x: auto;
+}
+
+.duel-weapon-row {
+  min-width: 0;
+  grid-template-columns: minmax(46px, 0.75fr) minmax(58px, 0.9fr) minmax(
+      50px,
+      0.75fr
+    ) minmax(52px, 0.8fr) minmax(58px, 0.85fr) minmax(130px, 1.8fr);
+  font-size: 0.76rem;
+}
+
+.duel-weapon-row span {
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+
+.duel-weapon-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.duel-unit-divider {
+  border-top: 1px solid var(--line);
+  margin-top: 2px;
+}
+
+.duel-weapon-entry-title {
+  margin: 0 0 6px;
+  color: var(--text-main);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.duel-weapon-entry + .duel-weapon-entry {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+
+.duel-weapon-notes {
+  margin: 6px 10px 10px;
+}
+
+.duel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.duel-actions .primary,
+.duel-actions .ghost {
+  min-width: 160px;
+}
+
+.duel-log {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.52);
+  padding: 12px;
+}
+
+.duel-log-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.duel-log-head h3 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+}
+
+.duel-log-head span {
+  color: var(--metal);
+  font-size: 0.78rem;
+}
+
+.duel-log-list {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.duel-log-card {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.duel-log-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.duel-log-card-head strong {
+  color: var(--text-main);
+  font-size: 0.8rem;
+}
+
+.duel-log-card-head span {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.duel-log-row {
+  display: grid;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+
+.duel-dice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.duel-die {
+  min-width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  background: rgba(12, 12, 18, 0.72);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.duel-log-outcome {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.76rem;
+}
+
+.duel-log-blocked {
+  margin: 0;
+  color: #ff9a9a;
+  font-size: 0.76rem;
+}
+
+@media (max-width: 1100px) {
+  .battle-duel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .duel-attack-type-btn {
+    flex: 1 1 calc(33.33% - 8px);
+    min-width: 104px;
+  }
+
+  .duel-actions .primary,
+  .duel-actions .ghost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .duel-unit-card .unit-stats-row,
+  .duel-weapon-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .duel-log-card-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

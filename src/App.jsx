@@ -6,6 +6,7 @@ import SeoManager from './components/SeoManager.jsx'
 import Home from './pages/Home.jsx'
 import Generador from './pages/Generador.jsx'
 import Reglamento from './pages/Reglamento.jsx'
+import Batalla from './pages/Batalla.jsx'
 
 function Layout() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/generador" element={<Generador />} />
+          <Route path="/batalla" element={<Batalla />} />
           <Route path="/reglamento" element={<Reglamento />} />
         </Route>
       </Routes>

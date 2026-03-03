@@ -18,6 +18,7 @@ function Nav() {
         <Link to="/">{t('nav.home')}</Link>
         <Link to="/reglamento">{t('nav.rules')}</Link>
         <Link to="/generador">{t('nav.generator')}</Link>
+        <Link to="/batalla">{lang === 'en' ? 'Battle' : 'Batalla'}</Link>
         <a
           className="nav-whatsapp-link"
           href={whatsappUrl}
