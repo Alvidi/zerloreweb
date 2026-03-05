@@ -3117,6 +3117,16 @@ mark {
   line-height: 1.35;
 }
 
+.duel-log-save-threshold {
+  color: rgba(135, 223, 154, 0.95);
+  font-weight: 700;
+}
+
+.duel-log-cover-tag {
+  color: var(--metal);
+  font-size: 0.76rem;
+}
+
 .duel-log-copy-result {
   color: var(--text-main);
   font-weight: 600;

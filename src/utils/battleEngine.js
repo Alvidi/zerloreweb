@@ -332,13 +332,13 @@ export function resolveAttack({
   }
 
   if (mode === 'ranged' && coverType === 'partial') {
-    bonusSaveDice += 1
-    rulesApplied.push('Cobertura parcial (+1 dado de salvación)')
+    saveThreshold -= 1
+    rulesApplied.push('Cobertura parcial (-1 al valor de salvación)')
   }
   if (mode === 'ranged' && coverType === 'height') {
-    bonusSaveDice += 1
+    saveThreshold -= 1
     hitThreshold += 1
-    rulesApplied.push('Cobertura de altura (+1 salvación, +1 impacto requerido)')
+    rulesApplied.push('Cobertura de altura (-1 al valor de salvación, +1 impacto requerido)')
   }
 
   if (mode === 'ranged' && hasAbility(weapon, 'quickAttack') && conditions.halfRange) {
@@ -365,7 +365,7 @@ export function resolveAttack({
 
   const ignoreCover = hasAbility(weapon, 'ignoreCover') && mode === 'ranged'
   if (ignoreCover && coverType === 'partial') {
-    bonusSaveDice = Math.max(0, bonusSaveDice - 1)
+    saveThreshold += 1
     rulesApplied.push('Ignora coberturas (anula cobertura parcial)')
   }
 

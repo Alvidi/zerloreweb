@@ -137,7 +137,8 @@ const getConditionSupport = (weapons, mode) => {
   return {
     moved: weapons.some((weapon) => weaponHasAnyPrefix(weapon, HEAVY_PREFIXES)),
     halfRange: weapons.some((weapon) => weaponHasAnyPrefix(weapon, QUICK_ATTACK_PREFIXES)),
-    noLineOfSight: weapons.some((weapon) => weaponHasAnyPrefix(weapon, PARABOLIC_PREFIXES)),
+    // Line of sight is a battlefield condition; parabolic weapons only modify its effect.
+    noLineOfSight: true,
     afterDash: weapons.some((weapon) => weaponHasAnyPrefix(weapon, GUERRILLA_PREFIXES)),
   }
 }
@@ -637,6 +638,10 @@ function Batalla() {
         defenderLine: lang === 'en'
           ? `${defenderName} defends: ${result.blockedReason || tx.blocked}.`
           : `${defenderName} defiende: ${result.blockedReason || tx.blocked}.`,
+        defenderLead: '',
+        defenderSave: '',
+        defenderCover: '',
+        defenderTail: '',
         attackDice: [],
         defenseDice: [],
         resultState: {
@@ -651,10 +656,45 @@ function Batalla() {
     const attackDice = (result.hitEntries || [])
       .filter((entry) => Number.isFinite(entry.roll))
       .map((entry) => ({ value: entry.roll, outcome: entry.outcome }))
-    const defenseDice = (result.saveRolls || [])
-      .filter((roll) => Number.isFinite(roll))
-      .map((roll) => ({ value: roll, blocked: roll >= result.saveThreshold }))
+    const saveRolls = (result.saveRolls || []).filter((roll) => Number.isFinite(roll))
+    const blockedFlags = new Array(saveRolls.length).fill(false)
+    const sixIndices = []
+    const regularPassIndices = []
+
+    saveRolls.forEach((roll, index) => {
+      if (roll === 6) {
+        sixIndices.push(index)
+      } else if (roll >= result.saveThreshold) {
+        regularPassIndices.push(index)
+      }
+    })
+
+    let remainingBlockedCrits = result.totals?.blockedCrits || 0
+    sixIndices.forEach((index) => {
+      if (remainingBlockedCrits <= 0) return
+      blockedFlags[index] = true
+      remainingBlockedCrits -= 1
+    })
+
+    let remainingBlockedHits = result.totals?.blockedHits || 0
+    regularPassIndices.forEach((index) => {
+      if (remainingBlockedHits <= 0) return
+      blockedFlags[index] = true
+      remainingBlockedHits -= 1
+    })
+    sixIndices.forEach((index) => {
+      if (remainingBlockedHits <= 0 || blockedFlags[index]) return
+      blockedFlags[index] = true
+      remainingBlockedHits -= 1
+    })
+
+    const defenseDice = saveRolls.map((roll, index) => ({ value: roll, blocked: blockedFlags[index] }))
     const appliedAbilityRules = (result.rulesApplied || []).filter((rule) => isAbilityRule(rule))
+    const appliedCoverRules = (result.rulesApplied || []).filter((rule) => normalizeText(rule).startsWith('cobertura'))
+    const ignoresPartialCover = (result.rulesApplied || []).some((rule) =>
+      normalizeText(rule).startsWith('ignora coberturas'),
+    )
+    const coverAffectsDefense = appliedCoverRules.length > 0 && !(ignoresPartialCover && result.coverType === 'partial')
     const attackerSummary = result.hasDirect
       ? lang === 'en'
         ? `${attackerName} attacks with ${weaponName} (automatic hits): ${result.totals.hits} hits and ${result.totals.crits} crits.`
@@ -662,11 +702,24 @@ function Batalla() {
       : lang === 'en'
         ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${result.totals.hits} hits and ${result.totals.crits} crits.`
         : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${result.totals.hits} impactos y ${result.totals.crits} críticos.`
+    const defenderCover = coverAffectsDefense
+      ? lang === 'en'
+        ? result.coverType === 'height'
+          ? 'cover: high'
+          : 'cover: partial'
+        : result.coverType === 'height'
+          ? 'cobertura de altura'
+          : 'cobertura parcial'
+      : ''
     const abilityLine = appliedAbilityRules.length
       ? lang === 'en'
         ? `Applied abilities: ${appliedAbilityRules.join(', ')}.`
         : `Habilidades aplicadas: ${appliedAbilityRules.join(', ')}.`
       : ''
+    const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
+    const defenderTail = lang === 'en'
+      ? `): blocks ${blockedTotal} and takes ${result.totals.damage} damage.`
+      : `): bloquea ${blockedTotal} y recibe ${result.totals.damage} de daño.`
 
     return {
       key,
@@ -674,9 +727,11 @@ function Batalla() {
       subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
       attackerLine: attackerSummary,
       abilityLine,
-      defenderLine: lang === 'en'
-        ? `${defenderName} defends (${result.saveThreshold}+): blocks ${blockedTotal} and takes ${result.totals.damage} damage.`
-        : `${defenderName} defiende (${result.saveThreshold}+): bloquea ${blockedTotal} y recibe ${result.totals.damage} de daño.`,
+      defenderLine: '',
+      defenderLead,
+      defenderSave: `${result.saveThreshold}+`,
+      defenderCover,
+      defenderTail,
       attackDice,
       defenseDice,
       resultState: {
@@ -705,6 +760,10 @@ function Batalla() {
     attackerLine,
     defenderLine,
     abilityLine: '',
+    defenderLead: '',
+    defenderSave: '',
+    defenderCover: '',
+    defenderTail: '',
     attackDice,
     defenseDice: [],
     hideResult,
@@ -1459,7 +1518,18 @@ function Batalla() {
                           {die.value}
                         </span>
                       ))}
-                      <span className="duel-log-copy">{entry.defenderLine}</span>
+                      {entry.defenderSave ? (
+                        <span className="duel-log-copy">
+                          <span>{entry.defenderLead}</span>
+                          <span className="duel-log-save-threshold">{entry.defenderSave}</span>
+                          {!!entry.defenderCover && (
+                            <span className="duel-log-cover-tag"> · {entry.defenderCover}</span>
+                          )}
+                          <span>{entry.defenderTail}</span>
+                        </span>
+                      ) : (
+                        <span className="duel-log-copy">{entry.defenderLine}</span>
+                      )}
                     </div>
                   </div>
                 )}
