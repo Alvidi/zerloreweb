@@ -9,12 +9,12 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "rules:sync-en": "node scripts/sync-regulations-en.mjs",
-    "rules:audit": "node scripts/audit-regulations.mjs"
+    "rules:audit": "node scripts/audit-regulations.mjs",
+    "factions:sync-html": "node scripts/sync-factions-from-html.mjs"
   },
   "dependencies": {
     "jsdom": "^28.0.0",
     "jspdf": "^4.0.0",
-    "pdf-parse": "^1.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0"

@@ -218,7 +218,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Bang",
-            "ataques": "1D",
+            "ataques": "1",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -243,14 +243,14 @@
           "max": 1
         },
         "especialidad": "This unit cannot fire. This drone removes one attack die from the enemy attack and critical damage becomes normal damage.",
-        "valor": 5
+        "valor": 7
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Bang",
-            "ataques": "1D",
+            "ataques": "1",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -474,19 +474,7 @@
             "valor_extra": 2
           }
         ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "hydraulic blow",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [],
-            "especialidad": "-",
-            "valor_extra": 0
-          }
-        ]
+        "cuerpo_a_cuerpo": []
       }
     },
     {
@@ -717,5 +705,5 @@
       }
     }
   ],
-  "_fuente": "3c3cec79-9f73-40a9-a1e8-7546ed075cbc_Tecnocratras.pdf"
+  "_fuente": "Tecnocratras 292087d94b3380799736c4aeb55b04e1.html"
 }

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema de Salvajes</title>
+  <desc id="desc">Insignia orka de chatarra con mandibula de colmillos y placa de guerra.</desc>
+  <defs>
+    <linearGradient id="ork-plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b9cf73"/>
+      <stop offset="100%" stop-color="#5f7831"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 48 398 126v248L256 462 114 374V126Z" stroke="#97b15e" stroke-width="18"/>
+    <path d="M148 152h216l22 66-20 116-110 74-110-74-20-116z" fill="url(#ork-plate)" stroke="#425425" stroke-width="10"/>
+
+    <path d="M170 206h66l20 26 20-26h66l-20 52H190z" fill="#2d2317" stroke="#1f170f" stroke-width="8"/>
+    <path d="M182 272h148l-28 54h-92z" fill="#2b2014" stroke="#1f170f" stroke-width="8"/>
+
+    <path d="M200 326 166 392M312 326l34 66" stroke="#efe4c4" stroke-width="14"/>
+    <path d="M226 330h60" stroke="#1f170f" stroke-width="10"/>
+
+    <path d="M144 178 94 206M368 178l50 28M138 248l-56 10M374 248l56 10" stroke="#97b15e" stroke-width="12" opacity=".8"/>
+    <circle cx="174" cy="190" r="7" fill="#cfdca2"/>
+    <circle cx="338" cy="190" r="7" fill="#cfdca2"/>
+    <circle cx="148" cy="300" r="7" fill="#cfdca2"/>
+    <circle cx="364" cy="300" r="7" fill="#cfdca2"/>
+  </g>
+</svg>

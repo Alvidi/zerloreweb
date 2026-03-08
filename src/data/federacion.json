@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Atrincheramiento",
-        "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene -1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación."
+        "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación."
       },
       {
         "habilidades_faccion2": "Refuerzos rasos",
@@ -36,7 +36,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusil láser",
+            "nombre": "fusil láser",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+4",
@@ -62,7 +62,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Bayoneta",
+            "nombre": "bayoneta",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -93,7 +93,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusiles láser Grand II",
+            "nombre": "fusiles laser Grand II",
             "ataques": "3D",
             "distancia": "15\"",
             "impactos": "+4",
@@ -130,7 +130,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Fusiles de plasma",
+            "nombre": "fusiles de plasma",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+3",
@@ -145,7 +145,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Bayoneta",
+            "nombre": "bayoneta",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -201,7 +201,7 @@
           },
           {
             "nombre": "Embestida de Escudo",
-            "ataques": "1D3",
+            "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -279,7 +279,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusiles láser modificados",
+            "nombre": "fusiles laser modificados",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+3",
@@ -305,7 +305,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Vibra-espada",
+            "nombre": "vibra-espada",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -323,7 +323,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -388,14 +388,15 @@
           },
           {
             "nombre": "Cañón barricade",
-            "ataques": "1D (3 munición)",
+            "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "D.Dirección + D6",
+            "impactos": "+6",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Indirect Fire",
-              "Explosiva"
+              "Disparo parabólico",
+              "Explosiva",
+              "Munición limitada (3)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -421,28 +422,28 @@
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "-",
-        "vidas": 6,
+        "vidas": 8,
         "salvacion": "+5",
         "velocidad": 1,
         "escuadra": {
-          "min": 1,
+          "min": 2,
           "max": 2
         },
-        "especialidad": "Esta unidad no puede moverse. Requiere dos unidades de Línea aliadas para poder disparar. Dichas unidades pueden separarse de esta unidad, pero no podrán disparar ese turno.",
+        "especialidad": "Esta unidad no puede moverse.",
         "valor": 8
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Artillería",
+            "nombre": "artillería",
             "ataques": "1D6",
             "distancia": "35\"",
-            "impactos": "D6 + D.Dirección",
+            "impactos": "+6",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
               "Explosiva",
-              "Ignora Coberturas"
+              "Ignora coberturas"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -488,7 +489,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades de la Federación en escuadra o a 6\" en escaramuza pueden repetir un dado de Impactos fallido en disparo durante su activación. Esta unidad puede ir dentro de un vehículo.",
+        "especialidad": "Las unidades de la Federación en escuadra o a 6\" en escaramuza: pueden repetir un dado de Impactos fallido en disparo durante su activación. Esta unidad puede ir dentro de un vehículo",
         "valor": 14
       },
       "armas": {
@@ -529,7 +530,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -556,13 +557,14 @@
         "disparo": [
           {
             "nombre": "Cañón de Asedio",
-            "ataques": "2D6 (3 munición)",
+            "ataques": "2D6",
             "distancia": "24\"",
             "impactos": "+4",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Pesada"
+              "Pesada",
+              "Munición limitada (3)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -596,7 +598,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Patada blindada",
+            "nombre": "patada blindada",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -610,5 +612,5 @@
       }
     }
   ],
-  "_fuente": "7eb48379-9b31-4a4f-8391-cadc1abb7ef6_La_Federacin.pdf"
+  "_fuente": "La Federación 291087d94b3380aea866e0719797e7a0.html"
 }

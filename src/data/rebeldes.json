@@ -1,7 +1,7 @@
 {
   "faccion": {
     "nombre": "Rebeldes",
-    "estilo_juego": "Los Rebeldes destacan por su movilidad extrema, armas exóticas y estilos de combate ágiles tanto a distancia como en melee. Sus tropas reposicionan con facilidad, esquivan daño y castigan al enemigo con ataques precisos o ráfagas de energía inestable, pero son frágiles y deben evitar enfrentamientos directos prolongados. Una facción ideal para jugadores tácticos que disfrutan del “golpea y muévete”, de romper líneas y de atacar desde ángulos inesperados.",
+    "estilo_juego": "Los Rebeldes destacan por su movilidad extrema, armas exóticas y estilos de combate ágiles tanto a distancia como en cuerpo a cuerpo. Sus tropas reposicionan con facilidad, esquivan daño y castigan al enemigo con ataques precisos o ráfagas de energía inestable, pero son frágiles y deben evitar enfrentamientos directos prolongados. Una facción ideal para jugadores tácticos que disfrutan del \"golpea y muévete\", de romper líneas y de atacar desde ángulos inesperados.",
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Guerrilla en las sombras",
@@ -9,11 +9,11 @@
       },
       {
         "habilidades_faccion2": "Finta",
-        "descripcion": "Las unidades/escuadras, cuando usan la acción prepararse en vez de contraatacar, ganan -1 de salvación cuando es disparada, no es acumulable si está en cobertura."
+        "descripcion": "Las unidades/escuadras, cuando usan la acción prepararse en vez de contraatacar, al recibir un ataque a distancia, el atacante sufre +1 al valor de Impactos necesario. Este efecto no se acumula con coberturas."
       },
       {
         "habilidades_faccion3": "Nadie se para",
-        "descripcion": "Esta facción siempre tiene que gastar una acción de movimiento, a excepción si carga o está trabada en combate cuerpo a cuerpo."
+        "descripcion": "esta facción siempre tiene que gastar una acción de movimiento, a excepción si carga o está trabada en combate cuerpo a cuerpo"
       }
     ]
   },
@@ -37,7 +37,7 @@
         "disparo": [
           {
             "nombre": "Carabina del Eco",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
@@ -63,7 +63,7 @@
           },
           {
             "nombre": "Mirada holo-lanza",
-            "ataques": "1D",
+            "ataques": "1",
             "distancia": "25\"",
             "impactos": "+5",
             "danio": "1",
@@ -78,7 +78,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Hoja del eco",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -124,7 +124,7 @@
         "disparo": [
           {
             "nombre": "Fusil fractal",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -135,7 +135,7 @@
           },
           {
             "nombre": "Torreta de impulso fractal",
-            "ataques": "1D3",
+            "ataques": "1D3+1",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
@@ -148,7 +148,7 @@
           },
           {
             "nombre": "Cañón resonante",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "3",
@@ -163,7 +163,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Cuchillo disruptor",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -182,7 +182,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -209,7 +209,7 @@
         "disparo": [
           {
             "nombre": "Fusil fractal",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -222,7 +222,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Filo-sombra",
-            "ataques": "4D",
+            "ataques": "4",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -235,20 +235,20 @@
           },
           {
             "nombre": "Espada de fase",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
             "nombre": "Daga de vértice",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -261,14 +261,14 @@
           },
           {
             "nombre": "Martillo eléctrico",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
               "Inestable",
-              "Anti 1+ (Élite/Línea)"
+              "Anti -1 (Élite/Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -295,7 +295,7 @@
         "disparo": [
           {
             "nombre": "Cañón de luz fractal",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
@@ -336,7 +336,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Embestida cinética",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -367,7 +367,7 @@
         "disparo": [
           {
             "nombre": "Cañón espectral",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "20\"",
             "impactos": "+4",
             "danio": "3",
@@ -393,7 +393,7 @@
           },
           {
             "nombre": "Lanza fractal pesada",
-            "ataques": "1D",
+            "ataques": "1",
             "distancia": "24\"",
             "impactos": "+3",
             "danio": "4",
@@ -408,13 +408,13 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Guantelete resonante",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -434,7 +434,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Puede secuestrar vehículos enemigos si carga con éxito contra uno, se tira un 1D6, si sale 1,2 y 3 el vehículo pasa a formar parte de tus líneas.",
+        "especialidad": "Puede secuestrar vehículos enemigos por debajo del 50% de vida, Si carga con éxito contra un vehículo enemigo, tira 1D6: con 1-3 el vehículo pasa a ser tuyo hasta el final de la partida y puede activarse normalmente desde el siguiente turno. Con 4-6 el intento falla. El héroe sale ileso si el vehículo es destruido.",
         "valor": 14
       },
       "armas": {
@@ -539,7 +539,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -559,5 +559,5 @@
       }
     }
   ],
-  "_fuente": "c6156854-24be-46b6-8a30-3bdf3ab31ab5_Rebeldes.pdf"
+  "_fuente": "Rebeldes 2a1087d94b3380218c8ef110cd52cdde.html"
 }

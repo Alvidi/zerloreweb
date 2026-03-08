@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema de Federacion</title>
+  <desc id="desc">Escudo institucional con estrella y alas geometricas.</desc>
+  <defs>
+    <linearGradient id="fed-star" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d7e6ff"/>
+      <stop offset="100%" stop-color="#8aa6cc"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 54 402 132v132c0 108-64 172-146 194-82-22-146-86-146-194V132Z" stroke="#9cb4d7" stroke-width="18"/>
+    <path d="M256 106 352 156v106c0 76-44 122-96 140-52-18-96-64-96-140V156Z" stroke="#4e668b" stroke-width="10"/>
+    <path d="M256 162 274 206l48 4-36 30 11 46-41-25-41 25 11-46-36-30 48-4Z" fill="url(#fed-star)" stroke="#eff5ff" stroke-width="8"/>
+    <path d="M152 212h66M294 212h66M178 286h54M280 286h54" stroke="#9cb4d7" stroke-width="10" opacity=".8"/>
+  </g>
+</svg>

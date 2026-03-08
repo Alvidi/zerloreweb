@@ -63,7 +63,7 @@
             "nombre": "Kebab Launcher",
             "ataques": "1D",
             "distancia": "16\"",
-            "impactos": "1D6",
+            "impactos": "+1",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -266,7 +266,7 @@
             "nombre": "spark thrower",
             "ataques": "3D",
             "distancia": "10\"",
-            "impactos": "1D6",
+            "impactos": "-",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -279,7 +279,7 @@
             "nombre": "Spark-Lightning",
             "ataques": "1D6",
             "distancia": "12\"",
-            "impactos": "2",
+            "impactos": "+1",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -481,7 +481,7 @@
             "nombre": "Destroyer bomb",
             "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "address +1D6",
+            "impactos": "+6",
             "danio": "7",
             "danio_critico": "10",
             "habilidades_arma": [
@@ -567,7 +567,7 @@
             "nombre": "Scrap Launcher",
             "ataques": "1D",
             "distancia": "16\"",
-            "impactos": "1D6",
+            "impactos": "+1",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -719,5 +719,5 @@
       }
     }
   ],
-  "_fuente": "99554057-dbf7-4b29-a6fb-3ffff2ed13a9_Savajes.pdf"
+  "_fuente": "Salvajes 292087d94b338059bc4ae81fdf286225.html"
 }

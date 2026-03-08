@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema de Rebeldes</title>
+  <desc id="desc">Insignia triangular con rayo fracturado y marcas de ruptura, simbolo de insurgencia.</desc>
+  <defs>
+    <linearGradient id="rebel-bolt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff9be8"/>
+      <stop offset="100%" stop-color="#b25dff"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 54 430 390H82Z" stroke="#b48fcf" stroke-width="20"/>
+    <path d="M256 106 386 356H126Z" stroke="#e36ec7" stroke-width="10" opacity=".9"/>
+    <path d="M286 140 210 268h58l-42 104 88-144h-58z" fill="url(#rebel-bolt)" stroke="#ffd5f3" stroke-width="8"/>
+    <path d="m176 190-24 30m192-30 24 30M156 286l34 18m166-18-34 18" stroke="#c1a4dc" stroke-width="12" opacity=".78"/>
+  </g>
+</svg>

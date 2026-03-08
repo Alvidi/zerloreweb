@@ -37,7 +37,7 @@
         "disparo": [
           {
             "nombre": "Echo Carbine",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
@@ -63,7 +63,7 @@
           },
           {
             "nombre": "holo-spear look",
-            "ataques": "1D",
+            "ataques": "1",
             "distancia": "25\"",
             "impactos": "+5",
             "danio": "1",
@@ -78,7 +78,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "echo sheet",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -124,7 +124,7 @@
         "disparo": [
           {
             "nombre": "Fractal rifle",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -135,7 +135,7 @@
           },
           {
             "nombre": "Fractal impulse turret",
-            "ataques": "1D3",
+            "ataques": "1D3+1",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
@@ -148,7 +148,7 @@
           },
           {
             "nombre": "resounding cannon",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "3",
@@ -163,7 +163,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Disruptor knife",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -209,7 +209,7 @@
         "disparo": [
           {
             "nombre": "Fractal rifle",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -222,7 +222,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "shadow-edge",
-            "ataques": "4D",
+            "ataques": "4",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -235,7 +235,7 @@
           },
           {
             "nombre": "phase sword",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -248,7 +248,7 @@
           },
           {
             "nombre": "Vertex Dagger",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -261,7 +261,7 @@
           },
           {
             "nombre": "electric hammer",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -295,7 +295,7 @@
         "disparo": [
           {
             "nombre": "Fractal light cannon",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
@@ -336,7 +336,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "kinetic lunge",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -367,7 +367,7 @@
         "disparo": [
           {
             "nombre": "Spectral cannon",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "20\"",
             "impactos": "+4",
             "danio": "3",
@@ -393,7 +393,7 @@
           },
           {
             "nombre": "Heavy Fractal Spear",
-            "ataques": "1D",
+            "ataques": "1",
             "distancia": "24\"",
             "impactos": "+3",
             "danio": "4",
@@ -408,7 +408,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Resonant Gauntlet",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -559,5 +559,5 @@
       }
     }
   ],
-  "_fuente": "c6156854-24be-46b6-8a30-3bdf3ab31ab5_Rebeldes.pdf"
+  "_fuente": "Rebeldes 2a1087d94b3380218c8ef110cd52cdde.html"
 }

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
-import { jsPDF } from 'jspdf'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import { formatAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
@@ -74,15 +73,15 @@ const doctrinePriorityByMode = {
 }
 
 const factionImages = {
-  alianza: new URL('../images/alianza.webp', import.meta.url).href,
-  legionarios_crisol: new URL('../images/legionarios_crisol.webp', import.meta.url).href,
-  salvajes: new URL('../images/salvajes.webp', import.meta.url).href,
-  vacio: new URL('../images/vacio.webp', import.meta.url).href,
-  rebeldes: new URL('../images/rebeldes.webp', import.meta.url).href,
-  tecnotumbas: new URL('../images/tecnotumbas.webp', import.meta.url).href,
-  enjambre: new URL('../images/enjambre.webp', import.meta.url).href,
-  federacion: new URL('../images/federacion.webp', import.meta.url).href,
-  tecnocratas: new URL('../images/tecnocratas.webp', import.meta.url).href,
+  alianza: new URL('../images/alianza.svg', import.meta.url).href,
+  legionarios_crisol: new URL('../images/legionarios_crisol.svg', import.meta.url).href,
+  salvajes: new URL('../images/salvajes.svg', import.meta.url).href,
+  vacio: new URL('../images/vacio.svg', import.meta.url).href,
+  rebeldes: new URL('../images/rebeldes.svg', import.meta.url).href,
+  tecnotumbas: new URL('../images/tecnotumbas.svg', import.meta.url).href,
+  enjambre: new URL('../images/enjambre.svg', import.meta.url).href,
+  federacion: new URL('../images/federacion.svg', import.meta.url).href,
+  tecnocratas: new URL('../images/tecnocratas.svg', import.meta.url).href,
 }
 
 const slugify = (value) =>
@@ -775,6 +774,7 @@ function Generador() {
 
   const exportPdf = async () => {
     if (!armyUnits.length) return
+    const { jsPDF } = await import('jspdf')
     const doc = new jsPDF({ unit: 'mm', format: 'a4' })
     const pageWidth = doc.internal.pageSize.getWidth()
     const pageHeight = doc.internal.pageSize.getHeight()

@@ -5,11 +5,11 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Portales del vacío",
-        "descripcion": "Una vez por turno, una unidad línea/élite/héroe aliada puede intercambiar su posición con otra unidad línea/élite/héroe aliada de esta facción a 18\" o menos. No puede intercambiarse con unidades trabadas. Consume 1 acción."
+        "descripcion": "Una vez por turno, durante la activación de una unidad aliada, esta puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos unidades puede estar trabada."
       },
       {
         "habilidades_faccion2": "Ojos del más allá",
-        "descripcion": "Las unidades del Vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura parcial."
+        "descripcion": "Las unidades del vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura parcial."
       },
       {
         "habilidades_faccion3": "Heraldos del vacío supremo",
@@ -127,7 +127,7 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+3",
+        "salvacion": "+4",
         "velocidad": 2,
         "escuadra": {
           "min": 3,
@@ -162,7 +162,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -185,15 +185,15 @@
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
-        "vidas": 5,
+        "vidas": 7,
         "salvacion": "+3",
         "velocidad": 2,
         "escuadra": {
-          "min": 1,
-          "max": 3
+          "min": 2,
+          "max": 4
         },
-        "especialidad": "Esta unidad no puede realizar acciones de Retirada ni ser forzada a retirarse.",
-        "valor": 6
+        "especialidad": "Esta unidad ignora las penalizaciones de cobertura parcial al disparar.",
+        "valor": 8
       },
       "armas": {
         "disparo": [
@@ -233,7 +233,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -253,7 +253,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "No se ve afectado por descontrol.",
+        "especialidad": "No se ve afectado por descontrol",
         "valor": 10
       },
       "armas": {
@@ -342,7 +342,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -403,7 +403,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -436,7 +436,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad no puede beneficiarse de la habilidad Portales del Vacío. Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
+        "especialidad": "Esta unidad no puede beneficiarse de la habilidad Portales del Vacío.Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
         "valor": 42
       },
       "armas": {
@@ -463,7 +463,7 @@
             "danio_critico": "9",
             "habilidades_arma": [
               "Explosiva",
-              "Munición limitada 3"
+              "Munición limitada (3)"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -505,7 +505,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -514,5 +514,5 @@
       }
     }
   ],
-  "_fuente": "0ddfb768-4637-437e-b0d5-e8e3c08824ef_El_Vaco.pdf"
+  "_fuente": "El Vacío 291087d94b33807bb8e4c53245d8caaa.html"
 }

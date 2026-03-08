@@ -5,15 +5,15 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Gloria del Crisol",
-        "descripcion": "Una unidad / escuadra puede ignorar la primera herida que reciban a distancia."
+        "descripcion": "Una vez por turno, una unidad/escuadra del Crisol puede ignorar el primer punto de daño recibido por un ataque a distancia."
       },
       {
         "habilidades_faccion2": "Caída heroica",
-        "descripcion": "Si la unidad muere, realiza antes de morir un contraataque, ya sea en disparo como en combate."
+        "descripcion": "Cuando una unidad del Crisol es destruida, antes de ser retirada puede realizar inmediatamente un contraataque gratuito - en disparo o CaC según su posición - siguiendo las reglas normales de ataque. Este ataque se resuelve aunque la unidad esté trabada. Tras resolverlo, la unidad es retirada. En escuadra la unidad que va a ser retirada realiza el ataque individualmente"
       },
       {
         "habilidades_faccion3": "Voto sagrado",
-        "descripcion": "Una unidad / escuadra puede repetir un dado cuerpo a cuerpo fallido por turno."
+        "descripcion": "Una unidad/escuadra puede repetir un dado cuerpo a cuerpo fallido por turno."
       }
     ]
   },
@@ -37,7 +37,7 @@
         "disparo": [
           {
             "nombre": "Fusil de Crisol",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -50,7 +50,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Hoja devocional",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -74,27 +74,27 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "No se beneficia de la cobertura parcial. Las armas equipadas elegidas tienen que coincidir en disparo y cuerpo a cuerpo.",
+        "especialidad": "No se beneficia de la coberturas. Esta unidad debe equipar la misma arma tanto para disparo como para CaC - si elige la Lanza guardia, la usa en ambos tipos de ataque. Si elige la Espada solar y escudo, también la usa en ambos.\"",
         "valor": 10
       },
       "armas": {
         "disparo": [
           {
             "nombre": "Lanza guardia",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Anti 1+ (Línea)"
+              "Anti -1 (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
             "nombre": "Espada solar y escudo",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "1",
@@ -107,20 +107,20 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lanza guardia",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
             "nombre": "Espada solar y escudo",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -151,7 +151,7 @@
         "disparo": [
           {
             "nombre": "Lanza tormenta",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
@@ -166,7 +166,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Puño de energía",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -196,8 +196,8 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Destructor Solar",
-            "ataques": "3D",
+            "nombre": "destructor Solar",
+            "ataques": "3",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "2",
@@ -210,7 +210,7 @@
           },
           {
             "nombre": "Cañón Solar",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "4",
@@ -222,7 +222,19 @@
             "valor_extra": 2
           }
         ],
-        "cuerpo_a_cuerpo": []
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Ariete Dorado",
+            "ataques": "3",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
       }
     },
     {
@@ -237,8 +249,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Mientras esté en mesa, todo el daño recibido por unidades del Crisol a 6\" se asigna primero a esta unidad. Esta unidad no puede ir en escuadra.",
-        "valor": 18
+        "especialidad": "Mientras esté en mesa, todo el daño recibido por unidades del Crisol a 6\" se asigna primero a esta unidad. ESta unidad no puede ir en escuadra",
+        "valor": 22
       },
       "armas": {
         "disparo": [
@@ -265,7 +277,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -274,5 +286,5 @@
       }
     }
   ],
-  "_fuente": "0acfe181-40fa-4f4f-9b03-8705ef722910_Legionarios_del_Crisol.pdf"
+  "_fuente": "Legionarios del Crisol 291087d94b338084894ce0051cde9010.html"
 }

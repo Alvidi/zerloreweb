@@ -215,7 +215,7 @@
           "max": 6
         },
         "especialidad": "This unit can be deployed anywhere within 9\" of the enemy on turn 2. This unit does not attack at range.",
-        "valor": 6
+        "valor": 8
       },
       "armas": {
         "disparo": [],
@@ -406,7 +406,7 @@
           "max": 1
         },
         "especialidad": "This unit can deploy anywhere within 9\" of the enemy on turn 2. It can climb structures with diagonal movement.",
-        "valor": 11
+        "valor": 14
       },
       "armas": {
         "disparo": [
@@ -579,5 +579,5 @@
       }
     }
   ],
-  "_fuente": "637497f3-c34b-4690-ad66-7fa408d69cb5_El_Ejambre.pdf"
+  "_fuente": "El Ejambre 291087d94b3380f8be70fde1da11d668.html"
 }

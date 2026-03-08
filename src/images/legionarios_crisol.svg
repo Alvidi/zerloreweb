@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema de Legionarios del Crisol</title>
+  <desc id="desc">Hexagono militar con nucleo de forja y hoja ceremonial.</desc>
+  <defs>
+    <linearGradient id="crisol-core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffb56f"/>
+      <stop offset="100%" stop-color="#c86d27"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 52 396 132v248L256 460 116 380V132Z" stroke="#d89a55" stroke-width="18"/>
+    <path d="M256 100 354 156v200L256 412 158 356V156Z" stroke="#7e3b1b" stroke-width="10" opacity=".9"/>
+    <path d="M256 150c42 36 58 72 58 106 0 34-24 62-58 62s-58-28-58-62c0-34 16-70 58-106Z" fill="url(#crisol-core)" stroke="#ffd9aa" stroke-width="8"/>
+    <path d="M256 168v172M220 230l36-36 36 36M220 282h72" stroke="#2f1b12" stroke-width="12"/>
+    <path d="M158 214h56M298 214h56M188 340h136" stroke="#d89a55" stroke-width="10" opacity=".7"/>
+  </g>
+</svg>

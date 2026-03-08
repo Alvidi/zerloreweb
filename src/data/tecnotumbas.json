@@ -5,15 +5,15 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Reanimación Mekánika",
-        "descripcion": "Si una unidad cae derrotada, su cuerpo se mantendrá en el campo de batalla; una vez comience la siguiente iniciativa, se tirará 1D6: con resultado 1-3 la unidad muere, si sale 3-6 la unidad revive con mitad de su vida. Esto solo se puede hacer una vez por unidad."
+        "descripcion": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-3 la unidad muere definitivamente y es retirada; con resultado 4-6 la unidad revive con la mitad de sus Vidas máximas."
       },
       {
         "habilidades_faccion2": "No conocen el miedo",
-        "descripcion": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse."
+        "descripcion": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse"
       },
       {
         "habilidades_faccion3": "Protocolo de Aniquilación",
-        "descripcion": "Si una unidad/escuadra elimina o daña, esta gana una acción extra de movimiento de 2\" de inmediato."
+        "descripcion": "Si una unidad/escuadra elimina o daña, esta gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción"
       }
     ]
   },
@@ -113,7 +113,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 1+ (Élite)"
+              "Anti 4+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -141,7 +141,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -174,7 +174,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 1+ (Línea)"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -202,7 +202,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -222,7 +222,7 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Si elimina una unidad cuerpo a cuerpo, gana instantaneamente: Preparado",
+        "especialidad": "Si la unidad no se mueve durante el turno recupera +2 de vida.",
         "valor": 10
       },
       "armas": {
@@ -279,7 +279,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad es destruida, vuelve a aparecer en la zona de despliegue.",
+        "especialidad": "Cuando esta unidad es destruida, vuelve a aparecer en la zona de despliegue",
         "valor": 14
       },
       "armas": {
@@ -351,7 +351,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 2+ (Todo)"
+              "Anti 4+ (Todo)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -359,7 +359,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Pata Metálica",
+            "nombre": "pata Metálica",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -384,7 +384,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades en escuadra o a 3\" en modo escaramuza de esta unidad reviven inmediatamente con la mitad de la vida.",
+        "especialidad": "Las unidades en escuadra o a 3\" en modo escaramuza, de esta unidad, reviven inmediatamente con la mitad de la vida",
         "valor": 15
       },
       "armas": {
@@ -425,7 +425,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -492,7 +492,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Choque Monolítico",
+            "nombre": "choque Monolítico",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -506,5 +506,5 @@
       }
     }
   ],
-  "_fuente": "4a77d496-5444-418a-a63d-7d17d426b54c_TecnoTumbas.pdf"
+  "_fuente": "TecnoTumbas 292087d94b3380e8a265d23d61931641.html"
 }

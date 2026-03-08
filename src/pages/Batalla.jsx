@@ -71,15 +71,15 @@ const normalizeFaction = (data, baseId, index) => ({
 })
 
 const factionImages = {
-  alianza: new URL('../images/alianza.webp', import.meta.url).href,
-  legionarios_crisol: new URL('../images/legionarios_crisol.webp', import.meta.url).href,
-  salvajes: new URL('../images/salvajes.webp', import.meta.url).href,
-  vacio: new URL('../images/vacio.webp', import.meta.url).href,
-  rebeldes: new URL('../images/rebeldes.webp', import.meta.url).href,
-  tecnotumbas: new URL('../images/tecnotumbas.webp', import.meta.url).href,
-  enjambre: new URL('../images/enjambre.webp', import.meta.url).href,
-  federacion: new URL('../images/federacion.webp', import.meta.url).href,
-  tecnocratas: new URL('../images/tecnocratas.webp', import.meta.url).href,
+  alianza: new URL('../images/alianza.svg', import.meta.url).href,
+  legionarios_crisol: new URL('../images/legionarios_crisol.svg', import.meta.url).href,
+  salvajes: new URL('../images/salvajes.svg', import.meta.url).href,
+  vacio: new URL('../images/vacio.svg', import.meta.url).href,
+  rebeldes: new URL('../images/rebeldes.svg', import.meta.url).href,
+  tecnotumbas: new URL('../images/tecnotumbas.svg', import.meta.url).href,
+  enjambre: new URL('../images/enjambre.svg', import.meta.url).href,
+  federacion: new URL('../images/federacion.svg', import.meta.url).href,
+  tecnocratas: new URL('../images/tecnocratas.svg', import.meta.url).href,
 }
 
 const makeHpKey = (side, unitId) => `${side}:${unitId || 'none'}`

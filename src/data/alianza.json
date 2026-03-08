@@ -5,15 +5,15 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Potencia blindada",
-        "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas."
+        "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas"
       },
       {
         "habilidades_faccion2": "Objetivo en la mira",
-        "descripcion": "La unidad tiene repetición de tiradas contra un objetivo específico marcado ese turno."
+        "descripcion": "Durante la Fase de Iniciativa, esta facción puede marcar una unidad enemiga visible. Todas las unidades/escuadras de La Alianza pueden repetir tiradas de impacto fallidas contra ese objetivo durante ese turno."
       },
       {
         "habilidades_faccion3": "Resistencia marcial",
-        "descripcion": "Cuando una unidad/escuadra está en un punto de mando, las unidades ganan -1 de impacto en sus armas a distancia."
+        "descripcion": "Cuando una unidad/escuadra aliada está en un punto de mando, los atacantes enemigos sufren +1 al valor de Impactos necesario en sus ataques a distancia contra esa unidad."
       }
     ]
   },
@@ -100,7 +100,7 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "Pueden llevar dos armas de disparo.",
+        "especialidad": "Pueden llevar dos armas de disparo",
         "valor": 7
       },
       "armas": {
@@ -207,7 +207,7 @@
           "min": 1,
           "max": 4
         },
-        "especialidad": "No pueden usar la acción retirarse.",
+        "especialidad": "No pueden usar la acción retirarse",
         "valor": 8
       },
       "armas": {
@@ -277,7 +277,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno.",
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno",
         "valor": 9
       },
       "armas": {
@@ -312,7 +312,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puño de energía",
+            "nombre": "puño de energía",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -391,12 +391,12 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Cañón láser balístico",
+            "nombre": "Cañón láser balistico",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+3",
-            "danio": "D6",
-            "danio_critico": "2",
+            "danio": "D6+2",
+            "danio_critico": "D6+2",
             "habilidades_arma": [
               "Asaltante +1"
             ],
@@ -432,7 +432,7 @@
           "max": 1
         },
         "especialidad": "-",
-        "valor": 10
+        "valor": 9
       },
       "armas": {
         "disparo": [
@@ -475,7 +475,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Pueden llevar dos armas de disparo. Las unidades en escuadra con este héroe o que estén a 3\" de él en escaramuza, ganan la posibilidad de usar las armas de este héroe en disparo o cuerpo a cuerpo, sustituyendo todas las que tienen en ese ataque.",
+        "especialidad": "Pueden llevar dos armas de disparo. Las unidades en escuadra con este héroe, o a 3\" en escaramuza, pueden elegir usar las armas de disparo O las armas CaC de este héroe en su ataque, sustituyendo completamente su propio perfil de armas para ese ataque. Solo pueden usar un tipo por activación.",
         "valor": 15
       },
       "armas": {
@@ -527,7 +527,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Asaltante +1"
+              "Asaltante"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -553,7 +553,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -651,7 +651,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -660,5 +660,5 @@
       }
     }
   ],
-  "_fuente": "5772f423-dbd2-462f-bdb5-bcaa0df8c77f_La_Alianza.pdf"
+  "_fuente": "La Alianza 291087d94b33803b8dcdc12cf11e8fb5.html"
 }

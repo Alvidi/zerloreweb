@@ -5,11 +5,11 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "El enjambre eterno",
-        "descripcion": "Todas las unidades/escuadras de línea eliminadas vuelven a la partida desde la zona de despliegue."
+        "descripcion": "Todas la unidades/escuadras de línea eliminadas, vuelven a la partida desde la zona de despliegue."
       },
       {
         "habilidades_faccion2": "Synapsis mental",
-        "descripcion": "Si las unidades/escuadras no se encuentran a 6\" entre ellas, deben tirar 1D6 en iniciativa: si sale 1 o 2, la unidad entra en retirada, siguiendo las reglas de retirada."
+        "descripcion": "Al inicio de cada Fase de Iniciativa, cualquier unidad/escuadra del Enjambre que no esté a 6\" o menos de al menos otra unidad aliada debe tirar 1D6: con resultado 1-2 entra en retirada siguiendo las reglas normales de retirada."
       },
       {
         "habilidades_faccion3": "Voracidad",
@@ -74,7 +74,7 @@
           "min": 4,
           "max": 12
         },
-        "especialidad": "Estas unidades no atacan a distancia.",
+        "especialidad": "Estas unidades no atacan a distancia",
         "valor": 3
       },
       "armas": {
@@ -214,8 +214,8 @@
           "min": 2,
           "max": 6
         },
-        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Esta unidad no ataca a distancia.",
-        "valor": 6
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Esta unidad no atacan a distancia.",
+        "valor": 8
       },
       "armas": {
         "disparo": [],
@@ -241,7 +241,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -261,7 +261,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Si mata una unidad cuerpo a cuerpo, puede devorarla y ganar +1 de vida.",
+        "especialidad": "Si mata una unidad cuerpo a cuerpo, puede devorarla y ganar +1 de vida",
         "valor": 14
       },
       "armas": {
@@ -289,7 +289,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 2+ (Todo)"
+              "Anti -2 (Todo)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -309,7 +309,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Si la unidad daña (línea y élite), crea miedo provocando que la unidad entre en estado de retirada.",
+        "especialidad": "Si esta unidad inflige 3 o más puntos de daño en un mismo ataque a una unidad de Línea o Élite, esa unidad entra en estado de retirada.",
         "valor": 12
       },
       "armas": {
@@ -337,7 +337,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -357,7 +357,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Si tus unidades/escuadras están a 6\" de esta, repiten tiradas fallidas de cualquier tipo. Esta unidad sí puede conquistar puestos de mando.",
+        "especialidad": "Las unidades/escuadras aliadas a 6\" de esta unidad pueden repetir tiradas de ataque fallidas. Esta unidad puede conquistar puntos de mando.",
         "valor": 11
       },
       "armas": {
@@ -405,8 +405,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Puede subir estructuras con movimiento diagonal.",
-        "valor": 11
+        "especialidad": "Esta unidad puede trepar estructuras midiendo la distancia en diagonal, contando tanto el desplazamiento horizontal como el vertical para calcular el movimiento consumido.",
+        "valor": 14
       },
       "armas": {
         "disparo": [
@@ -459,7 +459,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -492,7 +492,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad sirve como zona de despliegue. Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "especialidad": "Las unidades aliadas pueden desplegarse desde esta unidad como si fuera una zona de despliegue desde la unidad a 3\", siempre que la Reina Mayor no esté trabada en combate. Esta unidad puede llevar dos armas a distancia y disparar dos veces en la misma acción.",
         "valor": 40
       },
       "armas": {
@@ -557,7 +557,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -579,5 +579,5 @@
       }
     }
   ],
-  "_fuente": "637497f3-c34b-4690-ad66-7fa408d69cb5_El_Ejambre.pdf"
+  "_fuente": "El Ejambre 291087d94b3380f8be70fde1da11d668.html"
 }

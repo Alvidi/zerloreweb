@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema de Tecnotumbas</title>
+  <desc id="desc">Obelisco mecanico con ojo central y marcas de energia antigua.</desc>
+  <defs>
+    <linearGradient id="crypt-energy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b7f3e8"/>
+      <stop offset="100%" stop-color="#50cdb9"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 46 384 120v272L256 466 128 392V120Z" stroke="#a7b0c0" stroke-width="18"/>
+    <path d="M256 92 344 142v228l-88 50-88-50V142Z" stroke="#5ad3bf" stroke-width="10" opacity=".85"/>
+    <path d="M256 180c34 0 62 24 62 54s-28 54-62 54-62-24-62-54 28-54 62-54Z" stroke="#ff8f45" stroke-width="10"/>
+    <circle cx="256" cy="234" r="22" fill="url(#crypt-energy)" stroke="#d7fff8" stroke-width="8"/>
+    <path d="M182 320h148M206 360h100M212 146h88" stroke="#a7b0c0" stroke-width="12" opacity=".7"/>
+  </g>
+</svg>

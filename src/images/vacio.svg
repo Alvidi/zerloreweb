@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema del Vacio</title>
+  <desc id="desc">Anillo de eclipse con nucleo de energia fria y trazos de distorsion.</desc>
+  <defs>
+    <radialGradient id="void-core" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#f3fbff"/>
+      <stop offset="100%" stop-color="#9cc8ff"/>
+    </radialGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="256" cy="256" r="176" stroke="#bfd8ff" stroke-width="16"/>
+    <circle cx="256" cy="256" r="132" stroke="#6f8ccf" stroke-width="10" opacity=".85"/>
+    <circle cx="256" cy="256" r="70" fill="url(#void-core)" stroke="#e7f3ff" stroke-width="8"/>
+    <path d="M256 86v54M256 372v54M86 256h54M372 256h54" stroke="#bfd8ff" stroke-width="12" opacity=".75"/>
+    <path d="m150 150 30 30m182-30-30 30m-182 182 30-30m182 30-30-30" stroke="#6f8ccf" stroke-width="10"/>
+    <path d="M186 256c0-38 32-70 70-70" stroke="#ffffff" stroke-width="8"/>
+  </g>
+</svg>

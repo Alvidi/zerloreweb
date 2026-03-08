@@ -37,7 +37,7 @@
         "disparo": [
           {
             "nombre": "Crucible Rifle",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -50,7 +50,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "devotional sheet",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -81,7 +81,7 @@
         "disparo": [
           {
             "nombre": "Lance guard",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
@@ -94,7 +94,7 @@
           },
           {
             "nombre": "Sun Sword and Shield",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "1",
@@ -107,7 +107,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lance guard",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -120,7 +120,7 @@
           },
           {
             "nombre": "Sun Sword and Shield",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -151,7 +151,7 @@
         "disparo": [
           {
             "nombre": "Storm Lance",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
@@ -166,7 +166,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "energy fist",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -197,7 +197,7 @@
         "disparo": [
           {
             "nombre": "Solar Destroyer",
-            "ataques": "3D",
+            "ataques": "3",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "2",
@@ -210,7 +210,7 @@
           },
           {
             "nombre": "Solar Cannon",
-            "ataques": "2D",
+            "ataques": "2",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "4",
@@ -222,7 +222,19 @@
             "valor_extra": 2
           }
         ],
-        "cuerpo_a_cuerpo": []
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Ariete Dorado",
+            "ataques": "3",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "valor_extra": 0,
+            "especialidad": "-",
+            "habilidades_arma": []
+          }
+        ]
       }
     },
     {
@@ -238,7 +250,7 @@
           "max": 1
         },
         "especialidad": "While on the table, all damage taken by Crucible units within 6\" is assigned to this unit first. This unit cannot go in a squad.",
-        "valor": 18
+        "valor": 22
       },
       "armas": {
         "disparo": [
@@ -274,5 +286,5 @@
       }
     }
   ],
-  "_fuente": "0acfe181-40fa-4f4f-9b03-8705ef722910_Legionarios_del_Crisol.pdf"
+  "_fuente": "Legionarios del Crisol 291087d94b338084894ce0051cde9010.html"
 }

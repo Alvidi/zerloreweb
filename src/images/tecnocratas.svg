@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema de Tecnocratas</title>
+  <desc id="desc">Sello tecnologico con circuito central y anillos de control.</desc>
+  <defs>
+    <linearGradient id="tech-core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffb06e"/>
+      <stop offset="100%" stop-color="#c86d27"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="256" cy="256" r="180" stroke="#d78a4c" stroke-width="16"/>
+    <circle cx="256" cy="256" r="134" stroke="#7a4b2a" stroke-width="10" opacity=".9"/>
+    <path d="M256 148 334 192v88l-78 44-78-44v-88Z" fill="url(#tech-core)" stroke="#ffd6b1" stroke-width="8"/>
+    <path d="M256 170v132M200 224h112M214 270h84" stroke="#4a2b16" stroke-width="10"/>
+    <path d="M256 76v44M256 392v44M76 256h44M392 256h44" stroke="#d78a4c" stroke-width="10" opacity=".75"/>
+    <path d="m136 136 30 30m210-30-30 30m-210 210 30-30m210 30-30-30" stroke="#7a4b2a" stroke-width="9"/>
+  </g>
+</svg>

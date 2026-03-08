@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Emblema del Enjambre</title>
+  <desc id="desc">Silueta biologica de enjambre con nucleo y apendices simetricos.</desc>
+  <defs>
+    <linearGradient id="swarm-core" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#bde36a"/>
+      <stop offset="100%" stop-color="#6da74a"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 62 380 138v236L256 450 132 374V138Z" stroke="#8fbe57" stroke-width="16"/>
+    <path d="M256 132c54 0 98 40 98 90s-44 90-98 90-98-40-98-90 44-90 98-90Z" fill="url(#swarm-core)" stroke="#2f4f2a" stroke-width="10"/>
+    <circle cx="256" cy="222" r="24" fill="#223b1f" stroke="#d9f7a1" stroke-width="6"/>
+    <path d="M166 194 122 164M346 194l44-30M166 252 116 266M346 252l50 14M196 308l-34 36M316 308l34 36" stroke="#8fbe57" stroke-width="10"/>
+    <path d="M224 252h64M236 278h40" stroke="#223b1f" stroke-width="10"/>
+  </g>
+</svg>

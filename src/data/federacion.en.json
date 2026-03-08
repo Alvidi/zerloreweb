@@ -201,7 +201,7 @@
           },
           {
             "nombre": "Shield Rush",
-            "ataques": "1D3",
+            "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -388,9 +388,9 @@
           },
           {
             "nombre": "barricade cannon",
-            "ataques": "1D (3 ammo)",
+            "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "D.Address + D6",
+            "impactos": "+6",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -421,11 +421,11 @@
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "-",
-        "vidas": 6,
+        "vidas": 8,
         "salvacion": "+5",
         "velocidad": 1,
         "escuadra": {
-          "min": 1,
+          "min": 2,
           "max": 2
         },
         "especialidad": "This unit cannot be moved. Requires two friendly Line units to fire. Such units may detach from this unit, but may not fire that turn.",
@@ -437,7 +437,7 @@
             "nombre": "Artillery",
             "ataques": "1D6",
             "distancia": "35\"",
-            "impactos": "D6 + D.Address",
+            "impactos": "+6",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
@@ -556,7 +556,7 @@
         "disparo": [
           {
             "nombre": "Siege Cannon",
-            "ataques": "2D6 (3 ammo)",
+            "ataques": "2D6",
             "distancia": "24\"",
             "impactos": "+4",
             "danio": "4",
@@ -610,5 +610,5 @@
       }
     }
   ],
-  "_fuente": "7eb48379-9b31-4a4f-8391-cadc1abb7ef6_La_Federacin.pdf"
+  "_fuente": "La Federación 291087d94b3380aea866e0719797e7a0.html"
 }
