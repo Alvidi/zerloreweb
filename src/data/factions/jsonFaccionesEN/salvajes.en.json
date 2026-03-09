@@ -1,26 +1,26 @@
 {
   "faccion": {
-    "nombre": "Salvajes",
-    "estilo_juego": "Los Salvajes son la facción más impredecible y brutal del juego, una mezcla de chatarra, fuerza bruta y agresividad descontrolada. Sus unidades se mueven rápido, pegan fuerte y generan muchos dados aleatorios, capaces de causar estragos en combate cuerpo a cuerpo. Funcionan mejor en manos de jugadores que disfrutan del caos, el riesgo y la ofensiva constante, aunque sacrifican precisión y defensa.",
+    "nombre": "Wild",
+    "estilo_juego": "The Wildlings are the most unpredictable and brutal faction in the game, a mix of scrap metal, brute force, and uncontrolled aggression. Their units move fast, hit hard, and generate lots of random dice, capable of wreaking havoc in close combat. They work best in the hands of players who enjoy chaos, risk, and constant offense, although they sacrifice precision and defense.",
     "habilidades_faccion": [
       {
-        "habilidades_faccion1": "Furia Incontrolada",
-        "descripcion": "Una unidad Salvaje que carga, gana +1 Ataque en cuerpo a cuerpo."
+        "habilidades_faccion1": "Uncontrolled Fury",
+        "descripcion": "A charging Wild unit gains +1 Attack in melee."
       },
       {
-        "habilidades_faccion2": "Descontrol de plebeyos",
-        "descripcion": "Cuando una unidad/escuadra de Línea Salvaje llega por primera vez al 50% de sus Vidas o menos, al inicio del siguiente turno durante la Fase de Iniciativa tira 1D6: con 1-2 entra en retirada; con 3-4 no ocurre nada; con 5-6 entra en modo asesino y añade un dado adicional a todas sus tiradas de ataque hasta el final de ese turno. Esta tirada siempre que la unidad tenga 50% menos de su vida y la escuadra tenga menos de la mitad de sus integrantes."
+        "habilidades_faccion2": "commoner riot",
+        "descripcion": "If the Line units/squads that reach mid-life, they must roll a D6: 1-2 go into retreat, 3-4 nothing happens, 5-6 go into assassin mode, adding one more attack die to all their weapons. This roll is made on initiative and applies the result only that turn, until the next turn."
       },
       {
-        "habilidades_faccion3": "Violencia Tribal",
-        "descripcion": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\" (este movimiento no provoca chequeos ni cuenta como acción)."
+        "habilidades_faccion3": "Tribal Violence",
+        "descripcion": "The first time per turn that a Wild unit eliminates an enemy unit in close combat, it may immediately move 2\" (this movement does not trigger checks and does not count as an action)."
       }
     ]
   },
   "unidades": [
     {
-      "nombre_unidad": "Chatarreros",
-      "clase": "Línea",
+      "nombre_unidad": "Scrap metal dealers",
+      "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 3,
@@ -36,7 +36,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Rifle Chatarroso",
+            "nombre": "Scrap Rifle",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+5",
@@ -47,7 +47,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Escopeta Salvaje",
+            "nombre": "Wild Shotgun",
             "ataques": "1D6",
             "distancia": "6\"",
             "impactos": "-",
@@ -60,7 +60,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Lanza-Kebabs",
+            "nombre": "Kebab Launcher",
             "ataques": "1D",
             "distancia": "16\"",
             "impactos": "+1",
@@ -89,8 +89,8 @@
       }
     },
     {
-      "nombre_unidad": "Tormentos",
-      "clase": "Línea",
+      "nombre_unidad": "Torments",
+      "clase": "Line",
       "perfil": {
         "movimiento": "9\"",
         "vidas": 5,
@@ -100,13 +100,13 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Esta unidad puede sumar 1D6 a su movimiento una vez por activación. Puede trepar estructuras midiendo la distancia en diagonal, contando desplazamiento horizontal y vertical.",
+        "especialidad": "This unit can add 1D6 to its movement and move up to areas diagonally.",
         "valor": 5
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola Chisporroteante",
+            "nombre": "Sizzling Gun",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -121,7 +121,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillo Segalo",
+            "nombre": "Segalo Knife",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -134,7 +134,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Rebanadora",
+            "nombre": "Slicer",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -147,7 +147,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Lanza-Botellas",
+            "nombre": "Bottle Launcher",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
@@ -163,8 +163,8 @@
       }
     },
     {
-      "nombre_unidad": "Bestiajos",
-      "clase": "Élite",
+      "nombre_unidad": "Beasts",
+      "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 8,
@@ -180,7 +180,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Acribilladoras",
+            "nombre": "Gunners",
             "ataques": "2D",
             "distancia": "10\"",
             "impactos": "+4",
@@ -191,7 +191,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Honda de proyectil",
+            "nombre": "projectile slingshot",
             "ataques": "1D",
             "distancia": "12\"",
             "impactos": "+5",
@@ -204,7 +204,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Hacha ZugZug",
+            "nombre": "ZugZug Ax",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
@@ -217,7 +217,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Mordisco Descomunal",
+            "nombre": "Huge Bite",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -230,7 +230,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Hacha del jefe",
+            "nombre": "boss ax",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
@@ -246,8 +246,8 @@
       }
     },
     {
-      "nombre_unidad": "Grandes Makineros",
-      "clase": "Élite",
+      "nombre_unidad": "Great Makineros",
+      "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 12,
@@ -263,7 +263,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanzachispas",
+            "nombre": "spark thrower",
             "ataques": "3D",
             "distancia": "10\"",
             "impactos": "-",
@@ -276,10 +276,10 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Chispa-Rayo",
+            "nombre": "Spark-Lightning",
             "ataques": "1D6",
             "distancia": "12\"",
-            "impactos": "+1",
+            "impactos": "+6",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -289,7 +289,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Kañón Bobina",
+            "nombre": "Coil Cannon",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -302,7 +302,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Explosivo Pegado",
+            "nombre": "Stuck Explosive",
             "ataques": "1D",
             "distancia": "6\"",
             "impactos": "+3",
@@ -317,7 +317,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Martillo Chatarroso",
+            "nombre": "Scrap Hammer",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -330,7 +330,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Cadenasierra Orca",
+            "nombre": "Orca Chainsaw",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -343,7 +343,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Pico Industrial",
+            "nombre": "Industrial Peak",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -357,8 +357,8 @@
       }
     },
     {
-      "nombre_unidad": "Brutos del Clan",
-      "clase": "Élite",
+      "nombre_unidad": "Clan Brutes",
+      "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 9,
@@ -368,14 +368,14 @@
           "min": 2,
           "max": 3
         },
-        "especialidad": "Esta unidad no puede disparar",
+        "especialidad": "This unit cannot fire.",
         "valor": 8
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Maza Brutal",
+            "nombre": "Brutal Mace",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -392,7 +392,7 @@
     },
     {
       "nombre_unidad": "Tronkatank",
-      "clase": "Vehículo",
+      "clase": "Vehicle",
       "perfil": {
         "movimiento": "8\"",
         "vidas": 14,
@@ -408,7 +408,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Ametralladora Cutre",
+            "nombre": "Tatty Machine Gun",
             "ataques": "3D",
             "distancia": "12\"",
             "impactos": "+5",
@@ -419,7 +419,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Kañón de Bidones",
+            "nombre": "Drum Cannon",
             "ataques": "1D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -432,7 +432,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Torreta de arpones",
+            "nombre": "Harpoon turret",
             "ataques": "2D6",
             "distancia": "10\"",
             "impactos": "+5",
@@ -447,7 +447,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "aceleron",
+            "nombre": "Acceleration",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -461,8 +461,8 @@
       }
     },
     {
-      "nombre_unidad": "Gran cañonazo",
-      "clase": "Vehículo",
+      "nombre_unidad": "Big shot",
+      "clase": "Vehicle",
       "perfil": {
         "movimiento": "-",
         "vidas": 10,
@@ -478,21 +478,20 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Bomba destructora",
+            "nombre": "Destroyer bomb",
             "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "+6",
+            "impactos": "+4",
             "danio": "7",
             "danio_critico": "10",
             "habilidades_arma": [
-              "Explosiva",
               "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Bomba racimo",
+            "nombre": "cluster bomb",
             "ataques": "3D6",
             "distancia": "35\"",
             "impactos": "+5",
@@ -507,7 +506,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Equipo de artillería",
+            "nombre": "artillery equipment",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -521,8 +520,8 @@
       }
     },
     {
-      "nombre_unidad": "Jefe de la Horda",
-      "clase": "Héroe",
+      "nombre_unidad": "Horde Chief",
+      "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 10,
@@ -532,13 +531,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Si juega en escuadra y esta unidad va en una, da +1 de ataque cuerpo a cuerpo, si juega en escaramuza, da +1 de ataque cuerpo a cuerpo a todas las unidades a 3\"",
+        "especialidad": "If you play in a squad and this unit is in one, it gives +1 melee attack; if playing in skirmish, gives +1 melee attack to all units within 3\".",
         "valor": 14
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola Tribal",
+            "nombre": "Tribal Gun",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -551,7 +550,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Escopeta Improvisada",
+            "nombre": "Improvised Shotgun",
             "ataques": "1D6",
             "distancia": "12\"",
             "impactos": "+5",
@@ -564,10 +563,10 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Lanzachatarra",
+            "nombre": "Scrap Launcher",
             "ataques": "1D",
             "distancia": "16\"",
-            "impactos": "+1",
+            "impactos": "+6",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -579,7 +578,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Hacha Tribal Gigante",
+            "nombre": "Giant Tribal Ax",
             "ataques": "5D",
             "distancia": null,
             "impactos": null,
@@ -592,7 +591,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Hacha Zugkar",
+            "nombre": "Zugkar Ax",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
@@ -605,7 +604,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Maza Brutal",
+            "nombre": "Brutal Mace",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -621,8 +620,8 @@
       }
     },
     {
-      "nombre_unidad": "Debora- mundos",
-      "clase": "Titán",
+      "nombre_unidad": "Debora- worlds",
+      "clase": "Titan",
       "perfil": {
         "movimiento": "2\"",
         "vidas": 25,
@@ -632,13 +631,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "especialidad": "This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
         "valor": 38
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanzarrocas Gigante",
+            "nombre": "Giant Rock Launcher",
             "ataques": "1D6",
             "distancia": "18\"",
             "impactos": "+4",
@@ -651,7 +650,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Gatling demoledora",
+            "nombre": "devastating Gatling",
             "ataques": "6D",
             "distancia": "16\"",
             "impactos": "+4",
@@ -664,7 +663,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Rugido Ensordecedor",
+            "nombre": "Deafening Roar",
             "ataques": "2D6",
             "distancia": "12\"",
             "impactos": "+5",
@@ -679,7 +678,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Garras Colosales",
+            "nombre": "Colossal Claws",
             "ataques": "6D",
             "distancia": null,
             "impactos": null,
@@ -690,7 +689,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Puños Demoledores",
+            "nombre": "Crushing Fists",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
@@ -703,7 +702,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Mandíbulas Trituradoras",
+            "nombre": "Crusher Jaws",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,

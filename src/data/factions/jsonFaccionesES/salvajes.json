@@ -1,26 +1,26 @@
 {
   "faccion": {
-    "nombre": "Wild",
-    "estilo_juego": "The Wildlings are the most unpredictable and brutal faction in the game, a mix of scrap metal, brute force, and uncontrolled aggression. Their units move fast, hit hard, and generate lots of random dice, capable of wreaking havoc in close combat. They work best in the hands of players who enjoy chaos, risk, and constant offense, although they sacrifice precision and defense.",
+    "nombre": "Salvajes",
+    "estilo_juego": "Los Salvajes son la facción más impredecible y brutal del juego, una mezcla de chatarra, fuerza bruta y agresividad descontrolada. Sus unidades se mueven rápido, pegan fuerte y generan muchos dados aleatorios, capaces de causar estragos en combate cuerpo a cuerpo. Funcionan mejor en manos de jugadores que disfrutan del caos, el riesgo y la ofensiva constante, aunque sacrifican precisión y defensa.",
     "habilidades_faccion": [
       {
-        "habilidades_faccion1": "Uncontrolled Fury",
-        "descripcion": "A charging Wild unit gains +1 Attack in melee."
+        "habilidades_faccion1": "Furia Incontrolada",
+        "descripcion": "Una unidad Salvaje que carga, gana +1 Ataque en cuerpo a cuerpo."
       },
       {
-        "habilidades_faccion2": "commoner riot",
-        "descripcion": "If the Line units/squads that reach mid-life, they must roll a D6: 1-2 go into retreat, 3-4 nothing happens, 5-6 go into assassin mode, adding one more attack die to all their weapons. This roll is made on initiative and applies the result only that turn, until the next turn."
+        "habilidades_faccion2": "Descontrol de plebeyos",
+        "descripcion": "Cuando una unidad/escuadra de Línea Salvaje llega por primera vez al 50% de sus Vidas o menos, al inicio del siguiente turno durante la Fase de Iniciativa tira 1D6: con 1-2 entra en retirada; con 3-4 no ocurre nada; con 5-6 entra en modo asesino y añade un dado adicional a todas sus tiradas de ataque hasta el final de ese turno. Esta tirada siempre que la unidad tenga 50% menos de su vida y la escuadra tenga menos de la mitad de sus integrantes."
       },
       {
-        "habilidades_faccion3": "Tribal Violence",
-        "descripcion": "The first time per turn that a Wild unit eliminates an enemy unit in close combat, it may immediately move 2\" (this movement does not trigger checks and does not count as an action)."
+        "habilidades_faccion3": "Violencia Tribal",
+        "descripcion": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\" (este movimiento no provoca chequeos ni cuenta como acción)."
       }
     ]
   },
   "unidades": [
     {
-      "nombre_unidad": "Scrap metal dealers",
-      "clase": "Line",
+      "nombre_unidad": "Chatarreros",
+      "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 3,
@@ -36,7 +36,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Scrap Rifle",
+            "nombre": "Rifle Chatarroso",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+5",
@@ -47,27 +47,27 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Wild Shotgun",
+            "nombre": "Escopeta Salvaje",
             "ataques": "1D6",
             "distancia": "6\"",
             "impactos": "-",
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Kebab Launcher",
+            "nombre": "Lanza-Kebabs",
             "ataques": "1D",
             "distancia": "16\"",
             "impactos": "+1",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Unstable"
+              "Inestable"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -89,8 +89,8 @@
       }
     },
     {
-      "nombre_unidad": "Torments",
-      "clase": "Line",
+      "nombre_unidad": "Tormentos",
+      "clase": "Línea",
       "perfil": {
         "movimiento": "9\"",
         "vidas": 5,
@@ -100,20 +100,20 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "This unit can add 1D6 to its movement and move up to areas diagonally.",
+        "especialidad": "Esta unidad puede sumar 1D6 a su movimiento una vez por activación. Puede trepar estructuras midiendo la distancia en diagonal, contando desplazamiento horizontal y vertical.",
         "valor": 5
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Sizzling Gun",
+            "nombre": "Pistola Chisporroteante",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolero"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -121,40 +121,40 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Segalo Knife",
+            "nombre": "Cuchillo Segalo",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Slicer",
+            "nombre": "Rebanadora",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Bottle Launcher",
+            "nombre": "Lanza-Botellas",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Line)"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -163,8 +163,8 @@
       }
     },
     {
-      "nombre_unidad": "Beasts",
-      "clase": "Elite",
+      "nombre_unidad": "Bestiajos",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 8,
@@ -180,7 +180,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Gunners",
+            "nombre": "Acribilladoras",
             "ataques": "2D",
             "distancia": "10\"",
             "impactos": "+4",
@@ -191,7 +191,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "projectile slingshot",
+            "nombre": "Honda de proyectil",
             "ataques": "1D",
             "distancia": "12\"",
             "impactos": "+5",
@@ -204,40 +204,40 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "ZugZug Ax",
+            "nombre": "Hacha ZugZug",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Huge Bite",
+            "nombre": "Mordisco Descomunal",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Elite)"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "boss ax",
+            "nombre": "Hacha del jefe",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -246,8 +246,8 @@
       }
     },
     {
-      "nombre_unidad": "Great Makineros",
-      "clase": "Elite",
+      "nombre_unidad": "Grandes Makineros",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 12,
@@ -263,53 +263,53 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "spark thrower",
+            "nombre": "Lanzachispas",
             "ataques": "3D",
             "distancia": "10\"",
             "impactos": "-",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Spark-Lightning",
+            "nombre": "Chispa-Rayo",
             "ataques": "1D6",
             "distancia": "12\"",
-            "impactos": "+1",
+            "impactos": "+6",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Asaltante +1"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Coil Cannon",
+            "nombre": "Kañón Bobina",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)"
+              "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
             "valor_extra": 2
           },
           {
-            "nombre": "Stuck Explosive",
+            "nombre": "Explosivo Pegado",
             "ataques": "1D",
             "distancia": "6\"",
             "impactos": "+3",
             "danio": "4",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable"
+              "Inestable"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -317,33 +317,33 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Scrap Hammer",
+            "nombre": "Martillo Chatarroso",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehicles)"
+              "Anti 5+ (Vehículos)"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Orca Chainsaw",
+            "nombre": "Cadenasierra Orca",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Industrial Peak",
+            "nombre": "Pico Industrial",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -357,8 +357,8 @@
       }
     },
     {
-      "nombre_unidad": "Clan Brutes",
-      "clase": "Elite",
+      "nombre_unidad": "Brutos del Clan",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 9,
@@ -368,21 +368,21 @@
           "min": 2,
           "max": 3
         },
-        "especialidad": "This unit cannot fire.",
+        "especialidad": "Esta unidad no puede disparar",
         "valor": 8
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Brutal Mace",
+            "nombre": "Maza Brutal",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -392,7 +392,7 @@
     },
     {
       "nombre_unidad": "Tronkatank",
-      "clase": "Vehicle",
+      "clase": "Vehículo",
       "perfil": {
         "movimiento": "8\"",
         "vidas": 14,
@@ -408,7 +408,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Tatty Machine Gun",
+            "nombre": "Ametralladora Cutre",
             "ataques": "3D",
             "distancia": "12\"",
             "impactos": "+5",
@@ -419,27 +419,27 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Drum Cannon",
+            "nombre": "Kañón de Bidones",
             "ataques": "1D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Unstable"
+              "Inestable"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Harpoon turret",
+            "nombre": "Torreta de arpones",
             "ataques": "2D6",
             "distancia": "10\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -447,7 +447,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Acceleration",
+            "nombre": "aceleron",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -461,8 +461,8 @@
       }
     },
     {
-      "nombre_unidad": "Big shot",
-      "clase": "Vehicle",
+      "nombre_unidad": "Gran cañonazo",
+      "clase": "Vehículo",
       "perfil": {
         "movimiento": "-",
         "vidas": 10,
@@ -478,28 +478,27 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Destroyer bomb",
+            "nombre": "Bomba destructora",
             "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "+6",
+            "impactos": "+4",
             "danio": "7",
             "danio_critico": "10",
             "habilidades_arma": [
-              "Explosive",
-              "parabolic shot"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "cluster bomb",
+            "nombre": "Bomba racimo",
             "ataques": "3D6",
             "distancia": "35\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "parabolic shot"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -507,7 +506,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "artillery equipment",
+            "nombre": "Equipo de artillería",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -521,8 +520,8 @@
       }
     },
     {
-      "nombre_unidad": "Horde Chief",
-      "clase": "Hero",
+      "nombre_unidad": "Jefe de la Horda",
+      "clase": "Héroe",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 10,
@@ -532,46 +531,46 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If you play in a squad and this unit is in one, it gives +1 melee attack; if playing in skirmish, gives +1 melee attack to all units within 3\".",
+        "especialidad": "Si juega en escuadra y esta unidad va en una, da +1 de ataque cuerpo a cuerpo, si juega en escaramuza, da +1 de ataque cuerpo a cuerpo a todas las unidades a 3\"",
         "valor": 14
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Tribal Gun",
+            "nombre": "Pistola Tribal",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolero"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Improvised Shotgun",
+            "nombre": "Escopeta Improvisada",
             "ataques": "1D6",
             "distancia": "12\"",
             "impactos": "+5",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Asaltante +1"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Scrap Launcher",
+            "nombre": "Lanzachatarra",
             "ataques": "1D",
             "distancia": "16\"",
-            "impactos": "+1",
+            "impactos": "+6",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable"
+              "Inestable"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -579,40 +578,40 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Giant Tribal Ax",
+            "nombre": "Hacha Tribal Gigante",
             "ataques": "5D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico (+1)"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Zugkar Ax",
+            "nombre": "Hacha Zugkar",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 2
           },
           {
-            "nombre": "Brutal Mace",
+            "nombre": "Maza Brutal",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -621,8 +620,8 @@
       }
     },
     {
-      "nombre_unidad": "Debora- worlds",
-      "clase": "Titan",
+      "nombre_unidad": "Debora- mundos",
+      "clase": "Titán",
       "perfil": {
         "movimiento": "2\"",
         "vidas": 25,
@@ -632,46 +631,46 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
+        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
         "valor": 38
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Giant Rock Launcher",
+            "nombre": "Lanzarrocas Gigante",
             "ataques": "1D6",
             "distancia": "18\"",
             "impactos": "+4",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "parabolic shot"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "devastating Gatling",
+            "nombre": "Gatling demoledora",
             "ataques": "6D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Deafening Roar",
+            "nombre": "Rugido Ensordecedor",
             "ataques": "2D6",
             "distancia": "12\"",
             "impactos": "+5",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -679,7 +678,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Colossal Claws",
+            "nombre": "Garras Colosales",
             "ataques": "6D",
             "distancia": null,
             "impactos": null,
@@ -690,27 +689,27 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Crushing Fists",
+            "nombre": "Puños Demoledores",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Crusher Jaws",
+            "nombre": "Mandíbulas Trituradoras",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Anti 4+ (Titan)"
+              "Anti 4+ (Titán)"
             ],
             "especialidad": "-",
             "valor_extra": 2

@@ -1,50 +1,67 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
-import { formatAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
+import { getAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
+import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
 
-const factionModules = import.meta.glob('../data/*.json', { eager: true })
+const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 
 const commandDoctrines = [
   {
     id: 'garrotazo',
     nombre: 'Garrotazo',
+    nombre_en: 'Bludgeon',
     descripcion: 'La unidad o escuadra trabada en combate cuerpo a cuerpo empuja 1” a su contrincante, poniendo fin al combate.',
+    descripcion_en: 'The unit or squad engaged in melee pushes its opponent 1”, ending the combat.',
   },
   {
     id: 'apuntado',
     nombre: 'Apuntado',
+    nombre_en: 'Aimed Shot',
     descripcion: 'La unidad o escuadra elegida pierde una acción, pero gana +1 dado de Ataque en disparo durante este turno.',
+    descripcion_en: 'The chosen unit or squad loses one action but gains +1 Attack die for ranged attacks this turn.',
   },
   {
     id: 'frenesi',
     nombre: 'Frenesí',
+    nombre_en: 'Frenzy',
     descripcion: 'La unidad elegida puede utilizar una acción adicional de movimiento este turno.',
+    descripcion_en: 'The chosen unit may use one additional movement action this turn.',
   },
   {
     id: 'agilidad-en-combate',
     nombre: 'Agilidad en combate',
+    nombre_en: 'Combat Agility',
     descripcion: 'La unidad o escuadra gana +3 a su Velocidad durante este turno.',
+    descripcion_en: 'The unit or squad gains +3 to its Speed this turn.',
   },
   {
     id: 'nuestra-es-la-victoria',
     nombre: 'Nuestra es la victoria',
+    nombre_en: 'Victory Is Ours',
     descripcion: 'La unidad o escuadra gana +3 a su Valor durante este turno.',
+    descripcion_en: 'The unit or squad gains +3 to its Value this turn.',
   },
   {
     id: 'reaccion-inmediata',
     nombre: 'Reacción inmediata',
+    nombre_en: 'Immediate Reaction',
     descripcion: 'El jugador puede activar dos unidades o escuadras seguidas durante este turno.',
+    descripcion_en: 'The player may activate two units or squads in a row this turn.',
   },
   {
     id: 'mas-que-preparado',
     nombre: 'Más que preparado',
+    nombre_en: 'More Than Ready',
     descripcion: 'La unidad o escuadra gana una acción adicional de Preparado durante este turno.',
+    descripcion_en: 'The unit or squad gains one additional Ready action this turn.',
   },
   {
     id: 'alineacion-perfecta',
     nombre: 'Alineación perfecta',
+    nombre_en: 'Perfect Alignment',
     descripcion: 'La unidad ignora todas las coberturas parciales enemigas durante este turno.',
+    descripcion_en: 'The unit ignores all enemy partial covers this turn.',
   },
 ]
 
@@ -121,7 +138,7 @@ const normalizeWeapon = (weapon, tipo) => ({
   tipo,
   ataques: weapon.ataques ?? weapon.atq ?? '-',
   distancia: weapon.distancia ?? null,
-  impactos: weapon.impactos ?? null,
+  impactos: weapon.impactos ? String(weapon.impactos).replace(/^\+?(\d+)\+?$/, '$1+') : null,
   danio: weapon.danio ?? weapon.danio_base ?? '-',
   danio_critico: weapon.danio_critico ?? weapon.critico ?? '-',
   habilidades: weapon.habilidades_arma || weapon.habilidades || [],
@@ -240,7 +257,7 @@ const normalizeUnit = (unit, index) => {
     tipo: unit.clase || unit.tipo || 'Línea',
     movimiento: perfil.movimiento ?? unit.movimiento ?? '-',
     vidas: perfil.vidas ?? unit.vidas ?? '-',
-    salvacion: perfil.salvacion ?? unit.salvacion ?? '-',
+    salvacion: String(perfil.salvacion ?? unit.salvacion ?? '-').replace(/^\+?(\d+)\+?$/, '$1+'),
     velocidad: perfil.velocidad ?? unit.velocidad ?? '-',
     escuadra_min: squadBounds.min,
     escuadra_max: squadBounds.max,
@@ -499,25 +516,7 @@ function Generador() {
   const { t, lang } = useI18n()
   const [, startTransition] = useTransition()
   const factions = useMemo(() => {
-    const esByBase = new Map()
-    const enByBase = new Map()
-
-    Object.entries(factionModules).forEach(([path, module]) => {
-      const filename = path.split('/').pop() || ''
-      if (filename.endsWith('.en.json')) {
-        enByBase.set(filename.replace('.en.json', ''), module)
-      } else if (filename.endsWith('.json')) {
-        esByBase.set(filename.replace('.json', ''), module)
-      }
-    })
-
-    return Array.from(esByBase.keys())
-      .sort()
-      .map((base) => {
-        const selectedModule = lang === 'en' && enByBase.has(base) ? enByBase.get(base) : esByBase.get(base)
-        const data = selectedModule?.default || selectedModule
-        return data ? { data, base } : null
-      })
+    return buildLocalizedFactionEntries(factionModules, lang)
       .filter((item) => item && isFactionData(item.data))
       .map((item, index) => normalizeFaction(item.data, index, item.base))
   }, [lang])
@@ -912,7 +911,7 @@ function Generador() {
       doc.rect(margin, y, usableWidth, headerHeight)
       doc.setFontSize(8)
       doc.setTextColor(20)
-      const columns = [t('generator.mov'), t('generator.vidas'), t('generator.salv'), t('generator.vel'), t('generator.squadLabel'), 'Especialidad']
+      const columns = [t('generator.mov'), t('generator.vidas'), t('generator.salv'), t('generator.vel'), t('generator.squadLabel'), t('generator.specialty')]
       columns.forEach((label, idx) => {
         const width = columnWidths[idx]
         doc.text(label, x + 2, y + 4.5)
@@ -993,7 +992,7 @@ function Generador() {
     if (selectedDoctrines.length) {
       drawSectionTitle(`${t('generator.doctrines')} (${t('generator.add')})`, true)
       selectedDoctrines.forEach((doctrine) => {
-        drawBulletItem(doctrine.nombre, doctrine.descripcion, 9)
+        drawBulletItem(lang === 'en' ? (doctrine.nombre_en || doctrine.nombre) : doctrine.nombre, lang === 'en' ? (doctrine.descripcion_en || doctrine.descripcion) : doctrine.descripcion, 9)
       })
       y += 2
     }
@@ -1237,8 +1236,8 @@ function Generador() {
                                 <DoctrineIcon id={doctrine.id} />
                               </div>
                               <div className="doctrine-content">
-                                <p className="doctrine-name">{doctrine.nombre}</p>
-                                <p className="doctrine-description">{doctrine.descripcion}</p>
+                                <p className="doctrine-name">{lang === 'en' ? (doctrine.nombre_en || doctrine.nombre) : doctrine.nombre}</p>
+                                <p className="doctrine-description">{lang === 'en' ? (doctrine.descripcion_en || doctrine.descripcion) : doctrine.descripcion}</p>
                               </div>
                             </div>
                             <button
@@ -1491,6 +1490,7 @@ function Generador() {
       {isDoctrineModalOpen && (
         <DoctrinePickerModal
           t={t}
+          lang={lang}
           selectedIds={new Set(selectedDoctrines.map((item) => item.id))}
           doctrines={commandDoctrines}
           onClose={() => setIsDoctrineModalOpen(false)}
@@ -1590,7 +1590,7 @@ function DoctrineIcon({ id }) {
   )
 }
 
-function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t }) {
+function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t, lang }) {
   const available = doctrines.filter((item) => !selectedIds.has(item.id))
 
   const content = (
@@ -1617,8 +1617,8 @@ function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t }) {
                       <DoctrineIcon id={doctrine.id} />
                     </div>
                     <div className="doctrine-content">
-                      <p className="doctrine-name">{doctrine.nombre}</p>
-                      <p className="doctrine-description">{doctrine.descripcion}</p>
+                      <p className="doctrine-name">{lang === 'en' ? (doctrine.nombre_en || doctrine.nombre) : doctrine.nombre}</p>
+                      <p className="doctrine-description">{lang === 'en' ? (doctrine.descripcion_en || doctrine.descripcion) : doctrine.descripcion}</p>
                     </div>
                   </div>
                   <button type="button" className="ghost tiny" onClick={() => onSelect(doctrine)}>
@@ -1726,7 +1726,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lan
     if (!weapon) return null
     const abilityNotes = (weapon.habilidades || [])
       .map((ability) => ({
-        label: formatAbilityLabel(ability),
+        label: getAbilityLabel(ability, lang),
         description: getAbilityDescription(ability, lang),
         raw: ability,
       }))
@@ -1752,7 +1752,7 @@ function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lan
             <span>{weapon.danio_critico}</span>
             <span className="weapon-tags">
               {weapon.habilidades?.length
-                ? weapon.habilidades.map((ability) => formatAbilityLabel(ability)).join(', ')
+                ? weapon.habilidades.map((ability) => getAbilityLabel(ability, lang)).join(', ')
                 : '-'}
             </span>
             <span>{weapon.valor_extra > 0 ? `+${weapon.valor_extra}` : '0'}</span>

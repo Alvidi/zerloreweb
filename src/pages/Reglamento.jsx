@@ -1,9 +1,9 @@
 import { useMemo, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import reglamentoHtml from '../data/ZEROLORE - REGLAMENTO avanzado 2eb087d94b33800ea112ed9327b7e9c8.html?raw&v=advanced-20260307'
-import reglamentoEnHtml from '../data/ZEROLORE - REGULATIONS advanced 2eb087d94b33800ea112ed9327b7e9c8.en.html?raw&v=advanced-20260307'
-import reglamentoRapidoHtml from '../data/ZEROLORE - REGLAMENTO juego rapido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw&v=quick-20260308'
-import reglamentoRapidoEnHtml from '../data/ZEROLORE - REGULATIONS quick game 313087d94b3380dc9c0ffd50e9ba8d50.en.html?raw&v=quick-20260308'
+import reglamentoHtml from '../data/spanish/ZEROLORE - REGLAMENTO avanzado 2eb087d94b33800ea112ed9327b7e9c8.html?raw'
+import reglamentoEnHtml from '../data/english/ZEROLORE_ADVANCED_RULEBOOK_EN.html?raw'
+import reglamentoRapidoHtml from '../data/spanish/ZEROLORE - REGLAMENTO juego rapido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw'
+import reglamentoRapidoEnHtml from '../data/english/ZEROLORE_QUICK_PLAY_RULEBOOK_EN.html?raw'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 function Reglamento() {
@@ -28,7 +28,6 @@ function Reglamento() {
     }
     const parser = new DOMParser()
     const doc = parser.parseFromString(rulesHtml, 'text/html')
-    const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     const headings = Array.from(doc.querySelectorAll('h1, h2, h3'))
     const toc = headings
       .map((heading, index) => {
@@ -42,6 +41,7 @@ function Reglamento() {
         return { id, title, level }
       })
       .filter((item) => item.title)
+    const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc }
   }, [t, rulesHtml])
 

@@ -1,26 +1,26 @@
 {
   "faccion": {
-    "nombre": "Tecnócratas",
-    "estilo_juego": "Los Tecnócratras son una facción de tecnología avanzada, fuego preciso y control táctico, especializada en el uso de drones, armamento experimental y retirada inteligente. Sus unidades destacan por su versatilidad y eficiencia, capaces de adaptarse rápidamente a la situación del campo de batalla mediante reposicionamiento y apoyo automatizado. No buscan el enfrentamiento frontal prolongado, sino desgastar al enemigo con superioridad técnica, sacrificando resistencia bruta a cambio de control, precisión y flexibilidad.",
+    "nombre": "Technocrats",
+    "estilo_juego": "The Technocrats are a faction of advanced technology, precise fire and tactical control, specializing in the use of drones, experimental weaponry and intelligent retreat. Its units stand out for their versatility and efficiency, capable of quickly adapting to the battlefield situation through repositioning and automated support. They do not seek prolonged frontal confrontation, but rather wear down the enemy with technical superiority, sacrificing brute resistance in exchange for control, precision and flexibility.",
     "habilidades_faccion": [
       {
-        "habilidades_faccion1": "Retirada inteligente",
-        "descripcion": "Las unidades de esta facción pueden retirarse sin necesidad de realizar chequeo de retirada."
+        "habilidades_faccion1": "Smart withdrawal",
+        "descripcion": "Units of this faction can retreat without needing to take a retreat test."
       },
       {
-        "habilidades_faccion2": "Apoyo dron",
-        "descripcion": "se puede incluir en las escuadras de línea y élite hasta 2 drones ignorando el número de escuadra que tenga la unidad. En modo escaramuza se puede añadir un dron a una unidad."
+        "habilidades_faccion2": "Drone support",
+        "descripcion": "Up to 2 drones can be included in line and elite squads, ignoring the squad number of the unit. In skirmish mode a drone can be added to a unit."
       },
       {
-        "habilidades_faccion3": "Protocolos de Combate",
-        "descripcion": "Una vez por turno, cuando una unidad/escuadra Tecnócrata vaya a realizar una acción de Disparo, puede añadir +1 al resultado de Impactos si otra unidad/escuadra Tecnócrata (incluidos drones) está a 6\" del mismo objetivo."
+        "habilidades_faccion3": "Combat Protocols",
+        "descripcion": "Once per turn, when a Technocrat unit/squad is about to take a Shoot action, it can add +1 to the Hit result if another Technocrat unit/squad (including drones) is within 6\" of the same target."
       }
     ]
   },
   "unidades": [
     {
-      "nombre_unidad": "Soldados de la Tecnounión",
-      "clase": "Línea",
+      "nombre_unidad": "Soldiers of the Technounion",
+      "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
@@ -36,7 +36,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Carabina de Impulso",
+            "nombre": "Impulse Carbine",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
@@ -47,7 +47,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Rifle de Impulso",
+            "nombre": "Impulse Rifle",
             "ataques": "3D",
             "distancia": "18\"",
             "impactos": "+4",
@@ -58,7 +58,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Rifle de Francotirador",
+            "nombre": "Sniper Rifle",
             "ataques": "1D",
             "distancia": "24\"",
             "impactos": "+3",
@@ -71,7 +71,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "rifle de Ultrapulso",
+            "nombre": "Ultra Pulse Rifle",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
@@ -86,7 +86,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Culata de Arma",
+            "nombre": "Weapon Butt",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
@@ -100,8 +100,8 @@
       }
     },
     {
-      "nombre_unidad": "Errantes",
-      "clase": "Línea",
+      "nombre_unidad": "wanderers",
+      "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 4,
@@ -111,13 +111,13 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Puede usar Carrera como 1 acción",
+        "especialidad": "You can use Dash as 1 action.",
         "valor": 5
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rifle regio",
+            "nombre": "royal rifle",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+4",
@@ -132,7 +132,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillas cyber-tribales",
+            "nombre": "Cyber-tribal blades",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -145,7 +145,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Picos de agarre",
+            "nombre": "Gripping Spikes",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
@@ -161,8 +161,8 @@
       }
     },
     {
-      "nombre_unidad": "Servo-Dron de ataque",
-      "clase": "Línea",
+      "nombre_unidad": "Servo attack drone",
+      "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 3,
@@ -172,13 +172,13 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "3",
+        "especialidad": "-",
         "valor": 3
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Gatling de impulso",
+            "nombre": "impulse gatling",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -189,7 +189,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzamisiles guiado",
+            "nombre": "guided missile launcher",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
@@ -202,7 +202,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzallamas",
+            "nombre": "Flamethrower",
             "ataques": "1D6",
             "distancia": "6\"",
             "impactos": "-",
@@ -217,7 +217,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "golpe",
+            "nombre": "Bang",
             "ataques": "1",
             "distancia": null,
             "impactos": null,
@@ -231,8 +231,8 @@
       }
     },
     {
-      "nombre_unidad": "Servo-Dron escudo",
-      "clase": "Línea",
+      "nombre_unidad": "Servo-drone shield",
+      "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 3,
@@ -242,14 +242,14 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad no puede disparar. Una vez por turno, cuando la escuadra a la que pertenece recibe un ataque, el atacante pierde 1 dado de ataque y los impactos críticos se convierten en impactos normales.",
+        "especialidad": "This unit cannot fire. This drone removes one attack die from the enemy attack and critical damage becomes normal damage.",
         "valor": 7
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "golpe",
+            "nombre": "Bang",
             "ataques": "1",
             "distancia": null,
             "impactos": null,
@@ -263,8 +263,8 @@
       }
     },
     {
-      "nombre_unidad": "Mecha X",
-      "clase": "Élite",
+      "nombre_unidad": "Wick X",
+      "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 10,
@@ -280,7 +280,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Ametralladora Burst",
+            "nombre": "Burst Machine Gun",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -291,7 +291,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzallamas",
+            "nombre": "Flamethrower",
             "ataques": "1D6",
             "distancia": "8\"",
             "impactos": "-",
@@ -304,7 +304,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Lanzamisiles",
+            "nombre": "Missile launcher",
             "ataques": "2D",
             "distancia": "22\"",
             "impactos": "+4",
@@ -317,7 +317,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Cañón de Plasma",
+            "nombre": "Plasma Cannon",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+3",
@@ -332,7 +332,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "patada pesada",
+            "nombre": "heavy kick",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -347,7 +347,7 @@
     },
     {
       "nombre_unidad": "Mecha X-II",
-      "clase": "Élite",
+      "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 12,
@@ -363,7 +363,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Plasma Blaster",
+            "nombre": "plasma blaster",
             "ataques": "3D",
             "distancia": "16\"",
             "impactos": "+3",
@@ -376,7 +376,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Cañón de Fusión Experimental",
+            "nombre": "Experimental Fusion Cannon",
             "ataques": "1D",
             "distancia": "14\"",
             "impactos": "+3",
@@ -391,7 +391,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Hoja de la Aurora",
+            "nombre": "Dawn Leaf",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -404,7 +404,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Hoja Resonante",
+            "nombre": "Resonant Blade",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -418,8 +418,8 @@
       }
     },
     {
-      "nombre_unidad": "Mecha-destructor",
-      "clase": "Vehículo",
+      "nombre_unidad": "Mecha-destroyer",
+      "clase": "Vehicle",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 18,
@@ -435,7 +435,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Hyper-cañon de particulas",
+            "nombre": "Hyper-particle cannon",
             "ataques": "2D",
             "distancia": "24\"",
             "impactos": "+3",
@@ -448,7 +448,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Misiles guiados",
+            "nombre": "guided missiles",
             "ataques": "2D",
             "distancia": "22\"",
             "impactos": "+4",
@@ -461,7 +461,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Cañón de plasma acoplado",
+            "nombre": "Attached plasma cannon",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+3",
@@ -479,7 +479,7 @@
     },
     {
       "nombre_unidad": "Mantex",
-      "clase": "Vehículo",
+      "clase": "Vehicle",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 14,
@@ -495,7 +495,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón automático doble",
+            "nombre": "Double Autocannon",
             "ataques": "4D",
             "distancia": "16\"",
             "impactos": "+4",
@@ -506,7 +506,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Lanza misiles frontal",
+            "nombre": "front missile launcher",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
@@ -521,7 +521,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Embestida frontal",
+            "nombre": "Front lunge",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -535,8 +535,8 @@
       }
     },
     {
-      "nombre_unidad": "Arquitecto de Guerra",
-      "clase": "Héroe",
+      "nombre_unidad": "War Architect",
+      "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 8,
@@ -546,13 +546,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando una escuadra con este héroe o a 6\" en escaramuza recibe un ataque crítico, puede convertirlo en un impacto normal.",
+        "especialidad": "This unit transforms any critical hit into a normal hit to its squad or to units within 6\". This unit can carry two ranged weapons and fire twice, with or without a weapon, in the same action.",
         "valor": 10
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rifle de Pulso",
+            "nombre": "Pulse Rifle",
             "ataques": "3D",
             "distancia": "16\"",
             "impactos": "+4",
@@ -563,7 +563,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Pistola Neural",
+            "nombre": "Neural Gun",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -576,7 +576,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Fusil Experimental",
+            "nombre": "Experimental Rifle",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+4",
@@ -589,7 +589,7 @@
             "valor_extra": 1
           },
           {
-            "nombre": "Proyector de Microdrones",
+            "nombre": "Microdrone Projector",
             "ataques": "1D6",
             "distancia": "14\"",
             "impactos": "+5",
@@ -602,10 +602,10 @@
             "valor_extra": 2
           },
           {
-            "nombre": "Cañón de Fase",
+            "nombre": "Phase Cannon",
             "ataques": "1D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "-",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
@@ -617,7 +617,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Bastón Energético",
+            "nombre": "Energy Staff",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -633,8 +633,8 @@
       }
     },
     {
-      "nombre_unidad": "Coloso Autónomo",
-      "clase": "Titán",
+      "nombre_unidad": "Autonomous Colossus",
+      "clase": "Titan",
       "perfil": {
         "movimiento": "3\"",
         "vidas": 26,
@@ -644,13 +644,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad transforma cualquier impacto crítico en normal.",
+        "especialidad": "This unit transforms any critical hit into normal.",
         "valor": 40
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de Iones",
+            "nombre": "Ion Cannon",
             "ataques": "2D6",
             "distancia": "22\"",
             "impactos": "+4",
@@ -663,7 +663,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Batería de Microdrones",
+            "nombre": "Microdrone Battery",
             "ataques": "3D",
             "distancia": "35\"",
             "impactos": "+4",
@@ -676,7 +676,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzador de Plasma",
+            "nombre": "Plasma Launcher",
             "ataques": "1D6",
             "distancia": "20\"",
             "impactos": "+5",
@@ -691,7 +691,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Aplastador Mecánico",
+            "nombre": "Mechanical Crusher",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,

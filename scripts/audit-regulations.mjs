@@ -16,10 +16,20 @@ function parseArgs(argv) {
 
 function listDataFiles() {
   const dataDir = path.resolve('src/data');
-  return fs
-    .readdirSync(dataDir)
-    .filter((f) => f.endsWith('.html'))
-    .map((f) => path.join(dataDir, f));
+  const out = [];
+  const stack = [dataDir];
+  while (stack.length) {
+    const current = stack.pop();
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const fullPath = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(fullPath);
+      } else if (entry.isFile() && entry.name.endsWith('.html')) {
+        out.push(fullPath);
+      }
+    }
+  }
+  return out;
 }
 
 function pickLatest(files, predicate) {
@@ -28,6 +38,13 @@ function pickLatest(files, predicate) {
   return filtered
     .map((file) => ({ file, mtime: fs.statSync(file).mtimeMs }))
     .sort((a, b) => b.mtime - a.mtime)[0].file;
+}
+
+function getRulebookKind(filePath) {
+  const name = path.basename(filePath).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  if (/(juego\s*rapido|quick[\s_-]*play|quick\s*game)/i.test(name)) return 'quick';
+  if (/(avanzado|advanced)/i.test(name)) return 'advanced';
+  return null;
 }
 
 function stripTags(html) {
@@ -68,13 +85,23 @@ function run() {
   const args = parseArgs(process.argv.slice(2));
   const threshold = Number(args.threshold ?? 0.72);
   const files = listDataFiles();
+  const isSpanishRulebook = (file) => /REGLAMENTO/i.test(path.basename(file));
+  const isEnglishRulebook = (file) => /(RULEBOOK|REGULATIONS).*(EN)?/i.test(path.basename(file));
+  const requestedMode = args.mode === 'quick' || args.mode === 'advanced' ? args.mode : null;
 
   const esPath = args.es
     ? path.resolve(args.es)
-    : pickLatest(files, (file) => /REGLAMENTO/i.test(path.basename(file)) && !/\.en\.html$/i.test(file));
+    : pickLatest(
+        files,
+        (file) => isSpanishRulebook(file) && (!requestedMode || getRulebookKind(file) === requestedMode),
+      );
+  const detectedMode = requestedMode || (esPath ? getRulebookKind(esPath) : null);
   const enPath = args.en
     ? path.resolve(args.en)
-    : pickLatest(files, (file) => /REGULATIONS/i.test(path.basename(file)) && /\.en\.html$/i.test(file));
+    : pickLatest(
+        files,
+        (file) => isEnglishRulebook(file) && (!detectedMode || getRulebookKind(file) === detectedMode),
+      );
 
   if (!esPath || !fs.existsSync(esPath)) throw new Error('No se encontró ES. Usa --es');
   if (!enPath || !fs.existsSync(enPath)) throw new Error('No se encontró EN. Usa --en');

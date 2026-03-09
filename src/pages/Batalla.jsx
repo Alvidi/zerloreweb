@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useI18n } from '../i18n/I18nContext.jsx'
-import { formatAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
+import { getAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
 import { parseThreshold, resolveAttack } from '../utils/battleEngine.js'
+import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
 
-const factionModules = import.meta.glob('../data/*.json', { eager: true })
+const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 
 const slugify = (value) =>
   String(value || '')
@@ -28,7 +29,7 @@ const normalizeWeapon = (weapon, kind) => ({
   kind,
   attacks: weapon.ataques ?? weapon.atq ?? '1D',
   range: weapon.distancia ?? '-',
-  hit: weapon.impactos ?? null,
+  hit: weapon.impactos ? String(weapon.impactos).replace(/^\+?(\d+)\+?$/, '$1+') : null,
   damage: weapon.danio ?? '1',
   critDamage: weapon.danio_critico ?? weapon.critico ?? weapon.danio ?? '1',
   extraValue: toNumber(weapon.valor_extra ?? 0),
@@ -51,7 +52,7 @@ const normalizeUnit = (unit, index) => {
     type: unit.clase || 'Línea',
     movement: profile.movimiento ?? unit.movimiento ?? '-',
     hp: Math.max(1, toNumber(profile.vidas, 1)),
-    saveLabel: profile.salvacion ?? unit.salvacion ?? `+${parseThreshold(profile.salvacion ?? '+4', 4)}`,
+    saveLabel: String(profile.salvacion ?? unit.salvacion ?? '+4').replace(/^\+?(\d+)\+?$/, '$1+'),
     save: parseThreshold(profile.salvacion ?? '+4', 4),
     speed: profile.velocidad ?? unit.velocidad ?? '-',
     valueBase: toNumber(profile.valor ?? unit.valor_base ?? unit.valor ?? 0),
@@ -152,7 +153,8 @@ const getLimitedAmmoMax = (weapon) => {
   const value = Number.parseInt(match[0], 10)
   return Number.isFinite(value) ? Math.max(0, value) : null
 }
-const makeAmmoKey = (side, unitId, weaponId) => `${side}:${unitId || 'none'}:${weaponId || 'none'}`
+const makeAmmoKey = (side, factionId, unitId, weaponId) =>
+  `${side}:${factionId || 'none'}:${unitId || 'none'}:${weaponId || 'none'}`
 const parseSpeedValue = (unit) => {
   const match = String(unit?.speed ?? '').match(/\d+/)
   return match ? Number.parseInt(match[0], 10) : 0
@@ -375,25 +377,10 @@ function Batalla() {
   )
 
   const factions = useMemo(() => {
-    const esByBase = new Map()
-    const enByBase = new Map()
-
-    Object.entries(factionModules).forEach(([path, module]) => {
-      const filename = path.split('/').pop() || ''
-      if (filename.endsWith('.en.json')) {
-        enByBase.set(filename.replace('.en.json', ''), module)
-      } else if (filename.endsWith('.json')) {
-        esByBase.set(filename.replace('.json', ''), module)
-      }
-    })
-
-    return Array.from(esByBase.keys())
-      .sort()
-      .map((base, index) => {
-        const selectedModule = lang === 'en' && enByBase.has(base) ? enByBase.get(base) : esByBase.get(base)
-        const data = selectedModule?.default || selectedModule
-        if (!isFactionData(data)) return null
-        return normalizeFaction(data, base, index)
+    return buildLocalizedFactionEntries(factionModules, lang)
+      .map((item, index) => {
+        if (!isFactionData(item.data)) return null
+        return normalizeFaction(item.data, item.base, index)
       })
       .filter(Boolean)
   }, [lang])
@@ -413,7 +400,7 @@ function Batalla() {
   const [rightAfterDash, setRightAfterDash] = useState(false)
   const [chargeDistance, setChargeDistance] = useState(7)
   const [hpMap, setHpMap] = useState({})
-  const [ammoMap] = useState({})
+  const [ammoMap, setAmmoMap] = useState({})
   const [logEntries, setLogEntries] = useState([])
   const [isResolving, setIsResolving] = useState(false)
   const [defenderCounterattack, setDefenderCounterattack] = useState(true)
@@ -466,12 +453,12 @@ function Batalla() {
 
   const leftPrimaryWeaponId = leftSelectedWeapons[0]?.id || ''
   const rightPrimaryWeaponId = rightSelectedWeapons[0]?.id || ''
-  const getWeaponAmmoInfo = (side, unit, weapon, pendingSpend = {}) => {
+  const getWeaponAmmoInfo = (side, factionId, unit, weapon, pendingSpend = {}) => {
     const maxAmmo = getLimitedAmmoMax(weapon)
     if (!maxAmmo && maxAmmo !== 0) {
       return { limited: false, max: null, used: 0, remaining: null, key: null }
     }
-    const key = makeAmmoKey(side, unit?.id, weapon?.id)
+    const key = makeAmmoKey(side, factionId, unit?.id, weapon?.id)
     const used = Math.max(0, (ammoMap[key] || 0) + (pendingSpend[key] || 0))
     const remaining = Math.max(0, maxAmmo - used)
     return { limited: true, max: maxAmmo, used, remaining, key }
@@ -609,7 +596,7 @@ function Batalla() {
     (weapon?.abilities || [])
       .map((ability) => ({
         raw: ability,
-        label: formatAbilityLabel(ability),
+        label: getAbilityLabel(ability, lang),
         description: getAbilityDescription(ability, lang),
       }))
       .filter((item) => item.label)
@@ -796,7 +783,8 @@ function Batalla() {
       const defenderHpBefore = defenderSide === 'left' ? nextLeftHp : nextRightHp
       if (attackerHpBefore <= 0 || defenderHpBefore <= 0) return
 
-      const ammoInfo = getWeaponAmmoInfo(attackerSide, attackerUnit, weapon, pendingAmmoSpend)
+      const attackerFactionId = attackerSide === 'left' ? leftFactionId : rightFactionId
+      const ammoInfo = getWeaponAmmoInfo(attackerSide, attackerFactionId, attackerUnit, weapon, pendingAmmoSpend)
       if (ammoInfo.limited && ammoInfo.remaining <= 0) {
         entries.push(
           buildStatusEntry({
@@ -967,6 +955,16 @@ function Batalla() {
       }
     } else {
       runWeaponsForSide('left', 'attack')
+    }
+
+    if (Object.keys(pendingAmmoSpend).length) {
+      setAmmoMap((prev) => {
+        const next = { ...prev }
+        Object.entries(pendingAmmoSpend).forEach(([key, spent]) => {
+          next[key] = Math.max(0, (next[key] || 0) + spent)
+        })
+        return next
+      })
     }
 
     playLog(entries)
@@ -1147,7 +1145,7 @@ function Batalla() {
                 <div className="duel-weapon-stack">
                   {leftSelectedWeapons.map((weapon, index) => {
                     const notes = buildAbilityNotes(weapon)
-                    const ammoInfo = getWeaponAmmoInfo('left', leftUnit, weapon)
+                    const ammoInfo = getWeaponAmmoInfo('left', leftFactionId, leftUnit, weapon)
                     return (
                       <div key={`left-weapon-${weapon.id}-${index}`} className="duel-weapon-entry">
                         <p className="duel-weapon-entry-title">{tx.weapon} {index + 1}: {weapon.name}</p>
@@ -1171,7 +1169,7 @@ function Batalla() {
                             <span>{weapon.kind === 'melee' ? '3+' : weaponHasAnyPrefix(weapon, DIRECT_PREFIXES) ? '-' : weapon.hit || '-'}</span>
                             <span>{weapon.damage}</span>
                             <span>{weapon.critDamage}</span>
-                            <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.join(', ') : '-'}</span>
+                            <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
                           </div>
                         </div>
                         {notes.length > 0 && (
@@ -1355,7 +1353,7 @@ function Batalla() {
                 <div className="duel-weapon-stack">
                   {rightSelectedWeapons.map((weapon, index) => {
                     const notes = buildAbilityNotes(weapon)
-                    const ammoInfo = getWeaponAmmoInfo('right', rightUnit, weapon)
+                    const ammoInfo = getWeaponAmmoInfo('right', rightFactionId, rightUnit, weapon)
                     return (
                       <div key={`right-weapon-${weapon.id}-${index}`} className="duel-weapon-entry">
                         <p className="duel-weapon-entry-title">{tx.weapon} {index + 1}: {weapon.name}</p>
@@ -1379,7 +1377,7 @@ function Batalla() {
                             <span>{weapon.kind === 'melee' ? '3+' : weaponHasAnyPrefix(weapon, DIRECT_PREFIXES) ? '-' : weapon.hit || '-'}</span>
                             <span>{weapon.damage}</span>
                             <span>{weapon.critDamage}</span>
-                            <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.join(', ') : '-'}</span>
+                            <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
                           </div>
                         </div>
                         {notes.length > 0 && (

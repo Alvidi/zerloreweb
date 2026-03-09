@@ -4,7 +4,9 @@ import { JSDOM } from 'jsdom';
 
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'src/data');
-const HTML_DIR = path.join(DATA_DIR, 'facciones');
+const HTML_DIR = path.join(DATA_DIR, 'factions');
+const ES_JSON_DIR = path.join(DATA_DIR, 'factions/jsonFaccionesES');
+const EN_JSON_DIR = path.join(DATA_DIR, 'factions/jsonFaccionesEN');
 const DRY_RUN = process.argv.includes('--dry-run');
 
 const BASES = [
@@ -437,10 +439,7 @@ function syncEnMechanical(esObj, enObj) {
           danio_critico: esWeapon.danio_critico,
           valor_extra: esWeapon.valor_extra,
           especialidad: prev.especialidad || esWeapon.especialidad || '-',
-          habilidades_arma:
-            Array.isArray(prev.habilidades_arma) && prev.habilidades_arma.length
-              ? [...prev.habilidades_arma]
-              : [...(esWeapon.habilidades_arma || [])],
+          habilidades_arma: [...(esWeapon.habilidades_arma || [])],
         };
       });
 
@@ -483,8 +482,8 @@ function findHtmlForBase(base, factionName, htmlIndex) {
 }
 
 function syncFaction(base, htmlIndex) {
-  const esPath = path.join(DATA_DIR, `${base}.json`);
-  const enPath = path.join(DATA_DIR, `${base}.en.json`);
+  const esPath = path.join(ES_JSON_DIR, `${base}.json`);
+  const enPath = path.join(EN_JSON_DIR, `${base}.en.json`);
   const esObj = JSON.parse(fs.readFileSync(esPath, 'utf8'));
   const enObj = JSON.parse(fs.readFileSync(enPath, 'utf8'));
   const htmlMeta = findHtmlForBase(base, esObj.faccion?.nombre || base, htmlIndex);

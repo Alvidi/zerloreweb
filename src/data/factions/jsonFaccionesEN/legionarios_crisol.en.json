@@ -87,7 +87,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Anti 1+ (Line)"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -113,7 +113,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -157,7 +157,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -203,7 +203,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Quick attack +1"
+              "Ataque rápido +1"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -216,7 +216,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -262,7 +262,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolero"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -277,7 +277,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0

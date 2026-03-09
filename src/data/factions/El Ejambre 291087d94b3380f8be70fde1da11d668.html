@@ -1,0 +1,715 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>El Ejambre</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="291087d9-4b33-80f8-be70-fde1da11d668" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="El%20Ejambre/20251212_1730_Logo_El_Enjambre_simple_compose_01kc9pa9wwf8js40xa7ypzjvyr.png"/></div><h1 class="page-title" dir="auto">El Ejambre</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="2c6087d9-4b33-80f2-8c05-f3ec4fe2fa38" class="">Estilo de juego:</h2></div><div style="display:contents" dir="auto"><p id="2c6087d9-4b33-80cf-9671-cb0b17891ef3" class="">El Enjambre se basa en la presión constante y el avance en bloque. Sus unidades funcionan mejor cuando se mantienen juntas, aprovechando la sinapsis para evitar la desorganización y sostener el ataque. Aunque sus tropas caen con facilidad, el Enjambre compensa las bajas con su capacidad de regresar al campo de batalla y saturar al enemigo, destacando en el combate cuerpo a cuerpo y el control del espacio.</p></div><div style="display:contents" dir="auto"><h2 id="2c6087d9-4b33-80dd-9015-d439136c5771" class="">Habilidades de facción:</h2></div><div style="display:contents" dir="auto"><ul id="2c6087d9-4b33-8078-bf02-e17df1f582a8" class="bulleted-list"><li style="list-style-type:disc"><strong>El ejambre enterno: </strong>Todas la unidades/escuadras de línea eliminadas, vuelven a la partida desde la zona de despliegue.</li></ul></div><div style="display:contents" dir="auto"><ul id="2c6087d9-4b33-8044-b147-f5da911ddd57" class="bulleted-list"><li style="list-style-type:disc"><strong>Synapsis </strong>mental: Al inicio de cada Fase de Iniciativa, cualquier unidad/escuadra del Enjambre que no esté a 6&quot; o menos de al menos otra unidad aliada debe tirar 1D6: con resultado 1-2 entra en retirada siguiendo las reglas normales de retirada.</li></ul></div><div style="display:contents" dir="auto"><ul id="2c6087d9-4b33-8008-bea9-fe483cf865ac" class="bulleted-list"><li style="list-style-type:disc"><strong>Voracidad: </strong>Cuando una unidad/escuadra del Enjambre elimina una unidad enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño a una unidad.</li></ul></div><div style="display:contents" dir="auto"><hr id="2c6087d9-4b33-80e5-a442-f69b4a7fcaba"/></div><div style="display:contents" dir="auto"><h2 id="2c6087d9-4b33-80fc-8437-d4a359b7c071" class="">Unidades:</h2></div><div style="display:contents" dir="ltr"><table id="2c6087d9-4b33-8069-9d29-da9ff02f4829" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8081-b686-d4df2f205d5f"><td id="^mi;" class="" style="width:136.328125px">Zánganos</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8006-84d3-c4c33783facf"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-80a1-ba14-cb3a342e5c02"><td id="^mi;" class="" style="width:136.328125px">línea</td><td id="nJZC" class="" style="width:119.328125px">7”</td><td id="cDC@" class="" style="width:148.328125px">2</td><td id="wLKf" class="">6+</td><td id="XjR?" class="" style="width:154px">5</td><td id="mY^=" class="">6 / 14</td><td id="RtEw" class="">-</td><td id="ZjeU" class="">2</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8015-b162-e153a29023fa"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-80ba-83d2-e243978b1a3b"><td id="^mi;" class="" style="width:136.328125px">Lanza espinas</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">8”</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">1 / 1</td><td id="mY^=" class="">-</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-80dc-b4a8-e8b2756fa312"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-80dd-a604-c17b4e09c0ed"><td id="^mi;" class="" style="width:136.328125px">Garras simples</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">1 / 2</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c6087d9-4b33-808e-a9cf-da75028a18eb"/></div><div style="display:contents" dir="ltr"><table id="2c6087d9-4b33-8020-bcd6-ebf3b75ca30e" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-80b9-ae2f-fa8887ec0ca7"><td id="^mi;" class="" style="width:136.328125px">Despedazadores</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-802d-8b2f-fb0f0235be48"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8070-a0a5-c5d00e3d00fe"><td id="^mi;" class="" style="width:136.328125px">línea</td><td id="nJZC" class="" style="width:119.328125px">9”</td><td id="cDC@" class="" style="width:148.328125px">4</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">4</td><td id="mY^=" class="">4 / 12</td><td id="RtEw" class="">Estas unidades no atacan a distancia</td><td id="ZjeU" class="">3</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8020-858f-ee9a07dfea10"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8091-9388-ff80552de912"><td id="^mi;" class="" style="width:136.328125px">-</td><td id="nJZC" class="" style="width:119.328125px">-</td><td id="cDC@" class="" style="width:148.328125px">-</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">-</td><td id="mY^=" class="">-</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-8025-85e6-c9fe530abaef"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c6087d9-4b33-80e4-880f-d583323dcbc1"><td id="^mi;" class="" style="width:136.328125px">Garras perforantes</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">1 / 3</td><td id="wLKf" class="">Anti +5 (línea)</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-80ec-a676-dfea39ee1703"/></div><div style="display:contents" dir="ltr"><table id="2c7087d9-4b33-8048-881b-f6329d12f9c5" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-801b-8dea-fc7608f5a813"><td id="^mi;" class="" style="width:136.328125px">Esporeros de asedio</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8020-a57c-e9d30521979a"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8036-b04b-eb7024b5f720"><td id="^mi;" class="" style="width:136.328125px">línea</td><td id="nJZC" class="" style="width:119.328125px">5”</td><td id="cDC@" class="" style="width:148.328125px">5</td><td id="wLKf" class="">6+</td><td id="XjR?" class="" style="width:154px">2</td><td id="mY^=" class="">2 / 6</td><td id="RtEw" class="">-</td><td id="ZjeU" class="">4</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80e0-9930-d1e8f189dd3d"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80bb-891c-de0e767afeb3"><td id="^mi;" class="" style="width:136.328125px">Lluvia de esporas</td><td id="nJZC" class="" style="width:119.328125px">2D6</td><td id="cDC@" class="" style="width:148.328125px">20”</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">1 / 1</td><td id="mY^=" class="">Disparo parabólico</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8001-9dfc-e63be462ce36"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-802d-b938-c931c513f92b"><td id="^mi;" class="" style="width:136.328125px">Tentáculos débiles</td><td id="nJZC" class="" style="width:119.328125px">1D</td><td id="cDC@" class="" style="width:148.328125px">1 / 1</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-8038-9e94-c1c4f8c48879"/></div><div style="display:contents" dir="ltr"><table id="2c7087d9-4b33-8002-a97e-cead2e107702" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80e6-b07c-e1f88d236733"><td id="^mi;" class="" style="width:136.328125px">Guerreros sinápticos</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80e5-8ea2-d966d86ecf55"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80d4-a75d-c7553c267102"><td id="^mi;" class="" style="width:136.328125px">Elite</td><td id="nJZC" class="" style="width:119.328125px">6”</td><td id="cDC@" class="" style="width:148.328125px">6</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">3</td><td id="mY^=" class="">2 / 5</td><td id="RtEw" class="">-</td><td id="ZjeU" class="">7</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8064-a0a3-c72cf8aae89e"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80a0-ac62-c409a1ee65ce"><td id="^mi;" class="" style="width:136.328125px">Bio-fusil</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">14”</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">1 / 2</td><td id="mY^=" class="">Precisión</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80ff-acb2-e3df6bb2abf2"><td id="^mi;" class="" style="width:136.328125px">Lanzador de espinas</td><td id="nJZC" class="" style="width:119.328125px">1D6</td><td id="cDC@" class="" style="width:148.328125px">10”</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">1 / 1</td><td id="mY^=" class="">Explosiva</td><td id="RtEw" class="">+1</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8015-bc6b-ce21ebb07f6d"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-804d-b808-cfe211fec6f7"><td id="^mi;" class="" style="width:136.328125px">Espadas óseas</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">2 / 3</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-800c-8408-f5e8886c9ca1"/></div><div style="display:contents" dir="ltr"><table id="2c7087d9-4b33-8092-b706-ed0b131a124d" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8047-a58c-f81ebc2be413"><td id="^mi;" class="" style="width:136.328125px">Acechadores sinápticos</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8037-a115-cab978354100"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8094-a289-d28b47996aa9"><td id="^mi;" class="" style="width:136.328125px">Elite</td><td id="nJZC" class="" style="width:119.328125px">10”</td><td id="cDC@" class="" style="width:148.328125px">4</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">5</td><td id="mY^=" class="">2 / 6</td><td id="RtEw" class="">Esta unidad puede desplegarse en cualquier lugar a 9” del enemigo en el 2 turno. Esta unidad no atacan a distancia.</td><td id="ZjeU" class="">8</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-809e-b90e-dcf42aa5638b"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80b8-82f4-ff74da0df3f9"><td id="^mi;" class="" style="width:136.328125px">-</td><td id="nJZC" class="" style="width:119.328125px">-</td><td id="cDC@" class="" style="width:148.328125px">-</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">-</td><td id="mY^=" class="">-</td><td id="RtEw" class="">-</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80dd-8c8f-e6fadbb6100e"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8095-a091-e9c290eb5b6d"><td id="^mi;" class="" style="width:136.328125px">Garras saltadoras</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">1 / 3</td><td id="wLKf" class="">Asaltante +1</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8054-92e2-fcdf02b84ba3"><td id="^mi;" class="" style="width:136.328125px">Zarpazo coordinado</td><td id="nJZC" class="" style="width:119.328125px">1D</td><td id="cDC@" class="" style="width:148.328125px">2 / 4</td><td id="wLKf" class="">Ataque crítico</td><td id="XjR?" class="" style="width:154px">+1</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-8083-bf74-e248d9ff0247"/></div><div style="display:contents" dir="auto"><p id="2c7087d9-4b33-80fa-8c68-fd493a4444f7" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-8072-a5d3-cdc27e0085bb"/></div><div style="display:contents" dir="ltr"><table id="2c7087d9-4b33-8076-bd25-fce769eaaec0" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8026-8d51-c636c7cbe59b"><td id="^mi;" class="" style="width:136.328125px">Coloso de Progenie</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8034-9134-fd54eb278152"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8037-8488-c32627d07300"><td id="^mi;" class="" style="width:136.328125px">Monstruo</td><td id="nJZC" class="" style="width:119.328125px">6”</td><td id="cDC@" class="" style="width:148.328125px">20</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">4</td><td id="mY^=" class="">-</td><td id="RtEw" class="">si mata una unidad cuerpo a cuerpo, puede devorarla y ganar +1 de vida</td><td id="ZjeU" class="">14</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80a2-9aab-da3da07b057f"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8073-9106-e13605c4ffca"><td id="^mi;" class="" style="width:136.328125px">Rayo bioplasmático</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">16”</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">3 / 4</td><td id="mY^=" class="">Directo</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-807f-a848-d93dec37207f"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8022-a873-c31071646f84"><td id="^mi;" class="" style="width:136.328125px">Aplastamiento total</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">4 / 5</td><td id="wLKf" class="">Anti 4+ (todo)</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-80ed-90fc-feecc17b017d"/></div><div style="display:contents" dir="ltr"><table id="2c7087d9-4b33-805e-af5b-f7e94a88637a" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80bc-9009-e8c1f3c144a8"><td id="^mi;" class="" style="width:136.328125px">Destripador aullante</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-804b-aa92-c2e467f7de7a"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80a4-bfd1-cd35d863e2da"><td id="^mi;" class="" style="width:136.328125px">Monstruo</td><td id="nJZC" class="" style="width:119.328125px">8”</td><td id="cDC@" class="" style="width:148.328125px">16</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">5</td><td id="mY^=" class="">-</td><td id="RtEw" class="">Si esta unidad inflige 3 o más puntos de daño en un mismo ataque a una unidad de Línea o Élite, esa unidad entra en estado de retirada.</td><td id="ZjeU" class="">12</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-803b-a868-e6b3500e76d5"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8025-b24a-d4b3a654c140"><td id="^mi;" class="" style="width:136.328125px">Rugido bio-sónico</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">8”</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">2 / 2</td><td id="mY^=" class="">Explosiva</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8093-a25f-f0e6ef85bf26"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8063-8891-ef63317b45cb"><td id="^mi;" class="" style="width:136.328125px">Garras trituradoras</td><td id="nJZC" class="" style="width:119.328125px">4D</td><td id="cDC@" class="" style="width:148.328125px">3 / 5</td><td id="wLKf" class="">Ataque crítico</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2c7087d9-4b33-80f7-a3af-cf6771414536"/></div><div style="display:contents" dir="ltr"><table id="2c7087d9-4b33-807e-9e14-c219c27c9296" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8066-a901-c9ce231a1329"><td id="^mi;" class="" style="width:136.328125px">Neurovigia</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8079-a787-e58f2ab699b8"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80b5-8253-c5b08bb928b0"><td id="^mi;" class="" style="width:136.328125px">Monstruo</td><td id="nJZC" class="" style="width:119.328125px">8”</td><td id="cDC@" class="" style="width:148.328125px">12</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">2</td><td id="mY^=" class="">-</td><td id="RtEw" class="">Las unidades/escuadras aliadas a 6&quot; de esta unidad pueden repetir tiradas de ataque fallidas. Esta unidad puede conquistar puntos de mando.</td><td id="ZjeU" class="">11</td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80fe-ae79-f3306aa2d769"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-803d-90de-daa15df5e370"><td id="^mi;" class="" style="width:136.328125px">Pulso psiónico</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">14”</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">1 / 2</td><td id="mY^=" class="">Ignora coberturas</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-80d7-9339-f2e356cafa30"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2c7087d9-4b33-8023-95b6-ef7c65b1e7c3"><td id="^mi;" class="" style="width:136.328125px">Tentáculos neuronales</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">2 / 2</td><td id="wLKf" class="">Directo</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2ec087d9-4b33-8086-9c62-f2bcaefba0d7"/></div><div style="display:contents" dir="ltr"><table id="2fc087d9-4b33-80d1-9e3a-c44aa34a903e" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-809b-b6b4-e9cde0d21f68"><td id="^mi;" class="" style="width:136.328125px">Nexo Sináptico</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-803f-9176-d092c734863a"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8052-ba5e-dd6ffdbbd385"><td id="^mi;" class="" style="width:136.328125px">Héroe</td><td id="nJZC" class="" style="width:119.328125px">7”</td><td id="cDC@" class="" style="width:148.328125px">12</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">6</td><td id="mY^=" class="">-</td><td id="RtEw" class="">Esta unidad puede trepar estructuras midiendo la distancia en diagonal, contando tanto el desplazamiento horizontal como el vertical para calcular el movimiento consumido.</td><td id="ZjeU" class="">14</td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-80a0-8f8c-d407a1cd7771"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8032-9f9f-ee9c490c175a"><td id="^mi;" class="" style="width:136.328125px">Descarga Sináptica</td><td id="nJZC" class="" style="width:119.328125px">1D6</td><td id="cDC@" class="" style="width:148.328125px">12”</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">2 / 3</td><td id="mY^=" class="">Impactos encadenados</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-80b7-b79b-ea7688427073"><td id="^mi;" class="" style="width:136.328125px">Pulso Psíquico</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">14”</td><td id="wLKf" class="">-</td><td id="XjR?" class="" style="width:154px">1 / 2</td><td id="mY^=" class="">Directo</td><td id="RtEw" class="">+2</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-804c-a07b-d0a7fe185c71"><td id="^mi;" class="" style="width:136.328125px">Aguijón Esporal</td><td id="nJZC" class="" style="width:119.328125px">1D3</td><td id="cDC@" class="" style="width:148.328125px">10”</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">3 / 4</td><td id="mY^=" class="">Inestable</td><td id="RtEw" class="">+3</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8013-a86b-e60a85d0d789"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8028-8c84-c148d144ae64"><td id="^mi;" class="" style="width:136.328125px">Garras Alfa</td><td id="nJZC" class="" style="width:119.328125px">4D</td><td id="cDC@" class="" style="width:148.328125px">2 / 4</td><td id="wLKf" class="">Ataque Crítico</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-809c-be56-f1db135ea814"><td id="^mi;" class="" style="width:136.328125px">Tentáculos Dominantes</td><td id="nJZC" class="" style="width:119.328125px">1D6</td><td id="cDC@" class="" style="width:148.328125px">2 / 3</td><td id="wLKf" class="">Impactos encadenados</td><td id="XjR?" class="" style="width:154px">+1</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2fc087d9-4b33-8030-a7f8-ed5713c9f709"/></div><div style="display:contents" dir="ltr"><table id="2fc087d9-4b33-80b3-85a5-e2f9c2a7b9f3" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8034-b10c-cf51e498ef55"><td id="^mi;" class="" style="width:136.328125px">Reina mayor</td><td id="nJZC" class="" style="width:119.328125px"></td><td id="cDC@" class="" style="width:148.328125px"></td><td id="wLKf" class=""></td><td id="XjR?" class="" style="width:154px"></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-80c1-b200-c7fe0ca6c6b9"><td id="^mi;" class="block-color-blue_background" style="width:136.328125px"><strong>Clase</strong></td><td id="nJZC" class="block-color-blue_background" style="width:119.328125px"><strong>Movimiento</strong></td><td id="cDC@" class="block-color-blue_background" style="width:148.328125px"><strong>Vidas</strong></td><td id="wLKf" class="block-color-blue_background"><strong>Salvación</strong></td><td id="XjR?" class="block-color-blue_background" style="width:154px"><strong>Velocidad</strong></td><td id="mY^=" class="block-color-blue_background"><strong>Escuadra Min / Max</strong></td><td id="RtEw" class="block-color-blue_background"><strong>Especialidad</strong></td><td id="ZjeU" class="block-color-blue_background"><strong>Valor</strong></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-80b3-9bca-d244e0ab34fe"><td id="^mi;" class="" style="width:136.328125px">Titan</td><td id="nJZC" class="" style="width:119.328125px">3”</td><td id="cDC@" class="" style="width:148.328125px">30</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">1</td><td id="mY^=" class="">-</td><td id="RtEw" class="">Las unidades aliadas pueden desplegarse desde esta unidad como si fuera una zona de despliegue desde la unidad a 3”, siempre que la Reina Mayor no esté trabada en combate. Esta unidad puede llevar dos armas a distancia y disparar dos veces en la misma acción.</td><td id="ZjeU" class="">40</td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8071-9807-dc66c7bb0a06"><td id="^mi;" class="" style="width:136.328125px"><strong>Disparo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>Distancia</strong></td><td id="wLKf" class=""><strong>Impactos</strong></td><td id="XjR?" class="" style="width:154px"><strong>daño / daño crítico</strong></td><td id="mY^=" class=""><strong>Habilidades armas</strong></td><td id="RtEw" class=""><strong>Valor extra</strong></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8092-aaae-c89a4b3d65b1"><td id="^mi;" class="" style="width:136.328125px">Lanzalarvas</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">14”</td><td id="wLKf" class="">5+</td><td id="XjR?" class="" style="width:154px">3 / 5</td><td id="mY^=" class="">Ignora coberturas</td><td id="RtEw" class="">0</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8009-a0ea-eeb1cff92cb5"><td id="^mi;" class="" style="width:136.328125px">Escupesavia Ácida</td><td id="nJZC" class="" style="width:119.328125px">1D6</td><td id="cDC@" class="" style="width:148.328125px">16”</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">5 / 5</td><td id="mY^=" class="">Disparo parabólico</td><td id="RtEw" class="">+1</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-80b3-b219-d18465285ca4"><td id="^mi;" class="" style="width:136.328125px">Biocañón Esporal</td><td id="nJZC" class="" style="width:119.328125px">2D6</td><td id="cDC@" class="" style="width:148.328125px">18”</td><td id="wLKf" class="">4+</td><td id="XjR?" class="" style="width:154px">4 / 7</td><td id="mY^=" class="">Explosiva</td><td id="RtEw" class="">+2</td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8067-a378-fbce96da2b49"><td id="^mi;" class="" style="width:136.328125px"><strong>Cuerpo a Cuerpo</strong></td><td id="nJZC" class="" style="width:119.328125px"><strong>Ataques</strong></td><td id="cDC@" class="" style="width:148.328125px"><strong>daño / daño crítico</strong></td><td id="wLKf" class=""><strong>Habilidades armas</strong></td><td id="XjR?" class="" style="width:154px"><strong>Valor extra</strong></td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-805c-8860-eef5355777fb"><td id="^mi;" class="" style="width:136.328125px">Pisotón Biológico</td><td id="nJZC" class="" style="width:119.328125px">2D</td><td id="cDC@" class="" style="width:148.328125px">3 / 4</td><td id="wLKf" class="">–</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-807d-838b-e9996ed78df0"><td id="^mi;" class="" style="width:136.328125px">Zarpas Trituradoras</td><td id="nJZC" class="" style="width:119.328125px">3D</td><td id="cDC@" class="" style="width:148.328125px">3 / 5</td><td id="wLKf" class="">Ataque Crítico</td><td id="XjR?" class="" style="width:154px">0</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="2fc087d9-4b33-8019-b75f-d2f1d14edd87"><td id="^mi;" class="" style="width:136.328125px">Mandíbulas de Colmena</td><td id="nJZC" class="" style="width:119.328125px">5D</td><td id="cDC@" class="" style="width:148.328125px">4 / 6</td><td id="wLKf" class="">Anti 5+ (Élite)</td><td id="XjR?" class="" style="width:154px">+1</td><td id="mY^=" class=""></td><td id="RtEw" class=""></td><td id="ZjeU" class=""></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="2fc087d9-4b33-8003-acae-e75cd2055cab" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

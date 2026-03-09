@@ -19,6 +19,11 @@ const SEO_BY_LANG = {
       description:
         'Crea y ajusta tu ejercito de ZeroLore por valor, faccion, doctrinas y configuracion de unidades.',
     },
+    '/batalla': {
+      title: 'Simulador de Batalla | ZeroLore',
+      description:
+        'Simula batallas de ZeroLore en tiempo real: turnos, dados, habilidades especiales y log de combate.',
+    },
   },
   en: {
     '/': {
@@ -35,6 +40,11 @@ const SEO_BY_LANG = {
       title: 'Army Generator | ZeroLore',
       description:
         'Build and tune your ZeroLore army by target value, faction, doctrines, and unit loadouts.',
+    },
+    '/batalla': {
+      title: 'Battle Simulator | ZeroLore',
+      description:
+        'Simulate ZeroLore battles in real time: turns, dice rolls, special abilities, and a full combat log.',
     },
   },
 }

@@ -54,7 +54,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy"
+              "Pesada"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -111,7 +111,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -120,11 +120,11 @@
             "nombre": "Grenade launcher",
             "ataques": "2D",
             "distancia": "15\"",
-            "impactos": "+3",
+            "impactos": "+4",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -133,11 +133,11 @@
             "nombre": "plasma rifles",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "+4",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 1+ (Elite)"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -207,7 +207,7 @@
             "danio": "3",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Asaltante +1"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -240,7 +240,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -297,7 +297,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy"
+              "Pesada"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -323,7 +323,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -356,8 +356,8 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Explosive",
-              "Heavy"
+              "Explosiva",
+              "Pesada"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -381,7 +381,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -390,12 +390,13 @@
             "nombre": "barricade cannon",
             "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "+6",
+            "impactos": "-",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Indirect Fire",
-              "Explosive"
+              "Disparo parabólico",
+              "Munición limitada (3)",
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -437,12 +438,11 @@
             "nombre": "Artillery",
             "ataques": "1D6",
             "distancia": "35\"",
-            "impactos": "+6",
+            "impactos": "+4",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Explosive",
-              "Ignore Coverages"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -455,7 +455,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -501,7 +501,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision"
+              "Precisión"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -514,7 +514,7 @@
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolero"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -529,7 +529,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -562,7 +562,8 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Heavy"
+              "Pesada",
+              "Munición limitada (3)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -575,7 +576,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Precision"
+              "Precisión"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -588,7 +589,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 1

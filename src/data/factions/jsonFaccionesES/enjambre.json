@@ -1,26 +1,26 @@
 {
   "faccion": {
-    "nombre": "The Swarm",
-    "estilo_juego": "The Swarm is based on constant pressure and block advancement. Their units work best when held together, leveraging synapses to avoid disorganization and sustain the attack. Although their troops fall easily, the Swarm compensates for casualties with their ability to return to the battlefield and saturate the enemy, excelling in close combat and control of space.",
+    "nombre": "El Ejambre",
+    "estilo_juego": "El Enjambre se basa en la presión constante y el avance en bloque. Sus unidades funcionan mejor cuando se mantienen juntas, aprovechando la sinapsis para evitar la desorganización y sostener el ataque. Aunque sus tropas caen con facilidad, el Enjambre compensa las bajas con su capacidad de regresar al campo de batalla y saturar al enemigo, destacando en el combate cuerpo a cuerpo y el control del espacio.",
     "habilidades_faccion": [
       {
-        "habilidades_faccion1": "The eternal swarm",
-        "descripcion": "All eliminated line units/squads return to the game from the deployment zone."
+        "habilidades_faccion1": "El enjambre eterno",
+        "descripcion": "Todas la unidades/escuadras de línea eliminadas, vuelven a la partida desde la zona de despliegue."
       },
       {
-        "habilidades_faccion2": "mental synapse",
-        "descripcion": "If the units/squads are not within 6\" of each other, they must roll 1D6 on initiative: if a 1 or 2 is rolled, the unit retreats, following the retreat rules."
+        "habilidades_faccion2": "Synapsis mental",
+        "descripcion": "Al inicio de cada Fase de Iniciativa, cualquier unidad/escuadra del Enjambre que no esté a 6\" o menos de al menos otra unidad aliada debe tirar 1D6: con resultado 1-2 entra en retirada siguiendo las reglas normales de retirada."
       },
       {
-        "habilidades_faccion3": "Voracity",
-        "descripcion": "When a Swarm unit/squad eliminates an enemy unit in close combat, it may remove a damage marker from a unit."
+        "habilidades_faccion3": "Voracidad",
+        "descripcion": "Cuando una unidad/escuadra del Enjambre elimina una unidad enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño a una unidad."
       }
     ]
   },
   "unidades": [
     {
-      "nombre_unidad": "Drones",
-      "clase": "Line",
+      "nombre_unidad": "Zánganos",
+      "clase": "Línea",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 2,
@@ -36,7 +36,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Throws thorns",
+            "nombre": "Lanza espinas",
             "ataques": "3D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -49,7 +49,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Simple claws",
+            "nombre": "Garras simples",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -63,8 +63,8 @@
       }
     },
     {
-      "nombre_unidad": "Breakers",
-      "clase": "Line",
+      "nombre_unidad": "Despedazadores",
+      "clase": "Línea",
       "perfil": {
         "movimiento": "9\"",
         "vidas": 4,
@@ -74,21 +74,21 @@
           "min": 4,
           "max": 12
         },
-        "especialidad": "These units do not attack from a distance.",
+        "especialidad": "Estas unidades no atacan a distancia",
         "valor": 3
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Piercing Claws",
+            "nombre": "Garras perforantes",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Anti 5+ (Line)"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -97,8 +97,8 @@
       }
     },
     {
-      "nombre_unidad": "Siege Sporeros",
-      "clase": "Line",
+      "nombre_unidad": "Esporeros de asedio",
+      "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
@@ -114,15 +114,14 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "spore rain",
+            "nombre": "Lluvia de esporas",
             "ataques": "2D6",
             "distancia": "20\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "parabolic shot",
-              "Explosive"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -130,7 +129,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "weak tentacles",
+            "nombre": "Tentáculos débiles",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
@@ -144,8 +143,8 @@
       }
     },
     {
-      "nombre_unidad": "Synaptic warriors",
-      "clase": "Elite",
+      "nombre_unidad": "Guerreros sinápticos",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 6,
@@ -161,27 +160,27 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Bio-gun",
+            "nombre": "Bio-fusil",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Precision"
+              "Precisión"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Thorn Launcher",
+            "nombre": "Lanzador de espinas",
             "ataques": "1D6",
             "distancia": "10\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -189,7 +188,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "bone swords",
+            "nombre": "Espadas óseas",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -203,8 +202,8 @@
       }
     },
     {
-      "nombre_unidad": "Synaptic lurkers",
-      "clase": "Elite",
+      "nombre_unidad": "Acechadores sinápticos",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "10\"",
         "vidas": 4,
@@ -214,34 +213,34 @@
           "min": 2,
           "max": 6
         },
-        "especialidad": "This unit can be deployed anywhere within 9\" of the enemy on turn 2. This unit does not attack at range.",
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Esta unidad no atacan a distancia.",
         "valor": 8
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "jumping claws",
+            "nombre": "Garras saltadoras",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Asaltante +1"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Coordinated blow",
+            "nombre": "Zarpazo coordinado",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -250,8 +249,8 @@
       }
     },
     {
-      "nombre_unidad": "Brood Colossus",
-      "clase": "Monster",
+      "nombre_unidad": "Coloso de Progenie",
+      "clase": "Monstruo",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 20,
@@ -261,20 +260,20 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If you kill a melee unit, you can devour it and gain +1 health.",
+        "especialidad": "Si mata una unidad cuerpo a cuerpo, puede devorarla y ganar +1 de vida",
         "valor": 14
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Bioplasmic ray",
+            "nombre": "Rayo bioplasmático",
             "ataques": "3D",
             "distancia": "16\"",
-            "impactos": "+3",
+            "impactos": "-",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -282,14 +281,14 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Total crush",
+            "nombre": "Aplastamiento total",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 2+ (All)"
+              "Anti 4+ (Todo)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -298,8 +297,8 @@
       }
     },
     {
-      "nombre_unidad": "Howling Ripper",
-      "clase": "Monster",
+      "nombre_unidad": "Destripador aullante",
+      "clase": "Monstruo",
       "perfil": {
         "movimiento": "8\"",
         "vidas": 16,
@@ -309,20 +308,20 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If the unit damages (line and elite), it creates fear causing the unit to enter a retreat state.",
+        "especialidad": "Si esta unidad inflige 3 o más puntos de daño en un mismo ataque a una unidad de Línea o Élite, esa unidad entra en estado de retirada.",
         "valor": 12
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Bio-sonic roar",
+            "nombre": "Rugido bio-sónico",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -330,14 +329,14 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Crushing claws",
+            "nombre": "Garras trituradoras",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -347,7 +346,7 @@
     },
     {
       "nombre_unidad": "Neurovigia",
-      "clase": "Monster",
+      "clase": "Monstruo",
       "perfil": {
         "movimiento": "8\"",
         "vidas": 12,
@@ -357,20 +356,20 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If your units/squads are within 6\" of it, they re-roll failed rolls of any type. This unit can conquer command posts.",
+        "especialidad": "Las unidades/escuadras aliadas a 6\" de esta unidad pueden repetir tiradas de ataque fallidas. Esta unidad puede conquistar puntos de mando.",
         "valor": 11
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "psionic pulse",
+            "nombre": "Pulso psiónico",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Ignore coverage"
+              "Ignora coberturas"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -378,14 +377,14 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Neural tentacles",
+            "nombre": "Tentáculos neuronales",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -394,8 +393,8 @@
       }
     },
     {
-      "nombre_unidad": "Synaptic Nexus",
-      "clase": "Hero",
+      "nombre_unidad": "Nexo Sináptico",
+      "clase": "Héroe",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 12,
@@ -405,46 +404,46 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit can deploy anywhere within 9\" of the enemy on turn 2. It can climb structures with diagonal movement.",
+        "especialidad": "Esta unidad puede trepar estructuras midiendo la distancia en diagonal, contando tanto el desplazamiento horizontal como el vertical para calcular el movimiento consumido.",
         "valor": 14
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Synaptic discharge",
+            "nombre": "Descarga Sináptica",
             "ataques": "1D6",
             "distancia": "12\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Psychic Pulse",
+            "nombre": "Pulso Psíquico",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "-",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Straight"
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 2
           },
           {
-            "nombre": "Spore Stinger",
+            "nombre": "Aguijón Esporal",
             "ataques": "1D3",
             "distancia": "10\"",
             "impactos": "+5",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable"
+              "Inestable"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -452,27 +451,27 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Alpha Claws",
+            "nombre": "Garras Alfa",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Dominant Tentacles",
+            "nombre": "Tentáculos Dominantes",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -481,8 +480,8 @@
       }
     },
     {
-      "nombre_unidad": "eldest queen",
-      "clase": "Titan",
+      "nombre_unidad": "Reina mayor",
+      "clase": "Titán",
       "perfil": {
         "movimiento": "3\"",
         "vidas": 30,
@@ -492,46 +491,46 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit serves as a deployment area. This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
+        "especialidad": "Las unidades aliadas pueden desplegarse desde esta unidad como si fuera una zona de despliegue desde la unidad a 3\", siempre que la Reina Mayor no esté trabada en combate. Esta unidad puede llevar dos armas a distancia y disparar dos veces en la misma acción.",
         "valor": 40
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Larva launcher",
+            "nombre": "Lanzalarvas",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+5",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ignore coverage"
+              "Ignora coberturas"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Acid Sap Spitter",
+            "nombre": "Escupesavia Ácida",
             "ataques": "1D6",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "5",
             "danio_critico": "5",
             "habilidades_arma": [
-              "parabolic shot"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 1
           },
           {
-            "nombre": "Esporal Biocanyon",
+            "nombre": "Biocañón Esporal",
             "ataques": "2D6",
             "distancia": "18\"",
             "impactos": "+4",
             "danio": "4",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Explosive"
+              "Explosiva"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -539,7 +538,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Biological Stomp",
+            "nombre": "Pisotón Biológico",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -550,27 +549,27 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Crushing Claws",
+            "nombre": "Zarpas Trituradoras",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Ataque crítico"
             ],
             "especialidad": "-",
             "valor_extra": 0
           },
           {
-            "nombre": "Beehive Jaws",
+            "nombre": "Mandíbulas de Colmena",
             "ataques": "5D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Anti 5+ (Elite)"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 1

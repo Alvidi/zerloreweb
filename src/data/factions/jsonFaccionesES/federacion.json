@@ -120,7 +120,7 @@
             "nombre": "Lanza Granadas",
             "ataques": "2D",
             "distancia": "15\"",
-            "impactos": "+3",
+            "impactos": "+4",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -133,11 +133,11 @@
             "nombre": "fusiles de plasma",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "+4",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 1+ (Élite)"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -390,13 +390,13 @@
             "nombre": "Cañón barricade",
             "ataques": "1D",
             "distancia": "35\"",
-            "impactos": "+6",
+            "impactos": "-",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
               "Disparo parabólico",
-              "Explosiva",
-              "Munición limitada (3)"
+              "Munición limitada (3)",
+              "Directo"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -438,12 +438,11 @@
             "nombre": "artillería",
             "ataques": "1D6",
             "distancia": "35\"",
-            "impactos": "+6",
+            "impactos": "+4",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Explosiva",
-              "Ignora coberturas"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
             "valor_extra": 0

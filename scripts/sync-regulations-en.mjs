@@ -19,10 +19,20 @@ function listDataFiles() {
   if (!fs.existsSync(dataDir)) {
     throw new Error(`No existe ${dataDir}`);
   }
-  return fs
-    .readdirSync(dataDir)
-    .filter((f) => f.endsWith('.html'))
-    .map((f) => path.join(dataDir, f));
+  const out = [];
+  const stack = [dataDir];
+  while (stack.length) {
+    const current = stack.pop();
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const fullPath = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(fullPath);
+      } else if (entry.isFile() && entry.name.endsWith('.html')) {
+        out.push(fullPath);
+      }
+    }
+  }
+  return out;
 }
 
 function pickLatest(files, predicate) {
@@ -33,8 +43,24 @@ function pickLatest(files, predicate) {
     .sort((a, b) => b.mtime - a.mtime)[0].file;
 }
 
+function getRulebookKind(filePath) {
+  const name = path.basename(filePath).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  if (/(juego\s*rapido|quick[\s_-]*play|quick\s*game)/i.test(name)) return 'quick';
+  if (/(avanzado|advanced)/i.test(name)) return 'advanced';
+  return null;
+}
+
 function deriveOutputPath(esPath) {
-  const dir = path.dirname(esPath);
+  const englishDir = path.resolve('src/data/english');
+  const kind = getRulebookKind(esPath);
+  if (kind === 'quick') {
+    return path.join(englishDir, 'ZEROLORE_QUICK_PLAY_RULEBOOK_EN.html');
+  }
+  if (kind === 'advanced') {
+    return path.join(englishDir, 'ZEROLORE_ADVANCED_RULEBOOK_EN.html');
+  }
+
+  const dir = path.resolve(path.dirname(esPath));
   const base = path.basename(esPath, '.html');
   const translated = base
     .replace(/REGLAMENTO/g, 'REGULATIONS')
@@ -120,13 +146,20 @@ function syncTocLabels(html) {
 function run() {
   const args = parseArgs(process.argv.slice(2));
   const files = listDataFiles();
+  const isSpanishRulebook = (file) => /REGLAMENTO/i.test(path.basename(file));
+  const isEnglishRulebook = (file) => /(RULEBOOK|REGULATIONS).*(EN)?/i.test(path.basename(file));
+  const requestedMode = args.mode === 'quick' || args.mode === 'advanced' ? args.mode : null;
 
   const esPath = args.es
     ? path.resolve(args.es)
-    : pickLatest(files, (file) => /REGLAMENTO/i.test(path.basename(file)) && !/\.en\.html$/i.test(file));
+    : pickLatest(
+        files,
+        (file) => isSpanishRulebook(file) && (!requestedMode || getRulebookKind(file) === requestedMode),
+      );
   if (!esPath || !fs.existsSync(esPath)) {
     throw new Error('No se encontró archivo ES. Usa --es "src/data/archivo.html"');
   }
+  const rulebookKind = requestedMode || getRulebookKind(esPath);
 
   const outPath = args.out ? path.resolve(args.out) : deriveOutputPath(esPath);
 
@@ -134,15 +167,15 @@ function run() {
     ? path.resolve(args.template)
     : pickLatest(
         files.filter((f) => path.resolve(f) !== path.resolve(outPath)),
-        (file) => /REGULATIONS/i.test(path.basename(file)) && /\.en\.html$/i.test(file),
+        (file) => isEnglishRulebook(file) && (!rulebookKind || getRulebookKind(file) === rulebookKind),
       );
 
-  if (!templatePath && fs.existsSync(outPath) && /\.en\.html$/i.test(outPath)) {
+  if (!templatePath && fs.existsSync(outPath)) {
     templatePath = outPath;
   }
 
   if (!templatePath || !fs.existsSync(templatePath)) {
-    throw new Error('No se encontró EN previo para usar como plantilla. Usa --template "...en.html"');
+    throw new Error('No se encontró EN previo para usar como plantilla. Usa --template "src/data/english/archivo.html"');
   }
 
   const esHtml = fs.readFileSync(esPath, 'utf8');

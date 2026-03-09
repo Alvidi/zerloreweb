@@ -621,7 +621,7 @@
             "nombre": "Rayo de Anulación",
             "ataques": "1D",
             "distancia": "18\"",
-            "impactos": "+4",
+            "impactos": "-",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
