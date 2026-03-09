@@ -596,13 +596,23 @@ function Generador() {
 
   const activeManualFilters = useMemo(() => {
     if (!availableUnitTypes.length) return new Set()
-    if (unitTypeFiltersManual.size) return unitTypeFiltersManual
+    if (unitTypeFiltersManual.size) {
+      const sanitized = new Set(
+        [...unitTypeFiltersManual].filter((type) => availableUnitTypes.includes(type)),
+      )
+      return sanitized.size ? sanitized : new Set(availableUnitTypes)
+    }
     return new Set(availableUnitTypes)
   }, [availableUnitTypes, unitTypeFiltersManual])
 
   const activeRandomFilters = useMemo(() => {
     if (!availableUnitTypesRandom.length) return new Set()
-    if (unitTypeFiltersRandom.size) return unitTypeFiltersRandom
+    if (unitTypeFiltersRandom.size) {
+      const sanitized = new Set(
+        [...unitTypeFiltersRandom].filter((type) => availableUnitTypesRandom.includes(type)),
+      )
+      return sanitized.size ? sanitized : new Set(availableUnitTypesRandom)
+    }
     return new Set(availableUnitTypesRandom)
   }, [availableUnitTypesRandom, unitTypeFiltersRandom])
 
