@@ -54,7 +54,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Pesada"
+              "Heavy"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -111,7 +111,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo"
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -124,7 +124,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -137,7 +137,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Élite)"
+              "Anti 5+ (Elite)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -189,7 +189,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Reinforced Porrón",
+            "nombre": "Reinforced Club",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -207,7 +207,7 @@
             "danio": "3",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Asaltante +1"
+              "Raider +1"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -240,7 +240,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo"
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -297,7 +297,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Pesada"
+              "Heavy"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -323,7 +323,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Critical Attack"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -356,8 +356,8 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Explosiva",
-              "Pesada"
+              "Explosive",
+              "Heavy"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -381,7 +381,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo"
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -394,9 +394,9 @@
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Disparo parabólico",
-              "Munición limitada (3)",
-              "Directo"
+              "Parabolic Shot",
+              "Limited Ammo (3)",
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -442,7 +442,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Disparo parabólico"
+              "Parabolic Shot"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -455,7 +455,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -501,7 +501,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión"
+              "Precision"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -514,7 +514,7 @@
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Pistolero"
+              "Gunslinger"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -529,7 +529,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Critical Attack"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -562,8 +562,8 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Pesada",
-              "Munición limitada (3)"
+              "Heavy",
+              "Limited Ammo (3)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -576,7 +576,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Precisión"
+              "Precision"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -589,7 +589,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 1

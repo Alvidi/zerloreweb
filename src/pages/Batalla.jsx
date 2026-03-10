@@ -86,7 +86,7 @@ const factionImages = {
   tecnocratas: new URL('../images/tecnocratas.svg', import.meta.url).href,
 }
 
-const makeHpKey = (side, unitId) => `${side}:${unitId || 'none'}`
+const makeHpKey = (side, factionId, unitId) => `${side}:${factionId || 'none'}:${unitId || 'none'}`
 const buildHpValues = (maxHp) => Array.from({ length: Math.max(0, maxHp) }, (_, index) => maxHp - index)
 const attackTypeOptions = ['ranged', 'melee', 'charge']
 const coverTypeOptions = ['none', 'partial', 'height']
@@ -128,7 +128,6 @@ const getConditionKeyForAbility = (ability) => {
   const normalized = normalizeText(ability)
   if (HEAVY_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'moved'
   if (QUICK_ATTACK_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'halfRange'
-  if (PARABOLIC_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'noLineOfSight'
   if (GUERRILLA_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'afterDash'
   return null
 }
@@ -475,15 +474,15 @@ function Batalla() {
     return { limited: true, max: maxAmmo, used, remaining, key }
   }
 
-  const leftHpKey = makeHpKey('L', leftUnit?.id)
-  const rightHpKey = makeHpKey('R', rightUnit?.id)
+  const leftHpKey = makeHpKey('L', leftFactionId, leftUnit?.id)
+  const rightHpKey = makeHpKey('R', rightFactionId, rightUnit?.id)
 
   const leftHp = hpMap[leftHpKey] ?? leftUnit?.hp ?? 0
   const rightHp = hpMap[rightHpKey] ?? rightUnit?.hp ?? 0
 
-  const setUnitHp = (side, unit, rawValue) => {
+  const setUnitHp = (side, factionId, unit, rawValue) => {
     if (!unit) return
-    const key = makeHpKey(side, unit.id)
+    const key = makeHpKey(side, factionId, unit.id)
     const next = clamp(toNumber(rawValue, unit.hp), 0, unit.hp)
     setHpMap((prev) => ({ ...prev, [key]: next }))
   }
@@ -654,12 +653,22 @@ function Batalla() {
     }
     const blockedTotal = (result.totals?.blockedHits || 0) + (result.totals?.blockedCrits || 0)
     const attackerSelfDamage = result.totals?.selfDamage || 0
-    const attackDice = (result.hitEntries || [])
-      .filter((entry) => Number.isFinite(entry.roll))
+    const attackCountDice = (result.attackCountRolls || [])
+      .flatMap((entry) => (entry.rolls || []).map((roll) => ({
+        value: `${roll}`,
+        outcome: 'hit',
+        tone: 'count',
+      })))
+    const attackDice = [
+      ...attackCountDice,
+      ...(result.hitEntries || [])
+      .filter((entry) => entry.source === 'base')
+      .filter((entry) => Number.isFinite(entry.initialRoll) || Number.isFinite(entry.roll))
       .map((entry) => ({
         value: `${Number.isFinite(entry.initialRoll) ? entry.initialRoll : entry.roll}`,
-        outcome: entry.displayOutcome || (entry.rerolled ? entry.initialOutcome : entry.outcome) || 'fail',
-      }))
+        outcome: entry.initialOutcome || entry.displayOutcome || entry.outcome || 'fail',
+      })),
+    ]
     const saveRolls = (result.saveRolls || []).filter((roll) => Number.isFinite(roll))
     const blockedFlags = new Array(saveRolls.length).fill(false)
     const sixIndices = []
@@ -743,12 +752,14 @@ function Batalla() {
         pushAbilityDetail(
           `Anti ${antiThreshold}+ convierte ${antiCritEntries.length} resultado${antiCritEntries.length > 1 ? 's' : ''} en crítico.`,
           `Anti ${antiThreshold}+ turns ${antiCritEntries.length} roll${antiCritEntries.length > 1 ? 's' : ''} into critical hits.`,
-          antiCritEntries.map((entry) => ({ value: entry.roll, outcome: entry.outcome })),
         )
       }
     }
 
-    const unstableRule = (result.rulesApplied || []).find((rule) => normalizeText(rule).startsWith('inestable'))
+    const unstableRule = (result.rulesApplied || []).find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('inestable') || normalized.startsWith('unstable')
+    })
     if (unstableRule) {
       const unstableRollMatch = unstableRule.match(/(\d+)/)
       const unstableRoll = unstableRollMatch ? Number.parseInt(unstableRollMatch[1], 10) : null
@@ -772,9 +783,19 @@ function Batalla() {
         'Direct turns attacks into automatic hits.',
       )
     }
+    const ignoresCoverRule = (result.rulesApplied || []).find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('ignora coberturas') || normalized.startsWith('ignore cover')
+    })
+    if (ignoresCoverRule && result.coverType === 'partial') {
+      pushAbilityDetail(
+        'Ignora coberturas anula la cobertura parcial del defensor.',
+        'Ignore Cover cancels the defender partial cover.',
+      )
+    }
     const appliedCoverRules = (result.rulesApplied || []).filter((rule) => normalizeText(rule).startsWith('cobertura'))
     const ignoresPartialCover = (result.rulesApplied || []).some((rule) =>
-      normalizeText(rule).startsWith('ignora coberturas'),
+      normalizeText(rule).startsWith('ignora coberturas') || normalizeText(rule).startsWith('ignore cover'),
     )
     const coverAffectsDefense = appliedCoverRules.length > 0 && !(ignoresPartialCover && result.coverType === 'partial')
     const attackerSummary = result.hasDirect
@@ -793,11 +814,6 @@ function Batalla() {
           ? 'cobertura de altura'
           : 'cobertura parcial'
       : ''
-    const abilityLine = appliedAbilityRules.length
-      ? lang === 'en'
-        ? `Applied abilities: ${appliedAbilityRules.join(', ')}.`
-        : `Habilidades aplicadas: ${appliedAbilityRules.join(', ')}.`
-      : ''
     const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
     const landedImpacts = Math.max(0, (result.totals?.hits || 0) + (result.totals?.crits || 0) - blockedTotal)
     const defenderTail = lang === 'en'
@@ -809,7 +825,7 @@ function Batalla() {
       title,
       subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
       attackerLine: attackerSummary,
-      abilityLine,
+      abilityLine: '',
       defenderLine: '',
       defenderLead,
       defenderSave: `${result.saveThreshold}+`,
@@ -895,6 +911,16 @@ function Batalla() {
 
     setHpMap((prev) => swapMapBySidePrefix(prev, 'L', 'R'))
     setAmmoMap((prev) => swapMapBySidePrefix(prev, 'left', 'right'))
+  }
+
+  const handleReset = () => {
+    if (isResolving) return
+    clearTimers()
+    resolveRunRef.current += 1
+    setIsResolving(false)
+    setLogEntries([])
+    setHpMap({})
+    setAmmoMap({})
   }
 
   const handleResolve = () => {
@@ -1283,7 +1309,7 @@ function Batalla() {
                     <select
                       className="duel-hp-select"
                       value={leftHp}
-                      onChange={(event) => setUnitHp('L', leftUnit, event.target.value)}
+                      onChange={(event) => setUnitHp('L', leftFactionId, leftUnit, event.target.value)}
                     >
                       {leftHp <= 0 && <option value={0}>KO</option>}
                       {buildHpValues(leftUnit.hp).map((value) => (
@@ -1486,7 +1512,7 @@ function Batalla() {
                     <select
                       className="duel-hp-select"
                       value={rightHp}
-                      onChange={(event) => setUnitHp('R', rightUnit, event.target.value)}
+                      onChange={(event) => setUnitHp('R', rightFactionId, rightUnit, event.target.value)}
                     >
                       {rightHp <= 0 && <option value={0}>KO</option>}
                       {buildHpValues(rightUnit.hp).map((value) => (
@@ -1612,6 +1638,14 @@ function Batalla() {
         >
           {tx.flip}
         </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={handleReset}
+          disabled={isResolving}
+        >
+          {tx.reset}
+        </button>
       </div>
 
       <article className="duel-log reveal">
@@ -1642,6 +1676,8 @@ function Batalla() {
                         className={`duel-die ${
                           die.tone === 'charge'
                             ? 'duel-die-charge'
+                            : die.tone === 'count'
+                              ? 'duel-die-tag'
                             : die.outcome === 'fail'
                               ? 'duel-die-fail-gray'
                               : die.outcome === 'crit'

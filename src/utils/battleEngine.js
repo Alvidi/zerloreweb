@@ -295,7 +295,7 @@ export function resolveAttack({
   }
 
   if (mode === 'ranged' && !hasLineOfSight && hasParabolic) {
-    rulesApplied.push('Disparo parabólico (ignora línea de visión)')
+    rulesApplied.push('Disparo parabólico')
   }
 
   if (coverType === 'total' && mode === 'ranged') {
@@ -321,10 +321,17 @@ export function resolveAttack({
   let hitThreshold = baseHitThreshold + toInt(conditions.hitModifier, 0)
   let baseAttackDiceCount = baseAttackRoll.total
   let bonusAttackDice = 0
+  const attackCountRolls = []
   let saveThreshold = parseThreshold(defender.save, 4) + toInt(conditions.saveModifier, 0)
   let bonusSaveDice = 0
 
   if (baseAttackRoll.rolls.length) {
+    attackCountRolls.push({
+      source: 'base',
+      label: attackExpr.label,
+      rolls: [...baseAttackRoll.rolls],
+      total: baseAttackDiceCount,
+    })
     rulesApplied.push(`Ataques variables (${attackExpr.label}: ${baseAttackRoll.rolls.join('+')} = ${baseAttackDiceCount})`)
   }
   if (hitThresholdRoll.rolls.length) {
@@ -386,6 +393,12 @@ export function resolveAttack({
     const guerrillaRoll = rollAttackDiceCount(attackExpr)
     bonusAttackDice += guerrillaRoll.total
     if (guerrillaRoll.rolls.length) {
+      attackCountRolls.push({
+        source: 'guerrilla',
+        label: attackExpr.label,
+        rolls: [...guerrillaRoll.rolls],
+        total: guerrillaRoll.total,
+      })
       rulesApplied.push(
         `Guerrilla (tras carrera: ${attackExpr.label} ${guerrillaRoll.rolls.join('+')} = +${guerrillaRoll.total} dados)`,
       )
@@ -468,7 +481,7 @@ export function resolveAttack({
   const totalDamage = unblockedHits * normalDamage + unblockedCrits * critDamage
 
   let selfDamage = 0
-  if (mode === 'ranged' && hasAbility(weapon, 'unstable') && totalDamage > 0) {
+  if (mode === 'ranged' && hasAbility(weapon, 'unstable')) {
     const unstableRoll = rollDie(6)
     rulesApplied.push(`Inestable (tirada ${unstableRoll})`)
     if (unstableRoll <= 2) {
@@ -510,6 +523,7 @@ export function resolveAttack({
     saveDiceCount,
     saveRolls,
     hitEntries,
+    attackCountRolls,
     rulesApplied,
     hasDirect,
     canCounter,

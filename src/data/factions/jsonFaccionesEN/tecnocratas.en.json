@@ -65,7 +65,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión"
+              "Precision"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -78,7 +78,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Asaltante +1"
+              "Raider +1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -124,7 +124,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Precisión"
+              "Precision"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -139,7 +139,7 @@
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Asaltante +1"
+              "Raider +1"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -152,7 +152,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Critical Attack"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -196,7 +196,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehículo)"
+              "Anti 5+ (Vehicle)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -209,7 +209,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Directo"
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -298,7 +298,7 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo"
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -311,7 +311,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -324,7 +324,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Inestable"
+              "Unstable"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -370,7 +370,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Inestable"
+              "Unstable"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -383,7 +383,7 @@
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Anti 4+ (Vehículo)"
+              "Anti 4+ (Vehicle)"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -398,7 +398,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Critical Attack"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -442,7 +442,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Pesada"
+              "Heavy"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -455,7 +455,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -468,7 +468,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Inestable"
+              "Unstable"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -513,7 +513,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -570,7 +570,7 @@
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Pistolero"
+              "Gunslinger"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -583,7 +583,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Inestable"
+              "Unstable"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -596,7 +596,7 @@
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Impactos encadenados"
+              "Chained Impacts"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -609,7 +609,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Directo"
+              "Direct"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -624,7 +624,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Critical Attack"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -657,7 +657,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Pesada"
+              "Heavy"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -670,7 +670,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Impactos encadenados"
+              "Chained Impacts"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -683,7 +683,7 @@
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 2
