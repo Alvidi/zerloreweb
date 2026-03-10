@@ -2960,7 +2960,7 @@ mark {
 
 .duel-unit-divider {
   border-top: 1px solid var(--line);
-  margin-top: 2px;
+  margin: 2px -18px 6px;
 }
 
 .duel-weapon-entry-title {
@@ -3087,6 +3087,10 @@ mark {
 
 .duel-log-line-label-defender {
   color: rgba(90, 156, 255, 0.9);
+}
+
+.duel-log-line-label-ability {
+  color: rgba(113, 238, 212, 0.9);
 }
 
 .duel-dice {

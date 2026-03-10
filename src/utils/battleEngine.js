@@ -404,6 +404,7 @@ export function resolveAttack({
     const initialRoll = rollDie(6)
     let roll = initialRoll
     let outcome = classifyRoll(roll, hitThreshold, antiData || { threshold: 99, groups: [] }, defender.type)
+    const initialOutcome = outcome
     let rerolled = false
 
     if (hasPrecision && outcome === 'fail') {
@@ -412,7 +413,16 @@ export function resolveAttack({
       rerolled = true
     }
 
-    hitEntries.push({ source, initialRoll, roll, outcome, rerolled })
+    hitEntries.push({
+      source,
+      initialRoll,
+      initialOutcome,
+      // Visual outcome for the original die shown in the attacker line.
+      displayOutcome: initialOutcome,
+      roll,
+      outcome,
+      rerolled,
+    })
 
     if (hasChains && outcome === 'crit') {
       resolveOneHitDie('chain')
