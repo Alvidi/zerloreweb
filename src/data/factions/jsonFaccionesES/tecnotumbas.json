@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Protocolo de Aniquilación",
-        "descripcion": "Si una unidad/escuadra elimina o daña, esta gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción"
+        "descripcion": "Una vez por turno, cuando una unidad/escuadra elimina una unidad enemiga, gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción."
       }
     ]
   },
@@ -279,7 +279,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad es destruida, vuelve a aparecer en la zona de despliegue",
+        "especialidad": "Una vez por partida, cuando esta unidad es destruida, vuelve a aparecer en la zona de despliegue con la mitad de sus Vidas máximas.",
         "valor": 14
       },
       "armas": {
@@ -384,7 +384,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades en escuadra o a 3\" en modo escaramuza, de esta unidad, reviven inmediatamente con la mitad de la vida",
+        "especialidad": "Las unidades a 3\" de esta unidad que sean eliminadas no realizan la tirada de Reanimación Mekánika - reviven automáticamente al inicio de la siguiente Fase de Iniciativa con la mitad de sus Vidas máximas.",
         "valor": 15
       },
       "armas": {
@@ -445,7 +445,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Gastando 2 de acción puede teletransportarse a 20\" de su posición.",
+        "especialidad": "Gastando 2 acciones puede teletransportarse hasta 20\" de su posición. No puede aparecer a menos de 1\" de una unidad enemiga ni dentro de la zona de despliegue rival. Si aparece a menos de 3\" de una unidad enemiga, esa unidad puede realizar inmediatamente un disparo de respuesta gratuito contra el Obelisco.\"",
         "valor": 40
       },
       "armas": {

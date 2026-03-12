@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom'
 
 const BOOKS = [
   {
-    source: 'src/data/spanish/ZEROLORE - REGLAMENTO juego rapido 313087d94b3380dc9c0ffd50e9ba8d50.html',
+    source: 'src/data/spanish/ZEROLORE - REGLAMENTO juego rápido 313087d94b3380dc9c0ffd50e9ba8d50.html',
     target: 'src/data/english/ZEROLORE_QUICK_PLAY_RULEBOOK_EN.html',
   },
   {

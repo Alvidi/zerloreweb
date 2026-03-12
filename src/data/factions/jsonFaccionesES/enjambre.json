@@ -5,11 +5,11 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "El enjambre eterno",
-        "descripcion": "Todas la unidades/escuadras de línea eliminadas, vuelven a la partida desde la zona de despliegue."
+        "descripcion": "Todas las unidades de línea eliminadas vuelven a la partida al inicio de la siguiente Fase de Iniciativa, desde la zona de despliegue con todas sus Vidas."
       },
       {
         "habilidades_faccion2": "Synapsis mental",
-        "descripcion": "Al inicio de cada Fase de Iniciativa, cualquier unidad/escuadra del Enjambre que no esté a 6\" o menos de al menos otra unidad aliada debe tirar 1D6: con resultado 1-2 entra en retirada siguiendo las reglas normales de retirada."
+        "descripcion": "Al inicio de cada Fase de Iniciativa, cualquier unidad o escuadra del Enjambre que no esté a 6\" o menos de al menos otra unidad aliada debe tirar 1D6: con resultado 1-2 entra en retirada siguiendo las reglas normales de retirada. Esta regla afecta a todas las unidades excepto Héroes y Monstruos."
       },
       {
         "habilidades_faccion3": "Voracidad",
@@ -260,7 +260,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Si mata una unidad cuerpo a cuerpo, puede devorarla y ganar +1 de vida",
+        "especialidad": "Si mata una unidad en CaC, puede devorarla y ganar +1 de vida, sin superar su máximo de Vidas",
         "valor": 14
       },
       "armas": {

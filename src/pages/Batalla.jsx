@@ -20,6 +20,10 @@ const toNumber = (value, fallback = 0) => {
 }
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+const sanitizeUnitHp = (rawHp, unit) => {
+  const maxHp = Math.max(0, toNumber(unit?.hp, 0))
+  return clamp(toNumber(rawHp, maxHp), 0, maxHp)
+}
 
 const isFactionData = (data) => data && data.faccion && Array.isArray(data.unidades)
 
@@ -477,8 +481,8 @@ function Batalla() {
   const leftHpKey = makeHpKey('L', leftFactionId, leftUnit?.id)
   const rightHpKey = makeHpKey('R', rightFactionId, rightUnit?.id)
 
-  const leftHp = hpMap[leftHpKey] ?? leftUnit?.hp ?? 0
-  const rightHp = hpMap[rightHpKey] ?? rightUnit?.hp ?? 0
+  const leftHp = sanitizeUnitHp(hpMap[leftHpKey], leftUnit)
+  const rightHp = sanitizeUnitHp(hpMap[rightHpKey], rightUnit)
 
   const setUnitHp = (side, factionId, unit, rawValue) => {
     if (!unit) return
@@ -617,13 +621,13 @@ function Batalla() {
     attackerName,
     defenderName,
     weapon,
-    attackerHp,
-    defenderHp,
+    attackerHpBefore,
+    defenderHpBefore,
     result,
   }) => {
     const weaponName = weapon?.name || ''
-    const attackerFinalHp = result.attackerAfter?.hp ?? attackerHp ?? 0
-    const defenderFinalHp = result.defenderAfter?.hp ?? defenderHp ?? 0
+    const attackerFinalHp = result.attackerAfter?.hp ?? attackerHpBefore ?? 0
+    const defenderFinalHp = result.defenderAfter?.hp ?? defenderHpBefore ?? 0
 
     if (result.blocked) {
       return {
@@ -817,8 +821,8 @@ function Batalla() {
     const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
     const landedImpacts = Math.max(0, (result.totals?.hits || 0) + (result.totals?.crits || 0) - blockedTotal)
     const defenderTail = lang === 'en'
-      ? `): ${landedImpacts} land and ${blockedTotal} are blocked; takes ${result.totals.damage} damage.`
-      : `): impactan ${landedImpacts} y bloquea ${blockedTotal}; recibe ${result.totals.damage} de daño.`
+      ? `): ${landedImpacts} land and ${blockedTotal} are blocked; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
+      : `): impactan ${landedImpacts} y bloquea ${blockedTotal}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
 
     return {
       key,
@@ -1049,8 +1053,8 @@ function Batalla() {
           attackerName: attackerUnit.name,
           defenderName: defenderUnit.name,
           weapon,
-          attackerHp: attackerSide === 'left' ? nextLeftHp : nextRightHp,
-          defenderHp: defenderSide === 'left' ? nextLeftHp : nextRightHp,
+          attackerHpBefore,
+          defenderHpBefore,
           result: attackResult,
         }),
       )
@@ -1135,8 +1139,8 @@ function Batalla() {
 
     setHpMap((prev) => ({
       ...prev,
-      [leftHpKey]: nextLeftHp,
-      [rightHpKey]: nextRightHp,
+      [leftHpKey]: sanitizeUnitHp(nextLeftHp, leftUnit),
+      [rightHpKey]: sanitizeUnitHp(nextRightHp, rightUnit),
     }))
 
     if (Object.keys(pendingAmmoSpend).length > 0) {

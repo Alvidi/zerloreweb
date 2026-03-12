@@ -24,6 +24,9 @@ export const translations = {
       modeLabel: 'Modo de reglamento',
       modeQuick: 'Reglamento rápido',
       modeAdvanced: 'Reglamento avanzado',
+      modeSiege: 'Modo Asedio',
+      modeElimination: 'Modo Eliminación',
+      modeConquest: 'Modo Conquista',
     },
     generator: {
       eyebrow: 'Generador de ejércitos',
@@ -183,6 +186,9 @@ export const translations = {
       modeLabel: 'Rules mode',
       modeQuick: 'Quick Rules',
       modeAdvanced: 'Advanced Rules',
+      modeSiege: 'Siege Mode',
+      modeElimination: 'Elimination Mode',
+      modeConquest: 'Conquest Mode',
     },
     generator: {
       eyebrow: 'Army generator',

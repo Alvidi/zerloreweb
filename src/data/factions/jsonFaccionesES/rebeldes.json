@@ -5,11 +5,11 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Guerrilla en las sombras",
-        "descripcion": "Esta facción puede desplegar sus unidades/escuadras de línea y Vehículos fuera de la zona de despliegue, a 9\" del enemigo y de puestos de mando."
+        "descripcion": "Esta facción puede desplegar sus unidades/escuadras de línea y Vehículos fuera de la zona de despliegue, a 9\" del enemigo y de puestos de mando u objetivos."
       },
       {
         "habilidades_faccion2": "Finta",
-        "descripcion": "Las unidades/escuadras, cuando usan la acción prepararse en vez de contraatacar, al recibir un ataque a distancia, el atacante sufre +1 al valor de Impactos necesario. Este efecto no se acumula con coberturas."
+        "descripcion": "Esta facción no puede usar la acción Preparado. Cuando una unidad Rebelde recibe un ataque a distancia, puede realizar inmediatamente un disparo de respuesta gratuito. Si esa misma unidad recibe otro ataque a distancia durante el mismo turno, no puede volver a responder."
       },
       {
         "habilidades_faccion3": "Nadie se para",

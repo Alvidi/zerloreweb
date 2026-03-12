@@ -101,7 +101,7 @@ export const getAbilityDescription = (ability, lang = 'es') => {
       ? 'After attacking, roll 1D6: on 1-2, this unit suffers the same damage dealt to the target. If the target received no hits, this unit also suffers nothing.'
       : 'Tras atacar, tira 1D6: con 1-2, la unidad recibe los mismos puntos de daño que recibió el objetivo. Si el objetivo no recibió ningún impacto, esta tampoco recibe nada.'
   }
-  if (key.startsWith('directo') || key.startsWith('straight')) {
+  if (key.startsWith('directo') || key.startsWith('straight') || key.startsWith('direct')) {
     return lang === 'en'
       ? 'Hits automatically, no Hit roll required.'
       : 'Impacta automáticamente, sin tirada de Impactos.'

@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Gloria del Crisol",
-        "descripcion": "Una vez por turno, una unidad/escuadra del Crisol puede ignorar el primer punto de daño recibido por un ataque a distancia."
+        "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad ignora el primer punto de daño recibido por un ataque a distancia durante ese turno."
       },
       {
         "habilidades_faccion2": "Caída heroica",
@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Voto sagrado",
-        "descripcion": "Una unidad/escuadra puede repetir un dado cuerpo a cuerpo fallido por turno."
+        "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno.."
       }
     ]
   },

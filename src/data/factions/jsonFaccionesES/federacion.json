@@ -488,7 +488,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades de la Federación en escuadra o a 6\" en escaramuza: pueden repetir un dado de Impactos fallido en disparo durante su activación. Esta unidad puede ir dentro de un vehículo",
+        "especialidad": "Las unidades de La Federación en escuadra o a 6\" en escaramuza pueden repetir un dado de Impactos fallido en disparo durante su activación. Además, este héroe puede asignarse a un vehículo aliado - colócalo en contacto con él. Mientras esté asignado, el vehículo puede repetir un dado de Impactos fallido en disparo. Si el vehículo es destruido, el General sufre 1D6 de daño que no puede ser salvado.",
         "valor": 14
       },
       "armas": {

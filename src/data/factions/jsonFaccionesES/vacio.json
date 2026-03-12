@@ -436,7 +436,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad no puede beneficiarse de la habilidad Portales del Vacío.Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
+        "especialidad": "Esta unidad no puede participar en intercambios de Portales del Vacío, ni como origen ni como destino.Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
         "valor": 42
       },
       "armas": {

@@ -2,9 +2,17 @@ import { useMemo, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import reglamentoHtml from '../data/spanish/ZEROLORE - REGLAMENTO avanzado 2eb087d94b33800ea112ed9327b7e9c8.html?raw'
 import reglamentoEnHtml from '../data/english/ZEROLORE_ADVANCED_RULEBOOK_EN.html?raw'
-import reglamentoRapidoHtml from '../data/spanish/ZEROLORE - REGLAMENTO juego rapido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw'
+import reglamentoRapidoHtml from '../data/spanish/ZEROLORE - REGLAMENTO juego rápido 313087d94b3380dc9c0ffd50e9ba8d50.html?raw'
 import reglamentoRapidoEnHtml from '../data/english/ZEROLORE_QUICK_PLAY_RULEBOOK_EN.html?raw'
+import asedioHtml from '../data/spanish/Asedio 320087d94b33802b9914e615a0ad68e0.html?raw'
+import asedioEnHtml from '../data/english/ZEROLORE_SIEGE_MODE_EN.html?raw'
+import eliminacionHtml from '../data/spanish/Eliminación 320087d94b338070ba22cc624381d70e.html?raw'
+import eliminacionEnHtml from '../data/english/ZEROLORE_ELIMINATION_MODE_EN.html?raw'
+import conquistaHtml from '../data/spanish/Conquista 320087d94b338056b052fa01c020e33d.html?raw'
+import conquistaEnHtml from '../data/english/ZEROLORE_CONQUEST_MODE_EN.html?raw'
 import { useI18n } from '../i18n/I18nContext.jsx'
+
+const RULES_MODES = ['quick', 'advanced', 'conquest', 'siege', 'elimination']
 
 function Reglamento() {
   const { t, lang } = useI18n()
@@ -14,8 +22,27 @@ function Reglamento() {
   const [activeSection, setActiveSection] = useState('')
   const [showBackToTop, setShowBackToTop] = useState(false)
   const modeParam = searchParams.get('mode')
-  const rulesMode = modeParam === 'advanced' ? 'advanced' : 'quick'
+  const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'quick'
+  const modeOptions = useMemo(
+    () => [
+      { id: 'quick', label: t('rules.modeQuick') },
+      { id: 'advanced', label: t('rules.modeAdvanced') },
+      { id: 'conquest', label: t('rules.modeConquest') },
+      { id: 'siege', label: t('rules.modeSiege') },
+      { id: 'elimination', label: t('rules.modeElimination') },
+    ],
+    [t],
+  )
   const rulesHtml = useMemo(() => {
+    if (rulesMode === 'siege') {
+      return lang === 'en' ? asedioEnHtml : asedioHtml
+    }
+    if (rulesMode === 'elimination') {
+      return lang === 'en' ? eliminacionEnHtml : eliminacionHtml
+    }
+    if (rulesMode === 'conquest') {
+      return lang === 'en' ? conquistaEnHtml : conquistaHtml
+    }
     if (rulesMode === 'quick') {
       return lang === 'en' ? reglamentoRapidoEnHtml : reglamentoRapidoHtml
     }
@@ -28,6 +55,14 @@ function Reglamento() {
     }
     const parser = new DOMParser()
     const doc = parser.parseFromString(rulesHtml, 'text/html')
+    // Wrap imported tables so wide rulebook tables never break the layout.
+    Array.from(doc.querySelectorAll('table')).forEach((table) => {
+      if (table.parentElement?.classList.contains('rules-table-scroll')) return
+      const wrapper = doc.createElement('div')
+      wrapper.className = 'rules-table-scroll'
+      table.parentNode?.insertBefore(wrapper, table)
+      wrapper.appendChild(table)
+    })
     const headings = Array.from(doc.querySelectorAll('h1, h2, h3'))
     const toc = headings
       .map((heading, index) => {
@@ -102,20 +137,16 @@ function Reglamento() {
           {t('rules.intro')}
         </p>
         <div className="rules-mode-switch" role="tablist" aria-label={t('rules.modeLabel')}>
-          <button
-            type="button"
-            className={`ghost ${rulesMode === 'quick' ? 'active' : ''}`}
-            onClick={() => setMode('quick')}
-          >
-            {t('rules.modeQuick')}
-          </button>
-          <button
-            type="button"
-            className={`ghost ${rulesMode === 'advanced' ? 'active' : ''}`}
-            onClick={() => setMode('advanced')}
-          >
-            {t('rules.modeAdvanced')}
-          </button>
+          {modeOptions.map((mode) => (
+            <button
+              key={mode.id}
+              type="button"
+              className={`ghost ${rulesMode === mode.id ? 'active' : ''}`}
+              onClick={() => setMode(mode.id)}
+            >
+              {mode.label}
+            </button>
+          ))}
         </div>
       </div>
       <div className="rules-layout">

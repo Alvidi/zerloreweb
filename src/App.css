@@ -2185,14 +2185,26 @@ mark {
 }
 
 .rules-mode-switch {
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 14px;
 }
 
 .rules-mode-switch .ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: max-content;
   padding: 8px 14px;
   border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 .rules-mode-switch .ghost.active {
@@ -2426,6 +2438,40 @@ mark {
 .rules-html em {
   color: var(--metal);
   font-style: italic;
+}
+
+.rules-html .rules-table-scroll {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow-x: auto;
+}
+
+.rules-html .rules-table-scroll table,
+.rules-html table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.rules-html th,
+.rules-html td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  color: var(--text-muted);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.rules-html th,
+.rules-html .simple-table-header-color {
+  background: rgba(255, 143, 69, 0.12);
+  color: var(--text-main);
+  font-weight: 600;
 }
 
 @media (max-width: 700px) {
