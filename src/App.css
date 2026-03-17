@@ -201,9 +201,6 @@
   padding: 0;
   line-height: 1;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.38);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .nav-mobile-toggle-icon {
