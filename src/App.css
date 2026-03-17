@@ -117,7 +117,7 @@
   transform: scaleX(1);
 }
 
-.nav-whatsapp-link {
+.nav-discord-link {
   width: 20px;
   height: 20px;
   display: inline-flex;
@@ -128,16 +128,16 @@
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.nav-whatsapp-link::after {
+.nav-discord-link::after {
   display: none;
 }
 
-.nav-whatsapp-link svg {
+.nav-discord-link svg {
   width: 100%;
   height: 100%;
 }
 
-.nav-whatsapp-link:hover {
+.nav-discord-link:hover {
   color: var(--accent);
   transform: translateY(-1px);
 }
@@ -271,14 +271,14 @@
   color: var(--accent);
 }
 
-.nav-mobile-whatsapp {
+.nav-mobile-discord {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.nav-mobile-whatsapp svg {
+.nav-mobile-discord svg {
   width: 16px;
   height: 16px;
 }
@@ -430,7 +430,7 @@
   margin-bottom: 0;
 }
 
-.whatsapp-button {
+.discord-button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -622,7 +622,7 @@ button {
 
 .cta-grid {
   display: grid;
-  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr);
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
@@ -630,55 +630,7 @@ button {
 .cta-side {
   display: grid;
   gap: 12px;
-}
-
-.cta-form {
-  display: grid;
-  gap: 12px;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: rgba(12, 12, 18, 0.7);
-}
-
-.cta-form-field {
-  display: grid;
-  gap: 6px;
-}
-
-.cta-form-field span {
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.cta-form-field input,
-.cta-form-field textarea {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: var(--bg-1);
-  color: var(--text-main);
-  padding: 10px 12px;
-  font: inherit;
-}
-
-.cta-form-field textarea {
-  resize: vertical;
-  min-height: 88px;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  max-width: 420px;
 }
 
 .section.manifesto {

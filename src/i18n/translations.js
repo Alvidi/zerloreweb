@@ -4,7 +4,7 @@ export const translations = {
       home: 'Home',
       rules: 'Reglamento',
       generator: 'Generador',
-      whatsapp: 'WhatsApp',
+      discord: 'Discord',
     },
     footer: {
       tagline: 'Un universo en construcción.',
@@ -159,8 +159,8 @@ export const translations = {
       join: {
         eyebrow: 'Comunidad',
         title: 'Únete a nuestro grupo',
-        subtitle: 'Entra al WhatsApp de ZeroLore y juega, comparte listas y recibe novedades.',
-        button: 'Únete por WhatsApp',
+        subtitle: 'Entra al Discord de ZeroLore y juega, comparte listas y recibe novedades.',
+        button: 'Únete por Discord',
       },
       contact: {
         name: 'Nombre',
@@ -191,7 +191,7 @@ export const translations = {
       home: 'Home',
       rules: 'Rules',
       generator: 'Generator',
-      whatsapp: 'WhatsApp',
+      discord: 'Discord',
     },
     footer: {
       tagline: 'A universe under construction.',
@@ -346,8 +346,8 @@ export const translations = {
       join: {
         eyebrow: 'Community',
         title: 'Join our group',
-        subtitle: 'Join the ZeroLore WhatsApp group to play, share lists, and get updates.',
-        button: 'Join via WhatsApp',
+        subtitle: 'Join the ZeroLore Discord server to play, share lists, and get updates.',
+        button: 'Join via Discord',
       },
       contact: {
         name: 'Name',
