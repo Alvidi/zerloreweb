@@ -3734,6 +3734,22 @@ mark {
   color: rgba(230, 236, 244, 0.9);
 }
 
+.duel-die-scatter {
+  min-width: 34px;
+  padding: 0 4px;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1;
+  border-color: rgba(113, 238, 212, 0.7);
+  background: rgba(113, 238, 212, 0.14);
+  color: rgba(211, 255, 246, 0.96);
+}
+
+.duel-die-scatter-symbol {
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .duel-log-outcome {
   margin: 0;
   color: var(--accent);

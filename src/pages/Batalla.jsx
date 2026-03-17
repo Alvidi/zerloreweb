@@ -187,10 +187,6 @@ const swapMapBySidePrefix = (map, leftPrefix, rightPrefix) =>
   Object.fromEntries(
     Object.entries(map || {}).map(([key, value]) => [swapSidePrefixInKey(key, leftPrefix, rightPrefix), value]),
   )
-const parseSpeedValue = (unit) => {
-  const match = String(unit?.speed ?? '').match(/\d+/)
-  return match ? Number.parseInt(match[0], 10) : 0
-}
 const rollChargeDice = () => {
   const first = Math.floor(Math.random() * 6) + 1
   const second = Math.floor(Math.random() * 6) + 1
@@ -656,10 +652,22 @@ function Batalla() {
     if (lang === 'en') return direction
     return direction
   }
+  const getScatterDirectionIcon = (direction) => {
+    const icons = {
+      N: '↑',
+      NE: '↗',
+      SE: '↘',
+      S: '↓',
+      SW: '↙',
+      NW: '↖',
+    }
+    return icons[String(direction || '').toUpperCase()] || '↑'
+  }
 
   const buildCombatEntry = ({
     key,
     title,
+    attackerSide,
     attackerName,
     defenderName,
     weapon,
@@ -675,6 +683,7 @@ function Batalla() {
       return {
         key,
         title,
+        attackerSide,
         subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
         attackerLine: lang === 'en'
           ? `${attackerName} attacks with ${weaponName}.`
@@ -692,7 +701,12 @@ function Batalla() {
         attackDice: [],
         defenseDice: [],
         resultState: {
-          attacker: { name: attackerName, hp: attackerFinalHp, defeated: attackerFinalHp <= 0 },
+          attacker: {
+            name: attackerName,
+            hp: attackerFinalHp,
+            defeated: attackerFinalHp <= 0,
+            hpBefore: attackerHpBefore,
+          },
           defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
           selfDamage: 0,
         },
@@ -801,6 +815,20 @@ function Batalla() {
       }
     }
 
+    const assaulterRule = appliedAbilityRules.find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('asaltante') || normalized.startsWith('raider')
+    })
+    if (assaulterRule) {
+      const savePenaltyMatch = assaulterRule.match(/([+-]?\d+)/)
+      const savePenalty = savePenaltyMatch ? Number.parseInt(savePenaltyMatch[1], 10) : 1
+      const bonusText = Number.isFinite(savePenalty) && savePenalty >= 0 ? `+${savePenalty}` : `${savePenalty || 1}`
+      pushAbilityDetail(
+        `Asaltante aplica ${bonusText} a la salvación enemiga (salva con ${result.saveThreshold}+).`,
+        `Raider applies ${bonusText} to enemy Save (saves on ${result.saveThreshold}+).`,
+      )
+    }
+
     const unstableRule = (result.rulesApplied || []).find((rule) => {
       const normalized = normalizeText(rule)
       return normalized.startsWith('inestable') || normalized.startsWith('unstable')
@@ -834,8 +862,13 @@ function Batalla() {
         scatterTextEs,
         scatterTextEn,
         [{
-          value: scatter.bullseye ? 'DIANA' : `FLECHA ${scatterDirection}`,
+          value: scatter.bullseye
+            ? (lang === 'en' ? 'BULLSEYE' : 'DIANA')
+            : (lang === 'en' ? 'ARROW' : 'FLECHA'),
           outcome: scatter.bullseye ? 'crit' : 'fail',
+          kind: 'scatter',
+          scatterDirection,
+          scatterBullseye: scatter.bullseye,
         }],
       )
     }
@@ -887,6 +920,7 @@ function Batalla() {
     return {
       key,
       title,
+      attackerSide,
       subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
       attackerLine: attackerSummary,
       abilityLine: '',
@@ -900,7 +934,12 @@ function Batalla() {
       defenseDice,
       abilityDetails,
       resultState: {
-        attacker: { name: attackerName, hp: attackerFinalHp, defeated: attackerFinalHp <= 0 },
+        attacker: {
+          name: attackerName,
+          hp: attackerFinalHp,
+          defeated: attackerFinalHp <= 0,
+          hpBefore: attackerHpBefore,
+        },
         defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
         selfDamage: attackerSelfDamage,
       },
@@ -909,6 +948,7 @@ function Batalla() {
 
   const buildStatusEntry = ({
     key,
+    attackerSide = 'left',
     attackerName,
     defenderName,
     attackerHp,
@@ -920,6 +960,7 @@ function Batalla() {
     hideResult = false,
   }) => ({
     key,
+    attackerSide,
     title: '',
     subtitle: '',
     attackerLine,
@@ -935,7 +976,12 @@ function Batalla() {
     defenseDice: [],
     hideResult,
     resultState: {
-      attacker: { name: attackerName, hp: attackerHp, defeated: attackerHp <= 0 },
+      attacker: {
+        name: attackerName,
+        hp: attackerHp,
+        defeated: attackerHp <= 0,
+        hpBefore: attackerHp,
+      },
       defender: { name: defenderName, hp: defenderHp, defeated: defenderHp <= 0 },
       selfDamage,
     },
@@ -992,8 +1038,7 @@ function Batalla() {
   const handleResolve = () => {
     if (isResolving) return
     if (!leftUnit || !rightUnit || !leftSelectedWeapons.length) return
-    const rightStartsMelee = attackType === 'melee' && parseSpeedValue(rightUnit) > parseSpeedValue(leftUnit)
-    const needsRightWeapons = rightStartsMelee || isCounterattackEnabled
+    const needsRightWeapons = isCounterattackEnabled
     if (needsRightWeapons && !rightSelectedWeapons.length) return
 
     // Every resolve starts a fresh simulation and replaces prior results.
@@ -1025,6 +1070,7 @@ function Batalla() {
         entries.push(
           buildStatusEntry({
             key: `${stepLabel}-${weapon.id}-${index}-no-ammo`,
+            attackerSide,
             attackerName: attackerUnit.name,
             defenderName: defenderUnit.name,
             attackerHp: attackerHpBefore,
@@ -1112,6 +1158,7 @@ function Batalla() {
         buildCombatEntry({
           key: `${stepLabel}-${weapon.id}-${index}`,
           title: '',
+          attackerSide,
           attackerName: attackerUnit.name,
           defenderName: defenderUnit.name,
           weapon,
@@ -1137,6 +1184,7 @@ function Batalla() {
       entries.push(
         buildStatusEntry({
           key: `charge-roll-${chargeRoll.first}-${chargeRoll.second}`,
+          attackerSide: 'left',
           attackerName: leftUnit.name,
           defenderName: rightUnit.name,
           attackerHp: nextLeftHp,
@@ -1165,32 +1213,9 @@ function Batalla() {
         }
       }
     } else if (attackType === 'melee') {
-      const leftSpeed = parseSpeedValue(leftUnit)
-      const rightSpeed = parseSpeedValue(rightUnit)
-      const firstSide = rightSpeed > leftSpeed ? 'right' : 'left'
-      const secondSide = firstSide === 'left' ? 'right' : 'left'
-
-      if (firstSide === 'right') {
-        entries.push(
-          buildStatusEntry({
-            key: 'melee-speed-priority',
-            attackerName: rightUnit.name,
-            defenderName: leftUnit.name,
-            attackerHp: nextRightHp,
-            defenderHp: nextLeftHp,
-            attackerLine: lang === 'en'
-              ? `${rightUnit.name} ${tx.firstBySpeed.toLowerCase()}.`
-              : `${rightUnit.name} ${tx.firstBySpeed.toLowerCase()}.`,
-            defenderLine: lang === 'en'
-              ? `${leftUnit.name} receives the first melee sequence.`
-              : `${leftUnit.name} recibe la primera secuencia de cuerpo a cuerpo.`,
-          }),
-        )
-      }
-
-      runWeaponsForSide(firstSide, 'melee-attack')
+      runWeaponsForSide('left', 'melee-attack')
       if (isCounterattackEnabled && nextLeftHp > 0 && nextRightHp > 0) {
-        runWeaponsForSide(secondSide, 'melee-counter')
+        runWeaponsForSide('right', 'melee-counter')
       }
     } else {
       runWeaponsForSide('left', 'attack')
@@ -1730,8 +1755,7 @@ function Batalla() {
             !leftUnit ||
             !rightUnit ||
             !leftSelectedWeapons.length ||
-            ((attackType === 'melee' && parseSpeedValue(rightUnit) > parseSpeedValue(leftUnit) || isCounterattackEnabled) &&
-              !rightSelectedWeapons.length) ||
+            (isCounterattackEnabled && !rightSelectedWeapons.length) ||
             isResolving
           }
         >
@@ -1764,20 +1788,27 @@ function Batalla() {
           <div className="duel-log-list">
             {logEntries.map((entry) => {
               const isCounterattackEntry = entry.key.includes('counter')
+              const attackerSide = entry.attackerSide === 'right' ? 'right' : 'left'
+              const attackerIsLeft = attackerSide === 'left'
+              const attackerHpBefore = Number(entry.resultState?.attacker?.hpBefore)
+              const attackerHpAfter = Number(entry.resultState?.attacker?.hp)
+              const showSelfDamageTransition = Number(entry.resultState?.selfDamage) > 0
+                && Number.isFinite(attackerHpBefore)
+                && Number.isFinite(attackerHpAfter)
               const attackerUnitName = String(entry.resultState?.attacker?.name || '-')
                 .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
               const defenderUnitName = String(entry.resultState?.defender?.name || '-')
                 .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
-              const primaryRole = isCounterattackEntry ? tx.defender : tx.attacker
-              const primaryUnitName = isCounterattackEntry ? defenderUnitName : attackerUnitName
-              const primaryLabelClass = isCounterattackEntry
-                ? 'duel-log-line-label duel-log-line-label-defender'
-                : 'duel-log-line-label duel-log-line-label-attacker'
-              const secondaryRole = isCounterattackEntry ? tx.attacker : tx.defender
-              const secondaryUnitName = isCounterattackEntry ? attackerUnitName : defenderUnitName
-              const secondaryLabelClass = isCounterattackEntry
+              const primaryRole = attackerIsLeft ? tx.attacker : tx.defender
+              const primaryUnitName = attackerUnitName
+              const primaryLabelClass = attackerIsLeft
                 ? 'duel-log-line-label duel-log-line-label-attacker'
                 : 'duel-log-line-label duel-log-line-label-defender'
+              const secondaryRole = attackerIsLeft ? tx.defender : tx.attacker
+              const secondaryUnitName = defenderUnitName
+              const secondaryLabelClass = attackerIsLeft
+                ? 'duel-log-line-label duel-log-line-label-defender'
+                : 'duel-log-line-label duel-log-line-label-attacker'
               return (
                 <article key={entry.key} className="duel-log-entry">
                 <div className="duel-log-line">
@@ -1841,14 +1872,25 @@ function Batalla() {
                         <span
                           key={`${entry.key}-ability-die-${detailIndex}-${dieIndex}`}
                           className={`duel-die ${
-                            die.outcome === 'fail'
+                            die.kind === 'scatter'
+                              ? 'duel-die-scatter'
+                            : die.outcome === 'fail'
                               ? 'duel-die-fail-gray'
                               : die.outcome === 'crit'
                                 ? 'duel-die-attack duel-die-crit'
                                 : 'duel-die-attack'
                           }`}
+                          title={die.value}
                         >
-                          {die.value}
+                          {die.kind === 'scatter' ? (
+                            <>
+                              <span className="duel-die-scatter-symbol">
+                                {die.scatterBullseye ? '◎' : getScatterDirectionIcon(die.scatterDirection)}
+                              </span>
+                            </>
+                          ) : (
+                            die.value
+                          )}
                         </span>
                       ))}
                       <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
@@ -1897,6 +1939,11 @@ function Batalla() {
                           <>
                             <span>{lang === 'en' ? 'ends with ' : 'se queda con '}</span>
                             <span className="duel-log-hp-remaining">{entry.resultState.attacker.hp} {tx.hp}</span>
+                            {showSelfDamageTransition && (
+                              <span>{lang === 'en'
+                                ? ` (${attackerHpBefore} -> ${attackerHpAfter} HP)`
+                                : ` (${attackerHpBefore} -> ${attackerHpAfter} vidas)`}</span>
+                            )}
                             <span>.</span>
                           </>
                         )}
@@ -1913,13 +1960,6 @@ function Batalla() {
                           </>
                         )}
                       </p>
-                      {!!entry.resultState.selfDamage && (
-                        <p className="duel-log-copy duel-log-copy-note">
-                          {lang === 'en'
-                            ? `Self-damage to attacker: ${entry.resultState.selfDamage}.`
-                            : `Autodaño del atacante: ${entry.resultState.selfDamage}.`}
-                        </p>
-                      )}
                     </div>
                   </div>
                 )}

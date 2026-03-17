@@ -458,6 +458,11 @@ export function resolveAttack({
       rerolled = true
     }
 
+    // Chained extra rolls can only become normal hits or fails.
+    if (source === 'chain' && outcome === 'crit') {
+      outcome = 'hit'
+    }
+
     hitEntries.push({
       source,
       initialRoll,
@@ -469,7 +474,8 @@ export function resolveAttack({
       rerolled,
     })
 
-    if (hasChains && outcome === 'crit') {
+    // Only base crits spawn one chained extra roll.
+    if (hasChains && source === 'base' && outcome === 'crit') {
       resolveOneHitDie('chain')
     }
   }
