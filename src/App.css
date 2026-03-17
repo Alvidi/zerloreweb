@@ -3277,6 +3277,14 @@ mark {
   color: #6fa8ff;
 }
 
+.duel-panel-random {
+  justify-self: start;
+  min-width: 120px;
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 0.76rem;
+}
+
 .duel-panel .field {
   font-size: 0.76rem;
 }

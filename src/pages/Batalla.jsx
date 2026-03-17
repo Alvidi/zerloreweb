@@ -20,6 +20,10 @@ const toNumber = (value, fallback = 0) => {
 }
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+const pickRandomItem = (items) => {
+  if (!Array.isArray(items) || !items.length) return null
+  return items[Math.floor(Math.random() * items.length)]
+}
 const sanitizeUnitHp = (rawHp, unit) => {
   const maxHp = Math.max(0, toNumber(unit?.hp, 0))
   return clamp(toNumber(rawHp, maxHp), 0, maxHp)
@@ -115,6 +119,19 @@ const pickWeaponIdsForMode = (unit, mode) => {
   const all = (unit?.weapons || []).filter((weapon) => weapon.kind === mode)
   const slots = getWeaponSlotsForMode(unit, mode, all.length)
   return all.slice(0, slots).map((weapon) => weapon.id)
+}
+const pickRandomWeaponIdsForMode = (unit, mode) => {
+  const all = (unit?.weapons || []).filter((weapon) => weapon.kind === mode)
+  const slots = getWeaponSlotsForMode(unit, mode, all.length)
+  if (!all.length || !slots) return []
+  const shuffled = [...all].sort(() => Math.random() - 0.5)
+  return Array.from({ length: slots }, (_, index) => shuffled[index % shuffled.length]?.id).filter(Boolean)
+}
+const pickRandomUnitForMode = (faction, mode) => {
+  const units = faction?.units || []
+  if (!units.length) return null
+  const withWeaponsForMode = units.filter((unit) => (unit.weapons || []).some((weapon) => weapon.kind === mode))
+  return pickRandomItem(withWeaponsForMode.length ? withWeaponsForMode : units)
 }
 const normalizeText = (value) =>
   String(value || '')
@@ -311,6 +328,7 @@ function Batalla() {
           weaponSkills: 'Abilities',
           valueUnit: 'VALUE',
           resolve: 'Resolve Combat',
+          random: 'Random',
           reset: 'Reset',
           flip: 'Flip',
           combatLog: 'Combat Log',
@@ -371,6 +389,7 @@ function Batalla() {
           weaponSkills: 'Habilidades',
           valueUnit: 'VALOR',
           resolve: 'Resolución',
+          random: 'Aleatorio',
           reset: 'Reset',
           flip: 'Flip',
           combatLog: 'Registro de combate',
@@ -1199,6 +1218,31 @@ function Batalla() {
     playLog(entries)
   }
 
+  const handleRandomizeSide = (side) => {
+    if (isResolving || !factions.length) return
+
+    clearTimers()
+    resolveRunRef.current += 1
+    setIsResolving(false)
+    setLogEntries([])
+    setHpMap({})
+    setAmmoMap({})
+
+    const randomFaction = pickRandomItem(factions)
+    if (!randomFaction) return
+    const randomUnit = pickRandomUnitForMode(randomFaction, mode)
+    const nextSelection = {
+      factionId: randomFaction.id,
+      unitId: randomUnit?.id || '',
+      weaponIds: pickRandomWeaponIdsForMode(randomUnit, mode),
+    }
+    if (side === 'left') {
+      setLeft(nextSelection)
+    } else {
+      setRight(nextSelection)
+    }
+  }
+
   return (
     <section className="section battle-page" id="batalla">
       <div className="section-head reveal">
@@ -1247,6 +1291,14 @@ function Batalla() {
       <div className="battle-duel-grid">
         <article className="duel-panel attacker-panel reveal">
           <h3>{tx.attacker}</h3>
+          <button
+            type="button"
+            className="ghost duel-panel-random"
+            onClick={() => handleRandomizeSide('left')}
+            disabled={!factions.length || isResolving}
+          >
+            {tx.random}
+          </button>
           <label className="field">
             <span>{tx.faction}</span>
             <div className="duel-faction-select">
@@ -1450,6 +1502,14 @@ function Batalla() {
 
         <article className="duel-panel defender-panel reveal">
           <h3>{tx.defender}</h3>
+          <button
+            type="button"
+            className="ghost duel-panel-random"
+            onClick={() => handleRandomizeSide('right')}
+            disabled={!factions.length || isResolving}
+          >
+            {tx.random}
+          </button>
           <label className="field">
             <span>{tx.faction}</span>
             <div className="duel-faction-select">
