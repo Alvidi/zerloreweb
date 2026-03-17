@@ -31,32 +31,46 @@ const parseDamage = (value, fallback = 1) => {
 }
 
 const parseDiceExpr = (value) => {
-  const raw = String(value || '').trim().toLowerCase()
-  const md = raw.match(/(\d+)\s*d\s*(\d+)?/)
+  const raw = String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '')
+  const md = raw.match(/^(\d*)d(\d+)?([+-]\d+)?$/)
   if (md) {
-    const count = clamp(toInt(md[1], 1), 0, 60)
+    const count = clamp(toInt(md[1] || '1', 1), 0, 60)
     const hasExplicitSides = Boolean(md[2])
     const sides = hasExplicitSides ? clamp(toInt(md[2], 6), 2, 100) : 6
+    const modifier = toInt(md[3], 0)
+    const labelBase = hasExplicitSides ? `${count}D${sides}` : `${count}D`
     return {
       count,
       sides,
       hasExplicitSides,
-      label: hasExplicitSides ? `${count}D${sides}` : `${count}D`,
+      modifier,
+      label: modifier ? `${labelBase}${modifier > 0 ? `+${modifier}` : modifier}` : labelBase,
     }
   }
   const asNum = toInt(raw, 1)
-  return { count: clamp(asNum, 0, 60), sides: 6, hasExplicitSides: false, label: String(asNum) }
+  return { count: clamp(asNum, 0, 60), sides: 6, hasExplicitSides: false, label: String(asNum), modifier: 0 }
 }
 
 const rollDie = (sides = 6) => Math.floor(Math.random() * sides) + 1
+const SCATTER_DIRECTIONS = ['N', 'NE', 'SE', 'S', 'SW', 'NW']
 
 const rollDice = (count, sides = 6) => Array.from({ length: Math.max(0, count) }, () => rollDie(sides))
 
 const rollAttackDiceCount = (expr) => {
-  if (!expr?.count) return { total: 0, rolls: [] }
-  if (!expr.hasExplicitSides) return { total: expr.count, rolls: [] }
+  if (!expr?.count) {
+    const total = Math.max(0, toInt(expr?.modifier, 0))
+    return { total, rolls: [] }
+  }
+  if (!expr.hasExplicitSides) {
+    const total = Math.max(0, expr.count + toInt(expr.modifier, 0))
+    return { total, rolls: [] }
+  }
   const rolls = rollDice(expr.count, expr.sides)
-  return { total: rolls.reduce((sum, value) => sum + value, 0), rolls }
+  const total = Math.max(0, rolls.reduce((sum, value) => sum + value, 0) + toInt(expr.modifier, 0))
+  return { total, rolls }
 }
 
 const resolveRollableThreshold = (value, fallback = 4) => {
@@ -257,6 +271,7 @@ export function resolveAttack({
   const rulesApplied = []
   const hasParabolic = mode === 'ranged' && hasAbility(weapon, 'parabolicShot')
   const hasGunslinger = mode === 'ranged' && hasAbility(weapon, 'gunslinger')
+  let parabolicScatter = null
 
   if (mode === 'ranged' && attackerEngaged && !hasGunslinger) {
     return {
@@ -296,6 +311,23 @@ export function resolveAttack({
 
   if (mode === 'ranged' && !hasLineOfSight && hasParabolic) {
     rulesApplied.push('Disparo parabólico')
+  }
+
+  if (mode === 'ranged' && hasParabolic) {
+    const scatterRoll = rollDie(6)
+    const bullseye = scatterRoll === 1
+    const direction = bullseye ? null : SCATTER_DIRECTIONS[(scatterRoll - 2) % SCATTER_DIRECTIONS.length]
+    parabolicScatter = {
+      roll: scatterRoll,
+      bullseye,
+      direction,
+      deviationInches: bullseye ? 0 : 3,
+    }
+    rulesApplied.push(
+      bullseye
+        ? 'Disparo parabólico (dispersión: diana)'
+        : `Disparo parabólico (dispersión: flecha ${direction}, desvío 3")`,
+    )
   }
 
   if (coverType === 'total' && mode === 'ranged') {
@@ -527,6 +559,7 @@ export function resolveAttack({
     rulesApplied,
     hasDirect,
     canCounter,
+    parabolicScatter,
     narrative: buildNarrative({
       attacker,
       defender,

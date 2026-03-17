@@ -614,6 +614,29 @@ function Batalla() {
         description: getAbilityDescription(ability, lang),
       }))
       .filter((item) => item.label)
+  const summarizeRollOutcomes = (rollEntries) => {
+    const critCount = rollEntries.filter((entry) => entry.outcome === 'crit').length
+    const hitCount = rollEntries.filter((entry) => entry.outcome === 'hit').length
+    const failCount = rollEntries.filter((entry) => entry.outcome === 'fail').length
+    const parts = []
+    if (lang === 'en') {
+      if (critCount > 0) parts.push(`${critCount} ${critCount === 1 ? 'critical hit' : 'critical hits'}`)
+      if (hitCount > 0) parts.push(`${hitCount} ${hitCount === 1 ? 'normal hit' : 'normal hits'}`)
+      if (failCount > 0) parts.push(`${failCount} ${failCount === 1 ? 'fail' : 'fails'}`)
+    } else {
+      if (critCount > 0) parts.push(`${critCount} ${critCount === 1 ? 'crítico' : 'críticos'}`)
+      if (hitCount > 0) parts.push(`${hitCount} ${hitCount === 1 ? 'normal' : 'normales'}`)
+      if (failCount > 0) parts.push(`${failCount} ${failCount === 1 ? 'fallo' : 'fallos'}`)
+    }
+    if (!parts.length) return ''
+    if (parts.length === 1) return parts[0]
+    return `${parts.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'y'} ${parts[parts.length - 1]}`
+  }
+  const getScatterDirectionLabel = (direction) => {
+    if (!direction) return ''
+    if (lang === 'en') return direction
+    return direction
+  }
 
   const buildCombatEntry = ({
     key,
@@ -646,6 +669,7 @@ function Batalla() {
         defenderCover: '',
         defenderTail: '',
         abilityDetails: [],
+        attackCountDice: [],
         attackDice: [],
         defenseDice: [],
         resultState: {
@@ -660,19 +684,17 @@ function Batalla() {
     const attackCountDice = (result.attackCountRolls || [])
       .flatMap((entry) => (entry.rolls || []).map((roll) => ({
         value: `${roll}`,
+        dieType: entry.label || '1D6',
         outcome: 'hit',
         tone: 'count',
       })))
-    const attackDice = [
-      ...attackCountDice,
-      ...(result.hitEntries || [])
+    const attackDice = (result.hitEntries || [])
       .filter((entry) => entry.source === 'base')
       .filter((entry) => Number.isFinite(entry.initialRoll) || Number.isFinite(entry.roll))
       .map((entry) => ({
         value: `${Number.isFinite(entry.initialRoll) ? entry.initialRoll : entry.roll}`,
         outcome: entry.initialOutcome || entry.displayOutcome || entry.outcome || 'fail',
-      })),
-    ]
+      }))
     const saveRolls = (result.saveRolls || []).filter((roll) => Number.isFinite(roll))
     const blockedFlags = new Array(saveRolls.length).fill(false)
     const sixIndices = []
@@ -780,6 +802,24 @@ function Batalla() {
           : [],
       )
     }
+    if (result.parabolicScatter) {
+      const scatter = result.parabolicScatter
+      const scatterDirection = getScatterDirectionLabel(scatter.direction)
+      const scatterTextEs = scatter.bullseye
+        ? 'Disparo parabólico: diana. Impacta en el punto marcado.'
+        : `Disparo parabólico: flecha ${scatterDirection}, desvío ${scatter.deviationInches}".`
+      const scatterTextEn = scatter.bullseye
+        ? 'Parabolic Shot: bullseye. It lands on the marked point.'
+        : `Parabolic Shot: arrow ${scatterDirection}, deviates ${scatter.deviationInches}".`
+      pushAbilityDetail(
+        scatterTextEs,
+        scatterTextEn,
+        [{
+          value: scatter.bullseye ? 'DIANA' : `FLECHA ${scatterDirection}`,
+          outcome: scatter.bullseye ? 'crit' : 'fail',
+        }],
+      )
+    }
 
     if (result.hasDirect) {
       pushAbilityDetail(
@@ -802,13 +842,14 @@ function Batalla() {
       normalizeText(rule).startsWith('ignora coberturas') || normalizeText(rule).startsWith('ignore cover'),
     )
     const coverAffectsDefense = appliedCoverRules.length > 0 && !(ignoresPartialCover && result.coverType === 'partial')
+    const rollOutcomeSummary = summarizeRollOutcomes(attackDice)
     const attackerSummary = result.hasDirect
       ? lang === 'en'
         ? `${attackerName} attacks with ${weaponName} (automatic hits): ${result.totals.hits} hits and ${result.totals.crits} crits.`
         : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${result.totals.hits} impactos y ${result.totals.crits} críticos.`
       : lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${result.totals.hits} hits and ${result.totals.crits} crits.`
-        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${result.totals.hits} impactos y ${result.totals.crits} críticos.`
+        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'}.`
+        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'}.`
     const defenderCover = coverAffectsDefense
       ? lang === 'en'
         ? result.coverType === 'height'
@@ -821,8 +862,8 @@ function Batalla() {
     const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
     const landedImpacts = Math.max(0, (result.totals?.hits || 0) + (result.totals?.crits || 0) - blockedTotal)
     const defenderTail = lang === 'en'
-      ? `): ${landedImpacts} land and ${blockedTotal} are blocked; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
-      : `): impactan ${landedImpacts} y bloquea ${blockedTotal}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
+      ? `): blocks ${blockedTotal}; ${landedImpacts} land; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
+      : `): consigue bloquear ${blockedTotal}; impactan ${landedImpacts}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
 
     return {
       key,
@@ -835,6 +876,7 @@ function Batalla() {
       defenderSave: `${result.saveThreshold}+`,
       defenderCover,
       defenderTail,
+      attackCountDice,
       attackDice,
       defenseDice,
       abilityDetails,
@@ -869,6 +911,7 @@ function Batalla() {
     defenderCover: '',
     defenderTail: '',
     abilityDetails: [],
+    attackCountDice: [],
     attackDice,
     defenseDice: [],
     hideResult,
@@ -1661,19 +1704,51 @@ function Batalla() {
           <div className="duel-log-list">
             {logEntries.map((entry) => {
               const isCounterattackEntry = entry.key.includes('counter')
-              const primaryLabel = isCounterattackEntry ? `${tx.defender} (${tx.counterattack})` : tx.attacker
+              const attackerUnitName = String(entry.resultState?.attacker?.name || '-')
+                .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
+              const defenderUnitName = String(entry.resultState?.defender?.name || '-')
+                .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
+              const primaryRole = isCounterattackEntry ? tx.defender : tx.attacker
+              const primaryUnitName = isCounterattackEntry ? defenderUnitName : attackerUnitName
               const primaryLabelClass = isCounterattackEntry
                 ? 'duel-log-line-label duel-log-line-label-defender'
                 : 'duel-log-line-label duel-log-line-label-attacker'
-              const secondaryLabel = isCounterattackEntry ? tx.attacker : tx.defender
+              const secondaryRole = isCounterattackEntry ? tx.attacker : tx.defender
+              const secondaryUnitName = isCounterattackEntry ? attackerUnitName : defenderUnitName
               const secondaryLabelClass = isCounterattackEntry
                 ? 'duel-log-line-label duel-log-line-label-attacker'
                 : 'duel-log-line-label duel-log-line-label-defender'
               return (
                 <article key={entry.key} className="duel-log-entry">
                 <div className="duel-log-line">
-                  <span className={primaryLabelClass}>{primaryLabel}</span>
+                  <span className={primaryLabelClass}>
+                    <span>{primaryRole}</span>{' '}
+                    <span className="duel-log-line-label-unit">{primaryUnitName}</span>
+                    {isCounterattackEntry && <span>{` (${tx.counterattack})`}</span>}
+                  </span>
                   <div className="duel-dice">
+                    {!!entry.attackCountDice?.length && (
+                      <>
+                        <span className="duel-log-copy-note">
+                          {lang === 'en' ? 'Attack count' : 'Ataques'}
+                        </span>
+                        {entry.attackCountDice.map((die, index) => (
+                          <span
+                            key={`${entry.key}-attack-count-${index}`}
+                            className="duel-die duel-die-attack duel-die-count"
+                            title={die.dieType}
+                          >
+                            <span className="duel-die-count-value">{die.value}</span>
+                            <span className="duel-die-count-type">{die.dieType}</span>
+                          </span>
+                        ))}
+                      </>
+                    )}
+                    {!!entry.attackDice?.length && (
+                      <span className="duel-log-copy-note">
+                        {lang === 'en' ? 'Hit rolls' : 'Tiradas de impacto'}
+                      </span>
+                    )}
                     {entry.attackDice?.map((die, index) => (
                       <span
                         key={`${entry.key}-attacker-${index}`}
@@ -1722,7 +1797,10 @@ function Batalla() {
                 ))}
                 {(entry.defenseDice?.length || entry.defenderLine) && (
                   <div className="duel-log-line">
-                    <span className={secondaryLabelClass}>{secondaryLabel}</span>
+                    <span className={secondaryLabelClass}>
+                      <span>{secondaryRole}</span>{' '}
+                      <span className="duel-log-line-label-unit">{secondaryUnitName}</span>
+                    </span>
                     <div className="duel-dice">
                       {entry.defenseDice?.map((die, index) => (
                         <span
@@ -1752,7 +1830,7 @@ function Batalla() {
                     <span className="duel-log-line-label">{tx.result}</span>
                     <div className="duel-dice duel-result-block">
                       <p className="duel-log-copy duel-log-copy-result">
-                        <span>{lang === 'en' ? `Attacker (${entry.resultState.attacker.name}): ` : `Atacante (${entry.resultState.attacker.name}): `}</span>
+                        <span>{`${entry.resultState.attacker.name}: `}</span>
                         {entry.resultState.attacker.defeated ? (
                           <span className="duel-log-defeated">{lang === 'en' ? 'The unit has been defeated.' : 'La unidad ha sido derrotada.'}</span>
                         ) : (
@@ -1764,7 +1842,7 @@ function Batalla() {
                         )}
                       </p>
                       <p className="duel-log-copy duel-log-copy-result">
-                        <span>{lang === 'en' ? `Defender (${entry.resultState.defender.name}): ` : `Defensor (${entry.resultState.defender.name}): `}</span>
+                        <span>{`${entry.resultState.defender.name}: `}</span>
                         {entry.resultState.defender.defeated ? (
                           <span className="duel-log-defeated">{lang === 'en' ? 'The unit has been defeated.' : 'La unidad ha sido derrotada.'}</span>
                         ) : (
