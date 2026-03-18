@@ -27,7 +27,7 @@ function Home() {
               <button className="primary" onClick={() => navigate('/reglamento?mode=quick')}>
                 {t('home.hero.start')}
               </button>
-              <button className="ghost" onClick={() => navigate('/reglamento')}>
+              <button className="ghost" onClick={() => navigate('/generador')}>
                 {t('home.hero.rules')}
               </button>
             </div>

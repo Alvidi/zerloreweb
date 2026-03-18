@@ -1,410 +1,56 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import { getAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
-import { parseThreshold, resolveAttack } from '../utils/battleEngine.js'
+import { resolveAttack } from '../utils/battleEngine.js'
 import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
+import UnitTypeBadge from '../features/battle/components/UnitTypeBadge.jsx'
+import BattleCombatLog from '../features/battle/components/BattleCombatLog.jsx'
+import { getBattleTranslations } from '../features/battle/battleTranslations.js'
+import { createBattleLogBuilders } from '../features/battle/battleLogEntries.js'
+import {
+  buildFactionAttackConditions,
+  implementedFactionAbilityKeys,
+  isFactionEffectEnabled,
+} from '../features/battle/factionAbilities.js'
+import { buildFutureCombatConditions } from '../features/battle/battleFutureHooks.js'
+import {
+  hasWeaponAbilityId,
+  WEAPON_ABILITY_IDS,
+} from '../features/battle/weaponAbilities.js'
+import {
+  attackTypeOptions,
+  buildHpValues,
+  buildWeaponSelection,
+  CHARGE_DISTANCE_MAX,
+  CHARGE_DISTANCE_MIN,
+  chargeDistanceOptions,
+  clamp,
+  coverTypeOptions,
+  factionImages,
+  getConditionKeyForAbility,
+  getConditionSupport,
+  getLimitedAmmoMax,
+  getWeaponSlotsForMode,
+  isFactionData,
+  makeAmmoKey,
+  makeHpKey,
+  normalizeFaction,
+  pickRandomItem,
+  pickRandomUnitForMode,
+  pickRandomWeaponIdsForMode,
+  pickWeaponIdsForMode,
+  resolveMode,
+  rollChargeDice,
+  sanitizeUnitHp,
+  swapMapBySidePrefix,
+  toNumber,
+} from '../features/battle/battleUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 
-const slugify = (value) =>
-  String(value || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-
-const toNumber = (value, fallback = 0) => {
-  const parsed = Number(value)
-  return Number.isFinite(parsed) ? parsed : fallback
-}
-
-const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
-const pickRandomItem = (items) => {
-  if (!Array.isArray(items) || !items.length) return null
-  return items[Math.floor(Math.random() * items.length)]
-}
-const sanitizeUnitHp = (rawHp, unit) => {
-  const maxHp = Math.max(0, toNumber(unit?.hp, 0))
-  return clamp(toNumber(rawHp, maxHp), 0, maxHp)
-}
-
-const isFactionData = (data) => data && data.faccion && Array.isArray(data.unidades)
-
-const normalizeWeapon = (weapon, kind) => ({
-  id: slugify(weapon.nombre || `${kind}-${Math.random().toString(36).slice(2, 8)}`),
-  name: weapon.nombre || 'Arma',
-  kind,
-  attacks: weapon.ataques ?? weapon.atq ?? '1D',
-  range: weapon.distancia ?? '-',
-  hit: weapon.impactos ? String(weapon.impactos).replace(/^\+?(\d+)\+?$/, '$1+') : null,
-  damage: weapon.danio ?? '1',
-  critDamage: weapon.danio_critico ?? weapon.critico ?? weapon.danio ?? '1',
-  extraValue: toNumber(weapon.valor_extra ?? 0),
-  abilities: Array.isArray(weapon.habilidades_arma) ? weapon.habilidades_arma : [],
-})
-
-const getMaxRangedWeapons = (unit, profile) => {
-  const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? profile?.max_armas_disparo
-  if (explicit) return Math.max(1, toNumber(explicit, 1))
-  const text = `${unit.especialidad || ''} ${profile?.especialidad || ''}`.toLowerCase()
-  if (text.includes('dos armas') || text.includes('2 armas')) return 2
-  return 1
-}
-
-const normalizeUnit = (unit, index) => {
-  const profile = unit.perfil || {}
-  const rangedWeapons = (unit.armas?.disparo || []).map((weapon) => normalizeWeapon(weapon, 'ranged'))
-  const meleeWeapons = (unit.armas?.cuerpo_a_cuerpo || []).map((weapon) => normalizeWeapon(weapon, 'melee'))
-  const enabledRangedWeapons = meleeWeapons.length ? rangedWeapons : []
-  return {
-    id: unit.id || slugify(unit.nombre_unidad || `unidad-${index + 1}`),
-    name: unit.nombre_unidad || `Unidad ${index + 1}`,
-    type: unit.clase || 'Línea',
-    movement: profile.movimiento ?? unit.movimiento ?? '-',
-    hp: Math.max(1, toNumber(profile.vidas, 1)),
-    saveLabel: String(profile.salvacion ?? unit.salvacion ?? '+4').replace(/^\+?(\d+)\+?$/, '$1+'),
-    save: parseThreshold(profile.salvacion ?? '+4', 4),
-    speed: profile.velocidad ?? unit.velocidad ?? '-',
-    valueBase: toNumber(profile.valor ?? unit.valor_base ?? unit.valor ?? 0),
-    specialty: profile.especialidad ?? unit.especialidad ?? '-',
-    maxRangedWeapons: getMaxRangedWeapons(unit, profile),
-    weapons: [
-      ...enabledRangedWeapons,
-      ...meleeWeapons,
-    ],
-  }
-}
-
-const normalizeFaction = (data, baseId, index) => ({
-  id: baseId || slugify(data.faccion?.nombre || `faccion-${index + 1}`),
-  name: data.faccion?.nombre || `Facción ${index + 1}`,
-  units: (data.unidades || []).map(normalizeUnit),
-})
-
-const factionImages = {
-  alianza: new URL('../images/faccion/alianza.svg', import.meta.url).href,
-  legionarios_crisol: new URL('../images/faccion/legionarios_crisol.svg', import.meta.url).href,
-  salvajes: new URL('../images/faccion/salvajes.svg', import.meta.url).href,
-  vacio: new URL('../images/faccion/vacio.svg', import.meta.url).href,
-  rebeldes: new URL('../images/faccion/rebeldes.svg', import.meta.url).href,
-  tecnotumbas: new URL('../images/faccion/tecnotumbas.svg', import.meta.url).href,
-  enjambre: new URL('../images/faccion/enjambre.svg', import.meta.url).href,
-  federacion: new URL('../images/faccion/federacion.svg', import.meta.url).href,
-  tecnocratas: new URL('../images/faccion/tecnocratas.svg', import.meta.url).href,
-}
-
-const makeHpKey = (side, factionId, unitId) => `${side}:${factionId || 'none'}:${unitId || 'none'}`
-const buildHpValues = (maxHp) => Array.from({ length: Math.max(0, maxHp) }, (_, index) => maxHp - index)
-const attackTypeOptions = ['ranged', 'melee', 'charge']
-const coverTypeOptions = ['none', 'partial', 'height']
-const CHARGE_DISTANCE_MIN = 2
-const CHARGE_DISTANCE_MAX = 12
-const chargeDistanceOptions = Array.from(
-  { length: CHARGE_DISTANCE_MAX - CHARGE_DISTANCE_MIN + 1 },
-  (_, index) => CHARGE_DISTANCE_MIN + index,
-)
-const resolveMode = (attackType) => (attackType === 'ranged' ? 'ranged' : 'melee')
-const getWeaponSlotsForMode = (_unit, _mode, weaponCount) => {
-  if (!weaponCount) return 0
-  return 1
-}
-const buildWeaponSelection = (rawIds, availableWeapons, slots) => {
-  if (!slots || !availableWeapons.length) return []
-  const validIds = (rawIds || []).filter((id) => availableWeapons.some((weapon) => weapon.id === id))
-  const fallbackIds = availableWeapons.map((weapon) => weapon.id)
-  return Array.from({ length: slots }, (_, index) => validIds[index] || fallbackIds[index] || fallbackIds[0])
-}
-const pickWeaponIdsForMode = (unit, mode) => {
-  const all = (unit?.weapons || []).filter((weapon) => weapon.kind === mode)
-  const slots = getWeaponSlotsForMode(unit, mode, all.length)
-  return all.slice(0, slots).map((weapon) => weapon.id)
-}
-const pickRandomWeaponIdsForMode = (unit, mode) => {
-  const all = (unit?.weapons || []).filter((weapon) => weapon.kind === mode)
-  const slots = getWeaponSlotsForMode(unit, mode, all.length)
-  if (!all.length || !slots) return []
-  const shuffled = [...all].sort(() => Math.random() - 0.5)
-  return Array.from({ length: slots }, (_, index) => shuffled[index % shuffled.length]?.id).filter(Boolean)
-}
-const pickRandomUnitForMode = (faction, mode) => {
-  const units = faction?.units || []
-  if (!units.length) return null
-  const withWeaponsForMode = units.filter((unit) => (unit.weapons || []).some((weapon) => weapon.kind === mode))
-  return pickRandomItem(withWeaponsForMode.length ? withWeaponsForMode : units)
-}
-const normalizeText = (value) =>
-  String(value || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim()
-const LIMITED_AMMO_PREFIXES = ['municion limitada', 'limited ammo']
-const HEAVY_PREFIXES = ['pesada', 'heavy']
-const QUICK_ATTACK_PREFIXES = ['ataque rapido', 'quick attack']
-const PARABOLIC_PREFIXES = ['disparo parabolico', 'parabolic shot', 'indirect fire']
-const GUERRILLA_PREFIXES = ['guerrilla']
-const DIRECT_PREFIXES = ['directo', 'straight', 'direct']
-const getConditionKeyForAbility = (ability) => {
-  const normalized = normalizeText(ability)
-  if (HEAVY_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'moved'
-  if (QUICK_ATTACK_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'halfRange'
-  if (GUERRILLA_PREFIXES.some((prefix) => normalized.startsWith(prefix))) return 'afterDash'
-  return null
-}
-const weaponHasAnyPrefix = (weapon, prefixes) =>
-  (weapon?.abilities || []).some((ability) => prefixes.some((prefix) => normalizeText(ability).startsWith(prefix)))
-const getConditionSupport = (weapons, mode) => {
-  if (mode !== 'ranged') {
-    return { moved: false, halfRange: false, noLineOfSight: false, afterDash: false }
-  }
-  return {
-    moved: weapons.some((weapon) => weaponHasAnyPrefix(weapon, HEAVY_PREFIXES)),
-    halfRange: weapons.some((weapon) => weaponHasAnyPrefix(weapon, QUICK_ATTACK_PREFIXES)),
-    // Line of sight is a battlefield condition; parabolic weapons only modify its effect.
-    noLineOfSight: true,
-    afterDash: weapons.some((weapon) => weaponHasAnyPrefix(weapon, GUERRILLA_PREFIXES)),
-  }
-}
-const getLimitedAmmoMax = (weapon) => {
-  const raw = (weapon?.abilities || []).find((ability) =>
-    LIMITED_AMMO_PREFIXES.some((prefix) => normalizeText(ability).startsWith(prefix)),
-  )
-  if (!raw) return null
-  const match = String(raw).match(/\d+/)
-  if (!match) return null
-  const value = Number.parseInt(match[0], 10)
-  return Number.isFinite(value) ? Math.max(0, value) : null
-}
-const makeAmmoKey = (side, factionId, unitId, weaponId) =>
-  `${side}:${factionId || 'none'}:${unitId || 'none'}:${weaponId || 'none'}`
-const swapSidePrefixInKey = (key, leftPrefix, rightPrefix) => {
-  if (key.startsWith(`${leftPrefix}:`)) return `${rightPrefix}:${key.slice(leftPrefix.length + 1)}`
-  if (key.startsWith(`${rightPrefix}:`)) return `${leftPrefix}:${key.slice(rightPrefix.length + 1)}`
-  return key
-}
-const swapMapBySidePrefix = (map, leftPrefix, rightPrefix) =>
-  Object.fromEntries(
-    Object.entries(map || {}).map(([key, value]) => [swapSidePrefixInKey(key, leftPrefix, rightPrefix), value]),
-  )
-const rollChargeDice = () => {
-  const first = Math.floor(Math.random() * 6) + 1
-  const second = Math.floor(Math.random() * 6) + 1
-  return { first, second, total: first + second }
-}
-const getUnitTypeToken = (type) => {
-  const normalized = String(type || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-
-  if (normalized.includes('linea') || normalized.includes('line')) return 'line'
-  if (normalized.includes('elite')) return 'elite'
-  if (normalized.includes('vehiculo') || normalized.includes('vehicle')) return 'vehicle'
-  if (normalized.includes('monstruo') || normalized.includes('monster')) return 'monster'
-  if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
-  if (normalized.includes('titan') || normalized.includes('titante')) return 'titan'
-  return 'line'
-}
-
-function UnitTypeBadge({ type }) {
-  const token = getUnitTypeToken(type)
-  const iconProps = { viewBox: '0 0 24 24', className: 'unit-type-icon', 'aria-hidden': true }
-
-  const renderIcon = () => {
-    if (token === 'line') {
-      return (
-        <svg {...iconProps}>
-          <path d="M5 18H19L17 7H7Z" />
-          <path d="M9 7V5H15V7" />
-        </svg>
-      )
-    }
-    if (token === 'elite') {
-      return (
-        <svg {...iconProps}>
-          <path d="M12 3L16 8L21 12L16 16L12 21L8 16L3 12L8 8Z" />
-        </svg>
-      )
-    }
-    if (token === 'vehicle') {
-      return (
-        <svg {...iconProps}>
-          <rect x="4" y="8" width="16" height="8" rx="1" />
-          <circle cx="8" cy="17.5" r="1.5" />
-          <circle cx="16" cy="17.5" r="1.5" />
-        </svg>
-      )
-    }
-    if (token === 'monster') {
-      return (
-        <svg {...iconProps}>
-          <path d="M5 20L8 9L11 15L14 8L17 14L19 6" />
-        </svg>
-      )
-    }
-    if (token === 'hero') {
-      return (
-        <svg {...iconProps}>
-          <path d="M4 16L6 8L10 12L12 6L14 12L18 8L20 16Z" />
-          <path d="M7 18H17" />
-        </svg>
-      )
-    }
-    if (token === 'titan') {
-      return (
-        <svg {...iconProps}>
-          <rect x="7" y="4" width="10" height="16" />
-          <path d="M10 8H14" />
-          <path d="M10 12H14" />
-          <path d="M10 16H14" />
-        </svg>
-      )
-    }
-    return (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="7" />
-      </svg>
-    )
-  }
-
-  return (
-    <span className={`unit-type-badge unit-type-${token}`}>
-      {renderIcon()}
-      <span>{type}</span>
-    </span>
-  )
-}
-
 function Batalla() {
   const { lang } = useI18n()
-  const tx = useMemo(
-    () =>
-      lang === 'en'
-        ? {
-          eyebrow: 'Battle',
-          title: 'Combat Resolution',
-          subtitle: 'Choose attacker and defender. Select their weapons and resolve the combat in one click.',
-          attacker: 'Attacker',
-          defender: 'Defender',
-          faction: 'Faction',
-          unit: 'Unit',
-          weapon: 'Weapon',
-          weapons: 'Weapons',
-          ranged: 'Ranged',
-          melee: 'Melee',
-          charge: 'Charge + Melee',
-          attackType: 'Attack Type',
-          conditions: 'Combat Conditions',
-          coverType: 'Cover',
-          coverNone: 'No cover',
-          coverPartial: 'Partial cover',
-          coverHeight: 'High cover',
-          moved: 'Moved this turn',
-          halfRange: 'Half range',
-          noLineOfSight: 'No line of sight',
-          engaged: 'Engaged in melee',
-          afterDash: 'After dash',
-          chargeDistance: 'Charge distance',
-          chargeRoll: 'Charge roll',
-          chargeSuccess: 'Charge successful',
-          chargeFailed: 'Charge failed',
-          outOfAmmo: 'Out of ammo',
-          ammo: 'Ammo',
-          firstBySpeed: 'Attacks first by speed',
-          mov: 'Mov',
-          vidas: 'HP',
-          salv: 'Save',
-          vel: 'Spd',
-          weaponAtq: 'Atk',
-          weaponDist: 'Range',
-          weaponImp: 'Hit',
-          weaponDamage: 'Damage',
-          weaponCrit: 'Critical',
-          weaponSkills: 'Abilities',
-          valueUnit: 'VALUE',
-          resolve: 'Resolve Combat',
-          random: 'Random',
-          reset: 'Reset',
-          flip: 'Flip',
-          combatLog: 'Combat Log',
-          emptyLog: 'Press resolve to run the combat.',
-          noWeapons: 'No weapons available for this attack type.',
-          attackRoll: 'Attack roll',
-          saveRoll: 'Defense roll',
-          damage: 'Damage',
-          result: 'Result',
-          attackStep: 'Attack',
-          counterStep: 'Counter',
-          counterattack: 'Counterattack',
-          blocked: 'Attack blocked',
-          hp: 'HP',
-          save: 'Save',
-          steps: 'steps',
-        }
-        : {
-          eyebrow: 'Batalla',
-          title: 'Resolución de combate',
-          subtitle: 'Elige atacante y defensor. Selecciona sus armas y resuelve el combate con un clic.',
-          attacker: 'Atacante',
-          defender: 'Defensor',
-          faction: 'Facción',
-          unit: 'Unidad',
-          weapon: 'Arma',
-          weapons: 'Armas',
-          ranged: 'Disparo',
-          melee: 'Cuerpo a cuerpo',
-          charge: 'Carga + CaC',
-          attackType: 'Tipo de ataque',
-          conditions: 'Condiciones de combate',
-          coverType: 'Cobertura',
-          coverNone: 'Sin cobertura',
-          coverPartial: 'Cobertura parcial',
-          coverHeight: 'Cobertura de altura',
-          moved: 'Se ha movido',
-          halfRange: 'Media distancia',
-          noLineOfSight: 'Sin línea de visión',
-          engaged: 'Trabada en CaC',
-          afterDash: 'Tras carrera',
-          chargeDistance: 'Distancia de carga',
-          chargeRoll: 'Tirada de carga',
-          chargeSuccess: 'Carga exitosa',
-          chargeFailed: 'Carga fallida',
-          outOfAmmo: 'Sin munición',
-          ammo: 'Munición',
-          firstBySpeed: 'Ataca primero por velocidad',
-          mov: 'Mov',
-          vidas: 'Vidas',
-          salv: 'Salv',
-          vel: 'Vel',
-          weaponAtq: 'Atq',
-          weaponDist: 'Dist',
-          weaponImp: 'Imp',
-          weaponDamage: 'Daño',
-          weaponCrit: 'Crítico',
-          weaponSkills: 'Habilidades',
-          valueUnit: 'VALOR',
-          resolve: 'Resolución',
-          random: 'Aleatorio',
-          reset: 'Reset',
-          flip: 'Flip',
-          combatLog: 'Registro de combate',
-          emptyLog: 'Pulsa resolución para ejecutar el combate.',
-          noWeapons: 'No hay armas disponibles para este tipo de ataque.',
-          attackRoll: 'Tirada de ataque',
-          saveRoll: 'Tirada de defensa',
-          damage: 'Daño',
-          result: 'Resultado',
-          attackStep: 'Ataque',
-          counterStep: 'Contra',
-          counterattack: 'Contraataque',
-          blocked: 'Ataque bloqueado',
-          hp: 'Vidas',
-          save: 'Salvación',
-          steps: 'pasos',
-        },
-    [lang],
-  )
+  const tx = useMemo(() => getBattleTranslations(lang), [lang])
 
   const factions = useMemo(() => {
     return buildLocalizedFactionEntries(factionModules, lang)
@@ -417,6 +63,8 @@ function Batalla() {
 
   const [left, setLeft] = useState({ factionId: '', unitId: '', weaponIds: [] })
   const [right, setRight] = useState({ factionId: '', unitId: '', weaponIds: [] })
+  const [leftFactionAbilityState, setLeftFactionAbilityState] = useState({})
+  const [rightFactionAbilityState, setRightFactionAbilityState] = useState({})
   const [attackType, setAttackType] = useState('ranged')
   const [leftCoverType, setLeftCoverType] = useState('none')
   const [rightCoverType, setRightCoverType] = useState('none')
@@ -447,6 +95,12 @@ function Batalla() {
 
   const leftFaction = factionById.get(leftFactionId) || null
   const rightFaction = factionById.get(rightFactionId) || null
+  const leftFactionAbilities = leftFaction?.abilities || []
+  const rightFactionAbilities = rightFaction?.abilities || []
+  const leftImplementedFactionAbilities = leftFactionAbilities.filter((ability) => implementedFactionAbilityKeys.has(ability.effectKey))
+  const rightImplementedFactionAbilities = rightFactionAbilities.filter((ability) =>
+    implementedFactionAbilityKeys.has(ability.effectKey),
+  )
 
   const leftUnitId =
     left.unitId && leftFaction?.units.some((unit) => unit.id === left.unitId) ? left.unitId : leftFaction?.units[0]?.id || ''
@@ -565,6 +219,14 @@ function Batalla() {
   }
 
   const currentModeLabel = attackType === 'charge' ? tx.charge : mode === 'ranged' ? tx.ranged : tx.melee
+  const setFactionAbilityEnabled = (side, abilityId, enabled) => {
+    if (!abilityId) return
+    if (side === 'left') {
+      setLeftFactionAbilityState((prev) => ({ ...prev, [abilityId]: enabled }))
+      return
+    }
+    setRightFactionAbilityState((prev) => ({ ...prev, [abilityId]: enabled }))
+  }
   const getAbilityConditionBinding = (side, rawAbility) => {
     const key = getConditionKeyForAbility(rawAbility)
     if (!key) return null
@@ -585,42 +247,6 @@ function Batalla() {
     if (key === 'afterDash') return { checked: rightAfterDash, setChecked: setRightAfterDash, label: tx.afterDash }
     return null
   }
-  const abilityRulePrefixes = [
-    'asaltante',
-    'raider',
-    'pesada',
-    'heavy',
-    'ataque rapido',
-    'quick attack',
-    'pistolero',
-    'gunslinger',
-    'explosiva',
-    'explosive',
-    'ataque critico',
-    'critical attack',
-    'impactos encadenados',
-    'chained impacts',
-    'precision',
-    'anti',
-    'ignora coberturas',
-    'ignore coverage',
-    'disparo parabolico',
-    'parabolic shot',
-    'indirect fire',
-    'inestable',
-    'unstable',
-    'directo',
-    'straight',
-    'direct',
-    'guerrilla',
-    'municion limitada',
-    'limited ammo',
-  ]
-  const isAbilityRule = (rule) => {
-    const normalized = normalizeText(rule)
-    return abilityRulePrefixes.some((prefix) => normalized.startsWith(prefix))
-  }
-
   const buildAbilityNotes = (weapon) =>
     (weapon?.abilities || [])
       .map((ability) => ({
@@ -629,363 +255,10 @@ function Batalla() {
         description: getAbilityDescription(ability, lang),
       }))
       .filter((item) => item.label)
-  const summarizeRollOutcomes = (rollEntries) => {
-    const critCount = rollEntries.filter((entry) => entry.outcome === 'crit').length
-    const hitCount = rollEntries.filter((entry) => entry.outcome === 'hit').length
-    const failCount = rollEntries.filter((entry) => entry.outcome === 'fail').length
-    const parts = []
-    if (lang === 'en') {
-      if (critCount > 0) parts.push(`${critCount} ${critCount === 1 ? 'critical hit' : 'critical hits'}`)
-      if (hitCount > 0) parts.push(`${hitCount} ${hitCount === 1 ? 'normal hit' : 'normal hits'}`)
-      if (failCount > 0) parts.push(`${failCount} ${failCount === 1 ? 'fail' : 'fails'}`)
-    } else {
-      if (critCount > 0) parts.push(`${critCount} ${critCount === 1 ? 'crítico' : 'críticos'}`)
-      if (hitCount > 0) parts.push(`${hitCount} ${hitCount === 1 ? 'normal' : 'normales'}`)
-      if (failCount > 0) parts.push(`${failCount} ${failCount === 1 ? 'fallo' : 'fallos'}`)
-    }
-    if (!parts.length) return ''
-    if (parts.length === 1) return parts[0]
-    return `${parts.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'y'} ${parts[parts.length - 1]}`
-  }
-  const getScatterDirectionLabel = (direction) => {
-    if (!direction) return ''
-    if (lang === 'en') return direction
-    return direction
-  }
-  const getScatterDirectionIcon = (direction) => {
-    const icons = {
-      N: '↑',
-      NE: '↗',
-      SE: '↘',
-      S: '↓',
-      SW: '↙',
-      NW: '↖',
-    }
-    return icons[String(direction || '').toUpperCase()] || '↑'
-  }
-
-  const buildCombatEntry = ({
-    key,
-    title,
-    attackerSide,
-    attackerName,
-    defenderName,
-    weapon,
-    attackerHpBefore,
-    defenderHpBefore,
-    result,
-  }) => {
-    const weaponName = weapon?.name || ''
-    const attackerFinalHp = result.attackerAfter?.hp ?? attackerHpBefore ?? 0
-    const defenderFinalHp = result.defenderAfter?.hp ?? defenderHpBefore ?? 0
-
-    if (result.blocked) {
-      return {
-        key,
-        title,
-        attackerSide,
-        subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
-        attackerLine: lang === 'en'
-          ? `${attackerName} attacks with ${weaponName}.`
-          : `${attackerName} ataca con ${weaponName}.`,
-        defenderLine: lang === 'en'
-          ? `${defenderName} defends: ${result.blockedReason || tx.blocked}.`
-          : `${defenderName} defiende: ${result.blockedReason || tx.blocked}.`,
-        abilityLine: '',
-        defenderLead: '',
-        defenderSave: '',
-        defenderCover: '',
-        defenderTail: '',
-        abilityDetails: [],
-        attackCountDice: [],
-        attackDice: [],
-        defenseDice: [],
-        resultState: {
-          attacker: {
-            name: attackerName,
-            hp: attackerFinalHp,
-            defeated: attackerFinalHp <= 0,
-            hpBefore: attackerHpBefore,
-          },
-          defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
-          selfDamage: 0,
-        },
-      }
-    }
-    const blockedTotal = (result.totals?.blockedHits || 0) + (result.totals?.blockedCrits || 0)
-    const attackerSelfDamage = result.totals?.selfDamage || 0
-    const attackCountDice = (result.attackCountRolls || [])
-      .flatMap((entry) => (entry.rolls || []).map((roll) => ({
-        value: `${roll}`,
-        dieType: entry.label || '1D6',
-        outcome: 'hit',
-        tone: 'count',
-      })))
-    const attackDice = (result.hitEntries || [])
-      .filter((entry) => entry.source === 'base')
-      .filter((entry) => Number.isFinite(entry.initialRoll) || Number.isFinite(entry.roll))
-      .map((entry) => ({
-        value: `${Number.isFinite(entry.initialRoll) ? entry.initialRoll : entry.roll}`,
-        outcome: entry.initialOutcome || entry.displayOutcome || entry.outcome || 'fail',
-      }))
-    const saveRolls = (result.saveRolls || []).filter((roll) => Number.isFinite(roll))
-    const blockedFlags = new Array(saveRolls.length).fill(false)
-    const sixIndices = []
-    const regularPassIndices = []
-
-    saveRolls.forEach((roll, index) => {
-      if (roll === 6) {
-        sixIndices.push(index)
-      } else if (roll >= result.saveThreshold) {
-        regularPassIndices.push(index)
-      }
-    })
-
-    let remainingBlockedCrits = result.totals?.blockedCrits || 0
-    sixIndices.forEach((index) => {
-      if (remainingBlockedCrits <= 0) return
-      blockedFlags[index] = true
-      remainingBlockedCrits -= 1
-    })
-
-    let remainingBlockedHits = result.totals?.blockedHits || 0
-    regularPassIndices.forEach((index) => {
-      if (remainingBlockedHits <= 0) return
-      blockedFlags[index] = true
-      remainingBlockedHits -= 1
-    })
-    sixIndices.forEach((index) => {
-      if (remainingBlockedHits <= 0 || blockedFlags[index]) return
-      blockedFlags[index] = true
-      remainingBlockedHits -= 1
-    })
-
-    const defenseDice = saveRolls.map((roll, index) => ({ value: roll, blocked: blockedFlags[index] }))
-    const appliedAbilityRules = (result.rulesApplied || []).filter((rule) => isAbilityRule(rule))
-    const abilityDetails = []
-    const pushAbilityDetail = (esText, enText, dice = []) => {
-      abilityDetails.push({
-        text: lang === 'en' ? enText : esText,
-        dice,
-      })
-    }
-    const allHitEntries = result.hitEntries || []
-    const precisionRerolls = (result.hitEntries || []).filter((entry) => entry.rerolled)
-    if (weaponHasAnyPrefix(weapon, ['precision'])) {
-      if (precisionRerolls.length) {
-        const failedInitials = precisionRerolls.map((entry) => entry.initialRoll)
-        const rerollHits = precisionRerolls.filter((entry) => entry.outcome === 'hit').length
-        const rerollCrits = precisionRerolls.filter((entry) => entry.outcome === 'crit').length
-        const rerollFails = precisionRerolls.filter((entry) => entry.outcome === 'fail').length
-
-        pushAbilityDetail(
-          `Precisión repite fallos [${failedInitials.join(', ')}] con nuevos dados: ${rerollHits} impactos, ${rerollCrits} críticos y ${rerollFails} fallos.`,
-          `Precision rerolls failed rolls [${failedInitials.join(', ')}] with new dice: ${rerollHits} hits, ${rerollCrits} crits and ${rerollFails} fails.`,
-          precisionRerolls.map((entry) => ({
-            value: entry.roll,
-            outcome: entry.outcome,
-          })),
-        )
-      }
-    }
-    const chainedEntries = allHitEntries.filter((entry) => entry.source === 'chain' && Number.isFinite(entry.roll))
-    if (chainedEntries.length > 0) {
-      const chainedHits = chainedEntries.filter((entry) => entry.outcome === 'hit').length
-      const chainedCrits = chainedEntries.filter((entry) => entry.outcome === 'crit').length
-      const chainedFails = chainedEntries.filter((entry) => entry.outcome === 'fail').length
-      pushAbilityDetail(
-        `Impactos encadenados añade ${chainedEntries.length} tirada${chainedEntries.length > 1 ? 's' : ''}: ${chainedHits} impactos, ${chainedCrits} críticos y ${chainedFails} fallos.`,
-        `Chained Impacts adds ${chainedEntries.length} extra roll${chainedEntries.length > 1 ? 's' : ''}: ${chainedHits} hits, ${chainedCrits} crits and ${chainedFails} fails.`,
-        chainedEntries.map((entry) => ({ value: entry.roll, outcome: entry.outcome })),
-      )
-    }
-
-    const antiRule = appliedAbilityRules.find((rule) => normalizeText(rule).startsWith('anti '))
-    const antiThresholdMatch = antiRule ? antiRule.match(/(\d+)\+?/) : null
-    const antiThreshold = antiThresholdMatch ? Number.parseInt(antiThresholdMatch[1], 10) : null
-    if (Number.isFinite(antiThreshold)) {
-      const antiCritEntries = allHitEntries.filter(
-        (entry) => Number.isFinite(entry.roll) && entry.outcome === 'crit' && entry.roll < 6 && entry.roll >= antiThreshold,
-      )
-      if (antiCritEntries.length > 0) {
-        pushAbilityDetail(
-          `Anti ${antiThreshold}+ convierte ${antiCritEntries.length} resultado${antiCritEntries.length > 1 ? 's' : ''} en crítico.`,
-          `Anti ${antiThreshold}+ turns ${antiCritEntries.length} roll${antiCritEntries.length > 1 ? 's' : ''} into critical hits.`,
-        )
-      }
-    }
-
-    const assaulterRule = appliedAbilityRules.find((rule) => {
-      const normalized = normalizeText(rule)
-      return normalized.startsWith('asaltante') || normalized.startsWith('raider')
-    })
-    if (assaulterRule) {
-      const savePenaltyMatch = assaulterRule.match(/([+-]?\d+)/)
-      const savePenalty = savePenaltyMatch ? Number.parseInt(savePenaltyMatch[1], 10) : 1
-      const bonusText = Number.isFinite(savePenalty) && savePenalty >= 0 ? `+${savePenalty}` : `${savePenalty || 1}`
-      pushAbilityDetail(
-        `Asaltante aplica ${bonusText} a la salvación enemiga (salva con ${result.saveThreshold}+).`,
-        `Raider applies ${bonusText} to enemy Save (saves on ${result.saveThreshold}+).`,
-      )
-    }
-
-    const unstableRule = (result.rulesApplied || []).find((rule) => {
-      const normalized = normalizeText(rule)
-      return normalized.startsWith('inestable') || normalized.startsWith('unstable')
-    })
-    if (unstableRule) {
-      const unstableRollMatch = unstableRule.match(/(\d+)/)
-      const unstableRoll = unstableRollMatch ? Number.parseInt(unstableRollMatch[1], 10) : null
-      const unstableTriggered = (result.totals?.selfDamage || 0) > 0
-      pushAbilityDetail(
-        unstableTriggered
-          ? `Inestable tira ${unstableRoll ?? '-'}: se activa y causa ${result.totals?.selfDamage || 0} de autodaño.`
-          : `Inestable tira ${unstableRoll ?? '-'}: no se activa autodaño.`,
-        unstableTriggered
-          ? `Unstable rolls ${unstableRoll ?? '-'}: it triggers and deals ${result.totals?.selfDamage || 0} self-damage.`
-          : `Unstable rolls ${unstableRoll ?? '-'}: no self-damage is triggered.`,
-        Number.isFinite(unstableRoll)
-          ? [{ value: unstableRoll, outcome: unstableTriggered ? 'fail' : 'hit' }]
-          : [],
-      )
-    }
-    if (result.parabolicScatter) {
-      const scatter = result.parabolicScatter
-      const scatterDirection = getScatterDirectionLabel(scatter.direction)
-      const scatterTextEs = scatter.bullseye
-        ? 'Disparo parabólico: diana. Impacta en el punto marcado.'
-        : `Disparo parabólico: flecha ${scatterDirection}, desvío ${scatter.deviationInches}".`
-      const scatterTextEn = scatter.bullseye
-        ? 'Parabolic Shot: bullseye. It lands on the marked point.'
-        : `Parabolic Shot: arrow ${scatterDirection}, deviates ${scatter.deviationInches}".`
-      pushAbilityDetail(
-        scatterTextEs,
-        scatterTextEn,
-        [{
-          value: scatter.bullseye
-            ? (lang === 'en' ? 'BULLSEYE' : 'DIANA')
-            : (lang === 'en' ? 'ARROW' : 'FLECHA'),
-          outcome: scatter.bullseye ? 'crit' : 'fail',
-          kind: 'scatter',
-          scatterDirection,
-          scatterBullseye: scatter.bullseye,
-        }],
-      )
-    }
-
-    if (result.hasDirect) {
-      pushAbilityDetail(
-        'Directo convierte los ataques en impactos automáticos.',
-        'Direct turns attacks into automatic hits.',
-      )
-    }
-    const ignoresCoverRule = (result.rulesApplied || []).find((rule) => {
-      const normalized = normalizeText(rule)
-      return normalized.startsWith('ignora coberturas') || normalized.startsWith('ignore cover')
-    })
-    if (ignoresCoverRule && result.coverType === 'partial') {
-      pushAbilityDetail(
-        'Ignora coberturas anula la cobertura parcial del defensor.',
-        'Ignore Cover cancels the defender partial cover.',
-      )
-    }
-    const appliedCoverRules = (result.rulesApplied || []).filter((rule) => normalizeText(rule).startsWith('cobertura'))
-    const ignoresPartialCover = (result.rulesApplied || []).some((rule) =>
-      normalizeText(rule).startsWith('ignora coberturas') || normalizeText(rule).startsWith('ignore cover'),
-    )
-    const coverAffectsDefense = appliedCoverRules.length > 0 && !(ignoresPartialCover && result.coverType === 'partial')
-    const rollOutcomeSummary = summarizeRollOutcomes(attackDice)
-    const attackerSummary = result.hasDirect
-      ? lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (automatic hits): ${result.totals.hits} hits and ${result.totals.crits} crits.`
-        : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${result.totals.hits} impactos y ${result.totals.crits} críticos.`
-      : lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'}.`
-        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'}.`
-    const defenderCover = coverAffectsDefense
-      ? lang === 'en'
-        ? result.coverType === 'height'
-          ? 'cover: high'
-          : 'cover: partial'
-        : result.coverType === 'height'
-          ? 'cobertura de altura'
-          : 'cobertura parcial'
-      : ''
-    const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
-    const landedImpacts = Math.max(0, (result.totals?.hits || 0) + (result.totals?.crits || 0) - blockedTotal)
-    const defenderTail = lang === 'en'
-      ? `): blocks ${blockedTotal}; ${landedImpacts} land; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
-      : `): consigue bloquear ${blockedTotal}; impactan ${landedImpacts}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
-
-    return {
-      key,
-      title,
-      attackerSide,
-      subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
-      attackerLine: attackerSummary,
-      abilityLine: '',
-      defenderLine: '',
-      defenderLead,
-      defenderSave: `${result.saveThreshold}+`,
-      defenderCover,
-      defenderTail,
-      attackCountDice,
-      attackDice,
-      defenseDice,
-      abilityDetails,
-      resultState: {
-        attacker: {
-          name: attackerName,
-          hp: attackerFinalHp,
-          defeated: attackerFinalHp <= 0,
-          hpBefore: attackerHpBefore,
-        },
-        defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
-        selfDamage: attackerSelfDamage,
-      },
-    }
-  }
-
-  const buildStatusEntry = ({
-    key,
-    attackerSide = 'left',
-    attackerName,
-    defenderName,
-    attackerHp,
-    defenderHp,
-    attackerLine,
-    defenderLine,
-    attackDice = [],
-    selfDamage = 0,
-    hideResult = false,
-  }) => ({
-    key,
-    attackerSide,
-    title: '',
-    subtitle: '',
-    attackerLine,
-    defenderLine,
-    abilityLine: '',
-    defenderLead: '',
-    defenderSave: '',
-    defenderCover: '',
-    defenderTail: '',
-    abilityDetails: [],
-    attackCountDice: [],
-    attackDice,
-    defenseDice: [],
-    hideResult,
-    resultState: {
-      attacker: {
-        name: attackerName,
-        hp: attackerHp,
-        defeated: attackerHp <= 0,
-        hpBefore: attackerHp,
-      },
-      defender: { name: defenderName, hp: defenderHp, defeated: defenderHp <= 0 },
-      selfDamage,
-    },
-  })
+  const { buildCombatEntry, buildStatusEntry } = useMemo(
+    () => createBattleLogBuilders({ lang, tx, currentModeLabel }),
+    [lang, tx, currentModeLabel],
+  )
 
   const handleFlip = () => {
     if (isResolving) return
@@ -1009,6 +282,8 @@ function Batalla() {
 
     setLeft(nextLeft)
     setRight(nextRight)
+    setLeftFactionAbilityState(rightFactionAbilityState)
+    setRightFactionAbilityState(leftFactionAbilityState)
 
     setLeftCoverType(rightCoverType)
     setRightCoverType(leftCoverType)
@@ -1053,16 +328,35 @@ function Batalla() {
     const entries = []
     const pendingAmmoSpend = {}
     let rangedCounterReady = false
+    const heroicFallUsedBySide = { left: false, right: false }
+    const crucibleGloryUsedBySide = { left: false, right: false }
 
-    const runAttack = ({ attackerSide, weapon, stepLabel, index }) => {
+    const isFactionAbilityEnabledBySide = (side, effectKey) => {
+      const abilities = side === 'left' ? leftFaction?.abilities : rightFaction?.abilities
+      const stateMap = side === 'left' ? leftFactionAbilityState : rightFactionAbilityState
+      return isFactionEffectEnabled({ abilities, stateMap, effectKey })
+    }
+
+    const runAttack = ({
+      attackerSide,
+      weapon,
+      stepLabel,
+      index,
+      allowDestroyedAttacker = false,
+      extraFactionAbilityDetails = [],
+    }) => {
       const defenderSide = attackerSide === 'left' ? 'right' : 'left'
       const attackerUnit = attackerSide === 'left' ? leftUnit : rightUnit
       const defenderUnit = defenderSide === 'left' ? leftUnit : rightUnit
+      const attackerFaction = attackerSide === 'left' ? leftFaction : rightFaction
+      const defenderFaction = defenderSide === 'left' ? leftFaction : rightFaction
+      const attackerFactionAbilityState = attackerSide === 'left' ? leftFactionAbilityState : rightFactionAbilityState
+      const defenderFactionAbilityState = defenderSide === 'left' ? leftFactionAbilityState : rightFactionAbilityState
       if (!attackerUnit || !defenderUnit) return
 
       const attackerHpBefore = attackerSide === 'left' ? nextLeftHp : nextRightHp
       const defenderHpBefore = defenderSide === 'left' ? nextLeftHp : nextRightHp
-      if (attackerHpBefore <= 0 || defenderHpBefore <= 0) return
+      if ((!allowDestroyedAttacker && attackerHpBefore <= 0) || defenderHpBefore <= 0) return
 
       const attackerFactionId = attackerSide === 'left' ? leftFactionId : rightFactionId
       const ammoInfo = getWeaponAmmoInfo(attackerSide, attackerFactionId, attackerUnit, weapon, pendingAmmoSpend)
@@ -1110,6 +404,20 @@ function Batalla() {
           : rightAfterDash
         : false
       const defenderCoverType = defenderSide === 'left' ? leftCoverType : rightCoverType
+      const factionConditions = buildFactionAttackConditions({
+        attackerAbilities: attackerFaction?.abilities,
+        attackerState: attackerFactionAbilityState,
+        defenderAbilities: defenderFaction?.abilities,
+        defenderState: defenderFactionAbilityState,
+        mode,
+      })
+      if (mode === 'ranged' && factionConditions.defenderCrucibleGlory && crucibleGloryUsedBySide[defenderSide]) {
+        factionConditions.defenderCrucibleGlory = false
+      }
+      const futureConditions = buildFutureCombatConditions({
+        attackerUnitCount: 1,
+        defenderUnitCount: 1,
+      })
 
       const attackResult = resolveAttack({
         attacker: {
@@ -1136,6 +444,8 @@ function Batalla() {
           attackerEngaged: false,
           hasLineOfSight: !noLineOfSight,
           afterDash,
+          ...factionConditions,
+          ...futureConditions,
         },
       })
 
@@ -1153,6 +463,9 @@ function Batalla() {
         nextRightHp = attackResult.attackerAfter?.hp ?? nextRightHp
         nextLeftHp = attackResult.blocked ? nextLeftHp : attackResult.defenderAfter.hp
       }
+      if (!attackResult.blocked && mode === 'ranged' && Number(attackResult.totals?.preventedDamage) > 0) {
+        crucibleGloryUsedBySide[defenderSide] = true
+      }
 
       entries.push(
         buildCombatEntry({
@@ -1165,8 +478,56 @@ function Batalla() {
           attackerHpBefore,
           defenderHpBefore,
           result: attackResult,
+          extraFactionAbilityDetails,
         }),
       )
+
+      const defenderDestroyed = !attackResult.blocked && (attackResult.defenderAfter?.hp || 0) <= 0
+      const canUseHeroicFall = defenderDestroyed
+        && !heroicFallUsedBySide[defenderSide]
+        && isFactionAbilityEnabledBySide(defenderSide, 'crucible_heroic_fall')
+
+      if (!canUseHeroicFall) return
+      heroicFallUsedBySide[defenderSide] = true
+
+      const heroicWeapon = (defenderSide === 'left' ? leftSelectedWeapons : rightSelectedWeapons)[0]
+      const targetHpAfterKill = attackerSide === 'left' ? nextLeftHp : nextRightHp
+      if (!heroicWeapon || targetHpAfterKill <= 0) return
+
+      const heroicAttackerHp = defenderSide === 'left' ? nextLeftHp : nextRightHp
+      const heroicDefenderHp = attackerSide === 'left' ? nextLeftHp : nextRightHp
+
+      entries.push(
+        buildStatusEntry({
+          key: `${stepLabel}-heroic-fall-${defenderSide}-${index}`,
+          attackerSide: defenderSide,
+          attackerName: defenderUnit.name,
+          defenderName: attackerUnit.name,
+          attackerHp: heroicAttackerHp,
+          defenderHp: heroicDefenderHp,
+          attackerLine: '',
+          defenderLine: '',
+          hidePrimaryLine: true,
+          abilityDetails: [{
+            text:
+              lang === 'en'
+                ? `Heroic fall active: ${defenderUnit.name} performs a free counterattack before being removed.`
+                : `Caída heroica activa: ${defenderUnit.name} realiza un contraataque gratuito antes de ser retirada.`,
+            dice: [],
+            source: 'faction',
+            owner: 'attacker',
+          }],
+          hideResult: true,
+        }),
+      )
+
+      runAttack({
+        attackerSide: defenderSide,
+        weapon: heroicWeapon,
+        stepLabel: `${stepLabel}-heroic-fall`,
+        index,
+        allowDestroyedAttacker: true,
+      })
     }
 
     const runWeaponsForSide = (side, stepLabel) => {
@@ -1263,8 +624,10 @@ function Batalla() {
     }
     if (side === 'left') {
       setLeft(nextSelection)
+      setLeftFactionAbilityState({})
     } else {
       setRight(nextSelection)
+      setRightFactionAbilityState({})
     }
   }
 
@@ -1337,6 +700,7 @@ function Batalla() {
                     unitId: faction?.units[0]?.id || '',
                     weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
                   })
+                  setLeftFactionAbilityState({})
                 }}
               >
                 {factions.map((faction) => (
@@ -1475,7 +839,7 @@ function Batalla() {
                           <div className="weapon-stats-row duel-weapon-row">
                             <span>{weapon.attacks}</span>
                             <span>{weapon.range || '-'}</span>
-                            <span>{weapon.kind === 'melee' ? '3+' : weaponHasAnyPrefix(weapon, DIRECT_PREFIXES) ? '-' : weapon.hit || '-'}</span>
+                            <span>{weapon.kind === 'melee' ? '3+' : hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.direct) ? '-' : weapon.hit || '-'}</span>
                             <span>{weapon.damage}</span>
                             <span>{weapon.critDamage}</span>
                             <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
@@ -1522,6 +886,25 @@ function Batalla() {
               ))}
             </select>
           </label>
+          <section className="duel-faction-abilities">
+            <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
+            {!leftFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
+            {!!leftFactionAbilities.length && !leftImplementedFactionAbilities.length && (
+              <p className="battle-empty">{tx.inConstruction}</p>
+            )}
+            {leftImplementedFactionAbilities.map((ability) => (
+              <label key={ability.id} className="duel-faction-ability">
+                <input
+                  type="checkbox"
+                  checked={Boolean(leftFactionAbilityState[ability.id])}
+                  onChange={(event) => setFactionAbilityEnabled('left', ability.id, event.target.checked)}
+                />
+                <span className="duel-faction-ability-copy">
+                  <strong>{ability.name || '-'}</strong>
+                </span>
+              </label>
+            ))}
+          </section>
 
         </article>
 
@@ -1548,6 +931,7 @@ function Batalla() {
                     unitId: faction?.units[0]?.id || '',
                     weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
                   })
+                  setRightFactionAbilityState({})
                 }}
               >
                 {factions.map((faction) => (
@@ -1686,7 +1070,7 @@ function Batalla() {
                           <div className="weapon-stats-row duel-weapon-row">
                             <span>{weapon.attacks}</span>
                             <span>{weapon.range || '-'}</span>
-                            <span>{weapon.kind === 'melee' ? '3+' : weaponHasAnyPrefix(weapon, DIRECT_PREFIXES) ? '-' : weapon.hit || '-'}</span>
+                            <span>{weapon.kind === 'melee' ? '3+' : hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.direct) ? '-' : weapon.hit || '-'}</span>
                             <span>{weapon.damage}</span>
                             <span>{weapon.critDamage}</span>
                             <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
@@ -1733,6 +1117,26 @@ function Batalla() {
               ))}
             </select>
           </label>
+          <section className="duel-faction-abilities">
+            <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
+            {!rightFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
+            {!!rightFactionAbilities.length && !rightImplementedFactionAbilities.length && (
+              <p className="battle-empty">{tx.inConstruction}</p>
+            )}
+            {rightImplementedFactionAbilities.map((ability) => (
+              <label key={ability.id} className="duel-faction-ability">
+                <input
+                  type="checkbox"
+                  checked={Boolean(rightFactionAbilityState[ability.id])}
+                  onChange={(event) => setFactionAbilityEnabled('right', ability.id, event.target.checked)}
+                />
+                <span className="duel-faction-ability-copy">
+                  <strong>{ability.name || '-'}</strong>
+                </span>
+              </label>
+            ))}
+          </section>
+          <div className="duel-counter-divider" aria-hidden="true" />
 
           <label className="field checkbox">
             <input
@@ -1779,196 +1183,7 @@ function Batalla() {
         </button>
       </div>
 
-      <article className="duel-log reveal">
-        <div className="duel-log-head">
-          <h3>{tx.combatLog}</h3>
-        </div>
-        {!logEntries.length && <p className="battle-empty">{tx.emptyLog}</p>}
-        {logEntries.length > 0 && (
-          <div className="duel-log-list">
-            {logEntries.map((entry) => {
-              const isCounterattackEntry = entry.key.includes('counter')
-              const attackerSide = entry.attackerSide === 'right' ? 'right' : 'left'
-              const attackerIsLeft = attackerSide === 'left'
-              const attackerHpBefore = Number(entry.resultState?.attacker?.hpBefore)
-              const attackerHpAfter = Number(entry.resultState?.attacker?.hp)
-              const showSelfDamageTransition = Number(entry.resultState?.selfDamage) > 0
-                && Number.isFinite(attackerHpBefore)
-                && Number.isFinite(attackerHpAfter)
-              const attackerUnitName = String(entry.resultState?.attacker?.name || '-')
-                .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
-              const defenderUnitName = String(entry.resultState?.defender?.name || '-')
-                .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
-              const primaryRole = attackerIsLeft ? tx.attacker : tx.defender
-              const primaryUnitName = attackerUnitName
-              const primaryLabelClass = attackerIsLeft
-                ? 'duel-log-line-label duel-log-line-label-attacker'
-                : 'duel-log-line-label duel-log-line-label-defender'
-              const secondaryRole = attackerIsLeft ? tx.defender : tx.attacker
-              const secondaryUnitName = defenderUnitName
-              const secondaryLabelClass = attackerIsLeft
-                ? 'duel-log-line-label duel-log-line-label-defender'
-                : 'duel-log-line-label duel-log-line-label-attacker'
-              return (
-                <article key={entry.key} className="duel-log-entry">
-                <div className="duel-log-line">
-                  <span className={primaryLabelClass}>
-                    <span>{primaryRole}</span>{' '}
-                    <span className="duel-log-line-label-unit">{primaryUnitName}</span>
-                    {isCounterattackEntry && <span>{` (${tx.counterattack})`}</span>}
-                  </span>
-                  <div className="duel-dice">
-                    {!!entry.attackCountDice?.length && (
-                      <>
-                        <span className="duel-log-copy-note">
-                          {lang === 'en' ? 'Attack count' : 'Ataques'}
-                        </span>
-                        {entry.attackCountDice.map((die, index) => (
-                          <span
-                            key={`${entry.key}-attack-count-${index}`}
-                            className="duel-die duel-die-attack duel-die-count"
-                            title={die.dieType}
-                          >
-                            <span className="duel-die-count-value">{die.value}</span>
-                            <span className="duel-die-count-type">{die.dieType}</span>
-                          </span>
-                        ))}
-                      </>
-                    )}
-                    {!!entry.attackDice?.length && (
-                      <span className="duel-log-copy-note">
-                        {lang === 'en' ? 'Hit rolls' : 'Tiradas de impacto'}
-                      </span>
-                    )}
-                    {entry.attackDice?.map((die, index) => (
-                      <span
-                        key={`${entry.key}-attacker-${index}`}
-                        className={`duel-die ${
-                          die.tone === 'charge'
-                            ? 'duel-die-charge'
-                            : die.tone === 'count'
-                              ? 'duel-die-tag'
-                            : die.outcome === 'fail'
-                              ? 'duel-die-fail-gray'
-                              : die.outcome === 'crit'
-                                ? 'duel-die-attack duel-die-crit'
-                                : 'duel-die-attack'
-                        }`}
-                      >
-                        {die.value}
-                      </span>
-                    ))}
-                    <span className="duel-log-copy">{entry.attackerLine}</span>
-                    {!!entry.abilityLine && (
-                      <span className="duel-log-copy duel-log-ability-line">{entry.abilityLine}</span>
-                    )}
-                  </div>
-                </div>
-                {!!entry.abilityDetails?.length && entry.abilityDetails.map((detail, detailIndex) => (
-                  <div key={`${entry.key}-ability-detail-${detailIndex}`} className="duel-log-line">
-                    <span className="duel-log-line-label duel-log-line-label-ability">{lang === 'en' ? 'Ability' : 'Habilidad'}</span>
-                    <div className="duel-dice">
-                      {detail.dice?.map((die, dieIndex) => (
-                        <span
-                          key={`${entry.key}-ability-die-${detailIndex}-${dieIndex}`}
-                          className={`duel-die ${
-                            die.kind === 'scatter'
-                              ? 'duel-die-scatter'
-                            : die.outcome === 'fail'
-                              ? 'duel-die-fail-gray'
-                              : die.outcome === 'crit'
-                                ? 'duel-die-attack duel-die-crit'
-                                : 'duel-die-attack'
-                          }`}
-                          title={die.value}
-                        >
-                          {die.kind === 'scatter' ? (
-                            <>
-                              <span className="duel-die-scatter-symbol">
-                                {die.scatterBullseye ? '◎' : getScatterDirectionIcon(die.scatterDirection)}
-                              </span>
-                            </>
-                          ) : (
-                            die.value
-                          )}
-                        </span>
-                      ))}
-                      <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
-                    </div>
-                  </div>
-                ))}
-                {(entry.defenseDice?.length || entry.defenderLine) && (
-                  <div className="duel-log-line">
-                    <span className={secondaryLabelClass}>
-                      <span>{secondaryRole}</span>{' '}
-                      <span className="duel-log-line-label-unit">{secondaryUnitName}</span>
-                    </span>
-                    <div className="duel-dice">
-                      {entry.defenseDice?.map((die, index) => (
-                        <span
-                          key={`${entry.key}-defender-${index}`}
-                          className={`duel-die ${die.blocked ? 'duel-die-defense' : 'duel-die-fail-gray'} ${Number(die.value) === 6 ? 'duel-die-crit' : ''}`}
-                        >
-                          {die.value}
-                        </span>
-                      ))}
-                      {entry.defenderSave ? (
-                        <span className="duel-log-copy">
-                          <span>{entry.defenderLead}</span>
-                          <span className="duel-log-save-threshold">{entry.defenderSave}</span>
-                          {!!entry.defenderCover && (
-                            <span className="duel-log-cover-tag"> · {entry.defenderCover}</span>
-                          )}
-                          <span>{entry.defenderTail}</span>
-                        </span>
-                      ) : (
-                        <span className="duel-log-copy">{entry.defenderLine}</span>
-                      )}
-                    </div>
-                  </div>
-                )}
-                {!entry.hideResult && (
-                  <div className="duel-log-line">
-                    <span className="duel-log-line-label">{tx.result}</span>
-                    <div className="duel-dice duel-result-block">
-                      <p className="duel-log-copy duel-log-copy-result">
-                        <span>{`${entry.resultState.attacker.name}: `}</span>
-                        {entry.resultState.attacker.defeated ? (
-                          <span className="duel-log-defeated">{lang === 'en' ? 'The unit has been defeated.' : 'La unidad ha sido derrotada.'}</span>
-                        ) : (
-                          <>
-                            <span>{lang === 'en' ? 'ends with ' : 'se queda con '}</span>
-                            <span className="duel-log-hp-remaining">{entry.resultState.attacker.hp} {tx.hp}</span>
-                            {showSelfDamageTransition && (
-                              <span>{lang === 'en'
-                                ? ` (${attackerHpBefore} -> ${attackerHpAfter} HP)`
-                                : ` (${attackerHpBefore} -> ${attackerHpAfter} vidas)`}</span>
-                            )}
-                            <span>.</span>
-                          </>
-                        )}
-                      </p>
-                      <p className="duel-log-copy duel-log-copy-result">
-                        <span>{`${entry.resultState.defender.name}: `}</span>
-                        {entry.resultState.defender.defeated ? (
-                          <span className="duel-log-defeated">{lang === 'en' ? 'The unit has been defeated.' : 'La unidad ha sido derrotada.'}</span>
-                        ) : (
-                          <>
-                            <span>{lang === 'en' ? 'ends with ' : 'se queda con '}</span>
-                            <span className="duel-log-hp-remaining">{entry.resultState.defender.hp} {tx.hp}</span>
-                            <span>.</span>
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                </article>
-              )
-            })}
-          </div>
-        )}
-      </article>
+      <BattleCombatLog logEntries={logEntries} tx={tx} lang={lang} />
     </section>
   )
 }

@@ -7,6 +7,7 @@ export const translations = {
       discord: 'Discord',
     },
     footer: {
+      madeBy: 'hecho por alvidi91',
       tagline: 'Un universo en construcción.',
     },
     rules: {
@@ -129,7 +130,7 @@ export const translations = {
         lead2: 'Tus historias.',
         lead3: 'Tus batallas.',
         start: 'Empezar a jugar',
-        rules: 'Ver reglas',
+        rules: 'Crear tu ejército',
       },
       scales: {
         eyebrow: 'Escalas de juego',
@@ -194,6 +195,7 @@ export const translations = {
       discord: 'Discord',
     },
     footer: {
+      madeBy: 'made by alvidi91',
       tagline: 'A universe under construction.',
     },
     rules: {
@@ -316,7 +318,7 @@ export const translations = {
         lead2: 'Your stories.',
         lead3: 'Your battles.',
         start: 'Start playing',
-        rules: 'See rules',
+        rules: 'Create your army',
       },
       scales: {
         eyebrow: 'Game scales',

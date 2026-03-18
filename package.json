@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "battle:smoke": "node scripts/battle-smoke.mjs",
     "rules:sync-en": "node scripts/sync-regulations-en.mjs",
     "rules:audit": "node scripts/audit-regulations.mjs",
     "factions:sync-html": "node scripts/sync-factions-from-html.mjs"

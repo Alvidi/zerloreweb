@@ -1,3 +1,10 @@
+import {
+  findWeaponAbilityRaw,
+  getWeaponAbilityNumericValue,
+  hasWeaponAbilityId,
+  WEAPON_ABILITY_IDS,
+} from '../features/battle/weaponAbilities.js'
+
 const MAX_CHAIN_ROLLS = 180
 
 const sanitize = (value) =>
@@ -82,48 +89,11 @@ const resolveRollableThreshold = (value, fallback = 4) => {
   return { value: rolled.total, rolls: rolled.rolls, label: expr.label }
 }
 
-const ABILITY_ALIASES = {
-  assaulter: ['asaltante', 'raider'],
-  heavy: ['pesada', 'heavy'],
-  quickAttack: ['ataque rapido', 'quick attack'],
-  gunslinger: ['pistolero', 'gunslinger'],
-  explosive: ['explosiva', 'explosive'],
-  criticalAttack: ['ataque critico', 'critical attack'],
-  chainedImpacts: ['impactos encadenados', 'chained impacts'],
-  precision: ['precision'],
-  anti: ['anti'],
-  ignoreCover: ['ignora coberturas', 'ignora cobertura', 'ignore coverage', 'ignore coverages'],
-  parabolicShot: ['disparo parabolico', 'parabolic shot', 'indirect fire'],
-  unstable: ['inestable', 'unstable'],
-  direct: ['directo', 'straight', 'direct'],
-  guerrilla: ['guerrilla'],
-  limitedAmmo: ['municion limitada', 'limited ammo'],
-}
-
-const abilityPrefixes = (abilityKeyOrPrefix) => ABILITY_ALIASES[abilityKeyOrPrefix] || [abilityKeyOrPrefix]
-
-const matchesAbilityPrefix = (ability, prefixes) => {
-  const normalized = sanitize(ability)
-  return prefixes.some((prefix) => normalized.startsWith(sanitize(prefix)))
-}
-
-const findAbilityByKey = (weapon, abilityKeyOrPrefix) => {
-  const prefixes = abilityPrefixes(abilityKeyOrPrefix)
-  return (weapon?.abilities || []).find((ability) => matchesAbilityPrefix(ability, prefixes))
-}
-
-const hasAbility = (weapon, abilityKeyOrPrefix) => Boolean(findAbilityByKey(weapon, abilityKeyOrPrefix))
-
-const getAbilityValue = (weapon, abilityKeyOrPrefix, fallback = 0) => {
-  const ability = findAbilityByKey(weapon, abilityKeyOrPrefix)
-  if (!ability) return fallback
-  const num = String(ability).match(/[+-]?\s*\d+/)
-  if (!num) return fallback
-  return toInt(num[0].replace(/\s+/g, ''), fallback)
-}
+const hasAbility = (weapon, abilityId) => hasWeaponAbilityId(weapon, abilityId)
+const getAbilityValue = (weapon, abilityId, fallback = 0) => getWeaponAbilityNumericValue(weapon, abilityId, fallback)
 
 const parseAntiAbility = (weapon) => {
-  const anti = findAbilityByKey(weapon, 'anti')
+  const anti = findWeaponAbilityRaw(weapon, WEAPON_ABILITY_IDS.anti)
   if (!anti) return null
   const threshold = parseThreshold(anti, 99)
   const lower = sanitize(anti)
@@ -238,7 +208,7 @@ const buildNarrative = ({
       return `${entry.initialRoll}→${entry.roll}`
     })
     lines.push(`Impactos (${hitThreshold}+): [${rolls.join(', ')}].`)
-  } else if (hasAbility(weapon, 'direct')) {
+  } else if (hasAbility(weapon, WEAPON_ABILITY_IDS.direct)) {
     lines.push('Impactos automáticos por habilidad Directo.')
   }
 
@@ -268,9 +238,14 @@ export function resolveAttack({
   const coverType = conditions.coverType || 'none'
   const hasLineOfSight = conditions.hasLineOfSight !== false
   const attackerEngaged = Boolean(conditions.attackerEngaged)
+  const attackerRerollFailedHits = Boolean(conditions.attackerRerollFailedHits)
+  const attackerVoracity = Boolean(conditions.attackerVoracity)
+  const defenderMartialResistance = Boolean(conditions.defenderMartialResistance)
+  const defenderCrucibleGlory = Boolean(conditions.defenderCrucibleGlory)
+  const attackerCrucibleSacredVow = Boolean(conditions.attackerCrucibleSacredVow)
   const rulesApplied = []
-  const hasParabolic = mode === 'ranged' && hasAbility(weapon, 'parabolicShot')
-  const hasGunslinger = mode === 'ranged' && hasAbility(weapon, 'gunslinger')
+  const hasParabolic = mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.parabolicShot)
+  const hasGunslinger = mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.gunslinger)
   let parabolicScatter = null
 
   if (mode === 'ranged' && attackerEngaged && !hasGunslinger) {
@@ -369,6 +344,19 @@ export function resolveAttack({
   if (hitThresholdRoll.rolls.length) {
     rulesApplied.push(`Impactos variables (${hitThresholdRoll.label}: ${hitThresholdRoll.rolls.join('+')} = ${baseHitThreshold})`)
   }
+  if (attackerRerollFailedHits) {
+    rulesApplied.push('Objetivo en la mira (repite impactos fallidos)')
+  }
+  if (mode === 'ranged' && defenderMartialResistance) {
+    hitThreshold += 1
+    rulesApplied.push('Resistencia marcial (+1 al valor de impactos enemigo en disparo)')
+  }
+  if (mode === 'ranged' && defenderCrucibleGlory) {
+    rulesApplied.push('Gloria del Crisol (ignora 1 daño del primer disparo recibido)')
+  }
+  if (mode === 'melee' && attackerCrucibleSacredVow) {
+    rulesApplied.push('Voto sagrado (repite 1 dado fallido en CaC)')
+  }
 
   if (mode === 'ranged' && coverType === 'partial') {
     saveThreshold -= 1
@@ -380,13 +368,13 @@ export function resolveAttack({
     rulesApplied.push('Cobertura de altura (-1 al valor de salvación, +1 impacto requerido)')
   }
 
-  if (mode === 'ranged' && hasAbility(weapon, 'quickAttack') && conditions.halfRange) {
-    const rapidBonus = getAbilityValue(weapon, 'quickAttack', 1)
+  if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.quickAttack) && conditions.halfRange) {
+    const rapidBonus = getAbilityValue(weapon, WEAPON_ABILITY_IDS.quickAttack, 1)
     bonusAttackDice += rapidBonus
     rulesApplied.push(`Ataque rápido (+${rapidBonus} dados)`)
   }
 
-  if (mode === 'ranged' && hasAbility(weapon, 'heavy')) {
+  if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.heavy)) {
     if (conditions.attackerMoved) {
       hitThreshold += 1
       rulesApplied.push('Pesada (movió: +1 al valor de impactos)')
@@ -396,13 +384,13 @@ export function resolveAttack({
     }
   }
 
-  if (mode === 'ranged' && hasAbility(weapon, 'assaulter')) {
-    const savePenalty = Math.max(1, getAbilityValue(weapon, 'assaulter', 1))
+  if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.assaulter)) {
+    const savePenalty = Math.max(1, getAbilityValue(weapon, WEAPON_ABILITY_IDS.assaulter, 1))
     saveThreshold += savePenalty
     rulesApplied.push(`Asaltante (+${savePenalty} a salvación enemiga)`)
   }
 
-  const ignoreCover = hasAbility(weapon, 'ignoreCover') && mode === 'ranged'
+  const ignoreCover = hasAbility(weapon, WEAPON_ABILITY_IDS.ignoreCover) && mode === 'ranged'
   if (ignoreCover && coverType === 'partial') {
     saveThreshold += 1
     rulesApplied.push('Ignora coberturas (anula cobertura parcial)')
@@ -413,12 +401,12 @@ export function resolveAttack({
   const antiData = parseAntiAbility(weapon)
   if (antiData) rulesApplied.push(`Anti ${antiData.threshold}+`)
 
-  const hasDirect = hasAbility(weapon, 'direct') && mode === 'ranged'
-  const hasPrecision = hasAbility(weapon, 'precision')
-  const hasChains = hasAbility(weapon, 'chainedImpacts')
-  const critUnsavable = hasAbility(weapon, 'criticalAttack')
-  const hasExplosive = hasAbility(weapon, 'explosive') && mode === 'ranged'
-  const hasGuerrilla = hasAbility(weapon, 'guerrilla') && mode === 'ranged'
+  const hasDirect = hasAbility(weapon, WEAPON_ABILITY_IDS.direct) && mode === 'ranged'
+  const hasPrecision = hasAbility(weapon, WEAPON_ABILITY_IDS.precision)
+  const hasChains = hasAbility(weapon, WEAPON_ABILITY_IDS.chainedImpacts)
+  const critUnsavable = hasAbility(weapon, WEAPON_ABILITY_IDS.criticalAttack)
+  const hasExplosive = hasAbility(weapon, WEAPON_ABILITY_IDS.explosive) && mode === 'ranged'
+  const hasGuerrilla = hasAbility(weapon, WEAPON_ABILITY_IDS.guerrilla) && mode === 'ranged'
 
   if (hasGuerrilla && conditions.afterDash) {
     // Guerrilla grants an extra shooting action after dash; in 1v1 simulator we model it as one extra volley.
@@ -442,6 +430,7 @@ export function resolveAttack({
 
   const hitEntries = []
   let chainGuard = 0
+  let sacredVowRerollUsed = false
 
   const resolveOneHitDie = (source = 'base') => {
     if (chainGuard > MAX_CHAIN_ROLLS) return
@@ -451,11 +440,21 @@ export function resolveAttack({
     let outcome = classifyRoll(roll, hitThreshold, antiData || { threshold: 99, groups: [] }, defender.type)
     const initialOutcome = outcome
     let rerolled = false
+    let rerollSource = null
 
-    if (hasPrecision && outcome === 'fail') {
+    if ((hasPrecision || attackerRerollFailedHits) && outcome === 'fail') {
       roll = rollDie(6)
       outcome = classifyRoll(roll, hitThreshold, antiData || { threshold: 99, groups: [] }, defender.type)
       rerolled = true
+      if (hasPrecision && attackerRerollFailedHits) rerollSource = 'precision_target_in_sight'
+      else if (hasPrecision) rerollSource = 'precision'
+      else rerollSource = 'target_in_sight'
+    } else if (mode === 'melee' && attackerCrucibleSacredVow && !sacredVowRerollUsed && outcome === 'fail') {
+      roll = rollDie(6)
+      outcome = classifyRoll(roll, hitThreshold, antiData || { threshold: 99, groups: [] }, defender.type)
+      rerolled = true
+      rerollSource = 'sacred_vow'
+      sacredVowRerollUsed = true
     }
 
     // Chained extra rolls can only become normal hits or fails.
@@ -472,6 +471,7 @@ export function resolveAttack({
       roll,
       outcome,
       rerolled,
+      rerollSource,
     })
 
     // Only base crits spawn one chained extra roll.
@@ -516,10 +516,12 @@ export function resolveAttack({
 
   const normalDamage = parseDamage(weapon.damage, 1)
   const critDamage = parseDamage(weapon.critDamage, normalDamage)
-  const totalDamage = unblockedHits * normalDamage + unblockedCrits * critDamage
+  const rawDamage = unblockedHits * normalDamage + unblockedCrits * critDamage
+  const preventedDamage = mode === 'ranged' && defenderCrucibleGlory ? Math.min(1, rawDamage) : 0
+  const totalDamage = Math.max(0, rawDamage - preventedDamage)
 
   let selfDamage = 0
-  if (mode === 'ranged' && hasAbility(weapon, 'unstable')) {
+  if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.unstable)) {
     const unstableRoll = rollDie(6)
     rulesApplied.push(`Inestable (tirada ${unstableRoll})`)
     if (unstableRoll <= 2) {
@@ -529,8 +531,15 @@ export function resolveAttack({
 
   const defenderAfterHp = Math.max(0, defender.hp - totalDamage)
   const attackerAfterHp = Math.max(0, attacker.hp - selfDamage)
+  const canTriggerVoracity = attackerVoracity && mode === 'melee' && defenderAfterHp <= 0
+  const voracityHeal = canTriggerVoracity ? Math.min(1, Math.max(0, attacker.maxHp - attackerAfterHp)) : 0
+  const attackerAfterHpWithVoracity = attackerAfterHp + voracityHeal
   const defenderAfter = { hp: defenderAfterHp, maxHp: defender.maxHp, destroyed: defenderAfterHp <= 0 }
-  const attackerAfter = { hp: attackerAfterHp, maxHp: attacker.maxHp, destroyed: attackerAfterHp <= 0 }
+  const attackerAfter = { hp: attackerAfterHpWithVoracity, maxHp: attacker.maxHp, destroyed: attackerAfterHpWithVoracity <= 0 }
+
+  if (voracityHeal > 0) {
+    rulesApplied.push(`Voracidad (+${voracityHeal} vida)`)
+  }
 
   const totals = {
     attackDiceCount,
@@ -539,7 +548,10 @@ export function resolveAttack({
     blockedHits,
     blockedCrits,
     damage: totalDamage,
+    rawDamage,
+    preventedDamage,
     selfDamage,
+    heal: voracityHeal,
   }
 
   const canCounter = Boolean(
