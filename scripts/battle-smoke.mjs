@@ -73,6 +73,42 @@ const run = () => {
   )
   assert(rerollResult.hitEntries?.[0]?.rerolled === true, 'Target in sight should reroll failed hit rolls')
 
+  const voidEyesWithPartialCover = withFixedRandom([0.1, 0.95], () =>
+    resolveAttack({
+      ...makeBaseArgs(),
+      weapon: { name: 'Void Rifle', attacks: '1', hit: '4+', damage: '1', critDamage: '2', abilities: [] },
+      conditions: {
+        ...makeBaseArgs().conditions,
+        coverType: 'partial',
+        attackerVoidEyesBeyond: true,
+      },
+    }),
+  )
+  assert(
+    voidEyesWithPartialCover.hitEntries?.[0]?.rerolled === true,
+    'Eyes from beyond should reroll failed hit rolls against partial cover',
+  )
+  assert(
+    String(voidEyesWithPartialCover.hitEntries?.[0]?.rerollSource || '').includes('eyes_beyond'),
+    'Eyes from beyond reroll source should be explicit',
+  )
+
+  const voidEyesWithoutPartialCover = withFixedRandom([0.1], () =>
+    resolveAttack({
+      ...makeBaseArgs(),
+      weapon: { name: 'Void Rifle', attacks: '1', hit: '4+', damage: '1', critDamage: '2', abilities: [] },
+      conditions: {
+        ...makeBaseArgs().conditions,
+        coverType: 'none',
+        attackerVoidEyesBeyond: true,
+      },
+    }),
+  )
+  assert(
+    voidEyesWithoutPartialCover.hitEntries?.[0]?.rerolled === false,
+    'Eyes from beyond should not reroll when defender is not in partial cover',
+  )
+
   const voracityResult = withFixedRandom([0.95, 0.1], () =>
     resolveAttack({
       attacker: { id: 'left', name: 'Swarm', hp: 4, maxHp: 5 },
@@ -119,6 +155,59 @@ const run = () => {
   )
   assert(sacredVowResult.hitEntries?.[0]?.rerolled === true, 'Sacred vow should reroll one failed melee die')
   assert(sacredVowResult.hitEntries?.[0]?.rerollSource === 'sacred_vow', 'Sacred vow reroll source should be explicit')
+
+  const feintCounterResult = withFixedRandom([0.95, 0.1], () =>
+    resolveAttack({
+      ...makeBaseArgs(),
+      conditions: {
+        ...makeBaseArgs().conditions,
+        defenderPrepared: false,
+        defenderRebelFeint: true,
+      },
+    }),
+  )
+  assert(feintCounterResult.canCounter === true, 'Feint should allow a ranged response without prepared state')
+
+  const noProtocols = resolveAttack({
+    ...makeBaseArgs(),
+    conditions: { ...makeBaseArgs().conditions, attackerTechnocratsCombatProtocols: false },
+  })
+  const withProtocols = resolveAttack({
+    ...makeBaseArgs(),
+    conditions: { ...makeBaseArgs().conditions, attackerTechnocratsCombatProtocols: true },
+  })
+  assert(
+    withProtocols.hitThreshold === Math.max(2, noProtocols.hitThreshold - 1),
+    'Combat protocols should reduce required hit value by 1 (capped)',
+  )
+
+  const baseFederation = resolveAttack(makeBaseArgs())
+  const entrenchedFederation = resolveAttack({
+    ...makeBaseArgs(),
+    conditions: { ...makeBaseArgs().conditions, attackerFederationEntrenchment: true, attackerMoved: false },
+  })
+  assert(
+    entrenchedFederation.totals.attackDiceCount === baseFederation.totals.attackDiceCount + 1,
+    'Entrenchment should add +1 ranged attack die when attacker did not move',
+  )
+
+  const movedEntrenchedFederation = resolveAttack({
+    ...makeBaseArgs(),
+    conditions: { ...makeBaseArgs().conditions, attackerFederationEntrenchment: true, attackerMoved: true },
+  })
+  assert(
+    movedEntrenchedFederation.totals.attackDiceCount === baseFederation.totals.attackDiceCount,
+    'Entrenchment should not add attack die when attacker moved',
+  )
+
+  const furyFederation = resolveAttack({
+    ...makeBaseArgs(),
+    conditions: { ...makeBaseArgs().conditions, attackerFederationFuryOfTheFallen: true },
+  })
+  assert(
+    furyFederation.totals.attackDiceCount === baseFederation.totals.attackDiceCount + 1,
+    'Fury of the Fallen should add +1 attack die',
+  )
 
   console.log('Battle smoke checks: OK')
 }

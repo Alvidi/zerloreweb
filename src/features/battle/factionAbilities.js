@@ -48,6 +48,59 @@ const FACTION_ABILITY_DEFINITIONS = [
     },
   },
   {
+    effectKey: 'void_eyes_beyond',
+    nameTokens: ['ojos-del-mas-alla', 'eyes-from-beyond', 'eyes-beyond'],
+    appliesTo: 'attacker',
+    modes: ['ranged'],
+    engineConditionKey: 'attackerVoidEyesBeyond',
+    rulePrefixes: ['ojos del mas alla', 'eyes from beyond', 'eyes beyond'],
+    buildLogDetail: ({ lang, result, hasRule }) => {
+      if (!hasRule) return null
+      const rerolledEntries = (result.hitEntries || []).filter(
+        (entry) =>
+          entry.rerolled
+          && Number.isFinite(entry.initialRoll)
+          && Number.isFinite(entry.roll)
+          && String(entry.rerollSource || '').includes('eyes_beyond'),
+      )
+      if (!rerolledEntries.length) return null
+      return {
+        text: t(
+          lang,
+          'Ojos del más allá activo: esta unidad repite impactos fallidos contra cobertura parcial.',
+          'Eyes from beyond active: this unit rerolls failed hit rolls against partial cover.',
+        ),
+        dice: rerolledEntries.map((entry) => ({
+          value: `${entry.roll}`,
+          outcome: entry.outcome || 'fail',
+        })),
+        source: 'faction',
+        owner: 'attacker',
+      }
+    },
+  },
+  {
+    effectKey: 'wild_uncontrolled_fury',
+    nameTokens: ['furia-incontrolada', 'uncontrolled-fury'],
+    appliesTo: 'attacker',
+    modes: ['melee'],
+    engineConditionKey: 'attackerWildUncontrolledFury',
+    rulePrefixes: ['furia incontrolada', 'uncontrolled fury'],
+    buildLogDetail: ({ lang, hasRule }) => {
+      if (!hasRule) return null
+      return {
+        text: t(
+          lang,
+          'Furia incontrolada activa: esta unidad añade +1 dado de ataque en este CaC por cargar.',
+          'Uncontrolled fury active: this unit gains +1 melee attack die for charging.',
+        ),
+        dice: [],
+        source: 'faction',
+        owner: 'attacker',
+      }
+    },
+  },
+  {
     effectKey: 'alliance_martial_resistance',
     nameTokens: ['resistencia-marcial', 'martial-resistance'],
     appliesTo: 'defender',
@@ -149,6 +202,76 @@ const FACTION_ABILITY_DEFINITIONS = [
       }
     },
   },
+  {
+    effectKey: 'rebels_feint',
+    nameTokens: ['finta', 'feint'],
+    appliesTo: 'defender',
+    modes: ['ranged'],
+    engineConditionKey: 'defenderRebelFeint',
+    rulePrefixes: ['finta', 'feint'],
+  },
+  {
+    effectKey: 'technocrats_combat_protocols',
+    nameTokens: ['protocolos-de-combate', 'combat-protocols'],
+    appliesTo: 'attacker',
+    modes: ['ranged'],
+    engineConditionKey: 'attackerTechnocratsCombatProtocols',
+    rulePrefixes: ['protocolos de combate', 'combat protocols'],
+    buildLogDetail: ({ lang, result, hasRule }) => {
+      if (!hasRule || result.mode !== 'ranged') return null
+      return {
+        text: t(
+          lang,
+          `Protocolos de combate activo: esta unidad impacta con ${result.hitThreshold}+ en este disparo.`,
+          `Combat protocols active: this unit hits on ${result.hitThreshold}+ in this ranged attack.`,
+        ),
+        dice: [],
+        source: 'faction',
+        owner: 'attacker',
+      }
+    },
+  },
+  {
+    effectKey: 'federation_entrenchment',
+    nameTokens: ['atrincheramiento', 'entrenchment'],
+    appliesTo: 'attacker',
+    modes: ['ranged'],
+    engineConditionKey: 'attackerFederationEntrenchment',
+    rulePrefixes: ['atrincheramiento', 'entrenchment'],
+    buildLogDetail: ({ lang, hasRule }) => {
+      if (!hasRule) return null
+      return {
+        text: t(
+          lang,
+          'Atrincheramiento activo: esta unidad añade +1 dado de ataque en este disparo.',
+          'Entrenchment active: this unit gains +1 attack die in this ranged attack.',
+        ),
+        dice: [],
+        source: 'faction',
+        owner: 'attacker',
+      }
+    },
+  },
+  {
+    effectKey: 'federation_fury_of_the_fallen',
+    nameTokens: ['furia-de-los-caidos', 'fury-of-the-fallen'],
+    appliesTo: 'attacker',
+    engineConditionKey: 'attackerFederationFuryOfTheFallen',
+    rulePrefixes: ['furia de los caidos', 'fury of the fallen'],
+    buildLogDetail: ({ lang, hasRule }) => {
+      if (!hasRule) return null
+      return {
+        text: t(
+          lang,
+          'Furia de los Caídos activa: esta unidad añade +1 dado de ataque en esta acción.',
+          'Fury of the Fallen active: this unit gains +1 attack die in this action.',
+        ),
+        dice: [],
+        source: 'faction',
+        owner: 'attacker',
+      }
+    },
+  },
 ]
 
 const isDefinitionEnabledInMode = (definition, mode) =>
@@ -178,10 +301,16 @@ export const buildFactionAttackConditions = ({
 }) => {
   const conditions = {
     attackerRerollFailedHits: false,
+    attackerVoidEyesBeyond: false,
     attackerVoracity: false,
+    attackerWildUncontrolledFury: false,
     defenderMartialResistance: false,
     defenderCrucibleGlory: false,
     attackerCrucibleSacredVow: false,
+    defenderRebelFeint: false,
+    attackerTechnocratsCombatProtocols: false,
+    attackerFederationEntrenchment: false,
+    attackerFederationFuryOfTheFallen: false,
   }
 
   FACTION_ABILITY_DEFINITIONS.forEach((definition) => {

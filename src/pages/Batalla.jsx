@@ -328,8 +328,10 @@ function Batalla() {
     const entries = []
     const pendingAmmoSpend = {}
     let rangedCounterReady = false
+    let rangedCounterForcedByFaction = false
     const heroicFallUsedBySide = { left: false, right: false }
     const crucibleGloryUsedBySide = { left: false, right: false }
+    const combatProtocolsUsedBySide = { left: false, right: false }
 
     const isFactionAbilityEnabledBySide = (side, effectKey) => {
       const abilities = side === 'left' ? leftFaction?.abilities : rightFaction?.abilities
@@ -411,6 +413,16 @@ function Batalla() {
         defenderState: defenderFactionAbilityState,
         mode,
       })
+      if (
+        mode === 'melee'
+        && factionConditions.attackerWildUncontrolledFury
+        && !(attackType === 'charge' && attackerSide === 'left' && stepLabel === 'charge-attack')
+      ) {
+        factionConditions.attackerWildUncontrolledFury = false
+      }
+      if (mode === 'ranged' && factionConditions.attackerTechnocratsCombatProtocols && combatProtocolsUsedBySide[attackerSide]) {
+        factionConditions.attackerTechnocratsCombatProtocols = false
+      }
       if (mode === 'ranged' && factionConditions.defenderCrucibleGlory && crucibleGloryUsedBySide[defenderSide]) {
         factionConditions.defenderCrucibleGlory = false
       }
@@ -458,6 +470,9 @@ function Batalla() {
         nextRightHp = attackResult.blocked ? nextRightHp : attackResult.defenderAfter.hp
         if (attackType === 'ranged' && attackResult.canCounter) {
           rangedCounterReady = true
+          if (factionConditions.defenderRebelFeint) {
+            rangedCounterForcedByFaction = true
+          }
         }
       } else {
         nextRightHp = attackResult.attackerAfter?.hp ?? nextRightHp
@@ -465,6 +480,9 @@ function Batalla() {
       }
       if (!attackResult.blocked && mode === 'ranged' && Number(attackResult.totals?.preventedDamage) > 0) {
         crucibleGloryUsedBySide[defenderSide] = true
+      }
+      if (!attackResult.blocked && mode === 'ranged' && factionConditions.attackerTechnocratsCombatProtocols) {
+        combatProtocolsUsedBySide[attackerSide] = true
       }
 
       entries.push(
@@ -530,10 +548,17 @@ function Batalla() {
       })
     }
 
-    const runWeaponsForSide = (side, stepLabel) => {
+    const runWeaponsForSide = (side, stepLabel, options = {}) => {
+      const { extraFactionAbilityDetails = [] } = options
       const selectedWeapons = side === 'left' ? leftSelectedWeapons : rightSelectedWeapons
       selectedWeapons.forEach((weapon, index) => {
-        runAttack({ attackerSide: side, weapon, stepLabel, index })
+        runAttack({
+          attackerSide: side,
+          weapon,
+          stepLabel,
+          index,
+          extraFactionAbilityDetails: index === 0 ? extraFactionAbilityDetails : [],
+        })
       })
     }
 
@@ -580,8 +605,19 @@ function Batalla() {
       }
     } else {
       runWeaponsForSide('left', 'attack')
-      if (isCounterattackEnabled && rangedCounterReady && nextLeftHp > 0 && nextRightHp > 0) {
-        runWeaponsForSide('right', 'ranged-counter')
+      if ((isCounterattackEnabled || rangedCounterForcedByFaction) && rangedCounterReady && nextLeftHp > 0 && nextRightHp > 0) {
+        const fintaCounterDetails = rangedCounterForcedByFaction
+          ? [{
+            text:
+              lang === 'en'
+                ? 'Feint active: this unit performs a free ranged response.'
+                : 'Finta activa: esta unidad realiza un disparo de respuesta gratuito.',
+            dice: [],
+            source: 'faction',
+            owner: 'attacker',
+          }]
+          : []
+        runWeaponsForSide('right', 'ranged-counter', { extraFactionAbilityDetails: fintaCounterDetails })
       }
     }
 

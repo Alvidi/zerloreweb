@@ -239,10 +239,16 @@ export function resolveAttack({
   const hasLineOfSight = conditions.hasLineOfSight !== false
   const attackerEngaged = Boolean(conditions.attackerEngaged)
   const attackerRerollFailedHits = Boolean(conditions.attackerRerollFailedHits)
+  const attackerVoidEyesBeyond = Boolean(conditions.attackerVoidEyesBeyond)
   const attackerVoracity = Boolean(conditions.attackerVoracity)
+  const attackerWildUncontrolledFury = Boolean(conditions.attackerWildUncontrolledFury)
   const defenderMartialResistance = Boolean(conditions.defenderMartialResistance)
   const defenderCrucibleGlory = Boolean(conditions.defenderCrucibleGlory)
   const attackerCrucibleSacredVow = Boolean(conditions.attackerCrucibleSacredVow)
+  const defenderRebelFeint = Boolean(conditions.defenderRebelFeint)
+  const attackerTechnocratsCombatProtocols = Boolean(conditions.attackerTechnocratsCombatProtocols)
+  const attackerFederationEntrenchment = Boolean(conditions.attackerFederationEntrenchment)
+  const attackerFederationFuryOfTheFallen = Boolean(conditions.attackerFederationFuryOfTheFallen)
   const rulesApplied = []
   const hasParabolic = mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.parabolicShot)
   const hasGunslinger = mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.gunslinger)
@@ -347,6 +353,10 @@ export function resolveAttack({
   if (attackerRerollFailedHits) {
     rulesApplied.push('Objetivo en la mira (repite impactos fallidos)')
   }
+  const attackerVoidEyesBeyondActive = mode === 'ranged' && attackerVoidEyesBeyond && coverType === 'partial'
+  if (attackerVoidEyesBeyondActive) {
+    rulesApplied.push('Ojos del más allá (repite impactos fallidos contra cobertura parcial)')
+  }
   if (mode === 'ranged' && defenderMartialResistance) {
     hitThreshold += 1
     rulesApplied.push('Resistencia marcial (+1 al valor de impactos enemigo en disparo)')
@@ -356,6 +366,25 @@ export function resolveAttack({
   }
   if (mode === 'melee' && attackerCrucibleSacredVow) {
     rulesApplied.push('Voto sagrado (repite 1 dado fallido en CaC)')
+  }
+  if (mode === 'melee' && attackerWildUncontrolledFury) {
+    bonusAttackDice += 1
+    rulesApplied.push('Furia incontrolada (+1 dado de ataque en CaC al cargar)')
+  }
+  if (mode === 'ranged' && defenderRebelFeint) {
+    rulesApplied.push('Finta (respuesta gratuita al recibir ataque a distancia)')
+  }
+  if (mode === 'ranged' && attackerTechnocratsCombatProtocols) {
+    hitThreshold -= 1
+    rulesApplied.push('Protocolos de combate (+1 al resultado de impactos)')
+  }
+  if (mode === 'ranged' && attackerFederationEntrenchment && !conditions.attackerMoved) {
+    bonusAttackDice += 1
+    rulesApplied.push('Atrincheramiento (+1 dado de ataque en disparo si no movió)')
+  }
+  if (attackerFederationFuryOfTheFallen) {
+    bonusAttackDice += 1
+    rulesApplied.push('Furia de los Caídos (+1 dado de ataque)')
   }
 
   if (mode === 'ranged' && coverType === 'partial') {
@@ -431,6 +460,10 @@ export function resolveAttack({
   const hitEntries = []
   let chainGuard = 0
   let sacredVowRerollUsed = false
+  const failedHitRerollSources = []
+  if (attackerRerollFailedHits) failedHitRerollSources.push('target_in_sight')
+  if (attackerVoidEyesBeyondActive) failedHitRerollSources.push('eyes_beyond')
+  const canFactionRerollFailedHits = failedHitRerollSources.length > 0
 
   const resolveOneHitDie = (source = 'base') => {
     if (chainGuard > MAX_CHAIN_ROLLS) return
@@ -442,13 +475,15 @@ export function resolveAttack({
     let rerolled = false
     let rerollSource = null
 
-    if ((hasPrecision || attackerRerollFailedHits) && outcome === 'fail') {
+    if ((hasPrecision || canFactionRerollFailedHits) && outcome === 'fail') {
       roll = rollDie(6)
       outcome = classifyRoll(roll, hitThreshold, antiData || { threshold: 99, groups: [] }, defender.type)
       rerolled = true
-      if (hasPrecision && attackerRerollFailedHits) rerollSource = 'precision_target_in_sight'
+      if (hasPrecision && canFactionRerollFailedHits) {
+        rerollSource = `precision_${failedHitRerollSources.join('_')}`
+      }
       else if (hasPrecision) rerollSource = 'precision'
-      else rerollSource = 'target_in_sight'
+      else rerollSource = failedHitRerollSources.join('_')
     } else if (mode === 'melee' && attackerCrucibleSacredVow && !sacredVowRerollUsed && outcome === 'fail') {
       roll = rollDie(6)
       outcome = classifyRoll(roll, hitThreshold, antiData || { threshold: 99, groups: [] }, defender.type)
@@ -540,7 +575,6 @@ export function resolveAttack({
   if (voracityHeal > 0) {
     rulesApplied.push(`Voracidad (+${voracityHeal} vida)`)
   }
-
   const totals = {
     attackDiceCount,
     hits: rollSummary.hits,
@@ -558,7 +592,7 @@ export function resolveAttack({
     mode === 'ranged'
       && !defenderAfter.destroyed
       && !attackerAfter.destroyed
-      && conditions.defenderPrepared,
+      && (conditions.defenderPrepared || defenderRebelFeint),
   )
 
   return {

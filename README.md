@@ -41,3 +41,10 @@ Comandos:
 - Facciones ES: `src/data/factions/jsonFaccionesES/*.json`
 - Facciones EN: `src/data/factions/jsonFaccionesEN/*.en.json`
 - Reglamento ES/EN: `src/data/spanish` y `src/data/english`
+
+## Documentacion tecnica (importante)
+
+Si trabajas en codigo de batalla o entra otro agente/dev al proyecto, leer primero:
+
+- `AGENTS.md`
+- `docs/DEVELOPMENT_GUIDE.md`
