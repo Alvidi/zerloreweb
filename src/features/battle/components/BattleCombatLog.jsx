@@ -21,6 +21,7 @@ function BattleCombatLog({ logEntries, tx, lang }) {
         <div className="duel-log-list">
           {logEntries.map((entry) => {
             const isCounterattackEntry = entry.key.includes('counter')
+            const isChargeRollEntry = entry.key.startsWith('charge-roll-')
             const attackerSide = entry.attackerSide === 'right' ? 'right' : 'left'
             const attackerIsLeft = attackerSide === 'left'
             const attackerHpBefore = Number(entry.resultState?.attacker?.hpBefore)
@@ -32,11 +33,13 @@ function BattleCombatLog({ logEntries, tx, lang }) {
               .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
             const defenderUnitName = String(entry.resultState?.defender?.name || '-')
               .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
-            const primaryRole = attackerIsLeft ? tx.attacker : tx.defender
+            const primaryRole = isChargeRollEntry ? tx.chargeStep : attackerIsLeft ? tx.attacker : tx.defender
             const primaryUnitName = attackerUnitName
-            const primaryLabelClass = attackerIsLeft
-              ? 'duel-log-line-label duel-log-line-label-attacker'
-              : 'duel-log-line-label duel-log-line-label-defender'
+            const primaryLabelClass = isChargeRollEntry
+              ? 'duel-log-line-label duel-log-line-label-faction-ability'
+              : attackerIsLeft
+                ? 'duel-log-line-label duel-log-line-label-attacker'
+                : 'duel-log-line-label duel-log-line-label-defender'
             const secondaryRole = attackerIsLeft ? tx.defender : tx.attacker
             const secondaryUnitName = defenderUnitName
             const secondaryLabelClass = attackerIsLeft
@@ -83,7 +86,7 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                       )}
                       {!!entry.attackDice?.length && (
                         <span className="duel-log-copy-note">
-                          {lang === 'en' ? 'Hit rolls' : 'Tiradas de impacto'}
+                          {isChargeRollEntry ? tx.chargeRollsLabel : lang === 'en' ? 'Hit rolls' : 'Tiradas de impacto'}
                         </span>
                       )}
                       {entry.attackDice?.map((die, index) => (

@@ -41,7 +41,6 @@ import {
   pickWeaponIdsForMode,
   resolveMode,
   rollChargeDice,
-  sanitizeUnitHp,
   swapMapBySidePrefix,
   toNumber,
 } from '../features/battle/battleUtils.js'
@@ -72,8 +71,6 @@ function Batalla() {
   const [rightMoved, setRightMoved] = useState(false)
   const [leftHalfRange, setLeftHalfRange] = useState(false)
   const [rightHalfRange, setRightHalfRange] = useState(false)
-  const [leftNoLineOfSight, setLeftNoLineOfSight] = useState(false)
-  const [rightNoLineOfSight, setRightNoLineOfSight] = useState(false)
   const [leftAfterDash, setLeftAfterDash] = useState(false)
   const [rightAfterDash, setRightAfterDash] = useState(false)
   const [chargeDistance, setChargeDistance] = useState(7)
@@ -82,6 +79,8 @@ function Batalla() {
   const [logEntries, setLogEntries] = useState([])
   const [isResolving, setIsResolving] = useState(false)
   const [defenderCounterattack, setDefenderCounterattack] = useState(true)
+  const [leftUnitCount, setLeftUnitCount] = useState(1)
+  const [rightUnitCount, setRightUnitCount] = useState(1)
   const timersRef = useRef([])
   const resolveRunRef = useRef(0)
   const mode = resolveMode(attackType)
@@ -150,13 +149,67 @@ function Batalla() {
   const leftHpKey = makeHpKey('L', leftFactionId, leftUnit?.id)
   const rightHpKey = makeHpKey('R', rightFactionId, rightUnit?.id)
 
-  const leftHp = sanitizeUnitHp(hpMap[leftHpKey], leftUnit)
-  const rightHp = sanitizeUnitHp(hpMap[rightHpKey], rightUnit)
+  const getSquadCountMax = (unit) => Math.max(1, toNumber(unit?.squadMax, 1))
+  const getSquadCountMin = (unit) => Math.max(1, toNumber(unit?.squadMin, 1))
+  const clampSquadCount = (value, unit) => {
+    const raw = Math.max(1, toNumber(value, 1))
+    if (raw <= 1) return 1
+    return clamp(raw, getSquadCountMin(unit), getSquadCountMax(unit))
+  }
+  const getSquadHpPoolMax = (unit, unitCount) => {
+    if (!unit) return 0
+    const perUnitHp = Math.max(1, toNumber(unit.hp, 1))
+    return perUnitHp * clampSquadCount(unitCount, unit)
+  }
+  const sanitizeSquadHp = (rawHp, unit, unitCount) => {
+    const maxHp = getSquadHpPoolMax(unit, unitCount)
+    return clamp(toNumber(rawHp, maxHp), 0, maxHp)
+  }
+  const leftHpMax = getSquadHpPoolMax(leftUnit, leftUnitCount)
+  const rightHpMax = getSquadHpPoolMax(rightUnit, rightUnitCount)
+  const leftHp = sanitizeSquadHp(hpMap[leftHpKey], leftUnit, leftUnitCount)
+  const rightHp = sanitizeSquadHp(hpMap[rightHpKey], rightUnit, rightUnitCount)
+  const getAliveSquadCount = (poolHp, unit, fallbackCount = 1) => {
+    if (!unit) return 0
+    const perUnitHp = Math.max(1, toNumber(unit.hp, 1))
+    const aliveByHp = Math.ceil(Math.max(0, toNumber(poolHp, 0)) / perUnitHp)
+    return Math.min(clampSquadCount(fallbackCount, unit), Math.max(0, aliveByHp))
+  }
+  const buildUnitCountOptions = (unit) => {
+    const min = getSquadCountMin(unit)
+    const max = getSquadCountMax(unit)
+    const options = [1]
+    for (let value = min; value <= max; value += 1) {
+      if (!options.includes(value)) options.push(value)
+    }
+    return options
+  }
+  const scaleAttackExpression = (rawAttacks, multiplier) => {
+    const safeMultiplier = Math.max(1, toNumber(multiplier, 1))
+    const raw = String(rawAttacks || '1D').trim()
+    if (safeMultiplier === 1 || !raw) return raw || '1D'
 
-  const setUnitHp = (side, factionId, unit, rawValue) => {
+    const diceMatch = raw.match(/^(\d*)d(\d+)?([+-]\d+)?$/i)
+    if (diceMatch) {
+      const baseCount = Math.max(1, toNumber(diceMatch[1] || 1, 1))
+      const baseSides = diceMatch[2] || ''
+      const baseModifier = toNumber(diceMatch[3] || 0, 0)
+      const nextCount = baseCount * safeMultiplier
+      const nextModifier = baseModifier * safeMultiplier
+      const diceCore = baseSides ? `${nextCount}D${baseSides}` : `${nextCount}D`
+      if (!nextModifier) return diceCore
+      return `${diceCore}${nextModifier > 0 ? `+${nextModifier}` : nextModifier}`
+    }
+
+    const asFlat = Number(raw)
+    if (Number.isFinite(asFlat)) return `${asFlat * safeMultiplier}`
+    return raw
+  }
+
+  const setUnitHp = (side, factionId, unit, unitCount, rawValue) => {
     if (!unit) return
     const key = makeHpKey(side, factionId, unit.id)
-    const next = clamp(toNumber(rawValue, unit.hp), 0, unit.hp)
+    const next = sanitizeSquadHp(rawValue, unit, unitCount)
     setHpMap((prev) => ({ ...prev, [key]: next }))
   }
 
@@ -236,14 +289,12 @@ function Batalla() {
     if (side === 'left') {
       if (key === 'moved') return { checked: leftMoved, setChecked: setLeftMoved, label: tx.moved }
       if (key === 'halfRange') return { checked: leftHalfRange, setChecked: setLeftHalfRange, label: tx.halfRange }
-      if (key === 'noLineOfSight') return { checked: leftNoLineOfSight, setChecked: setLeftNoLineOfSight, label: tx.noLineOfSight }
       if (key === 'afterDash') return { checked: leftAfterDash, setChecked: setLeftAfterDash, label: tx.afterDash }
       return null
     }
 
     if (key === 'moved') return { checked: rightMoved, setChecked: setRightMoved, label: tx.moved }
     if (key === 'halfRange') return { checked: rightHalfRange, setChecked: setRightHalfRange, label: tx.halfRange }
-    if (key === 'noLineOfSight') return { checked: rightNoLineOfSight, setChecked: setRightNoLineOfSight, label: tx.noLineOfSight }
     if (key === 'afterDash') return { checked: rightAfterDash, setChecked: setRightAfterDash, label: tx.afterDash }
     return null
   }
@@ -291,23 +342,13 @@ function Batalla() {
     setRightMoved(leftMoved)
     setLeftHalfRange(rightHalfRange)
     setRightHalfRange(leftHalfRange)
-    setLeftNoLineOfSight(rightNoLineOfSight)
-    setRightNoLineOfSight(leftNoLineOfSight)
     setLeftAfterDash(rightAfterDash)
     setRightAfterDash(leftAfterDash)
+    setLeftUnitCount(clampSquadCount(rightUnitCount, rightUnit))
+    setRightUnitCount(clampSquadCount(leftUnitCount, leftUnit))
 
     setHpMap((prev) => swapMapBySidePrefix(prev, 'L', 'R'))
     setAmmoMap((prev) => swapMapBySidePrefix(prev, 'left', 'right'))
-  }
-
-  const handleReset = () => {
-    if (isResolving) return
-    clearTimers()
-    resolveRunRef.current += 1
-    setIsResolving(false)
-    setLogEntries([])
-    setHpMap({})
-    setAmmoMap({})
   }
 
   const handleResolve = () => {
@@ -323,8 +364,12 @@ function Batalla() {
     setLogEntries([])
     setAmmoMap({})
 
-    let nextLeftHp = leftHp
-    let nextRightHp = rightHp
+    const leftCountAtStart = clampSquadCount(leftUnitCount, leftUnit)
+    const rightCountAtStart = clampSquadCount(rightUnitCount, rightUnit)
+    let nextLeftHp = sanitizeSquadHp(leftHp, leftUnit, leftCountAtStart)
+    let nextRightHp = sanitizeSquadHp(rightHp, rightUnit, rightCountAtStart)
+    const leftMaxHpPool = Math.max(1, getSquadHpPoolMax(leftUnit, leftCountAtStart))
+    const rightMaxHpPool = Math.max(1, getSquadHpPoolMax(rightUnit, rightCountAtStart))
     const entries = []
     const pendingAmmoSpend = {}
     let rangedCounterReady = false
@@ -359,6 +404,13 @@ function Batalla() {
       const attackerHpBefore = attackerSide === 'left' ? nextLeftHp : nextRightHp
       const defenderHpBefore = defenderSide === 'left' ? nextLeftHp : nextRightHp
       if ((!allowDestroyedAttacker && attackerHpBefore <= 0) || defenderHpBefore <= 0) return
+      const attackerAliveCount = attackerSide === 'left'
+        ? getAliveSquadCount(attackerHpBefore, attackerUnit, leftCountAtStart)
+        : getAliveSquadCount(attackerHpBefore, attackerUnit, rightCountAtStart)
+      const defenderAliveCount = defenderSide === 'left'
+        ? getAliveSquadCount(defenderHpBefore, defenderUnit, leftCountAtStart)
+        : getAliveSquadCount(defenderHpBefore, defenderUnit, rightCountAtStart)
+      if (attackerAliveCount <= 0 || defenderAliveCount <= 0) return
 
       const attackerFactionId = attackerSide === 'left' ? leftFactionId : rightFactionId
       const ammoInfo = getWeaponAmmoInfo(attackerSide, attackerFactionId, attackerUnit, weapon, pendingAmmoSpend)
@@ -395,11 +447,6 @@ function Batalla() {
           ? leftHalfRange
           : rightHalfRange
         : false
-      const noLineOfSight = attackerSupport.noLineOfSight
-        ? attackerSide === 'left'
-          ? leftNoLineOfSight
-          : rightNoLineOfSight
-        : false
       const afterDash = attackerSupport.afterDash
         ? attackerSide === 'left'
           ? leftAfterDash
@@ -427,26 +474,31 @@ function Batalla() {
         factionConditions.defenderCrucibleGlory = false
       }
       const futureConditions = buildFutureCombatConditions({
-        attackerUnitCount: 1,
-        defenderUnitCount: 1,
+        attackerUnitCount: attackerAliveCount,
+        defenderUnitCount: defenderAliveCount,
       })
+
+      const combatWeapon = {
+        ...weapon,
+        attacks: scaleAttackExpression(weapon.attacks, attackerAliveCount),
+      }
 
       const attackResult = resolveAttack({
         attacker: {
           id: attackerSide,
           name: attackerUnit.name,
           hp: attackerHpBefore,
-          maxHp: attackerUnit.hp,
+          maxHp: attackerSide === 'left' ? leftMaxHpPool : rightMaxHpPool,
         },
         defender: {
           id: defenderSide,
           name: defenderUnit.name,
           hp: defenderHpBefore,
-          maxHp: defenderUnit.hp,
+          maxHp: defenderSide === 'left' ? leftMaxHpPool : rightMaxHpPool,
           type: defenderUnit.type,
           save: defenderUnit.save,
         },
-        weapon,
+        weapon: combatWeapon,
         mode,
         conditions: {
           coverType: defenderCoverType,
@@ -454,7 +506,7 @@ function Batalla() {
           attackerMoved,
           halfRange,
           attackerEngaged: false,
-          hasLineOfSight: !noLineOfSight,
+          hasLineOfSight: true,
           afterDash,
           ...factionConditions,
           ...futureConditions,
@@ -492,7 +544,7 @@ function Batalla() {
           attackerSide,
           attackerName: attackerUnit.name,
           defenderName: defenderUnit.name,
-          weapon,
+          weapon: combatWeapon,
           attackerHpBefore,
           defenderHpBefore,
           result: attackResult,
@@ -621,12 +673,6 @@ function Batalla() {
       }
     }
 
-    setHpMap((prev) => ({
-      ...prev,
-      [leftHpKey]: sanitizeUnitHp(nextLeftHp, leftUnit),
-      [rightHpKey]: sanitizeUnitHp(nextRightHp, rightUnit),
-    }))
-
     if (Object.keys(pendingAmmoSpend).length > 0) {
       setAmmoMap((prev) => {
         const next = { ...prev }
@@ -647,23 +693,61 @@ function Batalla() {
     resolveRunRef.current += 1
     setIsResolving(false)
     setLogEntries([])
-    setHpMap({})
     setAmmoMap({})
 
     const randomFaction = pickRandomItem(factions)
     if (!randomFaction) return
     const randomUnit = pickRandomUnitForMode(randomFaction, mode)
+    if (!randomUnit) return
+    const randomBool = () => Math.random() < 0.5
+    const randomFactionAbilityState = Object.fromEntries(
+      (randomFaction.abilities || [])
+        .filter((ability) => implementedFactionAbilityKeys.has(ability.effectKey))
+        .map((ability) => [ability.id, randomBool()]),
+    )
+    const randomCoverType = pickRandomItem(coverTypeOptions) || 'none'
+    const modeWeapons = (randomUnit.weapons || []).filter((weapon) => weapon.kind === mode)
+    const weaponSlots = getWeaponSlotsForMode(randomUnit, mode, modeWeapons.length)
+    const randomWeaponIds = buildWeaponSelection(
+      pickRandomWeaponIdsForMode(randomUnit, mode),
+      modeWeapons,
+      weaponSlots,
+    )
+    const randomSelectedWeapons = randomWeaponIds
+      .map((weaponId) => modeWeapons.find((weapon) => weapon.id === weaponId))
+      .filter(Boolean)
+    const randomConditionSupport = getConditionSupport(randomSelectedWeapons, mode)
+    const countOptions = buildUnitCountOptions(randomUnit)
+    const nextUnitCount = pickRandomItem(countOptions) || 1
+    const nextHpMax = getSquadHpPoolMax(randomUnit, nextUnitCount)
+    const hpOptions = buildHpValues(nextHpMax)
+    const nextHp = pickRandomItem(hpOptions) || nextHpMax
     const nextSelection = {
       factionId: randomFaction.id,
-      unitId: randomUnit?.id || '',
-      weaponIds: pickRandomWeaponIdsForMode(randomUnit, mode),
+      unitId: randomUnit.id,
+      weaponIds: randomWeaponIds,
     }
+    setDefenderCounterattack(randomBool())
     if (side === 'left') {
       setLeft(nextSelection)
-      setLeftFactionAbilityState({})
+      setLeftFactionAbilityState(randomFactionAbilityState)
+      setLeftUnitCount(nextUnitCount)
+      setLeftCoverType(randomCoverType)
+      setLeftMoved(randomConditionSupport.moved ? randomBool() : false)
+      setLeftHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
+      setLeftAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
+      const nextHpKey = makeHpKey('L', nextSelection.factionId, nextSelection.unitId)
+      setHpMap((prev) => ({ ...prev, [nextHpKey]: nextHp }))
     } else {
       setRight(nextSelection)
-      setRightFactionAbilityState({})
+      setRightFactionAbilityState(randomFactionAbilityState)
+      setRightUnitCount(nextUnitCount)
+      setRightCoverType(randomCoverType)
+      setRightMoved(randomConditionSupport.moved ? randomBool() : false)
+      setRightHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
+      setRightAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
+      const nextHpKey = makeHpKey('R', nextSelection.factionId, nextSelection.unitId)
+      setHpMap((prev) => ({ ...prev, [nextHpKey]: nextHp }))
     }
   }
 
@@ -737,6 +821,7 @@ function Batalla() {
                     weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
                   })
                   setLeftFactionAbilityState({})
+                  setLeftUnitCount(1)
                 }}
               >
                 {factions.map((faction) => (
@@ -755,6 +840,7 @@ function Batalla() {
               onChange={(event) =>
                 setLeft((prev) => {
                   const unit = leftFaction?.units.find((item) => item.id === event.target.value)
+                  setLeftUnitCount(1)
                   return {
                     ...prev,
                     unitId: event.target.value,
@@ -766,6 +852,19 @@ function Batalla() {
               {leftFaction?.units.map((unit) => (
                 <option key={unit.id} value={unit.id}>
                   {unit.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
+            <span>{tx.unitsCount}</span>
+            <select
+              value={clampSquadCount(leftUnitCount, leftUnit)}
+              onChange={(event) => setLeftUnitCount(clampSquadCount(event.target.value, leftUnit))}
+            >
+              {buildUnitCountOptions(leftUnit).map((value) => (
+                <option key={`left-units-${value}`} value={value}>
+                  {value === 1 ? value : `${value} (${tx.squadLabel})`}
                 </option>
               ))}
             </select>
@@ -833,10 +932,10 @@ function Batalla() {
                     <select
                       className="duel-hp-select"
                       value={leftHp}
-                      onChange={(event) => setUnitHp('L', leftFactionId, leftUnit, event.target.value)}
+                      onChange={(event) => setUnitHp('L', leftFactionId, leftUnit, leftUnitCount, event.target.value)}
                     >
                       {leftHp <= 0 && <option value={0}>KO</option>}
-                      {buildHpValues(leftUnit.hp).map((value) => (
+                      {buildHpValues(leftHpMax).map((value) => (
                         <option key={`left-hp-${value}`} value={value}>
                           {value}
                         </option>
@@ -924,10 +1023,7 @@ function Batalla() {
           </label>
           <section className="duel-faction-abilities">
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
-            {!leftFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
-            {!!leftFactionAbilities.length && !leftImplementedFactionAbilities.length && (
-              <p className="battle-empty">{tx.inConstruction}</p>
-            )}
+            {!leftImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
             {leftImplementedFactionAbilities.map((ability) => (
               <label key={ability.id} className="duel-faction-ability">
                 <input
@@ -968,6 +1064,7 @@ function Batalla() {
                     weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
                   })
                   setRightFactionAbilityState({})
+                  setRightUnitCount(1)
                 }}
               >
                 {factions.map((faction) => (
@@ -986,6 +1083,7 @@ function Batalla() {
               onChange={(event) =>
                 setRight((prev) => {
                   const unit = rightFaction?.units.find((item) => item.id === event.target.value)
+                  setRightUnitCount(1)
                   return {
                     ...prev,
                     unitId: event.target.value,
@@ -997,6 +1095,19 @@ function Batalla() {
               {rightFaction?.units.map((unit) => (
                 <option key={unit.id} value={unit.id}>
                   {unit.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="field">
+            <span>{tx.unitsCount}</span>
+            <select
+              value={clampSquadCount(rightUnitCount, rightUnit)}
+              onChange={(event) => setRightUnitCount(clampSquadCount(event.target.value, rightUnit))}
+            >
+              {buildUnitCountOptions(rightUnit).map((value) => (
+                <option key={`right-units-${value}`} value={value}>
+                  {value === 1 ? value : `${value} (${tx.squadLabel})`}
                 </option>
               ))}
             </select>
@@ -1064,10 +1175,10 @@ function Batalla() {
                     <select
                       className="duel-hp-select"
                       value={rightHp}
-                      onChange={(event) => setUnitHp('R', rightFactionId, rightUnit, event.target.value)}
+                      onChange={(event) => setUnitHp('R', rightFactionId, rightUnit, rightUnitCount, event.target.value)}
                     >
                       {rightHp <= 0 && <option value={0}>KO</option>}
-                      {buildHpValues(rightUnit.hp).map((value) => (
+                      {buildHpValues(rightHpMax).map((value) => (
                         <option key={`right-hp-${value}`} value={value}>
                           {value}
                         </option>
@@ -1155,10 +1266,7 @@ function Batalla() {
           </label>
           <section className="duel-faction-abilities">
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
-            {!rightFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
-            {!!rightFactionAbilities.length && !rightImplementedFactionAbilities.length && (
-              <p className="battle-empty">{tx.inConstruction}</p>
-            )}
+            {!rightImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
             {rightImplementedFactionAbilities.map((ability) => (
               <label key={ability.id} className="duel-faction-ability">
                 <input
@@ -1208,14 +1316,6 @@ function Batalla() {
           disabled={!leftUnit || !rightUnit || isResolving}
         >
           {tx.flip}
-        </button>
-        <button
-          type="button"
-          className="ghost"
-          onClick={handleReset}
-          disabled={isResolving}
-        >
-          {tx.reset}
         </button>
       </div>
 

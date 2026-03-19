@@ -86,6 +86,10 @@ const normalizeUnit = (unit, index) => {
   const rangedWeapons = (unit.armas?.disparo || []).map((weapon) => normalizeWeapon(weapon, 'ranged'))
   const meleeWeapons = (unit.armas?.cuerpo_a_cuerpo || []).map((weapon) => normalizeWeapon(weapon, 'melee'))
   const enabledRangedWeapons = meleeWeapons.length ? rangedWeapons : []
+  const squadMinRaw = toNumber(profile?.escuadra?.min ?? 1, 1)
+  const squadMaxRaw = toNumber(profile?.escuadra?.max ?? squadMinRaw, squadMinRaw)
+  const squadMin = Math.max(1, squadMinRaw)
+  const squadMax = Math.max(squadMin, squadMaxRaw)
   return {
     id: unit.id || slugify(unit.nombre_unidad || `unidad-${index + 1}`),
     name: unit.nombre_unidad || `Unidad ${index + 1}`,
@@ -95,6 +99,8 @@ const normalizeUnit = (unit, index) => {
     saveLabel: String(profile.salvacion ?? unit.salvacion ?? '+4').replace(/^\+?(\d+)\+?$/, '$1+'),
     save: parseThreshold(profile.salvacion ?? '+4', 4),
     speed: profile.velocidad ?? unit.velocidad ?? '-',
+    squadMin,
+    squadMax,
     valueBase: toNumber(profile.valor ?? unit.valor_base ?? unit.valor ?? 0),
     specialty: profile.especialidad ?? unit.especialidad ?? '-',
     maxRangedWeapons: getMaxRangedWeapons(unit, profile),
@@ -191,12 +197,11 @@ export const weaponHasAbilityId = (weapon, abilityId) => hasWeaponAbilityId(weap
 
 export const getConditionSupport = (weapons, mode) => {
   if (mode !== 'ranged') {
-    return { moved: false, halfRange: false, noLineOfSight: false, afterDash: false }
+    return { moved: false, halfRange: false, afterDash: false }
   }
   return {
     moved: weapons.some((weapon) => hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.heavy)),
     halfRange: weapons.some((weapon) => hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.quickAttack)),
-    noLineOfSight: true,
     afterDash: weapons.some((weapon) => hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.guerrilla)),
   }
 }
