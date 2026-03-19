@@ -39,8 +39,8 @@ const commandDoctrines = [
     id: 'nuestra-es-la-victoria',
     nombre: 'Nuestra es la victoria',
     nombre_en: 'Victory Is Ours',
-    descripcion: 'La unidad o escuadra gana +3 a su Valor durante este turno.',
-    descripcion_en: 'The unit or squad gains +3 to its Value this turn.',
+    descripcion: 'Durante este turno, la unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de héroes enemigos en ese mismo objetivo.',
+    descripcion_en: 'During this turn, the chosen unit or squad automatically controls the objective it is on, ignoring enemy heroes on that same objective.',
   },
   {
     id: 'reaccion-inmediata',
@@ -50,18 +50,27 @@ const commandDoctrines = [
     descripcion_en: 'The player may activate two units or squads in a row this turn.',
   },
   {
-    id: 'mas-que-preparado',
-    nombre: 'Más que preparado',
-    nombre_en: 'More Than Ready',
-    descripcion: 'La unidad o escuadra gana una acción adicional de Preparado durante este turno.',
-    descripcion_en: 'The unit or squad gains one additional Ready action this turn.',
+    id: 'mas-que-cargado',
+    nombre: 'Más que cargado',
+    nombre_en: 'Fully Charged',
+    descripcion: 'Si esta unidad falla una carga durante este turno, puede repetirla inmediatamente una vez.',
+    descripcion_en: 'If this unit fails a charge during this turn, it can immediately retry it once.',
   },
   {
-    id: 'alineacion-perfecta',
-    nombre: 'Alineación perfecta',
-    nombre_en: 'Perfect Alignment',
-    descripcion: 'La unidad ignora todas las coberturas parciales enemigas durante este turno.',
-    descripcion_en: 'The unit ignores all enemy partial covers this turn.',
+    id: 'una-nueva-oportunidad',
+    nombre: 'Una nueva oportunidad',
+    nombre_en: 'One More Chance',
+    descripcion: 'Repite una tirada de ataque tanto cuerpo a cuerpo como a distancia.',
+    descripcion_en: 'Repeat one attack roll, either in melee or at range.',
+  },
+  {
+    id: 'combate-a-muerte',
+    nombre: 'Combate a muerte',
+    nombre_en: 'Fight to the Death',
+    descripcion:
+      'Declara esta doctrina durante la Fase de Iniciativa designando una unidad aliada que esté trabada en cuerpo a cuerpo. Ninguna de las dos unidades puede retirarse ni ser separada del combate. Al inicio de cada turno, antes de cualquier otra activación, ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina cuando una de las dos unidades es destruida. No afecta a vehículos ni titanes.',
+    descripcion_en:
+      'Declare this doctrine in the Initiative Phase, choosing a friendly unit already engaged in melee. Neither unit can withdraw or be separated from that combat. At the start of each turn, before any other activation, both units automatically resolve one melee exchange following normal attack-order rules. The duel ends only when one unit is destroyed. It does not affect vehicles or titans.',
   },
 ]
 
@@ -71,18 +80,20 @@ const doctrinePriorityByMode = {
     'frenesi',
     'agilidad-en-combate',
     'reaccion-inmediata',
-    'alineacion-perfecta',
+    'una-nueva-oportunidad',
     'apuntado',
     'garrotazo',
-    'mas-que-preparado',
+    'mas-que-cargado',
+    'combate-a-muerte',
     'nuestra-es-la-victoria',
   ],
   escuadra: [
     'nuestra-es-la-victoria',
     'apuntado',
-    'alineacion-perfecta',
+    'una-nueva-oportunidad',
     'reaccion-inmediata',
-    'mas-que-preparado',
+    'mas-que-cargado',
+    'combate-a-muerte',
     'agilidad-en-combate',
     'frenesi',
     'garrotazo',
@@ -1575,7 +1586,7 @@ function DoctrineIcon({ id }) {
       </svg>
     )
   }
-  if (id === 'mas-que-preparado') {
+  if (id === 'mas-que-cargado') {
     return (
       <svg {...commonProps}>
         <path d="M6 12L10 16L18 8" />
@@ -1583,12 +1594,21 @@ function DoctrineIcon({ id }) {
       </svg>
     )
   }
-  if (id === 'alineacion-perfecta') {
+  if (id === 'una-nueva-oportunidad') {
     return (
       <svg {...commonProps}>
-        <path d="M4 7H20" />
-        <path d="M4 12H20" />
-        <path d="M4 17H20" />
+        <path d="M17 7V3L21 7L17 11V7H9A4 4 0 0 0 9 15H11" />
+        <path d="M7 17V21L3 17L7 13V17H15A4 4 0 0 0 15 9H13" />
+      </svg>
+    )
+  }
+  if (id === 'combate-a-muerte') {
+    return (
+      <svg {...commonProps}>
+        <path d="M7 6L17 18" />
+        <path d="M17 6L7 18" />
+        <path d="M9 4L7 6L5 4" />
+        <path d="M15 20L17 18L19 20" />
       </svg>
     )
   }

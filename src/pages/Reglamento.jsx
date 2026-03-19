@@ -10,6 +10,8 @@ import eliminacionHtml from '../data/spanish/Eliminacion-320087d94b338070ba22cc6
 import eliminacionEnHtml from '../data/english/ZEROLORE_ELIMINATION_MODE_EN.html?raw'
 import conquistaHtml from '../data/spanish/Conquista 320087d94b338056b052fa01c020e33d.html?raw'
 import conquistaEnHtml from '../data/english/ZEROLORE_CONQUEST_MODE_EN.html?raw'
+import dominioHtml from '../data/spanish/Dominio 326087d94b33804990a9cd9d238fdb07.html?raw'
+import dominioEnHtml from '../data/english/ZEROLORE_DOMINION_MODE_EN.html?raw'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/-1.webp'
 import damage3Token from '../images/tokens/-3.webp'
@@ -17,7 +19,7 @@ import damage5Token from '../images/tokens/-5.webp'
 import damage10Token from '../images/tokens/-10.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['quick', 'advanced', 'conquest', 'siege', 'elimination', 'tokens']
+const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'siege', 'elimination', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 
@@ -69,6 +71,7 @@ function Reglamento() {
       { id: 'quick', label: t('rules.modeQuick') },
       { id: 'advanced', label: t('rules.modeAdvanced') },
       { id: 'conquest', label: t('rules.modeConquest') },
+      { id: 'dominion', label: t('rules.modeDominion') },
       { id: 'siege', label: t('rules.modeSiege') },
       { id: 'elimination', label: t('rules.modeElimination') },
       { id: 'tokens', label: t('rules.modeTokens') },
@@ -87,6 +90,9 @@ function Reglamento() {
     }
     if (rulesMode === 'conquest') {
       return lang === 'en' ? conquistaEnHtml : conquistaHtml
+    }
+    if (rulesMode === 'dominion') {
+      return lang === 'en' ? dominioEnHtml : dominioHtml
     }
     if (rulesMode === 'quick') {
       return lang === 'en' ? reglamentoRapidoEnHtml : reglamentoRapidoHtml

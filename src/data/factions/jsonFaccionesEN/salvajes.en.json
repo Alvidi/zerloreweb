@@ -9,7 +9,7 @@
       },
       {
         "habilidades_faccion2": "commoner riot",
-        "descripcion": "If the Line units/squads that reach mid-life, they must roll a D6: 1-2 go into retreat, 3-4 nothing happens, 5-6 go into assassin mode, adding one more attack die to all their weapons. This roll is made on initiative and applies the result only that turn, until the next turn."
+        "descripcion": "Before each activation, the Wild Line unit/squad must roll 1D6. If it rolls a 1, that unit immediately ends its activation and cannot perform actions."
       },
       {
         "habilidades_faccion3": "Tribal Violence",

@@ -157,6 +157,18 @@ const unitTypeMatchesAnti = (unitType, antiData) => {
   )
 }
 
+const unitIgnoresCover = (unitType) => {
+  const typeTokens = new Set(getUnitTypeTokens(unitType))
+  return (
+    typeTokens.has('vehiculo')
+    || typeTokens.has('vehicle')
+    || typeTokens.has('monstruo')
+    || typeTokens.has('monster')
+    || typeTokens.has('titan')
+    || typeTokens.has('titans')
+  )
+}
+
 const classifyRoll = (roll, hitThreshold, antiData, defenderType) => {
   if (roll === 6) return 'crit'
   if (unitTypeMatchesAnti(defenderType, antiData) && roll >= antiData.threshold) return 'crit'
@@ -235,7 +247,9 @@ export function resolveAttack({
   mode = 'ranged',
   conditions = {},
 }) {
-  const coverType = conditions.coverType || 'none'
+  const selectedCoverType = conditions.coverType || 'none'
+  const coverIgnoredByType = mode === 'ranged' && unitIgnoresCover(defender?.type)
+  const coverType = coverIgnoredByType ? 'none' : selectedCoverType
   const hasLineOfSight = conditions.hasLineOfSight !== false
   const attackerEngaged = Boolean(conditions.attackerEngaged)
   const attackerRerollFailedHits = Boolean(conditions.attackerRerollFailedHits)
@@ -267,11 +281,18 @@ export function resolveAttack({
         rules: [],
       }),
       canCounter: false,
+      coverType,
+      selectedCoverType,
+      coverIgnoredByType,
     }
   }
 
   if (mode === 'ranged' && attackerEngaged && hasGunslinger) {
     rulesApplied.push('Pistolero (puede disparar estando trabada)')
+  }
+
+  if (coverIgnoredByType && selectedCoverType !== 'none') {
+    rulesApplied.push('Cobertura ignorada por tipo de unidad (vehículo/monstruo/titán)')
   }
 
   if (mode === 'ranged' && !hasLineOfSight && !hasParabolic) {
@@ -287,6 +308,9 @@ export function resolveAttack({
         rules: [],
       }),
       canCounter: false,
+      coverType,
+      selectedCoverType,
+      coverIgnoredByType,
     }
   }
 
@@ -324,6 +348,9 @@ export function resolveAttack({
         rules: [],
       }),
       canCounter: false,
+      coverType,
+      selectedCoverType,
+      coverIgnoredByType,
     }
   }
 
@@ -425,8 +452,8 @@ export function resolveAttack({
     rulesApplied.push('Ignora coberturas (anula cobertura parcial)')
   }
 
-  hitThreshold = clamp(hitThreshold, 2, 7)
-  saveThreshold = clamp(saveThreshold, 2, 7)
+  hitThreshold = clamp(hitThreshold, 2, 6)
+  saveThreshold = clamp(saveThreshold, 1, 6)
   const antiData = parseAntiAbility(weapon)
   if (antiData) rulesApplied.push(`Anti ${antiData.threshold}+`)
 
@@ -540,7 +567,8 @@ export function resolveAttack({
   const saveRolls = rollDice(saveDiceCount, 6)
 
   const defensiveSixes = saveRolls.filter((roll) => roll === 6).length
-  const regularPasses = saveRolls.filter((roll) => roll >= saveThreshold && roll !== 6).length
+  // A natural 1 always fails Save, even if the threshold is 1+.
+  const regularPasses = saveRolls.filter((roll) => roll >= saveThreshold && roll !== 6 && roll !== 1).length
 
   const blockedCrits = critUnsavable ? 0 : Math.min(rollSummary.crits, defensiveSixes)
   const sixesLeftForNormal = critUnsavable ? defensiveSixes : defensiveSixes - blockedCrits
@@ -601,6 +629,8 @@ export function resolveAttack({
     defenderAfter,
     totals,
     coverType,
+    selectedCoverType,
+    coverIgnoredByType,
     mode,
     hitThreshold,
     saveThreshold,

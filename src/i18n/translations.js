@@ -28,6 +28,7 @@ export const translations = {
       modeSiege: 'Modo Asedio',
       modeElimination: 'Modo Eliminación',
       modeConquest: 'Modo Conquista',
+      modeDominion: 'Modo Dominio',
       modeTokens: 'Tokens',
       tokens: {
         title: 'Generador de tokens',
@@ -216,6 +217,7 @@ export const translations = {
       modeSiege: 'Siege Mode',
       modeElimination: 'Elimination Mode',
       modeConquest: 'Conquest Mode',
+      modeDominion: 'Dominion Mode',
       modeTokens: 'Tokens',
       tokens: {
         title: 'Token generator',

@@ -278,11 +278,20 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         'Ignore Cover cancels the defender partial cover.',
       )
     }
-    const appliedCoverRules = (result.rulesApplied || []).filter((rule) => normalizeText(rule).startsWith('cobertura'))
+    const selectedCoverType = result.selectedCoverType || result.coverType || 'none'
+    const coverIgnoredByType = Boolean(result.coverIgnoredByType)
+    const appliedCoverRules = (result.rulesApplied || []).filter((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('cobertura parcial') || normalized.startsWith('cobertura de altura')
+    })
     const ignoresPartialCover = (result.rulesApplied || []).some((rule) =>
       normalizeText(rule).startsWith('ignora coberturas') || normalizeText(rule).startsWith('ignore cover'),
     )
-    const coverAffectsDefense = appliedCoverRules.length > 0 && !(ignoresPartialCover && result.coverType === 'partial')
+    const coverAffectsDefense = (
+      appliedCoverRules.length > 0
+      && !(ignoresPartialCover && result.coverType === 'partial')
+      && !coverIgnoredByType
+    )
     const rollOutcomeSummary = summarizeRollOutcomes(lang, attackDice)
     const directSummary = summarizeHitCritTotals(lang, result.totals?.hits || 0, result.totals?.crits || 0)
     const attackerSummary = result.hasDirect
@@ -315,11 +324,26 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       if (failedDefenses > 0) parts.push(`falla ${failedDefenses}`)
       return parts.join('; ')
     })()
-    const coverLine = defenderCover
-      ? (lang === 'en'
-        ? `Applied cover: ${defenderCover}.`
-        : `Cobertura aplicada: ${defenderCover}.`)
-      : ''
+    const coverLine = (() => {
+      if (defenderCover) {
+        return lang === 'en'
+          ? `Applied cover: ${defenderCover}.${
+            coverAffectsDefense && Number(result.saveThreshold) === 1 ? ' Save stays at 1+ (cap).' : ''
+          }`
+          : `Cobertura aplicada: ${defenderCover}.${
+            coverAffectsDefense && Number(result.saveThreshold) === 1 ? ' La salvación se mantiene en 1+ (tope).' : ''
+          }`
+      }
+      if (coverIgnoredByType && selectedCoverType !== 'none') {
+        const coverLabel = lang === 'en'
+          ? selectedCoverType === 'height' ? 'high cover' : 'partial cover'
+          : selectedCoverType === 'height' ? 'cobertura de altura' : 'cobertura parcial'
+        return lang === 'en'
+          ? `Selected cover: ${coverLabel}; no effect on vehicle/monster/titan units.`
+          : `Cobertura seleccionada: ${coverLabel}; sin efecto sobre unidades vehículo/monstruo/titán.`
+      }
+      return ''
+    })()
     const defenderTail = lang === 'en'
       ? `): ${defenseSummary || 'no defense rolls'}; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
       : `): ${defenseSummary || 'sin tiradas de defensa'}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`

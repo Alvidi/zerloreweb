@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "The eternal swarm",
-        "descripcion": "All eliminated line units/squads return to the game from the deployment zone."
+        "descripcion": "All eliminated Drone units/squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
       },
       {
         "habilidades_faccion2": "mental synapse",

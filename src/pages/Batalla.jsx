@@ -42,6 +42,7 @@ import {
   resolveMode,
   rollChargeDice,
   swapMapBySidePrefix,
+  getUnitTypeToken,
   toNumber,
 } from '../features/battle/battleUtils.js'
 
@@ -108,6 +109,12 @@ function Batalla() {
 
   const leftUnit = leftFaction?.units.find((unit) => unit.id === leftUnitId) || null
   const rightUnit = rightFaction?.units.find((unit) => unit.id === rightUnitId) || null
+  const unitCanUseCover = (unit) => {
+    const typeToken = getUnitTypeToken(unit?.type)
+    return typeToken !== 'vehicle' && typeToken !== 'monster' && typeToken !== 'titan'
+  }
+  const leftCanUseCover = unitCanUseCover(leftUnit)
+  const rightCanUseCover = unitCanUseCover(rightUnit)
   const leftWeapons = leftUnit?.weapons.filter((weapon) => weapon.kind === mode) || []
   const rightWeapons = rightUnit?.weapons.filter((weapon) => weapon.kind === mode) || []
   const leftWeaponSlots = getWeaponSlotsForMode(leftUnit, mode, leftWeapons.length)
@@ -150,11 +157,9 @@ function Batalla() {
   const rightHpKey = makeHpKey('R', rightFactionId, rightUnit?.id)
 
   const getSquadCountMax = (unit) => Math.max(1, toNumber(unit?.squadMax, 1))
-  const getSquadCountMin = (unit) => Math.max(1, toNumber(unit?.squadMin, 1))
   const clampSquadCount = (value, unit) => {
     const raw = Math.max(1, toNumber(value, 1))
-    if (raw <= 1) return 1
-    return clamp(raw, getSquadCountMin(unit), getSquadCountMax(unit))
+    return clamp(raw, 1, getSquadCountMax(unit))
   }
   const getSquadHpPoolMax = (unit, unitCount) => {
     if (!unit) return 0
@@ -176,11 +181,10 @@ function Batalla() {
     return Math.min(clampSquadCount(fallbackCount, unit), Math.max(0, aliveByHp))
   }
   const buildUnitCountOptions = (unit) => {
-    const min = getSquadCountMin(unit)
     const max = getSquadCountMax(unit)
-    const options = [1]
-    for (let value = min; value <= max; value += 1) {
-      if (!options.includes(value)) options.push(value)
+    const options = []
+    for (let value = 1; value <= max; value += 1) {
+      options.push(value)
     }
     return options
   }
@@ -344,8 +348,10 @@ function Batalla() {
     setRightHalfRange(leftHalfRange)
     setLeftAfterDash(rightAfterDash)
     setRightAfterDash(leftAfterDash)
-    setLeftUnitCount(clampSquadCount(rightUnitCount, rightUnit))
-    setRightUnitCount(clampSquadCount(leftUnitCount, leftUnit))
+    const nextLeftUnitCount = clampSquadCount(rightUnitCount, rightUnit)
+    const nextRightUnitCount = clampSquadCount(leftUnitCount, leftUnit)
+    setLeftUnitCount(nextLeftUnitCount)
+    setRightUnitCount(nextRightUnitCount)
 
     setHpMap((prev) => swapMapBySidePrefix(prev, 'L', 'R'))
     setAmmoMap((prev) => swapMapBySidePrefix(prev, 'left', 'right'))
@@ -452,7 +458,9 @@ function Batalla() {
           ? leftAfterDash
           : rightAfterDash
         : false
-      const defenderCoverType = defenderSide === 'left' ? leftCoverType : rightCoverType
+      const defenderCoverType = defenderSide === 'left'
+        ? (leftCanUseCover ? leftCoverType : 'none')
+        : (rightCanUseCover ? rightCoverType : 'none')
       const factionConditions = buildFactionAttackConditions({
         attackerAbilities: attackerFaction?.abilities,
         attackerState: attackerFactionAbilityState,
@@ -706,6 +714,7 @@ function Batalla() {
         .map((ability) => [ability.id, randomBool()]),
     )
     const randomCoverType = pickRandomItem(coverTypeOptions) || 'none'
+    const randomUnitCanUseCover = unitCanUseCover(randomUnit)
     const modeWeapons = (randomUnit.weapons || []).filter((weapon) => weapon.kind === mode)
     const weaponSlots = getWeaponSlotsForMode(randomUnit, mode, modeWeapons.length)
     const randomWeaponIds = buildWeaponSelection(
@@ -732,7 +741,7 @@ function Batalla() {
       setLeft(nextSelection)
       setLeftFactionAbilityState(randomFactionAbilityState)
       setLeftUnitCount(nextUnitCount)
-      setLeftCoverType(randomCoverType)
+      setLeftCoverType(randomUnitCanUseCover ? randomCoverType : 'none')
       setLeftMoved(randomConditionSupport.moved ? randomBool() : false)
       setLeftHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
       setLeftAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
@@ -742,7 +751,7 @@ function Batalla() {
       setRight(nextSelection)
       setRightFactionAbilityState(randomFactionAbilityState)
       setRightUnitCount(nextUnitCount)
-      setRightCoverType(randomCoverType)
+      setRightCoverType(randomUnitCanUseCover ? randomCoverType : 'none')
       setRightMoved(randomConditionSupport.moved ? randomBool() : false)
       setRightHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
       setRightAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
@@ -864,7 +873,7 @@ function Batalla() {
             >
               {buildUnitCountOptions(leftUnit).map((value) => (
                 <option key={`left-units-${value}`} value={value}>
-                  {value === 1 ? value : `${value} (${tx.squadLabel})`}
+                  {value}
                 </option>
               ))}
             </select>
@@ -1011,16 +1020,18 @@ function Batalla() {
               )}
             </article>
           )}
-          <label className="field">
-            <span>{tx.coverType}</span>
-            <select value={leftCoverType} onChange={(event) => setLeftCoverType(event.target.value)}>
-              {coverTypeOptions.map((option) => (
-                <option key={`left-cover-${option}`} value={option}>
-                  {option === 'none' ? tx.coverNone : option === 'partial' ? tx.coverPartial : tx.coverHeight}
-                </option>
-              ))}
-            </select>
-          </label>
+          {leftCanUseCover && (
+            <label className="field">
+              <span>{tx.coverType}</span>
+              <select value={leftCoverType} onChange={(event) => setLeftCoverType(event.target.value)}>
+                {coverTypeOptions.map((option) => (
+                  <option key={`left-cover-${option}`} value={option}>
+                    {option === 'none' ? tx.coverNone : option === 'partial' ? tx.coverPartial : tx.coverHeight}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <section className="duel-faction-abilities">
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
             {!leftImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
@@ -1107,7 +1118,7 @@ function Batalla() {
             >
               {buildUnitCountOptions(rightUnit).map((value) => (
                 <option key={`right-units-${value}`} value={value}>
-                  {value === 1 ? value : `${value} (${tx.squadLabel})`}
+                  {value}
                 </option>
               ))}
             </select>
@@ -1254,16 +1265,18 @@ function Batalla() {
               )}
             </article>
           )}
-          <label className="field">
-            <span>{tx.coverType}</span>
-            <select value={rightCoverType} onChange={(event) => setRightCoverType(event.target.value)}>
-              {coverTypeOptions.map((option) => (
-                <option key={`right-cover-${option}`} value={option}>
-                  {option === 'none' ? tx.coverNone : option === 'partial' ? tx.coverPartial : tx.coverHeight}
-                </option>
-              ))}
-            </select>
-          </label>
+          {rightCanUseCover && (
+            <label className="field">
+              <span>{tx.coverType}</span>
+              <select value={rightCoverType} onChange={(event) => setRightCoverType(event.target.value)}>
+                {coverTypeOptions.map((option) => (
+                  <option key={`right-cover-${option}`} value={option}>
+                    {option === 'none' ? tx.coverNone : option === 'partial' ? tx.coverPartial : tx.coverHeight}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <section className="duel-faction-abilities">
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
             {!rightImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
