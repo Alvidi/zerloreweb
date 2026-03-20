@@ -273,6 +273,33 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                     </div>
                   </div>
                 )}
+                {!!entry.damageDetails?.length && (
+                  <div className="duel-log-line">
+                    <span className="duel-log-line-label duel-log-line-label-damage">
+                      <span>{tx.damage}</span>{' '}
+                      <span className="duel-log-line-label-unit">{primaryUnitName}</span>
+                    </span>
+                    <div className="duel-dice">
+                      {entry.damageDetails.map((detail, detailIndex) => (
+                        <div key={`${entry.key}-damage-detail-${detailIndex}`} className="duel-ability-detail-group">
+                          {detail.dice?.map((die, dieIndex) => (
+                            <span
+                              key={`${entry.key}-damage-die-${detailIndex}-${dieIndex}`}
+                              className={`duel-die ${
+                                die.outcome === 'crit'
+                                  ? 'duel-die-attack duel-die-crit'
+                                  : 'duel-die-attack'
+                              }`}
+                            >
+                              {die.value}
+                            </span>
+                          ))}
+                          <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 {!entry.hideResult && (
                   <div className="duel-log-line">
                     <span className="duel-log-line-label">{tx.result}</span>

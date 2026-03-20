@@ -80,8 +80,6 @@ function Batalla() {
   const [logEntries, setLogEntries] = useState([])
   const [isResolving, setIsResolving] = useState(false)
   const [defenderCounterattack, setDefenderCounterattack] = useState(true)
-  const [leftUnitCount, setLeftUnitCount] = useState(1)
-  const [rightUnitCount, setRightUnitCount] = useState(1)
   const timersRef = useRef([])
   const resolveRunRef = useRef(0)
   const mode = resolveMode(attackType)
@@ -157,36 +155,37 @@ function Batalla() {
   const rightHpKey = makeHpKey('R', rightFactionId, rightUnit?.id)
 
   const getSquadCountMax = (unit) => Math.max(1, toNumber(unit?.squadMax, 1))
-  const clampSquadCount = (value, unit) => {
-    const raw = Math.max(1, toNumber(value, 1))
-    return clamp(raw, 1, getSquadCountMax(unit))
-  }
-  const getSquadHpPoolMax = (unit, unitCount) => {
+  const getSquadHpPoolMax = (unit) => {
     if (!unit) return 0
     const perUnitHp = Math.max(1, toNumber(unit.hp, 1))
-    return perUnitHp * clampSquadCount(unitCount, unit)
+    return perUnitHp * getSquadCountMax(unit)
   }
-  const sanitizeSquadHp = (rawHp, unit, unitCount) => {
-    const maxHp = getSquadHpPoolMax(unit, unitCount)
-    return clamp(toNumber(rawHp, maxHp), 0, maxHp)
+  const sanitizeSquadHp = (rawHp, unit) => {
+    const maxHp = getSquadHpPoolMax(unit)
+    const defaultHp = Math.max(1, toNumber(unit?.hp, 1))
+    return clamp(toNumber(rawHp, defaultHp), 0, maxHp)
   }
-  const leftHpMax = getSquadHpPoolMax(leftUnit, leftUnitCount)
-  const rightHpMax = getSquadHpPoolMax(rightUnit, rightUnitCount)
-  const leftHp = sanitizeSquadHp(hpMap[leftHpKey], leftUnit, leftUnitCount)
-  const rightHp = sanitizeSquadHp(hpMap[rightHpKey], rightUnit, rightUnitCount)
-  const getAliveSquadCount = (poolHp, unit, fallbackCount = 1) => {
+  const leftHpMax = getSquadHpPoolMax(leftUnit)
+  const rightHpMax = getSquadHpPoolMax(rightUnit)
+  const leftHp = sanitizeSquadHp(hpMap[leftHpKey], leftUnit)
+  const rightHp = sanitizeSquadHp(hpMap[rightHpKey], rightUnit)
+  const getAliveSquadCount = (poolHp, unit) => {
     if (!unit) return 0
     const perUnitHp = Math.max(1, toNumber(unit.hp, 1))
     const aliveByHp = Math.ceil(Math.max(0, toNumber(poolHp, 0)) / perUnitHp)
-    return Math.min(clampSquadCount(fallbackCount, unit), Math.max(0, aliveByHp))
+    return Math.min(getSquadCountMax(unit), Math.max(0, aliveByHp))
   }
-  const buildUnitCountOptions = (unit) => {
-    const max = getSquadCountMax(unit)
-    const options = []
-    for (let value = 1; value <= max; value += 1) {
-      options.push(value)
+  const leftAliveCount = getAliveSquadCount(leftHp, leftUnit)
+  const rightAliveCount = getAliveSquadCount(rightHp, rightUnit)
+  const formatHpOptionLabel = (hpValue, unit) => {
+    const hp = Math.max(0, toNumber(hpValue, 0))
+    if (hp <= 0) return 'KO'
+    const perUnitHp = Math.max(1, toNumber(unit?.hp, 1))
+    const activeUnits = Math.max(1, Math.ceil(hp / perUnitHp))
+    if (lang === 'en') {
+      return `${hp} HP · ${activeUnits} ${activeUnits === 1 ? 'unit' : 'units'}`
     }
-    return options
+    return `${hp} vidas · ${activeUnits} ${activeUnits === 1 ? 'unidad' : 'unidades'}`
   }
   const scaleAttackExpression = (rawAttacks, multiplier) => {
     const safeMultiplier = Math.max(1, toNumber(multiplier, 1))
@@ -210,10 +209,10 @@ function Batalla() {
     return raw
   }
 
-  const setUnitHp = (side, factionId, unit, unitCount, rawValue) => {
+  const setUnitHp = (side, factionId, unit, rawValue) => {
     if (!unit) return
     const key = makeHpKey(side, factionId, unit.id)
-    const next = sanitizeSquadHp(rawValue, unit, unitCount)
+    const next = sanitizeSquadHp(rawValue, unit)
     setHpMap((prev) => ({ ...prev, [key]: next }))
   }
 
@@ -348,10 +347,6 @@ function Batalla() {
     setRightHalfRange(leftHalfRange)
     setLeftAfterDash(rightAfterDash)
     setRightAfterDash(leftAfterDash)
-    const nextLeftUnitCount = clampSquadCount(rightUnitCount, rightUnit)
-    const nextRightUnitCount = clampSquadCount(leftUnitCount, leftUnit)
-    setLeftUnitCount(nextLeftUnitCount)
-    setRightUnitCount(nextRightUnitCount)
 
     setHpMap((prev) => swapMapBySidePrefix(prev, 'L', 'R'))
     setAmmoMap((prev) => swapMapBySidePrefix(prev, 'left', 'right'))
@@ -370,12 +365,14 @@ function Batalla() {
     setLogEntries([])
     setAmmoMap({})
 
-    const leftCountAtStart = clampSquadCount(leftUnitCount, leftUnit)
-    const rightCountAtStart = clampSquadCount(rightUnitCount, rightUnit)
-    let nextLeftHp = sanitizeSquadHp(leftHp, leftUnit, leftCountAtStart)
-    let nextRightHp = sanitizeSquadHp(rightHp, rightUnit, rightCountAtStart)
-    const leftMaxHpPool = Math.max(1, getSquadHpPoolMax(leftUnit, leftCountAtStart))
-    const rightMaxHpPool = Math.max(1, getSquadHpPoolMax(rightUnit, rightCountAtStart))
+    let nextLeftHp = sanitizeSquadHp(leftHp, leftUnit)
+    let nextRightHp = sanitizeSquadHp(rightHp, rightUnit)
+    const leftCountAtStart = Math.max(1, getAliveSquadCount(nextLeftHp, leftUnit))
+    const rightCountAtStart = Math.max(1, getAliveSquadCount(nextRightHp, rightUnit))
+    const leftPerUnitHp = Math.max(1, toNumber(leftUnit?.hp, 1))
+    const rightPerUnitHp = Math.max(1, toNumber(rightUnit?.hp, 1))
+    const leftMaxHpPool = Math.max(1, leftCountAtStart * leftPerUnitHp)
+    const rightMaxHpPool = Math.max(1, rightCountAtStart * rightPerUnitHp)
     const entries = []
     const pendingAmmoSpend = {}
     let rangedCounterReady = false
@@ -410,12 +407,8 @@ function Batalla() {
       const attackerHpBefore = attackerSide === 'left' ? nextLeftHp : nextRightHp
       const defenderHpBefore = defenderSide === 'left' ? nextLeftHp : nextRightHp
       if ((!allowDestroyedAttacker && attackerHpBefore <= 0) || defenderHpBefore <= 0) return
-      const attackerAliveCount = attackerSide === 'left'
-        ? getAliveSquadCount(attackerHpBefore, attackerUnit, leftCountAtStart)
-        : getAliveSquadCount(attackerHpBefore, attackerUnit, rightCountAtStart)
-      const defenderAliveCount = defenderSide === 'left'
-        ? getAliveSquadCount(defenderHpBefore, defenderUnit, leftCountAtStart)
-        : getAliveSquadCount(defenderHpBefore, defenderUnit, rightCountAtStart)
+      const attackerAliveCount = getAliveSquadCount(attackerHpBefore, attackerUnit)
+      const defenderAliveCount = getAliveSquadCount(defenderHpBefore, defenderUnit)
       if (attackerAliveCount <= 0 || defenderAliveCount <= 0) return
 
       const attackerFactionId = attackerSide === 'left' ? leftFactionId : rightFactionId
@@ -726,9 +719,7 @@ function Batalla() {
       .map((weaponId) => modeWeapons.find((weapon) => weapon.id === weaponId))
       .filter(Boolean)
     const randomConditionSupport = getConditionSupport(randomSelectedWeapons, mode)
-    const countOptions = buildUnitCountOptions(randomUnit)
-    const nextUnitCount = pickRandomItem(countOptions) || 1
-    const nextHpMax = getSquadHpPoolMax(randomUnit, nextUnitCount)
+    const nextHpMax = getSquadHpPoolMax(randomUnit)
     const hpOptions = buildHpValues(nextHpMax)
     const nextHp = pickRandomItem(hpOptions) || nextHpMax
     const nextSelection = {
@@ -740,7 +731,6 @@ function Batalla() {
     if (side === 'left') {
       setLeft(nextSelection)
       setLeftFactionAbilityState(randomFactionAbilityState)
-      setLeftUnitCount(nextUnitCount)
       setLeftCoverType(randomUnitCanUseCover ? randomCoverType : 'none')
       setLeftMoved(randomConditionSupport.moved ? randomBool() : false)
       setLeftHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
@@ -750,7 +740,6 @@ function Batalla() {
     } else {
       setRight(nextSelection)
       setRightFactionAbilityState(randomFactionAbilityState)
-      setRightUnitCount(nextUnitCount)
       setRightCoverType(randomUnitCanUseCover ? randomCoverType : 'none')
       setRightMoved(randomConditionSupport.moved ? randomBool() : false)
       setRightHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
@@ -830,7 +819,6 @@ function Batalla() {
                     weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
                   })
                   setLeftFactionAbilityState({})
-                  setLeftUnitCount(1)
                 }}
               >
                 {factions.map((faction) => (
@@ -849,7 +837,6 @@ function Batalla() {
               onChange={(event) =>
                 setLeft((prev) => {
                   const unit = leftFaction?.units.find((item) => item.id === event.target.value)
-                  setLeftUnitCount(1)
                   return {
                     ...prev,
                     unitId: event.target.value,
@@ -861,19 +848,6 @@ function Batalla() {
               {leftFaction?.units.map((unit) => (
                 <option key={unit.id} value={unit.id}>
                   {unit.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="field">
-            <span>{tx.unitsCount}</span>
-            <select
-              value={clampSquadCount(leftUnitCount, leftUnit)}
-              onChange={(event) => setLeftUnitCount(clampSquadCount(event.target.value, leftUnit))}
-            >
-              {buildUnitCountOptions(leftUnit).map((value) => (
-                <option key={`left-units-${value}`} value={value}>
-                  {value}
                 </option>
               ))}
             </select>
@@ -931,7 +905,7 @@ function Batalla() {
               <div className="unit-stats-table">
                 <div className="unit-stats-row head">
                   <span>{tx.mov}</span>
-                  <span>{tx.vidas}</span>
+                  <span>{tx.hpSquad || tx.vidas}</span>
                   <span>{tx.salv}</span>
                   <span>{tx.vel}</span>
                 </div>
@@ -941,12 +915,12 @@ function Batalla() {
                     <select
                       className="duel-hp-select"
                       value={leftHp}
-                      onChange={(event) => setUnitHp('L', leftFactionId, leftUnit, leftUnitCount, event.target.value)}
+                      onChange={(event) => setUnitHp('L', leftFactionId, leftUnit, event.target.value)}
                     >
-                      {leftHp <= 0 && <option value={0}>KO</option>}
+                      {leftHp <= 0 && <option value={0}>{formatHpOptionLabel(0, leftUnit)}</option>}
                       {buildHpValues(leftHpMax).map((value) => (
                         <option key={`left-hp-${value}`} value={value}>
-                          {value}
+                          {formatHpOptionLabel(value, leftUnit)}
                         </option>
                       ))}
                     </select>
@@ -955,8 +929,13 @@ function Batalla() {
                   <span>{leftUnit.speed}</span>
                 </div>
               </div>
+              <p className="duel-unit-alive">
+                {tx.activeUnits}: <strong>{leftAliveCount}</strong>
+              </p>
               {leftUnit.specialty && leftUnit.specialty !== '-' && (
-                <p className="unit-specialty duel-unit-specialty">{leftUnit.specialty}</p>
+                <p className="unit-specialty duel-unit-specialty">
+                  <span className="duel-unit-specialty-label">{tx.unitSpecialtyCard}:</span> {leftUnit.specialty}
+                </p>
               )}
               {!!leftSelectedWeapons.length && (
                 <div className="duel-weapon-stack">
@@ -1075,7 +1054,6 @@ function Batalla() {
                     weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
                   })
                   setRightFactionAbilityState({})
-                  setRightUnitCount(1)
                 }}
               >
                 {factions.map((faction) => (
@@ -1094,7 +1072,6 @@ function Batalla() {
               onChange={(event) =>
                 setRight((prev) => {
                   const unit = rightFaction?.units.find((item) => item.id === event.target.value)
-                  setRightUnitCount(1)
                   return {
                     ...prev,
                     unitId: event.target.value,
@@ -1106,19 +1083,6 @@ function Batalla() {
               {rightFaction?.units.map((unit) => (
                 <option key={unit.id} value={unit.id}>
                   {unit.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="field">
-            <span>{tx.unitsCount}</span>
-            <select
-              value={clampSquadCount(rightUnitCount, rightUnit)}
-              onChange={(event) => setRightUnitCount(clampSquadCount(event.target.value, rightUnit))}
-            >
-              {buildUnitCountOptions(rightUnit).map((value) => (
-                <option key={`right-units-${value}`} value={value}>
-                  {value}
                 </option>
               ))}
             </select>
@@ -1176,7 +1140,7 @@ function Batalla() {
               <div className="unit-stats-table">
                 <div className="unit-stats-row head">
                   <span>{tx.mov}</span>
-                  <span>{tx.vidas}</span>
+                  <span>{tx.hpSquad || tx.vidas}</span>
                   <span>{tx.salv}</span>
                   <span>{tx.vel}</span>
                 </div>
@@ -1186,12 +1150,12 @@ function Batalla() {
                     <select
                       className="duel-hp-select"
                       value={rightHp}
-                      onChange={(event) => setUnitHp('R', rightFactionId, rightUnit, rightUnitCount, event.target.value)}
+                      onChange={(event) => setUnitHp('R', rightFactionId, rightUnit, event.target.value)}
                     >
-                      {rightHp <= 0 && <option value={0}>KO</option>}
+                      {rightHp <= 0 && <option value={0}>{formatHpOptionLabel(0, rightUnit)}</option>}
                       {buildHpValues(rightHpMax).map((value) => (
                         <option key={`right-hp-${value}`} value={value}>
-                          {value}
+                          {formatHpOptionLabel(value, rightUnit)}
                         </option>
                       ))}
                     </select>
@@ -1200,8 +1164,13 @@ function Batalla() {
                   <span>{rightUnit.speed}</span>
                 </div>
               </div>
+              <p className="duel-unit-alive">
+                {tx.activeUnits}: <strong>{rightAliveCount}</strong>
+              </p>
               {rightUnit.specialty && rightUnit.specialty !== '-' && (
-                <p className="unit-specialty duel-unit-specialty">{rightUnit.specialty}</p>
+                <p className="unit-specialty duel-unit-specialty">
+                  <span className="duel-unit-specialty-label">{tx.unitSpecialtyCard}:</span> {rightUnit.specialty}
+                </p>
               )}
               {!!rightSelectedWeapons.length && (
                 <div className="duel-weapon-stack">

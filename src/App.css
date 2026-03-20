@@ -3389,6 +3389,17 @@ mark {
   color: var(--text-main);
 }
 
+.duel-unit-alive {
+  margin: -2px 0 2px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.duel-unit-alive strong {
+  color: rgba(135, 223, 154, 0.95);
+  font-weight: 700;
+}
+
 .duel-unit-card .unit-stats-table {
   margin-top: 0;
 }
@@ -3404,6 +3415,12 @@ mark {
 .duel-unit-specialty {
   margin-top: 2px;
   font-size: 0.8rem;
+  color: rgba(112, 176, 255, 0.95);
+}
+
+.duel-unit-specialty-label {
+  color: rgba(136, 194, 255, 0.98);
+  font-weight: 700;
 }
 
 .duel-hp-select {
@@ -3649,6 +3666,10 @@ mark {
 
 .duel-log-line-label-faction-ability {
   color: rgba(255, 199, 107, 0.94);
+}
+
+.duel-log-line-label-damage {
+  color: rgba(255, 164, 67, 0.92);
 }
 
 .duel-dice {

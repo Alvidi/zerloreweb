@@ -30,11 +30,27 @@ export const parseThreshold = (value, fallback = 4) => {
   return fallback
 }
 
-const parseDamage = (value, fallback = 1) => {
+const parseDamageExpression = (value, fallback = { kind: 'flat', value: 1, label: '1' }) => {
   const raw = String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '')
+  const md = raw.match(/^(\d*)d(\d+)?([+-]\d+)?$/)
+  if (md) {
+    const count = clamp(toInt(md[1] || '1', 1), 0, 60)
+    const hasExplicitSides = Boolean(md[2])
+    const sides = hasExplicitSides ? clamp(toInt(md[2], 6), 2, 100) : 6
+    const modifier = toInt(md[3], 0)
+    const labelBase = `${count}D${sides}`
+    const label = modifier ? `${labelBase}${modifier > 0 ? `+${modifier}` : modifier}` : labelBase
+    return { kind: 'dice', count, sides, modifier, label }
+  }
   const numMatch = raw.match(/-?\d+/)
-  if (!numMatch) return fallback
-  return toInt(numMatch[0], fallback)
+  if (numMatch) {
+    const flatValue = toInt(numMatch[0], 1)
+    return { kind: 'flat', value: flatValue, label: String(flatValue) }
+  }
+  return fallback
 }
 
 const parseDiceExpr = (value) => {
@@ -62,9 +78,24 @@ const parseDiceExpr = (value) => {
 }
 
 const rollDie = (sides = 6) => Math.floor(Math.random() * sides) + 1
-const SCATTER_DIRECTIONS = ['N', 'NE', 'SE', 'S', 'SW', 'NW']
 
 const rollDice = (count, sides = 6) => Array.from({ length: Math.max(0, count) }, () => rollDie(sides))
+const rollWarhammerD3 = () => Math.ceil(rollDie(6) / 2)
+const rollDamageValue = (expression) => {
+  if (!expression || expression.kind !== 'dice') {
+    return {
+      total: Math.max(0, toInt(expression?.value, 1)),
+      label: expression?.label || '1',
+      rolls: [],
+    }
+  }
+
+  const rolls = expression.sides === 3
+    ? Array.from({ length: Math.max(0, expression.count) }, () => rollWarhammerD3())
+    : rollDice(expression.count, expression.sides)
+  const total = Math.max(0, rolls.reduce((sum, value) => sum + value, 0) + toInt(expression.modifier, 0))
+  return { total, label: expression.label, rolls }
+}
 
 const rollAttackDiceCount = (expr) => {
   if (!expr?.count) {
@@ -75,7 +106,9 @@ const rollAttackDiceCount = (expr) => {
     const total = Math.max(0, expr.count + toInt(expr.modifier, 0))
     return { total, rolls: [] }
   }
-  const rolls = rollDice(expr.count, expr.sides)
+  const rolls = expr.sides === 3
+    ? Array.from({ length: Math.max(0, expr.count) }, () => rollWarhammerD3())
+    : rollDice(expr.count, expr.sides)
   const total = Math.max(0, rolls.reduce((sum, value) => sum + value, 0) + toInt(expr.modifier, 0))
   return { total, rolls }
 }
@@ -320,18 +353,16 @@ export function resolveAttack({
 
   if (mode === 'ranged' && hasParabolic) {
     const scatterRoll = rollDie(6)
-    const bullseye = scatterRoll === 1
-    const direction = bullseye ? null : SCATTER_DIRECTIONS[(scatterRoll - 2) % SCATTER_DIRECTIONS.length]
+    const bullseye = scatterRoll >= 5
     parabolicScatter = {
       roll: scatterRoll,
       bullseye,
-      direction,
-      deviationInches: bullseye ? 0 : 3,
+      noSave: bullseye,
     }
     rulesApplied.push(
       bullseye
-        ? 'Disparo parabólico (dispersión: diana)'
-        : `Disparo parabólico (dispersión: flecha ${direction}, desvío 3")`,
+        ? 'Disparo parabólico (5-6: diana, sin tirada de salvación del objetivo)'
+        : 'Disparo parabólico (1-4: fallo de precisión, salvación normal)',
     )
   }
 
@@ -558,28 +589,40 @@ export function resolveAttack({
   }
 
   if (hasExplosive) {
-    rulesApplied.push('Explosiva (sin objetivos adicionales en simulador 1v1)')
+    rulesApplied.push('Explosiva (afecta a enemigas a 3" del impacto; en simulador 1v1 se aplica al objetivo)')
   }
 
   const rollSummary = summarizeHits(hitEntries)
   const incomingHits = rollSummary.hits + rollSummary.crits
-  const saveDiceCount = Math.max(0, incomingHits + bonusSaveDice)
-  const saveRolls = rollDice(saveDiceCount, 6)
+  const parabolicNoSave = Boolean(parabolicScatter?.noSave)
+  const saveDiceCount = parabolicNoSave ? 0 : Math.max(0, incomingHits + bonusSaveDice)
+  const saveRolls = parabolicNoSave ? [] : rollDice(saveDiceCount, 6)
 
   const defensiveSixes = saveRolls.filter((roll) => roll === 6).length
   // A natural 1 always fails Save, even if the threshold is 1+.
   const regularPasses = saveRolls.filter((roll) => roll >= saveThreshold && roll !== 6 && roll !== 1).length
 
-  const blockedCrits = critUnsavable ? 0 : Math.min(rollSummary.crits, defensiveSixes)
-  const sixesLeftForNormal = critUnsavable ? defensiveSixes : defensiveSixes - blockedCrits
-  const blockedHits = Math.min(rollSummary.hits, regularPasses + sixesLeftForNormal)
+  const blockedCrits = parabolicNoSave
+    ? 0
+    : critUnsavable
+      ? 0
+      : Math.min(rollSummary.crits, defensiveSixes)
+  const sixesLeftForNormal = parabolicNoSave
+    ? 0
+    : critUnsavable
+      ? defensiveSixes
+      : defensiveSixes - blockedCrits
+  const blockedHits = parabolicNoSave ? 0 : Math.min(rollSummary.hits, regularPasses + sixesLeftForNormal)
 
   const unblockedHits = Math.max(0, rollSummary.hits - blockedHits)
   const unblockedCrits = Math.max(0, rollSummary.crits - blockedCrits)
 
-  const normalDamage = parseDamage(weapon.damage, 1)
-  const critDamage = parseDamage(weapon.critDamage, normalDamage)
-  const rawDamage = unblockedHits * normalDamage + unblockedCrits * critDamage
+  const normalDamageExpression = parseDamageExpression(weapon.damage, { kind: 'flat', value: 1, label: '1' })
+  const critDamageExpression = parseDamageExpression(weapon.critDamage, normalDamageExpression)
+  const normalDamageRolls = Array.from({ length: unblockedHits }, () => rollDamageValue(normalDamageExpression))
+  const critDamageRolls = Array.from({ length: unblockedCrits }, () => rollDamageValue(critDamageExpression))
+  const rawDamage = [...normalDamageRolls, ...critDamageRolls]
+    .reduce((sum, entry) => sum + entry.total, 0)
   const preventedDamage = mode === 'ranged' && defenderCrucibleGlory ? Math.min(1, rawDamage) : 0
   const totalDamage = Math.max(0, rawDamage - preventedDamage)
 
@@ -612,6 +655,10 @@ export function resolveAttack({
     damage: totalDamage,
     rawDamage,
     preventedDamage,
+    normalDamageRolls,
+    critDamageRolls,
+    normalDamageKind: normalDamageExpression.kind,
+    critDamageKind: critDamageExpression.kind,
     selfDamage,
     heal: voracityHeal,
   }

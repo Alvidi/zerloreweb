@@ -79,6 +79,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         defenderCover: '',
         defenderTail: '',
         abilityDetails: [],
+        damageDetails: [],
         attackCountDice: [],
         attackDice: [],
         defenseDice: [],
@@ -145,12 +146,19 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const defenseDice = saveRolls.map((roll, index) => ({ value: roll, blocked: blockedFlags[index] }))
     const appliedAbilityRules = (result.rulesApplied || []).filter((rule) => isWeaponAbilityRule(rule))
     const abilityDetails = []
+    const damageDetails = []
     const pushAbilityDetail = (esText, enText, dice = [], source = 'weapon', owner = 'attacker') => {
       abilityDetails.push({
         text: lang === 'en' ? enText : esText,
         dice,
         source,
         owner,
+      })
+    }
+    const pushDamageDetail = (esText, enText, dice = []) => {
+      damageDetails.push({
+        text: lang === 'en' ? enText : esText,
+        dice,
       })
     }
     const factionAbilityDetails = buildFactionAbilityLogDetails({ result, lang })
@@ -240,25 +248,25 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     }
     if (result.parabolicScatter) {
       const scatter = result.parabolicScatter
-      const scatterDirection = scatter.direction || ''
       const scatterTextEs = scatter.bullseye
-        ? 'Disparo parabólico: diana. Impacta en el punto marcado.'
-        : `Disparo parabólico: flecha ${scatterDirection}, desvío ${scatter.deviationInches}".`
+        ? `Disparo parabólico tira ${scatter.roll}: diana (5-6). El objetivo no puede realizar tirada de salvación.`
+        : `Disparo parabólico tira ${scatter.roll}: fallo de precisión (1-4). El objetivo puede salvar normalmente.`
       const scatterTextEn = scatter.bullseye
-        ? 'Parabolic Shot: bullseye. It lands on the marked point.'
-        : `Parabolic Shot: arrow ${scatterDirection}, deviates ${scatter.deviationInches}".`
+        ? `Parabolic Shot rolls ${scatter.roll}: bullseye (5-6). The target cannot make Save rolls.`
+        : `Parabolic Shot rolls ${scatter.roll}: precision failure (1-4). The target can save normally.`
       pushAbilityDetail(
         scatterTextEs,
         scatterTextEn,
         [{
-          value: scatter.bullseye
-            ? (lang === 'en' ? 'BULLSEYE' : 'DIANA')
-            : (lang === 'en' ? 'ARROW' : 'FLECHA'),
+          value: scatter.roll,
           outcome: scatter.bullseye ? 'crit' : 'fail',
-          kind: 'scatter',
-          scatterDirection,
-          scatterBullseye: scatter.bullseye,
         }],
+      )
+    }
+    if (hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.explosive)) {
+      pushAbilityDetail(
+        'Explosiva: en reglas completas afecta a enemigas a 3" del punto de impacto; en este simulador 1v1 se aplica solo al objetivo.',
+        'Explosive: in full rules it affects enemies within 3" of the impact point; in this 1v1 simulator it applies only to the target.',
       )
     }
 
@@ -348,6 +356,49 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       ? `): ${defenseSummary || 'no defense rolls'}; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
       : `): ${defenseSummary || 'sin tiradas de defensa'}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
 
+    const normalDamageRolls = Array.isArray(result.totals?.normalDamageRolls) ? result.totals.normalDamageRolls : []
+    const critDamageRolls = Array.isArray(result.totals?.critDamageRolls) ? result.totals.critDamageRolls : []
+
+    const hasVariableNormalDamage = result.totals?.normalDamageKind === 'dice'
+    const hasVariableCritDamage = result.totals?.critDamageKind === 'dice'
+
+    if (hasVariableNormalDamage && normalDamageRolls.length > 0) {
+      const values = normalDamageRolls
+        .map((entry) => Number(entry?.total))
+        .filter((value) => Number.isFinite(value))
+      const label = String(normalDamageRolls[0]?.label || (lang === 'en' ? 'Damage' : 'Daño'))
+      const total = values.reduce((sum, value) => sum + value, 0)
+      if (values.length > 0) {
+        pushDamageDetail(
+          `Daño normal (${label}) en ${values.length} impacto${values.length === 1 ? '' : 's'}: ${values.join(', ')} (total ${total}).`,
+          `Normal damage (${label}) over ${values.length} hit${values.length === 1 ? '' : 's'}: ${values.join(', ')} (total ${total}).`,
+          values.map((value) => ({ value, outcome: 'hit' })),
+        )
+      }
+    }
+
+    if (hasVariableCritDamage && critDamageRolls.length > 0) {
+      const values = critDamageRolls
+        .map((entry) => Number(entry?.total))
+        .filter((value) => Number.isFinite(value))
+      const label = String(critDamageRolls[0]?.label || (lang === 'en' ? 'Critical damage' : 'Daño crítico'))
+      const total = values.reduce((sum, value) => sum + value, 0)
+      if (values.length > 0) {
+        pushDamageDetail(
+          `Daño crítico (${label}) en ${values.length} crítico${values.length === 1 ? '' : 's'}: ${values.join(', ')} (total ${total}).`,
+          `Critical damage (${label}) over ${values.length} crit${values.length === 1 ? '' : 's'}: ${values.join(', ')} (total ${total}).`,
+          values.map((value) => ({ value, outcome: 'crit' })),
+        )
+      }
+    }
+
+    if ((hasVariableNormalDamage || hasVariableCritDamage) && damageDetails.length === 0) {
+      pushDamageDetail(
+        'Daño variable: sin tiradas porque no han entrado impactos.',
+        'Variable damage: no rolls because no hits got through.',
+      )
+    }
+
     return {
       key,
       title,
@@ -367,6 +418,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       attackDice,
       defenseDice,
       abilityDetails,
+      damageDetails,
       resultState: {
         attacker: {
           name: attackerName,
@@ -410,6 +462,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     defenderCover: '',
     defenderTail: '',
     abilityDetails,
+    damageDetails: [],
     attackCountDice: [],
     attackDice,
     defenseDice: [],

@@ -60,8 +60,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
-      ? 'Declare an impact point within range. All enemy units with a base within 3” receive the full attack, resolving hits, saves and damage independently. Units engaged in melee are not affected.'
-      : 'Declara un punto de impacto dentro del alcance. Todas las unidades enemigas cuya peana esté a 3” o menos reciben el ataque completo, resolviendo impactos, salvaciones y daño de forma independiente. Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
+      ? 'Declare an impact point within range and resolve the attack normally. Enemy units within 3" of that point suffer the same resulting damage. In squad mode, only miniatures in the target squad are affected (the opponent allocates damage). Units locked in melee are not affected.'
+      : 'Declara un punto de impacto dentro del alcance y resuelve el ataque normalmente. Las unidades enemigas a 3" o menos de ese punto reciben el mismo daño resultante. En modo escuadras solo afecta a miniaturas de la escuadra objetivo (el rival reparte el daño). Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.criticalAttack) {
     return lang === 'en'
@@ -90,8 +90,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
     return lang === 'en'
-      ? 'Can shoot without line of sight. Mark a target point within range and roll the scatter die. On a bullseye, hits that point; on an arrow, deviates 3" in that direction. All enemy units within 3" of the final impact point receive the full attack.'
-      : 'Puede disparar sin línea de visión. Marca un punto objetivo dentro del alcance y tira el dado de dispersión. Si sale Diana, impacta en ese punto; si sale flecha, se desvía 3" en esa dirección. Todas las unidades enemigas cuya peana esté a 3" del punto de impacto reciben el ataque completo.'
+      ? 'Can shoot without line of sight. Mark a target point within range and roll 1D6: on 5-6 (bullseye), the target and enemies within 3" cannot make Save rolls; on 1-4, they resolve Save rolls normally. In squad mode, only miniatures in the target squad are affected. Units locked in melee are not affected.'
+      : 'Puede disparar sin línea de visión. Marca un punto objetivo dentro del alcance y tira 1D6: con 5-6 (diana), el objetivo y las enemigas a 3" o menos no pueden realizar tirada de salvación; con 1-4, resuelven salvación normal. En modo escuadras solo afecta a miniaturas de la escuadra objetivo. Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.unstable) {
     return lang === 'en'
