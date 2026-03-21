@@ -264,9 +264,17 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       )
     }
     if (hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.explosive)) {
+      const nearbyUnits = Math.max(0, Number(result.totals?.explosiveNearbyUnits || 0))
+      const affectedUnits = Math.max(1, Number(result.totals?.explosiveAffectedUnits || 1))
+      const baseDamage = Math.max(0, Number(result.totals?.baseDamage || result.totals?.damage || 0))
+      const finalDamage = Math.max(0, Number(result.totals?.damage || 0))
       pushAbilityDetail(
-        'Explosiva: en reglas completas afecta a enemigas a 3" del punto de impacto; en este simulador 1v1 se aplica solo al objetivo.',
-        'Explosive: in full rules it affects enemies within 3" of the impact point; in this 1v1 simulator it applies only to the target.',
+        nearbyUnits > 0
+          ? `Explosiva: objetivo + ${nearbyUnits} cercanas (${affectedUnits} en total). Daño: ${baseDamage} x ${affectedUnits} = ${finalDamage}.`
+          : 'Explosiva: solo afecta al objetivo.',
+        nearbyUnits > 0
+          ? `Explosive: target + ${nearbyUnits} nearby (${affectedUnits} total). Damage: ${baseDamage} x ${affectedUnits} = ${finalDamage}.`
+          : 'Explosive: only affects the target.',
       )
     }
 

@@ -74,6 +74,8 @@ function Batalla() {
   const [rightHalfRange, setRightHalfRange] = useState(false)
   const [leftAfterDash, setLeftAfterDash] = useState(false)
   const [rightAfterDash, setRightAfterDash] = useState(false)
+  const [leftExplosiveNearbyUnits, setLeftExplosiveNearbyUnits] = useState(0)
+  const [rightExplosiveNearbyUnits, setRightExplosiveNearbyUnits] = useState(0)
   const [chargeDistance, setChargeDistance] = useState(7)
   const [hpMap, setHpMap] = useState({})
   const [ammoMap, setAmmoMap] = useState({})
@@ -177,6 +179,7 @@ function Batalla() {
   }
   const leftAliveCount = getAliveSquadCount(leftHp, leftUnit)
   const rightAliveCount = getAliveSquadCount(rightHp, rightUnit)
+  const getExplosiveNearbyMax = (defenderAliveCount) => Math.max(0, toNumber(defenderAliveCount, 1) - 1)
   const formatHpOptionLabel = (hpValue, unit) => {
     const hp = Math.max(0, toNumber(hpValue, 0))
     if (hp <= 0) return 'KO'
@@ -301,6 +304,28 @@ function Batalla() {
     if (key === 'afterDash') return { checked: rightAfterDash, setChecked: setRightAfterDash, label: tx.afterDash }
     return null
   }
+  const getExplosiveAbilityBinding = (side, rawAbility) => {
+    if (mode !== 'ranged') return null
+    if (!hasWeaponAbilityId({ abilities: [rawAbility] }, WEAPON_ABILITY_IDS.explosive)) return null
+
+    if (side === 'left') {
+      const max = getExplosiveNearbyMax(rightAliveCount)
+      return {
+        label: tx.explosiveNearby,
+        value: clamp(leftExplosiveNearbyUnits, 0, max),
+        max,
+        setValue: (rawValue) => setLeftExplosiveNearbyUnits(clamp(toNumber(rawValue, 0), 0, max)),
+      }
+    }
+
+    const max = getExplosiveNearbyMax(leftAliveCount)
+    return {
+      label: tx.explosiveNearby,
+      value: clamp(rightExplosiveNearbyUnits, 0, max),
+      max,
+      setValue: (rawValue) => setRightExplosiveNearbyUnits(clamp(toNumber(rawValue, 0), 0, max)),
+    }
+  }
   const buildAbilityNotes = (weapon) =>
     (weapon?.abilities || [])
       .map((ability) => ({
@@ -347,6 +372,8 @@ function Batalla() {
     setRightHalfRange(leftHalfRange)
     setLeftAfterDash(rightAfterDash)
     setRightAfterDash(leftAfterDash)
+    setLeftExplosiveNearbyUnits(rightExplosiveNearbyUnits)
+    setRightExplosiveNearbyUnits(leftExplosiveNearbyUnits)
 
     setHpMap((prev) => swapMapBySidePrefix(prev, 'L', 'R'))
     setAmmoMap((prev) => swapMapBySidePrefix(prev, 'left', 'right'))
@@ -410,6 +437,10 @@ function Batalla() {
       const attackerAliveCount = getAliveSquadCount(attackerHpBefore, attackerUnit)
       const defenderAliveCount = getAliveSquadCount(defenderHpBefore, defenderUnit)
       if (attackerAliveCount <= 0 || defenderAliveCount <= 0) return
+      const explosiveNearbyUnits = attackerSide === 'left' ? leftExplosiveNearbyUnits : rightExplosiveNearbyUnits
+      const explosiveNearbyCount = hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.explosive)
+        ? clamp(toNumber(explosiveNearbyUnits, 0), 0, getExplosiveNearbyMax(defenderAliveCount))
+        : 0
 
       const attackerFactionId = attackerSide === 'left' ? leftFactionId : rightFactionId
       const ammoInfo = getWeaponAmmoInfo(attackerSide, attackerFactionId, attackerUnit, weapon, pendingAmmoSpend)
@@ -509,6 +540,7 @@ function Batalla() {
           attackerEngaged: false,
           hasLineOfSight: true,
           afterDash,
+          explosiveNearbyUnits: explosiveNearbyCount,
           ...factionConditions,
           ...futureConditions,
         },
@@ -722,6 +754,13 @@ function Batalla() {
     const nextHpMax = getSquadHpPoolMax(randomUnit)
     const hpOptions = buildHpValues(nextHpMax)
     const nextHp = pickRandomItem(hpOptions) || nextHpMax
+    const randomNearbyUnits = () => {
+      const max = side === 'left'
+        ? getExplosiveNearbyMax(rightAliveCount)
+        : getExplosiveNearbyMax(leftAliveCount)
+      if (max <= 0) return 0
+      return Math.floor(Math.random() * (max + 1))
+    }
     const nextSelection = {
       factionId: randomFaction.id,
       unitId: randomUnit.id,
@@ -735,6 +774,7 @@ function Batalla() {
       setLeftMoved(randomConditionSupport.moved ? randomBool() : false)
       setLeftHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
       setLeftAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
+      setLeftExplosiveNearbyUnits(randomNearbyUnits())
       const nextHpKey = makeHpKey('L', nextSelection.factionId, nextSelection.unitId)
       setHpMap((prev) => ({ ...prev, [nextHpKey]: nextHp }))
     } else {
@@ -744,6 +784,7 @@ function Batalla() {
       setRightMoved(randomConditionSupport.moved ? randomBool() : false)
       setRightHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
       setRightAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
+      setRightExplosiveNearbyUnits(randomNearbyUnits())
       const nextHpKey = makeHpKey('R', nextSelection.factionId, nextSelection.unitId)
       setHpMap((prev) => ({ ...prev, [nextHpKey]: nextHp }))
     }
@@ -972,6 +1013,7 @@ function Batalla() {
                           <div className="weapon-ability-notes duel-weapon-notes">
                             {notes.map((note) => {
                               const binding = getAbilityConditionBinding('left', note.raw)
+                              const explosiveBinding = getExplosiveAbilityBinding('left', note.raw)
                               return (
                                 <div key={note.raw || note.label} className="duel-ability-note-item">
                                   <div>
@@ -985,6 +1027,22 @@ function Batalla() {
                                         onChange={(event) => binding.setChecked(event.target.checked)}
                                       />
                                       <span>{binding.label}</span>
+                                    </label>
+                                  )}
+                                  {explosiveBinding && (
+                                    <label className="duel-ability-check duel-ability-select">
+                                      <span>{explosiveBinding.label}</span>
+                                      <select
+                                        className="duel-ability-select-input"
+                                        value={explosiveBinding.value}
+                                        onChange={(event) => explosiveBinding.setValue(event.target.value)}
+                                      >
+                                        {Array.from({ length: explosiveBinding.max + 1 }, (_, index) => index).map((value) => (
+                                          <option key={`left-explosive-inline-${weapon.id}-${value}`} value={value}>
+                                            {value}
+                                          </option>
+                                        ))}
+                                      </select>
                                     </label>
                                   )}
                                 </div>
@@ -1207,6 +1265,7 @@ function Batalla() {
                           <div className="weapon-ability-notes duel-weapon-notes">
                             {notes.map((note) => {
                               const binding = getAbilityConditionBinding('right', note.raw)
+                              const explosiveBinding = getExplosiveAbilityBinding('right', note.raw)
                               return (
                                 <div key={note.raw || note.label} className="duel-ability-note-item">
                                   <div>
@@ -1220,6 +1279,22 @@ function Batalla() {
                                         onChange={(event) => binding.setChecked(event.target.checked)}
                                       />
                                       <span>{binding.label}</span>
+                                    </label>
+                                  )}
+                                  {explosiveBinding && (
+                                    <label className="duel-ability-check duel-ability-select">
+                                      <span>{explosiveBinding.label}</span>
+                                      <select
+                                        className="duel-ability-select-input"
+                                        value={explosiveBinding.value}
+                                        onChange={(event) => explosiveBinding.setValue(event.target.value)}
+                                      >
+                                        {Array.from({ length: explosiveBinding.max + 1 }, (_, index) => index).map((value) => (
+                                          <option key={`right-explosive-inline-${weapon.id}-${value}`} value={value}>
+                                            {value}
+                                          </option>
+                                        ))}
+                                      </select>
                                     </label>
                                   )}
                                 </div>

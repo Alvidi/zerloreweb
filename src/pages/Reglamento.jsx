@@ -13,10 +13,16 @@ import conquistaEnHtml from '../data/english/ZEROLORE_CONQUEST_MODE_EN.html?raw'
 import dominioHtml from '../data/spanish/Dominio 326087d94b33804990a9cd9d238fdb07.html?raw'
 import dominioEnHtml from '../data/english/ZEROLORE_DOMINION_MODE_EN.html?raw'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
-import damage1Token from '../images/tokens/-1.webp'
-import damage3Token from '../images/tokens/-3.webp'
-import damage5Token from '../images/tokens/-5.webp'
-import damage10Token from '../images/tokens/-10.webp'
+import damage1Token from '../images/tokens/damage-1-red.svg'
+import damage3Token from '../images/tokens/damage-3-red.svg'
+import damage5Token from '../images/tokens/damage-5-red.svg'
+import damage10Token from '../images/tokens/damage-10-red.svg'
+import explosiveArea3Token from '../images/tokens/explosive-area-3in.svg'
+import stateReadyToken from '../images/tokens/preparado-blue.svg'
+import stateRetreatToken from '../images/tokens/retirada-blue.svg'
+import meleeToken from '../images/tokens/cuerpo-a-cuerpo-orange.svg'
+import objectiveToken from '../images/tokens/objetivo-orange.svg'
+import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'siege', 'elimination', 'tokens']
@@ -28,6 +34,12 @@ const TOKEN_DEFINITIONS = [
   { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 32, previewSize: 'medium', imageSrc: damage3Token },
   { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 32, previewSize: 'medium', imageSrc: damage5Token },
   { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 32, previewSize: 'medium', imageSrc: damage10Token },
+  { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
+  { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
+  { id: 'state_out_of_control', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateOutOfControl', diameterMm: 32, previewSize: 'medium', imageSrc: outOfControlToken },
+  { id: 'state_melee', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateMelee', diameterMm: 32, previewSize: 'medium', imageSrc: meleeToken },
+  { id: 'state_objective', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateObjective', diameterMm: 32, previewSize: 'medium', imageSrc: objectiveToken },
+  { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_3', category: 'command', shape: 'circle', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_square_3', category: 'command', shape: 'square', labelKey: 'rules.tokens.types.commandSquare3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6', category: 'command', shape: 'circle', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
@@ -258,35 +270,61 @@ function Reglamento() {
       doc.rect(x - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
       doc.rect(x + cellSize - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
 
-      if (token.category === 'damage') {
-        const damageTokenImage = tokenImageDataById[token.id]
-        if (damageTokenImage) {
-          doc.addImage(
-            damageTokenImage,
-            'PNG',
-            centerX - radius,
-            centerY - radius,
-            token.diameterMm,
-            token.diameterMm,
-            undefined,
-            'FAST',
-          )
-          return
-        }
-      }
-
-      doc.setFillColor(12, 13, 18)
-      doc.setDrawColor(...accentColor)
-      doc.setLineWidth(1.9)
-      const borderGrow = 0.7
-      if (token.category === 'command' && token.shape === 'square') {
-        const side = token.diameterMm + borderGrow * 2
-        doc.roundedRect(centerX - side / 2, centerY - side / 2, side, side, 3.8, 3.8, 'FD')
-      } else {
-        doc.circle(centerX, centerY, radius + borderGrow, 'FD')
+      const tokenImage = tokenImageDataById[token.id]
+      if (tokenImage) {
+        doc.addImage(
+          tokenImage,
+          'PNG',
+          centerX - radius,
+          centerY - radius,
+          token.diameterMm,
+          token.diameterMm,
+          undefined,
+          'FAST',
+        )
+        return
       }
 
       if (token.category === 'command') {
+        const borderGrow = 0.7
+        const isSquare = token.shape === 'square'
+        const outerSize = token.diameterMm + borderGrow * 2
+
+        doc.setFillColor(10, 12, 18)
+        doc.setDrawColor(...accentColor)
+        doc.setLineWidth(Math.max(1.6, token.diameterMm * 0.04))
+
+        if (isSquare) {
+          const outerRadius = Math.max(3.4, token.diameterMm * 0.08)
+          doc.roundedRect(centerX - outerSize / 2, centerY - outerSize / 2, outerSize, outerSize, outerRadius, outerRadius, 'FD')
+          const innerSize = token.diameterMm * 0.86
+          const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
+          doc.setDrawColor(255, 205, 160)
+          doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+          doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
+          const dashSize = token.diameterMm * 0.66
+          const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
+          doc.setDrawColor(255, 203, 156)
+          doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+          doc.setLineDashPattern([1.1, 1.6], 0)
+          doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
+          doc.setLineDashPattern([], 0)
+          doc.setFillColor(22, 27, 38)
+          doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
+        } else {
+          doc.circle(centerX, centerY, radius + borderGrow, 'FD')
+          doc.setDrawColor(255, 205, 160)
+          doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+          doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
+          doc.setDrawColor(255, 203, 156)
+          doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+          doc.setLineDashPattern([1.1, 1.6], 0)
+          doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
+          doc.setLineDashPattern([], 0)
+          doc.setFillColor(22, 27, 38)
+          doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
+        }
+
         const maxLogoW = Math.min(token.diameterMm * 0.72, 90)
         let logoW = Math.max(18, maxLogoW)
         let logoH = logoW / ZEROLORE_LOGO_ASPECT
@@ -301,6 +339,13 @@ function Reglamento() {
           doc.setTextColor(...fallbackTextColor)
           drawCenteredText('ZL', centerX, centerY + 2, Math.max(16, token.diameterMm * 0.26))
         }
+      } else {
+        doc.setFillColor(12, 13, 18)
+        doc.setDrawColor(172, 172, 172)
+        doc.setLineWidth(1.2)
+        doc.circle(centerX, centerY, radius, 'FD')
+        doc.setTextColor(...fallbackTextColor)
+        drawCenteredText('?', centerX, centerY + Math.max(2, token.diameterMm * 0.07), Math.max(14, token.diameterMm * 0.36))
       }
     }
 

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="56%">
+      <stop offset="0%" stop-color="#102746"/>
+      <stop offset="58%" stop-color="#0b1831"/>
+      <stop offset="100%" stop-color="#070d18"/>
+    </radialGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ad7ff"/>
+      <stop offset="52%" stop-color="#43a9ff"/>
+      <stop offset="100%" stop-color="#1e6fd2"/>
+    </linearGradient>
+    <radialGradient id="coreGrad" cx="50%" cy="45%" r="62%">
+      <stop offset="0%" stop-color="#d9f2ff"/>
+      <stop offset="44%" stop-color="#75c4ff"/>
+      <stop offset="100%" stop-color="#2a75d9"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="512" cy="512" r="496" fill="url(#bgGlow)"/>
+  <circle cx="512" cy="512" r="470" fill="none" stroke="#e2f4ff" stroke-opacity="0.18" stroke-width="4"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="url(#ringGrad)" stroke-width="20"/>
+  <circle cx="512" cy="512" r="392" fill="none" stroke="#a8ddff" stroke-opacity="0.36" stroke-width="4"/>
+  <circle cx="512" cy="512" r="322" fill="none" stroke="#a8ddff" stroke-opacity="0.26" stroke-width="2.5" stroke-dasharray="8 14"/>
+  <circle cx="512" cy="512" r="248" fill="none" stroke="#a8ddff" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="6 13"/>
+
+  <circle cx="512" cy="512" r="204" fill="url(#coreGrad)" fill-opacity="0.26"/>
+  <circle cx="512" cy="512" r="152" fill="#0f2038" fill-opacity="0.62"/>
+
+  <g transform="translate(512 522) rotate(-35)">
+    <path d="M0-338 58-232 58 78H-58V-232z" fill="#1a3f72"/>
+    <path d="M0-318 38-242 38 64H-38V-242z" fill="#dfe8ff"/>
+    <rect x="-8" y="-224" width="16" height="274" rx="8" fill="#b7c9f7" fill-opacity="0.96"/>
+    <path d="M0-306 24-252H-24z" fill="#eaf8ff" fill-opacity="0.92"/>
+
+    <rect x="-132" y="62" width="264" height="50" rx="16" fill="#1a3f72"/>
+    <rect x="-102" y="72" width="204" height="30" rx="10" fill="#eaf8ff"/>
+
+    <rect x="-36" y="108" width="72" height="150" rx="22" fill="#1a3f72"/>
+    <rect x="-20" y="122" width="40" height="122" rx="14" fill="#7dc8ff"/>
+    <rect x="-20" y="156" width="40" height="22" rx="8" fill="#bde8ff"/>
+    <rect x="-20" y="188" width="40" height="20" rx="8" fill="#64baff"/>
+
+    <circle cx="0" cy="282" r="30" fill="#1a3f72"/>
+    <circle cx="0" cy="282" r="18" fill="#eaf8ff"/>
+  </g>
+</svg>

@@ -493,6 +493,8 @@ export function resolveAttack({
   const hasChains = hasAbility(weapon, WEAPON_ABILITY_IDS.chainedImpacts)
   const critUnsavable = hasAbility(weapon, WEAPON_ABILITY_IDS.criticalAttack)
   const hasExplosive = hasAbility(weapon, WEAPON_ABILITY_IDS.explosive) && mode === 'ranged'
+  const explosiveNearbyUnits = hasExplosive ? Math.max(0, toInt(conditions.explosiveNearbyUnits, 0)) : 0
+  const explosiveAffectedUnits = hasExplosive ? 1 + explosiveNearbyUnits : 1
   const hasGuerrilla = hasAbility(weapon, WEAPON_ABILITY_IDS.guerrilla) && mode === 'ranged'
 
   if (hasGuerrilla && conditions.afterDash) {
@@ -589,7 +591,9 @@ export function resolveAttack({
   }
 
   if (hasExplosive) {
-    rulesApplied.push('Explosiva (afecta a enemigas a 3" del impacto; en simulador 1v1 se aplica al objetivo)')
+    rulesApplied.push(
+      `Explosiva (objetivo + ${explosiveNearbyUnits} cercanas = ${explosiveAffectedUnits} unidades con el mismo daño)`,
+    )
   }
 
   const rollSummary = summarizeHits(hitEntries)
@@ -624,14 +628,15 @@ export function resolveAttack({
   const rawDamage = [...normalDamageRolls, ...critDamageRolls]
     .reduce((sum, entry) => sum + entry.total, 0)
   const preventedDamage = mode === 'ranged' && defenderCrucibleGlory ? Math.min(1, rawDamage) : 0
-  const totalDamage = Math.max(0, rawDamage - preventedDamage)
+  const baseTotalDamage = Math.max(0, rawDamage - preventedDamage)
+  const totalDamage = hasExplosive ? baseTotalDamage * explosiveAffectedUnits : baseTotalDamage
 
   let selfDamage = 0
   if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.unstable)) {
     const unstableRoll = rollDie(6)
     rulesApplied.push(`Inestable (tirada ${unstableRoll})`)
     if (unstableRoll <= 2) {
-      selfDamage = totalDamage
+      selfDamage = baseTotalDamage
     }
   }
 
@@ -659,6 +664,9 @@ export function resolveAttack({
     critDamageRolls,
     normalDamageKind: normalDamageExpression.kind,
     critDamageKind: critDamageExpression.kind,
+    explosiveNearbyUnits,
+    explosiveAffectedUnits,
+    baseDamage: baseTotalDamage,
     selfDamage,
     heal: voracityHeal,
   }
