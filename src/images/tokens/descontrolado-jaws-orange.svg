@@ -27,25 +27,14 @@
   <circle cx="512" cy="512" r="204" fill="url(#coreGrad)" fill-opacity="0.26"/>
   <circle cx="512" cy="512" r="152" fill="#0f2038" fill-opacity="0.66"/>
 
-  <g transform="translate(512 542) scale(1.12) translate(-512 -552)">
-    <ellipse cx="512" cy="552" rx="188" ry="136" fill="#0a1830" fill-opacity="0.5"/>
-    <ellipse cx="512" cy="552" rx="170" ry="118" fill="#102a4b" fill-opacity="0.42"/>
+  <path d="M604 248 418 508h118l-80 274 206-308H544z" fill="#1a3f72" fill-opacity="0.9"/>
+  <path d="M592 266 434 506h108l-70 246 180-282H542z" fill="#eaf8ff"/>
+  <path d="M580 286 450 506h98l-62 216 154-248H540z" fill="#64baff"/>
+  <path d="M366 454h56M656 426h46M640 620h54" fill="none" stroke="#b7e5ff" stroke-width="14" stroke-linecap="round" stroke-opacity="0.7"/>
 
-    <path d="M272 394 478 486 272 526 294 462z" fill="#163b6a"/>
-    <path d="M314 420 444 486 314 500 326 462z" fill="#eaf8ff"/>
-    <path d="M354 438 422 468 354 478z" fill="#9fd8ff" fill-opacity="0.9"/>
-    <path d="M752 394 546 486 752 526 730 462z" fill="#163b6a"/>
-    <path d="M710 420 580 486 710 500 698 462z" fill="#eaf8ff"/>
-    <path d="M670 438 602 468 670 478z" fill="#9fd8ff" fill-opacity="0.9"/>
-
-    <path d="M248 612 334 528 420 612 512 520 604 612 690 528 776 612 776 734 248 734z" fill="#163b6a"/>
-    <path d="M248 612 334 528 420 612 512 520 604 612 690 528 776 612 776 734 248 734z" fill="none" stroke="#0b1831" stroke-width="12" stroke-linejoin="round"/>
-    <path d="M286 618 352 556 420 618 512 548 604 618 672 556 738 618 738 688 286 688z" fill="#eaf8ff"/>
-    <path d="M322 670 372 620 430 670 512 606 594 670 652 620 702 670 702 706 322 706z" fill="#7dc8ff" fill-opacity="0.88"/>
-    <path d="M342 684 382 642 432 684 512 624 592 684 642 642 682 684 682 698 342 698z" fill="#1a3f72" fill-opacity="0.9"/>
-
-    <path d="M248 612v118" fill="none" stroke="#0b1831" stroke-width="14" stroke-linecap="round"/>
-    <path d="M776 612v118" fill="none" stroke="#0b1831" stroke-width="14" stroke-linecap="round"/>
-  </g>
+  <circle cx="324" cy="456" r="16" fill="#cff0ff" fill-opacity="0.8"/>
+  <circle cx="688" cy="426" r="14" fill="#cff0ff" fill-opacity="0.78"/>
+  <circle cx="716" cy="582" r="18" fill="#cff0ff" fill-opacity="0.82"/>
+  <circle cx="308" cy="588" r="14" fill="#cff0ff" fill-opacity="0.76"/>
 
 </svg>

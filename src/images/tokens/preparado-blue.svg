@@ -27,19 +27,17 @@
   <circle cx="512" cy="512" r="196" fill="url(#coreGrad)" fill-opacity="0.26"/>
   <circle cx="512" cy="512" r="132" fill="#dff3ff" fill-opacity="0.1"/>
 
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="512" cy="512" r="204" stroke="#eaf8ff" stroke-opacity="0.75" stroke-width="14"/>
-    <circle cx="512" cy="512" r="204" stroke="#64baff" stroke-width="9"/>
-    <circle cx="512" cy="512" r="94" stroke="#eaf8ff" stroke-opacity="0.7" stroke-width="10"/>
-    <circle cx="512" cy="512" r="94" stroke="#64baff" stroke-width="6"/>
+  <circle cx="512" cy="512" r="204" fill="#0f2038" fill-opacity="0.62"/>
+  <circle cx="512" cy="512" r="204" fill="none" stroke="#eaf8ff" stroke-opacity="0.75" stroke-width="14"/>
+  <circle cx="512" cy="512" r="204" fill="none" stroke="#64baff" stroke-width="9"/>
 
-    <path d="M512 266V420 M512 604V758 M266 512H420 M604 512H758" stroke="#eaf8ff" stroke-opacity="0.8" stroke-width="20"/>
-    <path d="M512 266V420 M512 604V758 M266 512H420 M604 512H758" stroke="#64baff" stroke-width="12"/>
-
-    <path d="M512 236V288 M512 736V788 M236 512H288 M736 512H788" stroke="#a8ddff" stroke-width="8"/>
-    <path d="M376 376 412 412 M612 612 648 648 M648 376 612 412 M412 612 376 648" stroke="#a8ddff" stroke-opacity="0.6" stroke-width="6"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M512 286V656" stroke="#1a3f72" stroke-width="150"/>
+    <path d="M512 310V638" stroke="#eaf8ff" stroke-width="102"/>
+    <path d="M512 312V638" stroke="#64baff" stroke-width="36"/>
   </g>
 
-  <circle cx="512" cy="512" r="22" fill="#eaf8ff" fill-opacity="0.9"/>
-  <circle cx="512" cy="512" r="12" fill="#64baff"/>
+  <circle cx="512" cy="776" r="78" fill="#1a3f72"/>
+  <circle cx="512" cy="776" r="54" fill="#eaf8ff"/>
+  <circle cx="512" cy="776" r="24" fill="#64baff"/>
 </svg>

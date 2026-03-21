@@ -2477,6 +2477,11 @@ mark {
   height: 112px;
 }
 
+.rules-token-preview[data-token-preview='state_activation'].has-image {
+  width: 112px;
+  height: 112px;
+}
+
 .rules-token-preview[data-token-preview='state_retreat'].has-image {
   width: 112px;
   height: 112px;

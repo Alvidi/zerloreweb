@@ -27,10 +27,5 @@
   <circle cx="512" cy="512" r="196" fill="url(#coreGrad)" fill-opacity="0.28"/>
   <circle cx="512" cy="512" r="132" fill="#ffece4" fill-opacity="0.1"/>
 
-  <g fill="none" stroke-linecap="round">
-    <path d="M512 252V352 M512 672V772 M252 512H352 M672 512H772" stroke="#ffd7cc" stroke-opacity="0.52" stroke-width="10"/>
-    <path d="M336 336 406 406 M618 618 688 688 M688 336 618 406 M406 618 336 688" stroke="#ffb09b" stroke-opacity="0.45" stroke-width="8"/>
-  </g>
-
   <text x="512" y="592" text-anchor="middle" font-family="Verdana, sans-serif" font-size="330" font-weight="700" fill="#fff5ef">-5</text>
 </svg>

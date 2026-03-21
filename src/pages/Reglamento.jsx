@@ -23,6 +23,7 @@ import stateRetreatToken from '../images/tokens/retirada-blue.svg'
 import meleeToken from '../images/tokens/cuerpo-a-cuerpo-orange.svg'
 import objectiveToken from '../images/tokens/objetivo-orange.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
+import activationToken from '../images/tokens/activacion-gray.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'siege', 'elimination', 'tokens']
@@ -30,18 +31,17 @@ const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 
 const TOKEN_DEFINITIONS = [
-  { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 32, previewSize: 'medium', imageSrc: damage1Token },
-  { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 32, previewSize: 'medium', imageSrc: damage3Token },
-  { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 32, previewSize: 'medium', imageSrc: damage5Token },
-  { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 32, previewSize: 'medium', imageSrc: damage10Token },
+  { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
+  { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
+  { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage5Token },
+  { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage10Token },
   { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
+  { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
   { id: 'state_out_of_control', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateOutOfControl', diameterMm: 32, previewSize: 'medium', imageSrc: outOfControlToken },
   { id: 'state_melee', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateMelee', diameterMm: 32, previewSize: 'medium', imageSrc: meleeToken },
   { id: 'state_objective', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateObjective', diameterMm: 32, previewSize: 'medium', imageSrc: objectiveToken },
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
-  { id: 'command_circle_3', category: 'command', shape: 'circle', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
-  { id: 'command_square_3', category: 'command', shape: 'square', labelKey: 'rules.tokens.types.commandSquare3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6', category: 'command', shape: 'circle', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
 ]
