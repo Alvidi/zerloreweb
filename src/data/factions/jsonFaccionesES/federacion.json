@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Furia de los Caídos",
-        "descripcion": "Cuando una unidad cae de una escuadra, la escuadra entera gana +1 de ataque adicional. En Escaramuza, las unidades a 6\" ganan un +1 de ataque adicional, hasta final de turno."
+        "descripcion": "Cuando una unidad cae de una escuadra, la escuadra entera gana +1 de ataque adicional en el ataque total. En Escaramuza, las unidades a 6\" ganan un +1 de ataque adicional, hasta final de turno."
       }
     ]
   },
@@ -45,19 +45,6 @@
             "habilidades_arma": [],
             "especialidad": "-",
             "valor_extra": 0
-          },
-          {
-            "nombre": "Armas pesadas",
-            "ataques": "3D",
-            "distancia": "22\"",
-            "impactos": "+4",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Pesada"
-            ],
-            "especialidad": "-",
-            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -327,6 +314,80 @@
             ],
             "especialidad": "-",
             "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Equipo de Armas Pesadas",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "Esta unidad no puede usar la acción Carrera. Si no se ha movido durante su activación, puede repetir un dado de Impactos fallido en todos sus ataques de Disparo.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Mortero pesado",
+            "ataques": "1D6",
+            "distancia": "30\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Ametralladora de posición",
+            "ataques": "4D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Pesada",
+              "Ataque rápido +2"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Cañón antitanque",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Pesada",
+              "Anti 5+ (Vehículo / Monstruo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Culatazo",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
           }
         ]
       }
@@ -610,6 +671,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "La Federación 291087d94b3380aea866e0719797e7a0.html"
+  ]
 }

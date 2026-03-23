@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Fury of the Fallen",
-        "descripcion": "When a unit falls from a squad, the entire squad gains +1 additional attack. In Skirmish, units within 6\" gain an additional +1 attack, until end of turn."
+        "descripcion": "When a unit falls from a squad, the entire squad gains +1 additional attack in the total attack. In Skirmish, units within 6\" gain an additional +1 attack, until end of turn."
       }
     ]
   },
@@ -45,19 +45,6 @@
             "habilidades_arma": [],
             "especialidad": "-",
             "valor_extra": 0
-          },
-          {
-            "nombre": "heavy weapons",
-            "ataques": "3D",
-            "distancia": "22\"",
-            "impactos": "+4",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Heavy"
-            ],
-            "especialidad": "-",
-            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -327,6 +314,80 @@
             ],
             "especialidad": "-",
             "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Heavy Weapons Team",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "This unit cannot use the Sprint action. If it has not moved during its activation, it may re-roll one failed Hit die on all of its Shooting attacks.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Heavy Mortar",
+            "ataques": "1D6",
+            "distancia": "30\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Arcing Fire"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Entrenched Machine Gun",
+            "ataques": "4D",
+            "distancia": "20\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Heavy",
+              "Rapid Fire +2"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          },
+          {
+            "nombre": "Anti-Tank Cannon",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Heavy",
+              "Anti 5+ (Vehicle / Monster)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Rifle Butt",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
           }
         ]
       }
@@ -610,6 +671,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "La Federación 291087d94b3380aea866e0719797e7a0.html"
+  ]
 }

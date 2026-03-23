@@ -1564,6 +1564,16 @@ button {
   color: var(--text-main);
 }
 
+.rules-page .section-head {
+  max-width: 1120px;
+}
+
+.rules-page .section-head h2 {
+  max-width: 980px;
+  line-height: 1.08;
+  letter-spacing: 0.035em;
+}
+
 .grid-three {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

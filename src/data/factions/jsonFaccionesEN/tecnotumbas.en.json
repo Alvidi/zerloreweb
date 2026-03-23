@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Mek Resuscitation",
-        "descripcion": "If a unit is defeated, its body remains on the battlefield; Once the next initiative begins, 1D6 will be rolled: with a result of 1-3 the unit dies, if a result of 3-6 the unit revives with half of its life. This can only be done once per unit."
+        "descripcion": "If a line or elite unit is defeated, its body remains on the battlefield. At the start of the next Initiative Phase, roll 1D6: on a result of 1-4 the unit dies permanently and is removed; on a result of 5-6 the unit revives with half of its maximum Lives."
       },
       {
         "habilidades_faccion2": "They don't know fear",
@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Annihilation Protocol",
-        "descripcion": "If a unit/squad is eliminated or damaged, it gains an extra 2\" move action immediately."
+        "descripcion": "Once per turn, when a unit/squad eliminates an enemy unit at range, it gains an extra 2\" move action immediately. This move does not count as an action."
       }
     ]
   },
@@ -505,6 +505,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "TecnoTumbas 292087d94b3380e8a265d23d61931641.html"
+  ]
 }

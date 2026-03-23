@@ -63,7 +63,7 @@
             "nombre": "Kebab Launcher",
             "ataques": "1D",
             "distancia": "16\"",
-            "impactos": "+1",
+            "impactos": "1D6",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -279,7 +279,7 @@
             "nombre": "Spark-Lightning",
             "ataques": "1D6",
             "distancia": "12\"",
-            "impactos": "+6",
+            "impactos": "1D6+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -566,7 +566,7 @@
             "nombre": "Scrap Launcher",
             "ataques": "1D",
             "distancia": "16\"",
-            "impactos": "+6",
+            "impactos": "1D6+",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -717,6 +717,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "Salvajes 292087d94b338059bc4ae81fdf286225.html"
+  ]
 }

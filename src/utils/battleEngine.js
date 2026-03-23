@@ -58,6 +58,7 @@ const parseDiceExpr = (value) => {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, '')
+    .replace(/[+-]$/, '') // strip trailing lone + or - (e.g. "1d6+" → "1d6")
   const md = raw.match(/^(\d*)d(\d+)?([+-]\d+)?$/)
   if (md) {
     const count = clamp(toInt(md[1] || '1', 1), 0, 60)
@@ -688,6 +689,7 @@ export function resolveAttack({
     coverIgnoredByType,
     mode,
     hitThreshold,
+    hitThresholdRoll,
     saveThreshold,
     saveDiceCount,
     saveRolls,

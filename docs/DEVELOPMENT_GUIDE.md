@@ -86,21 +86,20 @@ Nota:
 ## 9) Protocolo obligatorio de traducciones y contenido
 
 Regla:
-- Si entra contenido nuevo en español (HTML/JSON), hay que dejar tambien su par en ingles o marcar explicitamente que queda pendiente.
+- Si entra contenido nuevo en español (MD/JSON), hay que dejar tambien su par en ingles o marcar explicitamente que queda pendiente.
 
 Nunca cerrar cambios de contenido "a medias" sin dejar trazabilidad.
 
-## 10) Regla especial cuando Alberto pasa HTML nuevo
+## 10) Regla especial cuando Alberto pasa contenido nuevo
 
 Asuncion por defecto:
-- Alberto suele pasar HTML en español.
+- Alberto suele pasar contenido en español.
 
 Comportamiento esperado del agente:
-1. Colocar/actualizar HTML en `src/data/...`.
-2. Ejecutar scripts de sync segun tipo (facciones o reglamento).
-3. Revisar traducciones EN resultantes.
-4. Auditar consistencia (reglamento por IDs y toc).
-5. Validar app (`lint`, `build`, y `battle:smoke` si toca combate).
+1. Actualizar contenido fuente en `src/data/...` (reglamentos `.md`, facciones `.json`).
+2. Mantener paridad ES/EN del bloque modificado.
+3. Revisar terminologia de juego (Save, Cover, Charge, etc.) para mantener consistencia.
+4. Validar app (`lint`, `build`, y `battle:smoke` si toca combate).
 
 ## 11) Definicion de "terminado"
 
@@ -133,61 +132,47 @@ Convencion de entrega recomendada:
 
 ## 13) Flujo operativo de contenido y traducciones
 
-Esta seccion define el SOP obligatorio cuando Alberto pasa contenido nuevo (normalmente HTML en espanol).
+Esta seccion define el SOP obligatorio cuando Alberto pasa contenido nuevo (normalmente en espanol).
 
 ### 13.1 Regla principal
 
 Cuando entra contenido nuevo en ES, el proyecto debe quedar consistente en:
-- HTML ES/EN (cuando aplique en reglamento)
+- MD ES/EN (cuando aplique en reglamento)
 - JSON ES/EN (cuando aplique en facciones)
 - UI bilingue (labels y textos en `translations.js` y `battleTranslations.js`)
 
 Nunca cerrar cambios con solo un idioma actualizado si el feature ya existe en ambos.
 
-### 13.2 Caso A: Alberto pasa HTML de facciones (normalmente ES)
+### 13.2 Caso A: Alberto pasa datos de facciones (normalmente ES)
 
 Objetivo:
 - Actualizar `jsonFaccionesES`
-- Mantener/sincronizar `jsonFaccionesEN`
+- Mantener `jsonFaccionesEN` alineado
 - Validar que el juego no se rompe
 
 Pasos:
-1. Guardar el HTML en `src/data/factions/` (sin borrar historicos salvo instruccion explicita).
-2. Ejecutar parser de facciones:
-   - `npm run factions:sync-html`
-3. Revisar diff generado en:
-   - `src/data/factions/jsonFaccionesES/*.json`
-4. Sincronizar EN a partir del nuevo ES:
-   - usar script de normalizacion EN si procede (`scripts/normalize-factions-en.mjs`) y ajustes manuales.
-5. Revisar calidad de nombres EN (armas/unidades/habilidades) y corregir traducciones raras.
-6. Validar app:
+1. Actualizar JSON ES en `src/data/factions/jsonFaccionesES/*.json`.
+2. Reflejar cambios equivalentes en EN (`src/data/factions/jsonFaccionesEN/*.en.json`).
+3. Revisar calidad de nombres EN (armas/unidades/habilidades) y corregir traducciones raras.
+4. Validar app:
    - `npm run lint`
    - `npm run build`
    - `npm run battle:smoke` (si toca combate)
 
 Notas:
-- El parser normaliza muchas habilidades (ej. `Precision`, `Asaltante +1`, `Disparo parabolico`).
 - Si una habilidad nueva no esta mapeada, anadirla en `weaponAbilities.js` o `factionAbilities.js` segun corresponda.
 
-### 13.3 Caso B: Alberto pasa HTML de reglamento (ES)
+### 13.3 Caso B: Alberto pasa reglamento (ES)
 
 Objetivo:
-- ES y EN alineados por bloques `id`
+- ES y EN alineados por secciones
 - Tabla de contenidos coherente
 
 Pasos recomendados:
-1. Guardar HTML ES en `src/data/spanish/`.
-2. Sincronizar EN usando plantilla previa por IDs:
-   - `npm run rules:sync-en`
-   - opcional: `node scripts/sync-regulations-en.mjs --mode quick`
-   - opcional: `node scripts/sync-regulations-en.mjs --mode advanced`
-3. Auditar consistencia ES/EN:
-   - `npm run rules:audit`
-4. Si quedan bloques sin traducir, completar manualmente o con script de apoyo:
-   - `scripts/translate-regulations-en.mjs`
-   - `scripts/translate-rulebooks-from-spanish.mjs`
-5. Repetir auditoria hasta que no queden huecos criticos.
-6. Validar app:
+1. Actualizar `.md` ES en `src/data/spanish/`.
+2. Actualizar su equivalente EN en `src/data/english/`.
+3. Revisar TOC/render final en `Reglamento.jsx`.
+4. Validar app:
    - `npm run lint`
    - `npm run build`
 

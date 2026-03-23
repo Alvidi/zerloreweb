@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Reanimación Mekánika",
-        "descripcion": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-3 la unidad muere definitivamente y es retirada; con resultado 4-6 la unidad revive con la mitad de sus Vidas máximas."
+        "descripcion": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-4 la unidad muere definitivamente y es retirada; con resultado 5-6 la unidad revive con la mitad de sus Vidas máximas."
       },
       {
         "habilidades_faccion2": "No conocen el miedo",
@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Protocolo de Aniquilación",
-        "descripcion": "Una vez por turno, cuando una unidad/escuadra elimina una unidad enemiga, gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción."
+        "descripcion": "Una vez por turno, cuando una unidad/escuadra elimina una unidad enemiga a distancia, gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción."
       }
     ]
   },
@@ -505,6 +505,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "TecnoTumbas 292087d94b3380e8a265d23d61931641.html"
+  ]
 }

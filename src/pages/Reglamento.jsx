@@ -1,17 +1,18 @@
 import { useMemo, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import reglamentoHtml from '../data/spanish/ZEROLORE - REGLAMENTO avanzado 2eb087d94b33800ea112ed9327b7e9c8.html?raw'
-import reglamentoEnHtml from '../data/english/ZEROLORE_ADVANCED_RULEBOOK_EN.html?raw'
-import reglamentoRapidoHtml from '../data/spanish/ZEROLORE-REGLAMENTO-juego-rapido-313087d94b3380dc9c0ffd50e9ba8d50.html?raw'
-import reglamentoRapidoEnHtml from '../data/english/ZEROLORE_QUICK_PLAY_RULEBOOK_EN.html?raw'
-import asedioHtml from '../data/spanish/Asedio 320087d94b33802b9914e615a0ad68e0.html?raw'
-import asedioEnHtml from '../data/english/ZEROLORE_SIEGE_MODE_EN.html?raw'
-import eliminacionHtml from '../data/spanish/Eliminacion-320087d94b338070ba22cc624381d70e.html?raw'
-import eliminacionEnHtml from '../data/english/ZEROLORE_ELIMINATION_MODE_EN.html?raw'
-import conquistaHtml from '../data/spanish/Conquista 320087d94b338056b052fa01c020e33d.html?raw'
-import conquistaEnHtml from '../data/english/ZEROLORE_CONQUEST_MODE_EN.html?raw'
-import dominioHtml from '../data/spanish/Dominio 326087d94b33804990a9cd9d238fdb07.html?raw'
-import dominioEnHtml from '../data/english/ZEROLORE_DOMINION_MODE_EN.html?raw'
+import { marked } from 'marked'
+import reglamentoMd from '../data/spanish/reglamento-avanzado.md?raw'
+import reglamentoEnMd from '../data/english/advanced-rulebook.md?raw'
+import reglamentoRapidoMd from '../data/spanish/reglamento-rapido.md?raw'
+import reglamentoRapidoEnMd from '../data/english/quick-play.md?raw'
+import asedioMd from '../data/spanish/asedio.md?raw'
+import asedioEnMd from '../data/english/siege.md?raw'
+import eliminacionMd from '../data/spanish/eliminacion.md?raw'
+import eliminacionEnMd from '../data/english/elimination.md?raw'
+import conquistaMd from '../data/spanish/conquista.md?raw'
+import conquistaEnMd from '../data/english/conquest.md?raw'
+import dominioMd from '../data/spanish/dominio.md?raw'
+import dominioEnMd from '../data/english/dominion.md?raw'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
@@ -95,21 +96,21 @@ function Reglamento() {
       return ''
     }
     if (rulesMode === 'siege') {
-      return lang === 'en' ? asedioEnHtml : asedioHtml
+      return marked(lang === 'en' ? asedioEnMd : asedioMd)
     }
     if (rulesMode === 'elimination') {
-      return lang === 'en' ? eliminacionEnHtml : eliminacionHtml
+      return marked(lang === 'en' ? eliminacionEnMd : eliminacionMd)
     }
     if (rulesMode === 'conquest') {
-      return lang === 'en' ? conquistaEnHtml : conquistaHtml
+      return marked(lang === 'en' ? conquistaEnMd : conquistaMd)
     }
     if (rulesMode === 'dominion') {
-      return lang === 'en' ? dominioEnHtml : dominioHtml
+      return marked(lang === 'en' ? dominioEnMd : dominioMd)
     }
     if (rulesMode === 'quick') {
-      return lang === 'en' ? reglamentoRapidoEnHtml : reglamentoRapidoHtml
+      return marked(lang === 'en' ? reglamentoRapidoEnMd : reglamentoRapidoMd)
     }
-    return lang === 'en' ? reglamentoEnHtml : reglamentoHtml
+    return marked(lang === 'en' ? reglamentoEnMd : reglamentoMd)
   }, [lang, rulesMode, isTokensMode])
 
   const { renderedHtml, tocItems } = useMemo(() => {

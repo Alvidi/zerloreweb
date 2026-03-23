@@ -81,6 +81,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         abilityDetails: [],
         damageDetails: [],
         attackCountDice: [],
+        hitThresholdDice: [],
         attackDice: [],
         defenseDice: [],
         resultState: {
@@ -98,12 +99,21 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const blockedTotal = (result.totals?.blockedHits || 0) + (result.totals?.blockedCrits || 0)
     const attackerSelfDamage = result.totals?.selfDamage || 0
     const attackCountDice = (result.attackCountRolls || [])
-      .flatMap((entry) => (entry.rolls || []).map((roll) => ({
-        value: `${roll}`,
+      .filter((entry) => Array.isArray(entry?.rolls) && entry.rolls.length > 0 && Number.isFinite(entry?.total))
+      .map((entry) => ({
+        value: `${entry.total}`,
         dieType: entry.label || '1D6',
         outcome: 'hit',
         tone: 'count',
-      })))
+      }))
+    const hitThresholdDice = (result.hitThresholdRoll?.rolls || []).length > 0
+      ? [{
+        value: `${result.hitThreshold}`,
+        dieType: result.hitThresholdRoll?.label || '1D6',
+        outcome: 'hit',
+        tone: 'count',
+      }]
+      : []
     const attackDice = (result.hitEntries || [])
       .filter((entry) => entry.source === 'base')
       .filter((entry) => Number.isFinite(entry.initialRoll) || Number.isFinite(entry.roll))
@@ -310,13 +320,17 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     )
     const rollOutcomeSummary = summarizeRollOutcomes(lang, attackDice)
     const directSummary = summarizeHitCritTotals(lang, result.totals?.hits || 0, result.totals?.crits || 0)
+    const hitsTotal = (result.totals?.hits || 0) + (result.totals?.crits || 0)
+    const hitsTotalStr = lang === 'en'
+      ? `${hitsTotal} hit${hitsTotal !== 1 ? 's' : ''}`
+      : `impactan ${hitsTotal}`
     const attackerSummary = result.hasDirect
       ? lang === 'en'
         ? `${attackerName} attacks with ${weaponName} (automatic hits): ${directSummary}.`
         : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${directSummary}.`
       : lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'}.`
-        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'}.`
+        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'} → ${hitsTotalStr}.`
+        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'} → ${hitsTotalStr}.`
     const defenderCover = coverAffectsDefense
       ? lang === 'en'
         ? result.coverType === 'height'
@@ -423,6 +437,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       defenderCover,
       defenderTail,
       attackCountDice,
+      hitThresholdDice,
       attackDice,
       defenseDice,
       abilityDetails,
@@ -472,6 +487,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     abilityDetails,
     damageDetails: [],
     attackCountDice: [],
+    hitThresholdDice: [],
     attackDice,
     defenseDice: [],
     hidePrimaryLine,

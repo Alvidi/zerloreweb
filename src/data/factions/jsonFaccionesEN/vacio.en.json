@@ -242,6 +242,80 @@
       }
     },
     {
+      "nombre_unidad": "Void Weaver",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "When this unit/squad is locked in melee combat, it may spend 2 actions to swap positions with an allied unit/squad within 6\" or less. The allied unit takes its place, locked with the enemy. Both previous combats end.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Void Thread",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "-",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Direct"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Abyssal Projection",
+            "ataques": "1D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Anti 4+ (All)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Phase Claws",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Chained Impacts"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Dimensional Cut",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
       "nombre_unidad": "Void Brutalid",
       "clase": "Monster",
       "perfil": {
@@ -513,6 +587,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "El Vacío 291087d94b33807bb8e4c53245d8caaa.html"
+  ]
 }

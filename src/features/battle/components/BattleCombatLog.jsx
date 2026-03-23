@@ -86,7 +86,7 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                       )}
                       {!!entry.attackDice?.length && (
                         <span className="duel-log-copy-note">
-                          {isChargeRollEntry ? tx.chargeRollsLabel : lang === 'en' ? 'Hit rolls' : 'Tiradas de impacto'}
+                          {isChargeRollEntry ? tx.chargeRollsLabel : lang === 'en' ? 'Attack rolls' : 'Tiradas de ataque'}
                         </span>
                       )}
                       {entry.attackDice?.map((die, index) => (
@@ -107,6 +107,23 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                           {die.value}
                         </span>
                       ))}
+                      {!!entry.hitThresholdDice?.length && (
+                        <>
+                          <span className="duel-log-copy-note">
+                            {lang === 'en' ? 'Hits' : 'Impactos'}
+                          </span>
+                          {entry.hitThresholdDice.map((die, index) => (
+                            <span
+                              key={`${entry.key}-hit-threshold-${index}`}
+                              className="duel-die duel-die-attack duel-die-count"
+                              title={die.dieType}
+                            >
+                              <span className="duel-die-count-value">{die.value}</span>
+                              <span className="duel-die-count-type">{die.dieType}</span>
+                            </span>
+                          ))}
+                        </>
+                      )}
                       <span className="duel-log-copy">{entry.attackerLine}</span>
                       {!!entry.abilityLine && (
                         <span className="duel-log-copy duel-log-ability-line">{entry.abilityLine}</span>

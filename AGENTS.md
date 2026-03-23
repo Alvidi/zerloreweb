@@ -7,7 +7,7 @@ If you are an agent working on this repository, read these docs first:
 Non-negotiable rules:
 
 - Keep ES/EN content consistent. Do not update only one language unless explicitly requested.
-- When Alberto provides new HTML (usually Spanish), run the corresponding sync workflow.
+- When Alberto provides new content (usually Spanish), update both ES/EN sources directly (MD for rules, JSON for factions).
 - Validate before closing: `npm run lint`, `npm run build`, and `npm run battle:smoke` for combat-related changes.
 - Do incremental changes (ability by ability) to avoid regressions.
 - Do not silently change game-rule behavior while doing pure refactors.

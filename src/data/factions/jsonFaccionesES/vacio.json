@@ -242,6 +242,80 @@
       }
     },
     {
+      "nombre_unidad": "Tejedor del Vacío",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "Cuando esta unidad/escuadra está trabada en combate cuerpo a cuerpo, puede gastar 2 acciones para intercambiarse con una unidad/escuadra aliada a 6\" o menos. La unidad aliada ocupa su lugar quedando trabada con el enemigo. Ambos combates anteriores terminan.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Hilo del Vacío",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "-",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Proyección Abisal",
+            "ataques": "1D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Anti 4+ (Todo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras de fase",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Impactos encadenados"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Corte dimensional",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
       "nombre_unidad": "Brutálido del vacío",
       "clase": "Monstruo",
       "perfil": {
@@ -513,6 +587,5 @@
         ]
       }
     }
-  ],
-  "_fuente": "El Vacío 291087d94b33807bb8e4c53245d8caaa.html"
+  ]
 }
