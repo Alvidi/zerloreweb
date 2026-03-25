@@ -30,6 +30,70 @@ import { useI18n } from '../i18n/I18nContext.jsx'
 const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'siege', 'elimination', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
+const DOCTRINE_TOKEN_DIAMETER_MM = 32
+
+const DOCTRINE_ICON_PATHS = {
+  garrotazo: ['M5 19L19 5', 'M7 7L10 10', 'M14 14L17 17'],
+  apuntado: ['M12 3V6', 'M12 18V21', 'M3 12H6', 'M18 12H21'],
+  frenesi: ['M4 12H20', 'M14 6L20 12L14 18'],
+  'agilidad-en-combate': ['M5 16L10 11L13 14L19 8', 'M16 8H19V11'],
+  'nuestra-es-la-victoria': ['M12 4L14 9L20 9L15 13L17 19L12 15L7 19L9 13L4 9L10 9Z'],
+  'reaccion-inmediata': ['M5 12H13', 'M10 8L14 12L10 16', 'M11 6H19', 'M16 2L20 6L16 10'],
+  'mas-que-cargado': ['M6 12L10 16L18 8', 'M6 7L10 11L18 3'],
+  'una-nueva-oportunidad': ['M17 7V3L21 7L17 11V7H9A4 4 0 0 0 9 15H11', 'M7 17V21L3 17L7 13V17H15A4 4 0 0 0 15 9H13'],
+  'combate-a-muerte': ['M7 6L17 18', 'M17 6L7 18', 'M9 4L7 6L5 4', 'M15 20L17 18L19 20'],
+}
+
+const DOCTRINE_ICON_LABELS = {
+  garrotazo: { es: 'GARROTAZO', en: 'BLUDGEON' },
+  apuntado: { es: 'APUNTADO', en: 'AIMED SHOT' },
+  frenesi: { es: 'FRENESI', en: 'FRENZY' },
+  'agilidad-en-combate': { es: 'AGILIDAD COMBATE', en: 'COMBAT AGILITY' },
+  'nuestra-es-la-victoria': { es: 'NUESTRA VICTORIA', en: 'VICTORY IS OURS' },
+  'reaccion-inmediata': { es: 'REACCION INMEDIATA', en: 'IMMEDIATE REACTION' },
+  'mas-que-cargado': { es: 'MAS QUE CARGADO', en: 'FULLY CHARGED' },
+  'una-nueva-oportunidad': { es: 'NUEVA OPORTUNIDAD', en: 'ONE MORE CHANCE' },
+  'combate-a-muerte': { es: 'COMBATE A MUERTE', en: 'FIGHT TO THE DEATH' },
+}
+
+const DOCTRINE_ICON_TRANSFORMS = {
+  default: { tx: 4.95, ty: 5.35, scale: 0.58 },
+  'reaccion-inmediata': { tx: 4.75, ty: 6.45, scale: 0.56 },
+  'mas-que-cargado': { tx: 4.9, ty: 6.3, scale: 0.56 },
+}
+
+const buildDoctrineTokenImage = (id, locale = 'es') => {
+  const paths = DOCTRINE_ICON_PATHS[id]
+  if (!paths) return ''
+  const iconTransform = DOCTRINE_ICON_TRANSFORMS[id] || DOCTRINE_ICON_TRANSFORMS.default
+  const labelSet = DOCTRINE_ICON_LABELS[id] || {}
+  const label = labelSet[locale] || labelSet.es || ''
+  const labelFontSize = label.length > 16 ? 1.52 : label.length > 13 ? 1.72 : 1.92
+  const labelLetterSpacing = label.length > 16 ? 0.03 : label.length > 13 ? 0.07 : 0.11
+  const pathMarkup = paths
+    .map((d) => `<path d="${d}" fill="none" stroke="#f4f4f4" stroke-width="0.62" stroke-linecap="round" stroke-linejoin="round" />`)
+    .join('')
+  const extraMarkup = id === 'apuntado'
+    ? '<circle cx="12" cy="12" r="7" fill="none" stroke="#f4f4f4" stroke-width="0.62" /><circle cx="12" cy="12" r="1.05" fill="#f4f4f4" />'
+    : ''
+  const labelMarkup = label
+    ? `<text fill="#ffe7cc" font-size="${labelFontSize}" font-family="Arial, sans-serif" font-weight="500" letter-spacing="${labelLetterSpacing}"><textPath href="#arc" startOffset="50%" text-anchor="middle">${label}</textPath></text>`
+    : ''
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 24 24"><defs><radialGradient id="bgGlow" cx="50%" cy="50%" r="56%"><stop offset="0%" stop-color="#3b1f12"/><stop offset="58%" stop-color="#24140d"/><stop offset="100%" stop-color="#140d0a"/></radialGradient><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffd6a4"/><stop offset="52%" stop-color="#ff9b52"/><stop offset="100%" stop-color="#d15c26"/></linearGradient><radialGradient id="coreGrad" cx="50%" cy="45%" r="62%"><stop offset="0%" stop-color="#ffe5c7"/><stop offset="44%" stop-color="#ffb46a"/><stop offset="100%" stop-color="#cc5b2d"/></radialGradient><path id="arc" d="M4.35 12.45A7.65 7.65 0 0 1 19.65 12.45" /></defs><circle cx="12" cy="12" r="11" fill="url(#bgGlow)" /><circle cx="12" cy="12" r="10.4" fill="none" stroke="#ffe9cc" stroke-opacity="0.2" stroke-width="0.14" /><circle cx="12" cy="12" r="9.45" fill="none" stroke="url(#ringGrad)" stroke-width="0.66" /><circle cx="12" cy="12" r="8.8" fill="none" stroke="#ffd4a8" stroke-opacity="0.34" stroke-width="0.16" /><circle cx="12" cy="12" r="7.25" fill="none" stroke="#ffd4a8" stroke-opacity="0.24" stroke-width="0.11" stroke-dasharray="0.22 0.34" /><circle cx="12" cy="12" r="5.75" fill="url(#coreGrad)" fill-opacity="0.24" /><circle cx="12" cy="12" r="4.2" fill="#ffe9cc" fill-opacity="0.08" />${labelMarkup}<g transform="translate(${iconTransform.tx} ${iconTransform.ty}) scale(${iconTransform.scale})">${extraMarkup}${pathMarkup}</g></svg>`
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+}
+
+const DOCTRINE_TOKENS = [
+  { id: 'garrotazo', labelKey: 'rules.tokens.types.doctrineGarrotazo' },
+  { id: 'apuntado', labelKey: 'rules.tokens.types.doctrineApuntado' },
+  { id: 'frenesi', labelKey: 'rules.tokens.types.doctrineFrenesi' },
+  { id: 'agilidad-en-combate', labelKey: 'rules.tokens.types.doctrineAgilidadEnCombate' },
+  { id: 'nuestra-es-la-victoria', labelKey: 'rules.tokens.types.doctrineNuestraEsLaVictoria' },
+  { id: 'reaccion-inmediata', labelKey: 'rules.tokens.types.doctrineReaccionInmediata' },
+  { id: 'mas-que-cargado', labelKey: 'rules.tokens.types.doctrineMasQueCargado' },
+  { id: 'una-nueva-oportunidad', labelKey: 'rules.tokens.types.doctrineUnaNuevaOportunidad' },
+  { id: 'combate-a-muerte', labelKey: 'rules.tokens.types.doctrineCombateAMuerte' },
+]
 
 const TOKEN_DEFINITIONS = [
   { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
@@ -45,6 +109,17 @@ const TOKEN_DEFINITIONS = [
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_6', category: 'command', shape: 'circle', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  ...DOCTRINE_TOKENS.map((token) => ({
+    id: `doctrine_${token.id.replaceAll('-', '_')}`,
+    category: 'doctrine',
+    shape: 'circle',
+    labelKey: token.labelKey,
+    diameterMm: DOCTRINE_TOKEN_DIAMETER_MM,
+    previewSize: 'medium',
+    imageSrc: buildDoctrineTokenImage(token.id, 'es'),
+    imageSrcEs: buildDoctrineTokenImage(token.id, 'es'),
+    imageSrcEn: buildDoctrineTokenImage(token.id, 'en'),
+  })),
 ]
 
 const buildInitialTokenCounts = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, 0]))
@@ -62,6 +137,7 @@ function Reglamento() {
   const [activeSection, setActiveSection] = useState('')
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [tokenCounts, setTokenCounts] = useState(buildInitialTokenCounts)
+  const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const modeParam = searchParams.get('mode')
   const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'quick'
   const isTokensMode = rulesMode === 'tokens'
@@ -69,11 +145,15 @@ function Reglamento() {
     () =>
       TOKEN_DEFINITIONS.map((token) => ({
         ...token,
+        imageSrc:
+          token.category === 'doctrine'
+            ? (lang === 'en' ? token.imageSrcEn : token.imageSrcEs) || token.imageSrc
+            : token.imageSrc,
         label: t(token.labelKey),
         primaryText: token.primaryText || t(token.labelKey),
         secondaryText: token.secondaryKey ? t(token.secondaryKey) : '',
       })),
-    [t],
+    [t, lang],
   )
   const totalTokenCount = useMemo(
     () => tokenOptions.reduce((acc, token) => acc + (tokenCounts[token.id] || 0), 0),
@@ -202,15 +282,24 @@ function Reglamento() {
     }))
   }
 
-  const loadImageAsDataUrl = (src) =>
+  const loadImageAsDataUrl = (src, options = {}) =>
     new Promise((resolve, reject) => {
+      const { rasterSizePx } = options
       const img = new Image()
       img.onload = () => {
+        const sourceWidth = Math.max(1, Math.round(img.naturalWidth || img.width || 1))
+        const sourceHeight = Math.max(1, Math.round(img.naturalHeight || img.height || 1))
+        const maxSourceSide = Math.max(sourceWidth, sourceHeight)
+        const scale = rasterSizePx && maxSourceSide > 0 ? rasterSizePx / maxSourceSide : 1
+        const outputWidth = Math.max(1, Math.round(sourceWidth * scale))
+        const outputHeight = Math.max(1, Math.round(sourceHeight * scale))
         const canvas = document.createElement('canvas')
-        canvas.width = Math.max(1, Math.round(img.width))
-        canvas.height = Math.max(1, Math.round(img.height))
+        canvas.width = outputWidth
+        canvas.height = outputHeight
         const ctx = canvas.getContext('2d')
-        ctx.drawImage(img, 0, 0)
+        ctx.imageSmoothingEnabled = true
+        ctx.imageSmoothingQuality = 'high'
+        ctx.drawImage(img, 0, 0, outputWidth, outputHeight)
         resolve(canvas.toDataURL('image/png'))
       }
       img.onerror = reject
@@ -218,157 +307,164 @@ function Reglamento() {
     })
 
   const generateTokensPdf = async () => {
+    if (isGeneratingTokensPdf) return
+
     const selectedTokens = tokenOptions
       .flatMap((token) => Array.from({ length: tokenCounts[token.id] || 0 }, () => token))
       .sort((a, b) => b.diameterMm - a.diameterMm)
 
     if (!selectedTokens.length) return
+    setIsGeneratingTokensPdf(true)
+    try {
+      const { jsPDF } = await import('jspdf')
+      const doc = new jsPDF({ unit: 'mm', format: 'a4' })
+      const pageWidth = doc.internal.pageSize.getWidth()
+      const pageHeight = doc.internal.pageSize.getHeight()
+      const margin = 10
+      const gap = 4
+      const tokenCellPadding = 6
+      const maxX = pageWidth - margin
+      const maxY = pageHeight - margin
+      const accentColor = [255, 143, 69]
+      const fallbackTextColor = [244, 244, 244]
+      const logoDataUrl = await loadImageAsDataUrl(zeroLoreLogo).catch(() => null)
+      const tokenImageDataById = Object.fromEntries(
+        await Promise.all(
+          tokenOptions.map(async (token) => {
+            if (!token.imageSrc) return [token.id, null]
+            const renderOptions = token.category === 'doctrine' ? { rasterSizePx: 1400 } : undefined
+            return [token.id, await loadImageAsDataUrl(token.imageSrc, renderOptions).catch(() => null)]
+          }),
+        ),
+      )
 
-    const { jsPDF } = await import('jspdf')
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' })
-    const pageWidth = doc.internal.pageSize.getWidth()
-    const pageHeight = doc.internal.pageSize.getHeight()
-    const margin = 10
-    const gap = 4
-    const tokenCellPadding = 6
-    const maxX = pageWidth - margin
-    const maxY = pageHeight - margin
-    const accentColor = [255, 143, 69]
-    const fallbackTextColor = [244, 244, 244]
-    const logoDataUrl = await loadImageAsDataUrl(zeroLoreLogo).catch(() => null)
-    const tokenImageDataById = Object.fromEntries(
-      await Promise.all(
-        tokenOptions.map(async (token) => {
-          if (!token.imageSrc) return [token.id, null]
-          return [token.id, await loadImageAsDataUrl(token.imageSrc).catch(() => null)]
-        }),
-      ),
-    )
+      let cursorX = margin
+      let cursorY = margin
+      let rowHeight = 0
 
-    let cursorX = margin
-    let cursorY = margin
-    let rowHeight = 0
-
-    const drawCenteredText = (text, centerX, y, fontSize, fontStyle = 'bold') => {
-      doc.setFont('helvetica', fontStyle)
-      doc.setFontSize(fontSize)
-      doc.text(text, centerX, y, { align: 'center' })
-    }
-
-    const drawTokenCell = (token, x, y, cellSize) => {
-      const centerX = x + cellSize / 2
-      const centerY = y + cellSize / 2
-      const radius = token.diameterMm / 2
-
-      doc.setLineWidth(0.35)
-      doc.setDrawColor(172, 172, 172)
-      doc.setLineDashPattern([1.3, 1.3], 0)
-      doc.rect(x, y, cellSize, cellSize)
-      doc.setLineDashPattern([], 0)
-      doc.setFillColor(172, 172, 172)
-      doc.rect(x - 0.6, y - 0.6, 1.2, 1.2, 'F')
-      doc.rect(x + cellSize - 0.6, y - 0.6, 1.2, 1.2, 'F')
-      doc.rect(x - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
-      doc.rect(x + cellSize - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
-
-      const tokenImage = tokenImageDataById[token.id]
-      if (tokenImage) {
-        doc.addImage(
-          tokenImage,
-          'PNG',
-          centerX - radius,
-          centerY - radius,
-          token.diameterMm,
-          token.diameterMm,
-          undefined,
-          'FAST',
-        )
-        return
+      const drawCenteredText = (text, centerX, y, fontSize, fontStyle = 'bold') => {
+        doc.setFont('helvetica', fontStyle)
+        doc.setFontSize(fontSize)
+        doc.text(text, centerX, y, { align: 'center' })
       }
 
-      if (token.category === 'command') {
-        const borderGrow = 0.7
-        const isSquare = token.shape === 'square'
-        const outerSize = token.diameterMm + borderGrow * 2
+      const drawTokenCell = (token, x, y, cellSize) => {
+        const centerX = x + cellSize / 2
+        const centerY = y + cellSize / 2
+        const radius = token.diameterMm / 2
 
-        doc.setFillColor(10, 12, 18)
-        doc.setDrawColor(...accentColor)
-        doc.setLineWidth(Math.max(1.6, token.diameterMm * 0.04))
-
-        if (isSquare) {
-          const outerRadius = Math.max(3.4, token.diameterMm * 0.08)
-          doc.roundedRect(centerX - outerSize / 2, centerY - outerSize / 2, outerSize, outerSize, outerRadius, outerRadius, 'FD')
-          const innerSize = token.diameterMm * 0.86
-          const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
-          doc.setDrawColor(255, 205, 160)
-          doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-          doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
-          const dashSize = token.diameterMm * 0.66
-          const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
-          doc.setDrawColor(255, 203, 156)
-          doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-          doc.setLineDashPattern([1.1, 1.6], 0)
-          doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
-          doc.setLineDashPattern([], 0)
-          doc.setFillColor(22, 27, 38)
-          doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
-        } else {
-          doc.circle(centerX, centerY, radius + borderGrow, 'FD')
-          doc.setDrawColor(255, 205, 160)
-          doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-          doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
-          doc.setDrawColor(255, 203, 156)
-          doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-          doc.setLineDashPattern([1.1, 1.6], 0)
-          doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
-          doc.setLineDashPattern([], 0)
-          doc.setFillColor(22, 27, 38)
-          doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
-        }
-
-        const maxLogoW = Math.min(token.diameterMm * 0.72, 90)
-        let logoW = Math.max(18, maxLogoW)
-        let logoH = logoW / ZEROLORE_LOGO_ASPECT
-        const maxLogoH = token.diameterMm * 0.5
-        if (logoH > maxLogoH) {
-          logoH = maxLogoH
-          logoW = logoH * ZEROLORE_LOGO_ASPECT
-        }
-        if (logoDataUrl) {
-          doc.addImage(logoDataUrl, 'PNG', centerX - logoW / 2, centerY - logoH / 2, logoW, logoH)
-        } else {
-          doc.setTextColor(...fallbackTextColor)
-          drawCenteredText('ZL', centerX, centerY + 2, Math.max(16, token.diameterMm * 0.26))
-        }
-      } else {
-        doc.setFillColor(12, 13, 18)
+        doc.setLineWidth(0.35)
         doc.setDrawColor(172, 172, 172)
-        doc.setLineWidth(1.2)
-        doc.circle(centerX, centerY, radius, 'FD')
-        doc.setTextColor(...fallbackTextColor)
-        drawCenteredText('?', centerX, centerY + Math.max(2, token.diameterMm * 0.07), Math.max(14, token.diameterMm * 0.36))
+        doc.setLineDashPattern([1.3, 1.3], 0)
+        doc.rect(x, y, cellSize, cellSize)
+        doc.setLineDashPattern([], 0)
+        doc.setFillColor(172, 172, 172)
+        doc.rect(x - 0.6, y - 0.6, 1.2, 1.2, 'F')
+        doc.rect(x + cellSize - 0.6, y - 0.6, 1.2, 1.2, 'F')
+        doc.rect(x - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
+        doc.rect(x + cellSize - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
+
+        const tokenImage = tokenImageDataById[token.id]
+        if (tokenImage) {
+          doc.addImage(
+            tokenImage,
+            'PNG',
+            centerX - radius,
+            centerY - radius,
+            token.diameterMm,
+            token.diameterMm,
+            undefined,
+            'FAST',
+          )
+          return
+        }
+
+        if (token.category === 'command') {
+          const borderGrow = 0.7
+          const isSquare = token.shape === 'square'
+          const outerSize = token.diameterMm + borderGrow * 2
+
+          doc.setFillColor(10, 12, 18)
+          doc.setDrawColor(...accentColor)
+          doc.setLineWidth(Math.max(1.6, token.diameterMm * 0.04))
+
+          if (isSquare) {
+            const outerRadius = Math.max(3.4, token.diameterMm * 0.08)
+            doc.roundedRect(centerX - outerSize / 2, centerY - outerSize / 2, outerSize, outerSize, outerRadius, outerRadius, 'FD')
+            const innerSize = token.diameterMm * 0.86
+            const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
+            doc.setDrawColor(255, 205, 160)
+            doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+            doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
+            const dashSize = token.diameterMm * 0.66
+            const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
+            doc.setDrawColor(255, 203, 156)
+            doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+            doc.setLineDashPattern([1.1, 1.6], 0)
+            doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
+            doc.setLineDashPattern([], 0)
+            doc.setFillColor(22, 27, 38)
+            doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
+          } else {
+            doc.circle(centerX, centerY, radius + borderGrow, 'FD')
+            doc.setDrawColor(255, 205, 160)
+            doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+            doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
+            doc.setDrawColor(255, 203, 156)
+            doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+            doc.setLineDashPattern([1.1, 1.6], 0)
+            doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
+            doc.setLineDashPattern([], 0)
+            doc.setFillColor(22, 27, 38)
+            doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
+          }
+
+          const maxLogoW = Math.min(token.diameterMm * 0.72, 90)
+          let logoW = Math.max(18, maxLogoW)
+          let logoH = logoW / ZEROLORE_LOGO_ASPECT
+          const maxLogoH = token.diameterMm * 0.5
+          if (logoH > maxLogoH) {
+            logoH = maxLogoH
+            logoW = logoH * ZEROLORE_LOGO_ASPECT
+          }
+          if (logoDataUrl) {
+            doc.addImage(logoDataUrl, 'PNG', centerX - logoW / 2, centerY - logoH / 2, logoW, logoH)
+          } else {
+            doc.setTextColor(...fallbackTextColor)
+            drawCenteredText('ZL', centerX, centerY + 2, Math.max(16, token.diameterMm * 0.26))
+          }
+        } else {
+          doc.setFillColor(12, 13, 18)
+          doc.setDrawColor(172, 172, 172)
+          doc.setLineWidth(1.2)
+          doc.circle(centerX, centerY, radius, 'FD')
+          doc.setTextColor(...fallbackTextColor)
+          drawCenteredText('?', centerX, centerY + Math.max(2, token.diameterMm * 0.07), Math.max(14, token.diameterMm * 0.36))
+        }
       }
+
+      selectedTokens.forEach((token) => {
+        const cellSize = token.diameterMm + tokenCellPadding * 2
+        if (cursorX + cellSize > maxX + 0.01) {
+          cursorX = margin
+          cursorY += rowHeight + gap
+          rowHeight = 0
+        }
+        if (cursorY + cellSize > maxY + 0.01) {
+          doc.addPage()
+          cursorX = margin
+          cursorY = margin
+          rowHeight = 0
+        }
+        drawTokenCell(token, cursorX, cursorY, cellSize)
+        cursorX += cellSize + gap
+        rowHeight = Math.max(rowHeight, cellSize)
+      })
+
+      doc.save(lang === 'en' ? 'zerolore_tokens_en.pdf' : 'zerolore_tokens_es.pdf')
+    } finally {
+      setIsGeneratingTokensPdf(false)
     }
-
-    selectedTokens.forEach((token) => {
-      const cellSize = token.diameterMm + tokenCellPadding * 2
-      if (cursorX + cellSize > maxX + 0.01) {
-        cursorX = margin
-        cursorY += rowHeight + gap
-        rowHeight = 0
-      }
-      if (cursorY + cellSize > maxY + 0.01) {
-        doc.addPage()
-        cursorX = margin
-        cursorY = margin
-        rowHeight = 0
-      }
-      drawTokenCell(token, cursorX, cursorY, cellSize)
-      cursorX += cellSize + gap
-      rowHeight = Math.max(rowHeight, cellSize)
-    })
-
-    doc.save(lang === 'en' ? 'zerolore_tokens_en.pdf' : 'zerolore_tokens_es.pdf')
   }
 
   return (
@@ -437,8 +533,21 @@ function Reglamento() {
             <span>
               {t('rules.tokens.selected')}: {totalTokenCount}
             </span>
-            <button type="button" className="primary" onClick={generateTokensPdf} disabled={!totalTokenCount}>
-              {t('rules.tokens.generatePdf')}
+            <button
+              type="button"
+              className="primary"
+              onClick={generateTokensPdf}
+              disabled={!totalTokenCount || isGeneratingTokensPdf}
+              aria-busy={isGeneratingTokensPdf}
+            >
+              {isGeneratingTokensPdf ? (
+                <span className="rules-pdf-button-content">
+                  <span className="rules-pdf-spinner" aria-hidden="true" />
+                  {t('rules.tokens.generatingPdf')}
+                </span>
+              ) : (
+                t('rules.tokens.generatePdf')
+              )}
             </button>
           </div>
         </div>

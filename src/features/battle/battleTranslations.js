@@ -74,6 +74,11 @@ export const getBattleTranslations = (lang) =>
       weaponAbilityLog: 'Weapon ability',
       factionAbilityLog: 'Faction ability',
       blocked: 'Attack blocked',
+      blockedByTitanRule: 'blocked by Titan rule',
+      titanRestrictionHint:
+        'Titan rule: in melee/charge, Line, Elite, Vehicle and Monster units cannot engage a Titan. A Titan can only charge another Titan.',
+      attackerNoRangedWeaponsHint: 'The attacking unit has no ranged weapons and cannot shoot.',
+      defenderNoRangedWeaponsHint: 'The defender has no ranged weapons. Ranged counterattack is disabled.',
       hp: 'HP',
       save: 'Save',
       steps: 'steps',
@@ -152,6 +157,11 @@ export const getBattleTranslations = (lang) =>
       weaponAbilityLog: 'Habilidad de arma',
       factionAbilityLog: 'Habilidad de facción',
       blocked: 'Ataque bloqueado',
+      blockedByTitanRule: 'bloqueada por regla de Titán',
+      titanRestrictionHint:
+        'Regla de Titán: en CaC/Carga, Línea, Élite, Vehículo y Monstruo no pueden trabar a un Titán. Un Titán solo puede cargar a otro Titán.',
+      attackerNoRangedWeaponsHint: 'La unidad atacante no tiene armas de disparo y no puede disparar.',
+      defenderNoRangedWeaponsHint: 'La unidad defensora no tiene armas de disparo. El contraataque de disparo queda desactivado.',
       hp: 'Vidas',
       save: 'Salvación',
       steps: 'pasos',

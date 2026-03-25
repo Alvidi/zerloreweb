@@ -10,6 +10,33 @@ const getScatterDirectionIcon = (direction) => {
   return icons[String(direction || '').toUpperCase()] || '↑'
 }
 
+const extractFactionAbilityName = (text, lang) => {
+  const raw = String(text || '').trim()
+  if (!raw) return ''
+
+  const activePattern = lang === 'en'
+    ? /^(.*?)\s+active\s*:/i
+    : /^(.*?)\s+activ[oa]\s*:/i
+  const activeMatch = raw.match(activePattern)
+  if (activeMatch?.[1]) return activeMatch[1].trim()
+
+  const colonIndex = raw.indexOf(':')
+  if (colonIndex > 0) return raw.slice(0, colonIndex).trim()
+  return ''
+}
+
+const getFactionAbilityHeading = (details, lang) => {
+  const names = Array.from(
+    new Set(
+      (details || [])
+        .map((detail) => extractFactionAbilityName(detail?.text, lang))
+        .filter(Boolean),
+    ),
+  )
+  if (!names.length) return ''
+  return ` (${names.join(', ')})`
+}
+
 function BattleCombatLog({ logEntries, tx, lang }) {
   return (
     <article className="duel-log reveal">
@@ -49,6 +76,8 @@ function BattleCombatLog({ logEntries, tx, lang }) {
             const factionAbilityDetails = (entry.abilityDetails || []).filter((detail) => detail.source === 'faction')
             const attackerFactionAbilityDetails = factionAbilityDetails.filter((detail) => detail.owner !== 'defender')
             const defenderFactionAbilityDetails = factionAbilityDetails.filter((detail) => detail.owner === 'defender')
+            const attackerFactionAbilityHeading = getFactionAbilityHeading(attackerFactionAbilityDetails, lang)
+            const defenderFactionAbilityHeading = getFactionAbilityHeading(defenderFactionAbilityDetails, lang)
             return (
               <article key={entry.key} className="duel-log-entry">
                 {!!entry.specialtyLine && (
@@ -172,7 +201,7 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                 {!!attackerFactionAbilityDetails.length && (
                   <div className="duel-log-line">
                     <span className="duel-log-line-label duel-log-line-label-faction-ability">
-                      <span>{tx.factionAbilityLog}</span>{' '}
+                      <span>{tx.factionAbilityLog}{attackerFactionAbilityHeading}</span>{' '}
                       <span className="duel-log-line-label-unit">
                         {primaryUnitName}
                       </span>
@@ -212,7 +241,7 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                 {!!defenderFactionAbilityDetails.length && (
                   <div className="duel-log-line">
                     <span className="duel-log-line-label duel-log-line-label-faction-ability">
-                      <span>{tx.factionAbilityLog}</span>{' '}
+                      <span>{tx.factionAbilityLog}{defenderFactionAbilityHeading}</span>{' '}
                       <span className="duel-log-line-label-unit">
                         {secondaryUnitName}
                       </span>

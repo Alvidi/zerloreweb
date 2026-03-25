@@ -2517,6 +2517,11 @@ mark {
   height: 112px;
 }
 
+.rules-token-preview[data-token-preview^='doctrine_'].has-image {
+  width: 112px;
+  height: 112px;
+}
+
 .rules-token-preview-image {
   width: 100%;
   height: 100%;
@@ -2608,6 +2613,27 @@ mark {
   justify-content: space-between;
   gap: 12px;
   color: var(--text-main);
+}
+
+.rules-pdf-button-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rules-pdf-spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  animation: rules-pdf-spin 0.7s linear infinite;
+}
+
+@keyframes rules-pdf-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .rules-toc-search {
@@ -3306,6 +3332,16 @@ mark {
   max-width: 220px;
 }
 
+.duel-rule-warning {
+  margin: 2px 0 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 143, 69, 0.45);
+  background: rgba(255, 143, 69, 0.1);
+  color: #ffd6a8;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
 .duel-attack-type > span {
   font-size: 0.74rem;
   text-transform: uppercase;
@@ -3650,15 +3686,39 @@ mark {
 }
 
 .duel-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: grid;
+  gap: 8px;
   margin-top: 16px;
 }
 
-.duel-actions .primary,
-.duel-actions .ghost {
+.duel-actions-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.duel-actions-buttons .primary,
+.duel-actions-buttons .ghost {
   min-width: 160px;
+}
+
+.duel-actions-buttons .primary:disabled {
+  background: rgba(154, 160, 170, 0.28);
+  color: rgba(235, 240, 245, 0.55);
+  border: 1px solid rgba(154, 160, 170, 0.28);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+  opacity: 0.78;
+}
+
+.duel-actions-buttons .primary:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.duel-rule-warning-actions {
+  margin: 0;
 }
 
 .duel-log {

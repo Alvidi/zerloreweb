@@ -36,7 +36,6 @@ import {
   makeHpKey,
   normalizeFaction,
   pickRandomItem,
-  pickRandomUnitForMode,
   pickRandomWeaponIdsForMode,
   pickWeaponIdsForMode,
   resolveMode,
@@ -47,6 +46,7 @@ import {
 } from '../features/battle/battleUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
+const TITAN_ENGAGE_BLOCKER_TYPES = new Set(['line', 'elite', 'vehicle', 'monster'])
 
 function Batalla() {
   const { lang } = useI18n()
@@ -86,7 +86,6 @@ function Batalla() {
   const resolveRunRef = useRef(0)
   const mode = resolveMode(attackType)
   const canCounterByMode = mode === 'melee' || attackType === 'ranged'
-  const isCounterattackEnabled = canCounterByMode && defenderCounterattack
 
   const factionById = useMemo(() => new Map(factions.map((faction) => [faction.id, faction])), [factions])
 
@@ -109,6 +108,29 @@ function Batalla() {
 
   const leftUnit = leftFaction?.units.find((unit) => unit.id === leftUnitId) || null
   const rightUnit = rightFaction?.units.find((unit) => unit.id === rightUnitId) || null
+  const getUnitType = (unit) => getUnitTypeToken(unit?.type)
+  const isTitan = (unit) => getUnitType(unit) === 'titan'
+  const canEngageTitanByType = (unit) => !TITAN_ENGAGE_BLOCKER_TYPES.has(getUnitType(unit))
+  const isTitanRuleRestrictedMode = attackType === 'melee' || attackType === 'charge'
+  const isTitanEngagementAllowed = (attackerUnit, defenderUnit) => {
+    if (!isTitanRuleRestrictedMode) return true
+    if (!attackerUnit || !defenderUnit) return true
+
+    const attackerIsTitan = isTitan(attackerUnit)
+    const defenderIsTitan = isTitan(defenderUnit)
+
+    // In melee/charge, titan vs non-titan pairings are invalid.
+    if (attackerIsTitan !== defenderIsTitan) return false
+
+    // Line/Elite/Vehicle/Monster cannot charge or lock a Titan by themselves.
+    if (isTitan(defenderUnit) && !canEngageTitanByType(attackerUnit)) return false
+
+    // A Titan can only charge another Titan.
+    if (attackType === 'charge' && isTitan(attackerUnit) && !isTitan(defenderUnit)) return false
+
+    return true
+  }
+  const isCurrentPairAllowed = isTitanEngagementAllowed(leftUnit, rightUnit)
   const unitCanUseCover = (unit) => {
     const typeToken = getUnitTypeToken(unit?.type)
     return typeToken !== 'vehicle' && typeToken !== 'monster' && typeToken !== 'titan'
@@ -137,6 +159,11 @@ function Batalla() {
   const rightSelectedWeapons = safeRightWeaponIds
     .map((weaponId) => rightWeapons.find((weapon) => weapon.id === weaponId))
     .filter(Boolean)
+  const attackerHasWeaponsForMode = leftSelectedWeapons.length > 0
+  const defenderHasWeaponsForMode = rightSelectedWeapons.length > 0
+  const attackerMissingRangedWeapons = attackType === 'ranged' && !attackerHasWeaponsForMode
+  const defenderMissingRangedWeapons = attackType === 'ranged' && !defenderHasWeaponsForMode
+  const isCounterattackEnabled = canCounterByMode && defenderCounterattack && !defenderMissingRangedWeapons
   const leftConditionSupport = getConditionSupport(leftSelectedWeapons, mode)
   const rightConditionSupport = getConditionSupport(rightSelectedWeapons, mode)
 
@@ -233,6 +260,13 @@ function Batalla() {
   const clearTimers = () => {
     timersRef.current.forEach((timer) => clearTimeout(timer))
     timersRef.current = []
+  }
+
+  const resetCombatLog = () => {
+    clearTimers()
+    resolveRunRef.current += 1
+    setIsResolving(false)
+    setLogEntries([])
   }
 
   useEffect(
@@ -381,8 +415,9 @@ function Batalla() {
 
   const handleResolve = () => {
     if (isResolving) return
-    if (!leftUnit || !rightUnit || !leftSelectedWeapons.length) return
-    const needsRightWeapons = isCounterattackEnabled
+    if (!leftUnit || !rightUnit || !attackerHasWeaponsForMode) return
+    if (!isCurrentPairAllowed) return
+    const needsRightWeapons = isCounterattackEnabled && attackType !== 'ranged'
     if (needsRightWeapons && !rightSelectedWeapons.length) return
 
     // Every resolve starts a fresh simulation and replaces prior results.
@@ -728,9 +763,22 @@ function Batalla() {
     setLogEntries([])
     setAmmoMap({})
 
-    const randomFaction = pickRandomItem(factions)
+    const getRandomizableUnitsForSide = (faction) => {
+      const withWeaponsForMode = (faction?.units || []).filter((unit) =>
+        (unit.weapons || []).some((weapon) => weapon.kind === mode),
+      )
+      if (!isTitanRuleRestrictedMode) return withWeaponsForMode
+      return withWeaponsForMode.filter((unit) =>
+        side === 'left'
+          ? isTitanEngagementAllowed(unit, rightUnit)
+          : isTitanEngagementAllowed(leftUnit, unit),
+      )
+    }
+
+    const randomFactionPool = factions.filter((faction) => getRandomizableUnitsForSide(faction).length)
+    const randomFaction = pickRandomItem(randomFactionPool)
     if (!randomFaction) return
-    const randomUnit = pickRandomUnitForMode(randomFaction, mode)
+    const randomUnit = pickRandomItem(getRandomizableUnitsForSide(randomFaction))
     if (!randomUnit) return
     const randomBool = () => Math.random() < 0.5
     const randomFactionAbilityState = Object.fromEntries(
@@ -853,11 +901,13 @@ function Batalla() {
               <select
                 value={leftFactionId}
                 onChange={(event) => {
+                  resetCombatLog()
                   const faction = factionById.get(event.target.value)
+                  const nextUnit = faction?.units[0] || null
                   setLeft({
                     factionId: event.target.value,
-                    unitId: faction?.units[0]?.id || '',
-                    weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
+                    unitId: nextUnit?.id || '',
+                    weaponIds: pickWeaponIdsForMode(nextUnit, mode),
                   })
                   setLeftFactionAbilityState({})
                 }}
@@ -875,7 +925,8 @@ function Batalla() {
             <span>{tx.unit}</span>
             <select
               value={leftUnitId}
-              onChange={(event) =>
+              onChange={(event) => {
+                resetCombatLog()
                 setLeft((prev) => {
                   const unit = leftFaction?.units.find((item) => item.id === event.target.value)
                   return {
@@ -883,13 +934,12 @@ function Batalla() {
                     unitId: event.target.value,
                     weaponIds: pickWeaponIdsForMode(unit, mode),
                   }
-                })}
+                })
+              }}
               disabled={!leftFaction}
             >
               {leftFaction?.units.map((unit) => (
-                <option key={unit.id} value={unit.id}>
-                  {unit.name}
-                </option>
+                <option key={unit.id} value={unit.id}>{unit.name}</option>
               ))}
             </select>
           </label>
@@ -1105,11 +1155,13 @@ function Batalla() {
               <select
                 value={rightFactionId}
                 onChange={(event) => {
+                  resetCombatLog()
                   const faction = factionById.get(event.target.value)
+                  const nextUnit = faction?.units[0] || null
                   setRight({
                     factionId: event.target.value,
-                    unitId: faction?.units[0]?.id || '',
-                    weaponIds: pickWeaponIdsForMode(faction?.units[0], mode),
+                    unitId: nextUnit?.id || '',
+                    weaponIds: pickWeaponIdsForMode(nextUnit, mode),
                   })
                   setRightFactionAbilityState({})
                 }}
@@ -1127,7 +1179,8 @@ function Batalla() {
             <span>{tx.unit}</span>
             <select
               value={rightUnitId}
-              onChange={(event) =>
+              onChange={(event) => {
+                resetCombatLog()
                 setRight((prev) => {
                   const unit = rightFaction?.units.find((item) => item.id === event.target.value)
                   return {
@@ -1135,13 +1188,12 @@ function Batalla() {
                     unitId: event.target.value,
                     weaponIds: pickWeaponIdsForMode(unit, mode),
                   }
-                })}
+                })
+              }}
               disabled={!rightFaction}
             >
               {rightFaction?.units.map((unit) => (
-                <option key={unit.id} value={unit.id}>
-                  {unit.name}
-                </option>
+                <option key={unit.id} value={unit.id}>{unit.name}</option>
               ))}
             </select>
           </label>
@@ -1343,7 +1395,7 @@ function Batalla() {
             <input
               type="checkbox"
               checked={defenderCounterattack}
-              disabled={!canCounterByMode}
+              disabled={!canCounterByMode || defenderMissingRangedWeapons}
               onChange={(event) => setDefenderCounterattack(event.target.checked)}
             />
             <span>{tx.counterattack}</span>
@@ -1352,28 +1404,40 @@ function Batalla() {
       </div>
 
       <div className="duel-actions reveal">
-        <button
-          type="button"
-          className="primary"
-          onClick={handleResolve}
-          disabled={
-            !leftUnit ||
-            !rightUnit ||
-            !leftSelectedWeapons.length ||
-            (isCounterattackEnabled && !rightSelectedWeapons.length) ||
-            isResolving
-          }
-        >
-          {isResolving ? `${tx.resolve}...` : tx.resolve}
-        </button>
-        <button
-          type="button"
-          className="ghost"
-          onClick={handleFlip}
-          disabled={!leftUnit || !rightUnit || isResolving}
-        >
-          {tx.flip}
-        </button>
+        <div className="duel-actions-buttons">
+          <button
+            type="button"
+            className="primary"
+            onClick={handleResolve}
+            disabled={
+              !leftUnit ||
+              !rightUnit ||
+              !isCurrentPairAllowed ||
+              !attackerHasWeaponsForMode ||
+              (isCounterattackEnabled && attackType !== 'ranged' && !rightSelectedWeapons.length) ||
+              isResolving
+            }
+          >
+            {isResolving ? `${tx.resolve}...` : tx.resolve}
+          </button>
+          <button
+            type="button"
+            className="ghost"
+            onClick={handleFlip}
+            disabled={!leftUnit || !rightUnit || isResolving}
+          >
+            {tx.flip}
+          </button>
+        </div>
+        {isTitanRuleRestrictedMode && !isCurrentPairAllowed && (
+          <p className="duel-rule-warning duel-rule-warning-actions">{tx.titanRestrictionHint}</p>
+        )}
+        {attackerMissingRangedWeapons && (
+          <p className="duel-rule-warning duel-rule-warning-actions">{tx.attackerNoRangedWeaponsHint}</p>
+        )}
+        {!attackerMissingRangedWeapons && defenderMissingRangedWeapons && (
+          <p className="duel-rule-warning duel-rule-warning-actions">{tx.defenderNoRangedWeaponsHint}</p>
+        )}
       </div>
 
       <BattleCombatLog logEntries={logEntries} tx={tx} lang={lang} />
