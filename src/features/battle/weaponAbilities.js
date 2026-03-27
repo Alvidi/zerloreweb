@@ -98,4 +98,3 @@ export const getWeaponAbilityConditionKey = (rawAbility) => {
 }
 
 export const isWeaponAbilityRule = (ruleText) => Boolean(getWeaponAbilityId(ruleText))
-

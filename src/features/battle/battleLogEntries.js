@@ -50,10 +50,14 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     attackerHpBefore,
     defenderHpBefore,
     result,
+    attackerResultHpOverride = null,
+    attackerResultDefeatedOverride = null,
     extraFactionAbilityDetails = [],
   }) => {
     const weaponName = weapon?.name || ''
-    const attackerFinalHp = result.attackerAfter?.hp ?? attackerHpBefore ?? 0
+    const attackerFinalHp = Number.isFinite(attackerResultHpOverride)
+      ? attackerResultHpOverride
+      : (result.attackerAfter?.hp ?? attackerHpBefore ?? 0)
     const defenderFinalHp = result.defenderAfter?.hp ?? defenderHpBefore ?? 0
     const baseStatsLine = ''
     const specialtyLine = ''
@@ -79,6 +83,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         defenderCover: '',
         defenderTail: '',
         abilityDetails: [],
+        preAttackDetails: [],
         damageDetails: [],
         attackCountDice: [],
         hitThresholdDice: [],
@@ -156,9 +161,18 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const defenseDice = saveRolls.map((roll, index) => ({ value: roll, blocked: blockedFlags[index] }))
     const appliedAbilityRules = (result.rulesApplied || []).filter((rule) => isWeaponAbilityRule(rule))
     const abilityDetails = []
+    const preAttackDetails = []
     const damageDetails = []
     const pushAbilityDetail = (esText, enText, dice = [], source = 'weapon', owner = 'attacker') => {
       abilityDetails.push({
+        text: lang === 'en' ? enText : esText,
+        dice,
+        source,
+        owner,
+      })
+    }
+    const pushPreAttackDetail = (esText, enText, dice = [], source = 'weapon', owner = 'attacker') => {
+      preAttackDetails.push({
         text: lang === 'en' ? enText : esText,
         dice,
         source,
@@ -178,6 +192,67 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     ;(extraFactionAbilityDetails || []).forEach((detail) => {
       abilityDetails.push(detail)
     })
+    const appliedRules = result.rulesApplied || []
+    const wildUncontrolledFuryRule = appliedRules.find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('furia incontrolada') || normalized.startsWith('uncontrolled fury')
+    })
+    if (wildUncontrolledFuryRule) {
+      pushPreAttackDetail(
+        'Furia incontrolada añade +1 dado de ataque en esta carga.',
+        'Uncontrolled fury adds +1 attack die in this charge.',
+        [{ value: '+1', outcome: 'hit', tone: 'count' }],
+        'faction',
+        'attacker',
+      )
+    }
+    const entrenchmentRule = appliedRules.find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('atrincheramiento') || normalized.startsWith('entrenchment')
+    })
+    if (entrenchmentRule) {
+      pushPreAttackDetail(
+        'Atrincheramiento añade +1 dado de ataque a este disparo.',
+        'Entrenchment adds +1 attack die to this ranged attack.',
+        [{ value: '+1', outcome: 'hit', tone: 'count' }],
+        'faction',
+        'attacker',
+      )
+    }
+    const fallenFuryRule = appliedRules.find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('furia de los caidos') || normalized.startsWith('fury of the fallen')
+    })
+    if (fallenFuryRule) {
+      pushPreAttackDetail(
+        'Furia de los Caídos añade +1 dado de ataque en esta acción.',
+        'Fury of the Fallen adds +1 attack die in this action.',
+        [{ value: '+1', outcome: 'hit', tone: 'count' }],
+        'faction',
+        'attacker',
+      )
+    }
+    const quickAttackRule = appliedRules.find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('ataque rapido') || normalized.startsWith('quick attack')
+    })
+    if (quickAttackRule) {
+      const quickAttackBonusMatch = quickAttackRule.match(/([+-]?\d+)/)
+      const quickAttackBonus = quickAttackBonusMatch ? Number.parseInt(quickAttackBonusMatch[1], 10) : 1
+      pushPreAttackDetail(
+        `Ataque rápido añade +${quickAttackBonus} dado${quickAttackBonus === 1 ? '' : 's'} de ataque por estar a media distancia.`,
+        `Quick Attack adds +${quickAttackBonus} attack die${quickAttackBonus === 1 ? '' : 's'} for being at half range.`,
+        [{ value: `+${quickAttackBonus}`, outcome: 'hit', tone: 'count' }],
+      )
+    }
+    const guerrillaRoll = (result.attackCountRolls || []).find((entry) => entry.source === 'guerrilla' && Number.isFinite(entry.total))
+    if (guerrillaRoll) {
+      pushPreAttackDetail(
+        `Guerrilla añade una ráfaga extra tras Carrera: ${guerrillaRoll.label} = +${guerrillaRoll.total} dados.`,
+        `Guerrilla adds an extra volley after Sprint: ${guerrillaRoll.label} = +${guerrillaRoll.total} dice.`,
+        [{ value: `+${guerrillaRoll.total}`, outcome: 'hit', tone: 'count' }],
+      )
+    }
     const allHitEntries = result.hitEntries || []
     const precisionRerolls = (result.hitEntries || []).filter(
       (entry) => entry.rerolled && String(entry.rerollSource || '').includes('precision'),
@@ -259,11 +334,11 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     if (result.parabolicScatter) {
       const scatter = result.parabolicScatter
       const scatterTextEs = scatter.bullseye
-        ? `Disparo parabólico tira ${scatter.roll}: diana (5-6). El objetivo no puede realizar tirada de salvación.`
-        : `Disparo parabólico tira ${scatter.roll}: fallo de precisión (1-4). El objetivo puede salvar normalmente.`
+        ? `Disparo parabólico tira ${scatter.roll}: diana (5-6). El objetivo no puede realizar tirada de salvación e ignora cualquier bonificación de cobertura.`
+        : `Disparo parabólico tira ${scatter.roll}: fallo de precisión (1-4). El objetivo puede salvar normalmente y la cobertura aplica con normalidad.`
       const scatterTextEn = scatter.bullseye
-        ? `Parabolic Shot rolls ${scatter.roll}: bullseye (5-6). The target cannot make Save rolls.`
-        : `Parabolic Shot rolls ${scatter.roll}: precision failure (1-4). The target can save normally.`
+        ? `Parabolic Shot rolls ${scatter.roll}: bullseye (5-6). The target cannot make Save rolls and ignores any cover bonus.`
+        : `Parabolic Shot rolls ${scatter.roll}: precision failure (1-4). The target can save normally and cover applies as usual.`
       pushAbilityDetail(
         scatterTextEs,
         scatterTextEn,
@@ -294,6 +369,16 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         'Direct turns attacks into automatic hits.',
       )
     }
+    const criticalAttackRule = (result.rulesApplied || []).find((rule) => {
+      const normalized = normalizeText(rule)
+      return normalized.startsWith('ataque critico') || normalized.startsWith('critical attack')
+    })
+    if (criticalAttackRule && Number(result.totals?.crits || 0) > 0) {
+      pushAbilityDetail(
+        `Ataque crítico: ${result.totals?.crits || 0} crítico${Number(result.totals?.crits || 0) === 1 ? '' : 's'} no genera${Number(result.totals?.crits || 0) === 1 ? '' : 'n'} tirada de salvación.`,
+        `Critical Attack: ${result.totals?.crits || 0} crit${Number(result.totals?.crits || 0) === 1 ? '' : 's'} generate no Save roll.`,
+      )
+    }
     const ignoresCoverRule = (result.rulesApplied || []).find((rule) => {
       const normalized = normalizeText(rule)
       return normalized.startsWith('ignora coberturas') || normalized.startsWith('ignore cover')
@@ -306,6 +391,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     }
     const selectedCoverType = result.selectedCoverType || result.coverType || 'none'
     const coverIgnoredByType = Boolean(result.coverIgnoredByType)
+    const parabolicBullseyeIgnoresCover = Boolean(result.parabolicScatter?.bullseye && result.parabolicScatter?.ignoreCover)
     const appliedCoverRules = (result.rulesApplied || []).filter((rule) => {
       const normalized = normalizeText(rule)
       return normalized.startsWith('cobertura parcial') || normalized.startsWith('cobertura de altura')
@@ -317,20 +403,21 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       appliedCoverRules.length > 0
       && !(ignoresPartialCover && result.coverType === 'partial')
       && !coverIgnoredByType
+      && !parabolicBullseyeIgnoresCover
     )
+    const meleePartialCoverActive = Boolean(result.meleePartialCoverActive)
     const rollOutcomeSummary = summarizeRollOutcomes(lang, attackDice)
     const directSummary = summarizeHitCritTotals(lang, result.totals?.hits || 0, result.totals?.crits || 0)
-    const hitsTotal = (result.totals?.hits || 0) + (result.totals?.crits || 0)
-    const hitsTotalStr = lang === 'en'
-      ? `${hitsTotal} hit${hitsTotal !== 1 ? 's' : ''}`
-      : `impactan ${hitsTotal}`
+    const totalDamageStr = lang === 'en'
+      ? `total damage ${result.totals?.damage || 0}`
+      : `daño total ${result.totals?.damage || 0}`
     const attackerSummary = result.hasDirect
       ? lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (automatic hits): ${directSummary}.`
-        : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${directSummary}.`
+        ? `${attackerName} attacks with ${weaponName} (automatic hits): ${directSummary} → ${totalDamageStr}.`
+        : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${directSummary} → ${totalDamageStr}.`
       : lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'} → ${hitsTotalStr}.`
-        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'} → ${hitsTotalStr}.`
+        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'} → ${totalDamageStr}.`
+        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'} → ${totalDamageStr}.`
     const defenderCover = coverAffectsDefense
       ? lang === 'en'
         ? result.coverType === 'height'
@@ -340,6 +427,15 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
           ? 'cobertura de altura'
           : 'cobertura parcial'
       : ''
+    const selectedCoverLabel = selectedCoverType === 'none'
+      ? ''
+      : lang === 'en'
+        ? selectedCoverType === 'height'
+          ? 'high cover'
+          : 'partial cover'
+        : selectedCoverType === 'height'
+          ? 'cobertura de altura'
+          : 'cobertura parcial'
     const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
     const failedDefenses = Math.max(0, saveRolls.length - blockedTotal)
     const defenseSummary = (() => {
@@ -355,28 +451,77 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       return parts.join('; ')
     })()
     const coverLine = (() => {
+      if (meleePartialCoverActive) {
+        return lang === 'en'
+          ? 'partial cover: applied. Reason: in melee, both units lose 1 attack die.'
+          : 'cobertura parcial: aplicada. Motivo: en CaC, ambas unidades pierden 1 dado de ataque.'
+      }
       if (defenderCover) {
         return lang === 'en'
-          ? `Applied cover: ${defenderCover}.${
+          ? `${selectedCoverLabel}: applied.${
             coverAffectsDefense && Number(result.saveThreshold) === 1 ? ' Save stays at 1+ (cap).' : ''
           }`
-          : `Cobertura aplicada: ${defenderCover}.${
+          : `${selectedCoverLabel}: aplicada.${
             coverAffectsDefense && Number(result.saveThreshold) === 1 ? ' La salvación se mantiene en 1+ (tope).' : ''
           }`
       }
-      if (coverIgnoredByType && selectedCoverType !== 'none') {
-        const coverLabel = lang === 'en'
-          ? selectedCoverType === 'height' ? 'high cover' : 'partial cover'
-          : selectedCoverType === 'height' ? 'cobertura de altura' : 'cobertura parcial'
+      if (parabolicBullseyeIgnoresCover && selectedCoverType !== 'none') {
         return lang === 'en'
-          ? `Selected cover: ${coverLabel}; no effect on vehicle/monster/titan units.`
-          : `Cobertura seleccionada: ${coverLabel}; sin efecto sobre unidades vehículo/monstruo/titán.`
+          ? `${selectedCoverLabel}: not applied. Reason: Parabolic Shot scored a bullseye.`
+          : `${selectedCoverLabel}: no aplicada. Motivo: Disparo parabólico ha sacado diana.`
+      }
+      if (ignoresPartialCover && selectedCoverType === 'partial') {
+        return lang === 'en'
+          ? `${selectedCoverLabel}: not applied. Reason: the weapon ignores cover.`
+          : `${selectedCoverLabel}: no aplicada. Motivo: el arma ignora coberturas.`
+      }
+      if (coverIgnoredByType && selectedCoverType !== 'none') {
+        return lang === 'en'
+          ? `${selectedCoverLabel}: not applied. Reason: no effect on vehicle/monster/titan units.`
+          : `${selectedCoverLabel}: no aplicada. Motivo: sin efecto sobre unidades vehículo/monstruo/titán.`
       }
       return ''
     })()
-    const defenderTail = lang === 'en'
-      ? `): ${defenseSummary || 'no defense rolls'}; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
-      : `): ${defenseSummary || 'sin tiradas de defensa'}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
+    const preventedDamage = Math.max(0, Number(result.totals?.preventedDamage || 0))
+    const rawDamage = Math.max(0, Number(result.totals?.rawDamage || result.totals?.damage || 0))
+    const defenderMitigationInline = preventedDamage > 0
+      ? lang === 'en'
+        ? `-${preventedDamage} from ability`
+        : `-${preventedDamage} de habilidad`
+      : ''
+    const defenderTailPrefix = preventedDamage > 0
+      ? lang === 'en'
+        ? `): ${defenseSummary || 'no defense rolls'}; raw damage ${rawDamage}; `
+        : `): ${defenseSummary || 'sin tiradas de defensa'}; daño bruto ${rawDamage}; `
+      : ''
+    const defenderTailSuffix = preventedDamage > 0
+      ? lang === 'en'
+        ? `; final damage ${result.totals.damage} (${defenderHpBefore} -> ${defenderFinalHp} HP).`
+        : `; daño final ${result.totals.damage} (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
+      : ''
+    const defenderTail = preventedDamage > 0
+      ? ''
+      : lang === 'en'
+        ? `): ${defenseSummary || 'no defense rolls'}; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
+        : `): ${defenseSummary || 'sin tiradas de defensa'}; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
+    const defenderMitigationNote = ''
+    const defenderLinePrefix = preventedDamage > 0
+      ? lang === 'en'
+        ? `${defenderName} defends: no Save rolls; raw damage ${rawDamage}; `
+        : `${defenderName} defiende: sin tiradas de defensa; daño bruto ${rawDamage}; `
+      : ''
+    const defenderLineSuffix = preventedDamage > 0
+      ? lang === 'en'
+        ? `; final damage ${result.totals.damage} (${defenderHpBefore} -> ${defenderFinalHp} HP).`
+        : `; daño final ${result.totals.damage} (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
+      : ''
+    const defenderNoSaveLine = parabolicBullseyeIgnoresCover && result.saveDiceCount === 0
+      ? preventedDamage > 0
+        ? ''
+        : lang === 'en'
+          ? `${defenderName} defends: no Save rolls; takes ${result.totals.damage} damage (${defenderHpBefore} -> ${defenderFinalHp} HP).`
+          : `${defenderName} defiende: sin tiradas de defensa; recibe ${result.totals.damage} de daño (${defenderHpBefore} -> ${defenderFinalHp} vidas).`
+      : ''
 
     const normalDamageRolls = Array.isArray(result.totals?.normalDamageRolls) ? result.totals.normalDamageRolls : []
     const critDamageRolls = Array.isArray(result.totals?.critDamageRolls) ? result.totals.critDamageRolls : []
@@ -431,11 +576,18 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       coverLine,
       attackerLine: attackerSummary,
       abilityLine: '',
-      defenderLine: '',
+      defenderLine: defenderNoSaveLine,
       defenderLead,
-      defenderSave: `${result.saveThreshold}+`,
+      defenderSave: defenderNoSaveLine ? '' : `${result.saveThreshold}+`,
       defenderCover,
       defenderTail,
+      defenderTailPrefix,
+      defenderTailSuffix,
+      defenderLinePrefix,
+      defenderLineSuffix,
+      defenderMitigationInline,
+      defenderMitigationNote,
+      preAttackDetails,
       attackCountDice,
       hitThresholdDice,
       attackDice,
@@ -446,7 +598,9 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         attacker: {
           name: attackerName,
           hp: attackerFinalHp,
-          defeated: attackerFinalHp <= 0,
+          defeated: typeof attackerResultDefeatedOverride === 'boolean'
+            ? attackerResultDefeatedOverride
+            : attackerFinalHp <= 0,
           hpBefore: attackerHpBefore,
         },
         defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
@@ -484,6 +638,12 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     defenderSave: '',
     defenderCover: '',
     defenderTail: '',
+    defenderTailPrefix: '',
+    defenderTailSuffix: '',
+    defenderLinePrefix: '',
+    defenderLineSuffix: '',
+    defenderMitigationInline: '',
+    preAttackDetails: [],
     abilityDetails,
     damageDetails: [],
     attackCountDice: [],

@@ -51,6 +51,43 @@ const run = () => {
   })
   assert(blockedLoS.blocked, 'Ranged attack without LoS should be blocked')
 
+  const parabolicBullseye = withFixedRandom([0.9, 0.95], () =>
+    resolveAttack({
+      ...makeBaseArgs(),
+      weapon: {
+        name: 'Mortar',
+        attacks: '1',
+        hit: '4+',
+        damage: '1',
+        critDamage: '2',
+        abilities: ['Disparo parabólico'],
+      },
+      conditions: { ...makeBaseArgs().conditions, hasLineOfSight: false, coverType: 'partial' },
+    }),
+  )
+  assert(!parabolicBullseye.blocked, 'Parabolic shot should work without LoS')
+  assert(parabolicBullseye.parabolicScatter?.bullseye === true, 'Parabolic shot should record bullseye on 5-6')
+  assert(Number.isFinite(parabolicBullseye.hitEntries?.[0]?.roll), 'Bullseye parabolic shot should still roll to hit')
+  assert(parabolicBullseye.saveDiceCount === 0, 'Bullseye parabolic shot should deny Save rolls')
+
+  const parabolicMiss = withFixedRandom([0.1, 0.95, 0.95], () =>
+    resolveAttack({
+      ...makeBaseArgs(),
+      weapon: {
+        name: 'Mortar',
+        attacks: '1',
+        hit: '4+',
+        damage: '1',
+        critDamage: '2',
+        abilities: ['Disparo parabólico'],
+      },
+      conditions: { ...makeBaseArgs().conditions, hasLineOfSight: false, coverType: 'partial' },
+    }),
+  )
+  assert(parabolicMiss.parabolicScatter?.bullseye === false, 'Parabolic shot should record precision miss on 1-4')
+  assert(parabolicMiss.saveDiceCount === 1, 'Precision miss should keep the normal Save roll')
+  assert(parabolicMiss.saveThreshold === 3, 'Precision miss should keep defender cover modifiers intact')
+
   const noResistance = resolveAttack({
     ...makeBaseArgs(),
     conditions: { ...makeBaseArgs().conditions, defenderMartialResistance: false },
@@ -155,6 +192,49 @@ const run = () => {
   )
   assert(sacredVowResult.hitEntries?.[0]?.rerolled === true, 'Sacred vow should reroll one failed melee die')
   assert(sacredVowResult.hitEntries?.[0]?.rerollSource === 'sacred_vow', 'Sacred vow reroll source should be explicit')
+
+  const meleeBaseResult = resolveAttack({
+    attacker: { id: 'left', name: 'Melee Attacker', hp: 4, maxHp: 4 },
+    defender: { id: 'right', name: 'Melee Defender', hp: 4, maxHp: 4, type: 'linea', save: 4 },
+    weapon: { name: 'Blade', attacks: '2', hit: '3+', damage: '1', critDamage: '2', abilities: [] },
+    mode: 'melee',
+    conditions: {
+      coverType: 'none',
+      attackerCoverType: 'none',
+    },
+  })
+  const meleePartialCoverResult = resolveAttack({
+    attacker: { id: 'left', name: 'Melee Attacker', hp: 4, maxHp: 4 },
+    defender: { id: 'right', name: 'Melee Defender', hp: 4, maxHp: 4, type: 'linea', save: 4 },
+    weapon: { name: 'Blade', attacks: '2', hit: '3+', damage: '1', critDamage: '2', abilities: [] },
+    mode: 'melee',
+    conditions: {
+      coverType: 'partial',
+      attackerCoverType: 'none',
+    },
+  })
+  assert(
+    meleePartialCoverResult.totals.attackDiceCount === Math.max(0, meleeBaseResult.totals.attackDiceCount - 1),
+    'Partial cover in melee should remove 1 attack die',
+  )
+
+  const criticalAttackResult = withFixedRandom([0.95, 0.7, 0.95], () =>
+    resolveAttack({
+      ...makeBaseArgs(),
+      weapon: {
+        name: 'Critical Blade',
+        attacks: '2',
+        hit: '4+',
+        damage: '1',
+        critDamage: '2',
+        abilities: ['Ataque crítico'],
+      },
+    }),
+  )
+  assert(criticalAttackResult.totals.crits === 1, 'Critical attack test should produce one crit')
+  assert(criticalAttackResult.totals.hits === 1, 'Critical attack test should produce one normal hit')
+  assert(criticalAttackResult.saveDiceCount === 1, 'Critical hits should not generate Save rolls')
+  assert(criticalAttackResult.totals.blockedCrits === 0, 'Critical attack should prevent blocking crits with saves')
 
   const feintCounterResult = withFixedRandom([0.95, 0.1], () =>
     resolveAttack({

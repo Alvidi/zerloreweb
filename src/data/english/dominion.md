@@ -6,19 +6,31 @@ Dominion Mode is the most strategic format in ZeroLore, inspired by great real-t
 
 ## Setup
 
-Players agree on game size and consult the value table:
+Players agree on the total bank before starting. The larger the bank, the longer and more intense the game:
 
-| Size     | Starting Value | Total Bank Value | Easy Post  | Hard Post  | Main Post  |
-|----------|----------------|------------------|------------|------------|------------|
-| Small    | 15 pts         | 50 value         | 2/turn     | 4/turn     | 6/turn     |
-| Standard | 30 pts         | 100 value        | 4/turn     | 8/turn     | 12/turn    |
-| Large    | 60 pts         | 200 value        | 8/turn     | 15/turn    | 20/turn    |
+| Approximate duration | Total bank |
+| -------------------- | ---------- |
+| Short game           | 60 value   |
+| Standard game        | 100 value  |
+| Long game            | 200 value  |
 
-Each player receives value tokens equal to their total bank. The starting value is deducted from the bank immediately — in a Standard game you start with 30 pts already spent and 70 pts remaining in the bank.
+These values are guidelines; players may agree on any bank that fits their table and available time.
 
-Each player builds their first wave with the available starting value. In squad mode units don't need to be assembled in advance — you can create and configure your squad on the spot with the available points.
+Each player starts with **20 value** to build their first wave. This value is deducted from the bank immediately. In squad mode, units do not need to be preconfigured; you may create and equip your squad on the spot with the available points.
 
-Command posts are placed on the table where players agree. It is recommended to use different colours to differentiate post types and their points. Each player has 1 **Main Post** in their deployment zone that belongs to them from the start.
+Command posts are placed wherever the players agree. It is recommended to use different colours to distinguish the post types (see the tokens page). Each player has 1 **Main Post** in the zone agreed by the players, and it belongs to them from the start.
+
+**Command post control**
+
+A post belongs to the player who has at least one unit or squad inside it. If that player removes all their units, the post becomes **neutral** until someone occupies it again. The enemy does not need to enter it; simply abandoning it is enough.
+
+**Deployment and reinforcements**
+
+In Dominion, the deployment zones from the advanced rulebook do not apply. All deployment, both initial and during the battle, is done from the Main Post or from any command post you control. To deploy or reinforce from a post, at least **50% of the base** must be inside the post.
+
+**Retreat in Dominion**
+
+When a unit declares retreat, it retreats to the **nearest friendly command post** instead of the board edge. If that post has more than 50% of its area occupied, the unit **cannot declare retreat** until there is enough space available. Until then, it may only use melee combat actions.
 
 ---
 
@@ -36,39 +48,54 @@ Resources are represented with printable physical tokens:
 
 ---
 
-## During the Game
+## Initiative Phase in Dominion
 
-At the end of each turn each player receives value tokens for each command post they control, deducted from their bank. When the bank is empty no more tokens are received even if posts are controlled.
+Each Initiative Phase follows this order:
 
-That value can be spent at any time on:
+1. Collect value tokens for each controlled command post, deducting them from the bank. When the bank is empty, no more tokens are received.
+2. Spend value on new units or squad reinforcements.
+3. Deploy the purchased units at the Main Post or at a command post you control (with at least 50% free).
+4. Check elimination conditions.
+5. Roll Initiative.
 
-- **New units** — deployed from your deployment zone or from a command post you control. The cost is the unit's value as per the army generator.
-- **Command Doctrines** — add new doctrines to your army during the game at the following cost:
+**Reinforcing squads**
+
+During step 2, if a friendly squad is not locked in melee combat, you may spend value to add miniatures to it up to the maximum shown on its profile. The cost is the value of each miniature. Reinforced miniatures act normally from that same turn onward.
+
+In skirmish mode, individual units cannot be reinforced; only new units may be deployed.
+
+In squad mode, reinforcements must be deployed from a controlled command post. The same 50% rule applies; if the post is full, it cannot be used for reinforcement.
+
+---
+
+## Command Doctrines
+
+In Dominion, doctrines are bought with value during the battle, choosing one per turn:
 
 | Doctrine              | Effect                                                                                                                                                                                                                                                                                                                                                                                                      | Cost   |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| Clubbing Blow         | The unit locked in melee pushes the opponent 1", ending the combat                                                                                                                                                                                                                                                                                                                                          | 2 pts  |
-| Aimed Shot            | The unit loses one action but gains +1 attack die for shooting this turn                                                                                                                                                                                                                                                                                                                                    | 2 pts  |
-| Frenzy                | The unit may use one additional movement action this turn                                                                                                                                                                                                                                                                                                                                                   | 3 pts  |
-| Combat Agility        | The unit gains +3 to its Speed this turn                                                                                                                                                                                                                                                                                                                                                                    | 3 pts  |
-| Ours is the Victory   | During this turn, the designated unit or squad automatically controls the objective they are on, ignoring the presence of enemy heroes on that same objective                                                                                                                                                                                                                                                | 3 pts  |
-| Overcharged           | If this unit fails a charge during this turn, it may immediately repeat it once                                                                                                                                                                                                                                                                                                                             | 3 pts  |
-| Immediate Reaction    | The player may activate two units in a row this turn                                                                                                                                                                                                                                                                                                                                                        | 4 pts  |
-| Second Chance         | Repeat one attack roll in melee or ranged combat                                                                                                                                                                                                                                                                                                                                                            | 4 pts  |
-| Fight to the Death    | Declare this doctrine during the Initiative Phase, designating an allied unit that is locked in melee combat. Both units are committed to a no-way-out duel. Neither can retreat or be separated from the combat for any reason. At the start of each turn, before any other activation, both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed. This doctrine can only be applied to units in melee combat. It does not affect vehicles or titans. | 4 pts  |
-
-New units enter the table at the start of the next initiative phase, at a command post or in the deployment zone.
+| Clubbing Blow       | The unit or squad locked in melee pushes the opponent 1", ending the combat. It resolves immediately upon activation, ignoring Speed.                                                                                                                                                                                                                                                                     | 2 value |
+| Aimed Shot          | The unit loses one action but gains +1 Attack die for shooting this turn.                                                                                                                                                                                                                                                                                                                                   | 2 value |
+| Frenzy              | The unit may use one additional movement action this turn.                                                                                                                                                                                                                                                                                                                                                  | 3 value |
+| Combat Agility      | The unit gains initiative in melee this turn, even if the opponent charged.                                                                                                                                                                                                                                                                                                                                 | 3 value |
+| Ours is the Victory | The unit automatically controls the objective it is on, ignoring enemy units of higher value or heroes.                                                                                                                                                                                                                                                                                                    | 3 value |
+| Overcharged         | If this unit fails a charge, it may immediately repeat it once.                                                                                                                                                                                                                                                                                                                                              | 3 value |
+| Immediate Reaction  | This unit cannot be charged or declare a charge during this turn.                                                                                                                                                                                                                                                                                                                                            | 4 value |
+| Second Chance       | Repeat one attack roll. If the first roll is favourable you may ignore the doctrine; if you use it, the first roll is discarded.                                                                                                                                                                                                                                                                          | 4 value |
+| Fight to the Death  | It only works with one unit locked in melee against another (maximum 2 units involved). Both are locked into a no-way-out duel: they cannot retreat or be separated for any reason. When either of them is activated, they resolve an automatic melee exchange. The combat ends when one is destroyed.                                                                                             | 4 value |
 
 ---
 
 ## Victory
 
-If a player captures the opponent's **Main Post** — immediate victory. While you control it, that post continues generating tokens from your bank.
+There are three ways to win:
 
-If no one captures the Main Post, at the end of the last turn the player who controls the most command posts wins. In case of a tie, the player who has eliminated the most unit value wins.
+1. **Base capture**: if at the end of a turn a player's Main Post is under enemy control, that player is eliminated.
+2. **Annihilation**: if a player reaches the Initiative Phase with no units on the table and unable to deploy new ones, that player is eliminated.
+3. **Territory control**: if none of the above happens by the agreed turn limit, the player controlling more command posts wins. In case of a tie, the player controlling the highest-value post wins.
 
 ---
 
 ## Duration
 
-Minimum 5 turns. Players agree on the exact number before starting.
+The battle ends when a victory condition is fulfilled. If players want to set a turn limit, a minimum of 5 is recommended and should be agreed before the game begins.

@@ -277,6 +277,9 @@ const FACTION_ABILITY_DEFINITIONS = [
 const isDefinitionEnabledInMode = (definition, mode) =>
   !Array.isArray(definition.modes) || definition.modes.includes(mode)
 
+const findDefinitionByEffectKey = (effectKey) =>
+  FACTION_ABILITY_DEFINITIONS.find((definition) => definition.effectKey === effectKey) || null
+
 const hasEnabledFactionAbility = (abilities, stateMap, effectKey) =>
   (abilities || []).some((ability) => ability.effectKey === effectKey && Boolean(stateMap?.[ability.id]))
 
@@ -327,6 +330,12 @@ export const buildFactionAttackConditions = ({
 
 export const isFactionEffectEnabled = ({ abilities, stateMap, effectKey }) =>
   hasEnabledFactionAbility(abilities, stateMap, effectKey)
+
+export const isFactionAbilityAvailableInMode = (effectKey, mode) => {
+  const definition = findDefinitionByEffectKey(effectKey)
+  if (!definition) return true
+  return isDefinitionEnabledInMode(definition, mode)
+}
 
 export const buildFactionAbilityLogDetails = ({ result, lang }) => {
   const rulesApplied = result?.rulesApplied || []

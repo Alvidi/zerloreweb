@@ -5,10 +5,6 @@ import reglamentoMd from '../data/spanish/reglamento-avanzado.md?raw'
 import reglamentoEnMd from '../data/english/advanced-rulebook.md?raw'
 import reglamentoRapidoMd from '../data/spanish/reglamento-rapido.md?raw'
 import reglamentoRapidoEnMd from '../data/english/quick-play.md?raw'
-import asedioMd from '../data/spanish/asedio.md?raw'
-import asedioEnMd from '../data/english/siege.md?raw'
-import eliminacionMd from '../data/spanish/eliminacion.md?raw'
-import eliminacionEnMd from '../data/english/elimination.md?raw'
 import conquistaMd from '../data/spanish/conquista.md?raw'
 import conquistaEnMd from '../data/english/conquest.md?raw'
 import dominioMd from '../data/spanish/dominio.md?raw'
@@ -18,6 +14,10 @@ import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
 import damage5Token from '../images/tokens/damage-5-red.svg'
 import damage10Token from '../images/tokens/damage-10-red.svg'
+import dominion1Token from '../images/tokens/dominion-1-gold.svg'
+import dominion3Token from '../images/tokens/dominion-3-gold.svg'
+import dominion5Token from '../images/tokens/dominion-5-gold.svg'
+import dominion10Token from '../images/tokens/dominion-10-gold.svg'
 import explosiveArea3Token from '../images/tokens/explosive-area-3in.svg'
 import stateReadyToken from '../images/tokens/preparado-blue.svg'
 import stateRetreatToken from '../images/tokens/retirada-blue.svg'
@@ -27,7 +27,7 @@ import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'siege', 'elimination', 'tokens']
+const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const DOCTRINE_TOKEN_DIAMETER_MM = 32
@@ -95,11 +95,36 @@ const DOCTRINE_TOKENS = [
   { id: 'combate-a-muerte', labelKey: 'rules.tokens.types.doctrineCombateAMuerte' },
 ]
 
+const DOCTRINE_GALLERY_LABELS = {
+  garrotazo: { es: 'Garrotazo', en: 'Clubbing Blow' },
+  apuntado: { es: 'Apuntado', en: 'Aimed Shot' },
+  frenesi: { es: 'Frenesí', en: 'Frenzy' },
+  'agilidad-en-combate': { es: 'Agilidad en combate', en: 'Combat Agility' },
+  'nuestra-es-la-victoria': { es: 'Nuestra es la victoria', en: 'Ours is the Victory' },
+  'reaccion-inmediata': { es: 'Reacción inmediata', en: 'Immediate Reaction' },
+  'mas-que-cargado': { es: 'Más que cargado', en: 'Overcharged' },
+  'una-nueva-oportunidad': { es: 'Una nueva oportunidad', en: 'Second Chance' },
+  'combate-a-muerte': { es: 'Combate a muerte', en: 'Fight to the Death' },
+}
+
+const normalizeHeadingText = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
 const TOKEN_DEFINITIONS = [
   { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
   { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
   { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage5Token },
   { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage10Token },
+  { id: 'dominion_1', category: 'damage', labelKey: 'rules.tokens.types.dominion1', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion1Token },
+  { id: 'dominion_3', category: 'damage', labelKey: 'rules.tokens.types.dominion3', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion3Token },
+  { id: 'dominion_5', category: 'damage', labelKey: 'rules.tokens.types.dominion5', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion5Token },
+  { id: 'dominion_10', category: 'damage', labelKey: 'rules.tokens.types.dominion10', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion10Token },
   { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
   { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
@@ -107,8 +132,12 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_melee', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateMelee', diameterMm: 32, previewSize: 'medium', imageSrc: meleeToken },
   { id: 'state_objective', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateObjective', diameterMm: 32, previewSize: 'medium', imageSrc: objectiveToken },
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
-  { id: 'command_circle_6', category: 'command', shape: 'circle', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6', category: 'command', shape: 'square', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_6_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_square_6_blue', category: 'command', shape: 'square', commandColor: 'blue', labelKey: 'rules.tokens.types.commandSquare6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_6_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_square_6_red', category: 'command', shape: 'square', commandColor: 'red', labelKey: 'rules.tokens.types.commandSquare6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   ...DOCTRINE_TOKENS.map((token) => ({
     id: `doctrine_${token.id.replaceAll('-', '_')}`,
     category: 'doctrine',
@@ -165,8 +194,6 @@ function Reglamento() {
       { id: 'advanced', label: t('rules.modeAdvanced') },
       { id: 'conquest', label: t('rules.modeConquest') },
       { id: 'dominion', label: t('rules.modeDominion') },
-      { id: 'siege', label: t('rules.modeSiege') },
-      { id: 'elimination', label: t('rules.modeElimination') },
       { id: 'tokens', label: t('rules.modeTokens') },
     ],
     [t],
@@ -174,12 +201,6 @@ function Reglamento() {
   const rulesHtml = useMemo(() => {
     if (isTokensMode) {
       return ''
-    }
-    if (rulesMode === 'siege') {
-      return marked(lang === 'en' ? asedioEnMd : asedioMd)
-    }
-    if (rulesMode === 'elimination') {
-      return marked(lang === 'en' ? eliminacionEnMd : eliminacionMd)
     }
     if (rulesMode === 'conquest') {
       return marked(lang === 'en' ? conquistaEnMd : conquistaMd)
@@ -210,6 +231,49 @@ function Reglamento() {
       table.parentNode?.insertBefore(wrapper, table)
       wrapper.appendChild(table)
     })
+    if (rulesMode === 'advanced') {
+      const doctrineHeading = Array.from(doc.querySelectorAll('h1, h2, h3')).find((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized === 'doctrinas de mando' || normalized === 'command doctrines'
+      })
+      if (doctrineHeading) {
+        const gallery = doc.createElement('div')
+        gallery.className = 'rules-doctrine-gallery'
+        DOCTRINE_TOKENS.forEach((token) => {
+          const item = doc.createElement('article')
+          item.className = 'rules-doctrine-gallery-item'
+
+          const imageWrap = doc.createElement('div')
+          imageWrap.className = 'rules-doctrine-gallery-mark'
+
+          const image = doc.createElement('img')
+          image.className = 'rules-doctrine-gallery-image'
+          image.src = buildDoctrineTokenImage(token.id, lang === 'en' ? 'en' : 'es')
+          image.alt = DOCTRINE_GALLERY_LABELS[token.id]?.[lang] || DOCTRINE_GALLERY_LABELS[token.id]?.es || ''
+          image.loading = 'lazy'
+
+          const label = doc.createElement('p')
+          label.className = 'rules-doctrine-gallery-label'
+          label.textContent = DOCTRINE_GALLERY_LABELS[token.id]?.[lang] || DOCTRINE_GALLERY_LABELS[token.id]?.es || ''
+
+          imageWrap.appendChild(image)
+          item.appendChild(imageWrap)
+          item.appendChild(label)
+          gallery.appendChild(item)
+        })
+
+        let insertionTarget = doctrineHeading.nextElementSibling
+        while (insertionTarget && insertionTarget.tagName === 'P') {
+          insertionTarget = insertionTarget.nextElementSibling
+          break
+        }
+        if (insertionTarget) {
+          insertionTarget.parentNode?.insertBefore(gallery, insertionTarget)
+        } else {
+          doctrineHeading.parentNode?.insertBefore(gallery, doctrineHeading.nextSibling)
+        }
+      }
+    }
     const headings = Array.from(doc.querySelectorAll('h1, h2, h3'))
     const toc = headings
       .map((heading, index) => {
@@ -225,7 +289,7 @@ function Reglamento() {
       .filter((item) => item.title)
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc }
-  }, [t, rulesHtml, isTokensMode])
+  }, [t, rulesHtml, isTokensMode, rulesMode, lang])
 
   // Scroll spy para resaltar sección activa
   useEffect(() => {
@@ -325,7 +389,6 @@ function Reglamento() {
       const tokenCellPadding = 6
       const maxX = pageWidth - margin
       const maxY = pageHeight - margin
-      const accentColor = [255, 143, 69]
       const fallbackTextColor = [244, 244, 244]
       const logoDataUrl = await loadImageAsDataUrl(zeroLoreLogo).catch(() => null)
       const tokenImageDataById = Object.fromEntries(
@@ -346,6 +409,31 @@ function Reglamento() {
         doc.setFont('helvetica', fontStyle)
         doc.setFontSize(fontSize)
         doc.text(text, centerX, y, { align: 'center' })
+      }
+
+      const getCommandPalette = (commandColor = 'orange') => {
+        if (commandColor === 'blue') {
+          return {
+            accent: [86, 154, 255],
+            outerGlow: [189, 223, 255],
+            dashed: [170, 212, 255],
+            centerFill: [18, 28, 48],
+          }
+        }
+        if (commandColor === 'red') {
+          return {
+            accent: [219, 78, 78],
+            outerGlow: [255, 204, 204],
+            dashed: [255, 182, 182],
+            centerFill: [44, 18, 18],
+          }
+        }
+        return {
+          accent: [255, 143, 69],
+          outerGlow: [255, 205, 160],
+          dashed: [255, 203, 156],
+          centerFill: [22, 27, 38],
+        }
       }
 
       const drawTokenCell = (token, x, y, cellSize) => {
@@ -380,12 +468,13 @@ function Reglamento() {
         }
 
         if (token.category === 'command') {
+          const commandPalette = getCommandPalette(token.commandColor)
           const borderGrow = 0.7
           const isSquare = token.shape === 'square'
           const outerSize = token.diameterMm + borderGrow * 2
 
           doc.setFillColor(10, 12, 18)
-          doc.setDrawColor(...accentColor)
+          doc.setDrawColor(...commandPalette.accent)
           doc.setLineWidth(Math.max(1.6, token.diameterMm * 0.04))
 
           if (isSquare) {
@@ -393,29 +482,29 @@ function Reglamento() {
             doc.roundedRect(centerX - outerSize / 2, centerY - outerSize / 2, outerSize, outerSize, outerRadius, outerRadius, 'FD')
             const innerSize = token.diameterMm * 0.86
             const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
-            doc.setDrawColor(255, 205, 160)
+            doc.setDrawColor(...commandPalette.outerGlow)
             doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
             doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
             const dashSize = token.diameterMm * 0.66
             const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
-            doc.setDrawColor(255, 203, 156)
+            doc.setDrawColor(...commandPalette.dashed)
             doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
             doc.setLineDashPattern([1.1, 1.6], 0)
             doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
             doc.setLineDashPattern([], 0)
-            doc.setFillColor(22, 27, 38)
+            doc.setFillColor(...commandPalette.centerFill)
             doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
           } else {
             doc.circle(centerX, centerY, radius + borderGrow, 'FD')
-            doc.setDrawColor(255, 205, 160)
+            doc.setDrawColor(...commandPalette.outerGlow)
             doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
             doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
-            doc.setDrawColor(255, 203, 156)
+            doc.setDrawColor(...commandPalette.dashed)
             doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
             doc.setLineDashPattern([1.1, 1.6], 0)
             doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
             doc.setLineDashPattern([], 0)
-            doc.setFillColor(22, 27, 38)
+            doc.setFillColor(...commandPalette.centerFill)
             doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
           }
 
@@ -500,7 +589,7 @@ function Reglamento() {
                 <h4>{token.label}</h4>
                 <div className="rules-token-preview-wrap" aria-hidden="true">
                   <div
-                    className={`rules-token-preview ${token.category} ${token.previewSize} ${token.imageSrc ? 'has-image' : ''} ${token.category === 'command' ? `command-${token.shape || 'circle'}` : ''}`}
+                    className={`rules-token-preview ${token.category} ${token.previewSize} ${token.imageSrc ? 'has-image' : ''} ${token.category === 'command' ? `command-${token.shape || 'circle'} command-${token.commandColor || 'orange'}` : ''}`}
                     data-token-preview={token.id}
                   >
                     {token.imageSrc && (

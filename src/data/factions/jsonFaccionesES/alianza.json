@@ -30,7 +30,7 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "-",
+        "especialidad": "Cuando esta unidad carga, puede repetir todos los dados de ataque fallidos en el ataque cuerpo a cuerpo de esa carga.",
         "valor": 5
       },
       "armas": {

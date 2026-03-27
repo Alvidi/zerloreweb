@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "The eternal swarm",
-        "descripcion": "All eliminated Drone units/squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
+        "descripcion": "All eliminated Drone or Winged Drone units/squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
       },
       {
         "habilidades_faccion2": "mental synapse",
@@ -573,6 +573,50 @@
             ],
             "especialidad": "-",
             "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Winged Drone",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "10\"",
+        "vidas": 2,
+        "salvacion": "+6",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 4,
+          "max": 10
+        },
+        "especialidad": "Flight. This unit must be mounted on a base that shows it is elevated. It can move through all obstacles.",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Flying Stinger",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mandibles",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
           }
         ]
       }

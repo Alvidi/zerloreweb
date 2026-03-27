@@ -17,7 +17,7 @@ const SEO_BY_LANG = {
     '/generador': {
       title: 'Generador de Ejercitos | ZeroLore',
       description:
-        'Crea y ajusta tu ejercito de ZeroLore por valor, faccion, doctrinas y configuracion de unidades.',
+        'Crea y ajusta tu ejercito de ZeroLore por valor, faccion y configuracion de unidades.',
     },
     '/batalla': {
       title: 'Simulador de Batalla | ZeroLore',
@@ -39,7 +39,7 @@ const SEO_BY_LANG = {
     '/generador': {
       title: 'Army Generator | ZeroLore',
       description:
-        'Build and tune your ZeroLore army by target value, faction, doctrines, and unit loadouts.',
+        'Build and tune your ZeroLore army by target value, faction, and unit loadouts.',
     },
     '/batalla': {
       title: 'Battle Simulator | ZeroLore',

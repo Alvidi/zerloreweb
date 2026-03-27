@@ -30,7 +30,7 @@
           "min": 4,
           "max": 8
         },
-        "especialidad": "-",
+        "especialidad": "Apoyo dron",
         "valor": 4
       },
       "armas": {
@@ -242,7 +242,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad no puede disparar. Una vez por turno, cuando la escuadra a la que pertenece recibe un ataque, el atacante pierde 1 dado de ataque y los impactos críticos se convierten en impactos normales.",
+        "especialidad": "Apoyo dron. Esta unidad no puede disparar. Una vez por turno, cuando la escuadra a la que pertenece recibe un ataque, el atacante pierde 1 dado de ataque y los impactos críticos se convierten en impactos normales.",
         "valor": 7
       },
       "armas": {
@@ -546,7 +546,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Una vez por turno, cuando una escuadra con este héroe unidad/escuadra a 6\" de este héroe recibe un ataque crítico, puede convertirlo en un impacto normal.",
+        "especialidad": "Una vez por turno, cuando una escuadra con este héroe o una unidad/escuadra a 6\" de este héroe recibe un ataque crítico, puede convertirlo en un impacto normal.",
         "valor": 10
       },
       "armas": {

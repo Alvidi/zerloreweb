@@ -52,16 +52,11 @@ Throughout the game, different types of rolls are made: **initiative**, **hit**,
 
 ### Rule Priority
 
-If a special rule, ability, doctrine, or profile contradicts a general rule in the rulebook, **the special rule takes priority**.
+In ZeroLore there are two types of rules: **general rules**, which belong to the core rulebook and apply to all units, and **special rules**, which are the abilities written on the profile of a unit, a weapon, a doctrine, or a faction.
 
-Rules from:
+When a special rule contradicts or modifies a general rule, **the special rule always takes priority**.
 
-- unit abilities,
-- weapon abilities,
-- command doctrines,
-- faction rules,
-
-always override the basic rules, unless explicitly stated otherwise.
+_Example: the rulebook says a locked unit cannot shoot. If a weapon has the Gunslinger ability, that special rule lets you shoot while locked, and that takes precedence._
 
 ### Game Modes
 
@@ -125,13 +120,13 @@ At the beginning of each turn, both players make the **Initiative roll**.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
-### Doctrines and Stratagems
+### Command Doctrines
 
-After determining Initiative, players declare the **Command Doctrines** or stratagems they intend to use during that turn, following each doctrine's own rules.
+After determining Initiative, players declare the Command Doctrine they will use that turn and mark the unit or squad that will use it.
 
-- Doctrines are activated in this phase.
+- Only **one doctrine per turn** may be used.
 - Their effects last **the entire turn**, unless stated otherwise.
-- Once a doctrine has been used, **it cannot be used again** during the game.
+- The unit or squad with an active doctrine is marked with a token.
 
 ## 2. Activation Phase
 
@@ -155,7 +150,7 @@ When **all units from both players** have been activated, the turn ends.
 During the End of Turn:
 
 - Effects that state they resolve at the end of the turn are completed.
-- Points are counted according to the game mode.
+- Effects that state they are applied at the end of the turn are resolved.
 
 After this, a new turn begins starting again with the Initiative Phase.
 
@@ -219,14 +214,16 @@ To retreat:
 
 - The unit spends **2 actions**.
 - It moves using its **Movement** value toward its deployment zone.
-- Upon retreating, the unit reduces its **Speed and Value to 0** until it recovers.
+- Upon retreating, the unit reduces its **Speed to 0** and its **Value does not count for objective or command post control** until it recovers.
 
 At the start of its next turn, the unit must roll **1D6**:
 
 - **1–2:** it continues retreating toward its deployment zone.
 - **3–6:** it recovers and may act normally.
 
-Units automatically recover when they reach their deployment zone.
+Units automatically recover when they reach their deployment zone or any safe zone specified by the game mode.
+
+A unit in the Retreat state **cannot make counterattacks**.
 
 ## Ready
 
@@ -420,6 +417,8 @@ The player controlling the squad decides the **order** in which different weapon
 
 ## Melee Combat in Squads
 
+**Choosing a target in melee combat**
+
 In squad mode, even if a squad is in contact with multiple enemy squads, when making a melee attack it must **choose one target squad**.
 
 As soon as one miniature in the squad makes base contact with an enemy unit, **the entire squad is considered locked** and all its miniatures participate in the combat.
@@ -455,24 +454,17 @@ If both units are at the same height with a maximum difference of 1", this rule 
 
 **Field of View**
 
-If no part of the target miniature is visible, **it cannot be attacked at range**, unless a rule states otherwise.
+If no part of the target miniature is visible, **it cannot be attacked** at range or in melee, unless a rule states otherwise.
 
 Friendly or enemy miniatures that completely block the view act as obstacles for line of sight purposes.
 
-If a unit is partially visible but not in base contact with any cover, no defensive bonuses apply.
+If a unit is partially visible but not in contact with any cover, no defensive bonuses apply.
 
-**Clarifications**
+**Cover - clarifications**
 
 - **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection.
 - **Partial cover** may be crossed with normal movement as long as the unit is taller than the obstacle.
 - **Full cover** cannot be crossed or ignored unless a rule states otherwise.
-
-# Field of View
-
-If no part of the target miniature is visible, **it cannot be attacked** at range or in melee, except by special rules.
-
-- Miniatures (friendly or enemy) that completely block the view cannot be shot.
-- If the unit is partially visible but not base-to-base with any cover, cover rules do not apply.
 
 # Shooting at Locked Units
 
@@ -503,7 +495,13 @@ A unit enters **Retreat** when it declares the *Retreat* action. *(explained in 
 
 ## Locked Units
 
-Two units are considered **locked** when they are in base contact. *(explained in the section: Melee Combat)*
+Two units are considered **locked** when they are in base contact. While they are locked:
+
+- They may only use **melee combat** or **retreat** actions.
+- They cannot be attacked at range by units outside the combat.
+- They remain locked until one is destroyed or declares retreat.
+
+*(See the Melee Combat section for the full resolution.)*
 
 ## Out of Control Unit
 
@@ -519,14 +517,23 @@ The Out of Control state persists until a rule states otherwise or the game ends
 
 # Deployment Zone
 
-The deployment zone is the area where units begin the game or reorganise after a retreat. Its size may vary depending on the game type, but generally it is located at the table edges:
+The deployment zone is the strip along the edge of the table where each player places their units at the start of the game and where retreating units reorganise. It spans the full width of the table from the edge to the indicated distance:
 
 - **Skirmish Mode:** 5" from the table edge.
-- **Squad Mode:** 10" from the table edge.
+- **Squad Mode:** 12" from the table edge.
 
-Some units have special deployment rules indicated in their profile, which may allow them to deploy outside this zone.
+Each player deploys on the opposite edge of the table, leaving no-man's-land between both zones where the battle takes place.
 
-In some game modes or scenarios, command posts or deployment zones may allow **recovering Wounds** if controlled. In that case, a unit may recover up to a maximum of **3 Wounds at the end of the turn**, unless stated otherwise.
+Some units have special deployment rules in their profile that allow them to deploy outside this zone.
+
+## Initial Deployment
+
+Before the game begins, players deploy their armies. Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying:
+
+- **Skirmish Mode:** one miniature at a time.
+- **Squad Mode:** one squad at a time.
+
+All units must be placed within their own deployment zone unless a special rule states otherwise.
 
 ---
 
@@ -618,6 +625,8 @@ General characteristics:
 
 A **Titan** is a colossal unit representing war machines or giant creatures whose presence dominates the battlefield.
 
+Titans do not operate as conventional units and follow special rules due to their size, mass, and the impossibility of being stopped by lesser forces.
+
 Titans are **slow** units, extremely resilient, and very visible. They are not designed to play fine objective control, but to **condition space**, break formations, and force the enemy to react.
 
 ### General Titan Rules
@@ -628,33 +637,50 @@ Titans are **slow** units, extremely resilient, and very visible. They are not d
 - If during its movement a Titan passes over a **Line or Elite** unit, that unit is **automatically destroyed**.
 - When a Titan is destroyed, a **colossal explosion** occurs. All units within **6"** of the Titan suffer **1D6 automatic damage** that cannot be saved.
 
----
-
 # Unit Profiles
 
 Each ZeroLore unit has a **profile** that defines its capabilities on the battlefield.
 
 This profile is used whenever the unit activates, attacks, or interacts with the scenery.
 
+The profile of a unit contains the following values:
+
 ### Class
 
-Defines the **functional role** of the unit within the army. Determines whether it can capture objectives, whether it can be a hero or leader, and what special rules it may apply according to its type.
+Defines the **functional role** of the unit within the army.
+
+It determines whether it can capture objectives, whether it can be a hero or leader, and what special rules it may apply according to its type (Line, Elite, Vehicle, Monster, Hero, or Titan).
 
 ### Movement
 
-Indicates the **maximum distance**, in inches ("), the unit may travel when taking a movement action. Also used for Sprint and Retreat.
+Indicates the **maximum distance**, in inches ("), the unit may travel when taking a movement action.
+
+This value is also used for:
+
+- Sprint
+- Retreat
 
 ### Wounds
 
-Represents the total amount of damage the unit can suffer before being destroyed. When Wounds reach **0**, the unit is removed from the game as destroyed.
+Represents the total amount of damage the unit can suffer before being destroyed.
+
+- Each point of damage reduces the unit's Wounds.
+- When Wounds reach **0**, the unit is removed from the game as destroyed.
 
 ### Save
 
-Indicates the minimum result needed on **1D6** to block a received hit. Example: a Save of **4+** blocks hits on results of **4, 5, or 6**.
+Indicates the minimum result needed on **1D6** to block a received hit.
+
+Example:
+
+A Save of **4+** blocks hits on results of **4, 5, or 6**.
 
 ### Speed
 
-Represents the unit's reaction speed. In melee combat, the unit with higher Speed **acts first**, unless one has charged. Some abilities and doctrines temporarily modify this value.
+Represents the unit's reaction speed.
+
+- In melee combat, the unit with higher Speed **acts first**, unless one of them charged.
+- Some abilities and doctrines temporarily modify this value.
 
 ### Specialty
 
@@ -676,31 +702,68 @@ If a unit has more than one weapon of the same type, it must be explicitly indic
 
 ## Ranged Weapon Profiles
 
+Ranged weapons are described by their own profile.
+
+Each weapon indicates how its attack is resolved when used.
+
+A ranged weapon profile includes:
+
 ### Weapon Name
 Identifies the weapon used.
 
 ### Attacks
-Number of dice rolled when making a ranged attack. Each die represents an independent shot or projectile.
+Number of dice rolled when making a ranged attack with this weapon.
+
+Each die represents an independent shot or projectile.
 
 ### Range
 Maximum range of the weapon in inches ("). The unit may only attack targets within this range.
 
 ### Hit
-Minimum result needed on each die to hit. A result of **6** always counts as a critical hit, unless a rule states otherwise.
+Minimum result needed on each die to hit.
+
+- A result of **6** always counts as a critical hit, unless a rule states otherwise.
 
 ### Damage / Critical Damage
-- **Damage**: Wounds lost per normal hit.
-- **Critical Damage**: Wounds lost per hit obtained with a result of 6 or per weapon ability.
+Indicates how many **Wounds** are lost per hit:
+
+- **Damage**: normal hit.
+- **Critical Damage**: hit obtained with a result of 6 or due to a weapon ability.
 
 ### Weapon Abilities
-Special rules associated only with that weapon. Only apply while the weapon is operational.
+Special rules associated only with that weapon.
+
+- They only apply while the weapon is operational.
+- If the weapon is destroyed or silenced, these abilities cannot be used.
 
 ### Extra Value
 Additional point cost for equipping this weapon, if applicable.
 
 ## Melee Weapon Profiles
 
-Same structure as ranged weapons, without the Range and Hit fields (in melee, fixed rules apply: 1 and 2 miss, all others hit, 6 is critical).
+Melee weapons follow a similar structure.
+
+A melee weapon profile includes:
+
+### Weapon Name
+
+Identifies the weapon used.
+
+### Attacks
+
+Number of dice the unit rolls when attacking in melee combat.
+
+### Damage / Critical Damage
+
+They work the same way as for ranged weapons.
+
+### Abilities
+
+Special rules that only affect this type of attack or this specific weapon.
+
+### Extra Value
+
+Additional point cost for equipping the weapon, if applicable.
 
 ## Modifiers
 
@@ -717,11 +780,31 @@ Limits:
 - **Maximum Save:** no unit can ever need more than 6+ to save. A result of 1 always fails the save.
 - **Maximum Hit:** no unit can ever need more than 6+ to hit. A result of 6 always hits.
 
+## Weapon and Unit Abilities
+
+Abilities may belong to:
+
+- The **unit**, or
+- A **specific weapon**.
+
+- Unit abilities apply whenever the unit is in play.
+- Weapon abilities only apply when that weapon is used.
+
+Abilities and their timing are detailed in specific tables to make them easier to consult during the game.
+
 ---
 
 # Weapon Abilities
 
-Some weapons have **special abilities** that modify how their attacks are resolved. They apply **only while the weapon is operational** and only at the indicated moment.
+Some weapons have **special abilities** that modify how their attacks are resolved.
+
+These abilities:
+
+- Apply **only while the weapon is operational**.
+- May affect the attack, the defender, or the environment.
+- Apply only at the indicated moment.
+
+If a unit loses or cannot use a weapon, **it cannot benefit** from its abilities.
 
 ## Weapon Ability Table
 
@@ -747,7 +830,7 @@ The unit may fire this weapon even if **locked in melee combat**, but only again
 The attacker declares a point of impact within the weapon's range and the attack is resolved normally.
 
 - **Skirmish mode:** all enemy units whose base is within 3" or less of the point of impact take the same damage independently. If the damage exceeds a unit's Wounds, the excess passes to the next unit within the area.
-- **Squad mode:** only affects the target squad, which takes the total damage as a single entity. The opponent distributes that damage among their miniatures as they decide.
+- **Squad mode:** only affects the target squad, which takes the total damage as a single entity. The opponent distributes that damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess passes to the next.
 
 Locked units are not affected.
 **Moment:** Shooting
@@ -775,10 +858,13 @@ The target **cannot benefit** from any defensive bonus from partial cover.
 ### 11. Parabolic Fire
 This weapon may fire without requiring line of sight. The player marks a target point within the weapon's range and rolls 1D6:
 
-- **5–6 — Direct Hit:** the attack lands exactly on the marked point. The target unit and all enemy units within 3" or less cannot make a save roll against this attack.
-- **1–4 — Precision Miss:** the attack still lands on the marked point, but the target unit and units within 3" or less may make a save roll normally.
+- **5–6 — Direct Hit:** the attack lands exactly on the marked point. The target unit and all enemy units within 3" or less cannot make a save roll against this attack, also ignoring any cover bonus.
+- **1–4 — Precision Miss:** the attack still lands on the marked point, but the target unit and units within 3" or less may make a save roll normally. Cover applies as usual.
 
-Area rules apply the same as Explosive depending on the game mode. Locked units are not affected.
+- **Skirmish mode:** all enemy units whose base is within 3" or less of the final point of impact take the same damage independently. If the damage exceeds one unit's Wounds, the excess passes to the next unit within the area.
+- **Squad mode:** only affects the target squad, which takes the total damage as a single entity. The opponent distributes that damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess passes to the next.
+
+Locked units are not affected.
 **Moment:** Shooting
 
 ### 12. Unstable
@@ -794,7 +880,7 @@ The unit may take an extra **shooting action after using Sprint**.
 **Moment:** Shooting
 
 ### 15. Limited Ammo (X)
-The weapon has X shots available in total.
+This weapon has X limited shots.
 **Moment:** Shooting and melee
 
 ---
@@ -805,19 +891,18 @@ The weapon has X shots available in total.
 
 Doctrines:
 
-- Are declared during the **Initiative Phase**.
+- Are declared during the **Initiative Phase**, and the unit or squad that will use them is marked.
 - Affect **one unit or squad**, unless stated otherwise.
 - Their effects last **the entire turn**.
-- **Each doctrine may only be used once per game**.
+- Only **one doctrine per turn** may be used.
+- Any unit or squad with a doctrine bonus may be marked with some kind of token.
 
 Doctrines are **public** and must be clearly declared to the opponent before being applied.
-
-Any unit/squad with a doctrine bonus may be marked with a token.
 
 ## Command Doctrine List
 
 ### 1. Clubbing Blow
-The unit or squad locked in melee pushes the opponent **1"**, **ending the combat**.
+The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This doctrine resolves immediately when that unit performs its activation, regardless of which side has the higher Speed.
 
 ### 2. Aimed Shot
 The chosen unit or squad **loses one action**, but gains **+1 Attack die** for shooting this turn.
@@ -826,22 +911,22 @@ The chosen unit or squad **loses one action**, but gains **+1 Attack die** for s
 The chosen unit may use **one additional movement action** this turn.
 
 ### 4. Combat Agility
-The unit or squad gains **+3 to its Speed** this turn.
+The chosen unit gains initiative in melee combat this turn, ignoring the opponent's Speed and even if the enemy charged.
 
 ### 5. Ours is the Victory
-During this turn, the designated unit or squad automatically controls the objective they are on, ignoring the presence of enemy heroes on that same objective.
+The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes on that same objective.
 
 ### 6. Immediate Reaction
-The player may **activate two units or squads in a row** during this turn.
+This unit cannot be charged, nor can it charge any enemy unit during this turn.
 
 ### 7. Overcharged
 If this unit fails a charge during this turn, it may immediately repeat it once.
 
 ### 8. Second Chance
-Repeat one attack roll in melee or ranged combat.
+Repeat one melee or ranged attack roll. If the first roll is favourable, this doctrine may be ignored; if you decide to use the doctrine, the first roll is discarded.
 
 ### 9. Fight to the Death
-Declare this doctrine during the Initiative Phase, designating an allied unit that is locked in melee combat. Both units are committed to a no-way-out duel. Neither can retreat or be separated from the combat for any reason. At the start of each turn, before any other activation, both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed. This doctrine can only be applied to units in melee combat. It does not affect vehicles or titans.
+This doctrine only works when one allied unit or squad is locked in melee combat against one other unit or squad; if more than 2 units or squads are involved, it cannot be used. Both units or squads become committed to a no-way-out duel. Neither may retreat nor be separated from combat for any reason, including through other abilities, doctrines, and so on. If either of the two units or squads in combat is activated, the doctrine becomes active. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
 
 ---
 
@@ -850,3 +935,7 @@ Declare this doctrine during the Initiative Phase, designating an allied unit th
 ZeroLore is designed to be flexible, modular, and adaptable.
 
 This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system.
+
+The included game modes, Conquest and Dominion, are the starting point for anyone who wants to begin playing without complications. But ZeroLore does not end there. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
+
+The ZeroLore community is part of the game. If you create something interesting, share it.

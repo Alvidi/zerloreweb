@@ -1,4 +1,4 @@
-# ZEROLORE — Quick Play Rulebook
+# ZEROLORE - Quick Rulebook
 
 *Use any miniature. Agree on a Value. Start playing.*
 
@@ -141,4 +141,4 @@ At the end of each round, add up the Value of your units in contact with each ob
 
 If a situation is not covered here, resolve it with common sense and mutual agreement. If there is no consensus, roll 1D6 and continue.
 
-For full rules on cover, terrain, unit types, doctrines, Squad mode and more, see the Advanced Rulebook.
+For full rules on cover, terrain, unit types (including **Flyers**), doctrines, Squad mode and more, see the Advanced Rulebook.

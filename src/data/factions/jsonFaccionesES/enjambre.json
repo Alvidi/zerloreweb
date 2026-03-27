@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "El enjambre eterno",
-        "descripcion": "Todas las unidades de zánganos eliminadas vuelven a la partida al inicio de la siguiente Fase de Iniciativa, desde la zona de despliegue con todas sus Vidas."
+        "descripcion": "Todas las unidades de zánganos o zánganos alados eliminadas vuelven a la partida al inicio de la siguiente Fase de Iniciativa, desde la zona de despliegue con todas sus Vidas."
       },
       {
         "habilidades_faccion2": "Synapsis mental",
@@ -573,6 +573,50 @@
             ],
             "especialidad": "-",
             "valor_extra": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Zángano Alado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "10\"",
+        "vidas": 2,
+        "salvacion": "+6",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 4,
+          "max": 10
+        },
+        "especialidad": "Vuelo. Esta unidad tiene que estar suspendida en una peana que marque que está elevada. Puede atravesar todos los obstáculos.",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Aguijón volador",
+            "ataques": "2D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mandíbulas",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
           }
         ]
       }

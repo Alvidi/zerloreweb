@@ -1,4 +1,4 @@
-# ZEROLORE — Reglamento de Juego Rápido
+# ZEROLORE - Reglamento rápido
 
 _Usa cualquier miniatura. Acordad un Valor. Empezad a jugar._
 
@@ -141,4 +141,4 @@ Al final de cada ronda suma el Valor de tus unidades en contacto con cada objeti
 
 Si una situación no está cubierta aquí, resuélvela con sentido común y acuerdo mutuo. Si no hay consenso, tira 1D6 y continuad.
 
-Para reglas completas sobre coberturas, terreno, tipos de unidad, doctrinas, modo Escuadras y más, consulta el Reglamento Avanzado.
+Para reglas completas sobre coberturas, terreno, tipos de unidad (incluidas las **Voladoras**), doctrinas, modo Escuadras y más, consulta el Reglamento Avanzado.

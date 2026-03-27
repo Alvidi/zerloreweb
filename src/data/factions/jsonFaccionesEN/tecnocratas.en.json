@@ -30,7 +30,7 @@
           "min": 4,
           "max": 8
         },
-        "especialidad": "-",
+        "especialidad": "Drone Support",
         "valor": 4
       },
       "armas": {
@@ -242,7 +242,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit cannot fire. This drone removes one attack die from the enemy attack and critical damage becomes normal damage.",
+        "especialidad": "Drone Support. This unit cannot shoot. Once per turn, when the squad it belongs to is attacked, the attacker loses 1 attack die and critical hits become normal hits.",
         "valor": 7
       },
       "armas": {
@@ -546,7 +546,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit transforms any critical hit into a normal hit to its squad or to units within 6\". This unit can carry two ranged weapons and fire twice, with or without a weapon, in the same action.",
+        "especialidad": "Once per turn, when a squad with this hero or a unit/squad within 6\" of this hero receives a critical hit, it may turn it into a normal hit.",
         "valor": 10
       },
       "armas": {

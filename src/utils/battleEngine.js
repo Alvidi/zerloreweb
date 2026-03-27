@@ -282,8 +282,13 @@ export function resolveAttack({
   conditions = {},
 }) {
   const selectedCoverType = conditions.coverType || 'none'
+  const selectedAttackerCoverType = conditions.attackerCoverType || 'none'
   const coverIgnoredByType = mode === 'ranged' && unitIgnoresCover(defender?.type)
   const coverType = coverIgnoredByType ? 'none' : selectedCoverType
+  const meleePartialCoverActive = (
+    mode === 'melee'
+    && (selectedCoverType === 'partial' || selectedAttackerCoverType === 'partial')
+  )
   const hasLineOfSight = conditions.hasLineOfSight !== false
   const attackerEngaged = Boolean(conditions.attackerEngaged)
   const attackerRerollFailedHits = Boolean(conditions.attackerRerollFailedHits)
@@ -359,11 +364,12 @@ export function resolveAttack({
       roll: scatterRoll,
       bullseye,
       noSave: bullseye,
+      ignoreCover: bullseye,
     }
     rulesApplied.push(
       bullseye
-        ? 'Disparo parabólico (5-6: diana, sin tirada de salvación del objetivo)'
-        : 'Disparo parabólico (1-4: fallo de precisión, salvación normal)',
+        ? 'Disparo parabólico (5-6: diana, sin tirada de salvación e ignora cobertura)'
+        : 'Disparo parabólico (1-4: fallo de precisión, salvación normal y cobertura normal)',
     )
   }
 
@@ -497,6 +503,9 @@ export function resolveAttack({
   const explosiveNearbyUnits = hasExplosive ? Math.max(0, toInt(conditions.explosiveNearbyUnits, 0)) : 0
   const explosiveAffectedUnits = hasExplosive ? 1 + explosiveNearbyUnits : 1
   const hasGuerrilla = hasAbility(weapon, WEAPON_ABILITY_IDS.guerrilla) && mode === 'ranged'
+  if (critUnsavable) {
+    rulesApplied.push('Ataque crítico (los impactos críticos no pueden ser salvados)')
+  }
 
   if (hasGuerrilla && conditions.afterDash) {
     // Guerrilla grants an extra shooting action after dash; in 1v1 simulator we model it as one extra volley.
@@ -515,6 +524,10 @@ export function resolveAttack({
     } else {
       rulesApplied.push(`Guerrilla (tras carrera: +${guerrillaRoll.total} dados)`)
     }
+  }
+  if (meleePartialCoverActive) {
+    bonusAttackDice -= 1
+    rulesApplied.push('Cobertura parcial en CaC (-1 dado de ataque para ambas unidades)')
   }
   const attackDiceCount = clamp(baseAttackDiceCount + bonusAttackDice, 0, 80)
 
@@ -600,7 +613,8 @@ export function resolveAttack({
   const rollSummary = summarizeHits(hitEntries)
   const incomingHits = rollSummary.hits + rollSummary.crits
   const parabolicNoSave = Boolean(parabolicScatter?.noSave)
-  const saveDiceCount = parabolicNoSave ? 0 : Math.max(0, incomingHits + bonusSaveDice)
+  const saveableHitCount = critUnsavable ? rollSummary.hits : incomingHits
+  const saveDiceCount = parabolicNoSave ? 0 : Math.max(0, saveableHitCount + bonusSaveDice)
   const saveRolls = parabolicNoSave ? [] : rollDice(saveDiceCount, 6)
 
   const defensiveSixes = saveRolls.filter((roll) => roll === 6).length
@@ -685,8 +699,10 @@ export function resolveAttack({
     defenderAfter,
     totals,
     coverType,
+    attackerCoverType: selectedAttackerCoverType,
     selectedCoverType,
     coverIgnoredByType,
+    meleePartialCoverActive,
     mode,
     hitThreshold,
     hitThresholdRoll,

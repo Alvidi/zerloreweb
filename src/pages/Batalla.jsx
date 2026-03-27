@@ -10,6 +10,7 @@ import { createBattleLogBuilders } from '../features/battle/battleLogEntries.js'
 import {
   buildFactionAttackConditions,
   implementedFactionAbilityKeys,
+  isFactionAbilityAvailableInMode,
   isFactionEffectEnabled,
 } from '../features/battle/factionAbilities.js'
 import { buildFutureCombatConditions } from '../features/battle/battleFutureHooks.js'
@@ -112,8 +113,9 @@ function Batalla() {
   const isTitan = (unit) => getUnitType(unit) === 'titan'
   const canEngageTitanByType = (unit) => !TITAN_ENGAGE_BLOCKER_TYPES.has(getUnitType(unit))
   const isTitanRuleRestrictedMode = attackType === 'melee' || attackType === 'charge'
-  const isTitanEngagementAllowed = (attackerUnit, defenderUnit) => {
-    if (!isTitanRuleRestrictedMode) return true
+  const isTitanEngagementAllowedForAttackType = (attackTypeValue, attackerUnit, defenderUnit) => {
+    const restrictedMode = attackTypeValue === 'melee' || attackTypeValue === 'charge'
+    if (!restrictedMode) return true
     if (!attackerUnit || !defenderUnit) return true
 
     const attackerIsTitan = isTitan(attackerUnit)
@@ -126,10 +128,12 @@ function Batalla() {
     if (isTitan(defenderUnit) && !canEngageTitanByType(attackerUnit)) return false
 
     // A Titan can only charge another Titan.
-    if (attackType === 'charge' && isTitan(attackerUnit) && !isTitan(defenderUnit)) return false
+    if (attackTypeValue === 'charge' && isTitan(attackerUnit) && !isTitan(defenderUnit)) return false
 
     return true
   }
+  const isTitanEngagementAllowed = (attackerUnit, defenderUnit) =>
+    isTitanEngagementAllowedForAttackType(attackType, attackerUnit, defenderUnit)
   const isCurrentPairAllowed = isTitanEngagementAllowed(leftUnit, rightUnit)
   const unitCanUseCover = (unit) => {
     const typeToken = getUnitTypeToken(unit?.type)
@@ -455,6 +459,8 @@ function Batalla() {
       stepLabel,
       index,
       allowDestroyedAttacker = false,
+      attackerHpOverride = null,
+      disableCounterattack = false,
       extraFactionAbilityDetails = [],
     }) => {
       const defenderSide = attackerSide === 'left' ? 'right' : 'left'
@@ -466,7 +472,8 @@ function Batalla() {
       const defenderFactionAbilityState = defenderSide === 'left' ? leftFactionAbilityState : rightFactionAbilityState
       if (!attackerUnit || !defenderUnit) return
 
-      const attackerHpBefore = attackerSide === 'left' ? nextLeftHp : nextRightHp
+      const currentAttackerHp = attackerSide === 'left' ? nextLeftHp : nextRightHp
+      const attackerHpBefore = Number.isFinite(attackerHpOverride) ? attackerHpOverride : currentAttackerHp
       const defenderHpBefore = defenderSide === 'left' ? nextLeftHp : nextRightHp
       if ((!allowDestroyedAttacker && attackerHpBefore <= 0) || defenderHpBefore <= 0) return
       const attackerAliveCount = getAliveSquadCount(attackerHpBefore, attackerUnit)
@@ -520,6 +527,9 @@ function Batalla() {
       const defenderCoverType = defenderSide === 'left'
         ? (leftCanUseCover ? leftCoverType : 'none')
         : (rightCanUseCover ? rightCoverType : 'none')
+      const attackerCoverType = attackerSide === 'left'
+        ? (leftCanUseCover ? leftCoverType : 'none')
+        : (rightCanUseCover ? rightCoverType : 'none')
       const factionConditions = buildFactionAttackConditions({
         attackerAbilities: attackerFaction?.abilities,
         attackerState: attackerFactionAbilityState,
@@ -539,6 +549,9 @@ function Batalla() {
       }
       if (mode === 'ranged' && factionConditions.defenderCrucibleGlory && crucibleGloryUsedBySide[defenderSide]) {
         factionConditions.defenderCrucibleGlory = false
+      }
+      if (mode === 'ranged' && disableCounterattack) {
+        factionConditions.defenderRebelFeint = false
       }
       const futureConditions = buildFutureCombatConditions({
         attackerUnitCount: attackerAliveCount,
@@ -569,7 +582,8 @@ function Batalla() {
         mode,
         conditions: {
           coverType: defenderCoverType,
-          defenderPrepared: mode === 'ranged' && defenderSide === 'right',
+          attackerCoverType,
+          defenderPrepared: mode === 'ranged' && defenderSide === 'right' && !disableCounterattack,
           attackerMoved,
           halfRange,
           attackerEngaged: false,
@@ -586,16 +600,20 @@ function Batalla() {
       }
 
       if (attackerSide === 'left') {
-        nextLeftHp = attackResult.attackerAfter?.hp ?? nextLeftHp
+        if (!allowDestroyedAttacker) {
+          nextLeftHp = attackResult.attackerAfter?.hp ?? nextLeftHp
+        }
         nextRightHp = attackResult.blocked ? nextRightHp : attackResult.defenderAfter.hp
-        if (attackType === 'ranged' && attackResult.canCounter) {
+        if (attackType === 'ranged' && attackResult.canCounter && !disableCounterattack) {
           rangedCounterReady = true
           if (factionConditions.defenderRebelFeint) {
             rangedCounterForcedByFaction = true
           }
         }
       } else {
-        nextRightHp = attackResult.attackerAfter?.hp ?? nextRightHp
+        if (!allowDestroyedAttacker) {
+          nextRightHp = attackResult.attackerAfter?.hp ?? nextRightHp
+        }
         nextLeftHp = attackResult.blocked ? nextLeftHp : attackResult.defenderAfter.hp
       }
       if (!attackResult.blocked && mode === 'ranged' && Number(attackResult.totals?.preventedDamage) > 0) {
@@ -616,6 +634,8 @@ function Batalla() {
           attackerHpBefore,
           defenderHpBefore,
           result: attackResult,
+          attackerResultHpOverride: allowDestroyedAttacker ? currentAttackerHp : null,
+          attackerResultDefeatedOverride: allowDestroyedAttacker ? currentAttackerHp <= 0 : null,
           extraFactionAbilityDetails,
         }),
       )
@@ -665,6 +685,8 @@ function Batalla() {
         stepLabel: `${stepLabel}-heroic-fall`,
         index,
         allowDestroyedAttacker: true,
+        attackerHpOverride: defenderHpBefore,
+        disableCounterattack: true,
       })
     }
 
@@ -697,10 +719,10 @@ function Batalla() {
           defenderHp: nextRightHp,
           attackerLine:
             lang === 'en'
-              ? `${tx.chargeRoll}: ${chargeRoll.total} (${chargeRoll.first}+${chargeRoll.second}) vs ${distanceToTarget}. ${
+              ? `${tx.chargeRoll}: ${chargeRoll.total} vs ${distanceToTarget}. ${
                 chargeSuccess ? 'Charge was successful.' : 'Charge failed.'
               }`
-              : `${tx.chargeRoll}: ${chargeRoll.total} (${chargeRoll.first}+${chargeRoll.second}) frente a ${distanceToTarget}. ${
+              : `${tx.chargeRoll}: ${chargeRoll.total} frente a ${distanceToTarget}. ${
                 chargeSuccess ? 'La carga fue un éxito.' : 'La carga ha fallado.'
               }`,
           defenderLine: '',
@@ -754,6 +776,70 @@ function Batalla() {
     playLog(entries)
   }
 
+  const buildRandomizedSideState = (side, opponentUnit, opposingAliveCount, selectedMode = mode, selectedAttackType = attackType) => {
+    const getRandomizableUnitsForSide = (faction) => {
+      const withWeaponsForMode = (faction?.units || []).filter((unit) =>
+        (unit.weapons || []).some((weapon) => weapon.kind === selectedMode),
+      )
+      if (!(selectedAttackType === 'melee' || selectedAttackType === 'charge')) return withWeaponsForMode
+      return withWeaponsForMode.filter((unit) =>
+        side === 'left'
+          ? isTitanEngagementAllowedForAttackType(selectedAttackType, unit, opponentUnit)
+          : isTitanEngagementAllowedForAttackType(selectedAttackType, opponentUnit, unit),
+      )
+    }
+
+    const randomFactionPool = factions.filter((faction) => getRandomizableUnitsForSide(faction).length)
+    const randomFaction = pickRandomItem(randomFactionPool)
+    if (!randomFaction) return null
+    const randomUnit = pickRandomItem(getRandomizableUnitsForSide(randomFaction))
+    if (!randomUnit) return null
+
+    const randomBool = () => Math.random() < 0.5
+    const randomFactionAbilityState = Object.fromEntries(
+      (randomFaction.abilities || [])
+        .filter((ability) => implementedFactionAbilityKeys.has(ability.effectKey))
+        .map((ability) => [ability.id, randomBool()]),
+    )
+    const randomCoverType = pickRandomItem(coverTypeOptions) || 'none'
+    const randomUnitCanUseCover = unitCanUseCover(randomUnit)
+    const modeWeapons = (randomUnit.weapons || []).filter((weapon) => weapon.kind === selectedMode)
+    const weaponSlots = getWeaponSlotsForMode(randomUnit, selectedMode, modeWeapons.length)
+    const randomWeaponIds = buildWeaponSelection(
+      pickRandomWeaponIdsForMode(randomUnit, selectedMode),
+      modeWeapons,
+      weaponSlots,
+    )
+    const randomSelectedWeapons = randomWeaponIds
+      .map((weaponId) => modeWeapons.find((weapon) => weapon.id === weaponId))
+      .filter(Boolean)
+    const randomConditionSupport = getConditionSupport(randomSelectedWeapons, selectedMode)
+    const nextHpMax = getSquadHpPoolMax(randomUnit)
+    const hpOptions = buildHpValues(nextHpMax)
+    const nextHp = pickRandomItem(hpOptions) || nextHpMax
+    const explosiveNearbyMax = getExplosiveNearbyMax(opposingAliveCount)
+    const explosiveNearbyUnits = explosiveNearbyMax > 0
+      ? Number(pickRandomItem(Array.from({ length: explosiveNearbyMax + 1 }, (_, index) => index)) || 0)
+      : 0
+
+    return {
+      selection: {
+        factionId: randomFaction.id,
+        unitId: randomUnit.id,
+        weaponIds: randomWeaponIds,
+      },
+      factionAbilityState: randomFactionAbilityState,
+      coverType: randomUnitCanUseCover ? randomCoverType : 'none',
+      moved: randomConditionSupport.moved ? randomBool() : false,
+      halfRange: randomConditionSupport.halfRange ? randomBool() : false,
+      afterDash: randomConditionSupport.afterDash ? randomBool() : false,
+      explosiveNearbyUnits,
+      hp: nextHp,
+      unit: randomUnit,
+      randomBool,
+    }
+  }
+
   const handleRandomizeSide = (side) => {
     if (isResolving || !factions.length) return
 
@@ -763,79 +849,95 @@ function Batalla() {
     setLogEntries([])
     setAmmoMap({})
 
-    const getRandomizableUnitsForSide = (faction) => {
-      const withWeaponsForMode = (faction?.units || []).filter((unit) =>
-        (unit.weapons || []).some((weapon) => weapon.kind === mode),
+    const randomized = buildRandomizedSideState(
+      side,
+      side === 'left' ? rightUnit : leftUnit,
+      side === 'left' ? rightAliveCount : leftAliveCount,
+    )
+    if (!randomized) return
+
+    setDefenderCounterattack(randomized.randomBool())
+    if (side === 'left') {
+      setLeft(randomized.selection)
+      setLeftFactionAbilityState(randomized.factionAbilityState)
+      setLeftCoverType(randomized.coverType)
+      setLeftMoved(randomized.moved)
+      setLeftHalfRange(randomized.halfRange)
+      setLeftAfterDash(randomized.afterDash)
+      setLeftExplosiveNearbyUnits(randomized.explosiveNearbyUnits)
+      const nextHpKey = makeHpKey('L', randomized.selection.factionId, randomized.selection.unitId)
+      setHpMap((prev) => ({ ...prev, [nextHpKey]: randomized.hp }))
+    } else {
+      setRight(randomized.selection)
+      setRightFactionAbilityState(randomized.factionAbilityState)
+      setRightCoverType(randomized.coverType)
+      setRightMoved(randomized.moved)
+      setRightHalfRange(randomized.halfRange)
+      setRightAfterDash(randomized.afterDash)
+      setRightExplosiveNearbyUnits(randomized.explosiveNearbyUnits)
+      const nextHpKey = makeHpKey('R', randomized.selection.factionId, randomized.selection.unitId)
+      setHpMap((prev) => ({ ...prev, [nextHpKey]: randomized.hp }))
+    }
+  }
+
+  const handleRandomizeBattle = () => {
+    if (isResolving || !factions.length) return
+
+    clearTimers()
+    resolveRunRef.current += 1
+    setIsResolving(false)
+    setLogEntries([])
+    setAmmoMap({})
+    const randomAttackType = pickRandomItem(attackTypeOptions) || 'ranged'
+    const randomMode = resolveMode(randomAttackType)
+
+    let nextLeftRandom = null
+    let nextRightRandom = null
+
+    for (let attempt = 0; attempt < 12; attempt += 1) {
+      const candidateLeft = buildRandomizedSideState('left', rightUnit, rightAliveCount, randomMode, randomAttackType)
+      if (!candidateLeft) continue
+      const candidateRight = buildRandomizedSideState(
+        'right',
+        candidateLeft.unit,
+        leftAliveCount,
+        randomMode,
+        randomAttackType,
       )
-      if (!isTitanRuleRestrictedMode) return withWeaponsForMode
-      return withWeaponsForMode.filter((unit) =>
-        side === 'left'
-          ? isTitanEngagementAllowed(unit, rightUnit)
-          : isTitanEngagementAllowed(leftUnit, unit),
-      )
+      if (!candidateRight) continue
+      if (!isTitanEngagementAllowedForAttackType(randomAttackType, candidateLeft.unit, candidateRight.unit)) continue
+      nextLeftRandom = candidateLeft
+      nextRightRandom = candidateRight
+      break
     }
 
-    const randomFactionPool = factions.filter((faction) => getRandomizableUnitsForSide(faction).length)
-    const randomFaction = pickRandomItem(randomFactionPool)
-    if (!randomFaction) return
-    const randomUnit = pickRandomItem(getRandomizableUnitsForSide(randomFaction))
-    if (!randomUnit) return
-    const randomBool = () => Math.random() < 0.5
-    const randomFactionAbilityState = Object.fromEntries(
-      (randomFaction.abilities || [])
-        .filter((ability) => implementedFactionAbilityKeys.has(ability.effectKey))
-        .map((ability) => [ability.id, randomBool()]),
-    )
-    const randomCoverType = pickRandomItem(coverTypeOptions) || 'none'
-    const randomUnitCanUseCover = unitCanUseCover(randomUnit)
-    const modeWeapons = (randomUnit.weapons || []).filter((weapon) => weapon.kind === mode)
-    const weaponSlots = getWeaponSlotsForMode(randomUnit, mode, modeWeapons.length)
-    const randomWeaponIds = buildWeaponSelection(
-      pickRandomWeaponIdsForMode(randomUnit, mode),
-      modeWeapons,
-      weaponSlots,
-    )
-    const randomSelectedWeapons = randomWeaponIds
-      .map((weaponId) => modeWeapons.find((weapon) => weapon.id === weaponId))
-      .filter(Boolean)
-    const randomConditionSupport = getConditionSupport(randomSelectedWeapons, mode)
-    const nextHpMax = getSquadHpPoolMax(randomUnit)
-    const hpOptions = buildHpValues(nextHpMax)
-    const nextHp = pickRandomItem(hpOptions) || nextHpMax
-    const randomNearbyUnits = () => {
-      const max = side === 'left'
-        ? getExplosiveNearbyMax(rightAliveCount)
-        : getExplosiveNearbyMax(leftAliveCount)
-      if (max <= 0) return 0
-      return Math.floor(Math.random() * (max + 1))
+    if (!nextLeftRandom || !nextRightRandom) return
+
+    setAttackType(randomAttackType)
+    if (randomAttackType === 'charge') {
+      setChargeDistance(pickRandomItem(chargeDistanceOptions) || 7)
     }
-    const nextSelection = {
-      factionId: randomFaction.id,
-      unitId: randomUnit.id,
-      weaponIds: randomWeaponIds,
-    }
-    setDefenderCounterattack(randomBool())
-    if (side === 'left') {
-      setLeft(nextSelection)
-      setLeftFactionAbilityState(randomFactionAbilityState)
-      setLeftCoverType(randomUnitCanUseCover ? randomCoverType : 'none')
-      setLeftMoved(randomConditionSupport.moved ? randomBool() : false)
-      setLeftHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
-      setLeftAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
-      setLeftExplosiveNearbyUnits(randomNearbyUnits())
-      const nextHpKey = makeHpKey('L', nextSelection.factionId, nextSelection.unitId)
-      setHpMap((prev) => ({ ...prev, [nextHpKey]: nextHp }))
-    } else {
-      setRight(nextSelection)
-      setRightFactionAbilityState(randomFactionAbilityState)
-      setRightCoverType(randomUnitCanUseCover ? randomCoverType : 'none')
-      setRightMoved(randomConditionSupport.moved ? randomBool() : false)
-      setRightHalfRange(randomConditionSupport.halfRange ? randomBool() : false)
-      setRightAfterDash(randomConditionSupport.afterDash ? randomBool() : false)
-      setRightExplosiveNearbyUnits(randomNearbyUnits())
-      const nextHpKey = makeHpKey('R', nextSelection.factionId, nextSelection.unitId)
-      setHpMap((prev) => ({ ...prev, [nextHpKey]: nextHp }))
-    }
+
+    setLeft(nextLeftRandom.selection)
+    setRight(nextRightRandom.selection)
+    setLeftFactionAbilityState(nextLeftRandom.factionAbilityState)
+    setRightFactionAbilityState(nextRightRandom.factionAbilityState)
+    setLeftCoverType(nextLeftRandom.coverType)
+    setRightCoverType(nextRightRandom.coverType)
+    setLeftMoved(nextLeftRandom.moved)
+    setRightMoved(nextRightRandom.moved)
+    setLeftHalfRange(nextLeftRandom.halfRange)
+    setRightHalfRange(nextRightRandom.halfRange)
+    setLeftAfterDash(nextLeftRandom.afterDash)
+    setRightAfterDash(nextRightRandom.afterDash)
+    setLeftExplosiveNearbyUnits(nextLeftRandom.explosiveNearbyUnits)
+    setRightExplosiveNearbyUnits(nextRightRandom.explosiveNearbyUnits)
+    setDefenderCounterattack(Boolean(pickRandomItem([true, false])))
+    setHpMap((prev) => ({
+      ...prev,
+      [makeHpKey('L', nextLeftRandom.selection.factionId, nextLeftRandom.selection.unitId)]: nextLeftRandom.hp,
+      [makeHpKey('R', nextRightRandom.selection.factionId, nextRightRandom.selection.unitId)]: nextRightRandom.hp,
+    }))
   }
 
   return (
@@ -863,6 +965,14 @@ function Batalla() {
               </button>
             )
           })}
+          <button
+            type="button"
+            className="ghost duel-attack-type-random"
+            onClick={handleRandomizeBattle}
+            disabled={!factions.length || isResolving}
+          >
+            {tx.randomBattle}
+          </button>
         </div>
         {attackType === 'charge' && (
           <label className="field duel-charge-distance">
@@ -885,15 +995,28 @@ function Batalla() {
 
       <div className="battle-duel-grid">
         <article className="duel-panel attacker-panel reveal">
-          <h3>{tx.attacker}</h3>
-          <button
-            type="button"
-            className="ghost duel-panel-random"
-            onClick={() => handleRandomizeSide('left')}
-            disabled={!factions.length || isResolving}
-          >
-            {tx.random}
-          </button>
+          <div className="duel-panel-head">
+            <h3>{tx.attacker}</h3>
+            <button
+              type="button"
+              className="ghost duel-panel-icon-button"
+              onClick={() => handleRandomizeSide('left')}
+              disabled={!factions.length || isResolving}
+              aria-label={`${tx.randomizeRole} ${tx.attacker}`}
+              title={`${tx.randomizeRole} ${tx.attacker}`}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path
+                  d="M17 3h4v4M21 3l-5 5M7 21H3v-4M3 21l5-5M14 5h-3a4 4 0 0 0-4 4v1M10 19h3a4 4 0 0 0 4-4v-1"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
           <label className="field">
             <span>{tx.faction}</span>
             <div className="duel-faction-select">
@@ -1123,13 +1246,21 @@ function Batalla() {
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
             {!leftImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
             {leftImplementedFactionAbilities.map((ability) => (
-              <label key={ability.id} className="duel-faction-ability">
+              <label
+                key={ability.id}
+                className={`duel-faction-ability${!isFactionAbilityAvailableInMode(ability.effectKey, mode) ? ' duel-faction-ability-disabled' : ''}`}
+              >
                 <input
                   type="checkbox"
                   checked={Boolean(leftFactionAbilityState[ability.id])}
+                  disabled={!isFactionAbilityAvailableInMode(ability.effectKey, mode)}
                   onChange={(event) => setFactionAbilityEnabled('left', ability.id, event.target.checked)}
                 />
-                <span className="duel-faction-ability-copy">
+                <span
+                  className={`duel-faction-ability-copy${ability.description ? ' duel-faction-ability-copy-tooltip' : ''}`}
+                  data-tooltip={ability.description || undefined}
+                  tabIndex={ability.description ? 0 : undefined}
+                >
                   <strong>{ability.name || '-'}</strong>
                 </span>
               </label>
@@ -1139,15 +1270,28 @@ function Batalla() {
         </article>
 
         <article className="duel-panel defender-panel reveal">
-          <h3>{tx.defender}</h3>
-          <button
-            type="button"
-            className="ghost duel-panel-random"
-            onClick={() => handleRandomizeSide('right')}
-            disabled={!factions.length || isResolving}
-          >
-            {tx.random}
-          </button>
+          <div className="duel-panel-head">
+            <h3>{tx.defender}</h3>
+            <button
+              type="button"
+              className="ghost duel-panel-icon-button"
+              onClick={() => handleRandomizeSide('right')}
+              disabled={!factions.length || isResolving}
+              aria-label={`${tx.randomizeRole} ${tx.defender}`}
+              title={`${tx.randomizeRole} ${tx.defender}`}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path
+                  d="M17 3h4v4M21 3l-5 5M7 21H3v-4M3 21l5-5M14 5h-3a4 4 0 0 0-4 4v1M10 19h3a4 4 0 0 0 4-4v-1"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
           <label className="field">
             <span>{tx.faction}</span>
             <div className="duel-faction-select">
@@ -1377,13 +1521,21 @@ function Batalla() {
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
             {!rightImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
             {rightImplementedFactionAbilities.map((ability) => (
-              <label key={ability.id} className="duel-faction-ability">
+              <label
+                key={ability.id}
+                className={`duel-faction-ability${!isFactionAbilityAvailableInMode(ability.effectKey, mode) ? ' duel-faction-ability-disabled' : ''}`}
+              >
                 <input
                   type="checkbox"
                   checked={Boolean(rightFactionAbilityState[ability.id])}
+                  disabled={!isFactionAbilityAvailableInMode(ability.effectKey, mode)}
                   onChange={(event) => setFactionAbilityEnabled('right', ability.id, event.target.checked)}
                 />
-                <span className="duel-faction-ability-copy">
+                <span
+                  className={`duel-faction-ability-copy${ability.description ? ' duel-faction-ability-copy-tooltip' : ''}`}
+                  data-tooltip={ability.description || undefined}
+                  tabIndex={ability.description ? 0 : undefined}
+                >
                   <strong>{ability.name || '-'}</strong>
                 </span>
               </label>

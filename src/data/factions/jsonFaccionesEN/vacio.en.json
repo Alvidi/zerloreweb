@@ -5,14 +5,14 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Void Portals",
-        "descripcion": "Once per turn, an allied line/elite/hero unit can swap positions with another allied line/elite/hero unit of this faction within 18\" of it. It cannot swap with locked units. Consumes 1 action."
+        "descripcion": "Once per turn, during the activation of an allied unit, it may spend 1 action to swap its position with another allied Line, Elite, or Hero unit within 18\" or less. Neither unit may be locked in combat."
       },
       {
-        "habilidades_faccion2": "eyes from beyond",
+        "habilidades_faccion2": "Eyes from Beyond",
         "descripcion": "Void units can re-roll failed hit rolls if the enemy unit is in partial cover."
       },
       {
-        "habilidades_faccion3": "Heralds of the supreme void",
+        "habilidades_faccion3": "Heralds of the Supreme Void",
         "descripcion": "This faction can use two heroes."
       }
     ]
@@ -192,7 +192,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "This unit cannot take Retreat actions or be forced to retreat.",
+        "especialidad": "This unit ignores the penalties from partial cover when shooting.",
         "valor": 8
       },
       "armas": {
@@ -327,7 +327,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "It is not affected by lack of control.",
+        "especialidad": "This unit is not affected by Out of Control.",
         "valor": 10
       },
       "armas": {
@@ -375,7 +375,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit ignores the effects of Rampage.",
+        "especialidad": "This unit ignores the effects of Out of Control.",
         "valor": 13
       },
       "armas": {

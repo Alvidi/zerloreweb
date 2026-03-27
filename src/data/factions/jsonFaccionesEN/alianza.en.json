@@ -30,7 +30,7 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "-",
+        "especialidad": "When this unit charges, it may re-roll all failed attack dice in the melee attack of that charge.",
         "valor": 5
       },
       "armas": {

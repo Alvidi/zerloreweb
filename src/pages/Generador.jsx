@@ -6,100 +6,6 @@ import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 
-const commandDoctrines = [
-  {
-    id: 'garrotazo',
-    nombre: 'Garrotazo',
-    nombre_en: 'Bludgeon',
-    descripcion: 'La unidad o escuadra trabada en combate cuerpo a cuerpo empuja 1” a su contrincante, poniendo fin al combate.',
-    descripcion_en: 'The unit or squad engaged in melee pushes its opponent 1”, ending the combat.',
-  },
-  {
-    id: 'apuntado',
-    nombre: 'Apuntado',
-    nombre_en: 'Aimed Shot',
-    descripcion: 'La unidad o escuadra elegida pierde una acción, pero gana +1 dado de Ataque en disparo durante este turno.',
-    descripcion_en: 'The chosen unit or squad loses one action but gains +1 Attack die for ranged attacks this turn.',
-  },
-  {
-    id: 'frenesi',
-    nombre: 'Frenesí',
-    nombre_en: 'Frenzy',
-    descripcion: 'La unidad elegida puede utilizar una acción adicional de movimiento este turno.',
-    descripcion_en: 'The chosen unit may use one additional movement action this turn.',
-  },
-  {
-    id: 'agilidad-en-combate',
-    nombre: 'Agilidad en combate',
-    nombre_en: 'Combat Agility',
-    descripcion: 'La unidad o escuadra gana +3 a su Velocidad durante este turno.',
-    descripcion_en: 'The unit or squad gains +3 to its Speed this turn.',
-  },
-  {
-    id: 'nuestra-es-la-victoria',
-    nombre: 'Nuestra es la victoria',
-    nombre_en: 'Victory Is Ours',
-    descripcion: 'Durante este turno, la unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de héroes enemigos en ese mismo objetivo.',
-    descripcion_en: 'During this turn, the chosen unit or squad automatically controls the objective it is on, ignoring enemy heroes on that same objective.',
-  },
-  {
-    id: 'reaccion-inmediata',
-    nombre: 'Reacción inmediata',
-    nombre_en: 'Immediate Reaction',
-    descripcion: 'El jugador puede activar dos unidades o escuadras seguidas durante este turno.',
-    descripcion_en: 'The player may activate two units or squads in a row this turn.',
-  },
-  {
-    id: 'mas-que-cargado',
-    nombre: 'Más que cargado',
-    nombre_en: 'Fully Charged',
-    descripcion: 'Si esta unidad falla una carga durante este turno, puede repetirla inmediatamente una vez.',
-    descripcion_en: 'If this unit fails a charge during this turn, it can immediately retry it once.',
-  },
-  {
-    id: 'una-nueva-oportunidad',
-    nombre: 'Una nueva oportunidad',
-    nombre_en: 'One More Chance',
-    descripcion: 'Repite una tirada de ataque tanto cuerpo a cuerpo como a distancia.',
-    descripcion_en: 'Repeat one attack roll, either in melee or at range.',
-  },
-  {
-    id: 'combate-a-muerte',
-    nombre: 'Combate a muerte',
-    nombre_en: 'Fight to the Death',
-    descripcion:
-      'Declara esta doctrina durante la Fase de Iniciativa designando una unidad aliada que esté trabada en cuerpo a cuerpo. Ninguna de las dos unidades puede retirarse ni ser separada del combate. Al inicio de cada turno, antes de cualquier otra activación, ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina cuando una de las dos unidades es destruida. No afecta a vehículos ni titanes.',
-    descripcion_en:
-      'Declare this doctrine in the Initiative Phase, choosing a friendly unit already engaged in melee. Neither unit can withdraw or be separated from that combat. At the start of each turn, before any other activation, both units automatically resolve one melee exchange following normal attack-order rules. The duel ends only when one unit is destroyed. It does not affect vehicles or titans.',
-  },
-]
-
-const doctrineById = new Map(commandDoctrines.map((item) => [item.id, item]))
-const doctrinePriorityByMode = {
-  escaramuza: [
-    'frenesi',
-    'agilidad-en-combate',
-    'reaccion-inmediata',
-    'una-nueva-oportunidad',
-    'apuntado',
-    'garrotazo',
-    'mas-que-cargado',
-    'combate-a-muerte',
-    'nuestra-es-la-victoria',
-  ],
-  escuadra: [
-    'nuestra-es-la-victoria',
-    'apuntado',
-    'una-nueva-oportunidad',
-    'reaccion-inmediata',
-    'mas-que-cargado',
-    'combate-a-muerte',
-    'agilidad-en-combate',
-    'frenesi',
-    'garrotazo',
-  ],
-}
-
 const factionImages = {
   alianza: new URL('../images/faccion/alianza.svg', import.meta.url).href,
   legionarios_crisol: new URL('../images/faccion/legionarios_crisol.svg', import.meta.url).href,
@@ -322,35 +228,6 @@ const computeUnitTotal = (unit, shooting, melee, squadSize, perMiniLoadouts, gam
 
 const randomPick = (list) => list[Math.floor(Math.random() * list.length)]
 
-const randomPickNoRepeat = (list, amount) => {
-  if (!Array.isArray(list) || !list.length || amount <= 0) return []
-  const bag = [...list]
-  const result = []
-  while (bag.length && result.length < amount) {
-    const index = Math.floor(Math.random() * bag.length)
-    result.push(bag[index])
-    bag.splice(index, 1)
-  }
-  return result
-}
-
-const buildRandomDoctrines = (amountRaw, mode) => {
-  const amount = Math.max(0, Math.min(8, toNumber(amountRaw) || 0))
-  if (amount <= 0) return []
-  const maxByTurns = Math.min(amount, commandDoctrines.length)
-  const priorityIds = doctrinePriorityByMode[mode] || doctrinePriorityByMode.escaramuza
-  const priorityPool = priorityIds.map((id) => doctrineById.get(id)).filter(Boolean)
-
-  // Keep core doctrinas coherent with selected mode and fill remainder from the full pool.
-  const coreTarget = Math.max(1, Math.min(maxByTurns, Math.ceil(amount * 0.6)))
-  const core = randomPickNoRepeat(priorityPool, coreTarget)
-  if (core.length >= maxByTurns) return core.slice(0, maxByTurns)
-
-  const used = new Set(core.map((item) => item.id))
-  const remainderPool = commandDoctrines.filter((item) => !used.has(item.id))
-  return [...core, ...randomPickNoRepeat(remainderPool, maxByTurns - core.length)]
-}
-
 const shuffle = (list) => {
   const next = [...list]
   for (let i = next.length - 1; i > 0; i -= 1) {
@@ -536,36 +413,25 @@ function Generador() {
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
   const getSavedArmy = () => {
-    if (typeof window === 'undefined') return { units: [], factionId: '', doctrines: [] }
+    if (typeof window === 'undefined') return { units: [], factionId: '' }
     const saved = window.localStorage.getItem('zerolore_army_v1')
-    if (!saved) return { units: [], factionId: '', doctrines: [] }
+    if (!saved) return { units: [], factionId: '' }
     try {
       const parsed = JSON.parse(saved)
       if (parsed?.units && Array.isArray(parsed.units)) {
-        const doctrineIds = Array.isArray(parsed.doctrines)
-          ? parsed.doctrines
-          : Array.isArray(parsed.doctrineIds)
-            ? parsed.doctrineIds
-            : []
-        const doctrines = doctrineIds
-          .map((id) => commandDoctrines.find((item) => item.id === id))
-          .filter(Boolean)
-        return { units: parsed.units, factionId: parsed.factionId || '', doctrines }
+        return { units: parsed.units, factionId: parsed.factionId || '' }
       }
     } catch {
       // Ignore invalid cache
     }
-    return { units: [], factionId: '', doctrines: [] }
+    return { units: [], factionId: '' }
   }
 
   const initialSaved = getSavedArmy()
   const [armyFactionId, setArmyFactionId] = useState(initialSaved.factionId)
   const [armyUnits, setArmyUnits] = useState(initialSaved.units)
-  const [selectedDoctrines, setSelectedDoctrines] = useState(initialSaved.doctrines || [])
-  const [isDoctrineModalOpen, setIsDoctrineModalOpen] = useState(false)
   const [activeUnit, setActiveUnit] = useState(null)
   const [targetValue, setTargetValue] = useState(40)
-  const [doctrineCount, setDoctrineCount] = useState(3)
   const [randomFactionId, setRandomFactionId] = useState('random')
   const [unitTypeFiltersManual, setUnitTypeFiltersManual] = useState(() => new Set())
   const [unitTypeFiltersRandom, setUnitTypeFiltersRandom] = useState(() => new Set())
@@ -645,14 +511,13 @@ function Generador() {
     const payload = JSON.stringify({
       units: armyUnits,
       factionId: armyFactionIdSafe,
-      doctrines: selectedDoctrines.map((item) => item.id),
     })
     window.localStorage.setItem('zerolore_army_v1', payload)
-  }, [armyUnits, armyFactionIdSafe, selectedDoctrines])
+  }, [armyUnits, armyFactionIdSafe])
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
-    const hasOpenModal = Boolean(activeUnit) || isDoctrineModalOpen
+    const hasOpenModal = Boolean(activeUnit)
     const previousOverflow = document.body.style.overflow
     if (hasOpenModal) {
       document.body.style.overflow = 'hidden'
@@ -660,7 +525,7 @@ function Generador() {
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [activeUnit, isDoctrineModalOpen])
+  }, [activeUnit])
 
   const handleFactionChange = (event) => {
     const next = event.target.value
@@ -670,7 +535,6 @@ function Generador() {
       setSelectedFactionId(next)
       setUnitTypeFiltersManual(new Set(nextTypes))
       setArmyUnits([])
-      setSelectedDoctrines([])
       setArmyFactionId(next)
     })
   }
@@ -743,19 +607,7 @@ function Generador() {
 
   const handleReset = () => {
     setArmyUnits([])
-    setSelectedDoctrines([])
     setArmyFactionId('')
-  }
-
-  const handleAddDoctrine = (doctrine) => {
-    setSelectedDoctrines((prev) => {
-      if (prev.some((item) => item.id === doctrine.id)) return prev
-      return [...prev, doctrine]
-    })
-  }
-
-  const handleRemoveDoctrine = (id) => {
-    setSelectedDoctrines((prev) => prev.filter((item) => item.id !== id))
   }
 
   const handleGenerateRandom = () => {
@@ -772,7 +624,6 @@ function Generador() {
       activeRandomFilters.size ? activeRandomFilters : null,
     )
     setArmyUnits(result.units)
-    setSelectedDoctrines(buildRandomDoctrines(doctrineCount, gameMode))
     setArmyFactionId(result.faction?.id || '')
   }
 
@@ -1004,16 +855,9 @@ function Generador() {
     })
     y += 2
     if (armyFaction?.habilidades_faccion?.length) {
-      drawSectionTitle(`${t('generator.doctrines')} / ${t('generator.passives')}`, true)
+      drawSectionTitle(t('generator.passives'), true)
       armyFaction.habilidades_faccion.slice(0, 6).forEach((habilidad) => {
         drawBulletItem(habilidad.nombre, habilidad.descripcion, 9)
-      })
-      y += 2
-    }
-    if (selectedDoctrines.length) {
-      drawSectionTitle(`${t('generator.doctrines')} (${t('generator.add')})`, true)
-      selectedDoctrines.forEach((doctrine) => {
-        drawBulletItem(lang === 'en' ? (doctrine.nombre_en || doctrine.nombre) : doctrine.nombre, lang === 'en' ? (doctrine.descripcion_en || doctrine.descripcion) : doctrine.descripcion, 9)
       })
       y += 2
     }
@@ -1237,44 +1081,6 @@ function Generador() {
                       </label>
                     ))}
                   </div>
-                    <div className="doctrine-panel">
-                      <div className="doctrine-panel-header">
-                        <p className="faction-passives-title">{t('generator.doctrines')}</p>
-                      <button
-                        type="button"
-                        className="ghost tiny"
-                        onClick={() => setIsDoctrineModalOpen(true)}
-                      >
-                        {t('generator.add')}
-                      </button>
-                    </div>
-                    {selectedDoctrines.length > 0 ? (
-                      <div className="doctrine-list">
-                        {selectedDoctrines.map((doctrine) => (
-                          <article key={doctrine.id} className="doctrine-item">
-                            <div className="doctrine-item-main">
-                              <div className="doctrine-icon-box">
-                                <DoctrineIcon id={doctrine.id} />
-                              </div>
-                              <div className="doctrine-content">
-                                <p className="doctrine-name">{lang === 'en' ? (doctrine.nombre_en || doctrine.nombre) : doctrine.nombre}</p>
-                                <p className="doctrine-description">{lang === 'en' ? (doctrine.descripcion_en || doctrine.descripcion) : doctrine.descripcion}</p>
-                              </div>
-                            </div>
-                            <button
-                              type="button"
-                              className="ghost tiny"
-                              onClick={() => handleRemoveDoctrine(doctrine.id)}
-                            >
-                              {t('generator.remove')}
-                            </button>
-                          </article>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="empty-state">{t('generator.noDoctrinesAdded')}</p>
-                    )}
-                  </div>
                   <div className="unit-list">
                     {visibleManualUnits.map((unit) => (
                       <article className="unit-card" key={unit.id}>
@@ -1344,21 +1150,6 @@ function Generador() {
                   onChange={(event) => setTargetValue(event.target.value)}
                 />
               </label>
-              <div className="field">
-                <span>{t('generator.doctrines')}</span>
-                <CustomSelect
-                  t={t}
-                  value={String(doctrineCount)}
-                  onChange={(next) => setDoctrineCount(Number(next))}
-                  options={[
-                    { value: '0', label: t('generator.none') },
-                    ...Array.from({ length: 8 }, (_, idx) => ({
-                      value: String(idx + 1),
-                      label: String(idx + 1),
-                    })),
-                  ]}
-                />
-              </div>
               <div className="field">
                 <span>{t('generator.faction')}</span>
                 <CustomSelect
@@ -1508,163 +1299,8 @@ function Generador() {
           }}
         />
       )}
-      {isDoctrineModalOpen && (
-        <DoctrinePickerModal
-          t={t}
-          lang={lang}
-          selectedIds={new Set(selectedDoctrines.map((item) => item.id))}
-          doctrines={commandDoctrines}
-          onClose={() => setIsDoctrineModalOpen(false)}
-          onSelect={(doctrine) => {
-            handleAddDoctrine(doctrine)
-            setIsDoctrineModalOpen(false)
-          }}
-        />
-      )}
     </section>
   )
-}
-
-function DoctrineIcon({ id }) {
-  const commonProps = {
-    viewBox: '0 0 24 24',
-    className: 'doctrine-icon',
-    'aria-hidden': true,
-  }
-
-  if (id === 'garrotazo') {
-    return (
-      <svg {...commonProps}>
-        <path d="M5 19L19 5" />
-        <path d="M7 7L10 10" />
-        <path d="M14 14L17 17" />
-      </svg>
-    )
-  }
-  if (id === 'apuntado') {
-    return (
-      <svg {...commonProps}>
-        <circle cx="12" cy="12" r="7" />
-        <circle cx="12" cy="12" r="2" />
-        <path d="M12 3V6" />
-        <path d="M12 18V21" />
-        <path d="M3 12H6" />
-        <path d="M18 12H21" />
-      </svg>
-    )
-  }
-  if (id === 'frenesi') {
-    return (
-      <svg {...commonProps}>
-        <path d="M4 12H20" />
-        <path d="M14 6L20 12L14 18" />
-      </svg>
-    )
-  }
-  if (id === 'agilidad-en-combate') {
-    return (
-      <svg {...commonProps}>
-        <path d="M5 16L10 11L13 14L19 8" />
-        <path d="M16 8H19V11" />
-      </svg>
-    )
-  }
-  if (id === 'nuestra-es-la-victoria') {
-    return (
-      <svg {...commonProps}>
-        <path d="M12 4L14 9L20 9L15 13L17 19L12 15L7 19L9 13L4 9L10 9Z" />
-      </svg>
-    )
-  }
-  if (id === 'reaccion-inmediata') {
-    return (
-      <svg {...commonProps}>
-        <path d="M5 12H13" />
-        <path d="M10 8L14 12L10 16" />
-        <path d="M11 6H19" />
-        <path d="M16 2L20 6L16 10" />
-      </svg>
-    )
-  }
-  if (id === 'mas-que-cargado') {
-    return (
-      <svg {...commonProps}>
-        <path d="M6 12L10 16L18 8" />
-        <path d="M6 7L10 11L18 3" />
-      </svg>
-    )
-  }
-  if (id === 'una-nueva-oportunidad') {
-    return (
-      <svg {...commonProps}>
-        <path d="M17 7V3L21 7L17 11V7H9A4 4 0 0 0 9 15H11" />
-        <path d="M7 17V21L3 17L7 13V17H15A4 4 0 0 0 15 9H13" />
-      </svg>
-    )
-  }
-  if (id === 'combate-a-muerte') {
-    return (
-      <svg {...commonProps}>
-        <path d="M7 6L17 18" />
-        <path d="M17 6L7 18" />
-        <path d="M9 4L7 6L5 4" />
-        <path d="M15 20L17 18L19 20" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg {...commonProps}>
-      <circle cx="12" cy="12" r="7" />
-    </svg>
-  )
-}
-
-function DoctrinePickerModal({ doctrines, selectedIds, onClose, onSelect, t, lang }) {
-  const available = doctrines.filter((item) => !selectedIds.has(item.id))
-
-  const content = (
-    <div className="unit-modal">
-      <div className="unit-modal-card doctrine-modal-card">
-        <div className="unit-modal-header">
-          <div>
-            <p className="eyebrow">{t('generator.doctrines')}</p>
-            <h3>{t('generator.doctrineModalTitle')}</h3>
-          </div>
-          <button className="ghost tiny" type="button" onClick={onClose}>
-            {t('generator.close')}
-          </button>
-        </div>
-        <div className="unit-modal-body">
-          {available.length === 0 ? (
-            <p className="empty-state">{t('generator.noDoctrinesAvailable')}</p>
-          ) : (
-            <div className="doctrine-list">
-              {available.map((doctrine) => (
-                <article key={doctrine.id} className="doctrine-item">
-                  <div className="doctrine-item-main">
-                    <div className="doctrine-icon-box">
-                      <DoctrineIcon id={doctrine.id} />
-                    </div>
-                    <div className="doctrine-content">
-                      <p className="doctrine-name">{lang === 'en' ? (doctrine.nombre_en || doctrine.nombre) : doctrine.nombre}</p>
-                      <p className="doctrine-description">{lang === 'en' ? (doctrine.descripcion_en || doctrine.descripcion) : doctrine.descripcion}</p>
-                    </div>
-                  </div>
-                  <button type="button" className="ghost tiny" onClick={() => onSelect(doctrine)}>
-                    {t('generator.add')}
-                  </button>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-
-  if (typeof document === 'undefined') return content
-  return createPortal(content, document.body)
 }
 
 function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lang }) {

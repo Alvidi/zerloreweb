@@ -549,7 +549,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Federation units in squad or within 6\" in skirmish can re-roll a failed Hit die during their activation. This unit can ride inside a vehicle.",
+        "especialidad": "Federation units in squad mode or within 6\" in skirmish can re-roll one failed Hit die in shooting during their activation. In addition, this hero may be assigned to an allied vehicle - place it in contact with it.",
         "valor": 14
       },
       "armas": {

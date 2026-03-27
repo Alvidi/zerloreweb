@@ -399,6 +399,20 @@
   color: var(--text-main);
 }
 
+.hero-copy-home {
+  max-width: 760px;
+  padding: 48px 0 24px;
+}
+
+.hero-copy-home h1 {
+  max-width: 11ch;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.04;
+  font-size: clamp(3.1rem, 6vw, 5.4rem);
+  text-wrap: balance;
+}
+
 .eyebrow {
   color: var(--accent);
   font-size: 0.75rem;
@@ -416,6 +430,13 @@
 
 .hero .lead {
   color: var(--text-main);
+}
+
+.hero-copy-home .lead {
+  max-width: 690px;
+  font-size: 1.18rem;
+  line-height: 1.7;
+  color: rgba(245, 240, 232, 0.9);
 }
 
 .hero-actions {
@@ -1564,6 +1585,81 @@ button {
   color: var(--text-main);
 }
 
+.home-pillars {
+  padding-top: 8px;
+}
+
+.home-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.home-pillar-card {
+  min-height: 220px;
+  padding: 22px 22px 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 143, 69, 0.06), rgba(16, 18, 26, 0.82) 28%),
+    var(--bg-2);
+  border-color: rgba(255, 143, 69, 0.16);
+}
+
+.home-pillar-card:hover {
+  border-color: rgba(255, 143, 69, 0.72);
+}
+
+.home-pillar-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 8px 12px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 143, 69, 0.42);
+  background: rgba(255, 143, 69, 0.1);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.home-pillar-card h3 {
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+
+.home-pillar-card p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.62;
+}
+
+.home-toolkit {
+  padding-top: 12px;
+}
+
+.home-toolkit-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.9fr);
+  gap: 28px;
+  align-items: center;
+  padding: 32px;
+  border: 1px solid rgba(255, 143, 69, 0.18);
+  border-radius: 4px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 143, 69, 0.14), transparent 32%),
+    linear-gradient(160deg, rgba(18, 20, 28, 0.98), rgba(12, 13, 19, 0.98));
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.24);
+}
+
+.home-toolkit-copy p:last-child {
+  margin-bottom: 0;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
 .rules-page .section-head {
   max-width: 1120px;
 }
@@ -2122,6 +2218,19 @@ mark {
     margin-bottom: 20px;
   }
 
+  .hero-copy-home {
+    padding-top: 34px;
+  }
+
+  .home-pillars-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-toolkit-panel {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
   .hero::before {
     width: 100%;
   }
@@ -2444,6 +2553,28 @@ mark {
   overflow: hidden;
 }
 
+.rules-token-preview.command.command-blue {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(132, 186, 255, 0.26), rgba(24, 34, 58, 0.36) 42%, rgba(10, 12, 18, 0.97) 74%),
+    radial-gradient(circle at 35% 24%, rgba(154, 206, 255, 0.15), rgba(10, 10, 14, 0.98));
+  border-color: rgba(86, 154, 255, 0.96);
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(190, 223, 255, 0.22),
+    0 0 0 1.4px rgba(86, 154, 255, 0.32);
+}
+
+.rules-token-preview.command.command-red {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255, 132, 132, 0.24), rgba(48, 20, 24, 0.38) 42%, rgba(10, 12, 18, 0.97) 74%),
+    radial-gradient(circle at 35% 24%, rgba(255, 164, 164, 0.14), rgba(10, 10, 14, 0.98));
+  border-color: rgba(219, 78, 78, 0.96);
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(255, 208, 208, 0.2),
+    0 0 0 1.4px rgba(219, 78, 78, 0.32);
+}
+
 .rules-token-preview.command::before,
 .rules-token-preview.command::after {
   content: '';
@@ -2457,10 +2588,26 @@ mark {
   border-radius: inherit;
 }
 
+.rules-token-preview.command.command-blue::before {
+  border-color: rgba(194, 226, 255, 0.58);
+}
+
+.rules-token-preview.command.command-red::before {
+  border-color: rgba(255, 214, 214, 0.56);
+}
+
 .rules-token-preview.command::after {
   inset: 20%;
   border: 1.4px dashed rgba(255, 206, 165, 0.42);
   border-radius: inherit;
+}
+
+.rules-token-preview.command.command-blue::after {
+  border-color: rgba(174, 214, 255, 0.44);
+}
+
+.rules-token-preview.command.command-red::after {
+  border-color: rgba(255, 186, 186, 0.44);
 }
 
 .rules-token-preview.command-circle {
@@ -2926,16 +3073,57 @@ mark {
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.02);
   max-width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
+}
+
+.rules-html .rules-doctrine-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 69, 0.16), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.rules-html .rules-doctrine-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.rules-html .rules-doctrine-gallery-mark {
+  width: min(100%, 88px);
+}
+
+.rules-html .rules-doctrine-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rules-html .rules-doctrine-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.35;
 }
 
 .rules-html .rules-table-scroll table,
 .rules-html table {
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
+  min-width: 0;
   margin: 0;
   border-collapse: collapse;
   border-spacing: 0;
+  table-layout: fixed;
 }
 
 .rules-html th,
@@ -2946,6 +3134,10 @@ mark {
   text-align: left;
   vertical-align: top;
   line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .rules-html th,
@@ -2967,6 +3159,26 @@ mark {
 }
 
 @media (max-width: 700px) {
+  .rules-html .rules-doctrine-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .rules-html .rules-doctrine-gallery-mark {
+    width: min(100%, 72px);
+  }
+
+  .rules-html .rules-doctrine-gallery-label {
+    font-size: 0.72rem;
+  }
+
+  .rules-html th,
+  .rules-html td {
+    padding: 7px 8px;
+    font-size: 0.9rem;
+  }
+
   .field input,
   .field select {
     font-size: 16px;
@@ -3030,10 +3242,27 @@ mark {
     font-size: 1.05rem;
   }
 
+  .hero-copy-home h1 {
+    max-width: 100%;
+    font-size: clamp(2.5rem, 9vw, 3.4rem);
+  }
+
   .hero-actions .primary,
   .hero-actions .ghost {
     width: 100%;
     text-align: center;
+  }
+
+  .home-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-pillar-card {
+    min-height: 0;
+  }
+
+  .home-toolkit-panel {
+    padding: 24px 18px;
   }
 
   .card-scale-feature {
@@ -3355,6 +3584,12 @@ mark {
   gap: 8px;
 }
 
+.duel-attack-type-random {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 0.8rem;
+}
+
 .duel-attack-type-btn {
   min-height: 36px;
   padding: 0 12px;
@@ -3396,6 +3631,13 @@ mark {
   color: var(--text-main);
 }
 
+.duel-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .duel-panel.attacker-panel h3 {
   color: #ff6b6b;
 }
@@ -3406,10 +3648,20 @@ mark {
 
 .duel-panel-random {
   justify-self: start;
-  min-width: 120px;
+  min-width: 150px;
   min-height: 34px;
   padding: 0 12px;
   font-size: 0.76rem;
+}
+
+.duel-panel-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
 }
 
 .duel-panel .field {
@@ -3665,9 +3917,56 @@ mark {
   cursor: not-allowed;
 }
 
+.duel-faction-ability-disabled {
+  color: var(--text-muted);
+}
+
+.duel-faction-ability-disabled .duel-faction-ability-copy strong {
+  color: var(--text-muted);
+}
+
 .duel-faction-ability-copy {
   display: grid;
   gap: 2px;
+}
+
+.duel-faction-ability-copy-tooltip {
+  position: relative;
+  cursor: help;
+  outline: none;
+}
+
+.duel-faction-ability-copy-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  width: min(260px, calc(100vw - 64px));
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(11, 12, 16, 0.96);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+  color: var(--text-main);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.duel-faction-ability-copy-tooltip:hover::after,
+.duel-faction-ability-copy-tooltip:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.duel-faction-ability-copy-tooltip:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 134, 77, 0.22);
+  border-radius: 6px;
 }
 
 .duel-faction-ability-copy strong {
@@ -3856,6 +4155,11 @@ mark {
 .duel-log-cover-tag {
   color: var(--metal);
   font-size: 0.76rem;
+}
+
+.duel-log-mitigation-note {
+  color: rgba(255, 208, 94, 0.98);
+  font-weight: 700;
 }
 
 .duel-log-copy-result {

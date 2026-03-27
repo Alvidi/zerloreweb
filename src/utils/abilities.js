@@ -90,8 +90,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
     return lang === 'en'
-      ? 'Can shoot without line of sight. Mark a target point within range and roll 1D6: on 5-6 (bullseye), the target and enemies within 3" cannot make Save rolls; on 1-4, they resolve Save rolls normally. In squad mode, only miniatures in the target squad are affected. Units locked in melee are not affected.'
-      : 'Puede disparar sin línea de visión. Marca un punto objetivo dentro del alcance y tira 1D6: con 5-6 (diana), el objetivo y las enemigas a 3" o menos no pueden realizar tirada de salvación; con 1-4, resuelven salvación normal. En modo escuadras solo afecta a miniaturas de la escuadra objetivo. Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
+      ? 'Can shoot without line of sight. Mark a target point within range and roll 1D6: on 5-6 (bullseye), the target and enemies within 3" cannot make Save rolls, also ignoring any cover bonus; on 1-4, they resolve Save rolls normally and cover applies as usual. In squad mode, only the target squad is affected. Units locked in melee are not affected.'
+      : 'Puede disparar sin línea de visión. Marca un punto objetivo dentro del alcance y tira 1D6: con 5-6 (diana), el objetivo y las enemigas a 3" o menos no pueden realizar tirada de salvación, ignorando también cualquier bonificación de cobertura; con 1-4, resuelven salvación normal y la cobertura aplica con normalidad. En modo escuadras solo afecta a la escuadra objetivo. Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.unstable) {
     return lang === 'en'

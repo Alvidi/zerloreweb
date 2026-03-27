@@ -37,6 +37,57 @@ const getFactionAbilityHeading = (details, lang) => {
   return ` (${names.join(', ')})`
 }
 
+const renderAbilityGroups = ({
+  details,
+  labelClass,
+  label,
+  unitName,
+  entryKey,
+}) => {
+  if (!details?.length) return null
+
+  return (
+    <div className="duel-log-line">
+      <span className={labelClass}>
+        <span>{label}</span>{' '}
+        <span className="duel-log-line-label-unit">{unitName}</span>
+      </span>
+      <div className="duel-dice">
+        {details.map((detail, detailIndex) => (
+          <div key={`${entryKey}-${label}-${detailIndex}`} className="duel-ability-detail-group">
+            {detail.dice?.map((die, dieIndex) => (
+              <span
+                key={`${entryKey}-${label}-die-${detailIndex}-${dieIndex}`}
+                className={`duel-die ${
+                  die.tone === 'count'
+                    ? 'duel-die-tag'
+                    : die.kind === 'scatter'
+                      ? 'duel-die-scatter'
+                      : die.outcome === 'fail'
+                        ? 'duel-die-fail-gray'
+                        : die.outcome === 'crit'
+                          ? 'duel-die-attack duel-die-crit'
+                          : 'duel-die-attack'
+                }`}
+                title={die.value}
+              >
+                {die.kind === 'scatter' ? (
+                  <span className="duel-die-scatter-symbol">
+                    {die.scatterBullseye ? '◎' : getScatterDirectionIcon(die.scatterDirection)}
+                  </span>
+                ) : (
+                  die.value
+                )}
+              </span>
+            ))}
+            <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function BattleCombatLog({ logEntries, tx, lang }) {
   return (
     <article className="duel-log reveal">
@@ -72,6 +123,8 @@ function BattleCombatLog({ logEntries, tx, lang }) {
             const secondaryLabelClass = attackerIsLeft
               ? 'duel-log-line-label duel-log-line-label-defender'
               : 'duel-log-line-label duel-log-line-label-attacker'
+            const preAttackWeaponAbilityDetails = (entry.preAttackDetails || []).filter((detail) => detail.source !== 'faction')
+            const preAttackFactionAbilityDetails = (entry.preAttackDetails || []).filter((detail) => detail.source === 'faction')
             const weaponAbilityDetails = (entry.abilityDetails || []).filter((detail) => detail.source !== 'faction')
             const factionAbilityDetails = (entry.abilityDetails || []).filter((detail) => detail.source === 'faction')
             const attackerFactionAbilityDetails = factionAbilityDetails.filter((detail) => detail.owner !== 'defender')
@@ -88,6 +141,20 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                     </div>
                   </div>
                 )}
+                {renderAbilityGroups({
+                  details: preAttackWeaponAbilityDetails,
+                  labelClass: 'duel-log-line-label duel-log-line-label-ability',
+                  label: tx.weaponAbilityLog,
+                  unitName: primaryUnitName,
+                  entryKey: `${entry.key}-pre-weapon`,
+                })}
+                {renderAbilityGroups({
+                  details: preAttackFactionAbilityDetails,
+                  labelClass: 'duel-log-line-label duel-log-line-label-faction-ability',
+                  label: tx.factionAbilityLog,
+                  unitName: primaryUnitName,
+                  entryKey: `${entry.key}-pre-faction`,
+                })}
                 {!entry.hidePrimaryLine && (
                   <div className="duel-log-line">
                     <span className={primaryLabelClass}>
@@ -160,124 +227,27 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                     </div>
                   </div>
                 )}
-                {!!weaponAbilityDetails.length && (
-                  <div className="duel-log-line">
-                    <span className="duel-log-line-label duel-log-line-label-ability">
-                      <span>{tx.weaponAbilityLog}</span>{' '}
-                      <span className="duel-log-line-label-unit">{primaryUnitName}</span>
-                    </span>
-                    <div className="duel-dice">
-                      {weaponAbilityDetails.map((detail, detailIndex) => (
-                        <div key={`${entry.key}-weapon-ability-${detailIndex}`} className="duel-ability-detail-group">
-                          {detail.dice?.map((die, dieIndex) => (
-                            <span
-                              key={`${entry.key}-weapon-ability-die-${detailIndex}-${dieIndex}`}
-                              className={`duel-die ${
-                                die.kind === 'scatter'
-                                  ? 'duel-die-scatter'
-                                  : die.outcome === 'fail'
-                                    ? 'duel-die-fail-gray'
-                                    : die.outcome === 'crit'
-                                      ? 'duel-die-attack duel-die-crit'
-                                      : 'duel-die-attack'
-                              }`}
-                              title={die.value}
-                            >
-                              {die.kind === 'scatter' ? (
-                                <span className="duel-die-scatter-symbol">
-                                  {die.scatterBullseye ? '◎' : getScatterDirectionIcon(die.scatterDirection)}
-                                </span>
-                              ) : (
-                                die.value
-                              )}
-                            </span>
-                          ))}
-                          <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {!!attackerFactionAbilityDetails.length && (
-                  <div className="duel-log-line">
-                    <span className="duel-log-line-label duel-log-line-label-faction-ability">
-                      <span>{tx.factionAbilityLog}{attackerFactionAbilityHeading}</span>{' '}
-                      <span className="duel-log-line-label-unit">
-                        {primaryUnitName}
-                      </span>
-                    </span>
-                    <div className="duel-dice">
-                      {attackerFactionAbilityDetails.map((detail, detailIndex) => (
-                        <div key={`${entry.key}-faction-ability-${detailIndex}`} className="duel-ability-detail-group">
-                          {detail.dice?.map((die, dieIndex) => (
-                            <span
-                              key={`${entry.key}-faction-ability-die-${detailIndex}-${dieIndex}`}
-                              className={`duel-die ${
-                                die.kind === 'scatter'
-                                  ? 'duel-die-scatter'
-                                  : die.outcome === 'fail'
-                                    ? 'duel-die-fail-gray'
-                                    : die.outcome === 'crit'
-                                      ? 'duel-die-attack duel-die-crit'
-                                      : 'duel-die-attack'
-                              }`}
-                              title={die.value}
-                            >
-                              {die.kind === 'scatter' ? (
-                                <span className="duel-die-scatter-symbol">
-                                  {die.scatterBullseye ? '◎' : getScatterDirectionIcon(die.scatterDirection)}
-                                </span>
-                              ) : (
-                                die.value
-                              )}
-                            </span>
-                          ))}
-                          <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {!!defenderFactionAbilityDetails.length && (
-                  <div className="duel-log-line">
-                    <span className="duel-log-line-label duel-log-line-label-faction-ability">
-                      <span>{tx.factionAbilityLog}{defenderFactionAbilityHeading}</span>{' '}
-                      <span className="duel-log-line-label-unit">
-                        {secondaryUnitName}
-                      </span>
-                    </span>
-                    <div className="duel-dice">
-                      {defenderFactionAbilityDetails.map((detail, detailIndex) => (
-                        <div key={`${entry.key}-faction-ability-defender-${detailIndex}`} className="duel-ability-detail-group">
-                          {detail.dice?.map((die, dieIndex) => (
-                            <span
-                              key={`${entry.key}-faction-ability-defender-die-${detailIndex}-${dieIndex}`}
-                              className={`duel-die ${
-                                die.kind === 'scatter'
-                                  ? 'duel-die-scatter'
-                                  : die.outcome === 'fail'
-                                    ? 'duel-die-fail-gray'
-                                    : die.outcome === 'crit'
-                                      ? 'duel-die-attack duel-die-crit'
-                                      : 'duel-die-attack'
-                              }`}
-                              title={die.value}
-                            >
-                              {die.kind === 'scatter' ? (
-                                <span className="duel-die-scatter-symbol">
-                                  {die.scatterBullseye ? '◎' : getScatterDirectionIcon(die.scatterDirection)}
-                                </span>
-                              ) : (
-                                die.value
-                              )}
-                            </span>
-                          ))}
-                          <span className="duel-log-copy duel-log-ability-line">{detail.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                {renderAbilityGroups({
+                  details: weaponAbilityDetails,
+                  labelClass: 'duel-log-line-label duel-log-line-label-ability',
+                  label: tx.weaponAbilityLog,
+                  unitName: primaryUnitName,
+                  entryKey: `${entry.key}-weapon`,
+                })}
+                {renderAbilityGroups({
+                  details: attackerFactionAbilityDetails,
+                  labelClass: 'duel-log-line-label duel-log-line-label-faction-ability',
+                  label: `${tx.factionAbilityLog}${attackerFactionAbilityHeading}`,
+                  unitName: primaryUnitName,
+                  entryKey: `${entry.key}-faction-attacker`,
+                })}
+                {renderAbilityGroups({
+                  details: defenderFactionAbilityDetails,
+                  labelClass: 'duel-log-line-label duel-log-line-label-faction-ability',
+                  label: `${tx.factionAbilityLog}${defenderFactionAbilityHeading}`,
+                  unitName: secondaryUnitName,
+                  entryKey: `${entry.key}-faction-defender`,
+                })}
                 {!!entry.coverLine && (
                   <div className="duel-log-line">
                     <span className="duel-log-line-label">
@@ -311,10 +281,26 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                           {!!entry.defenderCover && (
                             <span className="duel-log-cover-tag"> · {entry.defenderCover}</span>
                           )}
-                          <span>{entry.defenderTail}</span>
+                          <span>{entry.defenderTailPrefix || entry.defenderTail}</span>
+                          {!!entry.defenderMitigationInline && (
+                            <span className="duel-log-mitigation-note">{entry.defenderMitigationInline}</span>
+                          )}
+                          <span>{entry.defenderTailPrefix ? entry.defenderTailSuffix : ''}</span>
+                          {!!entry.defenderMitigationNote && (
+                            <span className="duel-log-mitigation-note"> · {entry.defenderMitigationNote}</span>
+                          )}
                         </span>
                       ) : (
-                        <span className="duel-log-copy">{entry.defenderLine}</span>
+                        <span className="duel-log-copy">
+                          <span>{entry.defenderLinePrefix || entry.defenderLine}</span>
+                          {!!entry.defenderMitigationInline && (
+                            <span className="duel-log-mitigation-note">{entry.defenderMitigationInline}</span>
+                          )}
+                          <span>{entry.defenderLinePrefix ? entry.defenderLineSuffix : ''}</span>
+                          {!!entry.defenderMitigationNote && (
+                            <span className="duel-log-mitigation-note"> · {entry.defenderMitigationNote}</span>
+                          )}
+                        </span>
                       )}
                     </div>
                   </div>

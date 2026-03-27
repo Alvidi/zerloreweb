@@ -27,5 +27,5 @@
   <circle cx="512" cy="512" r="196" fill="url(#coreGrad)" fill-opacity="0.28"/>
   <circle cx="512" cy="512" r="132" fill="#ffece4" fill-opacity="0.1"/>
 
-  <text x="512" y="592" text-anchor="middle" font-family="Verdana, sans-serif" font-size="330" font-weight="700" fill="#fff5ef">-1</text>
+  <text x="512" y="512" text-anchor="middle" dominant-baseline="middle" font-family="Verdana, sans-serif" font-size="330" font-weight="700" fill="#fff5ef">-1</text>
 </svg>
