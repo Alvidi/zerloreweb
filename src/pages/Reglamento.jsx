@@ -1,23 +1,13 @@
 import { useMemo, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
-import reglamentoMd from '../data/spanish/reglamento-avanzado.md?raw'
-import reglamentoEnMd from '../data/english/advanced-rulebook.md?raw'
-import reglamentoRapidoMd from '../data/spanish/reglamento-rapido.md?raw'
-import reglamentoRapidoEnMd from '../data/english/quick-play.md?raw'
-import conquistaMd from '../data/spanish/conquista.md?raw'
-import conquistaEnMd from '../data/english/conquest.md?raw'
-import dominioMd from '../data/spanish/dominio.md?raw'
-import dominioEnMd from '../data/english/dominion.md?raw'
+import reglamentoMd from '../data/spanish/reglamento.md?raw'
+import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
 import damage5Token from '../images/tokens/damage-5-red.svg'
 import damage10Token from '../images/tokens/damage-10-red.svg'
-import dominion1Token from '../images/tokens/dominion-1-gold.svg'
-import dominion3Token from '../images/tokens/dominion-3-gold.svg'
-import dominion5Token from '../images/tokens/dominion-5-gold.svg'
-import dominion10Token from '../images/tokens/dominion-10-gold.svg'
 import explosiveArea3Token from '../images/tokens/explosive-area-3in.svg'
 import stateReadyToken from '../images/tokens/preparado-blue.svg'
 import stateRetreatToken from '../images/tokens/retirada-blue.svg'
@@ -27,7 +17,7 @@ import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['quick', 'advanced', 'conquest', 'dominion', 'tokens']
+const RULES_MODES = ['rules', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const DOCTRINE_TOKEN_DIAMETER_MM = 32
@@ -121,10 +111,6 @@ const TOKEN_DEFINITIONS = [
   { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
   { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage5Token },
   { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage10Token },
-  { id: 'dominion_1', category: 'damage', labelKey: 'rules.tokens.types.dominion1', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion1Token },
-  { id: 'dominion_3', category: 'damage', labelKey: 'rules.tokens.types.dominion3', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion3Token },
-  { id: 'dominion_5', category: 'damage', labelKey: 'rules.tokens.types.dominion5', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion5Token },
-  { id: 'dominion_10', category: 'damage', labelKey: 'rules.tokens.types.dominion10', diameterMm: 21.25, previewSize: 'medium', imageSrc: dominion10Token },
   { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
   { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
@@ -168,7 +154,7 @@ function Reglamento() {
   const [tokenCounts, setTokenCounts] = useState(buildInitialTokenCounts)
   const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const modeParam = searchParams.get('mode')
-  const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'quick'
+  const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'rules'
   const isTokensMode = rulesMode === 'tokens'
   const tokenOptions = useMemo(
     () =>
@@ -190,10 +176,7 @@ function Reglamento() {
   )
   const modeOptions = useMemo(
     () => [
-      { id: 'quick', label: t('rules.modeQuick') },
-      { id: 'advanced', label: t('rules.modeAdvanced') },
-      { id: 'conquest', label: t('rules.modeConquest') },
-      { id: 'dominion', label: t('rules.modeDominion') },
+      { id: 'rules', label: t('rules.modeRules') },
       { id: 'tokens', label: t('rules.modeTokens') },
     ],
     [t],
@@ -202,17 +185,8 @@ function Reglamento() {
     if (isTokensMode) {
       return ''
     }
-    if (rulesMode === 'conquest') {
-      return marked(lang === 'en' ? conquistaEnMd : conquistaMd)
-    }
-    if (rulesMode === 'dominion') {
-      return marked(lang === 'en' ? dominioEnMd : dominioMd)
-    }
-    if (rulesMode === 'quick') {
-      return marked(lang === 'en' ? reglamentoRapidoEnMd : reglamentoRapidoMd)
-    }
     return marked(lang === 'en' ? reglamentoEnMd : reglamentoMd)
-  }, [lang, rulesMode, isTokensMode])
+  }, [lang, isTokensMode])
 
   const { renderedHtml, tocItems } = useMemo(() => {
     if (isTokensMode) {
@@ -231,7 +205,7 @@ function Reglamento() {
       table.parentNode?.insertBefore(wrapper, table)
       wrapper.appendChild(table)
     })
-    if (rulesMode === 'advanced') {
+    if (rulesMode === 'rules') {
       const doctrineHeading = Array.from(doc.querySelectorAll('h1, h2, h3')).find((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
         return normalized === 'doctrinas de mando' || normalized === 'command doctrines'
@@ -335,7 +309,11 @@ function Reglamento() {
     setSearchTerm('')
     setActiveSection('')
     const nextParams = new URLSearchParams(searchParams)
-    nextParams.set('mode', nextMode)
+    if (nextMode === 'rules') {
+      nextParams.delete('mode')
+    } else {
+      nextParams.set('mode', nextMode)
+    }
     setSearchParams(nextParams, { replace: true })
   }
 

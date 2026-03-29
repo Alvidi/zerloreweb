@@ -1,6 +1,6 @@
-# Advanced Rulebook
+# Rulebook
 
-This rulebook aims to provide the full ZeroLore experience with all the rules. Although it may seem long, ZeroLore always tries to be straightforward and uncomplicated. New players are recommended to start with the Quick Play rulebook to practice the basics and experiment with units.
+This rulebook aims to provide the full ZeroLore experience with all the rules. Although it may seem long, ZeroLore always tries to be straightforward and uncomplicated.
 
 ---
 
@@ -64,8 +64,8 @@ ZeroLore can be played in two main modes: **Skirmish** and **Squads**.
 
 The game mode is chosen **before starting the game**, and all players must use the same mode.
 
-- **Skirmish Mode**: each miniature acts as an independent unit. A more tactical and narrative mode, ideal for quick games and small tables.
-- **Squad Mode**: units are grouped into squads that act as a single entity. Designed for larger-scale battles.
+- **Skirmish Mode**: each miniature acts as an independent unit. A more tactical and narrative mode, ideal for quick games and small tables. **Vehicles and Titans cannot be included in Skirmish**: those unit types are reserved for Squad mode.
+- **Squad Mode**: units are grouped into squads that act as a single entity. Designed for larger-scale battles, where all unit types are available, including Vehicles and Titans.
 
 Unless stated otherwise, all rules in the rulebook apply to both modes.
 
@@ -936,6 +936,6 @@ ZeroLore is designed to be flexible, modular, and adaptable.
 
 This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system.
 
-The included game modes, Conquest and Dominion, are the starting point for anyone who wants to begin playing without complications. But ZeroLore does not end there. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
+This rulebook is the starting point for anyone who wants to begin playing without complications. But ZeroLore does not end there. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
 
 The ZeroLore community is part of the game. If you create something interesting, share it.

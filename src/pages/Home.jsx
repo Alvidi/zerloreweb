@@ -30,7 +30,7 @@ function Home() {
               {content.hero.subtitle}
             </p>
             <div className="hero-actions reveal">
-              <button className="primary" onClick={() => navigate('/reglamento?mode=quick')}>
+              <button className="primary" onClick={() => navigate('/reglamento')}>
                 {content.hero.primary_cta}
               </button>
             </div>
@@ -58,7 +58,7 @@ function Home() {
             <p>{content.toolkit.body}</p>
           </div>
           <div className="hero-actions cta-actions">
-            <button className="primary" onClick={() => navigate('/reglamento?mode=quick')}>
+            <button className="primary" onClick={() => navigate('/generador')}>
               {content.toolkit.cta}
             </button>
           </div>

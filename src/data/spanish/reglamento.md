@@ -1,6 +1,6 @@
-# Reglamento avanzado
+# Reglamento
 
-Este reglamento pretende dar la experiencia completa de Zerolore con todas las reglas; aunque pueda parecer largo, Zerolore intenta siempre ser directo y sin demasiada complicación. Se recomienda, en caso de ser un jugador nuevo en este tipo de juegos, que empiece con reglamento rápido, donde podrá practicar lo básico, experimentar con unidades.
+Este reglamento pretende dar la experiencia completa de Zerolore con todas las reglas; aunque pueda parecer largo, Zerolore intenta siempre ser directo y sin demasiada complicación.
 
 ---
 
@@ -64,8 +64,8 @@ ZeroLore puede jugarse en dos modos principales: **Escaramuza** y **Escuadras**.
 
 El modo de juego se elige **antes de comenzar la partida**, y todos los jugadores deben usar el mismo modo.
 
-- **Modo Escaramuza**: cada miniatura actúa como una unidad independiente. Es un modo más táctico y narrativo, ideal para partidas rápidas y mesas pequeñas.
-- **Modo Escuadras**: las unidades se agrupan en escuadras que actúan como una sola entidad. Es un modo pensado para batallas de mayor escala.
+- **Modo Escaramuza**: cada miniatura actúa como una unidad independiente. Es un modo más táctico y narrativo, ideal para partidas rápidas y mesas pequeñas. **En escaramuza no se pueden incluir Vehículos ni Titanes**: estos tipos de unidad están reservados para el modo Escuadras.
+- **Modo Escuadras**: las unidades se agrupan en escuadras que actúan como una sola entidad. Es el modo pensado para batallas de mayor escala, donde todos los tipos de unidad están disponibles, incluidos Vehículos y Titanes.
 
 Salvo que se indique lo contrario, todas las reglas del reglamento se aplican a ambos modos.
 
@@ -967,6 +967,6 @@ ZeroLore está diseñado para ser flexible, modular y adaptable.
 
 Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema.
 
-Los modos de juego incluidos, Conquista y Dominio, son el punto de partida para quien quiera empezar a jugar sin complicarse. Pero ZeroLore no termina ahí. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
+Este reglamento es el punto de partida para quien quiera empezar a jugar sin complicarse. Pero ZeroLore no termina ahí. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
 
 La comunidad de ZeroLore es parte del juego. Si creas algo interesante, compártelo.
