@@ -72,7 +72,7 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -162,7 +162,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -221,7 +221,7 @@
               "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -282,7 +282,7 @@
               "Anti 4+ (Todo)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -310,7 +310,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -404,7 +404,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -465,7 +465,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -493,7 +493,7 @@
               "Impactos encadenados"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -510,7 +510,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad no puede participar en intercambios de Portales del Vacío, ni como origen ni como destino.Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
+        "especialidad": "Esta unidad no puede participar en intercambios de Portales del Vacío, ni como origen ni como destino. Puede equipar dos armas de Disparo y disparar dos veces en la misma acción, usando la misma o distintas armas.",
         "valor": 42
       },
       "armas": {
@@ -540,7 +540,7 @@
               "Munición limitada (3)"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Grieta del Vacío",
@@ -554,7 +554,7 @@
               "Anti 4+ (Titán)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -569,7 +569,7 @@
               "Anti 4+ (Titán)"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Extremidades Disformes",
@@ -582,7 +582,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }

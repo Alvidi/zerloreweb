@@ -57,7 +57,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Rifle de Energía Estable",
@@ -70,7 +70,7 @@
               "Precisión"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -190,7 +190,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -262,7 +262,7 @@
               "Impactos encadenados"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -413,7 +413,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -487,7 +487,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [

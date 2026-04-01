@@ -238,19 +238,6 @@ const FACTION_ABILITY_DEFINITIONS = [
     modes: ['ranged'],
     engineConditionKey: 'attackerFederationEntrenchment',
     rulePrefixes: ['atrincheramiento', 'entrenchment'],
-    buildLogDetail: ({ lang, hasRule }) => {
-      if (!hasRule) return null
-      return {
-        text: t(
-          lang,
-          'Atrincheramiento activo: esta unidad añade +1 dado de ataque en este disparo.',
-          'Entrenchment active: this unit gains +1 attack die in this ranged attack.',
-        ),
-        dice: [],
-        source: 'faction',
-        owner: 'attacker',
-      }
-    },
   },
   {
     effectKey: 'federation_fury_of_the_fallen',
@@ -258,19 +245,6 @@ const FACTION_ABILITY_DEFINITIONS = [
     appliesTo: 'attacker',
     engineConditionKey: 'attackerFederationFuryOfTheFallen',
     rulePrefixes: ['furia de los caidos', 'fury of the fallen'],
-    buildLogDetail: ({ lang, hasRule }) => {
-      if (!hasRule) return null
-      return {
-        text: t(
-          lang,
-          'Furia de los Caídos activa: esta unidad añade +1 dado de ataque en esta acción.',
-          'Fury of the Fallen active: this unit gains +1 attack die in this action.',
-        ),
-        dice: [],
-        source: 'faction',
-        owner: 'attacker',
-      }
-    },
   },
 ]
 

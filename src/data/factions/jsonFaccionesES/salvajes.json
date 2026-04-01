@@ -57,7 +57,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           },
           {
             "nombre": "Lanza-Kebabs",
@@ -70,7 +70,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -144,7 +144,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Lanza-Botellas",
@@ -157,7 +157,7 @@
               "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -199,7 +199,7 @@
             "danio_critico": "3",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -227,7 +227,7 @@
               "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Hacha del jefe",
@@ -240,7 +240,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -286,7 +286,7 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Kañón Bobina",
@@ -299,7 +299,7 @@
               "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Explosivo Pegado",
@@ -429,7 +429,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Torreta de arpones",
@@ -442,7 +442,7 @@
               "Impactos encadenados"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -501,7 +501,7 @@
               "Disparo parabólico"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -560,7 +560,7 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Lanzachatarra",
@@ -573,7 +573,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -620,7 +620,7 @@
       }
     },
     {
-      "nombre_unidad": "Debora- mundos",
+      "nombre_unidad": "Debora-mundos",
       "clase": "Titán",
       "perfil": {
         "movimiento": "2\"",
@@ -673,7 +673,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [

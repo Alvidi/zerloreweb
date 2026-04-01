@@ -1,0 +1,107 @@
+# Game Setup
+
+Before starting, players agree on:
+
+- The **number of command posts** to place on the table; these will be used to deploy units into the battle.
+- The **number of turns**.
+- Each player's **total army value**.
+- The **game mode**: Skirmish or Squads.
+- The **mission** they are going to play.
+
+Recommended guidelines:
+
+|                     | Skirmish | Squads                |
+| ------------------- | -------- | --------------------- |
+| Command posts       | 3 – 5    | 5 – 7                 |
+| Recommended value   | 30 – 60  | 60 – 150              |
+| Deployment per post | 1 – 2 units/squad | 2 units/squads |
+
+These values are only guidelines: players may agree on any setup that fits their table and available time.
+
+---
+
+# Missions
+
+There are **6 predefined missions** that determine how the battle is played. Players may choose one by mutual agreement or roll **1D6** to select one at random. All players use the same mission.
+
+---
+
+## Mission 1: Conquest
+
+_Take from the enemy what is theirs._
+
+Command posts are divided between the players before the battle: each player receives half of them. When placing them, each player secretly assigns a value to each post (**1, 2, or 3 points**), revealed at the start of the game. The objective is to conquer the opponent's posts.
+
+**Scoring:** at the end of each turn, each player adds up the value of the command posts they control.
+
+**Victory:** the player with the most points at the end of the game wins.
+
+---
+
+## Mission 2: Annihilation
+
+_Let nothing remain standing._
+
+Command posts are deployed normally. The goal is not territory, but to destroy the enemy.
+
+**Scoring:** at the end of each turn, each player adds the point value of enemy units destroyed during that turn.
+
+**Victory:** the player with the most points at the end of the game wins. In case of a tie, the player controlling more command posts wins.
+
+---
+
+## Mission 3: Last Bastion
+
+_If your base falls, everything falls._
+
+Each player assigns one of their command posts as their **Headquarters**. It must be placed in a committed position, not deep in the rear. The remaining posts function normally.
+
+**Scoring:** at the end of each turn, each player scores command posts they control as normal.
+
+**Immediate victory:** if a player captures the enemy Headquarters, they win the game immediately, regardless of accumulated points.
+
+**Standard victory:** if no Headquarters falls, the player with the most points at the end of the game wins.
+
+---
+
+## Mission 4: Total War
+
+_Everything counts. Everything matters._
+
+Command posts are deployed normally. Each player assigns one of their posts as a **Headquarters**, which must be placed in a committed position.
+
+**Scoring:** at the end of each turn, each player adds the points from the posts they control, plus the point value of enemy units destroyed that turn.
+
+**Immediate victory:** if a player captures the enemy Headquarters, they win immediately regardless of the score.
+
+**Standard victory:** if no Headquarters falls, the player with the most points at the end of the game wins.
+
+---
+
+## Mission 5: Assault
+
+_One attacks. One endures._
+
+Before the battle, the players decide who is the **Attacker** and who is the **Defender**, or roll for it. The Defender places all command posts and deploys first from them. The Attacker has no command posts of their own: they deploy their entire army directly on their table edge before the game begins.
+
+**Scoring:** at the end of each turn, the Defender adds the points of each post they still control. The Attacker does not score during turns.
+
+**Attacker victory:** if at the end of the game they control more posts than the Defender, they win.
+
+**Defender victory:** if the game ends with the Defender controlling at least as many posts as the Attacker, the Defender wins.
+
+---
+
+## Mission 6: Eye of the Storm
+
+_The centre decides everything, but no one holds it easily._
+
+Command posts are deployed normally and score normally at the end of each turn. In addition, a **Relic** is placed at the exact centre of the table at the start of the battle.
+
+**Picking up the Relic:** any Line, Elite, or Hero unit that moves into contact with the Relic may carry it. The bearer may only use the **move** action; it may only attack if charged into melee combat.
+
+**If the bearer dies or enters retreat:** the Relic returns to its starting position at the centre of the table. Any unit may pick it up during its next activation.
+
+**Bonus scoring:** at the end of each turn, the player holding the Relic scores **2 additional points**, regardless of command posts.
+
+**Victory:** the player with the most points at the end of the game wins. There is no immediate victory: the Relic is constant pressure throughout the battle.

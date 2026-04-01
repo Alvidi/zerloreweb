@@ -2,6 +2,7 @@
   min-height: 100vh;
   color: var(--text-main);
   background: var(--bg-1);
+  overflow-x: clip;
 }
 
 .app::before {
@@ -1421,9 +1422,78 @@ button {
   color: var(--text-main);
 }
 
+.unit-modal-header .eyebrow {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .unit-modal-body {
   display: grid;
   gap: 16px;
+}
+
+.unit-modal .field {
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+.unit-modal .field-label {
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+.field-inline-note {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.03em;
+}
+
+.field-label-accent {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.field-label-accent-lower {
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+.unit-image-field {
+  display: grid;
+  gap: 10px;
+}
+
+.unit-image-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.unit-image-input {
+  display: none;
+}
+
+.unit-image-preview {
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.unit-image-preview-empty {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+}
+
+.unit-image-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .squad-size-buttons {
@@ -1454,10 +1524,16 @@ button {
   background: transparent;
 }
 
+.mini-row + .mini-row {
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .mini-row .field {
   font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.03em;
   color: var(--text-muted);
 }
 
@@ -1465,8 +1541,8 @@ button {
   display: grid;
   gap: 8px;
   font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.03em;
   color: var(--text-muted);
 }
 
@@ -1482,7 +1558,8 @@ button {
 
 .mini-row .weapon-stats-row.head {
   font-size: 0.65rem;
-  text-transform: uppercase;
+  text-transform: none;
+  letter-spacing: 0.03em;
 }
 
 .mini-row .weapon-stats-row {
@@ -1495,9 +1572,10 @@ button {
 }
 
 .mini-row-title {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  font-weight: 700;
   color: var(--accent);
 }
 
@@ -1662,6 +1740,7 @@ button {
 
 .rules-page .section-head {
   max-width: 1120px;
+  min-width: 0;
 }
 
 .rules-page .section-head h2 {
@@ -2349,6 +2428,9 @@ mark {
   grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .rules-layout > * {
@@ -2358,6 +2440,50 @@ mark {
 .rules-content {
   min-width: 0;
   width: 100%;
+  max-width: 100%;
+}
+
+.rules-print-cover {
+  display: none;
+}
+
+.rules-print-cover-inner {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 18px;
+}
+
+.rules-print-cover-logo {
+  width: min(220px, 58vw);
+  height: auto;
+  display: block;
+}
+
+.rules-print-cover-brand {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+.rules-print-cover-title {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-align: center;
+}
+
+.rules-print-cover-subtitle {
+  margin: 0;
+  max-width: 44ch;
+  text-align: center;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
 .rules-toc {
@@ -2371,6 +2497,9 @@ mark {
   overflow-y: auto;
   overflow-x: hidden;
   backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .rules-toc::-webkit-scrollbar {
@@ -2425,6 +2554,41 @@ mark {
   align-items: center;
   gap: 6px;
   margin-top: 14px;
+}
+
+.rules-head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.rules-head-actions .rules-mode-switch {
+  margin-top: 0;
+}
+
+.rules-document-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.rules-document-head h1 {
+  flex: 1 1 auto;
+  margin: 0 !important;
+}
+
+.rules-download-button {
+  flex: 0 0 auto;
+  padding: 9px 14px;
+  border-radius: 999px;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.82rem;
 }
 
 .rules-mode-switch .ghost {
@@ -2655,6 +2819,16 @@ mark {
 }
 
 .rules-token-preview[data-token-preview='state_objective'].has-image {
+  width: 112px;
+  height: 112px;
+}
+
+.rules-token-preview[data-token-preview='state_conquest_blue'].has-image {
+  width: 112px;
+  height: 112px;
+}
+
+.rules-token-preview[data-token-preview='state_conquest_red'].has-image {
   width: 112px;
   height: 112px;
 }
@@ -3073,7 +3247,8 @@ mark {
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.02);
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .rules-html .rules-doctrine-gallery {
@@ -3159,6 +3334,20 @@ mark {
 }
 
 @media (max-width: 700px) {
+  .section,
+  .rules-page,
+  .rules-layout,
+  .rules-content,
+  .rules-html,
+  .rules-toc {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .rules-page {
+    overflow-x: clip;
+  }
+
   .rules-html .rules-doctrine-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
@@ -3331,6 +3520,23 @@ mark {
     width: 100%;
     margin-top: 0;
     gap: 8px;
+  }
+
+  .rules-head-actions {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .rules-document-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .rules-download-button {
+    width: 100%;
+    text-align: center;
   }
 
   .rules-mode-switch .ghost {
@@ -4355,5 +4561,124 @@ mark {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  .app,
+  .section,
+  .rules-page,
+  .rules-layout,
+  .rules-content,
+  .rules-html,
+  .rules-html .page {
+    max-width: none !important;
+    width: auto !important;
+    overflow: visible !important;
+  }
+
+  .app::before,
+  .app::after,
+  .nav,
+  .footer,
+  .back-to-top,
+  .rules-toc,
+  .rules-mode-switch,
+  .rules-document-head .rules-download-button,
+  .section-head .eyebrow {
+    display: none !important;
+  }
+
+  .app {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .section {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .rules-page .section-head {
+    padding: 0 0 12mm !important;
+    margin: 0 !important;
+  }
+
+  .rules-page .section-head h2,
+  .rules-page .section-head > p {
+    color: #111 !important;
+  }
+
+  .rules-layout {
+    display: block !important;
+  }
+
+  .rules-print-cover {
+    display: grid !important;
+    min-height: 260mm;
+    padding: 18mm 16mm 20mm;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .rules-print-cover-logo {
+    width: 54mm;
+  }
+
+  .rules-print-cover-brand,
+  .rules-print-cover-subtitle {
+    color: #222 !important;
+  }
+
+  .rules-print-cover-title {
+    color: #000 !important;
+  }
+
+  .rules-html {
+    background: #fff !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: #111 !important;
+  }
+
+  .rules-html h1,
+  .rules-html h2,
+  .rules-html h3,
+  .rules-html p,
+  .rules-html li,
+  .rules-html strong,
+  .rules-html em,
+  .rules-html th,
+  .rules-html td,
+  .rules-html a,
+  .rules-html code {
+    color: #111 !important;
+    background: transparent !important;
+  }
+
+  .rules-html h1,
+  .rules-html h2,
+  .rules-html h3 {
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .rules-html table,
+  .rules-html .rules-table-scroll {
+    overflow: visible !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .rules-html .rules-doctrine-gallery {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #bbb !important;
+    background: transparent !important;
   }
 }

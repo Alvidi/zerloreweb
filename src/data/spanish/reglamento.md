@@ -1,6 +1,10 @@
-# Reglamento
+# Reglamento ZeroLore
 
-Este reglamento pretende dar la experiencia completa de Zerolore con todas las reglas; aunque pueda parecer largo, Zerolore intenta siempre ser directo y sin demasiada complicación.
+ZeroLore está diseñado para ser flexible, modular y adaptable.
+
+Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
+
+La comunidad de ZeroLore es parte del juego. Si creas algo interesante, compártelo.
 
 ---
 
@@ -117,6 +121,8 @@ Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 - Cada jugador tira **1D6**.
 - El jugador con el resultado más alto **actúa primero** durante ese turno.
 - En caso de empate, se repite la tirada.
+- Se colocan estratagemas.
+- Se reclutan o se sacan unidades de reserva.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
@@ -147,12 +153,7 @@ Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese
 
 Cuando **todas las unidades de ambos jugadores** han sido activadas, el turno finaliza.
 
-Durante el Fin de Turno:
-
-- Se terminan los efectos que indiquen resolverse al final del turno.
-- Se resuelven los efectos que indiquen aplicarse al final del turno.
-
-Tras esto, comienza un nuevo turno empezando de nuevo por la Fase de Iniciativa.
+Durante el Fin de Turno se terminan los efectos que indiquen resolverse al final del turno. Tras esto, comienza un nuevo turno empezando de nuevo por la Fase de Iniciativa.
 
 ---
 
@@ -213,15 +214,15 @@ Una unidad puede retirarse en cualquier momento, incluso si está trabada en com
 Para realizar una retirada:
 
 - La unidad consume **2 acciones**.
-- Se mueve usando su valor de **Movimiento** en dirección a su zona de despliegue.
+- Se mueve usando su valor de **Movimiento** en dirección a un puesto de mando aliado.
 - Al entrar en retirada, la unidad reduce su **Velocidad a 0** y su **Valor no cuenta para el control de objetivos o puestos de mando** hasta que se recomponga.
 
 Al inicio de su siguiente turno, la unidad debe tirar **1D6**:
 
-- **1–2:** continúa retirándose hacia su zona de despliegue.
+- **1–2:** continúa retirándose hacia un puesto de mando aliado.
 - **3–6:** se recompone y puede actuar con normalidad.
 
-Las unidades se recomponen automáticamente en el momento en que alcanzan su zona de despliegue o alguna zona segura que indique el modo de juego.
+Las unidades se recomponen automáticamente en el momento en que alcanzan un puesto de mando o alguna zona segura que indique el modo de juego creado.
 
 Una unidad en estado de Retirada **no puede realizar contraataques**.
 
@@ -235,12 +236,6 @@ Una unidad preparada puede realizar **contraataques a distancia** durante el tur
 - **Si es cargada:** el combate se resuelve por **Velocidad**. Si la unidad preparada tiene mayor Velocidad, ataca primero. La unidad que cargó realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
 
 El estado de Preparado dura hasta que finaliza el turno.
-
-## Consideraciones generales
-
-- Si un jugador olvida realizar una acción, usar una habilidad o declarar un efecto, este se considera perdido, salvo acuerdo entre jugadores.
-- Se recomienda que las miniaturas porten las armas representadas en su perfil para facilitar la lectura del campo de batalla.
-- Comunicar las intenciones de cada jugada ayuda a mantener una partida fluida y clara.
 
 ---
 
@@ -515,16 +510,19 @@ Mientras esté descontrolada:
 
 El estado de Descontrol se mantiene hasta que una regla indique lo contrario o finalice la partida.
 
-# Zona de despliegue
+# Puestos de mando y despliegue
 
-La zona de despliegue es la franja a lo largo del borde de la mesa donde cada jugador coloca sus unidades al inicio de la partida y donde las unidades en retirada se reorganizan. Ocupa todo el ancho de la mesa desde el borde hasta la distancia indicada:
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
 
-- **Modo Escaramuza:** 5" desde el borde de la mesa.
-- **Modo Escuadras:** 12" desde el borde de la mesa.
+Para desplegar una unidad en un puesto de mando, la unidad debe estar en contacto con él. Si el puesto está ocupado por unidades enemigas, aunque siga siendo propiedad por valor o héroe del aliado, no se puede desplegar en él.
 
-Cada jugador despliega en el extremo opuesto de la mesa, dejando tierra de nadie entre ambas zonas donde se desarrolla el combate.
+Las unidades que no puedan desplegarse en el turno inicial quedan en **reserva**.
 
-Algunas unidades disponen de reglas especiales de despliegue indicadas en su ficha que les permiten desplegarse fuera de esta zona.
+Algunas unidades disponen de habilidades especiales de despliegue indicadas en su ficha.
+
+## Reserva
+
+Las unidades en reserva aún no han entrado al campo de batalla. Se despliegan durante la **Fase de Iniciativa** de turnos posteriores, desde cualquier puesto de mando que controles.
 
 ## Despliegue inicial
 
@@ -532,8 +530,6 @@ Antes de comenzar la partida los jugadores despliegan sus ejércitos. Cada jugad
 
 - **Modo escaramuza:** de una miniatura en una.
 - **Modo escuadras:** de una escuadra en una.
-
-Todas las unidades deben colocarse dentro de la propia zona de despliegue, salvo que una regla especial indique lo contrario.
 
 ---
 
@@ -961,12 +957,8 @@ Esta doctrina solo funciona con una unidad o escuadra aliada que esté trabada e
 
 ---
 
-# Cierre
+## Consideraciones generales
 
-ZeroLore está diseñado para ser flexible, modular y adaptable.
-
-Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema.
-
-Este reglamento es el punto de partida para quien quiera empezar a jugar sin complicarse. Pero ZeroLore no termina ahí. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
-
-La comunidad de ZeroLore es parte del juego. Si creas algo interesante, compártelo.
+- Si un jugador olvida realizar una acción, usar una habilidad o declarar un efecto, este se considera perdido, salvo acuerdo entre jugadores.
+- Se recomienda que las miniaturas porten las armas diferenciales en escuadras para facilitar la lectura del campo de batalla.
+- Comunicar las intenciones de cada jugada ayuda a mantener una partida fluida y clara.

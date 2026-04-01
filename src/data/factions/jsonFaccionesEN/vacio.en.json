@@ -72,7 +72,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -162,7 +162,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -221,7 +221,7 @@
               "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -282,7 +282,7 @@
               "Anti 4+ (All)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -310,7 +310,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -404,7 +404,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -483,7 +483,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Vacule of the Beyond",
+            "nombre": "Staff of the Beyond",
             "ataques": "1D6",
             "distancia": null,
             "impactos": null,
@@ -493,7 +493,7 @@
               "Chained Impacts"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -510,7 +510,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit cannot benefit from the Void Portals ability. You can equip two Shooting weapons and fire twice in the same action, using the same or different weapons.",
+        "especialidad": "This unit cannot take part in Void Portal exchanges, neither as origin nor destination. It may equip two ranged weapons and fire twice in the same action, using the same or different weapons.",
         "valor": 42
       },
       "armas": {
@@ -540,7 +540,7 @@
               "Limited Ammo (3)"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Void Rift",
@@ -554,7 +554,7 @@
               "Anti 4+ (Titan)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -569,7 +569,7 @@
               "Anti 4+ (Titan)"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Warp Limbs",
@@ -582,7 +582,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }

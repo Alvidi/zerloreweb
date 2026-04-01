@@ -30,7 +30,7 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad carga, puede repetir todos los dados de ataque fallidos en el ataque cuerpo a cuerpo de esa carga.",
+        "especialidad": "-",
         "valor": 5
       },
       "armas": {
@@ -57,7 +57,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Arma Pesada",
@@ -70,7 +70,7 @@
               "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -140,7 +140,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "MG Pesada",
@@ -153,7 +153,7 @@
               "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Lanzacohetes",
@@ -166,7 +166,7 @@
               "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -190,7 +190,7 @@
             "danio_critico": "4",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -236,7 +236,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -260,7 +260,7 @@
             "danio_critico": "5",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -277,7 +277,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno",
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9” de un puesto de mando aliado",
         "valor": 9
       },
       "armas": {
@@ -307,7 +307,7 @@
               "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -331,7 +331,7 @@
             "danio_critico": "5",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -375,7 +375,7 @@
               "Precisión"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Misiles balísticos",
@@ -388,7 +388,7 @@
               "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Cañón láser balistico",
@@ -401,7 +401,7 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 5
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -422,18 +422,18 @@
     {
       "nombre_unidad": "Centurión de Hierro",
       "clase": "Vehículo",
-      "perfil": {
-        "movimiento": "6\"",
-        "vidas": 18,
-        "salvacion": "+4",
-        "velocidad": 2,
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "especialidad": "-",
-        "valor": 9
+    "perfil": {
+      "movimiento": "6\"",
+      "vidas": 18,
+      "salvacion": "+4",
+      "velocidad": 2,
+      "escuadra": {
+        "min": 1,
+        "max": 1
       },
+      "especialidad": "Cuando esta unidad carga, puede repetir todos los dados de ataque fallidos en el ataque cuerpo a cuerpo de esa carga.",
+      "valor": 9
+    },
       "armas": {
         "disparo": [
           {
@@ -517,7 +517,7 @@
               "Pistolero"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Microcañón Táctico",
@@ -530,7 +530,7 @@
               "Asaltante"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -615,7 +615,7 @@
               "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Rayo de Anulación",
@@ -628,7 +628,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -654,7 +654,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }

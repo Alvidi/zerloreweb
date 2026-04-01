@@ -59,7 +59,7 @@
               "Ignora coberturas"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Mirada holo-lanza",
@@ -72,7 +72,7 @@
               "Disparo parabólico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -100,7 +100,7 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -144,7 +144,7 @@
               "Precisión"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Cañón resonante",
@@ -157,7 +157,7 @@
               "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -185,7 +185,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -244,7 +244,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Daga de vértice",
@@ -257,7 +257,7 @@
               "Ignora coberturas"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           },
           {
             "nombre": "Martillo eléctrico",
@@ -271,7 +271,7 @@
               "Anti 5+ (Élite/Línea)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ]
       }
@@ -317,7 +317,7 @@
               "Ataque rápido +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Cañón prisma móvil",
@@ -330,7 +330,7 @@
               "Disparo parabólico"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -389,7 +389,7 @@
               "Ignora coberturas"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Lanza fractal pesada",
@@ -402,7 +402,7 @@
               "Anti 5+ (Vehículos)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -477,7 +477,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Escopeta Recortada",
@@ -490,7 +490,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Rifle de Tirador",
@@ -503,7 +503,7 @@
               "Precisión"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Lanzador Improvisado",
@@ -516,7 +516,7 @@
               "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -542,7 +542,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Machete",
@@ -553,7 +553,7 @@
             "danio_critico": "3",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }

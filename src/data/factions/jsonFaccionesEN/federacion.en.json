@@ -5,10 +5,10 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Entrenchment",
-        "descripcion": "A unit of this faction that has not taken any Move actions during its activation gains -1 Hit die on all of its Shooting attacks until the end of that activation."
+        "descripcion": "A unit of this faction that has not taken any Move actions during its activation gains +1 Hit die on all of its Shooting attacks until the end of that activation."
       },
       {
-        "habilidades_faccion2": "Low reinforcements",
+        "habilidades_faccion2": "Raw Reinforcements",
         "descripcion": "Once per game, when a Line unit from this faction is completely eliminated, you may return it to the field to the deployment zone of your next Initiative phase."
       },
       {
@@ -101,7 +101,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Grenade launcher",
@@ -114,7 +114,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "plasma rifles",
@@ -127,7 +127,7 @@
               "Anti 5+ (Elite)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -197,7 +197,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -287,7 +287,7 @@
               "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -313,7 +313,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -360,7 +360,7 @@
               "Rapid Fire +2"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Anti-Tank Cannon",
@@ -374,7 +374,7 @@
               "Anti 5+ (Vehicle / Monster)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -445,7 +445,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "barricade cannon",
@@ -460,7 +460,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -490,7 +490,7 @@
           "min": 2,
           "max": 2
         },
-        "especialidad": "This unit cannot be moved. Requires two friendly Line units to fire. Such units may detach from this unit, but may not fire that turn.",
+        "especialidad": "This unit cannot move.",
         "valor": 8
       },
       "armas": {
@@ -653,7 +653,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [

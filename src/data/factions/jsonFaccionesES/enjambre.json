@@ -5,7 +5,7 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "El enjambre eterno",
-        "descripcion": "Todas las unidades de zánganos o zánganos alados eliminadas vuelven a la partida al inicio de la siguiente Fase de Iniciativa, desde la zona de despliegue con todas sus Vidas."
+        "descripcion": "Todas las unidades/escuadras de zánganos o zánganos alados eliminadas vuelven a la partida al inicio de la siguiente Fase de Iniciativa, desde la zona de despliegue con todas sus Vidas."
       },
       {
         "habilidades_faccion2": "Synapsis mental",
@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Voracidad",
-        "descripcion": "Cuando una unidad/escuadra del Enjambre elimina una unidad enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño a una unidad."
+        "descripcion": "Cuando una unidad/escuadra de Línea elimina una unidad enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño a una unidad o la escuadra."
       }
     ]
   },
@@ -183,7 +183,7 @@
               "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -213,7 +213,7 @@
           "min": 2,
           "max": 6
         },
-        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9\" del enemigo en el 2 turno. Esta unidad no atacan a distancia.",
+        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9” de un puesto de mando aliado. Esta unidad no ataca a distancia.",
         "valor": 8
       },
       "armas": {
@@ -243,7 +243,7 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -433,7 +433,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Aguijón Esporal",
@@ -446,7 +446,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -474,7 +474,7 @@
               "Impactos encadenados"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -491,7 +491,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas pueden desplegarse desde esta unidad como si fuera una zona de despliegue desde la unidad a 3\", siempre que la Reina Mayor no esté trabada en combate. Esta unidad puede llevar dos armas a distancia y disparar dos veces en la misma acción.",
+        "especialidad": "Las unidades aliadas pueden desplegarse desde esta unidad como si fuera un puesto de mando a 3”, siempre que la Reina Mayor no esté trabada en combate. Esta unidad puede llevar dos armas a distancia y disparar dos veces en la misma acción.",
         "valor": 40
       },
       "armas": {

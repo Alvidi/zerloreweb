@@ -9,11 +9,11 @@
       },
       {
         "habilidades_faccion2": "Target in sight",
-        "descripcion": "The unit has rerolls against a specific target marked that turn."
+        "descripcion": "During the Initiative Phase, this faction may mark one visible enemy unit. All Alliance units/squads may reroll failed Hit rolls against that target during this turn."
       },
       {
         "habilidades_faccion3": "Martial resistance",
-        "descripcion": "When a unit/squad is at a command point, units gain -1 hit on their ranged weapons."
+        "descripcion": "When an allied unit/squad is at a command point, enemy attackers suffer +1 to the Hit value needed on their ranged attacks against that unit."
       }
     ]
   },
@@ -30,7 +30,7 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "When this unit charges, it may re-roll all failed attack dice in the melee attack of that charge.",
+        "especialidad": "-",
         "valor": 5
       },
       "armas": {
@@ -57,7 +57,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Heavy Weapon",
@@ -70,7 +70,7 @@
               "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -140,7 +140,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Heavy MG",
@@ -153,7 +153,7 @@
               "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Rocket launcher",
@@ -166,7 +166,7 @@
               "Anti 5+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -190,7 +190,7 @@
             "danio_critico": "4",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -236,7 +236,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -260,7 +260,7 @@
             "danio_critico": "5",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -277,7 +277,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "This unit can be deployed anywhere within 9\" of the enemy on turn 2.",
+        "especialidad": "This unit may deploy anywhere within 9\" of an allied command point.",
         "valor": 9
       },
       "armas": {
@@ -307,7 +307,7 @@
               "Anti 5+ (Line)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -331,7 +331,7 @@
             "danio_critico": "5",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -375,7 +375,7 @@
               "Precision"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "ballistic missiles",
@@ -388,7 +388,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Ballistic laser cannon",
@@ -401,7 +401,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 5
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -422,18 +422,18 @@
     {
       "nombre_unidad": "Iron Centurion",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "6\"",
-        "vidas": 18,
-        "salvacion": "+4",
-        "velocidad": 2,
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "especialidad": "-",
-        "valor": 9
+    "perfil": {
+      "movimiento": "6\"",
+      "vidas": 18,
+      "salvacion": "+4",
+      "velocidad": 2,
+      "escuadra": {
+        "min": 1,
+        "max": 1
       },
+      "especialidad": "When this unit charges, it may reroll all failed attack dice in that charge's melee attack.",
+      "valor": 9
+    },
       "armas": {
         "disparo": [
           {
@@ -517,7 +517,7 @@
               "Gunslinger"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Tactical Microcannon",
@@ -530,7 +530,7 @@
               "Raider"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -615,7 +615,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Nullification Ray",
@@ -628,7 +628,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -654,7 +654,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }

@@ -5,15 +5,15 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "The eternal swarm",
-        "descripcion": "All eliminated Drone or Winged Drone units/squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
+        "descripcion": "All eliminated Drone or Winged Drone units or squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
       },
       {
         "habilidades_faccion2": "mental synapse",
-        "descripcion": "If the units/squads are not within 6\" of each other, they must roll 1D6 on initiative: if a 1 or 2 is rolled, the unit retreats, following the retreat rules."
+        "descripcion": "At the start of each Initiative Phase, any Swarm unit or squad that is not within 6\" of at least one other allied unit must roll 1D6: on a 1-2 it enters retreat following the normal retreat rules. This rule affects all units except Heroes and Monsters."
       },
       {
         "habilidades_faccion3": "Voracity",
-        "descripcion": "When a Swarm unit/squad eliminates an enemy unit in close combat, it may remove a damage marker from a unit."
+        "descripcion": "When a Line unit or squad eliminates an enemy unit in close combat, it may remove a damage marker from a unit or the squad."
       }
     ]
   },
@@ -183,7 +183,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -213,7 +213,7 @@
           "min": 2,
           "max": 6
         },
-        "especialidad": "This unit can be deployed anywhere within 9\" of the enemy on turn 2. This unit does not attack at range.",
+        "especialidad": "This unit may deploy anywhere within 9\" of an allied command point. This unit does not attack at range.",
         "valor": 8
       },
       "armas": {
@@ -243,7 +243,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -260,7 +260,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If you kill a melee unit, you can devour it and gain +1 health.",
+        "especialidad": "If this unit destroys an enemy unit in melee, it may devour it and gain +1 HP, up to its maximum HP.",
         "valor": 14
       },
       "armas": {
@@ -308,7 +308,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If the unit damages (line and elite), it creates fear causing the unit to enter a retreat state.",
+        "especialidad": "If this unit inflicts 3 or more damage in a single attack to a Line or Elite unit, that unit enters retreat.",
         "valor": 12
       },
       "armas": {
@@ -356,7 +356,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If your units/squads are within 6\" of it, they re-roll failed rolls of any type. This unit can conquer command posts.",
+        "especialidad": "Allied units and squads within 6\" of this unit may reroll failed attack rolls. This unit can capture command points.",
         "valor": 11
       },
       "armas": {
@@ -404,7 +404,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit can deploy anywhere within 9\" of the enemy on turn 2. It can climb structures with diagonal movement.",
+        "especialidad": "This unit can climb structures by measuring distance diagonally, counting both the horizontal and vertical displacement to determine the movement spent.",
         "valor": 14
       },
       "armas": {
@@ -433,7 +433,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Spore Stinger",
@@ -446,7 +446,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -474,13 +474,13 @@
               "Chained Impacts"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
     },
     {
-      "nombre_unidad": "eldest queen",
+      "nombre_unidad": "Eldest Queen",
       "clase": "Titan",
       "perfil": {
         "movimiento": "3\"",
@@ -491,7 +491,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit serves as a deployment area. This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
+        "especialidad": "Allied units may deploy from this unit as if it were a command point within 3\", as long as the Eldest Queen is not engaged in melee. This unit may carry two ranged weapons and fire twice in the same action.",
         "valor": 40
       },
       "armas": {

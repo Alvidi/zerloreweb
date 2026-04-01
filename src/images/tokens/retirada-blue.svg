@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
     <radialGradient id="bgGlow" cx="50%" cy="50%" r="56%">
-      <stop offset="0%" stop-color="#102746"/>
-      <stop offset="58%" stop-color="#0b1831"/>
-      <stop offset="100%" stop-color="#070d18"/>
+      <stop offset="0%" stop-color="#3b1f12"/>
+      <stop offset="58%" stop-color="#24140d"/>
+      <stop offset="100%" stop-color="#140d0a"/>
     </radialGradient>
     <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#9ad7ff"/>
-      <stop offset="52%" stop-color="#43a9ff"/>
-      <stop offset="100%" stop-color="#1e6fd2"/>
+      <stop offset="0%" stop-color="#ffd6a4"/>
+      <stop offset="52%" stop-color="#ff9b52"/>
+      <stop offset="100%" stop-color="#d15c26"/>
     </linearGradient>
     <radialGradient id="coreGrad" cx="50%" cy="45%" r="62%">
-      <stop offset="0%" stop-color="#d9f2ff"/>
-      <stop offset="44%" stop-color="#75c4ff"/>
-      <stop offset="100%" stop-color="#2a75d9"/>
+      <stop offset="0%" stop-color="#ffe5c7"/>
+      <stop offset="44%" stop-color="#ffb46a"/>
+      <stop offset="100%" stop-color="#cc5b2d"/>
     </radialGradient>
   </defs>
 
   <circle cx="512" cy="512" r="496" fill="url(#bgGlow)"/>
-  <circle cx="512" cy="512" r="470" fill="none" stroke="#e2f4ff" stroke-opacity="0.18" stroke-width="4"/>
+  <circle cx="512" cy="512" r="470" fill="none" stroke="#ffe9cc" stroke-opacity="0.18" stroke-width="4"/>
   <circle cx="512" cy="512" r="420" fill="none" stroke="url(#ringGrad)" stroke-width="20"/>
-  <circle cx="512" cy="512" r="392" fill="none" stroke="#a8ddff" stroke-opacity="0.36" stroke-width="4"/>
-  <circle cx="512" cy="512" r="322" fill="none" stroke="#a8ddff" stroke-opacity="0.26" stroke-width="2.5" stroke-dasharray="8 14"/>
-  <circle cx="512" cy="512" r="248" fill="none" stroke="#a8ddff" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="6 13"/>
+  <circle cx="512" cy="512" r="392" fill="none" stroke="#ffd4a8" stroke-opacity="0.36" stroke-width="4"/>
+  <circle cx="512" cy="512" r="322" fill="none" stroke="#ffd4a8" stroke-opacity="0.26" stroke-width="2.5" stroke-dasharray="8 14"/>
+  <circle cx="512" cy="512" r="248" fill="none" stroke="#ffd4a8" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="6 13"/>
 
   <circle cx="512" cy="512" r="196" fill="url(#coreGrad)" fill-opacity="0.28"/>
-  <circle cx="512" cy="512" r="132" fill="#dff3ff" fill-opacity="0.1"/>
+  <circle cx="512" cy="512" r="132" fill="#ffe9cc" fill-opacity="0.08"/>
 
-  <path d="M708 458H488v-86L278 512l210 140v-86h220z" fill="#1a3f72"/>
-  <path d="M684 472H474v-70L316 512l158 110v-70h210z" fill="#eaf8ff"/>
-  <path d="M654 486H458v-52L352 512l106 78v-52h196z" fill="#64baff"/>
+  <path d="M708 458H488v-86L278 512l210 140v-86h220z" fill="#8d411d"/>
+  <path d="M684 472H474v-70L316 512l158 110v-70h210z" fill="#fff4e4"/>
+  <path d="M654 486H458v-52L352 512l106 78v-52h196z" fill="#ff9b52"/>
 
-  <path d="M760 430h64M740 512h84M760 594h64" fill="none" stroke="#b7e5ff" stroke-width="14" stroke-linecap="round" stroke-opacity="0.72"/>
+  <path d="M760 430h64M740 512h84M760 594h64" fill="none" stroke="#ffd8b0" stroke-width="14" stroke-linecap="round" stroke-opacity="0.72"/>
 </svg>

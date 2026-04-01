@@ -5,15 +5,15 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Guerrilla in the shadows",
-        "descripcion": "This faction can deploy its line units/squads and Vehicles outside the deployment zone, 9\" from the enemy and command posts."
+        "descripcion": "This faction can deploy its Line units/squads and Vehicles outside the deployment zone, 9\" from enemies and from command points or objectives."
       },
       {
         "habilidades_faccion2": "Feint",
-        "descripcion": "Units/squads, when using the prepare action instead of counterattack, gain -1 save when it is fired, it does not stack if it is in cover."
+        "descripcion": "This faction cannot use the Prepare action. When a Rebel unit receives a ranged attack, it may immediately make a free reaction shot. If that same unit receives another ranged attack during the same turn, it cannot respond again."
       },
       {
         "habilidades_faccion3": "Nobody stops",
-        "descripcion": "This faction must always spend one 3\" movement action, except when charging or when engaged in melee combat."
+        "descripcion": "This faction must always spend one 3\" Move action, except when charging or when locked in melee combat."
       }
     ]
   },
@@ -59,7 +59,7 @@
               "Ignore Coverage"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "holo-spear look",
@@ -72,7 +72,7 @@
               "Parabolic Shot"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -100,7 +100,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ]
       }
@@ -144,7 +144,7 @@
               "Precision"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "resounding cannon",
@@ -157,7 +157,7 @@
               "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -185,7 +185,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -244,7 +244,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Vertex Dagger",
@@ -257,7 +257,7 @@
               "Ignore Coverage"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           },
           {
             "nombre": "electric hammer",
@@ -271,7 +271,7 @@
               "Anti 5+ (Elite/Line)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ]
       }
@@ -317,7 +317,7 @@
               "Quick Attack +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Mobile prism cannon",
@@ -330,7 +330,7 @@
               "Parabolic Shot"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -389,7 +389,7 @@
               "Ignore Coverage"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Heavy Fractal Spear",
@@ -402,7 +402,7 @@
               "Anti 5+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -434,7 +434,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "You can hijack enemy vehicles if you successfully charge against one, roll a D6, if you roll 1,2 and 3 the vehicle becomes part of your lines.",
+        "especialidad": "This unit can hijack enemy vehicles below 50% health. If it successfully charges an enemy vehicle, roll 1D6: on 1-3 that vehicle becomes yours until the end of the game and may activate normally from the following turn. On 4-6 the attempt fails. The hero escapes unharmed if the vehicle is destroyed.",
         "valor": 14
       },
       "armas": {
@@ -477,7 +477,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Sawed-Off Shotgun",
@@ -490,7 +490,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Marksman Rifle",
@@ -503,7 +503,7 @@
               "Precision"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Improvised Launcher",
@@ -516,7 +516,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -542,7 +542,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Machete",
@@ -553,7 +553,7 @@
             "danio_critico": "3",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }

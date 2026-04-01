@@ -5,15 +5,15 @@
     "habilidades_faccion": [
       {
         "habilidades_faccion1": "Glory of the Crucible",
-        "descripcion": "A unit/squad can ignore the first ranged wound they receive."
+        "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit ignores the first point of damage received from a ranged attack during that turn."
       },
       {
-        "habilidades_faccion2": "heroic fall",
-        "descripcion": "If the unit dies, carry out a counterattack before dying, either in shooting or in combat."
+        "habilidades_faccion2": "Heroic Fall",
+        "descripcion": "When a Crucible unit is destroyed, before being removed it may immediately make a free counterattack, either ranged or melee depending on its position, following the normal attack rules. This attack is resolved even if the unit is locked. After resolving it, the unit is removed. In squads, the individual model being removed makes the attack."
       },
       {
-        "habilidades_faccion3": "sacred vow",
-        "descripcion": "A unit/squad can reroll one failed melee die per turn."
+        "habilidades_faccion3": "Sacred Vow",
+        "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit may reroll one failed melee die during that turn."
       }
     ]
   },
@@ -49,8 +49,8 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "devotional sheet",
-            "ataques": "2",
+            "nombre": "Devotional Blade",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -74,7 +74,7 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "You do not benefit from partial coverage. The chosen equipped weapons have to match in shooting and melee.",
+        "especialidad": "This unit does not benefit from cover. It must equip the same weapon for both shooting and melee. If it chooses the Guardian Lance, it uses it for both attack types. If it chooses the Sun Sword and Shield, it also uses it for both.",
         "valor": 10
       },
       "armas": {
@@ -107,7 +107,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lance guard",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -151,7 +151,7 @@
         "disparo": [
           {
             "nombre": "Storm Lance",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
@@ -165,8 +165,8 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "energy fist",
-            "ataques": "3",
+            "nombre": "Energy Fist",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -197,7 +197,7 @@
         "disparo": [
           {
             "nombre": "Solar Destroyer",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "2",
@@ -210,7 +210,7 @@
           },
           {
             "nombre": "Solar Cannon",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "4",
@@ -219,13 +219,13 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Ariete Dorado",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -249,7 +249,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "While on the table, all damage taken by Crucible units within 6\" is assigned to this unit first. This unit cannot go in a squad.",
+        "especialidad": "This unit may choose to receive damage from units/squads within 6\" of it. This unit cannot join a squad.",
         "valor": 22
       },
       "armas": {

@@ -13,7 +13,7 @@
       },
       {
         "habilidades_faccion3": "Voto sagrado",
-        "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno.."
+        "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno."
       }
     ]
   },
@@ -37,7 +37,7 @@
         "disparo": [
           {
             "nombre": "Fusil de Crisol",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -50,7 +50,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Hoja devocional",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -74,7 +74,7 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "No se beneficia de la coberturas. Esta unidad debe equipar la misma arma tanto para disparo como para CaC - si elige la Lanza guardia, la usa en ambos tipos de ataque. Si elige la Espada solar y escudo, también la usa en ambos.\"",
+        "especialidad": "No se beneficia de las coberturas. Esta unidad debe equipar la misma arma tanto para disparo como para CaC. Si elige la Lanza guardia, la usa en ambos tipos de ataque. Si elige la Espada solar y escudo, también la usa en ambos.",
         "valor": 10
       },
       "armas": {
@@ -107,7 +107,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lanza guardia",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -151,7 +151,7 @@
         "disparo": [
           {
             "nombre": "Lanza tormenta",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
@@ -166,7 +166,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Puño de energía",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -197,7 +197,7 @@
         "disparo": [
           {
             "nombre": "destructor Solar",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "2",
@@ -210,7 +210,7 @@
           },
           {
             "nombre": "Cañón Solar",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "4",
@@ -219,13 +219,13 @@
               "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Ariete Dorado",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -249,7 +249,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Mientras esté en mesa, todo el daño recibido por unidades del Crisol a 6\" se asigna primero a esta unidad. ESta unidad no puede ir en escuadra",
+        "especialidad": "Puede decidir recibir el daño de unidades/escuadras a 6\" de este. Esta unidad no puede ir en escuadra.",
         "valor": 22
       },
       "armas": {

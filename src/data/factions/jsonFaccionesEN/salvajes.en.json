@@ -57,7 +57,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           },
           {
             "nombre": "Kebab Launcher",
@@ -70,7 +70,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -144,7 +144,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Bottle Launcher",
@@ -157,7 +157,7 @@
               "Anti 5+ (Line)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -199,7 +199,7 @@
             "danio_critico": "3",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -227,7 +227,7 @@
               "Anti 5+ (Elite)"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "boss ax",
@@ -240,7 +240,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ]
       }
@@ -286,7 +286,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Coil Cannon",
@@ -299,7 +299,7 @@
               "Anti 5+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Stuck Explosive",
@@ -429,7 +429,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Harpoon turret",
@@ -442,7 +442,7 @@
               "Chained Impacts"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -501,7 +501,7 @@
               "Parabolic Shot"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -560,7 +560,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Scrap Launcher",
@@ -573,7 +573,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -585,7 +585,7 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Critical Attack (+1)"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -620,7 +620,7 @@
       }
     },
     {
-      "nombre_unidad": "Debora- worlds",
+      "nombre_unidad": "World-Devourer",
       "clase": "Titan",
       "perfil": {
         "movimiento": "2\"",
@@ -673,7 +673,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [

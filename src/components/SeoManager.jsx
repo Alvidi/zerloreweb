@@ -12,7 +12,7 @@ const SEO_BY_LANG = {
     '/reglamento': {
       title: 'Reglamento | ZeroLore',
       description:
-        'Consulta el reglamento de ZeroLore: sistema rapido, brutal y cinematografico para tus partidas.',
+        'Consulta el reglamento de ZeroLore: sistema rapido, brutal y cinematico para tus partidas.',
     },
     '/generador': {
       title: 'Generador de Ejercitos | ZeroLore',

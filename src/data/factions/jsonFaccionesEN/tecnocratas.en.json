@@ -30,7 +30,7 @@
           "min": 4,
           "max": 8
         },
-        "especialidad": "Drone Support",
+        "especialidad": "-",
         "valor": 4
       },
       "armas": {
@@ -55,7 +55,7 @@
             "danio_critico": "2",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Sniper Rifle",
@@ -68,7 +68,7 @@
               "Precision"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Ultra Pulse Rifle",
@@ -81,7 +81,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -155,7 +155,7 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ]
       }
@@ -172,7 +172,7 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "-",
+        "especialidad": "Drone Support",
         "valor": 3
       },
       "armas": {
@@ -301,7 +301,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Missile launcher",
@@ -314,7 +314,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Plasma Cannon",
@@ -327,7 +327,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -386,7 +386,7 @@
               "Anti 4+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -458,7 +458,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Attached plasma cannon",
@@ -471,7 +471,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": []
@@ -516,7 +516,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -586,7 +586,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 2
           },
           {
             "nombre": "Microdrone Projector",
@@ -599,7 +599,7 @@
               "Chained Impacts"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 3
           },
           {
             "nombre": "Phase Cannon",
@@ -612,7 +612,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -686,7 +686,7 @@
               "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [

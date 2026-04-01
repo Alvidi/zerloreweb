@@ -1,404 +1,24 @@
-import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
-import { createPortal } from 'react-dom'
+import { useEffect, useMemo, useState, useTransition } from 'react'
 import { useI18n } from '../i18n/I18nContext.jsx'
-import { getAbilityLabel, getAbilityDescription } from '../utils/abilities.js'
 import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
+import UnitConfigurator from '../features/generator/components/UnitConfigurator.jsx'
+import CustomSelect from '../features/generator/components/CustomSelect.jsx'
+import UnitTypeBadge from '../features/generator/components/UnitTypeBadge.jsx'
+import { exportGeneratorPdf } from '../features/generator/exportGeneratorPdf.js'
+import {
+  buildArmyUnitDisplayNames,
+  clampSquadSize,
+  computeUnitTotal,
+  factionImages,
+  generateArmyByValue,
+  isFactionData,
+  isUnitTypeAllowedInGameMode,
+  localizeArmyUnits,
+  normalizeFaction,
+  toNumber,
+} from '../features/generator/generatorUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
-
-const factionImages = {
-  alianza: new URL('../images/faccion/alianza.svg', import.meta.url).href,
-  legionarios_crisol: new URL('../images/faccion/legionarios_crisol.svg', import.meta.url).href,
-  salvajes: new URL('../images/faccion/salvajes.svg', import.meta.url).href,
-  vacio: new URL('../images/faccion/vacio.svg', import.meta.url).href,
-  rebeldes: new URL('../images/faccion/rebeldes.svg', import.meta.url).href,
-  tecnotumbas: new URL('../images/faccion/tecnotumbas.svg', import.meta.url).href,
-  enjambre: new URL('../images/faccion/enjambre.svg', import.meta.url).href,
-  federacion: new URL('../images/faccion/federacion.svg', import.meta.url).href,
-  tecnocratas: new URL('../images/faccion/tecnocratas.svg', import.meta.url).href,
-}
-
-const slugify = (value) =>
-  String(value || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-
-const toNumber = (value) => {
-  const parsed = Number(value)
-  return Number.isFinite(parsed) ? parsed : 0
-}
-
-const isFactionData = (data) => data && data.faccion && Array.isArray(data.unidades)
-
-const normalizeSquadBounds = (minRaw, maxRaw) => {
-  const min = toNumber(minRaw)
-  const max = toNumber(maxRaw)
-  const safeMin = min > 0 ? min : 1
-  const safeMax = max >= safeMin ? max : safeMin
-  return { min: safeMin, max: safeMax }
-}
-
-const clampSquadSize = (value, unit) => {
-  const next = toNumber(value)
-  const min = unit?.escuadra_min ?? 1
-  const max = unit?.escuadra_max ?? min
-  if (!Number.isFinite(next)) return min
-  return Math.min(max, Math.max(min, next))
-}
-
-const normalizeWeapon = (weapon, tipo) => ({
-  id: slugify(weapon.nombre || weapon.id || `${tipo}-${Math.random()}`),
-  nombre: weapon.nombre || weapon.id || 'Arma',
-  tipo,
-  ataques: weapon.ataques ?? weapon.atq ?? '-',
-  distancia: weapon.distancia ?? null,
-  impactos: weapon.impactos ? String(weapon.impactos).replace(/^\+?(\d+)\+?$/, '$1+') : null,
-  danio: weapon.danio ?? weapon.danio_base ?? '-',
-  danio_critico: weapon.danio_critico ?? weapon.critico ?? '-',
-  habilidades: weapon.habilidades_arma || weapon.habilidades || [],
-  valor_extra: toNumber(weapon.valor_extra ?? 0),
-})
-
-const getUnitTypeToken = (type) => {
-  const normalized = String(type || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-
-  if (normalized.includes('linea') || normalized.includes('line')) return 'line'
-  if (normalized.includes('elite')) return 'elite'
-  if (normalized.includes('vehiculo') || normalized.includes('vehicle')) return 'vehicle'
-  if (normalized.includes('monstruo') || normalized.includes('monster')) return 'monster'
-  if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
-  if (normalized.includes('titan') || normalized.includes('titante')) return 'titan'
-  return 'line'
-}
-
-function UnitTypeBadge({ type }) {
-  const token = getUnitTypeToken(type)
-  const iconProps = { viewBox: '0 0 24 24', className: 'unit-type-icon', 'aria-hidden': true }
-
-  const renderIcon = () => {
-    if (token === 'line') {
-      return (
-        <svg {...iconProps}>
-          <path d="M5 18H19L17 7H7Z" />
-          <path d="M9 7V5H15V7" />
-        </svg>
-      )
-    }
-    if (token === 'elite') {
-      return (
-        <svg {...iconProps}>
-          <path d="M12 3L16 8L21 12L16 16L12 21L8 16L3 12L8 8Z" />
-        </svg>
-      )
-    }
-    if (token === 'vehicle') {
-      return (
-        <svg {...iconProps}>
-          <rect x="4" y="8" width="16" height="8" rx="1" />
-          <circle cx="8" cy="17.5" r="1.5" />
-          <circle cx="16" cy="17.5" r="1.5" />
-        </svg>
-      )
-    }
-    if (token === 'monster') {
-      return (
-        <svg {...iconProps}>
-          <path d="M5 20L8 9L11 15L14 8L17 14L19 6" />
-        </svg>
-      )
-    }
-    if (token === 'hero') {
-      return (
-        <svg {...iconProps}>
-          <path d="M4 16L6 8L10 12L12 6L14 12L18 8L20 16Z" />
-          <path d="M7 18H17" />
-        </svg>
-      )
-    }
-    if (token === 'titan') {
-      return (
-        <svg {...iconProps}>
-          <rect x="7" y="4" width="10" height="16" />
-          <path d="M10 8H14" />
-          <path d="M10 12H14" />
-          <path d="M10 16H14" />
-        </svg>
-      )
-    }
-    return (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="7" />
-      </svg>
-    )
-  }
-
-  return (
-    <span className={`unit-type-badge unit-type-${token}`}>
-      {renderIcon()}
-      <span>{type}</span>
-    </span>
-  )
-}
-
-const getMaxDisparo = (unit) => {
-  const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? unit.perfil?.max_armas_disparo
-  if (explicit) return explicit
-  const text = `${unit.especialidad || ''} ${unit.perfil?.especialidad || ''}`.toLowerCase()
-  if (text.includes('dos armas') || text.includes('2 armas')) return 2
-  return 1
-}
-
-const normalizeUnit = (unit, index) => {
-  const perfil = unit.perfil || {}
-  const armas = unit.armas || {}
-  const squadBounds = normalizeSquadBounds(
-    perfil.escuadra?.min ?? unit.escuadra_min ?? unit.escuadra?.min,
-    perfil.escuadra?.max ?? unit.escuadra_max ?? unit.escuadra?.max,
-  )
-  const disparo = (armas.disparo || unit.armas_disparo || []).map((weapon) =>
-    normalizeWeapon(weapon, 'disparo'),
-  )
-  const melee = (armas.cuerpo_a_cuerpo || unit.armas_melee || []).map((weapon) =>
-    normalizeWeapon(weapon, 'melee'),
-  )
-
-  return {
-    id: unit.id || slugify(unit.nombre_unidad || unit.nombre || `${index}`),
-    nombre: unit.nombre_unidad || unit.nombre || `Unidad ${index + 1}`,
-    tipo: unit.clase || unit.tipo || 'Línea',
-    movimiento: perfil.movimiento ?? unit.movimiento ?? '-',
-    vidas: perfil.vidas ?? unit.vidas ?? '-',
-    salvacion: String(perfil.salvacion ?? unit.salvacion ?? '-').replace(/^\+?(\d+)\+?$/, '$1+'),
-    velocidad: perfil.velocidad ?? unit.velocidad ?? '-',
-    escuadra_min: squadBounds.min,
-    escuadra_max: squadBounds.max,
-    especialidad: perfil.especialidad ?? unit.especialidad ?? '-',
-    valor_base: toNumber(perfil.valor ?? unit.valor_base ?? unit.valor ?? 0),
-    armas_disparo: disparo,
-    armas_melee: melee,
-    max_armas_disparo: getMaxDisparo({ ...unit, perfil }),
-  }
-}
-
-const normalizeFaction = (data, index, baseId = '') => {
-  const faccion = data.faccion || {}
-  const habilidades = Array.isArray(faccion.habilidades_faccion)
-    ? faccion.habilidades_faccion.map((item, idx) => {
-      const entries = Object.entries(item || {})
-      const nameEntry = entries.find(([key]) => key !== 'descripcion') || []
-      return {
-        id: `${index}-${idx}`,
-        nombre: nameEntry[1] || nameEntry[0] || 'Habilidad',
-        descripcion: item.descripcion || '',
-      }
-    })
-    : []
-
-  const unidades = (data.unidades || []).map(normalizeUnit)
-
-  return {
-    id: data.id || baseId || slugify(faccion.nombre || `faccion-${index}`),
-    nombre: faccion.nombre || `Facción ${index + 1}`,
-    estilo: faccion.estilo_juego || faccion.estilo || '',
-    habilidades_faccion: habilidades,
-    unidades,
-  }
-}
-
-const getWeaponById = (list, id) => list.find((weapon) => weapon.id === id)
-
-const sumWeaponCost = (weapons) => weapons.reduce((total, weapon) => total + (weapon?.valor_extra || 0), 0)
-
-const computeUnitTotal = (unit, shooting, melee, squadSize, perMiniLoadouts, gameMode = 'escuadra') => {
-  const perMiniCost = (loadout) =>
-    unit.valor_base + sumWeaponCost(loadout.shooting) + (loadout.melee?.valor_extra || 0)
-  if (Array.isArray(perMiniLoadouts) && perMiniLoadouts.length) {
-    return perMiniLoadouts.reduce((total, loadout) => total + perMiniCost(loadout), 0)
-  }
-  const perMini = perMiniCost({ shooting, melee })
-  const clampedSize = gameMode === 'escuadra' ? clampSquadSize(squadSize, unit) : 1
-  return perMini * Math.max(1, clampedSize || 1)
-}
-
-const randomPick = (list) => list[Math.floor(Math.random() * list.length)]
-
-const shuffle = (list) => {
-  const next = [...list]
-  for (let i = next.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[next[i], next[j]] = [next[j], next[i]]
-  }
-  return next
-}
-
-const buildRandomSelection = (unit) => {
-  const shooting = []
-  if (unit.armas_disparo.length > 0) {
-    const slots = Math.min(unit.max_armas_disparo, unit.armas_disparo.length)
-    for (let i = 0; i < slots; i += 1) {
-      shooting.push(randomPick(unit.armas_disparo))
-    }
-  }
-  const melee = unit.armas_melee.length > 0 ? randomPick(unit.armas_melee) : null
-  return { shooting, melee }
-}
-
-const buildRandomSquadLoadouts = (unit, squadSize) => {
-  const size = clampSquadSize(squadSize, unit)
-  const shootingOptions = unit.armas_disparo
-  const meleeOptions = unit.armas_melee
-  const slots = Math.min(unit.max_armas_disparo, shootingOptions.length)
-
-  const shootingPools = Array.from({ length: slots }, (_, slotIndex) => {
-    const pool = shuffle(shootingOptions)
-    return pool.map((weapon, idx) => pool[(idx + slotIndex) % pool.length])
-  })
-  const meleePool = shuffle(meleeOptions)
-
-  return Array.from({ length: size }, (_, miniIndex) => {
-    const shooting = slots
-      ? Array.from({ length: slots }, (_, slotIndex) => {
-          const pool = shootingPools[slotIndex]
-          return pool[miniIndex % pool.length]
-        })
-      : []
-    const melee = meleeOptions.length ? meleePool[miniIndex % meleePool.length] : null
-    return { shooting, melee }
-  })
-}
-
-const getLoadoutSignature = (entry) => {
-  if (entry.perMiniLoadouts?.length) {
-    const miniSignatures = entry.perMiniLoadouts.map((loadout) => {
-      const shooting = loadout.shooting.map((weapon) => weapon.id).join('|')
-      const melee = loadout.melee?.id || ''
-      return `${shooting}::${melee}`
-    })
-    return miniSignatures.sort().join('||')
-  }
-  const shooting = entry.shooting.map((weapon) => weapon.id).join('|')
-  const melee = entry.melee?.id || ''
-  return `${shooting}::${melee}`
-}
-
-const mergeSquads = (units) => {
-  const merged = []
-  const buckets = new Map()
-
-  units.forEach((entry) => {
-    const key = `${entry.base.id}::${getLoadoutSignature(entry)}`
-    const existing = buckets.get(key)
-    if (existing) {
-      existing.push(entry)
-    } else {
-      buckets.set(key, [entry])
-    }
-  })
-
-  buckets.forEach((entries) => {
-    const ordered = entries.slice().sort((a, b) => (a.squadSize || 0) - (b.squadSize || 0))
-    let buffer = null
-
-    ordered.forEach((entry) => {
-      if (!buffer) {
-        buffer = { ...entry, perMiniLoadouts: entry.perMiniLoadouts ? [...entry.perMiniLoadouts] : null }
-        return
-      }
-      const combinedSize = (buffer.squadSize || 1) + (entry.squadSize || 1)
-      if (combinedSize <= buffer.base.escuadra_max) {
-        buffer.squadSize = combinedSize
-        if (buffer.perMiniLoadouts && entry.perMiniLoadouts) {
-          buffer.perMiniLoadouts = [...buffer.perMiniLoadouts, ...entry.perMiniLoadouts]
-        }
-      } else {
-        const total = computeUnitTotal(
-          buffer.base,
-          buffer.shooting,
-          buffer.melee,
-          buffer.squadSize,
-          buffer.perMiniLoadouts,
-        )
-        merged.push({ ...buffer, total })
-        buffer = { ...entry, perMiniLoadouts: entry.perMiniLoadouts ? [...entry.perMiniLoadouts] : null }
-      }
-    })
-
-    if (buffer) {
-      const total = computeUnitTotal(
-        buffer.base,
-        buffer.shooting,
-        buffer.melee,
-        buffer.squadSize,
-        buffer.perMiniLoadouts,
-      )
-      merged.push({ ...buffer, total })
-    }
-  })
-
-  return merged
-}
-
-const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = null) => {
-  if (!faction || !faction.unidades.length) return { faction: null, units: [], total: 0 }
-  const pool = unitTypeFilter && unitTypeFilter.size
-    ? faction.unidades.filter((unit) => unitTypeFilter.has(unit.tipo))
-    : faction.unidades
-  if (!pool.length) return { faction, units: [], total: 0 }
-  const iterations = 200
-  let best = { units: [], total: 0 }
-
-  for (let i = 0; i < iterations; i += 1) {
-    let total = 0
-    const units = []
-    let guard = 0
-
-    while (guard < 80) {
-      guard += 1
-      const unit = randomPick(pool)
-      const squadSize =
-        gameMode === 'escuadra'
-          ? randomPick(
-              Array.from(
-                { length: Math.max(1, unit.escuadra_max - unit.escuadra_min + 1) },
-                (_, idx) => unit.escuadra_min + idx,
-              ),
-            )
-          : 1
-      const selection = buildRandomSelection(unit)
-      const perMiniLoadouts =
-        gameMode === 'escuadra' ? buildRandomSquadLoadouts(unit, squadSize) : null
-      const cost = computeUnitTotal(unit, selection.shooting, selection.melee, squadSize, perMiniLoadouts, gameMode)
-      if (total + cost <= target) {
-        units.push({
-          uid: `${unit.id}-${Date.now()}-${Math.random()}`,
-          base: unit,
-          shooting: selection.shooting,
-          melee: selection.melee,
-          squadSize,
-          perMiniLoadouts,
-          total: cost,
-        })
-        total += cost
-        if (total === target) break
-      }
-    }
-
-    if (total > best.total) {
-      best = { units, total }
-      if (total === target) break
-    }
-  }
-
-  const normalizedUnits = gameMode === 'escuadra' ? mergeSquads(best.units) : best.units
-  const normalizedTotal = normalizedUnits.reduce((sum, unit) => sum + unit.total, 0)
-  return { faction, units: normalizedUnits, total: normalizedTotal }
-}
 
 function Generador() {
   const { t, lang } = useI18n()
@@ -454,22 +74,36 @@ function Generador() {
   const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || selectedFaction
   const availableUnitTypes = useMemo(() => {
     if (!selectedFaction?.unidades?.length) return []
-    const types = new Set(selectedFaction.unidades.map((unit) => unit.tipo))
+    const types = new Set(
+      selectedFaction.unidades
+        .filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))
+        .map((unit) => unit.tipo),
+    )
     return Array.from(types)
-  }, [selectedFaction])
+  }, [selectedFaction, gameMode])
   const randomFaction = randomFactionIdSafe === 'random'
     ? null
     : factions.find((faction) => faction.id === randomFactionIdSafe)
   const availableUnitTypesRandom = useMemo(() => {
     if (randomFaction) {
-      return Array.from(new Set(randomFaction.unidades.map((unit) => unit.tipo)))
+      return Array.from(
+        new Set(
+          randomFaction.unidades
+            .filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))
+            .map((unit) => unit.tipo),
+        ),
+      )
     }
     const types = new Set()
     factions.forEach((faction) => {
-      faction.unidades.forEach((unit) => types.add(unit.tipo))
+      faction.unidades.forEach((unit) => {
+        if (isUnitTypeAllowedInGameMode(unit.tipo, gameMode)) {
+          types.add(unit.tipo)
+        }
+      })
     })
     return Array.from(types)
-  }, [randomFaction, factions])
+  }, [randomFaction, factions, gameMode])
 
   const activeManualFilters = useMemo(() => {
     if (!availableUnitTypes.length) return new Set()
@@ -493,11 +127,15 @@ function Generador() {
     return new Set(availableUnitTypesRandom)
   }, [availableUnitTypesRandom, unitTypeFiltersRandom])
 
-  const totalValue = armyUnits.reduce((total, unit) => total + unit.total, 0)
+  const localizedArmyUnits = useMemo(() => localizeArmyUnits(armyUnits, armyFaction), [armyUnits, armyFaction])
+  const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0)
+  const armyUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(localizedArmyUnits), [localizedArmyUnits])
   const visibleManualUnits = useMemo(() => {
     if (!selectedFaction?.unidades?.length) return []
-    return selectedFaction.unidades.filter((unit) => activeManualFilters.has(unit.tipo))
-  }, [selectedFaction, activeManualFilters])
+    return selectedFaction.unidades.filter(
+      (unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode) && activeManualFilters.has(unit.tipo),
+    )
+  }, [selectedFaction, activeManualFilters, gameMode])
 
   useEffect(() => {
     if (typeof Image === 'undefined') return
@@ -580,7 +218,7 @@ function Generador() {
     setActiveUnit(unit)
   }
 
-  const handleAddUnit = (unit, shooting, melee, squadSize, perMiniLoadouts) => {
+  const handleAddUnit = (unit, shooting, melee, squadSize, perMiniLoadouts, imageDataUrl = '') => {
     const clampedSize = gameMode === 'escuadra' ? clampSquadSize(squadSize, unit) : 1
     const total = computeUnitTotal(unit, shooting, melee, clampedSize, perMiniLoadouts, gameMode)
     const entry = {
@@ -590,6 +228,7 @@ function Generador() {
       melee,
       squadSize: clampedSize,
       perMiniLoadouts,
+      imageDataUrl,
       total,
     }
     setArmyUnits((prev) => [...prev, entry])
@@ -614,7 +253,7 @@ function Generador() {
     if (!factions.length) return
     const faction =
       randomFactionIdSafe === 'random'
-        ? randomPick(factions)
+        ? factions[Math.floor(Math.random() * factions.length)]
         : factions.find((item) => item.id === randomFactionIdSafe)
     const target = toNumber(targetValue)
     const result = generateArmyByValue(
@@ -627,366 +266,15 @@ function Generador() {
     setArmyFactionId(result.faction?.id || '')
   }
 
-  const loadImageAsDataUrl = (src) =>
-    new Promise((resolve, reject) => {
-      const img = new Image()
-      img.crossOrigin = 'anonymous'
-      img.onload = () => {
-        const canvas = document.createElement('canvas')
-        canvas.width = img.width
-        canvas.height = img.height
-        const ctx = canvas.getContext('2d')
-        ctx.drawImage(img, 0, 0)
-        resolve(canvas.toDataURL('image/png'))
-      }
-      img.onerror = reject
-      img.src = src
+  const exportPdf = () =>
+    exportGeneratorPdf({
+      armyUnits: localizedArmyUnits,
+      armyFaction,
+      totalValue,
+      gameMode,
+      t,
+      lang,
     })
-
-  const exportPdf = async () => {
-    if (!armyUnits.length) return
-    const { jsPDF } = await import('jspdf')
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' })
-    const pageWidth = doc.internal.pageSize.getWidth()
-    const pageHeight = doc.internal.pageSize.getHeight()
-    const margin = 12
-    const usableWidth = pageWidth - margin * 2
-    let y = margin
-
-    const ensureSpace = (height) => {
-      if (y + height > pageHeight - margin) {
-        doc.addPage()
-        y = margin
-      }
-    }
-
-    const getLineHeight = (fontSize, multiplier = 1.2) => {
-      doc.setFontSize(fontSize)
-      return doc.getTextDimensions('Mg').h * multiplier
-    }
-
-    const drawSectionTitle = (text, bold = false) => {
-      ensureSpace(10)
-      doc.setFontSize(12)
-      doc.setTextColor(20)
-      doc.setFont(bold ? 'helvetica' : 'helvetica', bold ? 'bold' : 'normal')
-      doc.text(text, margin, y)
-      doc.setFont('helvetica', 'normal')
-      y += 6
-      doc.setDrawColor(200)
-      doc.line(margin, y, pageWidth - margin, y)
-      y += 4
-    }
-
-    const drawTextBlock = (text, fontSize = 9, width = usableWidth) => {
-      doc.setFontSize(fontSize)
-      doc.setTextColor(40)
-      const lines = doc.splitTextToSize(text, width)
-      const lineHeight = getLineHeight(fontSize)
-      lines.forEach((line) => {
-        ensureSpace(lineHeight)
-        doc.text(line, margin, y)
-        y += lineHeight
-      })
-    }
-
-    const drawBulletItem = (title, description, fontSize = 9) => {
-      const lineHeight = getLineHeight(fontSize)
-      ensureSpace(lineHeight)
-      doc.setFontSize(fontSize)
-      doc.setTextColor(40)
-      doc.setFont('helvetica', 'bold')
-      doc.text(`• ${title}`, margin, y)
-      doc.setFont('helvetica', 'normal')
-      y += lineHeight
-      if (!description) return
-      const lines = doc.splitTextToSize(description, usableWidth - 6)
-      lines.forEach((line) => {
-        ensureSpace(lineHeight)
-        doc.text(line, margin + 6, y)
-        y += lineHeight
-      })
-    }
-
-    const drawTable = ({
-      columns,
-      rows,
-      columnWidths,
-      compact = false,
-      headerFill = [240, 246, 255],
-      rowFill = [252, 252, 252],
-    }) => {
-      const baseRowHeight = compact ? 5.2 : 6.5
-      const headerHeight = compact ? 5.5 : 6.8
-      ensureSpace(headerHeight + 4)
-      let x = margin
-      doc.setFillColor(...headerFill)
-      doc.rect(margin, y, usableWidth, headerHeight, 'F')
-      doc.setDrawColor(210)
-      doc.rect(margin, y, usableWidth, headerHeight)
-      doc.setFontSize(compact ? 7.6 : 8.4)
-      doc.setTextColor(20)
-      columns.forEach((label, idx) => {
-        const width = columnWidths[idx]
-        doc.text(label, x + 2, y + (compact ? 3.9 : 4.5))
-        x += width
-      })
-      y += headerHeight
-
-      rows.forEach((row, rowIndex) => {
-        const rowLines = row.map((cell, idx) => {
-          const width = columnWidths[idx] - 4
-          const text = String(cell ?? '–')
-          doc.setFontSize(compact ? 7.8 : 8.6)
-          return doc.splitTextToSize(text, width)
-        })
-        const lineHeight = getLineHeight(compact ? 7.8 : 8.6, 1.1)
-        const rowHeight = Math.max(baseRowHeight, Math.max(...rowLines.map((lines) => lines.length)) * lineHeight + 1)
-        ensureSpace(rowHeight + 2)
-        doc.setDrawColor(225)
-        if (rowIndex % 2 === 0) {
-          doc.setFillColor(...rowFill)
-          doc.rect(margin, y, usableWidth, rowHeight, 'F')
-        }
-        doc.rect(margin, y, usableWidth, rowHeight)
-        let cx = margin
-        row.forEach((cell, idx) => {
-          const width = columnWidths[idx]
-          const lines = rowLines[idx]
-          doc.setFontSize(compact ? 7.8 : 8.6)
-          doc.setTextColor(40)
-          lines.forEach((line, lineIndex) => {
-            doc.text(line, cx + 2, y + 4 + lineIndex * lineHeight, { maxWidth: width - 4 })
-          })
-          cx += width
-        })
-        y += rowHeight
-      })
-
-      y += 4
-    }
-
-    const drawStatsTable = (unit) => {
-      const columnWidths = [18, 18, 18, 18, 26, usableWidth - (18 + 18 + 18 + 18 + 26)]
-      const headerHeight = 7
-      const baseRowHeight = 6.5
-      const especialidad = String(unit.base.especialidad || '-')
-      doc.setFontSize(8.5)
-      const specialLines = doc.splitTextToSize(especialidad, columnWidths[5] - 4)
-      const rowHeight = Math.max(baseRowHeight, specialLines.length * 4.2 + 2)
-
-      ensureSpace(headerHeight + rowHeight + 6)
-      let x = margin
-      doc.setFillColor(240, 246, 255)
-      doc.rect(margin, y, usableWidth, headerHeight, 'F')
-      doc.setDrawColor(210)
-      doc.rect(margin, y, usableWidth, headerHeight)
-      doc.setFontSize(8)
-      doc.setTextColor(20)
-      const columns = [t('generator.mov'), t('generator.vidas'), t('generator.salv'), t('generator.vel'), t('generator.squadLabel'), t('generator.specialty')]
-      columns.forEach((label, idx) => {
-        const width = columnWidths[idx]
-        doc.text(label, x + 2, y + 4.5)
-        x += width
-      })
-      y += headerHeight
-
-      ensureSpace(rowHeight + 2)
-      doc.setDrawColor(225)
-      doc.rect(margin, y, usableWidth, rowHeight)
-      doc.setFontSize(8.5)
-      doc.setTextColor(40)
-      let cx = margin
-      const cells = [
-        unit.base.movimiento,
-        unit.base.vidas,
-        unit.base.salvacion,
-        unit.base.velocidad,
-        unit.squadSize || 1,
-        specialLines,
-      ]
-      cells.forEach((cell, idx) => {
-        const width = columnWidths[idx]
-        if (idx === 5 && Array.isArray(cell)) {
-          cell.forEach((line, lineIndex) => {
-            doc.text(line, cx + 2, y + 4.6 + lineIndex * 4.2, { maxWidth: width - 4 })
-          })
-        } else {
-          doc.text(String(cell ?? '-'), cx + 2, y + 4.6, { maxWidth: width - 4 })
-        }
-        cx += width
-      })
-      y += rowHeight + 4
-    }
-
-    const drawSubheader = (text, fill) => {
-      ensureSpace(7)
-      doc.setFillColor(...fill)
-      doc.rect(margin, y, usableWidth, 6.5, 'F')
-      doc.setFontSize(9.5)
-      doc.setTextColor(20)
-      doc.text(text, margin + 2, y + 4.6)
-      y += 7.5
-    }
-
-    const logoSource = armyFaction?.id ? factionImages[armyFaction.id] : null
-    const logoDataUrl = logoSource ? await loadImageAsDataUrl(logoSource).catch(() => null) : null
-    if (logoDataUrl) {
-      doc.addImage(logoDataUrl, 'PNG', margin, y - 2, 16, 16)
-    }
-    doc.setFontSize(18)
-    doc.setTextColor(10)
-    const headerX = margin + (logoDataUrl ? 20 : 0)
-    const headerText = `${t('generator.roster')} – ${armyFaction?.nombre || t('generator.currentArmy')}`
-    doc.text(headerText, headerX, y + 6)
-    y += 12
-    doc.setFontSize(10)
-    doc.setTextColor(50)
-    if (logoDataUrl) {
-      y = Math.max(y, margin + 18)
-    }
-    const headerMeta = `${t('generator.faction')}: ${armyFaction?.nombre || '—'} | ${t('generator.targetValue')}: ${totalValue}`
-    const metaLines = doc.splitTextToSize(headerMeta, usableWidth)
-    const metaLineHeight = getLineHeight(10)
-    metaLines.forEach((line) => {
-      ensureSpace(metaLineHeight)
-      doc.text(line, headerX, y)
-      y += metaLineHeight
-    })
-    y += 2
-    if (armyFaction?.habilidades_faccion?.length) {
-      drawSectionTitle(t('generator.passives'), true)
-      armyFaction.habilidades_faccion.slice(0, 6).forEach((habilidad) => {
-        drawBulletItem(habilidad.nombre, habilidad.descripcion, 9)
-      })
-      y += 2
-    }
-
-    drawSectionTitle(t('generator.units'))
-
-    armyUnits.forEach((unit, unitIndex) => {
-      ensureSpace(50)
-      if (y > pageHeight - margin - 60) {
-        doc.addPage()
-        y = margin
-      }
-      y += 2
-      doc.setFontSize(13)
-      doc.setTextColor(20)
-      const isSquad = gameMode === 'escuadra' && unit.squadSize > 1
-      const squadLabel = isSquad ? `${t('generator.squadLabel')} ${unitIndex + 1}: ` : ''
-      const squadCount = isSquad ? ` x${unit.squadSize || 1}` : ''
-      doc.text(`${squadLabel}${unit.base.nombre}${squadCount} (${unit.base.tipo})`, margin, y)
-      doc.setFontSize(9.5)
-      doc.setTextColor(60)
-      doc.text(`${unit.total} ${t('generator.valueUnit')}`, pageWidth - margin - 25, y)
-      y += 6
-
-      drawStatsTable(unit)
-
-      const buildGroupedWeapons = (loadouts, listKey) => {
-        const counts = new Map()
-        const weaponsByName = new Map()
-        loadouts.forEach((loadout) => {
-          const value = loadout[listKey]
-          const list = Array.isArray(value) ? value : value ? [value] : []
-          list.forEach((weapon) => {
-            const name = weapon?.nombre || '–'
-            counts.set(name, (counts.get(name) || 0) + 1)
-            if (weapon && !weaponsByName.has(name)) {
-              weaponsByName.set(name, weapon)
-            }
-          })
-        })
-        return Array.from(counts.entries()).map(([name, count]) => ({
-          name,
-          count,
-          weapon: weaponsByName.get(name) || null,
-        }))
-      }
-
-      const drawWeaponTable = (title, weapons) => {
-        if (!weapons.length) {
-          drawSubheader(title, [255, 240, 244])
-          drawTextBlock(t('generator.noWeaponsAvailable'), 8.6)
-          y += 2
-          return
-        }
-        drawSubheader(title, [255, 240, 244])
-        drawTable({
-          columns: ['Arma', t('generator.weaponAtq'), t('generator.weaponDist'), t('generator.weaponImp'), `${t('generator.weaponDamage')} / ${t('generator.weaponCrit')}`, t('generator.weaponSkills'), t('generator.weaponValue')],
-          rows: weapons.map((weapon) => [
-            weapon.nombre,
-            weapon.ataques,
-            weapon.distancia || '–',
-            weapon.impactos || '–',
-            `${weapon.danio} / ${weapon.danio_critico}`,
-            (weapon.habilidades || [])
-              .filter(Boolean)
-              .join(', ')
-              .slice(0, 120),
-            weapon.valor_extra ?? 0,
-          ]),
-          columnWidths: [
-            usableWidth * 0.3,
-            14,
-            16,
-            14,
-            24,
-            usableWidth * 0.24,
-            usableWidth * 0.1,
-          ],
-          compact: true,
-          headerFill: [232, 239, 250],
-          rowFill: [252, 252, 252],
-        })
-      }
-
-      if (unit.shooting.length || unit.melee) {
-        if (isSquad && unit.perMiniLoadouts?.length) {
-          const shootingGroups = buildGroupedWeapons(unit.perMiniLoadouts, 'shooting')
-          const meleeGroups = buildGroupedWeapons(unit.perMiniLoadouts, 'melee')
-          const shootingRows = shootingGroups
-            .map((group) => {
-              const weapon = group.weapon
-              if (!weapon) return null
-              return { ...weapon, nombre: `${weapon.nombre} x${group.count}` }
-            })
-            .filter(Boolean)
-          const meleeRows = meleeGroups
-            .map((group) => {
-              const weapon = group.weapon
-              if (!weapon) return null
-              return { ...weapon, nombre: `${weapon.nombre} x${group.count}` }
-            })
-            .filter(Boolean)
-          drawWeaponTable(t('generator.shooting').toUpperCase(), shootingRows)
-          if (meleeRows.length) drawWeaponTable(t('generator.melee').toUpperCase(), meleeRows)
-        } else {
-          drawWeaponTable(t('generator.shooting').toUpperCase(), unit.shooting)
-          if (unit.melee) drawWeaponTable(t('generator.melee').toUpperCase(), [unit.melee])
-        }
-      }
-      y += 4
-
-    })
-
-    ensureSpace(10)
-    doc.setFontSize(12)
-    doc.setTextColor(20)
-    doc.text(`${t('generator.targetValue')}: ${totalValue} ${t('generator.valueUnit')}`, margin, y)
-
-    const totalPages = doc.getNumberOfPages()
-    for (let page = 1; page <= totalPages; page += 1) {
-      doc.setPage(page)
-      doc.setFontSize(8)
-      doc.setTextColor(90)
-      doc.text(`${armyFaction?.nombre || t('generator.currentArmy')} – ${armyFaction?.nombre || t('generator.faction')}`, margin, pageHeight - 6)
-      doc.text(`${t('generator.page')} ${page} / ${totalPages}`, pageWidth - margin - 25, pageHeight - 6)
-    }
-
-    doc.save(`zerolore_${armyFaction?.nombre || 'ejercito'}.pdf`)
-  }
 
   return (
     <section className="section generator-page reveal" id="generador">
@@ -1197,21 +485,21 @@ function Generador() {
             <button type="button" className="ghost small" onClick={handleReset}>
               {t('generator.resetArmy')}
             </button>
-            <button type="button" className="ghost small" onClick={exportPdf} disabled={!armyUnits.length}>
+            <button type="button" className="ghost small" onClick={exportPdf} disabled={!localizedArmyUnits.length}>
               {t('generator.downloadPdf')}
             </button>
           </div>
 
-          {armyUnits.length === 0 && (
+          {localizedArmyUnits.length === 0 && (
             <p className="empty-state">{t('generator.noUnitsYet')}</p>
           )}
 
           <div className="army-list">
-            {armyUnits.map((unit) => (
+            {localizedArmyUnits.map((unit) => (
               <article className="army-unit" key={unit.uid}>
                 <div className="army-unit-header">
                   <div>
-                    <h4>{unit.base.nombre}</h4>
+                    <h4>{armyUnitDisplayNames.get(unit.uid) || unit.base.nombre}</h4>
                     <p>
                       <UnitTypeBadge type={unit.base.tipo} />
                       {gameMode === 'escuadra' ? ` · ${t('generator.size')} ${unit.squadSize || 1}` : ''}
@@ -1274,7 +562,7 @@ function Generador() {
           selected={activeUnit.shooting || activeUnit.melee ? activeUnit : null}
           gameMode={gameMode}
           onClose={() => setActiveUnit(null)}
-          onConfirm={(unit, shooting, melee, editingUid, nextSquadSize, nextPerMini) => {
+          onConfirm={(unit, shooting, melee, editingUid, nextSquadSize, nextPerMini, nextImageDataUrl) => {
             if (editingUid) {
               const clampedSize = clampSquadSize(nextSquadSize, unit)
               setArmyUnits((prev) =>
@@ -1287,6 +575,7 @@ function Generador() {
                         melee,
                         squadSize: clampedSize,
                         perMiniLoadouts: nextPerMini,
+                        imageDataUrl: nextImageDataUrl || '',
                         total: computeUnitTotal(unit, shooting, melee, clampedSize, nextPerMini, gameMode),
                       }
                     : entry,
@@ -1295,387 +584,11 @@ function Generador() {
               setActiveUnit(null)
               return
             }
-            handleAddUnit(unit, shooting, melee, nextSquadSize || 1, nextPerMini)
+            handleAddUnit(unit, shooting, melee, nextSquadSize || 1, nextPerMini, nextImageDataUrl)
           }}
         />
       )}
     </section>
-  )
-}
-
-function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lang }) {
-  const initialShooting = useMemo(() => {
-    if (!unit.armas_disparo.length) return []
-    const first = unit.armas_disparo[0]
-    const second = unit.armas_disparo[1] || unit.armas_disparo[0]
-    return unit.max_armas_disparo > 1 ? [first.id, second.id] : [first.id]
-  }, [unit])
-
-  const initialMeleeSelection = selected?.melee?.id || unit.armas_melee[0]?.id || ''
-  const initialSquadSize = gameMode === 'escuadra'
-    ? clampSquadSize(selected?.squadSize ?? unit.escuadra_min, unit)
-    : 1
-
-  const createBaseSelection = (shootingIds, meleeId) => ({
-    shootingIds: [...shootingIds],
-    meleeId,
-  })
-
-  const normalizePerMiniSelections = (list, size, baseFactory) => {
-    if (size <= 0) return []
-    if (list.length === size) return list
-    if (list.length < size) {
-      return [...list, ...Array.from({ length: size - list.length }, baseFactory)]
-    }
-    return list.slice(0, size)
-  }
-
-  const [shootingSelection, setShootingSelection] = useState(
-    selected?.shooting?.length ? selected.shooting.map((weapon) => weapon.id) : initialShooting,
-  )
-  const [meleeSelection, setMeleeSelection] = useState(initialMeleeSelection)
-  const [squadSize, setSquadSize] = useState(initialSquadSize)
-  const [perMiniSelections, setPerMiniSelections] = useState(() => {
-    if (gameMode !== 'escuadra') return []
-    const selectedLoadouts = selected?.perMiniLoadouts?.map((loadout) => ({
-      shootingIds: loadout.shooting.map((weapon) => weapon.id),
-      meleeId: loadout.melee?.id || '',
-    })) || []
-    return normalizePerMiniSelections(
-      selectedLoadouts,
-      initialSquadSize,
-      () => createBaseSelection(initialShooting, initialMeleeSelection),
-    )
-  })
-  const squadOptions = useMemo(() => {
-    if (gameMode !== 'escuadra') return []
-    const length = Math.max(1, unit.escuadra_max - unit.escuadra_min + 1)
-    return Array.from({ length }, (_, idx) => unit.escuadra_min + idx)
-  }, [gameMode, unit])
-
-  const selectedShooting = shootingSelection
-    .map((id) => getWeaponById(unit.armas_disparo, id))
-    .filter(Boolean)
-  const selectedMelee = getWeaponById(unit.armas_melee, meleeSelection)
-
-  const perMiniLoadouts = gameMode === 'escuadra'
-    ? perMiniSelections.map((sel) => ({
-        shooting: sel.shootingIds
-          .map((id) => getWeaponById(unit.armas_disparo, id))
-          .filter(Boolean),
-        melee: getWeaponById(unit.armas_melee, sel.meleeId),
-      }))
-    : null
-
-  const total = computeUnitTotal(
-    unit,
-    selectedShooting,
-    selectedMelee,
-    squadSize,
-    perMiniLoadouts,
-    gameMode,
-  )
-
-  const handleSquadSizeChange = (size) => {
-    setSquadSize(size)
-    if (gameMode !== 'escuadra') return
-    setPerMiniSelections((prev) =>
-      normalizePerMiniSelections(
-        [...prev],
-        size,
-        () => createBaseSelection(shootingSelection, meleeSelection),
-      ),
-    )
-  }
-
-  const renderWeaponStats = (weapon) => {
-    if (!weapon) return null
-    const abilityNotes = (weapon.habilidades || [])
-      .map((ability) => ({
-        label: getAbilityLabel(ability, lang),
-        description: getAbilityDescription(ability, lang),
-        raw: ability,
-      }))
-      .filter((item) => item.label)
-
-    return (
-      <div>
-        <div className="weapon-stats-table">
-          <div className="weapon-stats-row head">
-            <span>{t('generator.weaponAtq')}</span>
-            <span>{t('generator.weaponDist')}</span>
-            <span>{t('generator.weaponImp')}</span>
-            <span>{t('generator.weaponDamage')}</span>
-            <span>{t('generator.weaponCrit')}</span>
-            <span>{t('generator.weaponSkills')}</span>
-            <span>{t('generator.weaponValue')}</span>
-          </div>
-          <div className="weapon-stats-row">
-            <span>{weapon.ataques}</span>
-            <span>{weapon.distancia || '-'}</span>
-            <span>{weapon.impactos || '-'}</span>
-            <span>{weapon.danio}</span>
-            <span>{weapon.danio_critico}</span>
-            <span className="weapon-tags">
-              {weapon.habilidades?.length
-                ? weapon.habilidades.map((ability) => getAbilityLabel(ability, lang)).join(', ')
-                : '-'}
-            </span>
-            <span>{weapon.valor_extra > 0 ? `+${weapon.valor_extra}` : '0'}</span>
-          </div>
-        </div>
-        {abilityNotes.length > 0 && (
-          <div className="weapon-ability-notes">
-            {abilityNotes.map((note) => (
-              <div key={note.raw || note.label}>
-                <strong>{note.label}:</strong>{' '}
-                {note.description || t('generator.pendingDescription')}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    )
-  }
-
-
-  const handleShootingChange = (index, value) => {
-    setShootingSelection((prev) => {
-      const next = [...prev]
-      next[index] = value
-      return next
-    })
-  }
-
-  const content = (
-    <div className="unit-modal">
-      <div className="unit-modal-card">
-        <div className="unit-modal-header">
-          <div>
-            <p className="eyebrow">{gameMode === 'escuadra' ? t('generator.createSquad') : t('generator.configureUnit')}</p>
-            <h3>{unit.nombre}</h3>
-          </div>
-          <button className="ghost tiny" type="button" onClick={onClose}>
-            {t('generator.close')}
-          </button>
-        </div>
-        <div className="unit-modal-body">
-          {gameMode === 'escuadra' && (
-            <label className="field">
-              {t('generator.squadSize')}
-              <div className="squad-size-buttons">
-                {squadOptions.map((size) => (
-                  <button
-                    key={`squad-size-${size}`}
-                    type="button"
-                    className={`ghost small ${size === squadSize ? 'active' : ''}`}
-                    onClick={() => handleSquadSizeChange(size)}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </label>
-          )}
-          {gameMode === 'escuadra' && (
-            <p className="field-label">{t('generator.perMiniCustomize')}</p>
-          )}
-          {gameMode !== 'escuadra' && unit.armas_disparo.length > 0 && (
-            <div className="field-group">
-              <p className="field-label">{t('generator.shootingWeapons')}</p>
-              {shootingSelection.map((value, index) => {
-                const weapon = getWeaponById(unit.armas_disparo, value)
-                return (
-                  <div className="weapon-select" key={`shooting-${index}`}>
-                    <div className="field">
-                      <span>{t('generator.selection')} {index + 1}</span>
-                      <CustomSelect
-                        t={t}
-                        value={value}
-                        onChange={(next) => handleShootingChange(index, next)}
-                        options={unit.armas_disparo.map((option) => ({
-                          value: option.id,
-                          label: `${option.nombre} (+${option.valor_extra})`,
-                        }))}
-                      />
-                    </div>
-                    {renderWeaponStats(weapon)}
-                  </div>
-                )
-              })}
-            </div>
-          )}
-
-          {gameMode !== 'escuadra' && unit.armas_melee.length > 0 && (
-            <div className="weapon-select">
-              <div className="field">
-                <span>{t('generator.meleeWeapon')}</span>
-                <CustomSelect
-                  t={t}
-                  value={meleeSelection}
-                  onChange={setMeleeSelection}
-                  options={unit.armas_melee.map((weapon) => ({
-                    value: weapon.id,
-                    label: `${weapon.nombre} (+${weapon.valor_extra})`,
-                  }))}
-                />
-              </div>
-              {renderWeaponStats(selectedMelee)}
-            </div>
-          )}
-
-          {gameMode === 'escuadra' && (
-            <div className="mini-customizer">
-              <p className="field-label">{t('generator.squadLabel')} ({t('generator.size').toLowerCase()} {squadSize})</p>
-              {perMiniSelections.map((mini, index) => (
-                <div className="mini-row" key={`mini-${index}`}>
-                  <div className="mini-row-title">{t('generator.unit')} {index + 1}</div>
-                  {(unit.armas_disparo.length ? shootingSelection : []).map((_, slotIndex) => (
-                    <div className="field" key={`mini-${index}-shoot-${slotIndex}`}>
-                      <div className="field">
-                        <span>{t('generator.shooting')} {slotIndex + 1}</span>
-                        <CustomSelect
-                          t={t}
-                          value={mini.shootingIds[slotIndex] || shootingSelection[slotIndex]}
-                          onChange={(nextValue) =>
-                            setPerMiniSelections((prev) => {
-                              const next = [...prev]
-                              const current = { ...next[index] }
-                              const ids = [...(current.shootingIds || shootingSelection)]
-                              ids[slotIndex] = nextValue
-                              current.shootingIds = ids
-                              next[index] = current
-                              return next
-                            })
-                          }
-                          options={unit.armas_disparo.map((weapon) => ({
-                            value: weapon.id,
-                            label: `${weapon.nombre} (+${weapon.valor_extra})`,
-                          }))}
-                        />
-                      </div>
-                      {renderWeaponStats(
-                        getWeaponById(
-                          unit.armas_disparo,
-                          mini.shootingIds[slotIndex] || shootingSelection[slotIndex],
-                        ),
-                      )}
-                    </div>
-                  ))}
-                  {unit.armas_melee.length > 0 && (
-                    <div className="field">
-                      <div className="field">
-                        <span>{t('generator.melee')}</span>
-                        <CustomSelect
-                          t={t}
-                          value={mini.meleeId || meleeSelection}
-                          onChange={(nextValue) =>
-                            setPerMiniSelections((prev) => {
-                              const next = [...prev]
-                              const current = { ...next[index] }
-                              current.meleeId = nextValue
-                              next[index] = current
-                              return next
-                            })
-                          }
-                          options={unit.armas_melee.map((weapon) => ({
-                            value: weapon.id,
-                            label: `${weapon.nombre} (+${weapon.valor_extra})`,
-                          }))}
-                        />
-                      </div>
-                      {renderWeaponStats(getWeaponById(unit.armas_melee, mini.meleeId || meleeSelection))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="unit-modal-footer">
-          <span className="unit-total">{t('generator.totalUnit')}: {total} {t('generator.valueUnit')}</span>
-          <button
-            type="button"
-            className="primary"
-            onClick={() =>
-              onConfirm(
-                unit,
-                selectedShooting,
-                selectedMelee,
-                selected?.uid,
-                squadSize,
-                perMiniLoadouts,
-              )
-            }
-          >
-            {t('generator.confirm')}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-
-  if (typeof document === 'undefined') return content
-  return createPortal(content, document.body)
-}
-
-function CustomSelect({ value, onChange, options, disabled = false, t }) {
-  const rootRef = useRef(null)
-  const [open, setOpen] = useState(false)
-  const selected = options.find((option) => option.value === value) || options[0]
-
-  useEffect(() => {
-    if (!open) return
-    const handlePointerDown = (event) => {
-      if (rootRef.current && !rootRef.current.contains(event.target)) {
-        setOpen(false)
-      }
-    }
-    const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('pointerdown', handlePointerDown)
-    document.addEventListener('keydown', handleEscape)
-    return () => {
-      document.removeEventListener('pointerdown', handlePointerDown)
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [open])
-
-  const handleSelect = (next) => {
-    onChange(next)
-    setOpen(false)
-  }
-
-  return (
-    <div className={`custom-select${open ? ' open' : ''}${disabled ? ' disabled' : ''}`} ref={rootRef}>
-      <button
-        type="button"
-        className="custom-select-trigger"
-        onClick={() => setOpen((prev) => !prev)}
-        disabled={disabled || options.length === 0}
-      >
-        <span>{selected?.label || t('generator.select')}</span>
-      </button>
-      {open && options.length > 0 && (
-        <div className="custom-select-menu" role="listbox">
-          {options.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              className={`custom-select-option${option.value === value ? ' active' : ''}`}
-              onClick={() => handleSelect(option.value)}
-              role="option"
-              aria-selected={option.value === value}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
   )
 }
 

@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import reglamentoEnMd from '../data/english/rulebook.md?raw'
+import misionesMd from '../data/spanish/misiones.md?raw'
+import misionesEnMd from '../data/english/missions.md?raw'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
@@ -13,11 +15,13 @@ import stateReadyToken from '../images/tokens/preparado-blue.svg'
 import stateRetreatToken from '../images/tokens/retirada-blue.svg'
 import meleeToken from '../images/tokens/cuerpo-a-cuerpo-orange.svg'
 import objectiveToken from '../images/tokens/objetivo-orange.svg'
+import conquestBlueToken from '../images/tokens/conquista-blue.svg'
+import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['rules', 'tokens']
+const RULES_MODES = ['rules', 'missions', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const DOCTRINE_TOKEN_DIAMETER_MM = 32
@@ -117,6 +121,8 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_out_of_control', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateOutOfControl', diameterMm: 32, previewSize: 'medium', imageSrc: outOfControlToken },
   { id: 'state_melee', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateMelee', diameterMm: 32, previewSize: 'medium', imageSrc: meleeToken },
   { id: 'state_objective', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateObjective', diameterMm: 32, previewSize: 'medium', imageSrc: objectiveToken },
+  { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
+  { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
@@ -153,9 +159,16 @@ function Reglamento() {
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [tokenCounts, setTokenCounts] = useState(buildInitialTokenCounts)
   const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
+  const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
   const modeParam = searchParams.get('mode')
   const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'rules'
   const isTokensMode = rulesMode === 'tokens'
+  const activeMarkdown = useMemo(() => {
+    if (rulesMode === 'missions') {
+      return lang === 'en' ? misionesEnMd : misionesMd
+    }
+    return lang === 'en' ? reglamentoEnMd : reglamentoMd
+  }, [lang, rulesMode])
   const tokenOptions = useMemo(
     () =>
       TOKEN_DEFINITIONS.map((token) => ({
@@ -177,6 +190,7 @@ function Reglamento() {
   const modeOptions = useMemo(
     () => [
       { id: 'rules', label: t('rules.modeRules') },
+      { id: 'missions', label: t('rules.modeMissions') },
       { id: 'tokens', label: t('rules.modeTokens') },
     ],
     [t],
@@ -185,15 +199,16 @@ function Reglamento() {
     if (isTokensMode) {
       return ''
     }
-    return marked(lang === 'en' ? reglamentoEnMd : reglamentoMd)
-  }, [lang, isTokensMode])
+    return marked(activeMarkdown)
+  }, [activeMarkdown, isTokensMode])
+  const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
 
-  const { renderedHtml, tocItems } = useMemo(() => {
+  const { renderedHtml, tocItems, documentHeading } = useMemo(() => {
     if (isTokensMode) {
-      return { renderedHtml: '', tocItems: [] }
+      return { renderedHtml: '', tocItems: [], documentHeading: null }
     }
     if (typeof window === 'undefined') {
-      return { renderedHtml: rulesHtml, tocItems: [] }
+      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null }
     }
     const parser = new DOMParser()
     const doc = parser.parseFromString(rulesHtml, 'text/html')
@@ -206,10 +221,11 @@ function Reglamento() {
       wrapper.appendChild(table)
     })
     if (rulesMode === 'rules') {
-      const doctrineHeading = Array.from(doc.querySelectorAll('h1, h2, h3')).find((heading) => {
+      const doctrineHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
         return normalized === 'doctrinas de mando' || normalized === 'command doctrines'
       })
+      const doctrineHeading = doctrineHeadings.at(-1)
       if (doctrineHeading) {
         const gallery = doc.createElement('div')
         gallery.className = 'rules-doctrine-gallery'
@@ -237,9 +253,8 @@ function Reglamento() {
         })
 
         let insertionTarget = doctrineHeading.nextElementSibling
-        while (insertionTarget && insertionTarget.tagName === 'P') {
+        while (insertionTarget && insertionTarget.tagName !== 'H3') {
           insertionTarget = insertionTarget.nextElementSibling
-          break
         }
         if (insertionTarget) {
           insertionTarget.parentNode?.insertBefore(gallery, insertionTarget)
@@ -261,8 +276,18 @@ function Reglamento() {
         return { id, title, level }
       })
       .filter((item) => item.title)
+    const firstHeading = doc.querySelector('h1')
+    const documentHeading = firstHeading
+      ? {
+        id: firstHeading.getAttribute('id') || '',
+        title: firstHeading.textContent?.trim() || '',
+      }
+      : null
+    if (firstHeading) {
+      firstHeading.remove()
+    }
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
-    return { renderedHtml: bodyHtml, tocItems: toc }
+    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading }
   }, [t, rulesHtml, isTokensMode, rulesMode, lang])
 
   // Scroll spy para resaltar sección activa
@@ -347,6 +372,348 @@ function Reglamento() {
       img.onerror = reject
       img.src = src
     })
+
+  const loadMonochromeImageAsDataUrl = (src, color = '#000000', options = {}) =>
+    new Promise((resolve, reject) => {
+      const { rasterSizePx } = options
+      const img = new Image()
+      img.onload = () => {
+        const sourceWidth = Math.max(1, Math.round(img.naturalWidth || img.width || 1))
+        const sourceHeight = Math.max(1, Math.round(img.naturalHeight || img.height || 1))
+        const maxSourceSide = Math.max(sourceWidth, sourceHeight)
+        const scale = rasterSizePx && maxSourceSide > 0 ? rasterSizePx / maxSourceSide : 1
+        const outputWidth = Math.max(1, Math.round(sourceWidth * scale))
+        const outputHeight = Math.max(1, Math.round(sourceHeight * scale))
+        const canvas = document.createElement('canvas')
+        canvas.width = outputWidth
+        canvas.height = outputHeight
+        const ctx = canvas.getContext('2d')
+        ctx.imageSmoothingEnabled = true
+        ctx.imageSmoothingQuality = 'high'
+        ctx.clearRect(0, 0, outputWidth, outputHeight)
+        ctx.drawImage(img, 0, 0, outputWidth, outputHeight)
+        ctx.globalCompositeOperation = 'source-in'
+        ctx.fillStyle = color
+        ctx.fillRect(0, 0, outputWidth, outputHeight)
+        ctx.globalCompositeOperation = 'source-over'
+        resolve(canvas.toDataURL('image/png'))
+      }
+      img.onerror = reject
+      img.src = src
+    })
+
+  const waitForImages = async (element) => {
+    const images = Array.from(element.querySelectorAll('img'))
+    await Promise.all(
+      images.map((img) => {
+        img.loading = 'eager'
+        img.decoding = 'sync'
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve()
+        return new Promise((resolve) => {
+          const done = () => resolve()
+          const timeoutId = window.setTimeout(done, 2500)
+          const finish = () => {
+            window.clearTimeout(timeoutId)
+            done()
+          }
+          img.addEventListener('load', finish, { once: true })
+          img.addEventListener('error', finish, { once: true })
+        })
+      }),
+    )
+  }
+
+  const handleDownloadPdf = async () => {
+    if (typeof window === 'undefined' || isTokensMode || isGeneratingRulesPdf) return
+
+    let captureRoot = null
+    setIsGeneratingRulesPdf(true)
+
+    try {
+      const [{ jsPDF }, { default: html2canvas }] = await Promise.all([
+        import('jspdf'),
+        import('html2canvas'),
+      ])
+      const blackLogoDataUrl = await loadMonochromeImageAsDataUrl(zeroLoreLogo, '#000000', { rasterSizePx: 2200 }).catch(() => null)
+      const doc = new jsPDF({ unit: 'mm', format: 'a4' })
+      const pageWidth = doc.internal.pageSize.getWidth()
+      const pageHeight = doc.internal.pageSize.getHeight()
+      const margin = 14
+      const contentWidthMm = pageWidth - margin * 2
+      const contentHeightMm = pageHeight - margin * 2
+
+      captureRoot = document.createElement('div')
+      captureRoot.setAttribute('aria-hidden', 'true')
+      captureRoot.style.position = 'fixed'
+      captureRoot.style.left = '-20000px'
+      captureRoot.style.top = '0'
+      captureRoot.style.width = '1040px'
+      captureRoot.style.padding = '0'
+      captureRoot.style.margin = '0'
+      captureRoot.style.zIndex = '-1'
+      captureRoot.style.background = '#ffffff'
+
+      captureRoot.innerHTML = `
+        <style>
+          .rules-pdf-sheet {
+            width: 1040px;
+            background: #ffffff;
+            color: #111111;
+            padding: 34px 44px 40px;
+            box-sizing: border-box;
+            font-family: Georgia, "Times New Roman", serif;
+          }
+          .rules-pdf-sheet *,
+          .rules-pdf-sheet *::before,
+          .rules-pdf-sheet *::after {
+            box-sizing: border-box;
+          }
+          .rules-pdf-sheet .rules-html {
+            background: #ffffff;
+            color: #111111;
+            padding: 0;
+            border: 0;
+            box-shadow: none;
+            line-height: 1.65;
+            overflow: visible;
+          }
+          .rules-pdf-sheet .rules-html h1,
+          .rules-pdf-sheet .rules-html h2,
+          .rules-pdf-sheet .rules-html h3,
+          .rules-pdf-sheet .rules-html p,
+          .rules-pdf-sheet .rules-html li,
+          .rules-pdf-sheet .rules-html th,
+          .rules-pdf-sheet .rules-html td,
+          .rules-pdf-sheet .rules-html strong,
+          .rules-pdf-sheet .rules-html em,
+          .rules-pdf-sheet .rules-html a,
+          .rules-pdf-sheet .rules-html code {
+            color: #111111;
+            background: transparent;
+          }
+          .rules-pdf-sheet .rules-html h1 {
+            margin: 36px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #cfcfcf;
+            font-family: "Cinzel", Georgia, serif;
+            font-size: 31px;
+            line-height: 1.18;
+          }
+          .rules-pdf-sheet .rules-html h2 {
+            margin: 28px 0 12px;
+            font-family: "Cinzel", Georgia, serif;
+            font-size: 23px;
+            line-height: 1.22;
+          }
+          .rules-pdf-sheet .rules-html h3 {
+            margin: 22px 0 10px;
+            font-size: 18px;
+            line-height: 1.24;
+          }
+          .rules-pdf-sheet .rules-html p,
+          .rules-pdf-sheet .rules-html li {
+            font-size: 15px;
+            line-height: 1.62;
+          }
+          .rules-pdf-sheet .rules-html ul,
+          .rules-pdf-sheet .rules-html ol {
+            padding-left: 24px;
+            margin: 12px 0;
+          }
+          .rules-pdf-sheet .rules-html .rules-table-scroll {
+            overflow: visible;
+            margin: 16px 0;
+            border: 1px solid #d7d7d7;
+            border-radius: 0;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+          }
+          .rules-pdf-sheet .rules-html th,
+          .rules-pdf-sheet .rules-html td {
+            border: 1px solid #d7d7d7;
+            padding: 8px 9px;
+            vertical-align: top;
+            font-size: 13px;
+            line-height: 1.45;
+          }
+          .rules-pdf-sheet .rules-html th {
+            background: #f2f2f2;
+            font-weight: 700;
+          }
+          .rules-pdf-sheet .rules-html .rules-doctrine-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 18px 0;
+            padding: 14px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-mark {
+            width: 70px;
+          }
+          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-image {
+            display: block;
+            width: 100%;
+            height: auto;
+          }
+          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-label {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-cover {
+            width: 1040px;
+            min-height: 1450px;
+            background: #ffffff;
+            color: #111111;
+            padding: 96px 90px 110px;
+            box-sizing: border-box;
+            display: grid;
+            align-content: center;
+            justify-items: center;
+            text-align: center;
+            gap: 18px;
+            font-family: "Space Grotesk", Arial, sans-serif;
+          }
+          .rules-pdf-cover *,
+          .rules-pdf-cover *::before,
+          .rules-pdf-cover *::after {
+            box-sizing: border-box;
+          }
+          .rules-pdf-cover-mark {
+            width: 220px;
+            height: auto;
+          }
+          .rules-pdf-cover-brand {
+            margin: 0;
+            font-family: "Cinzel", Georgia, serif;
+            font-size: 56px;
+            line-height: 1.08;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #000000;
+          }
+          .rules-pdf-cover-section {
+            margin: 8px 0 0;
+            font-family: "Cinzel", Georgia, serif;
+            font-size: 26px;
+            line-height: 1.12;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #111111;
+          }
+          .rules-pdf-cover-subtitle {
+            margin: 6px 0 0;
+            max-width: 520px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444444;
+          }
+        </style>
+        <div class="rules-pdf-cover">
+          ${blackLogoDataUrl ? `<img class="rules-pdf-cover-mark" src="${blackLogoDataUrl}" alt="" />` : ''}
+          <p class="rules-pdf-cover-brand">ZEROLORE</p>
+          <p class="rules-pdf-cover-section">${printCoverSectionLabel}</p>
+        </div>
+        <div class="rules-pdf-sheet">
+          <div class="rules-html">${renderedHtml}</div>
+        </div>
+      `
+
+      document.body.appendChild(captureRoot)
+
+      if (document.fonts?.ready) {
+        await document.fonts.ready
+      }
+      await waitForImages(captureRoot)
+
+      const coverTarget = captureRoot.querySelector('.rules-pdf-cover')
+      const coverCanvas = await html2canvas(coverTarget, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        useCORS: true,
+        windowWidth: coverTarget.scrollWidth,
+      })
+      doc.addImage(
+        coverCanvas.toDataURL('image/png'),
+        'PNG',
+        0,
+        0,
+        pageWidth,
+        pageHeight,
+        undefined,
+        'FAST',
+      )
+
+      const captureTarget = captureRoot.querySelector('.rules-pdf-sheet')
+      const canvas = await html2canvas(captureTarget, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        useCORS: true,
+        windowWidth: captureTarget.scrollWidth,
+      })
+
+      const pxPerMm = canvas.width / contentWidthMm
+      const sliceHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm))
+      let offsetY = 0
+
+      while (offsetY < canvas.height) {
+        doc.addPage()
+        const currentSliceHeightPx = Math.min(sliceHeightPx, canvas.height - offsetY)
+        const sliceCanvas = document.createElement('canvas')
+        sliceCanvas.width = canvas.width
+        sliceCanvas.height = currentSliceHeightPx
+        const sliceCtx = sliceCanvas.getContext('2d')
+        sliceCtx.fillStyle = '#ffffff'
+        sliceCtx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height)
+        sliceCtx.drawImage(
+          canvas,
+          0,
+          offsetY,
+          canvas.width,
+          currentSliceHeightPx,
+          0,
+          0,
+          canvas.width,
+          currentSliceHeightPx,
+        )
+        const sliceHeightMm = currentSliceHeightPx / pxPerMm
+        doc.addImage(
+          sliceCanvas.toDataURL('image/png'),
+          'PNG',
+          margin,
+          margin,
+          contentWidthMm,
+          sliceHeightMm,
+          undefined,
+          'FAST',
+        )
+        offsetY += currentSliceHeightPx
+      }
+
+      const filename = lang === 'en'
+        ? (rulesMode === 'missions' ? 'zerolore-missions-en.pdf' : 'zerolore-rulebook-en.pdf')
+        : (rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf')
+
+      doc.save(filename)
+    } finally {
+      captureRoot?.remove()
+      setIsGeneratingRulesPdf(false)
+    }
+  }
 
   const generateTokensPdf = async () => {
     if (isGeneratingTokensPdf) return
@@ -542,17 +909,19 @@ function Reglamento() {
         <p>
           {t('rules.intro')}
         </p>
-        <div className="rules-mode-switch" role="tablist" aria-label={t('rules.modeLabel')}>
-          {modeOptions.map((mode) => (
-            <button
-              key={mode.id}
-              type="button"
-              className={`ghost ${rulesMode === mode.id ? 'active' : ''}`}
-              onClick={() => setMode(mode.id)}
-            >
-              {mode.label}
-            </button>
-          ))}
+        <div className="rules-head-actions">
+          <div className="rules-mode-switch" role="tablist" aria-label={t('rules.modeLabel')}>
+            {modeOptions.map((mode) => (
+              <button
+                key={mode.id}
+                type="button"
+                className={`ghost ${rulesMode === mode.id ? 'active' : ''}`}
+                onClick={() => setMode(mode.id)}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
       {isTokensMode ? (
@@ -655,11 +1024,38 @@ function Reglamento() {
             </ul>
           </aside>
           <div className="rules-content">
-            <div
-              className="rules-html reveal"
-              ref={contentRef}
-              dangerouslySetInnerHTML={{ __html: renderedHtml }}
-            />
+            <div className="rules-print-cover" aria-hidden="true">
+              <div className="rules-print-cover-inner">
+                <img className="rules-print-cover-logo" src={zeroLoreLogo} alt="" />
+                <p className="rules-print-cover-brand">ZeroLore</p>
+                <h1 className="rules-print-cover-title">{printCoverSectionLabel}</h1>
+                <p className="rules-print-cover-subtitle">{t('rules.title')}</p>
+              </div>
+            </div>
+            <div className="rules-html reveal" ref={contentRef}>
+              {documentHeading && (
+                <div className="rules-document-head">
+                  <h1 id={documentHeading.id}>{documentHeading.title}</h1>
+                  <button
+                    type="button"
+                    className="primary rules-download-button"
+                    onClick={handleDownloadPdf}
+                    disabled={isGeneratingRulesPdf}
+                    aria-busy={isGeneratingRulesPdf}
+                  >
+                    {isGeneratingRulesPdf ? (
+                      <span className="rules-pdf-button-content">
+                        <span className="rules-pdf-spinner" aria-hidden="true" />
+                        {t('rules.generatingPdf')}
+                      </span>
+                    ) : (
+                      t('rules.downloadPdf')
+                    )}
+                  </button>
+                </div>
+              )}
+              <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+            </div>
           </div>
         </div>
       )}

@@ -1,6 +1,10 @@
-# Rulebook
+# ZeroLore Rulebook
 
-This rulebook aims to provide the full ZeroLore experience with all the rules. Although it may seem long, ZeroLore always tries to be straightforward and uncomplicated.
+ZeroLore is designed to be flexible, modular, and adaptable.
+
+This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
+
+The ZeroLore community is part of the game. If you create something interesting, share it.
 
 ---
 
@@ -117,6 +121,8 @@ At the beginning of each turn, both players make the **Initiative roll**.
 - Each player rolls **1D6**.
 - The player with the highest result **acts first** during that turn.
 - In case of a tie, roll again.
+- Stratagems are placed.
+- Units are recruited or brought out from reserve.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
@@ -147,12 +153,7 @@ Once a unit has been activated, **it cannot be activated again** during that tur
 
 When **all units from both players** have been activated, the turn ends.
 
-During the End of Turn:
-
-- Effects that state they resolve at the end of the turn are completed.
-- Effects that state they are applied at the end of the turn are resolved.
-
-After this, a new turn begins starting again with the Initiative Phase.
+During the End of Turn, effects that state they resolve at the end of the turn are completed. After this, a new turn begins starting again with the Initiative Phase.
 
 ---
 
@@ -213,15 +214,15 @@ A unit may retreat at any time, even if locked in melee combat.
 To retreat:
 
 - The unit spends **2 actions**.
-- It moves using its **Movement** value toward its deployment zone.
+- It moves using its **Movement** value toward an allied command post.
 - Upon retreating, the unit reduces its **Speed to 0** and its **Value does not count for objective or command post control** until it recovers.
 
 At the start of its next turn, the unit must roll **1D6**:
 
-- **1–2:** it continues retreating toward its deployment zone.
+- **1–2:** it continues retreating toward an allied command post.
 - **3–6:** it recovers and may act normally.
 
-Units automatically recover when they reach their deployment zone or any safe zone specified by the game mode.
+Units automatically recover when they reach a command post or any safe zone specified by the created game mode.
 
 A unit in the Retreat state **cannot make counterattacks**.
 
@@ -235,12 +236,6 @@ A ready unit may make **ranged counterattacks** during the opposing player's tur
 - **If charged:** combat is resolved by **Speed**. If the ready unit has higher Speed, it attacks first. The charging unit makes the counterattack. The Ready unit may attack or counterattack even if it has no actions left.
 
 The Ready state lasts until the end of the turn.
-
-## General Considerations
-
-- If a player forgets to take an action, use an ability, or declare an effect, it is considered lost, unless players agree otherwise.
-- Miniatures are recommended to carry the weapons shown in their profile to facilitate reading the battlefield.
-- Communicating intentions keeps the game flowing clearly.
 
 ---
 
@@ -515,16 +510,19 @@ While out of control:
 
 The Out of Control state persists until a rule states otherwise or the game ends.
 
-# Deployment Zone
+# Command Posts and Deployment
 
-The deployment zone is the strip along the edge of the table where each player places their units at the start of the game and where retreating units reorganise. It spans the full width of the table from the edge to the indicated distance:
+Command posts are strategic positions spread across the battlefield. Besides being objectives to capture, they are the only points from which units may deploy.
 
-- **Skirmish Mode:** 5" from the table edge.
-- **Squad Mode:** 12" from the table edge.
+To deploy a unit at a command post, the unit must be in contact with it. If the post is occupied by enemy units, even if it still belongs to the ally by value or hero presence, you cannot deploy there.
 
-Each player deploys on the opposite edge of the table, leaving no-man's-land between both zones where the battle takes place.
+Units that cannot be deployed during the initial turn remain in **reserve**.
 
-Some units have special deployment rules in their profile that allow them to deploy outside this zone.
+Some units have special deployment abilities indicated on their profile.
+
+## Reserve
+
+Units in reserve have not yet entered the battlefield. They are deployed during the **Initiative Phase** of later turns, from any command post you control.
 
 ## Initial Deployment
 
@@ -532,8 +530,6 @@ Before the game begins, players deploy their armies. Each player rolls **1D6**; 
 
 - **Skirmish Mode:** one miniature at a time.
 - **Squad Mode:** one squad at a time.
-
-All units must be placed within their own deployment zone unless a special rule states otherwise.
 
 ---
 
@@ -930,12 +926,8 @@ This doctrine only works when one allied unit or squad is locked in melee combat
 
 ---
 
-# Closing
+## General Considerations
 
-ZeroLore is designed to be flexible, modular, and adaptable.
-
-This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system.
-
-This rulebook is the starting point for anyone who wants to begin playing without complications. But ZeroLore does not end there. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
-
-The ZeroLore community is part of the game. If you create something interesting, share it.
+- If a player forgets to take an action, use an ability, or declare an effect, it is considered lost, unless players agree otherwise.
+- It is recommended that miniatures carry distinct weapons in squads to make the battlefield easier to read.
+- Communicating intentions helps keep the game flowing smoothly and clearly.
