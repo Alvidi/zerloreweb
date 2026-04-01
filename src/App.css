@@ -3991,6 +3991,37 @@ mark {
   font-weight: 700;
 }
 
+.duel-section-label {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--metal);
+}
+
+.duel-unit-conditions {
+  display: grid;
+  gap: 6px;
+}
+
+.duel-condition-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.duel-condition-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  font-size: 0.74rem;
+  line-height: 1;
+}
+
 .duel-hp-select {
   width: 74px;
   max-width: 100%;
@@ -4273,6 +4304,42 @@ mark {
 .duel-log-entry:last-child {
   border-bottom: 0;
   padding-bottom: 0;
+}
+
+.duel-log-entry-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.duel-log-stage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 199, 107, 0.22);
+  background: rgba(255, 199, 107, 0.1);
+  color: rgba(255, 223, 164, 0.96);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.duel-log-stage-pill span {
+  color: var(--metal);
+}
+
+.duel-log-versus {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .duel-log-row {

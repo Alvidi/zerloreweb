@@ -37,6 +37,13 @@ const getFactionAbilityHeading = (details, lang) => {
   return ` (${names.join(', ')})`
 }
 
+const getEntryStageLabel = (entry, tx) => {
+  if (entry.key.startsWith('charge-roll-')) return tx.chargeStep
+  if (entry.key.includes('heroic-fall')) return tx.counterattack
+  if (entry.key.includes('counter')) return tx.counterattack
+  return tx.attackStep
+}
+
 const renderAbilityGroups = ({
   details,
   labelClass,
@@ -98,7 +105,6 @@ function BattleCombatLog({ logEntries, tx, lang }) {
       {logEntries.length > 0 && (
         <div className="duel-log-list">
           {logEntries.map((entry) => {
-            const isCounterattackEntry = entry.key.includes('counter')
             const isChargeRollEntry = entry.key.startsWith('charge-roll-')
             const attackerSide = entry.attackerSide === 'right' ? 'right' : 'left'
             const attackerIsLeft = attackerSide === 'left'
@@ -108,17 +114,13 @@ function BattleCombatLog({ logEntries, tx, lang }) {
               && Number.isFinite(attackerHpBefore)
               && Number.isFinite(attackerHpAfter)
             const attackerUnitName = String(entry.resultState?.attacker?.name || '-')
-              .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
             const defenderUnitName = String(entry.resultState?.defender?.name || '-')
-              .toLocaleLowerCase(lang === 'en' ? 'en-US' : 'es-ES')
-            const primaryRole = isChargeRollEntry ? tx.chargeStep : attackerIsLeft ? tx.attacker : tx.defender
             const primaryUnitName = attackerUnitName
             const primaryLabelClass = isChargeRollEntry
               ? 'duel-log-line-label duel-log-line-label-faction-ability'
               : attackerIsLeft
                 ? 'duel-log-line-label duel-log-line-label-attacker'
                 : 'duel-log-line-label duel-log-line-label-defender'
-            const secondaryRole = attackerIsLeft ? tx.defender : tx.attacker
             const secondaryUnitName = defenderUnitName
             const secondaryLabelClass = attackerIsLeft
               ? 'duel-log-line-label duel-log-line-label-defender'
@@ -131,8 +133,21 @@ function BattleCombatLog({ logEntries, tx, lang }) {
             const defenderFactionAbilityDetails = factionAbilityDetails.filter((detail) => detail.owner === 'defender')
             const attackerFactionAbilityHeading = getFactionAbilityHeading(attackerFactionAbilityDetails, lang)
             const defenderFactionAbilityHeading = getFactionAbilityHeading(defenderFactionAbilityDetails, lang)
+            const stageLabel = getEntryStageLabel(entry, tx)
             return (
               <article key={entry.key} className="duel-log-entry">
+                <div className="duel-log-entry-top">
+                  <span className="duel-log-stage-pill">
+                    <span>{stageLabel}</span>
+                  </span>
+                  {!isChargeRollEntry && (
+                    <span className="duel-log-versus">
+                      <span>{attackerUnitName}</span>
+                      <span>{tx.logVersus}</span>
+                      <span>{defenderUnitName}</span>
+                    </span>
+                  )}
+                </div>
                 {!!entry.specialtyLine && (
                   <div className="duel-log-line">
                     <span className="duel-log-line-label">{tx.unitSpecialty}</span>
@@ -158,9 +173,7 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                 {!entry.hidePrimaryLine && (
                   <div className="duel-log-line">
                     <span className={primaryLabelClass}>
-                      <span>{primaryRole}</span>{' '}
                       <span className="duel-log-line-label-unit">{primaryUnitName}</span>
-                      {isCounterattackEntry && <span>{` (${tx.counterattack})`}</span>}
                     </span>
                     <div className="duel-dice">
                       {!!entry.attackCountDice?.length && (
@@ -262,7 +275,6 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                 {(entry.defenseDice?.length || entry.defenderLine || entry.defenderSave) && (
                   <div className="duel-log-line">
                     <span className={secondaryLabelClass}>
-                      <span>{secondaryRole}</span>{' '}
                       <span className="duel-log-line-label-unit">{secondaryUnitName}</span>
                     </span>
                     <div className="duel-dice">
