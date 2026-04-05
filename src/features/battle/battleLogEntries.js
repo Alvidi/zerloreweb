@@ -70,6 +70,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
         baseStatsLine,
         specialtyLine,
+        coverLabel: '',
         coverLine: '',
         attackerLine: lang === 'en'
           ? `${attackerName} attacks with ${weaponName}.`
@@ -436,6 +437,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         : selectedCoverType === 'height'
           ? 'cobertura de altura'
           : 'cobertura parcial'
+    const coverLabel = selectedCoverLabel
     const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
     const failedDefenses = Math.max(0, saveRolls.length - blockedTotal)
     const defenseSummary = (() => {
@@ -453,32 +455,28 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const coverLine = (() => {
       if (meleePartialCoverActive) {
         return lang === 'en'
-          ? 'partial cover: applied. Reason: in melee, both units lose 1 attack die.'
-          : 'cobertura parcial: aplicada. Motivo: en CaC, ambas unidades pierden 1 dado de ataque.'
+          ? 'applied'
+          : 'aplicada'
       }
       if (defenderCover) {
         return lang === 'en'
-          ? `${selectedCoverLabel}: applied.${
-            coverAffectsDefense && Number(result.saveThreshold) === 1 ? ' Save stays at 1+ (cap).' : ''
-          }`
-          : `${selectedCoverLabel}: aplicada.${
-            coverAffectsDefense && Number(result.saveThreshold) === 1 ? ' La salvación se mantiene en 1+ (tope).' : ''
-          }`
+          ? 'applied'
+          : 'aplicada'
       }
       if (parabolicBullseyeIgnoresCover && selectedCoverType !== 'none') {
         return lang === 'en'
-          ? `${selectedCoverLabel}: not applied. Reason: Parabolic Shot scored a bullseye.`
-          : `${selectedCoverLabel}: no aplicada. Motivo: Disparo parabólico ha sacado diana.`
+          ? 'not applied'
+          : 'no aplicada'
       }
       if (ignoresPartialCover && selectedCoverType === 'partial') {
         return lang === 'en'
-          ? `${selectedCoverLabel}: not applied. Reason: the weapon ignores cover.`
-          : `${selectedCoverLabel}: no aplicada. Motivo: el arma ignora coberturas.`
+          ? 'not applied'
+          : 'no aplicada'
       }
       if (coverIgnoredByType && selectedCoverType !== 'none') {
         return lang === 'en'
-          ? `${selectedCoverLabel}: not applied. Reason: no effect on vehicle/monster/titan units.`
-          : `${selectedCoverLabel}: no aplicada. Motivo: sin efecto sobre unidades vehículo/monstruo/titán.`
+          ? 'not applied'
+          : 'no aplicada'
       }
       return ''
     })()
@@ -573,6 +571,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
       baseStatsLine,
       specialtyLine,
+      coverLabel,
       coverLine,
       attackerLine: attackerSummary,
       abilityLine: '',
@@ -630,6 +629,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     subtitle: '',
     baseStatsLine: '',
     specialtyLine: '',
+    coverLabel: '',
     coverLine: '',
     attackerLine,
     defenderLine,

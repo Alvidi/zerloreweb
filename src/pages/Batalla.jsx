@@ -372,45 +372,6 @@ function Batalla() {
         description: getAbilityDescription(ability, lang),
       }))
       .filter((item) => item.label)
-  const buildSideConditionTags = (side) => {
-    const isLeft = side === 'left'
-    const unit = isLeft ? leftUnit : rightUnit
-    const canUseCover = isLeft ? leftCanUseCover : rightCanUseCover
-    const coverType = isLeft ? leftCoverType : rightCoverType
-    const conditionSupport = isLeft ? leftConditionSupport : rightConditionSupport
-    const moved = isLeft ? leftMoved : rightMoved
-    const halfRange = isLeft ? leftHalfRange : rightHalfRange
-    const afterDash = isLeft ? leftAfterDash : rightAfterDash
-    const explosiveNearbyUnits = isLeft ? leftExplosiveNearbyUnits : rightExplosiveNearbyUnits
-    const activeFactionState = isLeft ? leftFactionAbilityState : rightFactionAbilityState
-    const implementedFactionAbilities = isLeft ? leftImplementedFactionAbilities : rightImplementedFactionAbilities
-    const tags = []
-
-    if (canUseCover && coverType !== 'none') {
-      tags.push(coverType === 'height' ? tx.coverHeight : tx.coverPartial)
-    }
-    if (conditionSupport.moved && moved) tags.push(tx.moved)
-    if (conditionSupport.halfRange && halfRange) tags.push(tx.halfRange)
-    if (conditionSupport.afterDash && afterDash) tags.push(tx.afterDash)
-    if (mode === 'ranged' && explosiveNearbyUnits > 0) {
-      tags.push(`${tx.explosiveNearby}: ${explosiveNearbyUnits}`)
-    }
-
-    const activeFactionCount = implementedFactionAbilities.filter((ability) => Boolean(activeFactionState[ability.id])).length
-    if (activeFactionCount > 0) {
-      tags.push(
-        lang === 'en'
-          ? `${activeFactionCount} faction ${activeFactionCount === 1 ? 'ability' : 'abilities'}`
-          : `${activeFactionCount} habilidad${activeFactionCount === 1 ? '' : 'es'} de facción`,
-      )
-    }
-
-    if (!tags.length && unit) {
-      tags.push(tx.statusReady)
-    }
-
-    return tags
-  }
   const { buildCombatEntry, buildStatusEntry } = useMemo(
     () => createBattleLogBuilders({ lang, tx, currentModeLabel }),
     [lang, tx, currentModeLabel],
@@ -1190,14 +1151,6 @@ function Batalla() {
                   <span className="duel-unit-specialty-label">{tx.unitSpecialtyCard}:</span> {leftUnit.specialty}
                 </p>
               )}
-              <div className="duel-unit-conditions">
-                <p className="duel-section-label">{tx.currentConditions}</p>
-                <div className="duel-condition-tags">
-                  {buildSideConditionTags('left').map((tag, index) => (
-                    <span key={`left-condition-${index}-${tag}`} className="duel-condition-tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
               {!!leftSelectedWeapons.length && (
                 <div className="duel-weapon-stack">
                   <p className="duel-section-label">{tx.selectedWeapons}</p>
@@ -1474,14 +1427,6 @@ function Batalla() {
                   <span className="duel-unit-specialty-label">{tx.unitSpecialtyCard}:</span> {rightUnit.specialty}
                 </p>
               )}
-              <div className="duel-unit-conditions">
-                <p className="duel-section-label">{tx.currentConditions}</p>
-                <div className="duel-condition-tags">
-                  {buildSideConditionTags('right').map((tag, index) => (
-                    <span key={`right-condition-${index}-${tag}`} className="duel-condition-tag">{tag}</span>
-                  ))}
-                </div>
-              </div>
               {!!rightSelectedWeapons.length && (
                 <div className="duel-weapon-stack">
                   <p className="duel-section-label">{tx.selectedWeapons}</p>

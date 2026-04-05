@@ -19,6 +19,7 @@ import conquestBlueToken from '../images/tokens/conquista-blue.svg'
 import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
+import activationOrangeToken from '../images/tokens/activacion-orange.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -71,9 +72,9 @@ const buildDoctrineTokenImage = (id, locale = 'es') => {
     ? '<circle cx="12" cy="12" r="7" fill="none" stroke="#f4f4f4" stroke-width="0.62" /><circle cx="12" cy="12" r="1.05" fill="#f4f4f4" />'
     : ''
   const labelMarkup = label
-    ? `<text fill="#ffe7cc" font-size="${labelFontSize}" font-family="Arial, sans-serif" font-weight="500" letter-spacing="${labelLetterSpacing}"><textPath href="#arc" startOffset="50%" text-anchor="middle">${label}</textPath></text>`
+    ? `<text fill="#dcffd8" font-size="${labelFontSize}" font-family="Arial, sans-serif" font-weight="500" letter-spacing="${labelLetterSpacing}"><textPath href="#arc" startOffset="50%" text-anchor="middle">${label}</textPath></text>`
     : ''
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 24 24"><defs><radialGradient id="bgGlow" cx="50%" cy="50%" r="56%"><stop offset="0%" stop-color="#3b1f12"/><stop offset="58%" stop-color="#24140d"/><stop offset="100%" stop-color="#140d0a"/></radialGradient><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffd6a4"/><stop offset="52%" stop-color="#ff9b52"/><stop offset="100%" stop-color="#d15c26"/></linearGradient><radialGradient id="coreGrad" cx="50%" cy="45%" r="62%"><stop offset="0%" stop-color="#ffe5c7"/><stop offset="44%" stop-color="#ffb46a"/><stop offset="100%" stop-color="#cc5b2d"/></radialGradient><path id="arc" d="M4.35 12.45A7.65 7.65 0 0 1 19.65 12.45" /></defs><circle cx="12" cy="12" r="11" fill="url(#bgGlow)" /><circle cx="12" cy="12" r="10.4" fill="none" stroke="#ffe9cc" stroke-opacity="0.2" stroke-width="0.14" /><circle cx="12" cy="12" r="9.45" fill="none" stroke="url(#ringGrad)" stroke-width="0.66" /><circle cx="12" cy="12" r="8.8" fill="none" stroke="#ffd4a8" stroke-opacity="0.34" stroke-width="0.16" /><circle cx="12" cy="12" r="7.25" fill="none" stroke="#ffd4a8" stroke-opacity="0.24" stroke-width="0.11" stroke-dasharray="0.22 0.34" /><circle cx="12" cy="12" r="5.75" fill="url(#coreGrad)" fill-opacity="0.24" /><circle cx="12" cy="12" r="4.2" fill="#ffe9cc" fill-opacity="0.08" />${labelMarkup}<g transform="translate(${iconTransform.tx} ${iconTransform.ty}) scale(${iconTransform.scale})">${extraMarkup}${pathMarkup}</g></svg>`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 24 24"><defs><radialGradient id="bgGlow" cx="50%" cy="50%" r="56%"><stop offset="0%" stop-color="#0f2416"/><stop offset="58%" stop-color="#0d1a11"/><stop offset="100%" stop-color="#09110c"/></radialGradient><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c8ffb9"/><stop offset="52%" stop-color="#7bdb73"/><stop offset="100%" stop-color="#2d8f4a"/></linearGradient><radialGradient id="coreGrad" cx="50%" cy="45%" r="62%"><stop offset="0%" stop-color="#e9ffe0"/><stop offset="44%" stop-color="#9cf089"/><stop offset="100%" stop-color="#2f8d48"/></radialGradient><path id="arc" d="M4.35 12.45A7.65 7.65 0 0 1 19.65 12.45" /></defs><circle cx="12" cy="12" r="11" fill="url(#bgGlow)" /><circle cx="12" cy="12" r="10.4" fill="none" stroke="#ecffe2" stroke-opacity="0.2" stroke-width="0.14" /><circle cx="12" cy="12" r="9.45" fill="none" stroke="url(#ringGrad)" stroke-width="0.66" /><circle cx="12" cy="12" r="8.8" fill="none" stroke="#cfffbe" stroke-opacity="0.34" stroke-width="0.16" /><circle cx="12" cy="12" r="7.25" fill="none" stroke="#cfffbe" stroke-opacity="0.24" stroke-width="0.11" stroke-dasharray="0.22 0.34" /><circle cx="12" cy="12" r="5.75" fill="url(#coreGrad)" fill-opacity="0.24" /><circle cx="12" cy="12" r="4.2" fill="#efffe8" fill-opacity="0.08" />${labelMarkup}<g transform="translate(${iconTransform.tx} ${iconTransform.ty}) scale(${iconTransform.scale})">${extraMarkup}${pathMarkup}</g></svg>`
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
 }
 
@@ -117,6 +118,7 @@ const TOKEN_DEFINITIONS = [
   { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage10Token },
   { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
   { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
+  { id: 'state_activation_orange', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivatedOrange', diameterMm: 32, previewSize: 'medium', imageSrc: activationOrangeToken },
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
   { id: 'state_out_of_control', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateOutOfControl', diameterMm: 32, previewSize: 'medium', imageSrc: outOfControlToken },
   { id: 'state_melee', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateMelee', diameterMm: 32, previewSize: 'medium', imageSrc: meleeToken },
@@ -126,10 +128,6 @@ const TOKEN_DEFINITIONS = [
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_circle_6_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6_blue', category: 'command', shape: 'square', commandColor: 'blue', labelKey: 'rules.tokens.types.commandSquare6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_circle_6_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6_red', category: 'command', shape: 'square', commandColor: 'red', labelKey: 'rules.tokens.types.commandSquare6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   ...DOCTRINE_TOKENS.map((token) => ({
     id: `doctrine_${token.id.replaceAll('-', '_')}`,
     category: 'doctrine',
@@ -260,6 +258,299 @@ function Reglamento() {
           insertionTarget.parentNode?.insertBefore(gallery, insertionTarget)
         } else {
           doctrineHeading.parentNode?.insertBefore(gallery, doctrineHeading.nextSibling)
+        }
+      }
+
+      const commandHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized === 'puestos de mando y despliegue' || normalized === 'command posts and deployment'
+      })
+      const commandHeading = commandHeadings.at(-1)
+      if (commandHeading) {
+        const gallery = doc.createElement('div')
+        gallery.className = 'rules-command-gallery'
+
+        ;[
+          {
+            label: t('rules.tokens.types.commandCircle6'),
+            shapeClass: 'command-circle',
+          },
+          {
+            label: t('rules.tokens.types.commandSquare6'),
+            shapeClass: 'command-square',
+          },
+        ].forEach((token) => {
+          const item = doc.createElement('article')
+          item.className = 'rules-command-gallery-item'
+
+          const mark = doc.createElement('div')
+          mark.className = 'rules-command-gallery-mark'
+
+          const preview = doc.createElement('div')
+          preview.className = `rules-token-preview command ${token.shapeClass}`
+
+          const logoBox = doc.createElement('span')
+          logoBox.className = 'rules-token-command-logo-box'
+
+          const logo = doc.createElement('img')
+          logo.className = 'rules-token-command-logo-mark'
+          logo.src = zeroLoreLogo
+          logo.alt = ''
+          logo.loading = 'lazy'
+
+          const label = doc.createElement('p')
+          label.className = 'rules-command-gallery-label'
+          label.textContent = token.label
+
+          logoBox.appendChild(logo)
+          preview.appendChild(logoBox)
+          mark.appendChild(preview)
+          item.appendChild(mark)
+          item.appendChild(label)
+          gallery.appendChild(item)
+        })
+
+        const paragraphs = []
+        let sibling = commandHeading.nextElementSibling
+        while (sibling && sibling.tagName === 'P') {
+          paragraphs.push(sibling)
+          sibling = sibling.nextElementSibling
+        }
+
+        const firstParagraph = paragraphs[0] || null
+        if (firstParagraph?.parentNode) {
+          firstParagraph.parentNode.insertBefore(gallery, firstParagraph.nextSibling)
+        } else {
+          commandHeading.parentNode?.insertBefore(gallery, commandHeading.nextSibling)
+        }
+
+        const flagParagraph = paragraphs[1] || null
+        if (flagParagraph?.parentNode) {
+          const flagGallery = doc.createElement('div')
+          flagGallery.className = 'rules-flag-gallery'
+
+          ;[
+            {
+              label: t('rules.tokens.types.stateConquestBlue'),
+              imageSrc: conquestBlueToken,
+            },
+            {
+              label: t('rules.tokens.types.stateConquestRed'),
+              imageSrc: conquestRedToken,
+            },
+          ].forEach((token) => {
+            const item = doc.createElement('article')
+            item.className = 'rules-flag-gallery-item'
+
+            const mark = doc.createElement('div')
+            mark.className = 'rules-flag-gallery-mark'
+
+            const image = doc.createElement('img')
+            image.className = 'rules-flag-gallery-image'
+            image.src = token.imageSrc
+            image.alt = ''
+            image.loading = 'lazy'
+
+            const label = doc.createElement('p')
+            label.className = 'rules-flag-gallery-label'
+            label.textContent = token.label
+
+            mark.appendChild(image)
+            item.appendChild(mark)
+            item.appendChild(label)
+            flagGallery.appendChild(item)
+          })
+
+          flagParagraph.parentNode.insertBefore(flagGallery, flagParagraph.nextSibling)
+        }
+      }
+
+      const activationHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized.includes('fase de activaciones') || normalized.includes('activation phase')
+      })
+      const activationHeading = activationHeadings.at(-1)
+      if (activationHeading) {
+        const sectionNodes = []
+        let sibling = activationHeading.nextElementSibling
+        while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
+          sectionNodes.push(sibling)
+          sibling = sibling.nextElementSibling
+        }
+
+        const tokenParagraph = sectionNodes.find((node) => {
+          if (node.tagName !== 'P') return false
+          const paragraph = node
+          const normalized = normalizeHeadingText(paragraph.textContent)
+          return normalized.includes('token de activacion') || normalized.includes('activation token')
+        })
+
+        if (tokenParagraph?.parentNode) {
+          const activationGallery = doc.createElement('div')
+          activationGallery.className = 'rules-activation-gallery'
+
+          ;[
+            {
+              label: t('rules.tokens.types.stateActivated'),
+              imageSrc: activationToken,
+            },
+            {
+              label: t('rules.tokens.types.stateActivatedOrange'),
+              imageSrc: activationOrangeToken,
+            },
+          ].forEach((token) => {
+            const item = doc.createElement('article')
+            item.className = 'rules-activation-gallery-item'
+
+            const mark = doc.createElement('div')
+            mark.className = 'rules-activation-gallery-mark'
+
+            const image = doc.createElement('img')
+            image.className = 'rules-activation-gallery-image'
+            image.src = token.imageSrc
+            image.alt = ''
+            image.loading = 'lazy'
+
+            const label = doc.createElement('p')
+            label.className = 'rules-activation-gallery-label'
+            label.textContent = token.label
+
+            mark.appendChild(image)
+            item.appendChild(mark)
+            item.appendChild(label)
+            activationGallery.appendChild(item)
+          })
+
+          tokenParagraph.parentNode.insertBefore(activationGallery, tokenParagraph.nextSibling)
+        }
+      }
+
+      const unitStatesHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized.includes('estados de unidad') || normalized.includes('unit states')
+      })
+      const unitStatesHeading = unitStatesHeadings.at(-1)
+      if (unitStatesHeading) {
+        const sectionNodes = []
+        let sibling = unitStatesHeading.nextElementSibling
+        while (sibling && sibling.tagName !== 'H1') {
+          sectionNodes.push(sibling)
+          sibling = sibling.nextElementSibling
+        }
+
+        const stateTokenConfigs = [
+          {
+            matcher: ['token de escudo', 'shield token'],
+            label: t('rules.tokens.types.stateReady'),
+            imageSrc: stateReadyToken,
+          },
+          {
+            matcher: ['token de retirada', 'retreat token'],
+            label: t('rules.tokens.types.stateRetreat'),
+            imageSrc: stateRetreatToken,
+          },
+          {
+            matcher: ['token de descontrol', 'out of control token'],
+            label: t('rules.tokens.types.stateOutOfControl'),
+            imageSrc: outOfControlToken,
+          },
+          {
+            matcher: ['token de espada', 'sword token'],
+            label: t('rules.tokens.types.stateMelee'),
+            imageSrc: meleeToken,
+          },
+        ]
+
+        stateTokenConfigs.forEach((token) => {
+          const tokenParagraph = sectionNodes.find((node) => {
+            if (node.tagName !== 'P') return false
+            const normalized = normalizeHeadingText(node.textContent)
+            return token.matcher.some((value) => normalized.includes(value))
+          })
+
+          if (!tokenParagraph?.parentNode) return
+
+          const stateGallery = doc.createElement('div')
+          stateGallery.className = 'rules-state-gallery'
+
+          const item = doc.createElement('article')
+          item.className = 'rules-state-gallery-item'
+
+          const mark = doc.createElement('div')
+          mark.className = 'rules-state-gallery-mark'
+
+          const image = doc.createElement('img')
+          image.className = 'rules-state-gallery-image'
+          image.src = token.imageSrc
+          image.alt = ''
+          image.loading = 'lazy'
+
+          const label = doc.createElement('p')
+          label.className = 'rules-state-gallery-label'
+          label.textContent = token.label
+
+          mark.appendChild(image)
+          item.appendChild(mark)
+          item.appendChild(label)
+          stateGallery.appendChild(item)
+          tokenParagraph.parentNode.insertBefore(stateGallery, tokenParagraph.nextSibling)
+        })
+      }
+
+      const woundsHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized === 'vidas' || normalized === 'wounds'
+      })
+      const woundsHeading = woundsHeadings.at(-1)
+      if (woundsHeading) {
+        const sectionNodes = []
+        let sibling = woundsHeading.nextElementSibling
+        while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
+          sectionNodes.push(sibling)
+          sibling = sibling.nextElementSibling
+        }
+
+        const tokenListItem = sectionNodes.find((node) => {
+          if (node.tagName !== 'UL') return false
+          return Array.from(node.querySelectorAll('li')).some((item) => {
+            const normalized = normalizeHeadingText(item.textContent)
+            return normalized.includes('tokens de dano') || normalized.includes('damage tokens')
+          })
+        })
+
+        if (tokenListItem?.parentNode) {
+          const damageGallery = doc.createElement('div')
+          damageGallery.className = 'rules-damage-gallery'
+
+          ;[
+            { label: t('rules.tokens.types.damage1'), imageSrc: damage1Token },
+            { label: t('rules.tokens.types.damage3'), imageSrc: damage3Token },
+            { label: t('rules.tokens.types.damage5'), imageSrc: damage5Token },
+            { label: t('rules.tokens.types.damage10'), imageSrc: damage10Token },
+          ].forEach((token) => {
+            const item = doc.createElement('article')
+            item.className = 'rules-damage-gallery-item'
+
+            const mark = doc.createElement('div')
+            mark.className = 'rules-damage-gallery-mark'
+
+            const image = doc.createElement('img')
+            image.className = 'rules-damage-gallery-image'
+            image.src = token.imageSrc
+            image.alt = ''
+            image.loading = 'lazy'
+
+            const label = doc.createElement('p')
+            label.className = 'rules-damage-gallery-label'
+            label.textContent = token.label
+
+            mark.appendChild(image)
+            item.appendChild(mark)
+            item.appendChild(label)
+            damageGallery.appendChild(item)
+          })
+
+          tokenListItem.parentNode.insertBefore(damageGallery, tokenListItem.nextSibling)
         }
       }
     }
@@ -568,6 +859,152 @@ function Reglamento() {
             height: auto;
           }
           .rules-pdf-sheet .rules-html .rules-doctrine-gallery-label {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-command-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 18px 0;
+            padding: 14px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-command-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 10px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-command-gallery-mark .rules-token-preview {
+            width: 86px;
+            height: 86px;
+          }
+          .rules-pdf-sheet .rules-html .rules-command-gallery-label {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-flag-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 14px 0 18px;
+            padding: 14px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-flag-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-flag-gallery-mark {
+            width: 72px;
+          }
+          .rules-pdf-sheet .rules-html .rules-flag-gallery-image {
+            display: block;
+            width: 100%;
+            height: auto;
+          }
+          .rules-pdf-sheet .rules-html .rules-flag-gallery-label {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-activation-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 14px 0 18px;
+            padding: 14px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-activation-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-activation-gallery-mark {
+            width: 72px;
+          }
+          .rules-pdf-sheet .rules-html .rules-activation-gallery-image {
+            display: block;
+            width: 100%;
+            height: auto;
+          }
+          .rules-pdf-sheet .rules-html .rules-activation-gallery-label {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-state-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 14px 0 18px;
+            padding: 14px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-state-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-state-gallery-mark {
+            width: 72px;
+          }
+          .rules-pdf-sheet .rules-html .rules-state-gallery-image {
+            display: block;
+            width: 100%;
+            height: auto;
+          }
+          .rules-pdf-sheet .rules-html .rules-state-gallery-label {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-damage-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin: 14px 0 18px;
+            padding: 14px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-damage-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-damage-gallery-mark {
+            width: 60px;
+          }
+          .rules-pdf-sheet .rules-html .rules-damage-gallery-image {
+            display: block;
+            width: 100%;
+            height: auto;
+          }
+          .rules-pdf-sheet .rules-html .rules-damage-gallery-label {
             margin: 0;
             font-size: 11px;
             line-height: 1.25;

@@ -170,6 +170,17 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                   unitName: primaryUnitName,
                   entryKey: `${entry.key}-pre-faction`,
                 })}
+                {!!entry.coverLine && (
+                  <div className="duel-log-line">
+                    <span className="duel-log-line-label">
+                      <span>{entry.coverLabel || tx.coverType}</span>{' '}
+                      <span className="duel-log-line-label-unit">{secondaryUnitName}</span>
+                    </span>
+                    <div className="duel-dice">
+                      <span className="duel-log-copy">{entry.coverLine}</span>
+                    </div>
+                  </div>
+                )}
                 {!entry.hidePrimaryLine && (
                   <div className="duel-log-line">
                     <span className={primaryLabelClass}>
@@ -254,24 +265,6 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                   unitName: primaryUnitName,
                   entryKey: `${entry.key}-faction-attacker`,
                 })}
-                {renderAbilityGroups({
-                  details: defenderFactionAbilityDetails,
-                  labelClass: 'duel-log-line-label duel-log-line-label-faction-ability',
-                  label: `${tx.factionAbilityLog}${defenderFactionAbilityHeading}`,
-                  unitName: secondaryUnitName,
-                  entryKey: `${entry.key}-faction-defender`,
-                })}
-                {!!entry.coverLine && (
-                  <div className="duel-log-line">
-                    <span className="duel-log-line-label">
-                      <span>{tx.coverAndSave}</span>{' '}
-                      <span className="duel-log-line-label-unit">{secondaryUnitName}</span>
-                    </span>
-                    <div className="duel-dice">
-                      <span className="duel-log-copy">{entry.coverLine}</span>
-                    </div>
-                  </div>
-                )}
                 {(entry.defenseDice?.length || entry.defenderLine || entry.defenderSave) && (
                   <div className="duel-log-line">
                     <span className={secondaryLabelClass}>
@@ -317,6 +310,13 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                     </div>
                   </div>
                 )}
+                {renderAbilityGroups({
+                  details: defenderFactionAbilityDetails,
+                  labelClass: 'duel-log-line-label duel-log-line-label-faction-ability',
+                  label: `${tx.factionAbilityLog}${defenderFactionAbilityHeading}`,
+                  unitName: secondaryUnitName,
+                  entryKey: `${entry.key}-faction-defender`,
+                })}
                 {!!entry.damageDetails?.length && (
                   <div className="duel-log-line">
                     <span className="duel-log-line-label duel-log-line-label-damage">

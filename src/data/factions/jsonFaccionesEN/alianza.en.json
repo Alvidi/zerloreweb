@@ -75,7 +75,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "combat knife",
+            "nombre": "Combat Knife",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -100,13 +100,13 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "They can carry two shooting weapons.",
+        "especialidad": "This unit may equip two ranged weapons.",
         "valor": 7
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Special hand gun",
+            "nombre": "Special Sidearm",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -130,7 +130,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "sweep shotgun",
+            "nombre": "Sweep Shotgun",
             "ataques": "1D6",
             "distancia": "6\"",
             "impactos": "-",
@@ -171,7 +171,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "combat knife",
+            "nombre": "Combat Knife",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -182,7 +182,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "reliquary sword",
+            "nombre": "Reliquary Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -196,7 +196,7 @@
       }
     },
     {
-      "nombre_unidad": "sworn",
+      "nombre_unidad": "Oathsworn",
       "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
@@ -207,13 +207,13 @@
           "min": 1,
           "max": 4
         },
-        "especialidad": "They cannot use the retreat action.",
+        "especialidad": "This unit cannot use the retreat action.",
         "valor": 8
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "hand gun",
+            "nombre": "Sidearm",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -226,7 +226,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Plasma gun",
+            "nombre": "Plasma Pistol",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+4",
@@ -283,14 +283,14 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "storm rifle",
+            "nombre": "Storm Rifle",
             "ataques": "3D",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Assaulter +1"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -312,7 +312,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "energy fist",
+            "nombre": "Energy Fist",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -323,7 +323,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "reliquary sword",
+            "nombre": "Reliquary Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -354,7 +354,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Attached machine guns",
+            "nombre": "Twin Machine Guns",
             "ataques": "4D",
             "distancia": "12\"",
             "impactos": "+3",
@@ -365,7 +365,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "precise cannon",
+            "nombre": "Precision Cannon",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
@@ -378,7 +378,7 @@
             "valor_extra": 2
           },
           {
-            "nombre": "ballistic missiles",
+            "nombre": "Ballistic Missiles",
             "ataques": "4D",
             "distancia": "22\"",
             "impactos": "+4",
@@ -391,14 +391,14 @@
             "valor_extra": 3
           },
           {
-            "nombre": "Ballistic laser cannon",
+            "nombre": "Ballistic Laser Cannon",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+3",
             "danio": "D6+2",
             "danio_critico": "D6+2",
             "habilidades_arma": [
-              "Raider +1"
+              "Assaulter +1"
             ],
             "especialidad": "-",
             "valor_extra": 5
@@ -437,7 +437,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Attached machine guns",
+            "nombre": "Twin Machine Guns",
             "ataques": "4D",
             "distancia": "12\"",
             "impactos": "+3",
@@ -464,7 +464,7 @@
       }
     },
     {
-      "nombre_unidad": "Sworn Commander",
+      "nombre_unidad": "Oathsworn Commander",
       "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
@@ -475,7 +475,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "They can carry two shooting weapons. Units in a squad with this hero or that are within 3\" of him in skirmish, gain the possibility of using this hero's weapons in shooting or melee, replacing all the ones they have in that attack.",
+        "especialidad": "This unit may equip two ranged weapons. Units in a squad with this hero, or within 3\" of this hero in skirmish, may choose to use either this hero's ranged weapons or melee weapons for their attack, completely replacing their own weapon profile for that attack. They may only use one type per activation.",
         "valor": 15
       },
       "armas": {
@@ -527,7 +527,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider"
+              "Assaulter"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -573,7 +573,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit can carry two ranged weapons and fire twice, with or without a different weapon, in the same action.",
+        "especialidad": "This unit may equip two ranged weapons and fire twice in the same action, with the same weapon or two different weapons.",
         "valor": 42
       },
       "armas": {
@@ -655,6 +655,89 @@
             ],
             "especialidad": "-",
             "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Gladiator Tank",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 16,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "When another allied unit/squad within 6\" makes a ranged attack against a target, this unit may immediately make a free shot with its base weapon against that same target.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Twin Machine Guns",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Siege Cannon",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          },
+          {
+            "nombre": "Heavy Laser Cannon",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+3",
+            "danio": "D6+2",
+            "danio_critico": "D6+2",
+            "habilidades_arma": [
+              "Anti 5+ (Vehicle)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 4
+          },
+          {
+            "nombre": "Tactical Missile Launcher",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Crush",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
           }
         ]
       }

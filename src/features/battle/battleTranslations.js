@@ -76,11 +76,8 @@ export const getBattleTranslations = (lang) =>
       weaponAbilityLog: 'Weapon ability',
       factionAbilityLog: 'Faction ability',
       selectedWeapons: 'Selected weapons',
-      currentConditions: 'Current conditions',
-      noConditions: 'No active conditions',
       logStep: 'Step',
       logVersus: 'vs',
-      statusReady: 'Ready',
       blocked: 'Attack blocked',
       blockedByTitanRule: 'blocked by Titan rule',
       titanRestrictionHint:
@@ -167,11 +164,8 @@ export const getBattleTranslations = (lang) =>
       weaponAbilityLog: 'Habilidad de arma',
       factionAbilityLog: 'Habilidad de facción',
       selectedWeapons: 'Armas seleccionadas',
-      currentConditions: 'Condiciones actuales',
-      noConditions: 'Sin condiciones activas',
       logStep: 'Paso',
       logVersus: 'vs',
-      statusReady: 'Lista',
       blocked: 'Ataque bloqueado',
       blockedByTitanRule: 'bloqueada por regla de Titán',
       titanRestrictionHint:

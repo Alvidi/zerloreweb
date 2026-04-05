@@ -2803,6 +2803,11 @@ mark {
   height: 112px;
 }
 
+.rules-token-preview[data-token-preview='state_activation_orange'].has-image {
+  width: 112px;
+  height: 112px;
+}
+
 .rules-token-preview[data-token-preview='state_retreat'].has-image {
   width: 112px;
   height: 112px;
@@ -3291,6 +3296,201 @@ mark {
   line-height: 1.35;
 }
 
+.rules-html .rules-command-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin: 22px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 69, 0.12), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.rules-html .rules-command-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.rules-html .rules-command-gallery-mark .rules-token-preview {
+  width: 104px;
+  height: 104px;
+}
+
+.rules-html .rules-command-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.rules-html .rules-flag-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  margin: 18px 0 22px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 69, 0.08), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.rules-html .rules-flag-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.rules-html .rules-flag-gallery-mark {
+  width: 92px;
+}
+
+.rules-html .rules-flag-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rules-html .rules-flag-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.rules-html .rules-activation-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  margin: 18px 0 22px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 69, 0.08), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.rules-html .rules-activation-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.rules-html .rules-activation-gallery-mark {
+  width: 92px;
+}
+
+.rules-html .rules-activation-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rules-html .rules-activation-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.rules-html .rules-state-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 14px 0 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 69, 0.08), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.rules-html .rules-state-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.rules-html .rules-state-gallery-mark {
+  width: 92px;
+}
+
+.rules-html .rules-state-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rules-html .rules-state-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+.rules-html .rules-damage-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin: 16px 0 20px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at top, rgba(255, 143, 69, 0.08), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.rules-html .rules-damage-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.rules-html .rules-damage-gallery-mark {
+  width: 76px;
+}
+
+.rules-html .rules-damage-gallery-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rules-html .rules-damage-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
 .rules-html .rules-table-scroll table,
 .rules-html table {
   width: 100%;
@@ -3354,11 +3554,80 @@ mark {
     padding: 12px;
   }
 
+  .rules-html .rules-command-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .rules-html .rules-flag-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .rules-html .rules-activation-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .rules-html .rules-state-gallery {
+    padding: 12px;
+  }
+
+  .rules-html .rules-damage-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
   .rules-html .rules-doctrine-gallery-mark {
     width: min(100%, 72px);
   }
 
+  .rules-html .rules-command-gallery-mark .rules-token-preview {
+    width: 92px;
+    height: 92px;
+  }
+
   .rules-html .rules-doctrine-gallery-label {
+    font-size: 0.72rem;
+  }
+
+  .rules-html .rules-command-gallery-label {
+    font-size: 0.76rem;
+  }
+
+  .rules-html .rules-flag-gallery-mark {
+    width: 82px;
+  }
+
+  .rules-html .rules-flag-gallery-label {
+    font-size: 0.74rem;
+  }
+
+  .rules-html .rules-activation-gallery-mark {
+    width: 82px;
+  }
+
+  .rules-html .rules-activation-gallery-label {
+    font-size: 0.74rem;
+  }
+
+  .rules-html .rules-state-gallery-mark {
+    width: 82px;
+  }
+
+  .rules-html .rules-state-gallery-label {
+    font-size: 0.74rem;
+  }
+
+  .rules-html .rules-damage-gallery-mark {
+    width: 70px;
+  }
+
+  .rules-html .rules-damage-gallery-label {
     font-size: 0.72rem;
   }
 
@@ -3997,29 +4266,6 @@ mark {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--metal);
-}
-
-.duel-unit-conditions {
-  display: grid;
-  gap: 6px;
-}
-
-.duel-condition-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.duel-condition-tag {
-  display: inline-flex;
-  align-items: center;
-  min-height: 24px;
-  padding: 0 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
-  font-size: 0.74rem;
-  line-height: 1;
 }
 
 .duel-hp-select {
@@ -4743,6 +4989,41 @@ mark {
   }
 
   .rules-html .rules-doctrine-gallery {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #bbb !important;
+    background: transparent !important;
+  }
+
+  .rules-html .rules-command-gallery {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #bbb !important;
+    background: transparent !important;
+  }
+
+  .rules-html .rules-flag-gallery {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #bbb !important;
+    background: transparent !important;
+  }
+
+  .rules-html .rules-activation-gallery {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #bbb !important;
+    background: transparent !important;
+  }
+
+  .rules-html .rules-state-gallery {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #bbb !important;
+    background: transparent !important;
+  }
+
+  .rules-html .rules-damage-gallery {
     break-inside: avoid;
     page-break-inside: avoid;
     border-color: #bbb !important;

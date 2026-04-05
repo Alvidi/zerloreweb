@@ -658,6 +658,89 @@
           }
         ]
       }
+    },
+    {
+      "nombre_unidad": "Tanque Gladiador",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 16,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Cuando otra unidad/escuadra aliada a 6” ataca a distancia a un objetivo, esta unidad puede realizar inmediatamente un disparo gratuito con su arma base contra ese mismo objetivo.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ametralladoras acopladas",
+            "ataques": "4D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Cañón de asedio",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          },
+          {
+            "nombre": "Cañón láser pesado",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+3",
+            "danio": "D6+2",
+            "danio_critico": "D6+2",
+            "habilidades_arma": [
+              "Anti 5+ (Vehículo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 4
+          },
+          {
+            "nombre": "Lanzamisiles táctico",
+            "ataques": "2D",
+            "distancia": "22\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastar",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
     }
   ]
 }

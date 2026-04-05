@@ -29,6 +29,7 @@ In squad mode, all miniatures in a squad must stay within **1" or less** of at l
 
 Miniature placement only affects **which miniatures can attack** in melee combat and does not modify the number of actions, state, or activation of the squad.
 
+
 ### Recommended Base Sizes
 
 ZeroLore is miniature-agnostic, but bases proportional to the unit type are recommended to maintain visual and tactical coherence.
@@ -83,6 +84,7 @@ All distances are measured in inches (").
 - Distances may be measured at any point in the game.
 - If in doubt, either player may request a **precise re-measurement**, and the result applies definitively.
 
+
 ### Line of Sight
 
 For a unit to make a ranged attack on another, it must have **line of sight**.
@@ -92,6 +94,7 @@ For a unit to make a ranged attack on another, it must have **line of sight**.
 - If a miniature (friendly or enemy) or a piece of scenery completely blocks the view, the target **cannot be attacked** at range.
 
 Cover and height rules are detailed later in the rulebook.
+
 
 ### The Golden Rule
 
@@ -114,6 +117,7 @@ Each turn consists of the following phases:
 2. **Activation Phase**
 3. **End of Turn**
 
+
 ## 1. Initiative Phase
 
 At the beginning of each turn, both players make the **Initiative roll**.
@@ -134,6 +138,7 @@ After determining Initiative, players declare the Command Doctrine they will use
 - Their effects last **the entire turn**, unless stated otherwise.
 - The unit or squad with an active doctrine is marked with a token.
 
+
 ## 2. Activation Phase
 
 After the Initiative Phase comes the **Activation Phase**.
@@ -147,7 +152,8 @@ Activating a unit means:
 - Taking the available actions according to its rules.
 - Fully resolving its effects.
 
-Once a unit has been activated, **it cannot be activated again** during that turn.
+Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
+
 
 ## 3. End of Turn
 
@@ -175,6 +181,7 @@ Available actions for all units:
 - **Melee Attack** – 2 actions
 - **Sprint** – 2 actions
 
+
 ## Movement
 
 When a unit moves, it may travel up to its **Movement** value in inches (").
@@ -196,6 +203,7 @@ To climb:
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
 **Partial cover** (windows, low barricades, small obstacles) can be crossed with normal movement as long as the unit is **taller than the obstacle**.
+
 
 ## Sprint
 
@@ -237,6 +245,7 @@ A ready unit may make **ranged counterattacks** during the opposing player's tur
 
 The Ready state lasts until the end of the turn.
 
+
 ---
 
 # Ranged Combat
@@ -258,6 +267,7 @@ Every ranged attack is always resolved following this sequence:
 3. Roll to hit
 4. Roll saves
 5. Apply damage
+
 
 ## 1. Choose Target
 
@@ -282,6 +292,7 @@ For each die rolled:
 - Results below the Hit value are misses and are discarded.
 
 Dice that hit **are not rerolled**.
+
 
 ## 4. Roll Saves
 
@@ -317,6 +328,7 @@ To initiate melee combat, a unit must perform the **Charge** action, which costs
 
 A successful charge **automatically includes a melee attack**.
 
+
 ## Locked Units
 
 When two units are in base contact:
@@ -349,6 +361,7 @@ Melee combat is resolved following this sequence:
 1. Attack by the unit acting first
 2. Defender's saves
 3. Counterattack (if applicable)
+
 
 ### 1. Attack
 
@@ -447,6 +460,7 @@ If the unit is at **2" or more of height**, it gains:
 
 If both units are at the same height with a maximum difference of 1", this rule does not apply.
 
+
 **Field of View**
 
 If no part of the target miniature is visible, **it cannot be attacked** at range or in melee, unless a rule states otherwise.
@@ -484,13 +498,17 @@ The main states in ZeroLore are:
 
 A unit enters the **Ready** state when it uses the *Ready* action during its activation. *(explained in the section: Unit Actions)*
 
+The Ready state is shown by placing the **shield token** next to the miniature. It is removed at the end of the turn.
+
 ## Retreating Unit
 
 A unit enters **Retreat** when it declares the *Retreat* action. *(explained in the section: Unit Actions)*
 
+The Retreat state is shown by placing the **retreat token** (arrow) next to the miniature. It is removed when the unit regroups or reaches a friendly command post.
+
 ## Locked Units
 
-Two units are considered **locked** when they are in base contact. While they are locked:
+Two units are considered **locked** when they are in base contact. The locked state is shown by placing the **sword token** next to the miniatures involved. While they are locked:
 
 - They may only use **melee combat** or **retreat** actions.
 - They cannot be attacked at range by units outside the combat.
@@ -502,6 +520,8 @@ Two units are considered **locked** when they are in base contact. While they ar
 
 Some units, such as **Monsters**, may enter the **Out of Control** state when they suffer severe damage.
 
+The Out of Control state is shown by placing the **out of control token** (orange lightning bolt) next to the miniature.
+
 While out of control:
 
 - The unit will attack both **enemies and friendly units**.
@@ -510,9 +530,12 @@ While out of control:
 
 The Out of Control state persists until a rule states otherwise or the game ends.
 
+
 # Command Posts and Deployment
 
-Command posts are strategic positions spread across the battlefield. Besides being objectives to capture, they are the only points from which units may deploy.
+Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy.
+
+When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
 To deploy a unit at a command post, the unit must be in contact with it. If the post is occupied by enemy units, even if it still belongs to the ally by value or hero presence, you cannot deploy there.
 
@@ -553,6 +576,7 @@ Characteristics:
 - They can capture and control **command posts** and other conquest zones.
 - They usually have balanced profiles and access to a wide variety of weapons.
 
+
 ## 2. Elite Units
 
 **Elite** units are more resilient and powerful than Line units.
@@ -562,6 +586,7 @@ Characteristics:
 - Greater offensive or defensive capability.
 - Designed to break enemy formations or hold key positions.
 - They can capture and control **command posts**, just like Line units.
+
 
 ## 3. Vehicles
 
@@ -576,6 +601,7 @@ Characteristics:
 ### When a vehicle is destroyed
 
 An **explosion** occurs that affects all units within **3"**. Affected units take **1D6 automatic damage** that cannot be saved.
+
 
 ## 4. Monsters
 
@@ -599,6 +625,7 @@ While out of control:
 - It always prioritises the nearest unit.
 - It only uses melee attacks, prioritising charges.
 
+
 ## 5. Heroes
 
 **Heroes** represent exceptional fighters and key figures within each faction.
@@ -616,6 +643,7 @@ General characteristics:
 - If both players have a hero at the same command post, it remains **neutral**.
 - They have unique abilities that define their tactical role.
 - In squad mode, some heroes may **join specific squads** according to their profile. If part of a squad, their value, movement, save, and speed replace those of the squad. The hero maintains their own Wounds independently. If the hero is destroyed, the squad continues fighting normally.
+
 
 ## 6. Titans
 
@@ -662,6 +690,7 @@ Represents the total amount of damage the unit can suffer before being destroyed
 
 - Each point of damage reduces the unit's Wounds.
 - When Wounds reach **0**, the unit is removed from the game as destroyed.
+- Damage taken can be tracked using the **damage tokens** (-1, -3, -5, -10), placing them next to the miniature to show lost Wounds.
 
 ### Save
 
@@ -689,6 +718,7 @@ Indicates the **minimum and maximum number of miniatures** the unit may include 
 ### Value
 
 Represents the unit's **point cost**. Used to balance matchups, determine army size and composition, and calculate scoring when multiple units contest the same command post.
+
 
 ### Weapon Equipment
 
@@ -735,6 +765,7 @@ Special rules associated only with that weapon.
 ### Extra Value
 Additional point cost for equipping this weapon, if applicable.
 
+
 ## Melee Weapon Profiles
 
 Melee weapons follow a similar structure.
@@ -760,6 +791,7 @@ Special rules that only affect this type of attack or this specific weapon.
 ### Extra Value
 
 Additional point cost for equipping the weapon, if applicable.
+
 
 ## Modifiers
 
@@ -802,6 +834,7 @@ These abilities:
 
 If a unit loses or cannot use a weapon, **it cannot benefit** from its abilities.
 
+
 ## Weapon Ability Table
 
 ### 1. Raider (+X)
@@ -830,6 +863,7 @@ The attacker declares a point of impact within the weapon's range and the attack
 
 Locked units are not affected.
 **Moment:** Shooting
+
 
 ### 6. Critical Attack
 Critical hits obtained with this weapon **cannot be saved**.
@@ -894,6 +928,7 @@ Doctrines:
 - Any unit or squad with a doctrine bonus may be marked with some kind of token.
 
 Doctrines are **public** and must be clearly declared to the opponent before being applied.
+
 
 ## Command Doctrine List
 

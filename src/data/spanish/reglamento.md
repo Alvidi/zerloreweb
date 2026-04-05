@@ -29,6 +29,7 @@ En modo escuadras, todas las miniaturas que formen parte de una escuadra deben m
 
 La colocación de las miniaturas solo afecta a **qué miniaturas pueden atacar** en combate cuerpo a cuerpo y no modifica el número de acciones, el estado ni la activación de la escuadra.
 
+
 ### Tamaño de peanas recomendado
 
 ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda usar peanas proporcionales al tipo de unidad para mantener la coherencia visual y táctica.
@@ -83,6 +84,7 @@ Todas las distancias se miden en pulgadas (").
 - Las distancias pueden medirse en cualquier momento de la partida.
 - En caso de duda, cualquiera de los jugadores puede solicitar una **re-medición precisa**, y el resultado se aplica de forma definitiva.
 
+
 ### Línea de visión
 
 Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visión**.
@@ -92,6 +94,7 @@ Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visi
 - Si una miniatura (aliada o enemiga) o un elemento de escenografía bloquea completamente la visión, el objetivo **no puede ser atacado** a distancia.
 
 Las reglas de cobertura y altura se detallan más adelante en el reglamento.
+
 
 ### La regla de oro
 
@@ -114,6 +117,7 @@ Cada turno se compone de las siguientes fases:
 2. **Fase de Activaciones**
 3. **Fin de Turno**
 
+
 ## 1. Fase de Iniciativa
 
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
@@ -134,6 +138,7 @@ Tras determinar la Iniciativa, los jugadores declaran la Doctrina de Mando que v
 - Sus efectos duran **todo el turno**, salvo que se indique lo contrario.
 - La unidad o escuadra que tenga activa una doctrina se marca con un token.
 
+
 ## 2. Fase de Activaciones
 
 Después de la Fase de Iniciativa comienza la **Fase de Activaciones**.
@@ -147,7 +152,8 @@ Activar una unidad significa:
 - Realizar las acciones disponibles según sus reglas.
 - Resolver completamente sus efectos.
 
-Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno.
+Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
+
 
 ## 3. Fin de Turno
 
@@ -175,6 +181,7 @@ Las acciones disponibles para todas las unidades son las siguientes:
 - **Atacar cuerpo a cuerpo** – 2 acciones
 - **Carrera** – 2 acciones
 
+
 ## Movimiento
 
 Cuando una unidad se mueve, puede desplazarse hasta su valor de **Movimiento** en pulgadas (").
@@ -196,6 +203,7 @@ Para trepar:
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 
 Las **coberturas parciales** (ventanas, barricadas bajas, obstáculos pequeños) pueden atravesarse con movimiento normal siempre que la unidad sea **más alta que el obstáculo**.
+
 
 ## Carrera
 
@@ -237,6 +245,7 @@ Una unidad preparada puede realizar **contraataques a distancia** durante el tur
 
 El estado de Preparado dura hasta que finaliza el turno.
 
+
 ---
 
 # Combate a distancia
@@ -258,6 +267,7 @@ Todo ataque a distancia se resuelve siguiendo siempre esta secuencia:
 3. Tirar impactos
 4. Tirar salvaciones
 5. Aplicar daño
+
 
 ## 1. Elegir objetivo
 
@@ -282,6 +292,7 @@ Por cada dado lanzado:
 - Los resultados inferiores al valor de Impactos se consideran fallos y se descartan.
 
 Los dados que impactan **no se vuelven a tirar**.
+
 
 ## 4. Tirada de salvaciones
 
@@ -317,6 +328,7 @@ Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar la acción **C
 
 Una carga exitosa **incluye automáticamente un ataque cuerpo a cuerpo**.
 
+
 ## Unidades trabadas
 
 Cuando dos unidades están en contacto de peana:
@@ -349,6 +361,7 @@ El combate cuerpo a cuerpo se resuelve siguiendo esta secuencia:
 1. Ataque de la unidad que actúa primero
 2. Salvaciones del defensor
 3. Contraataque (si procede)
+
 
 ### 1. Ataque
 
@@ -447,6 +460,7 @@ Si la unidad se encuentra a **2" o más de altura**, obtiene:
 
 Si ambas unidades están a la misma altura con una diferencia máxima de 1", esta regla no se aplica.
 
+
 **Campo de visión**
 
 Si no se ve ninguna parte de la miniatura objetivo, **no puede ser atacada** a distancia ni en cuerpo a cuerpo, salvo que una regla indique lo contrario.
@@ -484,13 +498,17 @@ Los estados principales en ZeroLore son:
 
 Una unidad entra en estado **Preparado** cuando utiliza la acción _Preparado_ durante su activación. _(explicado en la sección: acciones de unidades)_
 
+El estado Preparado se indica colocando el **token de escudo** junto a la miniatura. Se retira al final del turno.
+
 ## Unidad en retirada
 
 Una unidad entra en **Retirada** cuando declara la acción _Retirarse_. _(explicado en la sección: acciones de unidades)_
 
+El estado de Retirada se indica colocando el **token de retirada** (flecha) junto a la miniatura. Se retira cuando la unidad se recompone o alcanza un puesto de mando aliado.
+
 ## Unidades trabadas
 
-Dos unidades se consideran **trabadas** cuando están en contacto de peana. Mientras estén trabadas:
+Dos unidades se consideran **trabadas** cuando están en contacto de peana. El estado de trabada se indica colocando el **token de espada** junto a las miniaturas involucradas. Mientras estén trabadas:
 
 - Solo pueden usar acciones de **combate cuerpo a cuerpo** o **retirada**.
 - No pueden ser atacadas a distancia por unidades externas al combate.
@@ -502,6 +520,8 @@ _(Ver sección: Combate cuerpo a cuerpo para la resolución completa.)_
 
 Algunas unidades, como los **Monstruos**, pueden entrar en estado de **Descontrol** cuando sufren daños graves.
 
+El estado de Descontrol se indica colocando el **token de descontrol** (rayo naranja) junto a la miniatura.
+
 Mientras esté descontrolada:
 
 - La unidad atacará tanto a **enemigos como a unidades aliadas**.
@@ -510,9 +530,12 @@ Mientras esté descontrolada:
 
 El estado de Descontrol se mantiene hasta que una regla indique lo contrario o finalice la partida.
 
+
 # Puestos de mando y despliegue
 
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
+
+Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del token naranja para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
 Para desplegar una unidad en un puesto de mando, la unidad debe estar en contacto con él. Si el puesto está ocupado por unidades enemigas, aunque siga siendo propiedad por valor o héroe del aliado, no se puede desplegar en él.
 
@@ -553,6 +576,7 @@ Características:
 - Pueden capturar y controlar **puntos de mando** y otras zonas de conquista.
 - Suelen tener perfiles equilibrados y acceso a una amplia variedad de armas.
 
+
 ## 2. Unidades de Élite
 
 Las unidades de **Élite** son tropas más resistentes y poderosas que las de Línea.
@@ -562,6 +586,7 @@ Características:
 - Mayor capacidad ofensiva o defensiva.
 - Diseñadas para romper formaciones enemigas o mantener posiciones clave.
 - Pueden capturar y controlar **puntos de mando**, igual que las unidades de Línea.
+
 
 ## 3. Vehículos
 
@@ -576,6 +601,7 @@ Características:
 ### Cuando un vehículo es destruido
 
 Se produce una **explosión** que afecta a todas las unidades a **3"**. Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado.
+
 
 ## 4. Monstruos
 
@@ -599,6 +625,7 @@ Mientras esté descontrolado:
 - Prioriza siempre la unidad más cercana.
 - Solo utiliza ataques cuerpo a cuerpo, priorizando las cargas.
 
+
 ## 5. Héroes
 
 Los **Héroes** representan combatientes excepcionales y figuras clave dentro de cada facción.
@@ -616,6 +643,7 @@ Características generales:
 - Si ambos jugadores tienen un héroe en el mismo punto de mando, este permanece **neutral**.
 - Poseen habilidades únicas que definen su rol táctico.
 - En modo escuadras, algunos héroes pueden **unirse a escuadras específicas** según su ficha. Si forman parte de una escuadra, su valor, movimiento, salvación y velocidad sustituyen al de la escuadra. El héroe mantiene sus propias Vidas de forma independiente. Si el héroe es eliminado, la escuadra continúa combatiendo con normalidad.
+
 
 ## 6. Titanes
 
@@ -662,6 +690,7 @@ Representa la cantidad total de daño que la unidad puede sufrir antes de ser de
 
 - Cada punto de daño reduce las Vidas de la unidad.
 - Cuando las Vidas llegan a **0**, la unidad se retira del juego como destruida.
+- El daño recibido se puede llevar el control usando los **tokens de daño** (-1, -3, -5, -10), colocándolos junto a la miniatura para indicar las Vidas perdidas.
 
 ### Salvación
 
@@ -689,6 +718,7 @@ Indica el **número mínimo y máximo de miniaturas** que puede incluir la unida
 ### Valor
 
 Representa el **coste en puntos** de la unidad. Se utiliza para equilibrar enfrentamientos, determinar el tamaño y composición de los ejércitos, y calcular la puntuación cuando varias unidades disputan un mismo puesto de mando.
+
 
 ### Equipamiento de armas
 
@@ -742,6 +772,7 @@ Reglas especiales asociadas únicamente a esa arma.
 
 Coste adicional en puntos por equipar esta arma, si procede.
 
+
 ## Perfiles de armas de combate cuerpo a cuerpo
 
 Las armas de combate cuerpo a cuerpo siguen una estructura similar.
@@ -767,6 +798,7 @@ Reglas especiales que solo afectan a este tipo de ataque o a esta arma concreta.
 ### Valor extra
 
 Coste adicional por equipar el arma, si aplica.
+
 
 ## Modificadores
 
@@ -809,6 +841,7 @@ Estas habilidades:
 
 Si una unidad pierde o no puede utilizar un arma, **no puede beneficiarse** de sus habilidades.
 
+
 ## Tabla de habilidades de armas
 
 ### 1. Asaltante (+X)
@@ -842,6 +875,7 @@ El atacante declara un punto de impacto dentro del alcance y se resuelve el ataq
 
 Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
 **Momento:** Disparo
+
 
 ### 6. Ataque crítico
 
@@ -916,6 +950,7 @@ Las doctrinas:
 - Cualquier unidad o escuadra que tenga una bonificación de doctrina se puede marcar con algún tipo de token.
 
 Las doctrinas son **públicas** y deben declararse claramente al rival antes de aplicarse.
+
 
 ## Lista de Doctrinas de Mando
 

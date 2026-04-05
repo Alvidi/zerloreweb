@@ -27,14 +27,16 @@
   <circle cx="512" cy="512" r="204" fill="url(#coreGrad)" fill-opacity="0.26"/>
   <circle cx="512" cy="512" r="152" fill="#2a170f" fill-opacity="0.66"/>
 
-  <path d="M604 248 418 508h118l-80 274 206-308H544z" fill="#8d411d" fill-opacity="0.92"/>
-  <path d="M592 266 434 506h108l-70 246 180-282H542z" fill="#fff4e4"/>
-  <path d="M580 286 450 506h98l-62 216 154-248H540z" fill="#ff9b52"/>
-  <path d="M366 454h56M656 426h46M640 620h54" fill="none" stroke="#ffd8b0" stroke-width="14" stroke-linecap="round" stroke-opacity="0.7"/>
+  <g transform="translate(268 198) scale(1.34)">
+    <path d="M128 0 24 180h72L44 368l140-214h-78z" fill="#8d411d" fill-opacity="0.94"/>
+    <path d="M118 24 42 182h58L60 330l108-170h-60z" fill="#fff4e4"/>
+    <path d="M108 48 60 184h46L78 292l76-126h-44z" fill="#ff9b52"/>
+  </g>
 
-  <circle cx="324" cy="456" r="16" fill="#ffe8c8" fill-opacity="0.8"/>
-  <circle cx="688" cy="426" r="14" fill="#ffe8c8" fill-opacity="0.78"/>
-  <circle cx="716" cy="582" r="18" fill="#ffe8c8" fill-opacity="0.82"/>
-  <circle cx="308" cy="588" r="14" fill="#ffe8c8" fill-opacity="0.76"/>
+  <g transform="translate(496 280) scale(1.34)">
+    <path d="M128 0 24 180h72L44 368l140-214h-78z" fill="#8d411d" fill-opacity="0.94"/>
+    <path d="M118 24 42 182h58L60 330l108-170h-60z" fill="#fff4e4"/>
+    <path d="M108 48 60 184h46L78 292l76-126h-44z" fill="#ff9b52"/>
+  </g>
 
 </svg>
