@@ -212,7 +212,8 @@ function Batalla() {
   }
   const leftAliveCount = getAliveSquadCount(leftHp, leftUnit)
   const rightAliveCount = getAliveSquadCount(rightHp, rightUnit)
-  const getExplosiveNearbyMax = (defenderAliveCount) => Math.max(0, toNumber(defenderAliveCount, 1) - 1)
+  const EXPLOSIVE_NEARBY_MAX = 6
+  const getExplosiveNearbyMax = () => EXPLOSIVE_NEARBY_MAX
   const formatHpOptionLabel = (hpValue, unit) => {
     const hp = Math.max(0, toNumber(hpValue, 0))
     if (hp <= 0) return 'KO'
@@ -345,10 +346,12 @@ function Batalla() {
   }
   const getExplosiveAbilityBinding = (side, rawAbility) => {
     if (mode !== 'ranged') return null
-    if (!hasWeaponAbilityId({ abilities: [rawAbility] }, WEAPON_ABILITY_IDS.explosive)) return null
+    const rawAbilityHolder = { abilities: [rawAbility] }
+    const hasExplosiveBinding = hasWeaponAbilityId(rawAbilityHolder, WEAPON_ABILITY_IDS.explosive)
+    if (!hasExplosiveBinding) return null
 
     if (side === 'left') {
-      const max = getExplosiveNearbyMax(rightAliveCount)
+      const max = getExplosiveNearbyMax()
       return {
         label: tx.explosiveNearby,
         value: clamp(leftExplosiveNearbyUnits, 0, max),
@@ -357,7 +360,7 @@ function Batalla() {
       }
     }
 
-    const max = getExplosiveNearbyMax(leftAliveCount)
+    const max = getExplosiveNearbyMax()
     return {
       label: tx.explosiveNearby,
       value: clamp(rightExplosiveNearbyUnits, 0, max),
@@ -482,7 +485,7 @@ function Batalla() {
       if (attackerAliveCount <= 0 || defenderAliveCount <= 0) return
       const explosiveNearbyUnits = attackerSide === 'left' ? leftExplosiveNearbyUnits : rightExplosiveNearbyUnits
       const explosiveNearbyCount = hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.explosive)
-        ? clamp(toNumber(explosiveNearbyUnits, 0), 0, getExplosiveNearbyMax(defenderAliveCount))
+        ? clamp(toNumber(explosiveNearbyUnits, 0), 0, getExplosiveNearbyMax())
         : 0
 
       const attackerFactionId = attackerSide === 'left' ? leftFactionId : rightFactionId
@@ -799,7 +802,7 @@ function Batalla() {
     const nextHpMax = getSquadHpPoolMax(randomUnit)
     const hpOptions = buildHpValues(nextHpMax)
     const nextHp = pickRandomItem(hpOptions) || nextHpMax
-    const explosiveNearbyMax = getExplosiveNearbyMax(opposingAliveCount)
+    const explosiveNearbyMax = getExplosiveNearbyMax()
     const explosiveNearbyUnits = explosiveNearbyMax > 0
       ? Number(pickRandomItem(Array.from({ length: explosiveNearbyMax + 1 }, (_, index) => index)) || 0)
       : 0

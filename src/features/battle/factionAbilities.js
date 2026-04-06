@@ -15,6 +15,33 @@ const normalizeRuleText = (value) =>
 
 const t = (lang, es, en) => (lang === 'en' ? en : es)
 
+const parseFlatDamageValue = (value, fallback = 1) => {
+  const raw = String(value || '').trim().toLowerCase().replace(/\s+/g, '')
+  const pureNumber = raw.match(/^-?\d+$/)
+  if (pureNumber) return Number.parseInt(pureNumber[0], 10)
+  return fallback
+}
+
+const summarizeHitCritTotals = (lang, hits, crits) => {
+  const parts = []
+  if (lang === 'en') {
+    if (crits > 0) parts.push(`${crits} ${crits === 1 ? 'critical hit' : 'critical hits'}`)
+    if (hits > 0) parts.push(`${hits} ${hits === 1 ? 'normal hit' : 'normal hits'}`)
+  } else {
+    if (crits > 0) parts.push(`${crits} ${crits === 1 ? 'crítico' : 'críticos'}`)
+    if (hits > 0) parts.push(`${hits} ${hits === 1 ? 'normal' : 'normales'}`)
+  }
+  if (!parts.length) return lang === 'en' ? 'no impacts' : 'sin impactos'
+  if (parts.length === 1) return parts[0]
+  return `${parts.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'y'} ${parts[parts.length - 1]}`
+}
+
+const computeFlatDamageTotal = ({ hits = 0, crits = 0, weapon }) => {
+  const normalDamage = Math.max(0, parseFlatDamageValue(weapon?.damage, 1))
+  const critDamage = Math.max(0, parseFlatDamageValue(weapon?.critDamage, normalDamage))
+  return (hits * normalDamage) + (crits * critDamage)
+}
+
 const FACTION_ABILITY_DEFINITIONS = [
   {
     effectKey: 'alliance_target_in_sight',
@@ -25,7 +52,6 @@ const FACTION_ABILITY_DEFINITIONS = [
     rulePrefixes: ['objetivo en la mira', 'target in sight'],
     buildLogDetail: ({ lang, result, hasRule }) => {
       if (!hasRule) return null
-      const totalDamage = Number(result.totals?.damage || 0)
       const rerolledEntries = (result.hitEntries || []).filter(
         (entry) =>
           entry.rerolled
@@ -36,14 +62,21 @@ const FACTION_ABILITY_DEFINITIONS = [
       const failedInitials = rerolledEntries
         .map((entry) => entry.initialRoll)
         .filter((value) => Number.isFinite(value))
+      const rerollResults = rerolledEntries
+        .map((entry) => entry.roll)
+        .filter((value) => Number.isFinite(value))
+      const finalHits = Math.max(0, Number(result.totals?.hits || 0))
+      const finalCrits = Math.max(0, Number(result.totals?.crits || 0))
+      const finalSummary = summarizeHitCritTotals(lang, finalHits, finalCrits)
+      const updatedDamage = computeFlatDamageTotal({ hits: finalHits, crits: finalCrits, weapon: result.weapon || {} })
       return {
         text: t(
           lang,
           failedInitials.length
-            ? `Objetivo en la mira: repite fallos [${failedInitials.join(', ')}] y deja daño final ${totalDamage}.`
+            ? `Objetivo en la mira: repite fallos [${failedInitials.join(', ')}] -> nuevas tiradas [${rerollResults.join(', ')}] -> daño final total: ${finalSummary}, daño base ${updatedDamage}.`
             : 'Objetivo en la mira activo: esta unidad repite impactos fallidos contra el objetivo marcado.',
           failedInitials.length
-            ? `Target in sight: rerolls failed hits [${failedInitials.join(', ')}] and leaves final damage ${totalDamage}.`
+            ? `Target in sight: rerolls failed hits [${failedInitials.join(', ')}] -> new rolls [${rerollResults.join(', ')}] -> final total: ${finalSummary}, base damage ${updatedDamage}.`
             : 'Target in sight active: this unit rerolls failed hit rolls against the marked target.',
         ),
         dice: rerolledEntries.map((entry) => ({
@@ -65,7 +98,6 @@ const FACTION_ABILITY_DEFINITIONS = [
     rulePrefixes: ['ojos del mas alla', 'eyes from beyond', 'eyes beyond'],
     buildLogDetail: ({ lang, result, hasRule }) => {
       if (!hasRule) return null
-      const totalDamage = Number(result.totals?.damage || 0)
       const rerolledEntries = (result.hitEntries || []).filter(
         (entry) =>
           entry.rerolled
@@ -76,14 +108,21 @@ const FACTION_ABILITY_DEFINITIONS = [
       const failedInitials = rerolledEntries
         .map((entry) => entry.initialRoll)
         .filter((value) => Number.isFinite(value))
+      const rerollResults = rerolledEntries
+        .map((entry) => entry.roll)
+        .filter((value) => Number.isFinite(value))
+      const finalHits = Math.max(0, Number(result.totals?.hits || 0))
+      const finalCrits = Math.max(0, Number(result.totals?.crits || 0))
+      const finalSummary = summarizeHitCritTotals(lang, finalHits, finalCrits)
+      const updatedDamage = computeFlatDamageTotal({ hits: finalHits, crits: finalCrits, weapon: result.weapon || {} })
       return {
         text: t(
           lang,
           failedInitials.length
-            ? `Ojos del más allá: repite fallos [${failedInitials.join(', ')}] contra cobertura y deja daño final ${totalDamage}.`
+            ? `Ojos del más allá: repite fallos [${failedInitials.join(', ')}] contra cobertura -> nuevas tiradas [${rerollResults.join(', ')}] -> daño final total: ${finalSummary}, daño base ${updatedDamage}.`
             : 'Ojos del más allá activo: esta unidad repite impactos fallidos contra cobertura.',
           failedInitials.length
-            ? `Eyes from beyond: rerolls failed hits [${failedInitials.join(', ')}] against cover and leaves final damage ${totalDamage}.`
+            ? `Eyes from beyond: rerolls failed hits [${failedInitials.join(', ')}] against cover -> new rolls [${rerollResults.join(', ')}] -> final total: ${finalSummary}, base damage ${updatedDamage}.`
             : 'Eyes from beyond active: this unit rerolls failed hit rolls against cover.',
         ),
         dice: rerolledEntries.map((entry) => ({
@@ -333,7 +372,7 @@ export const isFactionAbilityAvailableInMode = (effectKey, mode) => {
   return isDefinitionEnabledInMode(definition, mode)
 }
 
-export const buildFactionAbilityLogDetails = ({ result, lang }) => {
+export const buildFactionAbilityLogDetails = ({ result, lang, weapon }) => {
   const rulesApplied = result?.rulesApplied || []
 
   return FACTION_ABILITY_DEFINITIONS.map((definition) => {
@@ -342,7 +381,7 @@ export const buildFactionAbilityLogDetails = ({ result, lang }) => {
       const normalized = normalizeRuleText(rule)
       return (definition.rulePrefixes || []).some((prefix) => normalized.startsWith(prefix))
     })
-    const detail = definition.buildLogDetail({ lang, result, hasRule })
+    const detail = definition.buildLogDetail({ lang, result, hasRule, weapon })
     if (!detail) return null
     return {
       ...detail,

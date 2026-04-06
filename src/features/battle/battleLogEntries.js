@@ -39,6 +39,30 @@ const summarizeHitCritTotals = (lang, hits, crits) => {
   return `${parts.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'y'} ${parts[parts.length - 1]}`
 }
 
+const parseFlatDamageValue = (value, fallback = 1) => {
+  const raw = String(value || '').trim().toLowerCase().replace(/\s+/g, '')
+  const pureNumber = raw.match(/^-?\d+$/)
+  if (pureNumber) return Number.parseInt(pureNumber[0], 10)
+  return fallback
+}
+
+const countOutcomes = (entries = [], useInitial = false) => {
+  let hits = 0
+  let crits = 0
+  entries.forEach((entry) => {
+    const outcome = useInitial ? (entry.initialOutcome || entry.displayOutcome || entry.outcome) : entry.outcome
+    if (outcome === 'hit') hits += 1
+    if (outcome === 'crit') crits += 1
+  })
+  return { hits, crits }
+}
+
+const computeFlatDamageTotal = ({ hits = 0, crits = 0, weapon }) => {
+  const normalDamage = Math.max(0, parseFlatDamageValue(weapon?.damage, 1))
+  const critDamage = Math.max(0, parseFlatDamageValue(weapon?.critDamage, normalDamage))
+  return (hits * normalDamage) + (crits * critDamage)
+}
+
 const splitDetailsByType = (details = []) => {
   const grouped = {
     conditionDetails: [],
@@ -178,12 +202,13 @@ export const createBattleLogBuilders = ({ lang, tx }) => {
     const abilityDetails = []
     const preAttackDetails = []
     const damageDetails = []
-    const pushAbilityDetail = (esText, enText, dice = [], source = 'weapon', owner = 'attacker') => {
+    const pushAbilityDetail = (esText, enText, dice = [], source = 'weapon', owner = 'attacker', phase = 'pre') => {
       abilityDetails.push({
         text: lang === 'en' ? enText : esText,
         dice,
         source,
         owner,
+        phase,
       })
     }
     const pushPreAttackDetail = (esText, enText, dice = [], source = 'weapon', owner = 'attacker') => {
@@ -200,7 +225,7 @@ export const createBattleLogBuilders = ({ lang, tx }) => {
         dice,
       })
     }
-    const factionAbilityDetails = buildFactionAbilityLogDetails({ result, lang })
+    const factionAbilityDetails = buildFactionAbilityLogDetails({ result, lang, weapon })
     factionAbilityDetails.forEach((detail) => {
       abilityDetails.push(detail)
     })
@@ -381,16 +406,19 @@ export const createBattleLogBuilders = ({ lang, tx }) => {
     }
     if (hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.explosive)) {
       const nearbyUnits = Math.max(0, Number(result.totals?.explosiveNearbyUnits || 0))
-      const affectedUnits = Math.max(1, Number(result.totals?.explosiveAffectedUnits || 1))
-      const baseDamage = Math.max(0, Number(result.totals?.baseDamage || result.totals?.damage || 0))
-      const finalDamage = Math.max(0, Number(result.totals?.damage || 0))
+      const targetDamage = Math.max(0, Number(result.totals?.damage || 0))
+      const totalAreaDamage = Math.max(0, Number(result.totals?.totalAreaDamage || targetDamage))
       pushAbilityDetail(
         nearbyUnits > 0
-          ? `Explosiva: objetivo + ${nearbyUnits} cercanas (${affectedUnits} en total). Daño: ${baseDamage} x ${affectedUnits} = ${finalDamage}.`
-          : 'Explosiva: al no haber unidades cercanas, la explosión se resuelve solo sobre el objetivo.',
+          ? `Explosiva: la unidad objetivo recibe ${targetDamage} de daño. ${nearbyUnits} unidades a 3" o menos reciben también ${targetDamage} cada una. Daño total del área tras la salvación: ${totalAreaDamage}.`
+          : `Explosiva: no hay unidades a 3" o menos. La unidad objetivo recibe ${targetDamage} de daño.`,
         nearbyUnits > 0
-          ? `Explosive: target + ${nearbyUnits} nearby (${affectedUnits} total). Damage: ${baseDamage} x ${affectedUnits} = ${finalDamage}.`
-          : 'Explosive: with no nearby units, the blast resolves only against the target.',
+          ? `Explosive: the target unit takes ${targetDamage} damage. ${nearbyUnits} units within 3" also take ${targetDamage} each. Total area damage after the Save: ${totalAreaDamage}.`
+          : `Explosive: there are no units within 3". The target unit takes ${targetDamage} damage.`,
+        [],
+        'weapon',
+        'defender',
+        'post',
       )
     }
 
@@ -440,11 +468,19 @@ export const createBattleLogBuilders = ({ lang, tx }) => {
     )
     const meleePartialCoverActive = Boolean(result.meleePartialCoverActive)
     const rollOutcomeSummary = summarizeRollOutcomes(lang, attackDice)
+    const baseOutcomeTotals = countOutcomes(
+      (result.hitEntries || []).filter((entry) => entry.source === 'base'),
+      true,
+    )
+    const baseDamageTotal = computeFlatDamageTotal({
+      hits: baseOutcomeTotals.hits,
+      crits: baseOutcomeTotals.crits,
+      weapon,
+    })
     const directSummary = summarizeHitCritTotals(lang, result.totals?.hits || 0, result.totals?.crits || 0)
-    const attackerDamageGettingThrough = Math.max(0, Number(result.totals?.rawDamage || result.totals?.damage || 0))
     const attackerDamageSuffix = lang === 'en'
-      ? ` -> damage getting through ${attackerDamageGettingThrough}.`
-      : ` -> daño que entra ${attackerDamageGettingThrough}.`
+      ? ` -> base damage ${baseDamageTotal}.`
+      : ` -> daño base ${baseDamageTotal}.`
     const attackerSummary = result.hasDirect
       ? lang === 'en'
         ? `${attackerName} attacks with ${weaponName} (automatic hits): ${directSummary}${attackerDamageSuffix}`

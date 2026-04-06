@@ -496,19 +496,6 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Artillery",
-            "ataques": "1D6",
-            "distancia": "35\"",
-            "impactos": "+4",
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Parabolic Shot"
-            ],
-            "especialidad": "-",
-            "valor_extra": 0
-          },
-          {
             "nombre": "Auxiliary cannon",
             "ataques": "2D",
             "distancia": "25\"",
@@ -520,6 +507,20 @@
             ],
             "especialidad": "-",
             "valor_extra": 0
+          },
+          {
+            "nombre": "Artillery",
+            "ataques": "1D6",
+            "distancia": "35\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Parabolic Shot",
+              "Explosive"
+            ],
+            "especialidad": "-",
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [

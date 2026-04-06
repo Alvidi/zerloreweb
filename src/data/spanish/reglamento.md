@@ -93,7 +93,7 @@ Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visi
 - Las unidades tienen visión en **360 grados**; la orientación de la miniatura no limita su campo visual.
 - Si una miniatura (aliada o enemiga) o un elemento de escenografía bloquea completamente la visión, el objetivo **no puede ser atacado** a distancia.
 
-Las reglas de cobertura y altura se detallan más adelante en el reglamento.
+Las reglas de cobertura se detallan más adelante en el reglamento.
 
 
 ### La regla de oro
@@ -202,7 +202,7 @@ Para trepar:
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana.
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 
-Las **coberturas parciales** (ventanas, barricadas bajas, obstáculos pequeños) pueden atravesarse con movimiento normal siempre que la unidad sea **más alta que el obstáculo**.
+Las **coberturas** (ventanas, barricadas bajas, obstáculos pequeños) pueden atravesarse con movimiento normal siempre que la unidad sea **más alta que el obstáculo**.
 
 
 ## Carrera
@@ -855,8 +855,8 @@ La unidad puede disparar esta arma incluso si está **trabada en combate cuerpo 
 
 El atacante declara un punto de impacto dentro del alcance y se resuelve el ataque normalmente.
 
-- **Modo escaramuza:** todas las unidades enemigas cuya peana esté a 3" o menos del punto de impacto reciben el mismo daño de forma independiente. Si el daño supera las vidas de una unidad, el sobrante pasa a la siguiente.
-- **Modo escuadras:** solo afecta a la escuadra objetivo, que recibe el daño total como una única entidad. El rival distribuye ese daño entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
+- **Modo escaramuza:** todas las unidades enemigas cuya peana esté a 3" o menos del punto de impacto reciben el mismo daño de forma independiente.
+- **Modo escuadras:** solo afecta a la escuadra objetivo, que recibe el daño total de unidades que haya alcanzado dentro de la escuadra. El rival distribuye ese daño entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
 
 Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
 **Momento:** Disparo
@@ -891,13 +891,9 @@ El objetivo **no puede beneficiarse** de ningún bono defensivo por cobertura pa
 
 Esta arma puede disparar sin necesidad de línea de visión. El jugador marca un punto objetivo dentro del alcance y tira 1D6:
 
-- **5–6 — Diana:** el ataque impacta exactamente en el punto marcado. La unidad objetivo y todas las unidades enemigas a 3" o menos no pueden realizar tirada de salvación contra este ataque, ignorando también cualquier bonificación de cobertura.
-- **1–4 — Fallo de precisión:** el ataque impacta igualmente, pero la unidad objetivo y las unidades a 3" o menos sí pueden realizar tirada de salvación normalmente. Las coberturas aplican con normalidad.
+- **5–6 — Diana:** el ataque impacta exactamente en el punto marcado. La unidad objetivo no puede usar salvación contra este ataque, ignorando también cualquier bonificación de cobertura que tenga.
+- **1–4 — Fallo de precisión:** el ataque impacta igualmente en el punto marcado, pero la unidad objetivo sí puede realizar tirada de salvación normalmente. Las coberturas aplican con normalidad.
 
-- **Modo escaramuza:** todas las unidades enemigas cuya peana esté a 3" o menos del punto de impacto final reciben el mismo daño de forma independiente. Si el daño supera las vidas de una unidad, el sobrante pasa a la siguiente unidad dentro del área.
-- **Modo escuadras:** solo afecta a la escuadra objetivo, que recibe el daño total como una única entidad. El rival distribuye ese daño entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
-
-Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
 **Momento:** Disparo
 
 ### 12. Inestable

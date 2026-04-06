@@ -169,9 +169,14 @@ function BattleCombatLog({ logEntries, tx, lang }) {
             const preAttackFactionAbilityDetails = entry.preFactionAbilityDetails || fallbackPreAttackFactionAbilityDetails
             const rawWeaponAbilityDetails = entry.weaponAbilityDetails || fallbackWeaponAbilityDetails
             const attackerResolvedWeaponAbilityDetails = rawWeaponAbilityDetails.filter(
-              (detail) => !isPreDefenseAttackerEffect(detail),
+              (detail) => detail.owner !== 'defender' && !isPreDefenseAttackerEffect(detail),
             )
-            const defenderIncomingEffectDetails = rawWeaponAbilityDetails.filter(isPreDefenseAttackerEffect)
+            const defenderIncomingEffectDetails = rawWeaponAbilityDetails.filter(
+              (detail) => (detail.owner === 'defender' || isPreDefenseAttackerEffect(detail)) && detail.phase !== 'post',
+            )
+            const defenderPostWeaponEffectDetails = rawWeaponAbilityDetails.filter(
+              (detail) => detail.owner === 'defender' && detail.phase === 'post',
+            )
             const attackerFactionAbilityDetails = entry.attackerFactionAbilityDetails
               || fallbackFactionAbilityDetails.filter((detail) => detail.owner !== 'defender')
             const defenderFactionAbilityDetails = entry.defenderFactionAbilityDetails
@@ -404,6 +409,13 @@ function BattleCombatLog({ logEntries, tx, lang }) {
                       </div>
                     </div>
                   )}
+                  {renderAbilityGroups({
+                    details: defenderPostWeaponEffectDetails,
+                    labelClass: 'duel-log-line-label duel-log-line-label-ability',
+                    label: tx.weaponAbilityLog,
+                    unitName: '',
+                    entryKey: `${entry.key}-weapon-defender-post`,
+                  })}
                   </div>
                 )}
                 {!entry.hideResult && (

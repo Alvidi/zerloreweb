@@ -638,7 +638,8 @@ export function resolveAttack({
     .reduce((sum, entry) => sum + entry.total, 0)
   const preventedDamage = mode === 'ranged' && defenderCrucibleGlory ? Math.min(1, rawDamage) : 0
   const baseTotalDamage = Math.max(0, rawDamage - preventedDamage)
-  const totalDamage = hasExplosive ? baseTotalDamage * explosiveAffectedUnits : baseTotalDamage
+  const targetDamage = baseTotalDamage
+  const totalAreaDamage = hasExplosive ? baseTotalDamage * explosiveAffectedUnits : targetDamage
 
   let selfDamage = 0
   let unstableTriggered = false
@@ -649,11 +650,11 @@ export function resolveAttack({
     rulesApplied.push(`Inestable (tirada ${unstableRoll})`)
     if (unstableRoll <= 2) {
       unstableTriggered = true
-      selfDamage = baseTotalDamage
+      selfDamage = targetDamage
     }
   }
 
-  const defenderAfterHp = Math.max(0, defender.hp - totalDamage)
+  const defenderAfterHp = Math.max(0, defender.hp - targetDamage)
   const attackerAfterHp = Math.max(0, attacker.hp - selfDamage)
   const canTriggerVoracity = attackerVoracity && mode === 'melee' && defenderAfterHp <= 0
   const voracityHeal = canTriggerVoracity ? Math.min(1, Math.max(0, attacker.maxHp - attackerAfterHp)) : 0
@@ -670,7 +671,8 @@ export function resolveAttack({
     crits: rollSummary.crits,
     blockedHits,
     blockedCrits,
-    damage: totalDamage,
+    damage: targetDamage,
+    totalAreaDamage,
     rawDamage,
     preventedDamage,
     normalDamageRolls,
@@ -679,6 +681,8 @@ export function resolveAttack({
     critDamageKind: critDamageExpression.kind,
     explosiveNearbyUnits,
     explosiveAffectedUnits,
+    areaNearbyUnits: explosiveNearbyUnits,
+    areaAffectedUnits: explosiveAffectedUnits,
     baseDamage: baseTotalDamage,
     selfDamage,
     unstableTriggered,

@@ -202,7 +202,7 @@ To climb:
 1. The unit must move until its base touches the base of the obstacle.
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
-**Partial cover** (windows, low barricades, small obstacles) can be crossed with normal movement as long as the unit is **taller than the obstacle**.
+**Cover** (windows, low barricades, small obstacles) can be crossed with normal movement as long as the unit is **taller than the obstacle**.
 
 
 ## Sprint
@@ -843,8 +843,8 @@ The unit may fire this weapon even if **locked in melee combat**, but only again
 ### 5. Explosive
 The attacker declares a point of impact within the weapon's range and the attack is resolved normally.
 
-- **Skirmish mode:** all enemy units whose base is within 3" or less of the point of impact take the same damage independently. If the damage exceeds a unit's Wounds, the excess passes to the next unit within the area.
-- **Squad mode:** only affects the target squad, which takes the total damage as a single entity. The opponent distributes that damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess passes to the next.
+- **Skirmish mode:** all enemy units whose base is within 3" or less of the point of impact take the same damage independently.
+- **Squad mode:** only affects the target squad, which takes the total damage from the units hit within that squad. The opponent distributes that damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess passes to the next.
 
 Locked units are not affected.
 **Moment:** Shooting
@@ -873,13 +873,9 @@ The target **cannot benefit** from any defensive bonus from partial cover.
 ### 11. Parabolic Fire
 This weapon may fire without requiring line of sight. The player marks a target point within the weapon's range and rolls 1D6:
 
-- **5–6 — Direct Hit:** the attack lands exactly on the marked point. The target unit and all enemy units within 3" or less cannot make a save roll against this attack, also ignoring any cover bonus.
-- **1–4 — Precision Miss:** the attack still lands on the marked point, but the target unit and units within 3" or less may make a save roll normally. Cover applies as usual.
+- **5–6 — Direct Hit:** the attack lands exactly on the marked point. The target unit cannot make a save roll against this attack, also ignoring any cover bonus it has.
+- **1–4 — Precision Miss:** the attack still lands on the marked point, but the target unit may make a save roll normally. Cover applies as usual.
 
-- **Skirmish mode:** all enemy units whose base is within 3" or less of the final point of impact take the same damage independently. If the damage exceeds one unit's Wounds, the excess passes to the next unit within the area.
-- **Squad mode:** only affects the target squad, which takes the total damage as a single entity. The opponent distributes that damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess passes to the next.
-
-Locked units are not affected.
 **Moment:** Shooting
 
 ### 12. Unstable

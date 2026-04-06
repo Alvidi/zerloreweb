@@ -496,19 +496,6 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "artillería",
-            "ataques": "1D6",
-            "distancia": "35\"",
-            "impactos": "+4",
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Disparo parabólico"
-            ],
-            "especialidad": "-",
-            "valor_extra": 0
-          },
-          {
             "nombre": "Cañón auxiliar",
             "ataques": "2D",
             "distancia": "25\"",
@@ -520,6 +507,20 @@
             ],
             "especialidad": "-",
             "valor_extra": 0
+          },
+          {
+            "nombre": "artillería",
+            "ataques": "1D6",
+            "distancia": "35\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Disparo parabólico",
+              "Explosiva"
+            ],
+            "especialidad": "-",
+            "valor_extra": 4
           }
         ],
         "cuerpo_a_cuerpo": [
