@@ -39,10 +39,29 @@ const summarizeHitCritTotals = (lang, hits, crits) => {
   return `${parts.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'y'} ${parts[parts.length - 1]}`
 }
 
-export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
+const splitDetailsByType = (details = []) => {
+  const grouped = {
+    conditionDetails: [],
+    weaponAbilityDetails: [],
+    factionAbilityDetails: [],
+  }
+
+  details.forEach((detail) => {
+    if (detail?.source === 'faction') {
+      grouped.factionAbilityDetails.push(detail)
+    } else if (detail?.source === 'condition') {
+      grouped.conditionDetails.push(detail)
+    } else {
+      grouped.weaponAbilityDetails.push(detail)
+    }
+  })
+
+  return grouped
+}
+
+export const createBattleLogBuilders = ({ lang, tx }) => {
   const buildCombatEntry = ({
     key,
-    title,
     attackerSide,
     attackerName,
     defenderName,
@@ -59,17 +78,11 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       ? attackerResultHpOverride
       : (result.attackerAfter?.hp ?? attackerHpBefore ?? 0)
     const defenderFinalHp = result.defenderAfter?.hp ?? defenderHpBefore ?? 0
-    const baseStatsLine = ''
-    const specialtyLine = ''
 
     if (result.blocked) {
       return {
         key,
-        title,
         attackerSide,
-        subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
-        baseStatsLine,
-        specialtyLine,
         coverLabel: '',
         coverLine: '',
         attackerLine: lang === 'en'
@@ -100,6 +113,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
           defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
           selfDamage: 0,
         },
+        damageValue: 0,
       }
     }
     const blockedTotal = (result.totals?.blockedHits || 0) + (result.totals?.blockedCrits || 0)
@@ -291,9 +305,10 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         (entry) => Number.isFinite(entry.roll) && entry.outcome === 'crit' && entry.roll < 6 && entry.roll >= antiThreshold,
       )
       if (antiCritEntries.length > 0) {
+        const antiLabel = antiRule || `Anti ${antiThreshold}+`
         pushAbilityDetail(
-          `Anti ${antiThreshold}+ convierte ${antiCritEntries.length} resultado${antiCritEntries.length > 1 ? 's' : ''} en crítico.`,
-          `Anti ${antiThreshold}+ turns ${antiCritEntries.length} roll${antiCritEntries.length > 1 ? 's' : ''} into critical hits.`,
+          `${antiLabel} convierte ${antiCritEntries.length} resultado${antiCritEntries.length > 1 ? 's' : ''} en crítico.`,
+          `${antiLabel} turns ${antiCritEntries.length} roll${antiCritEntries.length > 1 ? 's' : ''} into critical hits.`,
         )
       }
     }
@@ -317,15 +332,24 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       return normalized.startsWith('inestable') || normalized.startsWith('unstable')
     })
     if (unstableRule) {
-      const unstableRollMatch = unstableRule.match(/(\d+)/)
-      const unstableRoll = unstableRollMatch ? Number.parseInt(unstableRollMatch[1], 10) : null
-      const unstableTriggered = (result.totals?.selfDamage || 0) > 0
+      const unstableRoll = Number.isFinite(result.totals?.unstableRoll)
+        ? Number(result.totals.unstableRoll)
+        : (() => {
+            const unstableRollMatch = unstableRule.match(/(\d+)/)
+            return unstableRollMatch ? Number.parseInt(unstableRollMatch[1], 10) : null
+          })()
+      const unstableTriggered = Boolean(result.totals?.unstableTriggered)
+      const unstableSelfDamage = Math.max(0, Number(result.totals?.selfDamage || 0))
       pushAbilityDetail(
         unstableTriggered
-          ? `Inestable tira ${unstableRoll ?? '-'}: se activa y causa ${result.totals?.selfDamage || 0} de autodaño.`
+          ? unstableSelfDamage > 0
+            ? `Inestable tira ${unstableRoll ?? '-'}: se activa y causa ${unstableSelfDamage} de autodaño.`
+            : `Inestable tira ${unstableRoll ?? '-'}: se activa, pero no causa autodaño porque el daño base es 0.`
           : `Inestable tira ${unstableRoll ?? '-'}: no se activa autodaño.`,
         unstableTriggered
-          ? `Unstable rolls ${unstableRoll ?? '-'}: it triggers and deals ${result.totals?.selfDamage || 0} self-damage.`
+          ? unstableSelfDamage > 0
+            ? `Unstable rolls ${unstableRoll ?? '-'}: it triggers and deals ${unstableSelfDamage} self-damage.`
+            : `Unstable rolls ${unstableRoll ?? '-'}: it triggers, but deals no self-damage because base damage is 0.`
           : `Unstable rolls ${unstableRoll ?? '-'}: no self-damage is triggered.`,
         Number.isFinite(unstableRoll)
           ? [{ value: unstableRoll, outcome: unstableTriggered ? 'fail' : 'hit' }]
@@ -334,19 +358,25 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     }
     if (result.parabolicScatter) {
       const scatter = result.parabolicScatter
-      const scatterTextEs = scatter.bullseye
-        ? `Disparo parabólico tira ${scatter.roll}: diana (5-6). El objetivo no puede realizar tirada de salvación e ignora cualquier bonificación de cobertura.`
-        : `Disparo parabólico tira ${scatter.roll}: fallo de precisión (1-4). El objetivo puede salvar normalmente y la cobertura aplica con normalidad.`
-      const scatterTextEn = scatter.bullseye
-        ? `Parabolic Shot rolls ${scatter.roll}: bullseye (5-6). The target cannot make Save rolls and ignores any cover bonus.`
-        : `Parabolic Shot rolls ${scatter.roll}: precision failure (1-4). The target can save normally and cover applies as usual.`
-      pushAbilityDetail(
-        scatterTextEs,
-        scatterTextEn,
+      pushPreAttackDetail(
+        scatter.bullseye
+          ? `Disparo parabólico: tira ${scatter.roll} y logra diana (5-6).`
+          : `Disparo parabólico: tira ${scatter.roll} y falla la diana (1-4).`,
+        scatter.bullseye
+          ? `Parabolic Shot: rolls ${scatter.roll} and scores a bullseye (5-6).`
+          : `Parabolic Shot: rolls ${scatter.roll} and misses the bullseye (1-4).`,
         [{
           value: scatter.roll,
           outcome: scatter.bullseye ? 'crit' : 'fail',
         }],
+      )
+      pushAbilityDetail(
+        scatter.bullseye
+          ? 'Disparo parabólico: al dar diana, el defensor no puede realizar tirada de salvación e ignora cobertura.'
+          : 'Disparo parabólico: al fallar la diana, el defensor realiza su salvación con normalidad y mantiene cobertura.',
+        scatter.bullseye
+          ? 'Parabolic Shot: on a bullseye, the defender cannot make a Save roll and ignores cover.'
+          : 'Parabolic Shot: on a missed bullseye, the defender saves normally and keeps cover.',
       )
     }
     if (hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.explosive)) {
@@ -357,10 +387,10 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       pushAbilityDetail(
         nearbyUnits > 0
           ? `Explosiva: objetivo + ${nearbyUnits} cercanas (${affectedUnits} en total). Daño: ${baseDamage} x ${affectedUnits} = ${finalDamage}.`
-          : 'Explosiva: solo afecta al objetivo.',
+          : 'Explosiva: al no haber unidades cercanas, la explosión se resuelve solo sobre el objetivo.',
         nearbyUnits > 0
           ? `Explosive: target + ${nearbyUnits} nearby (${affectedUnits} total). Damage: ${baseDamage} x ${affectedUnits} = ${finalDamage}.`
-          : 'Explosive: only affects the target.',
+          : 'Explosive: with no nearby units, the blast resolves only against the target.',
       )
     }
 
@@ -395,12 +425,14 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const parabolicBullseyeIgnoresCover = Boolean(result.parabolicScatter?.bullseye && result.parabolicScatter?.ignoreCover)
     const appliedCoverRules = (result.rulesApplied || []).filter((rule) => {
       const normalized = normalizeText(rule)
-      return normalized.startsWith('cobertura parcial') || normalized.startsWith('cobertura de altura')
+      return normalized.startsWith('cobertura parcial')
     })
     const ignoresPartialCover = (result.rulesApplied || []).some((rule) =>
       normalizeText(rule).startsWith('ignora coberturas') || normalizeText(rule).startsWith('ignore cover'),
     )
     const coverAffectsDefense = (
+      result.mode === 'ranged'
+      && 
       appliedCoverRules.length > 0
       && !(ignoresPartialCover && result.coverType === 'partial')
       && !coverIgnoredByType
@@ -409,35 +441,29 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const meleePartialCoverActive = Boolean(result.meleePartialCoverActive)
     const rollOutcomeSummary = summarizeRollOutcomes(lang, attackDice)
     const directSummary = summarizeHitCritTotals(lang, result.totals?.hits || 0, result.totals?.crits || 0)
-    const totalDamageStr = lang === 'en'
-      ? `total damage ${result.totals?.damage || 0}`
-      : `daño total ${result.totals?.damage || 0}`
+    const attackerDamageGettingThrough = Math.max(0, Number(result.totals?.rawDamage || result.totals?.damage || 0))
+    const attackerDamageSuffix = lang === 'en'
+      ? ` -> damage getting through ${attackerDamageGettingThrough}.`
+      : ` -> daño que entra ${attackerDamageGettingThrough}.`
     const attackerSummary = result.hasDirect
       ? lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (automatic hits): ${directSummary} → ${totalDamageStr}.`
-        : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${directSummary} → ${totalDamageStr}.`
+        ? `${attackerName} attacks with ${weaponName} (automatic hits): ${directSummary}${attackerDamageSuffix}`
+        : `${attackerName} ataca con ${weaponName} (impactos automáticos): ${directSummary}${attackerDamageSuffix}`
       : lang === 'en'
-        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'} → ${totalDamageStr}.`
-        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'} → ${totalDamageStr}.`
+        ? `${attackerName} attacks with ${weaponName} (hits on ${result.hitThreshold}+): ${rollOutcomeSummary || 'no rolls recorded'}${attackerDamageSuffix}`
+        : `${attackerName} ataca con ${weaponName} (impacta con ${result.hitThreshold}+): ${rollOutcomeSummary || 'sin tiradas registradas'}${attackerDamageSuffix}`
     const defenderCover = coverAffectsDefense
       ? lang === 'en'
-        ? result.coverType === 'height'
-          ? 'cover: high'
-          : 'cover: partial'
-        : result.coverType === 'height'
-          ? 'cobertura de altura'
-          : 'cobertura parcial'
+        ? 'cover: partial'
+        : 'cobertura parcial'
       : ''
     const selectedCoverLabel = selectedCoverType === 'none'
       ? ''
       : lang === 'en'
-        ? selectedCoverType === 'height'
-          ? 'high cover'
-          : 'partial cover'
-        : selectedCoverType === 'height'
-          ? 'cobertura de altura'
-          : 'cobertura parcial'
-    const coverLabel = selectedCoverLabel
+        ? 'partial cover'
+        : 'cobertura parcial'
+    const coverLabel = coverAffectsDefense ? selectedCoverLabel : ''
+    const coverUnitName = coverAffectsDefense && selectedCoverLabel ? tx.defender : ''
     const defenderLead = lang === 'en' ? `${defenderName} defends (` : `${defenderName} defiende (`
     const failedDefenses = Math.max(0, saveRolls.length - blockedTotal)
     const defenseSummary = (() => {
@@ -455,28 +481,28 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const coverLine = (() => {
       if (meleePartialCoverActive) {
         return lang === 'en'
-          ? 'applied'
-          : 'aplicada'
+          ? 'applied to both units (-1 melee attack die)'
+          : 'aplicada a ambas unidades (-1 dado de ataque CaC)'
       }
       if (defenderCover) {
         return lang === 'en'
-          ? 'applied'
-          : 'aplicada'
+          ? 'applied to the defender (-1 save value)'
+          : 'aplicada al defensor (-1 al valor de salvación)'
       }
       if (parabolicBullseyeIgnoresCover && selectedCoverType !== 'none') {
         return lang === 'en'
-          ? 'not applied'
-          : 'no aplicada'
+          ? 'not applied to the defender'
+          : 'no aplicada al defensor'
       }
       if (ignoresPartialCover && selectedCoverType === 'partial') {
         return lang === 'en'
-          ? 'not applied'
-          : 'no aplicada'
+          ? 'not applied to the defender'
+          : 'no aplicada al defensor'
       }
       if (coverIgnoredByType && selectedCoverType !== 'none') {
         return lang === 'en'
-          ? 'not applied'
-          : 'no aplicada'
+          ? 'not applied to the defender'
+          : 'no aplicada al defensor'
       }
       return ''
     })()
@@ -489,8 +515,8 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       : ''
     const defenderTailPrefix = preventedDamage > 0
       ? lang === 'en'
-        ? `): ${defenseSummary || 'no defense rolls'}; raw damage ${rawDamage}; `
-        : `): ${defenseSummary || 'sin tiradas de defensa'}; daño bruto ${rawDamage}; `
+        ? `): ${defenseSummary || 'no defense rolls'}; damage getting through ${rawDamage}; `
+        : `): ${defenseSummary || 'sin tiradas de defensa'}; daño que entra ${rawDamage}; `
       : ''
     const defenderTailSuffix = preventedDamage > 0
       ? lang === 'en'
@@ -505,8 +531,8 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     const defenderMitigationNote = ''
     const defenderLinePrefix = preventedDamage > 0
       ? lang === 'en'
-        ? `${defenderName} defends: no Save rolls; raw damage ${rawDamage}; `
-        : `${defenderName} defiende: sin tiradas de defensa; daño bruto ${rawDamage}; `
+        ? `${defenderName} defends: no Save rolls; damage getting through ${rawDamage}; `
+        : `${defenderName} defiende: sin tiradas de defensa; daño que entra ${rawDamage}; `
       : ''
     const defenderLineSuffix = preventedDamage > 0
       ? lang === 'en'
@@ -564,14 +590,32 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       )
     }
 
+    const preAttackGroups = splitDetailsByType(preAttackDetails)
+    const resolvedAbilityGroups = splitDetailsByType(abilityDetails)
+    const attackerFactionAbilityDetails = resolvedAbilityGroups.factionAbilityDetails.filter((detail) => detail.owner !== 'defender')
+    const defenderFactionAbilityDetails = resolvedAbilityGroups.factionAbilityDetails.filter((detail) => detail.owner === 'defender')
+    const attackerCoverDetails = meleePartialCoverActive && coverLine
+      ? [{
+        text: coverLine,
+        dice: [],
+        label: coverLabel || tx.coverType,
+        unitName: attackerName,
+      }]
+      : []
+    const coverDetails = coverLine && !meleePartialCoverActive
+      ? [{
+        text: coverLine,
+        dice: [],
+        label: coverLabel || tx.coverType,
+        unitName: coverUnitName || defenderName,
+      }]
+      : []
+
     return {
       key,
-      title,
       attackerSide,
-      subtitle: `${attackerName} · ${weaponName} · ${currentModeLabel}`,
-      baseStatsLine,
-      specialtyLine,
       coverLabel,
+      coverUnitName,
       coverLine,
       attackerLine: attackerSummary,
       abilityLine: '',
@@ -586,6 +630,14 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
       defenderLineSuffix,
       defenderMitigationInline,
       defenderMitigationNote,
+      attackerCoverDetails,
+      conditionDetails: preAttackGroups.conditionDetails,
+      preWeaponAbilityDetails: preAttackGroups.weaponAbilityDetails,
+      preFactionAbilityDetails: preAttackGroups.factionAbilityDetails,
+      coverDetails,
+      weaponAbilityDetails: resolvedAbilityGroups.weaponAbilityDetails,
+      attackerFactionAbilityDetails,
+      defenderFactionAbilityDetails,
       preAttackDetails,
       attackCountDice,
       hitThresholdDice,
@@ -605,6 +657,7 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
         defender: { name: defenderName, hp: defenderFinalHp, defeated: defenderFinalHp <= 0 },
         selfDamage: attackerSelfDamage,
       },
+      damageValue: Number(result.totals?.damage || 0),
     }
   }
 
@@ -622,47 +675,55 @@ export const createBattleLogBuilders = ({ lang, tx, currentModeLabel }) => {
     hideResult = false,
     hidePrimaryLine = false,
     abilityDetails = [],
-  }) => ({
-    key,
-    attackerSide,
-    title: '',
-    subtitle: '',
-    baseStatsLine: '',
-    specialtyLine: '',
-    coverLabel: '',
-    coverLine: '',
-    attackerLine,
-    defenderLine,
-    abilityLine: '',
-    defenderLead: '',
-    defenderSave: '',
-    defenderCover: '',
-    defenderTail: '',
-    defenderTailPrefix: '',
-    defenderTailSuffix: '',
-    defenderLinePrefix: '',
-    defenderLineSuffix: '',
-    defenderMitigationInline: '',
-    preAttackDetails: [],
-    abilityDetails,
-    damageDetails: [],
-    attackCountDice: [],
-    hitThresholdDice: [],
-    attackDice,
-    defenseDice: [],
-    hidePrimaryLine,
-    hideResult,
-    resultState: {
-      attacker: {
-        name: attackerName,
-        hp: attackerHp,
-        defeated: attackerHp <= 0,
-        hpBefore: attackerHp,
+  }) => {
+    const resolvedAbilityGroups = splitDetailsByType(abilityDetails)
+    return {
+      key,
+      attackerSide,
+      coverLabel: '',
+      coverLine: '',
+      attackerLine,
+      defenderLine,
+      abilityLine: '',
+      defenderLead: '',
+      defenderSave: '',
+      defenderCover: '',
+      defenderTail: '',
+      defenderTailPrefix: '',
+      defenderTailSuffix: '',
+      defenderLinePrefix: '',
+      defenderLineSuffix: '',
+      defenderMitigationInline: '',
+      attackerCoverDetails: [],
+      conditionDetails: [],
+      preWeaponAbilityDetails: [],
+      preFactionAbilityDetails: [],
+      coverDetails: [],
+      weaponAbilityDetails: resolvedAbilityGroups.weaponAbilityDetails,
+      attackerFactionAbilityDetails: resolvedAbilityGroups.factionAbilityDetails.filter((detail) => detail.owner !== 'defender'),
+      defenderFactionAbilityDetails: resolvedAbilityGroups.factionAbilityDetails.filter((detail) => detail.owner === 'defender'),
+      preAttackDetails: [],
+      abilityDetails,
+      damageDetails: [],
+      attackCountDice: [],
+      hitThresholdDice: [],
+      attackDice,
+      defenseDice: [],
+      hidePrimaryLine,
+      hideResult,
+      resultState: {
+        attacker: {
+          name: attackerName,
+          hp: attackerHp,
+          defeated: attackerHp <= 0,
+          hpBefore: attackerHp,
+        },
+        defender: { name: defenderName, hp: defenderHp, defeated: defenderHp <= 0 },
+        selfDamage,
       },
-      defender: { name: defenderName, hp: defenderHp, defeated: defenderHp <= 0 },
-      selfDamage,
-    },
-  })
+      damageValue: 0,
+    }
+  }
 
   return { buildCombatEntry, buildStatusEntry }
 }

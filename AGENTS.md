@@ -11,6 +11,8 @@ Non-negotiable rules:
 - Validate before closing: `npm run lint`, `npm run build`, and `npm run battle:smoke` for combat-related changes.
 - Do incremental changes (ability by ability) to avoid regressions.
 - Do not silently change game-rule behavior while doing pure refactors.
+- In `Reglamento`, remember there are visual insertions layered on top of Markdown (doctrines, command posts, flags, activation, state, and damage tokens). Do not break those hooks accidentally.
+- If new rulebook text explicitly references a token, check whether that token should also be inserted visually in the rulebook web/PDF flow.
 
 Working contract for this repo:
 

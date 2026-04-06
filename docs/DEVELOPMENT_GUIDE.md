@@ -22,6 +22,19 @@ Datos:
 - Facciones EN: `src/data/factions/jsonFaccionesEN/*.en.json`
 - Reglamentos ES/EN: `src/data/spanish` y `src/data/english`
 
+## 2.1) Arquitectura de reglamento (actual)
+
+Archivos clave:
+- Render y orquestacion: `src/pages/Reglamento.jsx`
+- Textos fuente ES/EN: `src/data/spanish/*.md` y `src/data/english/*.md`
+- Estilos de reglamento y galerias: `src/App.css`
+
+Notas practicas:
+- `Reglamento.jsx` renderiza Markdown y luego inserta galerias visuales dentro del HTML segun secciones concretas.
+- Ahora mismo hay inserciones para doctrinas, puestos de mando, banderillas, activacion, estados y dano.
+- Si cambia el texto de un heading o un parrafo clave en Notion/Markdown, revisar esos hooks.
+- El PDF del reglamento tambien replica estas galerias, asi que cualquier insercion visual nueva debe revisarse en web y PDF.
+
 ## 3) Arquitectura de batalla (actual)
 
 Archivos clave:

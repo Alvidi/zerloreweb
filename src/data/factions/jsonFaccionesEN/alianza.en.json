@@ -517,7 +517,7 @@
               "Gunslinger"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 1
           },
           {
             "nombre": "Tactical Microcannon",
@@ -530,7 +530,7 @@
               "Assaulter"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [

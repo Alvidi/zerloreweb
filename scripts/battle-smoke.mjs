@@ -218,6 +218,34 @@ const run = () => {
     'Partial cover in melee should remove 1 attack die',
   )
 
+  const antiMatchesElite = withFixedRandom([0.7, 0.7], () =>
+    resolveAttack({
+      attacker: { id: 'left', name: 'Anti Attacker', hp: 4, maxHp: 4 },
+      defender: { id: 'right', name: 'Elite Target', hp: 6, maxHp: 6, type: 'elite', save: 7 },
+      weapon: { name: 'Crusher Bite', attacks: '2', hit: '3+', damage: '3', critDamage: '4', abilities: ['Anti 5+ (Élite)'] },
+      mode: 'melee',
+      conditions: {
+        coverType: 'none',
+      },
+    }),
+  )
+  assert(antiMatchesElite.totals.crits === 2, 'Anti should convert matching 5+ results into crits against the right target type')
+  assert(antiMatchesElite.totals.hits === 0, 'Anti should not leave matching converted results as normal hits')
+
+  const antiDoesNotMatchLine = withFixedRandom([0.7, 0.7], () =>
+    resolveAttack({
+      attacker: { id: 'left', name: 'Anti Attacker', hp: 4, maxHp: 4 },
+      defender: { id: 'right', name: 'Line Target', hp: 6, maxHp: 6, type: 'linea', save: 7 },
+      weapon: { name: 'Crusher Bite', attacks: '2', hit: '3+', damage: '3', critDamage: '4', abilities: ['Anti 5+ (Élite)'] },
+      mode: 'melee',
+      conditions: {
+        coverType: 'none',
+      },
+    }),
+  )
+  assert(antiDoesNotMatchLine.totals.crits === 0, 'Anti should not trigger against the wrong target type')
+  assert(antiDoesNotMatchLine.totals.hits === 2, 'Non-matching Anti results should remain normal hits')
+
   const criticalAttackResult = withFixedRandom([0.95, 0.7, 0.95], () =>
     resolveAttack({
       ...makeBaseArgs(),

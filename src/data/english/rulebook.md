@@ -93,7 +93,7 @@ For a unit to make a ranged attack on another, it must have **line of sight**.
 - Units have **360-degree** vision; miniature facing does not limit their field of view.
 - If a miniature (friendly or enemy) or a piece of scenery completely blocks the view, the target **cannot be attacked** at range.
 
-Cover and height rules are detailed later in the rulebook.
+Cover rules are detailed later in the rulebook.
 
 
 ### The Golden Rule
@@ -445,21 +445,7 @@ If the chosen miniature is destroyed and there is remaining damage to assign, th
 
 Cover modifies the defence of attacked units. To benefit from cover, the unit must have its base in contact with it.
 
-**Partial Cover**
-
-The unit gains **+1 save die** against ranged attacks.
-
-It may be charged and fight in melee. In that case, both units remove **-1 attack die** from their melee rolls, unless a rule states otherwise.
-
-**Height Cover**
-
-If the unit is at **2" or more of height**, it gains:
-
-- **+1 save die.**
-- **+1 to its Hit value** for ranged attacks.
-
-If both units are at the same height with a maximum difference of 1", this rule does not apply.
-
+The unit gains **-1 on its Save roll** against ranged attacks. If a unit in cover is charged through the cover side, both units remove **-1 attack die** from their melee rolls, unless a rule states otherwise.
 
 **Field of View**
 
@@ -472,8 +458,7 @@ If a unit is partially visible but not in contact with any cover, no defensive b
 **Cover - clarifications**
 
 - **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection.
-- **Partial cover** may be crossed with normal movement as long as the unit is taller than the obstacle.
-- **Full cover** cannot be crossed or ignored unless a rule states otherwise.
+- **Cover** may be crossed with normal movement, as long as the unit is at least half as tall as the obstacle or window.
 
 # Shooting at Locked Units
 

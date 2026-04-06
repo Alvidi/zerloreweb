@@ -456,12 +456,6 @@ export function resolveAttack({
     saveThreshold -= 1
     rulesApplied.push('Cobertura parcial (-1 al valor de salvación)')
   }
-  if (mode === 'ranged' && coverType === 'height') {
-    saveThreshold -= 1
-    hitThreshold += 1
-    rulesApplied.push('Cobertura de altura (-1 al valor de salvación, +1 impacto requerido)')
-  }
-
   if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.quickAttack) && conditions.halfRange) {
     const rapidBonus = getAbilityValue(weapon, WEAPON_ABILITY_IDS.quickAttack, 1)
     bonusAttackDice += rapidBonus
@@ -493,7 +487,7 @@ export function resolveAttack({
   hitThreshold = clamp(hitThreshold, 2, 6)
   saveThreshold = clamp(saveThreshold, 1, 6)
   const antiData = parseAntiAbility(weapon)
-  if (antiData) rulesApplied.push(`Anti ${antiData.threshold}+`)
+  if (antiData) rulesApplied.push(findWeaponAbilityRaw(weapon, WEAPON_ABILITY_IDS.anti) || `Anti ${antiData.threshold}+`)
 
   const hasDirect = hasAbility(weapon, WEAPON_ABILITY_IDS.direct) && mode === 'ranged'
   const hasPrecision = hasAbility(weapon, WEAPON_ABILITY_IDS.precision)
@@ -647,10 +641,14 @@ export function resolveAttack({
   const totalDamage = hasExplosive ? baseTotalDamage * explosiveAffectedUnits : baseTotalDamage
 
   let selfDamage = 0
+  let unstableTriggered = false
+  let unstableRollValue = null
   if (mode === 'ranged' && hasAbility(weapon, WEAPON_ABILITY_IDS.unstable)) {
     const unstableRoll = rollDie(6)
+    unstableRollValue = unstableRoll
     rulesApplied.push(`Inestable (tirada ${unstableRoll})`)
     if (unstableRoll <= 2) {
+      unstableTriggered = true
       selfDamage = baseTotalDamage
     }
   }
@@ -683,6 +681,8 @@ export function resolveAttack({
     explosiveAffectedUnits,
     baseDamage: baseTotalDamage,
     selfDamage,
+    unstableTriggered,
+    unstableRoll: unstableRollValue,
     heal: voracityHeal,
   }
 

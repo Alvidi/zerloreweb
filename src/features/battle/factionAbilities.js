@@ -20,10 +20,12 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'alliance_target_in_sight',
     nameTokens: ['objetivo-en-la-mira', 'target-in-sight'],
     appliesTo: 'attacker',
+    logPhase: 'post',
     engineConditionKey: 'attackerRerollFailedHits',
     rulePrefixes: ['objetivo en la mira', 'target in sight'],
     buildLogDetail: ({ lang, result, hasRule }) => {
       if (!hasRule) return null
+      const totalDamage = Number(result.totals?.damage || 0)
       const rerolledEntries = (result.hitEntries || []).filter(
         (entry) =>
           entry.rerolled
@@ -31,12 +33,18 @@ const FACTION_ABILITY_DEFINITIONS = [
           && Number.isFinite(entry.roll)
           && String(entry.rerollSource || '').includes('target_in_sight'),
       )
-      if (!rerolledEntries.length) return null
+      const failedInitials = rerolledEntries
+        .map((entry) => entry.initialRoll)
+        .filter((value) => Number.isFinite(value))
       return {
         text: t(
           lang,
-          'Objetivo en la mira activo: esta unidad repite impactos fallidos contra el objetivo marcado.',
-          'Target in sight active: this unit rerolls failed hit rolls against the marked target.',
+          failedInitials.length
+            ? `Objetivo en la mira: repite fallos [${failedInitials.join(', ')}] y deja daño final ${totalDamage}.`
+            : 'Objetivo en la mira activo: esta unidad repite impactos fallidos contra el objetivo marcado.',
+          failedInitials.length
+            ? `Target in sight: rerolls failed hits [${failedInitials.join(', ')}] and leaves final damage ${totalDamage}.`
+            : 'Target in sight active: this unit rerolls failed hit rolls against the marked target.',
         ),
         dice: rerolledEntries.map((entry) => ({
           value: `${entry.roll}`,
@@ -51,11 +59,13 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'void_eyes_beyond',
     nameTokens: ['ojos-del-mas-alla', 'eyes-from-beyond', 'eyes-beyond'],
     appliesTo: 'attacker',
+    logPhase: 'post',
     modes: ['ranged'],
     engineConditionKey: 'attackerVoidEyesBeyond',
     rulePrefixes: ['ojos del mas alla', 'eyes from beyond', 'eyes beyond'],
     buildLogDetail: ({ lang, result, hasRule }) => {
       if (!hasRule) return null
+      const totalDamage = Number(result.totals?.damage || 0)
       const rerolledEntries = (result.hitEntries || []).filter(
         (entry) =>
           entry.rerolled
@@ -63,12 +73,18 @@ const FACTION_ABILITY_DEFINITIONS = [
           && Number.isFinite(entry.roll)
           && String(entry.rerollSource || '').includes('eyes_beyond'),
       )
-      if (!rerolledEntries.length) return null
+      const failedInitials = rerolledEntries
+        .map((entry) => entry.initialRoll)
+        .filter((value) => Number.isFinite(value))
       return {
         text: t(
           lang,
-          'Ojos del más allá activo: esta unidad repite impactos fallidos contra cobertura parcial.',
-          'Eyes from beyond active: this unit rerolls failed hit rolls against partial cover.',
+          failedInitials.length
+            ? `Ojos del más allá: repite fallos [${failedInitials.join(', ')}] contra cobertura y deja daño final ${totalDamage}.`
+            : 'Ojos del más allá activo: esta unidad repite impactos fallidos contra cobertura.',
+          failedInitials.length
+            ? `Eyes from beyond: rerolls failed hits [${failedInitials.join(', ')}] against cover and leaves final damage ${totalDamage}.`
+            : 'Eyes from beyond active: this unit rerolls failed hit rolls against cover.',
         ),
         dice: rerolledEntries.map((entry) => ({
           value: `${entry.roll}`,
@@ -83,6 +99,7 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'wild_uncontrolled_fury',
     nameTokens: ['furia-incontrolada', 'uncontrolled-fury'],
     appliesTo: 'attacker',
+    logPhase: 'pre',
     modes: ['melee'],
     engineConditionKey: 'attackerWildUncontrolledFury',
     rulePrefixes: ['furia incontrolada', 'uncontrolled fury'],
@@ -104,6 +121,7 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'alliance_martial_resistance',
     nameTokens: ['resistencia-marcial', 'martial-resistance'],
     appliesTo: 'defender',
+    logPhase: 'pre',
     modes: ['ranged'],
     engineConditionKey: 'defenderMartialResistance',
     rulePrefixes: ['resistencia marcial', 'martial resistance'],
@@ -125,6 +143,7 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'swarm_voracity',
     nameTokens: ['voracidad', 'voracity'],
     appliesTo: 'attacker',
+    logPhase: 'result',
     modes: ['melee'],
     engineConditionKey: 'attackerVoracity',
     rulePrefixes: ['voracidad', 'voracity'],
@@ -146,6 +165,7 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'crucible_glory',
     nameTokens: ['gloria-del-crisol', 'glory-of-the-crucible'],
     appliesTo: 'defender',
+    logPhase: 'post',
     modes: ['ranged'],
     engineConditionKey: 'defenderCrucibleGlory',
     rulePrefixes: ['gloria del crisol', 'glory of the crucible'],
@@ -174,6 +194,7 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'crucible_sacred_vow',
     nameTokens: ['voto-sagrado', 'sacred-vow'],
     appliesTo: 'attacker',
+    logPhase: 'post',
     modes: ['melee'],
     engineConditionKey: 'attackerCrucibleSacredVow',
     rulePrefixes: ['voto sagrado', 'sacred vow'],
@@ -214,6 +235,7 @@ const FACTION_ABILITY_DEFINITIONS = [
     effectKey: 'technocrats_combat_protocols',
     nameTokens: ['protocolos-de-combate', 'combat-protocols'],
     appliesTo: 'attacker',
+    logPhase: 'pre',
     modes: ['ranged'],
     engineConditionKey: 'attackerTechnocratsCombatProtocols',
     rulePrefixes: ['protocolos de combate', 'combat protocols'],
@@ -320,6 +342,12 @@ export const buildFactionAbilityLogDetails = ({ result, lang }) => {
       const normalized = normalizeRuleText(rule)
       return (definition.rulePrefixes || []).some((prefix) => normalized.startsWith(prefix))
     })
-    return definition.buildLogDetail({ lang, result, hasRule })
+    const detail = definition.buildLogDetail({ lang, result, hasRule })
+    if (!detail) return null
+    return {
+      ...detail,
+      effectKey: definition.effectKey,
+      phase: definition.logPhase || 'post',
+    }
   }).filter(Boolean)
 }

@@ -9,7 +9,7 @@
       },
       {
         "habilidades_faccion2": "Ojos del más allá",
-        "descripcion": "Las unidades del vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura parcial."
+        "descripcion": "Las unidades del vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura."
       },
       {
         "habilidades_faccion3": "Heraldos del vacío supremo",
@@ -192,7 +192,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Esta unidad ignora las penalizaciones de cobertura parcial al disparar.",
+        "especialidad": "Esta unidad ignora las penalizaciones de cobertura al disparar.",
         "valor": 8
       },
       "armas": {

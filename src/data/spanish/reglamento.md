@@ -445,21 +445,7 @@ Si la miniatura elegida es eliminada y aún queda daño por asignar, el jugador 
 
 Las coberturas modifican la defensa de las unidades atacadas. Para beneficiarse de una cobertura, la unidad debe estar con su peana en contacto con ella.
 
-**Cobertura parcial**
-
-La unidad obtiene **+1 dado de salvación** frente a ataques a distancia.
-
-Puede ser cargada y combatir cuerpo a cuerpo. En ese caso, ambas unidades retiran **-1 dado de ataque** en sus tiradas de CaC, salvo que una regla indique lo contrario.
-
-**Cobertura de altura**
-
-Si la unidad se encuentra a **2" o más de altura**, obtiene:
-
-- **+1 dado de salvación.**
-- **+1 al valor de Impactos** de sus ataques a distancia.
-
-Si ambas unidades están a la misma altura con una diferencia máxima de 1", esta regla no se aplica.
-
+La unidad obtiene **-1 en el dado de salvación** frente a ataques a distancia. Si una unidad en cobertura es cargada por la zona de cobertura, ambas unidades retiran **-1 dado de ataque** en sus tiradas de CaC, salvo que una regla indique lo contrario.
 
 **Campo de visión**
 
@@ -472,8 +458,7 @@ Si una unidad es parcialmente visible pero no está en contacto con ninguna cobe
 **Coberturas - aclaraciones**
 
 - **Vehículos, Monstruos y Titanes** no se benefician de ningún tipo de cobertura. Sus dimensiones impiden que cualquier obstáculo les proporcione protección efectiva.
-- **Coberturas parciales** pueden atravesarse con movimiento normal siempre que la unidad sea más alta que el obstáculo.
-- **Coberturas totales** no pueden atravesarse ni ignorarse salvo que una regla indique lo contrario.
+- **Las coberturas** pueden atravesarse con movimiento normal, siempre que la unidad sea la mitad de alta que el obstáculo o ventanas.
 
 # Disparar a unidades trabadas
 

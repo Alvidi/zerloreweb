@@ -9,7 +9,7 @@
       },
       {
         "habilidades_faccion2": "Eyes from Beyond",
-        "descripcion": "Void units can re-roll failed hit rolls if the enemy unit is in partial cover."
+        "descripcion": "Void units can reroll failed Hit rolls if the enemy unit is in cover."
       },
       {
         "habilidades_faccion3": "Heralds of the Supreme Void",
@@ -192,7 +192,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "This unit ignores the penalties from partial cover when shooting.",
+        "especialidad": "This unit ignores cover penalties when shooting.",
         "valor": 8
       },
       "armas": {

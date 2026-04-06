@@ -138,7 +138,7 @@ export const factionImages = {
 export const makeHpKey = (side, factionId, unitId) => `${side}:${factionId || 'none'}:${unitId || 'none'}`
 export const buildHpValues = (maxHp) => Array.from({ length: Math.max(0, maxHp) }, (_, index) => maxHp - index)
 export const attackTypeOptions = ['ranged', 'melee', 'charge']
-export const coverTypeOptions = ['none', 'partial', 'height']
+export const coverTypeOptions = ['none', 'partial']
 export const CHARGE_DISTANCE_MIN = 2
 export const CHARGE_DISTANCE_MAX = 12
 export const chargeDistanceOptions = Array.from(

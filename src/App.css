@@ -4373,6 +4373,14 @@ mark {
   border-top: 1px solid var(--line);
 }
 
+.duel-generic-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  margin-top: 4px;
+}
+
 .duel-faction-abilities-title {
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -4423,7 +4431,7 @@ mark {
   content: attr(data-tooltip);
   position: absolute;
   left: 0;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 10px);
   z-index: 20;
   width: min(260px, calc(100vw - 64px));
   padding: 8px 10px;
@@ -4437,7 +4445,7 @@ mark {
   white-space: normal;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(4px);
+  transform: translateY(-4px);
   transition: opacity 0.16s ease, transform 0.16s ease;
 }
 
@@ -4460,11 +4468,6 @@ mark {
 .duel-faction-ability-copy span {
   color: var(--text-muted);
   line-height: 1.35;
-}
-
-.duel-counter-divider {
-  border-top: 1px solid var(--line);
-  margin-top: 2px;
 }
 
 .duel-actions {
@@ -4604,6 +4607,29 @@ mark {
   border-top: 1px solid var(--line);
   padding-top: 8px;
   margin-top: 2px;
+}
+
+.duel-log-subsection {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.duel-log-subsection-attacker {
+  border-color: rgba(247, 88, 88, 0.14);
+  background: rgba(247, 88, 88, 0.035);
+}
+
+.duel-log-subsection-defender {
+  border-color: rgba(90, 156, 255, 0.14);
+  background: rgba(90, 156, 255, 0.035);
+}
+
+.duel-log-subsection-result {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .duel-log-line-label {

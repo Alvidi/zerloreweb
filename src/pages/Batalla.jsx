@@ -167,6 +167,8 @@ function Batalla() {
   const defenderHasWeaponsForMode = rightSelectedWeapons.length > 0
   const attackerMissingRangedWeapons = attackType === 'ranged' && !attackerHasWeaponsForMode
   const defenderMissingRangedWeapons = attackType === 'ranged' && !defenderHasWeaponsForMode
+  const defenderHasFeint = mode === 'ranged'
+    && rightImplementedFactionAbilities.some((ability) => ability.effectKey === 'rebels_feint')
   const isCounterattackEnabled = canCounterByMode && defenderCounterattack && !defenderMissingRangedWeapons
   const leftConditionSupport = getConditionSupport(leftSelectedWeapons, mode)
   const rightConditionSupport = getConditionSupport(rightSelectedWeapons, mode)
@@ -315,7 +317,6 @@ function Batalla() {
     timersRef.current.push(safety)
   }
 
-  const currentModeLabel = attackType === 'charge' ? tx.charge : mode === 'ranged' ? tx.ranged : tx.melee
   const setFactionAbilityEnabled = (side, abilityId, enabled) => {
     if (!abilityId) return
     if (side === 'left') {
@@ -373,8 +374,8 @@ function Batalla() {
       }))
       .filter((item) => item.label)
   const { buildCombatEntry, buildStatusEntry } = useMemo(
-    () => createBattleLogBuilders({ lang, tx, currentModeLabel }),
-    [lang, tx, currentModeLabel],
+    () => createBattleLogBuilders({ lang, tx }),
+    [lang, tx],
   )
 
   const handleFlip = () => {
@@ -626,7 +627,6 @@ function Batalla() {
       entries.push(
         buildCombatEntry({
           key: `${stepLabel}-${weapon.id}-${index}`,
-          title: '',
           attackerSide,
           attackerName: attackerUnit.name,
           defenderName: defenderUnit.name,
@@ -652,33 +652,6 @@ function Batalla() {
       const targetHpAfterKill = attackerSide === 'left' ? nextLeftHp : nextRightHp
       if (!heroicWeapon || targetHpAfterKill <= 0) return
 
-      const heroicAttackerHp = defenderSide === 'left' ? nextLeftHp : nextRightHp
-      const heroicDefenderHp = attackerSide === 'left' ? nextLeftHp : nextRightHp
-
-      entries.push(
-        buildStatusEntry({
-          key: `${stepLabel}-heroic-fall-${defenderSide}-${index}`,
-          attackerSide: defenderSide,
-          attackerName: defenderUnit.name,
-          defenderName: attackerUnit.name,
-          attackerHp: heroicAttackerHp,
-          defenderHp: heroicDefenderHp,
-          attackerLine: '',
-          defenderLine: '',
-          hidePrimaryLine: true,
-          abilityDetails: [{
-            text:
-              lang === 'en'
-                ? `Heroic fall active: ${defenderUnit.name} performs a free counterattack before being removed.`
-                : `Caída heroica activa: ${defenderUnit.name} realiza un contraataque gratuito antes de ser retirada.`,
-            dice: [],
-            source: 'faction',
-            owner: 'attacker',
-          }],
-          hideResult: true,
-        }),
-      )
-
       runAttack({
         attackerSide: defenderSide,
         weapon: heroicWeapon,
@@ -687,6 +660,15 @@ function Batalla() {
         allowDestroyedAttacker: true,
         attackerHpOverride: defenderHpBefore,
         disableCounterattack: true,
+        extraFactionAbilityDetails: [{
+          text:
+            lang === 'en'
+              ? `Heroic fall active: ${defenderUnit.name} performs a free counterattack before being removed.`
+              : `Caída heroica activa: ${defenderUnit.name} realiza un contraataque gratuito antes de ser retirada.`,
+          dice: [],
+          source: 'faction',
+          owner: 'attacker',
+        }],
       })
     }
 
@@ -967,7 +949,7 @@ function Batalla() {
           })}
           <button
             type="button"
-            className="ghost duel-attack-type-random"
+            className="primary duel-attack-type-random"
             onClick={handleRandomizeBattle}
             disabled={!factions.length || isResolving}
           >
@@ -1232,15 +1214,13 @@ function Batalla() {
             </article>
           )}
           {leftCanUseCover && (
-            <label className="field">
-              <span>{tx.coverType}</span>
-              <select value={leftCoverType} onChange={(event) => setLeftCoverType(event.target.value)}>
-                {coverTypeOptions.map((option) => (
-                  <option key={`left-cover-${option}`} value={option}>
-                    {option === 'none' ? tx.coverNone : option === 'partial' ? tx.coverPartial : tx.coverHeight}
-                  </option>
-                ))}
-              </select>
+            <label className="field checkbox">
+              <input
+                type="checkbox"
+                checked={leftCoverType === 'partial'}
+                onChange={(event) => setLeftCoverType(event.target.checked ? 'partial' : 'none')}
+              />
+              <span>{tx.coverPartial}</span>
             </label>
           )}
           <section className="duel-faction-abilities">
@@ -1507,18 +1487,29 @@ function Batalla() {
               )}
             </article>
           )}
-          {rightCanUseCover && (
-            <label className="field">
-              <span>{tx.coverType}</span>
-              <select value={rightCoverType} onChange={(event) => setRightCoverType(event.target.value)}>
-                {coverTypeOptions.map((option) => (
-                  <option key={`right-cover-${option}`} value={option}>
-                    {option === 'none' ? tx.coverNone : option === 'partial' ? tx.coverPartial : tx.coverHeight}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
+          <div className="duel-generic-options">
+            {rightCanUseCover && (
+              <label className="field checkbox">
+                <input
+                  type="checkbox"
+                  checked={rightCoverType === 'partial'}
+                  onChange={(event) => setRightCoverType(event.target.checked ? 'partial' : 'none')}
+                />
+                <span>{tx.coverPartial}</span>
+              </label>
+            )}
+            {!defenderHasFeint && (
+              <label className="field checkbox">
+                <input
+                  type="checkbox"
+                  checked={defenderCounterattack}
+                  disabled={!canCounterByMode || defenderMissingRangedWeapons}
+                  onChange={(event) => setDefenderCounterattack(event.target.checked)}
+                />
+                <span>{tx.counterattack}</span>
+              </label>
+            )}
+          </div>
           <section className="duel-faction-abilities">
             <span className="duel-faction-abilities-title">{tx.factionAbilities}</span>
             {!rightImplementedFactionAbilities.length && <p className="battle-empty">{tx.noFactionAbilities}</p>}
@@ -1543,17 +1534,6 @@ function Batalla() {
               </label>
             ))}
           </section>
-          <div className="duel-counter-divider" aria-hidden="true" />
-
-          <label className="field checkbox">
-            <input
-              type="checkbox"
-              checked={defenderCounterattack}
-              disabled={!canCounterByMode || defenderMissingRangedWeapons}
-              onChange={(event) => setDefenderCounterattack(event.target.checked)}
-            />
-            <span>{tx.counterattack}</span>
-          </label>
         </article>
       </div>
 

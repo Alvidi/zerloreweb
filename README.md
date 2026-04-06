@@ -21,7 +21,8 @@ Hacer que ZeroLore sea mas accesible, agilizando decisiones de juego y reduciend
 
 - React + Vite
 - CSS propio
-- Datos de facciones y reglamentos en JSON/HTML
+- Datos de facciones en JSON
+- Reglamento y misiones en Markdown
 
 ## Desarrollo local
 
@@ -35,12 +36,19 @@ Comandos:
 - `npm run dev`
 - `npm run build`
 - `npm run lint`
+- `npm run battle:smoke`
 
 ## Estructura de datos (resumen)
 
 - Facciones ES: `src/data/factions/jsonFaccionesES/*.json`
 - Facciones EN: `src/data/factions/jsonFaccionesEN/*.en.json`
 - Reglamento ES/EN: `src/data/spanish` y `src/data/english`
+
+## Flujo de contenido
+
+- El contenido fuente suele llegar desde Notion, normalmente primero en espanol.
+- Cuando entra contenido nuevo, el proyecto debe quedar consistente en ES/EN.
+- Los cambios de reglamento viven en Markdown y los cambios de facciones en JSON.
 
 ## Documentacion tecnica (importante)
 
