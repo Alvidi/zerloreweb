@@ -111,6 +111,50 @@ const normalizeHeadingText = (value) =>
     .replace(/\s+/g, ' ')
     .trim()
 
+const getMissionHeadingMeta = (value) => {
+  const match = String(value || '').trim().match(/^(misi[oó]n|mission)\s+(\d+)\s*:\s*(.+)$/i)
+  if (!match) return null
+  return {
+    number: match[2],
+    title: match[3].trim(),
+  }
+}
+
+const isMissionHeading = (value) => {
+  const normalized = normalizeHeadingText(value)
+  return /^mision \d+/.test(normalized) || /^mission \d+/.test(normalized)
+}
+
+const isStandaloneEmphasisParagraph = (node) => {
+  if (!node || node.tagName !== 'P') return false
+  const children = Array.from(node.children)
+  if (children.length !== 1 || children[0].tagName !== 'EM') return false
+  return node.textContent?.trim() === children[0].textContent?.trim()
+}
+
+const isMissionMetaParagraph = (node) => {
+  if (!node || node.tagName !== 'P') return false
+  const strong = node.querySelector('strong')
+  if (!strong) return false
+  const normalized = normalizeHeadingText(strong.textContent)
+  return [
+    'puntuacion',
+    'puntuacion extra',
+    'victoria',
+    'victoria inmediata',
+    'victoria normal',
+    'victoria del atacante',
+    'victoria del defensor',
+    'scoring',
+    'bonus scoring',
+    'victory',
+    'immediate victory',
+    'standard victory',
+    'attacker victory',
+    'defender victory',
+  ].some((label) => normalized.startsWith(label))
+}
+
 const TOKEN_DEFINITIONS = [
   { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
   { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
@@ -218,6 +262,73 @@ function Reglamento() {
       table.parentNode?.insertBefore(wrapper, table)
       wrapper.appendChild(table)
     })
+    if (rulesMode === 'missions') {
+      const missionHeadings = Array.from(doc.querySelectorAll('h2')).filter((heading) => isMissionHeading(heading.textContent))
+      const firstMissionHeading = missionHeadings[0]
+
+      if (firstMissionHeading?.parentNode) {
+        const missionParent = firstMissionHeading.parentNode
+        const missionGrid = doc.createElement('div')
+        missionGrid.className = 'rules-mission-grid'
+        missionParent.insertBefore(missionGrid, firstMissionHeading)
+
+        missionHeadings.forEach((heading) => {
+          const card = doc.createElement('article')
+          card.className = 'rules-mission-card'
+          const aside = doc.createElement('div')
+          aside.className = 'rules-mission-card-aside'
+          const body = doc.createElement('div')
+          body.className = 'rules-mission-card-body'
+
+          const missionMeta = getMissionHeadingMeta(heading.textContent)
+          if (missionMeta) {
+            card.dataset.mission = missionMeta.number
+            const badge = doc.createElement('p')
+            badge.className = 'rules-mission-card-badge'
+            badge.textContent = lang === 'en' ? `Mission ${missionMeta.number}` : `Misión ${missionMeta.number}`
+            aside.appendChild(badge)
+          }
+
+          const sectionNodes = []
+          let sibling = heading.nextElementSibling
+          while (sibling && sibling.tagName !== 'H1' && sibling.tagName !== 'H2') {
+            sectionNodes.push(sibling)
+            sibling = sibling.nextElementSibling
+          }
+
+          heading.classList.add('rules-mission-card-title')
+          aside.appendChild(heading)
+
+          let regularParagraphIndex = 0
+          sectionNodes.forEach((node) => {
+            if (isStandaloneEmphasisParagraph(node)) {
+              node.classList.add('rules-mission-card-flavor')
+              aside.appendChild(node)
+            } else if (isMissionMetaParagraph(node)) {
+              node.classList.add('rules-mission-card-meta')
+              const firstStrong = node.querySelector('strong')
+              if (firstStrong) {
+                firstStrong.classList.add('rules-mission-card-meta-label')
+              }
+              body.appendChild(node)
+            } else if (node.tagName === 'P') {
+              node.classList.add('rules-mission-card-copy')
+              if (regularParagraphIndex === 0) {
+                node.classList.add('rules-mission-card-summary')
+              }
+              regularParagraphIndex += 1
+              body.appendChild(node)
+            } else {
+              body.appendChild(node)
+            }
+          })
+
+          card.appendChild(aside)
+          card.appendChild(body)
+          missionGrid.appendChild(card)
+        })
+      }
+    }
     if (rulesMode === 'rules') {
       const doctrineHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
@@ -732,6 +843,7 @@ function Reglamento() {
       const margin = 14
       const contentWidthMm = pageWidth - margin * 2
       const contentHeightMm = pageHeight - margin * 2
+      const captureScale = 2
 
       captureRoot = document.createElement('div')
       captureRoot.setAttribute('aria-hidden', 'true')
@@ -1011,6 +1123,84 @@ function Reglamento() {
             text-transform: uppercase;
             letter-spacing: 0.04em;
           }
+          .rules-pdf-sheet .rules-html .rules-mission-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin: 18px 0 10px;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card {
+            display: grid;
+            grid-template-columns: 195px minmax(0, 1fr);
+            gap: 0;
+            border: 1px solid #d7d7d7;
+            border-radius: 12px;
+            background: #fafafa;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            overflow: hidden;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-aside {
+            display: grid;
+            align-content: start;
+            gap: 10px;
+            padding: 14px;
+            background: #f3ede6;
+            border-right: 1px solid #d7d7d7;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-body {
+            display: grid;
+            gap: 10px;
+            padding: 14px;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-badge {
+            margin: 0;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #555555;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card .rules-mission-card-title {
+            margin: 0;
+            font-family: "Cinzel", Georgia, serif;
+            font-size: 20px;
+            line-height: 1.24;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card p {
+            margin: 0;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-copy,
+          .rules-pdf-sheet .rules-html .rules-mission-card-flavor,
+          .rules-pdf-sheet .rules-html .rules-mission-card-meta {
+            hyphens: none;
+            word-break: normal;
+            overflow-wrap: break-word;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-summary {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d7d7d7;
+            color: #111111;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-flavor {
+            padding-top: 10px;
+            border-top: 1px solid #d7d7d7;
+            color: #444444;
+            font-style: italic;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-meta {
+            padding: 10px 11px 11px;
+            border: 1px solid #d7d7d7;
+            border-radius: 10px;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-meta .rules-mission-card-meta-label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+          }
           .rules-pdf-cover {
             width: 1040px;
             min-height: 1450px;
@@ -1059,11 +1249,24 @@ function Reglamento() {
             line-height: 1.6;
             color: #444444;
           }
+          .rules-pdf-cover-credit {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 42px;
+            margin: 0;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #666666;
+          }
         </style>
         <div class="rules-pdf-cover">
           ${blackLogoDataUrl ? `<img class="rules-pdf-cover-mark" src="${blackLogoDataUrl}" alt="" />` : ''}
           <p class="rules-pdf-cover-brand">ZEROLORE</p>
           <p class="rules-pdf-cover-section">${printCoverSectionLabel}</p>
+          <p class="rules-pdf-cover-credit">by alvidi</p>
         </div>
         <div class="rules-pdf-sheet">
           <div class="rules-html">${renderedHtml}</div>
@@ -1080,7 +1283,7 @@ function Reglamento() {
       const coverTarget = captureRoot.querySelector('.rules-pdf-cover')
       const coverCanvas = await html2canvas(coverTarget, {
         backgroundColor: '#ffffff',
-        scale: 2,
+        scale: captureScale,
         useCORS: true,
         windowWidth: coverTarget.scrollWidth,
       })
@@ -1096,49 +1299,147 @@ function Reglamento() {
       )
 
       const captureTarget = captureRoot.querySelector('.rules-pdf-sheet')
-      const canvas = await html2canvas(captureTarget, {
-        backgroundColor: '#ffffff',
-        scale: 2,
-        useCORS: true,
-        windowWidth: captureTarget.scrollWidth,
-      })
-
-      const pxPerMm = canvas.width / contentWidthMm
-      const sliceHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm))
-      let offsetY = 0
-
-      while (offsetY < canvas.height) {
+      const renderSheetToPdfPage = async (sheetElement) => {
+        const sheetCanvas = await html2canvas(sheetElement, {
+          backgroundColor: '#ffffff',
+          scale: captureScale,
+          useCORS: true,
+          windowWidth: sheetElement.scrollWidth,
+        })
+        const sheetHeightMm = (sheetCanvas.height / sheetCanvas.width) * contentWidthMm
         doc.addPage()
-        const currentSliceHeightPx = Math.min(sliceHeightPx, canvas.height - offsetY)
-        const sliceCanvas = document.createElement('canvas')
-        sliceCanvas.width = canvas.width
-        sliceCanvas.height = currentSliceHeightPx
-        const sliceCtx = sliceCanvas.getContext('2d')
-        sliceCtx.fillStyle = '#ffffff'
-        sliceCtx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height)
-        sliceCtx.drawImage(
-          canvas,
-          0,
-          offsetY,
-          canvas.width,
-          currentSliceHeightPx,
-          0,
-          0,
-          canvas.width,
-          currentSliceHeightPx,
-        )
-        const sliceHeightMm = currentSliceHeightPx / pxPerMm
         doc.addImage(
-          sliceCanvas.toDataURL('image/png'),
+          sheetCanvas.toDataURL('image/png'),
           'PNG',
           margin,
           margin,
           contentWidthMm,
-          sliceHeightMm,
+          Math.min(sheetHeightMm, contentHeightMm),
           undefined,
           'FAST',
         )
-        offsetY += currentSliceHeightPx
+      }
+
+      if (rulesMode === 'missions') {
+        const rulesHtmlRoot = captureTarget.querySelector('.rules-html')
+        const missionGrid = rulesHtmlRoot?.querySelector('.rules-mission-grid')
+        const missionCards = Array.from(missionGrid?.children || [])
+
+        if (rulesHtmlRoot && missionGrid && missionCards.length) {
+          const introNodes = Array.from(rulesHtmlRoot.childNodes).filter((node) => node !== missionGrid)
+          const pxPerMm = captureTarget.scrollWidth / contentWidthMm
+          const maxSheetHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm) - 12)
+          const builtSheets = []
+
+          const buildMissionSheet = ({ includeIntro, cards }) => {
+            const sheet = document.createElement('div')
+            sheet.className = 'rules-pdf-sheet'
+
+            const html = document.createElement('div')
+            html.className = 'rules-html'
+
+            if (includeIntro) {
+              introNodes.forEach((node) => {
+                html.appendChild(node.cloneNode(true))
+              })
+            }
+
+            const grid = document.createElement('div')
+            grid.className = 'rules-mission-grid'
+            cards.forEach((card) => {
+              grid.appendChild(card.cloneNode(true))
+            })
+            html.appendChild(grid)
+            sheet.appendChild(html)
+            return sheet
+          }
+
+          let remainingCards = [...missionCards]
+          let includeIntro = true
+
+          while (remainingCards.length) {
+            let bestSheet = null
+            let bestCount = 0
+
+            for (let count = 1; count <= remainingCards.length; count += 1) {
+              const testSheet = buildMissionSheet({ includeIntro, cards: remainingCards.slice(0, count) })
+              captureRoot.appendChild(testSheet)
+              const fits = testSheet.scrollHeight <= maxSheetHeightPx
+
+              if (fits) {
+                bestSheet?.remove()
+                bestSheet = testSheet
+                bestCount = count
+              } else {
+                testSheet.remove()
+                break
+              }
+            }
+
+            if (!bestSheet) {
+              bestCount = 1
+              bestSheet = buildMissionSheet({ includeIntro, cards: remainingCards.slice(0, 1) })
+              captureRoot.appendChild(bestSheet)
+            }
+
+            builtSheets.push(bestSheet)
+            remainingCards = remainingCards.slice(bestCount)
+            includeIntro = false
+          }
+
+          for (const sheet of builtSheets) {
+            await waitForImages(sheet)
+            await renderSheetToPdfPage(sheet)
+          }
+        } else {
+          await waitForImages(captureTarget)
+          await renderSheetToPdfPage(captureTarget)
+        }
+      } else {
+        const canvas = await html2canvas(captureTarget, {
+          backgroundColor: '#ffffff',
+          scale: captureScale,
+          useCORS: true,
+          windowWidth: captureTarget.scrollWidth,
+        })
+
+        const pxPerMm = canvas.width / contentWidthMm
+        const sliceHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm))
+        let offsetY = 0
+
+        while (offsetY < canvas.height) {
+          doc.addPage()
+          const currentSliceHeightPx = Math.min(sliceHeightPx, canvas.height - offsetY)
+          const sliceCanvas = document.createElement('canvas')
+          sliceCanvas.width = canvas.width
+          sliceCanvas.height = currentSliceHeightPx
+          const sliceCtx = sliceCanvas.getContext('2d')
+          sliceCtx.fillStyle = '#ffffff'
+          sliceCtx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height)
+          sliceCtx.drawImage(
+            canvas,
+            0,
+            offsetY,
+            canvas.width,
+            currentSliceHeightPx,
+            0,
+            0,
+            canvas.width,
+            currentSliceHeightPx,
+          )
+          const sliceHeightMm = currentSliceHeightPx / pxPerMm
+          doc.addImage(
+            sliceCanvas.toDataURL('image/png'),
+            'PNG',
+            margin,
+            margin,
+            contentWidthMm,
+            sliceHeightMm,
+            undefined,
+            'FAST',
+          )
+          offsetY += currentSliceHeightPx
+        }
       }
 
       const filename = lang === 'en'

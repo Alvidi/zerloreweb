@@ -233,19 +233,6 @@ export const createBattleLogBuilders = ({ lang, tx }) => {
       abilityDetails.push(detail)
     })
     const appliedRules = result.rulesApplied || []
-    const wildUncontrolledFuryRule = appliedRules.find((rule) => {
-      const normalized = normalizeText(rule)
-      return normalized.startsWith('furia incontrolada') || normalized.startsWith('uncontrolled fury')
-    })
-    if (wildUncontrolledFuryRule) {
-      pushPreAttackDetail(
-        'Furia incontrolada añade +1 dado de ataque en esta carga.',
-        'Uncontrolled fury adds +1 attack die in this charge.',
-        [{ value: '+1', outcome: 'hit', tone: 'count' }],
-        'faction',
-        'attacker',
-      )
-    }
     const entrenchmentRule = appliedRules.find((rule) => {
       const normalized = normalizeText(rule)
       return normalized.startsWith('atrincheramiento') || normalized.startsWith('entrenchment')

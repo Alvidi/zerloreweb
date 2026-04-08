@@ -110,6 +110,10 @@ Comunidad
 
 Entra al Discord de ZeroLore, comparte listas y recibe novedades.
 
+### email_text
+
+Si tienes cualquier duda, quieres comentarnos algo o simplemente ponerte en contacto con nosotros, mándanos un mail a
+
 ### button
 
 Únete por Discord

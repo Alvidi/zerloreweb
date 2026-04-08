@@ -9,6 +9,7 @@ function Home() {
   const navigate = useNavigate()
   const { lang } = useI18n()
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
+  const contactEmail = 'zerloretmg@gmail.com'
   const pillars = [
     'agnostic',
     'free',
@@ -86,6 +87,13 @@ function Home() {
                 <span>{content.join.button}</span>
               </a>
             </div>
+            <p className="cta-email-copy">
+              {content.join.email_text}{' '}
+              <a className="cta-email-link" href={`mailto:${contactEmail}`}>
+                {contactEmail}
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>

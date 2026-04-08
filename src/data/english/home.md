@@ -87,5 +87,8 @@ Join our group
 ### subtitle
 Join the ZeroLore Discord server, share lists, and get updates.
 
+### email_text
+If you have any questions, want to tell us something, or simply want to get in touch, send us an email at
+
 ### button
 Join via Discord
