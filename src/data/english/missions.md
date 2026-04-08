@@ -82,9 +82,7 @@ Command posts are deployed normally. Each player assigns one of their posts as a
 
 _One attacks. One endures._
 
-Before the battle the players decide who is the **Attacker** and who is the **Defender**, or roll for it. The Defender places all command posts and deploys first from them. The Attacker has no command posts of their own — they deploy their entire army directly on their table edge before the game begins.
-
-**Scoring:** At the end of each turn the Defender adds the points of each post they still control. The Attacker does not score during turns.
+Before the battle the players decide who is the **Attacker** and who is the **Defender**, or roll for it. The Defender places all command posts, each one must be 10" apart, and deploys X units from them first. The Attacker only has one command post and deploys their entire army directly from that command post.
 
 **Attacker victory:** if at the end of the game they control more posts than the Defender, they win.
 
@@ -96,12 +94,12 @@ Before the battle the players decide who is the **Attacker** and who is the **De
 
 _The centre decides everything, but no one holds it easily._
 
-Command posts are deployed normally and score normally at the end of each turn. In addition, a **Relic** is placed at the exact centre of the table at the start of the battle.
+Command posts are deployed normally and score normally at the end of each turn. In addition, a **Relic** is placed at a point on the table agreed by the players at the start of the battle.
 
 **Picking up the Relic:** any Line, Elite, or Hero unit that moves into contact with the Relic may carry it. The bearer may only use the **move** action; it may only attack if charged into melee combat.
 
-**If the bearer dies or enters retreat:** the Relic returns to its starting position at the centre of the table. Any unit may pick it up during its next activation.
+**If the bearer dies or enters retreat:** the Relic returns to its agreed position on the table. Any other unit may pick it up during its next activation.
 
-**Bonus scoring:** At the end of each turn, the player holding the Relic scores **2 additional points**, regardless of command posts.
+**Bonus scoring:** At the end of each turn, the player who brings the Relic to a command post scores X **additional points**, regardless of command posts. The Relic then returns to the position agreed by the players.
 
 **Victory:** The player with the most points at the end of the game wins. There is no immediate victory — the Relic is constant pressure throughout the battle.

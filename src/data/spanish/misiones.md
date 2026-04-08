@@ -82,9 +82,7 @@ Los puestos de mando se despliegan de forma normal. Cada jugador tiene asignado 
 
 _Uno ataca. Otro resiste._
 
-Antes de la partida los jugadores deciden quién es el **Atacante** y quién el **Defensor**, o lo tiran a dado. El Defensor coloca todos los puestos de mando y despliega primero desde ellos. El Atacante no tiene puestos de mando propios — despliega todo su ejército directamente en su borde de mesa antes de que comience la partida.
-
-**Puntuación:** Al final de cada turno, el Defensor suma los puntos de cada puesto que siga controlando. El Atacante no puntúa por turnos.
+Antes de la partida los jugadores deciden quién es el **Atacante** y quién el **Defensor**, o lo tiran a dado. El Defensor coloca todos los puestos de mando, cada uno debe tener una separación de 10” y despliega primero desde ellos X unidades. El Atacante solo tiene un puesto de mando — despliega ya todo su ejército directamente en su puesto de mando.
 
 **Victoria del Atacante:** si al final de la partida controla más puestos que el Defensor, gana.
 
@@ -96,12 +94,12 @@ Antes de la partida los jugadores deciden quién es el **Atacante** y quién el 
 
 _El centro decide todo, pero nadie lo controla fácilmente._
 
-Los puestos de mando se despliegan de forma normal y puntúan con normalidad al final de cada turno. Además, una **Reliquia** se coloca en el centro exacto de la mesa al inicio de la partida.
+Los puestos de mando se despliegan de forma normal y puntúan con normalidad al final de cada turno. Además, una **Reliquia** se coloca en el un punto donde acuerden los jugadores en la mesa al inicio de la partida.
 
 **Coger la Reliquia:** cualquier unidad de Línea, Élite o Héroe que se mueva hasta la Reliquia puede portarla. El portador solo puede usar la acción de **moverse**; solo podrá atacar si es cargado en combate cuerpo a cuerpo.
 
-**Si el portador muere o entra en retirada:** la Reliquia vuelve a su posición inicial en el centro de la mesa. Cualquier unidad puede recogerla en su siguiente activación.
+**Si el portador muere o entra en retirada:** la Reliquia vuelve a su posición acordada en la mesa. Cualquier otra unidad puede recogerla en su siguiente activación.
 
-**Puntuación extra:** Al final de cada turno, el jugador que tenga la Reliquia en su poder suma **2 puntos adicionales** a su puntuación, independientemente de los puestos.
+**Puntuación extra:** Al final de cada turno, el jugador que lleve la Reliquia a un puesto de mando suma X **puntos adicionales** a su puntuación, independientemente de los puestos. La reliquia vuelve a la posición acordada por los jugadores.
 
 **Victoria:** Gana quien más puntos tenga al final de la partida. No hay victoria inmediata — la Reliquia es presión constante durante toda la batalla.

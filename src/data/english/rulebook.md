@@ -408,6 +408,10 @@ Titans follow the same general melee rules, except for their special rules.
 
 # Special Squad Rules
 
+## Line of Sight in Squads
+
+If at least one miniature in an enemy squad is visible to the attacker, the entire squad may be chosen as the target of a ranged attack.
+
 ## Using Weapons in Squads
 
 In squad mode, each miniature uses the weapon it has equipped.
@@ -431,6 +435,8 @@ In squad mode, even if a squad is in contact with multiple enemy squads, when ma
 
 As soon as one miniature in the squad makes base contact with an enemy unit, **the entire squad is considered locked** and all its miniatures participate in the combat.
 
+Even if physically only one miniature in the squad is in base contact with the enemy, the whole squad takes part in the combat and resolves its attacks together.
+
 The attack action is considered **consumed by the entire squad**.
 
 ## Eliminating Units in a Squad
@@ -443,22 +449,33 @@ If the chosen miniature is destroyed and there is remaining damage to assign, th
 
 # Cover
 
-Cover modifies the defence of attacked units. To benefit from cover, the unit must have its base in contact with it.
+Cover modifies the defence of attacked units. To benefit from cover, **the unit must have its base in direct contact with the scenery element acting as cover**. If there is no base contact, there is no cover.
 
-The unit gains **-1 on its Save roll** against ranged attacks. If a unit in cover is charged through the cover side, both units remove **-1 attack die** from their melee rolls, unless a rule states otherwise.
+**What counts as cover?**
+
+A scenery element provides cover if its height exceeds at least half the height of the miniature seeking protection.
+
+**Cover**
+
+The unit gains **-1 on its Save roll** against ranged attacks.
+
+If the unit in cover is charged, both units remove **-1 attack die** from their melee rolls, unless a rule states otherwise.
+
+**Moving through cover**
+
+A unit may move through a scenery element if it is physically taller than it. Gaps and windows may be crossed freely, as long as they are reasonably large enough for the miniature to pass through. This is resolved by common sense between the players.
 
 **Field of View**
 
-If no part of the target miniature is visible, **it cannot be attacked** at range or in melee, unless a rule states otherwise.
+If the attacker can see the target miniature's head, it is considered visible and may be attacked, still benefiting from cover. If no part of the miniature can be seen, it cannot be attacked at range or in melee, unless a rule states otherwise.
+
+**Clarifications**
 
 Friendly or enemy miniatures that completely block the view act as obstacles for line of sight purposes.
 
 If a unit is partially visible but not in contact with any cover, no defensive bonuses apply.
 
-**Cover - clarifications**
-
 - **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection.
-- **Cover** may be crossed with normal movement, as long as the unit is at least half as tall as the obstacle or window.
 
 # Shooting at Locked Units
 
@@ -867,7 +884,7 @@ Against the indicated unit type, results of X+ count as **critical hits**.
 **Moment:** Shooting and melee
 
 ### 10. Ignore Coverage
-The target **cannot benefit** from any defensive bonus from partial cover.
+The target **cannot benefit** from any defensive bonus from cover.
 **Moment:** Shooting
 
 ### 11. Parabolic Fire
@@ -879,7 +896,7 @@ This weapon may fire without requiring line of sight. The player marks a target 
 **Moment:** Shooting
 
 ### 12. Unstable
-After finishing the attack, roll 1D6. On a 1 or 2, the unit carrying this weapon takes the same damage points as the target received. If the target received no hits, this unit takes no damage either.
+This weapon is unstable. After finishing the attack against the target, roll 1D6. On a 1 or 2, the unit carrying this weapon suffers the same damage points the target received. If the target suffered no hits, this unit suffers nothing either.
 **Moment:** Shooting
 
 ### 13. Direct

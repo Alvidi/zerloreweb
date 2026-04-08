@@ -408,6 +408,10 @@ Los Titanes siguen las mismas reglas generales de combate cuerpo a cuerpo, salvo
 
 # Reglas especiales de escuadras
 
+## Línea de visión en escuadras
+
+Si al menos una miniatura de una escuadra enemiga es visible desde el atacante, la escuadra completa puede ser elegida como objetivo de un ataque a distancia.
+
 ## Uso de armas en escuadras
 
 En modo escuadras, cada miniatura utiliza el arma que tenga equipada.
@@ -431,6 +435,8 @@ En modo escuadras, aunque una escuadra pueda estar en contacto con varias escuad
 
 En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad enemiga, **la escuadra entera se considera trabada** y todas sus miniaturas participan en el combate.
 
+Aunque físicamente solo una miniatura de la escuadra esté en contacto de peana con el enemigo, toda la escuadra participa en el combate y realiza sus ataques de forma conjunta.
+
 La acción de ataque se considera **consumida por toda la escuadra**.
 
 ## Eliminación de unidades en escuadra
@@ -443,22 +449,33 @@ Si la miniatura elegida es eliminada y aún queda daño por asignar, el jugador 
 
 # Coberturas
 
-Las coberturas modifican la defensa de las unidades atacadas. Para beneficiarse de una cobertura, la unidad debe estar con su peana en contacto con ella.
+Las coberturas modifican la defensa de las unidades atacadas. Para beneficiarse de una cobertura, **la unidad debe estar con su peana en contacto directo con el elemento de escenografía que actúa como cobertura** — si no hay contacto de peana, no hay cobertura.
 
-La unidad obtiene **-1 en el dado de salvación** frente a ataques a distancia. Si una unidad en cobertura es cargada por la zona de cobertura, ambas unidades retiran **-1 dado de ataque** en sus tiradas de CaC, salvo que una regla indique lo contrario.
+**¿Qué se considera cobertura?**
+
+Un elemento de escenografía proporciona cobertura si su altura supera al menos la mitad de la miniatura que busca protegerse.
+
+**Cobertura**
+
+La unidad obtiene **-1 en el dado de salvación** frente a ataques a distancia.
+
+Si la unidad en cobertura es cargada, ambas unidades retiran **-1 dado de ataque** en sus tiradas de CaC, salvo que una regla indique lo contrario.
+
+**Atravesar coberturas**
+
+Una unidad puede atravesar un elemento de escenografía si es físicamente más alta que él. Los huecos y ventanas pueden atravesarse libremente, siempre que tengan un tamaño razonable para que pase la miniatura — esto se resuelve por sentido común entre los jugadores.
 
 **Campo de visión**
 
-Si no se ve ninguna parte de la miniatura objetivo, **no puede ser atacada** a distancia ni en cuerpo a cuerpo, salvo que una regla indique lo contrario.
+Si el atacante puede ver la cabeza de la miniatura objetivo, esta se considera visible y puede ser atacada, beneficiándose igualmente de la cobertura. Si no puede verse ninguna parte de la miniatura, no puede ser atacada a distancia ni en CaC, salvo que una regla indique lo contrario.
+
+**Aclaraciones**
 
 Las miniaturas aliadas o enemigas que bloquean completamente la visión actúan como obstáculos a efectos de línea de visión.
 
 Si una unidad es parcialmente visible pero no está en contacto con ninguna cobertura, no se aplican bonificaciones defensivas.
 
-**Coberturas - aclaraciones**
-
 - **Vehículos, Monstruos y Titanes** no se benefician de ningún tipo de cobertura. Sus dimensiones impiden que cualquier obstáculo les proporcione protección efectiva.
-- **Las coberturas** pueden atravesarse con movimiento normal, siempre que la unidad sea la mitad de alta que el obstáculo o ventanas.
 
 # Disparar a unidades trabadas
 
@@ -884,12 +901,12 @@ Contra el tipo de unidad indicado, los resultados de X+ cuentan como **impactos 
 
 ### 10. Ignora coberturas
 
-El objetivo **no puede beneficiarse** de ningún bono defensivo por cobertura parcial.
+El objetivo **no puede beneficiarse** de ningún bono defensivo por cobertura.
 **Momento:** Disparo
 
 ### 11. Disparo parabólico
 
-Esta arma puede disparar sin necesidad de línea de visión. El jugador marca un punto objetivo dentro del alcance y tira 1D6:
+Esta arma puede disparar sin necesidad de línea de visión. El jugador marca un punto objetivo dentro del alcance del arma y tira 1D6:
 
 - **5–6 — Diana:** el ataque impacta exactamente en el punto marcado. La unidad objetivo no puede usar salvación contra este ataque, ignorando también cualquier bonificación de cobertura que tenga.
 - **1–4 — Fallo de precisión:** el ataque impacta igualmente en el punto marcado, pero la unidad objetivo sí puede realizar tirada de salvación normalmente. Las coberturas aplican con normalidad.
@@ -898,7 +915,7 @@ Esta arma puede disparar sin necesidad de línea de visión. El jugador marca un
 
 ### 12. Inestable
 
-Una vez acabado el ataque, lanza 1D6. Si el resultado es 1 o 2, la unidad que porta el arma recibe los mismos puntos de daño que ha recibido el objetivo. Si el objetivo no recibe ningún impacto, esta tampoco recibe nada.
+Este arma es inestable, una vez acabado el ataque al objetivo, debe lanzar un 1D6, si el resultado es 1 o 2, la unidad que porta este arma recibe los mismos puntos de daño que ha recibido el objetivo, si el objetivo no recibe ningún impacto, esta tampoco recibe nada.
 **Momento:** Disparo
 
 ### 13. Directo
