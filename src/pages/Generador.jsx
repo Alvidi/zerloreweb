@@ -24,12 +24,12 @@ function GameModeIcon({ mode }) {
   if (mode === 'escuadra') {
     return (
       <svg viewBox="0 0 64 40" aria-hidden="true">
-        <circle className="game-mode-icon-stroke" cx="20" cy="13" r="6" />
-        <circle className="game-mode-icon-stroke" cx="32" cy="9" r="7" />
-        <circle className="game-mode-icon-stroke" cx="44" cy="13" r="6" />
-        <path className="game-mode-icon-stroke" d="M12 32c0-6 4.4-10 8-10s8 4 8 10" />
-        <path className="game-mode-icon-stroke" d="M22 34c0-8 5.2-13 10-13s10 5 10 13" />
-        <path className="game-mode-icon-stroke" d="M36 32c0-6 4.4-10 8-10s8 4 8 10" />
+        <circle className="game-mode-icon-stroke" cx="15" cy="15" r="5" />
+        <circle className="game-mode-icon-stroke" cx="49" cy="15" r="5" />
+        <path className="game-mode-icon-stroke" d="M8 33c0-5.4 3.2-8.5 7-8.5s7 3.1 7 8.5" />
+        <path className="game-mode-icon-stroke" d="M42 33c0-5.4 3.2-8.5 7-8.5s7 3.1 7 8.5" />
+        <circle className="game-mode-icon-stroke" cx="32" cy="10" r="7" />
+        <path className="game-mode-icon-stroke" d="M22 35c0-7.6 4.8-12 10-12s10 4.4 10 12" />
       </svg>
     )
   }
