@@ -202,8 +202,6 @@ To climb:
 1. The unit must move until its base touches the base of the obstacle.
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
-**Cover** (windows, low barricades, small obstacles) can be crossed with normal movement as long as the unit is **taller than the obstacle**.
-
 
 ## Sprint
 
@@ -404,6 +402,10 @@ Monsters follow the same general melee rules, except for their special rules.
 
 Titans follow the same general melee rules, except for their special rules.
 
+## Shooting at Locked Units
+
+A unit locked in melee combat **cannot be attacked at range** by units outside the combat, unless an ability states otherwise.
+
 ---
 
 # Special Squad Rules
@@ -471,15 +473,11 @@ If the attacker can see the target miniature's head, it is considered visible an
 
 **Clarifications**
 
+- **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection.
+
 Friendly or enemy miniatures that completely block the view act as obstacles for line of sight purposes.
 
 If a unit is partially visible but not in contact with any cover, no defensive bonuses apply.
-
-- **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection.
-
-# Shooting at Locked Units
-
-A unit locked in melee combat **cannot be attacked at range**, unless an ability states otherwise.
 
 ---
 
@@ -494,18 +492,16 @@ The main states in ZeroLore are:
 - **Ready**
 - **Retreat**
 - **Out of Control**
-- **Locked**
+- Locked
 
 ## Ready Unit
 
 A unit enters the **Ready** state when it uses the *Ready* action during its activation. *(explained in the section: Unit Actions)*
-
 The Ready state is shown by placing the **shield token** next to the miniature. It is removed at the end of the turn.
 
 ## Retreating Unit
 
 A unit enters **Retreat** when it declares the *Retreat* action. *(explained in the section: Unit Actions)*
-
 The Retreat state is shown by placing the **retreat token** (arrow) next to the miniature. It is removed when the unit regroups or reaches a friendly command post.
 
 ## Locked Units
@@ -553,9 +549,6 @@ Units in reserve have not yet entered the battlefield. They are deployed during 
 
 Before the game begins, players deploy their armies. Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying:
 
-- **Skirmish Mode:** one miniature at a time.
-- **Squad Mode:** one squad at a time.
-
 ---
 
 # Unit Types
@@ -602,7 +595,8 @@ Characteristics:
 
 ### When a vehicle is destroyed
 
-An **explosion** occurs that affects all units within **3"**. Affected units take **1D6 automatic damage** that cannot be saved.
+- An **explosion** occurs that affects all units within **3"**.
+- Affected units take **1D6 automatic damage** that cannot be saved.
 
 
 ## 4. Monsters
@@ -711,15 +705,23 @@ Represents the unit's reaction speed.
 
 ### Specialty
 
-Includes special behaviours, design clarifications, or unique rules specific to the unit. These rules apply whenever the unit is in play, unless stated otherwise.
+Includes special behaviours, design clarifications, or unique rules specific to the unit.
+
+These rules apply whenever the unit is in play, unless stated otherwise.
 
 ### Squads
 
-Indicates the **minimum and maximum number of miniatures** the unit may include when playing in squad mode. This value is not used in skirmish mode.
+Indicates the **minimum and maximum number of miniatures** the unit may include when playing in squad mode.
+
+This value is not used in skirmish mode.
 
 ### Value
 
-Represents the unit's **point cost**. Used to balance matchups, determine army size and composition, and calculate scoring when multiple units contest the same command post.
+Represents the unit's **point cost**.
+
+- It is used to balance matchups.
+- It determines army size and composition.
+- It is also used to calculate scoring when multiple units contest the same command post.
 
 
 ### Weapon Equipment
@@ -799,16 +801,16 @@ Additional point cost for equipping the weapon, if applicable.
 
 In ZeroLore you will see values expressed as 4+, 5+, 3+, etc. This means the minimum result needed on 1D6 for something to happen.
 
-- **4+** → need a 4, 5, or 6 → 50%
-- **5+** → need a 5 or 6 → ~33%
-- **3+** → need a 3, 4, 5, or 6 → ~67%
+- **4+** → need a 4, 5, or 6 → 3 out of 6 dice → 50%
+- **5+** → need a 5 or 6 → 2 out of 6 → ~33%
+- **3+** → need a 3, 4, 5, or 6 → 4 out of 6 → ~67%
 
-When a rule says **+1 to the Hit value**, the number needed goes up (worse for the attacker). **-1 to Hit** is an advantage. This applies equally to Saves.
+When a rule says **+1 to the Hit value**, the number needed goes up and it becomes worse for the attacker. If your weapon hits on 4+ and you receive +1, you now need 5+. Conversely, **-1 to the Hit value** is an advantage: if you hit on 4+ and gain -1, you now hit on 3+. This applies equally to Saves.
 
-Limits:
+To avoid situations of immortality or infallibility, Save and Hit modifiers have the following limits:
 
-- **Maximum Save:** no unit can ever need more than 6+ to save. A result of 1 always fails the save.
-- **Maximum Hit:** no unit can ever need more than 6+ to hit. A result of 6 always hits.
+- **Maximum Save:** no unit can ever need more than 6+ to save, regardless of accumulated modifiers. A result of 1 always fails the save.
+- **Maximum Hit:** no unit can ever need more than 6+ to hit, regardless of accumulated modifiers. A result of 6 always hits.
 
 ## Weapon and Unit Abilities
 
@@ -854,7 +856,7 @@ When the target is at **half or less of the weapon's range**, it gains **+X Atta
 **Moment:** Shooting
 
 ### 4. Gunslinger
-The unit may fire this weapon even if **locked in melee combat**, but only against the unit it is fighting.
+The unit may fire this weapon even if **locked in melee combat**, but only against the unit it is fighting in melee combat.
 **Moment:** Shooting
 
 ### 5. Explosive
@@ -946,7 +948,7 @@ The chosen unit gains initiative in melee combat this turn, ignoring the opponen
 The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes on that same objective.
 
 ### 6. Immediate Reaction
-This unit cannot be charged, nor can it charge any enemy unit during this turn.
+This unit cannot be charged, nor can it charge any enemy unit.
 
 ### 7. Overcharged
 If this unit fails a charge during this turn, it may immediately repeat it once.

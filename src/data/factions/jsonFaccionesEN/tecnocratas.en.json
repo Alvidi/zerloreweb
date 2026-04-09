@@ -474,7 +474,19 @@
             "valor_extra": 3
           }
         ],
-        "cuerpo_a_cuerpo": []
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hydraulic Strike",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
       }
     },
     {

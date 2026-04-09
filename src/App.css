@@ -5190,6 +5190,19 @@ mark {
     page-break-after: avoid;
   }
 
+  .rules-html h1 + *,
+  .rules-html h2 + *,
+  .rules-html h3 + * {
+    break-before: avoid-page;
+    page-break-before: avoid;
+  }
+
+  .rules-html p,
+  .rules-html li {
+    orphans: 3;
+    widows: 3;
+  }
+
   .rules-html table,
   .rules-html .rules-table-scroll {
     overflow: visible !important;

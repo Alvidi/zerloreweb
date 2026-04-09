@@ -155,6 +155,22 @@ const isMissionMetaParagraph = (node) => {
   ].some((label) => normalized.startsWith(label))
 }
 
+const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
+
+const isRulesPdfKeepWithNextNode = (node) =>
+  node?.nodeType === 1 && RULES_PDF_KEEP_WITH_NEXT_TAGS.has(node.tagName)
+
+const getSafeRulesPdfSplitCount = (nodes, candidateCount) => {
+  if (candidateCount >= nodes.length) return candidateCount
+
+  let safeCount = candidateCount
+  while (safeCount > 1 && isRulesPdfKeepWithNextNode(nodes[safeCount - 1])) {
+    safeCount -= 1
+  }
+
+  return safeCount
+}
+
 const TOKEN_DEFINITIONS = [
   { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
   { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
@@ -1396,49 +1412,76 @@ function Reglamento() {
           await renderSheetToPdfPage(captureTarget)
         }
       } else {
-        const canvas = await html2canvas(captureTarget, {
-          backgroundColor: '#ffffff',
-          scale: captureScale,
-          useCORS: true,
-          windowWidth: captureTarget.scrollWidth,
-        })
+        const rulesHtmlRoot = captureTarget.querySelector('.rules-html')
+        const contentNodes = Array.from(rulesHtmlRoot?.childNodes || []).filter(
+          (node) => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim(),
+        )
 
-        const pxPerMm = canvas.width / contentWidthMm
-        const sliceHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm))
-        let offsetY = 0
+        if (rulesHtmlRoot && contentNodes.length) {
+          const pxPerMm = captureTarget.scrollWidth / contentWidthMm
+          const maxSheetHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm) - 12)
+          const builtSheets = []
 
-        while (offsetY < canvas.height) {
-          doc.addPage()
-          const currentSliceHeightPx = Math.min(sliceHeightPx, canvas.height - offsetY)
-          const sliceCanvas = document.createElement('canvas')
-          sliceCanvas.width = canvas.width
-          sliceCanvas.height = currentSliceHeightPx
-          const sliceCtx = sliceCanvas.getContext('2d')
-          sliceCtx.fillStyle = '#ffffff'
-          sliceCtx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height)
-          sliceCtx.drawImage(
-            canvas,
-            0,
-            offsetY,
-            canvas.width,
-            currentSliceHeightPx,
-            0,
-            0,
-            canvas.width,
-            currentSliceHeightPx,
-          )
-          const sliceHeightMm = currentSliceHeightPx / pxPerMm
-          doc.addImage(
-            sliceCanvas.toDataURL('image/png'),
-            'PNG',
-            margin,
-            margin,
-            contentWidthMm,
-            sliceHeightMm,
-            undefined,
-            'FAST',
-          )
-          offsetY += currentSliceHeightPx
+          const buildRulesSheet = (nodes) => {
+            const sheet = document.createElement('div')
+            sheet.className = 'rules-pdf-sheet'
+
+            const html = document.createElement('div')
+            html.className = 'rules-html'
+            nodes.forEach((node) => {
+              html.appendChild(node.cloneNode(true))
+            })
+
+            sheet.appendChild(html)
+            return sheet
+          }
+
+          let remainingNodes = [...contentNodes]
+
+          while (remainingNodes.length) {
+            let bestSheet = null
+            let bestCount = 0
+
+            for (let count = 1; count <= remainingNodes.length; count += 1) {
+              const testSheet = buildRulesSheet(remainingNodes.slice(0, count))
+              captureRoot.appendChild(testSheet)
+              const fits = testSheet.scrollHeight <= maxSheetHeightPx
+
+              if (fits) {
+                bestSheet?.remove()
+                bestSheet = testSheet
+                bestCount = count
+              } else {
+                testSheet.remove()
+                break
+              }
+            }
+
+            if (!bestSheet) {
+              bestCount = 1
+              bestSheet = buildRulesSheet(remainingNodes.slice(0, 1))
+              captureRoot.appendChild(bestSheet)
+            } else {
+              const safeCount = getSafeRulesPdfSplitCount(remainingNodes, bestCount)
+              if (safeCount !== bestCount) {
+                bestSheet.remove()
+                bestCount = safeCount
+                bestSheet = buildRulesSheet(remainingNodes.slice(0, bestCount))
+                captureRoot.appendChild(bestSheet)
+              }
+            }
+
+            builtSheets.push(bestSheet)
+            remainingNodes = remainingNodes.slice(bestCount)
+          }
+
+          for (const sheet of builtSheets) {
+            await waitForImages(sheet)
+            await renderSheetToPdfPage(sheet)
+          }
+        } else {
+          await waitForImages(captureTarget)
+          await renderSheetToPdfPage(captureTarget)
         }
       }
 

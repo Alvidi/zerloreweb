@@ -202,8 +202,6 @@ Para trepar:
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana.
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 
-Las **coberturas** (ventanas, barricadas bajas, obstáculos pequeños) pueden atravesarse con movimiento normal siempre que la unidad sea **más alta que el obstáculo**.
-
 
 ## Carrera
 
@@ -404,6 +402,10 @@ Los monstruos siguen las mismas reglas generales de combate cuerpo a cuerpo, sal
 
 Los Titanes siguen las mismas reglas generales de combate cuerpo a cuerpo, salvo por sus reglas especiales.
 
+## Disparar a unidades trabadas
+
+Una unidad trabada en combate cuerpo a cuerpo **no puede ser atacada a distancia** por unidades externas al combate, salvo que una habilidad indique lo contrario.
+
 ---
 
 # Reglas especiales de escuadras
@@ -471,15 +473,11 @@ Si el atacante puede ver la cabeza de la miniatura objetivo, esta se considera v
 
 **Aclaraciones**
 
+**Vehículos, Monstruos y Titanes** no se benefician de ningún tipo de cobertura. Sus dimensiones impiden que cualquier obstáculo les proporcione protección efectiva.
+
 Las miniaturas aliadas o enemigas que bloquean completamente la visión actúan como obstáculos a efectos de línea de visión.
 
 Si una unidad es parcialmente visible pero no está en contacto con ninguna cobertura, no se aplican bonificaciones defensivas.
-
-- **Vehículos, Monstruos y Titanes** no se benefician de ningún tipo de cobertura. Sus dimensiones impiden que cualquier obstáculo les proporcione protección efectiva.
-
-# Disparar a unidades trabadas
-
-Una unidad trabada en combate cuerpo a cuerpo **no puede ser atacada a distancia**, salvo que una habilidad indique lo contrario.
 
 ---
 
@@ -494,18 +492,16 @@ Los estados principales en ZeroLore son:
 - **Preparado**
 - **Retirada**
 - **Descontrol**
-- **Trabada**
+- Trabada
 
 ## Unidad preparada
 
 Una unidad entra en estado **Preparado** cuando utiliza la acción _Preparado_ durante su activación. _(explicado en la sección: acciones de unidades)_
-
 El estado Preparado se indica colocando el **token de escudo** junto a la miniatura. Se retira al final del turno.
 
 ## Unidad en retirada
 
 Una unidad entra en **Retirada** cuando declara la acción _Retirarse_. _(explicado en la sección: acciones de unidades)_
-
 El estado de Retirada se indica colocando el **token de retirada** (flecha) junto a la miniatura. Se retira cuando la unidad se recompone o alcanza un puesto de mando aliado.
 
 ## Unidades trabadas
@@ -553,9 +549,6 @@ Las unidades en reserva aún no han entrado al campo de batalla. Se despliegan d
 
 Antes de comenzar la partida los jugadores despliegan sus ejércitos. Cada jugador tira **1D6**; el resultado más alto despliega primero. A continuación los jugadores se alternan desplegando:
 
-- **Modo escaramuza:** de una miniatura en una.
-- **Modo escuadras:** de una escuadra en una.
-
 ---
 
 # Tipos de unidad
@@ -602,7 +595,8 @@ Características:
 
 ### Cuando un vehículo es destruido
 
-Se produce una **explosión** que afecta a todas las unidades a **3"**. Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado.
+- Se produce una **explosión** que afecta a todas las unidades a **3"**.
+- Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado.
 
 
 ## 4. Monstruos
@@ -711,15 +705,23 @@ Representa la rapidez de reacción de la unidad.
 
 ### Especialidad
 
-Incluye comportamientos especiales, aclaraciones de diseño o reglas únicas propias de la unidad. Estas reglas se aplican siempre que la unidad esté en juego, salvo que se indique lo contrario.
+Incluye comportamientos especiales, aclaraciones de diseño o reglas únicas propias de la unidad.
+
+Estas reglas se aplican siempre que la unidad esté en juego, salvo que se indique lo contrario.
 
 ### Escuadras
 
-Indica el **número mínimo y máximo de miniaturas** que puede incluir la unidad cuando se juega en modo escuadras. Este valor no se utiliza en modo escaramuza.
+Indica el **número mínimo y máximo de miniaturas** que puede incluir la unidad cuando se juega en modo escuadras.
+
+Este valor no se utiliza en modo escaramuza.
 
 ### Valor
 
-Representa el **coste en puntos** de la unidad. Se utiliza para equilibrar enfrentamientos, determinar el tamaño y composición de los ejércitos, y calcular la puntuación cuando varias unidades disputan un mismo puesto de mando.
+Representa el **coste en puntos** de la unidad.
+
+- Se utiliza para equilibrar enfrentamientos.
+- Determina el tamaño y composición de los ejércitos.
+- También se emplea para calcular la puntuación cuando varias unidades disputan un mismo puesto de mando.
 
 
 ### Equipamiento de armas
@@ -806,16 +808,16 @@ Coste adicional por equipar el arma, si aplica.
 
 En ZeroLore verás valores expresados como 4+, 5+, 3+, etc. Esto significa el resultado mínimo necesario en 1D6 para que algo ocurra.
 
-- **4+** → necesitas sacar 4, 5 o 6 → 50%
-- **5+** → necesitas sacar 5 o 6 → ~33%
-- **3+** → necesitas sacar 3, 4, 5 o 6 → ~67%
+- **4+** → necesitas sacar 4, 5 o 6 → 3 de cada 6 dados → 50%
+- **5+** → necesitas sacar 5 o 6 → 2 de cada 6 → ~33%
+- **3+** → necesitas sacar 3, 4, 5 o 6 → 4 de cada 6 → ~67%
 
-Cuando una regla dice **+1 al valor de Impactos**, el número necesario sube (es peor para el atacante). **-1 al valor de Impactos** es una ventaja. Esto aplica igual a Salvaciones.
+Cuando una regla dice **+1 al valor de Impactos**, el número necesario sube — es peor para el atacante. Si tu arma impacta con 4+ y recibes +1, ahora necesitas 5+. Al contrario, **-1 al valor de Impactos** es una ventaja: si impactas con 4+ y obtienes -1, ahora impactas con 3+. Esto aplica igual a Salvaciones.
 
-Límites:
+Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Salvación e Impactos tienen los siguientes límites:
 
-- **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar. Un resultado de 1 siempre falla la salvación.
-- **Impactos máximos:** ninguna unidad puede llegar a necesitar más de 6+ para impactar. Un resultado de 6 siempre impacta.
+- **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
+- **Impactos máximos:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
 
 ## Habilidades de armas y unidades
 
@@ -865,12 +867,12 @@ Cuando el objetivo se encuentra a **mitad o menos del alcance** del arma, esta s
 
 ### 4. Pistolero
 
-La unidad puede disparar esta arma incluso si está **trabada en combate cuerpo a cuerpo**, pero solo contra la unidad con la que combate.
+La unidad puede disparar esta arma incluso si está **trabada en combate cuerpo a cuerpo**, pero solo contra la unidad con la que combate cuerpo a cuerpo.
 **Momento:** Disparo
 
 ### 5. Explosiva
 
-El atacante declara un punto de impacto dentro del alcance y se resuelve el ataque normalmente.
+El atacante declara un punto de impacto dentro del alcance del arma y se resuelve el ataque normalmente.
 
 - **Modo escaramuza:** todas las unidades enemigas cuya peana esté a 3" o menos del punto de impacto reciben el mismo daño de forma independiente.
 - **Modo escuadras:** solo afecta a la escuadra objetivo, que recibe el daño total de unidades que haya alcanzado dentro de la escuadra. El rival distribuye ese daño entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
@@ -974,7 +976,7 @@ La unidad o escuadra designada controla automáticamente el objetivo en el que s
 
 ### 6. Reacción inmediata
 
-Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga durante este turno.
+Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga.
 
 ### 7. Más que cargado
 

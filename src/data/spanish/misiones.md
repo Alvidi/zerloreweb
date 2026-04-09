@@ -34,7 +34,7 @@ Los puestos de mando se dividen entre los jugadores antes de la partida — cada
 
 **Puntuación:** Al final de cada turno, cada jugador suma el valor de los puestos de mando que controla.
 
-**Victoria:** el jugador con más puntos al final de la partida gana.
+**Victoria:** El jugador con más puntos al final de la partida gana.
 
 ---
 
@@ -46,7 +46,7 @@ Los puestos de mando se despliegan de forma normal. El objetivo no es el territo
 
 **Puntuación:** Al final de cada turno, cada jugador suma el valor en puntos de las unidades enemigas destruidas durante ese turno.
 
-**Victoria:** el jugador con más puntos al final de la partida gana. En caso de empate, gana quien controle más puestos de mando.
+**Victoria:** El jugador con más puntos al final de la partida gana. En caso de empate, gana quien controle más puestos de mando.
 
 ---
 
@@ -58,9 +58,9 @@ Cada jugador tiene asignado uno de sus puestos de mando como su **Cuartel Genera
 
 **Puntuación:** Al final de cada turno, cada jugador puntúa por los puestos que controla de forma normal.
 
-**Victoria inmediata:** si un jugador captura el Cuartel General enemigo, gana la partida en ese momento, independientemente de la puntuación acumulada.
+**Victoria inmediata:** Si un jugador captura el Cuartel General enemigo, gana la partida en ese momento, independientemente de la puntuación acumulada.
 
-**Victoria normal:** si ningún CG cae, gana quien más puntos tenga al final de la partida.
+**Victoria normal:** Si ningún CG cae, gana quien más puntos tenga al final de la partida.
 
 ---
 
@@ -72,7 +72,7 @@ Los puestos de mando se despliegan de forma normal. Cada jugador tiene asignado 
 
 **Puntuación:** Al final de cada turno cada jugador suma los puntos de los puestos que controla, más el valor en puntos de las unidades enemigas destruidas ese turno.
 
-**Victoria inmediata:** si un jugador captura el Cuartel General enemigo, gana en ese momento independientemente de la puntuación.
+**Victoria inmediata:** Si un jugador captura el Cuartel General enemigo, gana en ese momento independientemente de la puntuación.
 
 **Victoria normal:** Si ningún CG cae, gana quien más puntos tenga al final de la partida.
 
@@ -84,9 +84,9 @@ _Uno ataca. Otro resiste._
 
 Antes de la partida los jugadores deciden quién es el **Atacante** y quién el **Defensor**, o lo tiran a dado. El Defensor coloca todos los puestos de mando, cada uno debe tener una separación de 10” y despliega primero desde ellos X unidades. El Atacante solo tiene un puesto de mando — despliega ya todo su ejército directamente en su puesto de mando.
 
-**Victoria del Atacante:** si al final de la partida controla más puestos que el Defensor, gana.
+**Victoria del Atacante:** Si al final de la partida controla más puestos que el Defensor, gana.
 
-**Victoria del Defensor:** si termina la partida con igual o más puestos que el Atacante, gana.
+**Victoria del Defensor:** Si termina la partida con igual o más puestos que el Atacante, gana.
 
 ---
 
@@ -96,9 +96,9 @@ _El centro decide todo, pero nadie lo controla fácilmente._
 
 Los puestos de mando se despliegan de forma normal y puntúan con normalidad al final de cada turno. Además, una **Reliquia** se coloca en el un punto donde acuerden los jugadores en la mesa al inicio de la partida.
 
-**Coger la Reliquia:** cualquier unidad de Línea, Élite o Héroe que se mueva hasta la Reliquia puede portarla. El portador solo puede usar la acción de **moverse**; solo podrá atacar si es cargado en combate cuerpo a cuerpo.
+**Coger la Reliquia:** Cualquier unidad de Línea, Élite o Héroe que se mueva hasta la Reliquia puede portarla. El portador solo puede usar la acción de moverse — solo podrá atacar si es cargado en combate cuerpo a cuerpo.
 
-**Si el portador muere o entra en retirada:** la Reliquia vuelve a su posición acordada en la mesa. Cualquier otra unidad puede recogerla en su siguiente activación.
+**Si el portador muere o entra en retirada:** La Reliquia vuelve a su posición acordada en la mesa. Cualquier otra unidad puede recogerla en su siguiente activación.
 
 **Puntuación extra:** Al final de cada turno, el jugador que lleve la Reliquia a un puesto de mando suma X **puntos adicionales** a su puntuación, independientemente de los puestos. La reliquia vuelve a la posición acordada por los jugadores.
 
