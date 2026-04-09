@@ -20,63 +20,30 @@ import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
+import doctrineGarrotazoEs from '../images/tokens/doctrines/es/garrotazo.svg'
+import doctrineApuntadoEs from '../images/tokens/doctrines/es/apuntado.svg'
+import doctrineFrenesiEs from '../images/tokens/doctrines/es/frenesi.svg'
+import doctrineAgilidadEnCombateEs from '../images/tokens/doctrines/es/agilidad-en-combate.svg'
+import doctrineNuestraEsLaVictoriaEs from '../images/tokens/doctrines/es/nuestra-es-la-victoria.svg'
+import doctrineReaccionInmediataEs from '../images/tokens/doctrines/es/reaccion-inmediata.svg'
+import doctrineMasQueCargadoEs from '../images/tokens/doctrines/es/mas-que-cargado.svg'
+import doctrineUnaNuevaOportunidadEs from '../images/tokens/doctrines/es/una-nueva-oportunidad.svg'
+import doctrineCombateAMuerteEs from '../images/tokens/doctrines/es/combate-a-muerte.svg'
+import doctrineGarrotazoEn from '../images/tokens/doctrines/en/garrotazo.svg'
+import doctrineApuntadoEn from '../images/tokens/doctrines/en/apuntado.svg'
+import doctrineFrenesiEn from '../images/tokens/doctrines/en/frenesi.svg'
+import doctrineAgilidadEnCombateEn from '../images/tokens/doctrines/en/agilidad-en-combate.svg'
+import doctrineNuestraEsLaVictoriaEn from '../images/tokens/doctrines/en/nuestra-es-la-victoria.svg'
+import doctrineReaccionInmediataEn from '../images/tokens/doctrines/en/reaccion-inmediata.svg'
+import doctrineMasQueCargadoEn from '../images/tokens/doctrines/en/mas-que-cargado.svg'
+import doctrineUnaNuevaOportunidadEn from '../images/tokens/doctrines/en/una-nueva-oportunidad.svg'
+import doctrineCombateAMuerteEn from '../images/tokens/doctrines/en/combate-a-muerte.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const DOCTRINE_TOKEN_DIAMETER_MM = 32
-
-const DOCTRINE_ICON_PATHS = {
-  garrotazo: ['M5 19L19 5', 'M7 7L10 10', 'M14 14L17 17'],
-  apuntado: ['M12 3V6', 'M12 18V21', 'M3 12H6', 'M18 12H21'],
-  frenesi: ['M4 12H20', 'M14 6L20 12L14 18'],
-  'agilidad-en-combate': ['M5 16L10 11L13 14L19 8', 'M16 8H19V11'],
-  'nuestra-es-la-victoria': ['M12 4L14 9L20 9L15 13L17 19L12 15L7 19L9 13L4 9L10 9Z'],
-  'reaccion-inmediata': ['M5 12H13', 'M10 8L14 12L10 16', 'M11 6H19', 'M16 2L20 6L16 10'],
-  'mas-que-cargado': ['M6 12L10 16L18 8', 'M6 7L10 11L18 3'],
-  'una-nueva-oportunidad': ['M17 7V3L21 7L17 11V7H9A4 4 0 0 0 9 15H11', 'M7 17V21L3 17L7 13V17H15A4 4 0 0 0 15 9H13'],
-  'combate-a-muerte': ['M7 6L17 18', 'M17 6L7 18', 'M9 4L7 6L5 4', 'M15 20L17 18L19 20'],
-}
-
-const DOCTRINE_ICON_LABELS = {
-  garrotazo: { es: 'GARROTAZO', en: 'BLUDGEON' },
-  apuntado: { es: 'APUNTADO', en: 'AIMED SHOT' },
-  frenesi: { es: 'FRENESI', en: 'FRENZY' },
-  'agilidad-en-combate': { es: 'AGILIDAD COMBATE', en: 'COMBAT AGILITY' },
-  'nuestra-es-la-victoria': { es: 'NUESTRA VICTORIA', en: 'VICTORY IS OURS' },
-  'reaccion-inmediata': { es: 'REACCION INMEDIATA', en: 'IMMEDIATE REACTION' },
-  'mas-que-cargado': { es: 'MAS QUE CARGADO', en: 'FULLY CHARGED' },
-  'una-nueva-oportunidad': { es: 'NUEVA OPORTUNIDAD', en: 'ONE MORE CHANCE' },
-  'combate-a-muerte': { es: 'COMBATE A MUERTE', en: 'FIGHT TO THE DEATH' },
-}
-
-const DOCTRINE_ICON_TRANSFORMS = {
-  default: { tx: 4.95, ty: 5.35, scale: 0.58 },
-  'reaccion-inmediata': { tx: 4.75, ty: 6.45, scale: 0.56 },
-  'mas-que-cargado': { tx: 4.9, ty: 6.3, scale: 0.56 },
-}
-
-const buildDoctrineTokenImage = (id, locale = 'es') => {
-  const paths = DOCTRINE_ICON_PATHS[id]
-  if (!paths) return ''
-  const iconTransform = DOCTRINE_ICON_TRANSFORMS[id] || DOCTRINE_ICON_TRANSFORMS.default
-  const labelSet = DOCTRINE_ICON_LABELS[id] || {}
-  const label = labelSet[locale] || labelSet.es || ''
-  const labelFontSize = label.length > 16 ? 1.52 : label.length > 13 ? 1.72 : 1.92
-  const labelLetterSpacing = label.length > 16 ? 0.03 : label.length > 13 ? 0.07 : 0.11
-  const pathMarkup = paths
-    .map((d) => `<path d="${d}" fill="none" stroke="#f4f4f4" stroke-width="0.62" stroke-linecap="round" stroke-linejoin="round" />`)
-    .join('')
-  const extraMarkup = id === 'apuntado'
-    ? '<circle cx="12" cy="12" r="7" fill="none" stroke="#f4f4f4" stroke-width="0.62" /><circle cx="12" cy="12" r="1.05" fill="#f4f4f4" />'
-    : ''
-  const labelMarkup = label
-    ? `<text fill="#dcffd8" font-size="${labelFontSize}" font-family="Arial, sans-serif" font-weight="500" letter-spacing="${labelLetterSpacing}"><textPath href="#arc" startOffset="50%" text-anchor="middle">${label}</textPath></text>`
-    : ''
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 24 24"><defs><radialGradient id="bgGlow" cx="50%" cy="50%" r="56%"><stop offset="0%" stop-color="#0f2416"/><stop offset="58%" stop-color="#0d1a11"/><stop offset="100%" stop-color="#09110c"/></radialGradient><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c8ffb9"/><stop offset="52%" stop-color="#7bdb73"/><stop offset="100%" stop-color="#2d8f4a"/></linearGradient><radialGradient id="coreGrad" cx="50%" cy="45%" r="62%"><stop offset="0%" stop-color="#e9ffe0"/><stop offset="44%" stop-color="#9cf089"/><stop offset="100%" stop-color="#2f8d48"/></radialGradient><path id="arc" d="M4.35 12.45A7.65 7.65 0 0 1 19.65 12.45" /></defs><circle cx="12" cy="12" r="11" fill="url(#bgGlow)" /><circle cx="12" cy="12" r="10.4" fill="none" stroke="#ecffe2" stroke-opacity="0.2" stroke-width="0.14" /><circle cx="12" cy="12" r="9.45" fill="none" stroke="url(#ringGrad)" stroke-width="0.66" /><circle cx="12" cy="12" r="8.8" fill="none" stroke="#cfffbe" stroke-opacity="0.34" stroke-width="0.16" /><circle cx="12" cy="12" r="7.25" fill="none" stroke="#cfffbe" stroke-opacity="0.24" stroke-width="0.11" stroke-dasharray="0.22 0.34" /><circle cx="12" cy="12" r="5.75" fill="url(#coreGrad)" fill-opacity="0.24" /><circle cx="12" cy="12" r="4.2" fill="#efffe8" fill-opacity="0.08" />${labelMarkup}<g transform="translate(${iconTransform.tx} ${iconTransform.ty}) scale(${iconTransform.scale})">${extraMarkup}${pathMarkup}</g></svg>`
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
-}
 
 const DOCTRINE_TOKENS = [
   { id: 'garrotazo', labelKey: 'rules.tokens.types.doctrineGarrotazo' },
@@ -89,6 +56,18 @@ const DOCTRINE_TOKENS = [
   { id: 'una-nueva-oportunidad', labelKey: 'rules.tokens.types.doctrineUnaNuevaOportunidad' },
   { id: 'combate-a-muerte', labelKey: 'rules.tokens.types.doctrineCombateAMuerte' },
 ]
+
+const DOCTRINE_TOKEN_IMAGES = {
+  garrotazo: { es: doctrineGarrotazoEs, en: doctrineGarrotazoEn },
+  apuntado: { es: doctrineApuntadoEs, en: doctrineApuntadoEn },
+  frenesi: { es: doctrineFrenesiEs, en: doctrineFrenesiEn },
+  'agilidad-en-combate': { es: doctrineAgilidadEnCombateEs, en: doctrineAgilidadEnCombateEn },
+  'nuestra-es-la-victoria': { es: doctrineNuestraEsLaVictoriaEs, en: doctrineNuestraEsLaVictoriaEn },
+  'reaccion-inmediata': { es: doctrineReaccionInmediataEs, en: doctrineReaccionInmediataEn },
+  'mas-que-cargado': { es: doctrineMasQueCargadoEs, en: doctrineMasQueCargadoEn },
+  'una-nueva-oportunidad': { es: doctrineUnaNuevaOportunidadEs, en: doctrineUnaNuevaOportunidadEn },
+  'combate-a-muerte': { es: doctrineCombateAMuerteEs, en: doctrineCombateAMuerteEn },
+}
 
 const DOCTRINE_GALLERY_LABELS = {
   garrotazo: { es: 'Garrotazo', en: 'Clubbing Blow' },
@@ -195,9 +174,9 @@ const TOKEN_DEFINITIONS = [
     labelKey: token.labelKey,
     diameterMm: DOCTRINE_TOKEN_DIAMETER_MM,
     previewSize: 'medium',
-    imageSrc: buildDoctrineTokenImage(token.id, 'es'),
-    imageSrcEs: buildDoctrineTokenImage(token.id, 'es'),
-    imageSrcEn: buildDoctrineTokenImage(token.id, 'en'),
+    imageSrc: DOCTRINE_TOKEN_IMAGES[token.id]?.es || '',
+    imageSrcEs: DOCTRINE_TOKEN_IMAGES[token.id]?.es || '',
+    imageSrcEn: DOCTRINE_TOKEN_IMAGES[token.id]?.en || '',
   })),
 ]
 
@@ -260,6 +239,7 @@ function Reglamento() {
     return marked(activeMarkdown)
   }, [activeMarkdown, isTokensMode])
   const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
+  const printCoverCreditLabel = lang === 'en' ? 'by alvidi' : 'por alvidi'
 
   const { renderedHtml, tocItems, documentHeading } = useMemo(() => {
     if (isTokensMode) {
@@ -363,7 +343,7 @@ function Reglamento() {
 
           const image = doc.createElement('img')
           image.className = 'rules-doctrine-gallery-image'
-          image.src = buildDoctrineTokenImage(token.id, lang === 'en' ? 'en' : 'es')
+          image.src = DOCTRINE_TOKEN_IMAGES[token.id]?.[lang] || DOCTRINE_TOKEN_IMAGES[token.id]?.es || ''
           image.alt = DOCTRINE_GALLERY_LABELS[token.id]?.[lang] || DOCTRINE_GALLERY_LABELS[token.id]?.es || ''
           image.loading = 'lazy'
 
@@ -910,22 +890,37 @@ function Reglamento() {
             color: #111111;
             background: transparent;
           }
+          .rules-pdf-sheet .rules-html h1,
+          .rules-pdf-sheet .rules-html h2,
+          .rules-pdf-sheet .rules-html h3,
+          .rules-pdf-sheet .rules-html p,
+          .rules-pdf-sheet .rules-html li,
+          .rules-pdf-sheet .rules-html th,
+          .rules-pdf-sheet .rules-html td,
+          .rules-pdf-sheet .rules-html strong,
+          .rules-pdf-sheet .rules-html em,
+          .rules-pdf-sheet .rules-html a,
+          .rules-pdf-sheet .rules-html span {
+            word-break: normal;
+            overflow-wrap: normal;
+            hyphens: none;
+          }
           .rules-pdf-sheet .rules-html h1 {
-            margin: 36px 0 14px;
-            padding-bottom: 8px;
+            margin: 38px 0 18px;
+            padding-bottom: 12px;
             border-bottom: 1px solid #cfcfcf;
             font-family: "Cinzel", Georgia, serif;
             font-size: 31px;
             line-height: 1.18;
           }
           .rules-pdf-sheet .rules-html h2 {
-            margin: 28px 0 12px;
+            margin: 30px 0 16px;
             font-family: "Cinzel", Georgia, serif;
             font-size: 23px;
             line-height: 1.22;
           }
           .rules-pdf-sheet .rules-html h3 {
-            margin: 22px 0 10px;
+            margin: 24px 0 14px;
             font-size: 18px;
             line-height: 1.24;
           }
@@ -1191,7 +1186,7 @@ function Reglamento() {
           .rules-pdf-sheet .rules-html .rules-mission-card-meta {
             hyphens: none;
             word-break: normal;
-            overflow-wrap: break-word;
+            overflow-wrap: normal;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-summary {
             padding-bottom: 10px;
@@ -1218,6 +1213,7 @@ function Reglamento() {
             text-transform: uppercase;
           }
           .rules-pdf-cover {
+            position: relative;
             width: 1040px;
             min-height: 1450px;
             background: #ffffff;
@@ -1272,6 +1268,7 @@ function Reglamento() {
             bottom: 42px;
             margin: 0;
             text-align: center;
+            font-family: "Cinzel", Georgia, serif;
             font-size: 11px;
             letter-spacing: 0.16em;
             text-transform: uppercase;
@@ -1282,7 +1279,7 @@ function Reglamento() {
           ${blackLogoDataUrl ? `<img class="rules-pdf-cover-mark" src="${blackLogoDataUrl}" alt="" />` : ''}
           <p class="rules-pdf-cover-brand">ZEROLORE</p>
           <p class="rules-pdf-cover-section">${printCoverSectionLabel}</p>
-          <p class="rules-pdf-cover-credit">by alvidi</p>
+          <p class="rules-pdf-cover-credit">${printCoverCreditLabel}</p>
         </div>
         <div class="rules-pdf-sheet">
           <div class="rules-html">${renderedHtml}</div>
@@ -1811,6 +1808,7 @@ function Reglamento() {
                 <p className="rules-print-cover-brand">ZeroLore</p>
                 <h1 className="rules-print-cover-title">{printCoverSectionLabel}</h1>
                 <p className="rules-print-cover-subtitle">{t('rules.title')}</p>
+                <p className="rules-print-cover-credit">{printCoverCreditLabel}</p>
               </div>
             </div>
             <div className="rules-html reveal" ref={contentRef}>

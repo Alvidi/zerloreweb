@@ -20,6 +20,61 @@ import {
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 
+function GameModeIcon({ mode }) {
+  if (mode === 'escuadra') {
+    return (
+      <svg viewBox="0 0 64 40" aria-hidden="true">
+        <circle className="game-mode-icon-stroke" cx="20" cy="13" r="6" />
+        <circle className="game-mode-icon-stroke" cx="32" cy="9" r="7" />
+        <circle className="game-mode-icon-stroke" cx="44" cy="13" r="6" />
+        <path className="game-mode-icon-stroke" d="M12 32c0-6 4.4-10 8-10s8 4 8 10" />
+        <path className="game-mode-icon-stroke" d="M22 34c0-8 5.2-13 10-13s10 5 10 13" />
+        <path className="game-mode-icon-stroke" d="M36 32c0-6 4.4-10 8-10s8 4 8 10" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 64 40" aria-hidden="true">
+      <circle className="game-mode-icon-stroke" cx="32" cy="11" r="7" />
+      <path className="game-mode-icon-stroke" d="M22 34c0-8 5.5-13 10-13s10 5 10 13" />
+    </svg>
+  )
+}
+
+function GameModePicker({ value, onChange, t }) {
+  const options = [
+    { value: 'escaramuza', label: t('generator.skirmish') },
+    { value: 'escuadra', label: t('generator.squad') },
+  ]
+
+  return (
+    <div className="field field-game-mode">
+      <span>{t('generator.gameMode')}</span>
+      <div className="game-mode-picker" role="radiogroup" aria-label={t('generator.gameMode')}>
+        {options.map((option) => {
+          const isActive = option.value === value
+          return (
+            <button
+              key={option.value}
+              type="button"
+              className={`game-mode-card${isActive ? ' active' : ''}`}
+              onClick={() => onChange(option.value)}
+              role="radio"
+              aria-checked={isActive}
+            >
+              <span className="game-mode-card-icon">
+                <GameModeIcon mode={option.value} />
+              </span>
+              <span className="game-mode-card-label">{option.label}</span>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function Generador() {
   const { t, lang } = useI18n()
   const [, startTransition] = useTransition()
@@ -309,18 +364,7 @@ function Generador() {
 
           {mode === 'manual' && (
             <div className="manual-panel">
-              <div className="field">
-                <span>{t('generator.gameMode')}</span>
-                <CustomSelect
-                  t={t}
-                  value={gameMode}
-                  onChange={setGameMode}
-                  options={[
-                    { value: 'escaramuza', label: t('generator.skirmish') },
-                    { value: 'escuadra', label: t('generator.squad') },
-                  ]}
-                />
-              </div>
+              <GameModePicker value={gameMode} onChange={setGameMode} t={t} />
               <div className="field">
                 <span>{t('generator.faction')}</span>
                 <CustomSelect
@@ -417,18 +461,7 @@ function Generador() {
 
           {mode === 'random' && (
             <div className="random-panel">
-              <div className="field">
-                <span>{t('generator.gameMode')}</span>
-                <CustomSelect
-                  t={t}
-                  value={gameMode}
-                  onChange={setGameMode}
-                  options={[
-                    { value: 'escaramuza', label: t('generator.skirmish') },
-                    { value: 'escuadra', label: t('generator.squad') },
-                  ]}
-                />
-              </div>
+              <GameModePicker value={gameMode} onChange={setGameMode} t={t} />
               <label className="field">
                 {t('generator.targetValue')}
                 <input

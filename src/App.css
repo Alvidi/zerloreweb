@@ -352,7 +352,7 @@
       rgba(11, 12, 20, 0.98) 100%
     ),
     linear-gradient(180deg, rgba(8, 8, 12, 0.35), rgba(8, 8, 12, 0.9)),
-    url("./images/webimagen/cabecera.webp");
+    url("./images/webimagen/cabecera2.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -853,6 +853,88 @@ button {
 .field.checkbox input {
   width: 16px;
   height: 16px;
+}
+
+.field-game-mode {
+  gap: 10px;
+}
+
+.game-mode-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.game-mode-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 247, 235, 0.02), rgba(255, 255, 255, 0.008)),
+    rgba(12, 12, 18, 0.74);
+  color: var(--text-muted);
+  text-align: left;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.game-mode-card:hover {
+  border-color: rgba(255, 143, 69, 0.38);
+  color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.game-mode-card.active {
+  border-color: var(--accent);
+  background:
+    radial-gradient(circle at left center, rgba(255, 143, 69, 0.18), transparent 68%),
+    rgba(255, 143, 69, 0.08);
+  color: var(--text-main);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+}
+
+.game-mode-card-icon {
+  width: 52px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.game-mode-card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.game-mode-card-icon .game-mode-icon-fill {
+  fill: currentColor;
+  opacity: 0.12;
+}
+
+.game-mode-card-icon .game-mode-icon-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.game-mode-card-label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 
 .field input,
@@ -2469,6 +2551,10 @@ mark {
   display: none;
 }
 
+.rules-print-cover {
+  position: relative;
+}
+
 .rules-print-cover-inner {
   display: grid;
   justify-items: center;
@@ -2506,6 +2592,20 @@ mark {
   text-align: center;
   color: var(--text-muted);
   line-height: 1.6;
+}
+
+.rules-print-cover-credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20mm;
+  margin: 0;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .rules-toc {
@@ -3837,6 +3937,10 @@ mark {
     width: 100%;
   }
 
+  .game-mode-picker {
+    grid-template-columns: 1fr;
+  }
+
   .faction-header,
   .unit-card-header,
   .army-header,
@@ -5152,7 +5256,8 @@ mark {
   }
 
   .rules-print-cover-brand,
-  .rules-print-cover-subtitle {
+  .rules-print-cover-subtitle,
+  .rules-print-cover-credit {
     color: #222 !important;
   }
 
