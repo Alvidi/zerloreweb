@@ -358,10 +358,6 @@ function Generador() {
             </button>
           </div>
 
-          {factions.length === 0 && (
-            <p className="empty-state">{t('generator.emptyNoFactions')}</p>
-          )}
-
           {mode === 'manual' && (
             <div className="manual-panel">
               <GameModePicker value={gameMode} onChange={setGameMode} t={t} />
@@ -498,9 +494,9 @@ function Generador() {
                   </label>
                 ))}
               </div>
-                <button type="button" className="primary" onClick={handleGenerateRandom}>
-                  {t('generator.generate')}
-                </button>
+              <button type="button" className="primary" onClick={handleGenerateRandom}>
+                {t('generator.generate')}
+              </button>
             </div>
           )}
         </div>

@@ -869,10 +869,11 @@ button {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
+  min-height: 40px;
+  gap: 10px;
+  padding: 6px 14px;
   border: 1px solid var(--line);
-  border-radius: 9px;
+  border-radius: 0;
   background:
     linear-gradient(180deg, rgba(255, 247, 235, 0.02), rgba(255, 255, 255, 0.008)),
     rgba(12, 12, 18, 0.74);
@@ -902,8 +903,8 @@ button {
 }
 
 .game-mode-card-icon {
-  width: 52px;
-  height: 38px;
+  width: 40px;
+  height: 28px;
   display: grid;
   place-items: center;
   color: currentColor;
@@ -926,6 +927,14 @@ button {
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.game-mode-card-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 
 .game-mode-card-label {
