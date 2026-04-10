@@ -48,6 +48,18 @@ import {
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 const TITAN_ENGAGE_BLOCKER_TYPES = new Set(['line', 'elite', 'vehicle', 'monster'])
+const getBattleEraLabel = (era, tx) => {
+  const token = String(era?.token || '').toLowerCase()
+  if (token === 'future') return tx.future
+  if (token === 'past') return tx.past
+  return String(era?.label || '').trim()
+}
+const getBattleUnitOptionLabel = (unit, tx) => {
+  const eraLabels = (Array.isArray(unit?.eras) ? unit.eras : [])
+    .map((era) => getBattleEraLabel(era, tx))
+    .filter(Boolean)
+  return eraLabels.length ? `${unit.name} - ${eraLabels.join(' / ')}` : unit.name
+}
 
 function Batalla() {
   const { lang } = useI18n()
@@ -1028,78 +1040,49 @@ function Batalla() {
               </select>
             </div>
           </label>
-
-          <label className="field">
-            <span>{tx.unit}</span>
-            <select
-              value={leftUnitId}
-              onChange={(event) => {
-                resetCombatLog()
-                setLeft((prev) => {
-                  const unit = leftFaction?.units.find((item) => item.id === event.target.value)
-                  return {
-                    ...prev,
-                    unitId: event.target.value,
-                    weaponIds: pickWeaponIdsForMode(unit, mode),
-                  }
-                })
-              }}
-              disabled={!leftFaction}
-            >
-              {leftFaction?.units.map((unit) => (
-                <option key={unit.id} value={unit.id}>{unit.name}</option>
-              ))}
-            </select>
-          </label>
-
-          <label className="field">
-            <span>{leftWeaponSlots > 1 ? tx.weapons : tx.weapon}</span>
-            {!leftWeapons.length ? (
-              <p className="battle-empty">{tx.noWeapons}</p>
-            ) : leftWeaponSlots > 1 ? (
-              <div className="duel-weapon-multi">
-                {Array.from({ length: leftWeaponSlots }).map((_, slotIndex) => (
-                  <label key={`left-slot-${slotIndex}`} className="field duel-weapon-slot">
-                    <span>{tx.weapon} {slotIndex + 1}</span>
-                    <select
-                      value={safeLeftWeaponIds[slotIndex] || ''}
-                      onChange={(event) =>
-                        setWeaponAtSlot('left', slotIndex, event.target.value, leftWeapons, leftWeaponSlots, safeLeftWeaponIds)}
-                      disabled={!leftWeapons.length}
-                    >
-                      {leftWeapons.map((weapon) => (
-                        <option key={weapon.id} value={weapon.id}>
-                          {weapon.name} · {weapon.attacks}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                ))}
-              </div>
-            ) : (
-              <select
-                value={leftPrimaryWeaponId}
-                onChange={(event) => setLeft((prev) => ({ ...prev, weaponIds: [event.target.value] }))}
-                disabled={!leftWeapons.length}
-              >
-                {leftWeapons.map((weapon) => (
-                  <option key={weapon.id} value={weapon.id}>
-                    {weapon.name} · {weapon.attacks}
-                  </option>
-                ))}
-              </select>
-            )}
-          </label>
           <div className="duel-unit-divider" aria-hidden="true" />
 
           {leftUnit && (
             <article className="duel-unit-card">
               <div className="unit-card-header">
-                <h4>{leftUnit.name}</h4>
+                <select
+                  className="duel-inline-select duel-unit-inline-select"
+                  value={leftUnitId}
+                  onChange={(event) => {
+                    resetCombatLog()
+                    setLeft((prev) => {
+                      const unit = leftFaction?.units.find((item) => item.id === event.target.value)
+                      return {
+                        ...prev,
+                        unitId: event.target.value,
+                        weaponIds: pickWeaponIdsForMode(unit, mode),
+                      }
+                    })
+                  }}
+                  disabled={!leftFaction}
+                  aria-label={tx.unit}
+                >
+                  {leftFaction?.units.map((unit) => (
+                    <option key={unit.id} value={unit.id}>{getBattleUnitOptionLabel(unit, tx)}</option>
+                  ))}
+                </select>
               </div>
               <p className="unit-meta">
                 <UnitTypeBadge type={leftUnit.type} />
                 {' '}· <span className="unit-value">{leftUnit.valueBase} {tx.valueUnit}</span>
+                {leftUnit.eras?.length ? (
+                  <>
+                    {' '}
+                    ·{' '}
+                    <span className="unit-era-list">
+                      {leftUnit.eras.map((era) => (
+                        <span key={`left-${leftUnit.id}-${era.token}-${era.label}`} className={`unit-era-badge unit-era-${era.token || 'neutral'}`}>
+                          {getBattleEraLabel(era, tx)}
+                        </span>
+                      ))}
+                    </span>
+                  </>
+                ) : null}
               </p>
               <div className="unit-stats-table">
                 <div className="unit-stats-row head">
@@ -1136,84 +1119,118 @@ function Batalla() {
                   <span className="duel-unit-specialty-label">{tx.unitSpecialtyCard}:</span> {leftUnit.specialty}
                 </p>
               )}
-              {!!leftSelectedWeapons.length && (
-                <div className="duel-weapon-stack">
-                  <p className="duel-section-label">{tx.selectedWeapons}</p>
-                  {leftSelectedWeapons.map((weapon, index) => {
-                    const notes = buildAbilityNotes(weapon)
-                    const ammoInfo = getWeaponAmmoInfo('left', leftFactionId, leftUnit, weapon)
-                    return (
-                      <div key={`left-weapon-${weapon.id}-${index}`} className="duel-weapon-entry">
-                        <p className="duel-weapon-entry-title">{tx.weapon} {index + 1}: {weapon.name}</p>
-                        {ammoInfo.limited && (
-                          <p className="duel-weapon-ammo">
-                            {tx.ammo}: {ammoInfo.remaining}/{ammoInfo.max}
-                          </p>
-                        )}
-                        <div className="weapon-stats-table duel-weapon-table">
-                          <div className="weapon-stats-row duel-weapon-row head">
-                            <span>{tx.weaponAtq}</span>
-                            <span>{tx.weaponDist}</span>
-                            <span>{tx.weaponImp}</span>
-                            <span>{tx.weaponDamage}</span>
-                            <span>{tx.weaponCrit}</span>
-                            <span>{tx.weaponSkills}</span>
-                          </div>
-                          <div className="weapon-stats-row duel-weapon-row">
-                            <span>{weapon.attacks}</span>
-                            <span>{weapon.range || '-'}</span>
-                            <span>{weapon.kind === 'melee' ? '3+' : hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.direct) ? '-' : weapon.hit || '-'}</span>
-                            <span>{weapon.damage}</span>
-                            <span>{weapon.critDamage}</span>
-                            <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
-                          </div>
+              <div className="duel-weapon-stack">
+                {!leftWeapons.length ? (
+                  <p className="battle-empty">{tx.noWeapons}</p>
+                ) : leftWeaponSlots > 1 ? (
+                  <div className="duel-inline-control-list">
+                    {Array.from({ length: leftWeaponSlots }).map((_, slotIndex) => (
+                      <label key={`left-slot-${slotIndex}`} className="duel-inline-control-row">
+                        <select
+                          className="duel-inline-select"
+                          value={safeLeftWeaponIds[slotIndex] || ''}
+                          onChange={(event) =>
+                            setWeaponAtSlot('left', slotIndex, event.target.value, leftWeapons, leftWeaponSlots, safeLeftWeaponIds)}
+                          disabled={!leftWeapons.length}
+                          aria-label={`${tx.weapon} ${slotIndex + 1}`}
+                        >
+                          {leftWeapons.map((weapon) => (
+                            <option key={weapon.id} value={weapon.id}>
+                              {weapon.name} · {weapon.attacks}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    ))}
+                  </div>
+                ) : (
+                  <select
+                    className="duel-inline-select duel-weapon-inline-select"
+                    value={leftPrimaryWeaponId}
+                    onChange={(event) => setLeft((prev) => ({ ...prev, weaponIds: [event.target.value] }))}
+                    disabled={!leftWeapons.length}
+                    aria-label={tx.weapon}
+                  >
+                    {leftWeapons.map((weapon) => (
+                      <option key={weapon.id} value={weapon.id}>
+                        {weapon.name} · {weapon.attacks}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                {!!leftSelectedWeapons.length && leftSelectedWeapons.map((weapon, index) => {
+                  const notes = buildAbilityNotes(weapon)
+                  const ammoInfo = getWeaponAmmoInfo('left', leftFactionId, leftUnit, weapon)
+                  return (
+                    <div key={`left-weapon-${weapon.id}-${index}`} className="duel-weapon-entry">
+                      {ammoInfo.limited && (
+                        <p className="duel-weapon-ammo">
+                          {tx.ammo}: {ammoInfo.remaining}/{ammoInfo.max}
+                        </p>
+                      )}
+                      <div className="weapon-stats-table duel-weapon-table">
+                        <div className="weapon-stats-row duel-weapon-row head">
+                          <span>{tx.weaponAtq}</span>
+                          <span>{tx.weaponDist}</span>
+                          <span>{tx.weaponImp}</span>
+                          <span>{tx.weaponDamage}</span>
+                          <span>{tx.weaponCrit}</span>
+                          <span>{tx.weaponSkills}</span>
                         </div>
-                        {notes.length > 0 && (
-                          <div className="weapon-ability-notes duel-weapon-notes">
-                            {notes.map((note) => {
-                              const binding = getAbilityConditionBinding('left', note.raw)
-                              const explosiveBinding = getExplosiveAbilityBinding('left', note.raw)
-                              return (
-                                <div key={note.raw || note.label} className="duel-ability-note-item">
-                                  <div>
-                                    <strong>{note.label}:</strong> {note.description}
-                                  </div>
-                                  {binding && (
-                                    <label className="duel-ability-check">
-                                      <input
-                                        type="checkbox"
-                                        checked={binding.checked}
-                                        onChange={(event) => binding.setChecked(event.target.checked)}
-                                      />
-                                      <span>{binding.label}</span>
-                                    </label>
-                                  )}
-                                  {explosiveBinding && (
-                                    <label className="duel-ability-check duel-ability-select">
-                                      <span>{explosiveBinding.label}</span>
-                                      <select
-                                        className="duel-ability-select-input"
-                                        value={explosiveBinding.value}
-                                        onChange={(event) => explosiveBinding.setValue(event.target.value)}
-                                      >
-                                        {Array.from({ length: explosiveBinding.max + 1 }, (_, index) => index).map((value) => (
-                                          <option key={`left-explosive-inline-${weapon.id}-${value}`} value={value}>
-                                            {value}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    </label>
-                                  )}
-                                </div>
-                              )
-                            })}
-                          </div>
-                        )}
+                        <div className="weapon-stats-row duel-weapon-row">
+                          <span>{weapon.attacks}</span>
+                          <span>{weapon.range || '-'}</span>
+                          <span>{weapon.kind === 'melee' ? '3+' : hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.direct) ? '-' : weapon.hit || '-'}</span>
+                          <span>{weapon.damage}</span>
+                          <span>{weapon.critDamage}</span>
+                          <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
+                        </div>
                       </div>
-                    )
-                  })}
-                </div>
-              )}
+                      {notes.length > 0 && (
+                        <div className="weapon-ability-notes duel-weapon-notes">
+                          {notes.map((note) => {
+                            const binding = getAbilityConditionBinding('left', note.raw)
+                            const explosiveBinding = getExplosiveAbilityBinding('left', note.raw)
+                            return (
+                              <div key={note.raw || note.label} className="duel-ability-note-item">
+                                <div>
+                                  <strong>{note.label}:</strong> {note.description}
+                                </div>
+                                {binding && (
+                                  <label className="duel-ability-check">
+                                    <input
+                                      type="checkbox"
+                                      checked={binding.checked}
+                                      onChange={(event) => binding.setChecked(event.target.checked)}
+                                    />
+                                    <span>{binding.label}</span>
+                                  </label>
+                                )}
+                                {explosiveBinding && (
+                                  <label className="duel-ability-check duel-ability-select">
+                                    <span>{explosiveBinding.label}</span>
+                                    <select
+                                      className="duel-ability-select-input"
+                                      value={explosiveBinding.value}
+                                      onChange={(event) => explosiveBinding.setValue(event.target.value)}
+                                    >
+                                      {Array.from({ length: explosiveBinding.max + 1 }, (_, index) => index).map((value) => (
+                                        <option key={`left-explosive-inline-${weapon.id}-${value}`} value={value}>
+                                          {value}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </label>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </article>
           )}
           {leftCanUseCover && (
@@ -1302,78 +1319,49 @@ function Batalla() {
               </select>
             </div>
           </label>
-
-          <label className="field">
-            <span>{tx.unit}</span>
-            <select
-              value={rightUnitId}
-              onChange={(event) => {
-                resetCombatLog()
-                setRight((prev) => {
-                  const unit = rightFaction?.units.find((item) => item.id === event.target.value)
-                  return {
-                    ...prev,
-                    unitId: event.target.value,
-                    weaponIds: pickWeaponIdsForMode(unit, mode),
-                  }
-                })
-              }}
-              disabled={!rightFaction}
-            >
-              {rightFaction?.units.map((unit) => (
-                <option key={unit.id} value={unit.id}>{unit.name}</option>
-              ))}
-            </select>
-          </label>
-
-          <label className="field">
-            <span>{rightWeaponSlots > 1 ? tx.weapons : tx.weapon}</span>
-            {!rightWeapons.length ? (
-              <p className="battle-empty">{tx.noWeapons}</p>
-            ) : rightWeaponSlots > 1 ? (
-              <div className="duel-weapon-multi">
-                {Array.from({ length: rightWeaponSlots }).map((_, slotIndex) => (
-                  <label key={`right-slot-${slotIndex}`} className="field duel-weapon-slot">
-                    <span>{tx.weapon} {slotIndex + 1}</span>
-                    <select
-                      value={safeRightWeaponIds[slotIndex] || ''}
-                      onChange={(event) =>
-                        setWeaponAtSlot('right', slotIndex, event.target.value, rightWeapons, rightWeaponSlots, safeRightWeaponIds)}
-                      disabled={!rightWeapons.length}
-                    >
-                      {rightWeapons.map((weapon) => (
-                        <option key={weapon.id} value={weapon.id}>
-                          {weapon.name} · {weapon.attacks}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                ))}
-              </div>
-            ) : (
-              <select
-                value={rightPrimaryWeaponId}
-                onChange={(event) => setRight((prev) => ({ ...prev, weaponIds: [event.target.value] }))}
-                disabled={!rightWeapons.length}
-              >
-                {rightWeapons.map((weapon) => (
-                  <option key={weapon.id} value={weapon.id}>
-                    {weapon.name} · {weapon.attacks}
-                  </option>
-                ))}
-              </select>
-            )}
-          </label>
           <div className="duel-unit-divider" aria-hidden="true" />
 
           {rightUnit && (
             <article className="duel-unit-card">
               <div className="unit-card-header">
-                <h4>{rightUnit.name}</h4>
+                <select
+                  className="duel-inline-select duel-unit-inline-select"
+                  value={rightUnitId}
+                  onChange={(event) => {
+                    resetCombatLog()
+                    setRight((prev) => {
+                      const unit = rightFaction?.units.find((item) => item.id === event.target.value)
+                      return {
+                        ...prev,
+                        unitId: event.target.value,
+                        weaponIds: pickWeaponIdsForMode(unit, mode),
+                      }
+                    })
+                  }}
+                  disabled={!rightFaction}
+                  aria-label={tx.unit}
+                >
+                  {rightFaction?.units.map((unit) => (
+                    <option key={unit.id} value={unit.id}>{getBattleUnitOptionLabel(unit, tx)}</option>
+                  ))}
+                </select>
               </div>
               <p className="unit-meta">
                 <UnitTypeBadge type={rightUnit.type} />
                 {' '}· <span className="unit-value">{rightUnit.valueBase} {tx.valueUnit}</span>
+                {rightUnit.eras?.length ? (
+                  <>
+                    {' '}
+                    ·{' '}
+                    <span className="unit-era-list">
+                      {rightUnit.eras.map((era) => (
+                        <span key={`right-${rightUnit.id}-${era.token}-${era.label}`} className={`unit-era-badge unit-era-${era.token || 'neutral'}`}>
+                          {getBattleEraLabel(era, tx)}
+                        </span>
+                      ))}
+                    </span>
+                  </>
+                ) : null}
               </p>
               <div className="unit-stats-table">
                 <div className="unit-stats-row head">
@@ -1410,84 +1398,118 @@ function Batalla() {
                   <span className="duel-unit-specialty-label">{tx.unitSpecialtyCard}:</span> {rightUnit.specialty}
                 </p>
               )}
-              {!!rightSelectedWeapons.length && (
-                <div className="duel-weapon-stack">
-                  <p className="duel-section-label">{tx.selectedWeapons}</p>
-                  {rightSelectedWeapons.map((weapon, index) => {
-                    const notes = buildAbilityNotes(weapon)
-                    const ammoInfo = getWeaponAmmoInfo('right', rightFactionId, rightUnit, weapon)
-                    return (
-                      <div key={`right-weapon-${weapon.id}-${index}`} className="duel-weapon-entry">
-                        <p className="duel-weapon-entry-title">{tx.weapon} {index + 1}: {weapon.name}</p>
-                        {ammoInfo.limited && (
-                          <p className="duel-weapon-ammo">
-                            {tx.ammo}: {ammoInfo.remaining}/{ammoInfo.max}
-                          </p>
-                        )}
-                        <div className="weapon-stats-table duel-weapon-table">
-                          <div className="weapon-stats-row duel-weapon-row head">
-                            <span>{tx.weaponAtq}</span>
-                            <span>{tx.weaponDist}</span>
-                            <span>{tx.weaponImp}</span>
-                            <span>{tx.weaponDamage}</span>
-                            <span>{tx.weaponCrit}</span>
-                            <span>{tx.weaponSkills}</span>
-                          </div>
-                          <div className="weapon-stats-row duel-weapon-row">
-                            <span>{weapon.attacks}</span>
-                            <span>{weapon.range || '-'}</span>
-                            <span>{weapon.kind === 'melee' ? '3+' : hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.direct) ? '-' : weapon.hit || '-'}</span>
-                            <span>{weapon.damage}</span>
-                            <span>{weapon.critDamage}</span>
-                            <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
-                          </div>
+              <div className="duel-weapon-stack">
+                {!rightWeapons.length ? (
+                  <p className="battle-empty">{tx.noWeapons}</p>
+                ) : rightWeaponSlots > 1 ? (
+                  <div className="duel-inline-control-list">
+                    {Array.from({ length: rightWeaponSlots }).map((_, slotIndex) => (
+                      <label key={`right-slot-${slotIndex}`} className="duel-inline-control-row">
+                        <select
+                          className="duel-inline-select"
+                          value={safeRightWeaponIds[slotIndex] || ''}
+                          onChange={(event) =>
+                            setWeaponAtSlot('right', slotIndex, event.target.value, rightWeapons, rightWeaponSlots, safeRightWeaponIds)}
+                          disabled={!rightWeapons.length}
+                          aria-label={`${tx.weapon} ${slotIndex + 1}`}
+                        >
+                          {rightWeapons.map((weapon) => (
+                            <option key={weapon.id} value={weapon.id}>
+                              {weapon.name} · {weapon.attacks}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    ))}
+                  </div>
+                ) : (
+                  <select
+                    className="duel-inline-select duel-weapon-inline-select"
+                    value={rightPrimaryWeaponId}
+                    onChange={(event) => setRight((prev) => ({ ...prev, weaponIds: [event.target.value] }))}
+                    disabled={!rightWeapons.length}
+                    aria-label={tx.weapon}
+                  >
+                    {rightWeapons.map((weapon) => (
+                      <option key={weapon.id} value={weapon.id}>
+                        {weapon.name} · {weapon.attacks}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                {!!rightSelectedWeapons.length && rightSelectedWeapons.map((weapon, index) => {
+                  const notes = buildAbilityNotes(weapon)
+                  const ammoInfo = getWeaponAmmoInfo('right', rightFactionId, rightUnit, weapon)
+                  return (
+                    <div key={`right-weapon-${weapon.id}-${index}`} className="duel-weapon-entry">
+                      {ammoInfo.limited && (
+                        <p className="duel-weapon-ammo">
+                          {tx.ammo}: {ammoInfo.remaining}/{ammoInfo.max}
+                        </p>
+                      )}
+                      <div className="weapon-stats-table duel-weapon-table">
+                        <div className="weapon-stats-row duel-weapon-row head">
+                          <span>{tx.weaponAtq}</span>
+                          <span>{tx.weaponDist}</span>
+                          <span>{tx.weaponImp}</span>
+                          <span>{tx.weaponDamage}</span>
+                          <span>{tx.weaponCrit}</span>
+                          <span>{tx.weaponSkills}</span>
                         </div>
-                        {notes.length > 0 && (
-                          <div className="weapon-ability-notes duel-weapon-notes">
-                            {notes.map((note) => {
-                              const binding = getAbilityConditionBinding('right', note.raw)
-                              const explosiveBinding = getExplosiveAbilityBinding('right', note.raw)
-                              return (
-                                <div key={note.raw || note.label} className="duel-ability-note-item">
-                                  <div>
-                                    <strong>{note.label}:</strong> {note.description}
-                                  </div>
-                                  {binding && (
-                                    <label className="duel-ability-check">
-                                      <input
-                                        type="checkbox"
-                                        checked={binding.checked}
-                                        onChange={(event) => binding.setChecked(event.target.checked)}
-                                      />
-                                      <span>{binding.label}</span>
-                                    </label>
-                                  )}
-                                  {explosiveBinding && (
-                                    <label className="duel-ability-check duel-ability-select">
-                                      <span>{explosiveBinding.label}</span>
-                                      <select
-                                        className="duel-ability-select-input"
-                                        value={explosiveBinding.value}
-                                        onChange={(event) => explosiveBinding.setValue(event.target.value)}
-                                      >
-                                        {Array.from({ length: explosiveBinding.max + 1 }, (_, index) => index).map((value) => (
-                                          <option key={`right-explosive-inline-${weapon.id}-${value}`} value={value}>
-                                            {value}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    </label>
-                                  )}
-                                </div>
-                              )
-                            })}
-                          </div>
-                        )}
+                        <div className="weapon-stats-row duel-weapon-row">
+                          <span>{weapon.attacks}</span>
+                          <span>{weapon.range || '-'}</span>
+                          <span>{weapon.kind === 'melee' ? '3+' : hasWeaponAbilityId(weapon, WEAPON_ABILITY_IDS.direct) ? '-' : weapon.hit || '-'}</span>
+                          <span>{weapon.damage}</span>
+                          <span>{weapon.critDamage}</span>
+                          <span className="weapon-tags">{weapon.abilities.length ? weapon.abilities.map((a) => getAbilityLabel(a, lang)).join(', ') : '-'}</span>
+                        </div>
                       </div>
-                    )
-                  })}
-                </div>
-              )}
+                      {notes.length > 0 && (
+                        <div className="weapon-ability-notes duel-weapon-notes">
+                          {notes.map((note) => {
+                            const binding = getAbilityConditionBinding('right', note.raw)
+                            const explosiveBinding = getExplosiveAbilityBinding('right', note.raw)
+                            return (
+                              <div key={note.raw || note.label} className="duel-ability-note-item">
+                                <div>
+                                  <strong>{note.label}:</strong> {note.description}
+                                </div>
+                                {binding && (
+                                  <label className="duel-ability-check">
+                                    <input
+                                      type="checkbox"
+                                      checked={binding.checked}
+                                      onChange={(event) => binding.setChecked(event.target.checked)}
+                                    />
+                                    <span>{binding.label}</span>
+                                  </label>
+                                )}
+                                {explosiveBinding && (
+                                  <label className="duel-ability-check duel-ability-select">
+                                    <span>{explosiveBinding.label}</span>
+                                    <select
+                                      className="duel-ability-select-input"
+                                      value={explosiveBinding.value}
+                                      onChange={(event) => explosiveBinding.setValue(event.target.value)}
+                                    >
+                                      {Array.from({ length: explosiveBinding.max + 1 }, (_, index) => index).map((value) => (
+                                        <option key={`right-explosive-inline-${weapon.id}-${value}`} value={value}>
+                                          {value}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </label>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </article>
           )}
           <div className="duel-generic-options">

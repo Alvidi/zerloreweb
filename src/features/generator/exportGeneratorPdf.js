@@ -59,6 +59,13 @@ const getDataUrlImageFormat = (value) => {
   return 'PNG'
 }
 
+const getPdfEraLabel = (era, t) => {
+  const token = String(era?.token || '').toLowerCase()
+  if (token === 'future') return t('generator.future')
+  if (token === 'past') return t('generator.past')
+  return String(era?.label || '').trim()
+}
+
 export async function exportGeneratorPdf({
   armyUnits,
   armyFaction,
@@ -648,7 +655,12 @@ export async function exportGeneratorPdf({
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(8.8)
       doc.setTextColor(85)
-      doc.text(unit.base.tipo, unitNameX, titleY + 4.1)
+      const eraLabels = (Array.isArray(unit.base.eras) ? unit.base.eras : [])
+        .map((era) => getPdfEraLabel(era, t))
+        .filter(Boolean)
+      const unitMetaText = eraLabels.length ? `${unit.base.tipo} · ${eraLabels.join(' · ')}` : unit.base.tipo
+      const unitMetaLines = doc.splitTextToSize(unitMetaText, Math.max(splitX - unitNameX - 3, 24))
+      doc.text(unitMetaLines, unitNameX, titleY + 4.1)
       doc.setFont('helvetica', 'bold')
       doc.setFontSize(9)
       doc.setTextColor(55)

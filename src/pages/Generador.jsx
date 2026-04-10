@@ -19,6 +19,23 @@ import {
 } from '../features/generator/generatorUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
+const preferredEraOrder = ['future', 'past']
+
+const getUnitEraTokens = (unit) => (Array.isArray(unit?.eras) ? unit.eras.map((era) => era.token).filter(Boolean) : [])
+
+const unitMatchesEraFilters = (unit, filters) => {
+  if (!filters?.size) return true
+  const unitEraTokens = getUnitEraTokens(unit)
+  return unitEraTokens.some((token) => filters.has(token))
+}
+
+const getOrderedEraTokens = (units) => {
+  const present = new Set()
+  ;(units || []).forEach((unit) => {
+    getUnitEraTokens(unit).forEach((token) => present.add(token))
+  })
+  return preferredEraOrder.filter((token) => present.has(token))
+}
 
 function GameModeIcon({ mode }) {
   if (mode === 'escuadra') {
@@ -110,6 +127,9 @@ function Generador() {
   const [randomFactionId, setRandomFactionId] = useState('random')
   const [unitTypeFiltersManual, setUnitTypeFiltersManual] = useState(() => new Set())
   const [unitTypeFiltersRandom, setUnitTypeFiltersRandom] = useState(() => new Set())
+  const [eraFiltersManual, setEraFiltersManual] = useState(() => new Set())
+  const [eraFiltersRandom, setEraFiltersRandom] = useState(() => new Set())
+  const getEraLabel = (token) => (token === 'future' ? t('generator.future') : t('generator.past'))
   const selectedFactionIdSafe = useMemo(() => {
     if (!factions.length) return ''
     return factions.some((faction) => faction.id === selectedFactionId) ? selectedFactionId : factions[0].id
@@ -136,6 +156,12 @@ function Generador() {
     )
     return Array.from(types)
   }, [selectedFaction, gameMode])
+  const availableEraTokens = useMemo(() => {
+    if (!selectedFaction?.unidades?.length) return []
+    return getOrderedEraTokens(
+      selectedFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)),
+    )
+  }, [selectedFaction, gameMode])
   const randomFaction = randomFactionIdSafe === 'random'
     ? null
     : factions.find((faction) => faction.id === randomFactionIdSafe)
@@ -159,6 +185,17 @@ function Generador() {
     })
     return Array.from(types)
   }, [randomFaction, factions, gameMode])
+  const availableEraTokensRandom = useMemo(() => {
+    if (randomFaction) {
+      return getOrderedEraTokens(
+        randomFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)),
+      )
+    }
+    return getOrderedEraTokens(
+      factions.flatMap((faction) =>
+        faction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))),
+    )
+  }, [randomFaction, factions, gameMode])
 
   const activeManualFilters = useMemo(() => {
     if (!availableUnitTypes.length) return new Set()
@@ -170,6 +207,14 @@ function Generador() {
     }
     return new Set(availableUnitTypes)
   }, [availableUnitTypes, unitTypeFiltersManual])
+  const activeManualEraFilters = useMemo(() => {
+    if (!availableEraTokens.length) return new Set()
+    if (eraFiltersManual.size) {
+      const sanitized = new Set([...eraFiltersManual].filter((token) => availableEraTokens.includes(token)))
+      return sanitized.size ? sanitized : new Set(availableEraTokens)
+    }
+    return new Set(availableEraTokens)
+  }, [availableEraTokens, eraFiltersManual])
 
   const activeRandomFilters = useMemo(() => {
     if (!availableUnitTypesRandom.length) return new Set()
@@ -181,6 +226,14 @@ function Generador() {
     }
     return new Set(availableUnitTypesRandom)
   }, [availableUnitTypesRandom, unitTypeFiltersRandom])
+  const activeRandomEraFilters = useMemo(() => {
+    if (!availableEraTokensRandom.length) return new Set()
+    if (eraFiltersRandom.size) {
+      const sanitized = new Set([...eraFiltersRandom].filter((token) => availableEraTokensRandom.includes(token)))
+      return sanitized.size ? sanitized : new Set(availableEraTokensRandom)
+    }
+    return new Set(availableEraTokensRandom)
+  }, [availableEraTokensRandom, eraFiltersRandom])
 
   const localizedArmyUnits = useMemo(() => localizeArmyUnits(armyUnits, armyFaction), [armyUnits, armyFaction])
   const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0)
@@ -188,9 +241,12 @@ function Generador() {
   const visibleManualUnits = useMemo(() => {
     if (!selectedFaction?.unidades?.length) return []
     return selectedFaction.unidades.filter(
-      (unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode) && activeManualFilters.has(unit.tipo),
+      (unit) =>
+        isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
+        && activeManualFilters.has(unit.tipo)
+        && unitMatchesEraFilters(unit, activeManualEraFilters),
     )
-  }, [selectedFaction, activeManualFilters, gameMode])
+  }, [selectedFaction, activeManualFilters, activeManualEraFilters, gameMode])
 
   useEffect(() => {
     if (typeof Image === 'undefined') return
@@ -224,9 +280,13 @@ function Generador() {
     const next = event.target.value
     const nextFaction = factions.find((faction) => faction.id === next)
     const nextTypes = nextFaction ? Array.from(new Set(nextFaction.unidades.map((unit) => unit.tipo))) : []
+    const nextEras = nextFaction
+      ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
+      : []
     startTransition(() => {
       setSelectedFactionId(next)
       setUnitTypeFiltersManual(new Set(nextTypes))
+      setEraFiltersManual(new Set(nextEras))
       setArmyUnits([])
       setArmyFactionId(next)
     })
@@ -241,8 +301,15 @@ function Generador() {
           factions.flatMap((faction) => faction.unidades.map((unit) => unit.tipo)),
         ),
       )
+    const nextEras = nextFaction
+      ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
+      : getOrderedEraTokens(
+          factions.flatMap((faction) =>
+            faction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))),
+        )
     setRandomFactionId(next)
     setUnitTypeFiltersRandom(new Set(nextTypes))
+    setEraFiltersRandom(new Set(nextEras))
   }
 
   const handleToggleUnitTypeManual = (type) => {
@@ -265,6 +332,24 @@ function Generador() {
       } else {
         next.add(type)
       }
+      return next
+    })
+  }
+
+  const handleToggleEraManual = (token) => {
+    setEraFiltersManual((prev) => {
+      const next = prev.size ? new Set(prev) : new Set(availableEraTokens)
+      if (next.has(token)) next.delete(token)
+      else next.add(token)
+      return next
+    })
+  }
+
+  const handleToggleEraRandom = (token) => {
+    setEraFiltersRandom((prev) => {
+      const next = prev.size ? new Set(prev) : new Set(availableEraTokensRandom)
+      if (next.has(token)) next.delete(token)
+      else next.add(token)
       return next
     })
   }
@@ -306,10 +391,24 @@ function Generador() {
 
   const handleGenerateRandom = () => {
     if (!factions.length) return
+    const filterFactionUnits = (faction) => ({
+      ...faction,
+      unidades: faction.unidades.filter(
+        (unit) =>
+          isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
+          && (!activeRandomFilters.size || activeRandomFilters.has(unit.tipo))
+          && unitMatchesEraFilters(unit, activeRandomEraFilters),
+      ),
+    })
+    const factionPool =
+      randomFactionIdSafe === 'random'
+        ? factions.map(filterFactionUnits).filter((faction) => faction.unidades.length)
+        : []
     const faction =
       randomFactionIdSafe === 'random'
-        ? factions[Math.floor(Math.random() * factions.length)]
-        : factions.find((item) => item.id === randomFactionIdSafe)
+        ? factionPool[Math.floor(Math.random() * factionPool.length)]
+        : filterFactionUnits(factions.find((item) => item.id === randomFactionIdSafe))
+    if (!faction?.unidades?.length) return
     const target = toNumber(targetValue)
     const result = generateArmyByValue(
       faction,
@@ -398,6 +497,16 @@ function Generador() {
                     )}
                   </div>
                   <div className="unit-type-filters">
+                    {availableEraTokens.map((token) => (
+                      <label key={token} className={`unit-type-filter unit-era-filter unit-era-filter-${token}`}>
+                        <input
+                          type="checkbox"
+                          checked={activeManualEraFilters.has(token)}
+                          onChange={() => handleToggleEraManual(token)}
+                        />
+                        <span>{getEraLabel(token)}</span>
+                      </label>
+                    ))}
                     {availableUnitTypes.map((type) => (
                       <label key={type} className="unit-type-filter">
                         <input
@@ -420,8 +529,21 @@ function Generador() {
                             </button>
                           </div>
                           <p className="unit-meta">
-                            <UnitTypeBadge type={unit.tipo} /> ·{' '}
+                            <UnitTypeBadge type={unit.tipo} />
+                            {' '}·{' '}
                             <span className="unit-value">{unit.valor_base} {t('generator.valueUnit')}</span>
+                            {unit.eras?.length ? (
+                              <>
+                                {' '}·{' '}
+                                <span className="unit-era-list">
+                                  {unit.eras.map((era) => (
+                                    <span key={`${unit.id}-${era.token}-${era.label}`} className={`unit-era-badge unit-era-${era.token}`}>
+                                      {era.token === 'future' || era.token === 'past' ? getEraLabel(era.token) : era.label}
+                                    </span>
+                                  ))}
+                                </span>
+                              </>
+                            ) : null}
                           </p>
                           <div className="unit-stats-table">
                             <div className="unit-stats-row head">
@@ -483,6 +605,16 @@ function Generador() {
                 />
               </div>
               <div className="unit-type-filters">
+                {availableEraTokensRandom.map((token) => (
+                  <label key={`random-era-${token}`} className={`unit-type-filter unit-era-filter unit-era-filter-${token}`}>
+                    <input
+                      type="checkbox"
+                      checked={activeRandomEraFilters.has(token)}
+                      onChange={() => handleToggleEraRandom(token)}
+                    />
+                    <span>{getEraLabel(token)}</span>
+                  </label>
+                ))}
                 {availableUnitTypesRandom.map((type) => (
                   <label key={`random-${type}`} className="unit-type-filter">
                     <input

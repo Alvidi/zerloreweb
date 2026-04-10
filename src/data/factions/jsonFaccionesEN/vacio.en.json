@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Aveformers",
+      "era": "Future / Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
@@ -36,7 +37,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "shadow gun",
+            "nombre": "Shadow Weapon",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -79,6 +80,7 @@
     },
     {
       "nombre_unidad": "Void Acolytes",
+      "era": "Future / Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -123,6 +125,7 @@
     },
     {
       "nombre_unidad": "Carriers",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "5\"",
@@ -182,6 +185,7 @@
     },
     {
       "nombre_unidad": "Terminators",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
@@ -243,6 +247,7 @@
     },
     {
       "nombre_unidad": "Void Weaver",
+      "era": "Future / Past",
       "clase": "Elite",
       "perfil": {
         "movimiento": "8\"",
@@ -310,13 +315,14 @@
               "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 1
           }
         ]
       }
     },
     {
       "nombre_unidad": "Void Brutalid",
+      "era": "Future / Past",
       "clase": "Monster",
       "perfil": {
         "movimiento": "7\"",
@@ -365,6 +371,7 @@
     },
     {
       "nombre_unidad": "major horror",
+      "era": "Future / Past",
       "clase": "Monster",
       "perfil": {
         "movimiento": "6\"",
@@ -426,6 +433,7 @@
     },
     {
       "nombre_unidad": "Herald of the Void",
+      "era": "Future / Past",
       "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
@@ -500,6 +508,7 @@
     },
     {
       "nombre_unidad": "Avatar of the Void",
+      "era": "Future",
       "clase": "Titan",
       "perfil": {
         "movimiento": "3\"",

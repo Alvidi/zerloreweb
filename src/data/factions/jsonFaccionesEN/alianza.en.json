@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Tactical Infantry",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -90,6 +91,7 @@
     },
     {
       "nombre_unidad": "Specialists",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -197,6 +199,7 @@
     },
     {
       "nombre_unidad": "Oathsworn",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
@@ -267,6 +270,7 @@
     },
     {
       "nombre_unidad": "Veterans",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
@@ -338,6 +342,7 @@
     },
     {
       "nombre_unidad": "Acclaimer",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "6\"",
@@ -421,6 +426,7 @@
     },
     {
       "nombre_unidad": "Iron Centurion",
+      "era": "Future",
       "clase": "Vehicle",
     "perfil": {
       "movimiento": "6\"",
@@ -465,6 +471,7 @@
     },
     {
       "nombre_unidad": "Oathsworn Commander",
+      "era": "Future",
       "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
@@ -563,6 +570,7 @@
     },
     {
       "nombre_unidad": "Ark of Supremacy",
+      "era": "Future",
       "clase": "Titan",
       "perfil": {
         "movimiento": "3\"",
@@ -661,6 +669,7 @@
     },
     {
       "nombre_unidad": "Gladiator Tank",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "7\"",

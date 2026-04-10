@@ -1,10 +1,10 @@
 {
   "faccion": {
-    "nombre": "Legionnaires of the Crucible",
-    "estilo_juego": "The Crucible Legionnaires are an unstoppable, fanatical and extremely resilient elite, capable of absorbing damage that would destroy normal troops. They rely on counterattacks, solid saves, and defensive skills that allow them to win long duels. It is the perfect faction for those who enjoy tough, slow but devastating units that fearlessly advance towards the enemy.",
+    "nombre": "Legionnaires",
+    "estilo_juego": "The Legionnaires are an unstoppable, fanatical and extremely resilient elite, capable of absorbing damage that would destroy normal troops. They rely on counterattacks, solid saves, and defensive skills that allow them to win long duels. It is the perfect faction for those who enjoy tough, slow but devastating units that fearlessly advance towards the enemy.",
     "habilidades_faccion": [
       {
-        "habilidades_faccion1": "Glory of the Crucible",
+        "habilidades_faccion1": "Glory of the Praetor",
         "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit ignores the first point of damage received from a ranged attack during that turn."
       },
       {
@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Soronites",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -63,7 +64,8 @@
       }
     },
     {
-      "nombre_unidad": "Custodian of the Crucible",
+      "nombre_unidad": "Princeps",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "7\"",
@@ -133,7 +135,8 @@
       }
     },
     {
-      "nombre_unidad": "Praetor of the Crucible",
+      "nombre_unidad": "Pretorians",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
@@ -179,7 +182,8 @@
       }
     },
     {
-      "nombre_unidad": "Battle organ",
+      "nombre_unidad": "Battle Organ",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "6\"",
@@ -238,7 +242,8 @@
       }
     },
     {
-      "nombre_unidad": "Crucible Paladin",
+      "nombre_unidad": "Paladin",
+      "era": "Future",
       "clase": "Hero",
       "perfil": {
         "movimiento": "5\"",

@@ -89,6 +89,8 @@ export const getBattleTranslations = (lang) =>
       defenderNoRangedWeaponsHint: 'The defender has no ranged weapons. Ranged counterattack is disabled.',
       hp: 'HP',
       save: 'Save',
+      future: 'Future',
+      past: 'Past',
       steps: 'steps',
     }
     : {
@@ -180,5 +182,7 @@ export const getBattleTranslations = (lang) =>
       defenderNoRangedWeaponsHint: 'La unidad defensora no tiene armas de disparo. El contraataque de disparo queda desactivado.',
       hp: 'Vidas',
       save: 'Salvación',
+      future: 'Futuro',
+      past: 'Pasado',
       steps: 'pasos',
     }

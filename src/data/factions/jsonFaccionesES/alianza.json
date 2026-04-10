@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Infantería Táctica",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -90,6 +91,7 @@
     },
     {
       "nombre_unidad": "Especialistas",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -197,6 +199,7 @@
     },
     {
       "nombre_unidad": "Juramentados",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
@@ -267,6 +270,7 @@
     },
     {
       "nombre_unidad": "Veteranos",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
@@ -338,6 +342,7 @@
     },
     {
       "nombre_unidad": "Aclamador",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "6\"",
@@ -421,6 +426,7 @@
     },
     {
       "nombre_unidad": "Centurión de Hierro",
+      "era": "Futuro",
       "clase": "Vehículo",
     "perfil": {
       "movimiento": "6\"",
@@ -465,6 +471,7 @@
     },
     {
       "nombre_unidad": "Comandante Juramentado",
+      "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "6\"",
@@ -563,6 +570,7 @@
     },
     {
       "nombre_unidad": "Arca de Supremacía",
+      "era": "Futuro",
       "clase": "Titán",
       "perfil": {
         "movimiento": "3\"",
@@ -661,6 +669,7 @@
     },
     {
       "nombre_unidad": "Tanque Gladiador",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "7\"",

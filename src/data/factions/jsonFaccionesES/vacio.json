@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Aveformers",
+      "era": "Futuro / Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "7\"",
@@ -36,7 +37,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola sombría",
+            "nombre": "Arma sombría",
             "ataques": "2D",
             "distancia": "8\"",
             "impactos": "+5",
@@ -72,13 +73,14 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 2
           }
         ]
       }
     },
     {
       "nombre_unidad": "Acólitos del Vacío",
+      "era": "Futuro / Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -123,6 +125,7 @@
     },
     {
       "nombre_unidad": "Portadores",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
@@ -182,6 +185,7 @@
     },
     {
       "nombre_unidad": "Terminadores",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
@@ -243,6 +247,7 @@
     },
     {
       "nombre_unidad": "Tejedor del Vacío",
+      "era": "Futuro / Pasado",
       "clase": "Élite",
       "perfil": {
         "movimiento": "8\"",
@@ -310,13 +315,14 @@
               "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 1
           }
         ]
       }
     },
     {
       "nombre_unidad": "Brutálido del vacío",
+      "era": "Futuro / Pasado",
       "clase": "Monstruo",
       "perfil": {
         "movimiento": "7\"",
@@ -365,6 +371,7 @@
     },
     {
       "nombre_unidad": "Horror mayor",
+      "era": "Futuro / Pasado",
       "clase": "Monstruo",
       "perfil": {
         "movimiento": "6\"",
@@ -426,6 +433,7 @@
     },
     {
       "nombre_unidad": "Heraldo del Vacío",
+      "era": "Futuro / Pasado",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "6\"",
@@ -500,6 +508,7 @@
     },
     {
       "nombre_unidad": "Avatar del Vacío",
+      "era": "Futuro",
       "clase": "Titán",
       "perfil": {
         "movimiento": "3\"",

@@ -79,6 +79,45 @@ export const isUnitTypeAllowedInGameMode = (type, gameMode) => {
   return !normalized.includes('vehiculo') && !normalized.includes('vehicle') && !normalized.includes('titan')
 }
 
+const getEraToken = (value) => {
+  const normalized = String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+
+  if (!normalized) return ''
+  if (normalized.includes('futuro') || normalized.includes('future')) return 'future'
+  if (normalized.includes('pasado') || normalized.includes('past')) return 'past'
+  return ''
+}
+
+const splitEraValues = (value) => {
+  if (Array.isArray(value)) return value.filter(Boolean).map((item) => String(item).trim()).filter(Boolean)
+  const raw = String(value || '').trim()
+  if (!raw) return []
+
+  return raw
+    .split(/\s*(?:,|\/|\+| y | and |&)\s*/i)
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
+const normalizeEraEntries = (value) => {
+  const seen = new Set()
+  return splitEraValues(value)
+    .map((label) => ({
+      label,
+      token: getEraToken(label) || 'neutral',
+    }))
+    .filter((entry) => {
+      const key = `${entry.token}:${entry.label.toLowerCase()}`
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+}
+
 const getMaxDisparo = (unit) => {
   const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? unit.perfil?.max_armas_disparo
   if (explicit) return explicit
@@ -105,6 +144,7 @@ const normalizeUnit = (unit, index) => {
     id: unit.id || slugify(unit.nombre_unidad || unit.nombre || `${index}`),
     nombre: unit.nombre_unidad || unit.nombre || `Unidad ${index + 1}`,
     tipo: unit.clase || unit.tipo || 'Línea',
+    eras: normalizeEraEntries(unit.era || unit.zona_temporal || unit.periodo || unit.timeline || ''),
     movimiento: perfil.movimiento ?? unit.movimiento ?? '-',
     vidas: perfil.vidas ?? unit.vidas ?? '-',
     salvacion: String(perfil.salvacion ?? unit.salvacion ?? '-').replace(/^\+?(\d+)\+?$/, '$1+'),

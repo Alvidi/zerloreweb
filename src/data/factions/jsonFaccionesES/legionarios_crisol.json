@@ -1,10 +1,10 @@
 {
   "faccion": {
-    "nombre": "Legionarios del Crisol",
-    "estilo_juego": "Los Legionarios del Crisol son una élite imparable, fanática y extremadamente resistente, capaz de absorber daño que destruiría a tropas normales. Se apoyan en contraataques, salvaciones sólidas y habilidades defensivas que les permiten ganar duelos prolongados. Es la facción perfecta para quienes disfrutan de unidades duras, lentas pero devastadoras, que avanzan sin miedo hacia el enemigo.",
+    "nombre": "Legionarios",
+    "estilo_juego": "Los Legionarios son una élite imparable, fanática y extremadamente resistente, capaz de absorber daño que destruiría a tropas normales. Se apoyan en contraataques, salvaciones sólidas y habilidades defensivas que les permiten ganar duelos prolongados. Es la facción perfecta para quienes disfrutan de unidades duras, lentas pero devastadoras, que avanzan sin miedo hacia el enemigo.",
     "habilidades_faccion": [
       {
-        "habilidades_faccion1": "Gloria del Crisol",
+        "habilidades_faccion1": "Gloria del pretor",
         "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad ignora el primer punto de daño recibido por un ataque a distancia durante ese turno."
       },
       {
@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Soronitas",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -63,7 +64,8 @@
       }
     },
     {
-      "nombre_unidad": "Custodio del Crisol",
+      "nombre_unidad": "Princeps",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "7\"",
@@ -133,7 +135,8 @@
       }
     },
     {
-      "nombre_unidad": "Pretor del Crisol",
+      "nombre_unidad": "Pretorianos",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
@@ -180,6 +183,7 @@
     },
     {
       "nombre_unidad": "Órgano de batalla",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "6\"",
@@ -238,7 +242,8 @@
       }
     },
     {
-      "nombre_unidad": "Paladín del Crisol",
+      "nombre_unidad": "Paladín",
+      "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "5\"",

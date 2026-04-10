@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Scrap metal dealers",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -90,6 +91,7 @@
     },
     {
       "nombre_unidad": "Torments",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "9\"",
@@ -164,6 +166,7 @@
     },
     {
       "nombre_unidad": "Beasts",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
@@ -247,6 +250,7 @@
     },
     {
       "nombre_unidad": "Great Makineros",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
@@ -358,6 +362,7 @@
     },
     {
       "nombre_unidad": "Clan Brutes",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
@@ -392,6 +397,7 @@
     },
     {
       "nombre_unidad": "Tronkatank",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "8\"",
@@ -462,6 +468,7 @@
     },
     {
       "nombre_unidad": "Big shot",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "-",
@@ -521,6 +528,7 @@
     },
     {
       "nombre_unidad": "Horde Chief",
+      "era": "Future",
       "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
@@ -621,6 +629,7 @@
     },
     {
       "nombre_unidad": "World-Devourer",
+      "era": "Future",
       "clase": "Titan",
       "perfil": {
         "movimiento": "2\"",

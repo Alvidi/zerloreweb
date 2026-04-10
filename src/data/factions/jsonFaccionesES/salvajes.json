@@ -20,6 +20,7 @@
   "unidades": [
     {
       "nombre_unidad": "Chatarreros",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -90,6 +91,7 @@
     },
     {
       "nombre_unidad": "Tormentos",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "9\"",
@@ -164,6 +166,7 @@
     },
     {
       "nombre_unidad": "Bestiajos",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
@@ -247,6 +250,7 @@
     },
     {
       "nombre_unidad": "Grandes Makineros",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
@@ -358,6 +362,7 @@
     },
     {
       "nombre_unidad": "Brutos del Clan",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
@@ -392,6 +397,7 @@
     },
     {
       "nombre_unidad": "Tronkatank",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "8\"",
@@ -462,6 +468,7 @@
     },
     {
       "nombre_unidad": "Gran cañonazo",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "-",
@@ -521,6 +528,7 @@
     },
     {
       "nombre_unidad": "Jefe de la Horda",
+      "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "6\"",
@@ -621,6 +629,7 @@
     },
     {
       "nombre_unidad": "Debora-mundos",
+      "era": "Futuro",
       "clase": "Titán",
       "perfil": {
         "movimiento": "2\"",

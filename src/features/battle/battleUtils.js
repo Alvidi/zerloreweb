@@ -81,6 +81,45 @@ const getMaxRangedWeapons = (unit, profile) => {
   return 1
 }
 
+const getEraToken = (value) => {
+  const normalized = String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+
+  if (!normalized) return ''
+  if (normalized.includes('futuro') || normalized.includes('future')) return 'future'
+  if (normalized.includes('pasado') || normalized.includes('past')) return 'past'
+  return ''
+}
+
+const splitEraValues = (value) => {
+  if (Array.isArray(value)) return value.filter(Boolean).map((item) => String(item).trim()).filter(Boolean)
+  const raw = String(value || '').trim()
+  if (!raw) return []
+
+  return raw
+    .split(/\s*(?:,|\/|\+| y | and |&)\s*/i)
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
+const normalizeEraEntries = (value) => {
+  const seen = new Set()
+  return splitEraValues(value)
+    .map((label) => ({
+      label,
+      token: getEraToken(label) || 'neutral',
+    }))
+    .filter((entry) => {
+      const key = `${entry.token}:${entry.label.toLowerCase()}`
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+}
+
 const normalizeUnit = (unit, index) => {
   const profile = unit.perfil || {}
   const rangedWeapons = (unit.armas?.disparo || []).map((weapon) => normalizeWeapon(weapon, 'ranged'))
@@ -94,6 +133,7 @@ const normalizeUnit = (unit, index) => {
     id: unit.id || slugify(unit.nombre_unidad || `unidad-${index + 1}`),
     name: unit.nombre_unidad || `Unidad ${index + 1}`,
     type: unit.clase || 'Línea',
+    eras: normalizeEraEntries(unit.era || unit.zona_temporal || unit.periodo || unit.timeline || ''),
     movement: profile.movimiento ?? unit.movimiento ?? '-',
     hp: Math.max(1, toNumber(profile.vidas, 1)),
     saveLabel: String(profile.salvacion ?? unit.salvacion ?? '+4').replace(/^\+?(\d+)\+?$/, '$1+'),
