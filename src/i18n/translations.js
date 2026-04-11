@@ -5,6 +5,8 @@ export const translations = {
       rules: 'Reglamento',
       generator: 'Generador',
       discord: 'Discord',
+      youtube: 'YouTube',
+      instagram: 'Instagram',
     },
     footer: {
       madeBy: 'hecho por alvidi91',
@@ -226,6 +228,8 @@ export const translations = {
       rules: 'Rules',
       generator: 'Generator',
       discord: 'Discord',
+      youtube: 'YouTube',
+      instagram: 'Instagram',
     },
     footer: {
       madeBy: 'made by alvidi91',
