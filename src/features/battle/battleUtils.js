@@ -54,7 +54,7 @@ const normalizeWeapon = (weapon, kind) => {
 
 const getFactionAbilityName = (ability) => {
   if (!ability || typeof ability !== 'object') return ''
-  const nameKey = Object.keys(ability).find((key) => key !== 'descripcion')
+  const nameKey = Object.keys(ability).find((key) => key !== 'id' && key !== 'descripcion')
   return nameKey ? String(ability[nameKey] || '').trim() : ''
 }
 

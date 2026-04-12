@@ -4,16 +4,30 @@
     "estilo_juego": "Los Salvajes son la facción más impredecible y brutal del juego, una mezcla de chatarra, fuerza bruta y agresividad descontrolada. Sus unidades se mueven rápido, pegan fuerte y generan muchos dados aleatorios, capaces de causar estragos en combate cuerpo a cuerpo. Funcionan mejor en manos de jugadores que disfrutan del caos, el riesgo y la ofensiva constante, aunque sacrifican precisión y defensa.",
     "habilidades_faccion": [
       {
+        "id": "furia-incontrolada",
         "habilidades_faccion1": "Furia Incontrolada",
         "descripcion": "Una unidad Salvaje que carga, gana +1 Ataque en cuerpo a cuerpo."
       },
       {
+        "id": "descontrol-de-plebeyos",
         "habilidades_faccion2": "Descontrol de plebeyos",
         "descripcion": "Antes de cada activacion la unidad/escuadra de Línea Salvaje debe lanzar un 1D6, si este saca 1, la unidad termina directamente su activacion sin poder realizar acciones."
       },
       {
+        "id": "violencia-tribal",
         "habilidades_faccion3": "Violencia Tribal",
         "descripcion": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\" (este movimiento no provoca chequeos ni cuenta como acción)."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "furia-ancestral",
+        "nombre": "1. Furia ancestral",
+        "habilidades": [
+          "furia-incontrolada",
+          "descontrol-de-plebeyos",
+          "violencia-tribal"
+        ]
       }
     ]
   },

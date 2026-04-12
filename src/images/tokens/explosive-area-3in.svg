@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
     <radialGradient id="bgGlow" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#341111"/>
-      <stop offset="55%" stop-color="#1d0c0c"/>
-      <stop offset="100%" stop-color="#0a090b"/>
+      <stop offset="0%" stop-color="#3a1212"/>
+      <stop offset="55%" stop-color="#260d0d"/>
+      <stop offset="100%" stop-color="#12080b"/>
     </radialGradient>
     <radialGradient id="coreGlow" cx="50%" cy="50%" r="62%">
-      <stop offset="0%" stop-color="#ffd2d2"/>
-      <stop offset="30%" stop-color="#ff8b8b"/>
-      <stop offset="68%" stop-color="#e24f4f"/>
+      <stop offset="0%" stop-color="#ffe4d9"/>
+      <stop offset="30%" stop-color="#ff9f7f"/>
+      <stop offset="68%" stop-color="#d43d30"/>
       <stop offset="100%" stop-color="#7d2222"/>
     </radialGradient>
     <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffc4c4"/>
-      <stop offset="45%" stop-color="#ef6666"/>
-      <stop offset="100%" stop-color="#b93838"/>
+      <stop offset="0%" stop-color="#ffc3b2"/>
+      <stop offset="45%" stop-color="#ff7f5a"/>
+      <stop offset="100%" stop-color="#d43d30"/>
     </linearGradient>
   </defs>
 
   <circle cx="512" cy="512" r="496" fill="url(#bgGlow)" />
-  <circle cx="512" cy="512" r="470" fill="none" stroke="#f4f4f4" stroke-opacity="0.18" stroke-width="4" />
+  <circle cx="512" cy="512" r="470" fill="none" stroke="#ffe9e1" stroke-opacity="0.18" stroke-width="4" />
   <circle cx="512" cy="512" r="418" fill="none" stroke="url(#ringGrad)" stroke-width="20" />
-  <circle cx="512" cy="512" r="390" fill="none" stroke="#ffb1b1" stroke-opacity="0.35" stroke-width="4" />
-  <circle cx="512" cy="512" r="320" fill="none" stroke="#ffb1b1" stroke-opacity="0.26" stroke-width="2.5" stroke-dasharray="8 14" />
-  <circle cx="512" cy="512" r="248" fill="none" stroke="#ffb1b1" stroke-opacity="0.22" stroke-width="2" stroke-dasharray="6 13" />
+  <circle cx="512" cy="512" r="390" fill="none" stroke="#ffc8b6" stroke-opacity="0.35" stroke-width="4" />
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#ffc8b6" stroke-opacity="0.26" stroke-width="2.5" stroke-dasharray="8 14" />
+  <circle cx="512" cy="512" r="248" fill="none" stroke="#ffc8b6" stroke-opacity="0.22" stroke-width="2" stroke-dasharray="6 13" />
 
-  <g fill="url(#coreGlow)" stroke="#ffd3d3" stroke-opacity="0.55" stroke-width="4">
+  <g fill="url(#coreGlow)" stroke="#ffc3b2" stroke-opacity="0.55" stroke-width="4">
     <path d="M512 274 552 408 686 366 614 486 748 530 612 558 680 678 550 628 512 760 472 628 346 684 410 558 276 524 406 484 340 362 474 408z"/>
   </g>
 
-  <g fill="#ffcaca" fill-opacity="0.82">
+  <g fill="#ffc8b6" fill-opacity="0.82">
     <circle cx="324" cy="454" r="18"/>
     <circle cx="688" cy="422" r="14"/>
     <circle cx="714" cy="586" r="20"/>
@@ -38,7 +38,7 @@
     <circle cx="526" cy="696" r="15"/>
   </g>
 
-  <circle cx="512" cy="512" r="140" fill="#fff0f0" fill-opacity="0.16" />
-  <circle cx="512" cy="512" r="96" fill="#fff0f0" fill-opacity="0.14" />
+  <circle cx="512" cy="512" r="140" fill="#fff0e8" fill-opacity="0.16" />
+  <circle cx="512" cy="512" r="96" fill="#fff0e8" fill-opacity="0.14" />
 
 </svg>

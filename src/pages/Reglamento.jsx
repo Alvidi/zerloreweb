@@ -5,6 +5,7 @@ import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
 import misionesEnMd from '../data/english/missions.md?raw'
+import { doctrineCatalog, DOCTRINE_TOKEN_DIAMETER_MM } from '../data/doctrines/doctrineCatalog.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
@@ -20,66 +21,11 @@ import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
-import doctrineGarrotazoEs from '../images/tokens/doctrines/es/garrotazo.svg'
-import doctrineApuntadoEs from '../images/tokens/doctrines/es/apuntado.svg'
-import doctrineFrenesiEs from '../images/tokens/doctrines/es/frenesi.svg'
-import doctrineAgilidadEnCombateEs from '../images/tokens/doctrines/es/agilidad-en-combate.svg'
-import doctrineNuestraEsLaVictoriaEs from '../images/tokens/doctrines/es/nuestra-es-la-victoria.svg'
-import doctrineReaccionInmediataEs from '../images/tokens/doctrines/es/reaccion-inmediata.svg'
-import doctrineMasQueCargadoEs from '../images/tokens/doctrines/es/mas-que-cargado.svg'
-import doctrineUnaNuevaOportunidadEs from '../images/tokens/doctrines/es/una-nueva-oportunidad.svg'
-import doctrineCombateAMuerteEs from '../images/tokens/doctrines/es/combate-a-muerte.svg'
-import doctrineGarrotazoEn from '../images/tokens/doctrines/en/garrotazo.svg'
-import doctrineApuntadoEn from '../images/tokens/doctrines/en/apuntado.svg'
-import doctrineFrenesiEn from '../images/tokens/doctrines/en/frenesi.svg'
-import doctrineAgilidadEnCombateEn from '../images/tokens/doctrines/en/agilidad-en-combate.svg'
-import doctrineNuestraEsLaVictoriaEn from '../images/tokens/doctrines/en/nuestra-es-la-victoria.svg'
-import doctrineReaccionInmediataEn from '../images/tokens/doctrines/en/reaccion-inmediata.svg'
-import doctrineMasQueCargadoEn from '../images/tokens/doctrines/en/mas-que-cargado.svg'
-import doctrineUnaNuevaOportunidadEn from '../images/tokens/doctrines/en/una-nueva-oportunidad.svg'
-import doctrineCombateAMuerteEn from '../images/tokens/doctrines/en/combate-a-muerte.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
-const DOCTRINE_TOKEN_DIAMETER_MM = 32
-
-const DOCTRINE_TOKENS = [
-  { id: 'garrotazo', labelKey: 'rules.tokens.types.doctrineGarrotazo' },
-  { id: 'apuntado', labelKey: 'rules.tokens.types.doctrineApuntado' },
-  { id: 'frenesi', labelKey: 'rules.tokens.types.doctrineFrenesi' },
-  { id: 'agilidad-en-combate', labelKey: 'rules.tokens.types.doctrineAgilidadEnCombate' },
-  { id: 'nuestra-es-la-victoria', labelKey: 'rules.tokens.types.doctrineNuestraEsLaVictoria' },
-  { id: 'reaccion-inmediata', labelKey: 'rules.tokens.types.doctrineReaccionInmediata' },
-  { id: 'mas-que-cargado', labelKey: 'rules.tokens.types.doctrineMasQueCargado' },
-  { id: 'una-nueva-oportunidad', labelKey: 'rules.tokens.types.doctrineUnaNuevaOportunidad' },
-  { id: 'combate-a-muerte', labelKey: 'rules.tokens.types.doctrineCombateAMuerte' },
-]
-
-const DOCTRINE_TOKEN_IMAGES = {
-  garrotazo: { es: doctrineGarrotazoEs, en: doctrineGarrotazoEn },
-  apuntado: { es: doctrineApuntadoEs, en: doctrineApuntadoEn },
-  frenesi: { es: doctrineFrenesiEs, en: doctrineFrenesiEn },
-  'agilidad-en-combate': { es: doctrineAgilidadEnCombateEs, en: doctrineAgilidadEnCombateEn },
-  'nuestra-es-la-victoria': { es: doctrineNuestraEsLaVictoriaEs, en: doctrineNuestraEsLaVictoriaEn },
-  'reaccion-inmediata': { es: doctrineReaccionInmediataEs, en: doctrineReaccionInmediataEn },
-  'mas-que-cargado': { es: doctrineMasQueCargadoEs, en: doctrineMasQueCargadoEn },
-  'una-nueva-oportunidad': { es: doctrineUnaNuevaOportunidadEs, en: doctrineUnaNuevaOportunidadEn },
-  'combate-a-muerte': { es: doctrineCombateAMuerteEs, en: doctrineCombateAMuerteEn },
-}
-
-const DOCTRINE_GALLERY_LABELS = {
-  garrotazo: { es: 'Garrotazo', en: 'Clubbing Blow' },
-  apuntado: { es: 'Apuntado', en: 'Aimed Shot' },
-  frenesi: { es: 'Frenesí', en: 'Frenzy' },
-  'agilidad-en-combate': { es: 'Agilidad en combate', en: 'Combat Agility' },
-  'nuestra-es-la-victoria': { es: 'Nuestra es la victoria', en: 'Ours is the Victory' },
-  'reaccion-inmediata': { es: 'Reacción inmediata', en: 'Immediate Reaction' },
-  'mas-que-cargado': { es: 'Más que cargado', en: 'Overcharged' },
-  'una-nueva-oportunidad': { es: 'Una nueva oportunidad', en: 'Second Chance' },
-  'combate-a-muerte': { es: 'Combate a muerte', en: 'Fight to the Death' },
-}
 
 const normalizeHeadingText = (value) =>
   String(value || '')
@@ -167,16 +113,21 @@ const TOKEN_DEFINITIONS = [
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  ...DOCTRINE_TOKENS.map((token) => ({
-    id: `doctrine_${token.id.replaceAll('-', '_')}`,
+  { id: 'command_circle_6_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_square_6_blue', category: 'command', shape: 'square', commandColor: 'blue', labelKey: 'rules.tokens.types.commandSquare6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_6_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_square_6_red', category: 'command', shape: 'square', commandColor: 'red', labelKey: 'rules.tokens.types.commandSquare6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  ...doctrineCatalog.map((doctrine) => ({
+    id: `doctrine_${doctrine.id.replaceAll('-', '_')}`,
     category: 'doctrine',
     shape: 'circle',
-    labelKey: token.labelKey,
     diameterMm: DOCTRINE_TOKEN_DIAMETER_MM,
     previewSize: 'medium',
-    imageSrc: DOCTRINE_TOKEN_IMAGES[token.id]?.es || '',
-    imageSrcEs: DOCTRINE_TOKEN_IMAGES[token.id]?.es || '',
-    imageSrcEn: DOCTRINE_TOKEN_IMAGES[token.id]?.en || '',
+    imageSrc: doctrine.images.es || '',
+    imageSrcEs: doctrine.images.es || '',
+    imageSrcEn: doctrine.images.en || '',
+    labelEs: doctrine.tokenLabel.es,
+    labelEn: doctrine.tokenLabel.en,
   })),
 ]
 
@@ -214,8 +165,14 @@ function Reglamento() {
           token.category === 'doctrine'
             ? (lang === 'en' ? token.imageSrcEn : token.imageSrcEs) || token.imageSrc
             : token.imageSrc,
-        label: t(token.labelKey),
-        primaryText: token.primaryText || t(token.labelKey),
+        label:
+          token.category === 'doctrine'
+            ? (lang === 'en' ? token.labelEn : token.labelEs) || token.labelEs || token.labelEn || ''
+            : t(token.labelKey),
+        primaryText:
+          token.category === 'doctrine'
+            ? (lang === 'en' ? token.labelEn : token.labelEs) || token.labelEs || token.labelEn || ''
+            : token.primaryText || t(token.labelKey),
         secondaryText: token.secondaryKey ? t(token.secondaryKey) : '',
       })),
     [t, lang],
@@ -334,7 +291,7 @@ function Reglamento() {
       if (doctrineHeading) {
         const gallery = doc.createElement('div')
         gallery.className = 'rules-doctrine-gallery'
-        DOCTRINE_TOKENS.forEach((token) => {
+        doctrineCatalog.forEach((doctrine) => {
           const item = doc.createElement('article')
           item.className = 'rules-doctrine-gallery-item'
 
@@ -343,13 +300,13 @@ function Reglamento() {
 
           const image = doc.createElement('img')
           image.className = 'rules-doctrine-gallery-image'
-          image.src = DOCTRINE_TOKEN_IMAGES[token.id]?.[lang] || DOCTRINE_TOKEN_IMAGES[token.id]?.es || ''
-          image.alt = DOCTRINE_GALLERY_LABELS[token.id]?.[lang] || DOCTRINE_GALLERY_LABELS[token.id]?.es || ''
+          image.src = doctrine.images[lang] || doctrine.images.es || ''
+          image.alt = doctrine.nombre[lang] || doctrine.nombre.es || ''
           image.loading = 'lazy'
 
           const label = doc.createElement('p')
           label.className = 'rules-doctrine-gallery-label'
-          label.textContent = DOCTRINE_GALLERY_LABELS[token.id]?.[lang] || DOCTRINE_GALLERY_LABELS[token.id]?.es || ''
+          label.textContent = doctrine.nombre[lang] || doctrine.nombre.es || ''
 
           imageWrap.appendChild(image)
           item.appendChild(imageWrap)
@@ -1541,6 +1498,7 @@ function Reglamento() {
             outerGlow: [189, 223, 255],
             dashed: [170, 212, 255],
             centerFill: [18, 28, 48],
+            showInteriorDetails: true,
           }
         }
         if (commandColor === 'red') {
@@ -1549,13 +1507,15 @@ function Reglamento() {
             outerGlow: [255, 204, 204],
             dashed: [255, 182, 182],
             centerFill: [44, 18, 18],
+            showInteriorDetails: true,
           }
         }
         return {
-          accent: [255, 143, 69],
-          outerGlow: [255, 205, 160],
-          dashed: [255, 203, 156],
+          accent: [170, 176, 188],
+          outerGlow: [212, 216, 224],
+          dashed: [188, 194, 203],
           centerFill: [22, 27, 38],
+          showInteriorDetails: false,
         }
       }
 
@@ -1603,32 +1563,36 @@ function Reglamento() {
           if (isSquare) {
             const outerRadius = Math.max(3.4, token.diameterMm * 0.08)
             doc.roundedRect(centerX - outerSize / 2, centerY - outerSize / 2, outerSize, outerSize, outerRadius, outerRadius, 'FD')
-            const innerSize = token.diameterMm * 0.86
-            const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
-            doc.setDrawColor(...commandPalette.outerGlow)
-            doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-            doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
-            const dashSize = token.diameterMm * 0.66
-            const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
-            doc.setDrawColor(...commandPalette.dashed)
-            doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-            doc.setLineDashPattern([1.1, 1.6], 0)
-            doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
-            doc.setLineDashPattern([], 0)
-            doc.setFillColor(...commandPalette.centerFill)
-            doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
+            if (commandPalette.showInteriorDetails) {
+              const innerSize = token.diameterMm * 0.86
+              const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
+              doc.setDrawColor(...commandPalette.outerGlow)
+              doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+              doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
+              const dashSize = token.diameterMm * 0.66
+              const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
+              doc.setDrawColor(...commandPalette.dashed)
+              doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+              doc.setLineDashPattern([1.1, 1.6], 0)
+              doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
+              doc.setLineDashPattern([], 0)
+              doc.setFillColor(...commandPalette.centerFill)
+              doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
+            }
           } else {
             doc.circle(centerX, centerY, radius + borderGrow, 'FD')
-            doc.setDrawColor(...commandPalette.outerGlow)
-            doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-            doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
-            doc.setDrawColor(...commandPalette.dashed)
-            doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-            doc.setLineDashPattern([1.1, 1.6], 0)
-            doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
-            doc.setLineDashPattern([], 0)
-            doc.setFillColor(...commandPalette.centerFill)
-            doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
+            if (commandPalette.showInteriorDetails) {
+              doc.setDrawColor(...commandPalette.outerGlow)
+              doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+              doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
+              doc.setDrawColor(...commandPalette.dashed)
+              doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+              doc.setLineDashPattern([1.1, 1.6], 0)
+              doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
+              doc.setLineDashPattern([], 0)
+              doc.setFillColor(...commandPalette.centerFill)
+              doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
+            }
           }
 
           const maxLogoW = Math.min(token.diameterMm * 0.72, 90)

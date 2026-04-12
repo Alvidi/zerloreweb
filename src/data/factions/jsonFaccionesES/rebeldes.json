@@ -1,25 +1,40 @@
 {
   "faccion": {
-    "nombre": "Rebeldes",
-    "estilo_juego": "Los Rebeldes destacan por su movilidad extrema, armas exóticas y estilos de combate ágiles tanto a distancia como en cuerpo a cuerpo. Sus tropas reposicionan con facilidad, esquivan daño y castigan al enemigo con ataques precisos o ráfagas de energía inestable, pero son frágiles y deben evitar enfrentamientos directos prolongados. Una facción ideal para jugadores tácticos que disfrutan del \"golpea y muévete\", de romper líneas y de atacar desde ángulos inesperados.",
+    "nombre": "Místicos",
+    "estilo_juego": "Los místicos destacan por su movilidad extrema, armas exóticas y estilos de combate ágiles tanto a distancia como en cuerpo a cuerpo. Sus tropas reposicionan con facilidad, esquivan daño y castigan al enemigo con ataques precisos o ráfagas de energía inestable, pero son frágiles y deben evitar enfrentamientos directos prolongados. Una facción ideal para jugadores tácticos que disfrutan del \"golpea y muévete\", de romper líneas y de atacar desde ángulos inesperados.",
     "habilidades_faccion": [
       {
+        "id": "guerrilla-en-las-sombras",
         "habilidades_faccion1": "Guerrilla en las sombras",
-        "descripcion": "Esta facción puede desplegar sus unidades/escuadras de línea y Vehículos fuera de la zona de despliegue, a 9\" del enemigo y de puestos de mando u objetivos."
+        "descripcion": "Esta facción puede desplegar sus unidades/escuadras de línea y Vehículos a 8\" de sus puestos de mando."
       },
       {
+        "id": "finta",
         "habilidades_faccion2": "Finta",
         "descripcion": "Esta facción no puede usar la acción Preparado. Cuando una unidad Rebelde recibe un ataque a distancia, puede realizar inmediatamente un disparo de respuesta gratuito. Si esa misma unidad recibe otro ataque a distancia durante el mismo turno, no puede volver a responder."
       },
       {
+        "id": "nadie-se-para",
         "habilidades_faccion3": "Nadie se para",
         "descripcion": "esta facción siempre tiene que gastar una acción de movimiento de 3\", a excepción si carga o está trabada en combate cuerpo a cuerpo"
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "avance-desafio",
+        "nombre": "1. Avance del desafío",
+        "habilidades": [
+          "guerrilla-en-las-sombras",
+          "finta",
+          "nadie-se-para"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Exploradores del Eco",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "9\"",
@@ -107,6 +122,7 @@
     },
     {
       "nombre_unidad": "Saqueadores del Vacío",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "8\"",
@@ -192,6 +208,7 @@
     },
     {
       "nombre_unidad": "Espectros filo-sombra",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "8\"",
@@ -278,6 +295,7 @@
     },
     {
       "nombre_unidad": "Fenix",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "12\"",
@@ -350,6 +368,7 @@
     },
     {
       "nombre_unidad": "Caminante espectral",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "6\"",
@@ -424,6 +443,7 @@
     },
     {
       "nombre_unidad": "Líder de la Insurrección",
+      "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "7\"",

@@ -1,0 +1,58 @@
+{
+  "doctrinas": [
+    {
+      "id": "garrotazo",
+      "nombre": "Garrotazo",
+      "token_label": "Doctrina: Garrotazo",
+      "orden": 1
+    },
+    {
+      "id": "apuntado",
+      "nombre": "Apuntado",
+      "token_label": "Doctrina: Apuntado",
+      "orden": 2
+    },
+    {
+      "id": "frenesi",
+      "nombre": "Frenesí",
+      "token_label": "Doctrina: Frenesí",
+      "orden": 3
+    },
+    {
+      "id": "agilidad-en-combate",
+      "nombre": "Agilidad en combate",
+      "token_label": "Doctrina: Agilidad en combate",
+      "orden": 4
+    },
+    {
+      "id": "nuestra-es-la-victoria",
+      "nombre": "Nuestra es la victoria",
+      "token_label": "Doctrina: Nuestra es la victoria",
+      "orden": 5
+    },
+    {
+      "id": "reaccion-inmediata",
+      "nombre": "Reacción inmediata",
+      "token_label": "Doctrina: Reacción inmediata",
+      "orden": 6
+    },
+    {
+      "id": "mas-que-cargado",
+      "nombre": "Más que cargado",
+      "token_label": "Doctrina: Más que cargado",
+      "orden": 7
+    },
+    {
+      "id": "una-nueva-oportunidad",
+      "nombre": "Una nueva oportunidad",
+      "token_label": "Doctrina: Una nueva oportunidad",
+      "orden": 8
+    },
+    {
+      "id": "combate-a-muerte",
+      "nombre": "Combate a muerte",
+      "token_label": "Doctrina: Combate a muerte",
+      "orden": 9
+    }
+  ]
+}

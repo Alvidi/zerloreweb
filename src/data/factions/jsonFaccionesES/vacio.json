@@ -4,16 +4,30 @@
     "estilo_juego": "El Vacío es una facción de control, posicionamiento y daño de vacío, especializada en manipular el campo de batalla y castigar al enemigo desde ángulos inesperados. Sus unidades combinan armamento que ignora defensas, resistencia antinatural y efectos de desestabilización, sacrificando velocidad bruta por presión constante y letalidad puntual. Funciona mejor en manos de jugadores que disfrutan anticipándose al rival, forzando errores y dominando el ritmo de la partida mediante teletransportes y fuego selectivo.",
     "habilidades_faccion": [
       {
+        "id": "portales-del-vacio",
         "habilidades_faccion1": "Portales del vacío",
         "descripcion": "Una vez por turno, durante la activación de una unidad aliada, esta puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos unidades puede estar trabada."
       },
       {
+        "id": "ojos-del-mas-alla",
         "habilidades_faccion2": "Ojos del más allá",
         "descripcion": "Las unidades del vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura."
       },
       {
+        "id": "heraldos-del-vacio-supremo",
         "habilidades_faccion3": "Heraldos del vacío supremo",
         "descripcion": "Esta facción puede usar dos héroes."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "portal-desafio",
+        "nombre": "1. Portal del desafío",
+        "habilidades": [
+          "portales-del-vacio",
+          "ojos-del-mas-alla",
+          "heraldos-del-vacio-supremo"
+        ]
       }
     ]
   },
@@ -508,7 +522,7 @@
     },
     {
       "nombre_unidad": "Avatar del Vacío",
-      "era": "Futuro",
+      "era": "Futuro / Pasado",
       "clase": "Titán",
       "perfil": {
         "movimiento": "3\"",

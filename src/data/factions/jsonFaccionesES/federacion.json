@@ -1,25 +1,40 @@
 {
   "faccion": {
-    "nombre": "La Federación",
-    "estilo_juego": "La Federación es una fuerza militar disciplinada centrada en el disparo estable, el uso de coberturas y el control táctico del campo de batalla. Sus unidades funcionan mejor cuando se mantienen organizadas, aprovechando armas pesadas y fuego apoyado, aunque sacrifican movilidad y capacidad de combate cuerpo a cuerpo. Son ideales para jugadores que prefieren estrategias metódicas, fuego defensivo y ganar por posicionamiento.",
+    "nombre": "El Imperio",
+    "estilo_juego": "El Imperio es una fuerza militar disciplinada centrada en el disparo estable, el uso de coberturas y el control táctico del campo de batalla. Sus unidades funcionan mejor cuando se mantienen organizadas, aprovechando armas pesadas y fuego apoyado, aunque sacrifican movilidad y capacidad de combate cuerpo a cuerpo. Son ideales para jugadores que prefieren estrategias metódicas, fuego defensivo y ganar por posicionamiento.",
     "habilidades_faccion": [
       {
+        "id": "atrincheramiento",
         "habilidades_faccion1": "Atrincheramiento",
         "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación."
       },
       {
+        "id": "refuerzos-rasos",
         "habilidades_faccion2": "Refuerzos rasos",
         "descripcion": "Una vez por partida, cuando una unidad de Línea de esta facción es eliminada por completo, puedes devolverla al campo a la zona de despliegue de tu siguiente fase de Iniciativa."
       },
       {
+        "id": "furia-de-los-caidos",
         "habilidades_faccion3": "Furia de los Caídos",
         "descripcion": "Cuando una unidad cae de una escuadra, la escuadra entera gana +1 de ataque adicional en el ataque total. En Escaramuza, las unidades a 6\" ganan un +1 de ataque adicional, hasta final de turno."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "tierra-sacrificio",
+        "nombre": "1. Tierra y sacrificio",
+        "habilidades": [
+          "atrincheramiento",
+          "refuerzos-rasos",
+          "furia-de-los-caidos"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Soldados rasos",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -64,6 +79,7 @@
     },
     {
       "nombre_unidad": "Veteranos de guerra",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "6\"",
@@ -147,6 +163,7 @@
     },
     {
       "nombre_unidad": "Soldado de choque",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
@@ -204,6 +221,7 @@
     },
     {
       "nombre_unidad": "Bruto",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
@@ -250,6 +268,7 @@
     },
     {
       "nombre_unidad": "Raiders",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "8\"",
@@ -320,6 +339,7 @@
     },
     {
       "nombre_unidad": "Equipo de Armas Pesadas",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "4\"",
@@ -383,7 +403,7 @@
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
-            "danio": "1",
+            "danio": "0",
             "danio_critico": "1",
             "habilidades_arma": [],
             "especialidad": "-",
@@ -394,6 +414,7 @@
     },
     {
       "nombre_unidad": "Rameu-Russ",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "6\"",
@@ -480,6 +501,7 @@
     },
     {
       "nombre_unidad": "Cañón flatt-8",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "-",
@@ -540,6 +562,7 @@
     },
     {
       "nombre_unidad": "General",
+      "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "6\"",
@@ -601,6 +624,7 @@
     },
     {
       "nombre_unidad": "Bastión de Asedio",
+      "era": "Futuro",
       "clase": "Titán",
       "perfil": {
         "movimiento": "1\"",

@@ -2,7 +2,7 @@
 
 Before starting, players agree on:
 
-- The **number of command posts** to place on the table, these will be used to deploy units into the battle
+- The **number of command posts** to place on the table and where, these will be used to deploy units into the battle
 - The **number of turns**
 - Each player's **total army value**
 - The **game mode** — Skirmish or Squads
@@ -78,15 +78,19 @@ Command posts are deployed normally. Each player assigns one of their posts as a
 
 ---
 
-## Mission 5: Assault
+## Mission 5: Relics of Power
 
-_One attacks. One endures._
+_Dominate the centre, dominate the battle._
 
-Before the battle the players decide who is the **Attacker** and who is the **Defender**, or roll for it. The Defender places all command posts, each one must be 10" apart, and deploys X units from them first. The Attacker only has one command post and deploys their entire army directly from that command post.
+Command posts are deployed normally and serve only to deploy units — they cannot be captured or scored in this mission. In addition, a **Central Zone** of at least **6"x6"** is defined at the centre of the table, agreed by the players before the battle. Finally, 4 relics are placed at the 4 corners of the table at the start of the game.
 
-**Attacker victory:** If at the end of the game they control more posts than the Defender, they win.
+**Picking up a relic:** Any Line, Elite, or Hero unit may pick up a relic by moving into contact with it. The bearer may only use the move action — they may only attack if charged into melee combat.
 
-**Defender victory:** If the game ends with the Defender controlling at least as many posts as the Attacker, the Defender wins.
+**Scoring:** At the end of each turn, each relic inside the Central Zone scores **X points** for the player carrying it. If the relic is not inside the Central Zone, it does not score.
+
+**If the bearer dies:** The relic automatically returns to its corner of origin. Any unit may pick it up again by moving into contact with it.
+
+**Victory:** The player with the most points at the end of the game wins.
 
 ---
 
@@ -98,8 +102,10 @@ Command posts are deployed normally and score normally at the end of each turn. 
 
 **Picking up the Relic:** Any Line, Elite, or Hero unit that moves into contact with the Relic may carry it. The bearer may only use the move action — it may only attack if charged into melee combat.
 
-**If the bearer dies or enters retreat:** The Relic returns to its agreed position on the table. Any other unit may pick it up during its next activation.
+**Bonus scoring:** At the end of each turn, the player carrying the Relic scores **X additional points**, regardless of command posts controlled.
 
-**Bonus scoring:** At the end of each turn, the player who brings the Relic to a command post scores X **additional points**, regardless of command posts. The Relic then returns to the position agreed by the players.
+**If the bearer dies in melee combat:** The Relic automatically passes to the unit or squad that eliminated them.
+
+**If the bearer dies from ranged fire:** The Relic falls where they died. Any unit may pick it up during its next activation by moving into contact with it.
 
 **Victory:** The player with the most points at the end of the game wins. There is no immediate victory — the Relic is constant pressure throughout the battle.

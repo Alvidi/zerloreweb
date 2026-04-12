@@ -4,16 +4,30 @@
     "estilo_juego": "The Wildlings are the most unpredictable and brutal faction in the game, a mix of scrap metal, brute force, and uncontrolled aggression. Their units move fast, hit hard, and generate lots of random dice, capable of wreaking havoc in close combat. They work best in the hands of players who enjoy chaos, risk, and constant offense, although they sacrifice precision and defense.",
     "habilidades_faccion": [
       {
+        "id": "furia-incontrolada",
         "habilidades_faccion1": "Uncontrolled Fury",
         "descripcion": "A charging Wild unit gains +1 Attack in melee."
       },
       {
+        "id": "descontrol-de-plebeyos",
         "habilidades_faccion2": "commoner riot",
         "descripcion": "Before each activation, the Wild Line unit/squad must roll 1D6. If it rolls a 1, that unit immediately ends its activation and cannot perform actions."
       },
       {
+        "id": "violencia-tribal",
         "habilidades_faccion3": "Tribal Violence",
         "descripcion": "The first time per turn that a Wild unit eliminates an enemy unit in close combat, it may immediately move 2\" (this movement does not trigger checks and does not count as an action)."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "furia-ancestral",
+        "nombre": "1. Ancestral Fury",
+        "habilidades": [
+          "furia-incontrolada",
+          "descontrol-de-plebeyos",
+          "violencia-tribal"
+        ]
       }
     ]
   },

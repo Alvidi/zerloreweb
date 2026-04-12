@@ -4,16 +4,30 @@
     "estilo_juego": "The Void is a void control, positioning, and damage faction, specializing in manipulating the battlefield and punishing the enemy from unexpected angles. Their units combine defense-ignoring weaponry, unnatural resistance, and destabilization effects, sacrificing raw speed for constant pressure and punctual lethality. It works best in the hands of players who enjoy anticipating the opponent, forcing mistakes, and dominating the pace of the game through teleports and selective fire.",
     "habilidades_faccion": [
       {
+        "id": "portales-del-vacio",
         "habilidades_faccion1": "Void Portals",
         "descripcion": "Once per turn, during the activation of an allied unit, it may spend 1 action to swap its position with another allied Line, Elite, or Hero unit within 18\" or less. Neither unit may be locked in combat."
       },
       {
+        "id": "ojos-del-mas-alla",
         "habilidades_faccion2": "Eyes from Beyond",
         "descripcion": "Void units can reroll failed Hit rolls if the enemy unit is in cover."
       },
       {
+        "id": "heraldos-del-vacio-supremo",
         "habilidades_faccion3": "Heralds of the Supreme Void",
         "descripcion": "This faction can use two heroes."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "portal-desafio",
+        "nombre": "1. Portal of Defiance",
+        "habilidades": [
+          "portales-del-vacio",
+          "ojos-del-mas-alla",
+          "heraldos-del-vacio-supremo"
+        ]
       }
     ]
   },
@@ -473,7 +487,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -508,7 +522,7 @@
     },
     {
       "nombre_unidad": "Avatar of the Void",
-      "era": "Future",
+      "era": "Future / Past",
       "clase": "Titan",
       "perfil": {
         "movimiento": "3\"",

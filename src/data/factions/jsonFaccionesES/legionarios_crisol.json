@@ -1,19 +1,33 @@
 {
   "faccion": {
-    "nombre": "Legionarios",
-    "estilo_juego": "Los Legionarios son una élite imparable, fanática y extremadamente resistente, capaz de absorber daño que destruiría a tropas normales. Se apoyan en contraataques, salvaciones sólidas y habilidades defensivas que les permiten ganar duelos prolongados. Es la facción perfecta para quienes disfrutan de unidades duras, lentas pero devastadoras, que avanzan sin miedo hacia el enemigo.",
+    "nombre": "Paladines",
+    "estilo_juego": "Los Paladines son una élite imparable, fanática y extremadamente resistente, capaz de absorber daño que destruiría a tropas normales. Se apoyan en contraataques, salvaciones sólidas y habilidades defensivas que les permiten ganar duelos prolongados. Es la facción perfecta para quienes disfrutan de unidades duras, lentas pero devastadoras, que avanzan sin miedo hacia el enemigo.",
     "habilidades_faccion": [
       {
+        "id": "gloria-del-pretor",
         "habilidades_faccion1": "Gloria del pretor",
         "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad ignora el primer punto de daño recibido por un ataque a distancia durante ese turno."
       },
       {
+        "id": "caida-heroica",
         "habilidades_faccion2": "Caída heroica",
         "descripcion": "Cuando una unidad del Crisol es destruida, antes de ser retirada puede realizar inmediatamente un contraataque gratuito - en disparo o CaC según su posición - siguiendo las reglas normales de ataque. Este ataque se resuelve aunque la unidad esté trabada. Tras resolverlo, la unidad es retirada. En escuadra la unidad que va a ser retirada realiza el ataque individualmente"
       },
       {
+        "id": "voto-sagrado",
         "habilidades_faccion3": "Voto sagrado",
         "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "gloria-crisol",
+        "nombre": "1. Gloria del Crisol",
+        "habilidades": [
+          "gloria-del-pretor",
+          "caida-heroica",
+          "voto-sagrado"
+        ]
       }
     ]
   },
@@ -77,7 +91,7 @@
           "max": 3
         },
         "especialidad": "No se beneficia de las coberturas. Esta unidad debe equipar la misma arma tanto para disparo como para CaC. Si elige la Lanza guardia, la usa en ambos tipos de ataque. Si elige la Espada solar y escudo, también la usa en ambos.",
-        "valor": 10
+        "valor": 12
       },
       "armas": {
         "disparo": [
@@ -148,7 +162,7 @@
           "max": 2
         },
         "especialidad": "No se beneficia de la cobertura.",
-        "valor": 13
+        "valor": 15
       },
       "armas": {
         "disparo": [

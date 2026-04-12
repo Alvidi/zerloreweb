@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, useTransition } from 'react'
+import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
 import UnitConfigurator from '../features/generator/components/UnitConfigurator.jsx'
@@ -22,6 +23,15 @@ const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.jso
 const preferredEraOrder = ['future', 'past']
 
 const getUnitEraTokens = (unit) => (Array.isArray(unit?.eras) ? unit.eras.map((era) => era.token).filter(Boolean) : [])
+const getFirstPassiveGroupId = (faction) => faction?.grupos_habilidades_faccion?.[0]?.id || ''
+const sanitizePassiveGroupId = (faction, passiveGroupId) => {
+  const groups = Array.isArray(faction?.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
+  if (!groups.length) return ''
+  return groups.some((group) => group.id === passiveGroupId) ? passiveGroupId : groups[0].id
+}
+const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
+const getPassiveGroupDisplayName = (group, t, fallbackIndex = 0) =>
+  cleanPassiveGroupName(group?.nombre) || `${t('generator.defaultPassiveSet')} ${fallbackIndex + 1}`
 
 const unitMatchesEraFilters = (unit, filters) => {
   if (!filters?.size) return true
@@ -35,6 +45,29 @@ const getOrderedEraTokens = (units) => {
     getUnitEraTokens(unit).forEach((token) => present.add(token))
   })
   return preferredEraOrder.filter((token) => present.has(token))
+}
+
+const PASSIVE_GROUP_ICON_PATHS = [
+  'M12 4.5l4 3v5.3c0 3.1-1.7 5.8-4 6.7-2.3-.9-4-3.6-4-6.7V7.5l4-3z',
+  'M12 4.5l6 6-6 9-6-9 6-6zm0 3.2-2.8 2.8L12 15l2.8-4.5L12 7.7z',
+  'M6.5 15.5 12 4.5l5.5 11H6.5zm5.5-6.8-1.8 3.8h3.6L12 8.7z',
+  'M12 5.2c3.5 0 6.3 2.6 6.3 5.8S15.5 16.8 12 19c-3.5-2.2-6.3-4.8-6.3-8S8.5 5.2 12 5.2zm0 3.1c-1.7 0-3.2 1.2-3.2 2.8 0 1.4 1.2 2.8 3.2 4.2 2-1.4 3.2-2.8 3.2-4.2 0-1.6-1.5-2.8-3.2-2.8z',
+  'M7 6.2h10v3.4h-2.8v8.2H9.8V9.6H7V6.2zm4.1 3.4v5.1h1.8V9.6h-1.8z',
+  'M12 4.6 14 8.7l4.5.6-3.2 3.1.8 4.5-4.1-2.2-4.1 2.2.8-4.5-3.2-3.1 4.5-.6 2-4.1z',
+  'M6.2 9.2 12 4.8l5.8 4.4v7.6H6.2V9.2zm3 1.5v3.1h5.6v-3.1L12 8.5l-2.8 2.2z',
+  'M12 5.1c4 0 6.9 2.8 6.9 6.9S16 18.9 12 18.9 5.1 16 5.1 12 8 5.1 12 5.1zm0 3.1a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z',
+]
+
+const hashPassiveId = (value) =>
+  Array.from(String(value || '')).reduce((acc, char) => ((acc << 5) - acc + char.charCodeAt(0)) | 0, 0)
+
+const getPassiveGroupIconStyle = (groupId) => {
+  const hash = Math.abs(hashPassiveId(groupId))
+  return {
+    path: PASSIVE_GROUP_ICON_PATHS[hash % PASSIVE_GROUP_ICON_PATHS.length],
+    hue: hash % 360,
+    rotate: (hash % 24) - 12,
+  }
 }
 
 function GameModeIcon({ mode }) {
@@ -92,6 +125,26 @@ function GameModePicker({ value, onChange, t }) {
   )
 }
 
+function PassiveGroupIcon({ groupId }) {
+  const icon = getPassiveGroupIconStyle(groupId)
+
+  return (
+    <span
+      className="passive-group-icon-shape"
+      style={{
+        '--passive-group-icon-hue': `${icon.hue}`,
+        '--passive-group-icon-rotate': `${icon.rotate}deg`,
+      }}
+      aria-hidden="true"
+    >
+      <svg className="passive-group-icon-svg" viewBox="0 0 24 24">
+        <path d="M12 2.8c5 0 9.2 4 9.2 9.2S17 21.2 12 21.2 2.8 17 2.8 12 7 2.8 12 2.8z" />
+        <path d={icon.path} />
+      </svg>
+    </span>
+  )
+}
+
 function Generador() {
   const { t, lang } = useI18n()
   const [, startTransition] = useTransition()
@@ -105,23 +158,26 @@ function Generador() {
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
   const getSavedArmy = () => {
-    if (typeof window === 'undefined') return { units: [], factionId: '' }
+    if (typeof window === 'undefined') return { units: [], factionId: '', passiveGroupId: '' }
     const saved = window.localStorage.getItem('zerolore_army_v1')
-    if (!saved) return { units: [], factionId: '' }
+    if (!saved) return { units: [], factionId: '', passiveGroupId: '' }
     try {
       const parsed = JSON.parse(saved)
       if (parsed?.units && Array.isArray(parsed.units)) {
-        return { units: parsed.units, factionId: parsed.factionId || '' }
+        return { units: parsed.units, factionId: parsed.factionId || '', passiveGroupId: parsed.passiveGroupId || '' }
       }
     } catch {
       // Ignore invalid cache
     }
-    return { units: [], factionId: '' }
+    return { units: [], factionId: '', passiveGroupId: '' }
   }
 
   const initialSaved = getSavedArmy()
   const [armyFactionId, setArmyFactionId] = useState(initialSaved.factionId)
+  const [armyPassiveGroupId, setArmyPassiveGroupId] = useState(initialSaved.passiveGroupId)
   const [armyUnits, setArmyUnits] = useState(initialSaved.units)
+  const [selectedPassiveGroupId, setSelectedPassiveGroupId] = useState('')
+  const [isPassiveModalOpen, setIsPassiveModalOpen] = useState(false)
   const [activeUnit, setActiveUnit] = useState(null)
   const [targetValue, setTargetValue] = useState(40)
   const [randomFactionId, setRandomFactionId] = useState('random')
@@ -146,7 +202,33 @@ function Generador() {
   }, [factions, randomFactionId])
 
   const selectedFaction = factions.find((faction) => faction.id === selectedFactionIdSafe) || null
-  const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || selectedFaction
+  const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || null
+  const selectedPassiveGroupIdSafe = useMemo(
+    () => sanitizePassiveGroupId(selectedFaction, selectedPassiveGroupId),
+    [selectedFaction, selectedPassiveGroupId],
+  )
+  const selectedPassiveGroup = useMemo(
+    () => selectedFaction?.grupos_habilidades_faccion?.find((group) => group.id === selectedPassiveGroupIdSafe) || null,
+    [selectedFaction, selectedPassiveGroupIdSafe],
+  )
+  const armyPassiveGroupIdSafe = useMemo(
+    () => sanitizePassiveGroupId(armyFaction, armyPassiveGroupId),
+    [armyFaction, armyPassiveGroupId],
+  )
+  const armyPassiveGroup = useMemo(
+    () => armyFaction?.grupos_habilidades_faccion?.find((group) => group.id === armyPassiveGroupIdSafe) || null,
+    [armyFaction, armyPassiveGroupIdSafe],
+  )
+  const armyFactionForPdf = useMemo(
+    () =>
+      armyFaction
+        ? {
+            ...armyFaction,
+            selectedPassiveGroup: armyPassiveGroup,
+          }
+        : armyFaction,
+    [armyFaction, armyPassiveGroup],
+  )
   const availableUnitTypes = useMemo(() => {
     if (!selectedFaction?.unidades?.length) return []
     const types = new Set(
@@ -260,13 +342,14 @@ function Generador() {
     const payload = JSON.stringify({
       units: armyUnits,
       factionId: armyFactionIdSafe,
+      passiveGroupId: armyPassiveGroupIdSafe,
     })
     window.localStorage.setItem('zerolore_army_v1', payload)
-  }, [armyUnits, armyFactionIdSafe])
+  }, [armyUnits, armyFactionIdSafe, armyPassiveGroupIdSafe])
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
-    const hasOpenModal = Boolean(activeUnit)
+    const hasOpenModal = Boolean(activeUnit) || isPassiveModalOpen
     const previousOverflow = document.body.style.overflow
     if (hasOpenModal) {
       document.body.style.overflow = 'hidden'
@@ -274,7 +357,7 @@ function Generador() {
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [activeUnit])
+  }, [activeUnit, isPassiveModalOpen])
 
   const handleFactionChange = (event) => {
     const next = event.target.value
@@ -285,10 +368,10 @@ function Generador() {
       : []
     startTransition(() => {
       setSelectedFactionId(next)
+      setSelectedPassiveGroupId(getFirstPassiveGroupId(nextFaction))
+      setIsPassiveModalOpen(false)
       setUnitTypeFiltersManual(new Set(nextTypes))
       setEraFiltersManual(new Set(nextEras))
-      setArmyUnits([])
-      setArmyFactionId(next)
     })
   }
 
@@ -358,6 +441,11 @@ function Generador() {
     setActiveUnit(unit)
   }
 
+  const handleSelectPassiveGroup = (groupId) => {
+    setSelectedPassiveGroupId(groupId)
+    setIsPassiveModalOpen(false)
+  }
+
   const handleAddUnit = (unit, shooting, melee, squadSize, perMiniLoadouts, imageDataUrl = '') => {
     const clampedSize = gameMode === 'escuadra' ? clampSquadSize(squadSize, unit) : 1
     const total = computeUnitTotal(unit, shooting, melee, clampedSize, perMiniLoadouts, gameMode)
@@ -371,8 +459,11 @@ function Generador() {
       imageDataUrl,
       total,
     }
-    setArmyUnits((prev) => [...prev, entry])
+    setArmyUnits((prev) =>
+      prev.length && armyFactionIdSafe && armyFactionIdSafe !== selectedFactionIdSafe ? [entry] : [...prev, entry],
+    )
     setArmyFactionId(selectedFactionIdSafe)
+    setArmyPassiveGroupId(selectedPassiveGroupIdSafe)
     setActiveUnit(null)
   }
 
@@ -387,6 +478,8 @@ function Generador() {
   const handleReset = () => {
     setArmyUnits([])
     setArmyFactionId('')
+    setArmyPassiveGroupId('')
+    setIsPassiveModalOpen(false)
   }
 
   const handleGenerateRandom = () => {
@@ -418,12 +511,13 @@ function Generador() {
     )
     setArmyUnits(result.units)
     setArmyFactionId(result.faction?.id || '')
+    setArmyPassiveGroupId(getFirstPassiveGroupId(result.faction))
   }
 
   const exportPdf = () =>
     exportGeneratorPdf({
       armyUnits: localizedArmyUnits,
-      armyFaction,
+      armyFaction: armyFactionForPdf,
       totalValue,
       gameMode,
       t,
@@ -483,16 +577,43 @@ function Generador() {
                       <h3>{selectedFaction.nombre}</h3>
                     </div>
                     <p className="faction-description">{selectedFaction.estilo}</p>
-                    {selectedFaction.habilidades_faccion.length > 0 && (
-                      <div className="faction-passives">
-                        <p className="faction-passives-title">{t('generator.passives')}</p>
-                        <ul>
-                          {selectedFaction.habilidades_faccion.map((skill) => (
-                            <li key={skill.id}>
-                              <strong>{skill.nombre}:</strong> {skill.descripcion}
-                            </li>
-                          ))}
-                        </ul>
+                    {selectedFaction.grupos_habilidades_faccion.length > 0 && (
+                      <div className="doctrine-panel">
+                        <div className="doctrine-panel-header">
+                          <p className="faction-passives-title">{t('generator.choosePassives')}</p>
+                          <button
+                            type="button"
+                            className="ghost tiny passive-group-open-button"
+                            onClick={() => setIsPassiveModalOpen(true)}
+                            aria-label={t('generator.passiveModalTitle')}
+                          >
+                            {t('generator.select')}
+                          </button>
+                        </div>
+                        {selectedPassiveGroup ? (
+                          <div className="doctrine-item passive-group-current">
+                            <div className="doctrine-item-main">
+                              <span className="doctrine-icon-box passive-group-icon-box">
+                                <PassiveGroupIcon groupId={selectedPassiveGroup.id} />
+                              </span>
+                              <div className="doctrine-content">
+                                <p className="doctrine-name">
+                                  {getPassiveGroupDisplayName(
+                                    selectedPassiveGroup,
+                                    t,
+                                    Math.max(
+                                      selectedFaction.grupos_habilidades_faccion.findIndex((group) => group.id === selectedPassiveGroup.id),
+                                      0,
+                                    ),
+                                  )}
+                                </p>
+                                <p className="doctrine-description">
+                                  {selectedPassiveGroup.habilidades.map((skill) => skill.nombre).join(' · ')}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null}
                       </div>
                     )}
                   </div>
@@ -651,6 +772,32 @@ function Generador() {
             </button>
           </div>
 
+          {armyPassiveGroup?.habilidades?.length ? (
+            <div className="army-passive-group">
+              <p className="faction-passives-title">{t('generator.selectedPassiveSet')}</p>
+              {(() => {
+                const groupIndex = Math.max(
+                  armyFaction?.grupos_habilidades_faccion?.findIndex((group) => group.id === armyPassiveGroup.id) ?? 0,
+                  0,
+                )
+                return (
+                  <>
+                    <strong className="army-passive-group-name">
+                      {getPassiveGroupDisplayName(armyPassiveGroup, t, groupIndex)}
+                    </strong>
+                    <ul>
+                      {armyPassiveGroup.habilidades.map((skill) => (
+                        <li key={`army-passive-${skill.id}`}>
+                          <strong>{skill.nombre}:</strong> {skill.descripcion}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )
+              })()}
+            </div>
+          ) : null}
+
           {localizedArmyUnits.length === 0 && (
             <p className="empty-state">{t('generator.noUnitsYet')}</p>
           )}
@@ -749,6 +896,60 @@ function Generador() {
           }}
         />
       )}
+
+      {isPassiveModalOpen && selectedFaction && typeof document !== 'undefined'
+        ? createPortal(
+            <div className="unit-modal" role="dialog" aria-modal="true" onClick={() => setIsPassiveModalOpen(false)}>
+              <div className="unit-modal-card doctrine-modal-card" onClick={(event) => event.stopPropagation()}>
+                <div className="unit-modal-header">
+                  <div>
+                    <p className="eyebrow">{selectedFaction.nombre}</p>
+                    <h3>{t('generator.passiveModalTitle')}</h3>
+                  </div>
+                  <button type="button" className="ghost small" onClick={() => setIsPassiveModalOpen(false)}>
+                    {t('generator.close')}
+                  </button>
+                </div>
+
+                <div className="unit-modal-body passive-group-list">
+                  {selectedFaction.grupos_habilidades_faccion.length ? (
+                    selectedFaction.grupos_habilidades_faccion.map((group, index) => {
+                      const isActive = group.id === selectedPassiveGroupIdSafe
+                      return (
+                        <button
+                          key={group.id}
+                          type="button"
+                          className={`passive-group-card${isActive ? ' active' : ''}`}
+                          onClick={() => handleSelectPassiveGroup(group.id)}
+                        >
+                          <div className="passive-group-card-top">
+                            <span className="doctrine-icon-box passive-group-icon-box">
+                              <PassiveGroupIcon groupId={group.id} />
+                            </span>
+                            <div className="passive-group-heading">
+                              <span className="passive-group-label">{t('generator.passiveSet')}</span>
+                              <strong>{getPassiveGroupDisplayName(group, t, index)}</strong>
+                            </div>
+                          </div>
+                          <ul>
+                            {group.habilidades.map((skill) => (
+                              <li key={skill.id}>
+                                <strong>{skill.nombre}:</strong> {skill.descripcion}
+                              </li>
+                            ))}
+                          </ul>
+                        </button>
+                      )
+                    })
+                  ) : (
+                    <p className="empty-state">{t('generator.noPassiveSetsAvailable')}</p>
+                  )}
+                </div>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </section>
   )
 }

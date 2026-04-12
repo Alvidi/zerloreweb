@@ -4,16 +4,30 @@
     "estilo_juego": "La Alianza combina tropas versátiles con armamento de precisión y vehículos avanzados, destacándose por su flexibilidad y eficiencia en cualquier situación. Es una facción orientada a jugadores que buscan calidad por encima de cantidad, capaz de adaptarse a distancia o combate cercano mediante armas especializadas. Sus unidades son potentes y precisas, pero caras y menos numerosas.",
     "habilidades_faccion": [
       {
+        "id": "potencia-blindada",
         "habilidades_faccion1": "Potencia blindada",
         "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas"
       },
       {
+        "id": "objetivo-en-la-mira",
         "habilidades_faccion2": "Objetivo en la mira",
         "descripcion": "Durante la Fase de Iniciativa, esta facción puede marcar una unidad enemiga visible. Todas las unidades/escuadras de La Alianza pueden repetir tiradas de impacto fallidas contra ese objetivo durante ese turno."
       },
       {
+        "id": "resistencia-marcial",
         "habilidades_faccion3": "Resistencia marcial",
         "descripcion": "Cuando una unidad/escuadra aliada está en un punto de mando, los atacantes enemigos sufren +1 al valor de Impactos necesario en sus ataques a distancia contra esa unidad."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "confrontacion",
+        "nombre": "1. Confrontación",
+        "habilidades": [
+          "potencia-blindada",
+          "objetivo-en-la-mira",
+          "resistencia-marcial"
+        ]
       }
     ]
   },

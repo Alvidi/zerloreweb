@@ -4,22 +4,37 @@
     "estilo_juego": "El Enjambre se basa en la presión constante y el avance en bloque. Sus unidades funcionan mejor cuando se mantienen juntas, aprovechando la sinapsis para evitar la desorganización y sostener el ataque. Aunque sus tropas caen con facilidad, el Enjambre compensa las bajas con su capacidad de regresar al campo de batalla y saturar al enemigo, destacando en el combate cuerpo a cuerpo y el control del espacio.",
     "habilidades_faccion": [
       {
+        "id": "enjambre-eterno",
         "habilidades_faccion1": "El enjambre eterno",
         "descripcion": "Todas las unidades/escuadras de zánganos o zánganos alados eliminadas vuelven a la partida al inicio de la siguiente Fase de Iniciativa, desde la zona de despliegue con todas sus Vidas."
       },
       {
+        "id": "synapsis-mental",
         "habilidades_faccion2": "Synapsis mental",
         "descripcion": "Al inicio de cada Fase de Iniciativa, cualquier unidad o escuadra del Enjambre que no esté a 6\" o menos de al menos otra unidad aliada debe tirar 1D6: con resultado 1-2 entra en retirada siguiendo las reglas normales de retirada. Esta regla afecta a todas las unidades excepto Héroes y Monstruos."
       },
       {
+        "id": "voracidad",
         "habilidades_faccion3": "Voracidad",
         "descripcion": "Cuando una unidad/escuadra de Línea elimina una unidad enemiga en combate cuerpo a cuerpo, puede retirar un marcador de daño a una unidad o la escuadra."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "llamada-reina",
+        "nombre": "1. Llamada de la reina",
+        "habilidades": [
+          "enjambre-eterno",
+          "synapsis-mental",
+          "voracidad"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Zánganos",
+      "era": "Futuro / Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "7\"",
@@ -64,6 +79,7 @@
     },
     {
       "nombre_unidad": "Despedazadores",
+      "era": "Futuro / Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "9\"",
@@ -98,6 +114,7 @@
     },
     {
       "nombre_unidad": "Esporeros de asedio",
+      "era": "Futuro / Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
@@ -144,6 +161,7 @@
     },
     {
       "nombre_unidad": "Guerreros sinápticos",
+      "era": "Futuro / Pasado",
       "clase": "Élite",
       "perfil": {
         "movimiento": "6\"",
@@ -203,6 +221,7 @@
     },
     {
       "nombre_unidad": "Acechadores sinápticos",
+      "era": "Futuro / Pasado",
       "clase": "Élite",
       "perfil": {
         "movimiento": "10\"",
@@ -250,6 +269,7 @@
     },
     {
       "nombre_unidad": "Coloso de Progenie",
+      "era": "Futuro / Pasado",
       "clase": "Monstruo",
       "perfil": {
         "movimiento": "6\"",
@@ -298,6 +318,7 @@
     },
     {
       "nombre_unidad": "Destripador aullante",
+      "era": "Futuro / Pasado",
       "clase": "Monstruo",
       "perfil": {
         "movimiento": "8\"",
@@ -346,6 +367,7 @@
     },
     {
       "nombre_unidad": "Neurovigia",
+      "era": "Futuro / Pasado",
       "clase": "Monstruo",
       "perfil": {
         "movimiento": "8\"",
@@ -394,6 +416,7 @@
     },
     {
       "nombre_unidad": "Nexo Sináptico",
+      "era": "Futuro / Pasado",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "7\"",
@@ -481,6 +504,7 @@
     },
     {
       "nombre_unidad": "Reina mayor",
+      "era": "Futuro / Pasado",
       "clase": "Titán",
       "perfil": {
         "movimiento": "3\"",
@@ -579,6 +603,7 @@
     },
     {
       "nombre_unidad": "Zángano Alado",
+      "era": "Futuro / Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "10\"",

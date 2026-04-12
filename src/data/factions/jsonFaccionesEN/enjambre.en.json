@@ -4,22 +4,37 @@
     "estilo_juego": "The Swarm is based on constant pressure and block advancement. Their units work best when held together, leveraging synapses to avoid disorganization and sustain the attack. Although their troops fall easily, the Swarm compensates for casualties with their ability to return to the battlefield and saturate the enemy, excelling in close combat and control of space.",
     "habilidades_faccion": [
       {
+        "id": "enjambre-eterno",
         "habilidades_faccion1": "The eternal swarm",
         "descripcion": "All eliminated Drone or Winged Drone units or squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
       },
       {
+        "id": "synapsis-mental",
         "habilidades_faccion2": "mental synapse",
         "descripcion": "At the start of each Initiative Phase, any Swarm unit or squad that is not within 6\" of at least one other allied unit must roll 1D6: on a 1-2 it enters retreat following the normal retreat rules. This rule affects all units except Heroes and Monsters."
       },
       {
+        "id": "voracidad",
         "habilidades_faccion3": "Voracity",
         "descripcion": "When a Line unit or squad eliminates an enemy unit in close combat, it may remove a damage marker from a unit or the squad."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "llamada-reina",
+        "nombre": "1. Call of the Queen",
+        "habilidades": [
+          "enjambre-eterno",
+          "synapsis-mental",
+          "voracidad"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Drones",
+      "era": "Future / Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
@@ -64,6 +79,7 @@
     },
     {
       "nombre_unidad": "Breakers",
+      "era": "Future / Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "9\"",
@@ -98,6 +114,7 @@
     },
     {
       "nombre_unidad": "Siege Sporeros",
+      "era": "Future / Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "5\"",
@@ -143,7 +160,8 @@
       }
     },
     {
-      "nombre_unidad": "Synaptic warriors",
+      "nombre_unidad": "Synaptic Warriors",
+      "era": "Future / Past",
       "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
@@ -202,7 +220,8 @@
       }
     },
     {
-      "nombre_unidad": "Synaptic lurkers",
+      "nombre_unidad": "Synaptic Lurkers",
+      "era": "Future / Past",
       "clase": "Elite",
       "perfil": {
         "movimiento": "10\"",
@@ -250,6 +269,7 @@
     },
     {
       "nombre_unidad": "Brood Colossus",
+      "era": "Future / Past",
       "clase": "Monster",
       "perfil": {
         "movimiento": "6\"",
@@ -298,6 +318,7 @@
     },
     {
       "nombre_unidad": "Howling Ripper",
+      "era": "Future / Past",
       "clase": "Monster",
       "perfil": {
         "movimiento": "8\"",
@@ -346,6 +367,7 @@
     },
     {
       "nombre_unidad": "Neurovigia",
+      "era": "Future / Past",
       "clase": "Monster",
       "perfil": {
         "movimiento": "8\"",
@@ -394,6 +416,7 @@
     },
     {
       "nombre_unidad": "Synaptic Nexus",
+      "era": "Future / Past",
       "clase": "Hero",
       "perfil": {
         "movimiento": "7\"",
@@ -481,6 +504,7 @@
     },
     {
       "nombre_unidad": "Eldest Queen",
+      "era": "Future / Past",
       "clase": "Titan",
       "perfil": {
         "movimiento": "3\"",
@@ -579,6 +603,7 @@
     },
     {
       "nombre_unidad": "Winged Drone",
+      "era": "Future / Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "10\"",

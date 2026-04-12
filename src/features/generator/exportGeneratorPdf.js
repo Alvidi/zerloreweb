@@ -66,6 +66,8 @@ const getPdfEraLabel = (era, t) => {
   return String(era?.label || '').trim()
 }
 
+const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
+
 export async function exportGeneratorPdf({
   armyUnits,
   armyFaction,
@@ -85,6 +87,11 @@ export async function exportGeneratorPdf({
   const margin = 12
   const usableWidth = pageWidth - margin * 2
   const pdfUnitDisplayNames = buildArmyUnitDisplayNames(armyUnits)
+  const selectedPassiveGroup = armyFaction?.selectedPassiveGroup || null
+  const passiveGroupTitle = cleanPassiveGroupName(selectedPassiveGroup?.nombre || '')
+  const passiveAbilities = selectedPassiveGroup?.habilidades?.length
+    ? selectedPassiveGroup.habilidades
+    : armyFaction?.habilidades_faccion || []
   let y = margin
 
   const ensureSpace = (height) => {
@@ -457,15 +464,21 @@ export async function exportGeneratorPdf({
     doc.text(String(totalValue), pageWidth - margin - 4, y + 13.4, { align: 'right' })
     y += headerHeight + 6
 
-    if (armyFaction?.habilidades_faccion?.length) {
+    if (passiveAbilities.length) {
       const passiveTitleHeight = 7
-      const passiveBlocks = armyFaction.habilidades_faccion.slice(0, 6).map((habilidad) => {
+      const passiveGroupLabel = passiveGroupTitle
+        ? getWrappedLines(passiveGroupTitle, usableWidth - 10, 8.6)
+        : []
+      const passiveBlocks = passiveAbilities.slice(0, 6).map((habilidad) => {
         const title = getWrappedLines(habilidad.nombre || t('generator.passives'), usableWidth - 10, 9)
         const body = getWrappedLines(habilidad.descripcion || '—', usableWidth - 14, 8.4)
         return { title, body }
       })
       const passiveHeight =
         passiveTitleHeight +
+        (passiveGroupLabel.length
+          ? getLineHeight(8.6, 1.12) * Math.max(passiveGroupLabel.length, 1) + 3
+          : 0) +
         passiveBlocks.reduce((total, block) => {
           const titleHeight = getLineHeight(9, 1.12) * Math.max(block.title.length, 1)
           const bodyHeight = getLineHeight(8.4, 1.18) * Math.max(block.body.length, 1)
@@ -480,9 +493,13 @@ export async function exportGeneratorPdf({
       doc.setFont('helvetica', 'bold')
       doc.setFontSize(9.5)
       doc.setTextColor(20)
-      doc.text(t('generator.passives'), margin + 3, y + 4.8)
+      doc.text(t('generator.selectedPassiveSet'), margin + 3, y + 4.8)
 
       let passiveY = y + passiveTitleHeight + 4
+      if (passiveGroupLabel.length) {
+        drawWrappedLines({ lines: passiveGroupLabel, x: margin + 4, startY: passiveY, fontSize: 8.6, color: 45, style: 'bold', lineMultiplier: 1.12 })
+        passiveY += getLineHeight(8.6, 1.12) * Math.max(passiveGroupLabel.length, 1) + 3
+      }
       passiveBlocks.forEach((block) => {
         drawWrappedLines({ lines: block.title, x: margin + 4, startY: passiveY, fontSize: 9, color: 25, style: 'bold', lineMultiplier: 1.1 })
         passiveY += getLineHeight(9, 1.1) * Math.max(block.title.length, 1)
@@ -794,9 +811,13 @@ export async function exportGeneratorPdf({
     y += metaLineHeight
   })
   y += 2
-  if (armyFaction?.habilidades_faccion?.length) {
-    drawSectionTitle(t('generator.passives'), true)
-    armyFaction.habilidades_faccion.slice(0, 6).forEach((habilidad) => {
+  if (passiveAbilities.length) {
+    drawSectionTitle(t('generator.selectedPassiveSet'), true)
+    if (passiveGroupTitle) {
+      drawTextBlock(passiveGroupTitle, 9.4)
+      y += 1
+    }
+    passiveAbilities.slice(0, 6).forEach((habilidad) => {
       drawBulletItem(habilidad.nombre, habilidad.descripcion, 9)
     })
     y += 2

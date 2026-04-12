@@ -1,25 +1,40 @@
 {
   "faccion": {
-    "nombre": "Rebels",
-    "estilo_juego": "The Rebels stand out for their extreme mobility, exotic weapons, and agile combat styles both at range and in melee. Their troops easily reposition, dodge damage, and punish the enemy with precise attacks or bursts of unstable energy, but they are fragile and must avoid prolonged direct confrontations. An ideal faction for tactical players who enjoy hit and move, breaking lines and attacking from unexpected angles.",
+    "nombre": "Mystics",
+    "estilo_juego": "The Mystics stand out for their extreme mobility, exotic weapons, and agile combat styles both at range and in melee. Their troops easily reposition, dodge damage, and punish the enemy with precise attacks or bursts of unstable energy, but they are fragile and must avoid prolonged direct confrontations. An ideal faction for tactical players who enjoy hit and move, breaking lines and attacking from unexpected angles.",
     "habilidades_faccion": [
       {
+        "id": "guerrilla-en-las-sombras",
         "habilidades_faccion1": "Guerrilla in the shadows",
-        "descripcion": "This faction can deploy its Line units/squads and Vehicles outside the deployment zone, 9\" from enemies and from command points or objectives."
+        "descripcion": "This faction can deploy its Line units/squads and Vehicles within 8\" of its command posts."
       },
       {
+        "id": "finta",
         "habilidades_faccion2": "Feint",
         "descripcion": "This faction cannot use the Prepare action. When a Rebel unit receives a ranged attack, it may immediately make a free reaction shot. If that same unit receives another ranged attack during the same turn, it cannot respond again."
       },
       {
+        "id": "nadie-se-para",
         "habilidades_faccion3": "Nobody stops",
         "descripcion": "This faction must always spend one 3\" Move action, except when charging or when locked in melee combat."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "avance-desafio",
+        "nombre": "1. Advance of Defiance",
+        "habilidades": [
+          "guerrilla-en-las-sombras",
+          "finta",
+          "nadie-se-para"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Echo Explorers",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "9\"",
@@ -107,6 +122,7 @@
     },
     {
       "nombre_unidad": "Void Reavers",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "8\"",
@@ -192,6 +208,7 @@
     },
     {
       "nombre_unidad": "Shadow-Edge Wraiths",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "8\"",
@@ -278,6 +295,7 @@
     },
     {
       "nombre_unidad": "Phoenix",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "12\"",
@@ -349,7 +367,8 @@
       }
     },
     {
-      "nombre_unidad": "spectral walker",
+      "nombre_unidad": "Spectral Walker",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "6\"",
@@ -424,6 +443,7 @@
     },
     {
       "nombre_unidad": "Leader of the Insurrection",
+      "era": "Future",
       "clase": "Hero",
       "perfil": {
         "movimiento": "7\"",

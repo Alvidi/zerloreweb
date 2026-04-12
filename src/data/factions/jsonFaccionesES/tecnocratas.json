@@ -4,16 +4,30 @@
     "estilo_juego": "Los Tecnócratras son una facción de tecnología avanzada, fuego preciso y control táctico, especializada en el uso de drones, armamento experimental y retirada inteligente. Sus unidades destacan por su versatilidad y eficiencia, capaces de adaptarse rápidamente a la situación del campo de batalla mediante reposicionamiento y apoyo automatizado. No buscan el enfrentamiento frontal prolongado, sino desgastar al enemigo con superioridad técnica, sacrificando resistencia bruta a cambio de control, precisión y flexibilidad.",
     "habilidades_faccion": [
       {
+        "id": "retirada-inteligente",
         "habilidades_faccion1": "Retirada inteligente",
         "descripcion": "Las unidades de esta facción pueden retirarse sin necesidad de realizar chequeo de retirada."
       },
       {
+        "id": "apoyo-dron",
         "habilidades_faccion2": "Apoyo dron",
         "descripcion": "se puede incluir en las escuadras de línea y élite hasta 2 drones ignorando el número de escuadra que tenga la unidad. En modo escaramuza se puede añadir un dron a una unidad."
       },
       {
+        "id": "protocolos-de-combate",
         "habilidades_faccion3": "Protocolos de Combate",
         "descripcion": "Una vez por turno, cuando una unidad/escuadra Tecnócrata vaya a realizar una acción de Disparo, puede añadir +1 al resultado de Impactos si otra unidad/escuadra Tecnócrata (incluidos drones) está a 6\" del mismo objetivo."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "equipo-apoyo",
+        "nombre": "1. Equipo de apoyo",
+        "habilidades": [
+          "retirada-inteligente",
+          "apoyo-dron",
+          "protocolos-de-combate"
+        ]
       }
     ]
   },

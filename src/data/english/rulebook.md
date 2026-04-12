@@ -74,6 +74,16 @@ The game mode is chosen **before starting the game**, and all players must use t
 
 Unless stated otherwise, all rules in the rulebook apply to both modes.
 
+### Era of Play
+
+ZeroLore allows games set in different thematic eras. Before starting the game, the players agree on one of the following options:
+
+- **Past**: only units with the _Past_ keyword may be used. Games set in fantasy environments.
+- **Future**: only units with the _Future_ keyword may be used. Games set in science-fiction environments.
+- **No restriction**: Past against Future, anything goes. ZeroLore uses the same profile and ability format for all factions, so any unit can face any other regardless of its era.
+
+Each unit indicates its era on its profile. Units without a tag are compatible with any mode.
+
 ---
 
 # Measuring Distances
@@ -912,6 +922,16 @@ The unit may take an extra **shooting action after using Sprint**.
 ### 15. Limited Ammo (X)
 This weapon has X limited shots.
 **Moment:** Shooting and melee
+
+---
+
+# Faction Abilities
+
+Each faction has different **passive sets** that define its combat style. Before the game begins, each player chooses **one passive set** from those available to their faction. All abilities in the chosen set automatically apply to every unit in that faction while they are in play and do not require activation.
+
+Each set contains **3 passive abilities** with a shared theme, representing a specific way to bring that faction onto the battlefield. The chosen set must be declared to your opponent before the game begins.
+
+Over time, each faction will expand its catalogue of available sets, allowing for more playstyles within the same faction.
 
 ---
 

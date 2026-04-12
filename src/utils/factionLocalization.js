@@ -2,7 +2,7 @@ const getModuleData = (module) => module?.default || module || null
 
 const isObject = (value) => value && typeof value === 'object'
 
-const getSkillNameKey = (skill) => Object.keys(skill || {}).find((key) => key !== 'descripcion')
+const getSkillNameKey = (skill) => Object.keys(skill || {}).find((key) => key !== 'id' && key !== 'descripcion')
 
 const mergeSkillTranslation = (esSkill, enSkill) => {
   const base = isObject(esSkill) ? { ...esSkill } : {}
@@ -44,6 +44,19 @@ const mergeUnitsTranslation = (esUnits, enUnits) =>
     }
   })
 
+const mergePassiveGroupTranslation = (esGroup, enGroup) => {
+  const base = isObject(esGroup) ? { ...esGroup } : {}
+  if (!isObject(enGroup)) return base
+
+  if (enGroup.id) {
+    base.id = enGroup.id
+  }
+  if (enGroup.nombre) {
+    base.nombre = enGroup.nombre
+  }
+  return base
+}
+
 export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
   if (lang !== 'en') return esData || enData || null
   if (!esData) return enData || null
@@ -53,6 +66,8 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
   const enFaction = isObject(enData.faccion) ? enData.faccion : {}
   const esSkills = Array.isArray(esFaction.habilidades_faccion) ? esFaction.habilidades_faccion : []
   const enSkills = Array.isArray(enFaction.habilidades_faccion) ? enFaction.habilidades_faccion : []
+  const esPassiveGroups = Array.isArray(esFaction.grupos_habilidades_faccion) ? esFaction.grupos_habilidades_faccion : []
+  const enPassiveGroups = Array.isArray(enFaction.grupos_habilidades_faccion) ? enFaction.grupos_habilidades_faccion : []
 
   return {
     ...esData,
@@ -61,6 +76,8 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
       nombre: enFaction.nombre || esFaction.nombre || '',
       estilo_juego: enFaction.estilo_juego || esFaction.estilo_juego || '',
       habilidades_faccion: esSkills.map((skill, index) => mergeSkillTranslation(skill, enSkills[index])),
+      grupos_habilidades_faccion: esPassiveGroups.map((group, index) =>
+        mergePassiveGroupTranslation(group, enPassiveGroups[index])),
     },
     unidades: mergeUnitsTranslation(esData.unidades, enData.unidades),
   }

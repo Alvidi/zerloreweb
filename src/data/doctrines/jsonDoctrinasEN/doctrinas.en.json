@@ -1,0 +1,58 @@
+{
+  "doctrinas": [
+    {
+      "id": "garrotazo",
+      "nombre": "Bludgeon",
+      "token_label": "Doctrine: Bludgeon",
+      "orden": 1
+    },
+    {
+      "id": "apuntado",
+      "nombre": "Aimed Shot",
+      "token_label": "Doctrine: Aimed Shot",
+      "orden": 2
+    },
+    {
+      "id": "frenesi",
+      "nombre": "Frenzy",
+      "token_label": "Doctrine: Frenzy",
+      "orden": 3
+    },
+    {
+      "id": "agilidad-en-combate",
+      "nombre": "Combat Agility",
+      "token_label": "Doctrine: Combat Agility",
+      "orden": 4
+    },
+    {
+      "id": "nuestra-es-la-victoria",
+      "nombre": "Victory Is Ours",
+      "token_label": "Doctrine: Victory Is Ours",
+      "orden": 5
+    },
+    {
+      "id": "reaccion-inmediata",
+      "nombre": "Immediate Reaction",
+      "token_label": "Doctrine: Immediate Reaction",
+      "orden": 6
+    },
+    {
+      "id": "mas-que-cargado",
+      "nombre": "Fully Charged",
+      "token_label": "Doctrine: Fully Charged",
+      "orden": 7
+    },
+    {
+      "id": "una-nueva-oportunidad",
+      "nombre": "One More Chance",
+      "token_label": "Doctrine: One More Chance",
+      "orden": 8
+    },
+    {
+      "id": "combate-a-muerte",
+      "nombre": "Fight to the Death",
+      "token_label": "Doctrine: Fight to the Death",
+      "orden": 9
+    }
+  ]
+}

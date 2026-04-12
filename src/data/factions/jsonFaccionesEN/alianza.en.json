@@ -4,16 +4,30 @@
     "estilo_juego": "The Alliance combines versatile troops with precision weaponry and advanced vehicles, standing out for its flexibility and efficiency in any situation. It is a faction aimed at players looking for quality over quantity, capable of adapting to distance or close combat using specialized weapons. Their units are powerful and precise, but expensive and fewer in number.",
     "habilidades_faccion": [
       {
+        "id": "potencia-blindada",
         "habilidades_faccion1": "Armored power",
         "descripcion": "Vehicles can carry two ranged weapons equipped."
       },
       {
+        "id": "objetivo-en-la-mira",
         "habilidades_faccion2": "Target in sight",
         "descripcion": "During the Initiative Phase, this faction may mark one visible enemy unit. All Alliance units/squads may reroll failed Hit rolls against that target during this turn."
       },
       {
+        "id": "resistencia-marcial",
         "habilidades_faccion3": "Martial resistance",
         "descripcion": "When an allied unit/squad is at a command point, enemy attackers suffer +1 to the Hit value needed on their ranged attacks against that unit."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "confrontacion",
+        "nombre": "1. Confrontation",
+        "habilidades": [
+          "potencia-blindada",
+          "objetivo-en-la-mira",
+          "resistencia-marcial"
+        ]
       }
     ]
   },

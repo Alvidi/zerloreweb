@@ -118,6 +118,66 @@ const normalizeEraEntries = (value) => {
     })
 }
 
+const getFactionAbilityName = (item) => {
+  const entries = Object.entries(item || {})
+  const nameEntry = entries.find(([key]) => key !== 'id' && key !== 'descripcion') || []
+  return nameEntry[1] || nameEntry[0] || ''
+}
+
+const normalizeFactionAbility = (item, idx, factionId) => {
+  const nombre = getFactionAbilityName(item) || 'Habilidad'
+  return {
+    id: item?.id || `${factionId}-passive-${idx + 1}-${slugify(nombre || idx)}`,
+    nombre,
+    descripcion: item?.descripcion || '',
+  }
+}
+
+const normalizeFactionPassiveGroups = (rawGroups, abilities, factionId) => {
+  const abilityLookup = new Map()
+  abilities.forEach((ability) => {
+    abilityLookup.set(ability.id, ability)
+    abilityLookup.set(slugify(ability.nombre), ability)
+  })
+
+  const normalizedGroups = (Array.isArray(rawGroups) ? rawGroups : [])
+    .map((group, index) => {
+      const rawSkills = Array.isArray(group?.habilidades) ? group.habilidades : []
+      const habilidades = rawSkills
+        .map((entry) => {
+          if (typeof entry === 'string') {
+            return abilityLookup.get(entry) || abilityLookup.get(slugify(entry)) || null
+          }
+          if (entry && typeof entry === 'object') {
+            const entryId = entry.id || slugify(getFactionAbilityName(entry))
+            return abilityLookup.get(entryId) || normalizeFactionAbility(entry, index, factionId)
+          }
+          return null
+        })
+        .filter(Boolean)
+
+      if (!habilidades.length) return null
+
+      return {
+        id: group?.id || `${factionId}-passive-group-${index + 1}`,
+        nombre: group?.nombre || '',
+        habilidades,
+      }
+    })
+    .filter(Boolean)
+
+  if (normalizedGroups.length) return normalizedGroups
+  if (!abilities.length) return []
+
+  return [
+    {
+      id: `${factionId}-passive-group-1`,
+      nombre: '',
+      habilidades: abilities,
+    },
+  ]
+}
+
 const getMaxDisparo = (unit) => {
   const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? unit.perfil?.max_armas_disparo
   if (explicit) return explicit
@@ -161,25 +221,24 @@ const normalizeUnit = (unit, index) => {
 
 export const normalizeFaction = (data, index, baseId = '') => {
   const faccion = data.faccion || {}
+  const factionId = data.id || baseId || slugify(faccion.nombre || `faccion-${index}`)
   const habilidades = Array.isArray(faccion.habilidades_faccion)
-    ? faccion.habilidades_faccion.map((item, idx) => {
-      const entries = Object.entries(item || {})
-      const nameEntry = entries.find(([key]) => key !== 'descripcion') || []
-      return {
-        id: `${index}-${idx}`,
-        nombre: nameEntry[1] || nameEntry[0] || 'Habilidad',
-        descripcion: item.descripcion || '',
-      }
-    })
+    ? faccion.habilidades_faccion.map((item, idx) => normalizeFactionAbility(item, idx, factionId))
     : []
+  const gruposHabilidades = normalizeFactionPassiveGroups(
+    faccion.grupos_habilidades_faccion,
+    habilidades,
+    factionId,
+  )
 
   const unidades = (data.unidades || []).map(normalizeUnit)
 
   return {
-    id: data.id || baseId || slugify(faccion.nombre || `faccion-${index}`),
+    id: factionId,
     nombre: faccion.nombre || `Facción ${index + 1}`,
     estilo: faccion.estilo_juego || faccion.estilo || '',
     habilidades_faccion: habilidades,
+    grupos_habilidades_faccion: gruposHabilidades,
     unidades,
   }
 }

@@ -1,25 +1,40 @@
 {
   "faccion": {
-    "nombre": "The Federation",
-    "estilo_juego": "The Federation is a disciplined military force focused on steady fire, the use of cover, and tactical control of the battlefield. Their units work best when they stay organized, taking advantage of heavy weapons and supported fire, although they sacrifice mobility and close combat ability. They are ideal for players who prefer methodical strategies, defensive fire and winning by positioning.",
+    "nombre": "The Empire",
+    "estilo_juego": "The Empire is a disciplined military force focused on steady fire, the use of cover, and tactical control of the battlefield. Their units work best when they stay organized, taking advantage of heavy weapons and supported fire, although they sacrifice mobility and close combat ability. They are ideal for players who prefer methodical strategies, defensive fire and winning by positioning.",
     "habilidades_faccion": [
       {
+        "id": "atrincheramiento",
         "habilidades_faccion1": "Entrenchment",
         "descripcion": "A unit of this faction that has not taken any Move actions during its activation gains +1 Hit die on all of its Shooting attacks until the end of that activation."
       },
       {
+        "id": "refuerzos-rasos",
         "habilidades_faccion2": "Raw Reinforcements",
         "descripcion": "Once per game, when a Line unit from this faction is completely eliminated, you may return it to the field to the deployment zone of your next Initiative phase."
       },
       {
+        "id": "furia-de-los-caidos",
         "habilidades_faccion3": "Fury of the Fallen",
         "descripcion": "When a unit falls from a squad, the entire squad gains +1 additional attack in the total attack. In Skirmish, units within 6\" gain an additional +1 attack, until end of turn."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "tierra-sacrificio",
+        "nombre": "1. Earth and Sacrifice",
+        "habilidades": [
+          "atrincheramiento",
+          "refuerzos-rasos",
+          "furia-de-los-caidos"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Private soldiers",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -64,6 +79,7 @@
     },
     {
       "nombre_unidad": "war veterans",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "6\"",
@@ -147,6 +163,7 @@
     },
     {
       "nombre_unidad": "shock trooper",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "5\"",
@@ -204,6 +221,7 @@
     },
     {
       "nombre_unidad": "Rough",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "5\"",
@@ -250,6 +268,7 @@
     },
     {
       "nombre_unidad": "Raiders",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "8\"",
@@ -320,6 +339,7 @@
     },
     {
       "nombre_unidad": "Heavy Weapons Team",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "4\"",
@@ -383,7 +403,7 @@
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
-            "danio": "1",
+            "danio": "0",
             "danio_critico": "1",
             "habilidades_arma": [],
             "especialidad": "-",
@@ -394,6 +414,7 @@
     },
     {
       "nombre_unidad": "Rameu-Russ",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "6\"",
@@ -480,6 +501,7 @@
     },
     {
       "nombre_unidad": "Flatt-8 cannon",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "-",
@@ -540,6 +562,7 @@
     },
     {
       "nombre_unidad": "General",
+      "era": "Future",
       "clase": "Hero",
       "perfil": {
         "movimiento": "6\"",
@@ -601,6 +624,7 @@
     },
     {
       "nombre_unidad": "Siege Bastion",
+      "era": "Future",
       "clase": "Titan",
       "perfil": {
         "movimiento": "1\"",

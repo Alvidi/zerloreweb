@@ -1,25 +1,40 @@
 {
   "faccion": {
-    "nombre": "TechnoTombs",
-    "estilo_juego": "The Techno-Tombs are ancient machines that advance relentlessly, reviving again and again while unleashing heavy shots of calculated precision. They are slow but relentless, with units that return to combat and powerful vehicles that dominate long distances. Perfect for players who want wear and tear, inevitability and constant pressure without relying on morale or speed.",
+    "nombre": "Reapers",
+    "estilo_juego": "The Reapers are undead beings that advance relentlessly, reviving again and again while unleashing heavy shots and blows of calculated precision. They are slow but relentless, with units that return to combat and powerful vehicles that dominate long distances. Perfect for players who want attrition, inevitability, and constant pressure without relying on morale or speed.",
     "habilidades_faccion": [
       {
+        "id": "reanimacion-mekanika",
         "habilidades_faccion1": "Mek Resuscitation",
         "descripcion": "If a line or elite unit is defeated, its body remains on the battlefield. At the start of the next Initiative Phase, roll 1D6: on a result of 1-4 the unit dies permanently and is removed; on a result of 5-6 the unit revives with half of its maximum Lives."
       },
       {
+        "id": "no-conocen-el-miedo",
         "habilidades_faccion2": "They don't know fear",
         "descripcion": "This faction cannot retreat nor are they affected by any abilities that cause them to retreat."
       },
       {
+        "id": "protocolo-de-aniquilacion",
         "habilidades_faccion3": "Annihilation Protocol",
         "descripcion": "Once per turn, when a unit/squad eliminates an enemy unit at range, it gains an extra 2\" move action immediately. This move does not count as an action."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "mas-alla",
+        "nombre": "1. The Beyond",
+        "habilidades": [
+          "reanimacion-mekanika",
+          "no-conocen-el-miedo",
+          "protocolo-de-aniquilacion"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Techno-Tomb Guardians",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "4\"",
@@ -90,6 +105,7 @@
     },
     {
       "nombre_unidad": "Lookouts",
+      "era": "Future",
       "clase": "Line",
       "perfil": {
         "movimiento": "4\"",
@@ -151,6 +167,7 @@
     },
     {
       "nombre_unidad": "Destroyers",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "7\"",
@@ -212,6 +229,7 @@
     },
     {
       "nombre_unidad": "Tomb Lords",
+      "era": "Future",
       "clase": "Elite",
       "perfil": {
         "movimiento": "4\"",
@@ -269,6 +287,7 @@
     },
     {
       "nombre_unidad": "Mechanoid",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "4\"",
@@ -328,6 +347,7 @@
     },
     {
       "nombre_unidad": "Trilonoid",
+      "era": "Future",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "6\"",
@@ -374,6 +394,7 @@
     },
     {
       "nombre_unidad": "Lord Necrophore",
+      "era": "Future / Past",
       "clase": "Hero",
       "perfil": {
         "movimiento": "3\"",
@@ -435,6 +456,7 @@
     },
     {
       "nombre_unidad": "Obelisk of Annihilation",
+      "era": "Future / Past",
       "clase": "Titan",
       "perfil": {
         "movimiento": "2\"",

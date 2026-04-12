@@ -2,7 +2,7 @@
 
 Antes de comenzar, los jugadores acuerdan:
 
-- El **número de puestos de mando** a colocar en mesa, estos servirán para desplegar las unidades en la batalla
+- El **número de puestos de mando** a colocar en mesa y donde, estos servirán para desplegar las unidades en la batalla
 - El número de turnos
 - El **valor total del ejército** de cada jugador
 - El **modo de juego** — Escaramuza o Escuadras
@@ -78,15 +78,19 @@ Los puestos de mando se despliegan de forma normal. Cada jugador tiene asignado 
 
 ---
 
-## Misión 5: Asalto
+## Misión 5: Reliquias del Poder
 
-_Uno ataca. Otro resiste._
+_Quien domine el centro, domina la batalla._
 
-Antes de la partida los jugadores deciden quién es el **Atacante** y quién el **Defensor**, o lo tiran a dado. El Defensor coloca todos los puestos de mando, cada uno debe tener una separación de 10” y despliega primero desde ellos X unidades. El Atacante solo tiene un puesto de mando — despliega ya todo su ejército directamente en su puesto de mando.
+Los puestos de mando se despliegan de forma normal y sirven únicamente para desplegar unidades — no son conquistables ni puntúan en esta misión. Además, se define una **Zona Central** en el centro del mapa de al menos **6”x6”**, acordada por los jugadores antes de la partida. Por último, 4 reliquias se colocan en las 4 esquinas del mapa al inicio de la partida.
 
-**Victoria del Atacante:** Si al final de la partida controla más puestos que el Defensor, gana.
+**Recoger una reliquia:** Cualquier unidad de Línea, Élite o Héroe puede recoger una reliquia moviéndose hasta ella. El portador solo puede usar la acción de moverse — solo podrá atacar si es cargado en combate cuerpo a cuerpo.
 
-**Victoria del Defensor:** Si termina la partida con igual o más puestos que el Atacante, gana.
+**Puntuación:** Al final de cada turno, cada reliquia que se encuentre dentro de la Zona Central suma **X puntos** al jugador que la porta. Si la reliquia no está en la Zona Central, no puntúa.
+
+**Si el portador muere:** La reliquia regresa automáticamente a su esquina de origen. Cualquier unidad puede recogerla de nuevo moviéndose hasta ella.
+
+**Victoria:** El jugador con más puntos al final de la partida gana.
 
 ---
 
@@ -94,12 +98,14 @@ Antes de la partida los jugadores deciden quién es el **Atacante** y quién el 
 
 _El centro decide todo, pero nadie lo controla fácilmente._
 
-Los puestos de mando se despliegan de forma normal y puntúan con normalidad al final de cada turno. Además, una **Reliquia** se coloca en el un punto donde acuerden los jugadores en la mesa al inicio de la partida.
+Los puestos de mando se despliegan de forma normal y puntúan con normalidad al final de cada turno. Además, una **Reliquia** se coloca en un punto acordado por los jugadores al inicio de la partida.
 
 **Coger la Reliquia:** Cualquier unidad de Línea, Élite o Héroe que se mueva hasta la Reliquia puede portarla. El portador solo puede usar la acción de moverse — solo podrá atacar si es cargado en combate cuerpo a cuerpo.
 
-**Si el portador muere o entra en retirada:** La Reliquia vuelve a su posición acordada en la mesa. Cualquier otra unidad puede recogerla en su siguiente activación.
+**Puntuación extra:** Al final de cada turno, el jugador que porte la Reliquia suma **X puntos adicionales** a su puntuación, independientemente de los puestos de mando controlados.
 
-**Puntuación extra:** Al final de cada turno, el jugador que lleve la Reliquia a un puesto de mando suma X **puntos adicionales** a su puntuación, independientemente de los puestos. La reliquia vuelve a la posición acordada por los jugadores.
+**Si el portador muere en combate cuerpo a cuerpo:** La Reliquia pasa automáticamente a la unidad o escuadra que lo eliminó.
+
+**Si el portador muere por disparo:** La Reliquia cae en el lugar donde murió. Cualquier unidad puede recogerla en su siguiente activación moviéndose hasta ella.
 
 **Victoria:** Gana quien más puntos tenga al final de la partida. No hay victoria inmediata — la Reliquia es presión constante durante toda la batalla.

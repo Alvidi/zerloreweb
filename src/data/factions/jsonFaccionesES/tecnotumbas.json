@@ -1,25 +1,40 @@
 {
   "faccion": {
-    "nombre": "TecnoTumbas",
-    "estilo_juego": "Las Tecno-Tumbas son máquinas ancestrales que avanzan sin descanso, reviviendo una y otra vez mientras desatan disparos pesados de precisión calculada. Son lentos pero implacables, con unidades que regresan al combate y vehículos poderosos que dominan largas distancias. Perfectas para jugadores que quieren desgaste, inevitabilidad y presión constante sin depender de la moral o la velocidad.",
+    "nombre": "Segadores",
+    "estilo_juego": "Los Segadores son no muertos que avanzan sin descanso, reviviendo una y otra vez mientras desatan disparos y golpes pesados de precisión calculada. Son lentos pero implacables, con unidades que regresan al combate y vehículos poderosos que dominan largas distancias. Perfectos para jugadores que quieren desgaste, inevitabilidad y presión constante sin depender de la moral o la velocidad.",
     "habilidades_faccion": [
       {
+        "id": "reanimacion-mekanika",
         "habilidades_faccion1": "Reanimación Mekánika",
         "descripcion": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-4 la unidad muere definitivamente y es retirada; con resultado 5-6 la unidad revive con la mitad de sus Vidas máximas."
       },
       {
+        "id": "no-conocen-el-miedo",
         "habilidades_faccion2": "No conocen el miedo",
         "descripcion": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse"
       },
       {
+        "id": "protocolo-de-aniquilacion",
         "habilidades_faccion3": "Protocolo de Aniquilación",
         "descripcion": "Una vez por turno, cuando una unidad/escuadra elimina una unidad enemiga a distancia, gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "mas-alla",
+        "nombre": "1. El más allá",
+        "habilidades": [
+          "reanimacion-mekanika",
+          "no-conocen-el-miedo",
+          "protocolo-de-aniquilacion"
+        ]
       }
     ]
   },
   "unidades": [
     {
       "nombre_unidad": "Guardianes Tecno-Tumba",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "4\"",
@@ -90,6 +105,7 @@
     },
     {
       "nombre_unidad": "Vigías",
+      "era": "Futuro",
       "clase": "Línea",
       "perfil": {
         "movimiento": "4\"",
@@ -151,6 +167,7 @@
     },
     {
       "nombre_unidad": "Destructores",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "7\"",
@@ -212,6 +229,7 @@
     },
     {
       "nombre_unidad": "Lores de las tumbas",
+      "era": "Futuro",
       "clase": "Élite",
       "perfil": {
         "movimiento": "4\"",
@@ -269,6 +287,7 @@
     },
     {
       "nombre_unidad": "Mecanoide",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "4\"",
@@ -328,6 +347,7 @@
     },
     {
       "nombre_unidad": "Trilonoide",
+      "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "6\"",
@@ -374,6 +394,7 @@
     },
     {
       "nombre_unidad": "Señor Necróforo",
+      "era": "Futuro / Pasado",
       "clase": "Héroe",
       "perfil": {
         "movimiento": "3\"",
@@ -435,6 +456,7 @@
     },
     {
       "nombre_unidad": "Obelisco de Aniquilación",
+      "era": "Futuro / Pasado",
       "clase": "Titán",
       "perfil": {
         "movimiento": "2\"",

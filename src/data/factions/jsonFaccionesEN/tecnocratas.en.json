@@ -4,16 +4,30 @@
     "estilo_juego": "The Technocrats are a faction of advanced technology, precise fire and tactical control, specializing in the use of drones, experimental weaponry and intelligent retreat. Its units stand out for their versatility and efficiency, capable of quickly adapting to the battlefield situation through repositioning and automated support. They do not seek prolonged frontal confrontation, but rather wear down the enemy with technical superiority, sacrificing brute resistance in exchange for control, precision and flexibility.",
     "habilidades_faccion": [
       {
+        "id": "retirada-inteligente",
         "habilidades_faccion1": "Smart withdrawal",
         "descripcion": "Units of this faction can retreat without needing to take a retreat test."
       },
       {
+        "id": "apoyo-dron",
         "habilidades_faccion2": "Drone support",
         "descripcion": "Up to 2 drones can be included in line and elite squads, ignoring the squad number of the unit. In skirmish mode a drone can be added to a unit."
       },
       {
+        "id": "protocolos-de-combate",
         "habilidades_faccion3": "Combat Protocols",
         "descripcion": "Once per turn, when a Technocrat unit/squad is about to take a Shoot action, it can add +1 to the Hit result if another Technocrat unit/squad (including drones) is within 6\" of the same target."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "equipo-apoyo",
+        "nombre": "1. Support Team",
+        "habilidades": [
+          "retirada-inteligente",
+          "apoyo-dron",
+          "protocolos-de-combate"
+        ]
       }
     ]
   },

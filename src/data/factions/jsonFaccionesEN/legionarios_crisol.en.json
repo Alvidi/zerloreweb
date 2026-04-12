@@ -1,19 +1,33 @@
 {
   "faccion": {
-    "nombre": "Legionnaires",
-    "estilo_juego": "The Legionnaires are an unstoppable, fanatical and extremely resilient elite, capable of absorbing damage that would destroy normal troops. They rely on counterattacks, solid saves, and defensive skills that allow them to win long duels. It is the perfect faction for those who enjoy tough, slow but devastating units that fearlessly advance towards the enemy.",
+    "nombre": "Paladins",
+    "estilo_juego": "The Paladins are an unstoppable, fanatical and extremely resilient elite, capable of absorbing damage that would destroy normal troops. They rely on counterattacks, solid saves, and defensive skills that allow them to win long duels. It is the perfect faction for those who enjoy tough, slow but devastating units that fearlessly advance towards the enemy.",
     "habilidades_faccion": [
       {
+        "id": "gloria-del-pretor",
         "habilidades_faccion1": "Glory of the Praetor",
         "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit ignores the first point of damage received from a ranged attack during that turn."
       },
       {
+        "id": "caida-heroica",
         "habilidades_faccion2": "Heroic Fall",
         "descripcion": "When a Crucible unit is destroyed, before being removed it may immediately make a free counterattack, either ranged or melee depending on its position, following the normal attack rules. This attack is resolved even if the unit is locked. After resolving it, the unit is removed. In squads, the individual model being removed makes the attack."
       },
       {
+        "id": "voto-sagrado",
         "habilidades_faccion3": "Sacred Vow",
         "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit may reroll one failed melee die during that turn."
+      }
+    ],
+    "grupos_habilidades_faccion": [
+      {
+        "id": "gloria-crisol",
+        "nombre": "1. Glory of the Crucible",
+        "habilidades": [
+          "gloria-del-pretor",
+          "caida-heroica",
+          "voto-sagrado"
+        ]
       }
     ]
   },
@@ -77,7 +91,7 @@
           "max": 3
         },
         "especialidad": "This unit does not benefit from cover. It must equip the same weapon for both shooting and melee. If it chooses the Guardian Lance, it uses it for both attack types. If it chooses the Sun Sword and Shield, it also uses it for both.",
-        "valor": 10
+        "valor": 12
       },
       "armas": {
         "disparo": [
@@ -148,7 +162,7 @@
           "max": 2
         },
         "especialidad": "You do not benefit from cover.",
-        "valor": 13
+        "valor": 15
       },
       "armas": {
         "disparo": [

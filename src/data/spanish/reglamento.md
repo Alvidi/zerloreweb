@@ -74,6 +74,16 @@ El modo de juego se elige **antes de comenzar la partida**, y todos los jugadore
 
 Salvo que se indique lo contrario, todas las reglas del reglamento se aplican a ambos modos.
 
+### Era de juego
+
+ZeroLore permite jugar partidas ambientadas en distintas eras temáticas. Antes de comenzar la partida, los jugadores acuerdan una de las siguientes opciones:
+
+- **Past**: solo se utilizan unidades con la palabra clave _Past_. Partidas ambientadas en entornos de fantasía.
+- **Future**: solo se utilizan unidades con la palabra clave _Future_. Partidas ambientadas en entornos de ciencia ficción.
+- **Sin restricción**: Pasado contra futuro, todo vale. ZeroLore utiliza el mismo formato de fichas y habilidades para todas las facciones, por lo que cualquier unidad puede enfrentarse a cualquier otra independientemente de su era.
+
+Cada unidad indica su era en su ficha. Las unidades sin etiqueta son compatibles con cualquier modo.
+
 ---
 
 # Medición de distancias
@@ -934,6 +944,16 @@ La unidad puede realizar una acción extra de **disparo después de usar Carrera
 
 El arma tiene X disparos limitados con esta arma.
 **Momento:** Disparo y cuerpo a cuerpo
+
+---
+
+# Habilidades de facción
+
+Cada facción dispone de distintos **sets de pasivas** que definen su estilo de combate. Antes de comenzar la partida, cada jugador elige **un set de pasivas** de los disponibles en su facción. Todas las habilidades del set elegido se aplican automáticamente a todas las unidades de la facción mientras estén en juego y no requieren activación.
+
+Cada set contiene **3 habilidades pasivas** con coherencia temática entre sí, representando una forma concreta de llevar a la facción al campo de batalla. La elección del set debe comunicarse al rival antes de comenzar la partida.
+
+Con el tiempo, cada facción irá ampliando su catálogo de sets disponibles, permitiendo más estilos de juego distintos dentro de la misma facción.
 
 ---
 

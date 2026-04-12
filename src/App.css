@@ -1109,12 +1109,16 @@ button {
   letter-spacing: 0.08em;
   font-size: 0.75rem;
   cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .unit-type-filter input {
   width: 14px;
   height: 14px;
+  margin: 0;
   accent-color: var(--accent);
+  pointer-events: none;
 }
 
 .unit-era-filter-future {
@@ -1173,7 +1177,7 @@ button {
 }
 
 .faction-passives-title {
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-main);
@@ -1191,12 +1195,163 @@ button {
   color: var(--text-main);
 }
 
+.passive-group-list {
+  display: grid;
+  gap: 10px;
+}
+
+.passive-group-card {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.passive-group-card:hover {
+  border-color: rgba(255, 143, 69, 0.45);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.passive-group-card.active {
+  border-color: rgba(255, 143, 69, 0.7);
+  background: rgba(255, 143, 69, 0.08);
+}
+
+.passive-group-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.passive-group-icon-box {
+  background: rgba(255, 143, 69, 0.16);
+}
+
+.passive-group-heading {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 2px;
+}
+
+.passive-group-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.passive-group-heading strong {
+  color: var(--text-main);
+  font-size: 0.92rem;
+}
+
+.passive-group-icon-shape {
+  --passive-group-icon-hue: 200;
+  --passive-group-icon-rotate: 0deg;
+  width: 22px;
+  height: 22px;
+  border: 1px solid hsla(var(--passive-group-icon-hue), 75%, 68%, 0.35);
+  background:
+    radial-gradient(circle at 35% 30%, hsla(var(--passive-group-icon-hue), 90%, 72%, 0.2), rgba(10, 12, 18, 0.92)),
+    rgba(12, 12, 18, 0.9);
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.passive-group-icon-svg {
+  width: 15px;
+  height: 15px;
+  color: hsl(var(--passive-group-icon-hue), 78%, 72%);
+  transform: rotate(var(--passive-group-icon-rotate));
+}
+
+.passive-group-icon-svg path:first-child {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  opacity: 0.55;
+}
+
+.passive-group-icon-svg path:last-child {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.passive-group-open-button {
+  min-width: 36px;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--text-muted);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.passive-group-open-button:hover {
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.passive-group-current {
+  align-items: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.passive-group-current .doctrine-icon-box {
+  width: auto;
+  height: auto;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.army-passive-group {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  display: grid;
+  gap: 8px;
+}
+
+.army-passive-group-name {
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.army-passive-group ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.army-passive-group li strong {
+  color: var(--text-main);
+}
+
 .doctrine-panel {
   display: grid;
   gap: 10px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  background: rgba(12, 12, 18, 0.6);
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .doctrine-panel-header {
@@ -2887,13 +3042,13 @@ mark {
 
 .rules-token-preview.command {
   background:
-    radial-gradient(circle at 50% 46%, rgba(255, 186, 120, 0.28), rgba(26, 32, 44, 0.32) 42%, rgba(10, 12, 18, 0.97) 74%),
-    radial-gradient(circle at 35% 24%, rgba(255, 190, 130, 0.14), rgba(10, 10, 14, 0.98));
-  border: 2px solid rgba(255, 143, 69, 0.95);
+    radial-gradient(circle at 50% 46%, rgba(171, 178, 191, 0.15), rgba(26, 32, 44, 0.32) 42%, rgba(10, 12, 18, 0.97) 74%),
+    radial-gradient(circle at 35% 24%, rgba(225, 229, 236, 0.08), rgba(10, 10, 14, 0.98));
+  border: 2px solid rgba(170, 176, 188, 0.9);
   box-shadow:
     inset 0 0 24px rgba(0, 0, 0, 0.36),
-    inset 0 0 0 1px rgba(255, 204, 160, 0.2),
-    0 0 0 1.4px rgba(255, 143, 69, 0.34);
+    inset 0 0 0 1px rgba(216, 220, 228, 0.12),
+    0 0 0 1.4px rgba(170, 176, 188, 0.18);
   overflow: hidden;
 }
 
@@ -2928,7 +3083,7 @@ mark {
 
 .rules-token-preview.command::before {
   inset: 8%;
-  border: 1.8px solid rgba(255, 204, 160, 0.55);
+  border: 0;
   border-radius: inherit;
 }
 
@@ -2942,7 +3097,7 @@ mark {
 
 .rules-token-preview.command::after {
   inset: 20%;
-  border: 1.4px dashed rgba(255, 206, 165, 0.42);
+  border: 0;
   border-radius: inherit;
 }
 
@@ -4700,7 +4855,6 @@ mark {
 .duel-weapon-stack {
   display: grid;
   gap: 10px;
-  border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding: 8px 0;
   margin-top: 4px;
