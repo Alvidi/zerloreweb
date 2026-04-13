@@ -945,6 +945,11 @@ La unidad puede realizar una acción extra de **disparo después de usar Carrera
 El arma tiene X disparos limitados con esta arma.
 **Momento:** Disparo y cuerpo a cuerpo
 
+### 16. Arma limitada (X)
+
+El arma tiene limitación de equipamiento, solo se podrá usar X números de la misma arma en una escuadra o en una partida de escaramuza.
+**Momento:** -
+
 ---
 
 # Habilidades de facción

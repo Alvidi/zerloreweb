@@ -145,6 +145,17 @@ function PassiveGroupIcon({ groupId }) {
   )
 }
 
+function FactionSelectLabel({ label, iconSrc, isRandom = false }) {
+  return (
+    <span className="faction-select-option-label">
+      <span className={`faction-select-option-icon${isRandom ? ' random' : ''}`} aria-hidden="true">
+        {iconSrc ? <img src={iconSrc} alt="" /> : <span className="faction-select-option-random-mark">?</span>}
+      </span>
+      <span>{label}</span>
+    </span>
+  )
+}
+
 function Generador() {
   const { t, lang } = useI18n()
   const [, startTransition] = useTransition()
@@ -203,6 +214,27 @@ function Generador() {
 
   const selectedFaction = factions.find((faction) => faction.id === selectedFactionIdSafe) || null
   const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || null
+  const factionSelectOptions = useMemo(
+    () =>
+      factions.map((faction) => ({
+        value: faction.id,
+        label: <FactionSelectLabel label={faction.nombre} iconSrc={factionImages[faction.id]} />,
+      })),
+    [factions],
+  )
+  const randomFactionSelectOptions = useMemo(
+    () => [
+      {
+        value: 'random',
+        label: <FactionSelectLabel label={t('generator.randomFaction')} isRandom />,
+      },
+      ...factions.map((faction) => ({
+        value: faction.id,
+        label: <FactionSelectLabel label={faction.nombre} iconSrc={factionImages[faction.id]} />,
+      })),
+    ],
+    [factions, t],
+  )
   const selectedPassiveGroupIdSafe = useMemo(
     () => sanitizePassiveGroupId(selectedFaction, selectedPassiveGroupId),
     [selectedFaction, selectedPassiveGroupId],
@@ -366,12 +398,19 @@ function Generador() {
     const nextEras = nextFaction
       ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
       : []
+    const nextPassiveGroupId = getFirstPassiveGroupId(nextFaction)
+    const shouldResetArmy = armyUnits.length > 0 && armyFactionIdSafe && armyFactionIdSafe !== next
     startTransition(() => {
       setSelectedFactionId(next)
-      setSelectedPassiveGroupId(getFirstPassiveGroupId(nextFaction))
+      setSelectedPassiveGroupId(nextPassiveGroupId)
       setIsPassiveModalOpen(false)
       setUnitTypeFiltersManual(new Set(nextTypes))
       setEraFiltersManual(new Set(nextEras))
+      if (shouldResetArmy) {
+        setArmyUnits([])
+        setArmyFactionId(next)
+        setArmyPassiveGroupId(nextPassiveGroupId)
+      }
     })
   }
 
@@ -560,10 +599,7 @@ function Generador() {
                   t={t}
                   value={selectedFactionIdSafe}
                   onChange={(next) => handleFactionChange({ target: { value: next } })}
-                  options={factions.map((faction) => ({
-                    value: faction.id,
-                    label: faction.nombre,
-                  }))}
+                  options={factionSelectOptions}
                 />
               </div>
 
@@ -716,13 +752,7 @@ function Generador() {
                   t={t}
                   value={randomFactionIdSafe}
                   onChange={handleRandomFactionChange}
-                  options={[
-                    { value: 'random', label: t('generator.randomFaction') },
-                    ...factions.map((faction) => ({
-                      value: faction.id,
-                      label: faction.nombre,
-                    })),
-                  ]}
+                  options={randomFactionSelectOptions}
                 />
               </div>
               <div className="unit-type-filters">

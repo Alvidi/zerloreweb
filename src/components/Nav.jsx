@@ -61,7 +61,6 @@ function Nav() {
         <Link to="/">{t('nav.home')}</Link>
         <Link to="/reglamento">{t('nav.rules')}</Link>
         <Link to="/generador">{t('nav.generator')}</Link>
-        <Link to="/batalla">{lang === 'en' ? 'Battle' : 'Batalla'}</Link>
         {socialLinks.map((social) => (
           <a
             key={social.key}
@@ -108,7 +107,6 @@ function Nav() {
           <Link to="/" onClick={closeMobileMenu}>{t('nav.home')}</Link>
           <Link to="/reglamento" onClick={closeMobileMenu}>{t('nav.rules')}</Link>
           <Link to="/generador" onClick={closeMobileMenu}>{t('nav.generator')}</Link>
-          <Link to="/batalla" onClick={closeMobileMenu}>{lang === 'en' ? 'Battle' : 'Batalla'}</Link>
           {socialLinks.map((social) => (
             <a
               key={social.key}

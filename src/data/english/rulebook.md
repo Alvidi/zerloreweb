@@ -923,6 +923,10 @@ The unit may take an extra **shooting action after using Sprint**.
 This weapon has X limited shots.
 **Moment:** Shooting and melee
 
+### 16. Limited Weapon (X)
+This weapon has an equipment restriction: only X of the same weapon may be used in a squad or in a skirmish game.
+**Moment:** –
+
 ---
 
 # Faction Abilities
