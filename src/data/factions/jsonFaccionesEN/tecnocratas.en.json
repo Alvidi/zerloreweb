@@ -79,7 +79,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision"
+              "Precision",
+              "Weapon Limited 2"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -92,7 +93,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Raider +1",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -325,7 +327,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive"
+              "Explosive",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3

@@ -1,4 +1,5 @@
 import { getAbilityDescription, getAbilityLabel } from '../../utils/abilities.js'
+import { getWeaponAbilityId, WEAPON_ABILITY_IDS } from '../../utils/weaponAbilities.js'
 import zeroLoreLogoToken from '../../images/zeroloreLogoToken.png'
 import {
   buildArmyUnitDisplayNames,
@@ -67,6 +68,7 @@ const getPdfEraLabel = (era, t) => {
 }
 
 const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
+const isPdfVisibleWeaponAbility = (ability) => getWeaponAbilityId(ability) !== WEAPON_ABILITY_IDS.limitedAmmo
 
 export async function exportGeneratorPdf({
   armyUnits,
@@ -564,7 +566,7 @@ export async function exportGeneratorPdf({
 
       const uniqueWeaponAbilities = Array.from(
         weaponEntries.reduce((map, weapon) => {
-          ;(weapon.habilidades || []).filter(Boolean).forEach((ability) => {
+          ;(weapon.habilidades || []).filter((ability) => ability && isPdfVisibleWeaponAbility(ability)).forEach((ability) => {
             const current = map.get(ability) || {
               raw: ability,
               label: getAbilityLabel(ability, lang),
@@ -592,7 +594,11 @@ export async function exportGeneratorPdf({
         doc.setFontSize(8.6)
         const slotLabelWidth = doc.getTextWidth(`${weapon.slotLabel}: `) + 1.4
         const nameLines = getWrappedLines(weapon.nombre, Math.max(rightInnerWidth - slotLabelWidth, 24), 8.6)
-        const abilityText = (weapon.habilidades || []).map((ability) => getAbilityLabel(ability, lang)).filter(Boolean).join(', ') || '—'
+        const abilityText = (weapon.habilidades || [])
+          .filter((ability) => isPdfVisibleWeaponAbility(ability))
+          .map((ability) => getAbilityLabel(ability, lang))
+          .filter(Boolean)
+          .join(', ') || '—'
         const abilityLines = getWrappedLines(abilityText, rightInnerWidth, 7.6)
         const abilityBoxHeight = getLineHeight(7.6, 1.15) * Math.max(abilityLines.length, 1) + 4
         return {
@@ -883,7 +889,10 @@ export async function exportGeneratorPdf({
           weapon.distancia || '–',
           weapon.impactos || '–',
           `${weapon.danio} / ${weapon.danio_critico}`,
-          (weapon.habilidades || []).filter(Boolean).join(', ').slice(0, 120),
+          (weapon.habilidades || [])
+            .filter((ability) => ability && isPdfVisibleWeaponAbility(ability))
+            .join(', ')
+            .slice(0, 120),
           weapon.valor_extra ?? 0,
         ]),
         columnWidths: [usableWidth * 0.3, 14, 16, 14, 24, usableWidth * 0.24, usableWidth * 0.1],

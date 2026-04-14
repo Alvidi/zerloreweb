@@ -127,7 +127,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive"
+              "Explosive",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -140,7 +141,8 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Elite)"
+              "Anti 5+ (Elite)",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 4
@@ -303,7 +305,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy"
+              "Heavy",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -329,7 +332,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Critical Attack",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -363,7 +367,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Arcing Fire"
+              "Arcing Fire",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -391,7 +396,8 @@
             "danio_critico": "6",
             "habilidades_arma": [
               "Heavy",
-              "Anti 5+ (Vehicle / Monster)"
+              "Anti 5+ (Vehicle / Monster)",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 4

@@ -46,10 +46,14 @@ export default function CustomSelect({ value, onChange, options, disabled = fals
             <button
               key={option.value}
               type="button"
-              className={`custom-select-option${option.value === value ? ' active' : ''}`}
-              onClick={() => handleSelect(option.value)}
+              className={`custom-select-option${option.value === value ? ' active' : ''}${option.disabled ? ' disabled' : ''}`}
+              onClick={() => {
+                if (option.disabled) return
+                handleSelect(option.value)
+              }}
               role="option"
               aria-selected={option.value === value}
+              disabled={option.disabled}
             >
               {option.label}
             </button>

@@ -6,7 +6,7 @@
       {
         "id": "atrincheramiento",
         "habilidades_faccion1": "Atrincheramiento",
-        "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación."
+        "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Precisión en todos sus ataques de Disparo hasta el final de esa activación."
       },
       {
         "id": "refuerzos-rasos",
@@ -127,7 +127,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosiva",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -140,7 +141,8 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Élite)"
+              "Anti 5+ (Élite)",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 4
@@ -303,7 +305,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Pesada"
+              "Pesada",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -329,7 +332,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Ataque crítico",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -350,7 +354,7 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Esta unidad no puede usar la acción Carrera. Si no se ha movido durante su activación, puede repetir un dado de Impactos fallido en todos sus ataques de Disparo.",
+        "especialidad": "Esta unidad no puede usar la acción Carrera. Si no se ha movido durante su activación, puede repetir un dado de Precisión fallido en todos sus ataques de Disparo.",
         "valor": 9
       },
       "armas": {
@@ -363,7 +367,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Disparo parabólico"
+              "Disparo parabólico",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 0
@@ -391,7 +396,8 @@
             "danio_critico": "6",
             "habilidades_arma": [
               "Pesada",
-              "Anti 5+ (Vehículo / Monstruo)"
+              "Anti 5+ (Vehículo / Monstruo)",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 4
@@ -477,7 +483,7 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Disparo parabólico",
-              "Munición limitada (3)",
+              "Arma limitada (3)",
               "Directo"
             ],
             "especialidad": "-",
@@ -573,7 +579,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades de La Federación en escuadra o a 6\" en escaramuza pueden repetir un dado de Impactos fallido en disparo durante su activación. Además, este héroe puede asignarse a un vehículo aliado - colócalo en contacto con él.",
+        "especialidad": "Las unidades de La Federación en escuadra o a 6\" en escaramuza pueden repetir un dado de Precisión fallido en disparo durante su activación. Además, este héroe puede asignarse a un vehículo aliado - colócalo en contacto con él.",
         "valor": 14
       },
       "armas": {
@@ -649,7 +655,7 @@
             "danio_critico": "6",
             "habilidades_arma": [
               "Pesada",
-              "Munición limitada (3)"
+              "Arma limitada (3)"
             ],
             "especialidad": "-",
             "valor_extra": 0

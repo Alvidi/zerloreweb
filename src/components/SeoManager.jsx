@@ -7,7 +7,7 @@ const SEO_BY_LANG = {
     '/': {
       title: 'ZeroLore | Wargame de Miniaturas',
       description:
-        'ZeroLore es un wargame de miniaturas donde construyes tus propias batallas, facciones e historias.',
+        'ZeroLore es un wargame de miniaturas donde construyes tus propias partidas, facciones e historias.',
     },
     '/reglamento': {
       title: 'Reglamento | ZeroLore',
@@ -19,17 +19,12 @@ const SEO_BY_LANG = {
       description:
         'Crea y ajusta tu ejercito de ZeroLore por valor, faccion y configuracion de unidades.',
     },
-    '/batalla': {
-      title: 'Simulador de Batalla | ZeroLore',
-      description:
-        'Simula batallas de ZeroLore en tiempo real: turnos, dados, habilidades especiales y log de combate.',
-    },
   },
   en: {
     '/': {
       title: 'ZeroLore | Miniatures Wargame',
       description:
-        'ZeroLore is a miniatures wargame where you build your own battles, factions, and stories.',
+        'ZeroLore is a miniatures wargame where you build your own games, factions, and stories.',
     },
     '/reglamento': {
       title: 'Rules | ZeroLore',
@@ -41,18 +36,13 @@ const SEO_BY_LANG = {
       description:
         'Build and tune your ZeroLore army by target value, faction, and unit loadouts.',
     },
-    '/batalla': {
-      title: 'Battle Simulator | ZeroLore',
-      description:
-        'Simulate ZeroLore battles in real time: turns, dice rolls, special abilities, and a full combat log.',
-    },
   },
 }
 
 const FALLBACK = {
   title: 'ZeroLore',
   description:
-    'ZeroLore is a miniatures wargame where you build your own battles, factions, and stories.',
+    'ZeroLore is a miniatures wargame where you build your own games, factions, and stories.',
 }
 const SOCIAL_IMAGE_PATH = '/images/zerolore-social.png'
 const SOCIAL_IMAGE_WIDTH = '1200'

@@ -8,7 +8,6 @@ import SeoManager from './components/SeoManager.jsx'
 const Home = lazy(() => import('./pages/Home.jsx'))
 const Generador = lazy(() => import('./pages/Generador.jsx'))
 const Reglamento = lazy(() => import('./pages/Reglamento.jsx'))
-const Batalla = lazy(() => import('./pages/Batalla.jsx'))
 
 function Layout() {
   return (
@@ -29,7 +28,6 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/generador" element={<Generador />} />
-            <Route path="/batalla" element={<Batalla />} />
             <Route path="/reglamento" element={<Reglamento />} />
           </Route>
         </Routes>

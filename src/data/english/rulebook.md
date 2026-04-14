@@ -1,6 +1,6 @@
 # ZeroLore Rulebook
 
-ZeroLore is designed to be flexible, modular, and adaptable.
+ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, or doctrines, and add these concepts as you become more familiar with the game.
 
 This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
 
@@ -53,7 +53,7 @@ ZeroLore uses six-sided dice (1D6).
 - Results of 1 or 2 are generally considered misses in melee combat.
 - When a rule allows rerolling a die, each die may only be rerolled once. If multiple rules allow rerolling, only one reroll is applied.
 
-Throughout the game, different types of rolls are made: **initiative**, **hit**, **save**, **damage**, and **scatter**. Each is explained in detail in its corresponding section.
+Throughout the game, different types of rolls are made: **initiative**, **hits**, **save**, **damage**, and **scatter**. Each is explained in detail in its corresponding section.
 
 ### Rule Priority
 
@@ -62,6 +62,17 @@ In ZeroLore there are two types of rules: **general rules**, which belong to the
 When a special rule contradicts or modifies a general rule, **the special rule always takes priority**.
 
 _Example: the rulebook says a locked unit cannot shoot. If a weapon has the Gunslinger ability, that special rule lets you shoot while locked, and that takes precedence._
+
+### Number of Players
+
+ZeroLore can be played with **2 to 4 players**. The available formats are:
+
+- **1vs1**: duel between two players
+- **2vs2**: two teams of two players
+- **1vs1vs1**: three players facing each other
+- **1vs1vs1vs1**: four players facing each other
+
+In games with more than two players, the players agree before starting whether they are playing in teams or every player for themselves. The activation order is determined by initiative at the start of each turn.
 
 ### Game Modes
 
@@ -291,13 +302,13 @@ Each weapon indicates how many **Attacks** it makes.
 - Roll as many dice as the weapon's Attacks value indicates.
 - Each die represents an independent shot or projectile.
 
-## 3. Roll to Hit
+## 3. Roll Precision
 
 For each die rolled:
 
-- If the result is **equal to or above the weapon's Hit value**, the attack hits.
+- If the result is **equal to or above the weapon's Precision value**, the attack hits.
 - A result of **6** is a **critical hit**, unless a rule states otherwise.
-- Results below the Hit value are misses and are discarded.
+- Results below the Precision value are misses and are discarded.
 
 Dice that hit **are not rerolled**.
 
@@ -759,7 +770,7 @@ Each die represents an independent shot or projectile.
 ### Range
 Maximum range of the weapon in inches ("). The unit may only attack targets within this range.
 
-### Hit
+### Precision
 Minimum result needed on each die to hit.
 
 - A result of **6** always counts as a critical hit, unless a rule states otherwise.
@@ -815,12 +826,12 @@ In ZeroLore you will see values expressed as 4+, 5+, 3+, etc. This means the min
 - **5+** → need a 5 or 6 → 2 out of 6 → ~33%
 - **3+** → need a 3, 4, 5, or 6 → 4 out of 6 → ~67%
 
-When a rule says **+1 to the Hit value**, the number needed goes up and it becomes worse for the attacker. If your weapon hits on 4+ and you receive +1, you now need 5+. Conversely, **-1 to the Hit value** is an advantage: if you hit on 4+ and gain -1, you now hit on 3+. This applies equally to Saves.
+When a rule says **+1 to the Precision value**, the number needed goes up and it becomes worse for the attacker. If your weapon hits on 4+ and you receive +1, you now need 5+. Conversely, **-1 to the Precision value** is an advantage: if you hit on 4+ and gain -1, you now hit on 3+. This applies equally to Saves.
 
-To avoid situations of immortality or infallibility, Save and Hit modifiers have the following limits:
+To avoid situations of immortality or infallibility, Save and Precision modifiers have the following limits:
 
 - **Maximum Save:** no unit can ever need more than 6+ to save, regardless of accumulated modifiers. A result of 1 always fails the save.
-- **Maximum Hit:** no unit can ever need more than 6+ to hit, regardless of accumulated modifiers. A result of 6 always hits.
+- **Maximum Precision:** no unit can ever need more than 6+ to hit, regardless of accumulated modifiers. A result of 6 always hits.
 
 ## Weapon and Unit Abilities
 
@@ -856,8 +867,8 @@ When a target is hit by this weapon, it **loses +X to its Save** against that at
 **Moment:** Shooting
 
 ### 2. Heavy
-- If the unit **has moved**, the weapon gains **+1 to its Hit value**.
-- If the unit **has not moved**, the weapon gains **-1 to its Hit value**.
+- If the unit **has moved**, the weapon gains **+1 to its Precision value**.
+- If the unit **has not moved**, the weapon gains **-1 to its Precision value**.
 
 **Moment:** Shooting
 
@@ -887,7 +898,7 @@ Critical hits obtained with this weapon **cannot be saved**.
 Each critical hit generates **one additional attack**, resolved normally.
 **Moment:** Shooting and melee
 
-### 8. Precision
+### 8. Deadeye
 Allows **rerolling all failed** attack rolls.
 **Moment:** Shooting and melee
 
@@ -919,11 +930,7 @@ This weapon **hits automatically** and does not require a Hit roll.
 The unit may take an extra **shooting action after using Sprint**.
 **Moment:** Shooting
 
-### 15. Limited Ammo (X)
-This weapon has X limited shots.
-**Moment:** Shooting and melee
-
-### 16. Limited Weapon (X)
+### 15. Weapon Limited (X)
 This weapon has an equipment restriction: only X of the same weapon may be used in a squad or in a skirmish game.
 **Moment:** –
 
@@ -945,11 +952,11 @@ Over time, each faction will expand its catalogue of available sets, allowing fo
 
 Doctrines:
 
-- Are declared during the **Initiative Phase**, and the unit or squad that will use them is marked.
+- Are declared during the **Initiative Phase and the unit or squad** that will use them is marked.
 - Affect **one unit or squad**, unless stated otherwise.
 - Their effects last **the entire turn**.
-- Only **one doctrine per turn** may be used.
-- Any unit or squad with a doctrine bonus may be marked with some kind of token.
+- Only one doctrine per turn may be used.
+- Any unit/squad with a doctrine bonus may be marked with some kind of token.
 
 Doctrines are **public** and must be clearly declared to the opponent before being applied.
 
@@ -957,7 +964,7 @@ Doctrines are **public** and must be clearly declared to the opponent before bei
 ## Command Doctrine List
 
 ### 1. Clubbing Blow
-The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This doctrine resolves immediately when that unit performs its activation, regardless of which side has the higher Speed.
+The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This doctrine is resolved immediately when the unit performs its activation regardless of who has the higher Speed.
 
 ### 2. Aimed Shot
 The chosen unit or squad **loses one action**, but gains **+1 Attack die** for shooting this turn.
@@ -969,19 +976,19 @@ The chosen unit may use **one additional movement action** this turn.
 The chosen unit gains initiative in melee combat this turn, ignoring the opponent's Speed and even if the enemy charged.
 
 ### 5. Ours is the Victory
-The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes on that same objective.
+The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes, on that same objective.
 
 ### 6. Immediate Reaction
-This unit cannot be charged, nor can it charge any enemy unit.
+This unit cannot be charged, nor can it charge any enemy unit
 
 ### 7. Overcharged
 If this unit fails a charge during this turn, it may immediately repeat it once.
 
 ### 8. Second Chance
-Repeat one melee or ranged attack roll. If the first roll is favourable, this doctrine may be ignored; if you decide to use the doctrine, the first roll is discarded.
+Repeat one melee or ranged attack roll. If the first roll is favourable this doctrine may be ignored, if you decide to use the doctrine the first roll is discarded.
 
 ### 9. Fight to the Death
-This doctrine only works when one allied unit or squad is locked in melee combat against one other unit or squad; if more than 2 units or squads are involved, it cannot be used. Both units or squads become committed to a no-way-out duel. Neither may retreat nor be separated from combat for any reason, including through other abilities, doctrines, and so on. If either of the two units or squads in combat is activated, the doctrine becomes active. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
+This doctrine only works with one allied unit / squad that is locked in melee combat against another, if more than 2 units / squads are involved this doctrine cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, doctrines, and so on. If either of the two units / squads in combat is activated, the doctrine is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
 
 ---
 

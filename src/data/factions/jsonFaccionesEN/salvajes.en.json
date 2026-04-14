@@ -69,7 +69,8 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Direct"
+              "Direct",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -82,7 +83,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Unstable"
+              "Unstable",
+              "Weapon Limited 3"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -157,7 +159,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack"
+              "Critical Attack",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -170,7 +173,8 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Line)"
+              "Anti 5+ (Line)",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -254,7 +258,8 @@
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack"
+              "Critical Attack",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -301,7 +306,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1"
+              "Raider +1",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -327,7 +333,8 @@
             "danio": "4",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable"
+              "Unstable",
+              "Weapon Limited 2"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -348,14 +355,15 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Orca Chainsaw",
+            "nombre": "Savage Chainsaw",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts"
+              "Chained Impacts",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 1
@@ -367,7 +375,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Weapon Limited 1"
+            ],
             "especialidad": "-",
             "valor_extra": 2
           }

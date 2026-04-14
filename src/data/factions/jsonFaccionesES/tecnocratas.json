@@ -16,7 +16,7 @@
       {
         "id": "protocolos-de-combate",
         "habilidades_faccion3": "Protocolos de Combate",
-        "descripcion": "Una vez por turno, cuando una unidad/escuadra Tecnócrata vaya a realizar una acción de Disparo, puede añadir +1 al resultado de Impactos si otra unidad/escuadra Tecnócrata (incluidos drones) está a 6\" del mismo objetivo."
+        "descripcion": "Una vez por turno, cuando una unidad/escuadra Tecnócrata vaya a realizar una acción de Disparo, puede añadir +1 al resultado de Precisión si otra unidad/escuadra Tecnócrata (incluidos drones) está a 6\" del mismo objetivo."
       }
     ],
     "grupos_habilidades_faccion": [
@@ -79,7 +79,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión"
+              "Precisión",
+              "Arma limitada 2"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -92,7 +93,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Asaltante +1"
+              "Asaltante +1",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -325,7 +327,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosiva",
+              "Arma limitada 1"
             ],
             "especialidad": "-",
             "valor_extra": 3

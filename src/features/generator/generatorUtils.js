@@ -1,12 +1,12 @@
 export const factionImages = {
   alianza: new URL('../../images/faccion/alianza.svg', import.meta.url).href,
-  legionarios_crisol: new URL('../../images/faccion/legionarios_crisol.svg', import.meta.url).href,
+  paladines: new URL('../../images/faccion/paladines.svg', import.meta.url).href,
   salvajes: new URL('../../images/faccion/salvajes.svg', import.meta.url).href,
   vacio: new URL('../../images/faccion/vacio.svg', import.meta.url).href,
-  rebeldes: new URL('../../images/faccion/rebeldes.svg', import.meta.url).href,
-  tecnotumbas: new URL('../../images/faccion/tecnotumbas.svg', import.meta.url).href,
+  misticos: new URL('../../images/faccion/misticos.svg', import.meta.url).href,
+  segadores: new URL('../../images/faccion/segadores.svg', import.meta.url).href,
   enjambre: new URL('../../images/faccion/enjambre.svg', import.meta.url).href,
-  federacion: new URL('../../images/faccion/federacion.svg', import.meta.url).href,
+  imperio: new URL('../../images/faccion/imperio.svg', import.meta.url).href,
   tecnocratas: new URL('../../images/faccion/tecnocratas.svg', import.meta.url).href,
 }
 
@@ -41,6 +41,29 @@ export const clampSquadSize = (value, unit) => {
   return Math.min(max, Math.max(min, next))
 }
 
+const getWeaponLimitFromAbilities = (abilities) => {
+  if (!Array.isArray(abilities)) return null
+  for (const raw of abilities) {
+    const match = String(raw || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .match(/(?:arma limitada|municion limitada|weapon limited|limited weapon|limited ammo)\s*\(?\s*(\d+)\s*\)?/)
+    if (match) {
+      const parsed = Number.parseInt(match[1], 10)
+      if (Number.isFinite(parsed) && parsed > 0) return parsed
+    }
+  }
+  return null
+}
+
+export const getWeaponLimit = (weapon) => {
+  const raw = weapon?.limite ?? weapon?.weapon_limit
+  const parsed = Number.isFinite(Number(raw)) ? Number(raw) : null
+  if (parsed && parsed > 0) return parsed
+  return getWeaponLimitFromAbilities(weapon?.habilidades || weapon?.habilidades_arma || null)
+}
+
 const normalizeWeapon = (weapon, tipo) => ({
   id: slugify(weapon.nombre || weapon.id || `${tipo}-${Math.random()}`),
   nombre: weapon.nombre || weapon.id || 'Arma',
@@ -51,6 +74,7 @@ const normalizeWeapon = (weapon, tipo) => ({
   danio: weapon.danio ?? weapon.danio_base ?? '-',
   danio_critico: weapon.danio_critico ?? weapon.critico ?? '-',
   habilidades: weapon.habilidades_arma || weapon.habilidades || [],
+  limite: getWeaponLimitFromAbilities(weapon.habilidades_arma || weapon.habilidades || []),
   valor_extra: toNumber(weapon.valor_extra ?? 0),
 })
 
@@ -67,6 +91,25 @@ export const getUnitTypeToken = (type) => {
   if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
   if (normalized.includes('titan') || normalized.includes('titante')) return 'titan'
   return 'line'
+}
+
+const isVehicleType = (type) => getUnitTypeToken(type) === 'vehicle'
+
+const passiveAllowsVehicleDualWeapons = (passiveGroup) => {
+  const habilidades = Array.isArray(passiveGroup?.habilidades) ? passiveGroup.habilidades : []
+  return habilidades.some((skill) => {
+    const id = String(skill?.id || '').toLowerCase()
+    const nombre = String(skill?.nombre || '').toLowerCase()
+    const descripcion = String(skill?.descripcion || '').toLowerCase()
+
+    return id === 'potencia-blindada'
+      || nombre.includes('potencia blindada')
+      || nombre.includes('armored power')
+      || (
+        (descripcion.includes('veh') || descripcion.includes('vehicle'))
+        && (descripcion.includes('dos armas') || descripcion.includes('two ranged weapons'))
+      )
+  })
 }
 
 export const isUnitTypeAllowedInGameMode = (type, gameMode) => {
@@ -243,7 +286,98 @@ export const normalizeFaction = (data, index, baseId = '') => {
   }
 }
 
+export const applyPassiveGroupEffectsToFaction = (faction, passiveGroup) => {
+  if (!faction) return faction
+  if (!passiveAllowsVehicleDualWeapons(passiveGroup)) return faction
+
+  return {
+    ...faction,
+    unidades: (faction.unidades || []).map((unit) =>
+      isVehicleType(unit.tipo)
+        ? {
+            ...unit,
+            max_armas_disparo: Math.max(2, unit.max_armas_disparo || 1),
+          }
+        : unit
+    ),
+  }
+}
+
 export const getWeaponById = (list, id) => list.find((weapon) => weapon.id === id)
+
+export const getWeaponUsageKey = (weapon, type = '') => `${weapon?.tipo || type}:${weapon?.id || ''}`
+
+const addWeaponCount = (counts, weapon, type = '') => {
+  if (!weapon?.id) return
+  const key = getWeaponUsageKey(weapon, type)
+  counts.set(key, (counts.get(key) || 0) + 1)
+}
+
+const addWeaponsToCounts = (counts, weapons, type = '') => {
+  ;(weapons || []).forEach((weapon) => addWeaponCount(counts, weapon, type))
+}
+
+export const getEntryWeaponCounts = (entry) => {
+  const counts = new Map()
+  if (!entry) return counts
+
+  if (Array.isArray(entry.perMiniLoadouts) && entry.perMiniLoadouts.length) {
+    entry.perMiniLoadouts.forEach((loadout) => {
+      addWeaponsToCounts(counts, loadout.shooting, 'disparo')
+      addWeaponCount(counts, loadout.melee, 'melee')
+    })
+    return counts
+  }
+
+  addWeaponsToCounts(counts, entry.shooting, 'disparo')
+  addWeaponCount(counts, entry.melee, 'melee')
+  return counts
+}
+
+export const getArmyWeaponCounts = (units = [], excludeUid = '') => {
+  const counts = new Map()
+  ;(units || []).forEach((entry) => {
+    if (excludeUid && entry?.uid === excludeUid) return
+    const entryCounts = getEntryWeaponCounts(entry)
+    entryCounts.forEach((count, key) => {
+      counts.set(key, (counts.get(key) || 0) + count)
+    })
+  })
+  return counts
+}
+
+export const selectionHasWeaponLimitError = (entry, armyUnits = [], gameMode = 'escuadra', excludeUid = '') => {
+  if (!entry) return false
+  const entryCounts = getEntryWeaponCounts(entry)
+  const armyCounts = gameMode === 'escaramuza' ? getArmyWeaponCounts(armyUnits, excludeUid) : new Map()
+  const seen = new Set()
+  const weapons = []
+
+  if (Array.isArray(entry.perMiniLoadouts) && entry.perMiniLoadouts.length) {
+    entry.perMiniLoadouts.forEach((loadout) => {
+      ;(loadout.shooting || []).forEach((weapon) => weapons.push({ weapon, type: 'disparo' }))
+      if (loadout.melee) weapons.push({ weapon: loadout.melee, type: 'melee' })
+    })
+  } else {
+    ;(entry.shooting || []).forEach((weapon) => weapons.push({ weapon, type: 'disparo' }))
+    if (entry.melee) weapons.push({ weapon: entry.melee, type: 'melee' })
+  }
+
+  return weapons.some(({ weapon, type }) => {
+    const key = getWeaponUsageKey(weapon, type)
+    if (seen.has(key)) return false
+    seen.add(key)
+
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return false
+
+    const entryCount = entryCounts.get(key) || 0
+    if (entryCount > limit) return true
+
+    if (gameMode !== 'escaramuza') return false
+    return (armyCounts.get(key) || 0) + entryCount > limit
+  })
+}
 
 const sumWeaponCost = (weapons) => weapons.reduce((total, weapon) => total + (weapon?.valor_extra || 0), 0)
 
@@ -269,15 +403,35 @@ const shuffle = (list) => {
   return next
 }
 
-const buildRandomSelection = (unit) => {
+const pickRandomWeaponWithLimits = (options, counts) => {
+  if (!options.length) return null
+  const available = options.filter((weapon) => {
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return true
+    return (counts.get(weapon.id) || 0) < limit
+  })
+  if (!available.length) return null
+  const pick = randomPick(available)
+  if (pick) {
+    counts.set(pick.id, (counts.get(pick.id) || 0) + 1)
+  }
+  return pick
+}
+
+const buildRandomSelection = (unit, existingArmyCounts = null) => {
   const shooting = []
+  const shootingCounts = new Map(existingArmyCounts?.shooting || [])
   if (unit.armas_disparo.length > 0) {
     const slots = Math.min(unit.max_armas_disparo, unit.armas_disparo.length)
     for (let i = 0; i < slots; i += 1) {
-      shooting.push(randomPick(unit.armas_disparo))
+      const pick = pickRandomWeaponWithLimits(unit.armas_disparo, shootingCounts)
+      if (!pick) return null
+      shooting.push(pick)
     }
   }
-  const melee = unit.armas_melee.length > 0 ? randomPick(unit.armas_melee) : null
+  const meleeCounts = new Map(existingArmyCounts?.melee || [])
+  const melee = unit.armas_melee.length > 0 ? pickRandomWeaponWithLimits(unit.armas_melee, meleeCounts) : null
+  if (unit.armas_melee.length > 0 && !melee) return null
   return { shooting, melee }
 }
 
@@ -287,20 +441,21 @@ const buildRandomSquadLoadouts = (unit, squadSize) => {
   const meleeOptions = unit.armas_melee
   const slots = Math.min(unit.max_armas_disparo, shootingOptions.length)
 
-  const shootingPools = Array.from({ length: slots }, (_, slotIndex) => {
-    const pool = shuffle(shootingOptions)
-    return pool.map((weapon, idx) => pool[(idx + slotIndex) % pool.length])
-  })
-  const meleePool = shuffle(meleeOptions)
+  const shootingCounts = new Map()
+  const meleeCounts = new Map()
 
-  return Array.from({ length: size }, (_, miniIndex) => {
+  return Array.from({ length: size }, () => {
     const shooting = slots
-      ? Array.from({ length: slots }, (_, slotIndex) => {
-          const pool = shootingPools[slotIndex]
-          return pool[miniIndex % pool.length]
+      ? Array.from({ length: slots }, () => {
+          const pool = shuffle(shootingOptions)
+          return pickRandomWeaponWithLimits(pool, shootingCounts)
         })
       : []
-    const melee = meleeOptions.length ? meleePool[miniIndex % meleePool.length] : null
+    const melee = meleeOptions.length
+      ? pickRandomWeaponWithLimits(shuffle(meleeOptions), meleeCounts)
+      : null
+    if (shooting.some((weapon) => !weapon)) return null
+    if (meleeOptions.length && !melee) return null
     return { shooting, melee }
   })
 }
@@ -444,6 +599,8 @@ export const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = 
     let total = 0
     const units = []
     let guard = 0
+    const armyShootingCounts = new Map()
+    const armyMeleeCounts = new Map()
 
     while (guard < 80) {
       guard += 1
@@ -457,10 +614,23 @@ export const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = 
               ),
             )
           : 1
-      const selection = buildRandomSelection(unit)
+      const selection = buildRandomSelection(
+        unit,
+        gameMode === 'escaramuza'
+          ? { shooting: armyShootingCounts, melee: armyMeleeCounts }
+          : null,
+      )
+      if (!selection) continue
       const perMiniLoadouts =
         gameMode === 'escuadra' ? buildRandomSquadLoadouts(unit, squadSize) : null
+      if (gameMode === 'escuadra' && (!perMiniLoadouts || perMiniLoadouts.some((loadout) => !loadout))) continue
       const cost = computeUnitTotal(unit, selection.shooting, selection.melee, squadSize, perMiniLoadouts, gameMode)
+      const candidateEntry = {
+        shooting: selection.shooting,
+        melee: selection.melee,
+        perMiniLoadouts,
+      }
+      if (selectionHasWeaponLimitError(candidateEntry, units, gameMode)) continue
       if (total + cost <= target) {
         units.push({
           uid: `${unit.id}-${Date.now()}-${Math.random()}`,
@@ -471,6 +641,14 @@ export const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = 
           perMiniLoadouts,
           total: cost,
         })
+        if (gameMode === 'escaramuza') {
+          selection.shooting.forEach((weapon) => {
+            armyShootingCounts.set(weapon.id, (armyShootingCounts.get(weapon.id) || 0) + 1)
+          })
+          if (selection.melee?.id) {
+            armyMeleeCounts.set(selection.melee.id, (armyMeleeCounts.get(selection.melee.id) || 0) + 1)
+          }
+        }
         total += cost
         if (total === target) break
       }

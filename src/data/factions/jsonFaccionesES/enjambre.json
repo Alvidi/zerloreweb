@@ -198,7 +198,8 @@
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Explosiva"
+              "Explosiva",
+              "Arma limitada 2"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -259,7 +260,8 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque crítico"
+              "Ataque crítico",
+              "Arma limitada 2"
             ],
             "especialidad": "-",
             "valor_extra": 2

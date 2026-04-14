@@ -1,4 +1,4 @@
-import { getWeaponAbilityId, WEAPON_ABILITY_IDS } from '../features/battle/weaponAbilities.js'
+import { getWeaponAbilityId, WEAPON_ABILITY_IDS } from './weaponAbilities.js'
 
 const parseAbilityNumber = (raw) => {
   const text = String(raw || '')
@@ -32,6 +32,11 @@ const normalizeLimitedValue = (value) => {
   return value
 }
 
+const parseAbilityTarget = (raw) => {
+  const match = String(raw || '').match(/\(([^)]+)\)/)
+  return match ? match[1].trim() : ''
+}
+
 export const getAbilityDescription = (ability, lang = 'es') => {
   if (!ability) return ''
   const raw = String(ability).trim()
@@ -45,8 +50,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.heavy) {
     return lang === 'en'
-      ? 'If it moved: +1 to Hit value. If it did not move: -1 to Hit value.'
-      : 'Si se ha movido: +1 al valor de Impactos. Si no se ha movido: -1 al valor de Impactos.'
+      ? 'If it moved: +1 to Precision value. If it did not move: -1 to Precision value.'
+      : 'Si se ha movido: +1 al valor de Precisión. Si no se ha movido: -1 al valor de Precisión.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.quickAttack) {
     return lang === 'en'
@@ -79,9 +84,10 @@ export const getAbilityDescription = (ability, lang = 'es') => {
       : 'Repite todas las tiradas fallidas de ataque.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.anti) {
+    const target = parseAbilityTarget(raw)
     return lang === 'en'
-      ? `Against the listed type, results of ${normalizeAntiValue(value)} count as critical hits.`
-      : `Contra el tipo indicado, los resultados de ${normalizeAntiValue(value)} son críticos.`
+      ? `Against ${target || 'the listed type'}, results of ${normalizeAntiValue(value)} count as critical hits.`
+      : `Contra ${target || 'el tipo indicado'}, los resultados de ${normalizeAntiValue(value)} son críticos.`
   }
   if (abilityId === WEAPON_ABILITY_IDS.ignoreCover) {
     return lang === 'en'
@@ -100,8 +106,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.direct) {
     return lang === 'en'
-      ? 'Hits automatically, no Hit roll required.'
-      : 'Impacta automáticamente, sin tirada de Impactos.'
+      ? 'Hits automatically, no Precision roll required.'
+      : 'Impacta automáticamente, sin tirada de Precisión.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) {
     return lang === 'en'
@@ -110,8 +116,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.limitedAmmo) {
     return lang === 'en'
-      ? `This weapon has ${normalizeLimitedValue(value)} limited shots.`
-      : `Tiene ${normalizeLimitedValue(value)} disparos limitados con esta arma.`
+      ? `Only ${normalizeLimitedValue(value)} of this weapon may be equipped.`
+      : `Solo se puede equipar ${normalizeLimitedValue(value)} de esta arma.`
   }
 
   return ''
@@ -144,12 +150,15 @@ export const getAbilityLabel = (ability, lang = 'es') => {
   if (abilityId === WEAPON_ABILITY_IDS.criticalAttack) return 'Critical Attack'
   if (abilityId === WEAPON_ABILITY_IDS.chainedImpacts) return 'Chained Impacts'
   if (abilityId === WEAPON_ABILITY_IDS.precision) return 'Precision'
-  if (abilityId === WEAPON_ABILITY_IDS.anti) return `Anti${suffix}`
+  if (abilityId === WEAPON_ABILITY_IDS.anti) {
+    const target = parseAbilityTarget(raw)
+    return target ? `Anti${suffix} (${target})` : `Anti${suffix}`
+  }
   if (abilityId === WEAPON_ABILITY_IDS.ignoreCover) return 'Ignore Cover'
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) return 'Parabolic Shot'
   if (abilityId === WEAPON_ABILITY_IDS.unstable) return 'Unstable'
   if (abilityId === WEAPON_ABILITY_IDS.direct) return 'Direct'
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) return 'Guerrilla'
-  if (abilityId === WEAPON_ABILITY_IDS.limitedAmmo) return `Limited Ammo${suffix}`
+  if (abilityId === WEAPON_ABILITY_IDS.limitedAmmo) return `Weapon Limited${suffix}`
   return formatAbilityLabel(raw)
 }

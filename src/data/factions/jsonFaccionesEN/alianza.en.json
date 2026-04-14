@@ -69,7 +69,8 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Direct"
+              "Direct",
+              "Weapon Limited 2"
             ],
             "especialidad": "-",
             "valor_extra": 2
@@ -82,7 +83,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy"
+              "Heavy",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -166,7 +168,8 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy"
+              "Heavy",
+              "Weapon Limited 2"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -179,7 +182,8 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)"
+              "Anti 5+ (Vehicle)",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 4
@@ -250,7 +254,8 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable"
+              "Unstable",
+              "Weapon Limited 2"
             ],
             "especialidad": "-",
             "valor_extra": 4
@@ -264,7 +269,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Weapon Limited 1"
+            ],
             "especialidad": "-",
             "valor_extra": 0
           },
@@ -322,7 +329,8 @@
             "danio_critico": "3",
             "habilidades_arma": [
               "Heavy",
-              "Anti 5+ (Line)"
+              "Anti 5+ (Line)",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3

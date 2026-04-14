@@ -46,7 +46,11 @@ const WEAPON_ABILITY_DEFINITIONS = [
   { id: WEAPON_ABILITY_IDS.unstable, aliases: ['inestable', 'unstable'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.direct, aliases: ['directo', 'straight', 'direct'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.guerrilla, aliases: ['guerrilla'], conditionKey: 'afterDash' },
-  { id: WEAPON_ABILITY_IDS.limitedAmmo, aliases: ['municion limitada', 'limited ammo'], conditionKey: null },
+  {
+    id: WEAPON_ABILITY_IDS.limitedAmmo,
+    aliases: ['municion limitada', 'arma limitada', 'weapon limited', 'limited weapon', 'limited ammo'],
+    conditionKey: null,
+  },
 ]
 
 const definitionById = new Map(WEAPON_ABILITY_DEFINITIONS.map((definition) => [definition.id, definition]))

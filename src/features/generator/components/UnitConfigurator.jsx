@@ -5,10 +5,14 @@ import {
   clampSquadSize,
   computeUnitTotal,
   getWeaponById,
+  getArmyWeaponCounts,
+  getWeaponLimit,
+  getWeaponUsageKey,
+  selectionHasWeaponLimitError,
 } from '../generatorUtils.js'
 import CustomSelect from './CustomSelect.jsx'
 
-export default function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lang }) {
+export default function UnitConfigurator({ unit, selected, onClose, onConfirm, gameMode, t, lang, armyUnits = [] }) {
   const imageInputRef = useRef(null)
   const initialShooting = useMemo(() => {
     if (!unit.armas_disparo.length) return []
@@ -64,6 +68,10 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
     .map((id) => getWeaponById(unit.armas_disparo, id))
     .filter(Boolean)
   const selectedMelee = getWeaponById(unit.armas_melee, meleeSelection)
+  const baseArmyWeaponCounts = useMemo(
+    () => getArmyWeaponCounts(armyUnits, selected?.uid || ''),
+    [armyUnits, selected?.uid],
+  )
 
   const perMiniLoadouts = gameMode === 'escuadra'
     ? perMiniSelections.map((sel) => ({
@@ -82,6 +90,82 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
     perMiniLoadouts,
     gameMode,
   )
+  const hasWeaponLimitError = selectionHasWeaponLimitError(
+    {
+      shooting: selectedShooting,
+      melee: selectedMelee,
+      perMiniLoadouts,
+    },
+    armyUnits,
+    gameMode,
+    selected?.uid || '',
+  )
+
+  const getWeaponLimitLabel = (weapon) => {
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return ''
+    return `${t('generator.weaponLimit')} ${limit}`
+  }
+
+  const buildWeaponOptionLabel = (weapon) => {
+    const limitLabel = getWeaponLimitLabel(weapon)
+    const weaponValue = weapon.valor_extra > 0 ? `+${weapon.valor_extra}` : '0'
+    const valueLabel = `${t('generator.weaponValue')} ${weaponValue}`
+    return limitLabel
+      ? `${weapon.nombre} · ${valueLabel} · ${limitLabel}`
+      : `${weapon.nombre} · ${valueLabel}`
+  }
+
+  const getCurrentShootingId = (miniIndex, slotIndex) =>
+    perMiniSelections[miniIndex]?.shootingIds?.[slotIndex] || shootingSelection[slotIndex]
+
+  const getCurrentMeleeId = (miniIndex) => perMiniSelections[miniIndex]?.meleeId || meleeSelection
+
+  const wouldExceedLimit = (weaponId, nextSelection) => {
+    const weapon = getWeaponById(unit.armas_disparo, weaponId)
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return false
+    const count = nextSelection.reduce((totalCount, id) => (id === weaponId ? totalCount + 1 : totalCount), 0)
+    if (count > limit) return true
+    if (gameMode !== 'escaramuza') return false
+    const armyCount = baseArmyWeaponCounts.get(getWeaponUsageKey(weapon, 'disparo')) || 0
+    return armyCount + count > limit
+  }
+
+  const wouldExceedSquadLimit = (weaponId, slotIndex, miniIndex) => {
+    const weapon = getWeaponById(unit.armas_disparo, weaponId)
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return false
+    let count = 0
+    for (let i = 0; i < perMiniSelections.length; i += 1) {
+      for (let slot = 0; slot < shootingSelection.length; slot += 1) {
+        const current = i === miniIndex && slot === slotIndex ? weaponId : getCurrentShootingId(i, slot)
+        if (current === weaponId) count += 1
+      }
+    }
+    return count > limit
+  }
+
+  const wouldExceedSquadMeleeLimit = (weaponId, miniIndex) => {
+    const weapon = getWeaponById(unit.armas_melee, weaponId)
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return false
+    let count = 0
+    for (let i = 0; i < perMiniSelections.length; i += 1) {
+      const current = i === miniIndex ? weaponId : getCurrentMeleeId(i)
+      if (current === weaponId) count += 1
+    }
+    return count > limit
+  }
+
+  const wouldExceedSkirmishMeleeLimit = (weaponId) => {
+    if (gameMode !== 'escaramuza') return false
+    const weapon = getWeaponById(unit.armas_melee, weaponId)
+    const limit = getWeaponLimit(weapon)
+    if (!limit) return false
+    const armyCount = baseArmyWeaponCounts.get(getWeaponUsageKey(weapon, 'melee')) || 0
+    return armyCount + 1 > limit
+  }
 
   const handleSquadSizeChange = (size) => {
     setSquadSize(size)
@@ -253,10 +337,16 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
                         t={t}
                         value={value}
                         onChange={(next) => handleShootingChange(index, next)}
-                        options={unit.armas_disparo.map((option) => ({
-                          value: option.id,
-                          label: `${option.nombre} (+${option.valor_extra})`,
-                        }))}
+                        options={unit.armas_disparo.map((option) => {
+                          const nextSelection = [...shootingSelection]
+                          nextSelection[index] = option.id
+                          const exceeds = wouldExceedLimit(option.id, nextSelection)
+                          return {
+                            value: option.id,
+                            label: buildWeaponOptionLabel(option),
+                            disabled: option.id !== value && exceeds,
+                          }
+                        })}
                       />
                     </div>
                     {renderWeaponStats(weapon)}
@@ -276,7 +366,8 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
                   onChange={setMeleeSelection}
                   options={unit.armas_melee.map((weapon) => ({
                     value: weapon.id,
-                    label: `${weapon.nombre} (+${weapon.valor_extra})`,
+                    label: buildWeaponOptionLabel(weapon),
+                    disabled: weapon.id !== meleeSelection && wouldExceedSkirmishMeleeLimit(weapon.id),
                   }))}
                 />
               </div>
@@ -308,10 +399,15 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
                               return next
                             })
                           }
-                          options={unit.armas_disparo.map((weapon) => ({
-                            value: weapon.id,
-                            label: `${weapon.nombre} (+${weapon.valor_extra})`,
-                          }))}
+                          options={unit.armas_disparo.map((weapon) => {
+                            const currentId = mini.shootingIds[slotIndex] || shootingSelection[slotIndex]
+                            const exceeds = wouldExceedSquadLimit(weapon.id, slotIndex, index)
+                            return {
+                              value: weapon.id,
+                              label: buildWeaponOptionLabel(weapon),
+                              disabled: weapon.id !== currentId && exceeds,
+                            }
+                          })}
                         />
                       </div>
                       {renderWeaponStats(
@@ -338,10 +434,15 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
                               return next
                             })
                           }
-                          options={unit.armas_melee.map((weapon) => ({
-                            value: weapon.id,
-                            label: `${weapon.nombre} (+${weapon.valor_extra})`,
-                          }))}
+                          options={unit.armas_melee.map((weapon) => {
+                            const currentId = mini.meleeId || meleeSelection
+                            const exceeds = wouldExceedSquadMeleeLimit(weapon.id, index)
+                            return {
+                              value: weapon.id,
+                              label: buildWeaponOptionLabel(weapon),
+                              disabled: weapon.id !== currentId && exceeds,
+                            }
+                          })}
                         />
                       </div>
                       {renderWeaponStats(getWeaponById(unit.armas_melee, mini.meleeId || meleeSelection))}
@@ -352,11 +453,15 @@ export default function UnitConfigurator({ unit, selected, onClose, onConfirm, g
             </div>
           )}
         </div>
+        {hasWeaponLimitError && (
+          <p className="field-inline-note">{t('generator.weaponLimitExceeded')}</p>
+        )}
         <div className="unit-modal-footer">
           <span className="unit-total">{t('generator.totalUnit')}: {total} {t('generator.valueUnit')}</span>
           <button
             type="button"
             className="primary"
+            disabled={hasWeaponLimitError}
             onClick={() =>
               onConfirm(
                 unit,

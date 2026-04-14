@@ -1,10 +1,8 @@
 # Reglamento ZeroLore
 
-ZeroLore está diseñado para ser flexible, modular y adaptable.
+ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones , armas o doctrinas y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
 Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
-
-La comunidad de ZeroLore es parte del juego. Si creas algo interesante, compártelo.
 
 ---
 
@@ -29,18 +27,17 @@ En modo escuadras, todas las miniaturas que formen parte de una escuadra deben m
 
 La colocación de las miniaturas solo afecta a **qué miniaturas pueden atacar** en combate cuerpo a cuerpo y no modifica el número de acciones, el estado ni la activación de la escuadra.
 
-
 ### Tamaño de peanas recomendado
 
 ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda usar peanas proporcionales al tipo de unidad para mantener la coherencia visual y táctica.
 
-| Tipo de unidad               | Peana recomendada                                  |
-| ---------------------------- | -------------------------------------------------- |
-| Línea / Élite (infantería)   | 25 – 40 mm redonda                                 |
-| Élite corpulenta / Monstruos | 50 – 60 mm redonda                                 |
-| Vehículos ligeros            | 40 – 60 mm                                         |
-| Vehículos medianos / pesados | 60 – 80 mm u ovalada                               |
-| Titanes                      | 100 mm o mayor                                     |
+| Tipo de unidad               | Peana recomendada    |
+| ---------------------------- | -------------------- |
+| Línea / Élite (infantería)   | 25 – 40 mm redonda   |
+| Élite corpulenta / Monstruos | 50 – 60 mm redonda   |
+| Vehículos ligeros            | 40 – 60 mm           |
+| Vehículos medianos / pesados | 60 – 80 mm u ovalada |
+| Titanes                      | 100 mm o mayor       |
 
 Estas medidas son orientativas. El criterio es que la peana sea coherente con el tamaño visual de la miniatura y no suponga una ventaja táctica injusta.
 
@@ -62,6 +59,17 @@ En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las d
 Cuando una regla especial contradiga o modifique una regla general, **la regla especial siempre tiene prioridad**.
 
 _Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Pistolero, esa regla especial permite disparar aunque estés trabado, y eso manda._
+
+### Numero de jugadores
+
+ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
+
+- **1vs1**: duelo entre dos jugadores
+- **2vs2**: dos equipos de dos jugadores
+- **1vs1vs1**: tres jugadores enfrentados entre si
+- **1vs1vs1vs1**: cuatro jugadores enfrentados entre si
+
+En partidas de mas de dos jugadores, los jugadores acuerdan antes de empezar si juegan en equipos o cada uno por su cuenta. El orden de activacion se determina por iniciativa al inicio de cada turno.
 
 ### Modos de juego
 
@@ -94,7 +102,6 @@ Todas las distancias se miden en pulgadas (").
 - Las distancias pueden medirse en cualquier momento de la partida.
 - En caso de duda, cualquiera de los jugadores puede solicitar una **re-medición precisa**, y el resultado se aplica de forma definitiva.
 
-
 ### Línea de visión
 
 Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visión**.
@@ -104,7 +111,6 @@ Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visi
 - Si una miniatura (aliada o enemiga) o un elemento de escenografía bloquea completamente la visión, el objetivo **no puede ser atacado** a distancia.
 
 Las reglas de cobertura se detallan más adelante en el reglamento.
-
 
 ### La regla de oro
 
@@ -127,7 +133,6 @@ Cada turno se compone de las siguientes fases:
 2. **Fase de Activaciones**
 3. **Fin de Turno**
 
-
 ## 1. Fase de Iniciativa
 
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
@@ -148,7 +153,6 @@ Tras determinar la Iniciativa, los jugadores declaran la Doctrina de Mando que v
 - Sus efectos duran **todo el turno**, salvo que se indique lo contrario.
 - La unidad o escuadra que tenga activa una doctrina se marca con un token.
 
-
 ## 2. Fase de Activaciones
 
 Después de la Fase de Iniciativa comienza la **Fase de Activaciones**.
@@ -163,7 +167,6 @@ Activar una unidad significa:
 - Resolver completamente sus efectos.
 
 Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
-
 
 ## 3. Fin de Turno
 
@@ -191,7 +194,6 @@ Las acciones disponibles para todas las unidades son las siguientes:
 - **Atacar cuerpo a cuerpo** – 2 acciones
 - **Carrera** – 2 acciones
 
-
 ## Movimiento
 
 Cuando una unidad se mueve, puede desplazarse hasta su valor de **Movimiento** en pulgadas (").
@@ -211,7 +213,6 @@ Para trepar:
 
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana.
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
-
 
 ## Carrera
 
@@ -253,7 +254,6 @@ Una unidad preparada puede realizar **contraataques a distancia** durante el tur
 
 El estado de Preparado dura hasta que finaliza el turno.
 
-
 ---
 
 # Combate a distancia
@@ -272,10 +272,9 @@ Todo ataque a distancia se resuelve siguiendo siempre esta secuencia:
 
 1. Elegir objetivo
 2. Determinar ataques
-3. Tirar impactos
+3. Tirar precision
 4. Tirar salvaciones
 5. Aplicar daño
-
 
 ## 1. Elegir objetivo
 
@@ -291,16 +290,15 @@ Cada arma indica cuántos **Ataques** realiza.
 - Se lanzan tantos dados como indique el valor de Ataques del arma.
 - Cada dado representa un disparo o proyectil independiente.
 
-## 3. Tirada de impactos
+## 3. Tirada de precision
 
 Por cada dado lanzado:
 
-- Si el resultado es **igual o superior al valor de Impactos** del arma, el ataque impacta.
+- Si el resultado es **igual o superior al valor de Precision** del arma, el ataque impacta.
 - Un resultado de **6** se considera un **impacto crítico**, salvo que una regla indique lo contrario.
-- Los resultados inferiores al valor de Impactos se consideran fallos y se descartan.
+- Los resultados inferiores al valor de Precision se consideran fallos y se descartan.
 
 Los dados que impactan **no se vuelven a tirar**.
-
 
 ## 4. Tirada de salvaciones
 
@@ -336,7 +334,6 @@ Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar la acción **C
 
 Una carga exitosa **incluye automáticamente un ataque cuerpo a cuerpo**.
 
-
 ## Unidades trabadas
 
 Cuando dos unidades están en contacto de peana:
@@ -369,7 +366,6 @@ El combate cuerpo a cuerpo se resuelve siguiendo esta secuencia:
 1. Ataque de la unidad que actúa primero
 2. Salvaciones del defensor
 3. Contraataque (si procede)
-
 
 ### 1. Ataque
 
@@ -538,7 +534,6 @@ Mientras esté descontrolada:
 
 El estado de Descontrol se mantiene hasta que una regla indique lo contrario o finalice la partida.
 
-
 # Puestos de mando y despliegue
 
 Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
@@ -581,7 +576,6 @@ Características:
 - Pueden capturar y controlar **puntos de mando** y otras zonas de conquista.
 - Suelen tener perfiles equilibrados y acceso a una amplia variedad de armas.
 
-
 ## 2. Unidades de Élite
 
 Las unidades de **Élite** son tropas más resistentes y poderosas que las de Línea.
@@ -591,7 +585,6 @@ Características:
 - Mayor capacidad ofensiva o defensiva.
 - Diseñadas para romper formaciones enemigas o mantener posiciones clave.
 - Pueden capturar y controlar **puntos de mando**, igual que las unidades de Línea.
-
 
 ## 3. Vehículos
 
@@ -607,7 +600,6 @@ Características:
 
 - Se produce una **explosión** que afecta a todas las unidades a **3"**.
 - Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado.
-
 
 ## 4. Monstruos
 
@@ -631,7 +623,6 @@ Mientras esté descontrolado:
 - Prioriza siempre la unidad más cercana.
 - Solo utiliza ataques cuerpo a cuerpo, priorizando las cargas.
 
-
 ## 5. Héroes
 
 Los **Héroes** representan combatientes excepcionales y figuras clave dentro de cada facción.
@@ -649,7 +640,6 @@ Características generales:
 - Si ambos jugadores tienen un héroe en el mismo punto de mando, este permanece **neutral**.
 - Poseen habilidades únicas que definen su rol táctico.
 - En modo escuadras, algunos héroes pueden **unirse a escuadras específicas** según su ficha. Si forman parte de una escuadra, su valor, movimiento, salvación y velocidad sustituyen al de la escuadra. El héroe mantiene sus propias Vidas de forma independiente. Si el héroe es eliminado, la escuadra continúa combatiendo con normalidad.
-
 
 ## 6. Titanes
 
@@ -733,7 +723,6 @@ Representa el **coste en puntos** de la unidad.
 - Determina el tamaño y composición de los ejércitos.
 - También se emplea para calcular la puntuación cuando varias unidades disputan un mismo puesto de mando.
 
-
 ### Equipamiento de armas
 
 Salvo que una regla indique lo contrario, cada unidad puede portar **una única arma a distancia** y **una única arma de combate cuerpo a cuerpo**.
@@ -762,7 +751,7 @@ Cada dado representa un proyectil o disparo independiente.
 
 Alcance máximo del arma en pulgadas ("). La unidad solo puede atacar objetivos dentro de este rango.
 
-### Impactos
+### Precision
 
 Resultado mínimo necesario en cada dado para impactar.
 
@@ -785,7 +774,6 @@ Reglas especiales asociadas únicamente a esa arma.
 ### Valor extra
 
 Coste adicional en puntos por equipar esta arma, si procede.
-
 
 ## Perfiles de armas de combate cuerpo a cuerpo
 
@@ -813,7 +801,6 @@ Reglas especiales que solo afectan a este tipo de ataque o a esta arma concreta.
 
 Coste adicional por equipar el arma, si aplica.
 
-
 ## Modificadores
 
 En ZeroLore verás valores expresados como 4+, 5+, 3+, etc. Esto significa el resultado mínimo necesario en 1D6 para que algo ocurra.
@@ -822,12 +809,12 @@ En ZeroLore verás valores expresados como 4+, 5+, 3+, etc. Esto significa el re
 - **5+** → necesitas sacar 5 o 6 → 2 de cada 6 → ~33%
 - **3+** → necesitas sacar 3, 4, 5 o 6 → 4 de cada 6 → ~67%
 
-Cuando una regla dice **+1 al valor de Impactos**, el número necesario sube — es peor para el atacante. Si tu arma impacta con 4+ y recibes +1, ahora necesitas 5+. Al contrario, **-1 al valor de Impactos** es una ventaja: si impactas con 4+ y obtienes -1, ahora impactas con 3+. Esto aplica igual a Salvaciones.
+Cuando una regla dice **+1 al valor de Precision**, el número necesario sube — es peor para el atacante. Si tu arma impacta con 4+ y recibes +1, ahora necesitas 5+. Al contrario, **-1 al valor de Precision** es una ventaja: si impactas con 4+ y obtienes -1, ahora impactas con 3+. Esto aplica igual a Salvaciones.
 
-Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Salvación e Impactos tienen los siguientes límites:
+Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Salvacion e Impactos tienen los siguientes límites:
 
 - **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
-- **Impactos máximos:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
+- **Precision máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
 
 ## Habilidades de armas y unidades
 
@@ -855,7 +842,6 @@ Estas habilidades:
 
 Si una unidad pierde o no puede utilizar un arma, **no puede beneficiarse** de sus habilidades.
 
-
 ## Tabla de habilidades de armas
 
 ### 1. Asaltante (+X)
@@ -865,8 +851,8 @@ Cuando un objetivo es impactado por esta arma, **pierde +X a su Salvación** fre
 
 ### 2. Pesada
 
-- Si la unidad **se ha movido**, el arma obtiene **+1 al valor de Impactos**.
-- Si la unidad **no se ha movido**, el arma obtiene **-1 al valor de Impactos**.
+- Si la unidad **se ha movido**, el arma obtiene +**1 al valor de Precision**.
+- Si la unidad **no se ha movido**, el arma obtiene -**1 al valor de Precision**.
 
 **Momento:** Disparo
 
@@ -890,7 +876,6 @@ El atacante declara un punto de impacto dentro del alcance del arma y se resuelv
 Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
 **Momento:** Disparo
 
-
 ### 6. Ataque crítico
 
 Los impactos críticos obtenidos con esta arma **no pueden ser salvados**.
@@ -901,7 +886,7 @@ Los impactos críticos obtenidos con esta arma **no pueden ser salvados**.
 Cada ataque crítico genera **un ataque adicional**, que se resuelve de forma normal.
 **Momento:** Disparo y cuerpo a cuerpo
 
-### 8. Precisión
+### 8. Certero
 
 Permite **repetir todas las tiradas fallidas** de ataque.
 **Momento:** Disparo y cuerpo a cuerpo
@@ -940,12 +925,7 @@ Esta arma **impacta automáticamente** y no requiere tirada de Impactos.
 La unidad puede realizar una acción extra de **disparo después de usar Carrera**.
 **Momento:** Disparo
 
-### 15. Munición limitada (X)
-
-El arma tiene X disparos limitados con esta arma.
-**Momento:** Disparo y cuerpo a cuerpo
-
-### 16. Arma limitada (X)
+### 15. Arma limitada (X)
 
 El arma tiene limitación de equipamiento, solo se podrá usar X números de la misma arma en una escuadra o en una partida de escaramuza.
 **Momento:** -
@@ -968,20 +948,19 @@ Las **Doctrinas de Mando** representan órdenes tácticas, maniobras coordinadas
 
 Las doctrinas:
 
-- Se declaran durante la **Fase de Iniciativa** y se marca la unidad o escuadra que va a utilizarla.
+- Se declaran durante la **Fase de Iniciativa y se marca la unidad o escuadra **que va a utilizarla.
 - Afectan a **una unidad o escuadra**, salvo que se indique lo contrario.
 - Sus efectos duran **todo el turno**.
-- Solo se puede usar **una doctrina por turno** a escoger.
-- Cualquier unidad o escuadra que tenga una bonificación de doctrina se puede marcar con algún tipo de token.
+- Solo se puede usar una doctrina por turno a escoger.
+- Cualquier unidad/escuadra que tenga una bonificación de doctrina se la podrá marcar con algún tipo de token.
 
 Las doctrinas son **públicas** y deben declararse claramente al rival antes de aplicarse.
-
 
 ## Lista de Doctrinas de Mando
 
 ### 1. Garrotazo
 
-La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contrincante, **poniendo fin al combate**. Esta doctrina se realiza inmediatamente cuando la unidad realice su activación, independientemente de quién tiene más velocidad.
+La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contrincante, **poniendo fin al combate**. Esta doctrina se realiza inmediantamente la unidad realice su activación independientemente quien tiene más velocidad.
 
 ### 2. Apuntado
 
@@ -997,11 +976,11 @@ La unidad elegida gana la iniciativa en combate cuerpo a cuerpo este turno, igno
 
 ### 5. Nuestra es la victoria
 
-La unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de unidades con más valor o héroes enemigos en ese mismo objetivo.
+La unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de unidades con más valor o héroes enemigos, en ese mismo objetivo.
 
 ### 6. Reacción inmediata
 
-Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga.
+Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga
 
 ### 7. Más que cargado
 
@@ -1009,11 +988,11 @@ Si esta unidad falla una carga durante este turno, puede repetirla inmediatament
 
 ### 8. Una nueva oportunidad
 
-Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta doctrina; si se decide usar la doctrina, la primera tirada queda descartada.
+Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta doctrina, si se decide usar la doctrina la primera tirada queda descartada.
 
 ### 9. Combate a muerte
 
-Esta doctrina solo funciona con una unidad o escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra; si hay más de 2 unidades o escuadras involucradas no se puede usar esta doctrina. Ambas unidades o escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, doctrinas, etc. Si cualquiera de las dos unidades o escuadras en combate es activada, la doctrina se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.
+Esta doctrina solo funciona con una unidad / escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra, si hay más de 2 unidades / escuadras involucradas no se puede usar esta doctrina. Ambas unidades / escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, doctrinas, etc. Si cualquiera de las dos unidades / escuadras en combate es activada, la doctrina se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.
 
 ---
 

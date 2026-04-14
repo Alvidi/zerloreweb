@@ -8,14 +8,12 @@ Este documento existe para que, aunque cambie el contexto o entre otro agente, s
 - Desarrollo: `npm run dev`
 - Lint: `npm run lint`
 - Build: `npm run build`
-- Smoke test combate: `npm run battle:smoke`
 
 ## 2) Mapa del proyecto
 
 - Pagina principal: `src/pages/Home.jsx`
 - Reglamento: `src/pages/Reglamento.jsx`
 - Generador: `src/pages/Generador.jsx`
-- Batalla (orquestacion UI + estado): `src/pages/Batalla.jsx`
 
 Datos:
 - Facciones ES: `src/data/factions/jsonFaccionesES/*.json`
@@ -35,75 +33,30 @@ Notas practicas:
 - Si cambia el texto de un heading o un parrafo clave en Notion/Markdown, revisar esos hooks.
 - El PDF del reglamento tambien replica estas galerias, asi que cualquier insercion visual nueva debe revisarse en web y PDF.
 
-## 3) Arquitectura de batalla (actual)
+## 3) Traducciones y UX
 
-Archivos clave:
-- Motor de combate puro: `src/utils/battleEngine.js`
-- Habilidades de faccion (catalogo + condiciones + log): `src/features/battle/factionAbilities.js`
-- Habilidades de arma (ids/parsing): `src/features/battle/weaponAbilities.js`
-- Utilidades de batalla (normalizacion, picks, keys): `src/features/battle/battleUtils.js`
-- Builders de entradas de log: `src/features/battle/battleLogEntries.js`
-- Render del registro de combate: `src/features/battle/components/BattleCombatLog.jsx`
-- Hooks para futuro (cantidad minis, especialidades): `src/features/battle/battleFutureHooks.js`
-
-Regla de oro:
-- `battleEngine.js` debe seguir siendo lo mas puro posible (input -> output), sin depender de React.
-- `Batalla.jsx` orquesta estado y llama al motor, pero evita meter toda la logica de reglas ahi.
-
-## 4) Orden de resolucion acordado
-
-Pipeline de combate:
-1. Leer stats base (unidad + arma)
-2. Aplicar especialidad de unidad (si modifica combate)
-3. Aplicar habilidades de faccion
-4. Aplicar habilidades de arma
-5. Tirar dados
-6. Aplicar cobertura
-7. Calcular dano final y vidas restantes
-8. Si hay contraataque, repetir mismo pipeline
-
-Nota:
-- Este orden se usa como referencia para implementar nuevas reglas.
-
-## 5) Como anadir una nueva habilidad de faccion
-
-1. Mapear nombre -> `effectKey` en `factionAbilities.js` (`nameTokens`).
-2. Si altera calculo, anadir bandera en `buildFactionAttackConditions(...)`.
-3. Consumir esa bandera en `battleEngine.js` y registrar la regla en `rulesApplied`.
-4. Anadir detalle de log en `buildLogDetail(...)` para que el usuario vea que paso.
-5. Si es "una vez por turno/resolucion", controlar su consumo en `Batalla.jsx` (ejemplo: mapas por lado dentro de `handleResolve`).
-6. Verificar en UI y en `battle:smoke` cuando aplique.
-
-## 6) Traducciones y UX
-
-- Textos de batalla: `src/features/battle/battleTranslations.js`
 - Textos globales: `src/i18n/translations.js`
 - Cualquier texto nuevo debe salir en ES/EN.
-- En el log de combate, mostrar resultados utiles y directos (evitar ruido redundante).
 
-## 7) Checklist antes de cerrar cambios
+## 4) Checklist antes de cerrar cambios
 
 - `npm run lint` pasa
 - `npm run build` pasa
-- `npm run battle:smoke` pasa (si tocaste combate)
-- Revisar que no se duplican lineas de habilidad en el log
-- Revisar que el orden visual del registro sigue claro (ataque -> habilidades -> defensa -> resultado)
 
-## 8) Convenciones practicas para no romper
+## 5) Convenciones practicas para no romper
 
 - Cambios pequenos e incrementales (habilidad por habilidad).
 - Evitar mezclar refactor + regla nueva grande en el mismo paso si no hace falta.
-- Si una habilidad no afecta combate, dejarla fuera del motor por ahora.
-- Si dudas del orden de aplicacion, documentarlo aqui antes de codificar.
+ - Si dudas del alcance de una regla, documentarlo aqui antes de codificar.
 
-## 9) Protocolo obligatorio de traducciones y contenido
+## 6) Protocolo obligatorio de traducciones y contenido
 
 Regla:
 - Si entra contenido nuevo en español (MD/JSON), hay que dejar tambien su par en ingles o marcar explicitamente que queda pendiente.
 
 Nunca cerrar cambios de contenido "a medias" sin dejar trazabilidad.
 
-## 10) Regla especial cuando Alberto pasa contenido nuevo
+## 7) Regla especial cuando Alberto pasa contenido nuevo
 
 Asuncion por defecto:
 - Alberto suele pasar contenido en español.
@@ -112,17 +65,16 @@ Comportamiento esperado del agente:
 1. Actualizar contenido fuente en `src/data/...` (reglamentos `.md`, facciones `.json`).
 2. Mantener paridad ES/EN del bloque modificado.
 3. Revisar terminologia de juego (Save, Cover, Charge, etc.) para mantener consistencia.
-4. Validar app (`lint`, `build`, y `battle:smoke` si toca combate).
+4. Validar app (`lint`, `build`).
 
-## 11) Definicion de "terminado"
+## 8) Definicion de "terminado"
 
 Un cambio se considera terminado cuando:
 - No rompe compilacion.
-- No rompe combate.
 - Mantiene consistencia ES/EN.
 - Queda documentado que scripts se ejecutaron y que validaciones pasaron.
 
-## 12) Manera de trabajar (Alberto + IA)
+## 9) Manera de trabajar (Alberto + IA)
 
 Este proyecto se mantiene con un flujo incremental y muy controlado.
 
@@ -143,7 +95,7 @@ Convencion de entrega recomendada:
 3. Validaciones ejecutadas
 4. Pendientes claros (si existen)
 
-## 13) Flujo operativo de contenido y traducciones
+## 10) Flujo operativo de contenido y traducciones
 
 Esta seccion define el SOP obligatorio cuando Alberto pasa contenido nuevo (normalmente en espanol).
 
@@ -152,7 +104,7 @@ Esta seccion define el SOP obligatorio cuando Alberto pasa contenido nuevo (norm
 Cuando entra contenido nuevo en ES, el proyecto debe quedar consistente en:
 - MD ES/EN (cuando aplique en reglamento)
 - JSON ES/EN (cuando aplique en facciones)
-- UI bilingue (labels y textos en `translations.js` y `battleTranslations.js`)
+- UI bilingue (labels y textos en `translations.js`)
 
 Nunca cerrar cambios con solo un idioma actualizado si el feature ya existe en ambos.
 
@@ -170,10 +122,9 @@ Pasos:
 4. Validar app:
    - `npm run lint`
    - `npm run build`
-   - `npm run battle:smoke` (si toca combate)
 
 Notas:
-- Si una habilidad nueva no esta mapeada, anadirla en `weaponAbilities.js` o `factionAbilities.js` segun corresponda.
+- Si una habilidad nueva no esta mapeada, anadirla en `weaponAbilities.js` segun corresponda.
 
 ### 13.3 Caso B: Alberto pasa reglamento (ES)
 

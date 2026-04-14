@@ -7,6 +7,7 @@ import CustomSelect from '../features/generator/components/CustomSelect.jsx'
 import UnitTypeBadge from '../features/generator/components/UnitTypeBadge.jsx'
 import { exportGeneratorPdf } from '../features/generator/exportGeneratorPdf.js'
 import {
+  applyPassiveGroupEffectsToFaction,
   buildArmyUnitDisplayNames,
   clampSquadSize,
   computeUnitTotal,
@@ -16,13 +17,42 @@ import {
   isUnitTypeAllowedInGameMode,
   localizeArmyUnits,
   normalizeFaction,
+  selectionHasWeaponLimitError,
   toNumber,
 } from '../features/generator/generatorUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
 const preferredEraOrder = ['future', 'past']
+const preferredUnitTypeOrder = ['linea', 'elite', 'heroe', 'vehiculo', 'titan']
 
 const getUnitEraTokens = (unit) => (Array.isArray(unit?.eras) ? unit.eras.map((era) => era.token).filter(Boolean) : [])
+const normalizeTypeOrderKey = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+
+const getUnitTypeOrder = (type) => {
+  const normalized = normalizeTypeOrderKey(type)
+  const match = preferredUnitTypeOrder.findIndex((entry) => normalized.includes(entry))
+  return match === -1 ? preferredUnitTypeOrder.length : match
+}
+
+const sortUnitTypes = (types) =>
+  [...types].sort((a, b) => {
+    const orderDiff = getUnitTypeOrder(a) - getUnitTypeOrder(b)
+    if (orderDiff !== 0) return orderDiff
+    return String(a || '').localeCompare(String(b || ''), 'es', { sensitivity: 'base' })
+  })
+
+const sortUnitsByType = (units) =>
+  [...units].sort((a, b) => {
+    const orderDiff = getUnitTypeOrder(a?.tipo) - getUnitTypeOrder(b?.tipo)
+    if (orderDiff !== 0) return orderDiff
+    return String(a?.nombre || '').localeCompare(String(b?.nombre || ''), 'es', { sensitivity: 'base' })
+  })
+
 const getFirstPassiveGroupId = (faction) => faction?.grupos_habilidades_faccion?.[0]?.id || ''
 const sanitizePassiveGroupId = (faction, passiveGroupId) => {
   const groups = Array.isArray(faction?.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
@@ -243,6 +273,10 @@ function Generador() {
     () => selectedFaction?.grupos_habilidades_faccion?.find((group) => group.id === selectedPassiveGroupIdSafe) || null,
     [selectedFaction, selectedPassiveGroupIdSafe],
   )
+  const selectedFactionWithPassives = useMemo(
+    () => applyPassiveGroupEffectsToFaction(selectedFaction, selectedPassiveGroup),
+    [selectedFaction, selectedPassiveGroup],
+  )
   const armyPassiveGroupIdSafe = useMemo(
     () => sanitizePassiveGroupId(armyFaction, armyPassiveGroupId),
     [armyFaction, armyPassiveGroupId],
@@ -251,43 +285,47 @@ function Generador() {
     () => armyFaction?.grupos_habilidades_faccion?.find((group) => group.id === armyPassiveGroupIdSafe) || null,
     [armyFaction, armyPassiveGroupIdSafe],
   )
-  const armyFactionForPdf = useMemo(
-    () =>
-      armyFaction
-        ? {
-            ...armyFaction,
-            selectedPassiveGroup: armyPassiveGroup,
-          }
-        : armyFaction,
+  const armyFactionWithPassives = useMemo(
+    () => applyPassiveGroupEffectsToFaction(armyFaction, armyPassiveGroup),
     [armyFaction, armyPassiveGroup],
   )
+  const armyFactionForPdf = useMemo(
+    () =>
+      armyFactionWithPassives
+        ? {
+            ...armyFactionWithPassives,
+            selectedPassiveGroup: armyPassiveGroup,
+          }
+        : armyFactionWithPassives,
+    [armyFactionWithPassives, armyPassiveGroup],
+  )
   const availableUnitTypes = useMemo(() => {
-    if (!selectedFaction?.unidades?.length) return []
+    if (!selectedFactionWithPassives?.unidades?.length) return []
     const types = new Set(
-      selectedFaction.unidades
+      selectedFactionWithPassives.unidades
         .filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))
         .map((unit) => unit.tipo),
     )
-    return Array.from(types)
-  }, [selectedFaction, gameMode])
+    return sortUnitTypes(Array.from(types))
+  }, [selectedFactionWithPassives, gameMode])
   const availableEraTokens = useMemo(() => {
-    if (!selectedFaction?.unidades?.length) return []
+    if (!selectedFactionWithPassives?.unidades?.length) return []
     return getOrderedEraTokens(
-      selectedFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)),
+      selectedFactionWithPassives.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)),
     )
-  }, [selectedFaction, gameMode])
+  }, [selectedFactionWithPassives, gameMode])
   const randomFaction = randomFactionIdSafe === 'random'
     ? null
     : factions.find((faction) => faction.id === randomFactionIdSafe)
   const availableUnitTypesRandom = useMemo(() => {
     if (randomFaction) {
-      return Array.from(
+      return sortUnitTypes(Array.from(
         new Set(
           randomFaction.unidades
             .filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))
             .map((unit) => unit.tipo),
         ),
-      )
+      ))
     }
     const types = new Set()
     factions.forEach((faction) => {
@@ -297,7 +335,7 @@ function Generador() {
         }
       })
     })
-    return Array.from(types)
+    return sortUnitTypes(Array.from(types))
   }, [randomFaction, factions, gameMode])
   const availableEraTokensRandom = useMemo(() => {
     if (randomFaction) {
@@ -349,18 +387,21 @@ function Generador() {
     return new Set(availableEraTokensRandom)
   }, [availableEraTokensRandom, eraFiltersRandom])
 
-  const localizedArmyUnits = useMemo(() => localizeArmyUnits(armyUnits, armyFaction), [armyUnits, armyFaction])
+  const localizedArmyUnits = useMemo(
+    () => localizeArmyUnits(armyUnits, armyFactionWithPassives),
+    [armyUnits, armyFactionWithPassives],
+  )
   const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0)
   const armyUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(localizedArmyUnits), [localizedArmyUnits])
   const visibleManualUnits = useMemo(() => {
-    if (!selectedFaction?.unidades?.length) return []
-    return selectedFaction.unidades.filter(
+    if (!selectedFactionWithPassives?.unidades?.length) return []
+    return sortUnitsByType(selectedFactionWithPassives.unidades.filter(
       (unit) =>
         isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
         && activeManualFilters.has(unit.tipo)
         && unitMatchesEraFilters(unit, activeManualEraFilters),
-    )
-  }, [selectedFaction, activeManualFilters, activeManualEraFilters, gameMode])
+    ))
+  }, [selectedFactionWithPassives, activeManualFilters, activeManualEraFilters, gameMode])
 
   useEffect(() => {
     if (typeof Image === 'undefined') return
@@ -487,6 +528,12 @@ function Generador() {
 
   const handleAddUnit = (unit, shooting, melee, squadSize, perMiniLoadouts, imageDataUrl = '') => {
     const clampedSize = gameMode === 'escuadra' ? clampSquadSize(squadSize, unit) : 1
+    const candidateEntry = {
+      shooting,
+      melee,
+      perMiniLoadouts,
+    }
+    if (selectionHasWeaponLimitError(candidateEntry, armyUnits, gameMode)) return
     const total = computeUnitTotal(unit, shooting, melee, clampedSize, perMiniLoadouts, gameMode)
     const entry = {
       uid: `${unit.id}-${Date.now()}-${Math.random()}`,
@@ -523,15 +570,21 @@ function Generador() {
 
   const handleGenerateRandom = () => {
     if (!factions.length) return
-    const filterFactionUnits = (faction) => ({
-      ...faction,
-      unidades: faction.unidades.filter(
+    const filterFactionUnits = (faction) => {
+      const factionWithPassives = applyPassiveGroupEffectsToFaction(
+        faction,
+        faction?.grupos_habilidades_faccion?.[0] || null,
+      )
+      return {
+        ...factionWithPassives,
+        unidades: factionWithPassives.unidades.filter(
         (unit) =>
           isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
           && (!activeRandomFilters.size || activeRandomFilters.has(unit.tipo))
           && unitMatchesEraFilters(unit, activeRandomEraFilters),
-      ),
-    })
+        ),
+      }
+    }
     const factionPool =
       randomFactionIdSafe === 'random'
         ? factions.map(filterFactionUnits).filter((faction) => faction.unidades.length)
@@ -716,11 +769,7 @@ function Generador() {
                               <span>{unit.salvacion}</span>
                               <span>{unit.velocidad}</span>
                               {gameMode === 'escuadra' ? (
-                                <span>
-                                  {unit.escuadra_min === unit.escuadra_max
-                                    ? '-'
-                                    : `${unit.escuadra_min}-${unit.escuadra_max}`}
-                                </span>
+                                <span>{`${unit.escuadra_min} / ${unit.escuadra_max}`}</span>
                               ) : null}
                             </div>
                           </div>
@@ -898,11 +947,19 @@ function Generador() {
           lang={lang}
           unit={activeUnit.base || activeUnit}
           selected={activeUnit.shooting || activeUnit.melee ? activeUnit : null}
+          armyUnits={armyUnits}
           gameMode={gameMode}
           onClose={() => setActiveUnit(null)}
           onConfirm={(unit, shooting, melee, editingUid, nextSquadSize, nextPerMini, nextImageDataUrl) => {
             if (editingUid) {
               const clampedSize = clampSquadSize(nextSquadSize, unit)
+              const candidateEntry = {
+                uid: editingUid,
+                shooting,
+                melee,
+                perMiniLoadouts: nextPerMini,
+              }
+              if (selectionHasWeaponLimitError(candidateEntry, armyUnits, gameMode, editingUid)) return
               setArmyUnits((prev) =>
                 prev.map((entry) =>
                   entry.uid === editingUid

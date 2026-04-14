@@ -176,7 +176,8 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Direct"
+              "Direct",
+              "Weapon Limited 2"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -236,7 +237,8 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Heavy"
+              "Heavy",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 3
@@ -298,7 +300,8 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 4+ (All)"
+              "Anti 4+ (All)",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 4
@@ -326,7 +329,8 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Critical Attack",
+              "Weapon Limited 1"
             ],
             "especialidad": "-",
             "valor_extra": 1
