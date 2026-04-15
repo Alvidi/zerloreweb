@@ -132,10 +132,16 @@ const TOKEN_DEFINITIONS = [
 ]
 
 const buildInitialTokenCounts = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, 0]))
+const buildInitialTokenInputValues = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, '0']))
 const clampTokenCount = (value) => {
   const parsed = Number.parseInt(value, 10)
   if (!Number.isFinite(parsed)) return 0
   return Math.max(0, Math.min(TOKEN_LIMIT, parsed))
+}
+const normalizeTokenInputValue = (value) => {
+  const digitsOnly = String(value || '').replace(/\D+/g, '')
+  if (!digitsOnly) return ''
+  return String(clampTokenCount(digitsOnly))
 }
 
 function Reglamento() {
@@ -146,6 +152,7 @@ function Reglamento() {
   const [activeSection, setActiveSection] = useState('')
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [tokenCounts, setTokenCounts] = useState(buildInitialTokenCounts)
+  const [tokenInputValues, setTokenInputValues] = useState(buildInitialTokenInputValues)
   const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
   const modeParam = searchParams.get('mode')
@@ -698,9 +705,21 @@ function Reglamento() {
   }
 
   const setTokenCount = (tokenId, value) => {
+    const normalizedValue = normalizeTokenInputValue(value)
     setTokenCounts((prev) => ({
       ...prev,
-      [tokenId]: clampTokenCount(value),
+      [tokenId]: normalizedValue === '' ? 0 : clampTokenCount(normalizedValue),
+    }))
+    setTokenInputValues((prev) => ({
+      ...prev,
+      [tokenId]: normalizedValue,
+    }))
+  }
+
+  const finalizeTokenInput = (tokenId) => {
+    setTokenInputValues((prev) => ({
+      ...prev,
+      [tokenId]: String(tokenCounts[tokenId] || 0),
     }))
   }
 
@@ -1290,6 +1309,26 @@ function Reglamento() {
         )
       }
 
+      const findBestFittingCount = ({ totalCount, measureFits, getSafeCount }) => {
+        if (totalCount <= 1) return totalCount
+
+        let low = 1
+        let high = totalCount
+        let best = 1
+
+        while (low <= high) {
+          const mid = Math.floor((low + high) / 2)
+          if (measureFits(mid)) {
+            best = mid
+            low = mid + 1
+          } else {
+            high = mid - 1
+          }
+        }
+
+        return typeof getSafeCount === 'function' ? Math.max(1, getSafeCount(best)) : best
+      }
+
       if (rulesMode === 'missions') {
         const rulesHtmlRoot = captureTarget.querySelector('.rules-html')
         const missionGrid = rulesHtmlRoot?.querySelector('.rules-mission-grid')
@@ -1324,38 +1363,48 @@ function Reglamento() {
             return sheet
           }
 
+          const measurementSheet = buildMissionSheet({ includeIntro: false, cards: [] })
+          captureRoot.appendChild(measurementSheet)
+          const measurementHtml = measurementSheet.querySelector('.rules-html')
+
           let remainingCards = [...missionCards]
           let includeIntro = true
 
           while (remainingCards.length) {
-            let bestSheet = null
-            let bestCount = 0
+            const measureMissionFits = (count) => {
+              const fragment = document.createDocumentFragment()
+              const html = document.createElement('div')
+              html.className = 'rules-html'
 
-            for (let count = 1; count <= remainingCards.length; count += 1) {
-              const testSheet = buildMissionSheet({ includeIntro, cards: remainingCards.slice(0, count) })
-              captureRoot.appendChild(testSheet)
-              const fits = testSheet.scrollHeight <= maxSheetHeightPx
-
-              if (fits) {
-                bestSheet?.remove()
-                bestSheet = testSheet
-                bestCount = count
-              } else {
-                testSheet.remove()
-                break
+              if (includeIntro) {
+                introNodes.forEach((node) => {
+                  html.appendChild(node.cloneNode(true))
+                })
               }
+
+              const grid = document.createElement('div')
+              grid.className = 'rules-mission-grid'
+              remainingCards.slice(0, count).forEach((card) => {
+                grid.appendChild(card.cloneNode(true))
+              })
+              html.appendChild(grid)
+              fragment.appendChild(html)
+              measurementHtml.replaceChildren(...fragment.childNodes)
+              return measurementSheet.scrollHeight <= maxSheetHeightPx
             }
 
-            if (!bestSheet) {
-              bestCount = 1
-              bestSheet = buildMissionSheet({ includeIntro, cards: remainingCards.slice(0, 1) })
-              captureRoot.appendChild(bestSheet)
-            }
-
+            const bestCount = findBestFittingCount({
+              totalCount: remainingCards.length,
+              measureFits: measureMissionFits,
+            })
+            const bestSheet = buildMissionSheet({ includeIntro, cards: remainingCards.slice(0, bestCount) })
+            captureRoot.appendChild(bestSheet)
             builtSheets.push(bestSheet)
             remainingCards = remainingCards.slice(bestCount)
             includeIntro = false
           }
+
+          measurementSheet.remove()
 
           for (const sheet of builtSheets) {
             await waitForImages(sheet)
@@ -1390,44 +1439,30 @@ function Reglamento() {
             return sheet
           }
 
+          const measurementSheet = buildRulesSheet([])
+          captureRoot.appendChild(measurementSheet)
+          const measurementHtml = measurementSheet.querySelector('.rules-html')
+
           let remainingNodes = [...contentNodes]
 
           while (remainingNodes.length) {
-            let bestSheet = null
-            let bestCount = 0
-
-            for (let count = 1; count <= remainingNodes.length; count += 1) {
-              const testSheet = buildRulesSheet(remainingNodes.slice(0, count))
-              captureRoot.appendChild(testSheet)
-              const fits = testSheet.scrollHeight <= maxSheetHeightPx
-
-              if (fits) {
-                bestSheet?.remove()
-                bestSheet = testSheet
-                bestCount = count
-              } else {
-                testSheet.remove()
-                break
-              }
+            const measureRulesFits = (count) => {
+              measurementHtml.replaceChildren(...remainingNodes.slice(0, count).map((node) => node.cloneNode(true)))
+              return measurementSheet.scrollHeight <= maxSheetHeightPx
             }
 
-            if (!bestSheet) {
-              bestCount = 1
-              bestSheet = buildRulesSheet(remainingNodes.slice(0, 1))
-              captureRoot.appendChild(bestSheet)
-            } else {
-              const safeCount = getSafeRulesPdfSplitCount(remainingNodes, bestCount)
-              if (safeCount !== bestCount) {
-                bestSheet.remove()
-                bestCount = safeCount
-                bestSheet = buildRulesSheet(remainingNodes.slice(0, bestCount))
-                captureRoot.appendChild(bestSheet)
-              }
-            }
-
+            const bestCount = findBestFittingCount({
+              totalCount: remainingNodes.length,
+              measureFits: measureRulesFits,
+              getSafeCount: (count) => getSafeRulesPdfSplitCount(remainingNodes, count),
+            })
+            const bestSheet = buildRulesSheet(remainingNodes.slice(0, bestCount))
+            captureRoot.appendChild(bestSheet)
             builtSheets.push(bestSheet)
             remainingNodes = remainingNodes.slice(bestCount)
           }
+
+          measurementSheet.remove()
 
           for (const sheet of builtSheets) {
             await waitForImages(sheet)
@@ -1515,7 +1550,7 @@ function Reglamento() {
           outerGlow: [212, 216, 224],
           dashed: [188, 194, 203],
           centerFill: [22, 27, 38],
-          showInteriorDetails: false,
+          showInteriorDetails: true,
         }
       }
 
@@ -1696,11 +1731,13 @@ function Reglamento() {
                 <label className="rules-token-input">
                   <span>{t('rules.tokens.quantity')}</span>
                   <input
-                    type="number"
-                    min={0}
-                    max={TOKEN_LIMIT}
-                    value={tokenCounts[token.id] || 0}
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    value={tokenInputValues[token.id] ?? '0'}
                     onChange={(event) => setTokenCount(token.id, event.target.value)}
+                    onBlur={() => finalizeTokenInput(token.id)}
+                    onFocus={(event) => event.target.select()}
                     aria-label={`${token.label} ${t('rules.tokens.quantity')}`}
                   />
                 </label>

@@ -3136,7 +3136,7 @@ mark {
 
 .rules-token-preview.command::before {
   inset: 8%;
-  border: 0;
+  border: 1px solid rgba(194, 202, 214, 0.42);
   border-radius: inherit;
 }
 
@@ -3150,7 +3150,7 @@ mark {
 
 .rules-token-preview.command::after {
   inset: 20%;
-  border: 0;
+  border: 1px dashed rgba(174, 184, 198, 0.34);
   border-radius: inherit;
 }
 
