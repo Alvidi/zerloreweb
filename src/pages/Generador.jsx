@@ -57,7 +57,8 @@ const getFirstPassiveGroupId = (faction) => faction?.grupos_habilidades_faccion?
 const sanitizePassiveGroupId = (faction, passiveGroupId) => {
   const groups = Array.isArray(faction?.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
   if (!groups.length) return ''
-  return groups.some((group) => group.id === passiveGroupId) ? passiveGroupId : groups[0].id
+  if (!passiveGroupId) return ''
+  return groups.some((group) => group.id === passiveGroupId) ? passiveGroupId : ''
 }
 const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
 const getPassiveGroupDisplayName = (group, t, fallbackIndex = 0) =>
@@ -391,6 +392,8 @@ function Generador() {
     () => localizeArmyUnits(armyUnits, armyFactionWithPassives),
     [armyUnits, armyFactionWithPassives],
   )
+  const currentArmyFaction = localizedArmyUnits.length ? armyFaction : mode === 'manual' ? selectedFaction : null
+  const currentArmyPassiveGroup = localizedArmyUnits.length ? armyPassiveGroup : mode === 'manual' ? selectedPassiveGroup : null
   const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0)
   const armyUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(localizedArmyUnits), [localizedArmyUnits])
   const visibleManualUnits = useMemo(() => {
@@ -439,18 +442,17 @@ function Generador() {
     const nextEras = nextFaction
       ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
       : []
-    const nextPassiveGroupId = getFirstPassiveGroupId(nextFaction)
     const shouldResetArmy = armyUnits.length > 0 && armyFactionIdSafe && armyFactionIdSafe !== next
     startTransition(() => {
       setSelectedFactionId(next)
-      setSelectedPassiveGroupId(nextPassiveGroupId)
+      setSelectedPassiveGroupId('')
       setIsPassiveModalOpen(false)
       setUnitTypeFiltersManual(new Set(nextTypes))
       setEraFiltersManual(new Set(nextEras))
       if (shouldResetArmy) {
         setArmyUnits([])
         setArmyFactionId(next)
-        setArmyPassiveGroupId(nextPassiveGroupId)
+        setArmyPassiveGroupId('')
       }
     })
   }
@@ -565,6 +567,7 @@ function Generador() {
     setArmyUnits([])
     setArmyFactionId('')
     setArmyPassiveGroupId('')
+    setSelectedPassiveGroupId('')
     setIsPassiveModalOpen(false)
   }
 
@@ -837,7 +840,7 @@ function Generador() {
           <div className="army-header">
             <div>
               <p className="eyebrow">{t('generator.currentArmy')}</p>
-              <h3>{armyFaction?.nombre || t('generator.noFaction')}</h3>
+              <h3>{currentArmyFaction?.nombre || t('generator.noFaction')}</h3>
             </div>
             <span className="army-total">{totalValue} {t('generator.valueUnit')}</span>
           </div>
@@ -851,21 +854,21 @@ function Generador() {
             </button>
           </div>
 
-          {armyPassiveGroup?.habilidades?.length ? (
+          {currentArmyPassiveGroup?.habilidades?.length ? (
             <div className="army-passive-group">
               <p className="faction-passives-title">{t('generator.selectedPassiveSet')}</p>
               {(() => {
                 const groupIndex = Math.max(
-                  armyFaction?.grupos_habilidades_faccion?.findIndex((group) => group.id === armyPassiveGroup.id) ?? 0,
+                  currentArmyFaction?.grupos_habilidades_faccion?.findIndex((group) => group.id === currentArmyPassiveGroup.id) ?? 0,
                   0,
                 )
                 return (
                   <>
                     <strong className="army-passive-group-name">
-                      {getPassiveGroupDisplayName(armyPassiveGroup, t, groupIndex)}
+                      {getPassiveGroupDisplayName(currentArmyPassiveGroup, t, groupIndex)}
                     </strong>
                     <ul>
-                      {armyPassiveGroup.habilidades.map((skill) => (
+                      {currentArmyPassiveGroup.habilidades.map((skill) => (
                         <li key={`army-passive-${skill.id}`}>
                           <strong>{skill.nombre}:</strong> {skill.descripcion}
                         </li>
