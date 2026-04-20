@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Salvajes",
-    "estilo_juego": "Los Salvajes son la facción más impredecible y brutal del juego, una mezcla de chatarra, fuerza bruta y agresividad descontrolada. Sus unidades se mueven rápido, pegan fuerte y generan muchos dados aleatorios, capaces de causar estragos en combate cuerpo a cuerpo. Funcionan mejor en manos de jugadores que disfrutan del caos, el riesgo y la ofensiva constante, aunque sacrifican precisión y defensa.",
+    "estilo_juego": "Facción agresiva e impredecible, diseñada para abrumar al enemigo con números y velocidad. Sacrifica resistencia a cambio de presión constante y potencia en cuerpo a cuerpo. Ideal para jugadores que disfrutan del caos y la ofensiva sin descanso.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "furia-incontrolada",
         "habilidades_faccion1": "Furia Incontrolada",
-        "descripcion": "Una unidad Salvaje que carga, gana +1 Ataque en cuerpo a cuerpo."
+        "coste": 8,
+        "descripcion_escaramuza": "Una unidad Salvaje (línea, élite, monstruo) elegida que vaya a cargar gana +1 de daño en cuerpo a cuerpo si la carga es un éxito, por turno.",
+        "descripcion_escuadra": "Una unidad Salvaje (línea, élite, monstruo) elegida que vaya a cargar gana +1 de daño en cuerpo a cuerpo si la carga es un éxito, por turno."
       },
       {
-        "id": "descontrol-de-plebeyos",
-        "habilidades_faccion2": "Descontrol de plebeyos",
-        "descripcion": "Antes de cada activacion la unidad/escuadra de Línea Salvaje debe lanzar un 1D6, si este saca 1, la unidad termina directamente su activacion sin poder realizar acciones."
+        "id": "ley-del-mas-fuerte",
+        "habilidades_faccion2": "Ley del más fuerte",
+        "coste": 5,
+        "descripcion_escaramuza": "Sacrifica la activación de una unidad para volver a activar a una unidad que ya activó.",
+        "descripcion_escuadra": "Sacrifica la activación de una unidad para volver a activar una unidad que ya activó. (En Gran Batalla aplica también a vehículos y monstruos)"
       },
       {
         "id": "violencia-tribal",
         "habilidades_faccion3": "Violencia Tribal",
-        "descripcion": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\" (este movimiento no provoca chequeos ni cuenta como acción)."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "furia-ancestral",
-        "nombre": "1. Furia ancestral",
-        "habilidades": [
-          "furia-incontrolada",
-          "descontrol-de-plebeyos",
-          "violencia-tribal"
-        ]
+        "coste": 3,
+        "descripcion_escaramuza": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\". Este movimiento no provoca chequeos ni cuenta como acción.",
+        "descripcion_escuadra": "La primera vez por turno que una unidad Salvaje elimina una unidad enemiga en combate cuerpo a cuerpo, puede mover inmediatamente 2\". Este movimiento no provoca chequeos ni cuenta como acción. (En Gran Batalla aplica también a monstruos)"
       }
     ]
   },
@@ -69,11 +65,11 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo",
-              "Arma limitada 1"
+              "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           },
           {
             "nombre": "Lanza-Kebabs",
@@ -83,11 +79,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Inestable",
-              "Arma limitada 3"
+              "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -172,11 +168,11 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Línea)",
-              "Arma limitada 1"
+              "Anti 5+ (Línea)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ]
       }
@@ -257,11 +253,11 @@
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque crítico",
-              "Arma limitada 1"
+              "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ]
       }
@@ -305,11 +301,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Asaltante +1",
-              "Arma limitada 1"
+              "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Kañón Bobina",
@@ -332,11 +328,11 @@
             "danio": "4",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Inestable",
-              "Arma limitada 2"
+              "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 1,
+            "limitacion": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -361,11 +357,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Impactos encadenados",
-              "Arma limitada 1"
+              "Impactos encadenados"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 1,
+            "limitacion": 1
           },
           {
             "nombre": "Pico Industrial",
@@ -374,11 +370,10 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [
-              "Arma limitada 1"
-            ],
+            "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ]
       }

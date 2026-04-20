@@ -6,8 +6,9 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <div>ZeroLore © {year}. {t('footer.madeBy')}</div>
-      <div>{t('footer.tagline')}</div>
+      <div>
+        ZeroLore © {year}. {t('footer.madeBy')}. {t('footer.rights')} {t('footer.tagline')}
+      </div>
     </footer>
   )
 }

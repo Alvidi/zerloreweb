@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Mystics",
-    "estilo_juego": "The Mystics stand out for their extreme mobility, exotic weapons, and agile combat styles both at range and in melee. Their troops easily reposition, dodge damage, and punish the enemy with precise attacks or bursts of unstable energy, but they are fragile and must avoid prolonged direct confrontations. An ideal faction for tactical players who enjoy hit and move, breaking lines and attacking from unexpected angles.",
+    "estilo_juego": "An agile and tactical faction, specialised in constant movement and in fighting at range and in melee from advantageous positions. Its units are fragile but fast, designed to strike and reposition before the enemy can respond. Ideal for players who enjoy tempo, mobility, and attacking from unexpected angles.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "guerrilla-en-las-sombras",
-        "habilidades_faccion1": "Guerrilla in the shadows",
-        "descripcion": "This faction can deploy its Line units/squads and Vehicles within 8\" of its command posts."
+        "habilidades_faccion1": "Guerrilla in the Shadows",
+        "coste": 4,
+        "descripcion_escaramuza": "This faction may deploy its Line units and Vehicles within 8\" of its command posts.",
+        "descripcion_escuadra": "This faction may deploy its Line units and Vehicles within 8\" of its command posts."
       },
       {
         "id": "finta",
         "habilidades_faccion2": "Feint",
-        "descripcion": "This faction cannot use the Prepare action. When a Rebel unit receives a ranged attack, it may immediately make a free reaction shot. If that same unit receives another ranged attack during the same turn, it cannot respond again."
+        "coste": 5,
+        "descripcion_escaramuza": "When a Mystic unit is targeted by a ranged attack, it may immediately make a free return shot against the attacker. If that same unit is targeted by another ranged attack during the same turn, it cannot respond again.",
+        "descripcion_escuadra": "When a Mystic unit is targeted by a ranged attack, it may immediately make a free return shot against the attacker. If that same unit is targeted by another ranged attack during the same turn, it cannot respond again."
       },
       {
-        "id": "nadie-se-para",
-        "habilidades_faccion3": "Nobody stops",
-        "descripcion": "This faction must always spend one 3\" Move action, except when charging or when locked in melee combat."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "avance-desafio",
-        "nombre": "1. Advance of Defiance",
-        "habilidades": [
-          "guerrilla-en-las-sombras",
-          "finta",
-          "nadie-se-para"
-        ]
+        "id": "paso-fantasma",
+        "habilidades_faccion3": "Ghost Step",
+        "coste": 3,
+        "descripcion_escaramuza": "When a Mystic unit is chosen as the target of a ranged attack, it may move up to 3\" before that attack is resolved. If after moving the attacker loses line of sight or the target is out of range, the attack is cancelled.",
+        "descripcion_escuadra": "When a Mystic unit is chosen as the target of a ranged attack, it may move up to 3\" before that attack is resolved. If after moving the attacker loses line of sight or the target is out of range, the attack is cancelled."
       }
     ]
   },
@@ -52,7 +48,7 @@
         "disparo": [
           {
             "nombre": "Echo Carbine",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
@@ -71,25 +67,25 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ignore Coverage",
-              "Weapon Limited 1"
+              "Ignore Coverage"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
-            "nombre": "holo-spear look",
-            "ataques": "1",
+            "nombre": "Holo-Spear Gaze",
+            "ataques": "1D",
             "distancia": "25\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Parabolic Shot",
-              "Weapon Limited 1"
+              "Parabolic Shot"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -142,7 +138,7 @@
         "disparo": [
           {
             "nombre": "Fractal rifle",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -159,25 +155,25 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Precision",
-              "Weapon Limited 1"
+              "Precision"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
-            "nombre": "resounding cannon",
-            "ataques": "2",
+            "nombre": "Resonant Cannon",
+            "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Heavy",
-              "Weapon Limited 1"
+              "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -230,7 +226,7 @@
         "disparo": [
           {
             "nombre": "Fractal rifle",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -242,8 +238,8 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "shadow-edge",
-            "ataques": "4",
+            "nombre": "Shadow-Edge",
+            "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -255,8 +251,8 @@
             "valor_extra": 0
           },
           {
-            "nombre": "phase sword",
-            "ataques": "3",
+            "nombre": "Phase Sword",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -269,21 +265,21 @@
           },
           {
             "nombre": "Vertex Dagger",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ignore Coverage",
-              "Weapon Limited 1"
+              "Ignore Coverage"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           },
           {
-            "nombre": "electric hammer",
-            "ataques": "2",
+            "nombre": "Electric Hammer",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -293,7 +289,8 @@
               "Anti 5+ (Elite/Line)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ]
       }
@@ -318,7 +315,7 @@
         "disparo": [
           {
             "nombre": "Fractal light cannon",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
@@ -358,8 +355,8 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "kinetic lunge",
-            "ataques": "2",
+            "nombre": "Kinetic Lunge",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -391,7 +388,7 @@
         "disparo": [
           {
             "nombre": "Spectral cannon",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
             "danio": "3",
@@ -417,7 +414,7 @@
           },
           {
             "nombre": "Heavy Fractal Spear",
-            "ataques": "1",
+            "ataques": "1D",
             "distancia": "24\"",
             "impactos": "+3",
             "danio": "4",
@@ -432,7 +429,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Resonant Gauntlet",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -459,7 +456,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit can hijack enemy vehicles below 50% health. If it successfully charges an enemy vehicle, roll 1D6: on 1-3 that vehicle becomes yours until the end of the game and may activate normally from the following turn. On 4-6 the attempt fails. The hero escapes unharmed if the vehicle is destroyed.",
+        "especialidad_escaramuza": "Allied units within 3\" of this hero cannot be charged, including the hero.",
+        "especialidad_escuadra": "The squad this hero joins cannot be charged by enemy Line units.",
         "valor": 14
       },
       "armas": {

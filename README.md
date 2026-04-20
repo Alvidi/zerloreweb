@@ -56,3 +56,13 @@ Si trabajas en codigo de batalla o entra otro agente/dev al proyecto, leer prime
 
 - `AGENTS.md`
 - `docs/DEVELOPMENT_GUIDE.md`
+
+## Licencia y uso
+
+Este repositorio es publico para consulta, pero **no es open source**.
+
+- Quedan **todos los derechos reservados**.
+- No se permite copiar, reutilizar, modificar, redistribuir, rehostear ni replicar el proyecto o partes del mismo sin permiso previo por escrito.
+- Esto aplica al codigo, los JSON, el reglamento, las misiones, los assets, los logos, los tokens y la presentacion general de la web.
+
+Consulta el archivo `LICENSE.md` para el texto completo.

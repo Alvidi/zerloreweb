@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useTransition } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
+import { doctrineCatalog } from '../data/doctrines/doctrineCatalog.js'
 import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
 import UnitConfigurator from '../features/generator/components/UnitConfigurator.jsx'
 import CustomSelect from '../features/generator/components/CustomSelect.jsx'
@@ -13,6 +14,8 @@ import {
   computeUnitTotal,
   factionImages,
   generateArmyByValue,
+  getFactionSkillDescriptionForMode,
+  getUnitSpecialtyForMode,
   isFactionData,
   isUnitTypeAllowedInGameMode,
   localizeArmyUnits,
@@ -53,16 +56,155 @@ const sortUnitsByType = (units) =>
     return String(a?.nombre || '').localeCompare(String(b?.nombre || ''), 'es', { sensitivity: 'base' })
   })
 
-const getFirstPassiveGroupId = (faction) => faction?.grupos_habilidades_faccion?.[0]?.id || ''
+const getFactionPassiveSelectionMode = (faction) => {
+  if (faction?.seleccion_habilidades === 'multiple') return 'multiple'
+  if (faction?.seleccion_habilidades === 'individual') return 'individual'
+  return 'grupo'
+}
+
+const getFactionAbilityOptions = (faction) =>
+  Array.isArray(faction?.habilidades_faccion) ? faction.habilidades_faccion : []
+
+const getFactionAbilitySelectionLimit = (faction) =>
+  getFactionPassiveSelectionMode(faction) === 'multiple' ? 3 : 1
+
+const sanitizeFactionAbilityIds = (faction, skillIds) => {
+  if (getFactionPassiveSelectionMode(faction) === 'grupo') return []
+  const options = getFactionAbilityOptions(faction)
+  const availableIds = new Set(options.map((skill) => skill.id))
+  const uniqueIds = []
+  ;(Array.isArray(skillIds) ? skillIds : []).forEach((skillId) => {
+    if (!availableIds.has(skillId) || uniqueIds.includes(skillId)) return
+    uniqueIds.push(skillId)
+  })
+  return uniqueIds.slice(0, getFactionAbilitySelectionLimit(faction))
+}
+
+const buildFactionAbilitySelection = (faction, skillIds) => {
+  const mode = getFactionPassiveSelectionMode(faction)
+  if (mode === 'grupo') return null
+
+  const options = getFactionAbilityOptions(faction)
+  const abilityById = new Map(options.map((skill) => [skill.id, skill]))
+  const safeIds = sanitizeFactionAbilityIds(faction, skillIds)
+  const habilidades = safeIds.map((skillId) => abilityById.get(skillId)).filter(Boolean)
+  if (!habilidades.length) return null
+
+  return {
+    id: safeIds.join('|'),
+    nombre: habilidades.map((skill) => skill.nombre).join(' · '),
+    habilidades,
+    tipo: mode,
+    coste_total: habilidades.reduce((sum, skill) => sum + toNumber(skill.coste), 0),
+  }
+}
+
+const getFactionSelectionCost = (selection) =>
+  Array.isArray(selection?.habilidades)
+    ? selection.habilidades.reduce((sum, skill) => sum + toNumber(skill?.coste), 0)
+    : 0
+
+const localizeDoctrineEntries = (lang) =>
+  doctrineCatalog.map((doctrine) => ({
+    id: doctrine.id,
+    nombre: doctrine.nombre?.[lang] || doctrine.nombre?.es || doctrine.id,
+    descripcion: doctrine.descripcion?.[lang] || doctrine.descripcion?.es || '',
+    coste: toNumber(doctrine.coste),
+    imageSrc: doctrine.images?.[lang] || doctrine.images?.es || '',
+  }))
+
+const sanitizeDoctrineIds = (doctrines, doctrineIds) => {
+  const availableIds = new Set((Array.isArray(doctrines) ? doctrines : []).map((doctrine) => doctrine.id))
+  const uniqueIds = []
+  ;(Array.isArray(doctrineIds) ? doctrineIds : []).forEach((doctrineId) => {
+    if (!availableIds.has(doctrineId) || uniqueIds.includes(doctrineId)) return
+    uniqueIds.push(doctrineId)
+  })
+  return uniqueIds
+}
+
+const getDoctrineTotal = (doctrines) =>
+  (Array.isArray(doctrines) ? doctrines : []).reduce((sum, doctrine) => sum + toNumber(doctrine?.coste), 0)
+
+const buildMultipleFactionAbilitySelections = (faction) => {
+  const options = getFactionAbilityOptions(faction)
+  const selections = []
+
+  for (let i = 0; i < options.length; i += 1) {
+    selections.push(buildFactionAbilitySelection(faction, [options[i].id]))
+    for (let j = i + 1; j < options.length; j += 1) {
+      selections.push(buildFactionAbilitySelection(faction, [options[i].id, options[j].id]))
+      for (let k = j + 1; k < options.length; k += 1) {
+        selections.push(buildFactionAbilitySelection(faction, [options[i].id, options[j].id, options[k].id]))
+      }
+    }
+  }
+
+  return selections.filter(Boolean)
+}
+
+const getRandomFactionSelectionCandidates = (faction, target) => {
+  if (!faction) return [null]
+
+  const mode = getFactionPassiveSelectionMode(faction)
+  const allSelections =
+    mode === 'multiple'
+      ? buildMultipleFactionAbilitySelections(faction)
+      : getFactionPassiveSelections(faction)
+
+  const affordableSelections = allSelections.filter((selection) => getFactionSelectionCost(selection) < target)
+  const baseSelections = affordableSelections.length ? affordableSelections : allSelections
+
+  return [null, ...baseSelections]
+}
+
+const scoreRandomArmyCandidate = ({ unitResult, selection, target }) => {
+  const selectionCost = getFactionSelectionCost(selection)
+  const total = (unitResult?.total || 0) + selectionCost
+  let score = unitResult?.score || 0
+
+  if (selection?.habilidades?.length) {
+    score += Math.min(4, 1 + selection.habilidades.length)
+  }
+
+  if (target > 0) {
+    score -= Math.max(0, target - total) * 0.08
+  }
+
+  return score
+}
+
+const getFactionPassiveSelections = (faction) => {
+  if (!faction) return []
+  if (getFactionPassiveSelectionMode(faction) !== 'grupo') {
+    return getFactionAbilityOptions(faction).map((skill) => ({
+      id: skill.id,
+      nombre: skill.nombre,
+      habilidades: [skill],
+      tipo: getFactionPassiveSelectionMode(faction),
+      coste_total: toNumber(skill.coste),
+    }))
+  }
+  return Array.isArray(faction.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
+}
+const getFirstPassiveGroupId = (faction) =>
+  getFactionPassiveSelectionMode(faction) === 'grupo' ? getFactionPassiveSelections(faction)?.[0]?.id || '' : ''
 const sanitizePassiveGroupId = (faction, passiveGroupId) => {
-  const groups = Array.isArray(faction?.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
-  if (!groups.length) return ''
+  if (getFactionPassiveSelectionMode(faction) === 'multiple') return ''
+  const options = getFactionPassiveSelections(faction)
+  if (!options.length) return ''
   if (!passiveGroupId) return ''
-  return groups.some((group) => group.id === passiveGroupId) ? passiveGroupId : ''
+  return options.some((option) => option.id === passiveGroupId) ? passiveGroupId : ''
 }
 const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
 const getPassiveGroupDisplayName = (group, t, fallbackIndex = 0) =>
   cleanPassiveGroupName(group?.nombre) || `${t('generator.defaultPassiveSet')} ${fallbackIndex + 1}`
+const getPassiveSelectionDisplayName = (selection, faction, t, fallbackIndex = 0) =>
+  getFactionPassiveSelectionMode(faction) !== 'grupo'
+    ? String(selection?.nombre || '').trim() || `${t('generator.passive')} ${fallbackIndex + 1}`
+    : getPassiveGroupDisplayName(selection, t, fallbackIndex)
+const getPassiveSelectionLabelKey = (faction, singularKey, groupKey) =>
+  getFactionPassiveSelectionMode(faction) === 'grupo' ? groupKey : singularKey
 
 const unitMatchesEraFilters = (unit, filters) => {
   if (!filters?.size) return true
@@ -76,6 +218,12 @@ const getOrderedEraTokens = (units) => {
     getUnitEraTokens(unit).forEach((token) => present.add(token))
   })
   return preferredEraOrder.filter((token) => present.has(token))
+}
+
+const getExclusiveEraSelection = (availableTokens, currentSelection) => {
+  if (!availableTokens.length) return new Set()
+  const firstMatchingToken = [...(currentSelection || [])].find((token) => availableTokens.includes(token))
+  return new Set([firstMatchingToken || availableTokens[0]])
 }
 
 const PASSIVE_GROUP_ICON_PATHS = [
@@ -156,6 +304,31 @@ function GameModePicker({ value, onChange, t }) {
   )
 }
 
+function EraWorldSwitch({ tokens, activeTokens, onToggle, getLabel, title }) {
+  if (!tokens?.length) return null
+
+  return (
+    <div className="field field-era-worlds">
+      <div className="era-world-switch" role="group" aria-label={title}>
+        {tokens.map((token) => {
+          const isActive = activeTokens.has(token)
+          return (
+            <button
+              key={token}
+              type="button"
+              className={`era-world-button era-world-button-${token}${isActive ? ' active' : ''}`}
+              onClick={() => onToggle(token)}
+              aria-pressed={isActive}
+            >
+              {getLabel(token)}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function PassiveGroupIcon({ groupId }) {
   const icon = getPassiveGroupIconStyle(groupId)
 
@@ -173,6 +346,19 @@ function PassiveGroupIcon({ groupId }) {
         <path d={icon.path} />
       </svg>
     </span>
+  )
+}
+
+function DoctrineIcon({ doctrine }) {
+  if (doctrine?.imageSrc) {
+    return <img src={doctrine.imageSrc} alt="" />
+  }
+
+  return (
+    <svg className="doctrine-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3.5 18 7v10l-6 3.5L6 17V7l6-3.5z" />
+      <path d="M9.2 11.8 11 13.6l3.8-4" />
+    </svg>
   )
 }
 
@@ -200,26 +386,46 @@ function Generador() {
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
   const getSavedArmy = () => {
-    if (typeof window === 'undefined') return { units: [], factionId: '', passiveGroupId: '' }
+    if (typeof window === 'undefined') {
+      return { units: [], factionId: '', passiveGroupId: '', factionSkillIds: [], doctrineIds: [] }
+    }
     const saved = window.localStorage.getItem('zerolore_army_v1')
-    if (!saved) return { units: [], factionId: '', passiveGroupId: '' }
+    if (!saved) return { units: [], factionId: '', passiveGroupId: '', factionSkillIds: [], doctrineIds: [] }
     try {
       const parsed = JSON.parse(saved)
       if (parsed?.units && Array.isArray(parsed.units)) {
-        return { units: parsed.units, factionId: parsed.factionId || '', passiveGroupId: parsed.passiveGroupId || '' }
+        const doctrineIds = (
+          Array.isArray(parsed.doctrineIds)
+            ? parsed.doctrineIds
+            : Array.isArray(parsed.doctrines)
+              ? parsed.doctrines.map((item) => (typeof item === 'string' ? item : item?.id)).filter(Boolean)
+              : []
+        )
+        return {
+          units: parsed.units,
+          factionId: parsed.factionId || '',
+          passiveGroupId: parsed.passiveGroupId || '',
+          factionSkillIds: Array.isArray(parsed.factionSkillIds) ? parsed.factionSkillIds : [],
+          doctrineIds,
+        }
       }
     } catch {
       // Ignore invalid cache
     }
-    return { units: [], factionId: '', passiveGroupId: '' }
+    return { units: [], factionId: '', passiveGroupId: '', factionSkillIds: [], doctrineIds: [] }
   }
 
   const initialSaved = getSavedArmy()
   const [armyFactionId, setArmyFactionId] = useState(initialSaved.factionId)
   const [armyPassiveGroupId, setArmyPassiveGroupId] = useState(initialSaved.passiveGroupId)
+  const [armyFactionSkillIds, setArmyFactionSkillIds] = useState(initialSaved.factionSkillIds)
+  const [armyDoctrineIds, setArmyDoctrineIds] = useState(initialSaved.doctrineIds)
   const [armyUnits, setArmyUnits] = useState(initialSaved.units)
   const [selectedPassiveGroupId, setSelectedPassiveGroupId] = useState('')
+  const [selectedFactionSkillIds, setSelectedFactionSkillIds] = useState([])
+  const [selectedDoctrineIds, setSelectedDoctrineIds] = useState(initialSaved.doctrineIds)
   const [isPassiveModalOpen, setIsPassiveModalOpen] = useState(false)
+  const [isDoctrineModalOpen, setIsDoctrineModalOpen] = useState(false)
   const [activeUnit, setActiveUnit] = useState(null)
   const [targetValue, setTargetValue] = useState(40)
   const [randomFactionId, setRandomFactionId] = useState('random')
@@ -245,6 +451,21 @@ function Generador() {
 
   const selectedFaction = factions.find((faction) => faction.id === selectedFactionIdSafe) || null
   const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || null
+  const localizedDoctrines = useMemo(() => localizeDoctrineEntries(lang), [lang])
+  const doctrineById = useMemo(
+    () => new Map(localizedDoctrines.map((doctrine) => [doctrine.id, doctrine])),
+    [localizedDoctrines],
+  )
+  const selectedPassiveOptions = useMemo(() => getFactionPassiveSelections(selectedFaction), [selectedFaction])
+  const armyPassiveOptions = useMemo(() => getFactionPassiveSelections(armyFaction), [armyFaction])
+  const selectedFactionSkillIdsSafe = useMemo(
+    () => sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds),
+    [selectedFaction, selectedFactionSkillIds],
+  )
+  const armyFactionSkillIdsSafe = useMemo(
+    () => sanitizeFactionAbilityIds(armyFaction, armyFactionSkillIds),
+    [armyFaction, armyFactionSkillIds],
+  )
   const factionSelectOptions = useMemo(
     () =>
       factions.map((faction) => ({
@@ -271,34 +492,82 @@ function Generador() {
     [selectedFaction, selectedPassiveGroupId],
   )
   const selectedPassiveGroup = useMemo(
-    () => selectedFaction?.grupos_habilidades_faccion?.find((group) => group.id === selectedPassiveGroupIdSafe) || null,
-    [selectedFaction, selectedPassiveGroupIdSafe],
+    () => selectedPassiveOptions.find((group) => group.id === selectedPassiveGroupIdSafe) || null,
+    [selectedPassiveOptions, selectedPassiveGroupIdSafe],
+  )
+  const selectedFactionSelection = useMemo(
+    () =>
+      getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
+        ? buildFactionAbilitySelection(selectedFaction, selectedFactionSkillIdsSafe)
+        : selectedPassiveGroup,
+    [selectedFaction, selectedFactionSkillIdsSafe, selectedPassiveGroup],
   )
   const selectedFactionWithPassives = useMemo(
-    () => applyPassiveGroupEffectsToFaction(selectedFaction, selectedPassiveGroup),
-    [selectedFaction, selectedPassiveGroup],
+    () => applyPassiveGroupEffectsToFaction(selectedFaction, selectedFactionSelection),
+    [selectedFaction, selectedFactionSelection],
   )
   const armyPassiveGroupIdSafe = useMemo(
     () => sanitizePassiveGroupId(armyFaction, armyPassiveGroupId),
     [armyFaction, armyPassiveGroupId],
   )
   const armyPassiveGroup = useMemo(
-    () => armyFaction?.grupos_habilidades_faccion?.find((group) => group.id === armyPassiveGroupIdSafe) || null,
-    [armyFaction, armyPassiveGroupIdSafe],
+    () => armyPassiveOptions.find((group) => group.id === armyPassiveGroupIdSafe) || null,
+    [armyPassiveOptions, armyPassiveGroupIdSafe],
+  )
+  const armyFactionSelection = useMemo(
+    () =>
+      getFactionPassiveSelectionMode(armyFaction) === 'multiple'
+        ? buildFactionAbilitySelection(armyFaction, armyFactionSkillIdsSafe)
+        : armyPassiveGroup,
+    [armyFaction, armyFactionSkillIdsSafe, armyPassiveGroup],
   )
   const armyFactionWithPassives = useMemo(
-    () => applyPassiveGroupEffectsToFaction(armyFaction, armyPassiveGroup),
-    [armyFaction, armyPassiveGroup],
+    () => applyPassiveGroupEffectsToFaction(armyFaction, armyFactionSelection),
+    [armyFaction, armyFactionSelection],
   )
-  const armyFactionForPdf = useMemo(
+  const selectedDoctrineIdsSafe = useMemo(
+    () => sanitizeDoctrineIds(localizedDoctrines, selectedDoctrineIds),
+    [localizedDoctrines, selectedDoctrineIds],
+  )
+  const armyDoctrineIdsSafe = useMemo(
+    () => sanitizeDoctrineIds(localizedDoctrines, armyDoctrineIds),
+    [localizedDoctrines, armyDoctrineIds],
+  )
+  const selectedDoctrines = useMemo(
+    () => selectedDoctrineIdsSafe.map((doctrineId) => doctrineById.get(doctrineId)).filter(Boolean),
+    [doctrineById, selectedDoctrineIdsSafe],
+  )
+  const armyDoctrines = useMemo(
+    () => armyDoctrineIdsSafe.map((doctrineId) => doctrineById.get(doctrineId)).filter(Boolean),
+    [armyDoctrineIdsSafe, doctrineById],
+  )
+  const manualCurrentSelection = useMemo(() => {
+    if (getFactionPassiveSelectionMode(selectedFaction) !== 'multiple') return selectedFactionSelection
+    const currentIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
+    const selectedOptions = selectedPassiveOptions.filter((group) => currentIds.includes(group.id))
+    const habilidades = selectedOptions.map((group) => group.habilidades?.[0]).filter(Boolean)
+    if (!habilidades.length) return null
+    return {
+      id: currentIds.join('|'),
+      nombre: habilidades.map((skill) => skill.nombre).join(' · '),
+      habilidades,
+      tipo: 'multiple',
+      coste_total: habilidades.reduce((sum, skill) => sum + toNumber(skill.coste), 0),
+    }
+  }, [selectedFaction, selectedFactionSelection, selectedFactionSkillIds, selectedPassiveOptions])
+  const currentArmyFaction = mode === 'manual' ? selectedFaction : armyFaction
+  const currentArmySelection = mode === 'manual' ? manualCurrentSelection : armyFactionSelection
+  const currentArmyDoctrines = mode === 'manual' ? selectedDoctrines : armyDoctrines
+  const currentArmyFactionWithPassives = mode === 'manual' ? selectedFactionWithPassives : armyFactionWithPassives
+  const activeArmyFactionForPdf = useMemo(
     () =>
-      armyFactionWithPassives
+      currentArmyFactionWithPassives
         ? {
-            ...armyFactionWithPassives,
-            selectedPassiveGroup: armyPassiveGroup,
+            ...currentArmyFactionWithPassives,
+            selectedPassiveGroup: currentArmySelection,
           }
-        : armyFactionWithPassives,
-    [armyFactionWithPassives, armyPassiveGroup],
+        : currentArmyFactionWithPassives,
+    [currentArmyFactionWithPassives, currentArmySelection],
   )
   const availableUnitTypes = useMemo(() => {
     if (!selectedFactionWithPassives?.unidades?.length) return []
@@ -361,12 +630,7 @@ function Generador() {
     return new Set(availableUnitTypes)
   }, [availableUnitTypes, unitTypeFiltersManual])
   const activeManualEraFilters = useMemo(() => {
-    if (!availableEraTokens.length) return new Set()
-    if (eraFiltersManual.size) {
-      const sanitized = new Set([...eraFiltersManual].filter((token) => availableEraTokens.includes(token)))
-      return sanitized.size ? sanitized : new Set(availableEraTokens)
-    }
-    return new Set(availableEraTokens)
+    return getExclusiveEraSelection(availableEraTokens, eraFiltersManual)
   }, [availableEraTokens, eraFiltersManual])
 
   const activeRandomFilters = useMemo(() => {
@@ -380,21 +644,16 @@ function Generador() {
     return new Set(availableUnitTypesRandom)
   }, [availableUnitTypesRandom, unitTypeFiltersRandom])
   const activeRandomEraFilters = useMemo(() => {
-    if (!availableEraTokensRandom.length) return new Set()
-    if (eraFiltersRandom.size) {
-      const sanitized = new Set([...eraFiltersRandom].filter((token) => availableEraTokensRandom.includes(token)))
-      return sanitized.size ? sanitized : new Set(availableEraTokensRandom)
-    }
-    return new Set(availableEraTokensRandom)
+    return getExclusiveEraSelection(availableEraTokensRandom, eraFiltersRandom)
   }, [availableEraTokensRandom, eraFiltersRandom])
 
   const localizedArmyUnits = useMemo(
-    () => localizeArmyUnits(armyUnits, armyFactionWithPassives),
-    [armyUnits, armyFactionWithPassives],
+    () => localizeArmyUnits(armyUnits, currentArmyFactionWithPassives),
+    [armyUnits, currentArmyFactionWithPassives],
   )
-  const currentArmyFaction = localizedArmyUnits.length ? armyFaction : mode === 'manual' ? selectedFaction : null
-  const currentArmyPassiveGroup = localizedArmyUnits.length ? armyPassiveGroup : mode === 'manual' ? selectedPassiveGroup : null
-  const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0)
+  const factionAbilityTotal = useMemo(() => getFactionSelectionCost(currentArmySelection), [currentArmySelection])
+  const doctrineTotal = useMemo(() => getDoctrineTotal(currentArmyDoctrines), [currentArmyDoctrines])
+  const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0) + factionAbilityTotal + doctrineTotal
   const armyUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(localizedArmyUnits), [localizedArmyUnits])
   const visibleManualUnits = useMemo(() => {
     if (!selectedFactionWithPassives?.unidades?.length) return []
@@ -419,13 +678,15 @@ function Generador() {
       units: armyUnits,
       factionId: armyFactionIdSafe,
       passiveGroupId: armyPassiveGroupIdSafe,
+      factionSkillIds: armyFactionSkillIdsSafe,
+      doctrineIds: armyDoctrineIdsSafe,
     })
     window.localStorage.setItem('zerolore_army_v1', payload)
-  }, [armyUnits, armyFactionIdSafe, armyPassiveGroupIdSafe])
+  }, [armyUnits, armyFactionIdSafe, armyPassiveGroupIdSafe, armyFactionSkillIdsSafe, armyDoctrineIdsSafe])
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
-    const hasOpenModal = Boolean(activeUnit) || isPassiveModalOpen
+    const hasOpenModal = Boolean(activeUnit) || isPassiveModalOpen || isDoctrineModalOpen
     const previousOverflow = document.body.style.overflow
     if (hasOpenModal) {
       document.body.style.overflow = 'hidden'
@@ -433,7 +694,7 @@ function Generador() {
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [activeUnit, isPassiveModalOpen])
+  }, [activeUnit, isPassiveModalOpen, isDoctrineModalOpen])
 
   const handleFactionChange = (event) => {
     const next = event.target.value
@@ -442,17 +703,28 @@ function Generador() {
     const nextEras = nextFaction
       ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
       : []
+    const nextPassiveGroupId = getFirstPassiveGroupId(nextFaction)
+    const nextFactionSkillIds = []
     const shouldResetArmy = armyUnits.length > 0 && armyFactionIdSafe && armyFactionIdSafe !== next
     startTransition(() => {
       setSelectedFactionId(next)
-      setSelectedPassiveGroupId('')
+      setSelectedPassiveGroupId(nextPassiveGroupId)
+      setSelectedFactionSkillIds(nextFactionSkillIds)
       setIsPassiveModalOpen(false)
+      setIsDoctrineModalOpen(false)
       setUnitTypeFiltersManual(new Set(nextTypes))
-      setEraFiltersManual(new Set(nextEras))
+      setEraFiltersManual(getExclusiveEraSelection(nextEras, nextEras))
       if (shouldResetArmy) {
         setArmyUnits([])
         setArmyFactionId(next)
-        setArmyPassiveGroupId('')
+        setArmyPassiveGroupId(nextPassiveGroupId)
+        setArmyFactionSkillIds(nextFactionSkillIds)
+        setArmyDoctrineIds(selectedDoctrineIdsSafe)
+      } else if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === next) {
+        setArmyFactionId(next)
+        setArmyPassiveGroupId(nextPassiveGroupId)
+        setArmyFactionSkillIds(nextFactionSkillIds)
+        setArmyDoctrineIds(selectedDoctrineIdsSafe)
       }
     })
   }
@@ -474,7 +746,7 @@ function Generador() {
         )
     setRandomFactionId(next)
     setUnitTypeFiltersRandom(new Set(nextTypes))
-    setEraFiltersRandom(new Set(nextEras))
+    setEraFiltersRandom(getExclusiveEraSelection(nextEras, nextEras))
   }
 
   const handleToggleUnitTypeManual = (type) => {
@@ -502,21 +774,13 @@ function Generador() {
   }
 
   const handleToggleEraManual = (token) => {
-    setEraFiltersManual((prev) => {
-      const next = prev.size ? new Set(prev) : new Set(availableEraTokens)
-      if (next.has(token)) next.delete(token)
-      else next.add(token)
-      return next
-    })
+    if (!availableEraTokens.includes(token)) return
+    setEraFiltersManual(new Set([token]))
   }
 
   const handleToggleEraRandom = (token) => {
-    setEraFiltersRandom((prev) => {
-      const next = prev.size ? new Set(prev) : new Set(availableEraTokensRandom)
-      if (next.has(token)) next.delete(token)
-      else next.add(token)
-      return next
-    })
+    if (!availableEraTokensRandom.includes(token)) return
+    setEraFiltersRandom(new Set([token]))
   }
 
   const handleOpenConfigurator = (unit) => {
@@ -525,7 +789,89 @@ function Generador() {
 
   const handleSelectPassiveGroup = (groupId) => {
     setSelectedPassiveGroupId(groupId)
+    if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
+      setArmyFactionId(selectedFactionIdSafe)
+      setArmyPassiveGroupId(groupId)
+      setArmyFactionSkillIds([])
+    }
     setIsPassiveModalOpen(false)
+  }
+
+  const handleToggleFactionSkill = (skillId) => {
+    setSelectedFactionSkillIds((prev) => {
+      const currentIds = sanitizeFactionAbilityIds(selectedFaction, prev)
+      const nextIds = (() => {
+        if (currentIds.includes(skillId)) {
+          return currentIds.filter((id) => id !== skillId)
+        }
+        if (currentIds.length >= getFactionAbilitySelectionLimit(selectedFaction)) {
+          return currentIds
+        }
+        return [...currentIds, skillId]
+      })()
+
+      if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
+        setArmyFactionId(selectedFactionIdSafe)
+        setArmyPassiveGroupId('')
+        setArmyFactionSkillIds(nextIds)
+      }
+
+      return nextIds
+    })
+  }
+
+  const handleRemoveArmyFactionSkill = (skillId) => {
+    setArmyFactionSkillIds((prev) => {
+      const currentIds = sanitizeFactionAbilityIds(armyFaction, prev)
+      const nextIds = currentIds.filter((id) => id !== skillId)
+
+      if (mode === 'manual' && selectedFactionIdSafe === armyFactionIdSafe) {
+        setSelectedFactionSkillIds(nextIds)
+      }
+
+      return nextIds
+    })
+  }
+
+  const handleAddDoctrine = (doctrineId) => {
+    setSelectedDoctrineIds((prev) => {
+      const currentIds = sanitizeDoctrineIds(localizedDoctrines, prev)
+      if (currentIds.includes(doctrineId)) return currentIds
+      const nextIds = [...currentIds, doctrineId]
+
+      if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
+        setArmyFactionId(selectedFactionIdSafe)
+        setArmyDoctrineIds(nextIds)
+      }
+
+      return nextIds
+    })
+    setIsDoctrineModalOpen(false)
+  }
+
+  const handleRemoveSelectedDoctrine = (doctrineId) => {
+    setSelectedDoctrineIds((prev) => {
+      const nextIds = sanitizeDoctrineIds(localizedDoctrines, prev).filter((id) => id !== doctrineId)
+
+      if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
+        setArmyFactionId(selectedFactionIdSafe)
+        setArmyDoctrineIds(nextIds)
+      }
+
+      return nextIds
+    })
+  }
+
+  const handleRemoveArmyDoctrine = (doctrineId) => {
+    setArmyDoctrineIds((prev) => {
+      const nextIds = sanitizeDoctrineIds(localizedDoctrines, prev).filter((id) => id !== doctrineId)
+
+      if (mode === 'manual' && selectedFactionIdSafe === armyFactionIdSafe) {
+        setSelectedDoctrineIds(nextIds)
+      }
+
+      return nextIds
+    })
   }
 
   const handleAddUnit = (unit, shooting, melee, squadSize, perMiniLoadouts, imageDataUrl = '') => {
@@ -552,6 +898,8 @@ function Generador() {
     )
     setArmyFactionId(selectedFactionIdSafe)
     setArmyPassiveGroupId(selectedPassiveGroupIdSafe)
+    setArmyFactionSkillIds(selectedFactionSkillIdsSafe)
+    setArmyDoctrineIds(selectedDoctrineIdsSafe)
     setActiveUnit(null)
   }
 
@@ -568,51 +916,99 @@ function Generador() {
     setArmyFactionId('')
     setArmyPassiveGroupId('')
     setSelectedPassiveGroupId('')
+    setArmyFactionSkillIds([])
+    setSelectedFactionSkillIds([])
+    setArmyDoctrineIds([])
+    setSelectedDoctrineIds([])
     setIsPassiveModalOpen(false)
+    setIsDoctrineModalOpen(false)
   }
 
   const handleGenerateRandom = () => {
     if (!factions.length) return
-    const filterFactionUnits = (faction) => {
-      const factionWithPassives = applyPassiveGroupEffectsToFaction(
-        faction,
-        faction?.grupos_habilidades_faccion?.[0] || null,
-      )
-      return {
-        ...factionWithPassives,
-        unidades: factionWithPassives.unidades.filter(
-        (unit) =>
-          isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
-          && (!activeRandomFilters.size || activeRandomFilters.has(unit.tipo))
-          && unitMatchesEraFilters(unit, activeRandomEraFilters),
-        ),
-      }
-    }
-    const factionPool =
-      randomFactionIdSafe === 'random'
-        ? factions.map(filterFactionUnits).filter((faction) => faction.unidades.length)
-        : []
-    const faction =
-      randomFactionIdSafe === 'random'
-        ? factionPool[Math.floor(Math.random() * factionPool.length)]
-        : filterFactionUnits(factions.find((item) => item.id === randomFactionIdSafe))
-    if (!faction?.unidades?.length) return
     const target = toNumber(targetValue)
-    const result = generateArmyByValue(
-      faction,
-      target,
-      gameMode,
-      activeRandomFilters.size ? activeRandomFilters : null,
+    if (target <= 0) return
+
+    const buildBestFactionCandidate = (baseFaction) => {
+      if (!baseFaction) return null
+
+      const selectionCandidates = getRandomFactionSelectionCandidates(baseFaction, target)
+      let bestCandidate = null
+
+      selectionCandidates.forEach((selection) => {
+        const selectionCost = getFactionSelectionCost(selection)
+        const remainingTarget = Math.max(0, target - selectionCost)
+        const factionWithPassives = applyPassiveGroupEffectsToFaction(baseFaction, selection)
+        const filteredFaction = {
+          ...factionWithPassives,
+          unidades: factionWithPassives.unidades.filter(
+            (unit) =>
+              isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
+              && (!activeRandomFilters.size || activeRandomFilters.has(unit.tipo))
+              && unitMatchesEraFilters(unit, activeRandomEraFilters),
+          ),
+        }
+
+        if (!filteredFaction.unidades.length) return
+
+        const unitResult = generateArmyByValue(
+          filteredFaction,
+          remainingTarget,
+          gameMode,
+          activeRandomFilters.size ? activeRandomFilters : null,
+        )
+
+        const score = scoreRandomArmyCandidate({
+          unitResult,
+          selection,
+          target,
+        })
+
+        if (!bestCandidate || score > bestCandidate.score) {
+          bestCandidate = {
+            faction: baseFaction,
+            generatedFaction: filteredFaction,
+            selection,
+            unitResult,
+            score,
+          }
+        }
+      })
+
+      return bestCandidate
+    }
+
+    const factionCandidates = (
+      randomFactionIdSafe === 'random'
+        ? factions
+        : [factions.find((item) => item.id === randomFactionIdSafe)].filter(Boolean)
     )
-    setArmyUnits(result.units)
-    setArmyFactionId(result.faction?.id || '')
-    setArmyPassiveGroupId(getFirstPassiveGroupId(result.faction))
+      .map(buildBestFactionCandidate)
+      .filter((candidate) => candidate?.unitResult?.units?.length)
+
+    if (!factionCandidates.length) return
+
+    const rankedCandidates = [...factionCandidates].sort((a, b) => b.score - a.score)
+    const shortlistedCandidates = rankedCandidates.slice(0, Math.min(3, rankedCandidates.length))
+    const chosenCandidate = shortlistedCandidates[Math.floor(Math.random() * shortlistedCandidates.length)]
+    const chosenMode = getFactionPassiveSelectionMode(chosenCandidate.faction)
+
+    setArmyUnits(chosenCandidate.unitResult.units)
+    setArmyFactionId(chosenCandidate.faction?.id || '')
+    setArmyPassiveGroupId(chosenMode === 'multiple' ? '' : chosenCandidate.selection?.id || '')
+    setArmyFactionSkillIds(
+      chosenMode === 'multiple'
+        ? (chosenCandidate.selection?.habilidades || []).map((skill) => skill.id)
+        : [],
+    )
+    setArmyDoctrineIds([])
   }
 
   const exportPdf = () =>
     exportGeneratorPdf({
       armyUnits: localizedArmyUnits,
-      armyFaction: armyFactionForPdf,
+      armyFaction: activeArmyFactionForPdf,
+      doctrines: currentArmyDoctrines,
       totalValue,
       gameMode,
       t,
@@ -669,57 +1065,132 @@ function Generador() {
                       <h3>{selectedFaction.nombre}</h3>
                     </div>
                     <p className="faction-description">{selectedFaction.estilo}</p>
-                    {selectedFaction.grupos_habilidades_faccion.length > 0 && (
-                      <div className="doctrine-panel">
-                        <div className="doctrine-panel-header">
-                          <p className="faction-passives-title">{t('generator.choosePassives')}</p>
-                          <button
-                            type="button"
-                            className="ghost tiny passive-group-open-button"
+                    {selectedPassiveOptions.length > 0 && (
+	                        <div className="doctrine-panel">
+	                          <div className="doctrine-panel-header">
+	                            <div className="faction-passives-heading">
+	                              <p className="faction-passives-title">{t('generator.choosePassives')}</p>
+	                            </div>
+	                            <button
+	                              type="button"
+	                              className="ghost tiny passive-group-open-button"
                             onClick={() => setIsPassiveModalOpen(true)}
                             aria-label={t('generator.passiveModalTitle')}
                           >
                             {t('generator.select')}
                           </button>
                         </div>
-                        {selectedPassiveGroup ? (
+                        {(getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection)?.habilidades?.length ? (
                           <div className="doctrine-item passive-group-current">
                             <div className="doctrine-item-main">
-                              <span className="doctrine-icon-box passive-group-icon-box">
-                                <PassiveGroupIcon groupId={selectedPassiveGroup.id} />
-                              </span>
-                              <div className="doctrine-content">
-                                <p className="doctrine-name">
-                                  {getPassiveGroupDisplayName(
-                                    selectedPassiveGroup,
-                                    t,
-                                    Math.max(
-                                      selectedFaction.grupos_habilidades_faccion.findIndex((group) => group.id === selectedPassiveGroup.id),
-                                      0,
-                                    ),
-                                  )}
-                                </p>
-                                <p className="doctrine-description">
-                                  {selectedPassiveGroup.habilidades.map((skill) => skill.nombre).join(' · ')}
-                                </p>
-                              </div>
+                              {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
+                                <div className="selected-passive-skill-list selected-passive-skill-list-compact">
+                                  {(manualCurrentSelection || selectedFactionSelection).habilidades.map((skill) => (
+                                    <div
+                                      key={`selected-passive-${skill.id}`}
+                                      className="selected-passive-skill-item selected-passive-skill-item-compact selected-choice-row"
+                                    >
+                                      <div className="doctrine-item-main">
+                                        <span className="doctrine-icon-box passive-group-icon-box" aria-hidden="true">
+                                          <PassiveGroupIcon groupId={skill.id} />
+                                        </span>
+                                        <span className="selected-passive-skill-name">{skill.nombre}</span>
+                                      </div>
+                                      <button
+                                        type="button"
+                                        className="selected-choice-remove"
+                                        onClick={() => handleToggleFactionSkill(skill.id)}
+                                        aria-label={`${t('generator.delete')}: ${skill.nombre}`}
+                                      >
+                                        X
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : (
+                                <>
+                                  <span className="doctrine-icon-box passive-group-icon-box" aria-hidden="true">
+                                    <PassiveGroupIcon
+                                      groupId={(getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection).id}
+                                    />
+                                  </span>
+                                  <div className="doctrine-content">
+                                    <p className="doctrine-name doctrine-name-plain">
+                                      {getPassiveSelectionDisplayName(
+                                        (getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection),
+                                        selectedFaction,
+                                        t,
+                                        Math.max(
+                                          selectedPassiveOptions.findIndex((group) => group.id === (getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection).id),
+                                          0,
+                                        ),
+                                      )}
+                                    </p>
+                                  </div>
+                                </>
+                              )}
                             </div>
-                          </div>
+	                          </div>
+                        ) : getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
+                          <p className="doctrine-description">{t('generator.noPassivesAdded')}</p>
                         ) : null}
                       </div>
                     )}
+                    <div className="doctrine-panel">
+                      <div className="doctrine-panel-header">
+                        <div className="faction-passives-heading">
+                          <p className="faction-passives-title">{t('generator.chooseDoctrines')}</p>
+                        </div>
+                        <button
+                          type="button"
+                          className="ghost tiny passive-group-open-button"
+                          onClick={() => setIsDoctrineModalOpen(true)}
+                          aria-label={t('generator.doctrineModalTitle')}
+                        >
+                          {t('generator.select')}
+                        </button>
+                      </div>
+                      {selectedDoctrines.length ? (
+                        <div className="doctrine-item passive-group-current">
+                          <div className="doctrine-item-main">
+                            <div className="selected-passive-skill-list selected-passive-skill-list-compact">
+                              {selectedDoctrines.map((doctrine) => (
+                                <div
+                                  key={`selected-doctrine-${doctrine.id}`}
+                                  className="selected-passive-skill-item selected-passive-skill-item-compact selected-choice-row"
+                                >
+                                  <div className="doctrine-item-main">
+                                    <span className="selected-doctrine-token" aria-hidden="true">
+                                      <DoctrineIcon doctrine={doctrine} />
+                                    </span>
+                                    <span className="selected-passive-skill-name">{doctrine.nombre}</span>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    className="selected-choice-remove"
+                                    onClick={() => handleRemoveSelectedDoctrine(doctrine.id)}
+                                    aria-label={`${t('generator.delete')}: ${doctrine.nombre}`}
+                                  >
+                                    X
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="empty-state">{t('generator.noDoctrinesAdded')}</p>
+                      )}
+                    </div>
                   </div>
+                  <EraWorldSwitch
+                    tokens={availableEraTokens}
+                    activeTokens={activeManualEraFilters}
+                    onToggle={handleToggleEraManual}
+                    getLabel={getEraLabel}
+                    title={t('generator.era')}
+                  />
                   <div className="unit-type-filters">
-                    {availableEraTokens.map((token) => (
-                      <label key={token} className={`unit-type-filter unit-era-filter unit-era-filter-${token}`}>
-                        <input
-                          type="checkbox"
-                          checked={activeManualEraFilters.has(token)}
-                          onChange={() => handleToggleEraManual(token)}
-                        />
-                        <span>{getEraLabel(token)}</span>
-                      </label>
-                    ))}
                     {availableUnitTypes.map((type) => (
                       <label key={type} className="unit-type-filter">
                         <input
@@ -745,18 +1216,6 @@ function Generador() {
                             <UnitTypeBadge type={unit.tipo} />
                             {' '}·{' '}
                             <span className="unit-value">{unit.valor_base} {t('generator.valueUnit')}</span>
-                            {unit.eras?.length ? (
-                              <>
-                                {' '}·{' '}
-                                <span className="unit-era-list">
-                                  {unit.eras.map((era) => (
-                                    <span key={`${unit.id}-${era.token}-${era.label}`} className={`unit-era-badge unit-era-${era.token}`}>
-                                      {era.token === 'future' || era.token === 'past' ? getEraLabel(era.token) : era.label}
-                                    </span>
-                                  ))}
-                                </span>
-                              </>
-                            ) : null}
                           </p>
                           <div className="unit-stats-table">
                             <div className="unit-stats-row head">
@@ -776,7 +1235,7 @@ function Generador() {
                               ) : null}
                             </div>
                           </div>
-                          <p className="unit-specialty">{unit.especialidad}</p>
+                          <p className="unit-specialty">{getUnitSpecialtyForMode(unit, gameMode)}</p>
                         </div>
                       </article>
                     ))}
@@ -807,17 +1266,14 @@ function Generador() {
                   options={randomFactionSelectOptions}
                 />
               </div>
+              <EraWorldSwitch
+                tokens={availableEraTokensRandom}
+                activeTokens={activeRandomEraFilters}
+                onToggle={handleToggleEraRandom}
+                getLabel={getEraLabel}
+                title={t('generator.era')}
+              />
               <div className="unit-type-filters">
-                {availableEraTokensRandom.map((token) => (
-                  <label key={`random-era-${token}`} className={`unit-type-filter unit-era-filter unit-era-filter-${token}`}>
-                    <input
-                      type="checkbox"
-                      checked={activeRandomEraFilters.has(token)}
-                      onChange={() => handleToggleEraRandom(token)}
-                    />
-                    <span>{getEraLabel(token)}</span>
-                  </label>
-                ))}
                 {availableUnitTypesRandom.map((type) => (
                   <label key={`random-${type}`} className="unit-type-filter">
                     <input
@@ -854,29 +1310,93 @@ function Generador() {
             </button>
           </div>
 
-          {currentArmyPassiveGroup?.habilidades?.length ? (
+          {currentArmySelection?.habilidades?.length ? (
             <div className="army-passive-group">
-              <p className="faction-passives-title">{t('generator.selectedPassiveSet')}</p>
               {(() => {
-                const groupIndex = Math.max(
-                  currentArmyFaction?.grupos_habilidades_faccion?.findIndex((group) => group.id === currentArmyPassiveGroup.id) ?? 0,
-                  0,
-                )
-                return (
-                  <>
-                    <strong className="army-passive-group-name">
-                      {getPassiveGroupDisplayName(currentArmyPassiveGroup, t, groupIndex)}
-                    </strong>
-                    <ul>
-                      {currentArmyPassiveGroup.habilidades.map((skill) => (
-                        <li key={`army-passive-${skill.id}`}>
-                          <strong>{skill.nombre}:</strong> {skill.descripcion}
-                        </li>
-                      ))}
-                    </ul>
+                const isMultipleSelection = getFactionPassiveSelectionMode(currentArmyFaction) === 'multiple'
+	                return (
+	                  <>
+                      <div className="army-passive-card-list">
+                        {currentArmySelection.habilidades.map((skill) => (
+                          <article key={`army-passive-${skill.id}`} className="army-unit army-passive-card">
+                            <div className="army-unit-header army-passive-card-header">
+                              <div className="army-passive-card-title-wrap">
+                                <span className="doctrine-icon-box passive-group-icon-box" aria-hidden="true">
+                                  <PassiveGroupIcon groupId={skill.id} />
+                                </span>
+                                <div>
+                                  <h4>{skill.nombre}</h4>
+                                  <p className="army-passive-card-kicker">
+                                    {(isMultipleSelection ? t('generator.passive') : t('generator.passives')).toLowerCase()}
+                                  </p>
+                                </div>
+                              </div>
+                              {skill.coste ? (
+                                <span className="army-passive-skill-cost">
+                                  {skill.coste} {t('generator.valueUnit')}
+                                </span>
+                              ) : null}
+                            </div>
+                            <div className="army-weapons army-passive-card-body">
+                              {getFactionSkillDescriptionForMode(skill, gameMode)}
+                            </div>
+                            <div className="army-unit-actions">
+                              <button
+                                type="button"
+                                className="ghost tiny"
+                                onClick={() => handleRemoveArmyFactionSkill(skill.id)}
+                                aria-label={`${t('generator.remove')}: ${skill.nombre}`}
+                              >
+                                {t('generator.delete')}
+                              </button>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
                   </>
                 )
               })()}
+            </div>
+          ) : null}
+
+          {currentArmyDoctrines.length ? (
+            <div className="army-passive-group">
+              <div className="army-passive-card-list">
+                {currentArmyDoctrines.map((doctrine) => (
+                  <article key={`army-doctrine-${doctrine.id}`} className="army-unit army-passive-card">
+                    <div className="army-unit-header army-passive-card-header">
+                      <div className="army-passive-card-title-wrap">
+                        <span className="doctrine-icon-box" aria-hidden="true">
+                          <DoctrineIcon doctrine={doctrine} />
+                        </span>
+                        <div>
+                          <h4>{doctrine.nombre}</h4>
+                          <p className="army-passive-card-kicker">{t('generator.doctrines').toLowerCase()}</p>
+                        </div>
+                      </div>
+                      {doctrine.coste ? (
+                        <span className="army-passive-skill-cost">
+                          {doctrine.coste} {t('generator.valueUnit')}
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="army-weapons army-passive-card-body">{doctrine.descripcion}</div>
+                    <div className="army-unit-actions">
+                      <button
+                        type="button"
+                        className="ghost tiny"
+                        onClick={() =>
+                          mode === 'manual'
+                            ? handleRemoveSelectedDoctrine(doctrine.id)
+                            : handleRemoveArmyDoctrine(doctrine.id)}
+                        aria-label={`${t('generator.delete')}: ${doctrine.nombre}`}
+                      >
+                        {t('generator.delete')}
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           ) : null}
 
@@ -991,48 +1511,83 @@ function Generador() {
         ? createPortal(
             <div className="unit-modal" role="dialog" aria-modal="true" onClick={() => setIsPassiveModalOpen(false)}>
               <div className="unit-modal-card doctrine-modal-card" onClick={(event) => event.stopPropagation()}>
-                <div className="unit-modal-header">
-                  <div>
-                    <p className="eyebrow">{selectedFaction.nombre}</p>
-                    <h3>{t('generator.passiveModalTitle')}</h3>
-                  </div>
-                  <button type="button" className="ghost small" onClick={() => setIsPassiveModalOpen(false)}>
-                    {t('generator.close')}
-                  </button>
+	                <div className="unit-modal-header">
+	                  <div>
+	                    <p className="eyebrow">{selectedFaction.nombre}</p>
+	                    <h3>{t('generator.passiveModalTitle')}</h3>
+	                    {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
+	                      <p className="unit-modal-subtitle">{t('generator.maxFactionAbilities')}</p>
+	                    ) : null}
+	                  </div>
+	                  <button type="button" className="ghost small" onClick={() => setIsPassiveModalOpen(false)}>
+	                    {t('generator.close')}
+	                  </button>
                 </div>
 
                 <div className="unit-modal-body passive-group-list">
-                  {selectedFaction.grupos_habilidades_faccion.length ? (
-                    selectedFaction.grupos_habilidades_faccion.map((group, index) => {
-                      const isActive = group.id === selectedPassiveGroupIdSafe
+                  {selectedPassiveOptions.length ? (
+                    selectedPassiveOptions.map((group, index) => {
+                      const currentMultipleIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
+                      const isActive = getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
+                        ? currentMultipleIds.includes(group.id)
+                        : group.id === selectedPassiveGroupIdSafe
                       return (
                         <button
                           key={group.id}
                           type="button"
                           className={`passive-group-card${isActive ? ' active' : ''}`}
-                          onClick={() => handleSelectPassiveGroup(group.id)}
+                          onClick={() =>
+                            getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
+                              ? handleToggleFactionSkill(group.id)
+                              : handleSelectPassiveGroup(group.id)}
                         >
                           <div className="passive-group-card-top">
                             <span className="doctrine-icon-box passive-group-icon-box">
                               <PassiveGroupIcon groupId={group.id} />
                             </span>
                             <div className="passive-group-heading">
-                              <span className="passive-group-label">{t('generator.passiveSet')}</span>
-                              <strong>{getPassiveGroupDisplayName(group, t, index)}</strong>
+                              {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
+                                <strong>
+                                  {getPassiveSelectionDisplayName(group, selectedFaction, t, index)}
+                                  {group.coste_total ? ` · ${group.coste_total} ${t('generator.valueUnit')}` : ''}
+                                </strong>
+                              ) : (
+                                <>
+                                  <span className="passive-group-label">
+                                    {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.passive', 'generator.passiveSet'))}
+                                  </span>
+                                  <strong>{getPassiveSelectionDisplayName(group, selectedFaction, t, index)}</strong>
+                                </>
+                              )}
                             </div>
+                            {getFactionPassiveSelectionMode(selectedFaction) !== 'multiple' && group.coste_total ? (
+                              <span className="passive-group-cost">{group.coste_total} {t('generator.valueUnit')}</span>
+                            ) : null}
                           </div>
-                          <ul>
-                            {group.habilidades.map((skill) => (
-                              <li key={skill.id}>
-                                <strong>{skill.nombre}:</strong> {skill.descripcion}
-                              </li>
-                            ))}
-                          </ul>
+                          {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
+                            <p className="passive-group-description">
+                              {getFactionSkillDescriptionForMode(group.habilidades[0], gameMode)}
+                            </p>
+                          ) : (
+                            <ul>
+                              {group.habilidades.map((skill) => (
+                                <li key={skill.id}>
+                                  <strong>
+                                    {skill.nombre}
+                                    {skill.coste ? ` · ${skill.coste} ${t('generator.valueUnit')}` : ''}:
+                                  </strong>{' '}
+                                  {getFactionSkillDescriptionForMode(skill, gameMode)}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </button>
                       )
                     })
                   ) : (
-                    <p className="empty-state">{t('generator.noPassiveSetsAvailable')}</p>
+                    <p className="empty-state">
+                      {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.noPassivesAvailable', 'generator.noPassiveSetsAvailable'))}
+                    </p>
                   )}
                 </div>
               </div>
@@ -1040,7 +1595,67 @@ function Generador() {
             document.body,
           )
         : null}
+
+      {isDoctrineModalOpen && typeof document !== 'undefined'
+        ? createPortal(
+            <DoctrinePickerModal
+              doctrines={localizedDoctrines}
+              selectedIds={new Set(selectedDoctrineIdsSafe)}
+              t={t}
+              onClose={() => setIsDoctrineModalOpen(false)}
+              onSelect={handleAddDoctrine}
+            />,
+            document.body,
+          )
+        : null}
     </section>
+  )
+}
+
+function DoctrinePickerModal({ doctrines, selectedIds, t, onClose, onSelect }) {
+  const availableDoctrines = doctrines.filter((doctrine) => !selectedIds.has(doctrine.id))
+
+  return (
+    <div className="unit-modal" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="unit-modal-card doctrine-modal-card" onClick={(event) => event.stopPropagation()}>
+        <div className="unit-modal-header">
+          <div>
+            <p className="eyebrow">{t('generator.doctrines')}</p>
+            <h3>{t('generator.doctrineModalTitle')}</h3>
+          </div>
+          <button type="button" className="ghost small" onClick={onClose}>
+            {t('generator.close')}
+          </button>
+        </div>
+        <div className="unit-modal-body passive-group-list">
+          {availableDoctrines.length ? (
+            availableDoctrines.map((doctrine) => (
+              <button
+                key={doctrine.id}
+                type="button"
+                className="passive-group-card doctrine-picker-card"
+                onClick={() => onSelect(doctrine.id)}
+              >
+                <div className="passive-group-card-top">
+                  <span className="doctrine-icon-box" aria-hidden="true">
+                    <DoctrineIcon doctrine={doctrine} />
+                  </span>
+                  <div className="passive-group-heading">
+                    <strong>{doctrine.nombre}</strong>
+                  </div>
+                  {doctrine.coste ? (
+                    <span className="passive-group-cost">{doctrine.coste} {t('generator.valueUnit')}</span>
+                  ) : null}
+                </div>
+                <p className="passive-group-description">{doctrine.descripcion}</p>
+              </button>
+            ))
+          ) : (
+            <p className="empty-state">{t('generator.noDoctrinesAvailable')}</p>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 

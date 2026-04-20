@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Wild",
-    "estilo_juego": "The Wildlings are the most unpredictable and brutal faction in the game, a mix of scrap metal, brute force, and uncontrolled aggression. Their units move fast, hit hard, and generate lots of random dice, capable of wreaking havoc in close combat. They work best in the hands of players who enjoy chaos, risk, and constant offense, although they sacrifice precision and defense.",
+    "estilo_juego": "An aggressive and unpredictable faction, designed to overwhelm the enemy with numbers and speed. It sacrifices resilience in exchange for constant pressure and heavy melee power. Ideal for players who enjoy chaos and relentless offense.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "furia-incontrolada",
         "habilidades_faccion1": "Uncontrolled Fury",
-        "descripcion": "A charging Wild unit gains +1 Attack in melee."
+        "coste": 8,
+        "descripcion_escaramuza": "One chosen Wild unit (line, elite, monster) that is going to charge gains +1 melee damage if the charge succeeds, once per turn.",
+        "descripcion_escuadra": "One chosen Wild unit (line, elite, monster) that is going to charge gains +1 melee damage if the charge succeeds, once per turn."
       },
       {
-        "id": "descontrol-de-plebeyos",
-        "habilidades_faccion2": "commoner riot",
-        "descripcion": "Before each activation, the Wild Line unit/squad must roll 1D6. If it rolls a 1, that unit immediately ends its activation and cannot perform actions."
+        "id": "ley-del-mas-fuerte",
+        "habilidades_faccion2": "Law of the strongest",
+        "coste": 5,
+        "descripcion_escaramuza": "Sacrifice the activation of one unit to activate again a unit that has already activated.",
+        "descripcion_escuadra": "Sacrifice the activation of one unit to activate again a unit that has already activated. (In Grand Battle, this also applies to vehicles and monsters)"
       },
       {
         "id": "violencia-tribal",
         "habilidades_faccion3": "Tribal Violence",
-        "descripcion": "The first time per turn that a Wild unit eliminates an enemy unit in close combat, it may immediately move 2\" (this movement does not trigger checks and does not count as an action)."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "furia-ancestral",
-        "nombre": "1. Ancestral Fury",
-        "habilidades": [
-          "furia-incontrolada",
-          "descontrol-de-plebeyos",
-          "violencia-tribal"
-        ]
+        "coste": 3,
+        "descripcion_escaramuza": "The first time per turn that a Wild unit eliminates an enemy unit in melee combat, it may immediately move 2\". This movement does not trigger checks and does not count as an action.",
+        "descripcion_escuadra": "The first time per turn that a Wild unit eliminates an enemy unit in melee combat, it may immediately move 2\". This movement does not trigger checks and does not count as an action. (In Grand Battle, this also applies to monsters)"
       }
     ]
   },
@@ -69,11 +65,11 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Direct",
-              "Weapon Limited 1"
+              "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           },
           {
             "nombre": "Kebab Launcher",
@@ -83,11 +79,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Unstable",
-              "Weapon Limited 3"
+              "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -159,11 +155,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack",
-              "Weapon Limited 1"
+              "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Bottle Launcher",
@@ -173,11 +169,11 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Line)",
-              "Weapon Limited 1"
+              "Anti 5+ (Line)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ]
       }
@@ -258,11 +254,11 @@
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Critical Attack",
-              "Weapon Limited 1"
+              "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ]
       }
@@ -306,11 +302,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1",
-              "Weapon Limited 1"
+              "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Coil Cannon",
@@ -333,11 +329,11 @@
             "danio": "4",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable",
-              "Weapon Limited 2"
+              "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 1,
+            "limitacion": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -362,11 +358,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Impacts",
-              "Weapon Limited 1"
+              "Chained Impacts"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 1,
+            "limitacion": 1
           },
           {
             "nombre": "Industrial Peak",
@@ -375,11 +371,10 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [
-              "Weapon Limited 1"
-            ],
+            "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ]
       }

@@ -41,6 +41,22 @@ export const clampSquadSize = (value, unit) => {
   return Math.min(max, Math.max(min, next))
 }
 
+const normalizeTextValue = (value, fallback = '-') => {
+  const text = String(value ?? '').trim()
+  return text || fallback
+}
+
+const parseFactionSkillCostFromName = (value) => {
+  const match = String(value || '').match(/-\s*(\d+)\s*(?:valor|value)\b/i)
+  if (!match) return 0
+  return toNumber(match[1])
+}
+
+const stripFactionSkillCostFromName = (value) =>
+  String(value || '')
+    .replace(/\s*-\s*\d+\s*(?:valor|value)\b\s*$/i, '')
+    .trim()
+
 const getWeaponLimitFromAbilities = (abilities) => {
   if (!Array.isArray(abilities)) return null
   for (const raw of abilities) {
@@ -57,14 +73,32 @@ const getWeaponLimitFromAbilities = (abilities) => {
   return null
 }
 
+const stripWeaponLimitAbilities = (abilities) =>
+  (Array.isArray(abilities) ? abilities : []).filter((raw) => {
+    const normalized = String(raw || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+
+    return !/(?:arma limitada|municion limitada|weapon limited|limited weapon|limited ammo)\s*\(?\s*\d+\s*\)?/.test(normalized)
+  })
+
 export const getWeaponLimit = (weapon) => {
-  const raw = weapon?.limite ?? weapon?.weapon_limit
+  const raw = weapon?.limitacion ?? weapon?.limite ?? weapon?.weapon_limit
   const parsed = Number.isFinite(Number(raw)) ? Number(raw) : null
   if (parsed && parsed > 0) return parsed
   return getWeaponLimitFromAbilities(weapon?.habilidades || weapon?.habilidades_arma || null)
 }
 
-const normalizeWeapon = (weapon, tipo) => ({
+const normalizeWeapon = (weapon, tipo) => {
+  const rawAbilities = weapon.habilidades_arma || weapon.habilidades || []
+  const limit = getWeaponLimit({
+    ...weapon,
+    habilidades: rawAbilities,
+    habilidades_arma: rawAbilities,
+  })
+
+  return {
   id: slugify(weapon.nombre || weapon.id || `${tipo}-${Math.random()}`),
   nombre: weapon.nombre || weapon.id || 'Arma',
   tipo,
@@ -73,10 +107,12 @@ const normalizeWeapon = (weapon, tipo) => ({
   impactos: weapon.impactos ? String(weapon.impactos).replace(/^\+?(\d+)\+?$/, '$1+') : null,
   danio: weapon.danio ?? weapon.danio_base ?? '-',
   danio_critico: weapon.danio_critico ?? weapon.critico ?? '-',
-  habilidades: weapon.habilidades_arma || weapon.habilidades || [],
-  limite: getWeaponLimitFromAbilities(weapon.habilidades_arma || weapon.habilidades || []),
+  habilidades: stripWeaponLimitAbilities(rawAbilities),
+  limite: limit,
+  limitacion: limit,
   valor_extra: toNumber(weapon.valor_extra ?? 0),
-})
+  }
+}
 
 export const getUnitTypeToken = (type) => {
   const normalized = String(type || '')
@@ -100,7 +136,13 @@ const passiveAllowsVehicleDualWeapons = (passiveGroup) => {
   return habilidades.some((skill) => {
     const id = String(skill?.id || '').toLowerCase()
     const nombre = String(skill?.nombre || '').toLowerCase()
-    const descripcion = String(skill?.descripcion || '').toLowerCase()
+    const descripcion = [
+      skill?.descripcion,
+      skill?.descripcion_escaramuza,
+      skill?.descripcion_escuadra,
+    ]
+      .map((value) => String(value || '').toLowerCase())
+      .join(' ')
 
     return id === 'potencia-blindada'
       || nombre.includes('potencia blindada')
@@ -163,17 +205,41 @@ const normalizeEraEntries = (value) => {
 
 const getFactionAbilityName = (item) => {
   const entries = Object.entries(item || {})
-  const nameEntry = entries.find(([key]) => key !== 'id' && key !== 'descripcion') || []
+  const nameEntry = entries.find(([key]) =>
+    key !== 'id'
+    && key !== 'descripcion'
+    && key !== 'descripcion_escaramuza'
+    && key !== 'descripcion_escuadra'
+    && key !== 'coste'
+    && key !== 'cost'
+    && key !== 'valor'
+    && key !== 'valor_habilidad') || []
   return nameEntry[1] || nameEntry[0] || ''
 }
 
 const normalizeFactionAbility = (item, idx, factionId) => {
-  const nombre = getFactionAbilityName(item) || 'Habilidad'
+  const rawNombre = getFactionAbilityName(item) || 'Habilidad'
+  const nombre = stripFactionSkillCostFromName(rawNombre) || 'Habilidad'
+  const descripcion = normalizeTextValue(item?.descripcion, '')
+  const descripcionEscaramuza = normalizeTextValue(item?.descripcion_escaramuza ?? descripcion, descripcion)
+  const descripcionEscuadra = normalizeTextValue(item?.descripcion_escuadra ?? descripcionEscaramuza, descripcionEscaramuza)
+  const coste = toNumber(item?.coste ?? item?.cost ?? item?.valor_habilidad ?? item?.valor ?? parseFactionSkillCostFromName(rawNombre))
   return {
     id: item?.id || `${factionId}-passive-${idx + 1}-${slugify(nombre || idx)}`,
     nombre,
-    descripcion: item?.descripcion || '',
+    descripcion: descripcionEscaramuza || descripcionEscuadra || descripcion,
+    descripcion_escaramuza: descripcionEscaramuza,
+    descripcion_escuadra: descripcionEscuadra,
+    coste,
   }
+}
+
+export const getFactionSkillDescriptionForMode = (skill, gameMode = 'escaramuza') => {
+  if (!skill) return '-'
+  if (gameMode === 'escuadra') {
+    return normalizeTextValue(skill.descripcion_escuadra ?? skill.descripcion ?? skill.descripcion_escaramuza, '-')
+  }
+  return normalizeTextValue(skill.descripcion_escaramuza ?? skill.descripcion ?? skill.descripcion_escuadra, '-')
 }
 
 const normalizeFactionPassiveGroups = (rawGroups, abilities, factionId) => {
@@ -224,9 +290,26 @@ const normalizeFactionPassiveGroups = (rawGroups, abilities, factionId) => {
 const getMaxDisparo = (unit) => {
   const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? unit.perfil?.max_armas_disparo
   if (explicit) return explicit
-  const text = `${unit.especialidad || ''} ${unit.perfil?.especialidad || ''}`.toLowerCase()
+  const text = [
+    unit.especialidad,
+    unit.especialidad_escaramuza,
+    unit.especialidad_escuadra,
+    unit.perfil?.especialidad,
+    unit.perfil?.especialidad_escaramuza,
+    unit.perfil?.especialidad_escuadra,
+  ]
+    .join(' ')
+    .toLowerCase()
   if (text.includes('dos armas') || text.includes('2 armas')) return 2
   return 1
+}
+
+export const getUnitSpecialtyForMode = (unit, gameMode = 'escaramuza') => {
+  if (!unit) return '-'
+  if (gameMode === 'escuadra') {
+    return normalizeTextValue(unit.especialidad_escuadra ?? unit.especialidad ?? unit.especialidad_escaramuza, '-')
+  }
+  return normalizeTextValue(unit.especialidad_escaramuza ?? unit.especialidad ?? unit.especialidad_escuadra, '-')
 }
 
 const normalizeUnit = (unit, index) => {
@@ -242,6 +325,15 @@ const normalizeUnit = (unit, index) => {
   const melee = (armas.cuerpo_a_cuerpo || unit.armas_melee || []).map((weapon) =>
     normalizeWeapon(weapon, 'melee'),
   )
+  const especialidad = normalizeTextValue(perfil.especialidad ?? unit.especialidad, '-')
+  const especialidadEscaramuza = normalizeTextValue(
+    perfil.especialidad_escaramuza ?? unit.especialidad_escaramuza ?? perfil.especialidad ?? unit.especialidad,
+    especialidad,
+  )
+  const especialidadEscuadra = normalizeTextValue(
+    perfil.especialidad_escuadra ?? unit.especialidad_escuadra ?? perfil.especialidad ?? unit.especialidad,
+    especialidadEscaramuza,
+  )
 
   return {
     id: unit.id || slugify(unit.nombre_unidad || unit.nombre || `${index}`),
@@ -254,13 +346,21 @@ const normalizeUnit = (unit, index) => {
     velocidad: perfil.velocidad ?? unit.velocidad ?? '-',
     escuadra_min: squadBounds.min,
     escuadra_max: squadBounds.max,
-    especialidad: perfil.especialidad ?? unit.especialidad ?? '-',
+    especialidad: especialidadEscaramuza || especialidadEscuadra || especialidad,
+    especialidad_escaramuza: especialidadEscaramuza,
+    especialidad_escuadra: especialidadEscuadra,
     valor_base: toNumber(perfil.valor ?? unit.valor_base ?? unit.valor ?? 0),
     armas_disparo: disparo,
     armas_melee: melee,
     max_armas_disparo: getMaxDisparo({ ...unit, perfil }),
   }
 }
+
+const normalizeUnitsWithDefaultEra = (units, defaultEra = '') =>
+  (Array.isArray(units) ? units : []).map((unit) =>
+    (unit && typeof unit === 'object' && !Array.isArray(unit) && defaultEra && !unit.era
+      ? { ...unit, era: defaultEra }
+      : unit))
 
 export const normalizeFaction = (data, index, baseId = '') => {
   const faccion = data.faccion || {}
@@ -274,12 +374,24 @@ export const normalizeFaction = (data, index, baseId = '') => {
     factionId,
   )
 
-  const unidades = (data.unidades || []).map(normalizeUnit)
+  const unidadesBase = Array.isArray(data.unidades) ? data.unidades : []
+  const unidadesFuturo = normalizeUnitsWithDefaultEra(
+    data.unidades_futuro ?? data.unidadesFuture ?? data.future_units ?? [],
+    'Futuro',
+  )
+  const unidadesPasado = normalizeUnitsWithDefaultEra(
+    data.unidades_pasado ?? data.unidadesPast ?? data.past_units ?? [],
+    'Pasado',
+  )
+  const unidades = [...unidadesBase, ...unidadesFuturo, ...unidadesPasado].map(normalizeUnit)
 
   return {
     id: factionId,
     nombre: faccion.nombre || `Facción ${index + 1}`,
     estilo: faccion.estilo_juego || faccion.estilo || '',
+    seleccion_habilidades:
+      faccion.seleccion_habilidades
+      || (gruposHabilidades.length ? 'grupo' : 'individual'),
     habilidades_faccion: habilidades,
     grupos_habilidades_faccion: gruposHabilidades,
     unidades,
@@ -393,6 +505,24 @@ export const computeUnitTotal = (unit, shooting, melee, squadSize, perMiniLoadou
 }
 
 const randomPick = (list) => list[Math.floor(Math.random() * list.length)]
+
+const weightedRandomPick = (list, getWeight) => {
+  const weighted = list
+    .map((item) => ({ item, weight: Math.max(0, Number(getWeight(item)) || 0) }))
+    .filter((entry) => entry.weight > 0)
+
+  if (!weighted.length) return randomPick(list)
+
+  const totalWeight = weighted.reduce((sum, entry) => sum + entry.weight, 0)
+  let threshold = Math.random() * totalWeight
+
+  for (const entry of weighted) {
+    threshold -= entry.weight
+    if (threshold <= 0) return entry.item
+  }
+
+  return weighted[weighted.length - 1]?.item || randomPick(list)
+}
 
 const shuffle = (list) => {
   const next = [...list]
@@ -531,6 +661,84 @@ const mergeSquads = (units) => {
   return merged
 }
 
+const getArmyRoleCounts = (units) =>
+  units.reduce((counts, entry) => {
+    const role = getUnitTypeToken(entry?.base?.tipo || entry?.tipo)
+    counts[role] = (counts[role] || 0) + 1
+    return counts
+  }, {})
+
+const getUnitSelectionWeight = (unit, currentUnits, gameMode) => {
+  const role = getUnitTypeToken(unit?.tipo)
+  const roleCounts = getArmyRoleCounts(currentUnits)
+  const sameUnitCount = currentUnits.filter((entry) => entry?.base?.id === unit?.id).length
+
+  let weight = 1
+
+  switch (role) {
+    case 'line':
+      weight = roleCounts.line ? (roleCounts.line >= 2 ? 1.5 : 2.4) : 3.2
+      break
+    case 'elite':
+      weight = roleCounts.elite ? 1.45 : 2.1
+      break
+    case 'hero':
+      weight = roleCounts.hero ? 0.3 : 1.1
+      break
+    case 'vehicle':
+      weight = gameMode === 'escuadra' ? (roleCounts.vehicle ? 0.55 : 1) : 0
+      break
+    case 'monster':
+      weight = roleCounts.monster ? 0.6 : 1
+      break
+    case 'titan':
+      weight = roleCounts.titan ? 0.05 : 0.35
+      break
+    default:
+      weight = 1
+      break
+  }
+
+  if (sameUnitCount >= 2) weight *= 0.35
+  else if (sameUnitCount >= 1) weight *= 0.65
+
+  return weight
+}
+
+const getArmyGenerationScore = (units, total, target, gameMode) => {
+  const roleCounts = getArmyRoleCounts(units)
+  const byBase = units.reduce((map, entry) => {
+    const key = entry?.base?.id || entry?.uid
+    map.set(key, (map.get(key) || 0) + 1)
+    return map
+  }, new Map())
+
+  let score = target > 0 ? (total / target) * 100 : total
+
+  if (units.length >= 2) score += 6
+  if (roleCounts.line) score += 10
+  if (roleCounts.line >= 2) score += 3
+  if (roleCounts.elite) score += 5
+  if (roleCounts.hero) score += 2
+
+  if (gameMode === 'escuadra' && (roleCounts.vehicle || roleCounts.monster || roleCounts.titan)) {
+    score += 3
+  }
+
+  if (!roleCounts.line) score -= 18
+  if (units.length <= 1) score -= 10
+  if ((roleCounts.hero || 0) > 1) score -= (roleCounts.hero - 1) * 4
+  if ((roleCounts.titan || 0) > 1) score -= (roleCounts.titan - 1) * 8
+
+  byBase.forEach((count) => {
+    if (count > 2) {
+      score -= (count - 2) * 3
+    }
+  })
+
+  return score
+}
+
 export const buildArmyUnitDisplayNames = (units) => {
   const totals = new Map()
   units.forEach((unit) => {
@@ -593,7 +801,7 @@ export const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = 
     : allowedUnits
   if (!pool.length) return { faction, units: [], total: 0 }
   const iterations = 200
-  let best = { units: [], total: 0 }
+  let best = { units: [], total: 0, score: Number.NEGATIVE_INFINITY }
 
   for (let i = 0; i < iterations; i += 1) {
     let total = 0
@@ -604,7 +812,7 @@ export const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = 
 
     while (guard < 80) {
       guard += 1
-      const unit = randomPick(pool)
+      const unit = weightedRandomPick(pool, (candidate) => getUnitSelectionWeight(candidate, units, gameMode))
       const squadSize =
         gameMode === 'escuadra'
           ? randomPick(
@@ -654,13 +862,16 @@ export const generateArmyByValue = (faction, target, gameMode, unitTypeFilter = 
       }
     }
 
-    if (total > best.total) {
-      best = { units, total }
-      if (total === target) break
+    const score = getArmyGenerationScore(units, total, target, gameMode)
+
+    if (score > best.score || (score === best.score && total > best.total)) {
+      best = { units, total, score }
+      if (total === target && score >= 100) break
     }
   }
 
   const normalizedUnits = gameMode === 'escuadra' ? mergeSquads(best.units) : best.units
   const normalizedTotal = normalizedUnits.reduce((sum, unit) => sum + unit.total, 0)
-  return { faction, units: normalizedUnits, total: normalizedTotal }
+  const normalizedScore = getArmyGenerationScore(normalizedUnits, normalizedTotal, target, gameMode)
+  return { faction, units: normalizedUnits, total: normalizedTotal, score: normalizedScore }
 }

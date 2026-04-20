@@ -4,54 +4,71 @@
       "id": "garrotazo",
       "nombre": "Garrotazo",
       "token_label": "Doctrina: Garrotazo",
+      "descripcion": "La unidad o escuadra trabada en combate cuerpo a cuerpo empuja 1\" a su contrincante, poniendo fin al combate. Esta doctrina se realiza inmediantamente la unidad realice su activación independientemente quien tiene más velocidad.",
+      "coste": 3,
       "orden": 1
     },
     {
       "id": "apuntado",
       "nombre": "Apuntado",
       "token_label": "Doctrina: Apuntado",
+      "descripcion": "La unidad o escuadra elegida pierde una acción, pero gana +1 dado de Ataque en disparo durante este turno.",
+      "coste": 4,
       "orden": 2
     },
     {
       "id": "frenesi",
       "nombre": "Frenesí",
       "token_label": "Doctrina: Frenesí",
+      "descripcion": "La unidad elegida puede utilizar una acción adicional de movimiento este turno.",
       "orden": 3
     },
     {
       "id": "agilidad-en-combate",
       "nombre": "Agilidad en combate",
       "token_label": "Doctrina: Agilidad en combate",
+      "descripcion": "La unidad elegida gana la iniciativa en combate cuerpo a cuerpo este turno, ignorando la velocidad del contrincante e incluso si el rival ha cargado.",
+      "coste": 6,
       "orden": 4
     },
     {
       "id": "nuestra-es-la-victoria",
       "nombre": "Nuestra es la victoria",
       "token_label": "Doctrina: Nuestra es la victoria",
+      "descripcion": "La unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de unidades con más valor o héroes enemigos, en ese mismo objetivo.",
+      "coste": 5,
       "orden": 5
     },
     {
       "id": "reaccion-inmediata",
       "nombre": "Reacción inmediata",
       "token_label": "Doctrina: Reacción inmediata",
+      "descripcion": "Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga",
+      "coste": 4,
       "orden": 6
     },
     {
       "id": "mas-que-cargado",
       "nombre": "Más que cargado",
       "token_label": "Doctrina: Más que cargado",
+      "descripcion": "Si esta unidad falla una carga durante este turno, puede repetirla inmediatamente una vez.",
+      "coste": 3,
       "orden": 7
     },
     {
       "id": "una-nueva-oportunidad",
       "nombre": "Una nueva oportunidad",
       "token_label": "Doctrina: Una nueva oportunidad",
+      "descripcion": "Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta doctrina, si se decide usar la doctrina la primera tirada queda descartada.",
+      "coste": 4,
       "orden": 8
     },
     {
       "id": "combate-a-muerte",
       "nombre": "Combate a muerte",
       "token_label": "Doctrina: Combate a muerte",
+      "descripcion": "Esta doctrina solo funciona con una unidad / escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra, si hay más de 2 unidades / escuadras involucradas no se puede usar esta doctrina. Ambas unidades / escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, doctrinas, etc. Si cualquiera de las dos unidades / escuadras en combate es activada, la doctrina se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.",
+      "coste": 5,
       "orden": 9
     }
   ]

@@ -22,6 +22,8 @@ const toDoctrineList = (rawCatalog) => (Array.isArray(rawCatalog?.doctrinas) ? r
 const normalizeDoctrineEntry = (entry, index) => ({
   id: entry?.id || `doctrine-${index + 1}`,
   nombre: entry?.nombre || entry?.name || entry?.id || `Doctrine ${index + 1}`,
+  descripcion: entry?.descripcion || entry?.description || '',
+  coste: Number.isFinite(Number(entry?.coste)) ? Number(entry.coste) : null,
   tokenLabel: entry?.token_label || entry?.tokenLabel || '',
   imageId: entry?.image_id || entry?.imageId || entry?.id || `doctrine-${index + 1}`,
   order: Number.isFinite(Number(entry?.orden)) ? Number(entry.orden) : index,
@@ -58,6 +60,11 @@ export const doctrineCatalog = doctrineIds
         es: nombreEs,
         en: nombreEn,
       },
+      descripcion: {
+        es: doctrineEs?.descripcion || doctrineEn?.descripcion || '',
+        en: doctrineEn?.descripcion || doctrineEs?.descripcion || '',
+      },
+      coste: doctrineEs?.coste ?? doctrineEn?.coste ?? null,
       tokenLabel: {
         es: doctrineEs?.tokenLabel || `Doctrina: ${nombreEs}`,
         en: doctrineEn?.tokenLabel || `Doctrine: ${nombreEn}`,

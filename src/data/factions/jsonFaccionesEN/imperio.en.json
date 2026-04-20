@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "The Empire",
-    "estilo_juego": "The Empire is a disciplined military force focused on steady fire, the use of cover, and tactical control of the battlefield. Their units work best when they stay organized, taking advantage of heavy weapons and supported fire, although they sacrifice mobility and close combat ability. They are ideal for players who prefer methodical strategies, defensive fire and winning by positioning.",
+    "estilo_juego": "A disciplined and methodical faction, focused on territory control and sustained fire. Its units perform best when they hold position, taking advantage of long-range weapons and cover. It sacrifices mobility in exchange for defensive power and precision.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "atrincheramiento",
         "habilidades_faccion1": "Entrenchment",
-        "descripcion": "A unit of this faction that has not taken any Move actions during its activation gains +1 Hit die on all of its Shooting attacks until the end of that activation."
+        "coste": 8,
+        "descripcion_escaramuza": "A unit of this faction that has not taken any Move actions during its activation gains +1 Hit die on all of its Shooting attacks until the end of that activation.",
+        "descripcion_escuadra": "A unit of this faction that has not taken any Move actions during its activation gains +1 Hit die on all of its Shooting attacks until the end of that activation."
       },
       {
         "id": "refuerzos-rasos",
         "habilidades_faccion2": "Raw Reinforcements",
-        "descripcion": "Once per game, when a Line unit from this faction is completely eliminated, you may return it to the field to the deployment zone of your next Initiative phase."
+        "coste": 10,
+        "descripcion_escaramuza": "When a Line unit from this faction is completely eliminated, you may return it to battle at a command post that has not yet deployed reinforcements, in your next Initiative Phase.",
+        "descripcion_escuadra": "When a Line unit from this faction is completely eliminated, you may return it to battle at a command post that has not yet deployed reinforcements, in your next Initiative Phase."
       },
       {
         "id": "furia-de-los-caidos",
         "habilidades_faccion3": "Fury of the Fallen",
-        "descripcion": "When a unit falls from a squad, the entire squad gains +1 additional attack in the total attack. In Skirmish, units within 6\" gain an additional +1 attack, until end of turn."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "tierra-sacrificio",
-        "nombre": "1. Earth and Sacrifice",
-        "habilidades": [
-          "atrincheramiento",
-          "refuerzos-rasos",
-          "furia-de-los-caidos"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "When a unit falls, units gain +1 additional attack until the end of the turn.",
+        "descripcion_escuadra": "When a unit falls, units gain +1 additional attack until the end of the turn."
       }
     ]
   },
@@ -127,11 +123,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive",
-              "Weapon Limited 1"
+              "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           },
           {
             "nombre": "plasma rifles",
@@ -141,11 +137,11 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Elite)",
-              "Weapon Limited 1"
+              "Anti 5+ (Elite)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -305,11 +301,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy",
-              "Weapon Limited 1"
+              "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -332,11 +328,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack",
-              "Weapon Limited 1"
+              "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ]
       }
@@ -367,11 +363,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Arcing Fire",
-              "Weapon Limited 1"
+              "Arcing Fire"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 0,
+            "limitacion": 1
           },
           {
             "nombre": "Entrenched Machine Gun",
@@ -396,11 +392,11 @@
             "danio_critico": "6",
             "habilidades_arma": [
               "Heavy",
-              "Anti 5+ (Vehicle / Monster)",
-              "Weapon Limited 1"
+              "Anti 5+ (Vehicle / Monster)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [

@@ -9,7 +9,6 @@ function Nav() {
   const [mobileMenuPath, setMobileMenuPath] = useState(null)
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
   const youtubeUrl = 'https://www.youtube.com/@zeroloretmg'
-  const instagramUrl = 'https://www.instagram.com/zeroloretmg?igsh=MTNreGZkbmlkYzlldg%3D%3D&utm_source=qr'
   const socialLinks = [
     {
       key: 'discord',
@@ -26,15 +25,6 @@ function Nav() {
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M23.498 6.186a2.96 2.96 0 0 0-2.084-2.096C19.521 3.5 12 3.5 12 3.5s-7.521 0-9.414.59A2.96 2.96 0 0 0 .502 6.186C0 8.094 0 12 0 12s0 3.906.502 5.814a2.96 2.96 0 0 0 2.084 2.096C4.479 20.5 12 20.5 12 20.5s7.521 0 9.414-.59a2.96 2.96 0 0 0 2.084-2.096C24 15.906 24 12 24 12s0-3.906-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z" />
-        </svg>
-      ),
-    },
-    {
-      key: 'instagram',
-      url: instagramUrl,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm8.95 1.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 6.6A5.4 5.4 0 1 1 6.6 12 5.4 5.4 0 0 1 12 6.6Zm0 1.8A3.6 3.6 0 1 0 15.6 12 3.6 3.6 0 0 0 12 8.4Z" />
         </svg>
       ),
     },

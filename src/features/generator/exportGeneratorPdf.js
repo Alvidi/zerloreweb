@@ -4,6 +4,8 @@ import zeroLoreLogoToken from '../../images/zeroloreLogoToken.png'
 import {
   buildArmyUnitDisplayNames,
   factionImages,
+  getFactionSkillDescriptionForMode,
+  getUnitSpecialtyForMode,
   getUnitTypeToken,
 } from './generatorUtils.js'
 
@@ -60,19 +62,51 @@ const getDataUrlImageFormat = (value) => {
   return 'PNG'
 }
 
-const getPdfEraLabel = (era, t) => {
-  const token = String(era?.token || '').toLowerCase()
-  if (token === 'future') return t('generator.future')
-  if (token === 'past') return t('generator.past')
-  return String(era?.label || '').trim()
-}
-
 const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
 const isPdfVisibleWeaponAbility = (ability) => getWeaponAbilityId(ability) !== WEAPON_ABILITY_IDS.limitedAmmo
+const isMultiplePassiveSelection = (faction, selection) =>
+  faction?.seleccion_habilidades === 'multiple' || selection?.tipo === 'multiple'
+const isIndividualPassiveSelection = (faction, selection) =>
+  faction?.seleccion_habilidades === 'individual' || selection?.tipo === 'individual'
+const getPassiveSectionTitleKey = (faction, selection) =>
+  isMultiplePassiveSelection(faction, selection)
+    ? 'generator.selectedAbilities'
+    : isIndividualPassiveSelection(faction, selection)
+      ? 'generator.selectedPassive'
+      : 'generator.selectedPassiveSet'
+const getPassiveSelectionTitle = (faction, selection) =>
+  isMultiplePassiveSelection(faction, selection) || isIndividualPassiveSelection(faction, selection)
+    ? String(selection?.nombre || '').trim()
+    : cleanPassiveGroupName(selection?.nombre || '')
+const escapeRegExp = (value) => String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+const stripRepeatedAbilityTitle = (title, description) => {
+  const cleanTitle = String(title || '').trim()
+  const cleanDescription = String(description || '').trim()
+  if (!cleanTitle || !cleanDescription) return cleanDescription
+  return cleanDescription.replace(new RegExp(`^${escapeRegExp(cleanTitle)}\\s*[:.\\-–—]\\s*`, 'i'), '').trim()
+}
+const getPdfUnitSpecialRuleNote = (type, lang) => {
+  const unitType = getUnitTypeToken(type)
+
+  if (unitType === 'vehicle') {
+    return lang === 'en'
+      ? 'On destruction: it explodes within 3"; affected units take 1D6 automatic damage that cannot be saved.'
+      : 'Al destruirse: explota a 3"; las unidades afectadas sufren 1D6 de daño automático que no puede ser salvado.'
+  }
+
+  if (unitType === 'monster') {
+    return lang === 'en'
+      ? 'At 50% Wounds: roll 1D6 once; on 1-2 it becomes Out of Control.'
+      : 'Al llegar al 50% de sus Vidas: tira 1D6 una vez; con 1-2 entra en Descontrol.'
+  }
+
+  return ''
+}
 
 export async function exportGeneratorPdf({
   armyUnits,
   armyFaction,
+  doctrines = [],
   totalValue,
   gameMode,
   t,
@@ -90,7 +124,7 @@ export async function exportGeneratorPdf({
   const usableWidth = pageWidth - margin * 2
   const pdfUnitDisplayNames = buildArmyUnitDisplayNames(armyUnits)
   const selectedPassiveGroup = armyFaction?.selectedPassiveGroup || null
-  const passiveGroupTitle = cleanPassiveGroupName(selectedPassiveGroup?.nombre || '')
+  const passiveGroupTitle = getPassiveSelectionTitle(armyFaction, selectedPassiveGroup)
   const passiveAbilities = selectedPassiveGroup?.habilidades?.length
     ? selectedPassiveGroup.habilidades
     : armyFaction?.habilidades_faccion || []
@@ -213,7 +247,7 @@ export async function exportGeneratorPdf({
     const columnWidths = [18, 18, 18, 18, 26, usableWidth - (18 + 18 + 18 + 18 + 26)]
     const headerHeight = 7
     const baseRowHeight = 6.5
-    const especialidad = String(unit.base.especialidad || '-')
+    const especialidad = getUnitSpecialtyForMode(unit.base, gameMode)
     doc.setFontSize(8.5)
     const specialLines = doc.splitTextToSize(especialidad, columnWidths[5] - 4)
     const rowHeight = Math.max(baseRowHeight, specialLines.length * 4.2 + 2)
@@ -469,11 +503,16 @@ export async function exportGeneratorPdf({
     if (passiveAbilities.length) {
       const passiveTitleHeight = 7
       const passiveGroupLabel = passiveGroupTitle
-        ? getWrappedLines(passiveGroupTitle, usableWidth - 10, 8.6)
+        ? getWrappedLines(passiveGroupTitle, usableWidth - (logoDataUrl ? 17 : 10), 8.6)
         : []
       const passiveBlocks = passiveAbilities.slice(0, 6).map((habilidad) => {
-        const title = getWrappedLines(habilidad.nombre || t('generator.passives'), usableWidth - 10, 9)
-        const body = getWrappedLines(habilidad.descripcion || '—', usableWidth - 14, 8.4)
+        const abilityTitle = habilidad.nombre || t('generator.passives')
+        const abilityDescription = stripRepeatedAbilityTitle(
+          habilidad.nombre,
+          getFactionSkillDescriptionForMode(habilidad, gameMode),
+        )
+        const title = getWrappedLines(abilityTitle, usableWidth - 10, 9)
+        const body = getWrappedLines(abilityDescription, usableWidth - 14, 8.4)
         return { title, body }
       })
       const passiveHeight =
@@ -495,7 +534,12 @@ export async function exportGeneratorPdf({
       doc.setFont('helvetica', 'bold')
       doc.setFontSize(9.5)
       doc.setTextColor(20)
-      doc.text(t('generator.selectedPassiveSet'), margin + 3, y + 4.8)
+      const passiveHeaderIconX = margin + 3
+      const passiveHeaderTextX = passiveHeaderIconX + (logoDataUrl ? 6.2 : 0)
+      if (logoDataUrl) {
+        doc.addImage(logoDataUrl, 'PNG', passiveHeaderIconX, y + 1.2, 4.6, 4.6)
+      }
+      doc.text(t(getPassiveSectionTitleKey(armyFaction, selectedPassiveGroup)), passiveHeaderTextX, y + 4.8)
 
       let passiveY = y + passiveTitleHeight + 4
       if (passiveGroupLabel.length) {
@@ -512,6 +556,46 @@ export async function exportGeneratorPdf({
       y += passiveHeight + 6
     }
 
+    if (doctrines.length) {
+      const doctrineTitleHeight = 7
+      const doctrineBlocks = doctrines.map((doctrine) => {
+        const doctrineTitle = doctrine.coste
+          ? `${doctrine.nombre} · ${doctrine.coste} ${t('generator.valueUnit')}`
+          : doctrine.nombre
+        return {
+          title: getWrappedLines(doctrineTitle, usableWidth - 10, 9),
+          body: getWrappedLines(doctrine.descripcion || '—', usableWidth - 14, 8.4),
+        }
+      })
+      const doctrineHeight =
+        doctrineTitleHeight +
+        doctrineBlocks.reduce((total, block) => {
+          const titleHeight = getLineHeight(9, 1.12) * Math.max(block.title.length, 1)
+          const bodyHeight = getLineHeight(8.4, 1.18) * Math.max(block.body.length, 1)
+          return total + titleHeight + bodyHeight + 3
+        }, 4)
+
+      ensureSpace(doctrineHeight + 4)
+      doc.setDrawColor(...lineColor)
+      doc.rect(margin, y, usableWidth, doctrineHeight)
+      doc.setFillColor(...softFill)
+      doc.rect(margin, y, usableWidth, doctrineTitleHeight, 'F')
+      doc.setFont('helvetica', 'bold')
+      doc.setFontSize(9.5)
+      doc.setTextColor(20)
+      doc.text(t('generator.doctrines'), margin + 3, y + 4.8)
+
+      let doctrineY = y + doctrineTitleHeight + 4
+      doctrineBlocks.forEach((block) => {
+        drawWrappedLines({ lines: block.title, x: margin + 4, startY: doctrineY, fontSize: 9, color: 25, style: 'bold', lineMultiplier: 1.1 })
+        doctrineY += getLineHeight(9, 1.1) * Math.max(block.title.length, 1)
+        drawWrappedLines({ lines: block.body, x: margin + 7, startY: doctrineY, fontSize: 8.4, color: 55, style: 'normal', lineMultiplier: 1.18 })
+        doctrineY += getLineHeight(8.4, 1.18) * Math.max(block.body.length, 1) + 3
+      })
+
+      y += doctrineHeight + 6
+    }
+
     armyUnits.forEach((unit) => {
       const displayName = pdfUnitDisplayNames.get(unit.uid) || unit.base.nombre
       const cardPadding = 4
@@ -524,12 +608,19 @@ export async function exportGeneratorPdf({
       const rightInnerWidth = rightWidth - cardPadding * 2
       const specialTitleHeight = 5
       const statsHeight = 12
+      const specialRuleNote = getPdfUnitSpecialRuleNote(unit.base.tipo, lang)
       const specialLabel = getWrappedLines(`${t('generator.specialty')}:`, leftInnerWidth, 8.4)
       const specialText = getWrappedLines(
-        unit.base.especialidad && unit.base.especialidad !== '-' ? unit.base.especialidad : '—',
+        getUnitSpecialtyForMode(unit.base, gameMode) || '—',
         leftInnerWidth,
         8.6,
       )
+      const specialRuleLabel = specialRuleNote
+        ? getWrappedLines(`${lang === 'en' ? 'Special rule' : 'Regla especial'}:`, leftInnerWidth, 8.1)
+        : []
+      const specialRuleText = specialRuleNote
+        ? getWrappedLines(specialRuleNote, leftInnerWidth, 8.2)
+        : []
 
       const buildGroupedWeaponEntries = (loadouts, listKey, slotLabel) => {
         const counts = new Map()
@@ -625,6 +716,12 @@ export async function exportGeneratorPdf({
         specialTitleHeight +
         getLineHeight(8.4, 1.1) * Math.max(specialLabel.length, 1) +
         getLineHeight(8.6, 1.16) * Math.max(specialText.length, 1) +
+        (specialRuleLabel.length
+          ? getLineHeight(8.1, 1.1) * Math.max(specialRuleLabel.length, 1) + 1
+          : 0) +
+        (specialRuleText.length
+          ? getLineHeight(8.2, 1.14) * Math.max(specialRuleText.length, 1) + 2
+          : 0) +
         5 +
         weaponAbilitiesHeight
 
@@ -678,10 +775,7 @@ export async function exportGeneratorPdf({
       doc.setFont('helvetica', 'normal')
       doc.setFontSize(8.8)
       doc.setTextColor(85)
-      const eraLabels = (Array.isArray(unit.base.eras) ? unit.base.eras : [])
-        .map((era) => getPdfEraLabel(era, t))
-        .filter(Boolean)
-      const unitMetaText = eraLabels.length ? `${unit.base.tipo} · ${eraLabels.join(' · ')}` : unit.base.tipo
+      const unitMetaText = unit.base.tipo
       const unitMetaLines = doc.splitTextToSize(unitMetaText, Math.max(splitX - unitNameX - 3, 24))
       doc.text(unitMetaLines, unitNameX, titleY + 4.1)
       doc.setFont('helvetica', 'bold')
@@ -718,6 +812,13 @@ export async function exportGeneratorPdf({
       leftY += getLineHeight(8.4, 1.1) * Math.max(specialLabel.length, 1) + 1
       drawWrappedLines({ lines: specialText, x: margin + cardPadding, startY: leftY, fontSize: 8.6, color: 45, style: 'normal', lineMultiplier: 1.16 })
       leftY += getLineHeight(8.6, 1.16) * Math.max(specialText.length, 1)
+      if (specialRuleLabel.length) {
+        leftY += 2
+        drawWrappedLines({ lines: specialRuleLabel, x: margin + cardPadding, startY: leftY, fontSize: 8.1, color: 55, style: 'bold', lineMultiplier: 1.1 })
+        leftY += getLineHeight(8.1, 1.1) * Math.max(specialRuleLabel.length, 1) + 1
+        drawWrappedLines({ lines: specialRuleText, x: margin + cardPadding, startY: leftY, fontSize: 8.2, color: 70, style: 'normal', lineMultiplier: 1.14 })
+        leftY += getLineHeight(8.2, 1.14) * Math.max(specialRuleText.length, 1)
+      }
 
       if (uniqueWeaponAbilities.length) {
         leftY += 3.5
@@ -818,13 +919,29 @@ export async function exportGeneratorPdf({
   })
   y += 2
   if (passiveAbilities.length) {
-    drawSectionTitle(t('generator.selectedPassiveSet'), true)
+    drawSectionTitle(t(getPassiveSectionTitleKey(armyFaction, selectedPassiveGroup)), true)
     if (passiveGroupTitle) {
       drawTextBlock(passiveGroupTitle, 9.4)
       y += 1
     }
     passiveAbilities.slice(0, 6).forEach((habilidad) => {
-      drawBulletItem(habilidad.nombre, habilidad.descripcion, 9)
+      const abilityTitle = habilidad.nombre
+      const abilityDescription = stripRepeatedAbilityTitle(
+        habilidad.nombre,
+        getFactionSkillDescriptionForMode(habilidad, gameMode),
+      )
+      drawBulletItem(abilityTitle, abilityDescription, 9)
+    })
+    y += 2
+  }
+
+  if (doctrines.length) {
+    drawSectionTitle(t('generator.doctrines'), true)
+    doctrines.forEach((doctrine) => {
+      const doctrineTitle = doctrine.coste
+        ? `${doctrine.nombre} · ${doctrine.coste} ${t('generator.valueUnit')}`
+        : doctrine.nombre
+      drawBulletItem(doctrineTitle, doctrine.descripcion || '—', 9)
     })
     y += 2
   }

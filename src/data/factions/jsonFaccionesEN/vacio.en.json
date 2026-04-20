@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "The Void",
-    "estilo_juego": "The Void is a void control, positioning, and damage faction, specializing in manipulating the battlefield and punishing the enemy from unexpected angles. Their units combine defense-ignoring weaponry, unnatural resistance, and destabilization effects, sacrificing raw speed for constant pressure and punctual lethality. It works best in the hands of players who enjoy anticipating the opponent, forcing mistakes, and dominating the pace of the game through teleports and selective fire.",
+    "estilo_juego": "A control and positioning faction, specialised in punishing the enemy from unexpected angles. It does not seek direct confrontation, but rather to manipulate the battlefield in its favour. Ideal for patient players who prefer strategy over brute force.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "portales-del-vacio",
         "habilidades_faccion1": "Void Portals",
-        "descripcion": "Once per turn, during the activation of an allied unit, it may spend 1 action to swap its position with another allied Line, Elite, or Hero unit within 18\" or less. Neither unit may be locked in combat."
+        "coste": 10,
+        "descripcion_escaramuza": "Once per turn, during the activation of an allied unit, it may spend 1 action to swap its position with another allied Line, Elite, or Hero unit within 18\" or less. Neither unit may be locked in combat.",
+        "descripcion_escuadra": "Once per turn, during the activation of an allied unit, it may spend 1 action to swap its position with another allied Line, Elite, or Hero unit within 18\" or less. Neither unit may be locked in combat."
       },
       {
         "id": "ojos-del-mas-alla",
         "habilidades_faccion2": "Eyes from Beyond",
-        "descripcion": "Void units can reroll failed Hit rolls if the enemy unit is in cover."
+        "coste": 6,
+        "descripcion_escaramuza": "Void units can reroll failed attack rolls if the enemy unit is in cover.",
+        "descripcion_escuadra": "Void units can reroll failed attack rolls if the enemy unit is in cover."
       },
       {
         "id": "heraldos-del-vacio-supremo",
         "habilidades_faccion3": "Heralds of the Supreme Void",
-        "descripcion": "This faction can use two heroes."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "portal-desafio",
-        "nombre": "1. Portal of Defiance",
-        "habilidades": [
-          "portales-del-vacio",
-          "ojos-del-mas-alla",
-          "heraldos-del-vacio-supremo"
-        ]
+        "coste": 8,
+        "descripcion_escaramuza": "This faction can use two heroes.",
+        "descripcion_escuadra": "This faction can use two heroes."
       }
     ]
   },
@@ -176,11 +172,11 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Direct",
-              "Weapon Limited 2"
+              "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -237,11 +233,11 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Heavy",
-              "Weapon Limited 1"
+              "Heavy"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -300,11 +296,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 4+ (All)",
-              "Weapon Limited 1"
+              "Anti 4+ (All)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -329,11 +325,11 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack",
-              "Weapon Limited 1"
+              "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 1,
+            "limitacion": 1
           }
         ]
       }

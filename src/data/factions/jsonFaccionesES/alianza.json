@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "La Alianza",
-    "estilo_juego": "La Alianza combina tropas versátiles con armamento de precisión y vehículos avanzados, destacándose por su flexibilidad y eficiencia en cualquier situación. Es una facción orientada a jugadores que buscan calidad por encima de cantidad, capaz de adaptarse a distancia o combate cercano mediante armas especializadas. Sus unidades son potentes y precisas, pero caras y menos numerosas.",
+    "estilo_juego": "Facción equilibrada y versátil, diseñada para jugadores que prefieren calidad sobre cantidad. Combina unidades resistentes con armamento especializado, capaz de adaptarse tanto al combate a distancia como al cuerpo a cuerpo. Pocas unidades, pero cada una cuenta.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "potencia-blindada",
         "habilidades_faccion1": "Potencia blindada",
-        "descripcion": "Los vehículos puede llevar dos armas a distancia equipadas"
+        "coste": 10,
+        "descripcion_escaramuza": "Los vehículos pueden llevar dos armas a distancia equipadas y disparar dos veces en la misma acción.",
+        "descripcion_escuadra": "Los vehículos pueden llevar dos armas a distancia equipadas y disparar dos veces en la misma acción."
       },
       {
         "id": "objetivo-en-la-mira",
         "habilidades_faccion2": "Objetivo en la mira",
-        "descripcion": "Durante la Fase de Iniciativa, esta facción puede marcar una unidad enemiga visible. Todas las unidades/escuadras de La Alianza pueden repetir tiradas de impacto fallidas contra ese objetivo durante ese turno."
+        "coste": 7,
+        "descripcion_escaramuza": "Durante la Fase de Iniciativa, esta facción puede marcar una unidad enemiga visible. Todas las unidades de La Alianza pueden repetir tiradas de ataque fallidas contra ese objetivo durante ese turno.",
+        "descripcion_escuadra": "Durante la Fase de Iniciativa, esta facción puede marcar una escuadra o unidad enemiga visible. Todas las unidades de La Alianza pueden repetir tiradas de ataque fallidas contra ese objetivo durante ese turno."
       },
       {
         "id": "resistencia-marcial",
         "habilidades_faccion3": "Resistencia marcial",
-        "descripcion": "Cuando una unidad/escuadra aliada está en un punto de mando, los atacantes enemigos sufren +1 al valor de Precisión necesario en sus ataques a distancia contra esa unidad."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "confrontacion",
-        "nombre": "1. Confrontación",
-        "habilidades": [
-          "potencia-blindada",
-          "objetivo-en-la-mira",
-          "resistencia-marcial"
-        ]
+        "coste": 7,
+        "descripcion_escaramuza": "Cuando una unidad aliada está en un puesto de mando, los atacantes enemigos sufren +1 de precisión necesario en sus ataques a distancia, y sus ataques cuerpo a cuerpo fallan con resultado de 3 o menos.",
+        "descripcion_escuadra": "Cuando una escuadra aliada está en un puesto de mando, los atacantes enemigos sufren +1 de precisión necesario en sus ataques a distancia, y sus ataques cuerpo a cuerpo fallan con resultado de 3 o menos."
       }
     ]
   },
@@ -45,7 +41,8 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "-",
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
         "valor": 5
       },
       "armas": {
@@ -69,9 +66,9 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo",
-              "Arma limitada 2"
+              "Directo"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 2
           },
@@ -83,9 +80,9 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Pesada",
-              "Arma limitada 1"
+              "Pesada"
             ],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 3
           }
@@ -118,7 +115,8 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "Pueden llevar dos armas de disparo",
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
         "valor": 7
       },
       "armas": {
@@ -157,6 +155,7 @@
             "habilidades_arma": [
               "Directo"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 2
           },
@@ -168,9 +167,9 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Pesada",
-              "Arma limitada 2"
+              "Pesada"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 3
           },
@@ -182,9 +181,9 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehículo)",
-              "Arma limitada 1"
+              "Anti 5+ (Vehículo)"
             ],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 4
           }
@@ -228,7 +227,8 @@
           "min": 1,
           "max": 4
         },
-        "especialidad": "No pueden usar la acción retirarse",
+        "especialidad_escaramuza": "No pueden usar la acción retirarse",
+        "especialidad_escuadra": "No pueden usar la acción retirarse",
         "valor": 8
       },
       "armas": {
@@ -254,9 +254,9 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Inestable",
-              "Arma limitada 2"
+              "Inestable"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 4
           }
@@ -269,9 +269,7 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [
-              "Arma limitada 1"
-            ],
+            "habilidades_arma": [],
             "especialidad": "-",
             "valor_extra": 0
           },
@@ -283,6 +281,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 3
           }
@@ -302,7 +301,8 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Esta unidad puede desplegarse en cualquier lugar a 9” de un puesto de mando aliado",
+        "especialidad_escaramuza": "Esta unidad puede desplegarse en cualquier lugar a 6” de un puesto de mando aliado",
+        "especialidad_escuadra": "Esta escaudra puede desplegarse en cualquier lugar a 6” de un puesto de mando aliado",
         "valor": 9
       },
       "armas": {
@@ -329,9 +329,9 @@
             "danio_critico": "3",
             "habilidades_arma": [
               "Pesada",
-              "Anti 5+ (Línea)",
-              "Arma limitada 1"
+              "Anti 5+ (Línea)"
             ],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 3
           }
@@ -375,7 +375,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "-",
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
         "valor": 12
       },
       "armas": {
@@ -459,7 +460,8 @@
         "min": 1,
         "max": 1
       },
-      "especialidad": "Cuando esta unidad carga, puede repetir todos los dados de ataque fallidos en el ataque cuerpo a cuerpo de esa carga.",
+      "especialidad_escaramuza": "Cuando esta unidad carga, puede repetir todos los dados de ataque fallidos en el ataque cuerpo a cuerpo de esa carga. No acumulable",
+      "especialidad_escuadra": "Cuando esta unidad carga, puede repetir todos los dados de ataque fallidos en el ataque cuerpo a cuerpo de esa carga. No acumulable",
       "valor": 9
     },
       "armas": {
@@ -504,7 +506,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Pueden llevar dos armas de disparo. Las unidades en escuadra con este héroe, o a 3\" en escaramuza, pueden elegir usar las armas de disparo O las armas CaC de este héroe en su ataque, sustituyendo completamente su propio perfil de armas para ese ataque. Solo pueden usar un tipo por activación.",
+        "especialidad_escaramuza": "Pueden llevar dos armas de disparo. Las unidades a 3\" de esta pueden elegir usar las armas de disparo o las armas CaC de este héroe en su ataque, sustituyendo completamente su propio perfil de armas para ese ataque. Solo pueden usar un tipo por activación.",
+        "especialidad_escuadra": "Puede llevar dos armas de disparo. Las unidades en escuadra con este héroe, pueden elegir usar las armas de disparo o las armas cuerpo a cuerpo de este héroe en su ataque, sustituyendo completamente su propio perfil de armas para ese ataque. Solo pueden usar un tipo por activación.",
         "valor": 15
       },
       "armas": {
@@ -603,7 +606,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces, con o distinta arma, en la misma acción.",
+        "especialidad_escaramuza": "Esta unidad puede llevar dos armas a distancia y disparar dos veces en su acción de disparo, con o distinta arma, en la misma acción.",
+        "especialidad_escuadra": "Esta unidad puede llevar dos armas a distancia y disparar dos veces en su acción de disparo, con o distinta arma, en la misma acción.",
         "valor": 42
       },
       "armas": {
@@ -702,7 +706,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando otra unidad/escuadra aliada a 6” ataca a distancia a un objetivo, esta unidad puede realizar inmediatamente un disparo gratuito con su arma base contra ese mismo objetivo.",
+        "especialidad_escaramuza": "Cuando otra unidad aliada a 6” ataca a distancia a un objetivo, esta unidad puede realizar inmediatamente un disparo gratuito con su arma base contra ese mismo objetivo.",
+        "especialidad_escuadra": "Cuando otra unidad aliada a 6” ataca a distancia a un objetivo, esta unidad puede realizar inmediatamente un disparo gratuito con su arma base contra ese mismo objetivo.",
         "valor": 14
       },
       "armas": {
@@ -769,6 +774,345 @@
             "habilidades_arma": [],
             "especialidad": "-",
             "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Soldados de la Ciudadela",
+      "era": "Pasado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada y escudo",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Lanceros del Reino",
+      "era": "Pasado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad_escaramuza": "Si esta unidad no ha cargado y recibe una carga, ataca primero ignorando la Velocidad del rival.",
+        "especialidad_escuadra": "Si esta escuadra no ha cargado y recibe una carga, ataca primero ignorando la Velocidad del rival.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanza arrojadiza",
+            "ataques": "1D",
+            "distancia": "6\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lanza larga",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Gran lanza",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Arqueros de la Torre",
+      "era": "Pasado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad_escaramuza": "Si no se mueve durante su activación gana +1 dado de ataque en disparo.",
+        "especialidad_escuadra": "Si no se mueve durante su activación gana +1 dado de ataque en disparo.",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Arco largo",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Flecha de fuego",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "limitacion": 2,
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Jinetes del Crepúsculo",
+      "era": "Pasado",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "10\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad_escaramuza": "En carga gana +2 dados de ataque CaC.",
+        "especialidad_escuadra": "En carga gana +2 dados de ataque CaC.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanza de caballería",
+            "ataques": "1D",
+            "distancia": "3\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Pistolero"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada a caballo",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Asaltante +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Lanza de impacto",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "limitacion": 1,
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Catapulta de Asedio",
+      "era": "Pasado",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 10,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "Esta unidad no puede moverse.",
+        "especialidad_escuadra": "Esta unidad no puede moverse.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Roca de asedio",
+            "ataques": "1D",
+            "distancia": "30\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Disparo parabólico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Barril incendiario",
+            "ataques": "1D",
+            "distancia": "25\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Disparo parabólico",
+              "Explosiva"
+            ],
+            "limitacion": 2,
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Golpe de madera",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Capitán de la Guardia",
+      "era": "Pasado",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "Las unidades aliadas a 6\" reducen en 1 el daño recibido en CaC (mín. 1). Una vez por turno puede hacer que una unidad aliada repita todos los dados de salvación fallidos.",
+        "especialidad_escuadra": "Las unidades en escuadra con este héroe reducen en 1 el daño recibido en CaC (mín. 1). Una vez por turno puede hacer que la escuadra repita todos los dados de salvación fallidos.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Arco del capitán",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada del honor",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Ataque Crítico"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Escudo guardián",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
           }
         ]
       }

@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "The Alliance",
-    "estilo_juego": "The Alliance combines versatile troops with precision weaponry and advanced vehicles, standing out for its flexibility and efficiency in any situation. It is a faction aimed at players looking for quality over quantity, capable of adapting to distance or close combat using specialized weapons. Their units are powerful and precise, but expensive and fewer in number.",
+    "estilo_juego": "A balanced and versatile faction, designed for players who prefer quality over quantity. It combines resilient units with specialised weaponry, capable of adapting to both ranged and close combat. Few units, but each one matters.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "potencia-blindada",
         "habilidades_faccion1": "Armored power",
-        "descripcion": "Vehicles can carry two ranged weapons equipped."
+        "coste": 10,
+        "descripcion_escaramuza": "Vehicles can equip two ranged weapons and fire twice in the same action.",
+        "descripcion_escuadra": "Vehicles can equip two ranged weapons and fire twice in the same action."
       },
       {
         "id": "objetivo-en-la-mira",
         "habilidades_faccion2": "Target in sight",
-        "descripcion": "During the Initiative Phase, this faction may mark one visible enemy unit. All Alliance units/squads may reroll failed Hit rolls against that target during this turn."
+        "coste": 7,
+        "descripcion_escaramuza": "During the Initiative Phase, this faction may mark one visible enemy unit. All Alliance units may reroll failed attack rolls against that target during this turn.",
+        "descripcion_escuadra": "During the Initiative Phase, this faction may mark one visible enemy squad or unit. All Alliance units may reroll failed attack rolls against that target during this turn."
       },
       {
         "id": "resistencia-marcial",
         "habilidades_faccion3": "Martial resistance",
-        "descripcion": "When an allied unit/squad is at a command point, enemy attackers suffer +1 to the Hit value needed on their ranged attacks against that unit."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "confrontacion",
-        "nombre": "1. Confrontation",
-        "habilidades": [
-          "potencia-blindada",
-          "objetivo-en-la-mira",
-          "resistencia-marcial"
-        ]
+        "coste": 7,
+        "descripcion_escaramuza": "When an allied unit is on a command post, enemy attackers suffer +1 to the Precision value needed on their ranged attacks, and their melee attacks fail on a result of 3 or less.",
+        "descripcion_escuadra": "When an allied squad is on a command post, enemy attackers suffer +1 to the Precision value needed on their ranged attacks, and their melee attacks fail on a result of 3 or less."
       }
     ]
   },
@@ -45,7 +41,8 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "-",
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
         "valor": 5
       },
       "armas": {
@@ -69,9 +66,9 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Direct",
-              "Weapon Limited 2"
+              "Direct"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 2
           },
@@ -83,9 +80,9 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy",
-              "Weapon Limited 1"
+              "Heavy"
             ],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 3
           }
@@ -118,7 +115,8 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "This unit may equip two ranged weapons.",
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
         "valor": 7
       },
       "armas": {
@@ -157,6 +155,7 @@
             "habilidades_arma": [
               "Direct"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 2
           },
@@ -168,9 +167,9 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy",
-              "Weapon Limited 2"
+              "Heavy"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 3
           },
@@ -182,9 +181,9 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)",
-              "Weapon Limited 1"
+              "Anti 5+ (Vehicle)"
             ],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 4
           }
@@ -228,7 +227,8 @@
           "min": 1,
           "max": 4
         },
-        "especialidad": "This unit cannot use the retreat action.",
+        "especialidad_escaramuza": "This unit cannot use the retreat action.",
+        "especialidad_escuadra": "This unit cannot use the retreat action.",
         "valor": 8
       },
       "armas": {
@@ -254,9 +254,9 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Unstable",
-              "Weapon Limited 2"
+              "Unstable"
             ],
+            "limitacion": 2,
             "especialidad": "-",
             "valor_extra": 4
           }
@@ -269,9 +269,7 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [
-              "Weapon Limited 1"
-            ],
+            "habilidades_arma": [],
             "especialidad": "-",
             "valor_extra": 0
           },
@@ -283,6 +281,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 3
           }
@@ -302,7 +301,8 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "This unit may deploy anywhere within 9\" of an allied command point.",
+        "especialidad_escaramuza": "This unit may deploy anywhere within 6\" of a friendly command post.",
+        "especialidad_escuadra": "This squad may deploy anywhere within 6\" of a friendly command post.",
         "valor": 9
       },
       "armas": {
@@ -329,9 +329,9 @@
             "danio_critico": "3",
             "habilidades_arma": [
               "Heavy",
-              "Anti 5+ (Line)",
-              "Weapon Limited 1"
+              "Anti 5+ (Line)"
             ],
+            "limitacion": 1,
             "especialidad": "-",
             "valor_extra": 3
           }
@@ -375,7 +375,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "-",
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
         "valor": 12
       },
       "armas": {
@@ -459,7 +460,8 @@
         "min": 1,
         "max": 1
       },
-      "especialidad": "When this unit charges, it may reroll all failed attack dice in that charge's melee attack.",
+      "especialidad_escaramuza": "When this unit charges, it may reroll all failed attack dice in the melee attack of that charge. Not cumulative.",
+      "especialidad_escuadra": "When this unit charges, it may reroll all failed attack dice in the melee attack of that charge. Not cumulative.",
       "valor": 9
     },
       "armas": {
@@ -504,7 +506,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit may equip two ranged weapons. Units in a squad with this hero, or within 3\" of this hero in skirmish, may choose to use either this hero's ranged weapons or melee weapons for their attack, completely replacing their own weapon profile for that attack. They may only use one type per activation.",
+        "especialidad_escaramuza": "This hero may equip two ranged weapons. Units within 3\" of this hero may choose to use either this hero's ranged weapons or melee weapons in their attack, fully replacing their own weapon profile for that attack. They may only use one type per activation.",
+        "especialidad_escuadra": "This hero may equip two ranged weapons. Units in a squad with this hero may choose to use either this hero's ranged weapons or melee weapons in their attack, fully replacing their own weapon profile for that attack. They may only use one type per activation.",
         "valor": 15
       },
       "armas": {
@@ -603,7 +606,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit may equip two ranged weapons and fire twice in the same action, with the same weapon or two different weapons.",
+        "especialidad_escaramuza": "This unit may carry two ranged weapons and fire twice in its shooting action, with the same or a different weapon, in the same action.",
+        "especialidad_escuadra": "This unit may carry two ranged weapons and fire twice in its shooting action, with the same or a different weapon, in the same action.",
         "valor": 42
       },
       "armas": {
@@ -702,7 +706,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "When another allied unit/squad within 6\" makes a ranged attack against a target, this unit may immediately make a free shot with its base weapon against that same target.",
+        "especialidad_escaramuza": "When another allied unit within 6” makes a ranged attack against a target, this unit may immediately make a free shot with its base weapon against that same target.",
+        "especialidad_escuadra": "When another allied unit within 6” makes a ranged attack against a target, this unit may immediately make a free shot with its base weapon against that same target.",
         "valor": 14
       },
       "armas": {
@@ -769,6 +774,345 @@
             "habilidades_arma": [],
             "especialidad": "-",
             "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Citadel Soldiers",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad_escaramuza": "-",
+        "especialidad_escuadra": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Sword and Shield",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Kingdom Lancers",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad_escaramuza": "If this unit did not charge and is charged, it attacks first, ignoring the enemy's Speed.",
+        "especialidad_escuadra": "If this squad did not charge and is charged, it attacks first, ignoring the enemy's Speed.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Thrown Spear",
+            "ataques": "1D",
+            "distancia": "6\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Long Spear",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Great Lance",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Tower Archers",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad_escaramuza": "If it does not move during its activation, it gains +1 attack die when shooting.",
+        "especialidad_escuadra": "If it does not move during its activation, it gains +1 attack die when shooting.",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Longbow",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Fire Arrow",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "limitacion": 2,
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Knife",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Dusk Riders",
+      "era": "Past",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "10\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad_escaramuza": "On the charge, it gains +2 melee attack dice.",
+        "especialidad_escuadra": "On the charge, it gains +2 melee attack dice.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cavalry Lance",
+            "ataques": "1D",
+            "distancia": "3\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mounted Sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Assaulter +1"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Impact Lance",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "limitacion": 1,
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Siege Catapult",
+      "era": "Past",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 10,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "This unit cannot move.",
+        "especialidad_escuadra": "This unit cannot move.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Siege Rock",
+            "ataques": "1D",
+            "distancia": "30\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Parabolic Shot"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Incendiary Barrel",
+            "ataques": "1D",
+            "distancia": "25\"",
+            "impactos": "+5",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Parabolic Shot",
+              "Explosive"
+            ],
+            "limitacion": 2,
+            "especialidad": "-",
+            "valor_extra": 3
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Wooden Strike",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Guard Captain",
+      "era": "Past",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "Allied units within 6\" reduce melee damage received by 1 (min. 1). Once per turn, it may make one allied unit reroll all failed save dice.",
+        "especialidad_escuadra": "Units in squad with this hero reduce melee damage received by 1 (min. 1). Once per turn, it may make the squad reroll all failed save dice.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Captain's Bow",
+            "ataques": "2D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Sword of Honour",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Guardian Shield",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2
           }
         ]
       }

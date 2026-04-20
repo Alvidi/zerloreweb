@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Reapers",
-    "estilo_juego": "The Reapers are undead beings that advance relentlessly, reviving again and again while unleashing heavy shots and blows of calculated precision. They are slow but relentless, with units that return to combat and powerful vehicles that dominate long distances. Perfect for players who want attrition, inevitability, and constant pressure without relying on morale or speed.",
+    "estilo_juego": "An implacable and slow faction, designed to advance without fear and without stopping. Its units never retreat and revive after being destroyed, wearing the enemy down. Ideal for players who enjoy inevitability and battlefield control through persistence.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "reanimacion-mekanika",
-        "habilidades_faccion1": "Mek Resuscitation",
-        "descripcion": "If a line or elite unit is defeated, its body remains on the battlefield. At the start of the next Initiative Phase, roll 1D6: on a result of 1-4 the unit dies permanently and is removed; on a result of 5-6 the unit revives with half of its maximum Lives."
+        "habilidades_faccion1": "Mechanical Reanimation",
+        "coste": 8,
+        "descripcion_escaramuza": "If a Line or Elite unit is defeated, its body remains on the battlefield. At the start of the next Initiative Phase, roll 1D6: on a result of 1-4 the unit dies permanently and is removed; on a result of 5-6 the unit revives with half of its maximum Wounds.",
+        "descripcion_escuadra": "If a Line or Elite unit is defeated, its body remains on the battlefield. At the start of the next Initiative Phase, roll 1D6: on a result of 1-4 the unit dies permanently and is removed; on a result of 5-6 the unit revives with half of its maximum Wounds."
       },
       {
         "id": "no-conocen-el-miedo",
-        "habilidades_faccion2": "They don't know fear",
-        "descripcion": "This faction cannot retreat nor are they affected by any abilities that cause them to retreat."
+        "habilidades_faccion2": "They Know No Fear",
+        "coste": 4,
+        "descripcion_escaramuza": "This faction cannot retreat and is not affected by any ability that would make it retreat.",
+        "descripcion_escuadra": "This faction cannot retreat and is not affected by any ability that would make it retreat."
       },
       {
         "id": "protocolo-de-aniquilacion",
         "habilidades_faccion3": "Annihilation Protocol",
-        "descripcion": "Once per turn, when a unit/squad eliminates an enemy unit at range, it gains an extra 2\" move action immediately. This move does not count as an action."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "mas-alla",
-        "nombre": "1. The Beyond",
-        "habilidades": [
-          "reanimacion-mekanika",
-          "no-conocen-el-miedo",
-          "protocolo-de-aniquilacion"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Once per turn, when a unit destroys an enemy unit at range, it immediately gains +2 Wounds. This movement does not count as an action.",
+        "descripcion_escuadra": "Once per turn, when a unit destroys an enemy unit at range, it immediately gains +2 Wounds. This movement does not count as an action."
       }
     ]
   },

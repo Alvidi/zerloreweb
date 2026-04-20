@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Segadores",
-    "estilo_juego": "Los Segadores son no muertos que avanzan sin descanso, reviviendo una y otra vez mientras desatan disparos y golpes pesados de precisión calculada. Son lentos pero implacables, con unidades que regresan al combate y vehículos poderosos que dominan largas distancias. Perfectos para jugadores que quieren desgaste, inevitabilidad y presión constante sin depender de la moral o la velocidad.",
+    "estilo_juego": "Facción implacable y lenta, diseñada para avanzar sin miedo y sin parar. Sus unidades no se retiran nunca y reviven tras ser destruidas, desgastando al enemigo. Ideal para jugadores que disfrutan de la inevitabilidad y el control del campo a base de persistencia.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "reanimacion-mekanika",
         "habilidades_faccion1": "Reanimación Mekánika",
-        "descripcion": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-4 la unidad muere definitivamente y es retirada; con resultado 5-6 la unidad revive con la mitad de sus Vidas máximas."
+        "coste": 8,
+        "descripcion_escaramuza": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-4 la unidad muere definitivamente y es retirada; con resultado 5-6 la unidad revive con la mitad de sus Vidas máximas.",
+        "descripcion_escuadra": "Si una unidad de línea o élite cae derrotada, su cuerpo permanece en el campo de batalla. Al inicio de la siguiente Fase de Iniciativa, tira 1D6: con resultado 1-4 la unidad muere definitivamente y es retirada; con resultado 5-6 la unidad revive con la mitad de sus Vidas máximas."
       },
       {
         "id": "no-conocen-el-miedo",
         "habilidades_faccion2": "No conocen el miedo",
-        "descripcion": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse"
+        "coste": 4,
+        "descripcion_escaramuza": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse.",
+        "descripcion_escuadra": "Esta facción no puede retirarse ni se ven afectados por ninguna habilidad que les haga retirarse."
       },
       {
         "id": "protocolo-de-aniquilacion",
         "habilidades_faccion3": "Protocolo de Aniquilación",
-        "descripcion": "Una vez por turno, cuando una unidad/escuadra elimina una unidad enemiga a distancia, gana una acción extra de movimiento de 2\" de inmediato. Este movimiento no cuenta como acción."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "mas-alla",
-        "nombre": "1. El más allá",
-        "habilidades": [
-          "reanimacion-mekanika",
-          "no-conocen-el-miedo",
-          "protocolo-de-aniquilacion"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Una vez por turno, cuando una unidad elimina una unidad enemiga a distancia, gana +2 de vida de inmediato. Este movimiento no cuenta como acción.",
+        "descripcion_escuadra": "Una vez por turno, cuando una unidad elimina una unidad enemiga a distancia, gana +2 de vida de inmediato. Este movimiento no cuenta como acción."
       }
     ]
   },

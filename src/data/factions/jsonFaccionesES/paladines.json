@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Paladines",
-    "estilo_juego": "Los Paladines son una élite imparable, fanática y extremadamente resistente, capaz de absorber daño que destruiría a tropas normales. Se apoyan en contraataques, salvaciones sólidas y habilidades defensivas que les permiten ganar duelos prolongados. Es la facción perfecta para quienes disfrutan de unidades duras, lentas pero devastadoras, que avanzan sin miedo hacia el enemigo.",
+    "estilo_juego": "Facción resistente y lenta, diseñada para ganar duelos prolongados. Sus unidades absorben golpes que destruirían a cualquier otro ejército, se apoyan en contraataques y salvaciones sólidas para imponerse. Ideales para jugadores que prefieren avanzar sin miedo y ganar por aguante.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "gloria-del-pretor",
         "habilidades_faccion1": "Gloria del pretor",
-        "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad ignora el primer punto de daño recibido por un ataque a distancia durante ese turno."
+        "coste": 5,
+        "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad ignora el primer punto de daño recibido por un ataque a distancia durante ese turno.",
+        "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad ignora el primer punto de daño recibido por un ataque a distancia durante ese turno."
       },
       {
         "id": "caida-heroica",
         "habilidades_faccion2": "Caída heroica",
-        "descripcion": "Cuando una unidad del Crisol es destruida, antes de ser retirada puede realizar inmediatamente un contraataque gratuito - en disparo o CaC según su posición - siguiendo las reglas normales de ataque. Este ataque se resuelve aunque la unidad esté trabada. Tras resolverlo, la unidad es retirada. En escuadra la unidad que va a ser retirada realiza el ataque individualmente"
+        "coste": 8,
+        "descripcion_escaramuza": "Cuando una unidad del Crisol es destruida, antes de ser retirada puede realizar inmediatamente un contraataque gratuito — en disparo o CaC según su posición — siguiendo las reglas normales de ataque. Este ataque se resuelve aunque la unidad esté trabada. Tras resolverlo, la unidad es retirada.",
+        "descripcion_escuadra": "Cuando una unidad del Crisol es destruida, antes de ser retirada puede realizar inmediatamente un contraataque gratuito — en disparo o CaC según su posición — siguiendo las reglas normales de ataque. Este ataque se resuelve aunque la unidad esté trabada. Tras resolverlo, la unidad es retirada. En Gran Batalla la unidad que va a ser retirada realiza el ataque individualmente."
       },
       {
         "id": "voto-sagrado",
         "habilidades_faccion3": "Voto sagrado",
-        "descripcion": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad/escuadra propia. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "gloria-crisol",
-        "nombre": "1. Gloria del Crisol",
-        "habilidades": [
-          "gloria-del-pretor",
-          "caida-heroica",
-          "voto-sagrado"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno.",
+        "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa, esta facción puede designar una unidad. Esa unidad puede repetir un dado de cuerpo a cuerpo fallido durante ese turno."
       }
     ]
   },
@@ -256,7 +252,7 @@
       }
     },
     {
-      "nombre_unidad": "Paladín",
+      "nombre_unidad": "Paladín Maestro",
       "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
@@ -268,7 +264,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Puede decidir recibir el daño de unidades/escuadras a 6\" de este. Esta unidad no puede ir en escuadra.",
+        "especialidad_escaramuza": "Puede decidir recibir el daño de unidades a 6\" de este. Esta unidad no puede ir en escuadra.",
+        "especialidad_escuadra": "Puede decidir recibir el daño de unidades a 6\" de este. Esta unidad no puede ir en escuadra.",
         "valor": 22
       },
       "armas": {

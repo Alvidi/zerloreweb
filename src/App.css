@@ -1144,6 +1144,54 @@ button {
   gap: 10px;
 }
 
+.field-era-worlds {
+  gap: 10px;
+}
+
+.era-world-switch {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.era-world-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 16px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    rgba(12, 12, 18, 0.72);
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.era-world-button:hover {
+  transform: translateY(-1px);
+}
+
+.era-world-button-future {
+  color: #6fe7dd;
+}
+
+.era-world-button-past {
+  color: #d86aa2;
+}
+
+.era-world-button.active {
+  border-color: currentColor;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, currentColor 16%, transparent), transparent),
+    rgba(12, 12, 18, 0.9);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 18%, transparent);
+}
+
 .unit-type-filters {
   display: flex;
   flex-wrap: wrap;
@@ -1284,6 +1332,32 @@ button {
   gap: 10px;
 }
 
+.passive-group-card ul {
+  margin: 10px 0 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.passive-group-card li strong {
+  color: var(--text-main);
+}
+
+.passive-group-description {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.passive-group-cost {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
 .passive-group-icon-box {
   background: rgba(255, 143, 69, 0.16);
 }
@@ -1366,7 +1440,7 @@ button {
   padding: 0;
 }
 
-.passive-group-current .doctrine-icon-box {
+.passive-group-current > .doctrine-item-main > .doctrine-icon-box {
   width: auto;
   height: auto;
   border: 0;
@@ -1376,28 +1450,130 @@ button {
 
 .army-passive-group {
   margin-top: 12px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
+  padding: 0;
+  border: 0;
+  background: transparent;
   display: grid;
-  gap: 8px;
+  gap: 10px;
+}
+
+.army-passive-group-head {
+  display: grid;
+  gap: 6px;
+  padding: 0 0 2px;
+}
+
+.army-passive-group-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.army-passive-group-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .army-passive-group-name {
   color: var(--text-main);
-  font-size: 0.95rem;
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
-.army-passive-group ul {
-  margin: 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 6px;
-  color: var(--text-muted);
-}
-
-.army-passive-group li strong {
+.army-passive-group-total {
   color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.army-passive-card-list {
+  display: grid;
+  gap: 12px;
+}
+
+.army-passive-card {
+  border: 1px solid var(--line);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  display: grid;
+  gap: 8px;
+}
+
+.army-passive-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.army-passive-card-title-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.army-passive-card-title-wrap .doctrine-icon-box {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.army-passive-card-title-wrap > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.army-passive-card-title-wrap h4 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.army-passive-card-kicker {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.army-passive-card-title-wrap p {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.army-passive-card-title-wrap p.army-passive-card-kicker {
+  margin: 0;
+  font-size: 0.76rem;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+.army-passive-card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.army-passive-card-body {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin-top: 2px;
 }
 
 .doctrine-panel {
@@ -1434,6 +1610,12 @@ button {
   padding: 10px;
 }
 
+.doctrine-item-compact {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
 .doctrine-item-main {
   display: flex;
   align-items: flex-start;
@@ -1453,6 +1635,13 @@ button {
   flex-shrink: 0;
 }
 
+.doctrine-icon-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .doctrine-icon {
   width: 18px;
   height: 18px;
@@ -1467,6 +1656,13 @@ button {
   min-width: 0;
 }
 
+.doctrine-item-side {
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+  flex-shrink: 0;
+}
+
 .doctrine-name {
   margin: 0;
   color: var(--text-main);
@@ -1476,11 +1672,132 @@ button {
   font-size: 0.76rem;
 }
 
+.doctrine-name-plain {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
 .doctrine-description {
   margin: 6px 0 0;
   color: var(--text-muted);
   font-size: 0.82rem;
   line-height: 1.45;
+}
+
+.selected-passive-skill-list {
+  margin-top: 6px;
+  display: grid;
+  gap: 8px;
+}
+
+.selected-passive-skill-list-compact {
+  margin-top: 0;
+}
+
+.selected-passive-skill-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.selected-passive-skill-item-compact {
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
+.selected-choice-row {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.selected-choice-row .doctrine-item-main {
+  align-items: center;
+}
+
+.selected-choice-row .doctrine-icon-box {
+  width: auto;
+  height: auto;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.selected-doctrine-token {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.selected-doctrine-token img,
+.selected-doctrine-token svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.selected-choice-remove {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 0.88rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.selected-choice-remove:hover {
+  color: var(--text-main);
+}
+
+.selected-passive-skill-body {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 6px;
+}
+
+.selected-passive-skill-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.selected-passive-skill-name {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.selected-passive-skill-description {
+  color: var(--text-muted);
+}
+
+.selected-passive-skill-cost,
+.army-passive-skill-cost {
+  color: var(--text-main);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .doctrine-modal-card {
@@ -1790,6 +2107,12 @@ button {
 .unit-modal-header h3 {
   margin: 4px 0 0;
   color: var(--text-main);
+}
+
+.unit-modal-subtitle {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .unit-modal-header .eyebrow {
@@ -3882,27 +4205,20 @@ mark {
 .rules-html .rules-mission-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-  margin: 28px 0 14px;
+  gap: 22px;
+  margin: 24px 0 12px;
 }
 
 .rules-html .rules-mission-card {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(220px, 250px) minmax(0, 1fr);
-  align-items: stretch;
-  min-height: 100%;
-  border: 1px solid rgba(226, 192, 154, 0.16);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at top right, rgba(255, 143, 69, 0.1), transparent 28%),
-    linear-gradient(180deg, rgba(255, 247, 235, 0.03), rgba(255, 255, 255, 0.012)),
-    linear-gradient(145deg, rgba(17, 17, 22, 0.99), rgba(10, 11, 16, 0.99));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 232, 206, 0.08),
-    0 18px 36px rgba(0, 0, 0, 0.26);
-  overflow: clip;
-  isolation: isolate;
+  gap: 10px;
+  padding: 14px 0 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  isolation: auto;
 }
 
 .rules-html .rules-mission-card::before {
@@ -3910,43 +4226,23 @@ mark {
   position: absolute;
   inset: 0 0 auto 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(255, 143, 69, 0.45), rgba(255, 255, 255, 0.04));
+  background: linear-gradient(90deg, rgba(255, 143, 69, 0.45), rgba(255, 255, 255, 0.02));
   pointer-events: none;
-}
-
-.rules-html .rules-mission-card-aside {
-  position: relative;
-  display: grid;
-  align-content: start;
-  gap: 14px;
-  padding: 22px 20px 22px 22px;
-  min-width: 0;
-  background:
-    linear-gradient(180deg, rgba(255, 143, 69, 0.12), rgba(255, 143, 69, 0.03) 38%, rgba(255, 255, 255, 0.01)),
-    rgba(255, 255, 255, 0.015);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.rules-html .rules-mission-card-body {
-  display: grid;
-  gap: 12px;
-  padding: 22px;
-  min-width: 0;
 }
 
 .rules-html .rules-mission-card-badge {
   margin: 0;
-  color: #ffd7b2;
+  color: var(--accent);
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .rules-html .rules-mission-card-title {
   margin: 0;
   color: var(--text-main);
-  font-size: 1.5rem;
+  font-size: 1.42rem;
   line-height: 1.2;
   text-wrap: pretty;
 }
@@ -3961,35 +4257,49 @@ mark {
 }
 
 .rules-html .rules-mission-card-summary {
-  padding: 0 0 14px;
+  padding: 0 0 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-main);
   font-size: 1rem;
 }
 
 .rules-html .rules-mission-card-flavor {
-  margin-top: 4px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0;
+  padding-top: 6px;
+  border-top: 0;
   color: #f0caa1;
   font-style: italic;
   line-height: 1.62;
 }
 
+.rules-html .rules-mission-card-step {
+  padding-top: 4px;
+  color: var(--text-main);
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.rules-html .rules-mission-card-step strong {
+  color: var(--text-main);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .rules-html .rules-mission-card-meta {
-  padding: 12px 14px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.025);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .rules-html .rules-mission-card-meta .rules-mission-card-meta-label {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -3999,6 +4309,7 @@ mark {
 
 .rules-html .rules-mission-card-title,
 .rules-html .rules-mission-card-copy,
+.rules-html .rules-mission-card-step,
 .rules-html .rules-mission-card-flavor,
 .rules-html .rules-mission-card-meta {
   overflow-wrap: break-word;
@@ -4103,18 +4414,8 @@ mark {
   }
 
   .rules-html .rules-mission-card {
-    grid-template-columns: 1fr;
-    border-radius: 18px;
-  }
-
-  .rules-html .rules-mission-card-aside {
-    padding: 18px 16px 14px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .rules-html .rules-mission-card-body {
-    padding: 16px;
+    gap: 9px;
+    padding: 12px 0 16px;
   }
 
   .rules-html .rules-mission-card-title {
@@ -4204,6 +4505,10 @@ mark {
   }
 
   .game-mode-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .era-world-switch {
     grid-template-columns: 1fr;
   }
 

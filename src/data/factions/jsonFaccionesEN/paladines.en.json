@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Paladins",
-    "estilo_juego": "The Paladins are an unstoppable, fanatical and extremely resilient elite, capable of absorbing damage that would destroy normal troops. They rely on counterattacks, solid saves, and defensive skills that allow them to win long duels. It is the perfect faction for those who enjoy tough, slow but devastating units that fearlessly advance towards the enemy.",
+    "estilo_juego": "A resilient and slow faction, designed to win prolonged duels. Its units absorb blows that would destroy any other army, relying on counterattacks and solid saves to prevail. Ideal for players who prefer advancing fearlessly and winning through endurance.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "gloria-del-pretor",
         "habilidades_faccion1": "Glory of the Praetor",
-        "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit ignores the first point of damage received from a ranged attack during that turn."
+        "coste": 5,
+        "descripcion_escaramuza": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit ignores the first point of damage received from a ranged attack during that turn.",
+        "descripcion_escuadra": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit ignores the first point of damage received from a ranged attack during that turn."
       },
       {
         "id": "caida-heroica",
         "habilidades_faccion2": "Heroic Fall",
-        "descripcion": "When a Crucible unit is destroyed, before being removed it may immediately make a free counterattack, either ranged or melee depending on its position, following the normal attack rules. This attack is resolved even if the unit is locked. After resolving it, the unit is removed. In squads, the individual model being removed makes the attack."
+        "coste": 8,
+        "descripcion_escaramuza": "When a Crucible unit is destroyed, before being removed it may immediately make a free counterattack — ranged or melee depending on its position — following the normal attack rules. This attack is resolved even if the unit is locked. After resolving it, the unit is removed.",
+        "descripcion_escuadra": "When a Crucible unit is destroyed, before being removed it may immediately make a free counterattack — ranged or melee depending on its position — following the normal attack rules. This attack is resolved even if the unit is locked. After resolving it, the unit is removed. In Grand Battle, the unit being removed makes the attack individually."
       },
       {
         "id": "voto-sagrado",
         "habilidades_faccion3": "Sacred Vow",
-        "descripcion": "Once per turn, during the Initiative Phase, this faction may designate one friendly unit/squad. That unit may reroll one failed melee die during that turn."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "gloria-crisol",
-        "nombre": "1. Glory of the Crucible",
-        "habilidades": [
-          "gloria-del-pretor",
-          "caida-heroica",
-          "voto-sagrado"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Once per turn, during the Initiative Phase, this faction may designate one unit. That unit may reroll one failed melee die during that turn.",
+        "descripcion_escuadra": "Once per turn, during the Initiative Phase, this faction may designate one unit. That unit may reroll one failed melee die during that turn."
       }
     ]
   },
@@ -256,7 +252,7 @@
       }
     },
     {
-      "nombre_unidad": "Paladin",
+      "nombre_unidad": "Paladin Master",
       "era": "Future",
       "clase": "Hero",
       "perfil": {
@@ -268,13 +264,14 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit may choose to receive damage from units/squads within 6\" of it. This unit cannot join a squad.",
+        "especialidad_escaramuza": "This unit may choose to receive damage from units within 6\" of it. This unit cannot join a squad.",
+        "especialidad_escuadra": "This unit may choose to receive damage from units within 6\" of it. This unit cannot join a squad.",
         "valor": 22
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Crucible Gun",
+            "nombre": "Crucible Pistol",
             "ataques": "2D",
             "distancia": "10\"",
             "impactos": "+4",

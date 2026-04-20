@@ -36,50 +36,6 @@ const normalizeHeadingText = (value) =>
     .replace(/\s+/g, ' ')
     .trim()
 
-const getMissionHeadingMeta = (value) => {
-  const match = String(value || '').trim().match(/^(misi[oó]n|mission)\s+(\d+)\s*:\s*(.+)$/i)
-  if (!match) return null
-  return {
-    number: match[2],
-    title: match[3].trim(),
-  }
-}
-
-const isMissionHeading = (value) => {
-  const normalized = normalizeHeadingText(value)
-  return /^mision \d+/.test(normalized) || /^mission \d+/.test(normalized)
-}
-
-const isStandaloneEmphasisParagraph = (node) => {
-  if (!node || node.tagName !== 'P') return false
-  const children = Array.from(node.children)
-  if (children.length !== 1 || children[0].tagName !== 'EM') return false
-  return node.textContent?.trim() === children[0].textContent?.trim()
-}
-
-const isMissionMetaParagraph = (node) => {
-  if (!node || node.tagName !== 'P') return false
-  const strong = node.querySelector('strong')
-  if (!strong) return false
-  const normalized = normalizeHeadingText(strong.textContent)
-  return [
-    'puntuacion',
-    'puntuacion extra',
-    'victoria',
-    'victoria inmediata',
-    'victoria normal',
-    'victoria del atacante',
-    'victoria del defensor',
-    'scoring',
-    'bonus scoring',
-    'victory',
-    'immediate victory',
-    'standard victory',
-    'attacker victory',
-    'defender victory',
-  ].some((label) => normalized.startsWith(label))
-}
-
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
 
 const isRulesPdfKeepWithNextNode = (node) =>
@@ -222,73 +178,6 @@ function Reglamento() {
       table.parentNode?.insertBefore(wrapper, table)
       wrapper.appendChild(table)
     })
-    if (rulesMode === 'missions') {
-      const missionHeadings = Array.from(doc.querySelectorAll('h2')).filter((heading) => isMissionHeading(heading.textContent))
-      const firstMissionHeading = missionHeadings[0]
-
-      if (firstMissionHeading?.parentNode) {
-        const missionParent = firstMissionHeading.parentNode
-        const missionGrid = doc.createElement('div')
-        missionGrid.className = 'rules-mission-grid'
-        missionParent.insertBefore(missionGrid, firstMissionHeading)
-
-        missionHeadings.forEach((heading) => {
-          const card = doc.createElement('article')
-          card.className = 'rules-mission-card'
-          const aside = doc.createElement('div')
-          aside.className = 'rules-mission-card-aside'
-          const body = doc.createElement('div')
-          body.className = 'rules-mission-card-body'
-
-          const missionMeta = getMissionHeadingMeta(heading.textContent)
-          if (missionMeta) {
-            card.dataset.mission = missionMeta.number
-            const badge = doc.createElement('p')
-            badge.className = 'rules-mission-card-badge'
-            badge.textContent = lang === 'en' ? `Mission ${missionMeta.number}` : `Misión ${missionMeta.number}`
-            aside.appendChild(badge)
-          }
-
-          const sectionNodes = []
-          let sibling = heading.nextElementSibling
-          while (sibling && sibling.tagName !== 'H1' && sibling.tagName !== 'H2') {
-            sectionNodes.push(sibling)
-            sibling = sibling.nextElementSibling
-          }
-
-          heading.classList.add('rules-mission-card-title')
-          aside.appendChild(heading)
-
-          let regularParagraphIndex = 0
-          sectionNodes.forEach((node) => {
-            if (isStandaloneEmphasisParagraph(node)) {
-              node.classList.add('rules-mission-card-flavor')
-              aside.appendChild(node)
-            } else if (isMissionMetaParagraph(node)) {
-              node.classList.add('rules-mission-card-meta')
-              const firstStrong = node.querySelector('strong')
-              if (firstStrong) {
-                firstStrong.classList.add('rules-mission-card-meta-label')
-              }
-              body.appendChild(node)
-            } else if (node.tagName === 'P') {
-              node.classList.add('rules-mission-card-copy')
-              if (regularParagraphIndex === 0) {
-                node.classList.add('rules-mission-card-summary')
-              }
-              regularParagraphIndex += 1
-              body.appendChild(node)
-            } else {
-              body.appendChild(node)
-            }
-          })
-
-          card.appendChild(aside)
-          card.appendChild(body)
-          missionGrid.appendChild(card)
-        })
-      }
-    }
     if (rulesMode === 'rules') {
       const doctrineHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
@@ -1113,73 +1002,74 @@ function Reglamento() {
           .rules-pdf-sheet .rules-html .rules-mission-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 14px;
-            margin: 18px 0 10px;
+            gap: 18px;
+            margin: 16px 0 8px;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card {
             display: grid;
-            grid-template-columns: 195px minmax(0, 1fr);
-            gap: 0;
-            border: 1px solid #d7d7d7;
-            border-radius: 12px;
-            background: #fafafa;
+            gap: 8px;
+            padding: 10px 0 14px;
+            border: 0;
+            border-bottom: 1px solid #d7d7d7;
+            border-radius: 0;
+            background: transparent;
             break-inside: avoid;
             page-break-inside: avoid;
-            overflow: hidden;
-          }
-          .rules-pdf-sheet .rules-html .rules-mission-card-aside {
-            display: grid;
-            align-content: start;
-            gap: 10px;
-            padding: 14px;
-            background: #f3ede6;
-            border-right: 1px solid #d7d7d7;
-          }
-          .rules-pdf-sheet .rules-html .rules-mission-card-body {
-            display: grid;
-            gap: 10px;
-            padding: 14px;
+            overflow: visible;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-badge {
             margin: 0;
             font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             color: #555555;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card .rules-mission-card-title {
             margin: 0;
             font-family: "Cinzel", Georgia, serif;
-            font-size: 20px;
+            font-size: 18px;
             line-height: 1.24;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card p {
             margin: 0;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-copy,
+          .rules-pdf-sheet .rules-html .rules-mission-card-step,
           .rules-pdf-sheet .rules-html .rules-mission-card-flavor,
           .rules-pdf-sheet .rules-html .rules-mission-card-meta {
             hyphens: none;
             word-break: normal;
             overflow-wrap: normal;
           }
+          .rules-pdf-sheet .rules-html .rules-mission-card-step {
+            padding-top: 2px;
+            color: #111111;
+            font-size: 14px;
+            line-height: 1.42;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-card-step strong {
+            color: #111111;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: none;
+          }
           .rules-pdf-sheet .rules-html .rules-mission-card-summary {
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #d7d7d7;
             color: #111111;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-flavor {
-            padding-top: 10px;
-            border-top: 1px solid #d7d7d7;
+            padding-top: 2px;
+            border-top: 0;
             color: #444444;
             font-style: italic;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-meta {
-            padding: 10px 11px 11px;
-            border: 1px solid #d7d7d7;
-            border-radius: 10px;
-            background: #ffffff;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-meta .rules-mission-card-meta-label {
             display: block;
@@ -1329,7 +1219,7 @@ function Reglamento() {
         return typeof getSafeCount === 'function' ? Math.max(1, getSafeCount(best)) : best
       }
 
-      if (rulesMode === 'missions') {
+      if (rulesMode === 'missions' && captureTarget.querySelector('.rules-mission-grid')) {
         const rulesHtmlRoot = captureTarget.querySelector('.rules-html')
         const missionGrid = rulesHtmlRoot?.querySelector('.rules-mission-grid')
         const missionCards = Array.from(missionGrid?.children || [])

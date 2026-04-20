@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Technocrats",
-    "estilo_juego": "The Technocrats are a faction of advanced technology, precise fire and tactical control, specializing in the use of drones, experimental weaponry and intelligent retreat. Its units stand out for their versatility and efficiency, capable of quickly adapting to the battlefield situation through repositioning and automated support. They do not seek prolonged frontal confrontation, but rather wear down the enemy with technical superiority, sacrificing brute resistance in exchange for control, precision and flexibility.",
+    "estilo_juego": "A tactical and flexible faction, specialised in constant repositioning and coordinated support between units. It does not seek frontal confrontation, preferring to wear down the enemy through technical superiority and battlefield control.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "retirada-inteligente",
         "habilidades_faccion1": "Smart withdrawal",
-        "descripcion": "Units of this faction can retreat without needing to take a retreat test."
+        "coste": 8,
+        "descripcion_escaramuza": "Units of this faction can retreat without needing to take a retreat test.",
+        "descripcion_escuadra": "Units of this faction can retreat without needing to take a retreat test."
       },
       {
-        "id": "apoyo-dron",
-        "habilidades_faccion2": "Drone support",
-        "descripcion": "Up to 2 drones can be included in line and elite squads, ignoring the squad number of the unit. In skirmish mode a drone can be added to a unit."
+        "id": "apoyo-de-artefacto",
+        "habilidades_faccion2": "Artifact support",
+        "coste": 10,
+        "descripcion_escaramuza": "Up to 1 unit with the \"Artifact support\" specialty may be included in line and elite units, ignoring that unit's squad size.",
+        "descripcion_escuadra": "Up to 1 unit with the \"Artifact support\" specialty may be included in line and elite units, ignoring that unit's squad size."
       },
       {
         "id": "protocolos-de-combate",
         "habilidades_faccion3": "Combat Protocols",
-        "descripcion": "Once per turn, when a Technocrat unit/squad is about to take a Shoot action, it can add +1 to the Hit result if another Technocrat unit/squad (including drones) is within 6\" of the same target."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "equipo-apoyo",
-        "nombre": "1. Support Team",
-        "habilidades": [
-          "retirada-inteligente",
-          "apoyo-dron",
-          "protocolos-de-combate"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Once per turn, when a unit is about to take a Shoot action, it may add -1 to the Precision result if another unit is within 6\" of the same target.",
+        "descripcion_escuadra": "Once per turn, when a unit is about to take a Shoot action, it may add -1 to the Precision result if another unit is within 6\" of the same target."
       }
     ]
   },
@@ -79,11 +75,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision",
-              "Weapon Limited 2"
+              "Precision"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 2
           },
           {
             "nombre": "Ultra Pulse Rifle",
@@ -93,11 +89,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Raider +1",
-              "Weapon Limited 1"
+              "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -116,7 +112,7 @@
       }
     },
     {
-      "nombre_unidad": "wanderers",
+      "nombre_unidad": "Wanderers",
       "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
@@ -177,7 +173,7 @@
       }
     },
     {
-      "nombre_unidad": "Servo attack drone",
+      "nombre_unidad": "Attack Servo-Drone",
       "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
@@ -186,15 +182,15 @@
         "velocidad": 4,
         "escuadra": {
           "min": 1,
-          "max": 3
+          "max": 1
         },
-        "especialidad": "Drone Support",
+        "especialidad": "Artifact Support.",
         "valor": 3
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "impulse gatling",
+            "nombre": "Impulse Gatling",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -205,7 +201,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "guided missile launcher",
+            "nombre": "Guided Missile Launcher",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
@@ -233,8 +229,8 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Bang",
-            "ataques": "1",
+            "nombre": "Strike",
+            "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -247,7 +243,7 @@
       }
     },
     {
-      "nombre_unidad": "Servo-drone shield",
+      "nombre_unidad": "Shield Servo-Drone",
       "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
@@ -258,15 +254,15 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Drone Support. This unit cannot shoot. Once per turn, when the squad it belongs to is attacked, the attacker loses 1 attack die and critical hits become normal hits.",
+        "especialidad": "Artifact Support. This unit cannot shoot. Critical hits become normal hits.",
         "valor": 7
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Bang",
-            "ataques": "1",
+            "nombre": "Strike",
+            "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -279,7 +275,7 @@
       }
     },
     {
-      "nombre_unidad": "Wick X",
+      "nombre_unidad": "Mecha X",
       "clase": "Elite",
       "perfil": {
         "movimiento": "6\"",
@@ -317,7 +313,8 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Missile launcher",
@@ -327,11 +324,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosive",
-              "Weapon Limited 1"
+              "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           },
           {
             "nombre": "Plasma Cannon",
@@ -344,12 +341,13 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "heavy kick",
+            "nombre": "Heavy Kick",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -380,7 +378,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "plasma blaster",
+            "nombre": "Plasma Blaster",
             "ataques": "3D",
             "distancia": "16\"",
             "impactos": "+3",
@@ -403,7 +401,8 @@
               "Anti 4+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -575,7 +574,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Once per turn, when a squad with this hero or a unit/squad within 6\" of this hero receives a critical hit, it may turn it into a normal hit.",
+        "especialidad_escaramuza": "Once per turn, if this unit receives a critical hit within 6\", it may turn it into a normal hit.",
+        "especialidad_escuadra": "Once per turn, if this hero's squad receives a critical hit, it may turn it into a normal hit.",
         "valor": 10
       },
       "armas": {
@@ -673,7 +673,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "This unit transforms any critical hit into normal.",
+        "especialidad": "Transforms any enemy critical ranged attack into a normal hit.",
         "valor": 40
       },
       "armas": {

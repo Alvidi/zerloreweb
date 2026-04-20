@@ -2,9 +2,7 @@
 
 ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, or doctrines, and add these concepts as you become more familiar with the game.
 
-This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
-
-The ZeroLore community is part of the game. If you create something interesting, share it.
+**This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.**
 
 ---
 
@@ -19,15 +17,17 @@ A **miniature** represents an individual combatant, creature, or vehicle on the 
 A **unit** is the basic activation element of the game.
 
 - In **skirmish mode**, each miniature acts as an independent unit.
-- In **squad mode**, a unit represents an organised group of several miniatures that act as a single entity.
+- In **Grand Battle mode**, a unit represents an organised group of several miniatures that act as a single entity.
 
 A **squad** is a unit made up of several miniatures that share activation, actions, and objectives. Even if miniatures carry different weapons, they all form part of the same unit for rules purposes.
 
 **Squad coherence and placement**
 
-In squad mode, all miniatures in a squad must stay within **1" or less** of at least 2 other miniatures in the same squad (or 1 if the squad has only 2 miniatures), forming a coherent group.
+In Grand Battle mode, all miniatures in a squad must stay within **1" or less** of at least 2 other miniatures in the same squad (or 1 if the squad has only 2 miniatures), forming a coherent group.
 
 Miniature placement only affects **which miniatures can attack** in melee combat and does not modify the number of actions, state, or activation of the squad.
+
+> Throughout the rulebook, when a rule mentions a **"unit"**, it also applies to a **"squad"** in Grand Battle mode, unless stated otherwise.
 
 
 ### Recommended Base Sizes
@@ -53,7 +53,7 @@ ZeroLore uses six-sided dice (1D6).
 - Results of 1 or 2 are generally considered misses in melee combat.
 - When a rule allows rerolling a die, each die may only be rerolled once. If multiple rules allow rerolling, only one reroll is applied.
 
-Throughout the game, different types of rolls are made: **initiative**, **hits**, **save**, **damage**, and **scatter**. Each is explained in detail in its corresponding section.
+Throughout the game, different types of rolls are made: **initiative**, **hits**, **save**, and **damage**. Each is explained in detail in its corresponding section.
 
 ### Rule Priority
 
@@ -69,19 +69,17 @@ ZeroLore can be played with **2 to 4 players**. The available formats are:
 
 - **1vs1**: duel between two players
 - **2vs2**: two teams of two players
-- **1vs1vs1**: three players facing each other
-- **1vs1vs1vs1**: four players facing each other
 
-In games with more than two players, the players agree before starting whether they are playing in teams or every player for themselves. The activation order is determined by initiative at the start of each turn.
+In games with more than two players, activation order is determined by initiative at the start of each turn.
 
 ### Game Modes
 
-ZeroLore can be played in two main modes: **Skirmish** and **Squads**.
+ZeroLore can be played in two main modes: **Skirmish** and **Grand Battle**.
 
 The game mode is chosen **before starting the game**, and all players must use the same mode.
 
-- **Skirmish Mode**: each miniature acts as an independent unit. A more tactical and narrative mode, ideal for quick games and small tables. **Vehicles and Titans cannot be included in Skirmish**: those unit types are reserved for Squad mode.
-- **Squad Mode**: units are grouped into squads that act as a single entity. Designed for larger-scale battles, where all unit types are available, including Vehicles and Titans.
+- **Skirmish Mode**: each miniature acts as an independent unit. A more tactical and narrative mode, ideal for quick games and small tables. **Vehicles and Titans cannot be included in Skirmish**: those unit types are reserved for Grand Battle mode.
+- **Grand Battle Mode**: units are grouped into squads that act as a single entity. Designed for larger-scale battles, where all unit types are available, including Vehicles and Titans.
 
 Unless stated otherwise, all rules in the rulebook apply to both modes.
 
@@ -146,7 +144,7 @@ At the beginning of each turn, both players make the **Initiative roll**.
 - Each player rolls **1D6**.
 - The player with the highest result **acts first** during that turn.
 - In case of a tie, roll again.
-- Stratagems are placed.
+- Each player may assign one or more **stratagems** to their units if they wish.
 - Units are recruited or brought out from reserve.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
@@ -249,7 +247,7 @@ At the start of its next turn, the unit must roll **1D6**:
 - **1–2:** it continues retreating toward an allied command post.
 - **3–6:** it recovers and may act normally.
 
-Units automatically recover when they reach a command post or any safe zone specified by the created game mode.
+Units automatically recover the moment they reach an allied command post.
 
 A unit in the Retreat state **cannot make counterattacks**.
 
@@ -437,7 +435,7 @@ If at least one miniature in an enemy squad is visible to the attacker, the enti
 
 ## Using Weapons in Squads
 
-In squad mode, each miniature uses the weapon it has equipped.
+In Grand Battle, each miniature uses the weapon it has equipped.
 
 If a squad has weapons with different profiles, attacks are resolved **by weapon group**.
 
@@ -454,7 +452,7 @@ The player controlling the squad decides the **order** in which different weapon
 
 **Choosing a target in melee combat**
 
-In squad mode, even if a squad is in contact with multiple enemy squads, when making a melee attack it must **choose one target squad**.
+In Grand Battle, even if a squad is in contact with multiple enemy squads, when making a melee attack it must **choose one target squad**.
 
 As soon as one miniature in the squad makes base contact with an enemy unit, **the entire squad is considered locked** and all its miniatures participate in the combat.
 
@@ -556,7 +554,11 @@ Command posts are strategic positions spread across the battlefield. They are re
 
 When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
-To deploy a unit at a command post, the unit must be in contact with it. If the post is occupied by enemy units, even if it still belongs to the ally by value or hero presence, you cannot deploy there.
+**Control at the end of the turn**
+
+At the end of each turn, if both players have units on the same command post, control goes to the player whose units have the highest total Value on that post. In case of a tie, the post remains under the control of whoever already held it. If neither side has units there, the post keeps its last owner.
+
+To deploy a unit at a command post, the player must control it first, and the unit must be in contact with it. If the post is occupied by enemy units, even if it is still owned by Value, you cannot deploy there.
 
 Units that cannot be deployed during the initial turn remain in **reserve**.
 
@@ -564,11 +566,13 @@ Some units have special deployment abilities indicated on their profile.
 
 ## Reserve
 
-Units in reserve have not yet entered the battlefield. They are deployed during the **Initiative Phase** of later turns, from any command post you control.
+Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, each player may deploy **1 unit per command post they control**, from any friendly command post. Units in reserve are deployed in contact with the chosen command post.
 
 ## Initial Deployment
 
-Before the game begins, players deploy their armies. Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying:
+During the **Initiative Phase of turn 1**, each player may deploy **1 unit per command post they control**, placing it in contact with that post. Units that are not deployed at this moment automatically go into **reserve**.
+
+Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying one unit at a time.
 
 ---
 
@@ -650,16 +654,12 @@ While out of control:
 General characteristics:
 
 - They are singular units that act as **a single miniature**.
-- Each player may include **only one hero** in their list unless a rule states otherwise.
 - All their rules and abilities are described in their profile.
-- The game is fully functional even without heroes.
 
 ### Special Hero Rules
 
-- They automatically control **command posts** if present.
-- If both players have a hero at the same command post, it remains **neutral**.
-- They have unique abilities that define their tactical role.
-- In squad mode, some heroes may **join specific squads** according to their profile. If part of a squad, their value, movement, save, and speed replace those of the squad. The hero maintains their own Wounds independently. If the hero is destroyed, the squad continues fighting normally.
+- They have unique abilities that define their tactical role. Their abilities and specialty are shown on their profile.
+- In Grand Battle mode, some heroes may **join specific squads** according to their profile. While they are part of that squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently: damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
 
 
 ## 6. Titans
@@ -732,9 +732,9 @@ These rules apply whenever the unit is in play, unless stated otherwise.
 
 ### Squads
 
-Indicates the **minimum and maximum number of miniatures** the unit may include when playing in squad mode.
+Indicates the **minimum and maximum number of miniatures** the unit may include when playing in Grand Battle mode.
 
-This value is not used in skirmish mode.
+This value is not used in Skirmish mode.
 
 ### Value
 
@@ -884,7 +884,7 @@ The unit may fire this weapon even if **locked in melee combat**, but only again
 The attacker declares a point of impact within the weapon's range and the attack is resolved normally.
 
 - **Skirmish mode:** all enemy units whose base is within 3" or less of the point of impact take the same damage independently.
-- **Squad mode:** only affects the target squad, which takes the total damage from the units hit within that squad. The opponent distributes that damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess passes to the next.
+- **Grand Battle mode:** it only affects the target squad. The opponent distributes the total damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess carries over to the next.
 
 Locked units are not affected.
 **Moment:** Shooting
@@ -930,19 +930,21 @@ This weapon **hits automatically** and does not require a Hit roll.
 The unit may take an extra **shooting action after using Sprint**.
 **Moment:** Shooting
 
-### 15. Weapon Limited (X)
-This weapon has an equipment restriction: only X of the same weapon may be used in a squad or in a skirmish game.
-**Moment:** –
+---
+
+## Weapon Limitation
+
+Some weapons have a **usage limitation** indicated by a number in their profile. That number determines how many copies of that same weapon may be equipped within a squad, or how many times that weapon may be used in a skirmish game. Limitation is not an ability. It is not activated or declared. It is simply an equipment restriction that always applies.
 
 ---
 
 # Faction Abilities
 
-Each faction has different **passive sets** that define its combat style. Before the game begins, each player chooses **one passive set** from those available to their faction. All abilities in the chosen set automatically apply to every unit in that faction while they are in play and do not require activation.
+Each faction has different **Faction Abilities** that define its combat style. Each ability has a **point cost** shown on the faction profile.
 
-Each set contains **3 passive abilities** with a shared theme, representing a specific way to bring that faction onto the battlefield. The chosen set must be declared to your opponent before the game begins.
+Before the game begins, each player may choose up to **3 faction abilities** from those available to their faction. The cost of those abilities is included within the army's total Value: the more abilities you take, the fewer points remain for units. The chosen abilities automatically apply to every unit in that faction while they are in play and do not require activation. The selection must be declared to the opponent before the game begins.
 
-Over time, each faction will expand its catalogue of available sets, allowing for more playstyles within the same faction.
+Over time, each faction will expand its catalogue of available abilities, allowing for more playstyles within the same faction.
 
 ---
 
@@ -950,44 +952,47 @@ Over time, each faction will expand its catalogue of available sets, allowing fo
 
 **Command Doctrines** represent tactical orders, coordinated manoeuvres, or strategic impulses that a commander may execute during battle.
 
+Doctrines have a **point cost** included within the army's total Value. Each player chooses which doctrines they want to have available during the battle, without duplicates.
+
 Doctrines:
 
-- Are declared during the **Initiative Phase and the unit or squad** that will use them is marked.
-- Affect **one unit or squad**, unless stated otherwise.
+- Are declared during the **Initiative Phase** and the unit that will use them is marked.
+- Affect **one unit**, unless stated otherwise.
 - Their effects last **the entire turn**.
 - Only one doctrine per turn may be used.
-- Any unit/squad with a doctrine bonus may be marked with some kind of token.
+- Each doctrine may only be used **once per battle**.
+- The unit with an active doctrine is marked with a token.
 
 Doctrines are **public** and must be clearly declared to the opponent before being applied.
 
 
 ## Command Doctrine List
 
-### 1. Clubbing Blow
+### 1. Clubbing Blow — 3 pts
 The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This doctrine is resolved immediately when the unit performs its activation regardless of who has the higher Speed.
 
-### 2. Aimed Shot
+### 2. Aimed Shot — 4 pts
 The chosen unit or squad **loses one action**, but gains **+1 Attack die** for shooting this turn.
 
 ### 3. Frenzy
 The chosen unit may use **one additional movement action** this turn.
 
-### 4. Combat Agility
+### 4. Combat Agility — 6 pts
 The chosen unit gains initiative in melee combat this turn, ignoring the opponent's Speed and even if the enemy charged.
 
-### 5. Ours is the Victory
+### 5. Ours is the Victory — 5 pts
 The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes, on that same objective.
 
-### 6. Immediate Reaction
+### 6. Immediate Reaction — 4 pts
 This unit cannot be charged, nor can it charge any enemy unit
 
-### 7. Overcharged
+### 7. Overcharged — 3 pts
 If this unit fails a charge during this turn, it may immediately repeat it once.
 
-### 8. Second Chance
+### 8. Second Chance — 4 pts
 Repeat one melee or ranged attack roll. If the first roll is favourable this doctrine may be ignored, if you decide to use the doctrine the first roll is discarded.
 
-### 9. Fight to the Death
+### 9. Fight to the Death — 5 pts
 This doctrine only works with one allied unit / squad that is locked in melee combat against another, if more than 2 units / squads are involved this doctrine cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, doctrines, and so on. If either of the two units / squads in combat is activated, the doctrine is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
 
 ---

@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Místicos",
-    "estilo_juego": "Los místicos destacan por su movilidad extrema, armas exóticas y estilos de combate ágiles tanto a distancia como en cuerpo a cuerpo. Sus tropas reposicionan con facilidad, esquivan daño y castigan al enemigo con ataques precisos o ráfagas de energía inestable, pero son frágiles y deben evitar enfrentamientos directos prolongados. Una facción ideal para jugadores tácticos que disfrutan del \"golpea y muévete\", de romper líneas y de atacar desde ángulos inesperados.",
+    "estilo_juego": "Facción ágil y táctica, especializada en el movimiento constante y el combate a distancia y cuerpo a cuerpo desde posiciones ventajosas. Sus unidades son frágiles pero rápidas, diseñadas para golpear y reposicionarse antes de que el enemigo pueda responder. Ideal para jugadores que disfrutan del ritmo, la movilidad y atacar desde ángulos inesperados.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "guerrilla-en-las-sombras",
         "habilidades_faccion1": "Guerrilla en las sombras",
-        "descripcion": "Esta facción puede desplegar sus unidades/escuadras de línea y Vehículos a 8\" de sus puestos de mando."
+        "coste": 4,
+        "descripcion_escaramuza": "Esta facción puede desplegar sus unidades de línea y Vehículos a 8\" de sus puestos de mando.",
+        "descripcion_escuadra": "Esta facción puede desplegar sus unidades de línea y Vehículos a 8\" de sus puestos de mando."
       },
       {
         "id": "finta",
         "habilidades_faccion2": "Finta",
-        "descripcion": "Esta facción no puede usar la acción Preparado. Cuando una unidad Rebelde recibe un ataque a distancia, puede realizar inmediatamente un disparo de respuesta gratuito. Si esa misma unidad recibe otro ataque a distancia durante el mismo turno, no puede volver a responder."
+        "coste": 5,
+        "descripcion_escaramuza": "Cuando una unidad Místico recibe un ataque a distancia, puede realizar inmediatamente un disparo de respuesta gratuito contra el atacante. Si esa misma unidad recibe otro ataque a distancia durante el mismo turno, no puede volver a responder.",
+        "descripcion_escuadra": "Cuando una unidad Místico recibe un ataque a distancia, puede realizar inmediatamente un disparo de respuesta gratuito contra el atacante. Si esa misma unidad recibe otro ataque a distancia durante el mismo turno, no puede volver a responder."
       },
       {
-        "id": "nadie-se-para",
-        "habilidades_faccion3": "Nadie se para",
-        "descripcion": "esta facción siempre tiene que gastar una acción de movimiento de 3\", a excepción si carga o está trabada en combate cuerpo a cuerpo"
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "avance-desafio",
-        "nombre": "1. Avance del desafío",
-        "habilidades": [
-          "guerrilla-en-las-sombras",
-          "finta",
-          "nadie-se-para"
-        ]
+        "id": "paso-fantasma",
+        "habilidades_faccion3": "Paso fantasma",
+        "coste": 3,
+        "descripcion_escaramuza": "Cuando una unidad Mística es elegida como objetivo de un ataque a distancia, puede moverse hasta 3\" antes de que se resuelva el ataque. Si tras el movimiento el atacante pierde la línea de visión o el objetivo queda fuera de rango, el ataque se cancela.",
+        "descripcion_escuadra": "Cuando una unidad Mística es elegida como objetivo de un ataque a distancia, puede moverse hasta 3\" antes de que se resuelva el ataque. Si tras el movimiento el atacante pierde la línea de visión o el objetivo queda fuera de rango, el ataque se cancela."
       }
     ]
   },
@@ -52,7 +48,7 @@
         "disparo": [
           {
             "nombre": "Carabina del Eco",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
@@ -71,25 +67,25 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ignora coberturas",
-              "Arma limitada 1"
+              "Ignora coberturas"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Mirada holo-lanza",
-            "ataques": "1",
+            "ataques": "1D",
             "distancia": "25\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Disparo parabólico",
-              "Arma limitada 1"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -142,7 +138,7 @@
         "disparo": [
           {
             "nombre": "Fusil fractal",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -159,25 +155,25 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Precisión",
-              "Arma limitada 1"
+              "Precisión"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Cañón resonante",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Pesada",
-              "Arma limitada 1"
+              "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -230,7 +226,7 @@
         "disparo": [
           {
             "nombre": "Fusil fractal",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
@@ -243,7 +239,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Filo-sombra",
-            "ataques": "4",
+            "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -256,7 +252,7 @@
           },
           {
             "nombre": "Espada de fase",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -269,21 +265,21 @@
           },
           {
             "nombre": "Daga de vértice",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ignora coberturas",
-              "Arma limitada 1"
+              "Ignora coberturas"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           },
           {
             "nombre": "Martillo eléctrico",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -293,7 +289,8 @@
               "Anti 5+ (Élite/Línea)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ]
       }
@@ -318,7 +315,7 @@
         "disparo": [
           {
             "nombre": "Cañón de luz fractal",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
@@ -359,7 +356,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Embestida cinética",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
@@ -391,7 +388,7 @@
         "disparo": [
           {
             "nombre": "Cañón espectral",
-            "ataques": "2",
+            "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
             "danio": "3",
@@ -417,7 +414,7 @@
           },
           {
             "nombre": "Lanza fractal pesada",
-            "ataques": "1",
+            "ataques": "1D",
             "distancia": "24\"",
             "impactos": "+3",
             "danio": "4",
@@ -432,7 +429,7 @@
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Guantelete resonante",
-            "ataques": "3",
+            "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
@@ -459,7 +456,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Puede secuestrar vehículos enemigos por debajo del 50% de vida, Si carga con éxito contra un vehículo enemigo, tira 1D6: con 1-3 el vehículo pasa a ser tuyo hasta el final de la partida y puede activarse normalmente desde el siguiente turno. Con 4-6 el intento falla. El héroe sale ileso si el vehículo es destruido.",
+        "especialidad_escaramuza": "Las unidades aliadas a 3\" del héroe no pueden ser cargardas, incluido el héroe.",
+        "especialidad_escuadra": "La escuadra a la que se une no puede ser cargada por unidades de Línea enemigas.",
         "valor": 14
       },
       "armas": {

@@ -2,7 +2,7 @@
 
 ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones , armas o doctrinas y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
-Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
+**Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.**
 
 ---
 
@@ -17,15 +17,17 @@ Una **miniatura** representa a un combatiente individual, criatura o vehículo e
 Una **unidad** es el elemento básico de activación del juego.
 
 - En **modo escaramuza**, cada miniatura actúa como una unidad independiente.
-- En **modo escuadras**, una unidad representa un grupo organizado de varias miniaturas que actúan como una sola entidad.
+- En **modo Gran Batalla**, una unidad representa un grupo organizado de varias miniaturas que actúan como una sola entidad.
 
 Una **escuadra** es una unidad compuesta por varias miniaturas que comparten activación, acciones y objetivos. Aunque las miniaturas puedan portar armas distintas, todas forman parte de la misma unidad a efectos de reglas.
 
 **Coherencia y colocación de escuadras**
 
-En modo escuadras, todas las miniaturas que formen parte de una escuadra deben mantenerse a **1" o menos** de al menos de 2 miniaturas de la misma escuadra o una en caso de estar formada por 2 unidades, formando un grupo coherente.
+En modo Gran Batalla, todas las miniaturas que formen parte de una escuadra deben mantenerse a **1" o menos** de al menos de 2 miniaturas de la misma escuadra o una en caso de estar formada por 2 unidades, formando un grupo coherente.
 
 La colocación de las miniaturas solo afecta a **qué miniaturas pueden atacar** en combate cuerpo a cuerpo y no modifica el número de acciones, el estado ni la activación de la escuadra.
+
+> A lo largo del reglamento, cuando una regla mencione **"unidad"**, se aplica igualmente a **"escuadra"** en modo Gran Batalla, salvo que se indique lo contrario.
 
 ### Tamaño de peanas recomendado
 
@@ -50,7 +52,7 @@ ZeroLore utiliza dados de seis caras (1D6).
 - Los resultados de 1 o 2 suelen considerarse fallos en combate cuerpo a cuerpo.
 - Cuando una regla permite repetir una tirada, cada dado solo puede repetirse una vez. Si varias reglas permiten repetir una tirada, solo se aplica una repetición.
 
-A lo largo de la partida se realizan distintos tipos de tirada: **iniciativa**, **impactos**, **salvación**, **daño** y **dispersión**. Cada una se explica en detalle en su sección correspondiente.
+A lo largo de la partida se realizan distintos tipos de tirada: **iniciativa**, **impactos**, **salvación** y **daño**. Cada una se explica en detalle en su sección correspondiente.
 
 ### Prioridad de reglas
 
@@ -66,19 +68,17 @@ ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 
 - **1vs1**: duelo entre dos jugadores
 - **2vs2**: dos equipos de dos jugadores
-- **1vs1vs1**: tres jugadores enfrentados entre si
-- **1vs1vs1vs1**: cuatro jugadores enfrentados entre si
 
-En partidas de mas de dos jugadores, los jugadores acuerdan antes de empezar si juegan en equipos o cada uno por su cuenta. El orden de activacion se determina por iniciativa al inicio de cada turno.
+En partidas de mas de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno.
 
 ### Modos de juego
 
-ZeroLore puede jugarse en dos modos principales: **Escaramuza** y **Escuadras**.
+ZeroLore puede jugarse en dos modos principales: **Escaramuza** y **Gran Batalla**.
 
 El modo de juego se elige **antes de comenzar la partida**, y todos los jugadores deben usar el mismo modo.
 
-- **Modo Escaramuza**: cada miniatura actúa como una unidad independiente. Es un modo más táctico y narrativo, ideal para partidas rápidas y mesas pequeñas. **En escaramuza no se pueden incluir Vehículos ni Titanes**: estos tipos de unidad están reservados para el modo Escuadras.
-- **Modo Escuadras**: las unidades se agrupan en escuadras que actúan como una sola entidad. Es el modo pensado para batallas de mayor escala, donde todos los tipos de unidad están disponibles, incluidos Vehículos y Titanes.
+- **Modo Escaramuza**: cada miniatura actúa como una unidad independiente. Es un modo más táctico y narrativo, ideal para partidas rápidas y mesas pequeñas. **En escaramuza no se pueden incluir Vehículos ni Titanes**: estos tipos de unidad están reservados para el modo Gran Batalla.
+- **Modo Gran Batalla**: las unidades se agrupan en escuadras que actúan como una sola entidad. Es el modo pensado para batallas de mayor escala, donde todos los tipos de unidad están disponibles, incluidos Vehículos y Titanes.
 
 Salvo que se indique lo contrario, todas las reglas del reglamento se aplican a ambos modos.
 
@@ -140,7 +140,7 @@ Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 - Cada jugador tira **1D6**.
 - El jugador con el resultado más alto **actúa primero** durante ese turno.
 - En caso de empate, se repite la tirada.
-- Se colocan estratagemas.
+- Cada jugador puede añadir una o más **estratagemas** a sus unidades si lo desea.
 - Se reclutan o se sacan unidades de reserva.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
@@ -239,7 +239,7 @@ Al inicio de su siguiente turno, la unidad debe tirar **1D6**:
 - **1–2:** continúa retirándose hacia un puesto de mando aliado.
 - **3–6:** se recompone y puede actuar con normalidad.
 
-Las unidades se recomponen automáticamente en el momento en que alcanzan un puesto de mando o alguna zona segura que indique el modo de juego creado.
+Las unidades se recomponen automáticamente en el momento en que alcanzan un puesto de mando aliado.
 
 Una unidad en estado de Retirada **no puede realizar contraataques**.
 
@@ -422,7 +422,7 @@ Si al menos una miniatura de una escuadra enemiga es visible desde el atacante, 
 
 ## Uso de armas en escuadras
 
-En modo escuadras, cada miniatura utiliza el arma que tenga equipada.
+En Gran Batalla, cada miniatura utiliza el arma que tenga equipada.
 
 Si una escuadra dispone de armas con perfiles distintos, los ataques se resuelven **por grupos de armas**.
 
@@ -439,7 +439,7 @@ El jugador que controla la escuadra decide el **orden** en el que se resuelven l
 
 **Elección de objetivo en combate cuerpo a cuerpo**
 
-En modo escuadras, aunque una escuadra pueda estar en contacto con varias escuadras enemigas, al realizar un ataque cuerpo a cuerpo debe **elegir una única escuadra objetivo**.
+En Gran Batalla, aunque una escuadra pueda estar en contacto con varias escuadras enemigas, al realizar un ataque cuerpo a cuerpo debe **elegir una única escuadra objetivo**.
 
 En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad enemiga, **la escuadra entera se considera trabada** y todas sus miniaturas participan en el combate.
 
@@ -540,7 +540,11 @@ Los puestos de mando son posiciones estratégicas repartidas por el campo de bat
 
 Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del token naranja para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
-Para desplegar una unidad en un puesto de mando, la unidad debe estar en contacto con él. Si el puesto está ocupado por unidades enemigas, aunque siga siendo propiedad por valor o héroe del aliado, no se puede desplegar en él.
+**Control al final de turno**
+
+Al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto. En caso de empate, el puesto permanece bajo el control de quien lo tuviera. Si no hay unidades de ningún bando, el puesto mantiene su último propietario.
+
+Para desplegar una unidad en un puesto de mando, primero tiene que estar en posesión del jugador, la unidad debe estar en contacto con él. Si el puesto está ocupado por unidades enemigas, aunque siga siendo propiedad por valor, no se puede desplegar en él.
 
 Las unidades que no puedan desplegarse en el turno inicial quedan en **reserva**.
 
@@ -548,11 +552,13 @@ Algunas unidades disponen de habilidades especiales de despliegue indicadas en s
 
 ## Reserva
 
-Las unidades en reserva aún no han entrado al campo de batalla. Se despliegan durante la **Fase de Iniciativa** de turnos posteriores, desde cualquier puesto de mando que controles.
+Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, cada jugador puede desplegar **1 unidad por puesto de mando que controle**, desde cualquier puesto de mando aliado. Las unidades en reserva se despliegan en contacto con el puesto de mando elegido.
 
 ## Despliegue inicial
 
-Antes de comenzar la partida los jugadores despliegan sus ejércitos. Cada jugador tira **1D6**; el resultado más alto despliega primero. A continuación los jugadores se alternan desplegando:
+En la **Fase de Iniciativa del turno 1**, cada jugador puede desplegar **1 unidad por puesto de mando que controle**, colocándola en contacto con ese puesto. Las unidades que no se desplieguen en este momento pasan automáticamente a **Reserva**.
+
+Cada jugador tira **1D6**; el resultado más alto despliega primero. A continuación los jugadores se alternan desplegando unidad por unidad.
 
 ---
 
@@ -630,16 +636,12 @@ Los **Héroes** representan combatientes excepcionales y figuras clave dentro de
 Características generales:
 
 - Son unidades singulares que actúan como **una única miniatura**.
-- Cada jugador puede incluir **un único héroe** en su lista a no ser que una regla diga lo contrario.
 - Todas sus reglas y habilidades se describen en su ficha.
-- El juego es plenamente funcional incluso sin héroes.
 
 ### Reglas especiales de los héroes
 
-- Controlan automáticamente los **puntos de mando** si están presentes.
-- Si ambos jugadores tienen un héroe en el mismo punto de mando, este permanece **neutral**.
-- Poseen habilidades únicas que definen su rol táctico.
-- En modo escuadras, algunos héroes pueden **unirse a escuadras específicas** según su ficha. Si forman parte de una escuadra, su valor, movimiento, salvación y velocidad sustituyen al de la escuadra. El héroe mantiene sus propias Vidas de forma independiente. Si el héroe es eliminado, la escuadra continúa combatiendo con normalidad.
+- Poseen habilidades únicas que definen su rol táctico. Sus habilidades y especialidad se encuentran en su ficha.
+- En modo Gran Batalla, algunos héroes pueden **unirse a escuadras específicas** según su ficha. Mientras formen parte de ella, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente: el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer y solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
 
 ## 6. Titanes
 
@@ -711,9 +713,9 @@ Estas reglas se aplican siempre que la unidad esté en juego, salvo que se indiq
 
 ### Escuadras
 
-Indica el **número mínimo y máximo de miniaturas** que puede incluir la unidad cuando se juega en modo escuadras.
+Indica el **número mínimo y máximo de miniaturas** que puede incluir la unidad cuando se juega en modo Gran Batalla.
 
-Este valor no se utiliza en modo escaramuza.
+Este valor no se utiliza en modo Escaramuza.
 
 ### Valor
 
@@ -871,7 +873,7 @@ La unidad puede disparar esta arma incluso si está **trabada en combate cuerpo 
 El atacante declara un punto de impacto dentro del alcance del arma y se resuelve el ataque normalmente.
 
 - **Modo escaramuza:** todas las unidades enemigas cuya peana esté a 3" o menos del punto de impacto reciben el mismo daño de forma independiente.
-- **Modo escuadras:** solo afecta a la escuadra objetivo, que recibe el daño total de unidades que haya alcanzado dentro de la escuadra. El rival distribuye ese daño entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
+- **Modo Gran Batalla:** solo afecta a la escuadra objetivo. El rival distribuye el daño total entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
 
 Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
 **Momento:** Disparo
@@ -925,20 +927,21 @@ Esta arma **impacta automáticamente** y no requiere tirada de Impactos.
 La unidad puede realizar una acción extra de **disparo después de usar Carrera**.
 **Momento:** Disparo
 
-### 15. Arma limitada (X)
+---
 
-El arma tiene limitación de equipamiento, solo se podrá usar X números de la misma arma en una escuadra o en una partida de escaramuza.
-**Momento:** -
+## Limitación de armas
+
+Algunas armas tienen una **limitación de uso** indicada con un número en su perfil. Este número determina cuántas unidades de esa misma arma pueden equiparse dentro de una escuadra, o cuántas veces puede usarse esa arma en una partida de escaramuza. La limitación no es una habilidad: no se activa ni se declara. Es simplemente una restricción de equipamiento que aplica siempre.
 
 ---
 
 # Habilidades de facción
 
-Cada facción dispone de distintos **sets de pasivas** que definen su estilo de combate. Antes de comenzar la partida, cada jugador elige **un set de pasivas** de los disponibles en su facción. Todas las habilidades del set elegido se aplican automáticamente a todas las unidades de la facción mientras estén en juego y no requieren activación.
+Cada facción dispone de distintas **Habilidades de facción** que definen su estilo de combate. Cada habilidad tiene un **coste en puntos** indicado en la ficha de la facción.
 
-Cada set contiene **3 habilidades pasivas** con coherencia temática entre sí, representando una forma concreta de llevar a la facción al campo de batalla. La elección del set debe comunicarse al rival antes de comenzar la partida.
+Antes de comenzar la partida, cada jugador puede elegir un máximo de **3 habilidades de facción** de las disponibles en su facción. El coste de las habilidades se incluye dentro del valor total del ejército: cuantas más habilidades se tomen, menos puntos quedan para unidades. Las habilidades elegidas se aplican automáticamente a todas las unidades de la facción mientras estén en juego y no requieren activación. La elección debe comunicarse al rival antes de comenzar la partida.
 
-Con el tiempo, cada facción irá ampliando su catálogo de sets disponibles, permitiendo más estilos de juego distintos dentro de la misma facción.
+Con el tiempo, cada facción irá ampliando su catálogo de habilidades disponibles, permitiendo más estilos de juego distintos dentro de la misma facción.
 
 ---
 
@@ -946,23 +949,26 @@ Con el tiempo, cada facción irá ampliando su catálogo de sets disponibles, pe
 
 Las **Doctrinas de Mando** representan órdenes tácticas, maniobras coordinadas o impulsos estratégicos que un comandante puede ejecutar durante la batalla.
 
+Las doctrinas tienen un **coste en puntos** que se incluye dentro del valor total del ejército. Cada jugador elige las doctrinas que quiere llevar disponibles en partida, sin repetir.
+
 Las doctrinas:
 
-- Se declaran durante la **Fase de Iniciativa y se marca la unidad o escuadra **que va a utilizarla.
-- Afectan a **una unidad o escuadra**, salvo que se indique lo contrario.
+- Se declaran durante la **Fase de Iniciativa** y se marca la unidad que va a utilizarla.
+- Afectan a **una unidad**, salvo que se indique lo contrario.
 - Sus efectos duran **todo el turno**.
-- Solo se puede usar una doctrina por turno a escoger.
-- Cualquier unidad/escuadra que tenga una bonificación de doctrina se la podrá marcar con algún tipo de token.
+- Solo se puede usar una doctrina por turno.
+- Cada doctrina solo puede usarse **una vez por partida**.
+- La unidad que tenga activa una doctrina se marca con un token.
 
 Las doctrinas son **públicas** y deben declararse claramente al rival antes de aplicarse.
 
 ## Lista de Doctrinas de Mando
 
-### 1. Garrotazo
+### 1. Garrotazo — 3 pts
 
 La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contrincante, **poniendo fin al combate**. Esta doctrina se realiza inmediantamente la unidad realice su activación independientemente quien tiene más velocidad.
 
-### 2. Apuntado
+### 2. Apuntado — 4 pts
 
 La unidad o escuadra elegida **pierde una acción**, pero gana **+1 dado de Ataque** en disparo durante este turno.
 
@@ -970,27 +976,27 @@ La unidad o escuadra elegida **pierde una acción**, pero gana **+1 dado de Ataq
 
 La unidad elegida puede utilizar **una acción adicional de movimiento** este turno.
 
-### 4. Agilidad en combate
+### 4. Agilidad en combate — 6 pts
 
 La unidad elegida gana la iniciativa en combate cuerpo a cuerpo este turno, ignorando la velocidad del contrincante e incluso si el rival ha cargado.
 
-### 5. Nuestra es la victoria
+### 5. Nuestra es la victoria — 5 pts
 
 La unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de unidades con más valor o héroes enemigos, en ese mismo objetivo.
 
-### 6. Reacción inmediata
+### 6. Reacción inmediata — 4 pts
 
 Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga
 
-### 7. Más que cargado
+### 7. Más que cargado — 3 pts
 
 Si esta unidad falla una carga durante este turno, puede repetirla inmediatamente una vez.
 
-### 8. Una nueva oportunidad
+### 8. Una nueva oportunidad — 4 pts
 
 Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta doctrina, si se decide usar la doctrina la primera tirada queda descartada.
 
-### 9. Combate a muerte
+### 9. Combate a muerte — 5 pts
 
 Esta doctrina solo funciona con una unidad / escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra, si hay más de 2 unidades / escuadras involucradas no se puede usar esta doctrina. Ambas unidades / escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, doctrinas, etc. Si cualquiera de las dos unidades / escuadras en combate es activada, la doctrina se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.
 

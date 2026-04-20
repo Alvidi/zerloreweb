@@ -2,56 +2,73 @@
   "doctrinas": [
     {
       "id": "garrotazo",
-      "nombre": "Bludgeon",
-      "token_label": "Doctrine: Bludgeon",
+      "nombre": "Clubbing Blow",
+      "token_label": "Doctrine: Clubbing Blow",
+      "descripcion": "The unit or squad locked in melee pushes its opponent 1\", ending the combat. This doctrine is resolved immediately when the unit performs its activation regardless of who has the higher Speed.",
+      "coste": 3,
       "orden": 1
     },
     {
       "id": "apuntado",
       "nombre": "Aimed Shot",
       "token_label": "Doctrine: Aimed Shot",
+      "descripcion": "The chosen unit or squad loses one action, but gains +1 Attack die for shooting this turn.",
+      "coste": 4,
       "orden": 2
     },
     {
       "id": "frenesi",
       "nombre": "Frenzy",
       "token_label": "Doctrine: Frenzy",
+      "descripcion": "The chosen unit may use one additional movement action this turn.",
       "orden": 3
     },
     {
       "id": "agilidad-en-combate",
       "nombre": "Combat Agility",
       "token_label": "Doctrine: Combat Agility",
+      "descripcion": "The chosen unit gains initiative in melee combat this turn, ignoring the opponent's Speed and even if the enemy charged.",
+      "coste": 6,
       "orden": 4
     },
     {
       "id": "nuestra-es-la-victoria",
-      "nombre": "Victory Is Ours",
-      "token_label": "Doctrine: Victory Is Ours",
+      "nombre": "Ours is the Victory",
+      "token_label": "Doctrine: Ours is the Victory",
+      "descripcion": "The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes, on that same objective.",
+      "coste": 5,
       "orden": 5
     },
     {
       "id": "reaccion-inmediata",
       "nombre": "Immediate Reaction",
       "token_label": "Doctrine: Immediate Reaction",
+      "descripcion": "This unit cannot be charged, nor can it charge any enemy unit",
+      "coste": 4,
       "orden": 6
     },
     {
       "id": "mas-que-cargado",
-      "nombre": "Fully Charged",
-      "token_label": "Doctrine: Fully Charged",
+      "nombre": "Overcharged",
+      "token_label": "Doctrine: Overcharged",
+      "descripcion": "If this unit fails a charge during this turn, it may immediately repeat it once.",
+      "coste": 3,
       "orden": 7
     },
     {
       "id": "una-nueva-oportunidad",
-      "nombre": "One More Chance",
-      "token_label": "Doctrine: One More Chance",
+      "nombre": "Second Chance",
+      "token_label": "Doctrine: Second Chance",
+      "descripcion": "Repeat one melee or ranged attack roll. If the first roll is favourable this doctrine may be ignored, if you decide to use the doctrine the first roll is discarded.",
+      "coste": 4,
       "orden": 8
     },
     {
       "id": "combate-a-muerte",
       "nombre": "Fight to the Death",
       "token_label": "Doctrine: Fight to the Death",
+      "descripcion": "This doctrine only works with one allied unit / squad that is locked in melee combat against another, if more than 2 units / squads are involved this doctrine cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, doctrines, and so on. If either of the two units / squads in combat is activated, the doctrine is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.",
+      "coste": 5,
       "orden": 9
     }
   ]

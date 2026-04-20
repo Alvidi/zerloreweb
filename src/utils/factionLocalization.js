@@ -2,7 +2,18 @@ const getModuleData = (module) => module?.default || module || null
 
 const isObject = (value) => value && typeof value === 'object'
 
-const getSkillNameKey = (skill) => Object.keys(skill || {}).find((key) => key !== 'id' && key !== 'descripcion')
+const getSkillNameKey = (skill) =>
+  Object.keys(skill || {}).find(
+    (key) =>
+      key !== 'id'
+      && key !== 'descripcion'
+      && key !== 'descripcion_escaramuza'
+      && key !== 'descripcion_escuadra'
+      && key !== 'coste'
+      && key !== 'cost'
+      && key !== 'valor'
+      && key !== 'valor_habilidad'
+  )
 
 const mergeSkillTranslation = (esSkill, enSkill) => {
   const base = isObject(esSkill) ? { ...esSkill } : {}
@@ -15,6 +26,16 @@ const mergeSkillTranslation = (esSkill, enSkill) => {
   }
   if (enSkill.descripcion) {
     base.descripcion = enSkill.descripcion
+  }
+  if (enSkill.descripcion_escaramuza) {
+    base.descripcion_escaramuza = enSkill.descripcion_escaramuza
+  }
+  if (enSkill.descripcion_escuadra) {
+    base.descripcion_escuadra = enSkill.descripcion_escuadra
+  }
+  const translatedCost = enSkill.coste ?? enSkill.cost ?? enSkill.valor ?? enSkill.valor_habilidad
+  if (translatedCost !== undefined && translatedCost !== null && translatedCost !== '') {
+    base.coste = translatedCost
   }
   return base
 }
@@ -35,6 +56,18 @@ const mergeUnitsTranslation = (esUnits, enUnits) =>
       perfil: {
         ...(unit?.perfil || {}),
         especialidad: translated?.perfil?.especialidad ?? unit?.perfil?.especialidad ?? '-',
+        especialidad_escaramuza:
+          translated?.perfil?.especialidad_escaramuza
+          ?? unit?.perfil?.especialidad_escaramuza
+          ?? translated?.perfil?.especialidad
+          ?? unit?.perfil?.especialidad
+          ?? '-',
+        especialidad_escuadra:
+          translated?.perfil?.especialidad_escuadra
+          ?? unit?.perfil?.especialidad_escuadra
+          ?? translated?.perfil?.especialidad
+          ?? unit?.perfil?.especialidad
+          ?? '-',
       },
       armas: {
         ...(unit?.armas || {}),
@@ -75,6 +108,7 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
       ...esFaction,
       nombre: enFaction.nombre || esFaction.nombre || '',
       estilo_juego: enFaction.estilo_juego || esFaction.estilo_juego || '',
+      seleccion_habilidades: enFaction.seleccion_habilidades || esFaction.seleccion_habilidades || '',
       habilidades_faccion: esSkills.map((skill, index) => mergeSkillTranslation(skill, enSkills[index])),
       grupos_habilidades_faccion: esPassiveGroups.map((group, index) =>
         mergePassiveGroupTranslation(group, enPassiveGroups[index])),

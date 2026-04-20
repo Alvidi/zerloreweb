@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "El Imperio",
-    "estilo_juego": "El Imperio es una fuerza militar disciplinada centrada en el disparo estable, el uso de coberturas y el control táctico del campo de batalla. Sus unidades funcionan mejor cuando se mantienen organizadas, aprovechando armas pesadas y fuego apoyado, aunque sacrifican movilidad y capacidad de combate cuerpo a cuerpo. Son ideales para jugadores que prefieren estrategias metódicas, fuego defensivo y ganar por posicionamiento.",
+    "estilo_juego": "Facción disciplinada y metódica, centrada en el control del territorio y el fuego sostenido. Sus unidades rinden mejor cuando se mantienen en posición, aprovechando armas de largo alcance y cobertura. Sacrifica movilidad a cambio de potencia defensiva y precisión.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "atrincheramiento",
         "habilidades_faccion1": "Atrincheramiento",
-        "descripcion": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Precisión en todos sus ataques de Disparo hasta el final de esa activación."
+        "coste": 8,
+        "descripcion_escaramuza": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación.",
+        "descripcion_escuadra": "Una unidad de esta facción que no haya realizado ninguna acción de Movimiento durante su activación obtiene +1 dado de Impacto en todos sus ataques de Disparo hasta el final de esa activación."
       },
       {
         "id": "refuerzos-rasos",
         "habilidades_faccion2": "Refuerzos rasos",
-        "descripcion": "Una vez por partida, cuando una unidad de Línea de esta facción es eliminada por completo, puedes devolverla al campo a la zona de despliegue de tu siguiente fase de Iniciativa."
+        "coste": 10,
+        "descripcion_escaramuza": "Cuando una unidad de Línea de esta facción es eliminada por completo, puedes devolverla a la batalla en un puesto de mando que no haya sacado refuerzo, en tu siguiente fase de Iniciativa.",
+        "descripcion_escuadra": "Cuando una unidad de Línea de esta facción es eliminada por completo, puedes devolverla a la batalla en un puesto de mando que no haya sacado refuerzo, en tu siguiente fase de Iniciativa."
       },
       {
         "id": "furia-de-los-caidos",
         "habilidades_faccion3": "Furia de los Caídos",
-        "descripcion": "Cuando una unidad cae de una escuadra, la escuadra entera gana +1 de ataque adicional en el ataque total. En Escaramuza, las unidades a 6\" ganan un +1 de ataque adicional, hasta final de turno."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "tierra-sacrificio",
-        "nombre": "1. Tierra y sacrificio",
-        "habilidades": [
-          "atrincheramiento",
-          "refuerzos-rasos",
-          "furia-de-los-caidos"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Cuando una unidad cae, las unidades ganan un +1 de ataque adicional, hasta final de turno.",
+        "descripcion_escuadra": "Cuando una unidad cae, las unidades ganan un +1 de ataque adicional, hasta final de turno."
       }
     ]
   },
@@ -127,11 +123,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva",
-              "Arma limitada 1"
+              "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           },
           {
             "nombre": "fusiles de plasma",
@@ -141,11 +137,11 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Élite)",
-              "Arma limitada 1"
+              "Anti 5+ (Élite)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -305,11 +301,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Pesada",
-              "Arma limitada 1"
+              "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -332,11 +328,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque crítico",
-              "Arma limitada 1"
+              "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           }
         ]
       }
@@ -367,11 +363,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Disparo parabólico",
-              "Arma limitada 1"
+              "Disparo parabólico"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 0,
+            "limitacion": 1
           },
           {
             "nombre": "Ametralladora de posición",
@@ -396,11 +392,11 @@
             "danio_critico": "6",
             "habilidades_arma": [
               "Pesada",
-              "Anti 5+ (Vehículo / Monstruo)",
-              "Arma limitada 1"
+              "Anti 5+ (Vehículo / Monstruo)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -483,11 +479,11 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Disparo parabólico",
-              "Arma limitada (3)",
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 3
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -654,11 +650,11 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Pesada",
-              "Arma limitada (3)"
+              "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 0,
+            "limitacion": 3
           },
           {
             "nombre": "Batería Láser",

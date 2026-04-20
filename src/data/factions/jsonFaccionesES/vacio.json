@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "El Vacío",
-    "estilo_juego": "El Vacío es una facción de control, posicionamiento y daño de vacío, especializada en manipular el campo de batalla y castigar al enemigo desde ángulos inesperados. Sus unidades combinan armamento que ignora defensas, resistencia antinatural y efectos de desestabilización, sacrificando velocidad bruta por presión constante y letalidad puntual. Funciona mejor en manos de jugadores que disfrutan anticipándose al rival, forzando errores y dominando el ritmo de la partida mediante teletransportes y fuego selectivo.",
+    "estilo_juego": "Facción de control y posicionamiento, especializada en castigar al enemigo desde ángulos inesperados. No busca el enfrentamiento directo sino manipular el campo de batalla a su favor. Ideal para jugadores pacientes que prefieren la estrategia sobre la fuerza bruta.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "portales-del-vacio",
         "habilidades_faccion1": "Portales del vacío",
-        "descripcion": "Una vez por turno, durante la activación de una unidad aliada, esta puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos unidades puede estar trabada."
+        "coste": 10,
+        "descripcion_escaramuza": "Una vez por turno, durante la activación de una unidad aliada, esta puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos unidades puede estar trabada.",
+        "descripcion_escuadra": "Una vez por turno, durante la activación de una unidad aliada, esta puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos unidades puede estar trabada."
       },
       {
         "id": "ojos-del-mas-alla",
         "habilidades_faccion2": "Ojos del más allá",
-        "descripcion": "Las unidades del vacío pueden repetir tiradas de impacto fallidas si la unidad enemiga está en cobertura."
+        "coste": 6,
+        "descripcion_escaramuza": "Las unidades del Vacío pueden repetir tiradas de ataque fallidas si la unidad enemiga está en cobertura.",
+        "descripcion_escuadra": "Las unidades del Vacío pueden repetir tiradas de ataque fallidas si la unidad enemiga está en cobertura."
       },
       {
         "id": "heraldos-del-vacio-supremo",
         "habilidades_faccion3": "Heraldos del vacío supremo",
-        "descripcion": "Esta facción puede usar dos héroes."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "portal-desafio",
-        "nombre": "1. Portal del desafío",
-        "habilidades": [
-          "portales-del-vacio",
-          "ojos-del-mas-alla",
-          "heraldos-del-vacio-supremo"
-        ]
+        "coste": 8,
+        "descripcion_escaramuza": "Esta facción puede usar dos héroes.",
+        "descripcion_escuadra": "Esta facción puede usar dos héroes."
       }
     ]
   },
@@ -176,11 +172,11 @@
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Directo",
-              "Arma limitada 2"
+              "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -237,11 +233,11 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Pesada",
-              "Arma limitada 1"
+              "Pesada"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -300,11 +296,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 4+ (Todo)",
-              "Arma limitada 1"
+              "Anti 4+ (Todo)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -329,11 +325,11 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Ataque crítico",
-              "Arma limitada 1"
+              "Ataque crítico"
             ],
             "especialidad": "-",
-            "valor_extra": 1
+            "valor_extra": 1,
+            "limitacion": 1
           }
         ]
       }
@@ -563,11 +559,11 @@
             "danio": "7",
             "danio_critico": "9",
             "habilidades_arma": [
-              "Explosiva",
-              "Arma limitada (3)"
+              "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 3
           },
           {
             "nombre": "Grieta del Vacío",

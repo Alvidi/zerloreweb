@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "The Swarm",
-    "estilo_juego": "The Swarm is based on constant pressure and block advancement. Their units work best when held together, leveraging synapses to avoid disorganization and sustain the attack. Although their troops fall easily, the Swarm compensates for casualties with their ability to return to the battlefield and saturate the enemy, excelling in close combat and control of space.",
+    "estilo_juego": "A faction of waves and constant pressure, designed to saturate the enemy with numbers and never stop advancing. Its units fall easily but return to the battlefield again and again, dominating melee combat and space control. Ideal for players who enjoy sustained pressure and progressive attrition.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "enjambre-eterno",
-        "habilidades_faccion1": "The eternal swarm",
-        "descripcion": "All eliminated Drone or Winged Drone units or squads return to the battlefield at the start of the next Initiative Phase, from the deployment zone with all their HP."
+        "habilidades_faccion1": "The Eternal Swarm",
+        "coste": 8,
+        "descripcion_escaramuza": "All eliminated Drone units return to the battle at the start of the next Initiative Phase, from an empty command post with all their Wounds.",
+        "descripcion_escuadra": "All eliminated Drone units return to the battle at the start of the next Initiative Phase, from an empty command post with all their Wounds."
       },
       {
-        "id": "synapsis-mental",
-        "habilidades_faccion2": "mental synapse",
-        "descripcion": "At the start of each Initiative Phase, any Swarm unit or squad that is not within 6\" of at least one other allied unit must roll 1D6: on a 1-2 it enters retreat following the normal retreat rules. This rule affects all units except Heroes and Monsters."
+        "id": "swarm-instinct",
+        "habilidades_faccion2": "Swarm Instinct",
+        "coste": 4,
+        "descripcion_escaramuza": "Swarm units that are within 3\" or less of another allied unit reroll failed melee attack dice.",
+        "descripcion_escuadra": "Swarm units that are within 3\" or less of another allied unit reroll failed melee attack dice."
       },
       {
         "id": "voracidad",
         "habilidades_faccion3": "Voracity",
-        "descripcion": "When a Line unit or squad eliminates an enemy unit in close combat, it may remove a damage marker from a unit or the squad."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "llamada-reina",
-        "nombre": "1. Call of the Queen",
-        "habilidades": [
-          "enjambre-eterno",
-          "synapsis-mental",
-          "voracidad"
-        ]
+        "coste": 3,
+        "descripcion_escaramuza": "When a Line unit eliminates an enemy unit in melee combat, it may remove one damage marker.",
+        "descripcion_escuadra": "When a Line unit eliminates an enemy unit in melee combat, it may remove one damage marker."
       }
     ]
   },
@@ -198,11 +194,11 @@
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Explosive",
-              "Weapon Limited 2"
+              "Explosive"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -260,11 +256,11 @@
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack",
-              "Weapon Limited 2"
+              "Critical Attack"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 2
           }
         ]
       }

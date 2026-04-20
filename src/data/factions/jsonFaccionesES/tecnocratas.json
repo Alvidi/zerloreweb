@@ -1,33 +1,29 @@
 {
   "faccion": {
     "nombre": "Tecnócratas",
-    "estilo_juego": "Los Tecnócratras son una facción de tecnología avanzada, fuego preciso y control táctico, especializada en el uso de drones, armamento experimental y retirada inteligente. Sus unidades destacan por su versatilidad y eficiencia, capaces de adaptarse rápidamente a la situación del campo de batalla mediante reposicionamiento y apoyo automatizado. No buscan el enfrentamiento frontal prolongado, sino desgastar al enemigo con superioridad técnica, sacrificando resistencia bruta a cambio de control, precisión y flexibilidad.",
+    "estilo_juego": "Facción táctica y flexible, especializada en el reposicionamiento constante y el apoyo coordinado entre unidades. No busca el enfrentamiento frontal, prefiere desgastar al enemigo mediante superioridad técnica y control del campo de batalla.",
+    "seleccion_habilidades": "multiple",
     "habilidades_faccion": [
       {
         "id": "retirada-inteligente",
         "habilidades_faccion1": "Retirada inteligente",
-        "descripcion": "Las unidades de esta facción pueden retirarse sin necesidad de realizar chequeo de retirada."
+        "coste": 8,
+        "descripcion_escaramuza": "Las unidades de esta facción pueden retirarse sin necesidad de realizar chequeo de retirada.",
+        "descripcion_escuadra": "Las unidades de esta facción pueden retirarse sin necesidad de realizar chequeo de retirada."
       },
       {
-        "id": "apoyo-dron",
-        "habilidades_faccion2": "Apoyo dron",
-        "descripcion": "se puede incluir en las escuadras de línea y élite hasta 2 drones ignorando el número de escuadra que tenga la unidad. En modo escaramuza se puede añadir un dron a una unidad."
+        "id": "apoyo-de-artefacto",
+        "habilidades_faccion2": "Apoyo de artefacto",
+        "coste": 10,
+        "descripcion_escaramuza": "Se puede incluir en las unidades de línea y élite hasta 1 unidad con especialidad \"Apoyo de artefacto\" ignorando el número de escuadra que tenga la unidad.",
+        "descripcion_escuadra": "Se puede incluir en las unidades de línea y élite hasta 1 unidad con especialidad \"Apoyo de artefacto\" ignorando el número de escuadra que tenga la unidad."
       },
       {
         "id": "protocolos-de-combate",
         "habilidades_faccion3": "Protocolos de Combate",
-        "descripcion": "Una vez por turno, cuando una unidad/escuadra Tecnócrata vaya a realizar una acción de Disparo, puede añadir +1 al resultado de Precisión si otra unidad/escuadra Tecnócrata (incluidos drones) está a 6\" del mismo objetivo."
-      }
-    ],
-    "grupos_habilidades_faccion": [
-      {
-        "id": "equipo-apoyo",
-        "nombre": "1. Equipo de apoyo",
-        "habilidades": [
-          "retirada-inteligente",
-          "apoyo-dron",
-          "protocolos-de-combate"
-        ]
+        "coste": 5,
+        "descripcion_escaramuza": "Una vez por turno, cuando una unidad vaya a realizar una acción de Disparo, puede añadir -1 al resultado de precisión si otra unidad está a 6\" del mismo objetivo.",
+        "descripcion_escuadra": "Una vez por turno, cuando una unidad vaya a realizar una acción de Disparo, puede añadir -1 al resultado de precisión si otra unidad está a 6\" del mismo objetivo."
       }
     ]
   },
@@ -79,11 +75,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión",
-              "Arma limitada 2"
+              "Precisión"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 2
           },
           {
             "nombre": "rifle de Ultrapulso",
@@ -93,11 +89,11 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Asaltante +1",
-              "Arma limitada 1"
+              "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -186,9 +182,9 @@
         "velocidad": 4,
         "escuadra": {
           "min": 1,
-          "max": 3
+          "max": 1
         },
-        "especialidad": "Apoyo dron",
+        "especialidad": "Apoyo de artefacto.",
         "valor": 3
       },
       "armas": {
@@ -233,8 +229,8 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "golpe",
-            "ataques": "1",
+            "nombre": "Golpe",
+            "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -258,15 +254,15 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Apoyo dron. Esta unidad no puede disparar. Una vez por turno, cuando la escuadra a la que pertenece recibe un ataque, el atacante pierde 1 dado de ataque y los impactos críticos se convierten en impactos normales.",
+        "especialidad": "Apoyo de artefacto. No puede disparar. Los impactos críticos se convierten en impactos normales.",
         "valor": 7
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "golpe",
-            "ataques": "1",
+            "nombre": "Golpe",
+            "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
@@ -317,7 +313,8 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 2
+            "valor_extra": 2,
+            "limitacion": 1
           },
           {
             "nombre": "Lanzamisiles",
@@ -327,11 +324,11 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Explosiva",
-              "Arma limitada 1"
+              "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           },
           {
             "nombre": "Cañón de Plasma",
@@ -344,12 +341,13 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 3,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "patada pesada",
+            "nombre": "Patada pesada",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -403,7 +401,8 @@
               "Anti 4+ (Vehículo)"
             ],
             "especialidad": "-",
-            "valor_extra": 4
+            "valor_extra": 4,
+            "limitacion": 1
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -575,7 +574,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Una vez por turno, cuando una escuadra con este héroe o una unidad/escuadra a 6\" de este héroe recibe un ataque crítico, puede convertirlo en un impacto normal.",
+        "especialidad_escaramuza": "Una vez por turno, si esta unidad recibe un ataque crítico a 6\", puede convertirlo en un impacto normal.",
+        "especialidad_escuadra": "Una vez por turno, si la escuadra de este héroe recibe un ataque crítico, puede convertirlo en un impacto normal.",
         "valor": 10
       },
       "armas": {
@@ -673,7 +673,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad transforma cualquier impacto crítico en normal.",
+        "especialidad": "Transforma cualquier ataque a distancia del enemigo crítico en normal.",
         "valor": 40
       },
       "armas": {
