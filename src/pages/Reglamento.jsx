@@ -817,6 +817,7 @@ function Reglamento() {
           }
           .rules-pdf-sheet .rules-html p:has(> img:only-child),
           .rules-pdf-sheet .rules-html .image {
+            position: relative;
             display: grid;
             place-items: center;
             width: 100%;
@@ -824,12 +825,26 @@ function Reglamento() {
             min-height: 126px;
             margin: 18px 0;
             padding: 16px;
-            border: 1px solid #d7d7d7;
+            overflow: hidden;
+            border: 1px solid #e2b17f;
             border-radius: 6px;
-            background: #ffffff;
+            background:
+              radial-gradient(circle at 50% 0%, rgba(255, 143, 69, 0.2), transparent 46%),
+              linear-gradient(180deg, #fffaf4, #f8f8f8);
+          }
+          .rules-pdf-sheet .rules-html p:has(> img:only-child)::before,
+          .rules-pdf-sheet .rules-html .image::before {
+            content: '';
+            position: absolute;
+            inset: 9px;
+            pointer-events: none;
+            border: 1px solid rgba(255, 143, 69, 0.18);
+            border-radius: 4px;
           }
           .rules-pdf-sheet .rules-html p:has(> img:only-child) img,
           .rules-pdf-sheet .rules-html .image img {
+            position: relative;
+            z-index: 1;
             display: block;
             max-height: 340px;
             object-fit: contain;
