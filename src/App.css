@@ -3912,27 +3912,6 @@ mark {
   height: auto;
 }
 
-.rules-html p:has(> img:only-child),
-.rules-html .image {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  max-width: 100%;
-  min-height: 148px;
-  margin: 24px 0;
-  padding: 20px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.rules-html p:has(> img:only-child) img,
-.rules-html .image img {
-  display: block;
-  max-height: 420px;
-  border-radius: 4px;
-  object-fit: contain;
-}
-
 .rules-html,
 .rules-html .page,
 .rules-html .page-body {

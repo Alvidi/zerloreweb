@@ -815,24 +815,6 @@ function Reglamento() {
             max-width: 100%;
             height: auto;
           }
-          .rules-pdf-sheet .rules-html p:has(> img:only-child),
-          .rules-pdf-sheet .rules-html .image {
-            display: grid;
-            place-items: center;
-            width: 100%;
-            max-width: 100%;
-            min-height: 126px;
-            margin: 18px 0;
-            padding: 16px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.5);
-          }
-          .rules-pdf-sheet .rules-html p:has(> img:only-child) img,
-          .rules-pdf-sheet .rules-html .image img {
-            display: block;
-            max-height: 340px;
-            object-fit: contain;
-          }
           .rules-pdf-sheet .rules-html ul,
           .rules-pdf-sheet .rules-html ol {
             padding-left: 24px;
