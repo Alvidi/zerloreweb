@@ -228,6 +228,8 @@ When performing a **Sprint**, the unit spends **2 actions**.
 
 Sprint represents a fast, exposed movement, useful for repositioning or reaching cover.
 
+![Unit making a Sprint action]({{sprintImage}})
+
 ## Retreat
 
 A unit may retreat at any time, even if locked in melee combat.
@@ -257,6 +259,8 @@ A ready unit may make **ranged counterattacks** during the opposing player's tur
 - **If charged:** attack order is decided by **Speed**, as an exception to the normal charge rule. If the ready unit has **higher Speed** than the charging unit, the ready unit **attacks first** and the charging unit makes the counterattack. If the ready unit has **equal or lower Speed** than the charging unit, the charging unit **attacks first** following the normal rule and the ready unit makes the counterattack. The ready unit may attack or counterattack even if it has no actions left.
 
 The Ready state lasts until the end of the turn.
+
+![Ready unit in defensive position]({{readyImage}})
 
 ---
 

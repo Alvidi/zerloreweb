@@ -23,6 +23,8 @@ import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
 import miniatureVsSquadImage from '../images/webimagen/reglamento-miniatura-vs-escuadra.webp'
 import lineOfSightImage from '../images/webimagen/reglamento-linea-de-vision.webp'
+import sprintImage from '../images/webimagen/reglamento-carrera.webp'
+import readyImage from '../images/webimagen/reglamento-preparado.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -42,6 +44,8 @@ const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
 const RULES_ASSET_PLACEHOLDERS = {
   lineOfSightImage,
   miniatureVsSquadImage,
+  sprintImage,
+  readyImage,
 }
 
 const isRulesPdfKeepWithNextNode = (node) =>

@@ -228,6 +228,8 @@ Al realizar una **Carrera**, la unidad consume **2 acciones**.
 
 La Carrera representa un movimiento rápido y expuesto, útil para reposicionarse o alcanzar coberturas.
 
+![Unidad realizando una Carrera]({{sprintImage}})
+
 ## Retirada
 
 Una unidad puede retirarse en cualquier momento, incluso si está trabada en combate cuerpo a cuerpo.
@@ -257,6 +259,8 @@ Una unidad preparada puede realizar **contraataques a distancia** durante el tur
 - **Si es cargada:** el orden de ataque se decide por **Velocidad**, como excepción a la regla general de carga. Si la unidad preparada tiene **mayor Velocidad** que la que carga, la preparada **ataca primero** y la cargante realiza el contraataque. Si la unidad preparada tiene **igual o menor Velocidad** que la que carga, la cargante **ataca primero** siguiendo la regla normal y la preparada realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
 
 El estado de Preparado dura hasta que finaliza el turno.
+
+![Unidad preparada en posición defensiva]({{readyImage}})
 
 ---
 
