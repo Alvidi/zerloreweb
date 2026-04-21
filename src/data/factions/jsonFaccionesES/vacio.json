@@ -15,15 +15,15 @@
         "id": "ojos-del-mas-alla",
         "habilidades_faccion2": "Ojos del más allá",
         "coste": 6,
-        "descripcion_escaramuza": "Las unidades del Vacío pueden repetir tiradas de ataque fallidas si la unidad enemiga está en cobertura.",
-        "descripcion_escuadra": "Las unidades del Vacío pueden repetir tiradas de ataque fallidas si la unidad enemiga está en cobertura."
+        "descripcion_escaramuza": "La visión del Vacío atraviesa cualquier obstáculo: las unidades de la facción pueden repetir las tiradas de impacto fallidas contra una unidad enemiga que se encuentre en cobertura.",
+        "descripcion_escuadra": "La visión del Vacío atraviesa cualquier obstáculo: las unidades de la facción pueden repetir las tiradas de impacto fallidas contra una unidad enemiga que se encuentre en cobertura."
       },
       {
         "id": "heraldos-del-vacio-supremo",
         "habilidades_faccion3": "Heraldos del vacío supremo",
         "coste": 8,
-        "descripcion_escaramuza": "Esta facción puede usar dos héroes.",
-        "descripcion_escuadra": "Esta facción puede usar dos héroes."
+        "descripcion_escaramuza": "La facción puede incluir hasta 2 Héroes en su ejército, en lugar del tope habitual de 1.",
+        "descripcion_escuadra": "La facción puede incluir hasta 2 Héroes en su ejército, en lugar del tope habitual de 1."
       }
     ]
   },
@@ -213,7 +213,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "cañón del Vacío",
+            "nombre": "Cañón del Vacío",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -335,7 +335,7 @@
       }
     },
     {
-      "nombre_unidad": "Brutálido del vacío",
+      "nombre_unidad": "Brutálido del Vacío",
       "era": "Futuro / Pasado",
       "clase": "Monstruo",
       "perfil": {
@@ -562,8 +562,7 @@
               "Explosiva"
             ],
             "especialidad": "-",
-            "valor_extra": 2,
-            "limitacion": 3
+            "valor_extra": 2
           },
           {
             "nombre": "Grieta del Vacío",

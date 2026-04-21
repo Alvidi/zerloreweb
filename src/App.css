@@ -1694,6 +1694,7 @@ button {
 
 .selected-passive-skill-list-compact {
   margin-top: 0;
+  width: 100%;
 }
 
 .selected-passive-skill-item {
@@ -1718,12 +1719,15 @@ button {
 }
 
 .selected-choice-row {
+  width: 100%;
   justify-content: space-between;
   gap: 12px;
 }
 
 .selected-choice-row .doctrine-item-main {
   align-items: center;
+  min-width: 0;
+  flex: 1;
 }
 
 .selected-choice-row .doctrine-icon-box {
@@ -1754,6 +1758,7 @@ button {
   border: 0;
   background: transparent;
   box-shadow: none;
+  margin-left: auto;
   padding: 0;
   color: var(--text-muted);
   flex-shrink: 0;

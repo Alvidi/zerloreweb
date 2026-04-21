@@ -15,15 +15,15 @@
         "id": "ojos-del-mas-alla",
         "habilidades_faccion2": "Eyes from Beyond",
         "coste": 6,
-        "descripcion_escaramuza": "Void units can reroll failed attack rolls if the enemy unit is in cover.",
-        "descripcion_escuadra": "Void units can reroll failed attack rolls if the enemy unit is in cover."
+        "descripcion_escaramuza": "The Void's sight pierces any obstacle: faction units may reroll failed hit rolls against an enemy unit in cover.",
+        "descripcion_escuadra": "The Void's sight pierces any obstacle: faction units may reroll failed hit rolls against an enemy unit in cover."
       },
       {
         "id": "heraldos-del-vacio-supremo",
         "habilidades_faccion3": "Heralds of the Supreme Void",
         "coste": 8,
-        "descripcion_escaramuza": "This faction can use two heroes.",
-        "descripcion_escuadra": "This faction can use two heroes."
+        "descripcion_escaramuza": "The faction may include up to 2 Heroes in its army, instead of the usual limit of 1.",
+        "descripcion_escuadra": "The faction may include up to 2 Heroes in its army, instead of the usual limit of 1."
       }
     ]
   },
@@ -62,7 +62,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "ritual sword",
+            "nombre": "Ritual Sword",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -73,7 +73,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "ceremonial weapons",
+            "nombre": "Ceremonial Weapons",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -165,7 +165,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "warpflamethrower",
+            "nombre": "Warp Flamethrower",
             "ataques": "1D6",
             "distancia": "6\"",
             "impactos": "-",
@@ -213,7 +213,7 @@
       "armas": {
         "disparo": [
           {
-            "nombre": "void cannon",
+            "nombre": "Void Cannon",
             "ataques": "3D",
             "distancia": "14\"",
             "impactos": "+4",
@@ -384,7 +384,7 @@
       }
     },
     {
-      "nombre_unidad": "major horror",
+      "nombre_unidad": "Greater Horror",
       "era": "Future / Past",
       "clase": "Monster",
       "perfil": {
@@ -559,8 +559,7 @@
             "danio": "7",
             "danio_critico": "9",
             "habilidades_arma": [
-              "Explosive",
-              "Limited Ammo (3)"
+              "Explosive"
             ],
             "especialidad": "-",
             "valor_extra": 2

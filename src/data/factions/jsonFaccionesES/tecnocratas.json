@@ -15,15 +15,15 @@
         "id": "apoyo-de-artefacto",
         "habilidades_faccion2": "Apoyo de artefacto",
         "coste": 10,
-        "descripcion_escaramuza": "Se puede incluir en las unidades de línea y élite hasta 1 unidad con especialidad \"Apoyo de artefacto\" ignorando el número de escuadra que tenga la unidad.",
-        "descripcion_escuadra": "Se puede incluir en las unidades de línea y élite hasta 1 unidad con especialidad \"Apoyo de artefacto\" ignorando el número de escuadra que tenga la unidad."
+        "descripcion_escaramuza": "A cada unidad de Línea o Élite de la facción se le puede acoplar 1 miniatura con especialidad \"Apoyo de artefacto\", aunque la escuadra ya esté en su máximo. El artefacto se añade por encima del tope. En modo Escaramuza, el artefacto acompaña a su unidad y se activa junto a ella como si formaran una misma escuadra.",
+        "descripcion_escuadra": "A cada unidad de Línea o Élite de la facción se le puede acoplar 1 miniatura con especialidad \"Apoyo de artefacto\", aunque la escuadra ya esté en su máximo. El artefacto se añade por encima del tope. En modo Escaramuza, el artefacto acompaña a su unidad y se activa junto a ella como si formaran una misma escuadra."
       },
       {
         "id": "protocolos-de-combate",
         "habilidades_faccion3": "Protocolos de Combate",
         "coste": 5,
-        "descripcion_escaramuza": "Una vez por turno, cuando una unidad vaya a realizar una acción de Disparo, puede añadir -1 al resultado de precisión si otra unidad está a 6\" del mismo objetivo.",
-        "descripcion_escuadra": "Una vez por turno, cuando una unidad vaya a realizar una acción de Disparo, puede añadir -1 al resultado de precisión si otra unidad está a 6\" del mismo objetivo."
+        "descripcion_escaramuza": "Una vez por turno, cuando una unidad de la facción realice una acción de Disparo, aplica -1 al valor de Precisión del arma si al menos una unidad aliada está a 6\" o menos del objetivo. Por ejemplo, Precisión +4 cuenta como +3.",
+        "descripcion_escuadra": "Una vez por turno, cuando una unidad de la facción realice una acción de Disparo, aplica -1 al valor de Precisión del arma si al menos una unidad aliada está a 6\" o menos del objetivo. Por ejemplo, Precisión +4 cuenta como +3."
       }
     ]
   },
@@ -211,7 +211,7 @@
               "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 3
           },
           {
             "nombre": "Lanzallamas",
@@ -224,7 +224,7 @@
               "Directo"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -247,14 +247,14 @@
       "clase": "Línea",
       "perfil": {
         "movimiento": "7\"",
-        "vidas": 3,
+        "vidas": 7,
         "salvacion": "+3",
         "velocidad": 4,
         "escuadra": {
           "min": 1,
           "max": 1
         },
-        "especialidad": "Apoyo de artefacto. No puede disparar. Los impactos críticos se convierten en impactos normales.",
+        "especialidad": "Apoyo de artefacto. No puede disparar. El dron absorbe el daño primero, sea cual sea el ataque.",
         "valor": 7
       },
       "armas": {
@@ -576,7 +576,7 @@
         },
         "especialidad_escaramuza": "Una vez por turno, si esta unidad recibe un ataque crítico a 6\", puede convertirlo en un impacto normal.",
         "especialidad_escuadra": "Una vez por turno, si la escuadra de este héroe recibe un ataque crítico, puede convertirlo en un impacto normal.",
-        "valor": 10
+        "valor": 14
       },
       "armas": {
         "disparo": [
@@ -673,7 +673,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Transforma cualquier ataque a distancia del enemigo crítico en normal.",
+        "especialidad": "Transforma cualquier ataque crítico a distancia del enemigo en normal.",
         "valor": 40
       },
       "armas": {

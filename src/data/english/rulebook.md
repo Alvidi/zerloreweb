@@ -2,7 +2,7 @@
 
 ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, or doctrines, and add these concepts as you become more familiar with the game.
 
-**This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.**
+This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
 
 ---
 
@@ -27,20 +27,21 @@ In Grand Battle mode, all miniatures in a squad must stay within **1" or less** 
 
 Miniature placement only affects **which miniatures can attack** in melee combat and does not modify the number of actions, state, or activation of the squad.
 
-> Throughout the rulebook, when a rule mentions a **"unit"**, it also applies to a **"squad"** in Grand Battle mode, unless stated otherwise.
+![Single miniature versus a squad]({{miniatureVsSquadImage}})
 
+> Throughout the rulebook, when a rule mentions a **"unit"**, it also applies to a **"squad"** in Grand Battle mode, unless stated otherwise.
 
 ### Recommended Base Sizes
 
 ZeroLore is miniature-agnostic, but bases proportional to the unit type are recommended to maintain visual and tactical coherence.
 
-| Unit Type                         | Recommended Base         |
-|-----------------------------------|--------------------------|
-| Line / Elite (infantry)           | 25 – 40 mm round         |
-| Bulky Elite / Monsters            | 50 – 60 mm round         |
-| Light Vehicles                    | 40 – 60 mm               |
-| Medium / Heavy Vehicles           | 60 – 80 mm or oval       |
-| Titans                            | 100 mm or larger         |
+| Unit Type               | Recommended Base   |
+| ----------------------- | ------------------ |
+| Line / Elite (infantry) | 25 – 40 mm round   |
+| Bulky Elite / Monsters  | 50 – 60 mm round   |
+| Light Vehicles          | 40 – 60 mm         |
+| Medium / Heavy Vehicles | 60 – 80 mm or oval |
+| Titans                  | 100 mm or larger   |
 
 These are guidelines. The criterion is that the base is consistent with the visual size of the miniature and does not provide an unfair tactical advantage.
 
@@ -103,7 +104,6 @@ All distances are measured in inches (").
 - Distances may be measured at any point in the game.
 - If in doubt, either player may request a **precise re-measurement**, and the result applies definitively.
 
-
 ### Line of Sight
 
 For a unit to make a ranged attack on another, it must have **line of sight**.
@@ -114,6 +114,7 @@ For a unit to make a ranged attack on another, it must have **line of sight**.
 
 Cover rules are detailed later in the rulebook.
 
+![Example of clear and blocked line of sight]({{lineOfSightImage}})
 
 ### The Golden Rule
 
@@ -136,7 +137,6 @@ Each turn consists of the following phases:
 2. **Activation Phase**
 3. **End of Turn**
 
-
 ## 1. Initiative Phase
 
 At the beginning of each turn, both players make the **Initiative roll**.
@@ -157,7 +157,6 @@ After determining Initiative, players declare the Command Doctrine they will use
 - Their effects last **the entire turn**, unless stated otherwise.
 - The unit or squad with an active doctrine is marked with a token.
 
-
 ## 2. Activation Phase
 
 After the Initiative Phase comes the **Activation Phase**.
@@ -172,7 +171,6 @@ Activating a unit means:
 - Fully resolving its effects.
 
 Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
-
 
 ## 3. End of Turn
 
@@ -200,7 +198,6 @@ Available actions for all units:
 - **Melee Attack** – 2 actions
 - **Sprint** – 2 actions
 
-
 ## Movement
 
 When a unit moves, it may travel up to its **Movement** value in inches (").
@@ -220,7 +217,6 @@ To climb:
 
 1. The unit must move until its base touches the base of the obstacle.
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
-
 
 ## Sprint
 
@@ -258,10 +254,9 @@ A unit that uses the **Ready** action adopts a defensive posture.
 A ready unit may make **ranged counterattacks** during the opposing player's turn.
 
 - **If shot at:** it may immediately fire back with its equipped weapon, regardless of remaining actions. The enemy attack resolves first, then the return fire.
-- **If charged:** combat is resolved by **Speed**. If the ready unit has higher Speed, it attacks first. The charging unit makes the counterattack. The Ready unit may attack or counterattack even if it has no actions left.
+- **If charged:** attack order is decided by **Speed**, as an exception to the normal charge rule. If the ready unit has **higher Speed** than the charging unit, the ready unit **attacks first** and the charging unit makes the counterattack. If the ready unit has **equal or lower Speed** than the charging unit, the charging unit **attacks first** following the normal rule and the ready unit makes the counterattack. The ready unit may attack or counterattack even if it has no actions left.
 
 The Ready state lasts until the end of the turn.
-
 
 ---
 
@@ -284,7 +279,6 @@ Every ranged attack is always resolved following this sequence:
 3. Roll to hit
 4. Roll saves
 5. Apply damage
-
 
 ## 1. Choose Target
 
@@ -309,7 +303,6 @@ For each die rolled:
 - Results below the Precision value are misses and are discarded.
 
 Dice that hit **are not rerolled**.
-
 
 ## 4. Roll Saves
 
@@ -345,7 +338,6 @@ To initiate melee combat, a unit must perform the **Charge** action, which costs
 
 A successful charge **automatically includes a melee attack**.
 
-
 ## Locked Units
 
 When two units are in base contact:
@@ -354,7 +346,11 @@ When two units are in base contact:
 - Both units may only use **melee combat** or **retreat** actions.
 - They remain locked until one of them is destroyed or retreats.
 
-**A third unit or squad may charge a unit already locked in combat**, as long as it has enough actions to charge. Doing so locks it in with the others. The charged unit may choose which of the enemy units to attack when its Speed order comes.
+**A third unit or squad may charge a unit or squad already locked in combat**, as long as it has enough actions to charge. The charge is resolved normally: the charging unit makes its attack, and the defender counterattacks **only if it still has enough actions available**. If the defender already spent them in an earlier exchange that same turn, it suffers the attack without striking back. After the exchange, all involved units are considered locked in the same combat.
+
+This principle applies successively: each new unit or squad that charges joins the shared combat.
+
+In a combat with three or more units, when a unit makes its melee attack, it **may choose which locked enemy unit to attack** in that exchange. Attack order follows the normal rules: charger first, then Speed.
 
 To become unlocked:
 
@@ -365,9 +361,10 @@ To become unlocked:
 
 The order in which units attack is determined as follows:
 
-1. If a unit has charged, it **attacks first**.
-2. If neither has charged, the unit with the **higher Speed** attacks first.
-3. If both have the same Speed, players roll **1D6** to decide.
+1. If a unit has **charged this turn**, that unit **attacks first**, regardless of Speed.
+2. As an **exception** to rule 1: if the defending unit is in the **Ready** state, the Ready rule applies and **Speed** may alter this order.
+3. If neither unit has charged this turn, the unit with the **higher Speed** attacks first.
+4. If both have the same Speed, players roll **1D6** to decide.
 
 This order applies **each time an exchange of attacks is resolved**.
 
@@ -378,7 +375,6 @@ Melee combat is resolved following this sequence:
 1. Attack by the unit acting first
 2. Defender's saves
 3. Counterattack (if applicable)
-
 
 ### 1. Attack
 
@@ -515,12 +511,12 @@ The main states in ZeroLore are:
 
 ## Ready Unit
 
-A unit enters the **Ready** state when it uses the *Ready* action during its activation. *(explained in the section: Unit Actions)*
+A unit enters the **Ready** state when it uses the _Ready_ action during its activation. _(explained in the section: Unit Actions)_
 The Ready state is shown by placing the **shield token** next to the miniature. It is removed at the end of the turn.
 
 ## Retreating Unit
 
-A unit enters **Retreat** when it declares the *Retreat* action. *(explained in the section: Unit Actions)*
+A unit enters **Retreat** when it declares the _Retreat_ action. _(explained in the section: Unit Actions)_
 The Retreat state is shown by placing the **retreat token** (arrow) next to the miniature. It is removed when the unit regroups or reaches a friendly command post.
 
 ## Locked Units
@@ -531,7 +527,7 @@ Two units are considered **locked** when they are in base contact. The locked st
 - They cannot be attacked at range by units outside the combat.
 - They remain locked until one is destroyed or declares retreat.
 
-*(See the Melee Combat section for the full resolution.)*
+_(See the Melee Combat section for the full resolution.)_
 
 ## Out of Control Unit
 
@@ -546,7 +542,6 @@ While out of control:
 - It only uses **melee attacks**, prioritising charges when possible.
 
 The Out of Control state persists until a rule states otherwise or the game ends.
-
 
 # Command Posts and Deployment
 
@@ -596,7 +591,6 @@ Characteristics:
 - They can capture and control **command posts** and other conquest zones.
 - They usually have balanced profiles and access to a wide variety of weapons.
 
-
 ## 2. Elite Units
 
 **Elite** units are more resilient and powerful than Line units.
@@ -606,7 +600,6 @@ Characteristics:
 - Greater offensive or defensive capability.
 - Designed to break enemy formations or hold key positions.
 - They can capture and control **command posts**, just like Line units.
-
 
 ## 3. Vehicles
 
@@ -622,7 +615,6 @@ Characteristics:
 
 - An **explosion** occurs that affects all units within **3"**.
 - Affected units take **1D6 automatic damage** that cannot be saved.
-
 
 ## 4. Monsters
 
@@ -646,7 +638,6 @@ While out of control:
 - It always prioritises the nearest unit.
 - It only uses melee attacks, prioritising charges.
 
-
 ## 5. Heroes
 
 **Heroes** represent exceptional fighters and key figures within each faction.
@@ -660,7 +651,6 @@ General characteristics:
 
 - They have unique abilities that define their tactical role. Their abilities and specialty are shown on their profile.
 - In Grand Battle mode, some heroes may **join specific squads** according to their profile. While they are part of that squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently: damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
-
 
 ## 6. Titans
 
@@ -744,7 +734,6 @@ Represents the unit's **point cost**.
 - It determines army size and composition.
 - It is also used to calculate scoring when multiple units contest the same command post.
 
-
 ### Weapon Equipment
 
 Unless a rule states otherwise, each unit may carry **one ranged weapon** and **one melee weapon**.
@@ -760,36 +749,42 @@ Each weapon indicates how its attack is resolved when used.
 A ranged weapon profile includes:
 
 ### Weapon Name
+
 Identifies the weapon used.
 
 ### Attacks
+
 Number of dice rolled when making a ranged attack with this weapon.
 
 Each die represents an independent shot or projectile.
 
 ### Range
+
 Maximum range of the weapon in inches ("). The unit may only attack targets within this range.
 
 ### Precision
+
 Minimum result needed on each die to hit.
 
 - A result of **6** always counts as a critical hit, unless a rule states otherwise.
 
 ### Damage / Critical Damage
+
 Indicates how many **Wounds** are lost per hit:
 
 - **Damage**: normal hit.
 - **Critical Damage**: hit obtained with a result of 6 or due to a weapon ability.
 
 ### Weapon Abilities
+
 Special rules associated only with that weapon.
 
 - They only apply while the weapon is operational.
 - If the weapon is destroyed or silenced, these abilities cannot be used.
 
 ### Extra Value
-Additional point cost for equipping this weapon, if applicable.
 
+Additional point cost for equipping this weapon, if applicable.
 
 ## Melee Weapon Profiles
 
@@ -816,7 +811,6 @@ Special rules that only affect this type of attack or this specific weapon.
 ### Extra Value
 
 Additional point cost for equipping the weapon, if applicable.
-
 
 ## Modifiers
 
@@ -859,58 +853,64 @@ These abilities:
 
 If a unit loses or cannot use a weapon, **it cannot benefit** from its abilities.
 
-
 ## Weapon Ability Table
 
 ### 1. Raider (+X)
+
 When a target is hit by this weapon, it **loses +X to its Save** against that attack.
 **Moment:** Shooting
 
 ### 2. Heavy
+
 - If the unit **has moved**, the weapon gains **+1 to its Precision value**.
 - If the unit **has not moved**, the weapon gains **-1 to its Precision value**.
 
 **Moment:** Shooting
 
 ### 3. Rapid Fire (+X)
+
 When the target is at **half or less of the weapon's range**, it gains **+X Attacks**.
 **Moment:** Shooting
 
 ### 4. Gunslinger
+
 The unit may fire this weapon even if **locked in melee combat**, but only against the unit it is fighting in melee combat.
 **Moment:** Shooting
 
 ### 5. Explosive
-The attacker declares a point of impact within the weapon's range and the attack is resolved normally.
 
-- **Skirmish mode:** all enemy units whose base is within 3" or less of the point of impact take the same damage independently.
-- **Grand Battle mode:** it only affects the target squad. The opponent distributes the total damage among their miniatures as they decide. If the damage exceeds one miniature's Wounds, the excess carries over to the next.
+The attacker declares a **target unit** and resolves the attack normally. Any other enemy unit with at least one miniature within **3"** or less of the target unit receives the same damage. If it is a squad, the damage is multiplied by the number of its miniatures within the radius; the defender distributes it normally.
 
 Locked units are not affected.
 **Moment:** Shooting
 
-
 ### 6. Critical Attack
+
 Critical hits obtained with this weapon **cannot be saved**.
 **Moment:** Shooting and melee
 
 ### 7. Chained Impacts
+
 Each critical hit generates **one additional attack**, resolved normally.
 **Moment:** Shooting and melee
 
 ### 8. Deadeye
+
 Allows **rerolling all failed** attack rolls.
 **Moment:** Shooting and melee
 
 ### 9. Anti (X+) (Line, Elite, Vehicle, Monster, or All)
+
 Against the indicated unit type, results of X+ count as **critical hits**.
 **Moment:** Shooting and melee
 
 ### 10. Ignore Coverage
+
 The target **cannot benefit** from any defensive bonus from cover.
 **Moment:** Shooting
 
 ### 11. Parabolic Fire
+
 This weapon may fire without requiring line of sight. The player marks a target point within the weapon's range and rolls 1D6:
 
 - **5–6 — Direct Hit:** the attack lands exactly on the marked point. The target unit cannot make a save roll against this attack, also ignoring any cover bonus it has.
@@ -919,14 +919,17 @@ This weapon may fire without requiring line of sight. The player marks a target 
 **Moment:** Shooting
 
 ### 12. Unstable
+
 This weapon is unstable. After finishing the attack against the target, roll 1D6. On a 1 or 2, the unit carrying this weapon suffers the same damage points the target received. If the target suffered no hits, this unit suffers nothing either.
 **Moment:** Shooting
 
 ### 13. Direct
+
 This weapon **hits automatically** and does not require a Hit roll.
 **Moment:** Shooting
 
 ### 14. Guerrilla
+
 The unit may take an extra **shooting action after using Sprint**.
 **Moment:** Shooting
 
@@ -965,34 +968,42 @@ Doctrines:
 
 Doctrines are **public** and must be clearly declared to the opponent before being applied.
 
-
 ## Command Doctrine List
 
 ### 1. Clubbing Blow — 3 pts
+
 The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This doctrine is resolved immediately when the unit performs its activation regardless of who has the higher Speed.
 
 ### 2. Aimed Shot — 4 pts
+
 The chosen unit or squad **loses one action**, but gains **+1 Attack die** for shooting this turn.
 
-### 3. Frenzy
+### 3. Frenzy — 3 pts
+
 The chosen unit may use **one additional movement action** this turn.
 
 ### 4. Combat Agility — 6 pts
+
 The chosen unit gains initiative in melee combat this turn, ignoring the opponent's Speed and even if the enemy charged.
 
 ### 5. Ours is the Victory — 5 pts
+
 The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes, on that same objective.
 
 ### 6. Immediate Reaction — 4 pts
+
 This unit cannot be charged, nor can it charge any enemy unit
 
 ### 7. Overcharged — 3 pts
+
 If this unit fails a charge during this turn, it may immediately repeat it once.
 
 ### 8. Second Chance — 4 pts
+
 Repeat one melee or ranged attack roll. If the first roll is favourable this doctrine may be ignored, if you decide to use the doctrine the first roll is discarded.
 
 ### 9. Fight to the Death — 5 pts
+
 This doctrine only works with one allied unit / squad that is locked in melee combat against another, if more than 2 units / squads are involved this doctrine cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, doctrines, and so on. If either of the two units / squads in combat is activated, the doctrine is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
 
 ---

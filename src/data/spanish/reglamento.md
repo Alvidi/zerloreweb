@@ -2,7 +2,7 @@
 
 ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones , armas o doctrinas y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
-**Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.**
+Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
 
 ---
 
@@ -26,6 +26,8 @@ Una **escuadra** es una unidad compuesta por varias miniaturas que comparten act
 En modo Gran Batalla, todas las miniaturas que formen parte de una escuadra deben mantenerse a **1" o menos** de al menos de 2 miniaturas de la misma escuadra o una en caso de estar formada por 2 unidades, formando un grupo coherente.
 
 La colocación de las miniaturas solo afecta a **qué miniaturas pueden atacar** en combate cuerpo a cuerpo y no modifica el número de acciones, el estado ni la activación de la escuadra.
+
+![Miniatura individual frente a una escuadra]({{miniatureVsSquadImage}})
 
 > A lo largo del reglamento, cuando una regla mencione **"unidad"**, se aplica igualmente a **"escuadra"** en modo Gran Batalla, salvo que se indique lo contrario.
 
@@ -111,6 +113,8 @@ Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visi
 - Si una miniatura (aliada o enemiga) o un elemento de escenografía bloquea completamente la visión, el objetivo **no puede ser atacado** a distancia.
 
 Las reglas de cobertura se detallan más adelante en el reglamento.
+
+![Ejemplo de línea de visión clara y bloqueada]({{lineOfSightImage}})
 
 ### La regla de oro
 
@@ -250,7 +254,7 @@ Una unidad que utiliza la acción **Preparado** adopta una postura defensiva.
 Una unidad preparada puede realizar **contraataques a distancia** durante el turno del jugador rival.
 
 - **Si es disparada:** puede devolver inmediatamente un disparo con el arma equipada, independientemente de si le quedan acciones. Primero se resuelve el ataque enemigo, luego el disparo de respuesta.
-- **Si es cargada:** el combate se resuelve por **Velocidad**. Si la unidad preparada tiene mayor Velocidad, ataca primero. La unidad que cargó realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
+- **Si es cargada:** el orden de ataque se decide por **Velocidad**, como excepción a la regla general de carga. Si la unidad preparada tiene **mayor Velocidad** que la que carga, la preparada **ataca primero** y la cargante realiza el contraataque. Si la unidad preparada tiene **igual o menor Velocidad** que la que carga, la cargante **ataca primero** siguiendo la regla normal y la preparada realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
 
 El estado de Preparado dura hasta que finaliza el turno.
 
@@ -342,7 +346,11 @@ Cuando dos unidades están en contacto de peana:
 - Ambas unidades solo pueden usar acciones de **combate cuerpo a cuerpo** o **retirada**.
 - Permanecen trabadas hasta que una de las dos sea eliminada o se retire.
 
-**Una tercera unidad o escuadra puede cargar a una unidad ya trabada en combate**, siempre que disponga de acciones suficientes para cargar. Al hacerlo queda trabada con ella. La unidad cargada puede elegir a cuál de las unidades enemigas atacar cuando le corresponda por orden de Velocidad.
+**Una tercera unidad o escuadra puede cargar a una unidad o escuadra ya trabada en combate**, siempre que disponga de acciones suficientes para cargar. La carga se resuelve con normalidad: la cargante realiza su ataque y la defensora contraataca **únicamente si aún dispone de acciones suficientes**. Si la defensora ya las había gastado en un intercambio anterior de ese mismo turno, encaja el ataque sin devolverlo. Tras el intercambio, todas las unidades involucradas se consideran trabadas en el mismo combate.
+
+Este principio se aplica sucesivamente: cada nueva unidad o escuadra que cargue se une al combate común.
+
+En un combate con tres o más unidades, cuando una unidad realice su ataque cuerpo a cuerpo **puede elegir a cuál de las unidades enemigas trabadas atacar** en ese intercambio. El orden de ataque sigue las reglas normales: cargante primero, Velocidad después.
 
 Para destrabarse:
 
@@ -353,9 +361,10 @@ Para destrabarse:
 
 El orden en el que atacan las unidades se determina de la siguiente forma:
 
-1. Si una unidad ha cargado, **ataca primero**.
-2. Si ninguna ha cargado, ataca primero la unidad con **mayor Velocidad**.
-3. Si ambas tienen la misma Velocidad, los jugadores tiran **1D6** para decidir.
+1. Si una unidad ha **cargado este turno**, esa unidad **ataca primero**, sin importar el valor de Velocidad.
+2. Como **excepción** a la regla 1: si la defensora está en estado **Preparado**, se aplica la regla de Preparado y la **Velocidad** puede alterar este orden.
+3. Si ninguna unidad ha cargado este turno, ataca primero la unidad con **mayor Velocidad**.
+4. Si ambas tienen la misma Velocidad, los jugadores tiran **1D6** para decidir.
 
 Este orden se aplica **cada vez que se resuelve un intercambio de ataques**.
 
@@ -870,10 +879,7 @@ La unidad puede disparar esta arma incluso si está **trabada en combate cuerpo 
 
 ### 5. Explosiva
 
-El atacante declara un punto de impacto dentro del alcance del arma y se resuelve el ataque normalmente.
-
-- **Modo escaramuza:** todas las unidades enemigas cuya peana esté a 3" o menos del punto de impacto reciben el mismo daño de forma independiente.
-- **Modo Gran Batalla:** solo afecta a la escuadra objetivo. El rival distribuye el daño total entre sus miniaturas como decida. Si el daño supera las vidas de una miniatura, el sobrante pasa a la siguiente.
+El atacante declara una **unidad objetivo** y resuelve el ataque con normalidad. Cualquier otra unidad enemiga con al menos una miniatura a **3"** o menos de la unidad objetivo recibe el mismo daño. Si es una escuadra, el daño se multiplica por el número de sus miniaturas dentro del radio; el defensor lo distribuye con normalidad.
 
 Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
 **Momento:** Disparo
@@ -972,7 +978,7 @@ La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contr
 
 La unidad o escuadra elegida **pierde una acción**, pero gana **+1 dado de Ataque** en disparo durante este turno.
 
-### 3. Frenesí
+### 3. Frenesí — 3 pts
 
 La unidad elegida puede utilizar **una acción adicional de movimiento** este turno.
 

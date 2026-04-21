@@ -21,6 +21,8 @@ import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
+import miniatureVsSquadImage from '../images/webimagen/reglamento-miniatura-vs-escuadra.webp'
+import lineOfSightImage from '../images/webimagen/reglamento-linea-de-vision.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -37,6 +39,10 @@ const normalizeHeadingText = (value) =>
     .trim()
 
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
+const RULES_ASSET_PLACEHOLDERS = {
+  lineOfSightImage,
+  miniatureVsSquadImage,
+}
 
 const isRulesPdfKeepWithNextNode = (node) =>
   node?.nodeType === 1 && RULES_PDF_KEEP_WITH_NEXT_TAGS.has(node.tagName)
@@ -51,6 +57,12 @@ const getSafeRulesPdfSplitCount = (nodes, candidateCount) => {
 
   return safeCount
 }
+
+const replaceRulesAssetPlaceholders = (markdown) =>
+  Object.entries(RULES_ASSET_PLACEHOLDERS).reduce(
+    (output, [key, value]) => output.replaceAll(`{{${key}}}`, value),
+    markdown,
+  )
 
 const TOKEN_DEFINITIONS = [
   { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
@@ -156,7 +168,7 @@ function Reglamento() {
     if (isTokensMode) {
       return ''
     }
-    return marked(activeMarkdown)
+    return marked(replaceRulesAssetPlaceholders(activeMarkdown))
   }, [activeMarkdown, isTokensMode])
   const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
   const printCoverCreditLabel = lang === 'en' ? 'by alvidi' : 'por alvidi'

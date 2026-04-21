@@ -15,15 +15,15 @@
         "id": "apoyo-de-artefacto",
         "habilidades_faccion2": "Artifact support",
         "coste": 10,
-        "descripcion_escaramuza": "Up to 1 unit with the \"Artifact support\" specialty may be included in line and elite units, ignoring that unit's squad size.",
-        "descripcion_escuadra": "Up to 1 unit with the \"Artifact support\" specialty may be included in line and elite units, ignoring that unit's squad size."
+        "descripcion_escaramuza": "Each Line or Elite unit in the faction may attach 1 miniature with the \"Artifact Support\" specialty, even if the squad is already at its maximum size. The artifact is added above the squad limit. In Skirmish mode, the artifact accompanies its unit and activates with it as if they formed the same squad.",
+        "descripcion_escuadra": "Each Line or Elite unit in the faction may attach 1 miniature with the \"Artifact Support\" specialty, even if the squad is already at its maximum size. The artifact is added above the squad limit. In Skirmish mode, the artifact accompanies its unit and activates with it as if they formed the same squad."
       },
       {
         "id": "protocolos-de-combate",
         "habilidades_faccion3": "Combat Protocols",
         "coste": 5,
-        "descripcion_escaramuza": "Once per turn, when a unit is about to take a Shoot action, it may add -1 to the Precision result if another unit is within 6\" of the same target.",
-        "descripcion_escuadra": "Once per turn, when a unit is about to take a Shoot action, it may add -1 to the Precision result if another unit is within 6\" of the same target."
+        "descripcion_escaramuza": "Once per turn, when a faction unit takes a Shoot action, apply -1 to the weapon's Precision value if at least one allied unit is within 6\" or less of the target. For example, Precision +4 counts as +3.",
+        "descripcion_escuadra": "Once per turn, when a faction unit takes a Shoot action, apply -1 to the weapon's Precision value if at least one allied unit is within 6\" or less of the target. For example, Precision +4 counts as +3."
       }
     ]
   },
@@ -123,7 +123,7 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "You can use Dash as 1 action.",
+        "especialidad": "May use Sprint as 1 action.",
         "valor": 5
       },
       "armas": {
@@ -211,7 +211,7 @@
               "Anti 5+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 3
           },
           {
             "nombre": "Flamethrower",
@@ -224,7 +224,7 @@
               "Direct"
             ],
             "especialidad": "-",
-            "valor_extra": 0
+            "valor_extra": 2
           }
         ],
         "cuerpo_a_cuerpo": [
@@ -247,14 +247,14 @@
       "clase": "Line",
       "perfil": {
         "movimiento": "7\"",
-        "vidas": 3,
+        "vidas": 7,
         "salvacion": "+3",
         "velocidad": 4,
         "escuadra": {
           "min": 1,
           "max": 1
         },
-        "especialidad": "Artifact Support. This unit cannot shoot. Critical hits become normal hits.",
+        "especialidad": "Artifact Support. Cannot shoot. The drone absorbs damage first, regardless of the attack.",
         "valor": 7
       },
       "armas": {
@@ -576,7 +576,7 @@
         },
         "especialidad_escaramuza": "Once per turn, if this unit receives a critical hit within 6\", it may turn it into a normal hit.",
         "especialidad_escuadra": "Once per turn, if this hero's squad receives a critical hit, it may turn it into a normal hit.",
-        "valor": 10
+        "valor": 14
       },
       "armas": {
         "disparo": [
@@ -673,7 +673,7 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Transforms any enemy critical ranged attack into a normal hit.",
+        "especialidad": "Transforms any enemy ranged critical hit into a normal hit.",
         "valor": 40
       },
       "armas": {

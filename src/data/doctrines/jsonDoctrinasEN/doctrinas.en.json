@@ -21,6 +21,7 @@
       "nombre": "Frenzy",
       "token_label": "Doctrine: Frenzy",
       "descripcion": "The chosen unit may use one additional movement action this turn.",
+      "coste": 3,
       "orden": 3
     },
     {

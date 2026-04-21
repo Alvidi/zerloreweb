@@ -21,6 +21,7 @@
       "nombre": "Frenesí",
       "token_label": "Doctrina: Frenesí",
       "descripcion": "La unidad elegida puede utilizar una acción adicional de movimiento este turno.",
+      "coste": 3,
       "orden": 3
     },
     {
