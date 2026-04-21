@@ -817,17 +817,22 @@ function Reglamento() {
           }
           .rules-pdf-sheet .rules-html p:has(> img:only-child),
           .rules-pdf-sheet .rules-html .image {
-            width: fit-content;
+            display: grid;
+            place-items: center;
+            width: 100%;
             max-width: 100%;
-            margin: 18px auto;
-            padding: 14px;
+            min-height: 126px;
+            margin: 18px 0;
+            padding: 16px;
             border: 1px solid #d7d7d7;
-            border-radius: 0;
+            border-radius: 6px;
             background: #ffffff;
           }
           .rules-pdf-sheet .rules-html p:has(> img:only-child) img,
           .rules-pdf-sheet .rules-html .image img {
             display: block;
+            max-height: 340px;
+            object-fit: contain;
           }
           .rules-pdf-sheet .rules-html ul,
           .rules-pdf-sheet .rules-html ol {
