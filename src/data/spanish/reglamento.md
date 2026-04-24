@@ -1,6 +1,6 @@
 # Reglamento ZeroLore
 
-ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones , armas o doctrinas y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
+ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas o habilidades estratégicas, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
 Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
 
@@ -47,18 +47,14 @@ Estas medidas son orientativas. El criterio es que la peana sea coherente con el
 
 ### Dados y tiradas
 
-ZeroLore utiliza dados de seis caras (1D6).
+ZeroLore utiliza siempre dados de seis caras (1D6).
 
-- Cada tirada se resuelve lanzando uno o más dados según indique la regla.
-- Un impacto crítico se obtiene normalmente con un resultado de 6, salvo que una regla indique lo contrario.
-- Los resultados de 1 o 2 suelen considerarse fallos en combate cuerpo a cuerpo.
-- Cuando una regla permite repetir una tirada, cada dado solo puede repetirse una vez. Si varias reglas permiten repetir una tirada, solo se aplica una repetición.
-
-A lo largo de la partida se realizan distintos tipos de tirada: **iniciativa**, **impactos**, **salvación** y **daño**. Cada una se explica en detalle en su sección correspondiente.
+A lo largo de la partida se realizan distintos tipos de tirada: **iniciativa**, **impactos**, **salvación** y **daño**.
+Cada una se explica en detalle en su sección correspondiente.
 
 ### Prioridad de reglas
 
-En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las del reglamento base y se aplican a todas las unidades, y las **reglas especiales**, que son las habilidades escritas en la ficha de una unidad, un arma, una doctrina o una facción.
+En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las del reglamento base y se aplican a todas las unidades, y las **reglas especiales**, que son las habilidades escritas en la ficha de una unidad, un arma, una habilidad estratégica o una facción.
 
 Cuando una regla especial contradiga o modifique una regla general, **la regla especial siempre tiene prioridad**.
 
@@ -69,9 +65,10 @@ _Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arm
 ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 
 - **1vs1**: duelo entre dos jugadores
+- **1vs3**: enfrentamiento contra un jugador
 - **2vs2**: dos equipos de dos jugadores
 
-En partidas de mas de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno.
+En partidas de más de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno, y aplica también a equipos.
 
 ### Modos de juego
 
@@ -142,20 +139,20 @@ Cada turno se compone de las siguientes fases:
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 
 - Cada jugador tira **1D6**.
-- El jugador con el resultado más alto **actúa primero** durante ese turno.
+- El jugador o equipo con el resultado más alto **actúa primero** durante ese turno.
 - En caso de empate, se repite la tirada.
-- Cada jugador puede añadir una o más **estratagemas** a sus unidades si lo desea.
-- Se reclutan o se sacan unidades de reserva.
+- Cada jugador puede añadir una **habilidad estratégica** a sus unidades si la tiene.
+- Se reclutan o se sacan unidades de reserva en los puestos de mando.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
-### Doctrinas de Mando
+### Habilidades estratégicas
 
-Tras determinar la Iniciativa, los jugadores declaran la Doctrina de Mando que vayan a utilizar ese turno y marcan la unidad o escuadra que la usará.
+Tras determinar la Iniciativa, los jugadores declaran la habilidad estratégica que tengan equipada, que vayan a utilizar ese turno y marcan la unidad que la usará.
 
-- Solo se puede usar **una doctrina por turno** a escoger.
+- Solo se puede usar **una estrategia por turno** a escoger.
 - Sus efectos duran **todo el turno**, salvo que se indique lo contrario.
-- La unidad o escuadra que tenga activa una doctrina se marca con un token.
+- La unidad o escuadra que tenga activa una estrategia se marca con un token.
 
 ## 2. Fase de Activaciones
 
@@ -167,7 +164,7 @@ Después de la Fase de Iniciativa comienza la **Fase de Activaciones**.
 Activar una unidad significa:
 
 - Declararla como la unidad activa.
-- Realizar las acciones disponibles según sus reglas.
+- Realizar las **2 acciones** disponibles.
 - Resolver completamente sus efectos.
 
 Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
@@ -176,7 +173,7 @@ Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese
 
 Cuando **todas las unidades de ambos jugadores** han sido activadas, el turno finaliza.
 
-Durante el Fin de Turno se terminan los efectos que indiquen resolverse al final del turno. Tras esto, comienza un nuevo turno empezando de nuevo por la Fase de Iniciativa.
+Durante el Fin de Turno se terminan los efectos que indiquen resolverse al final del turno y se cuentan los puntos ganados según el modo de juego. Tras esto, comienza un nuevo turno empezando de nuevo por la Fase de Iniciativa.
 
 ---
 
@@ -278,11 +275,11 @@ Para atacar a distancia, la unidad debe:
 
 Todo ataque a distancia se resuelve siguiendo siempre esta secuencia:
 
-1. Elegir objetivo
-2. Determinar ataques
-3. Tirar precision
-4. Tirar salvaciones
-5. Aplicar daño
+1. Elegir objetivo.
+2. Determinar el número de dados de ataque del arma.
+3. Tirar y superar o igualar la Precisión.
+4. Tirar salvaciones por parte del defensor.
+5. Aplicar daño.
 
 ## 1. Elegir objetivo
 
@@ -298,7 +295,7 @@ Cada arma indica cuántos **Ataques** realiza.
 - Se lanzan tantos dados como indique el valor de Ataques del arma.
 - Cada dado representa un disparo o proyectil independiente.
 
-## 3. Tirada de precision
+## 3. Tirada de Precisión
 
 Por cada dado lanzado:
 
@@ -321,7 +318,7 @@ El jugador defensor lanza tantos dados como impactos haya recibido la unidad.
 Cada impacto no bloqueado inflige el daño indicado por el arma.
 
 - Los impactos normales infligen el **daño base**.
-- Los impactos críticos infligen el **daño crítico** del arma, si lo tiene.
+- Los impactos críticos infligen el **daño crítico** del arma.
 
 Cuando una unidad pierde todas sus Vidas, se retira del juego como destruida.
 
@@ -716,7 +713,7 @@ Una Salvación de **4+** bloquea impactos con resultados de **4, 5 o 6**.
 Representa la rapidez de reacción de la unidad.
 
 - En combate cuerpo a cuerpo, la unidad con mayor Velocidad **actúa primero**, salvo que una haya cargado.
-- Algunas habilidades y doctrinas modifican este valor temporalmente.
+- Algunas habilidades y habilidades estratégicas modifican este valor temporalmente.
 
 ### Especialidad
 
@@ -831,17 +828,12 @@ Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Sal
 - **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
 - **Precision máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
 
-## Habilidades de armas y unidades
+## Habilidades de armas y especialidades de unidades
 
-Las habilidades pueden pertenecer a:
-
-- La **unidad**, o
-- Un **arma concreta**.
-
-- Las habilidades de unidad se aplican siempre que la unidad esté en juego.
+- Una especialidad de unidad se aplica siempre que la unidad esté en juego.
 - Las habilidades de arma solo se aplican cuando esa arma se utiliza.
 
-Las habilidades y su momento de activación se detallan en tablas específicas para facilitar la consulta durante la partida.
+Las habilidades de armas, especialidades de las unidades y su momento de activación se detallan en la ficha de cada unidad para facilitar la consulta durante la partida.
 
 ---
 
@@ -955,28 +947,26 @@ Con el tiempo, cada facción irá ampliando su catálogo de habilidades disponib
 
 ---
 
-# Doctrinas de Mando
+# Habilidades estratégicas
 
-Las **Doctrinas de Mando** representan órdenes tácticas, maniobras coordinadas o impulsos estratégicos que un comandante puede ejecutar durante la batalla.
+Las **habilidades estratégicas** representan órdenes tácticas, maniobras coordinadas o impulsos estratégicos que un comandante puede ejecutar durante la batalla. Las habilidades estratégicas tienen un **coste en puntos** que se incluye dentro del valor total del ejército. Cada jugador elige las habilidades estratégicas que quiere llevar disponibles en partida, sin repetir.
 
-Las doctrinas tienen un **coste en puntos** que se incluye dentro del valor total del ejército. Cada jugador elige las doctrinas que quiere llevar disponibles en partida, sin repetir.
-
-Las doctrinas:
+Las habilidades estratégicas:
 
 - Se declaran durante la **Fase de Iniciativa** y se marca la unidad que va a utilizarla.
 - Afectan a **una unidad**, salvo que se indique lo contrario.
 - Sus efectos duran **todo el turno**.
-- Solo se puede usar una doctrina por turno.
-- Cada doctrina solo puede usarse **una vez por partida**.
-- La unidad que tenga activa una doctrina se marca con un token.
+- Solo se puede usar una habilidad estratégica por turno.
+- Cada habilidad estratégica solo puede usarse **una vez por partida**.
+- La unidad que tenga activa una habilidad estratégica se marca con un token.
 
-Las doctrinas son **públicas** y deben declararse claramente al rival antes de aplicarse.
+Las habilidades estratégicas son **públicas** y deben declararse claramente al rival antes de aplicarse.
 
-## Lista de Doctrinas de Mando
+## Lista de habilidades estratégicas
 
 ### 1. Garrotazo — 3 pts
 
-La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contrincante, **poniendo fin al combate**. Esta doctrina se realiza inmediantamente la unidad realice su activación independientemente quien tiene más velocidad.
+La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contrincante, **poniendo fin al combate**. Esta habilidad estratégica se realiza inmediatamente cuando la unidad realiza su activación, independientemente de quién tiene más velocidad.
 
 ### 2. Apuntado — 4 pts
 
@@ -1004,11 +994,11 @@ Si esta unidad falla una carga durante este turno, puede repetirla inmediatament
 
 ### 8. Una nueva oportunidad — 4 pts
 
-Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta doctrina, si se decide usar la doctrina la primera tirada queda descartada.
+Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta habilidad estratégica; si se decide usarla, la primera tirada queda descartada.
 
 ### 9. Combate a muerte — 5 pts
 
-Esta doctrina solo funciona con una unidad / escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra, si hay más de 2 unidades / escuadras involucradas no se puede usar esta doctrina. Ambas unidades / escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, doctrinas, etc. Si cualquiera de las dos unidades / escuadras en combate es activada, la doctrina se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.
+Esta habilidad estratégica solo funciona con una unidad / escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra. Si hay más de 2 unidades / escuadras involucradas, no se puede usar esta habilidad estratégica. Ambas unidades / escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, habilidades estratégicas, etc. Si cualquiera de las dos unidades / escuadras en combate es activada, la habilidad estratégica se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.
 
 ---
 

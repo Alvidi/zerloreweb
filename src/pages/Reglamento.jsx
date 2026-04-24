@@ -197,7 +197,10 @@ function Reglamento() {
     if (rulesMode === 'rules') {
       const doctrineHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'doctrinas de mando' || normalized === 'command doctrines'
+        return normalized === 'doctrinas de mando'
+          || normalized === 'command doctrines'
+          || normalized === 'habilidades estrategicas'
+          || normalized === 'strategic abilities'
       })
       const doctrineHeading = doctrineHeadings.at(-1)
       if (doctrineHeading) {

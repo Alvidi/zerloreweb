@@ -38,6 +38,11 @@ Comandos:
 - `npm run lint`
 - `npm run battle:smoke`
 
+Variables de entorno:
+
+- `VITE_SITE_URL=https://tu-dominio.com`
+  Necesaria para generar `canonical`, `robots.txt` y `sitemap.xml` absolutos en build.
+
 ## Estructura de datos (resumen)
 
 - Facciones ES: `src/data/factions/jsonFaccionesES/*.json`

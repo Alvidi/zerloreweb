@@ -1,6 +1,6 @@
 # ZeroLore Rulebook
 
-ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, or doctrines, and add these concepts as you become more familiar with the game.
+ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, or strategic abilities, and add these concepts as you become more familiar with the game.
 
 This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
 
@@ -47,18 +47,14 @@ These are guidelines. The criterion is that the base is consistent with the visu
 
 ### Dice and Rolls
 
-ZeroLore uses six-sided dice (1D6).
+ZeroLore always uses six-sided dice (1D6).
 
-- Each roll is resolved by rolling one or more dice as indicated by the rule.
-- A critical hit is normally obtained with a result of 6, unless a rule states otherwise.
-- Results of 1 or 2 are generally considered misses in melee combat.
-- When a rule allows rerolling a die, each die may only be rerolled once. If multiple rules allow rerolling, only one reroll is applied.
-
-Throughout the game, different types of rolls are made: **initiative**, **hits**, **save**, and **damage**. Each is explained in detail in its corresponding section.
+Throughout the game, different types of rolls are made: **initiative**, **hits**, **save**, and **damage**.
+Each is explained in detail in its corresponding section.
 
 ### Rule Priority
 
-In ZeroLore there are two types of rules: **general rules**, which belong to the core rulebook and apply to all units, and **special rules**, which are the abilities written on the profile of a unit, a weapon, a doctrine, or a faction.
+In ZeroLore there are two types of rules: **general rules**, which belong to the core rulebook and apply to all units, and **special rules**, which are the abilities written on the profile of a unit, a weapon, a strategic ability, or a faction.
 
 When a special rule contradicts or modifies a general rule, **the special rule always takes priority**.
 
@@ -69,9 +65,10 @@ _Example: the rulebook says a locked unit cannot shoot. If a weapon has the Guns
 ZeroLore can be played with **2 to 4 players**. The available formats are:
 
 - **1vs1**: duel between two players
+- **1vs3**: confrontation against one player
 - **2vs2**: two teams of two players
 
-In games with more than two players, activation order is determined by initiative at the start of each turn.
+In games with more than two players, activation order is determined by initiative at the start of each turn, and this also applies to teams.
 
 ### Game Modes
 
@@ -142,20 +139,20 @@ Each turn consists of the following phases:
 At the beginning of each turn, both players make the **Initiative roll**.
 
 - Each player rolls **1D6**.
-- The player with the highest result **acts first** during that turn.
+- The player or team with the highest result **acts first** during that turn.
 - In case of a tie, roll again.
-- Each player may assign one or more **stratagems** to their units if they wish.
-- Units are recruited or brought out from reserve.
+- Each player may assign one **strategic ability** to their units if they have one.
+- Units are recruited or brought out from reserve at command posts.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
-### Command Doctrines
+### Strategic Abilities
 
-After determining Initiative, players declare the Command Doctrine they will use that turn and mark the unit or squad that will use it.
+After determining Initiative, players declare the strategic ability they have equipped, that they will use that turn, and mark the unit that will use it.
 
-- Only **one doctrine per turn** may be used.
+- Only **one strategy per turn** may be used.
 - Their effects last **the entire turn**, unless stated otherwise.
-- The unit or squad with an active doctrine is marked with a token.
+- The unit or squad with an active strategy is marked with a token.
 
 ## 2. Activation Phase
 
@@ -167,7 +164,7 @@ After the Initiative Phase comes the **Activation Phase**.
 Activating a unit means:
 
 - Declaring it as the active unit.
-- Taking the available actions according to its rules.
+- Taking its **2 available actions**.
 - Fully resolving its effects.
 
 Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
@@ -176,7 +173,7 @@ Once a unit has been activated, **it cannot be activated again** during that tur
 
 When **all units from both players** have been activated, the turn ends.
 
-During the End of Turn, effects that state they resolve at the end of the turn are completed. After this, a new turn begins starting again with the Initiative Phase.
+During the End of Turn, effects that state they resolve at the end of the turn are completed and points gained according to the game mode are counted. After this, a new turn begins starting again with the Initiative Phase.
 
 ---
 
@@ -278,11 +275,11 @@ To attack at range, the unit must:
 
 Every ranged attack is always resolved following this sequence:
 
-1. Choose target
-2. Determine attacks
-3. Roll to hit
-4. Roll saves
-5. Apply damage
+1. Choose target.
+2. Determine the weapon's number of attack dice.
+3. Roll and meet or exceed Precision.
+4. The defender rolls saves.
+5. Apply damage.
 
 ## 1. Choose Target
 
@@ -321,7 +318,7 @@ The defending player rolls as many dice as hits the unit has received.
 Each unblocked hit deals the damage indicated by the weapon.
 
 - Normal hits deal **base damage**.
-- Critical hits deal the weapon's **critical damage**, if it has one.
+- Critical hits deal the weapon's **critical damage**.
 
 When a unit loses all its Wounds, it is removed from the game as destroyed.
 
@@ -716,7 +713,7 @@ A Save of **4+** blocks hits on results of **4, 5, or 6**.
 Represents the unit's reaction speed.
 
 - In melee combat, the unit with higher Speed **acts first**, unless one of them charged.
-- Some abilities and doctrines temporarily modify this value.
+- Some abilities and strategic abilities temporarily modify this value.
 
 ### Specialty
 
@@ -831,17 +828,12 @@ To avoid situations of immortality or infallibility, Save and Precision modifier
 - **Maximum Save:** no unit can ever need more than 6+ to save, regardless of accumulated modifiers. A result of 1 always fails the save.
 - **Maximum Precision:** no unit can ever need more than 6+ to hit, regardless of accumulated modifiers. A result of 6 always hits.
 
-## Weapon and Unit Abilities
+## Weapon Abilities and Unit Specialties
 
-Abilities may belong to:
-
-- The **unit**, or
-- A **specific weapon**.
-
-- Unit abilities apply whenever the unit is in play.
+- A unit specialty applies whenever the unit is in play.
 - Weapon abilities only apply when that weapon is used.
 
-Abilities and their timing are detailed in specific tables to make them easier to consult during the game.
+Weapon abilities, unit specialties, and their timing are detailed on each unit profile to make them easier to consult during the game.
 
 ---
 
@@ -955,28 +947,26 @@ Over time, each faction will expand its catalogue of available abilities, allowi
 
 ---
 
-# Command Doctrines
+# Strategic Abilities
 
-**Command Doctrines** represent tactical orders, coordinated manoeuvres, or strategic impulses that a commander may execute during battle.
+**Strategic abilities** represent tactical orders, coordinated manoeuvres, or strategic impulses that a commander may execute during battle. Strategic abilities have a **point cost** included within the army's total Value. Each player chooses which strategic abilities they want to have available during the battle, without duplicates.
 
-Doctrines have a **point cost** included within the army's total Value. Each player chooses which doctrines they want to have available during the battle, without duplicates.
-
-Doctrines:
+Strategic abilities:
 
 - Are declared during the **Initiative Phase** and the unit that will use them is marked.
 - Affect **one unit**, unless stated otherwise.
 - Their effects last **the entire turn**.
-- Only one doctrine per turn may be used.
-- Each doctrine may only be used **once per battle**.
-- The unit with an active doctrine is marked with a token.
+- Only one strategic ability per turn may be used.
+- Each strategic ability may only be used **once per battle**.
+- The unit with an active strategic ability is marked with a token.
 
-Doctrines are **public** and must be clearly declared to the opponent before being applied.
+Strategic abilities are **public** and must be clearly declared to the opponent before being applied.
 
-## Command Doctrine List
+## Strategic Ability List
 
 ### 1. Clubbing Blow — 3 pts
 
-The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This doctrine is resolved immediately when the unit performs its activation regardless of who has the higher Speed.
+The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This strategic ability is resolved immediately when the unit performs its activation, regardless of who has the higher Speed.
 
 ### 2. Aimed Shot — 4 pts
 
@@ -1004,11 +994,11 @@ If this unit fails a charge during this turn, it may immediately repeat it once.
 
 ### 8. Second Chance — 4 pts
 
-Repeat one melee or ranged attack roll. If the first roll is favourable this doctrine may be ignored, if you decide to use the doctrine the first roll is discarded.
+Repeat one melee or ranged attack roll. If the first roll is favourable this strategic ability may be ignored; if you decide to use it, the first roll is discarded.
 
 ### 9. Fight to the Death — 5 pts
 
-This doctrine only works with one allied unit / squad that is locked in melee combat against another, if more than 2 units / squads are involved this doctrine cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, doctrines, and so on. If either of the two units / squads in combat is activated, the doctrine is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
+This strategic ability only works with one allied unit / squad that is locked in melee combat against another. If more than 2 units / squads are involved, this strategic ability cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, strategic abilities, and so on. If either of the two units / squads in combat is activated, the strategic ability is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
 
 ---
 

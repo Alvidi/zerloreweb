@@ -305,7 +305,7 @@
               "Raider +1"
             ],
             "especialidad": "-",
-            "valor_extra": 2,
+            "valor_extra": 3,
             "limitacion": 1
           },
           {
@@ -319,7 +319,7 @@
               "Anti 5+ (Vehicle)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           },
           {
             "nombre": "Stuck Explosive",
@@ -332,7 +332,7 @@
               "Unstable"
             ],
             "especialidad": "-",
-            "valor_extra": 1,
+            "valor_extra": 2,
             "limitacion": 2
           }
         ],
@@ -361,7 +361,7 @@
               "Chained Impacts"
             ],
             "especialidad": "-",
-            "valor_extra": 1,
+            "valor_extra": 2,
             "limitacion": 1
           },
           {
@@ -373,7 +373,7 @@
             "danio_critico": "5",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2,
+            "valor_extra": 3,
             "limitacion": 1
           }
         ]
@@ -558,7 +558,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "If you play in a squad and this unit is in one, it gives +1 melee attack; if playing in skirmish, gives +1 melee attack to all units within 3\".",
+        "especialidad_escaramuza": "Gives +1 melee attack to all units within 3\".",
+        "especialidad_escuadra": "Gives +1 melee attack to the squad it joins.",
         "valor": 14
       },
       "armas": {
@@ -741,6 +742,375 @@
             ],
             "especialidad": "-",
             "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Black Warriors",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Brutal Sword",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Black Pikemen",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "If this unit is charged, then during its counterattack the enemy suffers +1 extra unsaveable damage.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Long Pike",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Reinforced Pike",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Black Archers",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Heavy Crossbow",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Incendiary Bolt",
+            "ataques": "1D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Knife",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Breach Berserkers",
+      "era": "Past",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "This unit can always counterattack.",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Frenzied Axes",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Serrated Greatsword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1,
+            "limitacion": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Siege Troll",
+      "era": "Past",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 16,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit may move through allied Line and Elite units during its movement, but it cannot end on top of them.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Uprooted Rock",
+            "ataques": "1D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "War Mace",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Iron Fist",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "6",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Siege Ballista",
+      "era": "Past",
+      "clase": "Vehicle",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 10,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "This unit cannot move. While deployed on a friendly command post, that command post cannot be used to recruit.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Iron Bolt",
+            "ataques": "1D",
+            "distancia": "28\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Precision"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Big Game Bolt",
+            "ataques": "1D",
+            "distancia": "26\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti 5+ (Monster)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Wooden Strike",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Black Foreman",
+      "era": "Past",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "Allied Line and Elite units within 3\" of this hero may reroll one charge die per activation.",
+        "especialidad_escuadra": "The squad with this hero may reroll one charge die per activation.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Command Bow",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Black Bow",
+            "ataques": "1D",
+            "distancia": "16\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 4+ (Hero)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Foreman's Sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "War Whip",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1,
+            "limitacion": 1
           }
         ]
       }

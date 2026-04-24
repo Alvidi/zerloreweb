@@ -304,7 +304,7 @@
               "Asaltante +1"
             ],
             "especialidad": "-",
-            "valor_extra": 2,
+            "valor_extra": 3,
             "limitacion": 1
           },
           {
@@ -318,7 +318,7 @@
               "Anti 5+ (Vehículo)"
             ],
             "especialidad": "-",
-            "valor_extra": 3
+            "valor_extra": 4
           },
           {
             "nombre": "Explosivo Pegado",
@@ -331,7 +331,7 @@
               "Inestable"
             ],
             "especialidad": "-",
-            "valor_extra": 1,
+            "valor_extra": 2,
             "limitacion": 2
           }
         ],
@@ -360,7 +360,7 @@
               "Impactos encadenados"
             ],
             "especialidad": "-",
-            "valor_extra": 1,
+            "valor_extra": 2,
             "limitacion": 1
           },
           {
@@ -372,7 +372,7 @@
             "danio_critico": "5",
             "habilidades_arma": [],
             "especialidad": "-",
-            "valor_extra": 2,
+            "valor_extra": 3,
             "limitacion": 1
           }
         ]
@@ -557,7 +557,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Si juega en escuadra y esta unidad va en una, da +1 de ataque cuerpo a cuerpo, si juega en escaramuza, da +1 de ataque cuerpo a cuerpo a todas las unidades a 3\"",
+        "especialidad_escaramuza": "Da +1 de ataque cuerpo a cuerpo a todas las unidades a 3\".",
+        "especialidad_escuadra": "Da +1 de ataque cuerpo a cuerpo a la escuadra en la que va.",
         "valor": 14
       },
       "armas": {
@@ -740,6 +741,375 @@
             ],
             "especialidad": "-",
             "valor_extra": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Guerreros Negros",
+      "era": "Pasado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "-",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada brutal",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Piqueros Negros",
+      "era": "Pasado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "Si esta unidad es cargada, en el contraataque de esta, el enemigo recibe +1 de daño extra no salvable",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Pica larga",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Pica reforzada",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Arqueros Negros",
+      "era": "Pasado",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "-",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Ballesta pesada",
+            "ataques": "2D",
+            "distancia": "18\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Virote incendiario",
+            "ataques": "1D",
+            "distancia": "16\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Berserkers de la Brecha",
+      "era": "Pasado",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "Esta unidad siempre puede contraatacar.",
+        "valor": 7
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hachas frenéticas",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Espadón dentado",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1,
+            "limitacion": 1
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Troll de Asedio",
+      "era": "Pasado",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 16,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad puede atravesar unidades aliadas de Línea y Élite durante su movimiento, pero no puede terminar encima de ellas.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Roca arrancada",
+            "ataques": "1D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Maza de guerra",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Puño de hierro",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "6",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 2
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Ballesta de Asedio",
+      "era": "Pasado",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 10,
+        "salvacion": "+5",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Esta unidad no puede moverse. Mientras esté desplegada en un puesto de mando aliado, no se puede reclutar desde ese puesto de mando.",
+        "valor": 8
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Virote de hierro",
+            "ataques": "1D",
+            "distancia": "28\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Precisión"
+            ],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Virote de caza mayor",
+            "ataques": "1D",
+            "distancia": "26\"",
+            "impactos": "+4",
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti 5+ (Monstruo)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2,
+            "limitacion": 1
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Golpe de madera",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "0",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Capataz Negro",
+      "era": "Pasado",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "Las unidades aliadas de Línea y Élite a 3\" de este héroe pueden repetir un dado de carga por activación.",
+        "especialidad_escuadra": "La escuadra con este héroe puede repetir un dado de carga por activación.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Arco de mando",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Arco negro",
+            "ataques": "1D",
+            "distancia": "16\"",
+            "impactos": "+3",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Anti 4+ (Héroe)"
+            ],
+            "especialidad": "-",
+            "valor_extra": 2
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Espada del capataz",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Látigo de guerra",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "especialidad": "-",
+            "valor_extra": 1,
+            "limitacion": 1
           }
         ]
       }

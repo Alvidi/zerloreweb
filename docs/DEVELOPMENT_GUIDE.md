@@ -9,6 +9,9 @@ Este documento existe para que, aunque cambie el contexto o entre otro agente, s
 - Lint: `npm run lint`
 - Build: `npm run build`
 
+SEO/Deploy:
+- Definir `VITE_SITE_URL=https://tu-dominio.com` en Netlify para generar `canonical`, `robots.txt` y `sitemap.xml` absolutos.
+
 ## 2) Mapa del proyecto
 
 - Pagina principal: `src/pages/Home.jsx`
