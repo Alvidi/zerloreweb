@@ -60,7 +60,7 @@ Cuando una regla especial contradiga o modifique una regla general, **la regla e
 
 _Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Pistolero, esa regla especial permite disparar aunque estés trabado, y eso manda._
 
-### Numero de jugadores
+### Número de jugadores
 
 ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 
@@ -101,11 +101,14 @@ Todas las distancias se miden en pulgadas (").
 - Las distancias pueden medirse en cualquier momento de la partida.
 - En caso de duda, cualquiera de los jugadores puede solicitar una **re-medición precisa**, y el resultado se aplica de forma definitiva.
 
+![Medición de peana a peana con regla]({{measurementImage}})
+
 ### Línea de visión
 
 Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visión**.
 
 - Se considera que una unidad tiene línea de visión si **puede verse cualquier parte de la miniatura objetivo** desde el punto de vista del atacante.
+- La línea de visión se mide desde **cualquier punto del cuerpo de la miniatura atacante** (no desde el arma ni desde la peana). Si desde algún punto del cuerpo del atacante puede verse cualquier parte de la miniatura objetivo, existe línea de visión.
 - Las unidades tienen visión en **360 grados**; la orientación de la miniatura no limita su campo visual.
 - Si una miniatura (aliada o enemiga) o un elemento de escenografía bloquea completamente la visión, el objetivo **no puede ser atacado** a distancia.
 
@@ -133,6 +136,8 @@ Cada turno se compone de las siguientes fases:
 1. **Fase de Iniciativa**
 2. **Fase de Activaciones**
 3. **Fin de Turno**
+
+![Diagrama del flujo del turno con iniciativa, activaciones alternas y reinicio]({{turnStructureImage}})
 
 ## 1. Fase de Iniciativa
 
@@ -168,6 +173,8 @@ Activar una unidad significa:
 - Resolver completamente sus efectos.
 
 Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
+
+![Unidad con el token de activación gris y naranja]({{activationImage}})
 
 ## 3. Fin de Turno
 
@@ -215,6 +222,8 @@ Para trepar:
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana.
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 
+![Unidad trepando un obstáculo y alcanzando una posición elevada]({{climbingImage}})
+
 ## Carrera
 
 Al realizar una **Carrera**, la unidad consume **2 acciones**.
@@ -253,11 +262,9 @@ Una unidad que utiliza la acción **Preparado** adopta una postura defensiva.
 Una unidad preparada puede realizar **contraataques a distancia** durante el turno del jugador rival.
 
 - **Si es disparada:** puede devolver inmediatamente un disparo con el arma equipada, independientemente de si le quedan acciones. Primero se resuelve el ataque enemigo, luego el disparo de respuesta.
-- **Si es cargada:** el orden de ataque se decide por **Velocidad**, como excepción a la regla general de carga. Si la unidad preparada tiene **mayor Velocidad** que la que carga, la preparada **ataca primero** y la cargante realiza el contraataque. Si la unidad preparada tiene **igual o menor Velocidad** que la que carga, la cargante **ataca primero** siguiendo la regla normal y la preparada realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
+- **Si es cargada:** el orden de ataque se decide por **Velocidad**, como excepción a la regla general de carga. Si la unidad preparada tiene **mayor Velocidad** que la que carga, la preparada **ataca primero** y la unidad que carga realiza el contraataque. Si la unidad preparada tiene **igual o menor Velocidad** que la que carga, la unidad que carga **ataca primero** siguiendo la regla normal y la preparada realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
 
 El estado de Preparado dura hasta que finaliza el turno.
-
-![Unidad preparada en posición defensiva]({{readyImage}})
 
 ---
 
@@ -337,7 +344,7 @@ Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar la acción **C
 - Si la unidad **no alcanza** al objetivo, la carga falla y la unidad permanece en su posición.
 - Si la carga es exitosa, la unidad coloca su peana en contacto con el objetivo y se considera trabada.
 
-Una carga exitosa **incluye automáticamente un ataque cuerpo a cuerpo**.
+Una carga exitosa **aporta una acción de ataque cuerpo a cuerpo gratuita**.
 
 ## Unidades trabadas
 
@@ -347,11 +354,11 @@ Cuando dos unidades están en contacto de peana:
 - Ambas unidades solo pueden usar acciones de **combate cuerpo a cuerpo** o **retirada**.
 - Permanecen trabadas hasta que una de las dos sea eliminada o se retire.
 
-**Una tercera unidad o escuadra puede cargar a una unidad o escuadra ya trabada en combate**, siempre que disponga de acciones suficientes para cargar. La carga se resuelve con normalidad: la cargante realiza su ataque y la defensora contraataca **únicamente si aún dispone de acciones suficientes**. Si la defensora ya las había gastado en un intercambio anterior de ese mismo turno, encaja el ataque sin devolverlo. Tras el intercambio, todas las unidades involucradas se consideran trabadas en el mismo combate.
+**Una tercera unidad o escuadra puede cargar a una unidad o escuadra ya trabada en combate**, siempre que disponga de acciones suficientes para cargar. La carga se resuelve con normalidad: la unidad que carga realiza su ataque y la defensora contraataca **únicamente si aún dispone de acciones suficientes**. Si la defensora ya las había gastado en un intercambio anterior de ese mismo turno, encaja el ataque sin devolverlo. Tras el intercambio, todas las unidades involucradas se consideran trabadas en el mismo combate.
 
 Este principio se aplica sucesivamente: cada nueva unidad o escuadra que cargue se une al combate común.
 
-En un combate con tres o más unidades, cuando una unidad realice su ataque cuerpo a cuerpo **puede elegir a cuál de las unidades enemigas trabadas atacar** en ese intercambio. El orden de ataque sigue las reglas normales: cargante primero, Velocidad después.
+En un combate con tres o más unidades, cuando una unidad realice su ataque cuerpo a cuerpo **puede elegir a cuál de las unidades enemigas trabadas atacar** en ese intercambio. El orden de ataque sigue las reglas normales: la unidad que carga primero, Velocidad después.
 
 Para destrabarse:
 
@@ -405,11 +412,13 @@ Tras el intercambio, ambas unidades permanecen trabadas.
 
 ## Vehículos y monstruos en combate cuerpo a cuerpo
 
-- Si un **vehículo** es cargado por una unidad de **Línea o Élite**, puede seguir moviéndose y actuando con normalidad.
-- Si es cargado por otro vehículo o por un **monstruo**, queda trabado en combate.
-- Un vehículo trabado solo puede utilizar sus **armas cuerpo a cuerpo**.
+Si un **Vehículo** o un **Monstruo** es cargado por una unidad de **Línea o Élite**, la carga se resuelve con normalidad: la unidad que carga realiza su ataque y el Vehículo o Monstruo contraataca si sobrevive. Tras el intercambio ambas quedan **trabadas en combate cuerpo a cuerpo**, siguiendo las reglas generales de traba.
 
-Los monstruos siguen las mismas reglas generales de combate cuerpo a cuerpo, salvo por sus reglas especiales.
+Como excepción, un Vehículo o Monstruo trabado **únicamente con unidades de Línea o Élite** puede **destrabarse libremente durante su activación**, consumiendo **1 acción de Movimiento** para alejarse sin declarar Retirada ni sufrir sus penalizaciones (no reduce Velocidad a 0 ni necesita tirar para recomponerse). Tras destrabarse puede seguir actuando con normalidad, incluyendo disparar si le quedan acciones. Si la unidad de Línea o Élite quiere volver a atacar, deberá cargarlo de nuevo.
+
+Si un Vehículo es cargado por otro **Vehículo** o por un **Monstruo**, o si un Monstruo es cargado por otro **Monstruo** o por un **Vehículo**, ambas unidades quedan trabadas en combate siguiendo las reglas normales y **no** pueden destrabarse libremente.
+
+Un **Vehículo** trabado solo puede utilizar sus **armas cuerpo a cuerpo**.
 
 ## Titanes en combate cuerpo a cuerpo
 
@@ -475,7 +484,7 @@ Un elemento de escenografía proporciona cobertura si su altura supera al menos 
 
 **Cobertura**
 
-La unidad obtiene **-1 en el dado de salvación** frente a ataques a distancia.
+La unidad obtiene **-1 a su valor de Salvación** frente a ataques a distancia (p. ej., de 4+ pasa a 3+), mejorando así sus posibilidades de bloquear impactos.
 
 Si la unidad en cobertura es cargada, ambas unidades retiran **-1 dado de ataque** en sus tiradas de CaC, salvo que una regla indique lo contrario.
 
@@ -550,6 +559,8 @@ Los puestos de mando son posiciones estratégicas repartidas por el campo de bat
 
 Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del token naranja para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
+![Unidad capturando un puesto de mando con su banderilla de control]({{commandPostControlImage}})
+
 **Control al final de turno**
 
 Al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto. En caso de empate, el puesto permanece bajo el control de quien lo tuviera. Si no hay unidades de ningún bando, el puesto mantiene su último propietario.
@@ -614,8 +625,8 @@ Características:
 
 ### Cuando un vehículo es destruido
 
-- Se produce una **explosión** que afecta a todas las unidades a **3"**.
-- Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado.
+- **4–6**: el vehículo queda destruido en el campo de batalla como una pieza más de escenografía.
+- **1–3**: se produce una **explosión** que afecta a todas las unidades a **3"** del vehículo. Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado. Después, el vehículo se retira del campo de batalla.
 
 ## 4. Monstruos
 
@@ -628,16 +639,19 @@ Características:
 
 ### Descontrol en monstruos
 
-Cuando un monstruo llega al **50% de sus Vidas**, el jugador debe tirar **1D6** una única vez:
+Cuando un monstruo llega al **50% de sus Vidas**, el jugador debe tirar **1D6** en la fase de Iniciativa:
 
 - **3–6**: el monstruo no sufre efectos adicionales.
-- **1–2**: el monstruo entra en estado de **Descontrol**.
+- **1–2**: el monstruo entra en estado de **Descontrol durante ese turno**.
+
+Mientras el monstruo se mantenga al **50% de sus Vidas o menos**, deberá repetir este chequeo al inicio de cada turno durante la fase de Iniciativa.
 
 Mientras esté descontrolado:
 
 - Ataca a enemigos y unidades aliadas.
 - Prioriza siempre la unidad más cercana.
 - Solo utiliza ataques cuerpo a cuerpo, priorizando las cargas.
+- Si un monstruo descontrolado está trabado en combate cuerpo a cuerpo con una unidad aliada y, en el siguiente turno, supera su chequeo y deja de estar descontrolado, el combate termina y ambas unidades se separan **1"**.
 
 ## 5. Héroes
 
@@ -823,7 +837,7 @@ En ZeroLore verás valores expresados como 4+, 5+, 3+, etc. Esto significa el re
 
 Cuando una regla dice **+1 al valor de Precision**, el número necesario sube — es peor para el atacante. Si tu arma impacta con 4+ y recibes +1, ahora necesitas 5+. Al contrario, **-1 al valor de Precision** es una ventaja: si impactas con 4+ y obtienes -1, ahora impactas con 3+. Esto aplica igual a Salvaciones.
 
-Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Salvacion e Impactos tienen los siguientes límites:
+Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Salvación e Impactos tienen los siguientes límites:
 
 - **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
 - **Precision máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
@@ -961,6 +975,8 @@ Las habilidades estratégicas:
 - La unidad que tenga activa una habilidad estratégica se marca con un token.
 
 Las habilidades estratégicas son **públicas** y deben declararse claramente al rival antes de aplicarse.
+
+![Unidad marcada con un token de habilidad estratégica]({{strategicAbilitiesImage}})
 
 ## Lista de habilidades estratégicas
 

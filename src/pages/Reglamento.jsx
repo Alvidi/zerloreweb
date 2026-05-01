@@ -21,10 +21,15 @@ import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
-import miniatureVsSquadImage from '../images/webimagen/reglamento-miniatura-vs-escuadra.webp'
-import lineOfSightImage from '../images/webimagen/reglamento-linea-de-vision.webp'
-import sprintImage from '../images/webimagen/reglamento-carrera.webp'
-import readyImage from '../images/webimagen/reglamento-preparado.webp'
+import miniatureVsSquadImage from '../images/webimagen/imagen_1.webp'
+import measurementImage from '../images/webimagen/imagen_2.webp'
+import lineOfSightImage from '../images/webimagen/imagen_3.webp'
+import climbingImage from '../images/webimagen/imagen_4.webp'
+import sprintImage from '../images/webimagen/imagen_5.webp'
+import strategicAbilitiesImage from '../images/webimagen/imagen_6.webp'
+import activationImage from '../images/webimagen/imagen_7.webp'
+import turnStructureImage from '../images/webimagen/imagen_8.webp'
+import commandPostControlImage from '../images/webimagen/imagen_9.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -42,10 +47,15 @@ const normalizeHeadingText = (value) =>
 
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
 const RULES_ASSET_PLACEHOLDERS = {
+  activationImage,
+  climbingImage,
+  commandPostControlImage,
   lineOfSightImage,
+  measurementImage,
   miniatureVsSquadImage,
   sprintImage,
-  readyImage,
+  strategicAbilitiesImage,
+  turnStructureImage,
 }
 
 const isRulesPdfKeepWithNextNode = (node) =>
@@ -1645,9 +1655,11 @@ function Reglamento() {
                 <label className="rules-token-input">
                   <span>{t('rules.tokens.quantity')}</span>
                   <input
-                    type="text"
+                    type="number"
                     inputMode="numeric"
-                    pattern="[0-9]*"
+                    min="0"
+                    max={String(TOKEN_LIMIT)}
+                    step="1"
                     value={tokenInputValues[token.id] ?? '0'}
                     onChange={(event) => setTokenCount(token.id, event.target.value)}
                     onBlur={() => finalizeTokenInput(token.id)}

@@ -101,11 +101,14 @@ All distances are measured in inches (").
 - Distances may be measured at any point in the game.
 - If in doubt, either player may request a **precise re-measurement**, and the result applies definitively.
 
+![Base-to-base measurement with a ruler]({{measurementImage}})
+
 ### Line of Sight
 
 For a unit to make a ranged attack on another, it must have **line of sight**.
 
 - A unit has line of sight if **any part of the target miniature can be seen** from the attacker's point of view.
+- Line of sight is measured from **any point on the attacking miniature's body** (not from the weapon or the base). If any point on the attacker's body can see any part of the target miniature, line of sight exists.
 - Units have **360-degree** vision; miniature facing does not limit their field of view.
 - If a miniature (friendly or enemy) or a piece of scenery completely blocks the view, the target **cannot be attacked** at range.
 
@@ -133,6 +136,8 @@ Each turn consists of the following phases:
 1. **Initiative Phase**
 2. **Activation Phase**
 3. **End of Turn**
+
+![Turn flow diagram with initiative, alternating activations, and reset]({{turnStructureImage}})
 
 ## 1. Initiative Phase
 
@@ -168,6 +173,8 @@ Activating a unit means:
 - Fully resolving its effects.
 
 Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
+
+![Unit with the grey and orange activation token]({{activationImage}})
 
 ## 3. End of Turn
 
@@ -215,6 +222,8 @@ To climb:
 1. The unit must move until its base touches the base of the obstacle.
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
+![Unit climbing an obstacle and reaching an elevated position]({{climbingImage}})
+
 ## Sprint
 
 When performing a **Sprint**, the unit spends **2 actions**.
@@ -256,8 +265,6 @@ A ready unit may make **ranged counterattacks** during the opposing player's tur
 - **If charged:** attack order is decided by **Speed**, as an exception to the normal charge rule. If the ready unit has **higher Speed** than the charging unit, the ready unit **attacks first** and the charging unit makes the counterattack. If the ready unit has **equal or lower Speed** than the charging unit, the charging unit **attacks first** following the normal rule and the ready unit makes the counterattack. The ready unit may attack or counterattack even if it has no actions left.
 
 The Ready state lasts until the end of the turn.
-
-![Ready unit in defensive position]({{readyImage}})
 
 ---
 
@@ -337,7 +344,7 @@ To initiate melee combat, a unit must perform the **Charge** action, which costs
 - If the unit **does not reach** the target, the charge fails and the unit remains in place.
 - If the charge succeeds, the unit places its base in contact with the target and is considered locked.
 
-A successful charge **automatically includes a melee attack**.
+A successful charge **grants a free melee attack action**.
 
 ## Locked Units
 
@@ -351,7 +358,7 @@ When two units are in base contact:
 
 This principle applies successively: each new unit or squad that charges joins the shared combat.
 
-In a combat with three or more units, when a unit makes its melee attack, it **may choose which locked enemy unit to attack** in that exchange. Attack order follows the normal rules: charger first, then Speed.
+In a combat with three or more units, when a unit makes its melee attack, it **may choose which locked enemy unit to attack** in that exchange. Attack order follows the normal rules: the charging unit first, then Speed.
 
 To become unlocked:
 
@@ -405,11 +412,13 @@ After the exchange, both units remain locked.
 
 ## Vehicles and Monsters in Melee
 
-- If a **vehicle** is charged by a **Line or Elite** unit, it may continue moving and acting normally.
-- If charged by another vehicle or a **monster**, it becomes locked in combat.
-- A locked vehicle may only use its **melee weapons**.
+If a **Vehicle** or a **Monster** is charged by a **Line or Elite** unit, the charge is resolved normally: the charging unit makes its attack and the Vehicle or Monster counterattacks if it survives. After the exchange, both units become **locked in melee combat**, following the general locked combat rules.
 
-Monsters follow the same general melee rules, except for their special rules.
+As an exception, a Vehicle or Monster locked **only with Line or Elite units** may **break away freely during its activation**, spending **1 Movement action** to move away without declaring Retreat or suffering its penalties (it does not reduce Speed to 0 and does not require a regroup roll). After breaking away, it may continue acting normally, including shooting if it still has actions remaining. If the Line or Elite unit wants to attack it again, it must charge it again.
+
+If a Vehicle is charged by another **Vehicle** or by a **Monster**, or if a Monster is charged by another **Monster** or by a **Vehicle**, both units become locked in combat following the normal rules and **cannot** break away freely.
+
+A locked **Vehicle** may only use its **melee weapons**.
 
 ## Titans in Melee
 
@@ -475,7 +484,7 @@ A scenery element provides cover if its height exceeds at least half the height 
 
 **Cover**
 
-The unit gains **-1 on its Save roll** against ranged attacks.
+The unit gains **-1 to its Save value** against ranged attacks (for example, from 4+ to 3+), improving its chances of blocking hits.
 
 If the unit in cover is charged, both units remove **-1 attack die** from their melee rolls, unless a rule states otherwise.
 
@@ -550,6 +559,8 @@ Command posts are strategic positions spread across the battlefield. They are re
 
 When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
+![Unit capturing a command post with its control flag]({{commandPostControlImage}})
+
 **Control at the end of the turn**
 
 At the end of each turn, if both players have units on the same command post, control goes to the player whose units have the highest total Value on that post. In case of a tie, the post remains under the control of whoever already held it. If neither side has units there, the post keeps its last owner.
@@ -614,8 +625,8 @@ Characteristics:
 
 ### When a vehicle is destroyed
 
-- An **explosion** occurs that affects all units within **3"**.
-- Affected units take **1D6 automatic damage** that cannot be saved.
+- **4–6**: the vehicle remains destroyed on the battlefield as an additional piece of scenery.
+- **1–3**: an **explosion** occurs that affects all units within **3"** of the vehicle. Affected units suffer **1D6 automatic damage** that cannot be saved. Afterwards, the vehicle is removed from the battlefield.
 
 ## 4. Monsters
 
@@ -628,16 +639,19 @@ Characteristics:
 
 ### Monster Out of Control
 
-When a monster reaches **50% of its Wounds**, the player must roll **1D6** once:
+When a monster reaches **50% of its Wounds**, the player must roll **1D6** during the Initiative phase:
 
 - **3–6**: the monster suffers no additional effects.
-- **1–2**: the monster enters the **Out of Control** state.
+- **1–2**: the monster enters the **Out of Control** state for that turn.
+
+As long as the monster remains at **50% Wounds or less**, this check must be repeated at the start of each turn during the Initiative phase.
 
 While out of control:
 
 - It attacks enemies and friendly units.
 - It always prioritises the nearest unit.
 - It only uses melee attacks, prioritising charges.
+- If an out of control monster is locked in melee combat with a friendly unit and, on the following turn, it passes its check and is no longer out of control, the combat ends and both units separate by **1"**.
 
 ## 5. Heroes
 
@@ -961,6 +975,8 @@ Strategic abilities:
 - The unit with an active strategic ability is marked with a token.
 
 Strategic abilities are **public** and must be clearly declared to the opponent before being applied.
+
+![Unit marked with a strategic ability token]({{strategicAbilitiesImage}})
 
 ## Strategic Ability List
 
