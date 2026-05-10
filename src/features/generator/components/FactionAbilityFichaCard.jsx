@@ -476,8 +476,8 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
               ...rectToStyle(guideMap.DESCRIPCION),
               lineHeight: body.length > 260 ? 1.14 : 1.22,
             }}
-            maxFontSize={22}
-            minFontSize={5}
+            maxFontSize={28}
+            minFontSize={7}
             step={0.25}
             fitKey={`${body}-${guideMap.DESCRIPCION?.w}-${guideMap.DESCRIPCION?.h}-${guideMap.DESCRIPCION?.x}-${guideMap.DESCRIPCION?.y}`}
           >

@@ -528,8 +528,8 @@ const renderAbilityFichaCanvas = async ({ ability, factionId, description, scale
   drawFitText(ctx, description || ability?.descripcion || ability?.efecto || ability?.texto || '-', guideMap.DESCRIPCION, {
     family: 'Space Grotesk',
     weight: 500,
-    max: 22,
-    min: 5,
+    max: 28,
+    min: 7,
     multiline: true,
     lineHeight: 1.12,
   })
@@ -2108,7 +2108,9 @@ function Generador() {
                               armas_disparo: previewLoadout.shooting,
                               armas_melee: previewLoadout.meleeList || [],
                               valor_base: previewValue,
-                              escuadra_display: getSquadFichaValue(previewUnit, gameMode, previewEntry?.squadSize ?? previewDraft.squadSize),
+                              escuadra_display: previewEntry
+                                ? getSquadFichaValue(previewUnit, gameMode, previewEntry.squadSize ?? previewDraft.squadSize)
+                                : undefined,
                             }}
                             factionId={selectedFaction?.id}
                             imageDataUrl={previewEntry?.imageDataUrl || ''}
