@@ -39,6 +39,12 @@ const factionAbilitySheetTemplates = {
   caos: new URL('../images/fichas/caos_hab.webp', import.meta.url).href,
   legado: new URL('../images/fichas/legado_hab.webp', import.meta.url).href,
 }
+const factionTextColors = {
+  orden: '#ff7a6b',
+  caos: '#b37aff',
+  legado: '#f0d84a',
+}
+const abilityTypeColor = '#ff9f43'
 const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster', 'titan']
 const MAX_MULTIPLE_FACTION_ABILITIES = 3
 const MAX_UNIT_IMAGE_SIDE = 1600
@@ -56,10 +62,10 @@ const EXPORT_RASTER_SCALE = 2
 const UNIT_LAYOUT_STORAGE_KEY = 'zerolore.generator.ficha-layout.v3'
 const ABILITY_LAYOUT_STORAGE_KEY = 'zerolore.generator.ficha-habilidad-layout.v1'
 const UNIT_EXPORT_LAYOUT = [
-  { label: 'NOMBRE', x: 155, y: 63, w: 575, h: 34 },
+  { label: 'NOMBRE', x: 180, y: 72, w: 539, h: 46 },
   { label: 'TIPO', x: 31, y: 201, w: 187, h: 20 },
   { label: 'ERA', x: 230, y: 202, w: 185, h: 20 },
-  { label: 'FACCION', x: 347, y: 108, w: 200, h: 44 },
+  { label: 'FACCION', x: 387, y: 120, w: 118, h: 44 },
   { label: 'VALOR', x: 643, y: 194, w: 76, h: 34 },
   { label: 'IMAGEN', x: 29, y: 250, w: 686, h: 473 },
   { label: 'MOV', x: 39, y: 764, w: 110, h: 42 },
@@ -67,7 +73,7 @@ const UNIT_EXPORT_LAYOUT = [
   { label: 'SALV', x: 317, y: 764, w: 110, h: 42 },
   { label: 'VEL', x: 469, y: 761, w: 110, h: 42 },
   { label: 'ESC', x: 597, y: 761, w: 110, h: 42 },
-  { label: 'ESPECIALIDAD', x: 31, y: 893, w: 681, h: 99 },
+  { label: 'ESPECIALIDAD', x: 28, y: 878, w: 681, h: 99 },
   { label: 'DISPARO 1 ARMA', x: 848, y: 159, w: 153, h: 64 },
   { label: 'DISPARO 1 ATAQUES', x: 997, y: 160, w: 90, h: 62 },
   { label: 'DISPARO 1 ALCANCE', x: 1086, y: 160, w: 89, h: 64 },
@@ -96,10 +102,10 @@ const UNIT_EXPORT_LAYOUT = [
 ]
 const ABILITY_EXPORT_LAYOUT = [
   { label: 'NOMBRE', x: 260, y: 70, w: 380, h: 44 },
-  { label: 'FACCION', x: 31, y: 190, w: 185, h: 44 },
-  { label: 'TIPO', x: 230, y: 190, w: 220, h: 44 },
+  { label: 'FACCION', x: 364, y: 111, w: 185, h: 44 },
+  { label: 'TIPO', x: 43, y: 193, w: 166, h: 37 },
   { label: 'VALOR', x: 650, y: 184, w: 62, h: 52 },
-  { label: 'DESCRIPCION', x: 850, y: 196, w: 620, h: 760 },
+  { label: 'DESCRIPCION', x: 56, y: 249, w: 639, h: 747 },
 ]
 
 const readFileAsDataUrl = (file) =>
@@ -463,7 +469,7 @@ const renderUnitFichaCanvas = async ({ entry, factionId, lang, gameMode, eraLabe
     hero: '#6fe9e2',
     titan: '#b37aff',
   }[unitTypeToken] || '#5dd66f'
-  const factionColor = { orden: '#ff7a6b', caos: '#78e56c', legado: '#7db8ff' }[factionToken] || '#ff7a6b'
+  const factionColor = factionTextColors[factionToken] || factionTextColors.orden
   const specialty = gameMode === 'escuadra'
     ? (unit.especialidad_escuadra || unit.especialidad || '-')
     : (unit.especialidad_escaramuza || unit.especialidad || '-')
@@ -516,14 +522,14 @@ const renderAbilityFichaCanvas = async ({ ability, factionId, description, scale
   const guideMap = getStoredLayoutMap(ABILITY_LAYOUT_STORAGE_KEY, ABILITY_EXPORT_LAYOUT)
   const factionToken = getFactionTokenForExport(factionId)
   const template = await loadImageFromDataUrl(factionAbilitySheetTemplates[factionToken] || factionAbilitySheetTemplates.orden)
-  const factionColor = { orden: '#ff7a6b', caos: '#78e56c', legado: '#7db8ff' }[factionToken] || '#ff7a6b'
+  const factionColor = factionTextColors[factionToken] || factionTextColors.orden
 
   ctx.fillStyle = '#f8f5ed'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   ctx.drawImage(template, 0, 0, FICHA_CARD_W, FICHA_CARD_H)
   drawFitText(ctx, ability?.nombre, guideMap.NOMBRE, { color: '#fff', family: 'Cinzel', max: 34, min: 12, uppercase: true })
   drawFitText(ctx, getFactionLabelForExport(factionId), guideMap.FACCION, { color: factionColor, family: 'Cinzel', max: 28, min: 10, uppercase: true })
-  drawFitText(ctx, 'Hab. de facción', guideMap.TIPO, { color: '#ff7a6b', family: 'Cinzel', max: 28, min: 10, uppercase: true })
+  drawFitText(ctx, 'Hab. de facción', guideMap.TIPO, { color: abilityTypeColor, family: 'Cinzel', max: 28, min: 10, uppercase: true })
   drawFitText(ctx, ability?.coste ?? ability?.valor ?? ability?.valor_habilidad ?? '-', guideMap.VALOR, { color: '#fff', family: 'Cinzel', max: 34, min: 12 })
   drawFitText(ctx, description || ability?.descripcion || ability?.efecto || ability?.texto || '-', guideMap.DESCRIPCION, {
     family: 'Space Grotesk',

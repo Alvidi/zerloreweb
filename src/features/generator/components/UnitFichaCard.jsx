@@ -40,10 +40,10 @@ const WEAPON_FIELD_LAYOUT = [
 ]
 const FICHA_LAYOUT = {
   image: { x: 29, y: 250, w: 686, h: 473 },
-  name: { x: 155, y: 63, w: 575, h: 34 },
+  name: { x: 180, y: 72, w: 539, h: 46 },
   type: { x: 31, y: 201, w: 187, h: 20 },
   era: { x: 230, y: 202, w: 185, h: 20 },
-  faction: { x: 347, y: 108, w: 200, h: 44 },
+  faction: { x: 387, y: 120, w: 118, h: 44 },
   value: { x: 643, y: 194, w: 76, h: 34 },
   stats: {
     cellWidth: 110,
@@ -55,7 +55,7 @@ const FICHA_LAYOUT = {
       { label: 'ESC', x: 597, y: 761 },
     ],
   },
-  specialty: { x: 31, y: 893, w: 681, h: 99 },
+  specialty: { x: 28, y: 878, w: 681, h: 99 },
   shooting: { x: 809, y: 159, w: 719, h: 124 },
   melee: { x: 809, y: 400, w: 719, h: 126 },
   abilities: { x: 843, y: 622, w: 648, h: 358 },
@@ -173,8 +173,8 @@ const FACTION_LABELS = {
 
 const FACTION_COLORS = {
   orden: '#ff7a6b',
-  caos: '#78e56c',
-  legado: '#7db8ff',
+  caos: '#b37aff',
+  legado: '#f0d84a',
 }
 
 const getFactionToken = (factionId = '') => {

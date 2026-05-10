@@ -11,10 +11,10 @@ const ABILITY_LAYOUT_DEV_KEY = 'zerolore.generator.layout-dev'
 
 const ABILITY_LAYOUT = [
   { label: 'NOMBRE', x: 260, y: 70, w: 380, h: 44 },
-  { label: 'FACCION', x: 31, y: 190, w: 185, h: 44 },
-  { label: 'TIPO', x: 230, y: 190, w: 220, h: 44 },
+  { label: 'FACCION', x: 364, y: 111, w: 185, h: 44 },
+  { label: 'TIPO', x: 43, y: 193, w: 166, h: 37 },
   { label: 'VALOR', x: 650, y: 184, w: 62, h: 52 },
-  { label: 'DESCRIPCION', x: 850, y: 196, w: 620, h: 760 },
+  { label: 'DESCRIPCION', x: 56, y: 249, w: 639, h: 747 },
 ]
 
 const cloneGuides = (guides) => guides.map((guide) => ({ ...guide }))
@@ -183,6 +183,24 @@ const getFactionLabel = (factionId = '') => {
   return 'Orden'
 }
 
+const getFactionToken = (factionId = '') => {
+  const id = String(factionId)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+  if (id.includes('caos')) return 'caos'
+  if (id.includes('legado')) return 'legado'
+  return 'orden'
+}
+
+const FACTION_COLORS = {
+  orden: '#ff7a6b',
+  caos: '#b37aff',
+  legado: '#f0d84a',
+}
+
+const ABILITY_TYPE_COLOR = '#ff9f43'
+
 const ensureText = (value, fallback = '-') => {
   const text = String(value || '').trim()
   return text || fallback
@@ -318,6 +336,7 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
   const body = ensureText(description || ability?.descripcion || ability?.efecto || ability?.texto)
   const cost = ability?.coste ?? ability?.valor ?? ability?.valor_habilidad ?? '-'
   const factionLabel = getFactionLabel(factionId)
+  const factionColor = FACTION_COLORS[getFactionToken(factionId)] || FACTION_COLORS.orden
   const typeLabel = 'Hab. de facción'
 
   const updateCursorPosition = (clientX, clientY) => {
@@ -445,7 +464,7 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
           </AutoFitText>
           <AutoFitText
             className="ficha-abs ability-ficha-tag ability-ficha-faction"
-            style={rectToStyle(guideMap.FACCION)}
+            style={{ ...rectToStyle(guideMap.FACCION), color: factionColor }}
             maxFontSize={28}
             minFontSize={10}
             fitKey={`${factionLabel}-${guideMap.FACCION?.w}-${guideMap.FACCION?.h}`}
@@ -454,7 +473,7 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
           </AutoFitText>
           <AutoFitText
             className="ficha-abs ability-ficha-tag ability-ficha-type"
-            style={rectToStyle(guideMap.TIPO)}
+            style={{ ...rectToStyle(guideMap.TIPO), color: ABILITY_TYPE_COLOR }}
             maxFontSize={28}
             minFontSize={10}
             fitKey={`${typeLabel}-${guideMap.TIPO?.w}-${guideMap.TIPO?.h}`}
