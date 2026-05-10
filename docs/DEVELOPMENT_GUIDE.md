@@ -36,6 +36,18 @@ Notas practicas:
 - Si cambia el texto de un heading o un parrafo clave en Notion/Markdown, revisar esos hooks.
 - El PDF del reglamento tambien replica estas galerias, asi que cualquier insercion visual nueva debe revisarse en web y PDF.
 
+## 2.2) PDF del generador de ejercito
+
+Regla importante:
+- El PDF de fichas del `Generador` no debe reconstruirse desde la maquetacion DOM ni pasar por flujos tipo print-preview.
+- La exportacion debe usar el renderer propio por canvas definido en `src/pages/Generador.jsx`.
+- Si hay que ajustar calidad o encaje en pagina, tocar parametros del renderer/exportador propio de forma incremental y validada.
+- No cambiar a `html2canvas`, captura de navegador, rasterizacion externa o librerias nuevas para las fichas sin aprobacion explicita de Alberto.
+
+Motivo:
+- La maquetacion de las fichas esta ajustada a mano. Reconstruirla con otro motor desplaza textos, cambia fuentes o rompe posiciones.
+- Ante duda, dejar el sistema anterior funcionando antes que introducir una estrategia nueva.
+
 ## 3) Traducciones y UX
 
 - Textos globales: `src/i18n/translations.js`

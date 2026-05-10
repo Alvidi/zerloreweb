@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 function Footer() {
@@ -7,7 +8,11 @@ function Footer() {
   return (
     <footer className="footer">
       <div>
-        ZeroLore © {year}. {t('footer.madeBy')}. {t('footer.rights')} {t('footer.tagline')}
+        ZeroLore © {year}. {t('footer.madeBy')}.{' '}
+        <Link className="footer-link" to="/derechos-de-autor">
+          {t('footer.copyrightLink')}
+        </Link>
+        . {t('footer.rights')} {t('footer.tagline')}
       </div>
     </footer>
   )

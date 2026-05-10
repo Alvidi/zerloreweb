@@ -31,6 +31,14 @@ export const SEO_BY_LANG = {
         'Consulta unidades, habilidades de faccion y fichas listas para descargar en ZeroLore.',
       pageType: 'WebApplication',
     },
+    '/derechos-de-autor': {
+      title: 'Derechos de autor | ZeroLore',
+      description:
+        'Aviso legal de ZeroLore: derechos de autor, condiciones de uso y propiedad intelectual del proyecto.',
+      summary:
+        'Consulta las condiciones de uso, autoria y derechos de autor de ZeroLore.',
+      pageType: 'WebPage',
+    },
   },
   en: {
     '/': {
@@ -57,10 +65,18 @@ export const SEO_BY_LANG = {
         'Browse units, faction abilities, and downloadable army cards for ZeroLore.',
       pageType: 'WebApplication',
     },
+    '/derechos-de-autor': {
+      title: 'Copyright | ZeroLore',
+      description:
+        'ZeroLore legal notice: copyright, usage rights, and intellectual property for the project.',
+      summary:
+        'Review ZeroLore usage terms, authorship, and copyright information.',
+      pageType: 'WebPage',
+    },
   },
 }
 
-export const ROUTE_PATHS = ['/', '/reglamento', '/generador']
+export const ROUTE_PATHS = ['/', '/reglamento', '/generador', '/derechos-de-autor']
 
 export const LOCALE_BY_LANG = {
   es: 'es_ES',

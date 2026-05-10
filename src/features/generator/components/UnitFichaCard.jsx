@@ -777,7 +777,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
             { key: 'VIDAS', idx: 1, value: unit.vidas },
             { key: 'SALV',  idx: 2, value: unit.salvacion },
             { key: 'VEL',   idx: 3, value: unit.velocidad },
-            { key: 'ESC',   idx: 4, value: `${unit.escuadra_min}/${unit.escuadra_max}` },
+            { key: 'ESC',   idx: 4, value: unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}` },
           ].map(({ key, idx, value }) => (
             <StatCell
               key={key}

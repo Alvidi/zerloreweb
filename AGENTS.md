@@ -13,6 +13,7 @@ Non-negotiable rules:
 - Do not silently change game-rule behavior while doing pure refactors.
 - In `Reglamento`, remember there are visual insertions layered on top of Markdown (doctrines, command posts, flags, activation, state, and damage tokens). Do not break those hooks accidentally.
 - If new rulebook text explicitly references a token, check whether that token should also be inserted visually in the rulebook web/PDF flow.
+- In `Generador`, do not replace the ficha PDF export pipeline with DOM capture, print-preview flows, or third-party layout reconstruction. The army PDF must stay on the project-owned canvas renderer unless Alberto explicitly approves a rewrite.
 
 Working contract for this repo:
 
