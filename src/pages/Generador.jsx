@@ -1011,6 +1011,7 @@ function Generador() {
   const [openManualUnitId, setOpenManualUnitId] = useState('')
   const [openArmyUnitUid, setOpenArmyUnitUid] = useState('')
   const [openFactionAbilityGroupId, setOpenFactionAbilityGroupId] = useState('')
+  const [openArmyAbilityId, setOpenArmyAbilityId] = useState('')
   const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
   const [imageCropDraft, setImageCropDraft] = useState(null)
   const [selectedArmyUnitSelections, setSelectedArmyUnitSelections] = useState([])
@@ -1417,6 +1418,7 @@ function Generador() {
       setOpenManualUnitId('')
       setOpenArmyUnitUid('')
       setOpenFactionAbilityGroupId('')
+      setOpenArmyAbilityId('')
       setPendingSquadUnitId('')
       setSelectedArmyUnitSelections([])
       setManualUnitDrafts({})
@@ -1428,6 +1430,7 @@ function Generador() {
     setOpenManualUnitId('')
     setOpenArmyUnitUid('')
     setOpenFactionAbilityGroupId('')
+    setOpenArmyAbilityId('')
     setPendingSquadUnitId('')
     setSelectedArmyUnitSelections([])
   }
@@ -1901,6 +1904,13 @@ function Generador() {
                                   <button
                                     type="button"
                                     className="ghost small"
+                                    onClick={() => setOpenArmyAbilityId(skill.id || skill.nombre)}
+                                  >
+                                    {t('generator.viewCard')}
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="ghost small"
                                     onClick={() => handleRemoveArmyPassive(skill.id)}
                                   >
                                     {t('generator.delete')}
@@ -2112,18 +2122,31 @@ function Generador() {
                     document.body,
                   ) : null
                 })() : null}
-                {openFactionAbilityGroupId ? (() => {
-                  const previewGroup = selectedPassiveOptions.find((group) => group.id === openFactionAbilityGroupId)
-                  const previewAbilities = Array.isArray(previewGroup?.habilidades) ? previewGroup.habilidades : []
-                  if (!previewGroup || !previewAbilities.length) return null
+                {openFactionAbilityGroupId || openArmyAbilityId ? (() => {
+                  const previewArmyAbility = openArmyAbilityId
+                    ? selectedAbilityRows.find((skill) => (skill.id || skill.nombre) === openArmyAbilityId)
+                    : null
+                  const previewGroup = openFactionAbilityGroupId
+                    ? selectedPassiveOptions.find((group) => group.id === openFactionAbilityGroupId)
+                    : null
+                  const previewAbilities = previewArmyAbility
+                    ? [previewArmyAbility]
+                    : Array.isArray(previewGroup?.habilidades) ? previewGroup.habilidades : []
+                  const previewAbilityLabel = previewArmyAbility?.nombre
+                    || (previewGroup ? getPassiveSelectionDisplayName(previewGroup, selectedFaction, t) : '')
+                  if (!previewAbilities.length) return null
+                  const closeAbilityPreview = () => {
+                    setOpenFactionAbilityGroupId('')
+                    setOpenArmyAbilityId('')
+                  }
 
                   return typeof document !== 'undefined' ? createPortal(
                     <div
                       className="unit-preview-modal"
                       role="dialog"
                       aria-modal="true"
-                      aria-label={getPassiveSelectionDisplayName(previewGroup, selectedFaction, t)}
-                      onClick={() => setOpenFactionAbilityGroupId('')}
+                      aria-label={previewAbilityLabel}
+                      onClick={closeAbilityPreview}
                     >
                       <div className="unit-preview-modal-inner" onClick={(e) => e.stopPropagation()}>
                         <div className="unit-preview-modal-bar">
@@ -2131,7 +2154,7 @@ function Generador() {
                             <button
                               type="button"
                               className="ghost small"
-                              onClick={() => setOpenFactionAbilityGroupId('')}
+                              onClick={closeAbilityPreview}
                               aria-label={t('generator.close')}
                             >
                               ✕
