@@ -1,6 +1,6 @@
 # Reglamento ZeroLore
 
-ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas o habilidades estratégicas, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
+ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones y armas, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
 Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
 
@@ -45,6 +45,12 @@ ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda usar peanas pr
 
 Estas medidas son orientativas. El criterio es que la peana sea coherente con el tamaño visual de la miniatura y no suponga una ventaja táctica injusta.
 
+### Coherencia del ejército
+
+ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda que las unidades de un mismo ejército mantengan una **coherencia estética y narrativa**. Aunque puedes usar miniaturas de distintas fuentes o fabricantes, intenta que tu ejército cuente una historia visual coherente: uniformes, paleta de colores, simbología o ambientación común.
+
+Esto refuerza la inmersión en mesa y ayuda al rival a identificar fácilmente a tus unidades.
+
 ### Dados y tiradas
 
 ZeroLore utiliza siempre dados de seis caras (1D6).
@@ -54,7 +60,7 @@ Cada una se explica en detalle en su sección correspondiente.
 
 ### Prioridad de reglas
 
-En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las del reglamento base y se aplican a todas las unidades, y las **reglas especiales**, que son las habilidades escritas en la ficha de una unidad, un arma, una habilidad estratégica o una facción.
+En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las del reglamento base y se aplican a todas las unidades, y las **reglas especiales**, que son las habilidades escritas en la ficha de una unidad, un arma o una facción.
 
 Cuando una regla especial contradiga o modifique una regla general, **la regla especial siempre tiene prioridad**.
 
@@ -65,7 +71,7 @@ _Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arm
 ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 
 - **1vs1**: duelo entre dos jugadores
-- **1vs3**: enfrentamiento contra un jugador
+- **1vs2**: enfrentamiento contra un jugador
 - **2vs2**: dos equipos de dos jugadores
 
 En partidas de más de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno, y aplica también a equipos.
@@ -146,18 +152,15 @@ Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 - Cada jugador tira **1D6**.
 - El jugador o equipo con el resultado más alto **actúa primero** durante ese turno.
 - En caso de empate, se repite la tirada.
-- Cada jugador puede añadir una **habilidad estratégica** a sus unidades si la tiene.
 - Se reclutan o se sacan unidades de reserva en los puestos de mando.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
-### Habilidades estratégicas
+### Reroll
 
-Tras determinar la Iniciativa, los jugadores declaran la habilidad estratégica que tengan equipada, que vayan a utilizar ese turno y marcan la unidad que la usará.
+Al inicio de cada Fase de Iniciativa, cada jugador gana **1 Ficha de Reroll**. Las fichas no gastadas se acumulan entre turnos.
 
-- Solo se puede usar **una estrategia por turno** a escoger.
-- Sus efectos duran **todo el turno**, salvo que se indique lo contrario.
-- La unidad o escuadra que tenga activa una estrategia se marca con un token.
+Una Ficha de Reroll puede gastarse en cualquier momento para **repetir cualquier tirada** (ataque, salvación, carga). La segunda tirada es siempre el resultado final.
 
 ## 2. Fase de Activaciones
 
@@ -228,8 +231,7 @@ Para trepar:
 
 Al realizar una **Carrera**, la unidad consume **2 acciones**.
 
-- La unidad tira **1D6**.
-- El resultado se suma a su valor de Movimiento para ese desplazamiento.
+- La unidad se desplaza su valor de Movimiento **+3"** adicionales.
 - Durante una Carrera no se pueden realizar ataques, salvo que una regla indique lo contrario.
 
 La Carrera representa un movimiento rápido y expuesto, útil para reposicionarse o alcanzar coberturas.
@@ -246,12 +248,7 @@ Para realizar una retirada:
 - Se mueve usando su valor de **Movimiento** en dirección a un puesto de mando aliado.
 - Al entrar en retirada, la unidad reduce su **Velocidad a 0** y su **Valor no cuenta para el control de objetivos o puestos de mando** hasta que se recomponga.
 
-Al inicio de su siguiente turno, la unidad debe tirar **1D6**:
-
-- **1–2:** continúa retirándose hacia un puesto de mando aliado.
-- **3–6:** se recompone y puede actuar con normalidad.
-
-Las unidades se recomponen automáticamente en el momento en que alcanzan un puesto de mando aliado.
+La unidad se recompone automáticamente al inicio de su siguiente activación si ha alcanzado un puesto de mando aliado. Si no lo ha alcanzado, continúa en retirada.
 
 Una unidad en estado de Retirada **no puede realizar contraataques**.
 
@@ -262,7 +259,7 @@ Una unidad que utiliza la acción **Preparado** adopta una postura defensiva.
 Una unidad preparada puede realizar **contraataques a distancia** durante el turno del jugador rival.
 
 - **Si es disparada:** puede devolver inmediatamente un disparo con el arma equipada, independientemente de si le quedan acciones. Primero se resuelve el ataque enemigo, luego el disparo de respuesta.
-- **Si es cargada:** el orden de ataque se decide por **Velocidad**, como excepción a la regla general de carga. Si la unidad preparada tiene **mayor Velocidad** que la que carga, la preparada **ataca primero** y la unidad que carga realiza el contraataque. Si la unidad preparada tiene **igual o menor Velocidad** que la que carga, la unidad que carga **ataca primero** siguiendo la regla normal y la preparada realiza el contraataque. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
+- **Si es cargada:** la unidad Preparada **ataca siempre primero**, independientemente de la Velocidad. La unidad que carga realiza el contraataque después. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
 
 El estado de Preparado dura hasta que finaliza el turno.
 
@@ -287,6 +284,8 @@ Todo ataque a distancia se resuelve siguiendo siempre esta secuencia:
 3. Tirar y superar o igualar la Precisión.
 4. Tirar salvaciones por parte del defensor.
 5. Aplicar daño.
+
+![Secuencia visual de un ataque a distancia: objetivo, tiradas, impacto, salvación y daño]({{rangedAttackSequenceImage}})
 
 ## 1. Elegir objetivo
 
@@ -396,7 +395,8 @@ La unidad atacante lanza los dados de **Ataques** indicados en su perfil de comb
 
 El jugador defensor lanza tantos dados como impactos haya recibido.
 
-- Cada resultado **igual o superior a su valor de Salvación** bloquea un impacto.
+- Los ataques cuerpo a cuerpo **reducen la Salvación del defensor en 1** (p. ej., de 4+ pasa a 5+). El combate en contacto directo es más letal que el fuego a distancia.
+- Cada resultado **igual o superior al valor de Salvación modificado** bloquea un impacto.
 - Los impactos críticos solo pueden bloquearse con un **6 defensivo**.
 - Los impactos no bloqueados infligen el daño base o crítico del arma atacante.
 
@@ -504,6 +504,8 @@ Las miniaturas aliadas o enemigas que bloquean completamente la visión actúan 
 
 Si una unidad es parcialmente visible pero no está en contacto con ninguna cobertura, no se aplican bonificaciones defensivas.
 
+Si el atacante tiene **línea de visión limpia a la unidad completa** — sin que ninguna parte del elemento de escenografía se interponga entre atacante y objetivo — **no hay cobertura**, aunque la unidad esté en contacto físico con dicho elemento. La cobertura requiere que el obstáculo bloquee parte del tiro, no solo que esté cerca.
+
 ---
 
 # Estados de unidad
@@ -563,7 +565,11 @@ Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla*
 
 **Control al final de turno**
 
-Al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto. En caso de empate, el puesto permanece bajo el control de quien lo tuviera. Si no hay unidades de ningún bando, el puesto mantiene su último propietario.
+Al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto.
+
+**Unidades trabadas en CaC:** las unidades de ambos bandos que estén en combate cuerpo a cuerpo dentro de un puesto de mando **no cuentan para el cálculo de control**. Se tratan como si no existiesen a efectos del puesto hasta que el combate se resuelva.
+
+En caso de empate, el puesto permanece bajo el control de quien lo tuviera. Si no hay unidades de ningún bando, el puesto mantiene su último propietario.
 
 Para desplegar una unidad en un puesto de mando, primero tiene que estar en posesión del jugador, la unidad debe estar en contacto con él. Si el puesto está ocupado por unidades enemigas, aunque siga siendo propiedad por valor, no se puede desplegar en él.
 
@@ -665,7 +671,7 @@ Características generales:
 ### Reglas especiales de los héroes
 
 - Poseen habilidades únicas que definen su rol táctico. Sus habilidades y especialidad se encuentran en su ficha.
-- En modo Gran Batalla, algunos héroes pueden **unirse a escuadras específicas** según su ficha. Mientras formen parte de ella, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente: el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer y solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
+- En modo Gran Batalla, el **Héroe debe unirse obligatoriamente a una escuadra antes del despliegue**. Un Héroe que no forme parte de ninguna escuadra no puede incluirse en el ejército en este modo. Mientras forme parte de una escuadra, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente: el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer y solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
 
 ## 6. Titanes
 
@@ -727,7 +733,7 @@ Una Salvación de **4+** bloquea impactos con resultados de **4, 5 o 6**.
 Representa la rapidez de reacción de la unidad.
 
 - En combate cuerpo a cuerpo, la unidad con mayor Velocidad **actúa primero**, salvo que una haya cargado.
-- Algunas habilidades y habilidades estratégicas modifican este valor temporalmente.
+- Algunas habilidades modifican este valor temporalmente.
 
 ### Especialidad
 
@@ -943,6 +949,11 @@ Esta arma **impacta automáticamente** y no requiere tirada de Impactos.
 La unidad puede realizar una acción extra de **disparo después de usar Carrera**.
 **Momento:** Disparo
 
+### 15. Ataque especializado (Línea, Élite, Vehículo, Monstruo)
+
+Esta arma solo puede atacar a un tipo de unidad.
+**Momento:** Disparo y cuerpo a cuerpo
+
 ---
 
 ## Limitación de armas
@@ -958,63 +969,6 @@ Cada facción dispone de distintas **Habilidades de facción** que definen su es
 Antes de comenzar la partida, cada jugador puede elegir un máximo de **3 habilidades de facción** de las disponibles en su facción. El coste de las habilidades se incluye dentro del valor total del ejército: cuantas más habilidades se tomen, menos puntos quedan para unidades. Las habilidades elegidas se aplican automáticamente a todas las unidades de la facción mientras estén en juego y no requieren activación. La elección debe comunicarse al rival antes de comenzar la partida.
 
 Con el tiempo, cada facción irá ampliando su catálogo de habilidades disponibles, permitiendo más estilos de juego distintos dentro de la misma facción.
-
----
-
-# Habilidades estratégicas
-
-Las **habilidades estratégicas** representan órdenes tácticas, maniobras coordinadas o impulsos estratégicos que un comandante puede ejecutar durante la batalla. Las habilidades estratégicas tienen un **coste en puntos** que se incluye dentro del valor total del ejército. Cada jugador elige las habilidades estratégicas que quiere llevar disponibles en partida, sin repetir.
-
-Las habilidades estratégicas:
-
-- Se declaran durante la **Fase de Iniciativa** y se marca la unidad que va a utilizarla.
-- Afectan a **una unidad**, salvo que se indique lo contrario.
-- Sus efectos duran **todo el turno**.
-- Solo se puede usar una habilidad estratégica por turno.
-- Cada habilidad estratégica solo puede usarse **una vez por partida**.
-- La unidad que tenga activa una habilidad estratégica se marca con un token.
-
-Las habilidades estratégicas son **públicas** y deben declararse claramente al rival antes de aplicarse.
-
-![Unidad marcada con un token de habilidad estratégica]({{strategicAbilitiesImage}})
-
-## Lista de habilidades estratégicas
-
-### 1. Garrotazo — 3 pts
-
-La unidad o escuadra trabada en combate cuerpo a cuerpo empuja **1"** a su contrincante, **poniendo fin al combate**. Esta habilidad estratégica se realiza inmediatamente cuando la unidad realiza su activación, independientemente de quién tiene más velocidad.
-
-### 2. Apuntado — 4 pts
-
-La unidad o escuadra elegida **pierde una acción**, pero gana **+1 dado de Ataque** en disparo durante este turno.
-
-### 3. Frenesí — 3 pts
-
-La unidad elegida puede utilizar **una acción adicional de movimiento** este turno.
-
-### 4. Agilidad en combate — 6 pts
-
-La unidad elegida gana la iniciativa en combate cuerpo a cuerpo este turno, ignorando la velocidad del contrincante e incluso si el rival ha cargado.
-
-### 5. Nuestra es la victoria — 5 pts
-
-La unidad o escuadra designada controla automáticamente el objetivo en el que se encuentre, ignorando la presencia de unidades con más valor o héroes enemigos, en ese mismo objetivo.
-
-### 6. Reacción inmediata — 4 pts
-
-Esta unidad no puede ser cargada, ni cargar a ninguna unidad enemiga
-
-### 7. Más que cargado — 3 pts
-
-Si esta unidad falla una carga durante este turno, puede repetirla inmediatamente una vez.
-
-### 8. Una nueva oportunidad — 4 pts
-
-Repite una tirada de ataque cuerpo a cuerpo o a distancia. Si la primera tirada es favorable se puede ignorar esta habilidad estratégica; si se decide usarla, la primera tirada queda descartada.
-
-### 9. Combate a muerte — 5 pts
-
-Esta habilidad estratégica solo funciona con una unidad / escuadra aliada que esté trabada en combate cuerpo a cuerpo contra otra. Si hay más de 2 unidades / escuadras involucradas, no se puede usar esta habilidad estratégica. Ambas unidades / escuadras quedan comprometidas en un duelo sin salida. Ninguna de las dos puede retirarse ni ser separada del combate por ningún motivo, ni usando otras habilidades, habilidades estratégicas, etc. Si cualquiera de las dos unidades / escuadras en combate es activada, la habilidad estratégica se da por activada. Ambas unidades resuelven automáticamente un intercambio de combate cuerpo a cuerpo siguiendo las reglas normales de orden de ataque. El combate termina únicamente cuando una de las dos unidades es destruida.
 
 ---
 

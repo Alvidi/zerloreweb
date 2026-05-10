@@ -114,6 +114,12 @@ export const getAbilityDescription = (ability, lang = 'es') => {
       ? 'Can perform an extra shooting action after using Sprint.'
       : 'Puede hacer una acción extra de disparo después de usar Carrera.'
   }
+  if (abilityId === WEAPON_ABILITY_IDS.specializedAttack) {
+    const target = parseAbilityTarget(raw)
+    return lang === 'en'
+      ? `This weapon can only attack ${target || 'the indicated unit type'}.`
+      : `Esta arma solo puede atacar a ${target || 'el tipo de unidad indicado'}.`
+  }
   if (abilityId === WEAPON_ABILITY_IDS.limitedAmmo) {
     return lang === 'en'
       ? `Only ${normalizeLimitedValue(value)} of this weapon may be equipped.`
@@ -159,6 +165,10 @@ export const getAbilityLabel = (ability, lang = 'es') => {
   if (abilityId === WEAPON_ABILITY_IDS.unstable) return 'Unstable'
   if (abilityId === WEAPON_ABILITY_IDS.direct) return 'Direct'
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) return 'Guerrilla'
+  if (abilityId === WEAPON_ABILITY_IDS.specializedAttack) {
+    const target = parseAbilityTarget(raw)
+    return target ? `Specialized Attack (${target})` : 'Specialized Attack'
+  }
   if (abilityId === WEAPON_ABILITY_IDS.limitedAmmo) return `Weapon Limited${suffix}`
   return formatAbilityLabel(raw)
 }

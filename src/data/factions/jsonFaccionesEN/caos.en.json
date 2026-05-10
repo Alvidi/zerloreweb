@@ -1,0 +1,1122 @@
+{
+  "id": "caos",
+  "faccion": {
+    "nombre": "Chaos",
+    "estilo_juego": "A faction built around waves and relentless pressure, designed to overwhelm the enemy with numbers and never stop advancing. Its Line units are the cheapest in the game: they die easily but return turn after turn from command posts. Melee and space control are its main weapons. Ideal for players who enjoy sustained pressure, gradual attrition, and controlled chaos.",
+    "seleccion_habilidades": "multiple",
+    "habilidades_faccion": [
+      {
+        "id": "oleada-eterna",
+        "nombre": "Endless Wave",
+        "coste": 8,
+        "descripcion_escaramuza": "When a Line unit is destroyed, at the start of the next Initiative Phase it returns from any empty command post with all of its Wounds restored.",
+        "descripcion_escuadra": "When a Line squad is destroyed, at the start of the next Initiative Phase it returns from any empty command post with all of its Wounds restored."
+      },
+      {
+        "id": "instinto-de-enjambre",
+        "nombre": "Horde Instinct",
+        "coste": 4,
+        "descripcion_escaramuza": "Units within 3\" of another allied unit may reroll failed melee attack dice.",
+        "descripcion_escuadra": "Squads within 3\" of another allied squad may reroll failed melee attack dice."
+      },
+      {
+        "id": "carga-salvaje",
+        "nombre": "Savage Charge",
+        "coste": 7,
+        "descripcion_escaramuza": "When a unit from this faction makes a successful charge, it gains +1 Damage on its melee attacks for that activation.",
+        "descripcion_escuadra": "When a squad from this faction makes a successful charge, it gains +1 Damage on its melee attacks for that activation."
+      },
+      {
+        "id": "propagacion-de-veneno",
+        "nombre": "Venom Spread",
+        "coste": 6,
+        "descripcion_escaramuza": "Enemy units that lose at least 1 Wound in melee against a Chaos unit must make a roll after the combat. On a 4+, that unit suffers 1 extra point of damage.",
+        "descripcion_escuadra": "Enemy squads that lose at least 1 Wound in melee against a Chaos squad must make a roll after the combat. On a 4+, that squad suffers 1 extra point of damage."
+      },
+      {
+        "id": "regeneracion",
+        "nombre": "Regeneration",
+        "coste": 6,
+        "descripcion_escaramuza": "At the start of each Initiative Phase, one Chaos unit of your choice recovers 1 Wound, up to its maximum. It can only be used on units that were not destroyed that turn.",
+        "descripcion_escuadra": "At the start of each Initiative Phase, one Chaos squad of your choice recovers D3 Wounds, up to its maximum. It can only be used on squads that were not destroyed that turn."
+      }
+    ]
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Vermin",
+      "era": "Future",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 3,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 4,
+          "max": 10
+        },
+        "especialidad": "-",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Proyectil sucio",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Ravagers",
+      "era": "Future",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 4,
+          "max": 6
+        },
+        "especialidad": "En carga, esta unidad gana +1 dado de ataque en CaC durante esa activación.",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Veneno arrojadizo",
+            "ataques": "1D",
+            "distancia": "6\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillas de asalto",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Bursters",
+      "era": "Future",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 3,
+        "salvacion": "+6",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "Cuando esta unidad es eliminada, antes de retirarla inflige D3 impactos automáticos de Daño 1/2 a todas las unidades a 2\" (aliadas y enemigas).",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuerpo explosivo",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Darters",
+      "era": "Future",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "+5",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "Puede disparar en la misma activación en que realiza una carga exitosa.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Espinas arrojadizas",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras cortantes",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Armored Beasts",
+      "era": "Future",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 9,
+        "salvacion": "+3",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad no está trabada en CaC, recupera 1 Vida.",
+        "valor": 11
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Proyectil ácido",
+            "ataques": "1D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mandíbulas acorazadas",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Devastators",
+      "era": "Future",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 8,
+        "salvacion": "+4",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Cuando esta unidad carga exitosamente, puede repetir todos los dados de ataque CaC fallidos en esa activación.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanzador de bilis",
+            "ataques": "1D6",
+            "distancia": "8\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Direct"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras devastadoras",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Riders of the Apocalypse",
+      "era": "Future",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "10\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "En carga, gana +2 dados de ataque CaC. Si esta unidad elimina una unidad enemiga en CaC, puede moverse inmediatamente 2\" de forma gratuita.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Espinas de montura",
+            "ataques": "1D",
+            "distancia": "6\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Gunslinger"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lanza de montura",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Charge Beast",
+      "era": "Future",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 18,
+        "salvacion": "+4",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Cuando esta unidad carga exitosamente, la unidad objetivo recibe D3 impactos automáticos de Daño 2/3 antes de resolver el ataque CaC.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Proyectiles espinosos",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastamiento",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Embestida",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Anti 5+ (Vehicle)"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Squig",
+      "era": "Future",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 20,
+        "salvacion": "+4",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Las unidades aliadas de Línea a 6\" pueden repetir los dados de salvación fallidos.",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Enjambre de esporas",
+            "ataques": "1D6",
+            "distancia": "12\"",
+            "impactos": "-",
+            "danio": "2",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Direct",
+              "Chained Hits"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aguijón venenoso",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Corrosive",
+      "era": "Future",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "salvacion": "+5",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Cuando realiza un ataque de Disparo, los objetivos no pueden beneficiarse de cobertura.",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Chorro ácido",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Anti 5+ (Vehicle)",
+              "Specialized Attack (Vehicle, Monster)"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mandíbulas corrosivas",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Agent of Chaos",
+      "era": "Future",
+      "clase": "Hero",
+      "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
+      "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
+        "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
+        "valor": 15
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Proyectil vivo",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garras del Señor",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Colmillo del Alfa",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "The Great Devourer",
+      "era": "Future",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 26,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Cuando esta unidad elimina una unidad enemiga en CaC, recupera D3 Vidas inmediatamente. Una vez por turno, al inicio de su activación, puede devolver al juego una unidad aliada de Línea eliminada con la mitad de su escuadra mínima, colocándola dentro de 6\" de esta unidad.",
+        "valor": 42
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Escupitajo ácido",
+            "ataques": "2D6",
+            "distancia": "18\"",
+            "impactos": "-",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Direct"
+            ],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Proyectil masivo",
+            "ataques": "2D",
+            "distancia": "20\"",
+            "impactos": "+4",
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Aplastamiento titánico",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Dientes del abismo",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Gretchins",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 3,
+        "salvacion": "+6",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 12
+        },
+        "especialidad": "Cuando esta unidad tiene 6 o más miniaturas en juego, sus ataques CaC infligen +1 Daño.",
+        "valor": 3
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistola chatarra",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "1",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Garfio orco",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Fight Orcs",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "especialidad": "Cuando esta unidad realiza una carga exitosa, cada dado de ataque CaC que saque 6 añade +1 dado de ataque adicional (Impactos encadenados).",
+        "valor": 5
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Arco orco",
+            "ataques": "1D",
+            "distancia": "10\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hacha de guerra",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Goblin Archers",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "+6",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 4,
+          "max": 8
+        },
+        "especialidad": "Esta unidad puede disparar a unidades enemigas trabadas en CaC con aliados sin penalización por fuego amigo (el daño se aplica igualmente a cualquier unidad trabada en ese combate).",
+        "valor": 4
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Arco goblin",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Cuchillo goblin",
+            "ataques": "1D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Orc Bruisers",
+      "era": "Past",
+      "clase": "Line",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "especialidad": "Cuando esta unidad realiza una carga, puede repetir los dos dados de distancia. Si la carga falla por 1\" o menos, tiene éxito igualmente.",
+        "valor": 6
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mandoble orco",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Big Bosses",
+      "era": "Past",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 9,
+        "salvacion": "+3",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Mientras esta unidad esté trabada en CaC, las unidades aliadas de Línea a 4\" o menos ganan +1D en sus ataques CaC.",
+        "valor": 12
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Pistolón orco",
+            "ataques": "2D",
+            "distancia": "10\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Hacha del jefe",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Boar Riders",
+      "era": "Past",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "9\"",
+        "vidas": 7,
+        "salvacion": "+4",
+        "velocidad": 5,
+        "escuadra": {
+          "min": 1,
+          "max": 3
+        },
+        "especialidad": "Cuando realiza una carga exitosa, gana +2D en CaC esa activación. Si elimina su objetivo en CaC, puede inmediatamente cargar a otra unidad enemiga a 6\" o menos.",
+        "valor": 10
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Lanza arrojadiza",
+            "ataques": "1D",
+            "distancia": "8\"",
+            "impactos": "+5",
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Lanza de jabalí",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Greenskin Shamans",
+      "era": "Past",
+      "clase": "Elite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 2
+        },
+        "especialidad": "Una vez por turno, en lugar de atacar, elige entre: (a) infligir 1D3 impactos automáticos de Daño 1 a una unidad enemiga a 12\", o (b) dar +1D de ataque a una unidad aliada a 8\" hasta el final del turno.",
+        "valor": 9
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Rayo Waaagh",
+            "ataques": "2D",
+            "distancia": "14\"",
+            "impactos": "+4",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Bastón mágico",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "War Troll",
+      "era": "Past",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 16,
+        "salvacion": "+4",
+        "velocidad": 3,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida (hasta su máximo). Cuando realiza una carga, inflige D3 impactos automáticos de Daño 2 antes del combate.",
+        "valor": 13
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Roca arrojada",
+            "ataques": "1D",
+            "distancia": "12\"",
+            "impactos": "+4",
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Porrazo",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Great Spider",
+      "era": "Past",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "8\"",
+        "vidas": 12,
+        "salvacion": "+5",
+        "velocidad": 4,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Las unidades enemigas trabadas en CaC con esta unidad no pueden retirarse ni destrabarse. Cuando esta unidad elimina una unidad en CaC, puede moverse 3\" de forma gratuita.",
+        "valor": 11
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Mordisco venenoso",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Ork War Machine",
+      "era": "Past",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 14,
+        "salvacion": "+4",
+        "velocidad": 1,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Cuando dispara, puede apuntar a un punto del tablero sin línea de visión directa: todas las unidades en 3\" del punto sufren el ataque (ignorando obstáculos de terreno).",
+        "valor": 14
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Catapulta orka",
+            "ataques": "1D6",
+            "distancia": "24\"",
+            "impactos": "-",
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive",
+              "Parabolic Shot"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Embestida",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Warboss",
+      "era": "Past",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "salvacion": "+3",
+        "velocidad": 6,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Las unidades aliadas a 6\" ganan +1D en ataques CaC. Cuando esta unidad elimina una unidad enemiga en CaC, puede realizar un movimiento gratuito de 3\" y declarar inmediatamente una carga si hay otro objetivo.",
+        "valor": 16
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañón de brazo",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": "+3",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Choppa gigante",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Great Destroyer",
+      "era": "Past",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 30,
+        "salvacion": "+3",
+        "velocidad": 2,
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1D3 Vidas. Cuando realiza una carga, inflige D3 impactos automáticos de Daño 3. Las unidades aliadas de Línea a 6\" pueden repetir dados de CaC fallidos.",
+        "valor": 44
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Cañones bestiales",
+            "ataques": "2D6",
+            "distancia": "22\"",
+            "impactos": "+3",
+            "danio": "4",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Explosive"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Puño aplastador",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "7",
+            "danio_critico": "9",
+            "habilidades_arma": [
+              "Critical Attack"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ]
+}

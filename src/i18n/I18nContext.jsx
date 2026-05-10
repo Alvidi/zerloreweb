@@ -4,7 +4,7 @@ import { translations } from './translations.js'
 const I18nContext = createContext(null)
 
 const STORAGE_KEY = 'zerolore_lang'
-const DEFAULT_LANG = 'en'
+const DEFAULT_LANG = 'es'
 
 function getInitialLanguage() {
   const saved = localStorage.getItem(STORAGE_KEY)

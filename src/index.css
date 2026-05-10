@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
 
 :root {
   color: #ffffff;
@@ -12,11 +12,11 @@
   --bg-1: #0c0c10;
   --bg-2: #14151c;
   --bg-3: #1b1f2a;
-  --accent: #ff8f45;
-  --accent-soft: rgba(255, 143, 69, 0.18);
+  --accent: #d7c69a;
+  --accent-soft: rgba(200, 170, 104, 0.18);
   --metal: #a7b0c0;
   --line: rgba(255, 255, 255, 0.12);
-  --glow: rgba(255, 159, 87, 0.35);
+  --glow: rgba(214, 190, 132, 0.32);
   --max-width: 1200px;
   --page-gutter: clamp(20px, 6vw, 64px);
   --text-main: #ffffff;

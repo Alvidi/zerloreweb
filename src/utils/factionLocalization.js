@@ -44,6 +44,7 @@ const mergeWeaponsTranslation = (esWeapons, enWeapons) =>
   (Array.isArray(esWeapons) ? esWeapons : []).map((weapon, index) => ({
     ...weapon,
     nombre: enWeapons?.[index]?.nombre || weapon?.nombre || '',
+    habilidades_arma: enWeapons?.[index]?.habilidades_arma || weapon?.habilidades_arma || [],
   }))
 
 const mergeUnitsTranslation = (esUnits, enUnits) =>
@@ -120,6 +121,7 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
 export const buildLocalizedFactionEntries = (factionModules, lang) => {
   const esByBase = new Map()
   const enByBase = new Map()
+  const preferredOrder = ['orden', 'caos', 'legado', 'otros']
 
   Object.entries(factionModules).forEach(([path, module]) => {
     const filename = path.split('/').pop() || ''
@@ -130,7 +132,14 @@ export const buildLocalizedFactionEntries = (factionModules, lang) => {
     }
   })
 
-  const bases = Array.from(new Set([...esByBase.keys(), ...enByBase.keys()])).sort()
+  const bases = Array.from(new Set([...esByBase.keys(), ...enByBase.keys()])).sort((a, b) => {
+    const aIndex = preferredOrder.indexOf(a)
+    const bIndex = preferredOrder.indexOf(b)
+    const safeAIndex = aIndex === -1 ? preferredOrder.length : aIndex
+    const safeBIndex = bIndex === -1 ? preferredOrder.length : bIndex
+    if (safeAIndex !== safeBIndex) return safeAIndex - safeBIndex
+    return a.localeCompare(b, 'es', { sensitivity: 'base' })
+  })
   return bases
     .map((base) => {
       const data = mergeFactionLanguageData({

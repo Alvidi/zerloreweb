@@ -3,6 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import zeroloreLogo from '../images/zeroloreLogo.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
+const LANGUAGE_OPTIONS = [
+  { code: 'es', flag: '🇪🇸', label: 'ES' },
+  { code: 'en', flag: '🇬🇧', label: 'EN' },
+]
+
 function Nav() {
   const { lang, setLang, t } = useI18n()
   const location = useLocation()
@@ -66,12 +71,18 @@ function Nav() {
         ))}
       </div>
       <div className="lang-switch" aria-label="Language switch">
-        <button type="button" className={`lang-btn ${lang === 'es' ? 'active' : ''}`} onClick={() => setLang('es')}>
-          ES
-        </button>
-        <button type="button" className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>
-          EN
-        </button>
+        {LANGUAGE_OPTIONS.map((language) => (
+          <button
+            key={language.code}
+            type="button"
+            className={`lang-btn ${lang === language.code ? 'active' : ''}`}
+            onClick={() => setLang(language.code)}
+            aria-label={language.code === 'en' ? 'English' : 'Español'}
+          >
+            <span className="lang-btn-flag" aria-hidden="true">{language.flag}</span>
+            <span>{language.label}</span>
+          </button>
+        ))}
       </div>
       <button
         type="button"
@@ -114,20 +125,18 @@ function Nav() {
           ))}
         </div>
         <div className="nav-mobile-lang" aria-label={lang === 'en' ? 'Language switch' : 'Selector de idioma'}>
-          <button
-            type="button"
-            className={`lang-btn ${lang === 'es' ? 'active' : ''}`}
-            onClick={() => handleMobileLangChange('es')}
-          >
-            ES
-          </button>
-          <button
-            type="button"
-            className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-            onClick={() => handleMobileLangChange('en')}
-          >
-            EN
-          </button>
+          {LANGUAGE_OPTIONS.map((language) => (
+            <button
+              key={language.code}
+              type="button"
+              className={`lang-btn ${lang === language.code ? 'active' : ''}`}
+              onClick={() => handleMobileLangChange(language.code)}
+              aria-label={language.code === 'en' ? 'English' : 'Español'}
+            >
+              <span className="lang-btn-flag" aria-hidden="true">{language.flag}</span>
+              <span>{language.label}</span>
+            </button>
+          ))}
         </div>
       </div>
     </nav>

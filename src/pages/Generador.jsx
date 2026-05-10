@@ -1,53 +1,518 @@
-import { useEffect, useMemo, useState, useTransition } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
-import { doctrineCatalog } from '../data/doctrines/doctrineCatalog.js'
+import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
+import FactionAbilityFichaCard from '../features/generator/components/FactionAbilityFichaCard.jsx'
+import { getAbilityDescription, getAbilityLabel } from '../utils/abilities.js'
 import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
-import UnitConfigurator from '../features/generator/components/UnitConfigurator.jsx'
 import CustomSelect from '../features/generator/components/CustomSelect.jsx'
-import UnitTypeBadge from '../features/generator/components/UnitTypeBadge.jsx'
-import { exportGeneratorPdf } from '../features/generator/exportGeneratorPdf.js'
+import {
+  getFactionAbilityIllustrationSrc,
+} from '../features/generator/factionAbilityBadges.js'
+import { getUnitTypeBadgeSrc } from '../features/generator/unitTypeBadges.js'
+import abilityIconSrc from '../images/units_icons/hability.png'
 import {
   applyPassiveGroupEffectsToFaction,
   buildArmyUnitDisplayNames,
   clampSquadSize,
   computeUnitTotal,
   factionImages,
-  generateArmyByValue,
   getFactionSkillDescriptionForMode,
+  getFixedUnitLoadout,
   getUnitSpecialtyForMode,
   isFactionData,
   isUnitTypeAllowedInGameMode,
-  localizeArmyUnits,
+  getUnitTypeToken,
   normalizeFaction,
-  selectionHasWeaponLimitError,
   toNumber,
 } from '../features/generator/generatorUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
-const preferredEraOrder = ['future', 'past']
-const preferredUnitTypeOrder = ['linea', 'elite', 'heroe', 'vehiculo', 'titan']
+const factionSheetTemplates = {
+  orden: new URL('../images/fichas/ficha_orden.webp', import.meta.url).href,
+  caos: new URL('../images/fichas/ficha_caos.webp', import.meta.url).href,
+  legado: new URL('../images/fichas/ficha_legado.webp', import.meta.url).href,
+}
+const factionAbilitySheetTemplates = {
+  orden: new URL('../images/fichas/orden_hab.webp', import.meta.url).href,
+  caos: new URL('../images/fichas/caos_hab.webp', import.meta.url).href,
+  legado: new URL('../images/fichas/legado_hab.webp', import.meta.url).href,
+}
+const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster', 'titan']
+const MAX_MULTIPLE_FACTION_ABILITIES = 3
+const MAX_UNIT_IMAGE_SIDE = 1600
+const IMAGE_CROP_ASPECT_RATIO = 686 / 473
+const IMAGE_CROP_VIEWPORT_WIDTH = 360
+const IMAGE_CROP_VIEWPORT_HEIGHT = Math.round(IMAGE_CROP_VIEWPORT_WIDTH / IMAGE_CROP_ASPECT_RATIO)
+const FICHA_CARD_W = 1537
+const FICHA_CARD_H = 1023
+const EXPORT_PAGE_W = 1240
+const EXPORT_PAGE_H = 1754
+const EXPORT_PAGE_PAD_X = 56
+const EXPORT_PAGE_PAD_Y = 52
+const EXPORT_PAGE_GAP = 28
+const EXPORT_RASTER_SCALE = 2
+const UNIT_LAYOUT_STORAGE_KEY = 'zerolore.generator.ficha-layout.v3'
+const ABILITY_LAYOUT_STORAGE_KEY = 'zerolore.generator.ficha-habilidad-layout.v1'
+const UNIT_EXPORT_LAYOUT = [
+  { label: 'NOMBRE', x: 155, y: 63, w: 575, h: 34 },
+  { label: 'TIPO', x: 31, y: 201, w: 187, h: 20 },
+  { label: 'ERA', x: 230, y: 202, w: 185, h: 20 },
+  { label: 'FACCION', x: 347, y: 108, w: 200, h: 44 },
+  { label: 'VALOR', x: 643, y: 194, w: 76, h: 34 },
+  { label: 'IMAGEN', x: 29, y: 250, w: 686, h: 473 },
+  { label: 'MOV', x: 39, y: 764, w: 110, h: 42 },
+  { label: 'VIDAS', x: 178, y: 763, w: 110, h: 42 },
+  { label: 'SALV', x: 317, y: 764, w: 110, h: 42 },
+  { label: 'VEL', x: 469, y: 761, w: 110, h: 42 },
+  { label: 'ESC', x: 597, y: 761, w: 110, h: 42 },
+  { label: 'ESPECIALIDAD', x: 31, y: 893, w: 681, h: 99 },
+  { label: 'DISPARO 1 ARMA', x: 848, y: 159, w: 153, h: 64 },
+  { label: 'DISPARO 1 ATAQUES', x: 997, y: 160, w: 90, h: 62 },
+  { label: 'DISPARO 1 ALCANCE', x: 1086, y: 160, w: 89, h: 64 },
+  { label: 'DISPARO 1 PRECISION', x: 1173, y: 159, w: 90, h: 66 },
+  { label: 'DISPARO 1 DANO', x: 1261, y: 161, w: 93, h: 64 },
+  { label: 'DISPARO 1 HABILIDADES', x: 1349, y: 160, w: 140, h: 63 },
+  { label: 'DISPARO 2 ARMA', x: 849, y: 222, w: 151, h: 60 },
+  { label: 'DISPARO 2 ATAQUES', x: 999, y: 221, w: 87, h: 60 },
+  { label: 'DISPARO 2 ALCANCE', x: 1087, y: 222, w: 87, h: 60 },
+  { label: 'DISPARO 2 PRECISION', x: 1173, y: 222, w: 88, h: 60 },
+  { label: 'DISPARO 2 DANO', x: 1261, y: 222, w: 90, h: 60 },
+  { label: 'DISPARO 2 HABILIDADES', x: 1348, y: 221, w: 142, h: 62 },
+  { label: 'CUERPO A CUERPO 1 ARMA', x: 850, y: 400, w: 150, h: 65 },
+  { label: 'CUERPO A CUERPO 1 ATAQUES', x: 999, y: 402, w: 87, h: 62 },
+  { label: 'CUERPO A CUERPO 1 ALCANCE', x: 1086, y: 402, w: 88, h: 62 },
+  { label: 'CUERPO A CUERPO 1 PRECISION', x: 1173, y: 402, w: 88, h: 62 },
+  { label: 'CUERPO A CUERPO 1 DANO', x: 1261, y: 400, w: 89, h: 63 },
+  { label: 'CUERPO A CUERPO 1 HABILIDADES', x: 1347, y: 400, w: 142, h: 65 },
+  { label: 'CUERPO A CUERPO 2 ARMA', x: 849, y: 463, w: 152, h: 62 },
+  { label: 'CUERPO A CUERPO 2 ATAQUES', x: 999, y: 462, w: 87, h: 62 },
+  { label: 'CUERPO A CUERPO 2 ALCANCE', x: 1086, y: 462, w: 87, h: 62 },
+  { label: 'CUERPO A CUERPO 2 PRECISION', x: 1172, y: 462, w: 91, h: 62 },
+  { label: 'CUERPO A CUERPO 2 DANO', x: 1260, y: 461, w: 89, h: 65 },
+  { label: 'CUERPO A CUERPO 2 HABILIDADES', x: 1347, y: 461, w: 142, h: 64 },
+  { label: 'HABILIDADES', x: 843, y: 622, w: 648, h: 358 },
+]
+const ABILITY_EXPORT_LAYOUT = [
+  { label: 'NOMBRE', x: 260, y: 70, w: 380, h: 44 },
+  { label: 'FACCION', x: 31, y: 190, w: 185, h: 44 },
+  { label: 'TIPO', x: 230, y: 190, w: 220, h: 44 },
+  { label: 'VALOR', x: 650, y: 184, w: 62, h: 52 },
+  { label: 'DESCRIPCION', x: 850, y: 196, w: 620, h: 760 },
+]
 
-const getUnitEraTokens = (unit) => (Array.isArray(unit?.eras) ? unit.eras.map((era) => era.token).filter(Boolean) : [])
-const normalizeTypeOrderKey = (value) =>
-  String(value || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim()
+const readFileAsDataUrl = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '')
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
 
-const getUnitTypeOrder = (type) => {
-  const normalized = normalizeTypeOrderKey(type)
-  const match = preferredUnitTypeOrder.findIndex((entry) => normalized.includes(entry))
-  return match === -1 ? preferredUnitTypeOrder.length : match
+const loadImageFromDataUrl = (dataUrl) =>
+  new Promise((resolve, reject) => {
+    const image = new Image()
+    image.onload = () => resolve(image)
+    image.onerror = reject
+    image.crossOrigin = 'anonymous'
+    image.src = dataUrl
+  })
+
+const clampCropOffsets = ({ offsetX, offsetY, zoom, imageWidth, imageHeight }) => {
+  if (!imageWidth || !imageHeight) {
+    return { offsetX: 0, offsetY: 0 }
+  }
+
+  const baseScale = Math.max(IMAGE_CROP_VIEWPORT_WIDTH / imageWidth, IMAGE_CROP_VIEWPORT_HEIGHT / imageHeight)
+  const scaledWidth = imageWidth * baseScale * zoom
+  const scaledHeight = imageHeight * baseScale * zoom
+  const maxOffsetX = Math.max(0, (scaledWidth - IMAGE_CROP_VIEWPORT_WIDTH) / 2)
+  const maxOffsetY = Math.max(0, (scaledHeight - IMAGE_CROP_VIEWPORT_HEIGHT) / 2)
+
+  return {
+    offsetX: Math.min(maxOffsetX, Math.max(-maxOffsetX, offsetX)),
+    offsetY: Math.min(maxOffsetY, Math.max(-maxOffsetY, offsetY)),
+  }
 }
 
-const sortUnitTypes = (types) =>
-  [...types].sort((a, b) => {
-    const orderDiff = getUnitTypeOrder(a) - getUnitTypeOrder(b)
-    if (orderDiff !== 0) return orderDiff
-    return String(a || '').localeCompare(String(b || ''), 'es', { sensitivity: 'base' })
+const createCroppedImageDataUrl = async (sourceDataUrl, cropState) => {
+  const image = await loadImageFromDataUrl(sourceDataUrl)
+  const imageWidth = image.naturalWidth || image.width || 1
+  const imageHeight = image.naturalHeight || image.height || 1
+  const baseScale = Math.max(IMAGE_CROP_VIEWPORT_WIDTH / imageWidth, IMAGE_CROP_VIEWPORT_HEIGHT / imageHeight)
+  const scale = baseScale * cropState.zoom
+  const outputWidth = MAX_UNIT_IMAGE_SIDE
+  const outputHeight = Math.round(outputWidth / IMAGE_CROP_ASPECT_RATIO)
+  const outputScale = outputWidth / IMAGE_CROP_VIEWPORT_WIDTH
+  const drawWidth = imageWidth * scale * outputScale
+  const drawHeight = imageHeight * scale * outputScale
+  const drawX = (outputWidth - drawWidth) / 2 + cropState.offsetX * outputScale
+  const drawY = (outputHeight - drawHeight) / 2 + cropState.offsetY * outputScale
+
+  const canvas = document.createElement('canvas')
+  canvas.width = outputWidth
+  canvas.height = outputHeight
+  const ctx = canvas.getContext('2d')
+  if (!ctx) {
+    throw new Error('Canvas context unavailable')
+  }
+
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
+  ctx.clearRect(0, 0, outputWidth, outputHeight)
+  ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight)
+
+  return canvas.toDataURL('image/png')
+}
+
+const chunkItems = (items, size) => {
+  if (!Array.isArray(items) || size <= 0) return []
+  const chunks = []
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size))
+  }
+  return chunks
+}
+
+const waitForElementImages = async (element) => {
+  if (!element) return
+  const images = Array.from(element.querySelectorAll('img'))
+  await Promise.all(images.map((image) => {
+    if (image.complete && image.naturalWidth > 0) return Promise.resolve()
+    return new Promise((resolve) => {
+      const done = () => resolve()
+      image.addEventListener('load', done, { once: true })
+      image.addEventListener('error', done, { once: true })
+    })
+  }))
+}
+
+const waitForPrintReady = async (elements = []) => {
+  if (document.fonts?.ready) await document.fonts.ready
+  for (const element of elements) {
+    await waitForElementImages(element)
+  }
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+}
+
+const createArmyPdfFileName = (factionName = '') => {
+  const slug = String(factionName || 'ejercito')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+  return `zerolore-${slug || 'ejercito'}.pdf`
+}
+
+const getStoredLayoutMap = (storageKey, defaults) => {
+  const defaultMap = new Map(defaults.map((guide) => [guide.label, guide]))
+  if (typeof window === 'undefined') return Object.fromEntries(defaultMap)
+
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(storageKey) || '[]')
+    if (!Array.isArray(parsed)) return Object.fromEntries(defaultMap)
+    parsed.forEach((guide) => {
+      if (!guide?.label || !defaultMap.has(guide.label)) return
+      defaultMap.set(guide.label, {
+        ...defaultMap.get(guide.label),
+        x: Number.isFinite(guide.x) ? guide.x : defaultMap.get(guide.label).x,
+        y: Number.isFinite(guide.y) ? guide.y : defaultMap.get(guide.label).y,
+        w: Number.isFinite(guide.w) ? guide.w : defaultMap.get(guide.label).w,
+        h: Number.isFinite(guide.h) ? guide.h : defaultMap.get(guide.label).h,
+      })
+    })
+  } catch {
+    // Keep defaults if localStorage is unavailable or malformed.
+  }
+
+  return Object.fromEntries(defaultMap)
+}
+
+const getFactionTokenForExport = (factionId = '') => {
+  const id = String(factionId).toLowerCase()
+  if (id.includes('caos')) return 'caos'
+  if (id.includes('legado')) return 'legado'
+  return 'orden'
+}
+
+const getFactionLabelForExport = (factionId = '', lang = 'es') => {
+  const token = getFactionTokenForExport(factionId)
+  if (lang === 'en') return { orden: 'Order', caos: 'Chaos', legado: 'Legacy' }[token] || 'Order'
+  return { orden: 'Orden', caos: 'Caos', legado: 'Legado' }[token] || 'Orden'
+}
+
+const ensureExportText = (value, fallback = '-') => {
+  const text = String(value ?? '').trim()
+  return text || fallback
+}
+
+const wrapCanvasText = (ctx, text, maxWidth) => {
+  const normalized = ensureExportText(text).replace(/\s+/g, ' ')
+  const words = normalized.split(' ')
+  const lines = []
+  let line = ''
+
+  words.forEach((word) => {
+    const nextLine = line ? `${line} ${word}` : word
+    if (ctx.measureText(nextLine).width <= maxWidth || !line) {
+      line = nextLine
+    } else {
+      lines.push(line)
+      line = word
+    }
   })
+  if (line) lines.push(line)
+  return lines
+}
+
+const drawFitText = (ctx, text, rect, {
+  color = '#1a1a1a',
+  family = 'Space Grotesk',
+  weight = 700,
+  max = 24,
+  min = 8,
+  uppercase = false,
+  multiline = false,
+  lineHeight = 1.15,
+  align = 'center',
+} = {}) => {
+  const value = uppercase ? ensureExportText(text).toUpperCase() : ensureExportText(text)
+  const safeRect = rect || { x: 0, y: 0, w: 10, h: 10 }
+  let size = max
+  let lines = [value]
+
+  while (size > min) {
+    ctx.font = `${weight} ${size}px "${family}", sans-serif`
+    lines = multiline ? wrapCanvasText(ctx, value, safeRect.w * 0.94) : [value]
+    const widest = Math.max(...lines.map((line) => ctx.measureText(line).width), 0)
+    const totalHeight = lines.length * size * lineHeight
+    if (widest <= safeRect.w * 0.96 && totalHeight <= safeRect.h * 0.96) break
+    size -= 0.5
+  }
+
+  ctx.save()
+  ctx.fillStyle = color
+  ctx.textAlign = align
+  ctx.textBaseline = 'middle'
+  ctx.font = `${weight} ${size}px "${family}", sans-serif`
+  const x = align === 'left' ? safeRect.x : safeRect.x + safeRect.w / 2
+  const firstY = safeRect.y + safeRect.h / 2 - ((lines.length - 1) * size * lineHeight) / 2
+  lines.forEach((line, index) => {
+    ctx.fillText(line, x, firstY + index * size * lineHeight)
+  })
+  ctx.restore()
+}
+
+const drawCoverImage = (ctx, image, rect) => {
+  if (!image || !rect) return
+  const imageWidth = image.naturalWidth || image.width
+  const imageHeight = image.naturalHeight || image.height
+  const scale = Math.max(rect.w / imageWidth, rect.h / imageHeight)
+  const width = imageWidth * scale
+  const height = imageHeight * scale
+  const x = rect.x + (rect.w - width) / 2
+  const y = rect.y + (rect.h - height) / 2
+  ctx.drawImage(image, x, y, width, height)
+}
+
+const formatExportDamage = (weapon) => {
+  const damage = ensureExportText(weapon?.danio)
+  const critical = ensureExportText(weapon?.danio_critico)
+  if (damage === '-' && critical === '-') return '-'
+  return `${damage}/${critical}`
+}
+
+const formatExportAbilities = (abilities = []) =>
+  abilities
+    .map((ability) => (typeof ability === 'string' ? ability : ability?.nombre || ability?.id || ''))
+    .map((ability) => ensureExportText(ability, ''))
+    .filter(Boolean)
+    .join(', ') || '-'
+
+const drawExportWeaponRows = (ctx, weapons, guideMap, prefix, isMelee = false) => {
+  const fields = ['ARMA', 'ATAQUES', 'ALCANCE', 'PRECISION', 'DANO', 'HABILIDADES']
+  const rows = weapons.length ? weapons.slice(0, 2) : [null]
+  if (rows.length === 1) rows.push(null)
+
+  rows.forEach((weapon, rowIndex) => {
+    fields.forEach((field) => {
+      const rect = guideMap[`${prefix} ${rowIndex + 1} ${field}`]
+      const value = weapon
+        ? {
+            ARMA: ensureExportText(weapon.nombre),
+            ATAQUES: ensureExportText(weapon.ataques),
+            ALCANCE: isMelee ? '-' : ensureExportText(weapon.distancia),
+            PRECISION: isMelee ? '-' : ensureExportText(weapon.impactos),
+            DANO: formatExportDamage(weapon),
+            HABILIDADES: formatExportAbilities(weapon.habilidades),
+          }[field]
+        : '-'
+
+      drawFitText(ctx, value, rect, {
+        family: field === 'HABILIDADES' ? 'Rajdhani' : 'Space Grotesk',
+        weight: 700,
+        max: field === 'ARMA' ? 18 : field === 'HABILIDADES' ? 15 : 20,
+        min: field === 'HABILIDADES' ? 8 : 9,
+        multiline: field === 'HABILIDADES',
+      })
+    })
+  })
+}
+
+const renderUnitFichaCanvas = async ({ entry, factionId, lang, gameMode, eraLabel, scale = EXPORT_RASTER_SCALE }) => {
+  const unit = {
+    ...entry.base,
+    nombre: entry.displayName || entry.base.nombre,
+    armas_disparo: entry.shooting,
+    armas_melee: entry.meleeList || [],
+    valor_base: entry.total,
+  }
+  const canvas = document.createElement('canvas')
+  canvas.width = FICHA_CARD_W * scale
+  canvas.height = FICHA_CARD_H * scale
+  const ctx = canvas.getContext('2d')
+  ctx.scale(scale, scale)
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
+  const guideMap = getStoredLayoutMap(UNIT_LAYOUT_STORAGE_KEY, UNIT_EXPORT_LAYOUT)
+  const factionToken = getFactionTokenForExport(factionId)
+  const template = await loadImageFromDataUrl(factionSheetTemplates[factionToken] || factionSheetTemplates.orden)
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.fillStyle = '#f8f5ed'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  const unitImageSrc = entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo)
+  if (unitImageSrc) {
+    try {
+      drawCoverImage(ctx, await loadImageFromDataUrl(unitImageSrc), guideMap.IMAGEN)
+    } catch {
+      // Image is decorative in export; keep going if it cannot be loaded.
+    }
+  }
+
+  ctx.drawImage(template, 0, 0, FICHA_CARD_W, FICHA_CARD_H)
+
+  const unitTypeToken = getUnitTypeToken(unit.tipo)
+  const unitTypeColor = {
+    line: '#5dd66f',
+    elite: '#5ea6ff',
+    vehicle: '#f0d84a',
+    monster: '#ff5454',
+    hero: '#6fe9e2',
+    titan: '#b37aff',
+  }[unitTypeToken] || '#5dd66f'
+  const factionColor = { orden: '#ff7a6b', caos: '#78e56c', legado: '#7db8ff' }[factionToken] || '#ff7a6b'
+  const specialty = gameMode === 'escuadra'
+    ? (unit.especialidad_escuadra || unit.especialidad || '-')
+    : (unit.especialidad_escaramuza || unit.especialidad || '-')
+
+  drawFitText(ctx, unit.nombre, guideMap.NOMBRE, { color: '#fff', family: 'Cinzel', max: 34, min: 16, uppercase: true })
+  drawFitText(ctx, unit.tipo, guideMap.TIPO, { color: unitTypeColor, family: 'Cinzel', max: 34, min: 12, uppercase: true })
+  if (eraLabel) drawFitText(ctx, eraLabel, guideMap.ERA, { color: '#6fe7dd', family: 'Cinzel', max: 34, min: 12, uppercase: true })
+  drawFitText(ctx, getFactionLabelForExport(factionId, lang), guideMap.FACCION, { color: factionColor, family: 'Cinzel', max: 34, min: 12, uppercase: true })
+  drawFitText(ctx, unit.valor_base, guideMap.VALOR, { color: '#fff', family: 'Cinzel', max: 36, min: 12 })
+  ;[
+    ['MOV', unit.movimiento],
+    ['VIDAS', unit.vidas],
+    ['SALV', unit.salvacion],
+    ['VEL', unit.velocidad],
+    ['ESC', `${unit.escuadra_min}/${unit.escuadra_max}`],
+  ].forEach(([label, value]) => drawFitText(ctx, value, guideMap[label], { color: '#fff', family: 'Cinzel', max: 26, min: 10 }))
+  drawFitText(ctx, specialty, guideMap.ESPECIALIDAD, { family: 'Space Grotesk', weight: 500, max: 18, min: 10, multiline: true })
+  drawExportWeaponRows(ctx, unit.armas_disparo || [], guideMap, 'DISPARO', false)
+  drawExportWeaponRows(ctx, unit.armas_melee || [], guideMap, 'CUERPO A CUERPO', true)
+
+  const abilityLines = []
+  ;[...(unit.armas_disparo || []), ...(unit.armas_melee || [])].forEach((weapon) => {
+    ;(weapon.habilidades || []).forEach((ability) => {
+      const raw = typeof ability === 'string' ? ability : ability?.nombre || ability?.id || ''
+      const label = getAbilityLabel(raw, lang) || raw
+      const desc = getAbilityDescription(raw, lang) || (typeof ability === 'object' ? ability?.descripcion : '')
+      if (label) abilityLines.push(desc ? `${label}: ${desc}` : label)
+    })
+  })
+  drawFitText(ctx, abilityLines.join('\n') || '-', guideMap.HABILIDADES, {
+    family: 'Space Grotesk',
+    weight: 500,
+    max: 18,
+    min: 10,
+    multiline: true,
+    lineHeight: 1.25,
+  })
+
+  return canvas
+}
+
+const renderAbilityFichaCanvas = async ({ ability, factionId, description, scale = EXPORT_RASTER_SCALE }) => {
+  const canvas = document.createElement('canvas')
+  canvas.width = FICHA_CARD_W * scale
+  canvas.height = FICHA_CARD_H * scale
+  const ctx = canvas.getContext('2d')
+  ctx.scale(scale, scale)
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
+  const guideMap = getStoredLayoutMap(ABILITY_LAYOUT_STORAGE_KEY, ABILITY_EXPORT_LAYOUT)
+  const factionToken = getFactionTokenForExport(factionId)
+  const template = await loadImageFromDataUrl(factionAbilitySheetTemplates[factionToken] || factionAbilitySheetTemplates.orden)
+  const factionColor = { orden: '#ff7a6b', caos: '#78e56c', legado: '#7db8ff' }[factionToken] || '#ff7a6b'
+
+  ctx.fillStyle = '#f8f5ed'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.drawImage(template, 0, 0, FICHA_CARD_W, FICHA_CARD_H)
+  drawFitText(ctx, ability?.nombre, guideMap.NOMBRE, { color: '#fff', family: 'Cinzel', max: 34, min: 12, uppercase: true })
+  drawFitText(ctx, getFactionLabelForExport(factionId), guideMap.FACCION, { color: factionColor, family: 'Cinzel', max: 28, min: 10, uppercase: true })
+  drawFitText(ctx, 'Hab. de facción', guideMap.TIPO, { color: '#ff7a6b', family: 'Cinzel', max: 28, min: 10, uppercase: true })
+  drawFitText(ctx, ability?.coste ?? ability?.valor ?? ability?.valor_habilidad ?? '-', guideMap.VALOR, { color: '#fff', family: 'Cinzel', max: 34, min: 12 })
+  drawFitText(ctx, description || ability?.descripcion || ability?.efecto || ability?.texto || '-', guideMap.DESCRIPCION, {
+    family: 'Space Grotesk',
+    weight: 500,
+    max: 22,
+    min: 5,
+    multiline: true,
+    lineHeight: 1.12,
+  })
+
+  return canvas
+}
+
+const renderExportPageCanvas = async (cardCanvases, scale = EXPORT_RASTER_SCALE) => {
+  const pageCanvas = document.createElement('canvas')
+  pageCanvas.width = EXPORT_PAGE_W * scale
+  pageCanvas.height = EXPORT_PAGE_H * scale
+  const ctx = pageCanvas.getContext('2d')
+  ctx.scale(scale, scale)
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
+  ctx.fillStyle = '#f8f5ed'
+  ctx.fillRect(0, 0, EXPORT_PAGE_W, EXPORT_PAGE_H)
+
+  const slotHeight = (EXPORT_PAGE_H - (EXPORT_PAGE_PAD_Y * 2) - EXPORT_PAGE_GAP) / 2
+  const maxCardWidth = EXPORT_PAGE_W - EXPORT_PAGE_PAD_X * 2
+  const maxCardHeight = slotHeight
+  const cardScale = Math.min(maxCardWidth / FICHA_CARD_W, maxCardHeight / FICHA_CARD_H)
+  const cardWidth = Math.round(FICHA_CARD_W * cardScale)
+  const cardHeight = Math.round(FICHA_CARD_H * cardScale)
+  const cardX = Math.round((EXPORT_PAGE_W - cardWidth) / 2)
+
+  cardCanvases.forEach((cardCanvas, index) => {
+    const slotY = EXPORT_PAGE_PAD_Y + index * (slotHeight + EXPORT_PAGE_GAP)
+    const cardY = Math.round(slotY + (slotHeight - cardHeight) / 2)
+    ctx.drawImage(cardCanvas, cardX, cardY, cardWidth, cardHeight)
+  })
+
+  return pageCanvas
+}
+
+const getUnitEraTokens = (unit) => (Array.isArray(unit?.eras) ? unit.eras.map((era) => era.token).filter(Boolean) : [])
+
+const getUnitTypeOrder = (type) => {
+  const token = getUnitTypeToken(type)
+  const match = preferredUnitTypeOrder.indexOf(token)
+  return match === -1 ? preferredUnitTypeOrder.length : match
+}
 
 const sortUnitsByType = (units) =>
   [...units].sort((a, b) => {
@@ -66,7 +531,9 @@ const getFactionAbilityOptions = (faction) =>
   Array.isArray(faction?.habilidades_faccion) ? faction.habilidades_faccion : []
 
 const getFactionAbilitySelectionLimit = (faction) =>
-  getFactionPassiveSelectionMode(faction) === 'multiple' ? 3 : 1
+  getFactionPassiveSelectionMode(faction) === 'multiple'
+    ? Math.min(MAX_MULTIPLE_FACTION_ABILITIES, getFactionAbilityOptions(faction).length)
+    : 1
 
 const sanitizeFactionAbilityIds = (faction, skillIds) => {
   if (getFactionPassiveSelectionMode(faction) === 'grupo') return []
@@ -97,81 +564,6 @@ const buildFactionAbilitySelection = (faction, skillIds) => {
     tipo: mode,
     coste_total: habilidades.reduce((sum, skill) => sum + toNumber(skill.coste), 0),
   }
-}
-
-const getFactionSelectionCost = (selection) =>
-  Array.isArray(selection?.habilidades)
-    ? selection.habilidades.reduce((sum, skill) => sum + toNumber(skill?.coste), 0)
-    : 0
-
-const localizeDoctrineEntries = (lang) =>
-  doctrineCatalog.map((doctrine) => ({
-    id: doctrine.id,
-    nombre: doctrine.nombre?.[lang] || doctrine.nombre?.es || doctrine.id,
-    descripcion: doctrine.descripcion?.[lang] || doctrine.descripcion?.es || '',
-    coste: toNumber(doctrine.coste),
-    imageSrc: doctrine.images?.[lang] || doctrine.images?.es || '',
-  }))
-
-const sanitizeDoctrineIds = (doctrines, doctrineIds) => {
-  const availableIds = new Set((Array.isArray(doctrines) ? doctrines : []).map((doctrine) => doctrine.id))
-  const uniqueIds = []
-  ;(Array.isArray(doctrineIds) ? doctrineIds : []).forEach((doctrineId) => {
-    if (!availableIds.has(doctrineId) || uniqueIds.includes(doctrineId)) return
-    uniqueIds.push(doctrineId)
-  })
-  return uniqueIds
-}
-
-const getDoctrineTotal = (doctrines) =>
-  (Array.isArray(doctrines) ? doctrines : []).reduce((sum, doctrine) => sum + toNumber(doctrine?.coste), 0)
-
-const buildMultipleFactionAbilitySelections = (faction) => {
-  const options = getFactionAbilityOptions(faction)
-  const selections = []
-
-  for (let i = 0; i < options.length; i += 1) {
-    selections.push(buildFactionAbilitySelection(faction, [options[i].id]))
-    for (let j = i + 1; j < options.length; j += 1) {
-      selections.push(buildFactionAbilitySelection(faction, [options[i].id, options[j].id]))
-      for (let k = j + 1; k < options.length; k += 1) {
-        selections.push(buildFactionAbilitySelection(faction, [options[i].id, options[j].id, options[k].id]))
-      }
-    }
-  }
-
-  return selections.filter(Boolean)
-}
-
-const getRandomFactionSelectionCandidates = (faction, target) => {
-  if (!faction) return [null]
-
-  const mode = getFactionPassiveSelectionMode(faction)
-  const allSelections =
-    mode === 'multiple'
-      ? buildMultipleFactionAbilitySelections(faction)
-      : getFactionPassiveSelections(faction)
-
-  const affordableSelections = allSelections.filter((selection) => getFactionSelectionCost(selection) < target)
-  const baseSelections = affordableSelections.length ? affordableSelections : allSelections
-
-  return [null, ...baseSelections]
-}
-
-const scoreRandomArmyCandidate = ({ unitResult, selection, target }) => {
-  const selectionCost = getFactionSelectionCost(selection)
-  const total = (unitResult?.total || 0) + selectionCost
-  let score = unitResult?.score || 0
-
-  if (selection?.habilidades?.length) {
-    score += Math.min(4, 1 + selection.habilidades.length)
-  }
-
-  if (target > 0) {
-    score -= Math.max(0, target - total) * 0.08
-  }
-
-  return score
 }
 
 const getFactionPassiveSelections = (faction) => {
@@ -206,26 +598,6 @@ const getPassiveSelectionDisplayName = (selection, faction, t, fallbackIndex = 0
 const getPassiveSelectionLabelKey = (faction, singularKey, groupKey) =>
   getFactionPassiveSelectionMode(faction) === 'grupo' ? groupKey : singularKey
 
-const unitMatchesEraFilters = (unit, filters) => {
-  if (!filters?.size) return true
-  const unitEraTokens = getUnitEraTokens(unit)
-  return unitEraTokens.some((token) => filters.has(token))
-}
-
-const getOrderedEraTokens = (units) => {
-  const present = new Set()
-  ;(units || []).forEach((unit) => {
-    getUnitEraTokens(unit).forEach((token) => present.add(token))
-  })
-  return preferredEraOrder.filter((token) => present.has(token))
-}
-
-const getExclusiveEraSelection = (availableTokens, currentSelection) => {
-  if (!availableTokens.length) return new Set()
-  const firstMatchingToken = [...(currentSelection || [])].find((token) => availableTokens.includes(token))
-  return new Set([firstMatchingToken || availableTokens[0]])
-}
-
 const PASSIVE_GROUP_ICON_PATHS = [
   'M12 4.5l4 3v5.3c0 3.1-1.7 5.8-4 6.7-2.3-.9-4-3.6-4-6.7V7.5l4-3z',
   'M12 4.5l6 6-6 9-6-9 6-6zm0 3.2-2.8 2.8L12 15l2.8-4.5L12 7.7z',
@@ -247,6 +619,15 @@ const getPassiveGroupIconStyle = (groupId) => {
     hue: hash % 360,
     rotate: (hash % 24) - 12,
   }
+}
+
+function SpinnerIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeOpacity="0.22" strokeWidth="2.2" />
+      <path d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
+  )
 }
 
 function GameModeIcon({ mode }) {
@@ -304,31 +685,6 @@ function GameModePicker({ value, onChange, t }) {
   )
 }
 
-function EraWorldSwitch({ tokens, activeTokens, onToggle, getLabel, title }) {
-  if (!tokens?.length) return null
-
-  return (
-    <div className="field field-era-worlds">
-      <div className="era-world-switch" role="group" aria-label={title}>
-        {tokens.map((token) => {
-          const isActive = activeTokens.has(token)
-          return (
-            <button
-              key={token}
-              type="button"
-              className={`era-world-button era-world-button-${token}${isActive ? ' active' : ''}`}
-              onClick={() => onToggle(token)}
-              aria-pressed={isActive}
-            >
-              {getLabel(token)}
-            </button>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
 function PassiveGroupIcon({ groupId }) {
   const icon = getPassiveGroupIconStyle(groupId)
 
@@ -349,27 +705,133 @@ function PassiveGroupIcon({ groupId }) {
   )
 }
 
-function DoctrineIcon({ doctrine }) {
-  if (doctrine?.imageSrc) {
-    return <img src={doctrine.imageSrc} alt="" />
-  }
-
-  return (
-    <svg className="doctrine-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 3.5 18 7v10l-6 3.5L6 17V7l6-3.5z" />
-      <path d="M9.2 11.8 11 13.6l3.8-4" />
-    </svg>
-  )
-}
-
-function FactionSelectLabel({ label, iconSrc, isRandom = false }) {
+function FactionSelectLabel({ label, iconSrc }) {
   return (
     <span className="faction-select-option-label">
-      <span className={`faction-select-option-icon${isRandom ? ' random' : ''}`} aria-hidden="true">
-        {iconSrc ? <img src={iconSrc} alt="" /> : <span className="faction-select-option-random-mark">?</span>}
+      <span className="faction-select-option-icon" aria-hidden="true">
+        {iconSrc ? <img src={iconSrc} alt="" /> : null}
       </span>
       <span>{label}</span>
     </span>
+  )
+}
+
+function FactionAbilityIcon({ skill }) {
+  const illustrationSrc = getFactionAbilityIllustrationSrc(skill?.id, skill?.nombre)
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false)
+
+  return (
+    <span
+      className={`faction-ability-icon${illustrationSrc ? ' has-hover-preview' : ''}`}
+      onMouseEnter={illustrationSrc ? () => setIsPreviewVisible(true) : undefined}
+      onMouseLeave={illustrationSrc ? () => setIsPreviewVisible(false) : undefined}
+    >
+      <img src={abilityIconSrc} alt="" aria-hidden="true" />
+      {illustrationSrc && isPreviewVisible ? (
+        <span className="faction-ability-hover-preview" aria-hidden="true">
+          <img src={illustrationSrc} alt="" loading="lazy" />
+        </span>
+      ) : null}
+    </span>
+  )
+}
+
+const getFactionSheetTemplateSrc = (factionId) => factionSheetTemplates[factionId] || factionSheetTemplates.orden
+
+const getWeaponAbilityNotes = (weapons, lang) =>
+  (Array.isArray(weapons) ? weapons : []).flatMap((weapon) =>
+    (weapon.habilidades || [])
+      .map((ability) => ({
+        key: `${weapon.nombre}-${ability}`,
+        label: getAbilityLabel(ability, lang),
+        description: getAbilityDescription(ability, lang),
+        weaponName: weapon.nombre,
+      }))
+      .filter((item) => item.label),
+  )
+
+function UnitSheetTable({ weapons, emptyLabel = '-', lang }) {
+  const rows = Array.isArray(weapons) && weapons.length ? weapons : [{ nombre: emptyLabel, ataques: '-', distancia: '-', impactos: '-', danio: '-', danio_critico: '-', habilidades: [] }]
+
+  return (
+    <div className="unit-sheet-table">
+      {rows.map((weapon, index) => (
+        <div className="unit-sheet-table-row" key={`${weapon.nombre}-${index}`}>
+          <span>{weapon.nombre}</span>
+          <span>{weapon.ataques}</span>
+          <span>{weapon.distancia || '-'}</span>
+          <span>{weapon.impactos || '-'}</span>
+          <span>{`${weapon.danio}/${weapon.danio_critico}`}</span>
+          <span>
+            {weapon.habilidades?.length
+              ? weapon.habilidades.map((ability) => getAbilityLabel(ability, lang)).join(', ')
+              : '-'}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl, fixedLoadout, t, lang }) {
+  const templateSrc = getFactionSheetTemplateSrc(factionId)
+  const factionLogoSrc = factionImages[factionId]
+  const abilityNotes = getWeaponAbilityNotes(
+    [...fixedLoadout.shooting, ...(fixedLoadout.meleeList || [])],
+    lang,
+  )
+  const statValues = [
+    unit.movimiento,
+    unit.vidas,
+    unit.salvacion,
+    unit.velocidad,
+    gameMode === 'escuadra' ? `${unit.escuadra_min}-${unit.escuadra_max}` : '1',
+  ]
+
+  return (
+    <div className="unit-sheet-preview-wrapper">
+      <div className="unit-sheet-preview">
+        <img className="unit-sheet-template" src={templateSrc} alt="" aria-hidden="true" />
+        {factionLogoSrc ? (
+          <div className="unit-sheet-slot unit-sheet-faction-mark" aria-hidden="true">
+            <img src={factionLogoSrc} alt="" />
+          </div>
+        ) : null}
+        <div className="unit-sheet-slot unit-sheet-name">{unit.nombre}</div>
+        <div className="unit-sheet-slot unit-sheet-type">{unit.tipo}</div>
+        <div className="unit-sheet-slot unit-sheet-value">{draftTotal}</div>
+        <div className="unit-sheet-slot unit-sheet-image-frame">
+          <img
+            className={`unit-sheet-image${imageDataUrl ? '' : ' fallback'}`}
+            src={imageDataUrl || getUnitTypeBadgeSrc(unit.tipo)}
+            alt={unit.nombre}
+          />
+        </div>
+        <div className="unit-sheet-slot unit-sheet-stats">
+          {statValues.map((value, index) => (
+            <span key={`${unit.id}-sheet-stat-${index}`}>{value}</span>
+          ))}
+        </div>
+        <div className="unit-sheet-slot unit-sheet-specialty">{getUnitSpecialtyForMode(unit, gameMode)}</div>
+        <div className="unit-sheet-slot unit-sheet-shooting">
+          <UnitSheetTable weapons={fixedLoadout.shooting} lang={lang} />
+        </div>
+        <div className="unit-sheet-slot unit-sheet-melee">
+          <UnitSheetTable weapons={fixedLoadout.meleeList || []} lang={lang} />
+        </div>
+        <div className="unit-sheet-slot unit-sheet-abilities">
+          {abilityNotes.length ? (
+            abilityNotes.map((note) => (
+              <p key={note.key}>
+                <strong>{note.weaponName} · {note.label}:</strong> {note.description || t('generator.pendingDescription')}
+              </p>
+            ))
+          ) : (
+            <p>{t('generator.noWeaponsAvailable')}</p>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -381,90 +843,31 @@ function Generador() {
       .filter((item) => item && isFactionData(item.data))
       .map((item, index) => normalizeFaction(item.data, index, item.base))
   }, [lang])
-
-  const [mode, setMode] = useState('manual')
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
-  const getSavedArmy = () => {
-    if (typeof window === 'undefined') {
-      return { units: [], factionId: '', passiveGroupId: '', factionSkillIds: [], doctrineIds: [] }
-    }
-    const saved = window.localStorage.getItem('zerolore_army_v1')
-    if (!saved) return { units: [], factionId: '', passiveGroupId: '', factionSkillIds: [], doctrineIds: [] }
-    try {
-      const parsed = JSON.parse(saved)
-      if (parsed?.units && Array.isArray(parsed.units)) {
-        const doctrineIds = (
-          Array.isArray(parsed.doctrineIds)
-            ? parsed.doctrineIds
-            : Array.isArray(parsed.doctrines)
-              ? parsed.doctrines.map((item) => (typeof item === 'string' ? item : item?.id)).filter(Boolean)
-              : []
-        )
-        return {
-          units: parsed.units,
-          factionId: parsed.factionId || '',
-          passiveGroupId: parsed.passiveGroupId || '',
-          factionSkillIds: Array.isArray(parsed.factionSkillIds) ? parsed.factionSkillIds : [],
-          doctrineIds,
-        }
-      }
-    } catch {
-      // Ignore invalid cache
-    }
-    return { units: [], factionId: '', passiveGroupId: '', factionSkillIds: [], doctrineIds: [] }
-  }
-
-  const initialSaved = getSavedArmy()
-  const [armyFactionId, setArmyFactionId] = useState(initialSaved.factionId)
-  const [armyPassiveGroupId, setArmyPassiveGroupId] = useState(initialSaved.passiveGroupId)
-  const [armyFactionSkillIds, setArmyFactionSkillIds] = useState(initialSaved.factionSkillIds)
-  const [armyDoctrineIds, setArmyDoctrineIds] = useState(initialSaved.doctrineIds)
-  const [armyUnits, setArmyUnits] = useState(initialSaved.units)
+  const [selectedEra, setSelectedEra] = useState('future')
+  const [manualUnitDrafts, setManualUnitDrafts] = useState({})
   const [selectedPassiveGroupId, setSelectedPassiveGroupId] = useState('')
   const [selectedFactionSkillIds, setSelectedFactionSkillIds] = useState([])
-  const [selectedDoctrineIds, setSelectedDoctrineIds] = useState(initialSaved.doctrineIds)
-  const [isPassiveModalOpen, setIsPassiveModalOpen] = useState(false)
-  const [isDoctrineModalOpen, setIsDoctrineModalOpen] = useState(false)
-  const [activeUnit, setActiveUnit] = useState(null)
-  const [targetValue, setTargetValue] = useState(40)
-  const [randomFactionId, setRandomFactionId] = useState('random')
-  const [unitTypeFiltersManual, setUnitTypeFiltersManual] = useState(() => new Set())
-  const [unitTypeFiltersRandom, setUnitTypeFiltersRandom] = useState(() => new Set())
-  const [eraFiltersManual, setEraFiltersManual] = useState(() => new Set())
-  const [eraFiltersRandom, setEraFiltersRandom] = useState(() => new Set())
-  const getEraLabel = (token) => (token === 'future' ? t('generator.future') : t('generator.past'))
+  const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
+  const [openManualUnitId, setOpenManualUnitId] = useState('')
+  const [openFactionAbilityGroupId, setOpenFactionAbilityGroupId] = useState('')
+  const [activeGeneratorSection, setActiveGeneratorSection] = useState('passives')
+  const [imageCropDraft, setImageCropDraft] = useState(null)
+  const [selectedArmyUnitIds, setSelectedArmyUnitIds] = useState([])
+  const armySheetRefs = useRef(new Map())
+  const armyExportStageRef = useRef(null)
+  const getEraLabel = useCallback((token) => (token === 'future' ? t('generator.future') : t('generator.past')), [t])
   const selectedFactionIdSafe = useMemo(() => {
     if (!factions.length) return ''
     return factions.some((faction) => faction.id === selectedFactionId) ? selectedFactionId : factions[0].id
   }, [factions, selectedFactionId])
-  const armyFactionIdSafe = useMemo(() => {
-    if (!armyFactionId || !factions.length) return ''
-    return factions.some((faction) => faction.id === armyFactionId) ? armyFactionId : factions[0].id
-  }, [factions, armyFactionId])
-  const randomFactionIdSafe = useMemo(() => {
-    if (!factions.length) return 'random'
-    return randomFactionId === 'random' || factions.some((faction) => faction.id === randomFactionId)
-      ? randomFactionId
-      : 'random'
-  }, [factions, randomFactionId])
 
   const selectedFaction = factions.find((faction) => faction.id === selectedFactionIdSafe) || null
-  const armyFaction = factions.find((faction) => faction.id === armyFactionIdSafe) || null
-  const localizedDoctrines = useMemo(() => localizeDoctrineEntries(lang), [lang])
-  const doctrineById = useMemo(
-    () => new Map(localizedDoctrines.map((doctrine) => [doctrine.id, doctrine])),
-    [localizedDoctrines],
-  )
   const selectedPassiveOptions = useMemo(() => getFactionPassiveSelections(selectedFaction), [selectedFaction])
-  const armyPassiveOptions = useMemo(() => getFactionPassiveSelections(armyFaction), [armyFaction])
   const selectedFactionSkillIdsSafe = useMemo(
     () => sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds),
     [selectedFaction, selectedFactionSkillIds],
-  )
-  const armyFactionSkillIdsSafe = useMemo(
-    () => sanitizeFactionAbilityIds(armyFaction, armyFactionSkillIds),
-    [armyFaction, armyFactionSkillIds],
   )
   const factionSelectOptions = useMemo(
     () =>
@@ -473,19 +876,6 @@ function Generador() {
         label: <FactionSelectLabel label={faction.nombre} iconSrc={factionImages[faction.id]} />,
       })),
     [factions],
-  )
-  const randomFactionSelectOptions = useMemo(
-    () => [
-      {
-        value: 'random',
-        label: <FactionSelectLabel label={t('generator.randomFaction')} isRandom />,
-      },
-      ...factions.map((faction) => ({
-        value: faction.id,
-        label: <FactionSelectLabel label={faction.nombre} iconSrc={factionImages[faction.id]} />,
-      })),
-    ],
-    [factions, t],
   )
   const selectedPassiveGroupIdSafe = useMemo(
     () => sanitizePassiveGroupId(selectedFaction, selectedPassiveGroupId),
@@ -506,41 +896,6 @@ function Generador() {
     () => applyPassiveGroupEffectsToFaction(selectedFaction, selectedFactionSelection),
     [selectedFaction, selectedFactionSelection],
   )
-  const armyPassiveGroupIdSafe = useMemo(
-    () => sanitizePassiveGroupId(armyFaction, armyPassiveGroupId),
-    [armyFaction, armyPassiveGroupId],
-  )
-  const armyPassiveGroup = useMemo(
-    () => armyPassiveOptions.find((group) => group.id === armyPassiveGroupIdSafe) || null,
-    [armyPassiveOptions, armyPassiveGroupIdSafe],
-  )
-  const armyFactionSelection = useMemo(
-    () =>
-      getFactionPassiveSelectionMode(armyFaction) === 'multiple'
-        ? buildFactionAbilitySelection(armyFaction, armyFactionSkillIdsSafe)
-        : armyPassiveGroup,
-    [armyFaction, armyFactionSkillIdsSafe, armyPassiveGroup],
-  )
-  const armyFactionWithPassives = useMemo(
-    () => applyPassiveGroupEffectsToFaction(armyFaction, armyFactionSelection),
-    [armyFaction, armyFactionSelection],
-  )
-  const selectedDoctrineIdsSafe = useMemo(
-    () => sanitizeDoctrineIds(localizedDoctrines, selectedDoctrineIds),
-    [localizedDoctrines, selectedDoctrineIds],
-  )
-  const armyDoctrineIdsSafe = useMemo(
-    () => sanitizeDoctrineIds(localizedDoctrines, armyDoctrineIds),
-    [localizedDoctrines, armyDoctrineIds],
-  )
-  const selectedDoctrines = useMemo(
-    () => selectedDoctrineIdsSafe.map((doctrineId) => doctrineById.get(doctrineId)).filter(Boolean),
-    [doctrineById, selectedDoctrineIdsSafe],
-  )
-  const armyDoctrines = useMemo(
-    () => armyDoctrineIdsSafe.map((doctrineId) => doctrineById.get(doctrineId)).filter(Boolean),
-    [armyDoctrineIdsSafe, doctrineById],
-  )
   const manualCurrentSelection = useMemo(() => {
     if (getFactionPassiveSelectionMode(selectedFaction) !== 'multiple') return selectedFactionSelection
     const currentIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
@@ -555,138 +910,209 @@ function Generador() {
       coste_total: habilidades.reduce((sum, skill) => sum + toNumber(skill.coste), 0),
     }
   }, [selectedFaction, selectedFactionSelection, selectedFactionSkillIds, selectedPassiveOptions])
-  const currentArmyFaction = mode === 'manual' ? selectedFaction : armyFaction
-  const currentArmySelection = mode === 'manual' ? manualCurrentSelection : armyFactionSelection
-  const currentArmyDoctrines = mode === 'manual' ? selectedDoctrines : armyDoctrines
-  const currentArmyFactionWithPassives = mode === 'manual' ? selectedFactionWithPassives : armyFactionWithPassives
-  const activeArmyFactionForPdf = useMemo(
-    () =>
-      currentArmyFactionWithPassives
-        ? {
-            ...currentArmyFactionWithPassives,
-            selectedPassiveGroup: currentArmySelection,
-          }
-        : currentArmyFactionWithPassives,
-    [currentArmyFactionWithPassives, currentArmySelection],
-  )
-  const availableUnitTypes = useMemo(() => {
-    if (!selectedFactionWithPassives?.unidades?.length) return []
-    const types = new Set(
-      selectedFactionWithPassives.unidades
-        .filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))
-        .map((unit) => unit.tipo),
-    )
-    return sortUnitTypes(Array.from(types))
-  }, [selectedFactionWithPassives, gameMode])
   const availableEraTokens = useMemo(() => {
-    if (!selectedFactionWithPassives?.unidades?.length) return []
-    return getOrderedEraTokens(
-      selectedFactionWithPassives.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)),
+    const tokens = new Set(
+      (selectedFactionWithPassives?.unidades || [])
+        .flatMap((unit) => getUnitEraTokens(unit))
+        .filter((token) => token === 'future' || token === 'past'),
     )
-  }, [selectedFactionWithPassives, gameMode])
-  const randomFaction = randomFactionIdSafe === 'random'
-    ? null
-    : factions.find((faction) => faction.id === randomFactionIdSafe)
-  const availableUnitTypesRandom = useMemo(() => {
-    if (randomFaction) {
-      return sortUnitTypes(Array.from(
-        new Set(
-          randomFaction.unidades
-            .filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))
-            .map((unit) => unit.tipo),
-        ),
-      ))
-    }
-    const types = new Set()
-    factions.forEach((faction) => {
-      faction.unidades.forEach((unit) => {
-        if (isUnitTypeAllowedInGameMode(unit.tipo, gameMode)) {
-          types.add(unit.tipo)
-        }
-      })
-    })
-    return sortUnitTypes(Array.from(types))
-  }, [randomFaction, factions, gameMode])
-  const availableEraTokensRandom = useMemo(() => {
-    if (randomFaction) {
-      return getOrderedEraTokens(
-        randomFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)),
-      )
-    }
-    return getOrderedEraTokens(
-      factions.flatMap((faction) =>
-        faction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))),
-    )
-  }, [randomFaction, factions, gameMode])
 
-  const activeManualFilters = useMemo(() => {
-    if (!availableUnitTypes.length) return new Set()
-    if (unitTypeFiltersManual.size) {
-      const sanitized = new Set(
-        [...unitTypeFiltersManual].filter((type) => availableUnitTypes.includes(type)),
-      )
-      return sanitized.size ? sanitized : new Set(availableUnitTypes)
-    }
-    return new Set(availableUnitTypes)
-  }, [availableUnitTypes, unitTypeFiltersManual])
-  const activeManualEraFilters = useMemo(() => {
-    return getExclusiveEraSelection(availableEraTokens, eraFiltersManual)
-  }, [availableEraTokens, eraFiltersManual])
-
-  const activeRandomFilters = useMemo(() => {
-    if (!availableUnitTypesRandom.length) return new Set()
-    if (unitTypeFiltersRandom.size) {
-      const sanitized = new Set(
-        [...unitTypeFiltersRandom].filter((type) => availableUnitTypesRandom.includes(type)),
-      )
-      return sanitized.size ? sanitized : new Set(availableUnitTypesRandom)
-    }
-    return new Set(availableUnitTypesRandom)
-  }, [availableUnitTypesRandom, unitTypeFiltersRandom])
-  const activeRandomEraFilters = useMemo(() => {
-    return getExclusiveEraSelection(availableEraTokensRandom, eraFiltersRandom)
-  }, [availableEraTokensRandom, eraFiltersRandom])
-
-  const localizedArmyUnits = useMemo(
-    () => localizeArmyUnits(armyUnits, currentArmyFactionWithPassives),
-    [armyUnits, currentArmyFactionWithPassives],
-  )
-  const factionAbilityTotal = useMemo(() => getFactionSelectionCost(currentArmySelection), [currentArmySelection])
-  const doctrineTotal = useMemo(() => getDoctrineTotal(currentArmyDoctrines), [currentArmyDoctrines])
-  const totalValue = localizedArmyUnits.reduce((total, unit) => total + unit.total, 0) + factionAbilityTotal + doctrineTotal
-  const armyUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(localizedArmyUnits), [localizedArmyUnits])
+    return ['future', 'past'].filter((token) => tokens.has(token))
+  }, [selectedFactionWithPassives])
   const visibleManualUnits = useMemo(() => {
     if (!selectedFactionWithPassives?.unidades?.length) return []
     return sortUnitsByType(selectedFactionWithPassives.unidades.filter(
-      (unit) =>
-        isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
-        && activeManualFilters.has(unit.tipo)
-        && unitMatchesEraFilters(unit, activeManualEraFilters),
+      (unit) => {
+        const eraTokens = getUnitEraTokens(unit)
+        const matchesEra = !availableEraTokens.length || !eraTokens.length || eraTokens.includes(selectedEra)
+        return matchesEra && isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
+      },
     ))
-  }, [selectedFactionWithPassives, activeManualFilters, activeManualEraFilters, gameMode])
+  }, [selectedFactionWithPassives, gameMode, availableEraTokens, selectedEra])
+
+  const getManualUnitDraft = (unit) => {
+    const draft = manualUnitDrafts[unit.id] || {}
+    return {
+      squadSize: gameMode === 'escuadra' ? clampSquadSize(draft.squadSize ?? unit.escuadra_min, unit) : 1,
+      imageDataUrl: draft.imageDataUrl || '',
+    }
+  }
+
+  const exportUnits = useMemo(
+    () =>
+      visibleManualUnits.map((unit) => {
+        const draft = manualUnitDrafts[unit.id] || {}
+        const squadSize = gameMode === 'escuadra' ? clampSquadSize(draft.squadSize ?? unit.escuadra_min, unit) : 1
+        const fixedLoadout = getFixedUnitLoadout(unit)
+        const total = computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, squadSize, null, gameMode)
+        return {
+          uid: unit.id,
+          base: unit,
+          shooting: fixedLoadout.shooting,
+          meleeList: fixedLoadout.meleeList,
+          melee: fixedLoadout.melee,
+          squadSize,
+          perMiniLoadouts: null,
+          imageDataUrl: draft.imageDataUrl || '',
+          total,
+        }
+      }),
+    [visibleManualUnits, manualUnitDrafts, gameMode],
+  )
+  const exportUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(exportUnits), [exportUnits])
+  const selectedAbilityRows = useMemo(
+    () => manualCurrentSelection?.habilidades || selectedFactionSelection?.habilidades || [],
+    [manualCurrentSelection, selectedFactionSelection],
+  )
+  const abilityExportPages = useMemo(() => chunkItems(selectedAbilityRows, 2), [selectedAbilityRows])
+  const selectedArmyUnits = useMemo(() => {
+    const selectedIds = new Set(selectedArmyUnitIds)
+    return exportUnits.filter((unit) => selectedIds.has(unit.uid))
+  }, [exportUnits, selectedArmyUnitIds])
+  const currentArmyTotalValue = useMemo(
+    () => selectedArmyUnits.reduce((sum, unit) => sum + Number(unit?.total || 0), 0)
+      + selectedAbilityRows.reduce((sum, skill) => sum + Number(skill?.coste || 0), 0),
+    [selectedArmyUnits, selectedAbilityRows],
+  )
+  const armyExportPages = useMemo(() => chunkItems(selectedArmyUnits, 2), [selectedArmyUnits])
+
+  const updateManualUnitDraft = (unit, nextPatch) => {
+    setManualUnitDrafts((prev) => {
+      const current = prev[unit.id] || {}
+      return {
+        ...prev,
+        [unit.id]: {
+          ...current,
+          ...nextPatch,
+        },
+      }
+    })
+  }
+
+  const handleManualUnitImageChange = (unit, event) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+    readFileAsDataUrl(file)
+      .then(async (sourceDataUrl) => {
+        if (!sourceDataUrl) return
+        const image = await loadImageFromDataUrl(sourceDataUrl)
+        const imageWidth = image.naturalWidth || image.width || 1
+        const imageHeight = image.naturalHeight || image.height || 1
+        setImageCropDraft({
+          unitId: unit.id,
+          unitName: unit.nombre,
+          sourceDataUrl,
+          imageWidth,
+          imageHeight,
+          zoom: 1,
+          offsetX: 0,
+          offsetY: 0,
+        })
+      })
+      .catch(() => {})
+    event.target.value = ''
+  }
+
+  const handleImageCropZoomChange = (nextZoom) => {
+    setImageCropDraft((prev) => {
+      if (!prev) return prev
+      const zoom = Math.min(3, Math.max(1, Number(nextZoom) || 1))
+      const nextOffsets = clampCropOffsets({
+        offsetX: prev.offsetX,
+        offsetY: prev.offsetY,
+        zoom,
+        imageWidth: prev.imageWidth,
+        imageHeight: prev.imageHeight,
+      })
+      return {
+        ...prev,
+        zoom,
+        ...nextOffsets,
+      }
+    })
+  }
+
+  const handleImageCropPointerDown = (event) => {
+    if (!imageCropDraft) return
+    event.preventDefault()
+
+    const startX = event.clientX
+    const startY = event.clientY
+    const startOffsetX = imageCropDraft.offsetX
+    const startOffsetY = imageCropDraft.offsetY
+
+    const handlePointerMove = (moveEvent) => {
+      const deltaX = moveEvent.clientX - startX
+      const deltaY = moveEvent.clientY - startY
+
+      setImageCropDraft((prev) => {
+        if (!prev) return prev
+        const nextOffsets = clampCropOffsets({
+          offsetX: startOffsetX + deltaX,
+          offsetY: startOffsetY + deltaY,
+          zoom: prev.zoom,
+          imageWidth: prev.imageWidth,
+          imageHeight: prev.imageHeight,
+        })
+        return {
+          ...prev,
+          ...nextOffsets,
+        }
+      })
+    }
+
+    const handlePointerUp = () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerup', handlePointerUp)
+    }
+
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', handlePointerUp)
+  }
+
+  const handleCancelImageCrop = () => {
+    setImageCropDraft(null)
+  }
+
+  const handleConfirmImageCrop = () => {
+    if (!imageCropDraft) return
+    createCroppedImageDataUrl(imageCropDraft.sourceDataUrl, imageCropDraft)
+      .then((result) => {
+        updateManualUnitDraft({ id: imageCropDraft.unitId }, { imageDataUrl: result })
+        setImageCropDraft(null)
+      })
+      .catch(() => {})
+  }
 
   useEffect(() => {
     if (typeof Image === 'undefined') return
-    Object.values(factionImages).forEach((src) => {
+    ;[...Object.values(factionImages), ...Object.values(factionSheetTemplates)].forEach((src) => {
       const img = new Image()
       img.src = src
     })
   }, [])
 
   useEffect(() => {
-    const payload = JSON.stringify({
-      units: armyUnits,
-      factionId: armyFactionIdSafe,
-      passiveGroupId: armyPassiveGroupIdSafe,
-      factionSkillIds: armyFactionSkillIdsSafe,
-      doctrineIds: armyDoctrineIdsSafe,
-    })
-    window.localStorage.setItem('zerolore_army_v1', payload)
-  }, [armyUnits, armyFactionIdSafe, armyPassiveGroupIdSafe, armyFactionSkillIdsSafe, armyDoctrineIdsSafe])
+    if (!selectedFaction) return
+    if (getFactionPassiveSelectionMode(selectedFaction) === 'multiple') return
+    if (selectedPassiveGroupIdSafe) return
+    const fallbackGroupId = getFirstPassiveGroupId(selectedFaction)
+    if (fallbackGroupId) {
+      const timeoutId = window.setTimeout(() => setSelectedPassiveGroupId(fallbackGroupId), 0)
+      return () => window.clearTimeout(timeoutId)
+    }
+  }, [selectedFaction, selectedPassiveGroupIdSafe])
+
+  useEffect(() => {
+    if (!availableEraTokens.length) return
+    if (availableEraTokens.includes(selectedEra)) return
+    const timeoutId = window.setTimeout(() => setSelectedEra(availableEraTokens[0]), 0)
+    return () => window.clearTimeout(timeoutId)
+  }, [availableEraTokens, selectedEra])
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
-    const hasOpenModal = Boolean(activeUnit) || isPassiveModalOpen || isDoctrineModalOpen
+    const hasOpenModal = Boolean(imageCropDraft)
     const previousOverflow = document.body.style.overflow
     if (hasOpenModal) {
       document.body.style.overflow = 'hidden'
@@ -694,326 +1120,200 @@ function Generador() {
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [activeUnit, isPassiveModalOpen, isDoctrineModalOpen])
+  }, [imageCropDraft])
+
+  useEffect(() => {
+    if (!isArmyPrintPreviewOpen) return undefined
+
+    const preparePreview = async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+      const sheetNodes = []
+      abilityExportPages.forEach((_, pageIndex) => {
+        const pageNode = armySheetRefs.current.get(`ability-${pageIndex}`)
+        if (pageNode) sheetNodes.push(pageNode)
+      })
+      armyExportPages.forEach((_, pageIndex) => {
+        const pageNode = armySheetRefs.current.get(`page-${pageIndex}`)
+        if (pageNode) sheetNodes.push(pageNode)
+      })
+      await waitForPrintReady(sheetNodes)
+    }
+
+    preparePreview().catch(() => {})
+
+    return undefined
+  }, [isArmyPrintPreviewOpen, abilityExportPages, armyExportPages])
+
+  useEffect(() => {
+    if (!isArmyPrintPreviewOpen || !armyExportStageRef.current) return undefined
+
+    let cancelled = false
+
+    const renderArmyPdf = async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+
+      const sheetNodes = []
+      abilityExportPages.forEach((_, pageIndex) => {
+        const pageNode = armySheetRefs.current.get(`ability-${pageIndex}`)
+        if (pageNode) sheetNodes.push(pageNode)
+      })
+      armyExportPages.forEach((_, pageIndex) => {
+        const pageNode = armySheetRefs.current.get(`page-${pageIndex}`)
+        if (pageNode) sheetNodes.push(pageNode)
+      })
+      await waitForPrintReady(sheetNodes)
+
+      if (cancelled || !armyExportStageRef.current) return
+
+      const { jsPDF } = await import('jspdf')
+      const capturedPageCanvases = []
+
+      for (const pageEntries of abilityExportPages) {
+        const cardCanvases = await Promise.all(pageEntries.map((skill) =>
+          renderAbilityFichaCanvas({
+            ability: skill,
+            factionId: selectedFaction?.id,
+            description: getFactionSkillDescriptionForMode(skill, gameMode),
+          }),
+        ))
+        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
+      }
+
+      for (const pageEntries of armyExportPages) {
+        const cardCanvases = await Promise.all(pageEntries.map((entry) => {
+          const displayName = exportUnitDisplayNames.get(entry.uid) || entry.base.nombre
+          const unitEraTokens = getUnitEraTokens(entry.base)
+          const unitEraLabel = unitEraTokens.length
+            ? unitEraTokens.map((token) => getEraLabel(token)).join(' / ')
+            : ''
+
+          return renderUnitFichaCanvas({
+            entry: { ...entry, displayName },
+            factionId: selectedFaction?.id,
+            lang,
+            gameMode,
+            eraLabel: unitEraLabel,
+          })
+        }))
+        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
+      }
+
+      if (!capturedPageCanvases.length) {
+        if (!cancelled) setIsArmyPrintPreviewOpen(false)
+        return
+      }
+
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+        compress: true,
+      })
+      const pageWidth = doc.internal.pageSize.getWidth()
+      const pageHeight = doc.internal.pageSize.getHeight()
+
+      capturedPageCanvases.forEach((canvas, index) => {
+        if (index > 0) doc.addPage()
+        doc.addImage(canvas, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST')
+      })
+
+      doc.save(createArmyPdfFileName(selectedFaction?.nombre || 'ZeroLore'))
+      if (!cancelled) {
+        setIsArmyPrintPreviewOpen(false)
+      }
+    }
+
+    renderArmyPdf().catch((error) => {
+      console.error('[generator] Army PDF export failed', error)
+      if (!cancelled) {
+        setIsArmyPrintPreviewOpen(false)
+      }
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [isArmyPrintPreviewOpen, abilityExportPages, armyExportPages, selectedFaction, gameMode, lang, exportUnitDisplayNames, getEraLabel])
 
   const handleFactionChange = (event) => {
     const next = event.target.value
     const nextFaction = factions.find((faction) => faction.id === next)
-    const nextTypes = nextFaction ? Array.from(new Set(nextFaction.unidades.map((unit) => unit.tipo))) : []
-    const nextEras = nextFaction
-      ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
-      : []
     const nextPassiveGroupId = getFirstPassiveGroupId(nextFaction)
     const nextFactionSkillIds = []
-    const shouldResetArmy = armyUnits.length > 0 && armyFactionIdSafe && armyFactionIdSafe !== next
     startTransition(() => {
       setSelectedFactionId(next)
       setSelectedPassiveGroupId(nextPassiveGroupId)
       setSelectedFactionSkillIds(nextFactionSkillIds)
-      setIsPassiveModalOpen(false)
-      setIsDoctrineModalOpen(false)
-      setUnitTypeFiltersManual(new Set(nextTypes))
-      setEraFiltersManual(getExclusiveEraSelection(nextEras, nextEras))
-      if (shouldResetArmy) {
-        setArmyUnits([])
-        setArmyFactionId(next)
-        setArmyPassiveGroupId(nextPassiveGroupId)
-        setArmyFactionSkillIds(nextFactionSkillIds)
-        setArmyDoctrineIds(selectedDoctrineIdsSafe)
-      } else if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === next) {
-        setArmyFactionId(next)
-        setArmyPassiveGroupId(nextPassiveGroupId)
-        setArmyFactionSkillIds(nextFactionSkillIds)
-        setArmyDoctrineIds(selectedDoctrineIdsSafe)
-      }
+      setOpenManualUnitId('')
+      setOpenFactionAbilityGroupId('')
+      setSelectedArmyUnitIds([])
+      setManualUnitDrafts({})
     })
   }
 
-  const handleRandomFactionChange = (next) => {
-    const nextFaction = next === 'random' ? null : factions.find((faction) => faction.id === next)
-    const nextTypes = nextFaction
-      ? Array.from(new Set(nextFaction.unidades.map((unit) => unit.tipo)))
-      : Array.from(
-        new Set(
-          factions.flatMap((faction) => faction.unidades.map((unit) => unit.tipo)),
-        ),
-      )
-    const nextEras = nextFaction
-      ? getOrderedEraTokens(nextFaction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode)))
-      : getOrderedEraTokens(
-          factions.flatMap((faction) =>
-            faction.unidades.filter((unit) => isUnitTypeAllowedInGameMode(unit.tipo, gameMode))),
-        )
-    setRandomFactionId(next)
-    setUnitTypeFiltersRandom(new Set(nextTypes))
-    setEraFiltersRandom(getExclusiveEraSelection(nextEras, nextEras))
+  const handleGameModeChange = (nextMode) => {
+    setGameMode(nextMode)
+    setOpenManualUnitId('')
+    setOpenFactionAbilityGroupId('')
+    setSelectedArmyUnitIds([])
   }
 
-  const handleToggleUnitTypeManual = (type) => {
-    setUnitTypeFiltersManual((prev) => {
-      const next = prev.size ? new Set(prev) : new Set(availableUnitTypes)
-      if (next.has(type)) {
-        next.delete(type)
-      } else {
-        next.add(type)
-      }
-      return next
-    })
+  const handleAddArmyUnit = (unitId) => {
+    setSelectedArmyUnitIds((current) => (current.includes(unitId) ? current : [...current, unitId]))
   }
 
-  const handleToggleUnitTypeRandom = (type) => {
-    setUnitTypeFiltersRandom((prev) => {
-      const next = prev.size ? new Set(prev) : new Set(availableUnitTypesRandom)
-      if (next.has(type)) {
-        next.delete(type)
-      } else {
-        next.add(type)
-      }
-      return next
-    })
+  const handleRemoveArmyUnit = (unitId) => {
+    setSelectedArmyUnitIds((current) => current.filter((id) => id !== unitId))
   }
 
-  const handleToggleEraManual = (token) => {
-    if (!availableEraTokens.includes(token)) return
-    setEraFiltersManual(new Set([token]))
-  }
-
-  const handleToggleEraRandom = (token) => {
-    if (!availableEraTokensRandom.includes(token)) return
-    setEraFiltersRandom(new Set([token]))
-  }
-
-  const handleOpenConfigurator = (unit) => {
-    setActiveUnit(unit)
-  }
-
-  const handleSelectPassiveGroup = (groupId) => {
-    setSelectedPassiveGroupId(groupId)
-    if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
-      setArmyFactionId(selectedFactionIdSafe)
-      setArmyPassiveGroupId(groupId)
-      setArmyFactionSkillIds([])
+  const handleAddArmyPassive = (groupId) => {
+    if (!selectedFaction) return
+    if (getFactionPassiveSelectionMode(selectedFaction) === 'multiple') {
+      const currentIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
+      if (currentIds.includes(groupId) || currentIds.length >= getFactionAbilitySelectionLimit(selectedFaction)) return
+      setSelectedFactionSkillIds([...currentIds, groupId])
+      setSelectedPassiveGroupId('')
+    } else {
+      setSelectedPassiveGroupId(groupId)
+      setSelectedFactionSkillIds([])
     }
-    setIsPassiveModalOpen(false)
   }
 
-  const handleToggleFactionSkill = (skillId) => {
-    setSelectedFactionSkillIds((prev) => {
-      const currentIds = sanitizeFactionAbilityIds(selectedFaction, prev)
-      const nextIds = (() => {
-        if (currentIds.includes(skillId)) {
-          return currentIds.filter((id) => id !== skillId)
-        }
-        if (currentIds.length >= getFactionAbilitySelectionLimit(selectedFaction)) {
-          return currentIds
-        }
-        return [...currentIds, skillId]
-      })()
-
-      if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
-        setArmyFactionId(selectedFactionIdSafe)
-        setArmyPassiveGroupId('')
-        setArmyFactionSkillIds(nextIds)
-      }
-
-      return nextIds
-    })
-  }
-
-  const handleRemoveArmyFactionSkill = (skillId) => {
-    setArmyFactionSkillIds((prev) => {
-      const currentIds = sanitizeFactionAbilityIds(armyFaction, prev)
-      const nextIds = currentIds.filter((id) => id !== skillId)
-
-      if (mode === 'manual' && selectedFactionIdSafe === armyFactionIdSafe) {
-        setSelectedFactionSkillIds(nextIds)
-      }
-
-      return nextIds
-    })
-  }
-
-  const handleAddDoctrine = (doctrineId) => {
-    setSelectedDoctrineIds((prev) => {
-      const currentIds = sanitizeDoctrineIds(localizedDoctrines, prev)
-      if (currentIds.includes(doctrineId)) return currentIds
-      const nextIds = [...currentIds, doctrineId]
-
-      if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
-        setArmyFactionId(selectedFactionIdSafe)
-        setArmyDoctrineIds(nextIds)
-      }
-
-      return nextIds
-    })
-    setIsDoctrineModalOpen(false)
-  }
-
-  const handleRemoveSelectedDoctrine = (doctrineId) => {
-    setSelectedDoctrineIds((prev) => {
-      const nextIds = sanitizeDoctrineIds(localizedDoctrines, prev).filter((id) => id !== doctrineId)
-
-      if (!armyUnits.length || !armyFactionIdSafe || armyFactionIdSafe === selectedFactionIdSafe) {
-        setArmyFactionId(selectedFactionIdSafe)
-        setArmyDoctrineIds(nextIds)
-      }
-
-      return nextIds
-    })
-  }
-
-  const handleRemoveArmyDoctrine = (doctrineId) => {
-    setArmyDoctrineIds((prev) => {
-      const nextIds = sanitizeDoctrineIds(localizedDoctrines, prev).filter((id) => id !== doctrineId)
-
-      if (mode === 'manual' && selectedFactionIdSafe === armyFactionIdSafe) {
-        setSelectedDoctrineIds(nextIds)
-      }
-
-      return nextIds
-    })
-  }
-
-  const handleAddUnit = (unit, shooting, melee, squadSize, perMiniLoadouts, imageDataUrl = '') => {
-    const clampedSize = gameMode === 'escuadra' ? clampSquadSize(squadSize, unit) : 1
-    const candidateEntry = {
-      shooting,
-      melee,
-      perMiniLoadouts,
+  const handleRemoveArmyPassive = (groupId) => {
+    if (!selectedFaction) return
+    if (getFactionPassiveSelectionMode(selectedFaction) === 'multiple') {
+      setSelectedFactionSkillIds((current) => current.filter((id) => id !== groupId))
+      return
     }
-    if (selectionHasWeaponLimitError(candidateEntry, armyUnits, gameMode)) return
-    const total = computeUnitTotal(unit, shooting, melee, clampedSize, perMiniLoadouts, gameMode)
-    const entry = {
-      uid: `${unit.id}-${Date.now()}-${Math.random()}`,
-      base: unit,
-      shooting,
-      melee,
-      squadSize: clampedSize,
-      perMiniLoadouts,
-      imageDataUrl,
-      total,
-    }
-    setArmyUnits((prev) =>
-      prev.length && armyFactionIdSafe && armyFactionIdSafe !== selectedFactionIdSafe ? [entry] : [...prev, entry],
-    )
-    setArmyFactionId(selectedFactionIdSafe)
-    setArmyPassiveGroupId(selectedPassiveGroupIdSafe)
-    setArmyFactionSkillIds(selectedFactionSkillIdsSafe)
-    setArmyDoctrineIds(selectedDoctrineIdsSafe)
-    setActiveUnit(null)
+    const fallbackGroupId = getFirstPassiveGroupId(selectedFaction)
+    setSelectedPassiveGroupId(groupId === fallbackGroupId ? '' : fallbackGroupId)
   }
 
-  const handleRemoveUnit = (uid) => {
-    setArmyUnits((prev) => prev.filter((unit) => unit.uid !== uid))
-  }
-
-  const handleEditUnit = (unit) => {
-    setActiveUnit(unit)
-  }
-
-  const handleReset = () => {
-    setArmyUnits([])
-    setArmyFactionId('')
-    setArmyPassiveGroupId('')
-    setSelectedPassiveGroupId('')
-    setArmyFactionSkillIds([])
+  const handleResetCurrentArmy = () => {
+    setSelectedArmyUnitIds([])
     setSelectedFactionSkillIds([])
-    setArmyDoctrineIds([])
-    setSelectedDoctrineIds([])
-    setIsPassiveModalOpen(false)
-    setIsDoctrineModalOpen(false)
+    setSelectedPassiveGroupId(getFirstPassiveGroupId(selectedFaction))
   }
 
-  const handleGenerateRandom = () => {
-    if (!factions.length) return
-    const target = toNumber(targetValue)
-    if (target <= 0) return
+  useEffect(() => {
+    const availableIds = new Set(exportUnits.map((unit) => unit.uid))
+    const timeoutId = window.setTimeout(() => {
+      setSelectedArmyUnitIds((current) => current.filter((id) => availableIds.has(id)))
+    }, 0)
+    return () => window.clearTimeout(timeoutId)
+  }, [exportUnits])
 
-    const buildBestFactionCandidate = (baseFaction) => {
-      if (!baseFaction) return null
-
-      const selectionCandidates = getRandomFactionSelectionCandidates(baseFaction, target)
-      let bestCandidate = null
-
-      selectionCandidates.forEach((selection) => {
-        const selectionCost = getFactionSelectionCost(selection)
-        const remainingTarget = Math.max(0, target - selectionCost)
-        const factionWithPassives = applyPassiveGroupEffectsToFaction(baseFaction, selection)
-        const filteredFaction = {
-          ...factionWithPassives,
-          unidades: factionWithPassives.unidades.filter(
-            (unit) =>
-              isUnitTypeAllowedInGameMode(unit.tipo, gameMode)
-              && (!activeRandomFilters.size || activeRandomFilters.has(unit.tipo))
-              && unitMatchesEraFilters(unit, activeRandomEraFilters),
-          ),
-        }
-
-        if (!filteredFaction.unidades.length) return
-
-        const unitResult = generateArmyByValue(
-          filteredFaction,
-          remainingTarget,
-          gameMode,
-          activeRandomFilters.size ? activeRandomFilters : null,
-        )
-
-        const score = scoreRandomArmyCandidate({
-          unitResult,
-          selection,
-          target,
-        })
-
-        if (!bestCandidate || score > bestCandidate.score) {
-          bestCandidate = {
-            faction: baseFaction,
-            generatedFaction: filteredFaction,
-            selection,
-            unitResult,
-            score,
-          }
-        }
-      })
-
-      return bestCandidate
-    }
-
-    const factionCandidates = (
-      randomFactionIdSafe === 'random'
-        ? factions
-        : [factions.find((item) => item.id === randomFactionIdSafe)].filter(Boolean)
-    )
-      .map(buildBestFactionCandidate)
-      .filter((candidate) => candidate?.unitResult?.units?.length)
-
-    if (!factionCandidates.length) return
-
-    const rankedCandidates = [...factionCandidates].sort((a, b) => b.score - a.score)
-    const shortlistedCandidates = rankedCandidates.slice(0, Math.min(3, rankedCandidates.length))
-    const chosenCandidate = shortlistedCandidates[Math.floor(Math.random() * shortlistedCandidates.length)]
-    const chosenMode = getFactionPassiveSelectionMode(chosenCandidate.faction)
-
-    setArmyUnits(chosenCandidate.unitResult.units)
-    setArmyFactionId(chosenCandidate.faction?.id || '')
-    setArmyPassiveGroupId(chosenMode === 'multiple' ? '' : chosenCandidate.selection?.id || '')
-    setArmyFactionSkillIds(
-      chosenMode === 'multiple'
-        ? (chosenCandidate.selection?.habilidades || []).map((skill) => skill.id)
-        : [],
-    )
-    setArmyDoctrineIds([])
+  const setArmySheetRef = (pageKey, node) => {
+    if (!pageKey) return
+    if (node) armySheetRefs.current.set(pageKey, node)
+    else armySheetRefs.current.delete(pageKey)
   }
 
-  const exportPdf = () =>
-    exportGeneratorPdf({
-      armyUnits: localizedArmyUnits,
-      armyFaction: activeArmyFactionForPdf,
-      doctrines: currentArmyDoctrines,
-      totalValue,
-      gameMode,
-      t,
-      lang,
-    })
+  const handleDownloadArmyPdf = () => {
+    if ((!selectedArmyUnits.length && !selectedAbilityRows.length) || isArmyPrintPreviewOpen) return
+    if (typeof window === 'undefined') return
+    setIsArmyPrintPreviewOpen(true)
+  }
 
   return (
     <section className="section generator-page reveal" id="generador">
@@ -1025,637 +1325,559 @@ function Generador() {
 
       <div className="generator-layout reveal">
         <div className="generator-main">
-          <div className="mode-switch">
-            <button
-              className={mode === 'manual' ? 'mode-button active' : 'mode-button'}
-              type="button"
-              onClick={() => setMode('manual')}
-            >
-              {t('generator.modeCreate')}
-            </button>
-            <button
-              className={mode === 'random' ? 'mode-button active' : 'mode-button'}
-              type="button"
-              onClick={() => setMode('random')}
-            >
-              {t('generator.modeRandom')}
-            </button>
-          </div>
-
-          {mode === 'manual' && (
-            <div className="manual-panel">
-              <GameModePicker value={gameMode} onChange={setGameMode} t={t} />
-              <div className="field">
-                <span>{t('generator.faction')}</span>
-                <CustomSelect
-                  t={t}
-                  value={selectedFactionIdSafe}
-                  onChange={(next) => handleFactionChange({ target: { value: next } })}
-                  options={factionSelectOptions}
-                />
-              </div>
-
-              {selectedFaction && (
-                <>
-                  <div className="faction-summary">
-                    <div className="faction-header">
-                      {factionImages[selectedFaction.id] && (
-                        <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
-                      )}
-                      <h3>{selectedFaction.nombre}</h3>
-                    </div>
-                    <p className="faction-description">{selectedFaction.estilo}</p>
-                    {selectedPassiveOptions.length > 0 && (
-	                        <div className="doctrine-panel">
-	                          <div className="doctrine-panel-header">
-	                            <div className="faction-passives-heading">
-	                              <p className="faction-passives-title">{t('generator.choosePassives')}</p>
-	                            </div>
-	                            <button
-	                              type="button"
-	                              className="ghost tiny passive-group-open-button"
-                            onClick={() => setIsPassiveModalOpen(true)}
-                            aria-label={t('generator.passiveModalTitle')}
-                          >
-                            {t('generator.select')}
-                          </button>
-                        </div>
-                        {(getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection)?.habilidades?.length ? (
-                          <div className="doctrine-item passive-group-current">
-                            <div className="doctrine-item-main">
-                              {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
-                                <div className="selected-passive-skill-list selected-passive-skill-list-compact">
-                                  {(manualCurrentSelection || selectedFactionSelection).habilidades.map((skill) => (
-                                    <div
-                                      key={`selected-passive-${skill.id}`}
-                                      className="selected-passive-skill-item selected-passive-skill-item-compact selected-choice-row"
-                                    >
-                                      <div className="doctrine-item-main">
-                                        <span className="doctrine-icon-box passive-group-icon-box" aria-hidden="true">
-                                          <PassiveGroupIcon groupId={skill.id} />
-                                        </span>
-                                        <span className="selected-passive-skill-name">{skill.nombre}</span>
-                                      </div>
-                                      <button
-                                        type="button"
-                                        className="selected-choice-remove"
-                                        onClick={() => handleToggleFactionSkill(skill.id)}
-                                        aria-label={`${t('generator.delete')}: ${skill.nombre}`}
-                                      >
-                                        X
-                                      </button>
-                                    </div>
-                                  ))}
-                                </div>
-                              ) : (
-                                <>
-                                  <span className="doctrine-icon-box passive-group-icon-box" aria-hidden="true">
-                                    <PassiveGroupIcon
-                                      groupId={(getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection).id}
-                                    />
-                                  </span>
-                                  <div className="doctrine-content">
-                                    <p className="doctrine-name doctrine-name-plain">
-                                      {getPassiveSelectionDisplayName(
-                                        (getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection),
-                                        selectedFaction,
-                                        t,
-                                        Math.max(
-                                          selectedPassiveOptions.findIndex((group) => group.id === (getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? manualCurrentSelection : selectedFactionSelection).id),
-                                          0,
-                                        ),
-                                      )}
-                                    </p>
-                                  </div>
-                                </>
-                              )}
-                            </div>
-	                          </div>
-                        ) : getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
-                          <p className="doctrine-description">{t('generator.noPassivesAdded')}</p>
-                        ) : null}
-                      </div>
-                    )}
-                    <div className="doctrine-panel">
-                      <div className="doctrine-panel-header">
-                        <div className="faction-passives-heading">
-                          <p className="faction-passives-title">{t('generator.chooseDoctrines')}</p>
-                        </div>
-                        <button
-                          type="button"
-                          className="ghost tiny passive-group-open-button"
-                          onClick={() => setIsDoctrineModalOpen(true)}
-                          aria-label={t('generator.doctrineModalTitle')}
-                        >
-                          {t('generator.select')}
-                        </button>
-                      </div>
-                      {selectedDoctrines.length ? (
-                        <div className="doctrine-item passive-group-current">
-                          <div className="doctrine-item-main">
-                            <div className="selected-passive-skill-list selected-passive-skill-list-compact">
-                              {selectedDoctrines.map((doctrine) => (
-                                <div
-                                  key={`selected-doctrine-${doctrine.id}`}
-                                  className="selected-passive-skill-item selected-passive-skill-item-compact selected-choice-row"
-                                >
-                                  <div className="doctrine-item-main">
-                                    <span className="selected-doctrine-token" aria-hidden="true">
-                                      <DoctrineIcon doctrine={doctrine} />
-                                    </span>
-                                    <span className="selected-passive-skill-name">{doctrine.nombre}</span>
-                                  </div>
-                                  <button
-                                    type="button"
-                                    className="selected-choice-remove"
-                                    onClick={() => handleRemoveSelectedDoctrine(doctrine.id)}
-                                    aria-label={`${t('generator.delete')}: ${doctrine.nombre}`}
-                                  >
-                                    X
-                                  </button>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="empty-state">{t('generator.noDoctrinesAdded')}</p>
-                      )}
-                    </div>
-                  </div>
-                  <EraWorldSwitch
-                    tokens={availableEraTokens}
-                    activeTokens={activeManualEraFilters}
-                    onToggle={handleToggleEraManual}
-                    getLabel={getEraLabel}
-                    title={t('generator.era')}
-                  />
-                  <div className="unit-type-filters">
-                    {availableUnitTypes.map((type) => (
-                      <label key={type} className="unit-type-filter">
-                        <input
-                          type="checkbox"
-                          checked={activeManualFilters.has(type)}
-                          onChange={() => handleToggleUnitTypeManual(type)}
-                        />
-                        <span>{type}</span>
-                      </label>
-                    ))}
-                  </div>
-                  <div className="unit-list">
-                    {visibleManualUnits.map((unit) => (
-                      <article className="unit-card" key={unit.id}>
-                        <div>
-                          <div className="unit-card-header">
-                            <h4>{unit.nombre}</h4>
-                            <button type="button" className="ghost tiny" onClick={() => handleOpenConfigurator(unit)}>
-                              {gameMode === 'escuadra' ? t('generator.createSquad') : t('generator.configure')}
-                            </button>
-                          </div>
-                          <p className="unit-meta">
-                            <UnitTypeBadge type={unit.tipo} />
-                            {' '}·{' '}
-                            <span className="unit-value">{unit.valor_base} {t('generator.valueUnit')}</span>
-                          </p>
-                          <div className="unit-stats-table">
-                            <div className="unit-stats-row head">
-                              <span>{t('generator.mov')}</span>
-                              <span>{t('generator.vidas')}</span>
-                              <span>{t('generator.salv')}</span>
-                              <span>{t('generator.vel')}</span>
-                              {gameMode === 'escuadra' ? <span>{t('generator.squadCap')}</span> : null}
-                            </div>
-                            <div className="unit-stats-row">
-                              <span>{unit.movimiento}</span>
-                              <span>{unit.vidas}</span>
-                              <span>{unit.salvacion}</span>
-                              <span>{unit.velocidad}</span>
-                              {gameMode === 'escuadra' ? (
-                                <span>{`${unit.escuadra_min} / ${unit.escuadra_max}`}</span>
-                              ) : null}
-                            </div>
-                          </div>
-                          <p className="unit-specialty">{getUnitSpecialtyForMode(unit, gameMode)}</p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {mode === 'random' && (
-            <div className="random-panel">
-              <GameModePicker value={gameMode} onChange={setGameMode} t={t} />
-              <label className="field">
-                {t('generator.targetValue')}
-                <input
-                  type="number"
-                  min="0"
-                  value={targetValue}
-                  onChange={(event) => setTargetValue(event.target.value)}
-                />
-              </label>
-              <div className="field">
-                <span>{t('generator.faction')}</span>
-                <CustomSelect
-                  t={t}
-                  value={randomFactionIdSafe}
-                  onChange={handleRandomFactionChange}
-                  options={randomFactionSelectOptions}
-                />
-              </div>
-              <EraWorldSwitch
-                tokens={availableEraTokensRandom}
-                activeTokens={activeRandomEraFilters}
-                onToggle={handleToggleEraRandom}
-                getLabel={getEraLabel}
-                title={t('generator.era')}
+          <div className="manual-panel">
+            <GameModePicker value={gameMode} onChange={handleGameModeChange} t={t} />
+            <div className="field">
+              <span>{t('generator.faction')}</span>
+              <CustomSelect
+                t={t}
+                value={selectedFactionIdSafe}
+                onChange={(next) => handleFactionChange({ target: { value: next } })}
+                options={factionSelectOptions}
               />
-              <div className="unit-type-filters">
-                {availableUnitTypesRandom.map((type) => (
-                  <label key={`random-${type}`} className="unit-type-filter">
-                    <input
-                      type="checkbox"
-                      checked={activeRandomFilters.has(type)}
-                      onChange={() => handleToggleUnitTypeRandom(type)}
-                    />
-                    <span>{type}</span>
-                  </label>
-                ))}
+            </div>
+            {availableEraTokens.length ? (
+              <div className="field field-era-worlds">
+                <span>{t('generator.era')}</span>
+                <div className="era-world-switch" role="radiogroup" aria-label={t('generator.era')}>
+                  {availableEraTokens.map((eraToken) => (
+                    <button
+                      key={eraToken}
+                      type="button"
+                      role="radio"
+                      aria-checked={selectedEra === eraToken}
+                      className={`era-world-button era-world-button-${eraToken}${selectedEra === eraToken ? ' active' : ''}`}
+                      onClick={() => setSelectedEra(eraToken)}
+                    >
+                      {getEraLabel(eraToken)}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <button type="button" className="primary" onClick={handleGenerateRandom}>
-                {t('generator.generate')}
-              </button>
-            </div>
-          )}
-        </div>
+            ) : null}
 
-        <aside className="army-panel">
-          <div className="army-header">
-            <div>
-              <p className="eyebrow">{t('generator.currentArmy')}</p>
-              <h3>{currentArmyFaction?.nombre || t('generator.noFaction')}</h3>
-            </div>
-            <span className="army-total">{totalValue} {t('generator.valueUnit')}</span>
-          </div>
+            {selectedFaction && (
+              <>
+                <div className="faction-summary">
+                  <div className="faction-header">
+                    {factionImages[selectedFaction.id] && (
+                      <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
+                    )}
+                    <h3>{selectedFaction.nombre}</h3>
+                  </div>
+                  <p className="faction-description">{selectedFaction.estilo}</p>
+                </div>
+                <div className="generator-section-tabs" role="tablist" aria-label={t('generator.sectionTabs')}>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeGeneratorSection === 'passives'}
+                    className={`generator-section-tab${activeGeneratorSection === 'passives' ? ' active' : ''}`}
+                    onClick={() => setActiveGeneratorSection('passives')}
+                  >
+                    {t('generator.passives')}
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeGeneratorSection === 'units'}
+                    className={`generator-section-tab${activeGeneratorSection === 'units' ? ' active' : ''}`}
+                    onClick={() => setActiveGeneratorSection('units')}
+                  >
+                    {t('generator.factionUnits')}
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeGeneratorSection === 'army'}
+                    className={`generator-section-tab generator-section-tab-army${activeGeneratorSection === 'army' ? ' active' : ''}`}
+                    onClick={() => setActiveGeneratorSection('army')}
+                  >
+                    <span>{t('generator.currentArmy')}:</span>
+                    <span className="generator-section-tab-count">{currentArmyTotalValue} {t('generator.valueUnit')}</span>
+                  </button>
+                </div>
+                {activeGeneratorSection === 'passives' && selectedPassiveOptions.length > 0 && (
+                  <div className="generator-subsection generator-listing-field">
+                    {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
+                      <div className="generator-listing-head">
+                        <span className="generator-listing-note">{t('generator.maxFactionAbilities')}</span>
+                      </div>
+                    ) : null}
+                    <div className="passive-group-list passive-group-list-inline unit-list">
+                      {selectedPassiveOptions.map((group, index) => {
+                        const currentMultipleIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
+                        const factionAbilityLimit = getFactionAbilitySelectionLimit(selectedFaction)
+                        const isActive = getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
+                          ? currentMultipleIds.includes(group.id)
+                          : group.id === selectedPassiveGroupIdSafe
+                        const isDisabled = getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
+                          && !isActive
+                          && currentMultipleIds.length >= factionAbilityLimit
 
-          <div className="army-actions">
-            <button type="button" className="ghost small" onClick={handleReset}>
-              {t('generator.resetArmy')}
-            </button>
-            <button type="button" className="ghost small" onClick={exportPdf} disabled={!localizedArmyUnits.length}>
-              {t('generator.downloadPdf')}
-            </button>
-          </div>
-
-          {currentArmySelection?.habilidades?.length ? (
-            <div className="army-passive-group">
-              {(() => {
-                const isMultipleSelection = getFactionPassiveSelectionMode(currentArmyFaction) === 'multiple'
-	                return (
-	                  <>
-                      <div className="army-passive-card-list">
-                        {currentArmySelection.habilidades.map((skill) => (
-                          <article key={`army-passive-${skill.id}`} className="army-unit army-passive-card">
-                            <div className="army-unit-header army-passive-card-header">
-                              <div className="army-passive-card-title-wrap">
-                                <span className="doctrine-icon-box passive-group-icon-box" aria-hidden="true">
-                                  <PassiveGroupIcon groupId={skill.id} />
+                        return (
+                          <article
+                            key={group.id}
+                            className={`unit-card passive-group-card${isActive ? ' active' : ''}${isDisabled ? ' is-disabled' : ''}`}
+                          >
+                            <div className="unit-card-header">
+                              <div className="unit-card-summary">
+                                <span className="unit-card-thumb-wrap passive-group-thumb-wrap" aria-hidden="true">
+                                  <span className="unit-card-thumb-frame passive-group-thumb-frame">
+                                    <span className="unit-card-thumb-canvas passive-group-thumb-canvas">
+                                      <FactionAbilityIcon skill={group.habilidades?.[0] || { id: group.id }} factionId={selectedFaction?.id} />
+                                    </span>
+                                  </span>
                                 </span>
-                                <div>
-                                  <h4>{skill.nombre}</h4>
-                                  <p className="army-passive-card-kicker">
-                                    {(isMultipleSelection ? t('generator.passive') : t('generator.passives')).toLowerCase()}
-                                  </p>
+                                <div className="passive-group-heading unit-card-heading">
+                                  <div className="unit-card-title-row">
+                                    <h4>{getPassiveSelectionDisplayName(group, selectedFaction, t, index)}</h4>
+                                  </div>
+                                  <div className="passive-group-kind">
+                                    {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.passive', 'generator.passiveSet'))}
+                                  </div>
+                                  {group.coste_total ? (
+                                    <div className="unit-card-inline-value">{group.coste_total} {t('generator.valueUnit')}</div>
+                                  ) : null}
                                 </div>
                               </div>
-                              {skill.coste ? (
-                                <span className="army-passive-skill-cost">
-                                  {skill.coste} {t('generator.valueUnit')}
-                                </span>
-                              ) : null}
-                            </div>
-                            <div className="army-weapons army-passive-card-body">
-                              {getFactionSkillDescriptionForMode(skill, gameMode)}
-                            </div>
-                            <div className="army-unit-actions">
-                              <button
-                                type="button"
-                                className="ghost tiny"
-                                onClick={() => handleRemoveArmyFactionSkill(skill.id)}
-                                aria-label={`${t('generator.remove')}: ${skill.nombre}`}
-                              >
-                                {t('generator.delete')}
-                              </button>
+                              <div className="unit-card-header-actions">
+                                <button
+                                  type="button"
+                                  className="ghost small"
+                                  onClick={() => setOpenFactionAbilityGroupId(group.id)}
+                                >
+                                  {t('generator.viewCard')}
+                                </button>
+                                <button
+                                  type="button"
+                                  className="ghost small"
+                                  disabled={isDisabled || isActive}
+                                  onClick={() => handleAddArmyPassive(group.id)}
+                                >
+                                  {t('generator.add')}
+                                </button>
+                              </div>
                             </div>
                           </article>
-                        ))}
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+                {activeGeneratorSection === 'units' ? (
+                <div className="generator-subsection generator-listing-field">
+                  <div className="unit-list">
+                  {visibleManualUnits.map((unit) => {
+                    const draft = getManualUnitDraft(unit)
+                    const fixedLoadout = getFixedUnitLoadout(unit)
+                    const draftTotal = computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, draft.squadSize, null, gameMode)
+                    const displayValue = gameMode === 'escuadra' ? unit.valor_base : draftTotal
+                    return (
+                      <article className="unit-card" key={unit.id}>
+                        <div className="unit-card-header">
+                          <div className="unit-card-summary">
+                            <div className="unit-card-thumb-wrap">
+                              <label
+                                htmlFor={`unit-image-${unit.id}`}
+                                className={`unit-image-trigger unit-card-thumb-trigger${draft.imageDataUrl ? ' has-image' : ''}`}
+                                aria-label={draft.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
+                                title={draft.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
+                              >
+                                <span className="unit-card-thumb-frame" aria-hidden="true">
+                                  <span className="unit-card-thumb-canvas">
+                                    <img
+                                      className={`unit-card-thumb${draft.imageDataUrl ? '' : ' fallback'}`}
+                                      src={draft.imageDataUrl || getUnitTypeBadgeSrc(unit.tipo)}
+                                      alt={unit.nombre}
+                                    />
+                                  </span>
+                                </span>
+                                <span className="unit-image-overlay">
+                                  {draft.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
+                                </span>
+                              </label>
+                              <input
+                                id={`unit-image-${unit.id}`}
+                                type="file"
+                                accept="image/*"
+                                className="unit-image-input"
+                                onChange={(event) => handleManualUnitImageChange(unit, event)}
+                              />
+                              {draft.imageDataUrl ? (
+                                <button
+                                  type="button"
+                                  className="unit-image-clear"
+                                  onClick={() => updateManualUnitDraft(unit, { imageDataUrl: '' })}
+                                  aria-label={t('generator.removeImage')}
+                                  title={t('generator.removeImage')}
+                                >
+                                  ×
+                                </button>
+                              ) : null}
+                            </div>
+                            <div className="unit-card-heading">
+                              <div className="unit-card-title-row">
+                                <h4>{unit.nombre}</h4>
+                              </div>
+                              <div className={`unit-card-type unit-type-${getUnitTypeToken(unit.tipo)}`}>{unit.tipo}</div>
+                              <div className="unit-card-inline-value">{displayValue} {t('generator.valueUnit')}</div>
+                            </div>
+                          </div>
+                          <div className="unit-card-header-actions">
+                            <button
+                              type="button"
+                              className="ghost small"
+                              onClick={() => setOpenManualUnitId(unit.id)}
+                            >
+                              {t('generator.viewCard')}
+                            </button>
+                            <button
+                              type="button"
+                              className="ghost small"
+                              onClick={() => handleAddArmyUnit(unit.id)}
+                              disabled={selectedArmyUnitIds.includes(unit.id)}
+                            >
+                              {t('generator.add')}
+                            </button>
+                          </div>
+                        </div>
+                      </article>
+                    )
+                  })}
+                  </div>
+                </div>
+                ) : null}
+                {activeGeneratorSection === 'army' ? (
+                  <div id="current-army-panel" className="generator-subsection generator-listing-field army-inline-panel">
+                    <div className="army-inline-head">
+                      <div>
+                        <p className="army-inline-total">
+                          <span className="generator-listing-label">{t('generator.currentArmy')}:</span>{' '}
+                          {currentArmyTotalValue} {t('generator.valueUnit')}
+                        </p>
                       </div>
-                  </>
-                )
-              })()}
-            </div>
-          ) : null}
-
-          {currentArmyDoctrines.length ? (
-            <div className="army-passive-group">
-              <div className="army-passive-card-list">
-                {currentArmyDoctrines.map((doctrine) => (
-                  <article key={`army-doctrine-${doctrine.id}`} className="army-unit army-passive-card">
-                    <div className="army-unit-header army-passive-card-header">
-                      <div className="army-passive-card-title-wrap">
-                        <span className="doctrine-icon-box" aria-hidden="true">
-                          <DoctrineIcon doctrine={doctrine} />
-                        </span>
-                        <div>
-                          <h4>{doctrine.nombre}</h4>
-                          <p className="army-passive-card-kicker">{t('generator.doctrines').toLowerCase()}</p>
+                    </div>
+                    {selectedAbilityRows.length ? (
+                      <div className="army-modal-section">
+                        <p className="army-modal-section-label">{t('generator.passives')}</p>
+                        <div className="army-list army-list-compact">
+                          {selectedAbilityRows.map((skill) => (
+                            <article key={`current-passive-${skill.id || skill.nombre}`} className="army-unit">
+                              <div className="army-unit-header">
+                                <div className="army-unit-summary">
+                                  <img className="army-unit-thumb" src={abilityIconSrc} alt="" aria-hidden="true" />
+                                  <div>
+                                    <h4>{skill.nombre || skill.id}</h4>
+                                    <p className="army-unit-meta">
+                                      <span className="army-unit-type-label">{t('generator.passive')}</span>
+                                      {skill.coste ? <span className="army-unit-total">{skill.coste} {t('generator.valueUnit')}</span> : null}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="army-unit-actions">
+                                <button
+                                  type="button"
+                                  className="ghost tiny"
+                                  onClick={() => handleRemoveArmyPassive(skill.id)}
+                                >
+                                  {t('generator.delete')}
+                                </button>
+                              </div>
+                            </article>
+                          ))}
                         </div>
                       </div>
-                      {doctrine.coste ? (
-                        <span className="army-passive-skill-cost">
-                          {doctrine.coste} {t('generator.valueUnit')}
-                        </span>
-                      ) : null}
-                    </div>
-                    <div className="army-weapons army-passive-card-body">{doctrine.descripcion}</div>
-                    <div className="army-unit-actions">
+                    ) : null}
+                    {selectedArmyUnits.length ? (
+                      <div className="army-modal-section">
+                        <p className="army-modal-section-label">{t('generator.factionUnits')}</p>
+                        <div className="army-list army-list-compact">
+                          {selectedArmyUnits.map((entry) => (
+                            <article key={`current-unit-${entry.uid}`} className="army-unit">
+                              <div className="army-unit-header">
+                                <div className="army-unit-summary">
+                                  <img
+                                    className={`army-unit-thumb${entry.imageDataUrl ? '' : ' fallback'}`}
+                                    src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo)}
+                                    alt={entry.base.nombre}
+                                  />
+                                  <div>
+                                    <h4>{exportUnitDisplayNames.get(entry.uid) || entry.base.nombre}</h4>
+                                    <p className="army-unit-meta">
+                                      <span className="army-unit-type-label">{entry.base.tipo}</span>
+                                      <span className="army-unit-total">{entry.total} {t('generator.valueUnit')}</span>
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="army-unit-actions">
+                                <button
+                                  type="button"
+                                  className="ghost tiny"
+                                  onClick={() => handleRemoveArmyUnit(entry.uid)}
+                                >
+                                  {t('generator.delete')}
+                                </button>
+                              </div>
+                            </article>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+                    {!selectedAbilityRows.length && !selectedArmyUnits.length ? (
+                      <p className="empty-state">{t('generator.noUnitsYet')}</p>
+                    ) : null}
+                    <div className="army-actions">
                       <button
                         type="button"
-                        className="ghost tiny"
-                        onClick={() =>
-                          mode === 'manual'
-                            ? handleRemoveSelectedDoctrine(doctrine.id)
-                            : handleRemoveArmyDoctrine(doctrine.id)}
-                        aria-label={`${t('generator.delete')}: ${doctrine.nombre}`}
+                        className="primary small"
+                        onClick={handleDownloadArmyPdf}
+                        disabled={(!selectedArmyUnits.length && !selectedAbilityRows.length) || isArmyPrintPreviewOpen}
+                        aria-busy={isArmyPrintPreviewOpen ? 'true' : 'false'}
                       >
-                        {t('generator.delete')}
+                        {isArmyPrintPreviewOpen ? <SpinnerIcon /> : null}
+                        <span>{isArmyPrintPreviewOpen ? t('generator.preparingPdf') : t('generator.downloadArmy')}</span>
+                      </button>
+                      <button type="button" className="ghost small" onClick={handleResetCurrentArmy}>
+                        {t('generator.resetArmy')}
                       </button>
                     </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          {localizedArmyUnits.length === 0 && (
-            <p className="empty-state">{t('generator.noUnitsYet')}</p>
-          )}
-
-          <div className="army-list">
-            {localizedArmyUnits.map((unit) => (
-              <article className="army-unit" key={unit.uid}>
-                <div className="army-unit-header">
-                  <div>
-                    <h4>{armyUnitDisplayNames.get(unit.uid) || unit.base.nombre}</h4>
-                    <p>
-                      <UnitTypeBadge type={unit.base.tipo} />
-                      {gameMode === 'escuadra' ? ` · ${t('generator.size')} ${unit.squadSize || 1}` : ''}
-                      {unit.perMiniLoadouts?.length ? ` · ${t('generator.squadLabel')}` : ''}
-                    </p>
                   </div>
-                  <span>{unit.total} {t('generator.valueUnit')}</span>
-                </div>
-                <div className="army-weapons">
-                  {unit.perMiniLoadouts?.length ? (
-                    <div>
-                      <strong>{t('generator.weapons')}:</strong>
-                      <div className="mini-loadout-list">
-                        {unit.perMiniLoadouts.map((loadout, index) => {
-                          return (
-                            <div key={`loadout-${unit.uid}-${index}`} className="mini-loadout-item">
-                              <div className="mini-loadout-label">{t('generator.unit')} {index + 1}</div>
-                              <div>
-                                <strong>{t('generator.shooting')}:</strong>{' '}
-                                {(loadout.shooting || []).map((weapon) => weapon.nombre).join(', ') || '—'}
-                              </div>
-                              <div>
-                                <strong>{t('generator.melee')}:</strong> {loadout.melee?.nombre || '—'}
-                              </div>
-                            </div>
-                          )
-                        })}
+                ) : null}
+
+                {/* Modal de vista previa de ficha */}
+                {openManualUnitId ? (() => {
+                  const previewUnit = visibleManualUnits.find((u) => u.id === openManualUnitId)
+                  if (!previewUnit) return null
+                  const previewDraft = getManualUnitDraft(previewUnit)
+                  const previewLoadout = getFixedUnitLoadout(previewUnit)
+                  const previewTotal = computeUnitTotal(previewUnit, previewLoadout.shooting, previewLoadout.melee, previewDraft.squadSize, null, gameMode)
+                  const previewValue = gameMode === 'escuadra' ? previewUnit.valor_base : previewTotal
+                  const previewEraTokens = getUnitEraTokens(previewUnit)
+                  const previewEraLabel = previewEraTokens.length ? previewEraTokens.map((token) => getEraLabel(token)).join(' / ') : ''
+                  return typeof document !== 'undefined' ? createPortal(
+                    <div
+                      className="unit-preview-modal"
+                      role="dialog"
+                      aria-modal="true"
+                      aria-label={previewUnit.nombre}
+                      onClick={() => setOpenManualUnitId('')}
+                    >
+                      <div className="unit-preview-modal-inner" onClick={(e) => e.stopPropagation()}>
+                        <div className="unit-preview-modal-bar">
+                          <span className="unit-preview-modal-title">{previewUnit.nombre}</span>
+                          <div className="unit-preview-modal-actions">
+                            <button
+                              type="button"
+                              className="ghost small"
+                              onClick={() => setOpenManualUnitId('')}
+                              aria-label={t('generator.close')}
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        </div>
+                        <div className="unit-preview-modal-card">
+                          <UnitFichaCard
+                            unit={{
+                              ...previewUnit,
+                              armas_disparo: previewLoadout.shooting,
+                              armas_melee: previewLoadout.meleeList || [],
+                              valor_base: previewValue,
+                            }}
+                            factionId={selectedFaction?.id}
+                            imageDataUrl={previewDraft.imageDataUrl}
+                            gameMode={gameMode}
+                            eraLabel={previewEraLabel}
+                            lang={lang}
+                            onImageClick={() => document.getElementById(`unit-image-${previewUnit.id}`)?.click()}
+                          />
+                        </div>
+                      </div>
+                    </div>,
+                    document.body,
+                  ) : null
+                })() : null}
+                {openFactionAbilityGroupId ? (() => {
+                  const previewGroup = selectedPassiveOptions.find((group) => group.id === openFactionAbilityGroupId)
+                  const previewAbilities = Array.isArray(previewGroup?.habilidades) ? previewGroup.habilidades : []
+                  if (!previewGroup || !previewAbilities.length) return null
+
+                  return typeof document !== 'undefined' ? createPortal(
+                    <div
+                      className="unit-preview-modal"
+                      role="dialog"
+                      aria-modal="true"
+                      aria-label={getPassiveSelectionDisplayName(previewGroup, selectedFaction, t)}
+                      onClick={() => setOpenFactionAbilityGroupId('')}
+                    >
+                      <div className="unit-preview-modal-inner" onClick={(e) => e.stopPropagation()}>
+                        <div className="unit-preview-modal-bar">
+                          <span className="unit-preview-modal-title">{getPassiveSelectionDisplayName(previewGroup, selectedFaction, t)}</span>
+                          <div className="unit-preview-modal-actions">
+                            <button
+                              type="button"
+                              className="ghost small"
+                              onClick={() => setOpenFactionAbilityGroupId('')}
+                              aria-label={t('generator.close')}
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        </div>
+                        <div className="unit-preview-modal-card ability-preview-modal-card-list">
+                          {previewAbilities.map((skill) => (
+                            <FactionAbilityFichaCard
+                              key={`preview-ability-ficha-${skill.id || skill.nombre}`}
+                              ability={skill}
+                              factionId={selectedFaction?.id}
+                              gameMode={gameMode}
+                              description={getFactionSkillDescriptionForMode(skill, gameMode)}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>,
+                    document.body,
+                  ) : null
+                })() : null}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      {isArmyPrintPreviewOpen ? (
+        <div ref={armyExportStageRef} className="army-export-stage army-export-stage-hidden" aria-hidden="true">
+          {abilityExportPages
+            ? abilityExportPages.map((pageEntries, pageIndex) => (
+                <div
+                  key={`ability-export-page-${pageIndex}`}
+                  ref={(node) => setArmySheetRef(`ability-${pageIndex}`, node)}
+                  className="army-export-sheet army-export-sheet-cards"
+                >
+                  {pageEntries.map((skill) => (
+                    <div key={`ability-export-${skill.id || skill.nombre}`} className="army-export-sheet-slot">
+                      <div className="army-export-card-host">
+                        <FactionAbilityFichaCard
+                          ability={skill}
+                          factionId={selectedFaction?.id}
+                          gameMode={gameMode}
+                          description={getFactionSkillDescriptionForMode(skill, gameMode)}
+                        />
                       </div>
                     </div>
-                  ) : unit.shooting.length > 0 ? (
-                    <div>
-                      <strong>{t('generator.shooting')}:</strong> {unit.shooting.map((weapon) => weapon.nombre).join(', ')}
-                    </div>
-                  ) : null}
-                  {!unit.perMiniLoadouts?.length && unit.melee && (
-                    <div>
-                      <strong>{t('generator.melee')}:</strong> {unit.melee.nombre}
-                    </div>
-                  )}
+                  ))}
                 </div>
-                <div className="army-unit-actions">
-                  <button type="button" className="ghost tiny" onClick={() => handleEditUnit(unit)}>
-                    {t('generator.edit')}
-                  </button>
-                  <button type="button" className="ghost tiny" onClick={() => handleRemoveUnit(unit.uid)}>
-                    {t('generator.delete')}
-                  </button>
+              ))
+            : null}
+          {armyExportPages
+            ? armyExportPages.map((pageEntries, pageIndex) => (
+                <div
+                  key={`army-export-page-${pageIndex}`}
+                  ref={(node) => setArmySheetRef(`page-${pageIndex}`, node)}
+                  className="army-export-sheet army-export-sheet-cards"
+                >
+                  {pageEntries.map((entry) => {
+                    const displayName = exportUnitDisplayNames.get(entry.uid) || entry.base.nombre
+                    const unitEraTokens = getUnitEraTokens(entry.base)
+                    const unitEraLabel = unitEraTokens.length
+                      ? unitEraTokens.map((token) => getEraLabel(token)).join(' / ')
+                      : ''
+
+                    return (
+                      <div key={`army-export-${entry.uid}`} className="army-export-sheet-slot" data-army-export-slot={entry.uid}>
+                        <div className="army-export-card-host">
+                          <UnitFichaCard
+                            unit={{
+                              ...entry.base,
+                              nombre: displayName,
+                              armas_disparo: entry.shooting,
+                              armas_melee: entry.meleeList || [],
+                              valor_base: entry.total,
+                            }}
+                            factionId={selectedFaction?.id}
+                            imageDataUrl={entry.imageDataUrl}
+                            gameMode={gameMode}
+                            eraLabel={unitEraLabel}
+                            lang={lang}
+                          />
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-              </article>
-            ))}
-          </div>
-        </aside>
-      </div>
-
-      {activeUnit && (
-        <UnitConfigurator
-          t={t}
-          lang={lang}
-          unit={activeUnit.base || activeUnit}
-          selected={activeUnit.shooting || activeUnit.melee ? activeUnit : null}
-          armyUnits={armyUnits}
-          gameMode={gameMode}
-          onClose={() => setActiveUnit(null)}
-          onConfirm={(unit, shooting, melee, editingUid, nextSquadSize, nextPerMini, nextImageDataUrl) => {
-            if (editingUid) {
-              const clampedSize = clampSquadSize(nextSquadSize, unit)
-              const candidateEntry = {
-                uid: editingUid,
-                shooting,
-                melee,
-                perMiniLoadouts: nextPerMini,
-              }
-              if (selectionHasWeaponLimitError(candidateEntry, armyUnits, gameMode, editingUid)) return
-              setArmyUnits((prev) =>
-                prev.map((entry) =>
-                  entry.uid === editingUid
-                    ? {
-                        ...entry,
-                        base: unit,
-                        shooting,
-                        melee,
-                        squadSize: clampedSize,
-                        perMiniLoadouts: nextPerMini,
-                        imageDataUrl: nextImageDataUrl || '',
-                        total: computeUnitTotal(unit, shooting, melee, clampedSize, nextPerMini, gameMode),
-                      }
-                    : entry,
-                ),
-              )
-              setActiveUnit(null)
-              return
-            }
-            handleAddUnit(unit, shooting, melee, nextSquadSize || 1, nextPerMini, nextImageDataUrl)
-          }}
-        />
-      )}
-
-      {isPassiveModalOpen && selectedFaction && typeof document !== 'undefined'
+              ))
+            : null}
+        </div>
+      ) : null}
+      {imageCropDraft && typeof document !== 'undefined'
         ? createPortal(
-            <div className="unit-modal" role="dialog" aria-modal="true" onClick={() => setIsPassiveModalOpen(false)}>
-              <div className="unit-modal-card doctrine-modal-card" onClick={(event) => event.stopPropagation()}>
-	                <div className="unit-modal-header">
-	                  <div>
-	                    <p className="eyebrow">{selectedFaction.nombre}</p>
-	                    <h3>{t('generator.passiveModalTitle')}</h3>
-	                    {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
-	                      <p className="unit-modal-subtitle">{t('generator.maxFactionAbilities')}</p>
-	                    ) : null}
-	                  </div>
-	                  <button type="button" className="ghost small" onClick={() => setIsPassiveModalOpen(false)}>
-	                    {t('generator.close')}
-	                  </button>
+            <div className="unit-modal" role="dialog" aria-modal="true" onClick={handleCancelImageCrop}>
+              <div className="unit-modal-card image-crop-modal-card" onClick={(event) => event.stopPropagation()}>
+                <div className="unit-modal-header">
+                  <div>
+                    <p className="eyebrow">{imageCropDraft.unitName}</p>
+                    <h3>{t('generator.cropImageTitle')}</h3>
+                    <p className="unit-modal-subtitle">{t('generator.cropImageHint')}</p>
+                  </div>
+                  <button type="button" className="ghost small" onClick={handleCancelImageCrop}>
+                    {t('generator.close')}
+                  </button>
                 </div>
-
-                <div className="unit-modal-body passive-group-list">
-                  {selectedPassiveOptions.length ? (
-                    selectedPassiveOptions.map((group, index) => {
-                      const currentMultipleIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
-                      const isActive = getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
-                        ? currentMultipleIds.includes(group.id)
-                        : group.id === selectedPassiveGroupIdSafe
-                      return (
-                        <button
-                          key={group.id}
-                          type="button"
-                          className={`passive-group-card${isActive ? ' active' : ''}`}
-                          onClick={() =>
-                            getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
-                              ? handleToggleFactionSkill(group.id)
-                              : handleSelectPassiveGroup(group.id)}
-                        >
-                          <div className="passive-group-card-top">
-                            <span className="doctrine-icon-box passive-group-icon-box">
-                              <PassiveGroupIcon groupId={group.id} />
-                            </span>
-                            <div className="passive-group-heading">
-                              {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
-                                <strong>
-                                  {getPassiveSelectionDisplayName(group, selectedFaction, t, index)}
-                                  {group.coste_total ? ` · ${group.coste_total} ${t('generator.valueUnit')}` : ''}
-                                </strong>
-                              ) : (
-                                <>
-                                  <span className="passive-group-label">
-                                    {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.passive', 'generator.passiveSet'))}
-                                  </span>
-                                  <strong>{getPassiveSelectionDisplayName(group, selectedFaction, t, index)}</strong>
-                                </>
-                              )}
-                            </div>
-                            {getFactionPassiveSelectionMode(selectedFaction) !== 'multiple' && group.coste_total ? (
-                              <span className="passive-group-cost">{group.coste_total} {t('generator.valueUnit')}</span>
-                            ) : null}
-                          </div>
-                          {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
-                            <p className="passive-group-description">
-                              {getFactionSkillDescriptionForMode(group.habilidades[0], gameMode)}
-                            </p>
-                          ) : (
-                            <ul>
-                              {group.habilidades.map((skill) => (
-                                <li key={skill.id}>
-                                  <strong>
-                                    {skill.nombre}
-                                    {skill.coste ? ` · ${skill.coste} ${t('generator.valueUnit')}` : ''}:
-                                  </strong>{' '}
-                                  {getFactionSkillDescriptionForMode(skill, gameMode)}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </button>
-                      )
-                    })
-                  ) : (
-                    <p className="empty-state">
-                      {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.noPassivesAvailable', 'generator.noPassiveSetsAvailable'))}
-                    </p>
-                  )}
+                <div className="unit-modal-body image-crop-modal-body">
+                  <div
+                    className="image-crop-stage"
+                    onPointerDown={handleImageCropPointerDown}
+                    role="presentation"
+                    style={{
+                      width: `${IMAGE_CROP_VIEWPORT_WIDTH}px`,
+                      height: `${IMAGE_CROP_VIEWPORT_HEIGHT}px`,
+                    }}
+                  >
+                    <img
+                      src={imageCropDraft.sourceDataUrl}
+                      alt={imageCropDraft.unitName}
+                      className="image-crop-stage-image"
+                      draggable="false"
+                      style={{
+                        width: `${imageCropDraft.imageWidth}px`,
+                        height: `${imageCropDraft.imageHeight}px`,
+                        transform: `translate(calc(-50% + ${imageCropDraft.offsetX}px), calc(-50% + ${imageCropDraft.offsetY}px)) scale(${Math.max(
+                          IMAGE_CROP_VIEWPORT_WIDTH / imageCropDraft.imageWidth,
+                          IMAGE_CROP_VIEWPORT_HEIGHT / imageCropDraft.imageHeight,
+                        ) * imageCropDraft.zoom})`,
+                      }}
+                    />
+                    <div className="image-crop-frame" aria-hidden="true" />
+                  </div>
+                  <label className="field image-crop-zoom-field">
+                    <span>{t('generator.zoom')}</span>
+                    <input
+                      type="range"
+                      min="1"
+                      max="3"
+                      step="0.01"
+                      value={imageCropDraft.zoom}
+                      onChange={(event) => handleImageCropZoomChange(event.target.value)}
+                    />
+                  </label>
+                  <div className="image-crop-actions">
+                    <button type="button" className="ghost small" onClick={handleCancelImageCrop}>
+                      {t('generator.cancel')}
+                    </button>
+                    <button type="button" className="primary" onClick={handleConfirmImageCrop}>
+                      {t('generator.confirmCropImage')}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>,
             document.body,
           )
         : null}
-
-      {isDoctrineModalOpen && typeof document !== 'undefined'
-        ? createPortal(
-            <DoctrinePickerModal
-              doctrines={localizedDoctrines}
-              selectedIds={new Set(selectedDoctrineIdsSafe)}
-              t={t}
-              onClose={() => setIsDoctrineModalOpen(false)}
-              onSelect={handleAddDoctrine}
-            />,
-            document.body,
-          )
-        : null}
     </section>
-  )
-}
-
-function DoctrinePickerModal({ doctrines, selectedIds, t, onClose, onSelect }) {
-  const availableDoctrines = doctrines.filter((doctrine) => !selectedIds.has(doctrine.id))
-
-  return (
-    <div className="unit-modal" role="dialog" aria-modal="true" onClick={onClose}>
-      <div className="unit-modal-card doctrine-modal-card" onClick={(event) => event.stopPropagation()}>
-        <div className="unit-modal-header">
-          <div>
-            <p className="eyebrow">{t('generator.doctrines')}</p>
-            <h3>{t('generator.doctrineModalTitle')}</h3>
-          </div>
-          <button type="button" className="ghost small" onClick={onClose}>
-            {t('generator.close')}
-          </button>
-        </div>
-        <div className="unit-modal-body passive-group-list">
-          {availableDoctrines.length ? (
-            availableDoctrines.map((doctrine) => (
-              <button
-                key={doctrine.id}
-                type="button"
-                className="passive-group-card doctrine-picker-card"
-                onClick={() => onSelect(doctrine.id)}
-              >
-                <div className="passive-group-card-top">
-                  <span className="doctrine-icon-box" aria-hidden="true">
-                    <DoctrineIcon doctrine={doctrine} />
-                  </span>
-                  <div className="passive-group-heading">
-                    <strong>{doctrine.nombre}</strong>
-                  </div>
-                  {doctrine.coste ? (
-                    <span className="passive-group-cost">{doctrine.coste} {t('generator.valueUnit')}</span>
-                  ) : null}
-                </div>
-                <p className="passive-group-description">{doctrine.descripcion}</p>
-              </button>
-            ))
-          ) : (
-            <p className="empty-state">{t('generator.noDoctrinesAvailable')}</p>
-          )}
-        </div>
-      </div>
-    </div>
   )
 }
 

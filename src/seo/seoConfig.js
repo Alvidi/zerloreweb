@@ -24,11 +24,11 @@ export const SEO_BY_LANG = {
       pageType: 'Article',
     },
     '/generador': {
-      title: 'Generador de Ejercitos | ZeroLore',
+      title: 'Ejércitos | ZeroLore',
       description:
-        'Crea y ajusta tu ejercito de ZeroLore por valor, faccion, era y configuracion de unidades.',
+        'Explora facciones, unidades y habilidades de ZeroLore y descarga tu ejercito listo para imprimir.',
       summary:
-        'Genera listas por faccion, ajusta escuadras y revisa configuraciones de unidades de ZeroLore.',
+        'Consulta unidades, habilidades de faccion y fichas listas para descargar en ZeroLore.',
       pageType: 'WebApplication',
     },
   },
@@ -50,11 +50,11 @@ export const SEO_BY_LANG = {
       pageType: 'Article',
     },
     '/generador': {
-      title: 'Army Generator | ZeroLore',
+      title: 'Armies | ZeroLore',
       description:
-        'Build and tune your ZeroLore army by target value, faction, era, and unit loadouts.',
+        'Explore ZeroLore factions, units, and abilities, then download your army ready to print.',
       summary:
-        'Generate faction lists, tune squads, and review unit configurations for ZeroLore armies.',
+        'Browse units, faction abilities, and downloadable army cards for ZeroLore.',
       pageType: 'WebApplication',
     },
   },

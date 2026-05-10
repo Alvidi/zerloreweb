@@ -1,6 +1,6 @@
 # ZeroLore Rulebook
 
-ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, or strategic abilities, and add these concepts as you become more familiar with the game.
+ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities and weapons, and add these concepts as you become more familiar with the game.
 
 This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
 
@@ -45,6 +45,12 @@ ZeroLore is miniature-agnostic, but bases proportional to the unit type are reco
 
 These are guidelines. The criterion is that the base is consistent with the visual size of the miniature and does not provide an unfair tactical advantage.
 
+### Army Cohesion
+
+ZeroLore is miniature-agnostic, but it is recommended that units from the same army maintain **aesthetic and narrative cohesion**. Even if you use miniatures from different sources or manufacturers, try to make your army tell a coherent visual story: uniforms, colour palette, symbols, or a shared setting.
+
+This strengthens immersion on the table and helps your opponent identify your units more easily.
+
 ### Dice and Rolls
 
 ZeroLore always uses six-sided dice (1D6).
@@ -54,7 +60,7 @@ Each is explained in detail in its corresponding section.
 
 ### Rule Priority
 
-In ZeroLore there are two types of rules: **general rules**, which belong to the core rulebook and apply to all units, and **special rules**, which are the abilities written on the profile of a unit, a weapon, a strategic ability, or a faction.
+In ZeroLore there are two types of rules: **general rules**, which belong to the core rulebook and apply to all units, and **special rules**, which are the abilities written on the profile of a unit, a weapon, or a faction.
 
 When a special rule contradicts or modifies a general rule, **the special rule always takes priority**.
 
@@ -65,7 +71,7 @@ _Example: the rulebook says a locked unit cannot shoot. If a weapon has the Guns
 ZeroLore can be played with **2 to 4 players**. The available formats are:
 
 - **1vs1**: duel between two players
-- **1vs3**: confrontation against one player
+- **1vs2**: confrontation against one player
 - **2vs2**: two teams of two players
 
 In games with more than two players, activation order is determined by initiative at the start of each turn, and this also applies to teams.
@@ -146,18 +152,15 @@ At the beginning of each turn, both players make the **Initiative roll**.
 - Each player rolls **1D6**.
 - The player or team with the highest result **acts first** during that turn.
 - In case of a tie, roll again.
-- Each player may assign one **strategic ability** to their units if they have one.
 - Units are recruited or brought out from reserve at command posts.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
-### Strategic Abilities
+### Reroll
 
-After determining Initiative, players declare the strategic ability they have equipped, that they will use that turn, and mark the unit that will use it.
+At the start of each Initiative Phase, each player gains **1 Reroll Token**. Unspent tokens accumulate between turns.
 
-- Only **one strategy per turn** may be used.
-- Their effects last **the entire turn**, unless stated otherwise.
-- The unit or squad with an active strategy is marked with a token.
+A Reroll Token may be spent at any time to **reroll any die roll** (attack, save, charge). The second roll is always the final result.
 
 ## 2. Activation Phase
 
@@ -228,8 +231,7 @@ To climb:
 
 When performing a **Sprint**, the unit spends **2 actions**.
 
-- The unit rolls **1D6**.
-- The result is added to its Movement value for that movement.
+- The unit moves its Movement value **+3"** extra.
 - During a Sprint, attacks cannot be made, unless a rule states otherwise.
 
 Sprint represents a fast, exposed movement, useful for repositioning or reaching cover.
@@ -287,6 +289,8 @@ Every ranged attack is always resolved following this sequence:
 3. Roll and meet or exceed Precision.
 4. The defender rolls saves.
 5. Apply damage.
+
+![Visual sequence of a ranged attack: target, rolls, hit, save, and damage]({{rangedAttackSequenceImage}})
 
 ## 1. Choose Target
 
@@ -563,7 +567,11 @@ When a player captures a command post, they place their coloured **flag token** 
 
 **Control at the end of the turn**
 
-At the end of each turn, if both players have units on the same command post, control goes to the player whose units have the highest total Value on that post. In case of a tie, the post remains under the control of whoever already held it. If neither side has units there, the post keeps its last owner.
+At the end of each turn, if both players have units on the same command post, control goes to the player whose units have the highest total Value on that post.
+
+**Units locked in melee:** units from both sides that are engaged in melee within a command post **do not count toward control**. They are treated as if they did not exist for the purpose of the post until that combat is resolved.
+
+In case of a tie, the post remains under the control of whoever already held it. If neither side has units there, the post keeps its last owner.
 
 To deploy a unit at a command post, the player must control it first, and the unit must be in contact with it. If the post is occupied by enemy units, even if it is still owned by Value, you cannot deploy there.
 
@@ -665,7 +673,7 @@ General characteristics:
 ### Special Hero Rules
 
 - They have unique abilities that define their tactical role. Their abilities and specialty are shown on their profile.
-- In Grand Battle mode, some heroes may **join specific squads** according to their profile. While they are part of that squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently: damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
+- In Grand Battle mode, the **Hero must join a squad before deployment**. A Hero that is not part of a squad cannot be included in the army in this mode. While they are part of that squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently: damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
 
 ## 6. Titans
 
@@ -727,7 +735,7 @@ A Save of **4+** blocks hits on results of **4, 5, or 6**.
 Represents the unit's reaction speed.
 
 - In melee combat, the unit with higher Speed **acts first**, unless one of them charged.
-- Some abilities and strategic abilities temporarily modify this value.
+- Some abilities temporarily modify this value.
 
 ### Specialty
 
@@ -943,6 +951,11 @@ This weapon **hits automatically** and does not require a Hit roll.
 The unit may take an extra **shooting action after using Sprint**.
 **Moment:** Shooting
 
+### 15. Specialized Attack (Line, Elite, Vehicle, Monster)
+
+This weapon can only attack one type of unit.
+**Moment:** Shooting and melee
+
 ---
 
 ## Weapon Limitation
@@ -958,63 +971,6 @@ Each faction has different **Faction Abilities** that define its combat style. E
 Before the game begins, each player may choose up to **3 faction abilities** from those available to their faction. The cost of those abilities is included within the army's total Value: the more abilities you take, the fewer points remain for units. The chosen abilities automatically apply to every unit in that faction while they are in play and do not require activation. The selection must be declared to the opponent before the game begins.
 
 Over time, each faction will expand its catalogue of available abilities, allowing for more playstyles within the same faction.
-
----
-
-# Strategic Abilities
-
-**Strategic abilities** represent tactical orders, coordinated manoeuvres, or strategic impulses that a commander may execute during battle. Strategic abilities have a **point cost** included within the army's total Value. Each player chooses which strategic abilities they want to have available during the battle, without duplicates.
-
-Strategic abilities:
-
-- Are declared during the **Initiative Phase** and the unit that will use them is marked.
-- Affect **one unit**, unless stated otherwise.
-- Their effects last **the entire turn**.
-- Only one strategic ability per turn may be used.
-- Each strategic ability may only be used **once per battle**.
-- The unit with an active strategic ability is marked with a token.
-
-Strategic abilities are **public** and must be clearly declared to the opponent before being applied.
-
-![Unit marked with a strategic ability token]({{strategicAbilitiesImage}})
-
-## Strategic Ability List
-
-### 1. Clubbing Blow — 3 pts
-
-The unit or squad locked in melee pushes its opponent **1"**, **ending the combat**. This strategic ability is resolved immediately when the unit performs its activation, regardless of who has the higher Speed.
-
-### 2. Aimed Shot — 4 pts
-
-The chosen unit or squad **loses one action**, but gains **+1 Attack die** for shooting this turn.
-
-### 3. Frenzy — 3 pts
-
-The chosen unit may use **one additional movement action** this turn.
-
-### 4. Combat Agility — 6 pts
-
-The chosen unit gains initiative in melee combat this turn, ignoring the opponent's Speed and even if the enemy charged.
-
-### 5. Ours is the Victory — 5 pts
-
-The designated unit or squad automatically controls the objective they are on, ignoring the presence of units with higher Value or enemy heroes, on that same objective.
-
-### 6. Immediate Reaction — 4 pts
-
-This unit cannot be charged, nor can it charge any enemy unit
-
-### 7. Overcharged — 3 pts
-
-If this unit fails a charge during this turn, it may immediately repeat it once.
-
-### 8. Second Chance — 4 pts
-
-Repeat one melee or ranged attack roll. If the first roll is favourable this strategic ability may be ignored; if you decide to use it, the first roll is discarded.
-
-### 9. Fight to the Death — 5 pts
-
-This strategic ability only works with one allied unit / squad that is locked in melee combat against another. If more than 2 units / squads are involved, this strategic ability cannot be used. Both units / squads become committed to a duel with no exit. Neither of the two may retreat or be separated from combat for any reason, even using other abilities, strategic abilities, and so on. If either of the two units / squads in combat is activated, the strategic ability is considered activated. Both units automatically resolve a melee combat exchange following the normal attack order rules. The combat ends only when one of the two units is destroyed.
 
 ---
 

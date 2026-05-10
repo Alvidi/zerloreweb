@@ -1,0 +1,35 @@
+{
+  "id": "otros",
+  "faccion": {
+    "nombre": "Others",
+    "estilo_juego": "Reserved space for narrative units, experimental ideas, and loose concepts that will grow over time.",
+    "seleccion_habilidades": "multiple",
+    "habilidades_faccion": []
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "Demon of the Past",
+      "era": "Past",
+      "clase": "Titan",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 26,
+        "salvacion": "+3",
+        "velocidad": 1,
+        "escuadra": { "min": 1, "max": 1 },
+        "especialidad": "Ancestral terror: enemy units within 6\" suffer -1 to Hit in melee. Eternal flame: when this unit destroys an enemy unit in melee, it may immediately make a free move of up to 2\".",
+        "valor": 44
+      },
+      "armas": {
+        "disparo": [
+          { "nombre": "Fiery Whip", "ataques": "2D", "distancia": "10\"", "impactos": "+4", "danio": "3", "danio_critico": "4", "habilidades_arma": ["Direct"], "valor_extra": 0 },
+          { "nombre": "Wave of Fire", "ataques": "1D6", "distancia": "8\"", "impactos": "-", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Explosive"], "valor_extra": 2 }
+        ],
+        "cuerpo_a_cuerpo": [
+          { "nombre": "Demonic Sword", "ataques": "3D", "distancia": null, "impactos": null, "danio": "5", "danio_critico": "7", "habilidades_arma": ["Critical Attack"], "valor_extra": 0 },
+          { "nombre": "Burning Claws", "ataques": "4D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "4", "habilidades_arma": ["Assaulter +1"], "valor_extra": 1 }
+        ]
+      }
+    }
+  ]
+}

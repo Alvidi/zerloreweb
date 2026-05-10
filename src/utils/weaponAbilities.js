@@ -13,6 +13,7 @@ export const WEAPON_ABILITY_IDS = {
   unstable: 'unstable',
   direct: 'direct',
   guerrilla: 'guerrilla',
+  specializedAttack: 'specializedAttack',
   limitedAmmo: 'limitedAmmo',
 }
 
@@ -46,6 +47,11 @@ const WEAPON_ABILITY_DEFINITIONS = [
   { id: WEAPON_ABILITY_IDS.unstable, aliases: ['inestable', 'unstable'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.direct, aliases: ['directo', 'straight', 'direct'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.guerrilla, aliases: ['guerrilla'], conditionKey: 'afterDash' },
+  {
+    id: WEAPON_ABILITY_IDS.specializedAttack,
+    aliases: ['ataque especializado', 'specialized attack'],
+    conditionKey: null,
+  },
   {
     id: WEAPON_ABILITY_IDS.limitedAmmo,
     aliases: ['municion limitada', 'arma limitada', 'weapon limited', 'limited weapon', 'limited ammo'],

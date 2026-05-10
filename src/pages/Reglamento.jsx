@@ -5,7 +5,6 @@ import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
 import misionesEnMd from '../data/english/missions.md?raw'
-import { doctrineCatalog, DOCTRINE_TOKEN_DIAMETER_MM } from '../data/doctrines/doctrineCatalog.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
@@ -21,15 +20,16 @@ import conquestRedToken from '../images/tokens/conquista-red.svg'
 import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
+import rerollToken from '../images/tokens/reroll-green.svg'
 import miniatureVsSquadImage from '../images/webimagen/imagen_1.webp'
 import measurementImage from '../images/webimagen/imagen_2.webp'
-import lineOfSightImage from '../images/webimagen/imagen_3.webp'
-import climbingImage from '../images/webimagen/imagen_4.webp'
+import climbingImage from '../images/webimagen/imagen_3.webp'
+import lineOfSightImage from '../images/webimagen/imagen_4.webp'
 import sprintImage from '../images/webimagen/imagen_5.webp'
-import strategicAbilitiesImage from '../images/webimagen/imagen_6.webp'
 import activationImage from '../images/webimagen/imagen_7.webp'
 import turnStructureImage from '../images/webimagen/imagen_8.webp'
 import commandPostControlImage from '../images/webimagen/imagen_9.webp'
+import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -53,8 +53,9 @@ const RULES_ASSET_PLACEHOLDERS = {
   lineOfSightImage,
   measurementImage,
   miniatureVsSquadImage,
+  rangedAttackSequenceImage,
+  rerollTokenImage: rerollToken,
   sprintImage,
-  strategicAbilitiesImage,
   turnStructureImage,
 }
 
@@ -92,6 +93,7 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_objective', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateObjective', diameterMm: 32, previewSize: 'medium', imageSrc: objectiveToken },
   { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
   { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
+  { id: 'state_reroll', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReroll', diameterMm: 32, previewSize: 'medium', imageSrc: rerollToken },
   { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
@@ -99,18 +101,6 @@ const TOKEN_DEFINITIONS = [
   { id: 'command_square_6_blue', category: 'command', shape: 'square', commandColor: 'blue', labelKey: 'rules.tokens.types.commandSquare6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_circle_6_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6_red', category: 'command', shape: 'square', commandColor: 'red', labelKey: 'rules.tokens.types.commandSquare6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  ...doctrineCatalog.map((doctrine) => ({
-    id: `doctrine_${doctrine.id.replaceAll('-', '_')}`,
-    category: 'doctrine',
-    shape: 'circle',
-    diameterMm: DOCTRINE_TOKEN_DIAMETER_MM,
-    previewSize: 'medium',
-    imageSrc: doctrine.images.es || '',
-    imageSrcEs: doctrine.images.es || '',
-    imageSrcEn: doctrine.images.en || '',
-    labelEs: doctrine.tokenLabel.es,
-    labelEn: doctrine.tokenLabel.en,
-  })),
 ]
 
 const buildInitialTokenCounts = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, 0]))
@@ -150,21 +140,12 @@ function Reglamento() {
     () =>
       TOKEN_DEFINITIONS.map((token) => ({
         ...token,
-        imageSrc:
-          token.category === 'doctrine'
-            ? (lang === 'en' ? token.imageSrcEn : token.imageSrcEs) || token.imageSrc
-            : token.imageSrc,
-        label:
-          token.category === 'doctrine'
-            ? (lang === 'en' ? token.labelEn : token.labelEs) || token.labelEs || token.labelEn || ''
-            : t(token.labelKey),
-        primaryText:
-          token.category === 'doctrine'
-            ? (lang === 'en' ? token.labelEn : token.labelEs) || token.labelEs || token.labelEn || ''
-            : token.primaryText || t(token.labelKey),
+        imageSrc: token.imageSrc,
+        label: t(token.labelKey),
+        primaryText: token.primaryText || t(token.labelKey),
         secondaryText: token.secondaryKey ? t(token.secondaryKey) : '',
       })),
-    [t, lang],
+    [t],
   )
   const totalTokenCount = useMemo(
     () => tokenOptions.reduce((acc, token) => acc + (tokenCounts[token.id] || 0), 0),
@@ -205,51 +186,6 @@ function Reglamento() {
       wrapper.appendChild(table)
     })
     if (rulesMode === 'rules') {
-      const doctrineHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
-        const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'doctrinas de mando'
-          || normalized === 'command doctrines'
-          || normalized === 'habilidades estrategicas'
-          || normalized === 'strategic abilities'
-      })
-      const doctrineHeading = doctrineHeadings.at(-1)
-      if (doctrineHeading) {
-        const gallery = doc.createElement('div')
-        gallery.className = 'rules-doctrine-gallery'
-        doctrineCatalog.forEach((doctrine) => {
-          const item = doc.createElement('article')
-          item.className = 'rules-doctrine-gallery-item'
-
-          const imageWrap = doc.createElement('div')
-          imageWrap.className = 'rules-doctrine-gallery-mark'
-
-          const image = doc.createElement('img')
-          image.className = 'rules-doctrine-gallery-image'
-          image.src = doctrine.images[lang] || doctrine.images.es || ''
-          image.alt = doctrine.nombre[lang] || doctrine.nombre.es || ''
-          image.loading = 'lazy'
-
-          const label = doc.createElement('p')
-          label.className = 'rules-doctrine-gallery-label'
-          label.textContent = doctrine.nombre[lang] || doctrine.nombre.es || ''
-
-          imageWrap.appendChild(image)
-          item.appendChild(imageWrap)
-          item.appendChild(label)
-          gallery.appendChild(item)
-        })
-
-        let insertionTarget = doctrineHeading.nextElementSibling
-        while (insertionTarget && insertionTarget.tagName !== 'H3') {
-          insertionTarget = insertionTarget.nextElementSibling
-        }
-        if (insertionTarget) {
-          insertionTarget.parentNode?.insertBefore(gallery, insertionTarget)
-        } else {
-          doctrineHeading.parentNode?.insertBefore(gallery, doctrineHeading.nextSibling)
-        }
-      }
-
       const commandHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
         return normalized === 'puestos de mando y despliegue' || normalized === 'command posts and deployment'
@@ -351,6 +287,52 @@ function Reglamento() {
           })
 
           flagParagraph.parentNode.insertBefore(flagGallery, flagParagraph.nextSibling)
+        }
+      }
+
+      const rerollHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized === 'ficha de reroll' || normalized === 'reroll token' || normalized === 'reroll'
+      })
+      const rerollHeading = rerollHeadings.at(-1)
+      if (rerollHeading) {
+        const sectionNodes = []
+        let sibling = rerollHeading.nextElementSibling
+        while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
+          sectionNodes.push(sibling)
+          sibling = sibling.nextElementSibling
+        }
+
+        const contentParagraphs = sectionNodes.filter((node) => node.tagName === 'P')
+        const imageParagraph = sectionNodes.find((node) => node.tagName === 'P' && node.querySelector('img'))
+        const insertionTarget = imageParagraph || contentParagraphs.at(-1) || rerollHeading
+
+        if (insertionTarget?.parentNode) {
+          const rerollGallery = doc.createElement('div')
+          rerollGallery.className = 'rules-state-gallery'
+
+          const item = doc.createElement('article')
+          item.className = 'rules-state-gallery-item'
+
+          const mark = doc.createElement('div')
+          mark.className = 'rules-state-gallery-mark'
+
+          const image = doc.createElement('img')
+          image.className = 'rules-state-gallery-image'
+          image.src = rerollToken
+          image.alt = ''
+          image.loading = 'lazy'
+
+          const label = doc.createElement('p')
+          label.className = 'rules-state-gallery-label'
+          label.textContent = t('rules.tokens.types.stateReroll')
+
+          mark.appendChild(image)
+          item.appendChild(mark)
+          item.appendChild(label)
+          rerollGallery.appendChild(item)
+          insertionTarget.parentNode.insertBefore(rerollGallery, insertionTarget.nextSibling)
+          imageParagraph?.remove()
         }
       }
 
@@ -568,7 +550,7 @@ function Reglamento() {
     }
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc, documentHeading }
-  }, [t, rulesHtml, isTokensMode, rulesMode, lang])
+  }, [t, rulesHtml, isTokensMode, rulesMode])
 
   // Scroll spy para resaltar sección activa
   useEffect(() => {
@@ -606,8 +588,8 @@ function Reglamento() {
 
   const filteredToc = useMemo(() => {
     if (!searchTerm.trim()) return tocItems
-    const q = searchTerm.trim().toLowerCase()
-    return tocItems.filter((item) => item.title.toLowerCase().includes(q))
+    const q = normalizeHeadingText(searchTerm)
+    return tocItems.filter((item) => normalizeHeadingText(item.title).includes(q))
   }, [tocItems, searchTerm])
 
   const setMode = (nextMode) => {
@@ -856,36 +838,6 @@ function Reglamento() {
           .rules-pdf-sheet .rules-html th {
             background: #f2f2f2;
             font-weight: 700;
-          }
-          .rules-pdf-sheet .rules-html .rules-doctrine-gallery {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            margin: 18px 0;
-            padding: 14px;
-            border: 1px solid #d7d7d7;
-            background: #ffffff;
-          }
-          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-item {
-            display: grid;
-            justify-items: center;
-            gap: 8px;
-            text-align: center;
-          }
-          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-mark {
-            width: 70px;
-          }
-          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-image {
-            display: block;
-            width: 100%;
-            height: auto;
-          }
-          .rules-pdf-sheet .rules-html .rules-doctrine-gallery-label {
-            margin: 0;
-            font-size: 11px;
-            line-height: 1.25;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
           }
           .rules-pdf-sheet .rules-html .rules-command-gallery {
             display: grid;
@@ -1434,8 +1386,7 @@ function Reglamento() {
         await Promise.all(
           tokenOptions.map(async (token) => {
             if (!token.imageSrc) return [token.id, null]
-            const renderOptions = token.category === 'doctrine' ? { rasterSizePx: 1400 } : undefined
-            return [token.id, await loadImageAsDataUrl(token.imageSrc, renderOptions).catch(() => null)]
+            return [token.id, await loadImageAsDataUrl(token.imageSrc).catch(() => null)]
           }),
         ),
       )
