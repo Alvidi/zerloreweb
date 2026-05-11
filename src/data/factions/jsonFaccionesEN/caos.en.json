@@ -56,31 +56,35 @@
           "min": 4,
           "max": 10
         },
-        "especialidad": "-",
-        "valor": 3
+        "valor": 3,
+        "especialidad": "-"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Proyectil sucio",
+            "nombre": "Filthy Projectile",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Garras",
+            "nombre": "Claws",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -99,38 +103,42 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "En carga, esta unidad gana +1 dado de ataque en CaC durante esa activación.",
-        "valor": 5
+        "valor": 5,
+        "especialidad": "On the charge, this unit gains +1 melee attack die during that activation."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Veneno arrojadizo",
+            "nombre": "Thrown Venom",
             "ataques": "1D",
             "distancia": "6\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillas de asalto",
+            "nombre": "Assault Blades",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Bursters",
+      "nombre_unidad": "Burstlings",
       "era": "Future",
       "clase": "Line",
       "perfil": {
@@ -142,20 +150,22 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad es eliminada, antes de retirarla inflige D3 impactos automáticos de Daño 1/2 a todas las unidades a 2\" (aliadas y enemigas).",
-        "valor": 4
+        "valor": 4,
+        "especialidad": "When this unit is destroyed, before removing it, it inflicts D3 automatic Damage 1/2 hits on all units within 2\" (allied and enemy)."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuerpo explosivo",
+            "nombre": "Explosive Body",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Explosive"
+            ],
             "valor_extra": 0
           }
         ]
@@ -174,38 +184,42 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Puede disparar en la misma activación en que realiza una carga exitosa.",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "It may shoot in the same activation in which it makes a successful charge."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Espinas arrojadizas",
+            "nombre": "Thrown Spines",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Garras cortantes",
+            "nombre": "Cutting Claws",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Armored Beasts",
+      "nombre_unidad": "Ironclads",
       "era": "Future",
       "clase": "Elite",
       "perfil": {
@@ -217,31 +231,35 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad no está trabada en CaC, recupera 1 Vida.",
-        "valor": 11
+        "valor": 11,
+        "especialidad": "At the start of each Initiative Phase, if this unit is not locked in melee, it recovers 1 Health."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Proyectil ácido",
+            "nombre": "Acid Projectile",
             "ataques": "1D",
             "distancia": "10\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Mandíbulas acorazadas",
+            "nombre": "Armored Jaws",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -260,13 +278,13 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando esta unidad carga exitosamente, puede repetir todos los dados de ataque CaC fallidos en esa activación.",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "When this unit charges successfully, it may reroll all failed melee attack dice in that activation."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanzador de bilis",
+            "nombre": "Bile Launcher",
             "ataques": "1D6",
             "distancia": "8\"",
             "impactos": "-",
@@ -280,13 +298,15 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Garras devastadoras",
+            "nombre": "Devastating Claws",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -305,40 +325,42 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "En carga, gana +2 dados de ataque CaC. Si esta unidad elimina una unidad enemiga en CaC, puede moverse inmediatamente 2\" de forma gratuita.",
-        "valor": 9
+        "valor": 9,
+        "especialidad": "On the charge, it gains +2 melee attack dice. If this unit destroys an enemy unit in melee, it may immediately make a free 2\" move."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Espinas de montura",
+            "nombre": "Mount Spines",
             "ataques": "1D",
             "distancia": "6\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolier"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza de montura",
+            "nombre": "Mounted Lance",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Charge Beast",
+      "nombre_unidad": "Charging Beast",
       "era": "Future",
       "clase": "Monster",
       "perfil": {
@@ -350,42 +372,46 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad carga exitosamente, la unidad objetivo recibe D3 impactos automáticos de Daño 2/3 antes de resolver el ataque CaC.",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "When this unit charges successfully, the target unit receives D3 automatic Damage 2/3 hits before resolving the melee attack."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Proyectiles espinosos",
+            "nombre": "Spiked Projectiles",
             "ataques": "2D",
             "distancia": "10\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Aplastamiento",
+            "nombre": "Crush",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           },
           {
-            "nombre": "Embestida",
+            "nombre": "Ram",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)"
+              "Piercing (Vehicle)"
             ],
             "valor_extra": 0
           }
@@ -405,13 +431,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas de Línea a 6\" pueden repetir los dados de salvación fallidos.",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Allied Line units within 6\" may reroll failed Save dice."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Enjambre de esporas",
+            "nombre": "Spore Swarm",
             "ataques": "1D6",
             "distancia": "12\"",
             "impactos": "-",
@@ -419,20 +445,22 @@
             "danio_critico": "2",
             "habilidades_arma": [
               "Direct",
-              "Chained Hits"
+              "Explosive"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Aguijón venenoso",
+            "nombre": "Venomous Stinger",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -451,34 +479,35 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando realiza un ataque de Disparo, los objetivos no pueden beneficiarse de cobertura.",
-        "valor": 12
+        "valor": 12,
+        "especialidad": "When it makes a Shooting attack, targets cannot benefit from cover."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Chorro ácido",
+            "nombre": "Acid Jet",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)",
-              "Specialized Attack (Vehicle, Monster)"
+              "Piercing (Vehicle, Monster)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Mandíbulas corrosivas",
+            "nombre": "Corrosive Jaws",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -488,8 +517,8 @@
       "nombre_unidad": "Agent of Chaos",
       "era": "Future",
       "clase": "Hero",
-      "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
-      "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
+      "especialidad_escaramuza": "Allied units within 6\" gain +1 melee attack die. When this unit destroys an enemy unit, all allied units within 6\" may immediately make a free 2\" move.",
+      "especialidad_escuadra": "Units in a squad with this Hero gain +1 melee attack die. When the squad destroys an enemy unit, it may immediately make a free 2\" move.",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 10,
@@ -499,43 +528,47 @@
           "min": 1,
           "max": 1
         },
-        "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
-        "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
-        "valor": 15
+        "valor": 15,
+        "especialidad_escaramuza": "Allied units within 6\" gain +1 melee attack die. When this unit destroys an enemy unit, all allied units within 6\" may immediately make a free 2\" move.",
+        "especialidad_escuadra": "Units in a squad with this Hero gain +1 melee attack die. When the squad destroys an enemy unit, it may immediately make a free 2\" move."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Proyectil vivo",
+            "nombre": "Living Projectile",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Garras del Señor",
+            "nombre": "Lord's Claws",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           },
           {
-            "nombre": "Colmillo del Alfa",
+            "nombre": "Alpha Fang",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -555,13 +588,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad elimina una unidad enemiga en CaC, recupera D3 Vidas inmediatamente. Una vez por turno, al inicio de su activación, puede devolver al juego una unidad aliada de Línea eliminada con la mitad de su escuadra mínima, colocándola dentro de 6\" de esta unidad.",
-        "valor": 42
+        "valor": 42,
+        "especialidad": "When this unit destroys an enemy unit in melee, it immediately recovers D3 Health. Once per turn, at the start of its activation, it may return a destroyed allied Line unit to play with half its minimum squad size, placing it within 6\" of this unit."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Escupitajo ácido",
+            "nombre": "Acid Spit",
             "ataques": "2D6",
             "distancia": "18\"",
             "impactos": "-",
@@ -573,7 +606,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Proyectil masivo",
+            "nombre": "Massive Projectile",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
@@ -587,7 +620,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Aplastamiento titánico",
+            "nombre": "Titanic Crush",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -597,14 +630,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Dientes del abismo",
+            "nombre": "Teeth of the Abyss",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -612,7 +645,7 @@
       }
     },
     {
-      "nombre_unidad": "Gretchins",
+      "nombre_unidad": "Horde Scum",
       "era": "Past",
       "clase": "Line",
       "perfil": {
@@ -624,38 +657,42 @@
           "min": 4,
           "max": 12
         },
-        "especialidad": "Cuando esta unidad tiene 6 o más miniaturas en juego, sus ataques CaC infligen +1 Daño.",
-        "valor": 3
+        "valor": 3,
+        "especialidad": "When this unit has 6 or more miniatures in play, its melee attacks inflict +1 Damage."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola chatarra",
+            "nombre": "Crude Pistol",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "1",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Garfio orco",
+            "nombre": "Rusty Hook",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Fight Orcs",
+      "nombre_unidad": "Horde Warriors",
       "era": "Past",
       "clase": "Line",
       "perfil": {
@@ -667,38 +704,42 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad realiza una carga exitosa, cada dado de ataque CaC que saque 6 añade +1 dado de ataque adicional (Impactos encadenados).",
-        "valor": 5
+        "valor": 5,
+        "especialidad": "When this unit makes a successful charge, each melee attack die that rolls a 6 adds +1 additional attack die (Chained Impacts)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco orco",
+            "nombre": "Crude Bow",
             "ataques": "1D",
             "distancia": "10\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Hacha de guerra",
+            "nombre": "War Axe",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Goblin Archers",
+      "nombre_unidad": "Horde Skirmishers",
       "era": "Past",
       "clase": "Line",
       "perfil": {
@@ -710,38 +751,42 @@
           "min": 4,
           "max": 8
         },
-        "especialidad": "Esta unidad puede disparar a unidades enemigas trabadas en CaC con aliados sin penalización por fuego amigo (el daño se aplica igualmente a cualquier unidad trabada en ese combate).",
-        "valor": 4
+        "valor": 4,
+        "especialidad": "This unit may shoot enemy units locked in melee with allies without friendly-fire penalty (damage is still applied to any unit locked in that combat)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco goblin",
+            "nombre": "Shortbow",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillo goblin",
+            "nombre": "Serrated Knife",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Orc Bruisers",
+      "nombre_unidad": "War Brutes",
       "era": "Past",
       "clase": "Line",
       "perfil": {
@@ -753,27 +798,29 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Cuando esta unidad realiza una carga, puede repetir los dos dados de distancia. Si la carga falla por 1\" o menos, tiene éxito igualmente.",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "When this unit charges, it may reroll both distance dice. If the charge fails by 1\" or less, it succeeds anyway."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Mandoble orco",
+            "nombre": "Savage Greatsword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Big Bosses",
+      "nombre_unidad": "Horde Champions",
       "era": "Past",
       "clase": "Elite",
       "perfil": {
@@ -785,32 +832,34 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Mientras esta unidad esté trabada en CaC, las unidades aliadas de Línea a 4\" o menos ganan +1D en sus ataques CaC.",
-        "valor": 12
+        "valor": 12,
+        "especialidad": "While this unit is locked in melee, allied Line units within 4\" gain +1D on their melee attacks."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistolón orco",
+            "nombre": "Crude Hand Cannon",
             "ataques": "2D",
             "distancia": "10\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Hacha del jefe",
+            "nombre": "Champion's Axe",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -818,7 +867,7 @@
       }
     },
     {
-      "nombre_unidad": "Boar Riders",
+      "nombre_unidad": "Savage Riders",
       "era": "Past",
       "clase": "Elite",
       "perfil": {
@@ -830,38 +879,42 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando realiza una carga exitosa, gana +2D en CaC esa activación. Si elimina su objetivo en CaC, puede inmediatamente cargar a otra unidad enemiga a 6\" o menos.",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "When it makes a successful charge, it gains +2D in melee that activation. If it destroys its target in melee, it may immediately charge another enemy unit within 6\"."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanza arrojadiza",
+            "nombre": "Throwing Spear",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza de jabalí",
+            "nombre": "Mounted Lance",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Greenskin Shamans",
+      "nombre_unidad": "Tribal Shamans",
       "era": "Past",
       "clase": "Elite",
       "perfil": {
@@ -873,31 +926,35 @@
           "min": 1,
           "max": 2
         },
-        "especialidad": "Una vez por turno, en lugar de atacar, elige entre: (a) infligir 1D3 impactos automáticos de Daño 1 a una unidad enemiga a 12\", o (b) dar +1D de ataque a una unidad aliada a 8\" hasta el final del turno.",
-        "valor": 9
+        "valor": 9,
+        "especialidad": "Once per turn, instead of attacking, choose one: (a) inflict 1D3 automatic Damage 1 hits on an enemy unit within 12\", or (b) give +1D attack to an allied unit within 8\" until the end of the turn."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rayo Waaagh",
+            "nombre": "Savage Bolt",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Unstable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Bastón mágico",
+            "nombre": "Magic Staff",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -916,31 +973,35 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida (hasta su máximo). Cuando realiza una carga, inflige D3 impactos automáticos de Daño 2 antes del combate.",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "At the start of each Initiative Phase, it recovers 1 Health (up to its maximum). When it charges, it inflicts D3 automatic Damage 2 hits before combat."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Roca arrojada",
+            "nombre": "Thrown Rock",
             "ataques": "1D",
             "distancia": "12\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Porrazo",
+            "nombre": "Club Smash",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -959,21 +1020,21 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades enemigas trabadas en CaC con esta unidad no pueden retirarse ni destrabarse. Cuando esta unidad elimina una unidad en CaC, puede moverse 3\" de forma gratuita.",
-        "valor": 11
+        "valor": 11,
+        "especialidad": "Enemy units locked in melee with this unit cannot retreat or disengage. When this unit destroys a unit in melee, it may make a free 3\" move."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Mordisco venenoso",
+            "nombre": "Venomous Bite",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -981,7 +1042,7 @@
       }
     },
     {
-      "nombre_unidad": "Ork War Machine",
+      "nombre_unidad": "Tribal War Machine",
       "era": "Past",
       "clase": "Monster",
       "perfil": {
@@ -993,13 +1054,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando dispara, puede apuntar a un punto del tablero sin línea de visión directa: todas las unidades en 3\" del punto sufren el ataque (ignorando obstáculos de terreno).",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "When it shoots, it may target a point on the battlefield without direct line of sight: all units within 3\" of that point suffer the attack (ignoring terrain obstacles)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Catapulta orka",
+            "nombre": "Tribal Catapult",
             "ataques": "1D6",
             "distancia": "24\"",
             "impactos": "-",
@@ -1007,27 +1068,29 @@
             "danio_critico": "5",
             "habilidades_arma": [
               "Explosive",
-              "Parabolic Shot"
+              "Arcing"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Embestida",
+            "nombre": "Ram",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Warboss",
+      "nombre_unidad": "Warlord",
       "era": "Past",
       "clase": "Hero",
       "perfil": {
@@ -1039,32 +1102,34 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 6\" ganan +1D en ataques CaC. Cuando esta unidad elimina una unidad enemiga en CaC, puede realizar un movimiento gratuito de 3\" y declarar inmediatamente una carga si hay otro objetivo.",
-        "valor": 16
+        "valor": 16,
+        "especialidad": "Allied units within 6\" gain +1D on melee attacks. When this unit destroys an enemy unit in melee, it may make a free 3\" move and immediately declare a charge if there is another target."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de brazo",
+            "nombre": "Arm Cannon",
             "ataques": "2D",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Choppa gigante",
+            "nombre": "Giant Blade",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1084,13 +1149,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1D3 Vidas. Cuando realiza una carga, inflige D3 impactos automáticos de Daño 3. Las unidades aliadas de Línea a 6\" pueden repetir dados de CaC fallidos.",
-        "valor": 44
+        "valor": 44,
+        "especialidad": "At the start of each Initiative Phase, it recovers 1D3 Health. When it charges, it inflicts D3 automatic Damage 3 hits. Allied Line units within 6\" may reroll failed melee dice."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañones bestiales",
+            "nombre": "Bestial Cannons",
             "ataques": "2D6",
             "distancia": "22\"",
             "impactos": "+3",
@@ -1104,14 +1169,14 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puño aplastador",
+            "nombre": "Crushing Fist",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "7",
             "danio_critico": "9",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }

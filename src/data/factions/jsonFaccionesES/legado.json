@@ -56,8 +56,8 @@
           "min": 3,
           "max": 5
         },
-        "especialidad": "Cuando esta unidad es objetivo de un ataque de Disparo, puede moverse hasta 2\" antes de que se resuelvan los dados. Si el atacante pierde línea de visión, el ataque se cancela.",
-        "valor": 7
+        "valor": 7,
+        "especialidad": "Cuando esta unidad es objetivo de un ataque de Disparo, puede moverse hasta 2\" antes de que se resuelvan los dados. Si el atacante pierde línea de visión, el ataque se cancela."
       },
       "armas": {
         "disparo": [
@@ -68,7 +68,9 @@
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -80,7 +82,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Perforante"
+            ],
             "valor_extra": 0
           }
         ]
@@ -99,8 +103,8 @@
           "min": 3,
           "max": 5
         },
-        "especialidad": "Esta unidad puede retirarse de combate cuerpo a cuerpo sin realizar chequeo de retirada.",
-        "valor": 8
+        "valor": 8,
+        "especialidad": "Esta unidad puede retirarse de combate cuerpo a cuerpo sin realizar chequeo de retirada."
       },
       "armas": {
         "disparo": [
@@ -111,7 +115,9 @@
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -123,7 +129,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -142,8 +150,8 @@
           "min": 3,
           "max": 5
         },
-        "especialidad": "Si esta unidad no dispara en su activación, gana +1 dado en todos sus ataques CaC.",
-        "valor": 9
+        "valor": 9,
+        "especialidad": "Esta unidad no puede ser cargada si tiene su vida completa."
       },
       "armas": {
         "disparo": [],
@@ -155,7 +163,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Perforante"
+            ],
             "valor_extra": 0
           }
         ]
@@ -174,8 +184,8 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla realiza un ataque gratuito (disparo o CaC).",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Esta unidad puede contraatacar siempre a distancia si es disparada, sin necesidad de acción."
       },
       "armas": {
         "disparo": [
@@ -187,8 +197,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Pesada",
-              "Ataque especializado (Élite, Héroe, Titán)"
+              "Brutal 5+ (Élite, Héroe, Titán)"
             ],
             "valor_extra": 0
           }
@@ -202,7 +211,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -222,8 +231,8 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Una vez por turno, como acción gratuita, puede intercambiar su posición con otra unidad aliada a 12\" o menos (ninguna puede estar trabada).",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "Una vez por turno, como acción gratuita, puede intercambiar su posición con otra unidad aliada a 12\" o menos (ninguna puede estar trabada)."
       },
       "armas": {
         "disparo": [
@@ -235,7 +244,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -248,7 +257,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -267,8 +278,8 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Esta unidad no puede ser objetivo de ataques de Disparo si el atacante está a más de 8\".",
-        "valor": 12
+        "valor": 12,
+        "especialidad": "Esta unidad no puede ser objetivo de ataques de Disparo si el atacante está a más de 8\"."
       },
       "armas": {
         "disparo": [],
@@ -281,7 +292,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -301,8 +312,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC).",
-        "valor": 19
+        "valor": 19,
+        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC)."
       },
       "armas": {
         "disparo": [
@@ -339,7 +350,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -358,8 +371,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando una unidad aliada es destruida a 12\" o menos, puede realizar inmediatamente un disparo gratuito contra el atacante responsable.",
-        "valor": 15
+        "valor": 15,
+        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando una unidad aliada es destruida a 12\" o menos, puede realizar inmediatamente un disparo gratuito contra el atacante responsable."
       },
       "armas": {
         "disparo": [
@@ -371,7 +384,7 @@
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Precisión"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -384,7 +397,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -403,8 +418,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Una vez por partida, al inicio de su activación, puede retirarse del tablero y reaparecer en cualquier punto del borde de despliegue de LEGADO.",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "Una vez por partida, al inicio de su activación, puede retirarse del tablero y reaparecer en cualquier punto del borde de despliegue de LEGADO."
       },
       "armas": {
         "disparo": [
@@ -416,7 +431,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Ataque especializado (Línea, Élite)"
+              "Brutal 5+ (Línea, Élite)"
             ],
             "valor_extra": 0
           },
@@ -428,7 +443,7 @@
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Vehículo)"
+              "Perforante (Vehículo)"
             ],
             "valor_extra": 0
           }
@@ -441,7 +456,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Perforante"
+            ],
             "valor_extra": 0
           }
         ]
@@ -460,8 +477,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 6\" reducen en 1 el daño de todos los ataques recibidos (mín. 1).",
-        "valor": 16
+        "valor": 16,
+        "especialidad": "Las unidades aliadas a 6\" reducen en 1 el daño de todos los ataques recibidos (mín. 1)."
       },
       "armas": {
         "disparo": [
@@ -472,7 +489,9 @@
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -485,7 +504,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -507,9 +526,9 @@
           "min": 1,
           "max": 1
         },
+        "valor": 18,
         "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada). Las unidades aliadas a 6\" destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-        "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos. Las unidades en escuadra destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-        "valor": 18
+        "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos. Las unidades en escuadra destruidas realizan su ataque de Caída gloriosa con +1 dado."
       },
       "armas": {
         "disparo": [
@@ -521,7 +540,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -534,7 +553,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           },
           {
@@ -545,7 +566,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -565,8 +586,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad tiene menos de la mitad de sus Vidas, recupera D3 Vidas. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC).",
-        "valor": 48
+        "valor": 48,
+        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad tiene menos de la mitad de sus Vidas, recupera D3 Vidas. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC)."
       },
       "armas": {
         "disparo": [
@@ -579,7 +600,7 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Explosiva",
-              "Precisión"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
@@ -605,7 +626,7 @@
             "danio": "6",
             "danio_critico": "8",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -625,8 +646,8 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Mientras esta unidad esté a 6\" o menos de un Héroe aliado, su Salvación mejora en 1 (5+ pasa a 4+).",
-        "valor": 5
+        "valor": 5,
+        "especialidad": "Mientras esta unidad esté a 6\" o menos de un Héroe aliado, su Salvación mejora en 1 (5+ pasa a 4+)."
       },
       "armas": {
         "disparo": [
@@ -637,7 +658,9 @@
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -649,7 +672,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -668,8 +693,8 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques CaC recibidos (mín. 1).",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques CaC recibidos (mín. 1)."
       },
       "armas": {
         "disparo": [
@@ -680,7 +705,9 @@
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -692,7 +719,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Perforante"
+            ],
             "valor_extra": 0
           }
         ]
@@ -711,8 +740,8 @@
           "min": 2,
           "max": 5
         },
-        "especialidad": "Cuando esta unidad realiza una carga exitosa, el primer ataque CaC de esa activación ignora la Salvación del defensor.",
-        "valor": 7
+        "valor": 7,
+        "especialidad": "Cuando esta unidad realiza una carga exitosa, el primer ataque CaC de esa activación ignora la Salvación del defensor."
       },
       "armas": {
         "disparo": [],
@@ -724,7 +753,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -743,8 +774,8 @@
           "min": 2,
           "max": 5
         },
-        "especialidad": "Cuando esta unidad carga (no lleva armas de disparo), puede repetir todos los dados de ataque CaC fallidos esa activación.",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "Cuando esta unidad carga (no lleva armas de disparo), puede repetir todos los dados de ataque CaC fallidos esa activación."
       },
       "armas": {
         "disparo": [],
@@ -757,7 +788,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Impactos encadenados"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -777,8 +808,8 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando realiza una carga exitosa, la Salvación del defensor empeora en 1 durante los ataques de esa activación (ej.: 3+ pasa a 4+).",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "Cuando realiza una carga exitosa, la Salvación del defensor empeora en 1 durante los ataques de esa activación (ej.: 3+ pasa a 4+)."
       },
       "armas": {
         "disparo": [],
@@ -790,7 +821,9 @@
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Perforante"
+            ],
             "valor_extra": 0
           }
         ]
@@ -809,8 +842,8 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla realiza un ataque gratuito CaC. Las unidades aliadas a 4\" reducen en 1 el daño recibido (mín. 1).",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Cuando esta unidad es destruida, antes de retirarla realiza un ataque gratuito CaC. Las unidades aliadas a 4\" reducen en 1 el daño recibido (mín. 1)."
       },
       "armas": {
         "disparo": [
@@ -821,7 +854,9 @@
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -834,7 +869,7 @@
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -854,8 +889,8 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando dispara a una unidad que realizó una carga ese turno, gana +2D de ataque.",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando dispara a una unidad que realizó una carga ese turno, gana +2D de ataque."
       },
       "armas": {
         "disparo": [
@@ -867,7 +902,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precisión"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -880,7 +915,9 @@
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -899,8 +936,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC). Las unidades aliadas a 6\" reducen en 1 el daño recibido (mín. 1).",
-        "valor": 16
+        "valor": 16,
+        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC). Las unidades aliadas a 6\" reducen en 1 el daño recibido (mín. 1)."
       },
       "armas": {
         "disparo": [
@@ -925,7 +962,9 @@
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -944,8 +983,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 6\" obtienen +1 a su Salvación (ej.: 5+ pasa a 4+). Cuando una unidad aliada a 8\" es destruida, puede realizar inmediatamente un disparo gratuito contra el atacante responsable.",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Las unidades aliadas a 6\" obtienen +1 a su Salvación (ej.: 5+ pasa a 4+). Cuando una unidad aliada a 8\" es destruida, puede realizar inmediatamente un disparo gratuito contra el atacante responsable."
       },
       "armas": {
         "disparo": [
@@ -956,7 +995,9 @@
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -968,7 +1009,9 @@
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -987,8 +1030,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad ignora penalizaciones de terreno al moverse y al cargar. Cuando realiza una carga, puede moverse sobre unidades y obstáculos.",
-        "valor": 15
+        "valor": 15,
+        "especialidad": "Esta unidad ignora penalizaciones de terreno al moverse y al cargar. Cuando realiza una carga, puede moverse sobre unidades y obstáculos."
       },
       "armas": {
         "disparo": [
@@ -999,7 +1042,9 @@
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ],
@@ -1012,7 +1057,7 @@
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1032,8 +1077,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Una vez por turno puede consagrar a una unidad aliada a 12\": hasta el final del turno sus ataques CaC infligen +1 Daño y sus críticos +1 Daño crítico. Las unidades aliadas a 6\" pueden repetir un dado de Salvación fallido por activación.",
-        "valor": 18
+        "valor": 18,
+        "especialidad": "Una vez por turno puede consagrar a una unidad aliada a 12\": hasta el final del turno sus ataques CaC infligen +1 Daño y sus críticos +1 Daño crítico. Las unidades aliadas a 6\" pueden repetir un dado de Salvación fallido por activación."
       },
       "armas": {
         "disparo": [
@@ -1044,7 +1089,9 @@
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           }
         ],
@@ -1057,7 +1104,7 @@
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1077,8 +1124,8 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida. Cuando elimina una unidad enemiga en CaC, todas las unidades aliadas a 8\" recuperan 1 Vida. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC).",
-        "valor": 46
+        "valor": 46,
+        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida. Cuando elimina una unidad enemiga en CaC, todas las unidades aliadas a 8\" recuperan 1 Vida. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC)."
       },
       "armas": {
         "disparo": [
@@ -1091,7 +1138,7 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Explosiva",
-              "Precisión"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1105,7 +1152,7 @@
             "danio": "7",
             "danio_critico": "9",
             "habilidades_arma": [
-              "Ataque Crítico"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }

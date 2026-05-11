@@ -63,31 +63,35 @@
           "min": 4,
           "max": 6
         },
-        "especialidad": "-",
-        "valor": 5
+        "valor": 5,
+        "especialidad": "-"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusil estándar",
+            "nombre": "Standard Rifle",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puños",
+            "nombre": "Fists",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "1",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -106,13 +110,13 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "-",
-        "valor": 7
+        "valor": 7,
+        "especialidad": "Ignores cover."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanzallamas",
+            "nombre": "Flamethrower",
             "ataques": "1D6",
             "distancia": "8\"",
             "impactos": "-",
@@ -126,13 +130,15 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillo de combate",
+            "nombre": "Combat Knife",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -151,53 +157,54 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "-",
-        "valor": 7
+        "valor": 7,
+        "especialidad": "-"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arma pesada",
+            "nombre": "Heavy Weapon",
             "ataques": "1D6",
             "distancia": "14\"",
             "impactos": "+5",
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Heavy"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzacohetes",
+            "nombre": "Rocket Launcher",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)",
-              "Specialized Attack (Vehicle)"
+              "Piercing (Vehicle)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillo de zapador",
+            "nombre": "Sapper Knife",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Shock Troopers",
+      "nombre_unidad": "Shock Infantry",
       "era": "Future",
       "clase": "Line",
       "perfil": {
@@ -209,33 +216,35 @@
           "min": 4,
           "max": 8
         },
-        "especialidad": "-",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "If another allied unit within 6\" is attacked, it may redirect half of the damage caused to this unit."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola reglamentaria",
+            "nombre": "Service Pistol",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolier"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Mazo de guardia",
+            "nombre": "Guard Maul",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -254,33 +263,35 @@
           "min": 1,
           "max": 4
         },
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques de Disparo recibidos ese turno (mín. 1).",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "When this unit does not move during its activation, reduce the damage of all Shooting attacks it receives that turn by 1 (min. 1)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusil de asalto blindado",
+            "nombre": "Armored Assault Rifle",
             "ataques": "3D",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Assailant +1"
+              "Reliable"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puños energía",
+            "nombre": "Power Fists",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -299,33 +310,35 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Una vez por activación, esta unidad puede gastar las 2 acciones para elegir una unidad aliada a 3\". Esa unidad recupera D3 Vidas perdidas. No puede superar sus Vidas máximas. No puede usarse sobre Vehículos ni Titanes.",
-        "valor": 8
+        "valor": 8,
+        "especialidad": "Once per activation, this unit may spend both actions to choose an allied unit within 3\". That unit recovers D3 lost Health. It cannot exceed its maximum Health. It cannot be used on Vehicles or Titans."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola táctica",
+            "nombre": "Tactical Pistol",
             "ataques": "2D",
             "distancia": "10\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolier"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillo quirúrgico",
+            "nombre": "Surgical Knife",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -344,41 +357,39 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Si no se mueve durante su activación, sus ataques de Disparo ignoran cobertura.",
-        "valor": 8
+        "valor": 8,
+        "especialidad": "If it does not move during its activation, its Shooting attacks ignore cover."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rifle de francotirador",
+            "nombre": "Sniper Rifle",
             "ataques": "2D",
             "distancia": "28\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy",
-              "Specialized Attack (Line, Elite)"
+              "Brutal 5+ (Line, Elite)"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Rifle anti-material",
+            "nombre": "Anti-Materiel Rifle",
             "ataques": "1D",
             "distancia": "24\"",
             "impactos": "+4",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)",
-              "Specialized Attack (Vehicle, Monster)"
+              "Piercing (Vehicle, Monster)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchillo de combate",
+            "nombre": "Combat Knife",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
@@ -403,33 +414,35 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Esta unidad vehículo puede ir en escuadras.",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "This Vehicle unit may be fielded in squads."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ametralladora ligera",
+            "nombre": "Light Machine Gun",
             "ataques": "3D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Assailant +1"
+              "Reliable"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Embestida",
+            "nombre": "Ram",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -448,25 +461,25 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Puede usar dos acciones de disparo.",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "It may use two shooting actions."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ametralladora",
+            "nombre": "Machine Gun",
             "ataques": "4D",
             "distancia": "12\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Specialized Attack (Line, Elite)"
+              "Brutal 5+ (Line, Elite)"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Cañón principal",
+            "nombre": "Main Cannon",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
@@ -480,13 +493,15 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Golpe",
+            "nombre": "Strike",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -505,13 +520,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad no puede moverse. Cuando realiza un ataque de Disparo, gana +1 dado de ataque.",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "This unit cannot move. When it makes a Shooting attack, it gains +1 attack die. It blocks reinforcements at that command post."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de asedio",
+            "nombre": "Siege Cannon",
             "ataques": "1D",
             "distancia": "36\"",
             "impactos": "+4",
@@ -519,33 +534,34 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Explosive",
-              "Parabolic Shot"
+              "Arcing"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Cañón electromagnético",
+            "nombre": "Electromagnetic Cannon",
             "ataques": "2D",
             "distancia": "30\"",
             "impactos": "+3",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)",
-              "Specialized Attack (Vehicle, Monster)"
+              "Piercing (Vehicle, Monster)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Golpe de cañón",
+            "nombre": "Cannon Strike",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -555,8 +571,8 @@
       "nombre_unidad": "Field General",
       "era": "Future",
       "clase": "Hero",
-      "especialidad_escaramuza": "Una vez por turno puede designar una unidad aliada a 6\" de este héroe para repetir todos los dados de Disparo fallidos.",
-      "especialidad_escuadra": "Mientras este héroe forme parte de una escuadra, esa escuadra obtiene +1 dado de ataque en Disparo si no ha realizado ninguna acción de Movimiento durante su activación.",
+      "especialidad_escaramuza": "Once per turn, it may designate an allied unit within 6\" of this Hero to reroll all failed Shooting dice.",
+      "especialidad_escuadra": "While this Hero is part of a squad, that squad gains +1 Shooting attack die if it has not made any Move action during its activation.",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 10,
@@ -566,42 +582,48 @@
           "min": 1,
           "max": 1
         },
-        "especialidad_escaramuza": "Una vez por turno puede designar una unidad aliada a 6\" de este héroe para repetir todos los dados de Disparo fallidos.",
-        "especialidad_escuadra": "Mientras este héroe forme parte de una escuadra, esa escuadra obtiene +1 dado de ataque en Disparo si no ha realizado ninguna acción de Movimiento durante su activación.",
-        "valor": 16
+        "valor": 16,
+        "especialidad_escaramuza": "Once per turn, it may designate an allied unit within 6\" of this Hero to reroll all failed Shooting dice.",
+        "especialidad_escuadra": "While this Hero is part of a squad, that squad gains +1 Shooting attack die if it has not made any Move action during its activation."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusil de energía",
+            "nombre": "Energy Rifle",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada de mando",
+            "nombre": "Command Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           },
           {
-            "nombre": "Puño energético",
+            "nombre": "Power Fist",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing (Elite)"
+            ],
             "valor_extra": 0
           }
         ]
@@ -611,7 +633,6 @@
       "nombre_unidad": "Assault Bastion",
       "era": "Future",
       "clase": "Titan",
-      "max_armas_disparo": 2,
       "perfil": {
         "movimiento": "3\"",
         "vidas": 32,
@@ -621,25 +642,25 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces en su acción de disparo. Si no se ha movido, gana +1 dado en ambos disparos.",
-        "valor": 45
+        "valor": 45,
+        "especialidad": "This unit may carry two ranged weapons and shoot twice with its shooting action. If it has not moved, it gains +1 die on both shots."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de destrucción",
+            "nombre": "Destruction Cannon",
             "ataques": "2D6",
             "distancia": "28\"",
             "impactos": "+3",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Explosive"
+              "Reliable"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzamisiles orbitales",
+            "nombre": "Orbital Missile Launcher",
             "ataques": "2D",
             "distancia": "24\"",
             "impactos": "+4",
@@ -653,14 +674,14 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puño de siege",
+            "nombre": "Siege Fist",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -680,38 +701,42 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Si esta unidad recibe un ataque CaC mientras está en cobertura, el atacante no obtiene el bonus de carga en ese ataque.",
-        "valor": 4
+        "valor": 4,
+        "especialidad": "If this unit receives a melee attack while in cover, the attacker does not gain the charge bonus for that attack."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Jabalina",
+            "nombre": "Javelin",
             "ataques": "1D",
             "distancia": "10\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza y escudo",
+            "nombre": "Spear and Shield",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Realm Archers",
+      "nombre_unidad": "Kingdom Archers",
       "era": "Past",
       "clase": "Line",
       "perfil": {
@@ -723,33 +748,35 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad no se mueve en su activación, gana +1 dado en todos sus ataques de Disparo.",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "When this unit does not move during its activation, it gains +1 die on all its Shooting attacks."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco largo",
+            "nombre": "Longbow",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Daga",
+            "nombre": "Dagger",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -768,31 +795,35 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad es objetivo de una carga enemiga, puede realizar un ataque gratuito CaC antes de que el atacante resuelva sus ataques.",
-        "valor": 5
+        "valor": 5,
+        "especialidad": "When this unit is the target of an enemy charge, it may make a free melee attack before the attacker resolves its attacks."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Jabalina",
+            "nombre": "Javelin",
             "ataques": "1D",
             "distancia": "6\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza de formación",
+            "nombre": "Formation Spear",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -811,31 +842,35 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Puede moverse y disparar sin penalización por movimiento. Sus ataques de Disparo ignoran cobertura.",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "It may move and shoot without movement penalty. Its Shooting attacks ignore cover."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco de explorador",
+            "nombre": "Scout Bow",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada de explorador",
+            "nombre": "Scout Sword",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -854,40 +889,42 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques recibidos (mín. 1).",
-        "valor": 11
+        "valor": 11,
+        "especialidad": "When this unit does not move during its activation, reduce the damage of all attacks it receives by 1 (min. 1)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ballesta de guardia",
+            "nombre": "Guard Crossbow",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Heavy"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada de guardia",
+            "nombre": "Guard Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Realm Cavalry",
+      "nombre_unidad": "Kingdom Cavalry",
       "era": "Past",
       "clase": "Elite",
       "perfil": {
@@ -899,33 +936,35 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando realiza una carga exitosa, gana +2D en CaC esa activación. Después de eliminar una unidad enemiga en CaC, puede realizar un movimiento gratuito de 3\".",
-        "valor": 11
+        "valor": 11,
+        "especialidad": "When it makes a successful charge, it gains +2D in melee that activation. After destroying an enemy unit in melee, it may make a free 3\" move."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanza arrojadiza",
+            "nombre": "Throwing Spear",
             "ataques": "1D",
             "distancia": "8\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Gunslinger"
+              "Pistolier"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada de caballería",
+            "nombre": "Cavalry Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -944,41 +983,42 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Puede repetir un dado de ataque de Disparo fallido por activación.",
-        "valor": 12
+        "valor": 12,
+        "especialidad": "Its Shooting attacks ignore cover. It may reroll one failed Shooting attack die per activation."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ballesta gigante",
+            "nombre": "Giant Ballista",
             "ataques": "3D",
             "distancia": "28\"",
             "impactos": "+3",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Heavy",
-              "Anti 5+ (Vehicle)"
+              "Piercing (Vehicle)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Embestida",
+            "nombre": "Ram",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Catapult",
+      "nombre_unidad": "Trebuchet",
       "era": "Past",
       "clase": "Vehicle",
       "perfil": {
@@ -990,13 +1030,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Puede disparar a objetivos sin línea de visión directa, ignorando obstáculos de terreno (pero no unidades).",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "It may shoot targets without direct line of sight, ignoring terrain obstacles (but not units)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Proyectil de catapulta",
+            "nombre": "Catapult Projectile",
             "ataques": "1D6",
             "distancia": "30\"",
             "impactos": "-",
@@ -1004,27 +1044,29 @@
             "danio_critico": "4",
             "habilidades_arma": [
               "Explosive",
-              "Parabolic Shot"
+              "Arcing"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Embestida",
+            "nombre": "Ram",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Armored Ram",
+      "nombre_unidad": "Armored Battering Ram",
       "era": "Past",
       "clase": "Vehicle",
       "perfil": {
@@ -1036,20 +1078,22 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 3\" o menos cuentan como en cobertura. Cuando esta unidad realiza una carga, inflige D3 impactos automáticos de Daño 2.",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Allied units within 3\" count as being in cover. When this unit charges, it inflicts D3 automatic Damage 2 hits."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Ariete",
+            "nombre": "Battering Ram",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -1068,38 +1112,42 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida (hasta su máximo). Cuando realiza una carga, inflige D3 impactos automáticos de Daño 2 antes del combate.",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "At the start of each Initiative Phase, it recovers 1 Health (up to its maximum). When it charges, it inflicts D3 automatic Damage 2 hits before combat."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Roca arrojada",
+            "nombre": "Thrown Rock",
             "ataques": "1D",
             "distancia": "12\"",
             "impactos": "+4",
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Porrazo brutal",
+            "nombre": "Brutal Club",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Captain of the Realm",
+      "nombre_unidad": "Kingdom Captain",
       "era": "Past",
       "clase": "Hero",
       "perfil": {
@@ -1111,34 +1159,34 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 6\" pueden repetir un dado de ataque CaC fallido por activación. Una vez por turno puede otorgar a una unidad aliada a 8\" una acción de movimiento gratuita.",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Allied units within 6\" may reroll one failed melee attack die per activation. Once per turn, it may grant an allied unit within 8\" a free move action."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco del capitán",
+            "nombre": "Captain's Bow",
             "ataques": "2D",
             "distancia": "18\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada del capitán",
+            "nombre": "Captain's Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1158,34 +1206,34 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 8\" repiten los dados de Salvación fallidos contra ataques de Disparo. Cuando esta unidad elimina una unidad enemiga en CaC, todas las unidades aliadas a 8\" pueden realizar un movimiento gratuito de 2\".",
-        "valor": 42
+        "valor": 42,
+        "especialidad": "Allied units within 8\" reroll failed Save dice against Shooting attacks. When this unit destroys an enemy unit in melee, all allied units within 8\" may make a free 2\" move."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco del soberano",
+            "nombre": "Sovereign's Bow",
             "ataques": "3D",
             "distancia": "24\"",
             "impactos": "+2",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada del soberano",
+            "nombre": "Sovereign's Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "6",
             "danio_critico": "8",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }

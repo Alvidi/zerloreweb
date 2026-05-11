@@ -30,6 +30,9 @@ import activationImage from '../images/webimagen/imagen_7.webp'
 import turnStructureImage from '../images/webimagen/imagen_8.webp'
 import commandPostControlImage from '../images/webimagen/imagen_9.webp'
 import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
+import unitTypesImage from '../images/webimagen/imagen_11.jpg'
+import unitProfileImage from '../images/webimagen/ficha_unidad.webp'
+import factionAbilityProfileImage from '../images/webimagen/ficha_habilidad.webp'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -57,6 +60,9 @@ const RULES_ASSET_PLACEHOLDERS = {
   rerollTokenImage: rerollToken,
   sprintImage,
   turnStructureImage,
+  factionAbilityProfileImage,
+  unitProfileImage,
+  unitTypesImage,
 }
 
 const isRulesPdfKeepWithNextNode = (node) =>

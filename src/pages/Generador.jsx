@@ -34,17 +34,6 @@ const factionSheetTemplates = {
   caos: new URL('../images/fichas/ficha_caos.webp', import.meta.url).href,
   legado: new URL('../images/fichas/ficha_legado.webp', import.meta.url).href,
 }
-const factionAbilitySheetTemplates = {
-  orden: new URL('../images/fichas/orden_hab.webp', import.meta.url).href,
-  caos: new URL('../images/fichas/caos_hab.webp', import.meta.url).href,
-  legado: new URL('../images/fichas/legado_hab.webp', import.meta.url).href,
-}
-const factionTextColors = {
-  orden: '#ff7a6b',
-  caos: '#b37aff',
-  legado: '#f0d84a',
-}
-const abilityTypeColor = '#ff9f43'
 const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster', 'titan']
 const MAX_MULTIPLE_FACTION_ABILITIES = 3
 const MAX_UNIT_IMAGE_SIDE = 1600
@@ -59,54 +48,6 @@ const EXPORT_PAGE_PAD_X = 56
 const EXPORT_PAGE_PAD_Y = 52
 const EXPORT_PAGE_GAP = 28
 const EXPORT_RASTER_SCALE = 2
-const UNIT_LAYOUT_STORAGE_KEY = 'zerolore.generator.ficha-layout.v3'
-const ABILITY_LAYOUT_STORAGE_KEY = 'zerolore.generator.ficha-habilidad-layout.v1'
-const UNIT_EXPORT_LAYOUT = [
-  { label: 'NOMBRE', x: 180, y: 72, w: 539, h: 46 },
-  { label: 'TIPO', x: 31, y: 201, w: 187, h: 20 },
-  { label: 'ERA', x: 230, y: 202, w: 185, h: 20 },
-  { label: 'FACCION', x: 387, y: 120, w: 118, h: 44 },
-  { label: 'VALOR', x: 643, y: 194, w: 76, h: 34 },
-  { label: 'IMAGEN', x: 29, y: 250, w: 686, h: 473 },
-  { label: 'MOV', x: 39, y: 764, w: 110, h: 42 },
-  { label: 'VIDAS', x: 178, y: 763, w: 110, h: 42 },
-  { label: 'SALV', x: 317, y: 764, w: 110, h: 42 },
-  { label: 'VEL', x: 469, y: 761, w: 110, h: 42 },
-  { label: 'ESC', x: 597, y: 761, w: 110, h: 42 },
-  { label: 'ESPECIALIDAD', x: 28, y: 878, w: 681, h: 99 },
-  { label: 'DISPARO 1 ARMA', x: 848, y: 159, w: 153, h: 64 },
-  { label: 'DISPARO 1 ATAQUES', x: 997, y: 160, w: 90, h: 62 },
-  { label: 'DISPARO 1 ALCANCE', x: 1086, y: 160, w: 89, h: 64 },
-  { label: 'DISPARO 1 PRECISION', x: 1173, y: 159, w: 90, h: 66 },
-  { label: 'DISPARO 1 DANO', x: 1261, y: 161, w: 93, h: 64 },
-  { label: 'DISPARO 1 HABILIDADES', x: 1349, y: 160, w: 140, h: 63 },
-  { label: 'DISPARO 2 ARMA', x: 849, y: 222, w: 151, h: 60 },
-  { label: 'DISPARO 2 ATAQUES', x: 999, y: 221, w: 87, h: 60 },
-  { label: 'DISPARO 2 ALCANCE', x: 1087, y: 222, w: 87, h: 60 },
-  { label: 'DISPARO 2 PRECISION', x: 1173, y: 222, w: 88, h: 60 },
-  { label: 'DISPARO 2 DANO', x: 1261, y: 222, w: 90, h: 60 },
-  { label: 'DISPARO 2 HABILIDADES', x: 1348, y: 221, w: 142, h: 62 },
-  { label: 'CUERPO A CUERPO 1 ARMA', x: 850, y: 400, w: 150, h: 65 },
-  { label: 'CUERPO A CUERPO 1 ATAQUES', x: 999, y: 402, w: 87, h: 62 },
-  { label: 'CUERPO A CUERPO 1 ALCANCE', x: 1086, y: 402, w: 88, h: 62 },
-  { label: 'CUERPO A CUERPO 1 PRECISION', x: 1173, y: 402, w: 88, h: 62 },
-  { label: 'CUERPO A CUERPO 1 DANO', x: 1261, y: 400, w: 89, h: 63 },
-  { label: 'CUERPO A CUERPO 1 HABILIDADES', x: 1347, y: 400, w: 142, h: 65 },
-  { label: 'CUERPO A CUERPO 2 ARMA', x: 849, y: 463, w: 152, h: 62 },
-  { label: 'CUERPO A CUERPO 2 ATAQUES', x: 999, y: 462, w: 87, h: 62 },
-  { label: 'CUERPO A CUERPO 2 ALCANCE', x: 1086, y: 462, w: 87, h: 62 },
-  { label: 'CUERPO A CUERPO 2 PRECISION', x: 1172, y: 462, w: 91, h: 62 },
-  { label: 'CUERPO A CUERPO 2 DANO', x: 1260, y: 461, w: 89, h: 65 },
-  { label: 'CUERPO A CUERPO 2 HABILIDADES', x: 1347, y: 461, w: 142, h: 64 },
-  { label: 'HABILIDADES', x: 843, y: 622, w: 648, h: 358 },
-]
-const ABILITY_EXPORT_LAYOUT = [
-  { label: 'NOMBRE', x: 260, y: 70, w: 380, h: 44 },
-  { label: 'FACCION', x: 364, y: 111, w: 185, h: 44 },
-  { label: 'TIPO', x: 43, y: 193, w: 166, h: 37 },
-  { label: 'VALOR', x: 650, y: 184, w: 62, h: 52 },
-  { label: 'DESCRIPCION', x: 56, y: 249, w: 639, h: 747 },
-]
 
 const readFileAsDataUrl = (file) =>
   new Promise((resolve, reject) => {
@@ -211,336 +152,6 @@ const createArmyPdfFileName = (factionName = '') => {
     .replace(/^-+|-+$/g, '')
 
   return `zerolore-${slug || 'ejercito'}.pdf`
-}
-
-const getStoredLayoutMap = (storageKey, defaults) => {
-  const defaultMap = new Map(defaults.map((guide) => [guide.label, guide]))
-  if (typeof window === 'undefined') return Object.fromEntries(defaultMap)
-
-  try {
-    const parsed = JSON.parse(window.localStorage.getItem(storageKey) || '[]')
-    if (!Array.isArray(parsed)) return Object.fromEntries(defaultMap)
-    parsed.forEach((guide) => {
-      if (!guide?.label || !defaultMap.has(guide.label)) return
-      defaultMap.set(guide.label, {
-        ...defaultMap.get(guide.label),
-        x: Number.isFinite(guide.x) ? guide.x : defaultMap.get(guide.label).x,
-        y: Number.isFinite(guide.y) ? guide.y : defaultMap.get(guide.label).y,
-        w: Number.isFinite(guide.w) ? guide.w : defaultMap.get(guide.label).w,
-        h: Number.isFinite(guide.h) ? guide.h : defaultMap.get(guide.label).h,
-      })
-    })
-  } catch {
-    // Keep defaults if localStorage is unavailable or malformed.
-  }
-
-  return Object.fromEntries(defaultMap)
-}
-
-const getFactionTokenForExport = (factionId = '') => {
-  const id = String(factionId).toLowerCase()
-  if (id.includes('caos')) return 'caos'
-  if (id.includes('legado')) return 'legado'
-  return 'orden'
-}
-
-const getFactionLabelForExport = (factionId = '', lang = 'es') => {
-  const token = getFactionTokenForExport(factionId)
-  if (lang === 'en') return { orden: 'Order', caos: 'Chaos', legado: 'Legacy' }[token] || 'Order'
-  return { orden: 'Orden', caos: 'Caos', legado: 'Legado' }[token] || 'Orden'
-}
-
-const ensureExportText = (value, fallback = '-') => {
-  const text = String(value ?? '').trim()
-  return text || fallback
-}
-
-const wrapCanvasText = (ctx, text, maxWidth) => {
-  const normalized = ensureExportText(text).replace(/\s+/g, ' ')
-  const words = normalized.split(' ')
-  const lines = []
-  let line = ''
-
-  words.forEach((word) => {
-    const nextLine = line ? `${line} ${word}` : word
-    if (ctx.measureText(nextLine).width <= maxWidth || !line) {
-      line = nextLine
-    } else {
-      lines.push(line)
-      line = word
-    }
-  })
-  if (line) lines.push(line)
-  return lines
-}
-
-const drawFitText = (ctx, text, rect, {
-  color = '#1a1a1a',
-  family = 'Space Grotesk',
-  weight = 700,
-  max = 24,
-  min = 8,
-  uppercase = false,
-  multiline = false,
-  lineHeight = 1.15,
-  align = 'center',
-} = {}) => {
-  const value = uppercase ? ensureExportText(text).toUpperCase() : ensureExportText(text)
-  const safeRect = rect || { x: 0, y: 0, w: 10, h: 10 }
-  let size = max
-  let lines = [value]
-
-  while (size > min) {
-    ctx.font = `${weight} ${size}px "${family}", sans-serif`
-    lines = multiline ? wrapCanvasText(ctx, value, safeRect.w * 0.94) : [value]
-    const widest = Math.max(...lines.map((line) => ctx.measureText(line).width), 0)
-    const totalHeight = lines.length * size * lineHeight
-    if (widest <= safeRect.w * 0.96 && totalHeight <= safeRect.h * 0.96) break
-    size -= 0.5
-  }
-
-  ctx.save()
-  ctx.fillStyle = color
-  ctx.textAlign = align
-  ctx.textBaseline = 'middle'
-  ctx.font = `${weight} ${size}px "${family}", sans-serif`
-  const x = align === 'left' ? safeRect.x : safeRect.x + safeRect.w / 2
-  const firstY = safeRect.y + safeRect.h / 2 - ((lines.length - 1) * size * lineHeight) / 2
-  lines.forEach((line, index) => {
-    ctx.fillText(line, x, firstY + index * size * lineHeight)
-  })
-  ctx.restore()
-}
-
-const drawCoverImage = (ctx, image, rect) => {
-  if (!image || !rect) return
-  const imageWidth = image.naturalWidth || image.width
-  const imageHeight = image.naturalHeight || image.height
-  const scale = Math.max(rect.w / imageWidth, rect.h / imageHeight)
-  const width = imageWidth * scale
-  const height = imageHeight * scale
-  const x = rect.x + (rect.w - width) / 2
-  const y = rect.y + (rect.h - height) / 2
-  ctx.drawImage(image, x, y, width, height)
-}
-
-const drawFichaImageBackground = (ctx, rect) => {
-  if (!rect) return
-  ctx.save()
-  const linear = ctx.createLinearGradient(rect.x, rect.y, rect.x, rect.y + rect.h)
-  linear.addColorStop(0, 'rgba(10, 12, 16, 0.98)')
-  linear.addColorStop(1, 'rgba(4, 5, 8, 1)')
-  ctx.fillStyle = linear
-  ctx.fillRect(rect.x, rect.y, rect.w, rect.h)
-
-  const radial = ctx.createRadialGradient(
-    rect.x + rect.w * 0.5,
-    rect.y + rect.h * 0.38,
-    0,
-    rect.x + rect.w * 0.5,
-    rect.y + rect.h * 0.38,
-    Math.max(rect.w, rect.h) * 0.68,
-  )
-  radial.addColorStop(0, 'rgba(56, 60, 72, 0.42)')
-  radial.addColorStop(1, 'rgba(8, 10, 14, 0.96)')
-  ctx.fillStyle = radial
-  ctx.fillRect(rect.x, rect.y, rect.w, rect.h)
-  ctx.restore()
-}
-
-const drawFallbackUnitBadge = (ctx, image, rect) => {
-  if (!image || !rect) return
-  const imageWidth = image.naturalWidth || image.width
-  const imageHeight = image.naturalHeight || image.height
-  const maxWidth = Math.min(rect.w * 0.46, 240)
-  const maxHeight = rect.h * 0.46
-  const scale = Math.min(maxWidth / imageWidth, maxHeight / imageHeight)
-  const width = imageWidth * scale
-  const height = imageHeight * scale
-  const x = rect.x + (rect.w - width) / 2
-  const y = rect.y + (rect.h - height) / 2
-
-  ctx.save()
-  ctx.beginPath()
-  ctx.rect(rect.x, rect.y, rect.w, rect.h)
-  ctx.clip()
-  ctx.globalAlpha = 0.34
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.45)'
-  ctx.shadowBlur = 20
-  ctx.shadowOffsetY = 8
-  ctx.drawImage(image, x, y, width, height)
-  ctx.restore()
-}
-
-const formatExportDamage = (weapon) => {
-  const damage = ensureExportText(weapon?.danio)
-  const critical = ensureExportText(weapon?.danio_critico)
-  if (damage === '-' && critical === '-') return '-'
-  return `${damage}/${critical}`
-}
-
-const formatExportAbilities = (abilities = []) =>
-  abilities
-    .map((ability) => (typeof ability === 'string' ? ability : ability?.nombre || ability?.id || ''))
-    .map((ability) => ensureExportText(ability, ''))
-    .filter(Boolean)
-    .join(', ') || '-'
-
-const drawExportWeaponRows = (ctx, weapons, guideMap, prefix, isMelee = false) => {
-  const fields = ['ARMA', 'ATAQUES', 'ALCANCE', 'PRECISION', 'DANO', 'HABILIDADES']
-  const rows = weapons.length ? weapons.slice(0, 2) : [null]
-  if (rows.length === 1) rows.push(null)
-
-  rows.forEach((weapon, rowIndex) => {
-    fields.forEach((field) => {
-      const rect = guideMap[`${prefix} ${rowIndex + 1} ${field}`]
-      const value = weapon
-        ? {
-            ARMA: ensureExportText(weapon.nombre),
-            ATAQUES: ensureExportText(weapon.ataques),
-            ALCANCE: isMelee ? '-' : ensureExportText(weapon.distancia),
-            PRECISION: isMelee ? '-' : ensureExportText(weapon.impactos),
-            DANO: formatExportDamage(weapon),
-            HABILIDADES: formatExportAbilities(weapon.habilidades),
-          }[field]
-        : '-'
-
-      drawFitText(ctx, value, rect, {
-        family: field === 'HABILIDADES' ? 'Rajdhani' : 'Space Grotesk',
-        weight: 700,
-        max: field === 'ARMA' ? 18 : field === 'HABILIDADES' ? 15 : 20,
-        min: field === 'HABILIDADES' ? 8 : 9,
-        multiline: field === 'HABILIDADES',
-      })
-    })
-  })
-}
-
-const renderUnitFichaCanvas = async ({ entry, factionId, lang, gameMode, eraLabel, scale = EXPORT_RASTER_SCALE }) => {
-  const unit = {
-    ...entry.base,
-    nombre: entry.displayName || entry.base.nombre,
-    armas_disparo: entry.shooting,
-    armas_melee: entry.meleeList || [],
-    valor_base: entry.total,
-    escuadra_display: getSquadFichaValue(entry.base, gameMode, entry.squadSize),
-  }
-  const canvas = document.createElement('canvas')
-  canvas.width = FICHA_CARD_W * scale
-  canvas.height = FICHA_CARD_H * scale
-  const ctx = canvas.getContext('2d')
-  ctx.scale(scale, scale)
-  ctx.imageSmoothingEnabled = true
-  ctx.imageSmoothingQuality = 'high'
-  const guideMap = getStoredLayoutMap(UNIT_LAYOUT_STORAGE_KEY, UNIT_EXPORT_LAYOUT)
-  const factionToken = getFactionTokenForExport(factionId)
-  const template = await loadImageFromDataUrl(factionSheetTemplates[factionToken] || factionSheetTemplates.orden)
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  ctx.fillStyle = '#f8f5ed'
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  if (entry.imageDataUrl) {
-    try {
-      drawCoverImage(ctx, await loadImageFromDataUrl(entry.imageDataUrl), guideMap.IMAGEN)
-    } catch {
-      // Image is decorative in export; keep going if it cannot be loaded.
-    }
-  } else {
-    drawFichaImageBackground(ctx, guideMap.IMAGEN)
-    const fallbackBadgeSrc = getUnitTypeBadgeSrc(entry.base.tipo)
-    if (fallbackBadgeSrc) {
-      try {
-        drawFallbackUnitBadge(ctx, await loadImageFromDataUrl(fallbackBadgeSrc), guideMap.IMAGEN)
-      } catch {
-        // Image is decorative in export; keep going if it cannot be loaded.
-      }
-    }
-  }
-
-  ctx.drawImage(template, 0, 0, FICHA_CARD_W, FICHA_CARD_H)
-
-  const unitTypeToken = getUnitTypeToken(unit.tipo)
-  const unitTypeColor = {
-    line: '#5dd66f',
-    elite: '#5ea6ff',
-    vehicle: '#f0d84a',
-    monster: '#ff5454',
-    hero: '#6fe9e2',
-    titan: '#b37aff',
-  }[unitTypeToken] || '#5dd66f'
-  const factionColor = factionTextColors[factionToken] || factionTextColors.orden
-  const specialty = gameMode === 'escuadra'
-    ? (unit.especialidad_escuadra || unit.especialidad || '-')
-    : (unit.especialidad_escaramuza || unit.especialidad || '-')
-
-  drawFitText(ctx, unit.nombre, guideMap.NOMBRE, { color: '#fff', family: 'Cinzel', max: 34, min: 16, uppercase: true })
-  drawFitText(ctx, unit.tipo, guideMap.TIPO, { color: unitTypeColor, family: 'Cinzel', max: 34, min: 12, uppercase: true })
-  if (eraLabel) drawFitText(ctx, eraLabel, guideMap.ERA, { color: '#6fe7dd', family: 'Cinzel', max: 34, min: 12, uppercase: true })
-  drawFitText(ctx, getFactionLabelForExport(factionId, lang), guideMap.FACCION, { color: factionColor, family: 'Cinzel', max: 34, min: 12, uppercase: true })
-  drawFitText(ctx, unit.valor_base, guideMap.VALOR, { color: '#fff', family: 'Cinzel', max: 36, min: 12 })
-  ;[
-    ['MOV', unit.movimiento],
-    ['VIDAS', unit.vidas],
-    ['SALV', unit.salvacion],
-    ['VEL', unit.velocidad],
-    ['ESC', unit.escuadra_display],
-  ].forEach(([label, value]) => drawFitText(ctx, value, guideMap[label], { color: '#fff', family: 'Cinzel', max: 26, min: 10 }))
-  drawFitText(ctx, specialty, guideMap.ESPECIALIDAD, { family: 'Space Grotesk', weight: 500, max: 18, min: 10, multiline: true })
-  drawExportWeaponRows(ctx, unit.armas_disparo || [], guideMap, 'DISPARO', false)
-  drawExportWeaponRows(ctx, unit.armas_melee || [], guideMap, 'CUERPO A CUERPO', true)
-
-  const abilityLines = []
-  ;[...(unit.armas_disparo || []), ...(unit.armas_melee || [])].forEach((weapon) => {
-    ;(weapon.habilidades || []).forEach((ability) => {
-      const raw = typeof ability === 'string' ? ability : ability?.nombre || ability?.id || ''
-      const label = getAbilityLabel(raw, lang) || raw
-      const desc = getAbilityDescription(raw, lang) || (typeof ability === 'object' ? ability?.descripcion : '')
-      if (label) abilityLines.push(desc ? `${label}: ${desc}` : label)
-    })
-  })
-  drawFitText(ctx, abilityLines.join('\n') || '-', guideMap.HABILIDADES, {
-    family: 'Space Grotesk',
-    weight: 500,
-    max: 18,
-    min: 10,
-    multiline: true,
-    lineHeight: 1.25,
-  })
-
-  return canvas
-}
-
-const renderAbilityFichaCanvas = async ({ ability, factionId, description, scale = EXPORT_RASTER_SCALE }) => {
-  const canvas = document.createElement('canvas')
-  canvas.width = FICHA_CARD_W * scale
-  canvas.height = FICHA_CARD_H * scale
-  const ctx = canvas.getContext('2d')
-  ctx.scale(scale, scale)
-  ctx.imageSmoothingEnabled = true
-  ctx.imageSmoothingQuality = 'high'
-  const guideMap = getStoredLayoutMap(ABILITY_LAYOUT_STORAGE_KEY, ABILITY_EXPORT_LAYOUT)
-  const factionToken = getFactionTokenForExport(factionId)
-  const template = await loadImageFromDataUrl(factionAbilitySheetTemplates[factionToken] || factionAbilitySheetTemplates.orden)
-  const factionColor = factionTextColors[factionToken] || factionTextColors.orden
-
-  ctx.fillStyle = '#f8f5ed'
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-  ctx.drawImage(template, 0, 0, FICHA_CARD_W, FICHA_CARD_H)
-  drawFitText(ctx, ability?.nombre, guideMap.NOMBRE, { color: '#fff', family: 'Cinzel', max: 34, min: 12, uppercase: true })
-  drawFitText(ctx, getFactionLabelForExport(factionId), guideMap.FACCION, { color: factionColor, family: 'Cinzel', max: 28, min: 10, uppercase: true })
-  drawFitText(ctx, 'Hab. de facción', guideMap.TIPO, { color: abilityTypeColor, family: 'Cinzel', max: 28, min: 10, uppercase: true })
-  drawFitText(ctx, ability?.coste ?? ability?.valor ?? ability?.valor_habilidad ?? '-', guideMap.VALOR, { color: '#fff', family: 'Cinzel', max: 34, min: 12 })
-  drawFitText(ctx, description || ability?.descripcion || ability?.efecto || ability?.texto || '-', guideMap.DESCRIPCION, {
-    family: 'Space Grotesk',
-    weight: 500,
-    max: 28,
-    min: 7,
-    multiline: true,
-    lineHeight: 1.12,
-  })
-
-  return canvas
 }
 
 const renderExportPageCanvas = async (cardCanvases, scale = EXPORT_RASTER_SCALE) => {
@@ -688,6 +299,9 @@ const getMinimumUnitCost = (units, mode) =>
 
 const getSquadFichaValue = (unit, mode, squadSize) =>
   mode === 'escuadra' ? String(clampSquadSize(squadSize ?? unit?.escuadra_min, unit)) : '-'
+
+const getUnitFichaValue = (unit, mode, totalValue) =>
+  mode === 'escuadra' ? unit?.valor_base : (totalValue ?? unit?.valor_base)
 
 const randomizeList = (items) => {
   const next = [...items]
@@ -1022,6 +636,7 @@ function Generador() {
   const [imageCropDraft, setImageCropDraft] = useState(null)
   const [selectedArmyUnitSelections, setSelectedArmyUnitSelections] = useState([])
   const armySheetRefs = useRef(new Map())
+  const armyCardRefs = useRef(new Map())
   const armyExportStageRef = useRef(null)
   const armyUnitSelectionCounterRef = useRef(0)
   const getEraLabel = useCallback((token) => (token === 'future' ? t('generator.future') : t('generator.past')), [t])
@@ -1344,34 +959,24 @@ function Generador() {
 
       const { jsPDF } = await import('jspdf')
       const capturedPageCanvases = []
+      const captureCardCanvas = async (cardKey) => {
+        const cardRef = armyCardRefs.current.get(cardKey)
+        const canvas = await cardRef?.captureAsCanvas?.()
+        if (!canvas) throw new Error(`Missing export card capture: ${cardKey}`)
+        return canvas
+      }
 
-      for (const pageEntries of abilityExportPages) {
-        const cardCanvases = await Promise.all(pageEntries.map((skill) =>
-          renderAbilityFichaCanvas({
-            ability: skill,
-            factionId: selectedFaction?.id,
-            description: getFactionSkillDescriptionForMode(skill, gameMode),
-          }),
+      for (const [pageIndex, pageEntries] of abilityExportPages.entries()) {
+        const cardCanvases = await Promise.all(pageEntries.map((skill, cardIndex) =>
+          captureCardCanvas(`ability-${pageIndex}-${skill.id || skill.nombre || cardIndex}`),
         ))
         capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
       }
 
-      for (const pageEntries of armyExportPages) {
-        const cardCanvases = await Promise.all(pageEntries.map((entry) => {
-          const displayName = exportUnitDisplayNames.get(entry.uid) || entry.base.nombre
-          const unitEraTokens = getUnitEraTokens(entry.base)
-          const unitEraLabel = unitEraTokens.length
-            ? unitEraTokens.map((token) => getEraLabel(token)).join(' / ')
-            : ''
-
-          return renderUnitFichaCanvas({
-            entry: { ...entry, displayName },
-            factionId: selectedFaction?.id,
-            lang,
-            gameMode,
-            eraLabel: unitEraLabel,
-          })
-        }))
+      for (const [pageIndex, pageEntries] of armyExportPages.entries()) {
+        const cardCanvases = await Promise.all(pageEntries.map((entry, cardIndex) =>
+          captureCardCanvas(`unit-${pageIndex}-${entry.uid || cardIndex}`),
+        ))
         capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
       }
 
@@ -1596,6 +1201,12 @@ function Generador() {
     if (!pageKey) return
     if (node) armySheetRefs.current.set(pageKey, node)
     else armySheetRefs.current.delete(pageKey)
+  }
+
+  const setArmyCardRef = (cardKey, node) => {
+    if (!cardKey) return
+    if (node) armyCardRefs.current.set(cardKey, node)
+    else armyCardRefs.current.delete(cardKey)
   }
 
   const handleDownloadArmyPdf = () => {
@@ -2073,9 +1684,15 @@ function Generador() {
                   if (!previewUnit) return null
                   const previewDraft = getManualUnitDraft(previewUnit)
                   const previewLoadout = previewEntry || getFixedUnitLoadout(previewUnit)
-                  const previewValue = previewEntry?.total || (gameMode === 'escuadra'
-                    ? previewUnit.valor_base
-                    : computeUnitTotal(previewUnit, previewLoadout.shooting, previewLoadout.melee, previewDraft.squadSize, null, gameMode))
+                  const previewTotal = previewEntry?.total || computeUnitTotal(
+                    previewUnit,
+                    previewLoadout.shooting,
+                    previewLoadout.melee,
+                    previewDraft.squadSize,
+                    null,
+                    gameMode,
+                  )
+                  const previewValue = getUnitFichaValue(previewUnit, gameMode, previewTotal)
                   const previewDisplayName = previewEntry
                     ? exportUnitDisplayNames.get(previewEntry.uid) || previewUnit.nombre
                     : previewUnit.nombre
@@ -2199,10 +1816,13 @@ function Generador() {
                   ref={(node) => setArmySheetRef(`ability-${pageIndex}`, node)}
                   className="army-export-sheet army-export-sheet-cards"
                 >
-                  {pageEntries.map((skill) => (
-                    <div key={`ability-export-${skill.id || skill.nombre}`} className="army-export-sheet-slot">
+                  {pageEntries.map((skill, cardIndex) => {
+                    const cardKey = `ability-${pageIndex}-${skill.id || skill.nombre || cardIndex}`
+                    return (
+                    <div key={`ability-export-${skill.id || skill.nombre || cardIndex}`} className="army-export-sheet-slot">
                       <div className="army-export-card-host">
                         <FactionAbilityFichaCard
+                          ref={(node) => setArmyCardRef(cardKey, node)}
                           ability={skill}
                           factionId={selectedFaction?.id}
                           gameMode={gameMode}
@@ -2210,7 +1830,8 @@ function Generador() {
                         />
                       </div>
                     </div>
-                  ))}
+                    )
+                  })}
                 </div>
               ))
             : null}
@@ -2221,7 +1842,8 @@ function Generador() {
                   ref={(node) => setArmySheetRef(`page-${pageIndex}`, node)}
                   className="army-export-sheet army-export-sheet-cards"
                 >
-                  {pageEntries.map((entry) => {
+                  {pageEntries.map((entry, cardIndex) => {
+                    const cardKey = `unit-${pageIndex}-${entry.uid || cardIndex}`
                     const displayName = exportUnitDisplayNames.get(entry.uid) || entry.base.nombre
                     const unitEraTokens = getUnitEraTokens(entry.base)
                     const unitEraLabel = unitEraTokens.length
@@ -2232,12 +1854,13 @@ function Generador() {
                       <div key={`army-export-${entry.uid}`} className="army-export-sheet-slot" data-army-export-slot={entry.uid}>
                         <div className="army-export-card-host">
                           <UnitFichaCard
+                            ref={(node) => setArmyCardRef(cardKey, node)}
                             unit={{
                               ...entry.base,
                               nombre: displayName,
                               armas_disparo: entry.shooting,
                               armas_melee: entry.meleeList || [],
-                              valor_base: entry.total,
+                              valor_base: getUnitFichaValue(entry.base, gameMode, entry.total),
                               escuadra_display: getSquadFichaValue(entry.base, gameMode, entry.squadSize),
                             }}
                             factionId={selectedFaction?.id}

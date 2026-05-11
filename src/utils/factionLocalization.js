@@ -121,7 +121,7 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
 export const buildLocalizedFactionEntries = (factionModules, lang) => {
   const esByBase = new Map()
   const enByBase = new Map()
-  const preferredOrder = ['orden', 'caos', 'legado', 'otros']
+  const preferredOrder = ['orden', 'caos', 'legado']
 
   Object.entries(factionModules).forEach(([path, module]) => {
     const filename = path.split('/').pop() || ''

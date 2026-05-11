@@ -56,31 +56,35 @@
           "min": 3,
           "max": 5
         },
-        "especialidad": "Cuando esta unidad es objetivo de un ataque de Disparo, puede moverse hasta 2\" antes de que se resuelvan los dados. Si el atacante pierde línea de visión, el ataque se cancela.",
-        "valor": 7
+        "valor": 7,
+        "especialidad": "When this unit is targeted by a Shooting attack, it may move up to 2\" before the dice are resolved. If the attacker loses line of sight, the attack is cancelled."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rifle de resonancia",
+            "nombre": "Resonance Rifle",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza espectral",
+            "nombre": "Spectral Spear",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -99,31 +103,35 @@
           "min": 3,
           "max": 5
         },
-        "especialidad": "Esta unidad puede retirarse de combate cuerpo a cuerpo sin realizar chequeo de retirada.",
-        "valor": 8
+        "valor": 8,
+        "especialidad": "This unit may disengage from melee without making a retreat check."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanzador de energía",
+            "nombre": "Energy Launcher",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Escudo y espada",
+            "nombre": "Shield and Sword",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -142,20 +150,22 @@
           "min": 3,
           "max": 5
         },
-        "especialidad": "Si esta unidad no dispara en su activación, gana +1 dado en todos sus ataques CaC.",
-        "valor": 9
+        "valor": 9,
+        "especialidad": "This unit cannot be charged while it is at full Health."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espadas de energía",
+            "nombre": "Energy Swords",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -174,35 +184,34 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla realiza un ataque gratuito (disparo o CaC).",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "This unit may always counterattack at range when shot, without needing an action."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de aniquilación",
+            "nombre": "Annihilation Cannon",
             "ataques": "3D",
             "distancia": "18\"",
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Heavy",
-              "Specialized Attack (Elite, Hero, Titan)"
+              "Brutal 5+ (Elite, Hero, Titan)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Guadaña espectral",
+            "nombre": "Spectral Scythe",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -222,33 +231,35 @@
           "min": 2,
           "max": 4
         },
-        "especialidad": "Una vez por turno, como acción gratuita, puede intercambiar su posición con otra unidad aliada a 12\" o menos (ninguna puede estar trabada).",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "Once per turn, as a free action, it may swap positions with another allied unit within 12\" (neither unit may be locked in melee)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Fusil del vacío",
+            "nombre": "Void Rifle",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Daga del vacío",
+            "nombre": "Void Dagger",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -267,21 +278,21 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Esta unidad no puede ser objetivo de ataques de Disparo si el atacante está a más de 8\".",
-        "valor": 12
+        "valor": 12,
+        "especialidad": "This unit cannot be targeted by Shooting attacks if the attacker is more than 8\" away."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Cuchilla espectral",
+            "nombre": "Spectral Blade",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -301,13 +312,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC).",
-        "valor": 19
+        "valor": 19,
+        "especialidad": "When this unit is destroyed, before removing it, it may make two free attacks (Shooting or melee)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de calor",
+            "nombre": "Heat Cannon",
             "ataques": "2D6",
             "distancia": "20\"",
             "impactos": "+3",
@@ -319,7 +330,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Rayo de disrupción",
+            "nombre": "Disruption Beam",
             "ataques": "3D",
             "distancia": "16\"",
             "impactos": "-",
@@ -333,13 +344,15 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Pisotón colosal",
+            "nombre": "Colossal Stomp",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -358,40 +371,42 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando una unidad aliada es destruida a 12\" o menos, puede realizar inmediatamente un disparo gratuito contra el atacante responsable.",
-        "valor": 15
+        "valor": 15,
+        "especialidad": "Its Shooting attacks ignore cover. When an allied unit is destroyed within 12\", it may immediately make a free shot against the responsible attacker."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón espectral",
+            "nombre": "Spectral Cannon",
             "ataques": "3D",
             "distancia": "24\"",
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Aplastar",
+            "nombre": "Crush",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Void Carrier",
+      "nombre_unidad": "Void Bearer",
       "era": "Future",
       "clase": "Vehicle",
       "perfil": {
@@ -403,45 +418,47 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Una vez por partida, al inicio de su activación, puede retirarse del tablero y reaparecer en cualquier punto del borde de despliegue de LEGADO.",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "Once per game, at the start of its activation, it may leave the battlefield and reappear at any point on the LEGACY deployment edge."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Baterías de energía",
+            "nombre": "Energy Batteries",
             "ataques": "4D",
             "distancia": "18\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Specialized Attack (Line, Elite)"
+              "Brutal 5+ (Line, Elite)"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Cañón de disrupción",
+            "nombre": "Disruption Cannon",
             "ataques": "2D",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Anti 5+ (Vehicle)"
+              "Piercing (Vehicle)"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Golpe espectral",
+            "nombre": "Spectral Strike",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -460,32 +477,34 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 6\" reducen en 1 el daño de todos los ataques recibidos (mín. 1).",
-        "valor": 16
+        "valor": 16,
+        "especialidad": "Allied units within 6\" reduce the damage of all attacks received by 1 (min. 1)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pulso etéreo",
+            "nombre": "Ethereal Pulse",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Golpe etéreo",
+            "nombre": "Ethereal Strike",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -496,8 +515,8 @@
       "nombre_unidad": "Legacy Oracle",
       "era": "Future",
       "clase": "Hero",
-      "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada). Las unidades aliadas a 6\" destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-      "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos. Las unidades en escuadra destruidas realizan su ataque de Caída gloriosa con +1 dado.",
+      "especialidad_escaramuza": "Once per turn, it may swap positions with any allied unit within 18\" (it cannot be locked in melee). Allied units destroyed within 6\" make their Glorious Fall attack with +1 die.",
+      "especialidad_escuadra": "Once per turn, the squad may swap positions with any allied unit within 18\". Units in the squad that are destroyed make their Glorious Fall attack with +1 die.",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 9,
@@ -507,45 +526,47 @@
           "min": 1,
           "max": 1
         },
-        "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada). Las unidades aliadas a 6\" destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-        "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos. Las unidades en escuadra destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-        "valor": 18
+        "valor": 18,
+        "especialidad_escaramuza": "Once per turn, it may swap positions with any allied unit within 18\" (it cannot be locked in melee). Allied units destroyed within 6\" make their Glorious Fall attack with +1 die.",
+        "especialidad_escuadra": "Once per turn, the squad may swap positions with any allied unit within 18\". Units in the squad that are destroyed make their Glorious Fall attack with +1 die."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanza del oráculo",
+            "nombre": "Oracle Spear",
             "ataques": "3D",
             "distancia": "22\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada del oráculo",
+            "nombre": "Oracle Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           },
           {
-            "nombre": "Toque del vacío",
+            "nombre": "Void Touch",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -553,7 +574,7 @@
       }
     },
     {
-      "nombre_unidad": "The Ancestral",
+      "nombre_unidad": "The Ancestor",
       "era": "Future",
       "clase": "Titan",
       "perfil": {
@@ -565,13 +586,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad tiene menos de la mitad de sus Vidas, recupera D3 Vidas. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC).",
-        "valor": 48
+        "valor": 48,
+        "especialidad": "At the start of each Initiative Phase, if this unit has less than half its Health, it recovers D3 Health. When destroyed, before removing it, it makes three free attacks (Shooting or melee)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón del juicio final",
+            "nombre": "Doomsday Cannon",
             "ataques": "2D6",
             "distancia": "30\"",
             "impactos": "+2",
@@ -579,12 +600,12 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Explosive",
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Batería del Legado",
+            "nombre": "Legacy Battery",
             "ataques": "2D",
             "distancia": "26\"",
             "impactos": "+3",
@@ -598,14 +619,14 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada del fin",
+            "nombre": "Sword of the End",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "6",
             "danio_critico": "8",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -625,31 +646,35 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Mientras esta unidad esté a 6\" o menos de un Héroe aliado, su Salvación mejora en 1 (5+ pasa a 4+).",
-        "valor": 5
+        "valor": 5,
+        "especialidad": "While this unit is within 6\" of an allied Hero, its Save improves by 1 (5+ becomes 4+)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco corto",
+            "nombre": "Shortbow",
             "ataques": "1D",
             "distancia": "12\"",
             "impactos": "+5",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada y escudo",
+            "nombre": "Sword and Shield",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -668,31 +693,35 @@
           "min": 3,
           "max": 6
         },
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques CaC recibidos (mín. 1).",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "When this unit does not move during its activation, reduce the damage of all melee attacks it receives by 1 (min. 1)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ballesta",
+            "nombre": "Crossbow",
             "ataques": "2D",
             "distancia": "16\"",
             "impactos": "+4",
             "danio": "1",
             "danio_critico": "2",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza larga",
+            "nombre": "Long Spear",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -711,27 +740,29 @@
           "min": 2,
           "max": 5
         },
-        "especialidad": "Cuando esta unidad realiza una carga exitosa, el primer ataque CaC de esa activación ignora la Salvación del defensor.",
-        "valor": 7
+        "valor": 7,
+        "especialidad": "When this unit makes a successful charge, the first melee attack of that activation ignores the defender's Save."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada de cruzada",
+            "nombre": "Crusader Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
       }
     },
     {
-      "nombre_unidad": "Fighting Monks",
+      "nombre_unidad": "Warrior Monks",
       "era": "Past",
       "clase": "Line",
       "perfil": {
@@ -743,21 +774,21 @@
           "min": 2,
           "max": 5
         },
-        "especialidad": "Cuando esta unidad carga (no lleva armas de disparo), puede repetir todos los dados de ataque CaC fallidos esa activación.",
-        "valor": 6
+        "valor": 6,
+        "especialidad": "When this unit charges (it carries no ranged weapons), it may reroll all failed melee attack dice that activation."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puños sagrados",
+            "nombre": "Sacred Fists",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Chained Hits"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -777,20 +808,22 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando realiza una carga exitosa, la Salvación del defensor empeora en 1 durante los ataques de esa activación (ej.: 3+ pasa a 4+).",
-        "valor": 13
+        "valor": 13,
+        "especialidad": "When it makes a successful charge, the defender's Save worsens by 1 during that activation's attacks (e.g. 3+ becomes 4+)."
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Lanza de caballería",
+            "nombre": "Cavalry Lance",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Piercing"
+            ],
             "valor_extra": 0
           }
         ]
@@ -809,32 +842,34 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla realiza un ataque gratuito CaC. Las unidades aliadas a 4\" reducen en 1 el daño recibido (mín. 1).",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "When this unit is destroyed, before removing it, it makes a free melee attack. Allied units within 4\" reduce damage received by 1 (min. 1)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Martillo lanzado",
+            "nombre": "Thrown Hammer",
             "ataques": "1D",
             "distancia": "10\"",
             "impactos": "+4",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Martillo sagrado",
+            "nombre": "Sacred Hammer",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -854,33 +889,35 @@
           "min": 1,
           "max": 3
         },
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando dispara a una unidad que realizó una carga ese turno, gana +2D de ataque.",
-        "valor": 10
+        "valor": 10,
+        "especialidad": "Its Shooting attacks ignore cover. When it shoots at a unit that charged this turn, it gains +2D attack."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arco sagrado",
+            "nombre": "Sacred Bow",
             "ataques": "3D",
             "distancia": "22\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Daga del templo",
+            "nombre": "Temple Dagger",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ]
@@ -899,13 +936,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC). Las unidades aliadas a 6\" reducen en 1 el daño recibido (mín. 1).",
-        "valor": 16
+        "valor": 16,
+        "especialidad": "When this unit is destroyed, before removing it, it may make two free attacks (Shooting or melee). Allied units within 6\" reduce damage received by 1 (min. 1)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Puños catapulta",
+            "nombre": "Catapult Fists",
             "ataques": "2D6",
             "distancia": "18\"",
             "impactos": "+3",
@@ -919,13 +956,15 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puñetazo de piedra",
+            "nombre": "Stone Punch",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -944,31 +983,35 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Las unidades aliadas a 6\" obtienen +1 a su Salvación (ej.: 5+ pasa a 4+). Cuando una unidad aliada a 8\" es destruida, puede realizar inmediatamente un disparo gratuito contra el atacante responsable.",
-        "valor": 14
+        "valor": 14,
+        "especialidad": "Allied units within 6\" gain +1 to their Save (e.g. 5+ becomes 4+). When an allied unit within 8\" is destroyed, it may immediately make a free shot against the responsible attacker."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanzador de reliquias",
+            "nombre": "Relic Launcher",
             "ataques": "3D",
             "distancia": "18\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Pisotón sagrado",
+            "nombre": "Sacred Stomp",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "3",
             "danio_critico": "4",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ]
@@ -987,32 +1030,34 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Esta unidad ignora penalizaciones de terreno al moverse y al cargar. Cuando realiza una carga, puede moverse sobre unidades y obstáculos.",
-        "valor": 15
+        "valor": 15,
+        "especialidad": "This unit ignores terrain penalties when moving and charging. When it charges, it may move over units and obstacles."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Lanza celestial",
+            "nombre": "Celestial Lance",
             "ataques": "3D",
             "distancia": "20\"",
             "impactos": "+3",
             "danio": "3",
             "danio_critico": "5",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada divina",
+            "nombre": "Divine Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1032,32 +1077,34 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Una vez por turno puede consagrar a una unidad aliada a 12\": hasta el final del turno sus ataques CaC infligen +1 Daño y sus críticos +1 Daño crítico. Las unidades aliadas a 6\" pueden repetir un dado de Salvación fallido por activación.",
-        "valor": 18
+        "valor": 18,
+        "especialidad": "Once per turn, it may consecrate an allied unit within 12\": until the end of the turn, its melee attacks inflict +1 Damage and its critical hits inflict +1 critical Damage. Allied units within 6\" may reroll one failed Save die per activation."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Martillo del maestre",
+            "nombre": "Master's Hammer",
             "ataques": "2D",
             "distancia": "14\"",
             "impactos": "+3",
             "danio": "2",
             "danio_critico": "3",
-            "habilidades_arma": [],
+            "habilidades_arma": [
+              "Reliable"
+            ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espadón sagrado",
+            "nombre": "Sacred Greatsword",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -1077,13 +1124,13 @@
           "min": 1,
           "max": 1
         },
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida. Cuando elimina una unidad enemiga en CaC, todas las unidades aliadas a 8\" recuperan 1 Vida. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC).",
-        "valor": 46
+        "valor": 46,
+        "especialidad": "At the start of each Initiative Phase, it recovers 1 Health. When it destroys an enemy unit in melee, all allied units within 8\" recover 1 Health. When destroyed, before removing it, it makes three free attacks (Shooting or melee)."
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rayo divino",
+            "nombre": "Divine Ray",
             "ataques": "2D6",
             "distancia": "26\"",
             "impactos": "+2",
@@ -1091,21 +1138,21 @@
             "danio_critico": "7",
             "habilidades_arma": [
               "Explosive",
-              "Precision"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Espada del juicio",
+            "nombre": "Sword of Judgment",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
             "danio": "7",
             "danio_critico": "9",
             "habilidades_arma": [
-              "Critical Attack"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }

@@ -43,6 +43,23 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   const abilityId = getWeaponAbilityId(raw)
   const value = parseAbilityNumber(raw)
 
+  if (abilityId === WEAPON_ABILITY_IDS.reliable) {
+    return lang === 'en'
+      ? 'This weapon has no special rules.'
+      : 'Esta arma no tiene reglas especiales.'
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.brutal) {
+    const target = parseAbilityTarget(raw)
+    return lang === 'en'
+      ? `Hits count as critical hits on a natural result of ${normalizeAntiValue(value)}${target ? ` against ${target}` : ''}.`
+      : `Los impactos se consideran críticos con un resultado natural de ${normalizeAntiValue(value)}${target ? ` contra ${target}` : ''}.`
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.piercing) {
+    const target = parseAbilityTarget(raw)
+    return lang === 'en'
+      ? `Critical hits worsen the target's Save by 1${target ? ` against ${target}` : ''}.`
+      : `Los impactos críticos empeoran la Salvación del objetivo en 1${target ? ` contra ${target}` : ''}.`
+  }
   if (abilityId === WEAPON_ABILITY_IDS.assaulter) {
     return lang === 'en'
       ? `The target suffers ${ensureSigned(value)} to Save against this attack.`
@@ -60,13 +77,13 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.gunslinger) {
     return lang === 'en'
-      ? 'Can shoot while engaged, only against the unit it is fighting in melee.'
-      : 'Puede disparar trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
+      ? 'Can be used while locked in melee, only against the unit it is fighting in melee.'
+      : 'Puede usarse aunque la unidad esté trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
-      ? 'Declare an impact point within range and resolve the attack normally. Enemy units within 3" of that point suffer the same resulting damage. In squad mode, only miniatures in the target squad are affected (the opponent allocates damage). Units locked in melee are not affected.'
-      : 'Declara un punto de impacto dentro del alcance y resuelve el ataque normalmente. Las unidades enemigas a 3" o menos de ese punto reciben el mismo daño resultante. En modo escuadras solo afecta a miniaturas de la escuadra objetivo (el rival reparte el daño). Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
+      ? 'When a unit suffers hits from this ability, the damage caused is automatically applied to all units within 3" of it.'
+      : 'Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica automáticamente a todas las unidades a 3" de esta.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.criticalAttack) {
     return lang === 'en'
@@ -96,8 +113,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
     return lang === 'en'
-      ? 'Can shoot without line of sight. Mark a target point within range and roll 1D6: on 5-6 (bullseye), the target and enemies within 3" cannot make Save rolls, also ignoring any cover bonus; on 1-4, they resolve Save rolls normally and cover applies as usual. In squad mode, only the target squad is affected. Units locked in melee are not affected.'
-      : 'Puede disparar sin línea de visión. Marca un punto objetivo dentro del alcance y tira 1D6: con 5-6 (diana), el objetivo y las enemigas a 3" o menos no pueden realizar tirada de salvación, ignorando también cualquier bonificación de cobertura; con 1-4, resuelven salvación normal y la cobertura aplica con normalidad. En modo escuadras solo afecta a la escuadra objetivo. Las unidades trabadas en cuerpo a cuerpo no se ven afectadas.'
+      ? 'Can attack targets without direct line of sight, as long as they are within Range.'
+      : 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.unstable) {
     return lang === 'en'
@@ -148,10 +165,19 @@ export const getAbilityLabel = (ability, lang = 'es') => {
   const num = raw.match(/[+-]?\s*\d+[+]?/)
   const suffix = num ? ` ${num[0].trim()}` : ''
 
+  if (abilityId === WEAPON_ABILITY_IDS.reliable) return 'Reliable'
+  if (abilityId === WEAPON_ABILITY_IDS.brutal) {
+    const target = parseAbilityTarget(raw)
+    return target ? `Brutal${suffix} (${target})` : `Brutal${suffix}`
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.piercing) {
+    const target = parseAbilityTarget(raw)
+    return target ? `Piercing (${target})` : 'Piercing'
+  }
   if (abilityId === WEAPON_ABILITY_IDS.assaulter) return `Raider${suffix}`
   if (abilityId === WEAPON_ABILITY_IDS.heavy) return 'Heavy'
   if (abilityId === WEAPON_ABILITY_IDS.quickAttack) return `Quick Attack${suffix}`
-  if (abilityId === WEAPON_ABILITY_IDS.gunslinger) return 'Gunslinger'
+  if (abilityId === WEAPON_ABILITY_IDS.gunslinger) return 'Pistolier'
   if (abilityId === WEAPON_ABILITY_IDS.explosive) return 'Explosive'
   if (abilityId === WEAPON_ABILITY_IDS.criticalAttack) return 'Critical Attack'
   if (abilityId === WEAPON_ABILITY_IDS.chainedImpacts) return 'Chained Impacts'
@@ -161,7 +187,7 @@ export const getAbilityLabel = (ability, lang = 'es') => {
     return target ? `Anti${suffix} (${target})` : `Anti${suffix}`
   }
   if (abilityId === WEAPON_ABILITY_IDS.ignoreCover) return 'Ignore Cover'
-  if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) return 'Parabolic Shot'
+  if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) return 'Arcing'
   if (abilityId === WEAPON_ABILITY_IDS.unstable) return 'Unstable'
   if (abilityId === WEAPON_ABILITY_IDS.direct) return 'Direct'
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) return 'Guerrilla'

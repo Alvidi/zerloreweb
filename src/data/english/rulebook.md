@@ -601,6 +601,8 @@ The type **does not limit the unit's stats**, which depend on its faction and de
 
 All units have at least **one melee attack** in their arsenal.
 
+![ZeroLore unit types: Line, Elite, Vehicle, Monster, Titan, and Hero]({{unitTypesImage}})
+
 ## 1. Line Units
 
 **Line** units represent versatile or offensive troops, and form the core of most armies.
@@ -698,6 +700,8 @@ Each ZeroLore unit has a **profile** that defines its capabilities on the battle
 This profile is used whenever the unit activates, attacks, or interacts with the scenery.
 
 The profile of a unit contains the following values:
+
+![Visual example of a unit profile with type, era, value, and stats]({{unitProfileImage}})
 
 ### Class
 
@@ -861,112 +865,59 @@ Weapon abilities, unit specialties, and their timing are detailed on each unit p
 
 # Weapon Abilities
 
-Some weapons have **special abilities** that modify how their attacks are resolved.
+Some weapons have an ability that modifies how their attacks are resolved.
 
-These abilities:
+These abilities differentiate weapons without adding complex rules. Some weapons are simple and reliable, others seek critical hits, others cut through defenses more effectively, and others are powerful but risky.
 
-- Apply **only while the weapon is operational**.
-- May affect the attack, the defender, or the environment.
-- Apply only at the indicated moment.
-
-If a unit loses or cannot use a weapon, **it cannot benefit** from its abilities.
+When a unit makes an attack, it must choose a single valid weapon from its profile. If that weapon has an ability, apply its effect during that attack.
 
 ## Weapon Ability Table
 
-### 1. Raider (+X)
+| Weapon ability | Description |
+| --- | --- |
+| **Reliable** | This weapon has no special rules. |
+| **Brutal X+** | Hits from this weapon count as critical hits on a natural result of **X+** on the attack roll. |
+| **Piercing** | Critical hits from this weapon worsen the target's **Save** by **1**. |
+| **Unstable** | This weapon is unstable. After finishing the attack against the target, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage points the target received. If the target suffered no hits, this unit suffers nothing either. |
+| **Pistolier** | This weapon can be used while the unit is locked in melee combat, but only against the unit it is fighting in melee combat. |
+| **Direct** | This weapon does not make a Precision roll. |
+| **Explosive** | When a unit suffers hits from this ability, the damage caused is automatically applied to all units within **3"** of it. |
+| **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 
-When a target is hit by this weapon, it **loses +X to its Save** against that attack.
-**Moment:** Shooting
+## Abilities Conditioned by Type
 
-### 2. Heavy
+Some abilities may include one or more unit types in parentheses. In that case, the ability only applies against those unit types.
 
-- If the unit **has moved**, the weapon gains **+1 to its Precision value**.
-- If the unit **has not moved**, the weapon gains **-1 to its Precision value**.
+Valid types are:
 
-**Moment:** Shooting
+- **Line**
+- **Elite**
+- **Hero**
+- **Vehicle**
+- **Monster**
+- **Titan**
 
-### 3. Rapid Fire (+X)
+Examples:
 
-When the target is at **half or less of the weapon's range**, it gains **+X Attacks**.
-**Moment:** Shooting
+- **Brutal 5+ (Vehicle)** only applies Brutal against Vehicles.
+- **Piercing (Elite, Hero)** only applies Piercing against Elite units and Heroes.
+- **Piercing (Vehicle, Monster)** only applies Piercing against Vehicles and Monsters.
 
-### 4. Gunslinger
+If the target does not belong to one of the listed types, the weapon is resolved normally using its profile values.
 
-The unit may fire this weapon even if **locked in melee combat**, but only against the unit it is fighting in melee combat.
-**Moment:** Shooting
+## Ability Limit per Weapon
 
-### 5. Explosive
+Unless stated otherwise, each weapon should have **a single weapon ability**.
 
-The attacker declares a **target unit** and resolves the attack normally. Any other enemy unit with at least one miniature within **3"** or less of the target unit receives the same damage. If it is a squad, the damage is multiplied by the number of its miniatures within the radius; the defender distributes it normally.
-
-Locked units are not affected.
-**Moment:** Shooting
-
-### 6. Critical Attack
-
-Critical hits obtained with this weapon **cannot be saved**.
-**Moment:** Shooting and melee
-
-### 7. Chained Impacts
-
-Each critical hit generates **one additional attack**, resolved normally.
-**Moment:** Shooting and melee
-
-### 8. Deadeye
-
-Allows **rerolling all failed** attack rolls.
-**Moment:** Shooting and melee
-
-### 9. Anti (X+) (Line, Elite, Vehicle, Monster, or All)
-
-Against the indicated unit type, results of X+ count as **critical hits**.
-**Moment:** Shooting and melee
-
-### 10. Ignore Coverage
-
-The target **cannot benefit** from any defensive bonus from cover.
-**Moment:** Shooting
-
-### 11. Parabolic Fire
-
-This weapon may fire without requiring line of sight. The player marks a target point within the weapon's range and rolls 1D6:
-
-- **5–6 — Direct Hit:** the attack lands exactly on the marked point. The target unit cannot make a save roll against this attack, also ignoring any cover bonus it has.
-- **1–4 — Precision Miss:** the attack still lands on the marked point, but the target unit may make a save roll normally. Cover applies as usual.
-
-**Moment:** Shooting
-
-### 12. Unstable
-
-This weapon is unstable. After finishing the attack against the target, roll 1D6. On a 1 or 2, the unit carrying this weapon suffers the same damage points the target received. If the target suffered no hits, this unit suffers nothing either.
-**Moment:** Shooting
-
-### 13. Direct
-
-This weapon **hits automatically** and does not require a Hit roll.
-**Moment:** Shooting
-
-### 14. Guerrilla
-
-The unit may take an extra **shooting action after using Sprint**.
-**Moment:** Shooting
-
-### 15. Specialized Attack (Line, Elite, Vehicle, Monster)
-
-This weapon can only attack one type of unit.
-**Moment:** Shooting and melee
-
----
-
-## Weapon Limitation
-
-Some weapons have a **usage limitation** indicated by a number in their profile. That number determines how many copies of that same weapon may be equipped within a squad, or how many times that weapon may be used in a skirmish game. Limitation is not an ability. It is not activated or declared. It is simply an equipment restriction that always applies.
+Especially powerful, unique, or exceptional weapons may have more than one ability, but this should be reserved for specific cases such as weapons used by Heroes, Monsters, Vehicles, or Titans.
 
 ---
 
 # Faction Abilities
 
 Each faction has different **Faction Abilities** that define its combat style. Each ability has a **point cost** shown on the faction profile.
+
+![Visual example of a faction ability sheet]({{factionAbilityProfileImage}})
 
 Before the game begins, each player may choose up to **3 faction abilities** from those available to their faction. The cost of those abilities is included within the army's total Value: the more abilities you take, the fewer points remain for units. The chosen abilities automatically apply to every unit in that faction while they are in play and do not require activation. The selection must be declared to the opponent before the game begins.
 

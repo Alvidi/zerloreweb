@@ -599,6 +599,8 @@ El tipo **no limita las estadísticas** de la unidad, que dependen de su facció
 
 Todas las unidades disponen, como mínimo, de **un ataque cuerpo a cuerpo** en su arsenal.
 
+![Tipos de unidad de ZeroLore: Línea, Élite, Vehículo, Monstruo, Titán y Héroe]({{unitTypesImage}})
+
 ## 1. Unidades de Línea
 
 Las unidades de **Línea** representan tropas versátiles u ofensivas, y constituyen el núcleo de la mayoría de ejércitos.
@@ -696,6 +698,8 @@ Cada unidad de ZeroLore dispone de un **perfil** que define sus capacidades en e
 Este perfil se utiliza siempre que la unidad se active, ataque o interactúe con el escenario.
 
 El perfil de una unidad contiene los siguientes valores:
+
+![Ejemplo visual de perfil de unidad con tipo, era, valor y estadísticas]({{unitProfileImage}})
 
 ### Clase
 
@@ -859,112 +863,59 @@ Las habilidades de armas, especialidades de las unidades y su momento de activac
 
 # Habilidades de armas
 
-Algunas armas poseen **habilidades especiales** que modifican la forma en que se resuelven sus ataques.
+Algunas armas tienen una habilidad que modifica la forma en la que resuelven sus ataques.
 
-Estas habilidades:
+Estas habilidades sirven para diferenciar armas sin añadir reglas complejas. Algunas armas son simples y fiables, otras buscan golpes críticos, otras atraviesan mejor las defensas y otras son poderosas pero arriesgadas.
 
-- Se aplican **solo mientras el arma esté operativa**.
-- Pueden afectar al ataque, al defensor o al entorno.
-- Se aplican únicamente en el momento indicado.
-
-Si una unidad pierde o no puede utilizar un arma, **no puede beneficiarse** de sus habilidades.
+Cuando una unidad realiza un ataque, debe elegir una única arma válida de su perfil. Si esa arma tiene una habilidad, aplica su efecto durante ese ataque.
 
 ## Tabla de habilidades de armas
 
-### 1. Asaltante (+X)
+| Habilidad de arma | Descripción |
+| --- | --- |
+| **Fiable** | Esta arma no tiene reglas especiales. |
+| **Brutal X+** | Los impactos de esta arma se consideran críticos con un resultado natural de **X+** en la tirada de ataque. |
+| **Perforante** | Los impactos críticos de esta arma empeoran la **Salvación** del objetivo en **1**. |
+| **Inestable** | Esta arma es inestable. Una vez acabado el ataque al objetivo, lanza 1D6. Con un resultado de **1–2**, la unidad que porta esta arma recibe los mismos puntos de daño que ha recibido el objetivo. Si el objetivo no recibe ningún impacto, esta tampoco recibe nada. |
+| **Pistolero** | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, pero solo contra la unidad con la que está combatiendo cuerpo a cuerpo. |
+| **Directo** | Esta arma no realiza tirada de Precisión. |
+| **Explosiva** | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica automáticamente a todas las unidades a **3"** de esta. |
+| **Parabólica** | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**. |
 
-Cuando un objetivo es impactado por esta arma, **pierde +X a su Salvación** frente a ese ataque.
-**Momento:** Disparo
+## Habilidades condicionadas por tipo
 
-### 2. Pesada
+Algunas habilidades pueden incluir uno o varios tipos de unidad entre paréntesis. En ese caso, la habilidad solo se aplica contra esos tipos de unidad.
 
-- Si la unidad **se ha movido**, el arma obtiene +**1 al valor de Precision**.
-- Si la unidad **no se ha movido**, el arma obtiene -**1 al valor de Precision**.
+Los tipos válidos son:
 
-**Momento:** Disparo
+- **Línea**
+- **Élite**
+- **Héroe**
+- **Vehículo**
+- **Monstruo**
+- **Titán**
 
-### 3. Ataque rápido (+X)
+Ejemplos:
 
-Cuando el objetivo se encuentra a **mitad o menos del alcance** del arma, esta suma **+X Ataques**.
-**Momento:** Disparo
+- **Brutal 5+ (Vehículo)** solo aplica Brutal contra Vehículos.
+- **Perforante (Élite, Héroe)** solo aplica Perforante contra Élite y Héroes.
+- **Perforante (Vehículo, Monstruo)** solo aplica Perforante contra Vehículos y Monstruos.
 
-### 4. Pistolero
+Si el objetivo no pertenece a uno de los tipos indicados, el arma se resuelve normalmente con los valores de su perfil.
 
-La unidad puede disparar esta arma incluso si está **trabada en combate cuerpo a cuerpo**, pero solo contra la unidad con la que combate cuerpo a cuerpo.
-**Momento:** Disparo
+## Límite de habilidades por arma
 
-### 5. Explosiva
+Salvo que se indique lo contrario, cada arma debería tener **una única habilidad de arma**.
 
-El atacante declara una **unidad objetivo** y resuelve el ataque con normalidad. Cualquier otra unidad enemiga con al menos una miniatura a **3"** o menos de la unidad objetivo recibe el mismo daño. Si es una escuadra, el daño se multiplica por el número de sus miniaturas dentro del radio; el defensor lo distribuye con normalidad.
-
-Las unidades trabadas en combate cuerpo a cuerpo no se ven afectadas.
-**Momento:** Disparo
-
-### 6. Ataque crítico
-
-Los impactos críticos obtenidos con esta arma **no pueden ser salvados**.
-**Momento:** Disparo y cuerpo a cuerpo
-
-### 7. Impactos encadenados
-
-Cada ataque crítico genera **un ataque adicional**, que se resuelve de forma normal.
-**Momento:** Disparo y cuerpo a cuerpo
-
-### 8. Certero
-
-Permite **repetir todas las tiradas fallidas** de ataque.
-**Momento:** Disparo y cuerpo a cuerpo
-
-### 9. Anti (X+) (Línea, Élite, Vehículo, Monstruo o Todo)
-
-Contra el tipo de unidad indicado, los resultados de X+ cuentan como **impactos críticos**.
-**Momento:** Disparo y cuerpo a cuerpo
-
-### 10. Ignora coberturas
-
-El objetivo **no puede beneficiarse** de ningún bono defensivo por cobertura.
-**Momento:** Disparo
-
-### 11. Disparo parabólico
-
-Esta arma puede disparar sin necesidad de línea de visión. El jugador marca un punto objetivo dentro del alcance del arma y tira 1D6:
-
-- **5–6 — Diana:** el ataque impacta exactamente en el punto marcado. La unidad objetivo no puede usar salvación contra este ataque, ignorando también cualquier bonificación de cobertura que tenga.
-- **1–4 — Fallo de precisión:** el ataque impacta igualmente en el punto marcado, pero la unidad objetivo sí puede realizar tirada de salvación normalmente. Las coberturas aplican con normalidad.
-
-**Momento:** Disparo
-
-### 12. Inestable
-
-Este arma es inestable, una vez acabado el ataque al objetivo, debe lanzar un 1D6, si el resultado es 1 o 2, la unidad que porta este arma recibe los mismos puntos de daño que ha recibido el objetivo, si el objetivo no recibe ningún impacto, esta tampoco recibe nada.
-**Momento:** Disparo
-
-### 13. Directo
-
-Esta arma **impacta automáticamente** y no requiere tirada de Impactos.
-**Momento:** Disparo
-
-### 14. Guerrilla
-
-La unidad puede realizar una acción extra de **disparo después de usar Carrera**.
-**Momento:** Disparo
-
-### 15. Ataque especializado (Línea, Élite, Vehículo, Monstruo)
-
-Esta arma solo puede atacar a un tipo de unidad.
-**Momento:** Disparo y cuerpo a cuerpo
-
----
-
-## Limitación de armas
-
-Algunas armas tienen una **limitación de uso** indicada con un número en su perfil. Este número determina cuántas unidades de esa misma arma pueden equiparse dentro de una escuadra, o cuántas veces puede usarse esa arma en una partida de escaramuza. La limitación no es una habilidad: no se activa ni se declara. Es simplemente una restricción de equipamiento que aplica siempre.
+Las armas especialmente poderosas, únicas o excepcionales pueden tener más de una habilidad, pero esto debería reservarse para casos concretos como armas de Héroes, Monstruos, Vehículos o Titanes.
 
 ---
 
 # Habilidades de facción
 
 Cada facción dispone de distintas **Habilidades de facción** que definen su estilo de combate. Cada habilidad tiene un **coste en puntos** indicado en la ficha de la facción.
+
+![Ejemplo visual de ficha de habilidad de facción]({{factionAbilityProfileImage}})
 
 Antes de comenzar la partida, cada jugador puede elegir un máximo de **3 habilidades de facción** de las disponibles en su facción. El coste de las habilidades se incluye dentro del valor total del ejército: cuantas más habilidades se tomen, menos puntos quedan para unidades. Las habilidades elegidas se aplican automáticamente a todas las unidades de la facción mientras estén en juego y no requieren activación. La elección debe comunicarse al rival antes de comenzar la partida.
 

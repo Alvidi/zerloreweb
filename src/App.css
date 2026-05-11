@@ -3035,18 +3035,92 @@ button {
 
 .army-export-stage-hidden {
   position: fixed;
-  left: 0;
+  left: -10000px;
   top: 0;
   z-index: -9999;
   pointer-events: none;
   overflow: visible;
-  opacity: 0;
+  opacity: 1;
   width: max-content;
   height: auto;
+  --ficha-export-text-offset-y: -11px;
+  --ficha-export-front-offset-y: -9px;
+  --ficha-export-name-offset-y: -5px;
+  --unit-export-value-offset-y: -20px;
+  --ability-export-value-offset-y: -16px;
+}
+
+.army-export-stage .ficha-layout-toolbar {
+  display: none;
 }
 
 .army-export-card-host {
   width: 100%;
+}
+
+.army-export-stage-hidden .army-export-card-host,
+.army-export-stage-hidden .army-export-sheet-slot,
+.army-export-stage-hidden .ficha-wrapper {
+  width: 1537px;
+}
+
+.army-export-stage-hidden .army-export-sheet-slot,
+.army-export-stage-hidden .ficha-wrapper {
+  height: 1023px;
+}
+
+.army-export-stage-hidden .ficha-wrapper {
+  padding-top: 0;
+}
+
+.army-export-stage-hidden .ficha-card {
+  transform: none !important;
+}
+
+.army-export-stage-hidden .ficha-data-layer .ficha-abs {
+  transform: translateY(var(--ficha-export-text-offset-y));
+}
+
+.army-export-stage-hidden .ficha-data-layer .ficha-nombre {
+  transform: translateY(var(--ficha-export-name-offset-y));
+}
+
+.army-export-stage-hidden .ficha-nombre,
+.army-export-stage-hidden .ficha-tipo,
+.army-export-stage-hidden .ficha-era,
+.army-export-stage-hidden .ficha-faccion,
+.army-export-stage-hidden .ficha-valor-num,
+.army-export-stage-hidden .ficha-stat-value,
+.army-export-stage-hidden .ability-ficha-name,
+.army-export-stage-hidden .ability-ficha-faction {
+  overflow: visible;
+}
+
+.army-export-stage-hidden .ficha-nombre,
+.army-export-stage-hidden .ficha-tipo,
+.army-export-stage-hidden .ficha-era,
+.army-export-stage-hidden .ficha-faccion {
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 1;
+}
+
+.army-export-stage-hidden .ficha-data-layer .ficha-tipo,
+.army-export-stage-hidden .ficha-data-layer .ficha-era,
+.army-export-stage-hidden .ficha-data-layer .ficha-faccion,
+.army-export-stage-hidden .ficha-data-layer .ficha-stat-cell,
+.army-export-stage-hidden .ficha-data-layer .ficha-especialidad-text {
+  transform: translateY(var(--ficha-export-front-offset-y));
+}
+
+.army-export-stage-hidden .ficha-data-layer .ficha-valor-num {
+  transform: translateY(var(--unit-export-value-offset-y));
+}
+
+.army-export-stage-hidden .ficha-data-layer .ability-ficha-value {
+  overflow: visible;
+  line-height: 1;
+  transform: translateY(var(--ability-export-value-offset-y));
 }
 
 .army-export-sheet {
@@ -3058,6 +3132,14 @@ button {
   display: grid;
   align-content: start;
   gap: 42px;
+}
+
+.army-export-stage-hidden .army-export-sheet {
+  width: 1537px;
+  min-height: auto;
+  padding: 0;
+  gap: 0;
+  background: transparent;
 }
 
 .army-export-sheet-cards {
@@ -3802,7 +3884,7 @@ button {
 }
 
 .home-pillar-card h3 {
-  margin-bottom: 14px;
+  margin-bottom: 22px;
   line-height: 1.15;
 }
 
@@ -6857,10 +6939,14 @@ mark {
   font-family: 'Space Grotesk', sans-serif;
   font-size: inherit;
   line-height: 1.2;
-  margin-bottom: 2px;
+  margin-bottom: 14px;
   text-align: center;
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.ficha-hab-line:last-child {
+  margin-bottom: 0;
 }
 
 .ficha-hab-line strong {

@@ -44,21 +44,21 @@ const FICHA_LAYOUT = {
   type: { x: 31, y: 201, w: 187, h: 20 },
   era: { x: 230, y: 202, w: 185, h: 20 },
   faction: { x: 387, y: 120, w: 118, h: 44 },
-  value: { x: 643, y: 194, w: 76, h: 34 },
+  value: { x: 643, y: 191, w: 76, h: 44 },
   stats: {
     cellWidth: 110,
     cells: [
       { label: 'MOV', x: 39, y: 764 },
       { label: 'VIDAS', x: 178, y: 763 },
       { label: 'SALV', x: 317, y: 764 },
-      { label: 'VEL', x: 469, y: 761 },
-      { label: 'ESC', x: 597, y: 761 },
+      { label: 'VEL', x: 469, y: 763 },
+      { label: 'ESC', x: 597, y: 763 },
     ],
   },
-  specialty: { x: 28, y: 878, w: 681, h: 99 },
+  specialty: { x: 36, y: 882, w: 669, h: 99 },
   shooting: { x: 809, y: 159, w: 719, h: 124 },
   melee: { x: 809, y: 400, w: 719, h: 126 },
-  abilities: { x: 843, y: 622, w: 648, h: 358 },
+  abilities: { x: 872, y: 614, w: 595, h: 358 },
 }
 
 const FICHA_LAYOUT_GUIDE_OVERRIDES = [
@@ -212,7 +212,7 @@ const formatHabilidades = (habilidades = []) => {
     .map((h) => (typeof h === 'string' ? h : h?.nombre || h?.id || ''))
     .map((label) => ensureFichaText(label, ''))
     .filter(Boolean)
-    .join('\n')
+    .join('\n\n\n\n')
 }
 
 const clampGuideRect = (guide) => ({

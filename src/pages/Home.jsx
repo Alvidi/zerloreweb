@@ -9,7 +9,7 @@ function Home() {
   const navigate = useNavigate()
   const { lang } = useI18n()
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
-  const contactEmail = 'zerloretmg@gmail.com'
+  const contactEmail = 'zeroloretmg@gmail.com'
   const pillars = [
     'agnostic',
     'free',
