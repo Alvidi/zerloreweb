@@ -3,42 +3,28 @@
   "faccion": {
     "nombre": "Legacy",
     "estilo_juego": "A control-and-positioning faction built around quality over quantity. Its units are the toughest in the game, but it fields fewer of them. It uses portals to appear where the enemy least expects, revives its fallen with a chance roll, and strikes back even in death. The battlefield belongs to it if the player is patient. Ideal for strategic players who enjoy micromanagement, positioning, and making every unit count.",
-    "seleccion_habilidades": "multiple",
+    "seleccion_habilidades": "individual",
     "habilidades_faccion": [
       {
-        "id": "portales-del-legado",
-        "nombre": "Legacy Portals",
-        "coste": 10,
-        "descripcion_escaramuza": "Once per turn, an allied unit may spend 1 action to swap positions with another allied Line, Elite, or Hero unit within 18\". Neither unit may be engaged.",
-        "descripcion_escuadra": "Once per turn, an allied squad or unit may spend 1 action to swap positions with another allied Line, Elite, or Hero unit within 18\". Neither one may be engaged."
+        "id": "last-breath",
+        "nombre": "Last Breath",
+        "descripcion_escaramuza": "When a LEGACY unit is destroyed, it makes one final ranged or melee attack whether it has actions or not.",
+        "descripcion_escuadra": "When a LEGACY unit is destroyed, it makes one final ranged or melee attack whether it has actions or not.",
+        "frase": "Nothing dies easily."
       },
       {
-        "id": "no-conocen-la-muerte",
-        "nombre": "They Know No Death",
-        "coste": 6,
-        "descripcion_escaramuza": "When a Line or Elite unit is eliminated, roll 1D6 at the start of the next Initiative Phase. On a 5+, that unit returns in its current position with half its maximum Wounds.",
-        "descripcion_escuadra": "When a Line or Elite squad is eliminated, roll 1D6 at the start of the next Initiative Phase. On a 5+, that squad returns in its current position with half its maximum Wounds."
+        "id": "the-void-calls",
+        "nombre": "The Void Calls",
+        "descripcion_escaramuza": "Once per turn, during the Initiative Phase and before any activation, LEGACY may swap the positions of any two allied units on the battlefield, as long as neither is locked in melee.",
+        "descripcion_escuadra": "Once per turn, during the Initiative Phase and before any activation, LEGACY may swap the positions of any two allied units on the battlefield, as long as neither is locked in melee.",
+        "frase": "The opponent cannot plan anything against you."
       },
       {
-        "id": "caida-gloriosa",
-        "nombre": "Glorious Fall",
-        "coste": 7,
-        "descripcion_escaramuza": "When any Legacy unit is destroyed, before removing it, it may immediately make one free attack (Shooting or melee, depending on its position) following the normal attack rules.",
-        "descripcion_escuadra": "When any Legacy squad or unit is destroyed, before removing it, it may immediately make one free attack (Shooting or melee, depending on its position) following the normal attack rules."
-      },
-      {
-        "id": "designacion-ancestral",
-        "nombre": "Ancestral Designation",
-        "coste": 5,
-        "descripcion_escaramuza": "Once per turn, designate an enemy unit as the ancestral target. Until the end of that turn, Legacy units attacking that target in melee score critical hits on 5+ instead of 6.",
-        "descripcion_escuadra": "Once per turn, designate an enemy unit or squad as the ancestral target. Until the end of that turn, Legacy units and squads attacking that target in melee score critical hits on 5+ instead of 6."
-      },
-      {
-        "id": "combate-a-muerte",
-        "nombre": "Fight to the Death",
-        "coste": 7,
-        "descripcion_escaramuza": "At the start of the Initiative Phase, designate one allied unit. If that unit enters melee this turn, whether by charging or being charged, all units engaged in that combat cannot retreat or disengage by any means until one of the two units is eliminated.",
-        "descripcion_escuadra": "At the start of the Initiative Phase, designate one allied squad. If that squad enters melee this turn, whether by charging or being charged, all squads or units engaged in that combat cannot retreat or disengage by any means until one of the two squads or units is eliminated."
+        "id": "echoes-of-the-past",
+        "nombre": "Echoes of the Past",
+        "descripcion_escaramuza": "When a destroyed LEGACY unit would leave the battlefield, roll 1D6. On a 5 or 6, instead of removing it, it returns to Reserve instead of being destroyed (and therefore has not been destroyed).",
+        "descripcion_escuadra": "When a destroyed LEGACY unit would leave the battlefield, roll 1D6. On a 5 or 6, instead of removing it, it returns to Reserve instead of being destroyed (and therefore has not been destroyed).",
+        "frase": "There is always a second chance."
       }
     ]
   },
@@ -50,14 +36,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 5
         },
         "valor": 7,
-        "especialidad": "When this unit is targeted by a Shooting attack, it may move up to 2\" before the dice are resolved. If the attacker loses line of sight, the attack is cancelled."
+        "especialidad": "Evasive"
       },
       "armas": {
         "disparo": [
@@ -65,7 +51,7 @@
             "nombre": "Resonance Rifle",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -97,14 +83,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 3,
           "max": 5
         },
         "valor": 8,
-        "especialidad": "This unit may disengage from melee without making a retreat check."
+        "especialidad": "Evasive"
       },
       "armas": {
         "disparo": [
@@ -112,7 +98,7 @@
             "nombre": "Energy Launcher",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -144,14 +130,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 6,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 3,
           "max": 5
         },
         "valor": 9,
-        "especialidad": "This unit cannot be charged while it is at full Health."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [],
@@ -178,26 +164,26 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 10,
-        "salvacion": "+2",
-        "velocidad": 3,
+        "salvacion": "2+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 14,
-        "especialidad": "This unit may always counterattack at range when shot, without needing an action."
+        "especialidad": "Shooter"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Annihilation Cannon",
+            "nombre": "Annihilation Cannon (Elite, Hero, Titan)",
             "ataques": "3D",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Brutal 5+ (Elite, Hero, Titan)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -225,14 +211,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 7,
-        "salvacion": "+3",
-        "velocidad": 4,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 10,
-        "especialidad": "Once per turn, as a free action, it may swap positions with another allied unit within 12\" (neither unit may be locked in melee)."
+        "especialidad": "Reinforcement Blockade"
       },
       "armas": {
         "disparo": [
@@ -240,7 +226,7 @@
             "nombre": "Void Rifle",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -272,14 +258,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 7,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 12,
-        "especialidad": "This unit cannot be targeted by Shooting attacks if the attacker is more than 8\" away."
+        "especialidad": "Evasive"
       },
       "armas": {
         "disparo": [],
@@ -306,14 +292,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 20,
-        "salvacion": "+2",
-        "velocidad": 1,
+        "salvacion": "2+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 19,
-        "especialidad": "When this unit is destroyed, before removing it, it may make two free attacks (Shooting or melee)."
+        "especialidad": "Berserker"
       },
       "armas": {
         "disparo": [
@@ -321,7 +307,7 @@
             "nombre": "Heat Cannon",
             "ataques": "2D6",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -365,14 +351,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 16,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 15,
-        "especialidad": "Its Shooting attacks ignore cover. When an allied unit is destroyed within 12\", it may immediately make a free shot against the responsible attacker."
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
@@ -380,7 +366,7 @@
             "nombre": "Spectral Cannon",
             "ataques": "3D",
             "distancia": "24\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -412,38 +398,38 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 12,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Once per game, at the start of its activation, it may leave the battlefield and reappear at any point on the LEGACY deployment edge."
+        "especialidad": "Teleport"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Energy Batteries",
+            "nombre": "Energy Batteries (Line, Elite)",
             "ataques": "4D",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Brutal 5+ (Line, Elite)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Disruption Cannon",
+            "nombre": "Disruption Cannon (Vehicle)",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Piercing (Vehicle)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -471,14 +457,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 14,
-        "salvacion": "+2",
-        "velocidad": 3,
+        "salvacion": "2+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad": "Allied units within 6\" reduce the damage of all attacks received by 1 (min. 1)."
+        "especialidad": "Mobile Cover"
       },
       "armas": {
         "disparo": [
@@ -486,7 +472,7 @@
             "nombre": "Ethereal Pulse",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -515,20 +501,22 @@
       "nombre_unidad": "Legacy Oracle",
       "era": "Future",
       "clase": "Hero",
-      "especialidad_escaramuza": "Once per turn, it may swap positions with any allied unit within 18\" (it cannot be locked in melee). Allied units destroyed within 6\" make their Glorious Fall attack with +1 die.",
-      "especialidad_escuadra": "Once per turn, the squad may swap positions with any allied unit within 18\". Units in the squad that are destroyed make their Glorious Fall attack with +1 die.",
+      "especialidad_escaramuza": "Once per turn, it may swap its position with any allied unit within 18\" or less (it cannot be locked in melee).",
+      "especialidad_escuadra": "Once per turn, the squad may swap its position with any allied unit within 18\" or less.",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 9,
-        "salvacion": "+2",
-        "velocidad": 4,
+        "salvacion": "2+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 18,
-        "especialidad_escaramuza": "Once per turn, it may swap positions with any allied unit within 18\" (it cannot be locked in melee). Allied units destroyed within 6\" make their Glorious Fall attack with +1 die.",
-        "especialidad_escuadra": "Once per turn, the squad may swap positions with any allied unit within 18\". Units in the squad that are destroyed make their Glorious Fall attack with +1 die."
+        "especialidad_escaramuza": "Once per turn, it may swap its position with any allied unit within 18\" or less (it cannot be locked in melee).",
+        "especialidad_escuadra": "Once per turn, the squad may swap its position with any allied unit within 18\" or less.",
+        "especialidad_nombre_escaramuza": "Legacy Oracle",
+        "especialidad_nombre_escuadra": "Legacy Oracle"
       },
       "armas": {
         "disparo": [
@@ -536,7 +524,7 @@
             "nombre": "Oracle Spear",
             "ataques": "3D",
             "distancia": "22\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -580,14 +568,14 @@
       "perfil": {
         "movimiento": "3\"",
         "vidas": 30,
-        "salvacion": "+2",
-        "velocidad": 1,
+        "salvacion": "2+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 48,
-        "especialidad": "At the start of each Initiative Phase, if this unit has less than half its Health, it recovers D3 Health. When destroyed, before removing it, it makes three free attacks (Shooting or melee)."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -595,7 +583,7 @@
             "nombre": "Doomsday Cannon",
             "ataques": "2D6",
             "distancia": "30\"",
-            "impactos": "+2",
+            "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -608,7 +596,7 @@
             "nombre": "Legacy Battery",
             "ataques": "2D",
             "distancia": "26\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -640,30 +628,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "While this unit is within 6\" of an allied Hero, its Save improves by 1 (5+ becomes 4+)."
+        "especialidad": "Mobile Cover"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Shortbow",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Sword and Shield",
@@ -687,30 +662,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 6,
-        "especialidad": "When this unit does not move during its activation, reduce the damage of all melee attacks it receives by 1 (min. 1)."
+        "especialidad": "Resilient"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Crossbow",
-            "ataques": "2D",
-            "distancia": "16\"",
-            "impactos": "+4",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Long Spear",
@@ -734,14 +696,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 5
         },
         "valor": 7,
-        "especialidad": "When this unit makes a successful charge, the first melee attack of that activation ignores the defender's Save."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [],
@@ -768,14 +730,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+5",
-        "velocidad": 5,
+        "salvacion": "5+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 5
         },
         "valor": 6,
-        "especialidad": "When this unit charges (it carries no ranged weapons), it may reroll all failed melee attack dice that activation."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [],
@@ -802,14 +764,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 13,
-        "especialidad": "When it makes a successful charge, the defender's Save worsens by 1 during that activation's attacks (e.g. 3+ becomes 4+)."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [],
@@ -836,14 +798,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+2",
-        "velocidad": 4,
+        "salvacion": "2+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 14,
-        "especialidad": "When this unit is destroyed, before removing it, it makes a free melee attack. Allied units within 4\" reduce damage received by 1 (min. 1)."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -851,7 +813,7 @@
             "nombre": "Thrown Hammer",
             "ataques": "1D",
             "distancia": "10\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -883,14 +845,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 7,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "Its Shooting attacks ignore cover. When it shoots at a unit that charged this turn, it gains +2D attack."
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
@@ -898,7 +860,7 @@
             "nombre": "Sacred Bow",
             "ataques": "3D",
             "distancia": "22\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -930,14 +892,14 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 18,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad": "When this unit is destroyed, before removing it, it may make two free attacks (Shooting or melee). Allied units within 6\" reduce damage received by 1 (min. 1)."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -945,7 +907,7 @@
             "nombre": "Catapult Fists",
             "ataques": "2D6",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -977,14 +939,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 14,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Allied units within 6\" gain +1 to their Save (e.g. 5+ becomes 4+). When an allied unit within 8\" is destroyed, it may immediately make a free shot against the responsible attacker."
+        "especialidad": "Mobile Cover"
       },
       "armas": {
         "disparo": [
@@ -992,7 +954,7 @@
             "nombre": "Relic Launcher",
             "ataques": "3D",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -1024,14 +986,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 14,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 15,
-        "especialidad": "This unit ignores terrain penalties when moving and charging. When it charges, it may move over units and obstacles."
+        "especialidad": "Flying"
       },
       "armas": {
         "disparo": [
@@ -1039,7 +1001,7 @@
             "nombre": "Celestial Lance",
             "ataques": "3D",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -1071,8 +1033,8 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+2",
-        "velocidad": 5,
+        "salvacion": "2+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 1
@@ -1086,7 +1048,7 @@
             "nombre": "Master's Hammer",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -1118,14 +1080,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 28,
-        "salvacion": "+2",
-        "velocidad": 3,
+        "salvacion": "2+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 46,
-        "especialidad": "At the start of each Initiative Phase, it recovers 1 Health. When it destroys an enemy unit in melee, all allied units within 8\" recover 1 Health. When destroyed, before removing it, it makes three free attacks (Shooting or melee)."
+        "especialidad": "Devourer"
       },
       "armas": {
         "disparo": [
@@ -1133,7 +1095,7 @@
             "nombre": "Divine Ray",
             "ataques": "2D6",
             "distancia": "26\"",
-            "impactos": "+2",
+            "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [

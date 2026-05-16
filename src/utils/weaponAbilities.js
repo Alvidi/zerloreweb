@@ -34,7 +34,11 @@ const WEAPON_ABILITY_DEFINITIONS = [
   { id: WEAPON_ABILITY_IDS.assaulter, aliases: ['asaltante', 'raider'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.heavy, aliases: ['pesada', 'heavy'], conditionKey: 'moved' },
   { id: WEAPON_ABILITY_IDS.quickAttack, aliases: ['ataque rapido', 'quick attack'], conditionKey: 'halfRange' },
-  { id: WEAPON_ABILITY_IDS.gunslinger, aliases: ['pistolero', 'pistolier', 'gunslinger'], conditionKey: null },
+  {
+    id: WEAPON_ABILITY_IDS.gunslinger,
+    aliases: ['multiuso', 'multiusos', 'multi-use', 'multi use', 'multiuse', 'pistolero', 'pistolier', 'gunslinger'],
+    conditionKey: null,
+  },
   { id: WEAPON_ABILITY_IDS.explosive, aliases: ['explosiva', 'explosive'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.criticalAttack, aliases: ['ataque critico', 'critical attack'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.chainedImpacts, aliases: ['impactos encadenados', 'chained impacts'], conditionKey: null },

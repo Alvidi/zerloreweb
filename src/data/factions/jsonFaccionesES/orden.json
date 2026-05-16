@@ -3,49 +3,28 @@
   "faccion": {
     "nombre": "Orden",
     "estilo_juego": "Facción disciplinada y metódica centrada en el control del territorio y el fuego sostenido. Sus unidades rinden mejor cuando se mantienen en posición y coordinación táctica. Sacrifica movilidad a cambio de potencia y precisión. Ideal para jugadores que disfrutan de planificar cada turno, establecer líneas defensivas y castigar al enemigo con unidades equilibradas.",
-    "seleccion_habilidades": "multiple",
+    "seleccion_habilidades": "individual",
     "habilidades_faccion": [
       {
-        "id": "atrincheramiento",
-        "nombre": "Atrincheramiento",
-        "coste": 8,
-        "descripcion_escaramuza": "Una unidad en cobertura, durante su activación obtiene +1 dado más de ataques de Disparo hasta el final de esa activación.",
-        "descripcion_escuadra": "Una escuadra en cobertura, durante su activación obtiene +1 dado más de ataques de Disparo hasta el final de esa activación."
+        "id": "cadena-de-mando",
+        "nombre": "Cadena de mando",
+        "descripcion_escaramuza": "Una vez por turno, cuando una unidad ORDEN se active, otra unidad ORDEN a 6\" o menos puede activarse inmediatamente después sin esperar el turno del rival.",
+        "descripcion_escuadra": "Una vez por turno, cuando una unidad ORDEN se active, otra unidad ORDEN a 6\" o menos puede activarse inmediatamente después sin esperar el turno del rival.",
+        "frase": "El orden es el origen de la justicia"
       },
       {
-        "id": "fuego-coordinado",
-        "nombre": "Fuego coordinado",
-        "coste": 5,
-        "descripcion_escaramuza": "Si una unidad aliada dispara al mismo objetivo en el mismo turno, la segunda y siguientes aplican -1 a su valor de Precisión (mejora la tirada para impactar) en el turno.",
-        "descripcion_escuadra": "Si una escuadra o unidad aliada dispara al mismo objetivo en el mismo turno, la segunda y siguientes aplican -1 a su valor de Precisión (mejora la tirada para impactar) en el turno."
+        "id": "fortificacion",
+        "nombre": "Fortificación",
+        "descripcion_escaramuza": "Los puestos de mando bajo tu control cuentan como en cobertura.",
+        "descripcion_escuadra": "Los puestos de mando bajo tu control cuentan como en cobertura.",
+        "frase": "Donde plantamos bandera, no se da un paso atrás."
       },
       {
-        "id": "repliegue-tactico",
-        "nombre": "Repliegue táctico",
-        "coste": 4,
-        "descripcion_escaramuza": "Una vez por turno, una unidad puede retirarse de un combate cuerpo a cuerpo sin realizar chequeo de retirada.",
-        "descripcion_escuadra": "Una vez por turno, una escuadra puede retirarse de un combate cuerpo a cuerpo sin realizar chequeo de retirada."
-      },
-      {
-        "id": "artilleria-de-apoyo",
-        "nombre": "Artillería de apoyo",
-        "coste": 7,
-        "descripcion_escaramuza": "Una vez por turno, en lugar de activar una unidad, puedes realizar un bombardeo sobre cualquier punto del tablero a más de 6\" de tus propias unidades. Todas las unidades en 3\" de ese punto sufren 1 impacto automático con Daño 1, sin salvación.",
-        "descripcion_escuadra": "Una vez por turno, en lugar de activar una escuadra o unidad, puedes realizar un bombardeo sobre cualquier punto del tablero a más de 6\" de tus propias unidades. Todas las escuadras o unidades en 3\" de ese punto sufren 1 impacto automático con Daño 1, sin salvación."
-      },
-      {
-        "id": "formacion-de-asalto",
-        "nombre": "Formación de asalto",
-        "coste": 5,
-        "descripcion_escaramuza": "Cuando una unidad declara una carga, puede repetir uno de los dos dados del 2D6 de carga. El resultado anterior queda anulado.",
-        "descripcion_escuadra": "Cuando una escuadra declara una carga, puede repetir uno de los dos dados del 2D6 de carga. El resultado anterior queda anulado."
-      },
-      {
-        "id": "contraofensiva",
-        "nombre": "Contraofensiva",
-        "coste": 4,
-        "descripcion_escaramuza": "Cuando una unidad del Orden realiza un contraataque en combate cuerpo a cuerpo, gana +1 dado de CaC.",
-        "descripcion_escuadra": "Cuando una escuadra del Orden realiza un contraataque en combate cuerpo a cuerpo, gana +1 dado de CaC."
+        "id": "doctrina",
+        "nombre": "Doctrina",
+        "descripcion_escaramuza": "Antes de comenzar la partida, elige un tipo de unidad enemigo: Línea, Élite, Vehículo, Monstruo, Héroe o Titán. Tus unidades pueden repetir todos los fallos al atacar a unidades de ese tipo hasta el final de la partida.",
+        "descripcion_escuadra": "Antes de comenzar la partida, elige un tipo de unidad enemigo: Línea, Élite, Vehículo, Monstruo, Héroe o Titán. Tus unidades pueden repetir todos los fallos al atacar a unidades de ese tipo hasta el final de la partida.",
+        "frase": "Conoce a tu enemigo antes de levantar el arma."
       }
     ]
   },
@@ -57,14 +36,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 4,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "-"
+        "especialidad": "Soldado"
       },
       "armas": {
         "disparo": [
@@ -72,7 +51,7 @@
             "nombre": "Fusil estándar",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -104,22 +83,22 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 7,
-        "especialidad": "Ignora coberturas."
+        "especialidad": "Soldado"
       },
       "armas": {
         "disparo": [
           {
             "nombre": "Lanzallamas",
             "ataques": "1D6",
-            "distancia": "8\"",
-            "impactos": "-",
+            "distancia": "6\"",
+            "impactos": null,
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -151,14 +130,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 7,
-        "especialidad": "-"
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
@@ -166,7 +145,7 @@
             "nombre": "Arma pesada",
             "ataques": "1D6",
             "distancia": "14\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -175,14 +154,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Lanzacohetes",
+            "nombre": "Lanzacohetes (Vehículo, Monstruo)",
             "ataques": "2D",
             "distancia": "18\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Perforante (Vehículo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -210,14 +189,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 4,
+        "salvacion": "4+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 4,
           "max": 8
         },
         "valor": 6,
-        "especialidad": "Si hay otra unidad aliada a 6\" y es atacada, puede redirigir la mitad del daño causado a esta unidad."
+        "especialidad": "Porrazo"
       },
       "armas": {
         "disparo": [
@@ -225,11 +204,11 @@
             "nombre": "Pistola reglamentaria",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Pistolero"
+              "Multiusos"
             ],
             "valor_extra": 0
           }
@@ -257,14 +236,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 4
         },
         "valor": 10,
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques de Disparo recibidos ese turno (mín. 1)."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
@@ -272,7 +251,7 @@
             "nombre": "Fusil de asalto blindado",
             "ataques": "3D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -304,14 +283,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 8,
-        "especialidad": "Una vez por activación, esta unidad puede gastar las 2 acciones para elegir una unidad aliada a 3\". Esa unidad recupera D3 Vidas perdidas. No puede superar sus Vidas máximas. No puede usarse sobre Vehículos ni Titanes."
+        "especialidad": "Soporte"
       },
       "armas": {
         "disparo": [
@@ -319,11 +298,11 @@
             "nombre": "Pistola táctica",
             "ataques": "2D",
             "distancia": "10\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Pistolero"
+              "Multiusos"
             ],
             "valor_extra": 0
           }
@@ -351,38 +330,38 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 6,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 8,
-        "especialidad": "Si no se mueve durante su activación, sus ataques de Disparo ignoran cobertura."
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Rifle de francotirador",
+            "nombre": "Rifle de francotirador (Línea, Élite)",
             "ataques": "2D",
             "distancia": "28\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Brutal 5+ (Línea, Élite)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Rifle anti-material",
+            "nombre": "Rifle anti-material (Vehículo, Monstruo)",
             "ataques": "1D",
             "distancia": "24\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Perforante (Vehículo, Monstruo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -408,14 +387,14 @@
       "perfil": {
         "movimiento": "10\"",
         "vidas": 8,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "Esta unidad vehículo puede ir en escuadras."
+        "especialidad": "Avanzadilla"
       },
       "armas": {
         "disparo": [
@@ -423,7 +402,7 @@
             "nombre": "Ametralladora ligera",
             "ataques": "3D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -455,26 +434,26 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 18,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Puede usar dos acciones de disparo."
+        "especialidad": "Tirador"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ametralladora",
+            "nombre": "Ametralladora (Línea, Élite)",
             "ataques": "4D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Brutal 5+ (Línea, Élite)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
@@ -482,7 +461,7 @@
             "nombre": "Cañón principal",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -514,14 +493,14 @@
       "perfil": {
         "movimiento": "-",
         "vidas": 12,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "-",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Esta unidad no puede moverse. Cuando realiza un ataque de Disparo, gana +1 dado de ataque. Bloquea los refuerzos en ese puesto de mando."
+        "especialidad": "Asentado"
       },
       "armas": {
         "disparo": [
@@ -529,7 +508,7 @@
             "nombre": "Cañón de asedio",
             "ataques": "1D",
             "distancia": "36\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -539,14 +518,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Cañón electromagnético",
+            "nombre": "Cañón electromagnético (Vehículo, Monstruo)",
             "ataques": "2D",
             "distancia": "30\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Perforante (Vehículo, Monstruo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -571,20 +550,19 @@
       "nombre_unidad": "General de Campaña",
       "era": "Futuro",
       "clase": "Héroe",
-      "especialidad_escaramuza": "Una vez por turno puede designar una unidad aliada a 6\" de este héroe para repetir todos los dados de Disparo fallidos.",
-      "especialidad_escuadra": "Mientras este héroe forme parte de una escuadra, esa escuadra obtiene +1 dado de ataque en Disparo si no ha realizado ninguna acción de Movimiento durante su activación.",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 10,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad_escaramuza": "Una vez por turno puede designar una unidad aliada a 6\" de este héroe para repetir todos los dados de Disparo fallidos.",
-        "especialidad_escuadra": "Mientras este héroe forme parte de una escuadra, esa escuadra obtiene +1 dado de ataque en Disparo si no ha realizado ninguna acción de Movimiento durante su activación."
+        "especialidad": "Todas las unidades aliadas a 6\" de este héroe pueden repetir todos los dados de Disparo y cuerpo a cuerpo fallidos.",
+        "especialidad_escaramuza": "Todas las unidades aliadas a 6\" de este héroe pueden repetir todos los dados de Disparo y cuerpo a cuerpo fallidos.",
+        "especialidad_escuadra": "Mientras este héroe forme parte de una escuadra, todas las unidades aliadas a 6\" de este héroe pueden repetir todos los dados de Disparo y cuerpo a cuerpo fallidos."
       },
       "armas": {
         "disparo": [
@@ -592,7 +570,7 @@
             "nombre": "Fusil de energía",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -615,14 +593,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Puño energético",
+            "nombre": "Puño energético (Élite)",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Perforante (Élite)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -636,14 +614,14 @@
       "perfil": {
         "movimiento": "3\"",
         "vidas": 32,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 45,
-        "especialidad": "Esta unidad puede llevar dos armas a distancia y disparar dos veces en su acción de disparo. Si no se ha movido, gana +1 dado en ambos disparos."
+        "especialidad": "Aplastamiento"
       },
       "armas": {
         "disparo": [
@@ -651,7 +629,7 @@
             "nombre": "Cañón de destrucción",
             "ataques": "2D6",
             "distancia": "28\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
@@ -663,7 +641,7 @@
             "nombre": "Lanzamisiles orbitales",
             "ataques": "2D",
             "distancia": "24\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -674,7 +652,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puño de siege",
+            "nombre": "Puño de asedio",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,
@@ -695,30 +673,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 4,
-        "especialidad": "Si esta unidad recibe un ataque CaC mientras está en cobertura, el atacante no obtiene el bonus de carga en ese ataque."
+        "especialidad": "Resistente"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Jabalina",
-            "ataques": "1D",
-            "distancia": "10\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lanza y escudo",
@@ -742,14 +707,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 6,
-        "especialidad": "Cuando esta unidad no se mueve en su activación, gana +1 dado en todos sus ataques de Disparo."
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
@@ -757,7 +722,7 @@
             "nombre": "Arco largo",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -789,30 +754,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "Cuando esta unidad es objetivo de una carga enemiga, puede realizar un ataque gratuito CaC antes de que el atacante resuelva sus ataques."
+        "especialidad": "Anclado"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Jabalina",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lanza de formación",
@@ -836,14 +788,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 6,
-        "especialidad": "Puede moverse y disparar sin penalización por movimiento. Sus ataques de Disparo ignoran cobertura."
+        "especialidad": "Avanzadilla"
       },
       "armas": {
         "disparo": [
@@ -851,7 +803,7 @@
             "nombre": "Arco de explorador",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -883,30 +835,17 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 11,
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques recibidos (mín. 1)."
+        "especialidad": "Resistente"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Ballesta de guardia",
-            "ataques": "2D",
-            "distancia": "16\"",
-            "impactos": "+4",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Espada de guardia",
@@ -930,14 +869,14 @@
       "perfil": {
         "movimiento": "10\"",
         "vidas": 7,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 11,
-        "especialidad": "Cuando realiza una carga exitosa, gana +2D en CaC esa activación. Después de eliminar una unidad enemiga en CaC, puede realizar un movimiento gratuito de 3\"."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [
@@ -945,11 +884,11 @@
             "nombre": "Lanza arrojadiza",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Pistolero"
+              "Multiuso"
             ],
             "valor_extra": 0
           }
@@ -977,26 +916,26 @@
       "perfil": {
         "movimiento": "3\"",
         "vidas": 10,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 12,
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Puede repetir un dado de ataque de Disparo fallido por activación."
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Ballesta gigante",
+            "nombre": "Ballesta gigante (Vehículo, Monstruo)",
             "ataques": "3D",
             "distancia": "28\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Perforante (Vehículo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -1022,16 +961,16 @@
       "era": "Pasado",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "3\"",
+        "movimiento": "-",
         "vidas": 10,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "-",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Puede disparar a objetivos sin línea de visión directa, ignorando obstáculos de terreno (pero no unidades)."
+        "especialidad": "Asentado"
       },
       "armas": {
         "disparo": [
@@ -1072,14 +1011,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 14,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Las unidades aliadas a 3\" o menos cuentan como en cobertura. Cuando esta unidad realiza una carga, inflige D3 impactos automáticos de Daño 2."
+        "especialidad": "Cobertura móvil"
       },
       "armas": {
         "disparo": [],
@@ -1106,14 +1045,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 16,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida (hasta su máximo). Cuando realiza una carga, inflige D3 impactos automáticos de Daño 2 antes del combate."
+        "especialidad": "Anclado"
       },
       "armas": {
         "disparo": [
@@ -1121,7 +1060,7 @@
             "nombre": "Roca arrojada",
             "ataques": "1D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -1153,30 +1092,19 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 4,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Las unidades aliadas a 6\" pueden repetir un dado de ataque CaC fallido por activación. Una vez por turno puede otorgar a una unidad aliada a 8\" una acción de movimiento gratuita."
+        "especialidad": "Todas las unidades aliadas a 6\" de este héroe pueden repetir todos los dados de cuerpo a cuerpo fallidos.",
+        "especialidad_escaramuza": "Todas las unidades aliadas a 6\" de este héroe pueden repetir todos los dados de cuerpo a cuerpo fallidos.",
+        "especialidad_escuadra": "Mientras este héroe forme parte de una escuadra, todas las unidades aliadas a 6\" de este héroe pueden repetir todos los dados de cuerpo a cuerpo fallidos."
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Arco del capitán",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "+3",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Espada del capitán",
@@ -1194,20 +1122,20 @@
       }
     },
     {
-      "nombre_unidad": "Señor Soberano",
+      "nombre_unidad": "Titan Soberano",
       "era": "Pasado",
       "clase": "Titán",
       "perfil": {
         "movimiento": "4\"",
         "vidas": 28,
-        "salvacion": "+2",
-        "velocidad": 2,
+        "salvacion": "2+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 42,
-        "especialidad": "Las unidades aliadas a 8\" repiten los dados de Salvación fallidos contra ataques de Disparo. Cuando esta unidad elimina una unidad enemiga en CaC, todas las unidades aliadas a 8\" pueden realizar un movimiento gratuito de 2\"."
+        "especialidad": "Portaestandarte"
       },
       "armas": {
         "disparo": [
@@ -1215,7 +1143,7 @@
             "nombre": "Arco del soberano",
             "ataques": "3D",
             "distancia": "24\"",
-            "impactos": "+2",
+            "impactos": "2+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [

@@ -3,42 +3,28 @@
   "faccion": {
     "nombre": "Caos",
     "estilo_juego": "Facción de oleadas y presión constante, diseñada para saturar al enemigo con números y nunca dejar de avanzar. Sus unidades de Línea son las más baratas del juego: caen con facilidad pero reaparecen turno tras turno desde los puestos de mando. El cuerpo a cuerpo y el control del espacio son su arma principal. Ideal para jugadores que disfrutan de la presión sostenida, el desgaste progresivo y el caos controlado.",
-    "seleccion_habilidades": "multiple",
+    "seleccion_habilidades": "individual",
     "habilidades_faccion": [
       {
-        "id": "oleada-eterna",
-        "nombre": "Oleada eterna",
-        "coste": 8,
-        "descripcion_escaramuza": "Cuando una unidad de Línea es eliminada, al inicio de la siguiente Fase de Iniciativa regresa desde cualquier puesto de mando vacío con todas sus Vidas.",
-        "descripcion_escuadra": "Cuando una escuadra de Línea es eliminada, al inicio de la siguiente Fase de Iniciativa regresa desde cualquier puesto de mando vacío con todas sus Vidas."
+        "id": "marea-infinita",
+        "nombre": "Marea Infinita",
+        "descripcion_escaramuza": "Al final de cada turno, todas las unidades de Línea CAOS destruidas durante ese turno vuelven al campo con todas sus Vidas, desplegándose en cualquier puesto de mando que el jugador controle.",
+        "descripcion_escuadra": "Al final de cada turno, todas las unidades de Línea CAOS destruidas durante ese turno vuelven al campo con todas sus Vidas, desplegándose en cualquier puesto de mando que el jugador controle.",
+        "frase": "El CAOS no se acaba. El rival tiene que destruirte muchas veces para librarse de ti."
       },
       {
-        "id": "instinto-de-enjambre",
-        "nombre": "Instinto de horda",
-        "coste": 4,
-        "descripcion_escaramuza": "Las unidades a 3\" o menos de otra unidad aliada repiten los dados de ataque cuerpo a cuerpo fallidos.",
-        "descripcion_escuadra": "Las escuadras a 3\" o menos de otra escuadra aliada repiten los dados de ataque cuerpo a cuerpo fallidos."
+        "id": "la-presa",
+        "nombre": "La Presa",
+        "descripcion_escaramuza": "Una vez por turno, en la Fase de Iniciativa, el jugador designa UNA unidad enemiga visible. Todos los ataques CaC de unidades CAOS contra esa unidad no consideran los resultados de 1 y 2 como fallos.",
+        "descripcion_escuadra": "Una vez por turno, en la Fase de Iniciativa, el jugador designa UNA unidad enemiga visible. Todos los ataques CaC de unidades CAOS contra esa unidad no consideran los resultados de 1 y 2 como fallos.",
+        "frase": "Cuando la manada elige, el resto solo mira."
       },
       {
-        "id": "carga-salvaje",
-        "nombre": "Carga salvaje",
-        "coste": 7,
-        "descripcion_escaramuza": "Cuando una unidad de esta facción realiza una carga exitosa, suma +1 de Daño en los ataques cuerpo a cuerpo de esa activación.",
-        "descripcion_escuadra": "Cuando una escuadra de esta facción realiza una carga exitosa, suma +1 de Daño en los ataques cuerpo a cuerpo de esa activación."
-      },
-      {
-        "id": "propagacion-de-veneno",
-        "nombre": "Propagación de veneno",
-        "coste": 6,
-        "descripcion_escaramuza": "Las unidades enemigas que pierdan al menos 1 Vida en CaC contra una unidad de Caos deben realizar una tirada después del combate. Con 4+, esa unidad sufre 1 punto de daño extra.",
-        "descripcion_escuadra": "Las escuadras enemigas que pierdan al menos 1 Vida en CaC contra una escuadra de Caos deben realizar una tirada después del combate. Con 4+, esa escuadra sufre 1 punto de daño extra."
-      },
-      {
-        "id": "regeneracion",
-        "nombre": "Regeneración",
-        "coste": 6,
-        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, una unidad de Caos a tu elección recupera 1 Vida, hasta su máximo. Solo puede usarse sobre unidades que no hayan sido eliminadas ese turno.",
-        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, una escuadra de Caos a tu elección recupera 1D3 Vidas, hasta su máximo. Solo puede usarse sobre escuadras que no hayan sido eliminadas ese turno."
+        "id": "banquete-de-sangre",
+        "nombre": "Banquete de Sangre",
+        "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa, el jugador CAOS puede sacrificar una unidad de Línea CAOS que controle. Esa unidad se retira del campo sin dar puntos al rival y sin contar como destruida a efectos de misión. La unidad transfiere sus Vidas restantes a otra unidad CAOS; la unidad receptora recupera Vidas hasta su máximo y el resto se descarta.",
+        "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa, el jugador CAOS puede sacrificar una unidad de Línea CAOS que controle. Esa unidad se retira del campo sin dar puntos al rival y sin contar como destruida a efectos de misión. La unidad transfiere sus Vidas restantes a otra unidad CAOS; la unidad receptora recupera Vidas hasta su máximo y el resto se descarta.",
+        "frase": "Los débiles alimentan a los fuertes."
       }
     ]
   },
@@ -50,14 +36,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 3,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 4,
           "max": 10
         },
         "valor": 3,
-        "especialidad": "-"
+        "especialidad": "Soldado"
       },
       "armas": {
         "disparo": [
@@ -65,7 +51,7 @@
             "nombre": "Proyectil sucio",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
@@ -97,14 +83,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 5,
+        "salvacion": "5+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 4,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "En carga, esta unidad gana +1 dado de ataque en CaC durante esa activación."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [
@@ -112,7 +98,7 @@
             "nombre": "Veneno arrojadizo",
             "ataques": "1D",
             "distancia": "6\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -144,14 +130,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 3,
-        "salvacion": "+6",
-        "velocidad": 2,
+        "salvacion": "6+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 4,
-        "especialidad": "Cuando esta unidad es eliminada, antes de retirarla inflige D3 impactos automáticos de Daño 1/2 a todas las unidades a 2\" (aliadas y enemigas)."
+        "especialidad": "Berserker"
       },
       "armas": {
         "disparo": [],
@@ -178,14 +164,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 6,
-        "especialidad": "Puede disparar en la misma activación en que realiza una carga exitosa."
+        "especialidad": "Avanzadilla"
       },
       "armas": {
         "disparo": [
@@ -193,7 +179,7 @@
             "nombre": "Espinas arrojadizas",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -225,14 +211,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 11,
-        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad no está trabada en CaC, recupera 1 Vida."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
@@ -240,7 +226,7 @@
             "nombre": "Proyectil ácido",
             "ataques": "1D",
             "distancia": "10\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -272,14 +258,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 8,
-        "salvacion": "+4",
-        "velocidad": 4,
+        "salvacion": "4+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "Cuando esta unidad carga exitosamente, puede repetir todos los dados de ataque CaC fallidos en esa activación."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [
@@ -287,7 +273,7 @@
             "nombre": "Lanzador de bilis",
             "ataques": "1D6",
             "distancia": "8\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -319,14 +305,14 @@
       "perfil": {
         "movimiento": "10\"",
         "vidas": 6,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 9,
-        "especialidad": "En carga, gana +2 dados de ataque CaC. Si esta unidad elimina una unidad enemiga en CaC, puede moverse inmediatamente 2\" de forma gratuita."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [
@@ -334,11 +320,11 @@
             "nombre": "Espinas de montura",
             "ataques": "1D",
             "distancia": "6\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Pistolero"
+              "Multiusos"
             ],
             "valor_extra": 0
           }
@@ -366,14 +352,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 18,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Cuando esta unidad carga exitosamente, la unidad objetivo recibe D3 impactos automáticos de Daño 2/3 antes de resolver el ataque CaC."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [
@@ -381,7 +367,7 @@
             "nombre": "Proyectiles espinosos",
             "ataques": "2D",
             "distancia": "10\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -404,14 +390,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Embestida",
+            "nombre": "Embestida (Vehículo)",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Perforante (Vehículo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -425,14 +411,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 20,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Las unidades aliadas de Línea a 6\" pueden repetir los dados de salvación fallidos."
+        "especialidad": "Cobertura móvil"
       },
       "armas": {
         "disparo": [
@@ -440,7 +426,7 @@
             "nombre": "Enjambre de esporas",
             "ataques": "1D6",
             "distancia": "12\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -473,26 +459,26 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 14,
-        "salvacion": "+5",
-        "velocidad": 2,
+        "salvacion": "5+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 12,
-        "especialidad": "Cuando realiza un ataque de Disparo, los objetivos no pueden beneficiarse de cobertura."
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Chorro ácido",
+            "nombre": "Chorro ácido (Vehículo, Monstruo)",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Perforante (Vehículo, Monstruo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -522,15 +508,17 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 10,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 15,
         "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
-        "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita."
+        "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
+        "especialidad_nombre_escaramuza": "Señor de la Cacería",
+        "especialidad_nombre_escuadra": "Señor de la Cacería"
       },
       "armas": {
         "disparo": [
@@ -538,7 +526,7 @@
             "nombre": "Proyectil vivo",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -582,14 +570,14 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 26,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 42,
-        "especialidad": "Cuando esta unidad elimina una unidad enemiga en CaC, recupera D3 Vidas inmediatamente. Una vez por turno, al inicio de su activación, puede devolver al juego una unidad aliada de Línea eliminada con la mitad de su escuadra mínima, colocándola dentro de 6\" de esta unidad."
+        "especialidad": "Boom!"
       },
       "armas": {
         "disparo": [
@@ -597,7 +585,7 @@
             "nombre": "Escupitajo ácido",
             "ataques": "2D6",
             "distancia": "18\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -609,7 +597,7 @@
             "nombre": "Proyectil masivo",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -626,11 +614,11 @@
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
-            "habilidades_arma": [],
+            "habilidades_arma": ["Fiable"],
             "valor_extra": 0
           },
           {
-            "nombre": "Dientes del abismo",
+            "nombre": "Dientes del abismo (línea, élite, héroe)",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -645,28 +633,28 @@
       }
     },
     {
-      "nombre_unidad": "Escoria de la Horda",
+      "nombre_unidad": "Alimaña",
       "era": "Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 3,
-        "salvacion": "+6",
-        "velocidad": 3,
+        "salvacion": "6+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 4,
           "max": 12
         },
         "valor": 3,
-        "especialidad": "Cuando esta unidad tiene 6 o más miniaturas en juego, sus ataques CaC infligen +1 Daño."
+        "especialidad": "Berserker"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Pistola rudimentaria",
+            "nombre": "Lanza piedra",
             "ataques": "1D",
-            "distancia": "8\"",
-            "impactos": "+5",
+            "distancia": "6\"",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
@@ -692,36 +680,23 @@
       }
     },
     {
-      "nombre_unidad": "Guerreros de la Horda",
+      "nombre_unidad": "Guerreros de la Casta",
       "era": "Pasado",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "Cuando esta unidad realiza una carga exitosa, cada dado de ataque CaC que saque 6 añade +1 dado de ataque adicional (Impactos encadenados)."
+        "especialidad": "Carga brutal"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Arco tosco",
-            "ataques": "1D",
-            "distancia": "10\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Hacha de guerra",
@@ -745,14 +720,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 3,
-        "salvacion": "+6",
-        "velocidad": 3,
+        "salvacion": "6+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 4,
           "max": 8
         },
         "valor": 4,
-        "especialidad": "Esta unidad puede disparar a unidades enemigas trabadas en CaC con aliados sin penalización por fuego amigo (el daño se aplica igualmente a cualquier unidad trabada en ese combate)."
+        "especialidad": "Tirador"
       },
       "armas": {
         "disparo": [
@@ -760,7 +735,7 @@
             "nombre": "Arco corto",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -792,14 +767,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 6,
-        "especialidad": "Cuando esta unidad realiza una carga, puede repetir los dos dados de distancia. Si la carga falla por 1\" o menos, tiene éxito igualmente."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [],
@@ -826,30 +801,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 12,
-        "especialidad": "Mientras esta unidad esté trabada en CaC, las unidades aliadas de Línea a 4\" o menos ganan +1D en sus ataques CaC."
+        "especialidad": "Portaestandarte"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Pistolón rudimentario",
-            "ataques": "2D",
-            "distancia": "10\"",
-            "impactos": "+4",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Hacha del campeón",
@@ -873,14 +835,14 @@
       "perfil": {
         "movimiento": "9\"",
         "vidas": 7,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "Cuando realiza una carga exitosa, gana +2D en CaC esa activación. Si elimina su objetivo en CaC, puede inmediatamente cargar a otra unidad enemiga a 6\" o menos."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [
@@ -888,7 +850,7 @@
             "nombre": "Lanza arrojadiza",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -920,14 +882,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 2
         },
         "valor": 9,
-        "especialidad": "Una vez por turno, en lugar de atacar, elige entre: (a) infligir 1D3 impactos automáticos de Daño 1 a una unidad enemiga a 12\", o (b) dar +1D de ataque a una unidad aliada a 8\" hasta el final del turno."
+        "especialidad": "Portaestandarte"
       },
       "armas": {
         "disparo": [
@@ -935,7 +897,7 @@
             "nombre": "Rayo salvaje",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -967,14 +929,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 16,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida (hasta su máximo). Cuando realiza una carga, inflige D3 impactos automáticos de Daño 2 antes del combate."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
@@ -982,7 +944,7 @@
             "nombre": "Roca arrojada",
             "ataques": "1D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -1014,14 +976,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 12,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 11,
-        "especialidad": "Las unidades enemigas trabadas en CaC con esta unidad no pueden retirarse ni destrabarse. Cuando esta unidad elimina una unidad en CaC, puede moverse 3\" de forma gratuita."
+        "especialidad": "Anclado"
       },
       "armas": {
         "disparo": [],
@@ -1048,14 +1010,14 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 14,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Cuando dispara, puede apuntar a un punto del tablero sin línea de visión directa: todas las unidades en 3\" del punto sufren el ataque (ignorando obstáculos de terreno)."
+        "especialidad": "Tirador"
       },
       "armas": {
         "disparo": [
@@ -1063,7 +1025,7 @@
             "nombre": "Catapulta tribal",
             "ataques": "1D6",
             "distancia": "24\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -1096,22 +1058,26 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
-        "salvacion": "+3",
-        "velocidad": 6,
+        "salvacion": "3+",
+        "velocidad": "+6\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad": "Las unidades aliadas a 6\" ganan +1D en ataques CaC. Cuando esta unidad elimina una unidad enemiga en CaC, puede realizar un movimiento gratuito de 3\" y declarar inmediatamente una carga si hay otro objetivo."
+        "especialidad": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por cada Vida perdida.",
+        "especialidad_escaramuza": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por cada Vida perdida.",
+        "especialidad_escuadra": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por unidad perdida de su escuadra.",
+        "especialidad_nombre_escaramuza": "Furia del Caudillo",
+        "especialidad_nombre_escuadra": "Furia del Caudillo"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de brazo",
+            "nombre": "Hacha arrojadiza",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -1134,7 +1100,9 @@
             "valor_extra": 0
           }
         ]
-      }
+      },
+      "especialidad_escaramuza": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por cada Vida perdida.",
+      "especialidad_escuadra": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por unidad perdida de su escuadra."
     },
     {
       "nombre_unidad": "Gran Destructor",
@@ -1143,22 +1111,22 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 30,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 44,
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1D3 Vidas. Cuando realiza una carga, inflige D3 impactos automáticos de Daño 3. Las unidades aliadas de Línea a 6\" pueden repetir dados de CaC fallidos."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañones bestiales",
+            "nombre": "Lanzapeñascos",
             "ataques": "2D6",
             "distancia": "22\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [

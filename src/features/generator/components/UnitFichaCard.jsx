@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { getUnitTypeBadgeSrc } from '../unitTypeBadges.js'
-import { getUnitTypeToken } from '../generatorUtils.js'
+import { formatSpeedValue, getUnitSpecialtyForMode, getUnitSpecialtyLabelForMode, getUnitTypeToken } from '../generatorUtils.js'
 import { getAbilityDescription, getAbilityLabel } from '../../../utils/abilities.js'
 
 // Ficha template images (1537×1023 px, RGBA con zona transparente para la imagen de unidad)
@@ -212,7 +212,7 @@ const formatHabilidades = (habilidades = []) => {
     .map((h) => (typeof h === 'string' ? h : h?.nombre || h?.id || ''))
     .map((label) => ensureFichaText(label, ''))
     .filter(Boolean)
-    .join('\n\n\n\n')
+    .join('\n')
 }
 
 const clampGuideRect = (guide) => ({
@@ -413,7 +413,7 @@ const resizeOrMoveGuide = (guide, interaction, nextPos) => {
 }
 
 // ─── Componente principal ─────────────────────────────────────────────────
-const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, imageDataUrl, gameMode = 'escaramuza', eraLabel = '', lang = 'es', onImageClick }, ref) {
+const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, imageDataUrl, gameMode = 'escaramuza', eraLabel = '', lang = 'es', onImageClick, showLayoutToolbar = true }, ref) {
   const wrapperRef = useRef(null)
   const cardRef = useRef(null)
 
@@ -538,11 +538,11 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
   const template = getFichaTemplate(factionId)
   const disparo = unit.armas_disparo || []
   const melee   = unit.armas_melee   || []
-  const especialidad = gameMode === 'escuadra'
-    ? (unit.especialidad_escuadra  || unit.especialidad || '-')
-    : (unit.especialidad_escaramuza || unit.especialidad || '-')
+  const especialidad = getUnitSpecialtyForMode(unit, gameMode, lang)
+  const especialidadNombre = getUnitSpecialtyLabelForMode(unit, gameMode)
+  const shouldShowEspecialidadNombre = especialidadNombre && especialidadNombre !== '-' && especialidadNombre !== especialidad
   const unitTypeToken = getUnitTypeToken(unit.tipo)
-  const fallbackBadgeSrc = getUnitTypeBadgeSrc(unit.tipo)
+  const fallbackBadgeSrc = getUnitTypeBadgeSrc(unit.tipo, unit.eras || eraLabel)
   const addImageLabel = lang === 'en' ? 'ADD IMAGE' : 'AÑADIR IMAGEN'
   const addImageAriaLabel = lang === 'en' ? 'Add unit image' : 'Añadir imagen de unidad'
   const eraToken = getEraToken(eraLabel)
@@ -635,7 +635,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
 
   return (
     <div ref={wrapperRef} className="ficha-wrapper">
-      {canAccessLayoutMode ? (
+      {canAccessLayoutMode && showLayoutToolbar ? (
         <div className="ficha-layout-toolbar">
           <button
             type="button"
@@ -776,7 +776,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
             { key: 'MOV',   idx: 0, value: unit.movimiento },
             { key: 'VIDAS', idx: 1, value: unit.vidas },
             { key: 'SALV',  idx: 2, value: unit.salvacion },
-            { key: 'VEL',   idx: 3, value: unit.velocidad },
+            { key: 'VEL',   idx: 3, value: formatSpeedValue(unit.velocidad) },
             { key: 'ESC',   idx: 4, value: unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}` },
           ].map(({ key, idx, value }) => (
             <StatCell
@@ -797,9 +797,12 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
             maxFontSize={18}
             minFontSize={10}
             step={0.5}
-            fitKey={`${especialidad || ''}-${guideMap.ESPECIALIDAD?.w || FICHA_LAYOUT.specialty.w}-${guideMap.ESPECIALIDAD?.h || FICHA_LAYOUT.specialty.h}`}
+            fitKey={`${especialidadNombre || ''}:${especialidad || ''}-${guideMap.ESPECIALIDAD?.w || FICHA_LAYOUT.specialty.w}-${guideMap.ESPECIALIDAD?.h || FICHA_LAYOUT.specialty.h}`}
           >
-            {ensureFichaText(especialidad)}
+            <div className="ficha-specialty-line">
+              {shouldShowEspecialidadNombre ? <strong>{ensureFichaText(especialidadNombre)}</strong> : null}
+              <div className="ficha-specialty-desc">{ensureFichaText(especialidad)}</div>
+            </div>
           </AutoFitText>
 
           {/* ── DISPARO: datos ── */}

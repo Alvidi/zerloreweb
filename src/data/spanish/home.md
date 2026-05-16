@@ -36,7 +36,7 @@ Completamente gratuito
 
 #### body
 
-Reglamento, facciones, generador de ejércitos y tokens. Todo sin coste.
+Reglamento, facciones, creador de ejércitos y tokens. Todo sin coste.
 
 ### fast
 
@@ -90,7 +90,7 @@ Todo lo que necesitas, en un solo sitio
 
 ### body
 
-Reglamento completo, fichas de facciones, generador de ejércitos y tokens imprimibles. Sin registros, sin pagos, sin trampa.
+Reglamento completo, fichas de facciones, creador de ejércitos y tokens imprimibles. Sin registros, sin pagos, sin trampa.
 
 ### cta
 

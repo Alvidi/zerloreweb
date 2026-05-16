@@ -5,19 +5,24 @@ import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
 import misionesEnMd from '../data/english/missions.md?raw'
+import legadoData from '../data/factions/jsonFaccionesES/legado.json'
+import ordenData from '../data/factions/jsonFaccionesES/orden.json'
+import legadoEnData from '../data/factions/jsonFaccionesEN/legado.en.json'
+import ordenEnData from '../data/factions/jsonFaccionesEN/orden.en.json'
+import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
+import FactionAbilityFichaCard from '../features/generator/components/FactionAbilityFichaCard.jsx'
+import { getFactionSkillDescriptionForMode, normalizeFaction } from '../features/generator/generatorUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
 import damage5Token from '../images/tokens/damage-5-red.svg'
 import damage10Token from '../images/tokens/damage-10-red.svg'
-import explosiveArea3Token from '../images/tokens/explosive-area-3in.svg'
 import stateReadyToken from '../images/tokens/preparado-blue.svg'
 import stateRetreatToken from '../images/tokens/retirada-blue.svg'
 import meleeToken from '../images/tokens/cuerpo-a-cuerpo-orange.svg'
 import objectiveToken from '../images/tokens/objetivo-orange.svg'
 import conquestBlueToken from '../images/tokens/conquista-blue.svg'
 import conquestRedToken from '../images/tokens/conquista-red.svg'
-import outOfControlToken from '../images/tokens/descontrolado-jaws-orange.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationOrangeToken from '../images/tokens/activacion-orange.svg'
 import rerollToken from '../images/tokens/reroll-green.svg'
@@ -30,14 +35,25 @@ import activationImage from '../images/webimagen/imagen_7.webp'
 import turnStructureImage from '../images/webimagen/imagen_8.webp'
 import commandPostControlImage from '../images/webimagen/imagen_9.webp'
 import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
-import unitTypesImage from '../images/webimagen/imagen_11.jpg'
-import unitProfileImage from '../images/webimagen/ficha_unidad.webp'
-import factionAbilityProfileImage from '../images/webimagen/ficha_habilidad.webp'
+import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
+import unitTypeLineIcon from '../images/units_icons/line.png'
+import unitTypeEliteIcon from '../images/units_icons/elite.png'
+import unitTypeVehicleIcon from '../images/units_icons/vehicle.png'
+import unitTypeMonsterIcon from '../images/units_icons/monster.png'
+import unitTypeHeroIcon from '../images/units_icons/hero.png'
+import unitTypeTitanIcon from '../images/units_icons/titan.png'
+import unitTypeLinePastIcon from '../images/units_icons/past/line.png'
+import unitTypeElitePastIcon from '../images/units_icons/past/elite.png'
+import unitTypeVehiclePastIcon from '../images/units_icons/past/vehicle.png'
+import unitTypeHeroPastIcon from '../images/units_icons/past/hero.png'
+import unitTypeTitanPastIcon from '../images/units_icons/past/titan.png'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
+const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
+const RULES_ABILITY_PROFILE_SLOT_SRC = 'rules-ability-profile-slot'
 
 const normalizeHeadingText = (value) =>
   String(value || '')
@@ -47,6 +63,14 @@ const normalizeHeadingText = (value) =>
     .replace(/[^\w\s]+/g, '')
     .replace(/\s+/g, ' ')
     .trim()
+
+const escapeHtml = (value) =>
+  String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
 const RULES_ASSET_PLACEHOLDERS = {
@@ -60,9 +84,119 @@ const RULES_ASSET_PLACEHOLDERS = {
   rerollTokenImage: rerollToken,
   sprintImage,
   turnStructureImage,
-  factionAbilityProfileImage,
-  unitProfileImage,
-  unitTypesImage,
+  factionAbilityProfileImage: RULES_ABILITY_PROFILE_SLOT_SRC,
+  unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,
+}
+
+const RULES_UNIT_TYPE_ICONS = [
+  { id: 'line', imageSrc: unitTypeLineIcon, pastImageSrc: unitTypeLinePastIcon, labelEs: 'Línea', labelEn: 'Line', sectionHeadings: ['1 unidades de linea', '1 line units'] },
+  { id: 'elite', imageSrc: unitTypeEliteIcon, pastImageSrc: unitTypeElitePastIcon, labelEs: 'Élite', labelEn: 'Elite', sectionHeadings: ['2 unidades de elite', '2 elite units'] },
+  { id: 'vehicle', imageSrc: unitTypeVehicleIcon, pastImageSrc: unitTypeVehiclePastIcon, labelEs: 'Vehículo', labelEn: 'Vehicle', sectionHeadings: ['3 vehiculos', '3 vehicles'] },
+  { id: 'monster', imageSrc: unitTypeMonsterIcon, labelEs: 'Monstruo', labelEn: 'Monster', sectionHeadings: ['4 monstruos', '4 monsters'] },
+  { id: 'hero', imageSrc: unitTypeHeroIcon, pastImageSrc: unitTypeHeroPastIcon, labelEs: 'Héroe', labelEn: 'Hero', sectionHeadings: ['5 heroes', '5 heroes'] },
+  { id: 'titan', imageSrc: unitTypeTitanIcon, pastImageSrc: unitTypeTitanPastIcon, labelEs: 'Titán', labelEn: 'Titan', sectionHeadings: ['6 titanes', '6 titans'] },
+]
+
+const RULES_EXAMPLE_FACTIONS = {
+  es: {
+    legado: normalizeFaction(legadoData, 0, 'legado'),
+    orden: normalizeFaction(ordenData, 0, 'orden'),
+  },
+  en: {
+    legado: normalizeFaction(legadoEnData, 0, 'legado'),
+    orden: normalizeFaction(ordenEnData, 0, 'orden'),
+  },
+}
+
+const getRulesExampleFactionSet = (lang = 'es') => RULES_EXAMPLE_FACTIONS[lang] || RULES_EXAMPLE_FACTIONS.es
+
+const getRulesExampleUnit = (lang = 'es') => {
+  const units = getRulesExampleFactionSet(lang).legado.unidades || []
+  const preferredName = lang === 'en' ? 'Eternal Guardians' : 'Guardianes Eternos'
+  return units.find((unit) => unit.nombre === preferredName) || units[0]
+}
+
+const getRulesExampleAbility = (lang = 'es') => {
+  const abilities = getRulesExampleFactionSet(lang).orden.habilidades_faccion || []
+  const preferredId = lang === 'en' ? 'fortification' : 'fortificacion'
+  return abilities.find((ability) => ability.id === preferredId) || abilities[0]
+}
+
+function RulesFichaSlot({ type, lang }) {
+  if (type === 'unit') {
+    const unit = getRulesExampleUnit(lang)
+    if (!unit) return null
+    return (
+      <div className="rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-unit">
+        <UnitFichaCard
+          unit={{
+            ...unit,
+            escuadra_display: `${unit.escuadra_min}/${unit.escuadra_max}`,
+          }}
+          factionId="legado"
+          imageDataUrl=""
+          gameMode="escaramuza"
+          eraLabel={lang === 'en' ? 'Future' : 'Futuro'}
+          lang={lang}
+          showLayoutToolbar={false}
+        />
+      </div>
+    )
+  }
+
+  if (type === 'ability') {
+    const ability = getRulesExampleAbility(lang)
+    if (!ability) return null
+    return (
+      <div className="rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-ability">
+        <FactionAbilityFichaCard
+          ability={ability}
+          factionId="orden"
+          description={getFactionSkillDescriptionForMode(ability, 'escaramuza')}
+          lang={lang}
+          showLayoutToolbar={false}
+        />
+      </div>
+    )
+  }
+
+  return null
+}
+
+const renderRulesHtmlWithFichaSlots = (html, lang) => {
+  const slotPattern = /<div data-rules-ficha-slot="(unit|ability)"><\/div>/g
+  const nodes = []
+  let lastIndex = 0
+  let match
+  let index = 0
+
+  while ((match = slotPattern.exec(html)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(
+        <div
+          key={`rules-html-fragment-${index}`}
+          className="rules-html-fragment"
+          dangerouslySetInnerHTML={{ __html: html.slice(lastIndex, match.index) }}
+        />,
+      )
+      index += 1
+    }
+    nodes.push(<RulesFichaSlot key={`rules-ficha-slot-${index}`} type={match[1]} lang={lang} />)
+    index += 1
+    lastIndex = match.index + match[0].length
+  }
+
+  if (lastIndex < html.length) {
+    nodes.push(
+      <div
+        key={`rules-html-fragment-${index}`}
+        className="rules-html-fragment"
+        dangerouslySetInnerHTML={{ __html: html.slice(lastIndex) }}
+      />,
+    )
+  }
+
+  return nodes
 }
 
 const isRulesPdfKeepWithNextNode = (node) =>
@@ -94,13 +228,11 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
   { id: 'state_activation_orange', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivatedOrange', diameterMm: 32, previewSize: 'medium', imageSrc: activationOrangeToken },
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
-  { id: 'state_out_of_control', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateOutOfControl', diameterMm: 32, previewSize: 'medium', imageSrc: outOfControlToken },
   { id: 'state_melee', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateMelee', diameterMm: 32, previewSize: 'medium', imageSrc: meleeToken },
   { id: 'state_objective', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateObjective', diameterMm: 32, previewSize: 'medium', imageSrc: objectiveToken },
   { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
   { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
   { id: 'state_reroll', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReroll', diameterMm: 32, previewSize: 'medium', imageSrc: rerollToken },
-  { id: 'explosive_area_3', category: 'template', shape: 'circle', labelKey: 'rules.tokens.types.explosiveArea3', diameterMm: 76.2, previewSize: 'large', imageSrc: explosiveArea3Token },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_circle_6_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
@@ -133,6 +265,7 @@ function Reglamento() {
   const [tokenInputValues, setTokenInputValues] = useState(buildInitialTokenInputValues)
   const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
+  const [isSpecialtyTableOpen, setIsSpecialtyTableOpen] = useState(false)
   const modeParam = searchParams.get('mode')
   const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'rules'
   const isTokensMode = rulesMode === 'tokens'
@@ -173,6 +306,7 @@ function Reglamento() {
   }, [activeMarkdown, isTokensMode])
   const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
   const printCoverCreditLabel = lang === 'en' ? 'by alvidi' : 'por alvidi'
+  const shouldShowRulesHeader = rulesMode === 'rules'
 
   const { renderedHtml, tocItems, documentHeading } = useMemo(() => {
     if (isTokensMode) {
@@ -192,6 +326,142 @@ function Reglamento() {
       wrapper.appendChild(table)
     })
     if (rulesMode === 'rules') {
+      const specialtyHeading = Array.from(doc.querySelectorAll('h3')).find((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized === 'especialidad' || normalized === 'specialty'
+      })
+
+      if (specialtyHeading) {
+        let sibling = specialtyHeading.nextElementSibling
+        while (sibling && !/^H[1-3]$/.test(sibling.tagName)) {
+          if (sibling.classList.contains('rules-table-scroll')) {
+            const details = doc.createElement('section')
+            details.className = `rules-specialty-details${isSpecialtyTableOpen ? ' is-open' : ''}`
+
+            const summary = doc.createElement('button')
+            summary.type = 'button'
+            summary.className = 'rules-specialty-summary'
+            summary.dataset.rulesSpecialtyToggle = 'true'
+            summary.setAttribute('aria-expanded', String(isSpecialtyTableOpen))
+            summary.textContent = lang === 'en' ? 'View specialty table' : 'Ver tabla de especialidades'
+
+            const panel = doc.createElement('div')
+            panel.className = 'rules-specialty-panel'
+
+            sibling.parentNode?.insertBefore(details, sibling)
+            details.appendChild(summary)
+            details.appendChild(panel)
+            panel.appendChild(sibling)
+            break
+          }
+          sibling = sibling.nextElementSibling
+        }
+      }
+    }
+    Array.from(doc.querySelectorAll('img')).forEach((image) => {
+      const src = image.getAttribute('src') || ''
+      const isUnitFicha = src === RULES_UNIT_PROFILE_SLOT_SRC
+      const isAbilityFicha = src === RULES_ABILITY_PROFILE_SLOT_SRC
+      if (!isUnitFicha && !isAbilityFicha) return
+
+      const slot = doc.createElement('div')
+      slot.dataset.rulesFichaSlot = isUnitFicha ? 'unit' : 'ability'
+      const paragraph = image.closest('p')
+      if (paragraph) {
+        paragraph.replaceWith(slot)
+      } else {
+        image.replaceWith(slot)
+      }
+    })
+    if (rulesMode === 'rules') {
+      const unitTypesHeading = Array.from(doc.querySelectorAll('h1, h2, h3')).find((heading) => {
+        const normalized = normalizeHeadingText(heading.textContent)
+        return normalized === 'tipos de unidad' || normalized === 'unit types'
+      })
+
+      if (unitTypesHeading) {
+        const gallery = doc.createElement('div')
+        gallery.className = 'rules-unit-type-gallery'
+
+        RULES_UNIT_TYPE_ICONS.forEach((unitType) => {
+          const item = doc.createElement('article')
+          item.className = 'rules-unit-type-gallery-item'
+
+          const mark = doc.createElement('div')
+          mark.className = `rules-unit-type-gallery-mark${unitType.pastImageSrc ? ' has-era-variants' : ''}`
+
+          const image = doc.createElement('img')
+          image.className = 'rules-unit-type-gallery-image'
+          image.src = unitType.imageSrc
+          image.alt = ''
+          image.loading = 'lazy'
+          mark.appendChild(image)
+
+          if (unitType.pastImageSrc) {
+            const pastImage = doc.createElement('img')
+            pastImage.className = 'rules-unit-type-gallery-image'
+            pastImage.src = unitType.pastImageSrc
+            pastImage.alt = ''
+            pastImage.loading = 'lazy'
+            mark.appendChild(pastImage)
+          }
+
+          const label = doc.createElement('p')
+          label.className = 'rules-unit-type-gallery-label'
+          label.textContent = lang === 'en' ? unitType.labelEn : unitType.labelEs
+
+          item.appendChild(mark)
+          item.appendChild(label)
+          gallery.appendChild(item)
+        })
+
+        let insertionTarget = unitTypesHeading
+        let sibling = unitTypesHeading.nextElementSibling
+        while (sibling && sibling.tagName === 'P') {
+          insertionTarget = sibling
+          sibling = sibling.nextElementSibling
+        }
+
+        insertionTarget.parentNode?.insertBefore(gallery, insertionTarget.nextSibling)
+      }
+
+      RULES_UNIT_TYPE_ICONS.forEach((unitType) => {
+        const sectionHeading = Array.from(doc.querySelectorAll('h2, h3')).find((heading) =>
+          unitType.sectionHeadings.includes(normalizeHeadingText(heading.textContent)),
+        )
+        if (!sectionHeading || sectionHeading.nextElementSibling?.classList.contains('rules-unit-type-section-badge')) return
+
+        const badge = doc.createElement('div')
+        badge.className = `rules-unit-type-section-badge unit-type-${unitType.id}`
+
+        const mark = doc.createElement('div')
+        mark.className = `rules-unit-type-section-mark${unitType.pastImageSrc ? ' has-era-variants' : ''}`
+
+        const image = doc.createElement('img')
+        image.className = 'rules-unit-type-section-image'
+        image.src = unitType.imageSrc
+        image.alt = ''
+        image.loading = 'lazy'
+        mark.appendChild(image)
+
+        if (unitType.pastImageSrc) {
+          const pastImage = doc.createElement('img')
+          pastImage.className = 'rules-unit-type-section-image'
+          pastImage.src = unitType.pastImageSrc
+          pastImage.alt = ''
+          pastImage.loading = 'lazy'
+          mark.appendChild(pastImage)
+        }
+
+        const label = doc.createElement('span')
+        label.className = 'rules-unit-type-section-label'
+        label.textContent = lang === 'en' ? unitType.labelEn : unitType.labelEs
+
+        badge.appendChild(mark)
+        badge.appendChild(label)
+        sectionHeading.parentNode?.insertBefore(badge, sectionHeading.nextSibling)
+      })
+
       const commandHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
         return normalized === 'puestos de mando y despliegue' || normalized === 'command posts and deployment'
@@ -427,11 +697,6 @@ function Reglamento() {
             imageSrc: stateRetreatToken,
           },
           {
-            matcher: ['token de descontrol', 'out of control token'],
-            label: t('rules.tokens.types.stateOutOfControl'),
-            imageSrc: outOfControlToken,
-          },
-          {
             matcher: ['token de espada', 'sword token'],
             label: t('rules.tokens.types.stateMelee'),
             imageSrc: meleeToken,
@@ -556,7 +821,22 @@ function Reglamento() {
     }
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc, documentHeading }
-  }, [t, rulesHtml, isTokensMode, rulesMode])
+  }, [t, lang, rulesHtml, isTokensMode, rulesMode, isSpecialtyTableOpen])
+
+  useEffect(() => {
+    if (!contentRef.current) return undefined
+
+    const handleRulesClick = (event) => {
+      const toggle = event.target.closest('[data-rules-specialty-toggle="true"]')
+      if (!toggle || !contentRef.current?.contains(toggle)) return
+      event.preventDefault()
+      setIsSpecialtyTableOpen((current) => !current)
+    }
+
+    const currentContent = contentRef.current
+    currentContent.addEventListener('click', handleRulesClick)
+    return () => currentContent.removeEventListener('click', handleRulesClick)
+  }, [renderedHtml])
 
   // Scroll spy para resaltar sección activa
   useEffect(() => {
@@ -816,6 +1096,40 @@ function Reglamento() {
             max-width: 100%;
             height: auto;
           }
+          .rules-pdf-sheet .rules-html .rules-profile-image-row {
+            width: 72%;
+            max-width: 72%;
+            margin: 18px 0 22px;
+            transform: none;
+            display: flex;
+            justify-content: center;
+            break-inside: avoid;
+          }
+          .rules-pdf-sheet .rules-html .rules-profile-image-row:has(.rules-profile-image-ability) {
+            width: 60%;
+            max-width: 60%;
+          }
+          .rules-pdf-sheet .rules-html .rules-profile-image {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+          }
+          .rules-pdf-sheet .rules-html .rules-hero-banner {
+            position: relative;
+            width: 100%;
+            margin: 0 0 30px;
+            overflow: hidden;
+            border: 1px solid #d8c777;
+            border-radius: 0;
+            background: #08090d;
+            break-inside: avoid;
+          }
+          .rules-pdf-sheet .rules-html .rules-hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+          }
           .rules-pdf-sheet .rules-html ul,
           .rules-pdf-sheet .rules-html ol {
             padding-left: 24px;
@@ -827,6 +1141,12 @@ function Reglamento() {
             border: 1px solid #d7d7d7;
             border-radius: 0;
             background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-specialty-summary {
+            display: none;
+          }
+          .rules-pdf-sheet .rules-html .rules-specialty-panel {
+            display: block;
           }
           .rules-pdf-sheet .rules-html table {
             width: 100%;
@@ -868,6 +1188,79 @@ function Reglamento() {
             margin: 0;
             font-size: 11px;
             line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-gallery {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 10px;
+            margin: 16px 0 22px;
+            padding: 12px;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-gallery-item {
+            display: grid;
+            justify-items: center;
+            gap: 7px;
+            text-align: center;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-gallery-mark {
+            width: 58px;
+            height: 58px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-gallery-image {
+            display: block;
+            width: 82%;
+            height: 82%;
+            object-fit: contain;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-gallery-mark.has-era-variants .rules-unit-type-gallery-image {
+            width: 48%;
+            height: 48%;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-gallery-label {
+            margin: 0;
+            font-size: 10px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 12px;
+            padding: 0;
+            break-inside: avoid;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-section-mark {
+            width: 76px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-section-image {
+            display: block;
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-section-mark.has-era-variants .rules-unit-type-section-image {
+            width: 34px;
+            height: 34px;
+          }
+          .rules-pdf-sheet .rules-html .rules-unit-type-section-label {
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
             text-transform: uppercase;
             letter-spacing: 0.04em;
           }
@@ -1140,11 +1533,25 @@ function Reglamento() {
           <p class="rules-pdf-cover-credit">${printCoverCreditLabel}</p>
         </div>
         <div class="rules-pdf-sheet">
-          <div class="rules-html">${renderedHtml}</div>
+          <div class="rules-html">
+            ${documentHeading ? `<h1>${escapeHtml(documentHeading.title)}</h1>` : ''}
+            ${shouldShowRulesHeader ? `<div class="rules-hero-banner"><img src="${rulesHeaderImage}" alt="" /></div>` : ''}
+            ${renderedHtml}
+          </div>
         </div>
       `
 
       document.body.appendChild(captureRoot)
+      const liveFichaSlots = Array.from(contentRef.current?.querySelectorAll('.rules-ficha-card-example') || [])
+      captureRoot.querySelectorAll('[data-rules-ficha-slot]').forEach((slot, index) => {
+        const liveSlot = liveFichaSlots[index]
+        if (liveSlot) {
+          slot.replaceWith(liveSlot.cloneNode(true))
+        }
+      })
+      captureRoot.querySelectorAll('.rules-specialty-details').forEach((details) => {
+        details.classList.add('is-open')
+      })
 
       if (document.fonts?.ready) {
         await document.fonts.ready
@@ -1697,27 +2104,34 @@ function Reglamento() {
             </div>
             <div className="rules-html reveal" ref={contentRef}>
               {documentHeading && (
-                <div className="rules-document-head">
-                  <h1 id={documentHeading.id}>{documentHeading.title}</h1>
-                  <button
-                    type="button"
-                    className="primary rules-download-button"
-                    onClick={handleDownloadPdf}
-                    disabled={isGeneratingRulesPdf}
-                    aria-busy={isGeneratingRulesPdf}
-                  >
-                    {isGeneratingRulesPdf ? (
-                      <span className="rules-pdf-button-content">
-                        <span className="rules-pdf-spinner" aria-hidden="true" />
-                        {t('rules.generatingPdf')}
-                      </span>
-                    ) : (
-                      t('rules.downloadPdf')
-                    )}
-                  </button>
-                </div>
+                <>
+                  <div className="rules-document-head">
+                    <h1 id={documentHeading.id}>{documentHeading.title}</h1>
+                    <button
+                      type="button"
+                      className="primary rules-download-button"
+                      onClick={handleDownloadPdf}
+                      disabled={isGeneratingRulesPdf}
+                      aria-busy={isGeneratingRulesPdf}
+                    >
+                      {isGeneratingRulesPdf ? (
+                        <span className="rules-pdf-button-content">
+                          <span className="rules-pdf-spinner" aria-hidden="true" />
+                          {t('rules.generatingPdf')}
+                        </span>
+                      ) : (
+                        t('rules.downloadPdf')
+                      )}
+                    </button>
+                  </div>
+                  {shouldShowRulesHeader && (
+                    <div className="rules-hero-banner" aria-hidden="true">
+                      <img src={rulesHeaderImage} alt="" loading="eager" />
+                    </div>
+                  )}
+                </>
               )}
-              <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+              {renderRulesHtmlWithFichaSlots(renderedHtml, lang)}
             </div>
           </div>
         </div>

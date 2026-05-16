@@ -2,50 +2,29 @@
   "id": "orden",
   "faccion": {
     "nombre": "Order",
-    "estilo_juego": "A disciplined and methodical faction focused on controlling territory and sustained fire. Its units perform best when they maintain position and tactical coordination. It sacrifices mobility in exchange for power and precision. Ideal for players who enjoy planning each turn, establishing defensive lines, and punishing the enemy with balanced units.",
-    "seleccion_habilidades": "multiple",
+    "estilo_juego": "A disciplined and methodical faction focused on territorial control and sustained fire. Its units perform best when they hold position and coordinate tactically. It sacrifices mobility for power and precision. Ideal for players who enjoy planning each turn, establishing defensive lines, and punishing the enemy with balanced units.",
+    "seleccion_habilidades": "individual",
     "habilidades_faccion": [
       {
-        "id": "atrincheramiento",
-        "nombre": "Entrenchment",
-        "coste": 8,
-        "descripcion_escaramuza": "A unit in cover gains +1 Shooting attack die during its activation until the end of that activation.",
-        "descripcion_escuadra": "A squad in cover gains +1 Shooting attack die during its activation until the end of that activation."
+        "id": "chain-of-command",
+        "nombre": "Chain of Command",
+        "descripcion_escaramuza": "Once per turn, when an ORDER unit activates, another ORDER unit within 6\" may activate immediately afterwards without waiting for the opponent's turn.",
+        "descripcion_escuadra": "Once per turn, when an ORDER unit activates, another ORDER unit within 6\" may activate immediately afterwards without waiting for the opponent's turn.",
+        "frase": "Order is the origin of justice"
       },
       {
-        "id": "fuego-coordinado",
-        "nombre": "Coordinated Fire",
-        "coste": 5,
-        "descripcion_escaramuza": "If an allied unit shoots the same target in the same turn, the second and later attackers apply -1 to their Precision value, improving the roll to hit for that turn.",
-        "descripcion_escuadra": "If an allied squad or unit shoots the same target in the same turn, the second and later attackers apply -1 to their Precision value, improving the roll to hit for that turn."
+        "id": "fortification",
+        "nombre": "Fortification",
+        "descripcion_escaramuza": "Command posts under your control count as being in cover.",
+        "descripcion_escuadra": "Command posts under your control count as being in cover.",
+        "frase": "Where we plant the banner, not one step back."
       },
       {
-        "id": "repliegue-tactico",
-        "nombre": "Tactical Withdrawal",
-        "coste": 4,
-        "descripcion_escaramuza": "Once per turn, a unit may disengage from melee without making a retreat check.",
-        "descripcion_escuadra": "Once per turn, a squad may disengage from melee without making a retreat check."
-      },
-      {
-        "id": "artilleria-de-apoyo",
-        "nombre": "Support Artillery",
-        "coste": 7,
-        "descripcion_escaramuza": "Once per turn, instead of activating a unit, you may bombard any point on the battlefield more than 6\" away from your own units. All units within 3\" of that point suffer 1 automatic hit with Damage 1 and no save.",
-        "descripcion_escuadra": "Once per turn, instead of activating a squad or unit, you may bombard any point on the battlefield more than 6\" away from your own units. All squads or units within 3\" of that point suffer 1 automatic hit with Damage 1 and no save."
-      },
-      {
-        "id": "formacion-de-asalto",
-        "nombre": "Assault Formation",
-        "coste": 5,
-        "descripcion_escaramuza": "When a unit declares a charge, it may reroll one of the two dice from the 2D6 charge roll. The previous result is discarded.",
-        "descripcion_escuadra": "When a squad declares a charge, it may reroll one of the two dice from the 2D6 charge roll. The previous result is discarded."
-      },
-      {
-        "id": "contraofensiva",
-        "nombre": "Counteroffensive",
-        "coste": 4,
-        "descripcion_escaramuza": "When an Order unit makes a counterattack in melee combat, it gains +1 melee die.",
-        "descripcion_escuadra": "When an Order squad makes a counterattack in melee combat, it gains +1 melee die."
+        "id": "doctrine",
+        "nombre": "Doctrine",
+        "descripcion_escaramuza": "Before the game begins, choose one enemy unit type: Line, Elite, Vehicle, Monster, Hero, or Titan. Your units may reroll all misses when attacking units of that type until the end of the game.",
+        "descripcion_escuadra": "Before the game begins, choose one enemy unit type: Line, Elite, Vehicle, Monster, Hero, or Titan. Your units may reroll all misses when attacking units of that type until the end of the game.",
+        "frase": "Know your enemy before raising your weapon."
       }
     ]
   },
@@ -57,14 +36,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 4,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "-"
+        "especialidad": "Soldier"
       },
       "armas": {
         "disparo": [
@@ -72,7 +51,7 @@
             "nombre": "Standard Rifle",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -104,22 +83,22 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 7,
-        "especialidad": "Ignores cover."
+        "especialidad": "Soldier"
       },
       "armas": {
         "disparo": [
           {
             "nombre": "Flamethrower",
             "ataques": "1D6",
-            "distancia": "8\"",
-            "impactos": "-",
+            "distancia": "6\"",
+            "impactos": null,
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -151,14 +130,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 7,
-        "especialidad": "-"
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
@@ -166,7 +145,7 @@
             "nombre": "Heavy Weapon",
             "ataques": "1D6",
             "distancia": "14\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -175,14 +154,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Rocket Launcher",
+            "nombre": "Rocket Launcher (Vehicle, Monster)",
             "ataques": "2D",
             "distancia": "18\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Piercing (Vehicle)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -210,33 +189,33 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 4,
+        "salvacion": "4+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 4,
           "max": 8
         },
         "valor": 6,
-        "especialidad": "If another allied unit within 6\" is attacked, it may redirect half of the damage caused to this unit."
+        "especialidad": "Shove"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Service Pistol",
+            "nombre": "Regulation Pistol",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
-              "Pistolier"
+              "Multi-use"
             ],
             "valor_extra": 0
           }
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Guard Maul",
+            "nombre": "Guard Mace",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -257,14 +236,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 4
         },
         "valor": 10,
-        "especialidad": "When this unit does not move during its activation, reduce the damage of all Shooting attacks it receives that turn by 1 (min. 1)."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -272,7 +251,7 @@
             "nombre": "Armored Assault Rifle",
             "ataques": "3D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -283,7 +262,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Power Fists",
+            "nombre": "Energy Fists",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -304,14 +283,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 8,
-        "especialidad": "Once per activation, this unit may spend both actions to choose an allied unit within 3\". That unit recovers D3 lost Health. It cannot exceed its maximum Health. It cannot be used on Vehicles or Titans."
+        "especialidad": "Support"
       },
       "armas": {
         "disparo": [
@@ -319,11 +298,11 @@
             "nombre": "Tactical Pistol",
             "ataques": "2D",
             "distancia": "10\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Pistolier"
+              "Multi-use"
             ],
             "valor_extra": 0
           }
@@ -351,38 +330,38 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 6,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 8,
-        "especialidad": "If it does not move during its activation, its Shooting attacks ignore cover."
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Sniper Rifle",
+            "nombre": "Sniper Rifle (Line, Elite)",
             "ataques": "2D",
             "distancia": "28\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Brutal 5+ (Line, Elite)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Anti-Materiel Rifle",
+            "nombre": "Anti-Materiel Rifle (Vehicle, Monster)",
             "ataques": "1D",
             "distancia": "24\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Piercing (Vehicle, Monster)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -408,14 +387,14 @@
       "perfil": {
         "movimiento": "10\"",
         "vidas": 8,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "This Vehicle unit may be fielded in squads."
+        "especialidad": "Vanguard"
       },
       "armas": {
         "disparo": [
@@ -423,7 +402,7 @@
             "nombre": "Light Machine Gun",
             "ataques": "3D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -455,26 +434,26 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 18,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "It may use two shooting actions."
+        "especialidad": "Shooter"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Machine Gun",
+            "nombre": "Machine Gun (Line, Elite)",
             "ataques": "4D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Brutal 5+ (Line, Elite)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
@@ -482,7 +461,7 @@
             "nombre": "Main Cannon",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -514,14 +493,14 @@
       "perfil": {
         "movimiento": "-",
         "vidas": 12,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "-",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "This unit cannot move. When it makes a Shooting attack, it gains +1 attack die. It blocks reinforcements at that command post."
+        "especialidad": "Emplaced"
       },
       "armas": {
         "disparo": [
@@ -529,7 +508,7 @@
             "nombre": "Siege Cannon",
             "ataques": "1D",
             "distancia": "36\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -539,14 +518,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Electromagnetic Cannon",
+            "nombre": "Electromagnetic Cannon (Vehicle, Monster)",
             "ataques": "2D",
             "distancia": "30\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Piercing (Vehicle, Monster)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -571,20 +550,19 @@
       "nombre_unidad": "Field General",
       "era": "Future",
       "clase": "Hero",
-      "especialidad_escaramuza": "Once per turn, it may designate an allied unit within 6\" of this Hero to reroll all failed Shooting dice.",
-      "especialidad_escuadra": "While this Hero is part of a squad, that squad gains +1 Shooting attack die if it has not made any Move action during its activation.",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 10,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad_escaramuza": "Once per turn, it may designate an allied unit within 6\" of this Hero to reroll all failed Shooting dice.",
-        "especialidad_escuadra": "While this Hero is part of a squad, that squad gains +1 Shooting attack die if it has not made any Move action during its activation."
+        "especialidad": "All allied units within 6\" of this hero may reroll all failed Shooting and melee dice.",
+        "especialidad_escaramuza": "All allied units within 6\" of this hero may reroll all failed Shooting and melee dice.",
+        "especialidad_escuadra": "While this hero is part of a squad, all allied units within 6\" of this hero may reroll all failed Shooting and melee dice."
       },
       "armas": {
         "disparo": [
@@ -592,7 +570,7 @@
             "nombre": "Energy Rifle",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -615,14 +593,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Power Fist",
+            "nombre": "Energy Fist (Elite)",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Piercing (Elite)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -636,14 +614,14 @@
       "perfil": {
         "movimiento": "3\"",
         "vidas": 32,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 45,
-        "especialidad": "This unit may carry two ranged weapons and shoot twice with its shooting action. If it has not moved, it gains +1 die on both shots."
+        "especialidad": "Shooter"
       },
       "armas": {
         "disparo": [
@@ -651,7 +629,7 @@
             "nombre": "Destruction Cannon",
             "ataques": "2D6",
             "distancia": "28\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
@@ -663,7 +641,7 @@
             "nombre": "Orbital Missile Launcher",
             "ataques": "2D",
             "distancia": "24\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -695,30 +673,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 4,
-        "especialidad": "If this unit receives a melee attack while in cover, the attacker does not gain the charge bonus for that attack."
+        "especialidad": "Resilient"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Javelin",
-            "ataques": "1D",
-            "distancia": "10\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Spear and Shield",
@@ -742,14 +707,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 6,
-        "especialidad": "When this unit does not move during its activation, it gains +1 die on all its Shooting attacks."
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
@@ -757,7 +722,7 @@
             "nombre": "Longbow",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -789,30 +754,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "When this unit is the target of an enemy charge, it may make a free melee attack before the attacker resolves its attacks."
+        "especialidad": "Anchored"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Javelin",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Formation Spear",
@@ -836,14 +788,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 6,
-        "especialidad": "It may move and shoot without movement penalty. Its Shooting attacks ignore cover."
+        "especialidad": "Vanguard"
       },
       "armas": {
         "disparo": [
@@ -851,7 +803,7 @@
             "nombre": "Scout Bow",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -883,30 +835,17 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 11,
-        "especialidad": "When this unit does not move during its activation, reduce the damage of all attacks it receives by 1 (min. 1)."
+        "especialidad": "Resilient"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Guard Crossbow",
-            "ataques": "2D",
-            "distancia": "16\"",
-            "impactos": "+4",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Guard Sword",
@@ -930,14 +869,14 @@
       "perfil": {
         "movimiento": "10\"",
         "vidas": 7,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 11,
-        "especialidad": "When it makes a successful charge, it gains +2D in melee that activation. After destroying an enemy unit in melee, it may make a free 3\" move."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [
@@ -945,11 +884,11 @@
             "nombre": "Throwing Spear",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Pistolier"
+              "Multi-use"
             ],
             "valor_extra": 0
           }
@@ -977,26 +916,26 @@
       "perfil": {
         "movimiento": "3\"",
         "vidas": 10,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 12,
-        "especialidad": "Its Shooting attacks ignore cover. It may reroll one failed Shooting attack die per activation."
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Giant Ballista",
+            "nombre": "Giant Crossbow (Vehicle, Monster)",
             "ataques": "3D",
             "distancia": "28\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Piercing (Vehicle)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -1022,16 +961,16 @@
       "era": "Past",
       "clase": "Vehicle",
       "perfil": {
-        "movimiento": "3\"",
+        "movimiento": "-",
         "vidas": 10,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "-",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "It may shoot targets without direct line of sight, ignoring terrain obstacles (but not units)."
+        "especialidad": "Emplaced"
       },
       "armas": {
         "disparo": [
@@ -1066,20 +1005,20 @@
       }
     },
     {
-      "nombre_unidad": "Armored Battering Ram",
+      "nombre_unidad": "Armored Ram",
       "era": "Past",
       "clase": "Vehicle",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 14,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Allied units within 3\" count as being in cover. When this unit charges, it inflicts D3 automatic Damage 2 hits."
+        "especialidad": "Mobile Cover"
       },
       "armas": {
         "disparo": [],
@@ -1106,14 +1045,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 16,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "At the start of each Initiative Phase, it recovers 1 Health (up to its maximum). When it charges, it inflicts D3 automatic Damage 2 hits before combat."
+        "especialidad": "Anchored"
       },
       "armas": {
         "disparo": [
@@ -1121,7 +1060,7 @@
             "nombre": "Thrown Rock",
             "ataques": "1D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -1153,33 +1092,22 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 4,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Allied units within 6\" may reroll one failed melee attack die per activation. Once per turn, it may grant an allied unit within 8\" a free move action."
+        "especialidad": "All allied units within 6\" of this hero may reroll all failed melee dice.",
+        "especialidad_escaramuza": "All allied units within 6\" of this hero may reroll all failed melee dice.",
+        "especialidad_escuadra": "While this hero is part of a squad, all allied units within 6\" of this hero may reroll all failed melee dice."
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Captain's Bow",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "+3",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Captain's Sword",
+            "nombre": "Captain Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -1194,28 +1122,28 @@
       }
     },
     {
-      "nombre_unidad": "Sovereign Lord",
+      "nombre_unidad": "Sovereign Titan",
       "era": "Past",
       "clase": "Titan",
       "perfil": {
         "movimiento": "4\"",
         "vidas": 28,
-        "salvacion": "+2",
-        "velocidad": 2,
+        "salvacion": "2+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 42,
-        "especialidad": "Allied units within 8\" reroll failed Save dice against Shooting attacks. When this unit destroys an enemy unit in melee, all allied units within 8\" may make a free 2\" move."
+        "especialidad": "Standard Bearer"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Sovereign's Bow",
+            "nombre": "Sovereign Bow",
             "ataques": "3D",
             "distancia": "24\"",
-            "impactos": "+2",
+            "impactos": "2+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -1226,7 +1154,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Sovereign's Sword",
+            "nombre": "Sovereign Sword",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,

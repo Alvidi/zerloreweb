@@ -77,8 +77,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.gunslinger) {
     return lang === 'en'
-      ? 'Can be used while locked in melee, only against the unit it is fighting in melee.'
-      : 'Puede usarse aunque la unidad esté trabada, solo contra la unidad con la que combate cuerpo a cuerpo.'
+      ? 'Can be used while locked in melee, against the unit it is fighting in melee.'
+      : 'Puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad con la que combate cuerpo a cuerpo.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
@@ -177,7 +177,7 @@ export const getAbilityLabel = (ability, lang = 'es') => {
   if (abilityId === WEAPON_ABILITY_IDS.assaulter) return `Raider${suffix}`
   if (abilityId === WEAPON_ABILITY_IDS.heavy) return 'Heavy'
   if (abilityId === WEAPON_ABILITY_IDS.quickAttack) return `Quick Attack${suffix}`
-  if (abilityId === WEAPON_ABILITY_IDS.gunslinger) return 'Pistolier'
+  if (abilityId === WEAPON_ABILITY_IDS.gunslinger) return 'Multi-use'
   if (abilityId === WEAPON_ABILITY_IDS.explosive) return 'Explosive'
   if (abilityId === WEAPON_ABILITY_IDS.criticalAttack) return 'Critical Attack'
   if (abilityId === WEAPON_ABILITY_IDS.chainedImpacts) return 'Chained Impacts'

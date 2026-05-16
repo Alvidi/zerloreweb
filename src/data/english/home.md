@@ -28,7 +28,7 @@ Warhammer, Star Wars, Lord of the Rings, whatever you have. Any miniature fits.
 Completely free
 
 #### body
-Rules, factions, army generator, and tokens. Everything at no cost.
+Rules, factions, army builder, and tokens. Everything at no cost.
 
 ### fast
 
@@ -71,7 +71,7 @@ Everything in one place
 Everything you need, in one place
 
 ### body
-Full rulebook, faction sheets, army generator, and printable tokens. No sign-ups, no payments, no tricks.
+Full rulebook, faction sheets, army builder, and printable tokens. No sign-ups, no payments, no tricks.
 
 ### cta
 Build your army →

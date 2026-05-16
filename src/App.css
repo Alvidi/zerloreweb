@@ -989,6 +989,18 @@ button {
   display: block;
 }
 
+.faction-select-option-fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
 .custom-select-trigger::after {
   content: "";
   position: absolute;
@@ -2635,6 +2647,7 @@ button {
   font-weight: 700;
   line-height: 1.28;
   overflow: hidden;
+  white-space: pre-line;
 }
 
 /* ── Tablas panel derecho ────────────────────────────────────
@@ -3449,6 +3462,22 @@ button {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
+  line-height: 1;
+}
+
+.squad-size-total-preview {
+  margin: 2px 0 0;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.squad-size-total-preview span {
+  font-size: 1.65rem;
 }
 
 .squad-size-option:hover,
@@ -3922,6 +3951,27 @@ button {
 .rules-page .section-head {
   max-width: 1120px;
   min-width: 0;
+}
+
+.rules-hero-banner {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  height: clamp(180px, 26vw, 300px);
+  margin: 0 0 34px;
+  overflow: hidden;
+  border: 1px solid rgba(200, 170, 104, 0.2);
+  border-radius: 4px;
+  background: #08090d;
+  box-shadow: 0 26px 58px rgba(0, 0, 0, 0.3);
+}
+
+.rules-hero-banner img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 .rules-page .section-head h2 {
@@ -4650,7 +4700,7 @@ mark {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
   line-height: 1.8;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
 .rules-layout {
@@ -5061,11 +5111,6 @@ mark {
   height: 112px;
 }
 
-.rules-token-preview[data-token-preview='state_out_of_control'].has-image {
-  width: 112px;
-  height: 112px;
-}
-
 .rules-token-preview[data-token-preview='state_melee'].has-image {
   width: 112px;
   height: 112px;
@@ -5087,11 +5132,6 @@ mark {
 }
 
 .rules-token-preview[data-token-preview='state_reroll'].has-image {
-  width: 112px;
-  height: 112px;
-}
-
-.rules-token-preview[data-token-preview='explosive_area_3'].has-image {
   width: 112px;
   height: 112px;
 }
@@ -5326,7 +5366,7 @@ mark {
 }
 
 .rules-html .page {
-  max-width: 800px;
+  max-width: 980px;
   margin: 0 auto;
   color: var(--text-main);
   min-width: 0;
@@ -5444,6 +5484,71 @@ mark {
   height: auto;
 }
 
+.rules-html .rules-profile-image-row {
+  width: min(760px, calc(100vw - 160px));
+  max-width: calc(100vw - 48px);
+  margin: 26px 50% 30px;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.rules-html .rules-profile-image-row:has(.rules-profile-image-ability) {
+  width: min(620px, calc(100vw - 160px));
+}
+
+.rules-html .rules-profile-image {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+.rules-html .rules-html-fragment {
+  display: contents;
+}
+
+.rules-html .rules-ficha-card-example {
+  display: block;
+}
+
+.rules-html .rules-ficha-card-example-ability {
+  width: min(620px, calc(100vw - 160px));
+}
+
+.rules-html .rules-ficha-card-example .ficha-wrapper {
+  border: 1px solid rgba(200, 170, 104, 0.16);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.rules-html .rules-ficha-card-example .ficha-cell,
+.rules-html .rules-ficha-card-example .ficha-specialty-line,
+.rules-html .rules-ficha-card-example .ficha-specialty-line strong,
+.rules-html .rules-ficha-card-example .ficha-hab-line,
+.rules-html .rules-ficha-card-example .ficha-hab-line strong,
+.rules-html .rules-ficha-card-example .ficha-hab-line-desc,
+.rules-html .rules-ficha-card-example .ability-ficha-description,
+.rules-html .rules-ficha-card-example .ability-ficha-description span,
+.rules-html .rules-ficha-card-example .ability-ficha-description strong,
+.rules-html .rules-ficha-card-example .ability-ficha-description em {
+  color: #1a1a1a;
+}
+
+.rules-html .rules-ficha-card-example .ability-ficha-name,
+.rules-html .rules-ficha-card-example .ability-ficha-value {
+  color: #ffffff;
+}
+
+@media (max-width: 1180px) {
+  .rules-html .rules-profile-image-row {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+  }
+}
+
 .rules-html,
 .rules-html .page,
 .rules-html .page-body {
@@ -5504,6 +5609,60 @@ mark {
   -webkit-overflow-scrolling: touch;
 }
 
+.rules-html .rules-specialty-details {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at top, rgba(200, 170, 104, 0.1), transparent 58%),
+    rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.rules-html .rules-specialty-details > .rules-specialty-summary {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  padding: 13px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.rules-html .rules-specialty-details > .rules-specialty-summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--accent);
+  transition: transform 160ms ease;
+}
+
+.rules-html .rules-specialty-details.is-open > .rules-specialty-summary::before {
+  transform: rotate(90deg);
+}
+
+.rules-html .rules-specialty-panel {
+  display: none;
+}
+
+.rules-html .rules-specialty-details.is-open .rules-specialty-panel {
+  display: block;
+}
+
+.rules-html .rules-specialty-panel .rules-table-scroll {
+  margin: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
 .rules-html .rules-command-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -5537,6 +5696,99 @@ mark {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.35;
+}
+
+.rules-html .rules-unit-type-gallery {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  margin: 18px 0 28px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(9, 11, 17, 0.58);
+}
+
+.rules-html .rules-unit-type-gallery-item {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-width: 0;
+  text-align: center;
+}
+
+.rules-html .rules-unit-type-gallery-mark {
+  width: 104px;
+  height: 164px;
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: visible;
+}
+
+.rules-html .rules-unit-type-gallery-image {
+  display: block;
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 87, 58, 0.38));
+}
+
+.rules-html .rules-unit-type-gallery-mark:not(.has-era-variants) .rules-unit-type-gallery-image {
+  grid-row: 1 / -1;
+}
+
+.rules-html .rules-unit-type-gallery-label {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.rules-html .rules-unit-type-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 4px 0 14px;
+  padding: 0;
+}
+
+.rules-html .rules-unit-type-section-mark {
+  width: 124px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: visible;
+}
+
+.rules-html .rules-unit-type-section-image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 7px rgba(255, 87, 58, 0.34));
+}
+
+.rules-html .rules-unit-type-section-mark:not(.has-era-variants) .rules-unit-type-section-image {
+  width: 64px;
+  height: 64px;
+}
+
+.rules-html .rules-unit-type-section-label {
+  color: var(--text-main);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .rules-html .rules-flag-gallery {
@@ -5850,6 +6102,14 @@ mark {
     grid-template-columns: 1fr;
   }
 
+  .rules-html .rules-profile-image-row {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+  }
+
   .rules-toc {
     position: static;
     max-height: none;
@@ -5875,6 +6135,34 @@ mark {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
     padding: 12px;
+  }
+
+  .rules-html .rules-unit-type-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .rules-html .rules-unit-type-gallery-mark {
+    width: 78px;
+    height: 122px;
+    gap: 5px;
+  }
+
+  .rules-html .rules-unit-type-gallery-image {
+    width: 58px;
+    height: 58px;
+  }
+
+  .rules-html .rules-unit-type-section-mark {
+    width: 54px;
+    height: 98px;
+    gap: 4px;
+  }
+
+  .rules-html .rules-unit-type-section-image {
+    width: 48px;
+    height: 48px;
   }
 
   .rules-html .rules-flag-gallery {
@@ -6867,7 +7155,29 @@ mark {
   text-align: center;
   overflow: hidden;
   overflow-wrap: anywhere;
+  white-space: pre-line;
   word-break: break-word;
+}
+
+.ficha-specialty-line {
+  margin: 0;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.ficha-specialty-line strong {
+  display: block;
+  margin-bottom: 2px;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 1.12em;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.ficha-specialty-desc {
+  opacity: 0.88;
+  line-height: 1.22;
 }
 
 /* ── Celdas de tabla de armas ───────────────────────────── */
@@ -6927,6 +7237,7 @@ mark {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   box-sizing: border-box;
   overflow: hidden;
   text-align: center;
@@ -6939,14 +7250,10 @@ mark {
   font-family: 'Space Grotesk', sans-serif;
   font-size: inherit;
   line-height: 1.2;
-  margin-bottom: 14px;
+  margin: 0;
   text-align: center;
   overflow-wrap: anywhere;
   word-break: break-word;
-}
-
-.ficha-hab-line:last-child {
-  margin-bottom: 0;
 }
 
 .ficha-hab-line strong {
@@ -7018,8 +7325,10 @@ mark {
 
 .ability-ficha-description {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 22px;
   box-sizing: border-box;
   padding: 8px 10px;
   color: #1a1a1a;
@@ -7031,6 +7340,19 @@ mark {
   white-space: pre-line;
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.ability-ficha-description-effect,
+.ability-ficha-description-quote {
+  display: block;
+  max-width: 100%;
+}
+
+.ability-ficha-description-quote {
+  font-style: italic !important;
+  font-weight: 400 !important;
+  transform: skewX(-6deg);
+  transform-origin: center;
 }
 
 .ficha-layout-overlay {

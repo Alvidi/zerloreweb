@@ -1,3 +1,8 @@
+import {
+  getUnitSpecialtyDescription,
+  resolveUnitSpecialtyDescription,
+} from '../../utils/unitSpecialties.js'
+
 export const factionImages = {
   orden: new URL('../../images/faccion/orden.png', import.meta.url).href,
   caos: new URL('../../images/faccion/caos.png', import.meta.url).href,
@@ -40,10 +45,9 @@ const normalizeTextValue = (value, fallback = '-') => {
   return text || fallback
 }
 
-const parseFactionSkillCostFromName = (value) => {
-  const match = String(value || '').match(/-\s*(\d+)\s*(?:valor|value)\b/i)
-  if (!match) return 0
-  return toNumber(match[1])
+const hasMeaningfulText = (value) => {
+  const text = String(value ?? '').trim()
+  return Boolean(text && text !== '-')
 }
 
 const stripFactionSkillCostFromName = (value) =>
@@ -80,6 +84,16 @@ export const getUnitTypeToken = (type) => {
   if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
   if (normalized.includes('titan') || normalized.includes('titante')) return 'titan'
   return 'line'
+}
+
+export const formatSpeedValue = (value) => {
+  const text = normalizeTextValue(value, '-')
+  if (text === '-') return text
+  const withoutQuote = text.replace(/["”]/g, '').trim()
+  const numericText = withoutQuote.replace(/^\+/, '')
+  const parsed = Number(numericText)
+  if (!Number.isFinite(parsed)) return text
+  return `+${parsed}"`
 }
 
 const isVehicleType = (type) => getUnitTypeToken(type) === 'vehicle'
@@ -176,14 +190,14 @@ const normalizeFactionAbility = (item, idx, factionId) => {
   const descripcion = normalizeTextValue(item?.descripcion, '')
   const descripcionEscaramuza = normalizeTextValue(item?.descripcion_escaramuza ?? descripcion, descripcion)
   const descripcionEscuadra = normalizeTextValue(item?.descripcion_escuadra ?? descripcionEscaramuza, descripcionEscaramuza)
-  const coste = toNumber(item?.coste ?? item?.cost ?? item?.valor_habilidad ?? item?.valor ?? parseFactionSkillCostFromName(rawNombre))
   return {
     id: item?.id || `${factionId}-passive-${idx + 1}-${slugify(nombre || idx)}`,
     nombre,
     descripcion: descripcionEscaramuza || descripcionEscuadra || descripcion,
     descripcion_escaramuza: descripcionEscaramuza,
     descripcion_escuadra: descripcionEscuadra,
-    coste,
+    frase: normalizeTextValue(item?.frase ?? item?.frase_es ?? item?.quote, ''),
+    coste: 0,
   }
 }
 
@@ -243,26 +257,57 @@ const normalizeFactionPassiveGroups = (rawGroups, abilities, factionId) => {
 const getMaxDisparo = (unit) => {
   const explicit = unit.max_armas_disparo ?? unit.maxArmasDisparo ?? unit.perfil?.max_armas_disparo
   if (explicit) return explicit
-  const text = [
+  const specialtyTexts = [
     unit.especialidad,
     unit.especialidad_escaramuza,
     unit.especialidad_escuadra,
+    unit.especialidad_nombre,
+    unit.especialidad_nombre_escaramuza,
+    unit.especialidad_nombre_escuadra,
     unit.perfil?.especialidad,
     unit.perfil?.especialidad_escaramuza,
     unit.perfil?.especialidad_escuadra,
+    unit.perfil?.especialidad_nombre,
+    unit.perfil?.especialidad_nombre_escaramuza,
+    unit.perfil?.especialidad_nombre_escuadra,
   ]
+  const text = specialtyTexts
+    .flatMap((value) => [
+      value,
+      resolveUnitSpecialtyDescription(value, 'es'),
+      resolveUnitSpecialtyDescription(value, 'en'),
+    ])
     .join(' ')
     .toLowerCase()
-  if (text.includes('dos armas') || text.includes('2 armas')) return 2
+  if (text.includes('dos armas') || text.includes('2 armas') || text.includes('dos acciones de ataque a distancia')) return 2
+  if (text.includes('two ranged weapons') || text.includes('shoot twice') || text.includes('two ranged attack actions')) return 2
   return 1
 }
 
-export const getUnitSpecialtyForMode = (unit, gameMode = 'escaramuza') => {
+export const getUnitSpecialtyForMode = (unit, gameMode = 'escaramuza', lang = 'es') => {
   if (!unit) return '-'
-  if (gameMode === 'escuadra') {
-    return normalizeTextValue(unit.especialidad_escuadra ?? unit.especialidad ?? unit.especialidad_escaramuza, '-')
-  }
-  return normalizeTextValue(unit.especialidad_escaramuza ?? unit.especialidad ?? unit.especialidad_escuadra, '-')
+  const specialtyName = gameMode === 'escuadra'
+    ? normalizeTextValue(unit.especialidad_nombre_escuadra ?? unit.especialidad_nombre ?? unit.especialidad_nombre_escaramuza, '')
+    : normalizeTextValue(unit.especialidad_nombre_escaramuza ?? unit.especialidad_nombre ?? unit.especialidad_nombre_escuadra, '')
+  const specialty = gameMode === 'escuadra'
+    ? normalizeTextValue(unit.especialidad_escuadra ?? unit.especialidad ?? unit.especialidad_escaramuza, '-')
+    : normalizeTextValue(unit.especialidad_escaramuza ?? unit.especialidad ?? unit.especialidad_escuadra, '-')
+
+  const resolvedSpecialty = hasMeaningfulText(specialty) ? resolveUnitSpecialtyDescription(specialty, lang) : ''
+  const resolvedName = getUnitSpecialtyDescription(specialtyName, lang)
+  return normalizeTextValue(resolvedSpecialty || resolvedName || specialtyName, '-')
+}
+
+export const getUnitSpecialtyLabelForMode = (unit, gameMode = 'escaramuza') => {
+  if (!unit) return '-'
+  const specialtyName = gameMode === 'escuadra'
+    ? normalizeTextValue(unit.especialidad_nombre_escuadra ?? unit.especialidad_nombre ?? unit.especialidad_nombre_escaramuza, '')
+    : normalizeTextValue(unit.especialidad_nombre_escaramuza ?? unit.especialidad_nombre ?? unit.especialidad_nombre_escuadra, '')
+  const specialty = gameMode === 'escuadra'
+    ? normalizeTextValue(unit.especialidad_escuadra ?? unit.especialidad ?? unit.especialidad_escaramuza, '-')
+    : normalizeTextValue(unit.especialidad_escaramuza ?? unit.especialidad ?? unit.especialidad_escuadra, '-')
+
+  return normalizeTextValue(specialtyName || specialty, '-')
 }
 
 const normalizeUnit = (unit, index) => {
@@ -279,13 +324,22 @@ const normalizeUnit = (unit, index) => {
     normalizeWeapon(weapon, 'melee'),
   )
   const especialidad = normalizeTextValue(perfil.especialidad ?? unit.especialidad, '-')
+  const especialidadNombre = normalizeTextValue(perfil.especialidad_nombre ?? unit.especialidad_nombre, '')
   const especialidadEscaramuza = normalizeTextValue(
     perfil.especialidad_escaramuza ?? unit.especialidad_escaramuza ?? perfil.especialidad ?? unit.especialidad,
     especialidad,
   )
+  const especialidadNombreEscaramuza = normalizeTextValue(
+    perfil.especialidad_nombre_escaramuza ?? unit.especialidad_nombre_escaramuza ?? perfil.especialidad_nombre ?? unit.especialidad_nombre,
+    especialidadNombre,
+  )
   const especialidadEscuadra = normalizeTextValue(
     perfil.especialidad_escuadra ?? unit.especialidad_escuadra ?? perfil.especialidad ?? unit.especialidad,
     especialidadEscaramuza,
+  )
+  const especialidadNombreEscuadra = normalizeTextValue(
+    perfil.especialidad_nombre_escuadra ?? unit.especialidad_nombre_escuadra ?? perfil.especialidad_nombre ?? unit.especialidad_nombre,
+    especialidadNombreEscaramuza,
   )
 
   return {
@@ -302,6 +356,9 @@ const normalizeUnit = (unit, index) => {
     especialidad: especialidadEscaramuza || especialidadEscuadra || especialidad,
     especialidad_escaramuza: especialidadEscaramuza,
     especialidad_escuadra: especialidadEscuadra,
+    especialidad_nombre: especialidadNombreEscaramuza || especialidadNombreEscuadra || especialidadNombre,
+    especialidad_nombre_escaramuza: especialidadNombreEscaramuza,
+    especialidad_nombre_escuadra: especialidadNombreEscuadra,
     valor_base: toNumber(perfil.valor ?? unit.valor_base ?? unit.valor ?? 0),
     armas_disparo: disparo,
     armas_melee: melee,

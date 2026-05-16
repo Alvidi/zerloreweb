@@ -1,0 +1,216 @@
+{
+  "id": "otros",
+  "faccion": {
+    "nombre": "Others",
+    "estilo_juego": "A reserved space for narrative units, experimental profiles, and loose ideas that will grow little by little.",
+    "seleccion_habilidades": "individual",
+    "habilidades_faccion": []
+  },
+  "unidades": [
+    {
+      "nombre_unidad": "The Unbreakable",
+      "era": "Future",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "salvacion": "2+",
+        "velocidad": "+4\"",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 18,
+        "especialidad": "Critical attacks against this unit count as misses.",
+        "especialidad_escaramuza": "Critical attacks against this unit count as misses.",
+        "especialidad_escuadra": "Critical attacks against this unit count as misses.",
+        "especialidad_nombre": "Iron Will",
+        "especialidad_nombre_escaramuza": "Iron Will",
+        "especialidad_nombre_escuadra": "Iron Will"
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Heavy Assault Rifle",
+            "ataques": "3D",
+            "distancia": "16\"",
+            "impactos": "3+",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Reliable"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Chainsword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Brutal 5+"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "The Fallen",
+      "era": "Future",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 11,
+        "salvacion": "2+",
+        "velocidad": "+5\"",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 19,
+        "especialidad": "Enemy units within 6\" cannot use Reroll tokens.",
+        "especialidad_escaramuza": "Enemy units within 6\" cannot use Reroll tokens.",
+        "especialidad_escuadra": "Enemy units within 6\" cannot use Reroll tokens.",
+        "especialidad_nombre": "Oppressive Presence",
+        "especialidad_nombre_escaramuza": "Oppressive Presence",
+        "especialidad_nombre_escuadra": "Oppressive Presence"
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Mental Choke",
+            "ataques": "-",
+            "distancia": "6\"",
+            "impactos": null,
+            "danio": "-",
+            "danio_critico": "-",
+            "habilidades_arma": [],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Energy Sword",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "4",
+            "danio_critico": "6",
+            "habilidades_arma": [
+              "Piercing"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "Demon of the Past",
+      "era": "Past",
+      "clase": "Monster",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 26,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 23,
+        "especialidad": "Enemy units within 6\" suffer 1 automatic damage.",
+        "especialidad_escaramuza": "Enemy units within 6\" suffer 1 automatic damage.",
+        "especialidad_escuadra": "Enemy units within 6\" suffer 1 automatic damage.",
+        "especialidad_nombre": "Fire and Shadow",
+        "especialidad_nombre_escaramuza": "Fire and Shadow",
+        "especialidad_nombre_escuadra": "Fire and Shadow"
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Fiery Whip",
+            "ataques": "1D6",
+            "distancia": "6\"",
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "4",
+            "habilidades_arma": [
+              "Direct"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Demonic Sword",
+            "ataques": "4D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "5",
+            "danio_critico": "7",
+            "habilidades_arma": [
+              "Reliable"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
+      "nombre_unidad": "The Lost Heir",
+      "era": "Past",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "salvacion": "3+",
+        "velocidad": "+6\"",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 17,
+        "especialidad": "Allied units within 6\" of this unit improve their Save by 1.",
+        "especialidad_escaramuza": "Allied units within 6\" of this unit improve their Save by 1.",
+        "especialidad_escuadra": "Allied units within 6\" of this unit improve their Save by 1.",
+        "especialidad_nombre": "King's Lineage",
+        "especialidad_nombre_escaramuza": "King's Lineage",
+        "especialidad_nombre_escuadra": "King's Lineage"
+      },
+      "armas": {
+        "disparo": [],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Exile Dagger",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Reliable"
+            ],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "King's Sword (Elite, Monster, Hero)",
+            "ataques": "3D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "3",
+            "danio_critico": "5",
+            "habilidades_arma": [
+              "Piercing"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    }
+  ]
+}

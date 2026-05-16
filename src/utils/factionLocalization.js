@@ -69,6 +69,22 @@ const mergeUnitsTranslation = (esUnits, enUnits) =>
           ?? translated?.perfil?.especialidad
           ?? unit?.perfil?.especialidad
           ?? '-',
+        especialidad_nombre:
+          translated?.perfil?.especialidad_nombre
+          ?? unit?.perfil?.especialidad_nombre
+          ?? '',
+        especialidad_nombre_escaramuza:
+          translated?.perfil?.especialidad_nombre_escaramuza
+          ?? unit?.perfil?.especialidad_nombre_escaramuza
+          ?? translated?.perfil?.especialidad_nombre
+          ?? unit?.perfil?.especialidad_nombre
+          ?? '',
+        especialidad_nombre_escuadra:
+          translated?.perfil?.especialidad_nombre_escuadra
+          ?? unit?.perfil?.especialidad_nombre_escuadra
+          ?? translated?.perfil?.especialidad_nombre
+          ?? unit?.perfil?.especialidad_nombre
+          ?? '',
       },
       armas: {
         ...(unit?.armas || {}),
@@ -121,7 +137,7 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
 export const buildLocalizedFactionEntries = (factionModules, lang) => {
   const esByBase = new Map()
   const enByBase = new Map()
-  const preferredOrder = ['orden', 'caos', 'legado']
+  const preferredOrder = ['orden', 'caos', 'legado', 'otros']
 
   Object.entries(factionModules).forEach(([path, module]) => {
     const filename = path.split('/').pop() || ''

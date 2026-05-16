@@ -1,6 +1,6 @@
 # ZeroLore Rulebook
 
-ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities and weapons, and add these concepts as you become more familiar with the game.
+ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, and unit specialties, and add these concepts as you become more familiar with the game.
 
 This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
 
@@ -73,6 +73,7 @@ ZeroLore can be played with **2 to 4 players**. The available formats are:
 - **1vs1**: duel between two players
 - **1vs2**: confrontation against one player
 - **2vs2**: two teams of two players
+- **1vs1vs1**: free-for-all
 
 In games with more than two players, activation order is determined by initiative at the start of each turn, and this also applies to teams.
 
@@ -160,7 +161,7 @@ In team games, players on the same side may take a brief moment to coordinate th
 
 At the start of each Initiative Phase, each player gains **1 Reroll Token**. Unspent tokens accumulate between turns.
 
-A Reroll Token may be spent at any time to **reroll any die roll** (attack, save, charge). The second roll is always the final result.
+A Reroll Token may be spent at any time to **reroll any die roll** (attack, save, etc.). The second roll is always the final result.
 
 ## 2. Activation Phase
 
@@ -201,16 +202,15 @@ Available actions for all units:
 - **Shoot** – 1 action
 - **Ready** – 2 actions
 - **Retreat** – 2 actions
-- **Charge** – 2 actions
+- **Rush** – 2 actions
 - **Melee Attack** – 2 actions
-- **Sprint** – 2 actions
 
 ## Movement
 
 When a unit moves, it may travel up to its **Movement** value in inches (").
 
 - Units may move in any direction.
-- A unit cannot move to within **1" of an enemy unit**, except when charging.
+- A unit cannot move to within **1" of an enemy unit**, except when making a Rush.
 - Movement may be used to go around obstacles or freely reposition on the battlefield.
 
 ### Terrain and Obstacles
@@ -225,18 +225,29 @@ To climb:
 1. The unit must move until its base touches the base of the obstacle.
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
+Some units with the **Flying** ability may climb obstacles diagonally.
+
 ![Unit climbing an obstacle and reaching an elevated position]({{climbingImage}})
 
-## Sprint
+## Rush
 
-When performing a **Sprint**, the unit spends **2 actions**.
+A **Rush** is an action that lets a unit move at high speed, either to reposition or to initiate melee combat.
 
-- The unit moves its Movement value **+3"** extra.
-- During a Sprint, attacks cannot be made, unless a rule states otherwise.
+When making a Rush, the unit spends **2 actions** and moves up to its **Movement + Speed** value in inches.
 
-Sprint represents a fast, exposed movement, useful for repositioning or reaching cover.
+A Rush can be used in two ways:
 
-![Unit making a Sprint action]({{sprintImage}})
+**1. Extended movement**
+
+The unit moves to reposition. During a Rush, it cannot make ranged attacks unless a rule states otherwise.
+
+**2. Charging the enemy**
+
+If during the Rush the unit enters base contact with an enemy unit, it counts as a **charge**. A successful charge allows the unit to make **one free melee attack** without spending additional actions.
+
+If the Rush does not reach the target, the unit ends its movement where it arrived.
+
+![Unit making a Rush action]({{sprintImage}})
 
 ## Retreat
 
@@ -248,23 +259,16 @@ To retreat:
 - It moves using its **Movement** value toward an allied command post.
 - Upon retreating, the unit reduces its **Speed to 0** and its **Value does not count for objective or command post control** until it recovers.
 
-At the start of its next turn, the unit must roll **1D6**:
-
-- **1–2:** it continues retreating toward an allied command post.
-- **3–6:** it recovers and may act normally.
-
-Units automatically recover the moment they reach an allied command post.
-
-A unit in the Retreat state **cannot make counterattacks**.
+The unit automatically recovers at the start of its next activation if it has reached an allied command post. If it has not reached one, it continues retreating.
 
 ## Ready
 
 A unit that uses the **Ready** action adopts a defensive posture.
 
-A ready unit may make **ranged counterattacks** during the opposing player's turn.
+A ready unit may make **return fire** during the opposing player's turn.
 
 - **If shot at:** it may immediately fire back with its equipped weapon, regardless of remaining actions. The enemy attack resolves first, then the return fire.
-- **If charged:** attack order is decided by **Speed**, as an exception to the normal charge rule. If the ready unit has **higher Speed** than the charging unit, the ready unit **attacks first** and the charging unit makes the counterattack. If the ready unit has **equal or lower Speed** than the charging unit, the charging unit **attacks first** following the normal rule and the ready unit makes the counterattack. The ready unit may attack or counterattack even if it has no actions left.
+- **If charged:** the Ready unit **always attacks first**, regardless of Speed. The charging unit resolves its attack afterwards. The Ready unit may attack even if it has no actions left.
 
 The Ready state lasts until the end of the turn.
 
@@ -339,13 +343,12 @@ When a unit loses all its Wounds, it is removed from the game as destroyed.
 
 Melee combat occurs when two units are **in base contact**. At that point, both units become **locked in combat**.
 
-## Charge
+## Charging with a Rush
 
-To initiate melee combat, a unit must perform the **Charge** action, which costs **2 actions**.
+To initiate melee combat, a unit must make a **Rush** and enter base contact with an enemy unit.
 
-- The unit rolls **2D6**.
-- The result is the total distance it may travel toward the target, regardless of its Movement value.
-- If the unit **does not reach** the target, the charge fails and the unit remains in place.
+- The unit moves up to its **Movement + Speed** value.
+- If the unit **does not reach** the target, it ends its movement where it arrived.
 - If the charge succeeds, the unit places its base in contact with the target and is considered locked.
 
 A successful charge **grants a free melee attack action**.
@@ -358,35 +361,24 @@ When two units are in base contact:
 - Both units may only use **melee combat** or **retreat** actions.
 - They remain locked until one of them is destroyed or retreats.
 
-**A third unit or squad may charge a unit or squad already locked in combat**, as long as it has enough actions to charge. The charge is resolved normally: the charging unit makes its attack, and the defender counterattacks **only if it still has enough actions available**. If the defender already spent them in an earlier exchange that same turn, it suffers the attack without striking back. After the exchange, all involved units are considered locked in the same combat.
+Each locked unit attacks during its own activation, spending its actions as normal.
 
-This principle applies successively: each new unit or squad that charges joins the shared combat.
+A unit may use the **Rush** action to charge a unit that is already locked in combat. After the charge, all involved units are considered locked in the same combat.
 
-In a combat with three or more units, when a unit makes its melee attack, it **may choose which locked enemy unit to attack** in that exchange. Attack order follows the normal rules: the charging unit first, then Speed.
+When a unit locked with several units activates and is going to make a melee attack, it may choose which locked enemy unit it attacks.
 
 To become unlocked:
 
 - Destroy the enemy unit
 - Declare a retreat following the retreat rules.
 
-## Attack Order
+## Melee Attacks
 
-The order in which units attack is determined as follows:
+A melee attack is resolved following this sequence:
 
-1. If a unit has **charged this turn**, that unit **attacks first**, regardless of Speed.
-2. As an **exception** to rule 1: if the defending unit is in the **Ready** state, the Ready rule applies and **Speed** may alter this order.
-3. If neither unit has charged this turn, the unit with the **higher Speed** attacks first.
-4. If both have the same Speed, players roll **1D6** to decide.
-
-This order applies **each time an exchange of attacks is resolved**.
-
-## Resolving Melee Combat
-
-Melee combat is resolved following this sequence:
-
-1. Attack by the unit acting first
+1. Attack by the active unit
 2. Defender's saves
-3. Counterattack (if applicable)
+3. Apply damage
 
 ### 1. Attack
 
@@ -400,36 +392,26 @@ The attacking unit rolls the **Attacks** dice indicated in its melee profile.
 
 The defending player rolls as many dice as hits received.
 
+- Melee attacks **reduce the defender's Save by 1** (for example, from 4+ to 5+). Direct contact is more lethal than ranged fire.
 - Each result **equal to or above their Save value** blocks a hit.
 - Critical hits can only be blocked by a **defensive 6**.
 - Unblocked hits deal the base or critical damage of the attacking weapon.
 
-### 3. Counterattack
+### 3. Apply Damage
 
-If the defending unit **survives** and has enough actions, it must make a **mandatory counterattack**.
-
-- The counterattack is resolved exactly like a melee attack.
-- If the unit is destroyed during the first attack, **it cannot counterattack**.
-- If the unit has no actions available, it cannot counterattack.
-
-After the exchange, both units remain locked.
+Each unblocked hit deals the damage indicated by the weapon. If the unit loses all its Wounds, it is removed from the game as destroyed. If it survives, both units remain locked.
 
 ## Vehicles and Monsters in Melee
 
-If a **Vehicle** or a **Monster** is charged by a **Line or Elite** unit, the charge is resolved normally: the charging unit makes its attack and the Vehicle or Monster counterattacks if it survives. After the exchange, both units become **locked in melee combat**, following the general locked combat rules.
+**Vehicles** and **Monsters** locked in melee combat follow the same rules as normal melee combat. They may only keep shooting if they have **Multi-use** weapons.
 
-As an exception, a Vehicle or Monster locked **only with Line or Elite units** may **break away freely during its activation**, spending **1 Movement action** to move away without declaring Retreat or suffering its penalties (it does not reduce Speed to 0 and does not require a regroup roll). After breaking away, it may continue acting normally, including shooting if it still has actions remaining. If the Line or Elite unit wants to attack it again, it must charge it again.
-
-If a Vehicle is charged by another **Vehicle** or by a **Monster**, or if a Monster is charged by another **Monster** or by a **Vehicle**, both units become locked in combat following the normal rules and **cannot** break away freely.
-
-A locked **Vehicle** may only use its **melee weapons**.
+In addition, these units may be attacked at range even while locked in melee combat.
 
 ## Titans in Melee
 
-- A Titan **can only charge another Titan**.
-- Line, Elite, Vehicle, and Monster units **cannot charge or lock** a Titan on their own.
+A Titan may **only Rush against another Titan**. Line units, Elite units, Vehicles, and Monsters **cannot lock** a Titan by themselves.
 
-Titans follow the same general melee rules, except for their special rules.
+Titans follow the same general melee combat rules, except for their special rules.
 
 ## Shooting at Locked Units
 
@@ -545,9 +527,9 @@ _(See the Melee Combat section for the full resolution.)_
 
 ## Out of Control Unit
 
-Some units, such as **Monsters**, may enter the **Out of Control** state when they suffer severe damage.
+Some units with the **Out of Control** specialty may enter the **Out of Control** state when they suffer severe damage.
 
-The Out of Control state is shown by placing the **out of control token** (orange lightning bolt) next to the miniature.
+The Out of Control state must be marked clearly next to the miniature.
 
 While out of control:
 
@@ -601,8 +583,6 @@ The type **does not limit the unit's stats**, which depend on its faction and de
 
 All units have at least **one melee attack** in their arsenal.
 
-![ZeroLore unit types: Line, Elite, Vehicle, Monster, Titan, and Hero]({{unitTypesImage}})
-
 ## 1. Line Units
 
 **Line** units represent versatile or offensive troops, and form the core of most armies.
@@ -633,11 +613,6 @@ Characteristics:
 - Cannot climb structures or scale elevated obstacles.
 - **Cannot capture or control command posts** or other conquest zones.
 
-### When a vehicle is destroyed
-
-- **4–6**: the vehicle remains destroyed on the battlefield as an additional piece of scenery.
-- **1–3**: an **explosion** occurs that affects all units within **3"** of the vehicle. Affected units suffer **1D6 automatic damage** that cannot be saved. Afterwards, the vehicle is removed from the battlefield.
-
 ## 4. Monsters
 
 **Monsters** are creatures of enormous power and presence on the battlefield.
@@ -645,23 +620,7 @@ Characteristics:
 Characteristics:
 
 - Very resilient and lethal in melee combat.
-- Like vehicles, **cannot capture or control command posts unless a rule states otherwise**.
-
-### Monster Out of Control
-
-When a monster reaches **50% of its Wounds**, the player must roll **1D6** during the Initiative phase:
-
-- **3–6**: the monster suffers no additional effects.
-- **1–2**: the monster enters the **Out of Control** state for that turn.
-
-As long as the monster remains at **50% Wounds or less**, this check must be repeated at the start of each turn during the Initiative phase.
-
-While out of control:
-
-- It attacks enemies and friendly units.
-- It always prioritises the nearest unit.
-- It only uses melee attacks, prioritising charges.
-- If an out of control monster is locked in melee combat with a friendly unit and, on the following turn, it passes its check and is no longer out of control, the combat ends and both units separate by **1"**.
+- They can take command posts.
 
 ## 5. Heroes
 
@@ -688,10 +647,8 @@ Titans are **slow** units, extremely resilient, and very visible. They are not d
 ### General Titan Rules
 
 - A Titan **cannot capture or control command posts**, unless a rule states otherwise.
-- During **movement**, a Titan may **move through scenery elements** such as buildings, ruins, or large obstacles, as long as it **does not end its movement on them**.
+- During **movement**, a Titan may **move through scenery elements** as large as the unit, as long as it **does not end its movement on them**.
 - A Titan **cannot be placed, stop, or remain** on a piece of scenery, nor use it as a surface, even if it can pass over it.
-- If during its movement a Titan passes over a **Line or Elite** unit, that unit is **automatically destroyed**.
-- When a Titan is destroyed, a **colossal explosion** occurs. All units within **6"** of the Titan suffer **1D6 automatic damage** that cannot be saved.
 
 # Unit Profiles
 
@@ -715,7 +672,7 @@ Indicates the **maximum distance**, in inches ("), the unit may travel when taki
 
 This value is also used for:
 
-- Sprint
+- Rush (Movement + Speed)
 - Retreat
 
 ### Wounds
@@ -736,16 +693,30 @@ A Save of **4+** blocks hits on results of **4, 5, or 6**.
 
 ### Speed
 
-Represents the unit's reaction speed.
+Represents the **additional distance**, in inches ("), that the unit may travel when making a **Rush**.
 
-- In melee combat, the unit with higher Speed **acts first**, unless one of them charged.
-- Some abilities temporarily modify this value.
+A unit with higher Speed can cover more ground in a single burst and reach more distant targets when charging.
 
 ### Specialty
 
-Includes special behaviours, design clarifications, or unique rules specific to the unit.
+Includes the special behaviours listed below. These rules apply whenever the unit is in play, unless stated otherwise.
 
-These rules apply whenever the unit is in play, unless stated otherwise.
+Heroes and some experimental units may have unique specialties described directly on their profile.
+
+| Specialty | Description | Specialty | Description |
+| --- | --- | --- | --- |
+| **Soldier** | This unit has no specialty. | **Resilient** | The first time each turn this unit suffers damage, reduce that damage by **1D3**. |
+| **Support** | This unit may spend **2 actions** to choose an allied unit within **6"**. That unit recovers **1D3 lost Wounds**. | **Evasive** | The first time each turn this unit is targeted by a **Shooting** attack, it may move up to **2"** before resolving the attack. |
+| **Guard** | Once per turn, when an allied unit within **6"** suffers damage, this unit may suffer up to **2 points of that damage** instead. | **Anchored** | Enemy units locked with this unit cannot declare **Retreat**. |
+| **Ruthless** | When this unit deals damage in melee, critical hits inflict **+1 critical damage**. | **Berserker** | Enemy units attacking this unit in melee miss on natural results of **1, 2, or 3**. |
+| **Accurate** | If this unit does not move, it gains **1 Precision** in Shooting. | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
+| **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. During its activation, it may spend **2 actions** to return to Reserve, leaving the battlefield. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
+| **Vanguard** | It may be deployed within **9"** of an allied command post. | **Devourer** | When this unit destroys an enemy unit in melee, it recovers **1D3 lost Wounds**. |
+| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Reroll Tokens. |
+| **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
+| **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Rush against a unit, it gains **+1 melee attack die** during that combat. |
+| **Out of Control** | When this unit reaches **50% of its Wounds**, it always attacks the nearest allied or enemy unit in melee combat, adding **+1 attack die**. If it is already locked, it continues fighting. If there is no nearby unit, it moves toward it. | **Boom!** | When this unit is destroyed, it explodes and affects all units within **6"** of it, which suffer **1D6 damage**. |
+| **Crushing** | During its movement, if this unit passes over a **Line or Elite** unit, that unit is destroyed automatically. | | |
 
 ### Squads
 
@@ -763,9 +734,9 @@ Represents the unit's **point cost**.
 
 ### Weapon Equipment
 
-Unless a rule states otherwise, each unit may carry **one ranged weapon** and **one melee weapon**.
+Each unit may have up to **2 weapons** in its profile, ranged or melee.
 
-If a unit has more than one weapon of the same type, it must be explicitly indicated in its profile or special rules.
+When making an attack, the player chooses which weapon the unit attacks with during that activation. It is not possible to use both weapons in the same attack.
 
 ## Ranged Weapon Profiles
 
@@ -809,10 +780,6 @@ Special rules associated only with that weapon.
 - They only apply while the weapon is operational.
 - If the weapon is destroyed or silenced, these abilities cannot be used.
 
-### Extra Value
-
-Additional point cost for equipping this weapon, if applicable.
-
 ## Melee Weapon Profiles
 
 Melee weapons follow a similar structure.
@@ -834,10 +801,6 @@ They work the same way as for ranged weapons.
 ### Abilities
 
 Special rules that only affect this type of attack or this specific weapon.
-
-### Extra Value
-
-Additional point cost for equipping the weapon, if applicable.
 
 ## Modifiers
 
@@ -871,39 +834,28 @@ These abilities differentiate weapons without adding complex rules. Some weapons
 
 When a unit makes an attack, it must choose a single valid weapon from its profile. If that weapon has an ability, apply its effect during that attack.
 
-## Weapon Ability Table
-
 | Weapon ability | Description |
 | --- | --- |
 | **Reliable** | This weapon has no special rules. |
 | **Brutal X+** | Hits from this weapon count as critical hits on a natural result of **X+** on the attack roll. |
 | **Piercing** | Critical hits from this weapon worsen the target's **Save** by **1**. |
-| **Unstable** | This weapon is unstable. After finishing the attack against the target, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage points the target received. If the target suffered no hits, this unit suffers nothing either. |
-| **Pistolier** | This weapon can be used while the unit is locked in melee combat, but only against the unit it is fighting in melee combat. |
+| **Unstable** | After resolving the attack, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage it inflicted on the target. If the attack caused no damage, there is no backlash. |
+| **Multi-use** | This weapon can be used while the unit is locked in melee combat, against the unit it is fighting in melee combat. |
 | **Direct** | This weapon does not make a Precision roll. |
-| **Explosive** | When a unit suffers hits from this ability, the damage caused is automatically applied to all units within **3"** of it. |
+| **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 
-## Abilities Conditioned by Type
+## Weapons Conditioned by Type
 
-Some abilities may include one or more unit types in parentheses. In that case, the ability only applies against those unit types.
-
-Valid types are:
-
-- **Line**
-- **Elite**
-- **Hero**
-- **Vehicle**
-- **Monster**
-- **Titan**
+Some weapons are not valid against every target. When a weapon name includes one or more unit types in parentheses, the weapon **can only attack units of those types**. Weapons without parentheses can attack any unit type.
 
 Examples:
 
-- **Brutal 5+ (Vehicle)** only applies Brutal against Vehicles.
-- **Piercing (Elite, Hero)** only applies Piercing against Elite units and Heroes.
-- **Piercing (Vehicle, Monster)** only applies Piercing against Vehicles and Monsters.
+- **Rocket launcher (Vehicle)** can only attack Vehicles.
+- **Sniper rifle (Line, Elite)** can only attack Line and Elite units.
+- **Annihilation cannon (Elite, Hero, Titan)** can only attack Elite units, Heroes, and Titans.
 
-If the target does not belong to one of the listed types, the weapon is resolved normally using its profile values.
+If the target does not belong to one of the listed types, the weapon **cannot be used** against it. This represents specialised weapons: an anti-vehicle rocket launcher is not wasted on light infantry.
 
 ## Ability Limit per Weapon
 
@@ -915,18 +867,29 @@ Especially powerful, unique, or exceptional weapons may have more than one abili
 
 # Faction Abilities
 
-Each faction has different **Faction Abilities** that define its combat style. Each ability has a **point cost** shown on the faction profile.
+Each faction has a **range of faction abilities** that represent different ways of waging war. A faction may focus on melee combat, ranged battlefield control, the weight of heavy machinery, or any other playstyle.
+
+Before the game begins, each player must **choose one faction ability** from those available to their faction. This choice represents the army's **play mode** for the battle and defines how its units behave on the battlefield.
+
+**Basic rules:**
+
+- Each player chooses **one single faction ability** before the game begins.
+- The choice must be declared to the opponent before deployment.
+- The ability automatically applies to every unit of the faction for the entire game; it requires no activation and no action cost.
+- **The faction ability cannot be changed during the game.**
+- Faction abilities **have no point cost**; they are included in the chosen play mode.
+
+Each faction ability introduces a **unique mechanic** that changes how that army plays, not just numerical bonuses. Choosing the right faction ability is the first major strategic decision of the game.
+
+As the game evolves, new faction abilities will be added to give each playstyle more variety.
 
 ![Visual example of a faction ability sheet]({{factionAbilityProfileImage}})
-
-Before the game begins, each player may choose up to **3 faction abilities** from those available to their faction. The cost of those abilities is included within the army's total Value: the more abilities you take, the fewer points remain for units. The chosen abilities automatically apply to every unit in that faction while they are in play and do not require activation. The selection must be declared to the opponent before the game begins.
-
-Over time, each faction will expand its catalogue of available abilities, allowing for more playstyles within the same faction.
 
 ---
 
 ## General Considerations
 
-- If a player forgets to take an action, use an ability, or declare an effect, it is considered lost, unless players agree otherwise.
-- It is recommended that miniatures carry distinct weapons in squads to make the battlefield easier to read.
-- Communicating intentions helps keep the game flowing smoothly and clearly.
+- **Forgotten actions:** If a player forgets to take an action, use an ability, or declare an effect at the proper time, it is considered lost unless both players agree otherwise.
+- **Visual consistency:** Although the game is completely miniature-agnostic, it is recommended that the army has visual coherence with its faction. The player is free to use whatever they want.
+- **Communicating intentions:** Communicating intentions helps keep the game flowing smoothly and clearly.
+- **Timer:** As an optional variant, a 1 to 2 minute timer per activation can be used to speed up decision-making.

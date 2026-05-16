@@ -7,7 +7,7 @@ import { parseHomeContent } from '../utils/homeContent.js'
 
 function Home() {
   const navigate = useNavigate()
-  const { lang } = useI18n()
+  const { lang, t } = useI18n()
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
   const contactEmail = 'zeroloretmg@gmail.com'
   const pillars = [
@@ -73,6 +73,32 @@ function Home() {
           <p>{content.join.subtitle}</p>
         </div>
         <div className="cta-grid reveal">
+          <form className="contact-form" action={`mailto:${contactEmail}`} method="post" encType="text/plain">
+            <label>
+              {t('home.contact.name')}
+              <input type="text" name="name" placeholder={t('home.contact.namePlaceholder')} />
+            </label>
+            <label>
+              {t('home.contact.email')}
+              <input type="email" name="email" placeholder={t('home.contact.emailPlaceholder')} />
+            </label>
+            <label>
+              {t('home.contact.role')}
+              <select name="role" defaultValue="playtester">
+                <option value="playtester">{t('home.contact.rolePlaytester')}</option>
+                <option value="concept">{t('home.contact.roleConcept')}</option>
+                <option value="narrative">{t('home.contact.roleNarrative')}</option>
+                <option value="other">{t('home.contact.roleOther')}</option>
+              </select>
+            </label>
+            <label>
+              {t('home.contact.message')}
+              <textarea name="message" rows="4" placeholder={t('home.contact.messagePlaceholder')} />
+            </label>
+            <button className="primary" type="submit">
+              {t('home.contact.submit')}
+            </button>
+          </form>
           <div className="cta-side">
             <div className="hero-actions cta-actions">
               <a

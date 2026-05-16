@@ -176,8 +176,13 @@ const getAbilityTemplate = (factionId = '') => {
   return fichaOrdenHab
 }
 
-const getFactionLabel = (factionId = '') => {
+const getFactionLabel = (factionId = '', lang = 'es') => {
   const id = String(factionId).toLowerCase()
+  if (lang === 'en') {
+    if (id.includes('caos')) return 'Chaos'
+    if (id.includes('legado')) return 'Legacy'
+    return 'Order'
+  }
   if (id.includes('caos')) return 'Caos'
   if (id.includes('legado')) return 'Legado'
   return 'Orden'
@@ -206,10 +211,17 @@ const ensureText = (value, fallback = '-') => {
   return text || fallback
 }
 
+const formatQuote = (value) => {
+  const text = String(value || '').trim().replace(/^["“”]+|["“”]+$/g, '')
+  return text ? `“${text}”` : ''
+}
+
 const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
   ability,
   factionId,
   description = '',
+  lang = 'es',
+  showLayoutToolbar = true,
 }, ref) {
   const wrapperRef = useRef(null)
   const cardRef = useRef(null)
@@ -334,10 +346,12 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
   const template = getAbilityTemplate(factionId)
   const title = ensureText(ability?.nombre)
   const body = ensureText(description || ability?.descripcion || ability?.efecto || ability?.texto)
-  const cost = ability?.coste ?? ability?.valor ?? ability?.valor_habilidad ?? '-'
-  const factionLabel = getFactionLabel(factionId)
+  const phrase = formatQuote(ability?.frase ?? ability?.frase_es ?? ability?.quote)
+  const rawCost = ability?.coste ?? ability?.valor ?? ability?.valor_habilidad
+  const cost = rawCost ? String(rawCost) : ''
+  const factionLabel = getFactionLabel(factionId, lang)
   const factionColor = FACTION_COLORS[getFactionToken(factionId)] || FACTION_COLORS.orden
-  const typeLabel = 'Hab. de facción'
+  const typeLabel = lang === 'en' ? 'Faction ability' : 'Hab. de facción'
 
   const updateCursorPosition = (clientX, clientY) => {
     const card = cardRef.current
@@ -421,7 +435,7 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
 
   return (
     <div ref={wrapperRef} className="ficha-wrapper ability-ficha-wrapper">
-      {canAccessLayoutMode ? (
+      {canAccessLayoutMode && showLayoutToolbar ? (
         <div className="ficha-layout-toolbar">
           <button
             type="button"
@@ -498,9 +512,17 @@ const FactionAbilityFichaCard = forwardRef(function FactionAbilityFichaCard({
             maxFontSize={28}
             minFontSize={7}
             step={0.25}
-            fitKey={`${body}-${guideMap.DESCRIPCION?.w}-${guideMap.DESCRIPCION?.h}-${guideMap.DESCRIPCION?.x}-${guideMap.DESCRIPCION?.y}`}
+            fitKey={`${body}-${phrase}-${guideMap.DESCRIPCION?.w}-${guideMap.DESCRIPCION?.h}-${guideMap.DESCRIPCION?.x}-${guideMap.DESCRIPCION?.y}`}
           >
-            {body}
+            <span className="ability-ficha-description-effect">{body}</span>
+            {phrase ? (
+              <em
+                className="ability-ficha-description-quote"
+                style={{ fontStyle: 'italic', fontWeight: 400 }}
+              >
+                {phrase}
+              </em>
+            ) : null}
           </AutoFitText>
         </div>
 

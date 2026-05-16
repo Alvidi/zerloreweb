@@ -16,16 +16,16 @@ import {
   buildArmyUnitDisplayNames,
   clampSquadSize,
   computeUnitTotal,
+  formatSpeedValue,
   factionImages,
   generateArmyByValue,
   getFactionSkillDescriptionForMode,
   getFixedUnitLoadout,
-  getUnitSpecialtyForMode,
+  getUnitSpecialtyLabelForMode,
   isFactionData,
   isUnitTypeAllowedInGameMode,
   getUnitTypeToken,
   normalizeFaction,
-  toNumber,
 } from '../features/generator/generatorUtils.js'
 
 const factionModules = import.meta.glob(['../data/factions/jsonFaccionesES/*.json', '../data/factions/jsonFaccionesEN/*.en.json'], { eager: true })
@@ -35,7 +35,6 @@ const factionSheetTemplates = {
   legado: new URL('../images/fichas/ficha_legado.webp', import.meta.url).href,
 }
 const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster', 'titan']
-const MAX_MULTIPLE_FACTION_ABILITIES = 3
 const MAX_UNIT_IMAGE_SIDE = 1600
 const IMAGE_CROP_ASPECT_RATIO = 686 / 473
 const IMAGE_CROP_VIEWPORT_WIDTH = 360
@@ -198,18 +197,16 @@ const sortUnitsByType = (units) =>
   })
 
 const getFactionPassiveSelectionMode = (faction) => {
-  if (faction?.seleccion_habilidades === 'multiple') return 'multiple'
-  if (faction?.seleccion_habilidades === 'individual') return 'individual'
-  return 'grupo'
+  if (faction?.seleccion_habilidades === 'grupo') return 'grupo'
+  if (faction?.seleccion_habilidades === 'group') return 'grupo'
+  return 'individual'
 }
 
 const getFactionAbilityOptions = (faction) =>
   Array.isArray(faction?.habilidades_faccion) ? faction.habilidades_faccion : []
 
 const getFactionAbilitySelectionLimit = (faction) =>
-  getFactionPassiveSelectionMode(faction) === 'multiple'
-    ? Math.min(MAX_MULTIPLE_FACTION_ABILITIES, getFactionAbilityOptions(faction).length)
-    : 1
+  Math.min(1, getFactionAbilityOptions(faction).length || 1)
 
 const sanitizeFactionAbilityIds = (faction, skillIds) => {
   if (getFactionPassiveSelectionMode(faction) === 'grupo') return []
@@ -238,7 +235,7 @@ const buildFactionAbilitySelection = (faction, skillIds) => {
     nombre: habilidades.map((skill) => skill.nombre).join(' · '),
     habilidades,
     tipo: mode,
-    coste_total: habilidades.reduce((sum, skill) => sum + toNumber(skill.coste), 0),
+    coste_total: 0,
   }
 }
 
@@ -250,7 +247,7 @@ const getFactionPassiveSelections = (faction) => {
       nombre: skill.nombre,
       habilidades: [skill],
       tipo: getFactionPassiveSelectionMode(faction),
-      coste_total: toNumber(skill.coste),
+      coste_total: 0,
     }))
   }
   return Array.isArray(faction.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
@@ -258,7 +255,6 @@ const getFactionPassiveSelections = (faction) => {
 const getFirstPassiveGroupId = (faction) =>
   getFactionPassiveSelectionMode(faction) === 'grupo' ? getFactionPassiveSelections(faction)?.[0]?.id || '' : ''
 const sanitizePassiveGroupId = (faction, passiveGroupId) => {
-  if (getFactionPassiveSelectionMode(faction) === 'multiple') return ''
   const options = getFactionPassiveSelections(faction)
   if (!options.length) return ''
   if (!passiveGroupId) return ''
@@ -275,10 +271,8 @@ const getPassiveSelectionLabelKey = (faction, singularKey, groupKey) =>
   getFactionPassiveSelectionMode(faction) === 'grupo' ? groupKey : singularKey
 
 const getPassiveSelectionCost = (selection) => {
-  if (!selection) return 0
-  const directCost = toNumber(selection.coste_total ?? selection.coste ?? selection.valor ?? selection.valor_habilidad)
-  if (directCost) return directCost
-  return (selection.habilidades || []).reduce((sum, skill) => sum + toNumber(skill?.coste), 0)
+  void selection
+  return 0
 }
 
 const getVisibleUnitsForGeneratorContext = (faction, eraToken, mode) =>
@@ -482,7 +476,7 @@ function FactionSelectLabel({ label, iconSrc }) {
   return (
     <span className="faction-select-option-label">
       <span className="faction-select-option-icon" aria-hidden="true">
-        {iconSrc ? <img src={iconSrc} alt="" /> : null}
+        {iconSrc ? <img src={iconSrc} alt="" /> : <span className="faction-select-option-fallback">?</span>}
       </span>
       <span>{label}</span>
     </span>
@@ -557,7 +551,7 @@ function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl,
     unit.movimiento,
     unit.vidas,
     unit.salvacion,
-    unit.velocidad,
+    formatSpeedValue(unit.velocidad),
     gameMode === 'escuadra' ? `${unit.escuadra_min}-${unit.escuadra_max}` : '1',
   ]
 
@@ -576,7 +570,7 @@ function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl,
         <div className="unit-sheet-slot unit-sheet-image-frame">
           <img
             className={`unit-sheet-image${imageDataUrl ? '' : ' fallback'}`}
-            src={imageDataUrl || getUnitTypeBadgeSrc(unit.tipo)}
+            src={imageDataUrl || getUnitTypeBadgeSrc(unit.tipo, unit.eras)}
             alt={unit.nombre}
           />
         </div>
@@ -585,7 +579,7 @@ function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl,
             <span key={`${unit.id}-sheet-stat-${index}`}>{value}</span>
           ))}
         </div>
-        <div className="unit-sheet-slot unit-sheet-specialty">{getUnitSpecialtyForMode(unit, gameMode)}</div>
+        <div className="unit-sheet-slot unit-sheet-specialty">{getUnitSpecialtyLabelForMode(unit, gameMode, lang)}</div>
         <div className="unit-sheet-slot unit-sheet-shooting">
           <UnitSheetTable weapons={fixedLoadout.shooting} lang={lang} />
         </div>
@@ -623,6 +617,7 @@ function Generador() {
   const [selectedPassiveGroupId, setSelectedPassiveGroupId] = useState('')
   const [selectedFactionSkillIds, setSelectedFactionSkillIds] = useState([])
   const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
+  const [armyDownloadError, setArmyDownloadError] = useState('')
   const [isRandomArmyModalOpen, setIsRandomArmyModalOpen] = useState(false)
   const [randomArmyTargetValue, setRandomArmyTargetValue] = useState('')
   const [randomArmyError, setRandomArmyError] = useState('')
@@ -678,20 +673,7 @@ function Generador() {
     () => applyPassiveGroupEffectsToFaction(selectedFaction, selectedFactionSelection),
     [selectedFaction, selectedFactionSelection],
   )
-  const manualCurrentSelection = useMemo(() => {
-    if (getFactionPassiveSelectionMode(selectedFaction) !== 'multiple') return selectedFactionSelection
-    const currentIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
-    const selectedOptions = selectedPassiveOptions.filter((group) => currentIds.includes(group.id))
-    const habilidades = selectedOptions.map((group) => group.habilidades?.[0]).filter(Boolean)
-    if (!habilidades.length) return null
-    return {
-      id: currentIds.join('|'),
-      nombre: habilidades.map((skill) => skill.nombre).join(' · '),
-      habilidades,
-      tipo: 'multiple',
-      coste_total: habilidades.reduce((sum, skill) => sum + toNumber(skill.coste), 0),
-    }
-  }, [selectedFaction, selectedFactionSelection, selectedFactionSkillIds, selectedPassiveOptions])
+  const manualCurrentSelection = selectedFactionSelection
   const availableEraTokens = useMemo(() => {
     const tokens = new Set(
       (selectedFactionWithPassives?.unidades || [])
@@ -738,6 +720,9 @@ function Generador() {
     () => manualCurrentSelection?.habilidades || selectedFactionSelection?.habilidades || [],
     [manualCurrentSelection, selectedFactionSelection],
   )
+  useEffect(() => {
+    if (selectedAbilityRows.length) setArmyDownloadError('')
+  }, [selectedAbilityRows.length])
   const abilityExportPages = useMemo(() => chunkItems(selectedAbilityRows, 2), [selectedAbilityRows])
   const selectedArmyUnits = useMemo(() => {
     const unitsById = new Map(exportUnits.map((unit) => [unit.uid, unit]))
@@ -766,8 +751,8 @@ function Generador() {
   }, [exportUnits, selectedArmyUnitSelections, gameMode])
   const exportUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(selectedArmyUnits), [selectedArmyUnits])
   const currentAbilityTotalValue = useMemo(
-    () => selectedAbilityRows.reduce((sum, skill) => sum + Number(skill?.coste || 0), 0),
-    [selectedAbilityRows],
+    () => 0,
+    [],
   )
   const currentArmyTotalValue = useMemo(
     () => selectedArmyUnits.reduce((sum, unit) => sum + Number(unit?.total || 0), 0) + currentAbilityTotalValue,
@@ -886,7 +871,7 @@ function Generador() {
 
   useEffect(() => {
     if (!selectedFaction) return
-    if (getFactionPassiveSelectionMode(selectedFaction) === 'multiple') return
+    if (getFactionPassiveSelectionMode(selectedFaction) !== 'grupo') return
     if (selectedPassiveGroupIdSafe) return
     const fallbackGroupId = getFirstPassiveGroupId(selectedFaction)
     if (fallbackGroupId) {
@@ -1020,7 +1005,7 @@ function Generador() {
   const handleFactionChange = (event) => {
     const next = event.target.value
     const nextFaction = factions.find((faction) => faction.id === next)
-    const nextPassiveGroupId = getFirstPassiveGroupId(nextFaction)
+    const nextPassiveGroupId = getFactionPassiveSelectionMode(nextFaction) === 'grupo' ? getFirstPassiveGroupId(nextFaction) : ''
     const nextFactionSkillIds = []
     startTransition(() => {
       setSelectedFactionId(next)
@@ -1033,6 +1018,7 @@ function Generador() {
       setPendingSquadUnitId('')
       setSelectedArmyUnitSelections([])
       setManualUnitDrafts({})
+      setArmyDownloadError('')
     })
   }
 
@@ -1096,6 +1082,7 @@ function Generador() {
       setSelectedPassiveGroupId(groupId)
       setSelectedFactionSkillIds([])
     }
+    setArmyDownloadError('')
   }
 
   const handleRemoveArmyPassive = (groupId) => {
@@ -1104,14 +1091,15 @@ function Generador() {
       setSelectedFactionSkillIds((current) => current.filter((id) => id !== groupId))
       return
     }
-    const fallbackGroupId = getFirstPassiveGroupId(selectedFaction)
-    setSelectedPassiveGroupId(groupId === fallbackGroupId ? '' : fallbackGroupId)
+    void groupId
+    setSelectedPassiveGroupId('')
   }
 
   const handleResetCurrentArmy = () => {
     setSelectedArmyUnitSelections([])
     setSelectedFactionSkillIds([])
-    setSelectedPassiveGroupId(getFirstPassiveGroupId(selectedFaction))
+    setSelectedPassiveGroupId(getFactionPassiveSelectionMode(selectedFaction) === 'grupo' ? getFirstPassiveGroupId(selectedFaction) : '')
+    setArmyDownloadError('')
   }
 
   const createArmyUnitSelection = (unitId, patch = {}) => {
@@ -1211,7 +1199,12 @@ function Generador() {
 
   const handleDownloadArmyPdf = () => {
     if ((!selectedArmyUnits.length && !selectedAbilityRows.length) || isArmyPrintPreviewOpen) return
+    if (selectedPassiveOptions.length && !selectedAbilityRows.length) {
+      setArmyDownloadError(t('generator.missingFactionAbility'))
+      return
+    }
     if (typeof window === 'undefined') return
+    setArmyDownloadError('')
     setIsArmyPrintPreviewOpen(true)
   }
 
@@ -1299,11 +1292,9 @@ function Generador() {
                 </div>
                 {activeGeneratorSection === 'passives' && selectedPassiveOptions.length > 0 && (
                   <div className="generator-subsection generator-listing-field">
-                    {getFactionPassiveSelectionMode(selectedFaction) === 'multiple' ? (
-                      <div className="generator-listing-head">
-                        <span className="generator-listing-note">{t('generator.maxFactionAbilities')}</span>
-                      </div>
-                    ) : null}
+                    <div className="generator-listing-head">
+                      <span className="generator-listing-note">{t('generator.requiredFactionAbility')}</span>
+                    </div>
                     <div className="passive-group-list passive-group-list-inline unit-list">
                       {selectedPassiveOptions.map((group, index) => {
                         const currentMultipleIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
@@ -1336,9 +1327,6 @@ function Generador() {
                                   <div className="passive-group-kind">
                                     {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.passive', 'generator.passiveSet'))}
                                   </div>
-                                  {group.coste_total ? (
-                                    <div className="unit-card-inline-value">{group.coste_total} {t('generator.valueUnit')}</div>
-                                  ) : null}
                                 </div>
                               </div>
                               <div className="unit-card-header-actions">
@@ -1382,7 +1370,7 @@ function Generador() {
                                 <span className="unit-card-thumb-canvas">
                                   <img
                                     className="unit-card-thumb fallback"
-                                    src={getUnitTypeBadgeSrc(unit.tipo)}
+                                    src={getUnitTypeBadgeSrc(unit.tipo, unit.eras)}
                                     alt=""
                                   />
                                 </span>
@@ -1440,7 +1428,7 @@ function Generador() {
                                   <div className="unit-card-thumb-wrap army-unit-image-wrap">
                                     <img
                                       className={`unit-card-thumb army-unit-thumb${entry.imageDataUrl ? '' : ' fallback'}`}
-                                      src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo)}
+                                      src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, entry.base.eras)}
                                       alt={entry.base.nombre}
                                     />
                                     <input
@@ -1514,7 +1502,6 @@ function Generador() {
                                       <h4>{skill.nombre || skill.id}</h4>
                                     </div>
                                     <div className="unit-card-type">{t('generator.passive')}</div>
-                                    {skill.coste ? <div className="unit-card-inline-value">{skill.coste} {t('generator.valueUnit')}</div> : null}
                                   </div>
                                 </div>
                                 <div className="unit-card-header-actions army-unit-actions">
@@ -1560,6 +1547,11 @@ function Generador() {
                         {t('generator.randomArmy')}
                       </button>
                     </div>
+                    {armyDownloadError ? (
+                      <p className="random-army-error" role="alert" aria-live="polite">
+                        {armyDownloadError}
+                      </p>
+                    ) : null}
                   </div>
                 ) : null}
 
@@ -1628,6 +1620,15 @@ function Generador() {
                   const min = clampSquadSize(unitEntry.base.escuadra_min, unitEntry.base)
                   const max = clampSquadSize(unitEntry.base.escuadra_max, unitEntry.base)
                   const sizeOptions = Array.from({ length: Math.max(1, max - min + 1) }, (_, index) => min + index)
+                  const fixedLoadout = getFixedUnitLoadout(unitEntry.base)
+                  const selectedSquadValue = computeUnitTotal(
+                    unitEntry.base,
+                    fixedLoadout.shooting,
+                    fixedLoadout.melee,
+                    clampSquadSize(pendingSquadSize, unitEntry.base),
+                    null,
+                    gameMode,
+                  )
 
                   return createPortal(
                     <div
@@ -1663,6 +1664,9 @@ function Generador() {
                             </button>
                           ))}
                         </div>
+                        <p className="squad-size-total-preview">
+                          <span>{selectedSquadValue}</span> {t('generator.valueUnit')}
+                        </p>
                         <div className="unit-modal-footer">
                           <button type="button" className="ghost small" onClick={handleCloseSquadSizeModal}>
                             {t('generator.cancel')}

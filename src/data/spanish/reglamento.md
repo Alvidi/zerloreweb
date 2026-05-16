@@ -1,6 +1,6 @@
 # Reglamento ZeroLore
 
-ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones y armas, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
+ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas y especialidades de unidades, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
 Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
 
@@ -64,7 +64,7 @@ En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las d
 
 Cuando una regla especial contradiga o modifique una regla general, **la regla especial siempre tiene prioridad**.
 
-_Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Pistolero, esa regla especial permite disparar aunque estés trabado, y eso manda._
+_Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Multiuso, esa regla especial permite disparar aunque estés trabado, y eso manda._
 
 ### Número de jugadores
 
@@ -73,6 +73,7 @@ ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 - **1vs1**: duelo entre dos jugadores
 - **1vs2**: enfrentamiento contra un jugador
 - **2vs2**: dos equipos de dos jugadores
+- **1vs1vs1**: todos contra todos
 
 En partidas de más de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno, y aplica también a equipos.
 
@@ -160,7 +161,7 @@ En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve t
 
 Al inicio de cada Fase de Iniciativa, cada jugador gana **1 Ficha de Reroll**. Las fichas no gastadas se acumulan entre turnos.
 
-Una Ficha de Reroll puede gastarse en cualquier momento para **repetir cualquier tirada** (ataque, salvación, carga). La segunda tirada es siempre el resultado final.
+Una Ficha de Reroll puede gastarse en cualquier momento para **repetir cualquier tirada** (ataque, salvación, etc.). La segunda tirada es siempre el resultado final.
 
 ## 2. Fase de Activaciones
 
@@ -201,16 +202,15 @@ Las acciones disponibles para todas las unidades son las siguientes:
 - **Atacar a distancia** – 1 acción
 - **Preparado** – 2 acciones
 - **Retirarse** – 2 acciones
-- **Cargar** – 2 acciones
+- **Acometida** – 2 acciones
 - **Atacar cuerpo a cuerpo** – 2 acciones
-- **Carrera** – 2 acciones
 
 ## Movimiento
 
 Cuando una unidad se mueve, puede desplazarse hasta su valor de **Movimiento** en pulgadas (").
 
 - Las unidades pueden moverse en cualquier dirección.
-- No se puede mover una unidad a menos de **1" de una unidad enemiga**, salvo al cargar.
+- No se puede mover una unidad a menos de **1" de una unidad enemiga**, salvo al realizar una Acometida.
 - El movimiento puede utilizarse para rodear obstáculos o posicionarse libremente en el campo de batalla.
 
 ### Terreno y obstáculos
@@ -225,18 +225,29 @@ Para trepar:
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana.
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 
+Algunas unidades con la habilidad **Vuelo** pueden subir obstáculos de manera diagonal.
+
 ![Unidad trepando un obstáculo y alcanzando una posición elevada]({{climbingImage}})
 
-## Carrera
+## Acometida
 
-Al realizar una **Carrera**, la unidad consume **2 acciones**.
+La **Acometida** es una acción que permite a una unidad moverse a alta velocidad, ya sea para reposicionarse o para iniciar un combate cuerpo a cuerpo.
 
-- La unidad se desplaza su valor de Movimiento **+3"** adicionales.
-- Durante una Carrera no se pueden realizar ataques, salvo que una regla indique lo contrario.
+Al realizar una Acometida, la unidad consume **2 acciones** y se mueve hasta su valor de **Movimiento + Velocidad** en pulgadas.
 
-La Carrera representa un movimiento rápido y expuesto, útil para reposicionarse o alcanzar coberturas.
+La Acometida puede usarse de dos formas:
 
-![Unidad realizando una Carrera]({{sprintImage}})
+**1. Movimiento extendido**
+
+La unidad se desplaza para reposicionarse. Durante una Acometida no se pueden realizar ataques a distancia, salvo que una regla indique lo contrario.
+
+**2. Carga al enemigo**
+
+Si durante la Acometida la unidad entra en contacto de peana con una unidad enemiga, se considera una **carga**. Una carga exitosa permite a la unidad realizar **un ataque cuerpo a cuerpo gratuito** sin gastar acciones adicionales.
+
+Si la Acometida no consigue alcanzar al objetivo, la unidad termina su movimiento donde llegó.
+
+![Unidad realizando una Acometida]({{sprintImage}})
 
 ## Retirada
 
@@ -250,16 +261,14 @@ Para realizar una retirada:
 
 La unidad se recompone automáticamente al inicio de su siguiente activación si ha alcanzado un puesto de mando aliado. Si no lo ha alcanzado, continúa en retirada.
 
-Una unidad en estado de Retirada **no puede realizar contraataques**.
-
 ## Preparado
 
 Una unidad que utiliza la acción **Preparado** adopta una postura defensiva.
 
-Una unidad preparada puede realizar **contraataques a distancia** durante el turno del jugador rival.
+Una unidad preparada puede realizar **disparos de respuesta** durante el turno del jugador rival.
 
 - **Si es disparada:** puede devolver inmediatamente un disparo con el arma equipada, independientemente de si le quedan acciones. Primero se resuelve el ataque enemigo, luego el disparo de respuesta.
-- **Si es cargada:** la unidad Preparada **ataca siempre primero**, independientemente de la Velocidad. La unidad que carga realiza el contraataque después. La unidad en Preparado puede atacar o contraatacar aunque no le queden acciones.
+- **Si es cargada:** la unidad Preparada **ataca siempre primero**, independientemente de la Velocidad. La unidad que carga resuelve su ataque después. La unidad en Preparado puede atacar aunque no le queden acciones.
 
 El estado de Preparado dura hasta que finaliza el turno.
 
@@ -334,13 +343,12 @@ Cuando una unidad pierde todas sus Vidas, se retira del juego como destruida.
 
 El combate cuerpo a cuerpo ocurre cuando dos unidades se encuentran **en contacto de peana**. En ese momento, ambas unidades quedan **trabadas en combate**.
 
-## Cargar
+## Cargar mediante Acometida
 
-Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar la acción **Cargar**, que consume **2 acciones**.
+Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar una **Acometida** y entrar en contacto de peana con una unidad enemiga.
 
-- La unidad lanza **2D6**.
-- El resultado es la distancia total que puede recorrer hacia el objetivo, independientemente de su valor de Movimiento.
-- Si la unidad **no alcanza** al objetivo, la carga falla y la unidad permanece en su posición.
+- La unidad se mueve hasta su valor de **Movimiento + Velocidad**.
+- Si la unidad **no alcanza** al objetivo, termina su movimiento donde llegó.
 - Si la carga es exitosa, la unidad coloca su peana en contacto con el objetivo y se considera trabada.
 
 Una carga exitosa **aporta una acción de ataque cuerpo a cuerpo gratuita**.
@@ -353,35 +361,24 @@ Cuando dos unidades están en contacto de peana:
 - Ambas unidades solo pueden usar acciones de **combate cuerpo a cuerpo** o **retirada**.
 - Permanecen trabadas hasta que una de las dos sea eliminada o se retire.
 
-**Una tercera unidad o escuadra puede cargar a una unidad o escuadra ya trabada en combate**, siempre que disponga de acciones suficientes para cargar. La carga se resuelve con normalidad: la unidad que carga realiza su ataque y la defensora contraataca **únicamente si aún dispone de acciones suficientes**. Si la defensora ya las había gastado en un intercambio anterior de ese mismo turno, encaja el ataque sin devolverlo. Tras el intercambio, todas las unidades involucradas se consideran trabadas en el mismo combate.
+Cada unidad trabada ataca en su propia activación gastando sus acciones de forma normal.
 
-Este principio se aplica sucesivamente: cada nueva unidad o escuadra que cargue se une al combate común.
+Una unidad puede usar la acción **Acometida** para cargar a una unidad ya trabada en combate. Tras la carga, todas las unidades involucradas se consideran trabadas en el mismo combate.
 
-En un combate con tres o más unidades, cuando una unidad realice su ataque cuerpo a cuerpo **puede elegir a cuál de las unidades enemigas trabadas atacar** en ese intercambio. El orden de ataque sigue las reglas normales: la unidad que carga primero, Velocidad después.
+Cuando una unidad que está trabada con varias unidades se activa y va a atacar cuerpo a cuerpo, puede elegir a cuál de las unidades enemigas trabadas ataca.
 
 Para destrabarse:
 
 - Eliminar a la unidad enemiga
 - Declarar una retirada siguiendo las reglas de retirada.
 
-## Orden de ataque
+## Ataques cuerpo a cuerpo
 
-El orden en el que atacan las unidades se determina de la siguiente forma:
+Un ataque cuerpo a cuerpo se resuelve siguiendo esta secuencia:
 
-1. Si una unidad ha **cargado este turno**, esa unidad **ataca primero**, sin importar el valor de Velocidad.
-2. Como **excepción** a la regla 1: si la defensora está en estado **Preparado**, se aplica la regla de Preparado y la **Velocidad** puede alterar este orden.
-3. Si ninguna unidad ha cargado este turno, ataca primero la unidad con **mayor Velocidad**.
-4. Si ambas tienen la misma Velocidad, los jugadores tiran **1D6** para decidir.
-
-Este orden se aplica **cada vez que se resuelve un intercambio de ataques**.
-
-## Resolución del combate cuerpo a cuerpo
-
-El combate cuerpo a cuerpo se resuelve siguiendo esta secuencia:
-
-1. Ataque de la unidad que actúa primero
+1. Ataque de la unidad activa
 2. Salvaciones del defensor
-3. Contraataque (si procede)
+3. Aplicar daño
 
 ### 1. Ataque
 
@@ -400,30 +397,19 @@ El jugador defensor lanza tantos dados como impactos haya recibido.
 - Los impactos críticos solo pueden bloquearse con un **6 defensivo**.
 - Los impactos no bloqueados infligen el daño base o crítico del arma atacante.
 
-### 3. Contraataque
+### 3. Aplicar daño
 
-Si la unidad defensora **sobrevive** y dispone de acciones suficientes, debe realizar un **contraataque obligatorio**.
-
-- El contraataque se resuelve exactamente igual que un ataque cuerpo a cuerpo.
-- Si la unidad es destruida durante el primer ataque, **no puede contraatacar**.
-- Si la unidad no tiene acciones disponibles, no puede realizar el contraataque.
-
-Tras el intercambio, ambas unidades permanecen trabadas.
+Cada impacto no bloqueado inflige el daño indicado por el arma. Si la unidad pierde todas sus Vidas, se retira del juego como destruida. Si sobrevive, ambas unidades permanecen trabadas.
 
 ## Vehículos y monstruos en combate cuerpo a cuerpo
 
-Si un **Vehículo** o un **Monstruo** es cargado por una unidad de **Línea o Élite**, la carga se resuelve con normalidad: la unidad que carga realiza su ataque y el Vehículo o Monstruo contraataca si sobrevive. Tras el intercambio ambas quedan **trabadas en combate cuerpo a cuerpo**, siguiendo las reglas generales de traba.
+Los **Vehículos** y los **Monstruos** trabados en cuerpo a cuerpo siguen las mismas reglas que un combate cuerpo a cuerpo normal. Únicamente pueden seguir disparando si tienen armas con **Multiuso**.
 
-Como excepción, un Vehículo o Monstruo trabado **únicamente con unidades de Línea o Élite** puede **destrabarse libremente durante su activación**, consumiendo **1 acción de Movimiento** para alejarse sin declarar Retirada ni sufrir sus penalizaciones (no reduce Velocidad a 0 ni necesita tirar para recomponerse). Tras destrabarse puede seguir actuando con normalidad, incluyendo disparar si le quedan acciones. Si la unidad de Línea o Élite quiere volver a atacar, deberá cargarlo de nuevo.
-
-Si un Vehículo es cargado por otro **Vehículo** o por un **Monstruo**, o si un Monstruo es cargado por otro **Monstruo** o por un **Vehículo**, ambas unidades quedan trabadas en combate siguiendo las reglas normales y **no** pueden destrabarse libremente.
-
-Un **Vehículo** trabado solo puede utilizar sus **armas cuerpo a cuerpo**.
+Además, estas unidades pueden ser atacadas a distancia aunque estén trabadas en combate cuerpo a cuerpo.
 
 ## Titanes en combate cuerpo a cuerpo
 
-- Un Titán **solo puede cargar contra otro Titán**.
-- Las unidades de Línea, Élite, Vehículos y Monstruos **no pueden cargar ni trabar** a un Titán por sí mismas.
+Un Titán **solo puede acometer contra otro Titán**. Las unidades de Línea, Élite, Vehículos y Monstruos **no pueden trabar** a un Titán por sí mismas.
 
 Los Titanes siguen las mismas reglas generales de combate cuerpo a cuerpo, salvo por sus reglas especiales.
 
@@ -543,9 +529,9 @@ _(Ver sección: Combate cuerpo a cuerpo para la resolución completa.)_
 
 ## Unidad descontrolada
 
-Algunas unidades, como los **Monstruos**, pueden entrar en estado de **Descontrol** cuando sufren daños graves.
+Algunas unidades con la especialidad **Descontrol** pueden entrar en estado de **Descontrol** cuando sufren daños graves.
 
-El estado de Descontrol se indica colocando el **token de descontrol** (rayo naranja) junto a la miniatura.
+El estado de Descontrol debe marcarse de forma clara junto a la miniatura.
 
 Mientras esté descontrolada:
 
@@ -599,8 +585,6 @@ El tipo **no limita las estadísticas** de la unidad, que dependen de su facció
 
 Todas las unidades disponen, como mínimo, de **un ataque cuerpo a cuerpo** en su arsenal.
 
-![Tipos de unidad de ZeroLore: Línea, Élite, Vehículo, Monstruo, Titán y Héroe]({{unitTypesImage}})
-
 ## 1. Unidades de Línea
 
 Las unidades de **Línea** representan tropas versátiles u ofensivas, y constituyen el núcleo de la mayoría de ejércitos.
@@ -631,11 +615,6 @@ Características:
 - No pueden subir estructuras ni trepar obstáculos elevados.
 - **No pueden capturar ni controlar puntos de mando** ni otras zonas de conquista.
 
-### Cuando un vehículo es destruido
-
-- **4–6**: el vehículo queda destruido en el campo de batalla como una pieza más de escenografía.
-- **1–3**: se produce una **explosión** que afecta a todas las unidades a **3"** del vehículo. Las unidades afectadas reciben **1D6 de daño automático**, que no puede ser salvado. Después, el vehículo se retira del campo de batalla.
-
 ## 4. Monstruos
 
 Los **Monstruos** son criaturas de enorme poder y presencia en el campo de batalla.
@@ -643,23 +622,7 @@ Los **Monstruos** son criaturas de enorme poder y presencia en el campo de batal
 Características:
 
 - Muy resistentes y letales en combate cuerpo a cuerpo.
-- Al igual que los vehículos, **no pueden capturar ni controlar puntos de mando a no ser que una regla diga lo contrario**.
-
-### Descontrol en monstruos
-
-Cuando un monstruo llega al **50% de sus Vidas**, el jugador debe tirar **1D6** en la fase de Iniciativa:
-
-- **3–6**: el monstruo no sufre efectos adicionales.
-- **1–2**: el monstruo entra en estado de **Descontrol durante ese turno**.
-
-Mientras el monstruo se mantenga al **50% de sus Vidas o menos**, deberá repetir este chequeo al inicio de cada turno durante la fase de Iniciativa.
-
-Mientras esté descontrolado:
-
-- Ataca a enemigos y unidades aliadas.
-- Prioriza siempre la unidad más cercana.
-- Solo utiliza ataques cuerpo a cuerpo, priorizando las cargas.
-- Si un monstruo descontrolado está trabado en combate cuerpo a cuerpo con una unidad aliada y, en el siguiente turno, supera su chequeo y deja de estar descontrolado, el combate termina y ambas unidades se separan **1"**.
+- Pueden tomar puestos de mando.
 
 ## 5. Héroes
 
@@ -686,10 +649,7 @@ Los Titanes son unidades **lentas**, extremadamente resistentes y muy visibles. 
 ### Reglas generales de los Titanes
 
 - Un Titán **no puede capturar ni controlar puntos de mando**, salvo que una regla indique lo contrario.
-- Durante su **movimiento**, un Titán puede **atravesar elementos de escenografía** como edificios, ruinas u obstáculos grandes, siempre que **no termine su movimiento sobre ellos**.
-- Un Titán **no puede colocarse, detenerse ni permanecer** sobre un elemento de escenografía, ni utilizarlo como superficie, aunque pueda pasar por encima de él.
-- Si durante su movimiento un Titán pasa por encima de una unidad de **Línea o Élite**, dicha unidad es **destruida automáticamente**.
-- Cuando un Titán es destruido, se produce una **explosión colosal**. Todas las unidades a **6"** del Titán sufren **1D6 de daño automático**, que no puede ser salvado.
+- Durante su **movimiento**, un Titán puede **atravesar elementos de escenografía** como edificios, ruinas u obstáculos igual de grandes que la unidad. Un Titán **no puede colocarse, detenerse ni permanecer** sobre un elemento de escenografía, ni utilizarlo como superficie, aunque pueda pasar por encima de él.
 
 # Perfiles de unidad
 
@@ -713,7 +673,7 @@ Indica la **distancia máxima**, en pulgadas ("), que la unidad puede desplazars
 
 Este valor también se utiliza para:
 
-- Carrera
+- Acometida (Movimiento + Velocidad)
 - Retirada
 
 ### Vidas
@@ -734,16 +694,30 @@ Una Salvación de **4+** bloquea impactos con resultados de **4, 5 o 6**.
 
 ### Velocidad
 
-Representa la rapidez de reacción de la unidad.
+Representa la **distancia adicional**, en pulgadas ("), que la unidad puede recorrer al realizar una **Acometida**.
 
-- En combate cuerpo a cuerpo, la unidad con mayor Velocidad **actúa primero**, salvo que una haya cargado.
-- Algunas habilidades modifican este valor temporalmente.
+Una unidad con mayor Velocidad puede cubrir más terreno en un solo impulso y alcanzar objetivos más lejanos al cargar.
 
 ### Especialidad
 
-Incluye comportamientos especiales, aclaraciones de diseño o reglas únicas propias de la unidad.
+Incluye comportamientos especiales listados abajo. Estas reglas se aplican siempre que la unidad esté en juego, salvo que se indique lo contrario.
 
-Estas reglas se aplican siempre que la unidad esté en juego, salvo que se indique lo contrario.
+Los Héroes y algunas unidades experimentales pueden tener especialidades propias descritas directamente en su ficha.
+
+| Especialidad | Descripción | Especialidad | Descripción |
+| --- | --- | --- | --- |
+| **Soldado** | Esta unidad no tiene ninguna especialidad. | **Resistente** | La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3**. |
+| **Soporte** | Esta unidad puede gastar **2 acciones** para elegir una unidad aliada a **6" o menos**. Esa unidad recupera **1D3 Vidas** perdidas. | **Evasivo** | La primera vez cada turno que esta unidad sea objetivo de un ataque de **Disparo**, puede moverse hasta **2"** antes de resolver el ataque. |
+| **Guardia** | Una vez por turno, cuando una unidad aliada a **6" o menos** reciba daño, esta unidad puede recibir hasta **2 puntos de ese daño** en su lugar. | **Anclado** | Las unidades enemigas trabadas con esta unidad no pueden declarar **Retirada**. |
+| **Despiadado** | Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen **+1 daño crítico**. | **Berserker** | Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3**. |
+| **Certero** | Si esta unidad no se mueve, gana **1 de Precisión** en Disparo. | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos. |
+| **Asentado** | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Durante su activación, puede gastar **2 acciones** para volver a Reserva, retirándose del campo de batalla. | **Capturador** | Esta unidad cuenta como el doble de su **Valor** al controlar o disputar puestos de mando. |
+| **Avanzadilla** | Puede ser desplegada a **9"** de un puesto de mando aliado. | **Devorador** | Cuando esta unidad destruye una unidad enemiga en CaC, recupera **1D3 Vidas perdidas**. |
+| **Porrazo** | Durante su activación, esta unidad puede gastar **1 acción** para empujar **1"** a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora Anclado**. | **Terror** | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar Fichas de Reroll. |
+| **Tirador** | Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas. | **Cobertura móvil** | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo. |
+| **Volador** | Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas. | **Carga brutal** | Cuando esta unidad realiza una Acometida contra una unidad, gana **+1 dado de ataque CaC** durante ese combate. |
+| **Descontrol** | Cuando esta unidad llega al **50% de sus Vidas**, ataca siempre a la unidad aliada o enemiga más cercana en combate cuerpo a cuerpo, sumando **+1 dado de ataque**. Si ya está trabada, continúa combatiendo. Si no hay ninguna unidad cercana, se mueve hacia ella. | **Boom!** | Cuando esta unidad es destruida, explota afectando a todas las unidades a **6"** de ella, que reciben **1D6 de daño**. |
+| **Aplastamiento** | Durante su movimiento, si esta unidad pasa por encima de una unidad de **Línea o Élite**, dicha unidad es destruida automáticamente. | | |
 
 ### Escuadras
 
@@ -761,9 +735,9 @@ Representa el **coste en puntos** de la unidad.
 
 ### Equipamiento de armas
 
-Salvo que una regla indique lo contrario, cada unidad puede portar **una única arma a distancia** y **una única arma de combate cuerpo a cuerpo**.
+Cada unidad puede tener hasta **2 armas** en su perfil, de disparo o cuerpo a cuerpo.
 
-Si una unidad dispone de más de un arma del mismo tipo, deberá indicarse explícitamente en su perfil o reglas especiales.
+Al realizar un ataque, el jugador elige con cuál de las armas ataca en esa activación. No es posible usar ambas armas en el mismo ataque.
 
 ## Perfiles de armas a distancia
 
@@ -807,10 +781,6 @@ Reglas especiales asociadas únicamente a esa arma.
 - Solo se aplican mientras el arma esté operativa.
 - Si el arma queda destruida o silenciada, estas habilidades no pueden usarse.
 
-### Valor extra
-
-Coste adicional en puntos por equipar esta arma, si procede.
-
 ## Perfiles de armas de combate cuerpo a cuerpo
 
 Las armas de combate cuerpo a cuerpo siguen una estructura similar.
@@ -832,10 +802,6 @@ Funcionan igual que en armas a distancia.
 ### Habilidades
 
 Reglas especiales que solo afectan a este tipo de ataque o a esta arma concreta.
-
-### Valor extra
-
-Coste adicional por equipar el arma, si aplica.
 
 ## Modificadores
 
@@ -869,39 +835,28 @@ Estas habilidades sirven para diferenciar armas sin añadir reglas complejas. Al
 
 Cuando una unidad realiza un ataque, debe elegir una única arma válida de su perfil. Si esa arma tiene una habilidad, aplica su efecto durante ese ataque.
 
-## Tabla de habilidades de armas
-
 | Habilidad de arma | Descripción |
 | --- | --- |
 | **Fiable** | Esta arma no tiene reglas especiales. |
 | **Brutal X+** | Los impactos de esta arma se consideran críticos con un resultado natural de **X+** en la tirada de ataque. |
 | **Perforante** | Los impactos críticos de esta arma empeoran la **Salvación** del objetivo en **1**. |
-| **Inestable** | Esta arma es inestable. Una vez acabado el ataque al objetivo, lanza 1D6. Con un resultado de **1–2**, la unidad que porta esta arma recibe los mismos puntos de daño que ha recibido el objetivo. Si el objetivo no recibe ningún impacto, esta tampoco recibe nada. |
-| **Pistolero** | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, pero solo contra la unidad con la que está combatiendo cuerpo a cuerpo. |
+| **Inestable** | Tras resolver el ataque, lanza 1D6. Con resultado de **1–2**, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
+| **Multiuso** | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad con la que está combatiendo cuerpo a cuerpo. |
 | **Directo** | Esta arma no realiza tirada de Precisión. |
-| **Explosiva** | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica automáticamente a todas las unidades a **3"** de esta. |
+| **Explosiva** | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **aliadas y enemigas** a **3"** del objetivo. |
 | **Parabólica** | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**. |
 
-## Habilidades condicionadas por tipo
+## Armas condicionadas por tipo
 
-Algunas habilidades pueden incluir uno o varios tipos de unidad entre paréntesis. En ese caso, la habilidad solo se aplica contra esos tipos de unidad.
-
-Los tipos válidos son:
-
-- **Línea**
-- **Élite**
-- **Héroe**
-- **Vehículo**
-- **Monstruo**
-- **Titán**
+Algunas armas no son válidas contra cualquier objetivo. Cuando el nombre del arma incluye uno o varios tipos de unidad entre paréntesis, el arma **solo puede atacar a unidades de esos tipos**. Las armas sin paréntesis pueden atacar a cualquier tipo de unidad.
 
 Ejemplos:
 
-- **Brutal 5+ (Vehículo)** solo aplica Brutal contra Vehículos.
-- **Perforante (Élite, Héroe)** solo aplica Perforante contra Élite y Héroes.
-- **Perforante (Vehículo, Monstruo)** solo aplica Perforante contra Vehículos y Monstruos.
+- **Lanzacohetes (Vehículo)** solo puede atacar a Vehículos.
+- **Rifle de francotirador (Línea, Élite)** solo puede atacar a unidades de Línea y Élite.
+- **Cañón de aniquilación (Élite, Héroe, Titán)** solo puede atacar a Élite, Héroes y Titanes.
 
-Si el objetivo no pertenece a uno de los tipos indicados, el arma se resuelve normalmente con los valores de su perfil.
+Si el objetivo no pertenece a uno de los tipos indicados, el arma **no puede usarse** contra él. Esto refleja armas especializadas: un lanzacohetes anti-vehículo no se desperdicia contra infantería ligera.
 
 ## Límite de habilidades por arma
 
@@ -913,18 +868,29 @@ Las armas especialmente poderosas, únicas o excepcionales pueden tener más de 
 
 # Habilidades de facción
 
-Cada facción dispone de distintas **Habilidades de facción** que definen su estilo de combate. Cada habilidad tiene un **coste en puntos** indicado en la ficha de la facción.
+Cada facción dispone de un **abanico de habilidades de facción** que representan distintas formas de hacer la guerra. Una misma facción puede priorizar el combate cuerpo a cuerpo, el dominio del campo a distancia, el peso de su maquinaria pesada o cualquier otro estilo de juego.
+
+Antes de comenzar la partida, cada jugador debe **elegir una habilidad de facción** de entre las disponibles para su facción. Esta elección representa el **modo de juego** de su ejército durante la partida y define cómo se comportan sus unidades en el campo de batalla.
+
+**Reglas básicas:**
+
+- Cada jugador elige **una única habilidad de facción** antes de comenzar.
+- La elección debe comunicarse al rival antes del despliegue.
+- La habilidad se aplica automáticamente a todas las unidades de la facción durante toda la partida; no requiere activación ni gasto de acciones.
+- **No se puede cambiar la habilidad de facción durante la partida.**
+- Las habilidades de facción **no tienen coste en puntos**; están incluidas en el modo de juego elegido.
+
+Cada habilidad de facción introduce una **mecánica única** que cambia cómo se juega ese ejército, no solo bonificadores numéricos. Elegir bien tu habilidad de facción es la primera gran decisión estratégica de la partida.
+
+A medida que el juego evoluciona, se irán añadiendo nuevas habilidades de facción para dar más variedad a cada estilo de juego.
 
 ![Ejemplo visual de ficha de habilidad de facción]({{factionAbilityProfileImage}})
-
-Antes de comenzar la partida, cada jugador puede elegir un máximo de **3 habilidades de facción** de las disponibles en su facción. El coste de las habilidades se incluye dentro del valor total del ejército: cuantas más habilidades se tomen, menos puntos quedan para unidades. Las habilidades elegidas se aplican automáticamente a todas las unidades de la facción mientras estén en juego y no requieren activación. La elección debe comunicarse al rival antes de comenzar la partida.
-
-Con el tiempo, cada facción irá ampliando su catálogo de habilidades disponibles, permitiendo más estilos de juego distintos dentro de la misma facción.
 
 ---
 
 ## Consideraciones generales
 
-- Si un jugador olvida realizar una acción, usar una habilidad o declarar un efecto, este se considera perdido, salvo acuerdo entre jugadores.
-- Se recomienda que las miniaturas porten las armas diferenciales en escuadras para facilitar la lectura del campo de batalla.
-- Comunicar las intenciones de cada jugada ayuda a mantener una partida fluida y clara.
+- **Acciones olvidadas:** Si un jugador olvida realizar una acción, usar una habilidad o declarar un efecto en su momento, se considera perdido, salvo acuerdo mutuo entre ambos jugadores.
+- **Concordancia estética:** Aunque el juego es completamente agnóstico respecto a las miniaturas, se recomienda que el ejército tenga coherencia visual con su facción. El jugador es libre de usar lo que quiera.
+- **Comunicar intenciones:** Comunicar las intenciones de cada jugada ayuda a mantener una partida fluida y clara.
+- **Cronómetro:** Como variante opcional, se puede usar un cronómetro de 1 a 2 minutos por activación para agilizar la toma de decisiones.

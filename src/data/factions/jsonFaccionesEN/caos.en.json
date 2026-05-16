@@ -3,42 +3,28 @@
   "faccion": {
     "nombre": "Chaos",
     "estilo_juego": "A faction built around waves and relentless pressure, designed to overwhelm the enemy with numbers and never stop advancing. Its Line units are the cheapest in the game: they die easily but return turn after turn from command posts. Melee and space control are its main weapons. Ideal for players who enjoy sustained pressure, gradual attrition, and controlled chaos.",
-    "seleccion_habilidades": "multiple",
+    "seleccion_habilidades": "individual",
     "habilidades_faccion": [
       {
-        "id": "oleada-eterna",
-        "nombre": "Endless Wave",
-        "coste": 8,
-        "descripcion_escaramuza": "When a Line unit is destroyed, at the start of the next Initiative Phase it returns from any empty command post with all of its Wounds restored.",
-        "descripcion_escuadra": "When a Line squad is destroyed, at the start of the next Initiative Phase it returns from any empty command post with all of its Wounds restored."
+        "id": "endless-tide",
+        "nombre": "Endless Tide",
+        "descripcion_escaramuza": "At the end of each turn, every CHAOS Line unit destroyed during that turn returns to the battlefield with all its Wounds, deploying from any command post the player controls.",
+        "descripcion_escuadra": "At the end of each turn, every CHAOS Line unit destroyed during that turn returns to the battlefield with all its Wounds, deploying from any command post the player controls.",
+        "frase": "CHAOS does not end. The opponent must destroy you many times to be rid of you."
       },
       {
-        "id": "instinto-de-enjambre",
-        "nombre": "Horde Instinct",
-        "coste": 4,
-        "descripcion_escaramuza": "Units within 3\" of another allied unit may reroll failed melee attack dice.",
-        "descripcion_escuadra": "Squads within 3\" of another allied squad may reroll failed melee attack dice."
+        "id": "the-prey",
+        "nombre": "The Prey",
+        "descripcion_escaramuza": "Once per turn, during the Initiative Phase, the player designates one visible enemy unit. All CHAOS melee attacks against that unit do not treat results of 1 and 2 as misses.",
+        "descripcion_escuadra": "Once per turn, during the Initiative Phase, the player designates one visible enemy unit. All CHAOS melee attacks against that unit do not treat results of 1 and 2 as misses.",
+        "frase": "When the pack chooses, the rest can only watch."
       },
       {
-        "id": "carga-salvaje",
-        "nombre": "Savage Charge",
-        "coste": 7,
-        "descripcion_escaramuza": "When a unit from this faction makes a successful charge, it gains +1 Damage on its melee attacks for that activation.",
-        "descripcion_escuadra": "When a squad from this faction makes a successful charge, it gains +1 Damage on its melee attacks for that activation."
-      },
-      {
-        "id": "propagacion-de-veneno",
-        "nombre": "Venom Spread",
-        "coste": 6,
-        "descripcion_escaramuza": "Enemy units that lose at least 1 Wound in melee against a Chaos unit must make a roll after the combat. On a 4+, that unit suffers 1 extra point of damage.",
-        "descripcion_escuadra": "Enemy squads that lose at least 1 Wound in melee against a Chaos squad must make a roll after the combat. On a 4+, that squad suffers 1 extra point of damage."
-      },
-      {
-        "id": "regeneracion",
-        "nombre": "Regeneration",
-        "coste": 6,
-        "descripcion_escaramuza": "At the start of each Initiative Phase, one Chaos unit of your choice recovers 1 Wound, up to its maximum. It can only be used on units that were not destroyed that turn.",
-        "descripcion_escuadra": "At the start of each Initiative Phase, one Chaos squad of your choice recovers D3 Wounds, up to its maximum. It can only be used on squads that were not destroyed that turn."
+        "id": "blood-feast",
+        "nombre": "Blood Feast",
+        "descripcion_escaramuza": "Once per turn, during the Initiative Phase, the CHAOS player may sacrifice one CHAOS Line unit they control. That unit is removed from the battlefield without giving points to the opponent and without counting as destroyed for mission purposes. That unit transfers its remaining Wounds to another CHAOS unit; the receiving unit recovers Wounds up to its maximum and the rest are discarded.",
+        "descripcion_escuadra": "Once per turn, during the Initiative Phase, the CHAOS player may sacrifice one CHAOS Line unit they control. That unit is removed from the battlefield without giving points to the opponent and without counting as destroyed for mission purposes. That unit transfers its remaining Wounds to another CHAOS unit; the receiving unit recovers Wounds up to its maximum and the rest are discarded.",
+        "frase": "The weak feed the strong."
       }
     ]
   },
@@ -50,22 +36,22 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 3,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 4,
           "max": 10
         },
         "valor": 3,
-        "especialidad": "-"
+        "especialidad": "Soldier"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Filthy Projectile",
+            "nombre": "Dirty Projectile",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
@@ -97,14 +83,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 5,
+        "salvacion": "5+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 4,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "On the charge, this unit gains +1 melee attack die during that activation."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [
@@ -112,7 +98,7 @@
             "nombre": "Thrown Venom",
             "ataques": "1D",
             "distancia": "6\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -144,14 +130,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 3,
-        "salvacion": "+6",
-        "velocidad": 2,
+        "salvacion": "6+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 4,
-        "especialidad": "When this unit is destroyed, before removing it, it inflicts D3 automatic Damage 1/2 hits on all units within 2\" (allied and enemy)."
+        "especialidad": "Berserker"
       },
       "armas": {
         "disparo": [],
@@ -178,14 +164,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 6,
-        "especialidad": "It may shoot in the same activation in which it makes a successful charge."
+        "especialidad": "Vanguard"
       },
       "armas": {
         "disparo": [
@@ -193,7 +179,7 @@
             "nombre": "Thrown Spines",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -225,14 +211,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 11,
-        "especialidad": "At the start of each Initiative Phase, if this unit is not locked in melee, it recovers 1 Health."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -240,7 +226,7 @@
             "nombre": "Acid Projectile",
             "ataques": "1D",
             "distancia": "10\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -272,14 +258,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 8,
-        "salvacion": "+4",
-        "velocidad": 4,
+        "salvacion": "4+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "When this unit charges successfully, it may reroll all failed melee attack dice in that activation."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [
@@ -287,7 +273,7 @@
             "nombre": "Bile Launcher",
             "ataques": "1D6",
             "distancia": "8\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -319,14 +305,14 @@
       "perfil": {
         "movimiento": "10\"",
         "vidas": 6,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 9,
-        "especialidad": "On the charge, it gains +2 melee attack dice. If this unit destroys an enemy unit in melee, it may immediately make a free 2\" move."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [
@@ -334,11 +320,11 @@
             "nombre": "Mount Spines",
             "ataques": "1D",
             "distancia": "6\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
-              "Pistolier"
+              "Multi-use"
             ],
             "valor_extra": 0
           }
@@ -366,14 +352,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 18,
-        "salvacion": "+4",
-        "velocidad": 2,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "When this unit charges successfully, the target unit receives D3 automatic Damage 2/3 hits before resolving the melee attack."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [
@@ -381,7 +367,7 @@
             "nombre": "Spiked Projectiles",
             "ataques": "2D",
             "distancia": "10\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -392,7 +378,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Crush",
+            "nombre": "Crushing Blow",
             "ataques": "4D",
             "distancia": null,
             "impactos": null,
@@ -404,14 +390,14 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Ram",
+            "nombre": "Ram (Vehicle)",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
             "habilidades_arma": [
-              "Piercing (Vehicle)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -425,14 +411,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 20,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Allied Line units within 6\" may reroll failed Save dice."
+        "especialidad": "Mobile Cover"
       },
       "armas": {
         "disparo": [
@@ -440,7 +426,7 @@
             "nombre": "Spore Swarm",
             "ataques": "1D6",
             "distancia": "12\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "2",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -452,7 +438,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Venomous Stinger",
+            "nombre": "Venom Stinger",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -473,26 +459,26 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 14,
-        "salvacion": "+5",
-        "velocidad": 2,
+        "salvacion": "5+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 12,
-        "especialidad": "When it makes a Shooting attack, targets cannot benefit from cover."
+        "especialidad": "Accurate"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Acid Jet",
+            "nombre": "Acid Stream (Vehicle, Monster)",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Piercing (Vehicle, Monster)"
+              "Piercing"
             ],
             "valor_extra": 0
           }
@@ -522,15 +508,17 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 10,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 15,
-        "especialidad_escaramuza": "Allied units within 6\" gain +1 melee attack die. When this unit destroys an enemy unit, all allied units within 6\" may immediately make a free 2\" move.",
-        "especialidad_escuadra": "Units in a squad with this Hero gain +1 melee attack die. When the squad destroys an enemy unit, it may immediately make a free 2\" move."
+        "especialidad_escaramuza": "Allied units within 6\" gain +1 melee attack die. When this unit destroys an enemy unit, all allied units within 6\" may immediately move 2\" for free.",
+        "especialidad_escuadra": "Units in squad with this hero gain +1 melee attack die. When the squad destroys an enemy unit, it may immediately move 2\" for free.",
+        "especialidad_nombre_escaramuza": "Lord of the Hunt",
+        "especialidad_nombre_escuadra": "Lord of the Hunt"
       },
       "armas": {
         "disparo": [
@@ -538,7 +526,7 @@
             "nombre": "Living Projectile",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -582,14 +570,14 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 26,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 42,
-        "especialidad": "When this unit destroys an enemy unit in melee, it immediately recovers D3 Health. Once per turn, at the start of its activation, it may return a destroyed allied Line unit to play with half its minimum squad size, placing it within 6\" of this unit."
+        "especialidad": "Devourer"
       },
       "armas": {
         "disparo": [
@@ -597,7 +585,7 @@
             "nombre": "Acid Spit",
             "ataques": "2D6",
             "distancia": "18\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -609,7 +597,7 @@
             "nombre": "Massive Projectile",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -630,7 +618,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Teeth of the Abyss",
+            "nombre": "Abyss Teeth",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -645,28 +633,28 @@
       }
     },
     {
-      "nombre_unidad": "Horde Scum",
+      "nombre_unidad": "Vermin",
       "era": "Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 3,
-        "salvacion": "+6",
-        "velocidad": 3,
+        "salvacion": "6+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 4,
           "max": 12
         },
         "valor": 3,
-        "especialidad": "When this unit has 6 or more miniatures in play, its melee attacks inflict +1 Damage."
+        "especialidad": "Berserker"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Crude Pistol",
+            "nombre": "Stone Thrower",
             "ataques": "1D",
-            "distancia": "8\"",
-            "impactos": "+5",
+            "distancia": "6\"",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "1",
             "habilidades_arma": [
@@ -692,36 +680,23 @@
       }
     },
     {
-      "nombre_unidad": "Horde Warriors",
+      "nombre_unidad": "Caste Warriors",
       "era": "Past",
       "clase": "Line",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "When this unit makes a successful charge, each melee attack die that rolls a 6 adds +1 additional attack die (Chained Impacts)."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Crude Bow",
-            "ataques": "1D",
-            "distancia": "10\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "War Axe",
@@ -745,22 +720,22 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 3,
-        "salvacion": "+6",
-        "velocidad": 3,
+        "salvacion": "6+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 4,
           "max": 8
         },
         "valor": 4,
-        "especialidad": "This unit may shoot enemy units locked in melee with allies without friendly-fire penalty (damage is still applied to any unit locked in that combat)."
+        "especialidad": "Shooter"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Shortbow",
+            "nombre": "Short Bow",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -792,14 +767,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 6,
-        "especialidad": "When this unit charges, it may reroll both distance dice. If the charge fails by 1\" or less, it succeeds anyway."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [],
@@ -826,30 +801,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 12,
-        "especialidad": "While this unit is locked in melee, allied Line units within 4\" gain +1D on their melee attacks."
+        "especialidad": "Standard Bearer"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Crude Hand Cannon",
-            "ataques": "2D",
-            "distancia": "10\"",
-            "impactos": "+4",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Champion's Axe",
@@ -873,22 +835,22 @@
       "perfil": {
         "movimiento": "9\"",
         "vidas": 7,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "When it makes a successful charge, it gains +2D in melee that activation. If it destroys its target in melee, it may immediately charge another enemy unit within 6\"."
+        "especialidad": "Brutal Charge"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Throwing Spear",
+            "nombre": "Thrown Spear",
             "ataques": "1D",
             "distancia": "8\"",
-            "impactos": "+5",
+            "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
             "habilidades_arma": [
@@ -920,22 +882,22 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 2
         },
         "valor": 9,
-        "especialidad": "Once per turn, instead of attacking, choose one: (a) inflict 1D3 automatic Damage 1 hits on an enemy unit within 12\", or (b) give +1D attack to an allied unit within 8\" until the end of the turn."
+        "especialidad": "Standard Bearer"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Savage Bolt",
+            "nombre": "Wild Bolt",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -967,14 +929,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 16,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "At the start of each Initiative Phase, it recovers 1 Health (up to its maximum). When it charges, it inflicts D3 automatic Damage 2 hits before combat."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -982,7 +944,7 @@
             "nombre": "Thrown Rock",
             "ataques": "1D",
             "distancia": "12\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -993,7 +955,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Club Smash",
+            "nombre": "Heavy Blow",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -1014,20 +976,20 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 12,
-        "salvacion": "+5",
-        "velocidad": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 11,
-        "especialidad": "Enemy units locked in melee with this unit cannot retreat or disengage. When this unit destroys a unit in melee, it may make a free 3\" move."
+        "especialidad": "Anchored"
       },
       "armas": {
         "disparo": [],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Venomous Bite",
+            "nombre": "Venom Bite",
             "ataques": "3D",
             "distancia": null,
             "impactos": null,
@@ -1048,14 +1010,14 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 14,
-        "salvacion": "+4",
-        "velocidad": 1,
+        "salvacion": "4+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "When it shoots, it may target a point on the battlefield without direct line of sight: all units within 3\" of that point suffer the attack (ignoring terrain obstacles)."
+        "especialidad": "Shooter"
       },
       "armas": {
         "disparo": [
@@ -1063,7 +1025,7 @@
             "nombre": "Tribal Catapult",
             "ataques": "1D6",
             "distancia": "24\"",
-            "impactos": "-",
+            "impactos": null,
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -1096,22 +1058,26 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
-        "salvacion": "+3",
-        "velocidad": 6,
+        "salvacion": "3+",
+        "velocidad": "+6\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad": "Allied units within 6\" gain +1D on melee attacks. When this unit destroys an enemy unit in melee, it may make a free 3\" move and immediately declare a charge if there is another target."
+        "especialidad": "This unit gains +1 melee attack die for each lost Wound.",
+        "especialidad_escaramuza": "This unit gains +1 melee attack die for each lost Wound.",
+        "especialidad_escuadra": "This unit gains +1 melee attack die for each lost unit in its squad.",
+        "especialidad_nombre_escaramuza": "Warlord Fury",
+        "especialidad_nombre_escuadra": "Warlord Fury"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Arm Cannon",
+            "nombre": "Throwing Axe",
             "ataques": "2D",
             "distancia": "12\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -1134,7 +1100,9 @@
             "valor_extra": 0
           }
         ]
-      }
+      },
+      "especialidad_escaramuza": "This unit gains +1 melee attack die for each lost Wound.",
+      "especialidad_escuadra": "This unit gains +1 melee attack die for each lost unit in its squad."
     },
     {
       "nombre_unidad": "Great Destroyer",
@@ -1143,14 +1111,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 30,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 44,
-        "especialidad": "At the start of each Initiative Phase, it recovers 1D3 Health. When it charges, it inflicts D3 automatic Damage 3 hits. Allied Line units within 6\" may reroll failed melee dice."
+        "especialidad": "Resilient"
       },
       "armas": {
         "disparo": [
@@ -1158,7 +1126,7 @@
             "nombre": "Bestial Cannons",
             "ataques": "2D6",
             "distancia": "22\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
             "habilidades_arma": [

@@ -3,42 +3,28 @@
   "faccion": {
     "nombre": "Legado",
     "estilo_juego": "Facción de control y posicionamiento que apuesta por la calidad sobre la cantidad. Sus unidades son las más resistentes del juego pero dispone de menos. Usa portales para teleportarse donde el rival no espera, revive a sus caídos con probabilidad y contraataca incluso al morir. El control del tablero es suyo si el jugador es paciente. Ideal para jugadores estratégicos que disfrutan de la microgestión, el posicionamiento y hacer que cada unidad cuente.",
-    "seleccion_habilidades": "multiple",
+    "seleccion_habilidades": "individual",
     "habilidades_faccion": [
       {
-        "id": "portales-del-legado",
-        "nombre": "Portales del Legado",
-        "coste": 10,
-        "descripcion_escaramuza": "Una vez por turno, una unidad aliada puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos puede estar trabada.",
-        "descripcion_escuadra": "Una vez por turno, una escuadra o unidad aliada puede gastar 1 acción para intercambiar su posición con otra unidad aliada de tipo Línea, Élite o Héroe a 18\" o menos. Ninguna de las dos puede estar trabada."
+        "id": "el-ultimo-aliento",
+        "nombre": "El Último Aliento",
+        "descripcion_escaramuza": "Cuando una unidad LEGADO es destruida, realiza un último ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
+        "descripcion_escuadra": "Cuando una unidad LEGADO es destruida, realiza un último ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
+        "frase": "Nada muere fácil."
       },
       {
-        "id": "no-conocen-la-muerte",
-        "nombre": "No conocen la muerte",
-        "coste": 6,
-        "descripcion_escaramuza": "Cuando una unidad de Línea o Élite es eliminada, al inicio de la siguiente Fase de Iniciativa tira 1D6: con resultado 5+ la unidad regresa en su posición actual con la mitad de sus Vidas máximas.",
-        "descripcion_escuadra": "Cuando una escuadra de Línea o Élite es eliminada, al inicio de la siguiente Fase de Iniciativa tira 1D6: con resultado 5+ la escuadra regresa en su posición actual con la mitad de sus Vidas máximas."
+        "id": "el-vacio-llama",
+        "nombre": "El Vacío llama",
+        "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, LEGADO puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
+        "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, LEGADO puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
+        "frase": "El rival no puede planificar nada contra ti."
       },
       {
-        "id": "caida-gloriosa",
-        "nombre": "Caída gloriosa",
-        "coste": 7,
-        "descripcion_escaramuza": "Cuando cualquier unidad del Legado es destruida, antes de retirarla puede realizar inmediatamente un ataque gratuito (disparo o CaC según su posición) siguiendo las reglas normales de ataque.",
-        "descripcion_escuadra": "Cuando cualquier escuadra o unidad del Legado es destruida, antes de retirarla puede realizar inmediatamente un ataque gratuito (disparo o CaC según su posición) siguiendo las reglas normales de ataque."
-      },
-      {
-        "id": "designacion-ancestral",
-        "nombre": "Designación ancestral",
-        "coste": 5,
-        "descripcion_escaramuza": "Una vez por turno, designa una unidad enemiga como objetivo ancestral. Hasta el final del turno, todos los ataques CaC de unidades de Legado contra ese objetivo consiguen crítico con 5+ en lugar de 6.",
-        "descripcion_escuadra": "Una vez por turno, designa una unidad o escuadra enemiga como objetivo ancestral. Hasta el final del turno, todos los ataques CaC de unidades y escuadras de Legado contra ese objetivo consiguen crítico con 5+ en lugar de 6."
-      },
-      {
-        "id": "combate-a-muerte",
-        "nombre": "Combate a muerte",
-        "coste": 7,
-        "descripcion_escaramuza": "Al inicio de la Fase de Iniciativa, designa una unidad aliada. Si esa unidad entra en combate cuerpo a cuerpo ese turno, ya sea cargando o siendo cargada, todas las unidades trabadas en ese combate no pueden retirarse ni destrabarse por ningún medio hasta que una de las dos unidades quede eliminada.",
-        "descripcion_escuadra": "Al inicio de la Fase de Iniciativa, designa una escuadra aliada. Si esa escuadra entra en combate cuerpo a cuerpo ese turno, ya sea cargando o siendo cargada, todas las escuadras o unidades trabadas en ese combate no pueden retirarse ni destrabarse por ningún medio hasta que una de las dos escuadras o unidades quede eliminada."
+        "id": "ecos-del-pasado",
+        "nombre": "Ecos del pasado",
+        "descripcion_escaramuza": "Cuando una unidad LEGADO destruida iba a abandonar el campo, lanza 1D6. Con 5 o 6, en lugar de retirarla, vuelve a Reserva en lugar de quedar destruida (y por tanto sin haber sido destruida).",
+        "descripcion_escuadra": "Cuando una unidad LEGADO destruida iba a abandonar el campo, lanza 1D6. Con 5 o 6, en lugar de retirarla, vuelve a Reserva en lugar de quedar destruida (y por tanto sin haber sido destruida).",
+        "frase": "Siempre se tiene una segunda oportunidad."
       }
     ]
   },
@@ -50,14 +36,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 5
         },
         "valor": 7,
-        "especialidad": "Cuando esta unidad es objetivo de un ataque de Disparo, puede moverse hasta 2\" antes de que se resuelvan los dados. Si el atacante pierde línea de visión, el ataque se cancela."
+        "especialidad": "Evasivo"
       },
       "armas": {
         "disparo": [
@@ -65,7 +51,7 @@
             "nombre": "Rifle de resonancia",
             "ataques": "2D",
             "distancia": "16\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -97,14 +83,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 3,
           "max": 5
         },
         "valor": 8,
-        "especialidad": "Esta unidad puede retirarse de combate cuerpo a cuerpo sin realizar chequeo de retirada."
+        "especialidad": "Evasivo"
       },
       "armas": {
         "disparo": [
@@ -112,7 +98,7 @@
             "nombre": "Lanzador de energía",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -144,14 +130,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 6,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 3,
           "max": 5
         },
         "valor": 9,
-        "especialidad": "Esta unidad no puede ser cargada si tiene su vida completa."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [],
@@ -178,26 +164,26 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 10,
-        "salvacion": "+2",
-        "velocidad": 3,
+        "salvacion": "2+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 14,
-        "especialidad": "Esta unidad puede contraatacar siempre a distancia si es disparada, sin necesidad de acción."
+        "especialidad": "Tirador"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Cañón de aniquilación",
+            "nombre": "Cañón de aniquilación (Élite, Héroe, Titán)",
             "ataques": "3D",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
-              "Brutal 5+ (Élite, Héroe, Titán)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           }
@@ -225,14 +211,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 7,
-        "salvacion": "+3",
-        "velocidad": 4,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 2,
           "max": 4
         },
         "valor": 10,
-        "especialidad": "Una vez por turno, como acción gratuita, puede intercambiar su posición con otra unidad aliada a 12\" o menos (ninguna puede estar trabada)."
+        "especialidad": "Bloqueo de refuerzos"
       },
       "armas": {
         "disparo": [
@@ -240,7 +226,7 @@
             "nombre": "Fusil del vacío",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -272,14 +258,14 @@
       "perfil": {
         "movimiento": "7\"",
         "vidas": 7,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 12,
-        "especialidad": "Esta unidad no puede ser objetivo de ataques de Disparo si el atacante está a más de 8\"."
+        "especialidad": "Evasivo"
       },
       "armas": {
         "disparo": [],
@@ -306,14 +292,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 20,
-        "salvacion": "+2",
-        "velocidad": 1,
+        "salvacion": "2+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 19,
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC)."
+        "especialidad": "Berserker"
       },
       "armas": {
         "disparo": [
@@ -321,7 +307,7 @@
             "nombre": "Cañón de calor",
             "ataques": "2D6",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -365,14 +351,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 16,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 15,
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando una unidad aliada es destruida a 12\" o menos, puede realizar inmediatamente un disparo gratuito contra el atacante responsable."
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
@@ -380,7 +366,7 @@
             "nombre": "Cañón espectral",
             "ataques": "3D",
             "distancia": "24\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -412,38 +398,38 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 12,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 13,
-        "especialidad": "Una vez por partida, al inicio de su activación, puede retirarse del tablero y reaparecer en cualquier punto del borde de despliegue de LEGADO."
+        "especialidad": "Teletransporte"
       },
       "armas": {
         "disparo": [
           {
-            "nombre": "Baterías de energía",
+            "nombre": "Baterías de energía (Línea, Élite)",
             "ataques": "4D",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Brutal 5+ (Línea, Élite)"
+              "Brutal 5+"
             ],
             "valor_extra": 0
           },
           {
-            "nombre": "Cañón de disrupción",
+            "nombre": "Cañón de disrupción (Vehículo)",
             "ataques": "2D",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
-              "Perforante (Vehículo)"
+              "Perforante"
             ],
             "valor_extra": 0
           }
@@ -471,14 +457,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 14,
-        "salvacion": "+2",
-        "velocidad": 3,
+        "salvacion": "2+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad": "Las unidades aliadas a 6\" reducen en 1 el daño de todos los ataques recibidos (mín. 1)."
+        "especialidad": "Cobertura móvil"
       },
       "armas": {
         "disparo": [
@@ -486,7 +472,7 @@
             "nombre": "Pulso etéreo",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -515,20 +501,22 @@
       "nombre_unidad": "Oráculo del Legado",
       "era": "Futuro",
       "clase": "Héroe",
-      "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada). Las unidades aliadas a 6\" destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-      "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos. Las unidades en escuadra destruidas realizan su ataque de Caída gloriosa con +1 dado.",
+      "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada).",
+      "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos.",
       "perfil": {
         "movimiento": "6\"",
         "vidas": 9,
-        "salvacion": "+2",
-        "velocidad": 4,
+        "salvacion": "2+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 18,
-        "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada). Las unidades aliadas a 6\" destruidas realizan su ataque de Caída gloriosa con +1 dado.",
-        "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos. Las unidades en escuadra destruidas realizan su ataque de Caída gloriosa con +1 dado."
+        "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada).",
+        "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos.",
+        "especialidad_nombre_escaramuza": "Oráculo del Legado",
+        "especialidad_nombre_escuadra": "Oráculo del Legado"
       },
       "armas": {
         "disparo": [
@@ -536,7 +524,7 @@
             "nombre": "Lanza del oráculo",
             "ataques": "3D",
             "distancia": "22\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -580,14 +568,14 @@
       "perfil": {
         "movimiento": "3\"",
         "vidas": 30,
-        "salvacion": "+2",
-        "velocidad": 1,
+        "salvacion": "2+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 48,
-        "especialidad": "Al inicio de cada Fase de Iniciativa, si esta unidad tiene menos de la mitad de sus Vidas, recupera D3 Vidas. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC)."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
@@ -595,7 +583,7 @@
             "nombre": "Cañón del juicio final",
             "ataques": "2D6",
             "distancia": "30\"",
-            "impactos": "+2",
+            "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
@@ -608,7 +596,7 @@
             "nombre": "Batería del Legado",
             "ataques": "2D",
             "distancia": "26\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -640,30 +628,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 4,
-        "salvacion": "+5",
-        "velocidad": 3,
+        "salvacion": "5+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 5,
-        "especialidad": "Mientras esta unidad esté a 6\" o menos de un Héroe aliado, su Salvación mejora en 1 (5+ pasa a 4+)."
+        "especialidad": "Cobertura móvil"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Arco corto",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "+5",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Espada y escudo",
@@ -687,30 +662,17 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 3,
           "max": 6
         },
         "valor": 6,
-        "especialidad": "Cuando esta unidad no se mueve en su activación, reduce en 1 el daño de todos los ataques CaC recibidos (mín. 1)."
+        "especialidad": "Resistente"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Ballesta",
-            "ataques": "2D",
-            "distancia": "16\"",
-            "impactos": "+4",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
+        "disparo": [],
         "cuerpo_a_cuerpo": [
           {
             "nombre": "Lanza larga",
@@ -734,14 +696,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
-        "salvacion": "+4",
-        "velocidad": 5,
+        "salvacion": "4+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 5
         },
         "valor": 7,
-        "especialidad": "Cuando esta unidad realiza una carga exitosa, el primer ataque CaC de esa activación ignora la Salvación del defensor."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [],
@@ -768,14 +730,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 5,
-        "salvacion": "+5",
-        "velocidad": 5,
+        "salvacion": "5+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 2,
           "max": 5
         },
         "valor": 6,
-        "especialidad": "Cuando esta unidad carga (no lleva armas de disparo), puede repetir todos los dados de ataque CaC fallidos esa activación."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [],
@@ -802,14 +764,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 8,
-        "salvacion": "+3",
-        "velocidad": 5,
+        "salvacion": "3+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 13,
-        "especialidad": "Cuando realiza una carga exitosa, la Salvación del defensor empeora en 1 durante los ataques de esa activación (ej.: 3+ pasa a 4+)."
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [],
@@ -836,14 +798,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+2",
-        "velocidad": 4,
+        "salvacion": "2+",
+        "velocidad": "+4\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 14,
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla realiza un ataque gratuito CaC. Las unidades aliadas a 4\" reducen en 1 el daño recibido (mín. 1)."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
@@ -851,7 +813,7 @@
             "nombre": "Martillo lanzado",
             "ataques": "1D",
             "distancia": "10\"",
-            "impactos": "+4",
+            "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -883,14 +845,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 7,
-        "salvacion": "+4",
-        "velocidad": 3,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 3
         },
         "valor": 10,
-        "especialidad": "Sus ataques de Disparo ignoran cobertura. Cuando dispara a una unidad que realizó una carga ese turno, gana +2D de ataque."
+        "especialidad": "Certero"
       },
       "armas": {
         "disparo": [
@@ -898,7 +860,7 @@
             "nombre": "Arco sagrado",
             "ataques": "3D",
             "distancia": "22\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -930,14 +892,14 @@
       "perfil": {
         "movimiento": "4\"",
         "vidas": 18,
-        "salvacion": "+3",
-        "velocidad": 1,
+        "salvacion": "3+",
+        "velocidad": "+1\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 16,
-        "especialidad": "Cuando esta unidad es destruida, antes de retirarla puede realizar dos ataques gratuitos (disparo o CaC). Las unidades aliadas a 6\" reducen en 1 el daño recibido (mín. 1)."
+        "especialidad": "Resistente"
       },
       "armas": {
         "disparo": [
@@ -945,7 +907,7 @@
             "nombre": "Puños catapulta",
             "ataques": "2D6",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
             "habilidades_arma": [
@@ -977,14 +939,14 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 14,
-        "salvacion": "+3",
-        "velocidad": 2,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Las unidades aliadas a 6\" obtienen +1 a su Salvación (ej.: 5+ pasa a 4+). Cuando una unidad aliada a 8\" es destruida, puede realizar inmediatamente un disparo gratuito contra el atacante responsable."
+        "especialidad": "Cobertura móvil"
       },
       "armas": {
         "disparo": [
@@ -992,7 +954,7 @@
             "nombre": "Lanzador de reliquias",
             "ataques": "3D",
             "distancia": "18\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -1024,14 +986,14 @@
       "perfil": {
         "movimiento": "8\"",
         "vidas": 14,
-        "salvacion": "+3",
-        "velocidad": 3,
+        "salvacion": "3+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 15,
-        "especialidad": "Esta unidad ignora penalizaciones de terreno al moverse y al cargar. Cuando realiza una carga, puede moverse sobre unidades y obstáculos."
+        "especialidad": "Volador"
       },
       "armas": {
         "disparo": [
@@ -1039,7 +1001,7 @@
             "nombre": "Lanza celestial",
             "ataques": "3D",
             "distancia": "20\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
             "habilidades_arma": [
@@ -1071,8 +1033,8 @@
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "+2",
-        "velocidad": 5,
+        "salvacion": "2+",
+        "velocidad": "+5\"",
         "escuadra": {
           "min": 1,
           "max": 1
@@ -1086,7 +1048,7 @@
             "nombre": "Martillo del maestre",
             "ataques": "2D",
             "distancia": "14\"",
-            "impactos": "+3",
+            "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
@@ -1118,14 +1080,14 @@
       "perfil": {
         "movimiento": "6\"",
         "vidas": 28,
-        "salvacion": "+2",
-        "velocidad": 3,
+        "salvacion": "2+",
+        "velocidad": "+3\"",
         "escuadra": {
           "min": 1,
           "max": 1
         },
         "valor": 46,
-        "especialidad": "Al inicio de cada Fase de Iniciativa recupera 1 Vida. Cuando elimina una unidad enemiga en CaC, todas las unidades aliadas a 8\" recuperan 1 Vida. Cuando es destruida, antes de retirarla realiza tres ataques gratuitos (disparo o CaC)."
+        "especialidad": "Devorador"
       },
       "armas": {
         "disparo": [
@@ -1133,7 +1095,7 @@
             "nombre": "Rayo divino",
             "ataques": "2D6",
             "distancia": "26\"",
-            "impactos": "+2",
+            "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",
             "habilidades_arma": [
