@@ -36,7 +36,6 @@ Comandos:
 - `npm run dev`
 - `npm run build`
 - `npm run lint`
-- `npm run battle:smoke`
 
 Variables de entorno:
 

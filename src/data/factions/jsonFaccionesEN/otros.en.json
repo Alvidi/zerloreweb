@@ -73,9 +73,9 @@
           "max": 1
         },
         "valor": 19,
-        "especialidad": "Enemy units within 6\" cannot use Reroll tokens.",
-        "especialidad_escaramuza": "Enemy units within 6\" cannot use Reroll tokens.",
-        "especialidad_escuadra": "Enemy units within 6\" cannot use Reroll tokens.",
+        "especialidad": "Enemy units within 6\" cannot use Command Tokens to reroll dice.",
+        "especialidad_escaramuza": "Enemy units within 6\" cannot use Command Tokens to reroll dice.",
+        "especialidad_escuadra": "Enemy units within 6\" cannot use Command Tokens to reroll dice.",
         "especialidad_nombre": "Oppressive Presence",
         "especialidad_nombre_escaramuza": "Oppressive Presence",
         "especialidad_nombre_escuadra": "Oppressive Presence"

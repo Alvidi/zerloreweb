@@ -8,8 +8,8 @@
       {
         "id": "marea-infinita",
         "nombre": "Marea Infinita",
-        "descripcion_escaramuza": "Al final de cada turno, todas las unidades de Línea CAOS destruidas durante ese turno vuelven al campo con todas sus Vidas, desplegándose en cualquier puesto de mando que el jugador controle.",
-        "descripcion_escuadra": "Al final de cada turno, todas las unidades de Línea CAOS destruidas durante ese turno vuelven al campo con todas sus Vidas, desplegándose en cualquier puesto de mando que el jugador controle.",
+        "descripcion_escaramuza": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
+        "descripcion_escuadra": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
         "frase": "El CAOS no se acaba. El rival tiene que destruirte muchas veces para librarse de ti."
       },
       {
@@ -25,6 +25,13 @@
         "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa, el jugador CAOS puede sacrificar una unidad de Línea CAOS que controle. Esa unidad se retira del campo sin dar puntos al rival y sin contar como destruida a efectos de misión. La unidad transfiere sus Vidas restantes a otra unidad CAOS; la unidad receptora recupera Vidas hasta su máximo y el resto se descarta.",
         "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa, el jugador CAOS puede sacrificar una unidad de Línea CAOS que controle. Esa unidad se retira del campo sin dar puntos al rival y sin contar como destruida a efectos de misión. La unidad transfiere sus Vidas restantes a otra unidad CAOS; la unidad receptora recupera Vidas hasta su máximo y el resto se descarta.",
         "frase": "Los débiles alimentan a los fuertes."
+      },
+      {
+        "id": "mando-reservado",
+        "nombre": "Mando Reservado",
+        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
   },

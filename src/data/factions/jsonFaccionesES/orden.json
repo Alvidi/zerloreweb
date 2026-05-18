@@ -22,9 +22,16 @@
       {
         "id": "doctrina",
         "nombre": "Doctrina",
-        "descripcion_escaramuza": "Antes de comenzar la partida, elige un tipo de unidad enemigo: Línea, Élite, Vehículo, Monstruo, Héroe o Titán. Tus unidades pueden repetir todos los fallos al atacar a unidades de ese tipo hasta el final de la partida.",
-        "descripcion_escuadra": "Antes de comenzar la partida, elige un tipo de unidad enemigo: Línea, Élite, Vehículo, Monstruo, Héroe o Titán. Tus unidades pueden repetir todos los fallos al atacar a unidades de ese tipo hasta el final de la partida.",
+        "descripcion_escaramuza": "Antes de comenzar la partida, elige un tipo de unidad enemiga (Línea, Élite, Vehículo, Monstruo, Héroe o Titán). Mientras tus unidades de Orden ataquen a unidades de ese tipo, ignoran su cobertura al disparar e ignoran sus especialidades Berserker y Resistente.",
+        "descripcion_escuadra": "Antes de comenzar la partida, elige un tipo de unidad enemiga (Línea, Élite, Vehículo, Monstruo, Héroe o Titán). Mientras tus unidades de Orden ataquen a unidades de ese tipo, ignoran su cobertura al disparar e ignoran sus especialidades Berserker y Resistente.",
         "frase": "Conoce a tu enemigo antes de levantar el arma."
+      },
+      {
+        "id": "mando-reservado",
+        "nombre": "Mando Reservado",
+        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
   },

@@ -2,7 +2,7 @@
 
 ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas y especialidades de unidades, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
 
-Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema. Las reglas base son una caja de herramientas: puedes usarlas para diseñar tus propias misiones, campañas con consecuencias, reglas de escenario personalizadas o cualquier formato que se adapte a tu mesa. Si tú y tu rival estáis de acuerdo, cualquier cosa es válida.
+Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema.
 
 ---
 
@@ -23,7 +23,7 @@ Una **escuadra** es una unidad compuesta por varias miniaturas que comparten act
 
 **Coherencia y colocación de escuadras**
 
-En modo Gran Batalla, todas las miniaturas que formen parte de una escuadra deben mantenerse a **1" o menos** de al menos de 2 miniaturas de la misma escuadra o una en caso de estar formada por 2 unidades, formando un grupo coherente.
+En modo Gran Batalla, todas las miniaturas que formen parte de una escuadra deben mantenerse a **1" o menos** de al menos 2 miniaturas de la misma escuadra, o de 1 en caso de escuadras formadas por 2 miniaturas, formando un grupo coherente.
 
 La colocación de las miniaturas solo afecta a **qué miniaturas pueden atacar** en combate cuerpo a cuerpo y no modifica el número de acciones, el estado ni la activación de la escuadra.
 
@@ -31,7 +31,7 @@ La colocación de las miniaturas solo afecta a **qué miniaturas pueden atacar**
 
 > A lo largo del reglamento, cuando una regla mencione **"unidad"**, se aplica igualmente a **"escuadra"** en modo Gran Batalla, salvo que se indique lo contrario.
 
-### Tamaño de peanas recomendado
+### Tamaño de peanas/superficie recomendado
 
 ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda usar peanas proporcionales al tipo de unidad para mantener la coherencia visual y táctica.
 
@@ -45,24 +45,18 @@ ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda usar peanas pr
 
 Estas medidas son orientativas. El criterio es que la peana sea coherente con el tamaño visual de la miniatura y no suponga una ventaja táctica injusta.
 
-### Coherencia del ejército
-
-ZeroLore es agnóstico en cuanto a miniaturas, pero se recomienda que las unidades de un mismo ejército mantengan una **coherencia estética y narrativa**. Aunque puedes usar miniaturas de distintas fuentes o fabricantes, intenta que tu ejército cuente una historia visual coherente: uniformes, paleta de colores, simbología o ambientación común.
-
-Esto refuerza la inmersión en mesa y ayuda al rival a identificar fácilmente a tus unidades.
-
 ### Dados y tiradas
 
-ZeroLore utiliza siempre dados de seis caras (1D6).
+ZeroLore utiliza siempre dados de seis caras (1D6) y dados de tres caras para algunas reglas (1D3).
 
-A lo largo de la partida se realizan distintos tipos de tirada: **iniciativa**, **impactos**, **salvación** y **daño**.
+A lo largo de la partida se realizan distintos tipos de tirada: **iniciativa**, **precisión**, **salvación**, etc.
 Cada una se explica en detalle en su sección correspondiente.
 
 ### Prioridad de reglas
 
-En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las del reglamento base y se aplican a todas las unidades, y las **reglas especiales**, que son las habilidades escritas en la ficha de una unidad, un arma o una facción.
+En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las de este reglamento base y se aplican a todas las unidades, y las reglas propias de las unidades: especialidades de unidad, habilidades de arma y habilidades de facción.
 
-Cuando una regla especial contradiga o modifique una regla general, **la regla especial siempre tiene prioridad**.
+Cuando una regla contradiga o modifique una regla del reglamento, **la regla de la ficha de unidad siempre tiene prioridad**.
 
 _Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Multiuso, esa regla especial permite disparar aunque estés trabado, y eso manda._
 
@@ -73,7 +67,8 @@ ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 - **1vs1**: duelo entre dos jugadores
 - **1vs2**: enfrentamiento contra un jugador
 - **2vs2**: dos equipos de dos jugadores
-- **1vs1vs1**: todos contra todos
+- **1vs1vs1**: todos contra todos de 3
+- **1vs1vs1vs1**: todos contra todos de 4
 
 En partidas de más de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno, y aplica también a equipos.
 
@@ -150,18 +145,31 @@ Cada turno se compone de las siguientes fases:
 
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 
-- Cada jugador tira **1D6**.
-- El jugador o equipo con el resultado más alto **actúa primero** durante ese turno.
-- En caso de empate, se repite la tirada.
-- Se reclutan o se sacan unidades de reserva en los puestos de mando.
+- Cada jugador tira **1D6**. El jugador o equipo con el resultado más alto **actúa primero** durante ese turno. En caso de empate, se repite la tirada.
+- Cada jugador gana sus **Fichas de Mando** del turno: **+1 por puesto de mando** que controle.
+- Empezando por el jugador con mayor Iniciativa, cada jugador puede **gastar Fichas de Mando para reclutar unidades** desde Reserva en los puestos de mando que controle.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
-### Reroll
+### Fichas de Mando
 
-Al inicio de cada Fase de Iniciativa, cada jugador gana **1 Ficha de Reroll**. Las fichas no gastadas se acumulan entre turnos.
+Las **Fichas de Mando** son el recurso estratégico del juego. Representan la capacidad de mando y reacción ante el campo de batalla, y se gastan para repetir tiradas, reclutar refuerzos o activar habilidades especiales.
 
-Una Ficha de Reroll puede gastarse en cualquier momento para **repetir cualquier tirada** (ataque, salvación, etc.). La segunda tirada es siempre el resultado final.
+**Generación de Fichas:**
+
+- Al inicio de la partida, cada jugador comienza con **3 Fichas de Mando**.
+- Al inicio de cada Fase de Iniciativa, a partir del turno 2, cada jugador gana **+1 Ficha** por cada puesto de mando que controle.
+- Las Fichas se acumulan entre turnos hasta un **máximo de 5**. Las fichas excedentes se pierden.
+
+**Usos de Fichas de Mando:**
+
+- **1 Ficha**: repetir una tirada propia (ataque, salvación, iniciativa, etc.). La segunda tirada es el resultado final.
+- **1 Ficha**: reclutar 1 unidad de **Línea, Élite o Héroe** desde Reserva en un puesto de mando que controles.
+- **2 Fichas**: reclutar 1 **Monstruo o Vehículo** desde Reserva.
+- **3 Fichas**: reclutar 1 **Titán** desde Reserva.
+- Algunas habilidades de arma o unidad requieren gastar Fichas de Mando para activarse; se indicará en su descripción.
+
+Los reclutamientos solo pueden realizarse durante la **Fase de Iniciativa**. Las Fichas de Mando usadas para repetir tiradas pueden gastarse en cualquier momento.
 
 ## 2. Fase de Activaciones
 
@@ -176,9 +184,9 @@ Activar una unidad significa:
 - Realizar las **2 acciones** disponibles.
 - Resolver completamente sus efectos.
 
-Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
+Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara verde = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
 
-![Unidad con el token de activación gris y naranja]({{activationImage}})
+![Unidad con el token de activación gris y verde]({{activationImage}})
 
 ## 3. Fin de Turno
 
@@ -504,7 +512,6 @@ Los estados principales en ZeroLore son:
 
 - **Preparado**
 - **Retirada**
-- **Descontrol**
 - Trabada
 
 ## Unidad preparada
@@ -519,7 +526,7 @@ El estado de Retirada se indica colocando el **token de retirada** (flecha) junt
 
 ## Unidades trabadas
 
-Dos unidades se consideran **trabadas** cuando están en contacto de peana. El estado de trabada se indica colocando el **token de espada** junto a las miniaturas involucradas. Mientras estén trabadas:
+Dos unidades se consideran **trabadas** cuando están en contacto de peana. Mientras estén trabadas:
 
 - Solo pueden usar acciones de **combate cuerpo a cuerpo** o **retirada**.
 - No pueden ser atacadas a distancia por unidades externas al combate.
@@ -527,23 +534,9 @@ Dos unidades se consideran **trabadas** cuando están en contacto de peana. El e
 
 _(Ver sección: Combate cuerpo a cuerpo para la resolución completa.)_
 
-## Unidad descontrolada
-
-Algunas unidades con la especialidad **Descontrol** pueden entrar en estado de **Descontrol** cuando sufren daños graves.
-
-El estado de Descontrol debe marcarse de forma clara junto a la miniatura.
-
-Mientras esté descontrolada:
-
-- La unidad atacará tanto a **enemigos como a unidades aliadas**.
-- Siempre priorizará atacar a la **unidad más cercana**.
-- Solo utilizará **ataques cuerpo a cuerpo**, priorizando las cargas si es posible.
-
-El estado de Descontrol se mantiene hasta que una regla indique lo contrario o finalice la partida.
-
 # Puestos de mando y despliegue
 
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse, y generan Fichas de Mando cada turno para el jugador que los controla.
 
 Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del token naranja para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
@@ -565,11 +558,17 @@ Algunas unidades disponen de habilidades especiales de despliegue indicadas en s
 
 ## Reserva
 
-Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, cada jugador puede desplegar **1 unidad por puesto de mando que controle**, desde cualquier puesto de mando aliado. Las unidades en reserva se despliegan en contacto con el puesto de mando elegido.
+Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, a partir del turno 2, cada jugador puede reclutar unidades desde Reserva **gastando Fichas de Mando**:
+
+- **1 Ficha** por cada unidad de Línea, Élite o Héroe.
+- **2 Fichas** por cada Monstruo o Vehículo.
+- **3 Fichas** por cada Titán.
+
+Las unidades se despliegan en contacto con un puesto de mando que controles. Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
 
 ## Despliegue inicial
 
-En la **Fase de Iniciativa del turno 1**, cada jugador puede desplegar **1 unidad por puesto de mando que controle**, colocándola en contacto con ese puesto. Las unidades que no se desplieguen en este momento pasan automáticamente a **Reserva**.
+En la **Fase de Iniciativa del turno 1**, cada jugador despliega unidades en los puestos de mando que controle, **gastando sus Fichas de Mando** según el coste de Reserva y colocándolas en contacto con esos puestos. Las unidades que no se desplieguen en este momento pasan automáticamente a **Reserva**.
 
 Cada jugador tira **1D6**; el resultado más alto despliega primero. A continuación los jugadores se alternan desplegando unidad por unidad.
 
@@ -592,7 +591,7 @@ Las unidades de **Línea** representan tropas versátiles u ofensivas, y constit
 Características:
 
 - Son el grueso del ejército.
-- Pueden capturar y controlar **puntos de mando** y otras zonas de conquista.
+- Pueden capturar y controlar **puestos de mando** y otras zonas de conquista.
 - Suelen tener perfiles equilibrados y acceso a una amplia variedad de armas.
 
 ## 2. Unidades de Élite
@@ -603,7 +602,7 @@ Características:
 
 - Mayor capacidad ofensiva o defensiva.
 - Diseñadas para romper formaciones enemigas o mantener posiciones clave.
-- Pueden capturar y controlar **puntos de mando**, igual que las unidades de Línea.
+- Pueden capturar y controlar **puestos de mando**, igual que las unidades de Línea.
 
 ## 3. Vehículos
 
@@ -613,7 +612,7 @@ Características:
 
 - Gran capacidad ofensiva o resistencia.
 - No pueden subir estructuras ni trepar obstáculos elevados.
-- **No pueden capturar ni controlar puntos de mando** ni otras zonas de conquista.
+- **No pueden capturar ni controlar puestos de mando** ni otras zonas de conquista.
 
 ## 4. Monstruos
 
@@ -648,7 +647,7 @@ Los Titanes son unidades **lentas**, extremadamente resistentes y muy visibles. 
 
 ### Reglas generales de los Titanes
 
-- Un Titán **no puede capturar ni controlar puntos de mando**, salvo que una regla indique lo contrario.
+- Un Titán **no puede capturar ni controlar puestos de mando**, salvo que una regla indique lo contrario.
 - Durante su **movimiento**, un Titán puede **atravesar elementos de escenografía** como edificios, ruinas u obstáculos igual de grandes que la unidad. Un Titán **no puede colocarse, detenerse ni permanecer** sobre un elemento de escenografía, ni utilizarlo como superficie, aunque pueda pasar por encima de él.
 
 # Perfiles de unidad
@@ -713,11 +712,11 @@ Los Héroes y algunas unidades experimentales pueden tener especialidades propia
 | **Certero** | Si esta unidad no se mueve, gana **1 de Precisión** en Disparo. | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos. |
 | **Asentado** | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Durante su activación, puede gastar **2 acciones** para volver a Reserva, retirándose del campo de batalla. | **Capturador** | Esta unidad cuenta como el doble de su **Valor** al controlar o disputar puestos de mando. |
 | **Avanzadilla** | Puede ser desplegada a **9"** de un puesto de mando aliado. | **Devorador** | Cuando esta unidad destruye una unidad enemiga en CaC, recupera **1D3 Vidas perdidas**. |
-| **Porrazo** | Durante su activación, esta unidad puede gastar **1 acción** para empujar **1"** a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora Anclado**. | **Terror** | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar Fichas de Reroll. |
+| **Porrazo** | Durante su activación, esta unidad puede gastar **1 acción** para empujar **1"** a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora Anclado**. | **Terror** | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar Fichas de Mando para repetir tiradas. |
 | **Tirador** | Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas. | **Cobertura móvil** | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo. |
 | **Volador** | Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas. | **Carga brutal** | Cuando esta unidad realiza una Acometida contra una unidad, gana **+1 dado de ataque CaC** durante ese combate. |
-| **Descontrol** | Cuando esta unidad llega al **50% de sus Vidas**, ataca siempre a la unidad aliada o enemiga más cercana en combate cuerpo a cuerpo, sumando **+1 dado de ataque**. Si ya está trabada, continúa combatiendo. Si no hay ninguna unidad cercana, se mueve hacia ella. | **Boom!** | Cuando esta unidad es destruida, explota afectando a todas las unidades a **6"** de ella, que reciben **1D6 de daño**. |
-| **Aplastamiento** | Durante su movimiento, si esta unidad pasa por encima de una unidad de **Línea o Élite**, dicha unidad es destruida automáticamente. | | |
+| **Boom!** | Cuando esta unidad es destruida, explota afectando a todas las unidades a **6"** de ella, que reciben **1D6 de daño**. | **Aplastamiento** | Durante su movimiento o Acometida, si esta unidad pasa por encima de una unidad de **Línea o Élite**, dicha unidad es destruida automáticamente. |
+| **Mercenario** | Esta unidad puede ser reactivada una segunda vez en el mismo turno gastando **1 Ficha de Mando**. Recupera sus **2 acciones** para esta segunda activación. Solo puede reactivarse una vez por turno. | | |
 
 ### Escuadras
 
@@ -845,6 +844,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | **Directo** | Esta arma no realiza tirada de Precisión. |
 | **Explosiva** | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **aliadas y enemigas** a **3"** del objetivo. |
 | **Parabólica** | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**. |
+| **Sobreesfuerzo** | Para usar esta arma, el jugador debe gastar **1 Ficha de Mando** al inicio del ataque. Si no puede pagarla, el arma no puede utilizarse en esa activación. |
 
 ## Armas condicionadas por tipo
 

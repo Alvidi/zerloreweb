@@ -22,9 +22,16 @@
       {
         "id": "ecos-del-pasado",
         "nombre": "Ecos del pasado",
-        "descripcion_escaramuza": "Cuando una unidad LEGADO destruida iba a abandonar el campo, lanza 1D6. Con 5 o 6, en lugar de retirarla, vuelve a Reserva en lugar de quedar destruida (y por tanto sin haber sido destruida).",
-        "descripcion_escuadra": "Cuando una unidad LEGADO destruida iba a abandonar el campo, lanza 1D6. Con 5 o 6, en lugar de retirarla, vuelve a Reserva en lugar de quedar destruida (y por tanto sin haber sido destruida).",
+        "descripcion_escaramuza": "Cuando una unidad LEGADO sea destruida, lanza 1D6. Con 5 o 6, en lugar de retirarla del juego, vuelve a Reserva. Para volver a desplegarla en el campo, deberás gastar Fichas de Mando según su tipo: 1 ficha para Línea, Élite o Héroe; 2 para Monstruo o Vehículo; 3 para Titán.",
+        "descripcion_escuadra": "Cuando una unidad LEGADO sea destruida, lanza 1D6. Con 5 o 6, en lugar de retirarla del juego, vuelve a Reserva. Para volver a desplegarla en el campo, deberás gastar Fichas de Mando según su tipo: 1 ficha para Línea, Élite o Héroe; 2 para Monstruo o Vehículo; 3 para Titán.",
         "frase": "Siempre se tiene una segunda oportunidad."
+      },
+      {
+        "id": "mando-reservado",
+        "nombre": "Mando Reservado",
+        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
   },

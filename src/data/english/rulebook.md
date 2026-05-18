@@ -2,7 +2,7 @@
 
 ZeroLore is designed to be flexible, modular, and adaptable. If this is your first time playing, start by getting comfortable with the basics of units before jumping into faction abilities, weapons, and unit specialties, and add these concepts as you become more familiar with the game.
 
-This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system. The core rules are a toolbox: you can use them to design your own missions, campaigns with consequences, custom scenario rules, or any format that suits your table. If you and your opponent agree, anything is valid.
+This rulebook provides a solid foundation, but players are free to create scenarios, campaigns, and additional rules while maintaining the fundamental structure of the system.
 
 ---
 
@@ -31,7 +31,7 @@ Miniature placement only affects **which miniatures can attack** in melee combat
 
 > Throughout the rulebook, when a rule mentions a **"unit"**, it also applies to a **"squad"** in Grand Battle mode, unless stated otherwise.
 
-### Recommended Base Sizes
+### Recommended Base/Surface Sizes
 
 ZeroLore is miniature-agnostic, but bases proportional to the unit type are recommended to maintain visual and tactical coherence.
 
@@ -45,24 +45,18 @@ ZeroLore is miniature-agnostic, but bases proportional to the unit type are reco
 
 These are guidelines. The criterion is that the base is consistent with the visual size of the miniature and does not provide an unfair tactical advantage.
 
-### Army Cohesion
-
-ZeroLore is miniature-agnostic, but it is recommended that units from the same army maintain **aesthetic and narrative cohesion**. Even if you use miniatures from different sources or manufacturers, try to make your army tell a coherent visual story: uniforms, colour palette, symbols, or a shared setting.
-
-This strengthens immersion on the table and helps your opponent identify your units more easily.
-
 ### Dice and Rolls
 
-ZeroLore always uses six-sided dice (1D6).
+ZeroLore always uses six-sided dice (1D6) and three-sided dice for some rules (1D3).
 
-Throughout the game, different types of rolls are made: **initiative**, **hits**, **save**, and **damage**.
+Throughout the game, different types of rolls are made: **initiative**, **precision**, **save**, etc.
 Each is explained in detail in its corresponding section.
 
 ### Rule Priority
 
-In ZeroLore there are two types of rules: **general rules**, which belong to the core rulebook and apply to all units, and **special rules**, which are the abilities written on the profile of a unit, a weapon, or a faction.
+In ZeroLore there are two types of rules: **general rules**, which belong to this core rulebook and apply to all units, and unit-specific rules: unit specialties, weapon abilities, and faction abilities.
 
-When a special rule contradicts or modifies a general rule, **the special rule always takes priority**.
+When a rule contradicts or modifies a rule from the rulebook, **the rule on the unit profile always takes priority**.
 
 _Example: the rulebook says a locked unit cannot shoot. If a weapon has the Gunslinger ability, that special rule lets you shoot while locked, and that takes precedence._
 
@@ -73,7 +67,8 @@ ZeroLore can be played with **2 to 4 players**. The available formats are:
 - **1vs1**: duel between two players
 - **1vs2**: confrontation against one player
 - **2vs2**: two teams of two players
-- **1vs1vs1**: free-for-all
+- **1vs1vs1**: three-player free-for-all
+- **1vs1vs1vs1**: four-player free-for-all
 
 In games with more than two players, activation order is determined by initiative at the start of each turn, and this also applies to teams.
 
@@ -150,18 +145,31 @@ Each turn consists of the following phases:
 
 At the beginning of each turn, both players make the **Initiative roll**.
 
-- Each player rolls **1D6**.
-- The player or team with the highest result **acts first** during that turn.
-- In case of a tie, roll again.
-- Units are recruited or brought out from reserve at command posts.
+- Each player rolls **1D6**. The player or team with the highest result **acts first** during that turn. In case of a tie, roll again.
+- Each player gains their **Command Tokens** for the turn: **+1 per command post** they control.
+- Starting with the player with the highest Initiative, each player may **spend Command Tokens to recruit units** from Reserve at command posts they control.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
-### Reroll
+### Command Tokens
 
-At the start of each Initiative Phase, each player gains **1 Reroll Token**. Unspent tokens accumulate between turns.
+**Command Tokens** are the game's strategic resource. They represent command capacity and battlefield reaction, and are spent to reroll dice, recruit reinforcements, or activate special abilities.
 
-A Reroll Token may be spent at any time to **reroll any die roll** (attack, save, etc.). The second roll is always the final result.
+**Generating Tokens:**
+
+- At the start of the game, each player begins with **3 Command Tokens**.
+- At the start of each Initiative Phase, from turn 2 onward, each player gains **+1 Token** for each command post they control.
+- Tokens accumulate between turns up to a **maximum of 5**. Excess tokens are lost.
+
+**Using Command Tokens:**
+
+- **1 Token**: reroll one of your rolls (attack, save, initiative, etc.). The second roll is the final result.
+- **1 Token**: recruit 1 **Line, Elite, or Hero** unit from Reserve at a command post you control.
+- **2 Tokens**: recruit 1 **Monster or Vehicle** from Reserve.
+- **3 Tokens**: recruit 1 **Titan** from Reserve.
+- Some weapon or unit abilities require spending Command Tokens to activate; this will be stated in their description.
+
+Recruitment can only be performed during the **Initiative Phase**. Command Tokens used to reroll dice may be spent at any time.
 
 ## 2. Activation Phase
 
@@ -176,9 +184,9 @@ Activating a unit means:
 - Taking its **2 available actions**.
 - Fully resolving its effects.
 
-Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
+Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (green side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
 
-![Unit with the grey and orange activation token]({{activationImage}})
+![Unit with the grey and green activation token]({{activationImage}})
 
 ## 3. End of Turn
 
@@ -502,7 +510,6 @@ The main states in ZeroLore are:
 
 - **Ready**
 - **Retreat**
-- **Out of Control**
 - Locked
 
 ## Ready Unit
@@ -517,7 +524,7 @@ The Retreat state is shown by placing the **retreat token** (arrow) next to the 
 
 ## Locked Units
 
-Two units are considered **locked** when they are in base contact. The locked state is shown by placing the **sword token** next to the miniatures involved. While they are locked:
+Two units are considered **locked** when they are in base contact. While they are locked:
 
 - They may only use **melee combat** or **retreat** actions.
 - They cannot be attacked at range by units outside the combat.
@@ -525,23 +532,9 @@ Two units are considered **locked** when they are in base contact. The locked st
 
 _(See the Melee Combat section for the full resolution.)_
 
-## Out of Control Unit
-
-Some units with the **Out of Control** specialty may enter the **Out of Control** state when they suffer severe damage.
-
-The Out of Control state must be marked clearly next to the miniature.
-
-While out of control:
-
-- The unit will attack both **enemies and friendly units**.
-- It always prioritises attacking the **nearest unit**.
-- It only uses **melee attacks**, prioritising charges when possible.
-
-The Out of Control state persists until a rule states otherwise or the game ends.
-
 # Command Posts and Deployment
 
-Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy.
+Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy, and they generate Command Tokens each turn for the player who controls them.
 
 When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
@@ -563,11 +556,17 @@ Some units have special deployment abilities indicated on their profile.
 
 ## Reserve
 
-Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, each player may deploy **1 unit per command post they control**, from any friendly command post. Units in reserve are deployed in contact with the chosen command post.
+Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, from turn 2 onward, each player may recruit units from Reserve by **spending Command Tokens**:
+
+- **1 Token** for each Line, Elite, or Hero unit.
+- **2 Tokens** for each Monster or Vehicle.
+- **3 Tokens** for each Titan.
+
+Units are deployed in contact with a command post you control. If the post is occupied by enemy units, you cannot deploy there even if it is yours.
 
 ## Initial Deployment
 
-During the **Initiative Phase of turn 1**, each player may deploy **1 unit per command post they control**, placing it in contact with that post. Units that are not deployed at this moment automatically go into **reserve**.
+During the **Initiative Phase of turn 1**, each player deploys units at the command posts they control, **spending Command Tokens** according to the Reserve cost and placing them in contact with those posts. Units that are not deployed at this moment automatically go into **Reserve**.
 
 Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying one unit at a time.
 
@@ -712,11 +711,11 @@ Heroes and some experimental units may have unique specialties described directl
 | **Accurate** | If this unit does not move, it gains **1 Precision** in Shooting. | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
 | **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. During its activation, it may spend **2 actions** to return to Reserve, leaving the battlefield. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
 | **Vanguard** | It may be deployed within **9"** of an allied command post. | **Devourer** | When this unit destroys an enemy unit in melee, it recovers **1D3 lost Wounds**. |
-| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Reroll Tokens. |
+| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Command Tokens to reroll dice. |
 | **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
 | **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Rush against a unit, it gains **+1 melee attack die** during that combat. |
-| **Out of Control** | When this unit reaches **50% of its Wounds**, it always attacks the nearest allied or enemy unit in melee combat, adding **+1 attack die**. If it is already locked, it continues fighting. If there is no nearby unit, it moves toward it. | **Boom!** | When this unit is destroyed, it explodes and affects all units within **6"** of it, which suffer **1D6 damage**. |
-| **Crushing** | During its movement, if this unit passes over a **Line or Elite** unit, that unit is destroyed automatically. | | |
+| **Boom!** | When this unit is destroyed, it explodes and affects all units within **6"** of it, which suffer **1D6 damage**. | **Crushing** | During its movement or Rush, if this unit passes over a **Line or Elite** unit, that unit is destroyed automatically. |
+| **Mercenary** | This unit may be reactivated a second time in the same turn by spending **1 Command Token**. It regains its **2 actions** for this second activation. It can only be reactivated once per turn. | | |
 
 ### Squads
 
@@ -844,6 +843,7 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Direct** | This weapon does not make a Precision roll. |
 | **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
+| **Overexertion** | To use this weapon, the player must spend **1 Command Token** at the start of the attack. If they cannot pay it, the weapon cannot be used during that activation. |
 
 ## Weapons Conditioned by Type
 

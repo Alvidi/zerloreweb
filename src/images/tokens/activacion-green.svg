@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="56%">
+      <stop offset="0%" stop-color="#14381f"/>
+      <stop offset="58%" stop-color="#0d2415"/>
+      <stop offset="100%" stop-color="#08140d"/>
+    </radialGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c8ffd7"/>
+      <stop offset="52%" stop-color="#63d77e"/>
+      <stop offset="100%" stop-color="#23924a"/>
+    </linearGradient>
+    <radialGradient id="coreGrad" cx="50%" cy="45%" r="62%">
+      <stop offset="0%" stop-color="#dfffe8"/>
+      <stop offset="44%" stop-color="#83e39a"/>
+      <stop offset="100%" stop-color="#238646"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="512" cy="512" r="496" fill="url(#bgGlow)"/>
+  <circle cx="512" cy="512" r="470" fill="none" stroke="#ddffe7" stroke-opacity="0.18" stroke-width="4"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="url(#ringGrad)" stroke-width="20"/>
+  <circle cx="512" cy="512" r="392" fill="none" stroke="#b8f6c7" stroke-opacity="0.34" stroke-width="4"/>
+  <circle cx="512" cy="512" r="322" fill="none" stroke="#b8f6c7" stroke-opacity="0.24" stroke-width="2.5" stroke-dasharray="8 14"/>
+  <circle cx="512" cy="512" r="248" fill="none" stroke="#b8f6c7" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="6 13"/>
+
+  <circle cx="512" cy="512" r="196" fill="url(#coreGrad)" fill-opacity="0.24"/>
+  <circle cx="512" cy="512" r="132" fill="#ddffe7" fill-opacity="0.08"/>
+
+  <circle cx="512" cy="512" r="204" fill="#102616" fill-opacity="0.62"/>
+  <circle cx="512" cy="512" r="204" fill="none" stroke="#edfff2" stroke-opacity="0.72" stroke-width="14"/>
+  <circle cx="512" cy="512" r="204" fill="none" stroke="#63d77e" stroke-width="9"/>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M512 292v198" stroke="#1e6638" stroke-width="78"/>
+    <path d="M512 306v176" stroke="#edfff2" stroke-width="50"/>
+    <path d="M512 314v160" stroke="#8cec9f" stroke-width="22"/>
+  </g>
+
+  <path d="M688 408A214 214 0 1 1 336 408" fill="none" stroke="#1e6638" stroke-width="102" stroke-linecap="round"/>
+  <path d="M686 412A212 212 0 1 1 338 412" fill="none" stroke="#edfff2" stroke-width="66" stroke-linecap="round"/>
+  <path d="M684 416A208 208 0 1 1 340 416" fill="none" stroke="#63d77e" stroke-width="28" stroke-linecap="round"/>
+</svg>

@@ -9,7 +9,6 @@ export const WEAPON_ABILITY_IDS = {
   explosive: 'explosive',
   criticalAttack: 'criticalAttack',
   chainedImpacts: 'chainedImpacts',
-  precision: 'precision',
   anti: 'anti',
   ignoreCover: 'ignoreCover',
   parabolicShot: 'parabolicShot',
@@ -18,6 +17,7 @@ export const WEAPON_ABILITY_IDS = {
   guerrilla: 'guerrilla',
   specializedAttack: 'specializedAttack',
   limitedAmmo: 'limitedAmmo',
+  overexertion: 'overexertion',
 }
 
 export const normalizeAbilityText = (value) =>
@@ -42,7 +42,6 @@ const WEAPON_ABILITY_DEFINITIONS = [
   { id: WEAPON_ABILITY_IDS.explosive, aliases: ['explosiva', 'explosive'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.criticalAttack, aliases: ['ataque critico', 'critical attack'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.chainedImpacts, aliases: ['impactos encadenados', 'chained impacts'], conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.precision, aliases: ['precision'], conditionKey: null },
   { id: WEAPON_ABILITY_IDS.anti, aliases: ['anti'], conditionKey: null },
   {
     id: WEAPON_ABILITY_IDS.ignoreCover,
@@ -65,6 +64,11 @@ const WEAPON_ABILITY_DEFINITIONS = [
   {
     id: WEAPON_ABILITY_IDS.limitedAmmo,
     aliases: ['municion limitada', 'arma limitada', 'weapon limited', 'limited weapon', 'limited ammo'],
+    conditionKey: null,
+  },
+  {
+    id: WEAPON_ABILITY_IDS.overexertion,
+    aliases: ['sobreesfuerzo', 'overexertion'],
     conditionKey: null,
   },
 ]

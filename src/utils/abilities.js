@@ -82,8 +82,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
-      ? 'When a unit suffers hits from this ability, the damage caused is automatically applied to all units within 3" of it.'
-      : 'Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica automáticamente a todas las unidades a 3" de esta.'
+      ? 'When a unit suffers hits from this ability, the damage caused also applies to all allied and enemy units within 3" of the target.'
+      : 'Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades aliadas y enemigas a 3" del objetivo.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.criticalAttack) {
     return lang === 'en'
@@ -94,11 +94,6 @@ export const getAbilityDescription = (ability, lang = 'es') => {
     return lang === 'en'
       ? 'Each critical hit generates one additional attack resolved normally.'
       : 'Cada ataque crítico genera un ataque adicional que se resuelve de forma normal.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.precision) {
-    return lang === 'en'
-      ? 'Reroll all failed attack rolls.'
-      : 'Repite todas las tiradas fallidas de ataque.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.anti) {
     const target = parseAbilityTarget(raw)
@@ -128,8 +123,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) {
     return lang === 'en'
-      ? 'Can perform an extra shooting action after using Sprint.'
-      : 'Puede hacer una acción extra de disparo después de usar Carrera.'
+      ? 'Can perform an extra shooting action after using Rush.'
+      : 'Puede hacer una acción extra de disparo después de usar Acometida.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.specializedAttack) {
     const target = parseAbilityTarget(raw)
@@ -141,6 +136,11 @@ export const getAbilityDescription = (ability, lang = 'es') => {
     return lang === 'en'
       ? `Only ${normalizeLimitedValue(value)} of this weapon may be equipped.`
       : `Solo se puede equipar ${normalizeLimitedValue(value)} de esta arma.`
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.overexertion) {
+    return lang === 'en'
+      ? 'Spend 1 Command Token at the start of the attack to use this weapon. If you cannot pay it, it cannot be used during this activation.'
+      : 'Gasta 1 Ficha de Mando al inicio del ataque para usar esta arma. Si no puedes pagarla, no puede utilizarse en esta activación.'
   }
 
   return ''

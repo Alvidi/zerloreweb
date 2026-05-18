@@ -68,8 +68,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Shove', description: 'During its activation, this unit may spend 1 action to push an enemy unit locked with it 1", ending the melee combat. Shove ignores Anchored.' },
   },
   {
-    es: { name: 'Terror', description: 'Las unidades enemigas a 3" o menos de esta unidad no pueden usar Fichas de Reroll.' },
-    en: { name: 'Terror', description: 'Enemy units within 3" of this unit cannot use Reroll Tokens.' },
+    es: { name: 'Terror', description: 'Las unidades enemigas a 3" o menos de esta unidad no pueden usar Fichas de Mando para repetir tiradas.' },
+    en: { name: 'Terror', description: 'Enemy units within 3" of this unit cannot use Command Tokens to reroll dice.' },
   },
   {
     es: { name: 'Tirador', description: 'Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas.' },
@@ -88,16 +88,16 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Brutal Charge', description: 'When this unit makes a Rush against a unit, it gains +1 melee attack die during that combat.' },
   },
   {
-    es: { name: 'Descontrol', description: 'Cuando esta unidad llega al 50% de sus Vidas, ataca siempre a la unidad aliada o enemiga más cercana en combate cuerpo a cuerpo, sumando +1 dado de ataque. Si ya está trabada, continúa combatiendo. Si no hay ninguna unidad cercana, se mueve hacia ella.' },
-    en: { name: 'Out of Control', description: 'When this unit reaches 50% of its Wounds, it always attacks the nearest allied or enemy unit in melee combat, adding +1 attack die. If it is already locked, it continues fighting. If there is no nearby unit, it moves toward it.' },
-  },
-  {
     es: { name: 'Boom!', description: 'Cuando esta unidad es destruida, explota afectando a todas las unidades a 6" de ella, que reciben 1D6 de daño.' },
     en: { name: 'Boom!', description: 'When this unit is destroyed, it explodes and affects all units within 6" of it, which suffer 1D6 damage.' },
   },
   {
-    es: { name: 'Aplastamiento', description: 'Durante su movimiento, si esta unidad pasa por encima de una unidad de Línea o Élite, dicha unidad es destruida automáticamente.' },
-    en: { name: 'Crushing', description: 'During its movement, if this unit passes over a Line or Elite unit, that unit is destroyed automatically.' },
+    es: { name: 'Aplastamiento', description: 'Durante su movimiento o Acometida, si esta unidad pasa por encima de una unidad de Línea o Élite, dicha unidad es destruida automáticamente.' },
+    en: { name: 'Crushing', description: 'During its movement or Rush, if this unit passes over a Line or Elite unit, that unit is destroyed automatically.' },
+  },
+  {
+    es: { name: 'Mercenario', description: 'Esta unidad puede ser reactivada una segunda vez en el mismo turno gastando 1 Ficha de Mando. Recupera sus 2 acciones para esta segunda activación. Solo puede reactivarse una vez por turno.' },
+    en: { name: 'Mercenary', description: 'This unit may be reactivated a second time in the same turn by spending 1 Command Token. It regains its 2 actions for this second activation. It can only be reactivated once per turn.' },
   },
   {
     es: { name: 'Portaestandarte', description: 'Las unidades aliadas a 6" de esta unidad no necesitan realizar chequeos por retirada.' },

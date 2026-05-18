@@ -20,7 +20,7 @@ El proyecto tiene una web en React/JSX. El Notion es la fuente de verdad para el
 | CaC | Cuerpo a Cuerpo |
 | Salvación | Tirada defensiva (X+, ej. 4+) |
 | Acometida | Movimiento de carga + ataque CaC gratis si llegas |
-| Fichas de Reroll | 1 por jugador por fase de Iniciativa, para repetir dados |
+| Fichas de Mando | Recurso estratégico para repetir tiradas, reclutar refuerzos y activar reglas especiales |
 | Escaramuza | Modo con miniaturas individuales |
 | Gran Batalla | Modo con escuadras |
 | Pasado / Futuro | Las dos eras de cada facción |

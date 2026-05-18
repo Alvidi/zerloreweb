@@ -5037,6 +5037,28 @@ mark {
     0 0 0 1.4px rgba(219, 78, 78, 0.32);
 }
 
+.rules-token-preview.command.command-green {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(108, 224, 136, 0.24), rgba(20, 50, 30, 0.38) 42%, rgba(10, 12, 18, 0.97) 74%),
+    radial-gradient(circle at 35% 24%, rgba(164, 244, 184, 0.14), rgba(10, 10, 14, 0.98));
+  border-color: rgba(73, 190, 106, 0.96);
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(202, 250, 214, 0.2),
+    0 0 0 1.4px rgba(73, 190, 106, 0.32);
+}
+
+.rules-token-preview.command.command-yellow {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(238, 198, 78, 0.25), rgba(54, 40, 18, 0.4) 42%, rgba(10, 12, 18, 0.97) 74%),
+    radial-gradient(circle at 35% 24%, rgba(255, 231, 150, 0.14), rgba(10, 10, 14, 0.98));
+  border-color: rgba(222, 178, 63, 0.96);
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(255, 236, 174, 0.2),
+    0 0 0 1.4px rgba(222, 178, 63, 0.32);
+}
+
 .rules-token-preview.command::before,
 .rules-token-preview.command::after {
   content: '';
@@ -5058,6 +5080,14 @@ mark {
   border-color: rgba(255, 214, 214, 0.56);
 }
 
+.rules-token-preview.command.command-green::before {
+  border-color: rgba(206, 250, 218, 0.56);
+}
+
+.rules-token-preview.command.command-yellow::before {
+  border-color: rgba(255, 238, 180, 0.56);
+}
+
 .rules-token-preview.command::after {
   inset: 20%;
   border: 1px dashed rgba(174, 184, 198, 0.34);
@@ -5070,6 +5100,14 @@ mark {
 
 .rules-token-preview.command.command-red::after {
   border-color: rgba(255, 186, 186, 0.44);
+}
+
+.rules-token-preview.command.command-green::after {
+  border-color: rgba(172, 236, 190, 0.44);
+}
+
+.rules-token-preview.command.command-yellow::after {
+  border-color: rgba(246, 216, 134, 0.44);
 }
 
 .rules-token-preview.command-circle {
@@ -5101,22 +5139,12 @@ mark {
   height: 112px;
 }
 
-.rules-token-preview[data-token-preview='state_activation_orange'].has-image {
+.rules-token-preview[data-token-preview='state_activation_green'].has-image {
   width: 112px;
   height: 112px;
 }
 
 .rules-token-preview[data-token-preview='state_retreat'].has-image {
-  width: 112px;
-  height: 112px;
-}
-
-.rules-token-preview[data-token-preview='state_melee'].has-image {
-  width: 112px;
-  height: 112px;
-}
-
-.rules-token-preview[data-token-preview='state_objective'].has-image {
   width: 112px;
   height: 112px;
 }
@@ -5131,7 +5159,7 @@ mark {
   height: 112px;
 }
 
-.rules-token-preview[data-token-preview='state_reroll'].has-image {
+.rules-token-preview[data-token-preview='state_command_token'].has-image {
   width: 112px;
   height: 112px;
 }

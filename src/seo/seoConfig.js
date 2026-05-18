@@ -1,5 +1,5 @@
 export const SITE_NAME = 'ZeroLore'
-export const DEFAULT_SEO_LANG = 'en'
+export const DEFAULT_SEO_LANG = 'es'
 export const SOCIAL_IMAGE_PATH = '/images/zerolore-social.png'
 export const SOCIAL_IMAGE_WIDTH = '1200'
 export const SOCIAL_IMAGE_HEIGHT = '630'
@@ -95,7 +95,7 @@ export function joinSiteUrl(siteUrl, path) {
 }
 
 export function getMetaForPath(pathname, lang = DEFAULT_SEO_LANG) {
-  const normalizedLang = lang === 'es' ? 'es' : DEFAULT_SEO_LANG
+  const normalizedLang = lang === 'es' || lang === 'en' ? lang : DEFAULT_SEO_LANG
   const pack = SEO_BY_LANG[normalizedLang] || SEO_BY_LANG[DEFAULT_SEO_LANG]
   return pack[pathname] || pack['/']
 }
