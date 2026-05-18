@@ -146,30 +146,26 @@ Cada turno se compone de las siguientes fases:
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 
 - Cada jugador tira **1D6**. El jugador o equipo con el resultado más alto **actúa primero** durante ese turno. En caso de empate, se repite la tirada.
-- Cada jugador gana sus **Fichas de Mando** del turno: **+1 por puesto de mando** que controle.
+- Cada jugador gana sus **Fichas de Mando** del turno según la economía definida por la **Misión**.
 - Empezando por el jugador con mayor Iniciativa, cada jugador puede **gastar Fichas de Mando para reclutar unidades** desde Reserva en los puestos de mando que controle.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
 ### Fichas de Mando
 
-Las **Fichas de Mando** son el recurso estratégico del juego. Representan la capacidad de mando y reacción ante el campo de batalla, y se gastan para repetir tiradas, reclutar refuerzos o activar habilidades especiales.
+Las **Fichas de Mando** son el recurso estratégico del juego. Representan la capacidad de mando y reacción ante el campo de batalla. Cada jugador las gasta para repetir tiradas, reclutar unidades desde Reserva o activar habilidades especiales (armas con Sobreesfuerzo, especialidades como Mercenario, etc.).
 
 **Generación de Fichas:**
 
-- Al inicio de la partida, cada jugador comienza con **3 Fichas de Mando**.
-- Al inicio de cada Fase de Iniciativa, a partir del turno 2, cada jugador gana **+1 Ficha** por cada puesto de mando que controle.
-- Las Fichas se acumulan entre turnos hasta un **máximo de 5**. Las fichas excedentes se pierden.
+- La cantidad inicial, la generación por turno y el máximo acumulable dependen de la **Misión** que se esté jugando.
 
 **Usos de Fichas de Mando:**
 
 - **1 Ficha**: repetir una tirada propia (ataque, salvación, iniciativa, etc.). La segunda tirada es el resultado final.
-- **1 Ficha**: reclutar 1 unidad de **Línea, Élite o Héroe** desde Reserva en un puesto de mando que controles.
-- **2 Fichas**: reclutar 1 **Monstruo o Vehículo** desde Reserva.
-- **3 Fichas**: reclutar 1 **Titán** desde Reserva.
-- Algunas habilidades de arma o unidad requieren gastar Fichas de Mando para activarse; se indicará en su descripción.
+- Reclutar unidades desde Reserva. El coste depende del tipo de unidad y se indica en la **Misión** que se esté jugando.
+- Activar habilidades especiales. Algunas habilidades de arma o especialidades de unidad requieren gastar Fichas para activarse; se indicará en su descripción.
 
-Los reclutamientos solo pueden realizarse durante la **Fase de Iniciativa**. Las Fichas de Mando usadas para repetir tiradas pueden gastarse en cualquier momento.
+Los reclutamientos solo pueden realizarse durante la **Fase de Iniciativa**. Las repeticiones de tirada y las habilidades especiales pueden gastarse en cualquier momento apropiado.
 
 ## 2. Fase de Activaciones
 
@@ -536,7 +532,7 @@ _(Ver sección: Combate cuerpo a cuerpo para la resolución completa.)_
 
 # Puestos de mando y despliegue
 
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse, y generan Fichas de Mando cada turno para el jugador que los controla.
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse, y pueden generar Fichas de Mando si la **Misión** lo indica.
 
 Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del token naranja para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
@@ -558,17 +554,13 @@ Algunas unidades disponen de habilidades especiales de despliegue indicadas en s
 
 ## Reserva
 
-Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, a partir del turno 2, cada jugador puede reclutar unidades desde Reserva **gastando Fichas de Mando**:
-
-- **1 Ficha** por cada unidad de Línea, Élite o Héroe.
-- **2 Fichas** por cada Monstruo o Vehículo.
-- **3 Fichas** por cada Titán.
+Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, a partir del turno 2, cada jugador puede reclutar unidades desde Reserva **gastando Fichas de Mando** según los costes definidos por la **Misión**.
 
 Las unidades se despliegan en contacto con un puesto de mando que controles. Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
 
 ## Despliegue inicial
 
-En la **Fase de Iniciativa del turno 1**, cada jugador despliega unidades en los puestos de mando que controle, **gastando sus Fichas de Mando** según el coste de Reserva y colocándolas en contacto con esos puestos. Las unidades que no se desplieguen en este momento pasan automáticamente a **Reserva**.
+En la **Fase de Iniciativa del turno 1**, cada jugador despliega unidades en los puestos de mando que controle, **gastando sus Fichas de Mando** según los costes de reclutamiento definidos por la **Misión** y colocándolas en contacto con esos puestos. Las unidades que no se desplieguen en este momento pasan automáticamente a **Reserva**.
 
 Cada jugador tira **1D6**; el resultado más alto despliega primero. A continuación los jugadores se alternan desplegando unidad por unidad.
 
@@ -710,7 +702,7 @@ Los Héroes y algunas unidades experimentales pueden tener especialidades propia
 | **Guardia** | Una vez por turno, cuando una unidad aliada a **6" o menos** reciba daño, esta unidad puede recibir hasta **2 puntos de ese daño** en su lugar. | **Anclado** | Las unidades enemigas trabadas con esta unidad no pueden declarar **Retirada**. |
 | **Despiadado** | Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen **+1 daño crítico**. | **Berserker** | Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3**. |
 | **Certero** | Si esta unidad no se mueve, gana **1 de Precisión** en Disparo. | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos. |
-| **Asentado** | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Durante su activación, puede gastar **2 acciones** para volver a Reserva, retirándose del campo de batalla. | **Capturador** | Esta unidad cuenta como el doble de su **Valor** al controlar o disputar puestos de mando. |
+| **Asentado** | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Si el jugador solo tiene **1 puesto de mando o CG**, no puede ser desplegada. | **Capturador** | Esta unidad cuenta como el doble de su **Valor** al controlar o disputar puestos de mando. |
 | **Avanzadilla** | Puede ser desplegada a **9"** de un puesto de mando aliado. | **Devorador** | Cuando esta unidad destruye una unidad enemiga en CaC, recupera **1D3 Vidas perdidas**. |
 | **Porrazo** | Durante su activación, esta unidad puede gastar **1 acción** para empujar **1"** a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora Anclado**. | **Terror** | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar Fichas de Mando para repetir tiradas. |
 | **Tirador** | Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas. | **Cobertura móvil** | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo. |

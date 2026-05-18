@@ -48,8 +48,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Reinforcement Blockade', description: 'While this unit is within 3" of an enemy command post, that command post cannot deploy reinforcements.' },
   },
   {
-    es: { name: 'Asentado', description: 'Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Durante su activación, puede gastar 2 acciones para volver a Reserva, retirándose del campo de batalla.' },
-    en: { name: 'Emplaced', description: 'This unit cannot move and blocks reinforcement deployment at its command post. During its activation, it may spend 2 actions to return to Reserve, leaving the battlefield.' },
+    es: { name: 'Asentado', description: 'Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Si el jugador solo tiene 1 puesto de mando o CG, no puede ser desplegada.' },
+    en: { name: 'Emplaced', description: 'This unit cannot move and blocks reinforcement deployment at its command post. If its player only has 1 command post or HQ, it cannot be deployed.' },
   },
   {
     es: { name: 'Capturador', description: 'Esta unidad cuenta como el doble de su Valor al controlar o disputar puestos de mando.' },

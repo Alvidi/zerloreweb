@@ -146,30 +146,26 @@ Each turn consists of the following phases:
 At the beginning of each turn, both players make the **Initiative roll**.
 
 - Each player rolls **1D6**. The player or team with the highest result **acts first** during that turn. In case of a tie, roll again.
-- Each player gains their **Command Tokens** for the turn: **+1 per command post** they control.
+- Each player gains their **Command Tokens** for the turn according to the economy defined by the **Mission**.
 - Starting with the player with the highest Initiative, each player may **spend Command Tokens to recruit units** from Reserve at command posts they control.
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
 ### Command Tokens
 
-**Command Tokens** are the game's strategic resource. They represent command capacity and battlefield reaction, and are spent to reroll dice, recruit reinforcements, or activate special abilities.
+**Command Tokens** are the game's strategic resource. They represent command capacity and battlefield reaction. Each player spends them to reroll dice, recruit units from Reserve, or activate special abilities (weapons with Overexertion, specialties such as Mercenary, etc.).
 
 **Generating Tokens:**
 
-- At the start of the game, each player begins with **3 Command Tokens**.
-- At the start of each Initiative Phase, from turn 2 onward, each player gains **+1 Token** for each command post they control.
-- Tokens accumulate between turns up to a **maximum of 5**. Excess tokens are lost.
+- The starting amount, turn generation, and maximum held depend on the **Mission** being played.
 
 **Using Command Tokens:**
 
 - **1 Token**: reroll one of your rolls (attack, save, initiative, etc.). The second roll is the final result.
-- **1 Token**: recruit 1 **Line, Elite, or Hero** unit from Reserve at a command post you control.
-- **2 Tokens**: recruit 1 **Monster or Vehicle** from Reserve.
-- **3 Tokens**: recruit 1 **Titan** from Reserve.
-- Some weapon or unit abilities require spending Command Tokens to activate; this will be stated in their description.
+- Recruit units from Reserve. The cost depends on the unit type and is stated by the **Mission** being played.
+- Activate special abilities. Some weapon abilities or unit specialties require spending Tokens to activate; this will be stated in their description.
 
-Recruitment can only be performed during the **Initiative Phase**. Command Tokens used to reroll dice may be spent at any time.
+Recruitment can only be performed during the **Initiative Phase**. Rerolls and special abilities may be spent at any appropriate time.
 
 ## 2. Activation Phase
 
@@ -534,7 +530,7 @@ _(See the Melee Combat section for the full resolution.)_
 
 # Command Posts and Deployment
 
-Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy, and they generate Command Tokens each turn for the player who controls them.
+Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy, and they may generate Command Tokens if the **Mission** states so.
 
 When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
@@ -556,17 +552,13 @@ Some units have special deployment abilities indicated on their profile.
 
 ## Reserve
 
-Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, from turn 2 onward, each player may recruit units from Reserve by **spending Command Tokens**:
-
-- **1 Token** for each Line, Elite, or Hero unit.
-- **2 Tokens** for each Monster or Vehicle.
-- **3 Tokens** for each Titan.
+Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, from turn 2 onward, each player may recruit units from Reserve by **spending Command Tokens** according to the costs defined by the **Mission**.
 
 Units are deployed in contact with a command post you control. If the post is occupied by enemy units, you cannot deploy there even if it is yours.
 
 ## Initial Deployment
 
-During the **Initiative Phase of turn 1**, each player deploys units at the command posts they control, **spending Command Tokens** according to the Reserve cost and placing them in contact with those posts. Units that are not deployed at this moment automatically go into **Reserve**.
+During the **Initiative Phase of turn 1**, each player deploys units at the command posts they control, **spending Command Tokens** according to the recruitment costs defined by the **Mission** and placing them in contact with those posts. Units that are not deployed at this moment automatically go into **Reserve**.
 
 Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying one unit at a time.
 
@@ -709,7 +701,7 @@ Heroes and some experimental units may have unique specialties described directl
 | **Guard** | Once per turn, when an allied unit within **6"** suffers damage, this unit may suffer up to **2 points of that damage** instead. | **Anchored** | Enemy units locked with this unit cannot declare **Retreat**. |
 | **Ruthless** | When this unit deals damage in melee, critical hits inflict **+1 critical damage**. | **Berserker** | Enemy units attacking this unit in melee miss on natural results of **1, 2, or 3**. |
 | **Accurate** | If this unit does not move, it gains **1 Precision** in Shooting. | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
-| **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. During its activation, it may spend **2 actions** to return to Reserve, leaving the battlefield. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
+| **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. If its player only has **1 command post or HQ**, it cannot be deployed. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
 | **Vanguard** | It may be deployed within **9"** of an allied command post. | **Devourer** | When this unit destroys an enemy unit in melee, it recovers **1D3 lost Wounds**. |
 | **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Command Tokens to reroll dice. |
 | **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
