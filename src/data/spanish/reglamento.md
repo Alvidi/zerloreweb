@@ -1,8 +1,8 @@
 # Reglamento ZeroLore
 
-ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas y especialidades de unidades, y ve añadiendo estos conceptos cuando te vayas sintiendo más familiarizado con el juego.
+ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas y especialidades de unidades, y ve añadiendo estos conceptos a medida que te familiarices con el juego.
 
-Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema.
+**Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema.**
 
 ---
 
@@ -146,26 +146,20 @@ Cada turno se compone de las siguientes fases:
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 
 - Cada jugador tira **1D6**. El jugador o equipo con el resultado más alto **actúa primero** durante ese turno. En caso de empate, se repite la tirada.
-- Cada jugador gana sus **Fichas de Mando** del turno según la economía definida por la **Misión**.
-- Empezando por el jugador con mayor Iniciativa, cada jugador puede **gastar Fichas de Mando para reclutar unidades** desde Reserva en los puestos de mando que controle.
+- Cada jugador gana **1 Ficha de Reroll** (se acumula entre turnos).
+- Empezando por el jugador con mayor Iniciativa, cada jugador puede desplegar unidades desde Reserva en los puestos de mando que controle (gratuito).
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
-### Fichas de Mando
+### Fichas de Reroll
 
-Las **Fichas de Mando** son el recurso estratégico del juego. Representan la capacidad de mando y reacción ante el campo de batalla. Cada jugador las gasta para repetir tiradas, reclutar unidades desde Reserva o activar habilidades especiales (armas con Sobreesfuerzo, especialidades como Mercenario, etc.).
+Las **Fichas de Reroll** son el recurso estratégico del juego. Cada jugador gana **1 Ficha de Reroll** al inicio de cada turno, acumulables entre turnos.
 
-**Generación de Fichas:**
+**Uso de las Fichas de Reroll:**
 
-- La cantidad inicial, la generación por turno y el máximo acumulable dependen de la **Misión** que se esté jugando.
+- **Repetir una tirada propia** (ataque, salvación, iniciativa, etc.). La segunda tirada es el resultado final. Una misma tirada solo puede repetirse una vez.
 
-**Usos de Fichas de Mando:**
-
-- **1 Ficha**: repetir una tirada propia (ataque, salvación, iniciativa, etc.). La segunda tirada es el resultado final.
-- Reclutar unidades desde Reserva. El coste depende del tipo de unidad y se indica en la **Misión** que se esté jugando.
-- Activar habilidades especiales. Algunas habilidades de arma o especialidades de unidad requieren gastar Fichas para activarse; se indicará en su descripción.
-
-Los reclutamientos solo pueden realizarse durante la **Fase de Iniciativa**. Las repeticiones de tirada y las habilidades especiales pueden gastarse en cualquier momento apropiado.
+Las Fichas de Reroll pueden gastarse en cualquier momento apropiado durante la partida.
 
 ## 2. Fase de Activaciones
 
@@ -229,7 +223,7 @@ Para trepar:
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana.
 2. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 
-Algunas unidades con la habilidad **Vuelo** pueden subir obstáculos de manera diagonal.
+Las unidades con la especialidad **Volador** pueden subir obstáculos de manera diagonal.
 
 ![Unidad trepando un obstáculo y alcanzando una posición elevada]({{climbingImage}})
 
@@ -261,20 +255,18 @@ Para realizar una retirada:
 
 - La unidad consume **2 acciones**.
 - Se mueve usando su valor de **Movimiento** en dirección a un puesto de mando aliado.
-- Al entrar en retirada, la unidad reduce su **Velocidad a 0** y su **Valor no cuenta para el control de objetivos o puestos de mando** hasta que se recomponga.
+- Al entrar en retirada, su **Valor no cuenta para el control de objetivos o puestos de mando** hasta que se recomponga.
 
 La unidad se recompone automáticamente al inicio de su siguiente activación si ha alcanzado un puesto de mando aliado. Si no lo ha alcanzado, continúa en retirada.
 
 ## Preparado
 
-Una unidad que utiliza la acción **Preparado** adopta una postura defensiva.
+Una unidad que utiliza la acción **Preparado** adopta una postura defensiva. Siempre que reciba un ataque enemigo durante el turno, puede responder inmediatamente:
 
-Una unidad preparada puede realizar **disparos de respuesta** durante el turno del jugador rival.
+- **Si es disparada:** realiza un disparo gratuito con una de sus armas a distancia contra el atacante.
+- **Si es acomentida:** ataca primero en cuerpo a cuerpo, antes de recibir el ataque de carga.
 
-- **Si es disparada:** puede devolver inmediatamente un disparo con el arma equipada, independientemente de si le quedan acciones. Primero se resuelve el ataque enemigo, luego el disparo de respuesta.
-- **Si es cargada:** la unidad Preparada **ataca siempre primero**, independientemente de la Velocidad. La unidad que carga resuelve su ataque después. La unidad en Preparado puede atacar aunque no le queden acciones.
-
-El estado de Preparado dura hasta que finaliza el turno.
+Estos ataques no consumen acciones. El estado de Preparado dura hasta que finaliza el turno.
 
 ---
 
@@ -396,8 +388,7 @@ La unidad atacante lanza los dados de **Ataques** indicados en su perfil de comb
 
 El jugador defensor lanza tantos dados como impactos haya recibido.
 
-- Los ataques cuerpo a cuerpo **reducen la Salvación del defensor en 1** (p. ej., de 4+ pasa a 5+). El combate en contacto directo es más letal que el fuego a distancia.
-- Cada resultado **igual o superior al valor de Salvación modificado** bloquea un impacto.
+- Cada resultado **igual o superior al valor de Salvación** bloquea un impacto.
 - Los impactos críticos solo pueden bloquearse con un **6 defensivo**.
 - Los impactos no bloqueados infligen el daño base o crítico del arma atacante.
 
@@ -407,13 +398,13 @@ Cada impacto no bloqueado inflige el daño indicado por el arma. Si la unidad pi
 
 ## Vehículos y monstruos en combate cuerpo a cuerpo
 
-Los **Vehículos** y los **Monstruos** trabados en cuerpo a cuerpo siguen las mismas reglas que un combate cuerpo a cuerpo normal. Únicamente pueden seguir disparando si tienen armas con **Multiuso**.
+Los **Vehículos** y los **Monstruos** trabados en cuerpo a cuerpo siguen las mismas reglas que un combate cuerpo a cuerpo normal, pero además pueden seguir disparando si tienen armas a distancia.
 
 Además, estas unidades pueden ser atacadas a distancia aunque estén trabadas en combate cuerpo a cuerpo.
 
 ## Titanes en combate cuerpo a cuerpo
 
-Un Titán **solo puede acometer contra otro Titán**. Las unidades de Línea, Élite, Vehículos y Monstruos **no pueden trabar** a un Titán por sí mismas.
+Un Titán **solo puede acometer contra otro Titán**. Las unidades de Línea, Élite, Héroes, Vehículos y Monstruos **no pueden trabar** a un Titán por sí mismas.
 
 Los Titanes siguen las mismas reglas generales de combate cuerpo a cuerpo, salvo por sus reglas especiales.
 
@@ -423,7 +414,9 @@ Una unidad trabada en combate cuerpo a cuerpo **no puede ser atacada a distancia
 
 ---
 
-# Reglas especiales de escuadras
+# Reglas de escuadras (modo Gran Batalla)
+
+En modo escaramuza, cada miniatura es una unidad independiente y se aplican las reglas generales del reglamento sin modificaciones. Las siguientes reglas **solo aplican en modo Gran Batalla**, cuando las unidades se agrupan en escuadras de varias miniaturas.
 
 ## Línea de visión en escuadras
 
@@ -433,16 +426,9 @@ Si al menos una miniatura de una escuadra enemiga es visible desde el atacante, 
 
 En Gran Batalla, cada miniatura utiliza el arma que tenga equipada.
 
-Si una escuadra dispone de armas con perfiles distintos, los ataques se resuelven **por grupos de armas**.
-
-Para cada grupo de armas:
-
-1. Se resuelven todos sus ataques (impactos, salvaciones y daños).
-2. Una vez completado, se pasa al siguiente tipo de arma.
+Cuando un Héroe forma parte de una escuadra, resuelve sus ataques de forma independiente al resto de la unidad.
 
 Todas las armas de la escuadra deben atacar al **mismo objetivo**, salvo que una regla indique lo contrario.
-
-El jugador que controla la escuadra decide el **orden** en el que se resuelven los distintos tipos de arma.
 
 ## Combate cuerpo a cuerpo en escuadras
 
@@ -474,9 +460,9 @@ Un elemento de escenografía proporciona cobertura si su altura supera al menos 
 
 **Cobertura**
 
-La unidad obtiene **-1 a su valor de Salvación** frente a ataques a distancia (p. ej., de 4+ pasa a 3+), mejorando así sus posibilidades de bloquear impactos.
+La unidad mejora en 1 su **Salvación** frente a ataques a distancia (p. ej., de 4+ pasa a 3+), mejorando así sus posibilidades de bloquear impactos.
 
-Si la unidad en cobertura es cargada, ambas unidades retiran **-1 dado de ataque** en sus tiradas de CaC, salvo que una regla indique lo contrario.
+Si la unidad en cobertura es atacada en cuerpo a cuerpo, el atacante falla con resultados de 1, 2 o 3.
 
 **Atravesar coberturas**
 
@@ -488,7 +474,7 @@ Si el atacante puede ver la cabeza de la miniatura objetivo, esta se considera v
 
 **Aclaraciones**
 
-**Vehículos, Monstruos y Titanes** no se benefician de ningún tipo de cobertura. Sus dimensiones impiden que cualquier obstáculo les proporcione protección efectiva.
+**Vehículos, Monstruos y Titanes** no se benefician de cobertura. Sus dimensiones impiden que cualquier obstáculo les proporcione protección efectiva, salvo que la unidad esté completamente fuera de la línea de visión.
 
 Las miniaturas aliadas o enemigas que bloquean completamente la visión actúan como obstáculos a efectos de línea de visión.
 
@@ -508,7 +494,7 @@ Los estados principales en ZeroLore son:
 
 - **Preparado**
 - **Retirada**
-- Trabada
+- **Trabada**
 
 ## Unidad preparada
 
@@ -532,11 +518,16 @@ _(Ver sección: Combate cuerpo a cuerpo para la resolución completa.)_
 
 # Puestos de mando y despliegue
 
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse, y pueden generar Fichas de Mando si la **Misión** lo indica.
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token circular de puesto de mando**. En Escaramuza se usa el token de **3"** y en Gran Batalla el de **6"**. Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
 
-Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del token naranja para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
+Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del puesto de mando para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
 ![Unidad capturando un puesto de mando con su banderilla de control]({{commandPostControlImage}})
+
+## Cuartel General
+
+- Funciona como un puesto de mando normal a efectos de control y despliegue.
+- Cada jugador tiene un solo Cuartel General. Si este es conquistado por el enemigo, la partida se acaba automáticamente.
 
 **Control al final de turno**
 
@@ -554,15 +545,17 @@ Algunas unidades disponen de habilidades especiales de despliegue indicadas en s
 
 ## Reserva
 
-Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, a partir del turno 2, cada jugador puede reclutar unidades desde Reserva **gastando Fichas de Mando** según los costes definidos por la **Misión**.
+Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, cada jugador puede desplegar unidades desde Reserva.
 
 Las unidades se despliegan en contacto con un puesto de mando que controles. Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
 
 ## Despliegue inicial
 
-En la **Fase de Iniciativa del turno 1**, cada jugador despliega unidades en los puestos de mando que controle, **gastando sus Fichas de Mando** según los costes de reclutamiento definidos por la **Misión** y colocándolas en contacto con esos puestos. Las unidades que no se desplieguen en este momento pasan automáticamente a **Reserva**.
+Al inicio de la partida, cada jugador despliega libremente sus unidades desde Reserva en los puestos de mando que controle.
 
-Cada jugador tira **1D6**; el resultado más alto despliega primero. A continuación los jugadores se alternan desplegando unidad por unidad.
+Cada jugador tira **1D6** — el resultado más alto despliega primero. Los jugadores se alternan desplegando unidad por unidad hasta que ambos decidan no desplegar más.
+
+Las unidades que no se desplieguen en este momento permanecen en **Reserva** y podrán desplegarse en turnos posteriores de forma gratuita.
 
 ---
 
@@ -695,20 +688,20 @@ Incluye comportamientos especiales listados abajo. Estas reglas se aplican siemp
 
 Los Héroes y algunas unidades experimentales pueden tener especialidades propias descritas directamente en su ficha.
 
-| Especialidad | Descripción | Especialidad | Descripción |
-| --- | --- | --- | --- |
-| **Soldado** | Esta unidad no tiene ninguna especialidad. | **Resistente** | La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3**. |
-| **Soporte** | Esta unidad puede gastar **2 acciones** para elegir una unidad aliada a **6" o menos**. Esa unidad recupera **1D3 Vidas** perdidas. | **Evasivo** | La primera vez cada turno que esta unidad sea objetivo de un ataque de **Disparo**, puede moverse hasta **2"** antes de resolver el ataque. |
-| **Guardia** | Una vez por turno, cuando una unidad aliada a **6" o menos** reciba daño, esta unidad puede recibir hasta **2 puntos de ese daño** en su lugar. | **Anclado** | Las unidades enemigas trabadas con esta unidad no pueden declarar **Retirada**. |
-| **Despiadado** | Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen **+1 daño crítico**. | **Berserker** | Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3**. |
-| **Certero** | Si esta unidad no se mueve, gana **1 de Precisión** en Disparo. | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos. |
-| **Asentado** | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Si el jugador solo tiene **1 puesto de mando o CG**, no puede ser desplegada. | **Capturador** | Esta unidad cuenta como el doble de su **Valor** al controlar o disputar puestos de mando. |
-| **Avanzadilla** | Puede ser desplegada a **9"** de un puesto de mando aliado. | **Devorador** | Cuando esta unidad destruye una unidad enemiga en CaC, recupera **1D3 Vidas perdidas**. |
-| **Porrazo** | Durante su activación, esta unidad puede gastar **1 acción** para empujar **1"** a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora Anclado**. | **Terror** | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar Fichas de Mando para repetir tiradas. |
-| **Tirador** | Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas. | **Cobertura móvil** | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo. |
-| **Volador** | Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas. | **Carga brutal** | Cuando esta unidad realiza una Acometida contra una unidad, gana **+1 dado de ataque CaC** durante ese combate. |
-| **Boom!** | Cuando esta unidad es destruida, explota afectando a todas las unidades a **6"** de ella, que reciben **1D6 de daño**. | **Aplastamiento** | Durante su movimiento o Acometida, si esta unidad pasa por encima de una unidad de **Línea o Élite**, dicha unidad es destruida automáticamente. |
-| **Mercenario** | Esta unidad puede ser reactivada una segunda vez en el mismo turno gastando **1 Ficha de Mando**. Recupera sus **2 acciones** para esta segunda activación. Solo puede reactivarse una vez por turno. | | |
+| Especialidad    | Descripción                                                                                                                                                                                           | Especialidad             | Descripción                                                                                                                                                                                                                               |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Soldado**     | Esta unidad no tiene ninguna especialidad.                                                                                                                                                            | **Resistente**           | La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3**.                                                                                                                                                        |
+| **Soporte**     | Esta unidad puede gastar **2 acciones** para elegir una unidad aliada a **6" o menos**. Esa unidad recupera **1D3 Vidas** perdidas.                                                                   | **Evasivo**              | La primera vez cada turno que esta unidad sea objetivo de un ataque de **Disparo**, puede moverse hasta **2"** antes de resolver el ataque.                                                                                               |
+| **Guardia**     | Una vez por turno, cuando una unidad aliada a **6" o menos** reciba daño, esta unidad puede recibir hasta **2 puntos de ese daño** en su lugar.                                                       | **Anclado**              | Las unidades enemigas trabadas con esta unidad no pueden declarar **Retirada**.                                                                                                                                                           |
+| **Despiadado**  | Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen **+1 daño crítico**.                                                                                               | **Berserker**            | Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3**.                                                                                                                       |
+| **Certero**     | Si esta unidad no se mueve, gana **1 de Precisión** en Disparo.                                                                                                                                       | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos.                                                                                                               |
+| **Asentado**    | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Si el jugador solo tiene **1 puesto de mando o CG**, no puede ser desplegada.                                | **Capturador**           | Esta unidad cuenta como el doble de su **Valor** al controlar o disputar puestos de mando.                                                                                                                                                |
+| **Avanzadilla** | Puede ser desplegada a **9"** de un puesto de mando aliado.                                                                                                                                           | **Devorador**            | Cuando esta unidad destruye una unidad enemiga en CaC, recupera **1D3 Vidas perdidas**.                                                                                                                                                   |
+| **Porrazo**     | Durante su activación, esta unidad puede gastar **1 acción** para empujar **1"** a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora Anclado**.            | **Terror**               | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar Fichas de Reroll para repetir tiradas.                                                                                                                                |
+| **Tirador**     | Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas.                                                                                                                    | **Cobertura móvil**      | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo.                                                                                                                                 |
+| **Volador**     | Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas.                              | **Carga brutal**         | Cuando esta unidad realiza una Acometida contra una unidad, gana **+1 dado de ataque CaC** durante ese combate.                                                                                                                           |
+| **Descontrol**  | Si esta unidad llega al 50% de su vida, ataca a la unidad aliada o enemiga más cercana cuerpo a cuerpo, sumando **1D** más de ataque. Si ya está trabada, continúa. Si no tiene ninguna unidad cercana, se mueve hacia ella. | **Boom!** | Cuando esta unidad muere explota afectando a unidades que estén a **6"** de esta, infligiendo **1D6**. |
+| **Aplastamiento** | Durante su movimiento o Acometida, si pasa por encima de una unidad de **Línea o Élite**, dicha unidad es **destruida automáticamente**. | | |
 
 ### Escuadras
 
@@ -826,17 +819,16 @@ Estas habilidades sirven para diferenciar armas sin añadir reglas complejas. Al
 
 Cuando una unidad realiza un ataque, debe elegir una única arma válida de su perfil. Si esa arma tiene una habilidad, aplica su efecto durante ese ataque.
 
-| Habilidad de arma | Descripción |
-| --- | --- |
-| **Fiable** | Esta arma no tiene reglas especiales. |
-| **Brutal X+** | Los impactos de esta arma se consideran críticos con un resultado natural de **X+** en la tirada de ataque. |
-| **Perforante** | Los impactos críticos de esta arma empeoran la **Salvación** del objetivo en **1**. |
-| **Inestable** | Tras resolver el ataque, lanza 1D6. Con resultado de **1–2**, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
-| **Multiuso** | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad con la que está combatiendo cuerpo a cuerpo. |
-| **Directo** | Esta arma no realiza tirada de Precisión. |
-| **Explosiva** | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **aliadas y enemigas** a **3"** del objetivo. |
-| **Parabólica** | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**. |
-| **Sobreesfuerzo** | Para usar esta arma, el jugador debe gastar **1 Ficha de Mando** al inicio del ataque. Si no puede pagarla, el arma no puede utilizarse en esa activación. |
+| Habilidad de arma | Descripción                                                                                                                                                                             |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fiable**        | Esta arma no tiene reglas especiales.                                                                                                                                                   |
+| **Brutal X+**     | Los impactos de esta arma se consideran críticos con un resultado natural de **X+** en la tirada de ataque.                                                                             |
+| **Perforante**    | Los impactos críticos de esta arma empeoran la **Salvación** del objetivo en **1**.                                                                                                     |
+| **Inestable**     | Tras resolver el ataque, lanza 1D6. Con resultado de **1–2**, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
+| **Multiuso**      | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad con la que está combatiendo cuerpo a cuerpo.                                          |
+| **Directo**       | Esta arma no realiza tirada de Precisión.                                                                                                                                               |
+| **Explosiva**     | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **aliadas y enemigas** a **3"** del objetivo.                              |
+| **Parabólica**    | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**.                                                                           |
 
 ## Armas condicionadas por tipo
 

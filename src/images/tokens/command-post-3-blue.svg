@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3in" height="3in" viewBox="0 0 1000 1000" role="img" aria-label="3 inch command post token blue">
+  <metadata>
+    token-type: command-post;
+    token-diameter-in: 3;
+    token-color: blue;
+  </metadata>
+  <defs>
+    <radialGradient id="base" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#569aff" stop-opacity="0.3"/>
+      <stop offset="52%" stop-color="#1a202c" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#0a0c12"/>
+    </radialGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <circle cx="500" cy="500" r="455" fill="url(#base)" stroke="#569aff" stroke-width="42" filter="url(#shadow)"/>
+  <circle cx="500" cy="500" r="390" fill="none" stroke="#bddfff" stroke-width="14" opacity="0.85"/>
+  <circle cx="500" cy="500" r="300" fill="none" stroke="#aad4ff" stroke-width="10" stroke-dasharray="24 32" opacity="0.8"/>
+  <circle cx="500" cy="500" r="218" fill="#121c30"/>
+  <g transform="translate(250 346)" fill="#f5f1e3">
+    <path d="M74 169h84l84-58 84 58h84L242 40 74 169Zm78 31h180v38H152v-38Zm-44 78h268v44H108v-44Z"/>
+  </g>
+</svg>

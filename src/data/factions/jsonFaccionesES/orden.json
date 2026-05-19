@@ -29,8 +29,8 @@
       {
         "id": "mando-reservado",
         "nombre": "Mando Reservado",
-        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
-        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
+        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
         "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
@@ -659,7 +659,7 @@
         ],
         "cuerpo_a_cuerpo": [
           {
-            "nombre": "Puño de asedio",
+            "nombre": "Puño de siege",
             "ataques": "1D",
             "distancia": null,
             "impactos": null,

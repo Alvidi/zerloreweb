@@ -8,8 +8,8 @@
       {
         "id": "marea-infinita",
         "nombre": "Marea Infinita",
-        "descripcion_escaramuza": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
-        "descripcion_escuadra": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
+        "descripcion_escaramuza": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
+        "descripcion_escuadra": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
         "frase": "El CAOS no se acaba. El rival tiene que destruirte muchas veces para librarse de ti."
       },
       {
@@ -29,8 +29,8 @@
       {
         "id": "mando-reservado",
         "nombre": "Mando Reservado",
-        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
-        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Mando adicional, sumada a las generadas por puestos de mando. El máximo de Fichas acumuladas sigue siendo 5.",
+        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
+        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
         "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
@@ -556,7 +556,7 @@
             "valor_extra": 0
           },
           {
-            "nombre": "Colmillo del Alfa",
+            "nombre": "Colmillo del Alfa (Élite, Héroe)",
             "ataques": "2D",
             "distancia": null,
             "impactos": null,
@@ -815,7 +815,7 @@
           "max": 3
         },
         "valor": 12,
-        "especialidad": "Portaestandarte"
+        "especialidad": "Carga brutal"
       },
       "armas": {
         "disparo": [],
@@ -896,7 +896,7 @@
           "max": 2
         },
         "valor": 9,
-        "especialidad": "Portaestandarte"
+        "especialidad": "Terror"
       },
       "armas": {
         "disparo": [

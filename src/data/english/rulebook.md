@@ -146,26 +146,20 @@ Each turn consists of the following phases:
 At the beginning of each turn, both players make the **Initiative roll**.
 
 - Each player rolls **1D6**. The player or team with the highest result **acts first** during that turn. In case of a tie, roll again.
-- Each player gains their **Command Tokens** for the turn according to the economy defined by the **Mission**.
-- Starting with the player with the highest Initiative, each player may **spend Command Tokens to recruit units** from Reserve at command posts they control.
+- Each player gains **1 Reroll Token** (tokens carry over between turns).
+- Starting with the player with the highest Initiative, each player may deploy units from Reserve at command posts they control (free).
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
 
-### Command Tokens
+### Reroll Tokens
 
-**Command Tokens** are the game's strategic resource. They represent command capacity and battlefield reaction. Each player spends them to reroll dice, recruit units from Reserve, or activate special abilities (weapons with Overexertion, specialties such as Mercenary, etc.).
+**Reroll Tokens** are the game's strategic resource. Each player gains **1 Reroll Token** at the start of each turn, and they carry over between turns.
 
-**Generating Tokens:**
+**Using Reroll Tokens:**
 
-- The starting amount, turn generation, and maximum held depend on the **Mission** being played.
+- **Reroll one of your own rolls** (attack, save, initiative, etc.). The second roll is the final result. A roll can only be repeated once.
 
-**Using Command Tokens:**
-
-- **1 Token**: reroll one of your rolls (attack, save, initiative, etc.). The second roll is the final result.
-- Recruit units from Reserve. The cost depends on the unit type and is stated by the **Mission** being played.
-- Activate special abilities. Some weapon abilities or unit specialties require spending Tokens to activate; this will be stated in their description.
-
-Recruitment can only be performed during the **Initiative Phase**. Rerolls and special abilities may be spent at any appropriate time.
+Reroll Tokens may be spent at any appropriate time during the game.
 
 ## 2. Activation Phase
 
@@ -229,7 +223,7 @@ To climb:
 1. The unit must move until its base touches the base of the obstacle.
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
-Some units with the **Flying** ability may climb obstacles diagonally.
+Units with the **Flyer** specialty may climb obstacles diagonally.
 
 ![Unit climbing an obstacle and reaching an elevated position]({{climbingImage}})
 
@@ -261,7 +255,7 @@ To retreat:
 
 - The unit spends **2 actions**.
 - It moves using its **Movement** value toward an allied command post.
-- Upon retreating, the unit reduces its **Speed to 0** and its **Value does not count for objective or command post control** until it recovers.
+- Upon retreating, its **Value does not count for objective or command post control** until it recovers.
 
 The unit automatically recovers at the start of its next activation if it has reached an allied command post. If it has not reached one, it continues retreating.
 
@@ -269,12 +263,10 @@ The unit automatically recovers at the start of its next activation if it has re
 
 A unit that uses the **Ready** action adopts a defensive posture.
 
-A ready unit may make **return fire** during the opposing player's turn.
+- **If shot:** performs a free ranged attack against the attacker.
+- **If charged:** attacks first in melee before receiving the charge attack.
 
-- **If shot at:** it may immediately fire back with its equipped weapon, regardless of remaining actions. The enemy attack resolves first, then the return fire.
-- **If charged:** the Ready unit **always attacks first**, regardless of Speed. The charging unit resolves its attack afterwards. The Ready unit may attack even if it has no actions left.
-
-The Ready state lasts until the end of the turn.
+These attacks do not consume actions. The Ready state lasts until the end of the turn.
 
 ---
 
@@ -396,7 +388,6 @@ The attacking unit rolls the **Attacks** dice indicated in its melee profile.
 
 The defending player rolls as many dice as hits received.
 
-- Melee attacks **reduce the defender's Save by 1** (for example, from 4+ to 5+). Direct contact is more lethal than ranged fire.
 - Each result **equal to or above their Save value** blocks a hit.
 - Critical hits can only be blocked by a **defensive 6**.
 - Unblocked hits deal the base or critical damage of the attacking weapon.
@@ -407,13 +398,13 @@ Each unblocked hit deals the damage indicated by the weapon. If the unit loses a
 
 ## Vehicles and Monsters in Melee
 
-**Vehicles** and **Monsters** locked in melee combat follow the same rules as normal melee combat. They may only keep shooting if they have **Multi-use** weapons.
+**Vehicles** and **Monsters** locked in melee combat follow the same rules as normal melee combat, but they can also keep shooting if they have ranged weapons.
 
 In addition, these units may be attacked at range even while locked in melee combat.
 
 ## Titans in Melee
 
-A Titan may **only Rush against another Titan**. Line units, Elite units, Vehicles, and Monsters **cannot lock** a Titan by themselves.
+A Titan may **only Rush against another Titan**. Line units, Elite units, Heroes, Vehicles, and Monsters **cannot lock** a Titan by themselves.
 
 Titans follow the same general melee combat rules, except for their special rules.
 
@@ -423,7 +414,9 @@ A unit locked in melee combat **cannot be attacked at range** by units outside t
 
 ---
 
-# Special Squad Rules
+# Squad Rules (Grand Battle mode)
+
+In skirmish mode, each miniature is an independent unit and general rules apply without modifications. The following rules **only apply in Grand Battle mode**, when units are grouped into squads of multiple miniatures.
 
 ## Line of Sight in Squads
 
@@ -433,16 +426,9 @@ If at least one miniature in an enemy squad is visible to the attacker, the enti
 
 In Grand Battle, each miniature uses the weapon it has equipped.
 
-If a squad has weapons with different profiles, attacks are resolved **by weapon group**.
-
-For each weapon group:
-
-1. All its attacks are resolved (hits, saves, and damage).
-2. Once complete, move to the next weapon type.
+When a Hero is part of a squad, they resolve their attacks independently from the rest of the unit.
 
 All weapons in the squad must attack the **same target**, unless a rule states otherwise.
-
-The player controlling the squad decides the **order** in which different weapon types are resolved.
 
 ## Melee Combat in Squads
 
@@ -476,7 +462,7 @@ A scenery element provides cover if its height exceeds at least half the height 
 
 The unit gains **-1 to its Save value** against ranged attacks (for example, from 4+ to 3+), improving its chances of blocking hits.
 
-If the unit in cover is charged, both units remove **-1 attack die** from their melee rolls, unless a rule states otherwise.
+If the unit in cover is attacked in melee, the attacker fails on results of 1, 2 or 3.
 
 **Moving through cover**
 
@@ -488,7 +474,7 @@ If the attacker can see the target miniature's head, it is considered visible an
 
 **Clarifications**
 
-- **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection.
+- **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection, unless the unit is completely out of line of sight.
 
 Friendly or enemy miniatures that completely block the view act as obstacles for line of sight purposes.
 
@@ -506,7 +492,7 @@ The main states in ZeroLore are:
 
 - **Ready**
 - **Retreat**
-- Locked
+- **Engaged**
 
 ## Ready Unit
 
@@ -518,23 +504,30 @@ The Ready state is shown by placing the **shield token** next to the miniature. 
 A unit enters **Retreat** when it declares the _Retreat_ action. _(explained in the section: Unit Actions)_
 The Retreat state is shown by placing the **retreat token** (arrow) next to the miniature. It is removed when the unit regroups or reaches a friendly command post.
 
-## Locked Units
+## Engaged Units
 
-Two units are considered **locked** when they are in base contact. While they are locked:
+Two units are considered **engaged** when they are in base contact. While they are engaged:
 
 - They may only use **melee combat** or **retreat** actions.
 - They cannot be attacked at range by units outside the combat.
-- They remain locked until one is destroyed or declares retreat.
+- They remain engaged until one is destroyed or declares retreat.
 
 _(See the Melee Combat section for the full resolution.)_
 
 # Command Posts and Deployment
 
-Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy, and they may generate Command Tokens if the **Mission** states so.
+Command posts are strategic positions spread across the battlefield. They are represented on the table with the **circular command post token**. In Skirmish, use the **3"** token; in Grand Battle, use the **6"** token. Besides being objectives to capture, they are the only points from which units may deploy.
 
 When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
 ![Unit capturing a command post with its control flag]({{commandPostControlImage}})
+
+## Headquarters
+
+Before deployment, each player designates one of their initial Command Posts as their **Headquarters**.
+
+- It works as a normal command post for control and deployment.
+- Each player has only one Headquarters. If it is captured by the enemy, the game ends automatically.
 
 **Control at the end of the turn**
 
@@ -552,15 +545,17 @@ Some units have special deployment abilities indicated on their profile.
 
 ## Reserve
 
-Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, from turn 2 onward, each player may recruit units from Reserve by **spending Command Tokens** according to the costs defined by the **Mission**.
+Units in reserve have not yet entered the battlefield. During the **Initiative Phase** of each turn, each player may deploy units from Reserve.
 
 Units are deployed in contact with a command post you control. If the post is occupied by enemy units, you cannot deploy there even if it is yours.
 
 ## Initial Deployment
 
-During the **Initiative Phase of turn 1**, each player deploys units at the command posts they control, **spending Command Tokens** according to the recruitment costs defined by the **Mission** and placing them in contact with those posts. Units that are not deployed at this moment automatically go into **Reserve**.
+At the start of the game, each player freely deploys their units from Reserve at the command posts they control.
 
-Each player rolls **1D6**; the highest result deploys first. Players then alternate deploying one unit at a time.
+Each player rolls **1D6**; the highest result deploys first. Players alternate deploying one unit at a time until both decide not to deploy further.
+
+Units that are not deployed at this moment remain in **Reserve** and may deploy on later turns for free.
 
 ---
 
@@ -703,11 +698,11 @@ Heroes and some experimental units may have unique specialties described directl
 | **Accurate** | If this unit does not move, it gains **1 Precision** in Shooting. | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
 | **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. If its player only has **1 command post or HQ**, it cannot be deployed. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
 | **Vanguard** | It may be deployed within **9"** of an allied command post. | **Devourer** | When this unit destroys an enemy unit in melee, it recovers **1D3 lost Wounds**. |
-| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Command Tokens to reroll dice. |
+| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Reroll Tokens to reroll dice. |
 | **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
 | **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Rush against a unit, it gains **+1 melee attack die** during that combat. |
-| **Boom!** | When this unit is destroyed, it explodes and affects all units within **6"** of it, which suffer **1D6 damage**. | **Crushing** | During its movement or Rush, if this unit passes over a **Line or Elite** unit, that unit is destroyed automatically. |
-| **Mercenary** | This unit may be reactivated a second time in the same turn by spending **1 Command Token**. It regains its **2 actions** for this second activation. It can only be reactivated once per turn. | | |
+| **Out of Control** | If this unit reaches 50% of its Wounds, it attacks the nearest allied or enemy unit in melee, adding **1D** more attack. If it is already locked, it continues. If there is no nearby unit, it moves toward it. | **Boom!** | When this unit dies, it explodes and affects units within **6"** of it, inflicting **1D6**. |
+| **Crushing** | During its movement or Rush, if it passes over a **Line or Elite** unit, that unit is **destroyed automatically**. | | |
 
 ### Squads
 
@@ -835,7 +830,6 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Direct** | This weapon does not make a Precision roll. |
 | **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
-| **Overexertion** | To use this weapon, the player must spend **1 Command Token** at the start of the attack. If they cannot pay it, the weapon cannot be used during that activation. |
 
 ## Weapons Conditioned by Type
 

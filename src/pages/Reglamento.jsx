@@ -23,7 +23,7 @@ import conquestBlueToken from '../images/tokens/conquista-blue.svg'
 import conquestRedToken from '../images/tokens/conquista-red.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationGreenToken from '../images/tokens/activacion-green.svg'
-import commandToken from '../images/tokens/command-token-gold.svg'
+import rerollDiceToken from '../images/tokens/reroll-dice-gold.svg'
 import miniatureVsSquadImage from '../images/webimagen/imagen_1.webp'
 import measurementImage from '../images/webimagen/imagen_2.webp'
 import climbingImage from '../images/webimagen/imagen_3.webp'
@@ -33,6 +33,14 @@ import turnStructureImage from '../images/webimagen/imagen_8.webp'
 import commandPostControlImage from '../images/webimagen/imagen_9.webp'
 import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
+import grandBattle4pExposedMap from '../images/maps/gran-batalla-4p-cuarteles-expuestos.svg'
+import grandBattle4pCornersMap from '../images/maps/gran-batalla-4p-esquinas.svg'
+import grandBattleContestedMap from '../images/maps/gran-batalla-2p-comprometida.svg'
+import grandBattleNormalMap from '../images/maps/gran-batalla-2p-normal.svg'
+import skirmishDiagonalMap from '../images/maps/escaramuza-2p-diagonal-3in.svg'
+import totalWarDiagonalMap from '../images/maps/guerra-total-2p-diagonal.svg'
+import totalWarCenterMap from '../images/maps/guerra-total-4p-centro.svg'
+import totalWarCornersMap from '../images/maps/guerra-total-4p-esquinas.svg'
 import unitTypeLineIcon from '../images/units_icons/line.png'
 import unitTypeEliteIcon from '../images/units_icons/elite.png'
 import unitTypeVehicleIcon from '../images/units_icons/vehicle.png'
@@ -78,8 +86,16 @@ const RULES_ASSET_PLACEHOLDERS = {
   measurementImage,
   miniatureVsSquadImage,
   rangedAttackSequenceImage,
-  commandTokenImage: commandToken,
+  rerollTokenImage: rerollDiceToken,
+  grandBattle4pExposedMap,
+  grandBattle4pCornersMap,
+  grandBattleContestedMap,
+  grandBattleNormalMap,
   sprintImage,
+  skirmishDiagonalMap,
+  totalWarCenterMap,
+  totalWarCornersMap,
+  totalWarDiagonalMap,
   turnStructureImage,
   factionAbilityProfileImage: RULES_ABILITY_PROFILE_SLOT_SRC,
   unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,
@@ -227,17 +243,17 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
   { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
   { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
-  { id: 'state_command_token', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateCommandToken', diameterMm: 32, previewSize: 'medium', imageSrc: commandToken },
+  { id: 'state_reroll_token', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRerollToken', diameterMm: 32, previewSize: 'medium', imageSrc: rerollDiceToken },
+  { id: 'command_circle_3', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6', category: 'command', shape: 'square', commandColor: 'orange', labelKey: 'rules.tokens.types.commandSquare6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_3_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle3Blue', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6_blue', category: 'command', shape: 'square', commandColor: 'blue', labelKey: 'rules.tokens.types.commandSquare6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_3_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle3Red', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6_red', category: 'command', shape: 'square', commandColor: 'red', labelKey: 'rules.tokens.types.commandSquare6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_3_green', category: 'command', shape: 'circle', commandColor: 'green', labelKey: 'rules.tokens.types.commandCircle3Green', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6_green', category: 'command', shape: 'circle', commandColor: 'green', labelKey: 'rules.tokens.types.commandCircle6Green', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6_green', category: 'command', shape: 'square', commandColor: 'green', labelKey: 'rules.tokens.types.commandSquare6Green', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  { id: 'command_circle_3_yellow', category: 'command', shape: 'circle', commandColor: 'yellow', labelKey: 'rules.tokens.types.commandCircle3Yellow', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6_yellow', category: 'command', shape: 'circle', commandColor: 'yellow', labelKey: 'rules.tokens.types.commandCircle6Yellow', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_square_6_yellow', category: 'command', shape: 'square', commandColor: 'yellow', labelKey: 'rules.tokens.types.commandSquare6Yellow', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
 ]
 
 const buildInitialTokenCounts = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, 0]))
@@ -472,12 +488,12 @@ function Reglamento() {
 
         ;[
           {
-            label: t('rules.tokens.types.commandCircle6'),
+            label: t('rules.tokens.types.commandCircle3'),
             shapeClass: 'command-circle',
           },
           {
-            label: t('rules.tokens.types.commandSquare6'),
-            shapeClass: 'command-square',
+            label: t('rules.tokens.types.commandCircle6'),
+            shapeClass: 'command-circle',
           },
         ].forEach((token) => {
           const item = doc.createElement('article')
@@ -565,16 +581,16 @@ function Reglamento() {
         }
       }
 
-      const commandTokenHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
+      const rerollTokenHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'fichas de mando'
-          || normalized === 'command tokens'
-          || normalized === 'command token'
+        return normalized === 'fichas de reroll'
+          || normalized === 'reroll tokens'
+          || normalized === 'reroll token'
       })
-      const commandTokenHeading = commandTokenHeadings.at(-1)
-      if (commandTokenHeading) {
+      const rerollTokenHeading = rerollTokenHeadings.at(-1)
+      if (rerollTokenHeading) {
         const sectionNodes = []
-        let sibling = commandTokenHeading.nextElementSibling
+        let sibling = rerollTokenHeading.nextElementSibling
         while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
           sectionNodes.push(sibling)
           sibling = sibling.nextElementSibling
@@ -582,11 +598,11 @@ function Reglamento() {
 
         const contentParagraphs = sectionNodes.filter((node) => node.tagName === 'P')
         const imageParagraph = sectionNodes.find((node) => node.tagName === 'P' && node.querySelector('img'))
-        const insertionTarget = imageParagraph || contentParagraphs.at(-1) || commandTokenHeading
+        const insertionTarget = imageParagraph || contentParagraphs.at(-1) || rerollTokenHeading
 
         if (insertionTarget?.parentNode) {
-          const commandTokenGallery = doc.createElement('div')
-          commandTokenGallery.className = 'rules-state-gallery'
+          const rerollTokenGallery = doc.createElement('div')
+          rerollTokenGallery.className = 'rules-state-gallery'
 
           const item = doc.createElement('article')
           item.className = 'rules-state-gallery-item'
@@ -596,19 +612,19 @@ function Reglamento() {
 
           const image = doc.createElement('img')
           image.className = 'rules-state-gallery-image'
-          image.src = commandToken
+          image.src = rerollDiceToken
           image.alt = ''
           image.loading = 'lazy'
 
           const label = doc.createElement('p')
           label.className = 'rules-state-gallery-label'
-          label.textContent = t('rules.tokens.types.stateCommandToken')
+          label.textContent = t('rules.tokens.types.stateRerollToken')
 
           mark.appendChild(image)
           item.appendChild(mark)
           item.appendChild(label)
-          commandTokenGallery.appendChild(item)
-          insertionTarget.parentNode.insertBefore(commandTokenGallery, insertionTarget.nextSibling)
+          rerollTokenGallery.appendChild(item)
+          insertionTarget.parentNode.insertBefore(rerollTokenGallery, insertionTarget.nextSibling)
           imageParagraph?.remove()
         }
       }
@@ -808,13 +824,18 @@ function Reglamento() {
       })
       .filter((item) => item.title)
     const firstHeading = doc.querySelector('h1')
-    const documentHeading = firstHeading
+    const documentHeading = rulesMode === 'missions'
       ? {
-        id: firstHeading.getAttribute('id') || '',
-        title: firstHeading.textContent?.trim() || '',
+        id: 'mission-total-war',
+        title: t('rules.modeMissions'),
       }
-      : null
-    if (firstHeading) {
+      : firstHeading
+        ? {
+          id: firstHeading.getAttribute('id') || '',
+          title: firstHeading.textContent?.trim() || '',
+        }
+        : null
+    if (firstHeading && rulesMode !== 'missions') {
       firstHeading.remove()
     }
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
@@ -1093,6 +1114,44 @@ function Reglamento() {
           .rules-pdf-sheet .rules-html .image img {
             max-width: 100%;
             height: auto;
+            object-fit: contain;
+          }
+          .rules-pdf-sheet .rules-html figure {
+            margin: 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+          .rules-pdf-sheet .rules-html .rules-map-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin: 14px 0 18px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+          .rules-pdf-sheet .rules-html .rules-map-grid figure {
+            display: block;
+            overflow: visible;
+          }
+          .rules-pdf-sheet .rules-html .rules-map-grid img {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            border: 1px solid #d7d7d7;
+            background: #ffffff;
+          }
+          .rules-pdf-sheet .rules-html .rules-map-grid figcaption {
+            margin-top: 5px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #111111;
           }
           .rules-pdf-sheet .rules-html .rules-profile-image-row {
             width: 72%;
@@ -1112,6 +1171,8 @@ function Reglamento() {
             width: 100%;
             max-width: 100%;
             height: auto;
+            max-height: 960px;
+            object-fit: contain;
           }
           .rules-pdf-sheet .rules-html .rules-hero-banner {
             position: relative;
@@ -1583,14 +1644,18 @@ function Reglamento() {
           windowWidth: sheetElement.scrollWidth,
         })
         const sheetHeightMm = (sheetCanvas.height / sheetCanvas.width) * contentWidthMm
+        const scaleToFit = Math.min(1, contentHeightMm / sheetHeightMm)
+        const renderWidthMm = contentWidthMm * scaleToFit
+        const renderHeightMm = sheetHeightMm * scaleToFit
+        const renderX = margin + (contentWidthMm - renderWidthMm) / 2
         doc.addPage()
         doc.addImage(
           sheetCanvas.toDataURL('image/png'),
           'PNG',
+          renderX,
           margin,
-          margin,
-          contentWidthMm,
-          Math.min(sheetHeightMm, contentHeightMm),
+          renderWidthMm,
+          renderHeightMm,
           undefined,
           'FAST',
         )
@@ -1614,6 +1679,30 @@ function Reglamento() {
         }
 
         return typeof getSafeCount === 'function' ? Math.max(1, getSafeCount(best)) : best
+      }
+
+      const normalizeRulesPdfNodes = (nodes) => {
+        const normalized = []
+
+        nodes.forEach((node) => {
+          if (node.nodeType === 1 && node.classList.contains('rules-map-grid')) {
+            const figures = Array.from(node.children)
+            for (let index = 0; index < figures.length; index += 2) {
+              const row = node.cloneNode(false)
+              row.dataset.rulesPdfMapRow = 'true'
+              row.appendChild(figures[index].cloneNode(true))
+              if (figures[index + 1]) {
+                row.appendChild(figures[index + 1].cloneNode(true))
+              }
+              normalized.push(row)
+            }
+            return
+          }
+
+          normalized.push(node)
+        })
+
+        return normalized
       }
 
       if (rulesMode === 'missions' && captureTarget.querySelector('.rules-mission-grid')) {
@@ -1703,9 +1792,9 @@ function Reglamento() {
         }
       } else {
         const rulesHtmlRoot = captureTarget.querySelector('.rules-html')
-        const contentNodes = Array.from(rulesHtmlRoot?.childNodes || []).filter(
+        const contentNodes = normalizeRulesPdfNodes(Array.from(rulesHtmlRoot?.childNodes || []).filter(
           (node) => node.nodeType !== Node.TEXT_NODE || node.textContent?.trim(),
-        )
+        ))
 
         if (rulesHtmlRoot && contentNodes.length) {
           const pxPerMm = captureTarget.scrollWidth / contentWidthMm
@@ -1762,8 +1851,8 @@ function Reglamento() {
       }
 
       const filename = lang === 'en'
-        ? (rulesMode === 'missions' ? 'zerolore-missions-en.pdf' : 'zerolore-rulebook-en.pdf')
-        : (rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf')
+        ? (rulesMode === 'missions' ? 'zerolore-mission-total-war-en.pdf' : 'zerolore-rulebook-en.pdf')
+        : (rulesMode === 'missions' ? 'zerolore-mision-guerra-total-es.pdf' : 'zerolore-reglamento-es.pdf')
 
       doc.save(filename)
     } finally {
@@ -1892,46 +1981,23 @@ function Reglamento() {
         if (token.category === 'command') {
           const commandPalette = getCommandPalette(token.commandColor)
           const borderGrow = 0.7
-          const isSquare = token.shape === 'square'
-          const outerSize = token.diameterMm + borderGrow * 2
 
           doc.setFillColor(10, 12, 18)
           doc.setDrawColor(...commandPalette.accent)
           doc.setLineWidth(Math.max(1.6, token.diameterMm * 0.04))
 
-          if (isSquare) {
-            const outerRadius = Math.max(3.4, token.diameterMm * 0.08)
-            doc.roundedRect(centerX - outerSize / 2, centerY - outerSize / 2, outerSize, outerSize, outerRadius, outerRadius, 'FD')
-            if (commandPalette.showInteriorDetails) {
-              const innerSize = token.diameterMm * 0.86
-              const innerRadius = Math.max(2.8, token.diameterMm * 0.065)
-              doc.setDrawColor(...commandPalette.outerGlow)
-              doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-              doc.roundedRect(centerX - innerSize / 2, centerY - innerSize / 2, innerSize, innerSize, innerRadius, innerRadius, 'S')
-              const dashSize = token.diameterMm * 0.66
-              const dashRadius = Math.max(2.2, token.diameterMm * 0.05)
-              doc.setDrawColor(...commandPalette.dashed)
-              doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-              doc.setLineDashPattern([1.1, 1.6], 0)
-              doc.roundedRect(centerX - dashSize / 2, centerY - dashSize / 2, dashSize, dashSize, dashRadius, dashRadius, 'S')
-              doc.setLineDashPattern([], 0)
-              doc.setFillColor(...commandPalette.centerFill)
-              doc.roundedRect(centerX - token.diameterMm * 0.26, centerY - token.diameterMm * 0.17, token.diameterMm * 0.52, token.diameterMm * 0.34, Math.max(1.6, token.diameterMm * 0.03), Math.max(1.6, token.diameterMm * 0.03), 'F')
-            }
-          } else {
-            doc.circle(centerX, centerY, radius + borderGrow, 'FD')
-            if (commandPalette.showInteriorDetails) {
-              doc.setDrawColor(...commandPalette.outerGlow)
-              doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-              doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
-              doc.setDrawColor(...commandPalette.dashed)
-              doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-              doc.setLineDashPattern([1.1, 1.6], 0)
-              doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
-              doc.setLineDashPattern([], 0)
-              doc.setFillColor(...commandPalette.centerFill)
-              doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
-            }
+          doc.circle(centerX, centerY, radius + borderGrow, 'FD')
+          if (commandPalette.showInteriorDetails) {
+            doc.setDrawColor(...commandPalette.outerGlow)
+            doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
+            doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
+            doc.setDrawColor(...commandPalette.dashed)
+            doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
+            doc.setLineDashPattern([1.1, 1.6], 0)
+            doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
+            doc.setLineDashPattern([], 0)
+            doc.setFillColor(...commandPalette.centerFill)
+            doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
           }
 
           const maxLogoW = Math.min(token.diameterMm * 0.72, 90)

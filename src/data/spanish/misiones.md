@@ -2,15 +2,14 @@
 
 Antes de comenzar, los jugadores acuerdan:
 
-- Los **puestos de mando** a colocar en mesa y dónde — sirven para desplegar unidades y son objetivos de conquista
-- El **número de turnos**
-- El **valor total del ejército** de cada jugador
-- El **modo de juego** — Escaramuza o Gran Batalla
+- Los **puestos de mando** a colocar en mesa y dónde — sirven para desplegar unidades y son objetivos de conquista.
+- El **número de turnos**.
+- El **valor total del ejército** de cada jugador.
+- El **modo de juego** — Escaramuza o Gran Batalla.
 - La **misión** que se va a jugar. Cada misión define sus propios objetivos, economía de Fichas de Mando y costes de reclutamiento.
 
 |                   | Escaramuza | Gran Batalla |
 | ----------------- | ---------- | ------------ |
-| Puestos de mando  | 3 – 5      | 5 – 7        |
 | Valor recomendado | 30 – 60    | 60 – 150     |
 
 ---
@@ -25,32 +24,6 @@ Guerra Total es el modo de juego base de ZeroLore. Cada jugador compite en tres 
 
 - Siempre debe haber al menos un puesto de mando (en este caso el Cuartel General) bajo control de cada jugador al inicio. El resto pueden ser neutrales.
 - Si los jugadores montan el mapa libremente, deciden entre ellos la distribución de puestos y designan su propio Cuartel General antes de comenzar la partida.
-
-## Economía de Fichas de Mando
-
-Guerra Total utiliza la siguiente economía de Fichas de Mando:
-
-**Fichas iniciales:**
-
-- Cada jugador comienza la partida con **3 Fichas de Mando**.
-
-**Máximo acumulable:** 5 Fichas. Las fichas excedentes se pierden.
-
-**Generación por turno (Fase de Iniciativa):**
-
-- **+1 Ficha** por cada puesto de mando controlado.
-- **+1 Ficha** por el Cuartel General (adicional al puesto en sí).
-
-**Costes de reclutamiento desde Reserva:**
-
-- **1 Ficha** — Línea, Élite o Héroe.
-- **2 Fichas** — Monstruo o Vehículo.
-- **3 Fichas** — Titán.
-
-**Otros usos:**
-
-- **1 Ficha** — repetir una tirada propia.
-- Habilidades especiales de unidades o armas (Sobreesfuerzo, Mercenario, etc.) pueden requerir gastar Fichas según se indique en su descripción.
 
 ## Cómo se gana
 
@@ -71,3 +44,49 @@ Si ningún CG cae al término de la partida, gana quien más puntos tenga. En ca
 ## Variantes
 
 Los costes y la economía de Guerra Total son los valores **estándar** de esta misión. Si los jugadores quieren una experiencia distinta — más lenta, más explosiva, con límites en unidades por turno, etc. — son libres de acordar otros valores antes de empezar. La imaginación del jugador manda; lo importante es que todos estén de acuerdo antes de la primera tirada.
+
+## Mapas sugeridos para Escaramuza
+
+Estos mapas usan tablero de **24" x 24"** y puestos de mando circulares de **3"**. Cada jugador se sitúa en el color de su **Cuartel General**. Los puestos negros son puestos de mando neutrales.
+
+<div class="rules-map-grid">
+  <figure>
+    <img src="{{totalWarDiagonalMap}}" alt="Mapa de Guerra Total para Escaramuza con dos jugadores en diagonal">
+    <figcaption>2 jugadores — diagonal</figcaption>
+  </figure>
+  <figure>
+    <img src="{{skirmishDiagonalMap}}" alt="Mapa de Guerra Total para Escaramuza con dos jugadores en flancos">
+    <figcaption>2 jugadores — flancos</figcaption>
+  </figure>
+  <figure>
+    <img src="{{totalWarCornersMap}}" alt="Mapa de Guerra Total para Escaramuza con cuatro jugadores en esquinas">
+    <figcaption>4 jugadores — esquinas</figcaption>
+  </figure>
+  <figure>
+    <img src="{{totalWarCenterMap}}" alt="Mapa de Guerra Total para Escaramuza con cuatro jugadores en centro">
+    <figcaption>4 jugadores — centro</figcaption>
+  </figure>
+</div>
+
+## Mapas sugeridos para Gran Batalla
+
+Estos mapas usan tablero de **36" x 36"** y puestos de mando circulares de **6"**. El mapa normal reparte los puestos de mando de forma más estable; el mapa de cuarteles expuestos acerca los Cuarteles Generales al centro para forzar presión temprana.
+
+<div class="rules-map-grid">
+  <figure>
+    <img src="{{grandBattleNormalMap}}" alt="Mapa de Guerra Total para Gran Batalla con dos jugadores y puestos equilibrados">
+    <figcaption>2 jugadores — normal</figcaption>
+  </figure>
+  <figure>
+    <img src="{{grandBattleContestedMap}}" alt="Mapa de Guerra Total para Gran Batalla con dos jugadores y cuarteles generales expuestos">
+    <figcaption>2 jugadores — cuarteles expuestos</figcaption>
+  </figure>
+  <figure>
+    <img src="{{grandBattle4pCornersMap}}" alt="Mapa de Guerra Total para Gran Batalla con cuatro jugadores en esquinas">
+    <figcaption>4 jugadores — esquinas</figcaption>
+  </figure>
+  <figure>
+    <img src="{{grandBattle4pExposedMap}}" alt="Mapa de Guerra Total para Gran Batalla con cuatro jugadores y cuarteles generales expuestos">
+    <figcaption>4 jugadores — cuarteles expuestos</figcaption>
+  </figure>
+</div>

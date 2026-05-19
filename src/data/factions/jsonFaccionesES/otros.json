@@ -73,9 +73,9 @@
           "max": 1
         },
         "valor": 19,
-        "especialidad": "Las unidades enemigas a 6\" no pueden usar Fichas de Mando para repetir tiradas.",
-        "especialidad_escaramuza": "Las unidades enemigas a 6\" no pueden usar Fichas de Mando para repetir tiradas.",
-        "especialidad_escuadra": "Las unidades enemigas a 6\" no pueden usar Fichas de Mando para repetir tiradas.",
+        "especialidad": "Las unidades enemigas a 6\" no pueden usar Fichas de Reroll para repetir tiradas.",
+        "especialidad_escaramuza": "Las unidades enemigas a 6\" no pueden usar Fichas de Reroll para repetir tiradas.",
+        "especialidad_escuadra": "Las unidades enemigas a 6\" no pueden usar Fichas de Reroll para repetir tiradas.",
         "especialidad_nombre": "Presencia Opresiva",
         "especialidad_nombre_escaramuza": "Presencia Opresiva",
         "especialidad_nombre_escuadra": "Presencia Opresiva"

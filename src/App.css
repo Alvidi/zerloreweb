@@ -5114,10 +5114,6 @@ mark {
   border-radius: 999px;
 }
 
-.rules-token-preview.command-square {
-  border-radius: 10px;
-}
-
 .rules-token-preview.has-image {
   background: transparent;
   border: 0;
@@ -5510,6 +5506,33 @@ mark {
 .rules-html .image img {
   max-width: 100%;
   height: auto;
+}
+
+.rules-html .rules-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 24px 0 8px;
+}
+
+.rules-html .rules-map-grid figure {
+  margin: 0;
+}
+
+.rules-html .rules-map-grid img {
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #ffffff;
+}
+
+.rules-html .rules-map-grid figcaption {
+  margin-top: 8px;
+  color: var(--metal);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .rules-html .rules-profile-image-row {
