@@ -7,7 +7,7 @@ import { parseHomeContent } from '../utils/homeContent.js'
 
 function Home() {
   const navigate = useNavigate()
-  const { lang, t } = useI18n()
+  const { lang } = useI18n()
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
   const contactEmail = 'zeroloretmg@gmail.com'
   const pillars = [
@@ -72,55 +72,27 @@ function Home() {
           <h2>{content.join.title}</h2>
           <p>{content.join.subtitle}</p>
         </div>
-        <div className="cta-grid reveal">
-          <form className="contact-form" action={`mailto:${contactEmail}`} method="post" encType="text/plain">
-            <label>
-              {t('home.contact.name')}
-              <input type="text" name="name" placeholder={t('home.contact.namePlaceholder')} />
-            </label>
-            <label>
-              {t('home.contact.email')}
-              <input type="email" name="email" placeholder={t('home.contact.emailPlaceholder')} />
-            </label>
-            <label>
-              {t('home.contact.role')}
-              <select name="role" defaultValue="playtester">
-                <option value="playtester">{t('home.contact.rolePlaytester')}</option>
-                <option value="concept">{t('home.contact.roleConcept')}</option>
-                <option value="narrative">{t('home.contact.roleNarrative')}</option>
-                <option value="other">{t('home.contact.roleOther')}</option>
-              </select>
-            </label>
-            <label>
-              {t('home.contact.message')}
-              <textarea name="message" rows="4" placeholder={t('home.contact.messagePlaceholder')} />
-            </label>
-            <button className="primary" type="submit">
-              {t('home.contact.submit')}
-            </button>
-          </form>
-          <div className="cta-side">
-            <div className="hero-actions cta-actions">
-              <a
-                className="primary discord-button"
-                href={discordUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-                  <path d="M20.317 4.369A19.791 19.791 0 0 0 15.396 2.8a.074.074 0 0 0-.078.037 13.877 13.877 0 0 0-.621 1.261 18.27 18.27 0 0 0-5.392 0 12.64 12.64 0 0 0-.63-1.26.077.077 0 0 0-.078-.038c-1.77.31-3.43.838-4.92 1.57a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.055 19.9 19.9 0 0 0 6.03 3.05.077.077 0 0 0 .084-.028 14.264 14.264 0 0 0 1.235-2.013.076.076 0 0 0-.042-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.06 0a.073.073 0 0 1 .078.01c.12.1.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107 16.23 16.23 0 0 0 1.234 2.01.076.076 0 0 0 .084.03 19.876 19.876 0 0 0 6.03-3.05.077.077 0 0 0 .031-.054c.5-5.177-.838-9.67-3.548-13.66a.06.06 0 0 0-.031-.03ZM8.02 15.332c-1.182 0-2.155-1.085-2.155-2.418 0-1.334.955-2.419 2.155-2.419 1.21 0 2.173 1.095 2.155 2.419 0 1.333-.955 2.418-2.155 2.418Zm7.974 0c-1.182 0-2.155-1.085-2.155-2.418 0-1.334.955-2.419 2.155-2.419 1.21 0 2.173 1.095 2.155 2.419 0 1.333-.946 2.418-2.155 2.418Z" />
-                </svg>
-                <span>{content.join.button}</span>
-              </a>
-            </div>
-            <p className="cta-email-copy">
-              {content.join.email_text}{' '}
-              <a className="cta-email-link" href={`mailto:${contactEmail}`}>
-                {contactEmail}
-              </a>
-              .
-            </p>
+        <div className="cta-side reveal">
+          <div className="hero-actions cta-actions">
+            <a
+              className="primary discord-button"
+              href={discordUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M20.317 4.369A19.791 19.791 0 0 0 15.396 2.8a.074.074 0 0 0-.078.037 13.877 13.877 0 0 0-.621 1.261 18.27 18.27 0 0 0-5.392 0 12.64 12.64 0 0 0-.63-1.26.077.077 0 0 0-.078-.038c-1.77.31-3.43.838-4.92 1.57a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.055 19.9 19.9 0 0 0 6.03 3.05.077.077 0 0 0 .084-.028 14.264 14.264 0 0 0 1.235-2.013.076.076 0 0 0-.042-.106 13.1 13.1 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.06 0a.073.073 0 0 1 .078.01c.12.1.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107 16.23 16.23 0 0 0 1.234 2.01.076.076 0 0 0 .084.03 19.876 19.876 0 0 0 6.03-3.05.077.077 0 0 0 .031-.054c.5-5.177-.838-9.67-3.548-13.66a.06.06 0 0 0-.031-.03ZM8.02 15.332c-1.182 0-2.155-1.085-2.155-2.418 0-1.334.955-2.419 2.155-2.419 1.21 0 2.173 1.095 2.155 2.419 0 1.333-.955 2.418-2.155 2.418Zm7.974 0c-1.182 0-2.155-1.085-2.155-2.418 0-1.334.955-2.419 2.155-2.419 1.21 0 2.173 1.095 2.155 2.419 0 1.333-.946 2.418-2.155 2.418Z" />
+              </svg>
+              <span>{content.join.button}</span>
+            </a>
           </div>
+          <p className="cta-email-copy">
+            {content.join.email_text}{' '}
+            <a className="cta-email-link" href={`mailto:${contactEmail}`}>
+              {contactEmail}
+            </a>
+            .
+          </p>
         </div>
       </section>
     </>

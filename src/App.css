@@ -692,13 +692,6 @@ button {
   padding-top: 28px;
 }
 
-.cta-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: start;
-}
-
 .cta-side {
   display: grid;
   gap: 12px;
@@ -1072,8 +1065,7 @@ button {
   cursor: not-allowed;
 }
 
-.field select,
-.contact-form select {
+.field select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1095,8 +1087,7 @@ button {
   cursor: pointer;
 }
 
-.field select option,
-.contact-form select option {
+.field select option {
   color: var(--text-main);
   background: var(--bg-2);
   font-size: 1rem;
@@ -4147,38 +4138,6 @@ button {
   gap: 32px;
 }
 
-.contact-form {
-  display: grid;
-  gap: 20px;
-}
-
-.contact-form label {
-  display: grid;
-  gap: 8px;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-  padding: 14px;
-  background: var(--bg-1);
-  border: 1px solid var(--line);
-  color: var(--text-main);
-  border-radius: 2px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  border-color: var(--accent);
-}
-
 .contact-panel {
   padding: 32px;
   background: var(--bg-3);
@@ -4656,10 +4615,6 @@ mark {
   }
 
   .split {
-    grid-template-columns: 1fr;
-  }
-
-  .cta-grid {
     grid-template-columns: 1fr;
   }
 
@@ -5155,7 +5110,7 @@ mark {
   height: 112px;
 }
 
-.rules-token-preview[data-token-preview='state_command_token'].has-image {
+.rules-token-preview[data-token-preview='state_reroll_token'].has-image {
   width: 112px;
   height: 112px;
 }
