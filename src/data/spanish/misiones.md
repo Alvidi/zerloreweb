@@ -47,46 +47,38 @@ Los costes y la economía de Guerra Total son los valores **estándar** de esta 
 
 ## Mapas sugeridos para Escaramuza
 
-Estos mapas usan tablero de **24" x 24"** y puestos de mando circulares de **3"**. Cada jugador se sitúa en el color de su **Cuartel General**. Los puestos negros son puestos de mando neutrales.
+Estos mapas usan tablero de **36" x 36"** y puestos de mando circulares de **3"**. Cada jugador se sitúa en el color de su **Cuartel General**. Los puestos negros son puestos de mando neutrales.
+
+Los mapas están pensados para hasta **4 jugadores**. Si juegan solo 2, los jugadores usan los Cuarteles Generales **1** y **2**; los Cuarteles Generales **3** y **4** se tratan como puestos de mando neutrales.
 
 <div class="rules-map-grid">
   <figure>
-    <img src="{{totalWarDiagonalMap}}" alt="Mapa de Guerra Total para Escaramuza con dos jugadores en diagonal">
-    <figcaption>2 jugadores — diagonal</figcaption>
-  </figure>
-  <figure>
-    <img src="{{skirmishDiagonalMap}}" alt="Mapa de Guerra Total para Escaramuza con dos jugadores en flancos">
-    <figcaption>2 jugadores — flancos</figcaption>
-  </figure>
-  <figure>
     <img src="{{totalWarCornersMap}}" alt="Mapa de Guerra Total para Escaramuza con cuatro jugadores en esquinas">
-    <figcaption>4 jugadores — esquinas</figcaption>
+    <figcaption>Esquinas</figcaption>
   </figure>
   <figure>
     <img src="{{totalWarCenterMap}}" alt="Mapa de Guerra Total para Escaramuza con cuatro jugadores en centro">
-    <figcaption>4 jugadores — centro</figcaption>
+    <figcaption>Centro</figcaption>
   </figure>
 </div>
 
 ## Mapas sugeridos para Gran Batalla
 
-Estos mapas usan tablero de **36" x 36"** y puestos de mando circulares de **6"**. El mapa normal reparte los puestos de mando de forma más estable; el mapa de cuarteles expuestos acerca los Cuarteles Generales al centro para forzar presión temprana.
+Estos mapas usan tableros de **46" x 46"** o **72" x 48"** y puestos de mando circulares de **6"**. El mapa de esquinas reparte los puestos de mando de forma más estable; el mapa de cuarteles expuestos acerca los Cuarteles Generales al centro para forzar presión temprana.
+
+Los mapas están pensados para hasta **4 jugadores**. Si juegan solo 2, los jugadores usan los Cuarteles Generales **1** y **2**; los Cuarteles Generales **3** y **4** se tratan como puestos de mando neutrales.
 
 <div class="rules-map-grid">
   <figure>
-    <img src="{{grandBattleNormalMap}}" alt="Mapa de Guerra Total para Gran Batalla con dos jugadores y puestos equilibrados">
-    <figcaption>2 jugadores — normal</figcaption>
-  </figure>
-  <figure>
-    <img src="{{grandBattleContestedMap}}" alt="Mapa de Guerra Total para Gran Batalla con dos jugadores y cuarteles generales expuestos">
-    <figcaption>2 jugadores — cuarteles expuestos</figcaption>
-  </figure>
-  <figure>
     <img src="{{grandBattle4pCornersMap}}" alt="Mapa de Guerra Total para Gran Batalla con cuatro jugadores en esquinas">
-    <figcaption>4 jugadores — esquinas</figcaption>
+    <figcaption>Esquinas 46" x 46"</figcaption>
   </figure>
   <figure>
     <img src="{{grandBattle4pExposedMap}}" alt="Mapa de Guerra Total para Gran Batalla con cuatro jugadores y cuarteles generales expuestos">
-    <figcaption>4 jugadores — cuarteles expuestos</figcaption>
+    <figcaption>Cuarteles expuestos 46" x 46"</figcaption>
+  </figure>
+  <figure class="rules-map-wide">
+    <img src="{{grandBattle4pWideMap}}" alt="Mapa de Guerra Total para Gran Batalla con cuatro jugadores en tablero de 72 por 48 pulgadas">
+    <figcaption>72" x 48"</figcaption>
   </figure>
 </div>

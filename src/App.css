@@ -5519,6 +5519,10 @@ mark {
   margin: 0;
 }
 
+.rules-html .rules-map-grid .rules-map-wide {
+  grid-column: 1 / -1;
+}
+
 .rules-html .rules-map-grid img {
   width: 100%;
   display: block;

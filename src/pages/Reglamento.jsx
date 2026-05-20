@@ -35,10 +35,7 @@ import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
 import grandBattle4pExposedMap from '../images/maps/gran-batalla-4p-cuarteles-expuestos.svg'
 import grandBattle4pCornersMap from '../images/maps/gran-batalla-4p-esquinas.svg'
-import grandBattleContestedMap from '../images/maps/gran-batalla-2p-comprometida.svg'
-import grandBattleNormalMap from '../images/maps/gran-batalla-2p-normal.svg'
-import skirmishDiagonalMap from '../images/maps/escaramuza-2p-diagonal-3in.svg'
-import totalWarDiagonalMap from '../images/maps/guerra-total-2p-diagonal.svg'
+import grandBattle4pWideMap from '../images/maps/gran-batalla-4p-72x48.svg'
 import totalWarCenterMap from '../images/maps/guerra-total-4p-centro.svg'
 import totalWarCornersMap from '../images/maps/guerra-total-4p-esquinas.svg'
 import unitTypeLineIcon from '../images/units_icons/line.png'
@@ -89,13 +86,10 @@ const RULES_ASSET_PLACEHOLDERS = {
   rerollTokenImage: rerollDiceToken,
   grandBattle4pExposedMap,
   grandBattle4pCornersMap,
-  grandBattleContestedMap,
-  grandBattleNormalMap,
+  grandBattle4pWideMap,
   sprintImage,
-  skirmishDiagonalMap,
   totalWarCenterMap,
   totalWarCornersMap,
-  totalWarDiagonalMap,
   turnStructureImage,
   factionAbilityProfileImage: RULES_ABILITY_PROFILE_SLOT_SRC,
   unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,

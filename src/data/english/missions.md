@@ -47,46 +47,38 @@ The costs and economy of Total War are the **standard** values for this mission.
 
 ## Suggested Skirmish Maps
 
-These maps use a **24" x 24"** battlefield and circular **3"** command posts. Each player starts in the colour of their **Headquarters**. Black command posts are neutral command posts.
+These maps use a **36" x 36"** battlefield and circular **3"** command posts. Each player starts in the colour of their **Headquarters**. Black command posts are neutral command posts.
+
+The maps are designed for up to **4 players**. If only 2 players are playing, they use Headquarters **1** and **2**; Headquarters **3** and **4** are treated as neutral command posts.
 
 <div class="rules-map-grid">
   <figure>
-    <img src="{{totalWarDiagonalMap}}" alt="Total War Skirmish map with two diagonal players">
-    <figcaption>2 players — diagonal</figcaption>
-  </figure>
-  <figure>
-    <img src="{{skirmishDiagonalMap}}" alt="Total War Skirmish map with two flank players">
-    <figcaption>2 players — flanks</figcaption>
-  </figure>
-  <figure>
     <img src="{{totalWarCornersMap}}" alt="Total War Skirmish map with four corner players">
-    <figcaption>4 players — corners</figcaption>
+    <figcaption>Corners</figcaption>
   </figure>
   <figure>
     <img src="{{totalWarCenterMap}}" alt="Total War Skirmish map with four central players">
-    <figcaption>4 players — centre</figcaption>
+    <figcaption>Centre</figcaption>
   </figure>
 </div>
 
 ## Suggested Grand Battle Maps
 
-These maps use a **36" x 36"** battlefield and circular **6"** command posts. The normal map spreads command posts in a steadier layout; the exposed HQ map moves the Headquarters closer to the centre to force early pressure.
+These maps use **46" x 46"** or **72" x 48"** battlefields and circular **6"** command posts. The corner map spreads command posts in a steadier layout; the exposed HQ map moves the Headquarters closer to the centre to force early pressure.
+
+The maps are designed for up to **4 players**. If only 2 players are playing, they use Headquarters **1** and **2**; Headquarters **3** and **4** are treated as neutral command posts.
 
 <div class="rules-map-grid">
   <figure>
-    <img src="{{grandBattleNormalMap}}" alt="Total War Grand Battle map with two players and balanced command posts">
-    <figcaption>2 players — normal</figcaption>
-  </figure>
-  <figure>
-    <img src="{{grandBattleContestedMap}}" alt="Total War Grand Battle map with two players and exposed Headquarters">
-    <figcaption>2 players — exposed HQs</figcaption>
-  </figure>
-  <figure>
     <img src="{{grandBattle4pCornersMap}}" alt="Total War Grand Battle map with four corner players">
-    <figcaption>4 players — corners</figcaption>
+    <figcaption>Corners 46" x 46"</figcaption>
   </figure>
   <figure>
     <img src="{{grandBattle4pExposedMap}}" alt="Total War Grand Battle map with four players and exposed Headquarters">
-    <figcaption>4 players — exposed HQs</figcaption>
+    <figcaption>Exposed HQs 46" x 46"</figcaption>
+  </figure>
+  <figure class="rules-map-wide">
+    <img src="{{grandBattle4pWideMap}}" alt="Total War Grand Battle map with four players on a 72 by 48 inch battlefield">
+    <figcaption>72" x 48"</figcaption>
   </figure>
 </div>
