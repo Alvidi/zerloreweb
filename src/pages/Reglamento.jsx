@@ -20,15 +20,17 @@ import damage10Token from '../images/tokens/damage-10-red.svg'
 import stateReadyToken from '../images/tokens/preparado-blue.svg'
 import stateRetreatToken from '../images/tokens/retirada-blue.svg'
 import conquestBlueToken from '../images/tokens/conquista-blue.svg'
+import conquestGreenToken from '../images/tokens/conquista-green.svg'
 import conquestRedToken from '../images/tokens/conquista-red.svg'
+import conquestYellowToken from '../images/tokens/conquista-yellow.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationGreenToken from '../images/tokens/activacion-green.svg'
-import rerollDiceToken from '../images/tokens/reroll-dice-gold.svg'
 import miniatureVsSquadImage from '../images/webimagen/imagen_1.webp'
 import measurementImage from '../images/webimagen/imagen_2.webp'
 import climbingImage from '../images/webimagen/imagen_3.webp'
 import lineOfSightImage from '../images/webimagen/imagen_4.webp'
 import sprintImage from '../images/webimagen/imagen_5.webp'
+import activationOverviewImage from '../images/webimagen/imagen_7.webp'
 import turnStructureImage from '../images/webimagen/imagen_8.webp'
 import commandPostControlImage from '../images/webimagen/imagen_9.webp'
 import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
@@ -76,14 +78,13 @@ const escapeHtml = (value) =>
 
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
 const RULES_ASSET_PLACEHOLDERS = {
-  activationImage: activationGreenToken,
+  activationImage: activationOverviewImage,
   climbingImage,
   commandPostControlImage,
   lineOfSightImage,
   measurementImage,
   miniatureVsSquadImage,
   rangedAttackSequenceImage,
-  rerollTokenImage: rerollDiceToken,
   grandBattle4pExposedMap,
   grandBattle4pCornersMap,
   grandBattle4pWideMap,
@@ -237,7 +238,8 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
   { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
   { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
-  { id: 'state_reroll_token', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRerollToken', diameterMm: 32, previewSize: 'medium', imageSrc: rerollDiceToken },
+  { id: 'state_conquest_green', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestGreen', diameterMm: 32, previewSize: 'medium', imageSrc: conquestGreenToken },
+  { id: 'state_conquest_yellow', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestYellow', diameterMm: 32, previewSize: 'medium', imageSrc: conquestYellowToken },
   { id: 'command_circle_3', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
   { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
   { id: 'command_circle_3_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle3Blue', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
@@ -548,6 +550,14 @@ function Reglamento() {
               label: t('rules.tokens.types.stateConquestRed'),
               imageSrc: conquestRedToken,
             },
+            {
+              label: t('rules.tokens.types.stateConquestGreen'),
+              imageSrc: conquestGreenToken,
+            },
+            {
+              label: t('rules.tokens.types.stateConquestYellow'),
+              imageSrc: conquestYellowToken,
+            },
           ].forEach((token) => {
             const item = doc.createElement('article')
             item.className = 'rules-flag-gallery-item'
@@ -575,54 +585,6 @@ function Reglamento() {
         }
       }
 
-      const rerollTokenHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
-        const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'fichas de reroll'
-          || normalized === 'reroll tokens'
-          || normalized === 'reroll token'
-      })
-      const rerollTokenHeading = rerollTokenHeadings.at(-1)
-      if (rerollTokenHeading) {
-        const sectionNodes = []
-        let sibling = rerollTokenHeading.nextElementSibling
-        while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
-          sectionNodes.push(sibling)
-          sibling = sibling.nextElementSibling
-        }
-
-        const contentParagraphs = sectionNodes.filter((node) => node.tagName === 'P')
-        const imageParagraph = sectionNodes.find((node) => node.tagName === 'P' && node.querySelector('img'))
-        const insertionTarget = imageParagraph || contentParagraphs.at(-1) || rerollTokenHeading
-
-        if (insertionTarget?.parentNode) {
-          const rerollTokenGallery = doc.createElement('div')
-          rerollTokenGallery.className = 'rules-state-gallery'
-
-          const item = doc.createElement('article')
-          item.className = 'rules-state-gallery-item'
-
-          const mark = doc.createElement('div')
-          mark.className = 'rules-state-gallery-mark'
-
-          const image = doc.createElement('img')
-          image.className = 'rules-state-gallery-image'
-          image.src = rerollDiceToken
-          image.alt = ''
-          image.loading = 'lazy'
-
-          const label = doc.createElement('p')
-          label.className = 'rules-state-gallery-label'
-          label.textContent = t('rules.tokens.types.stateRerollToken')
-
-          mark.appendChild(image)
-          item.appendChild(mark)
-          item.appendChild(label)
-          rerollTokenGallery.appendChild(item)
-          insertionTarget.parentNode.insertBefore(rerollTokenGallery, insertionTarget.nextSibling)
-          imageParagraph?.remove()
-        }
-      }
-
       const activationHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
         return normalized.includes('fase de activaciones') || normalized.includes('activation phase')
@@ -644,7 +606,7 @@ function Reglamento() {
         })
         const imageParagraph = sectionNodes.find((node) => node.tagName === 'P' && node.querySelector('img'))
 
-        if (tokenParagraph?.parentNode) {
+        if (tokenParagraph?.parentNode && !imageParagraph) {
           const activationGallery = doc.createElement('div')
           activationGallery.className = 'rules-activation-gallery'
 
@@ -681,7 +643,6 @@ function Reglamento() {
           })
 
           tokenParagraph.parentNode.insertBefore(activationGallery, tokenParagraph.nextSibling)
-          imageParagraph?.remove()
         }
       }
 

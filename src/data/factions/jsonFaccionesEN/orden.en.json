@@ -27,10 +27,10 @@
         "frase": "Know your enemy before raising your weapon."
       },
       {
-        "id": "reserved-command",
-        "nombre": "Reserved Command",
-        "descripcion_escaramuza": "At the start of each Initiative Phase, this player gains 1 additional Reroll Token.",
-        "descripcion_escuadra": "At the start of each Initiative Phase, this player gains 1 additional Reroll Token.",
+        "id": "decisive-command",
+        "nombre": "Decisive Command",
+        "descripcion_escaramuza": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
+        "descripcion_escuadra": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
         "frase": "The best battle is won with patience."
       }
     ]
@@ -41,7 +41,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 4,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -57,7 +57,7 @@
           {
             "nombre": "Standard Rifle",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -88,7 +88,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -135,7 +135,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -151,7 +151,7 @@
           {
             "nombre": "Heavy Weapon",
             "ataques": "1D6",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "5+",
             "danio": "2",
             "danio_critico": "2",
@@ -194,7 +194,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+4\"",
@@ -210,7 +210,7 @@
           {
             "nombre": "Regulation Pistol",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "1",
@@ -288,7 +288,7 @@
       "era": "Future",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -304,7 +304,7 @@
           {
             "nombre": "Tactical Pistol",
             "ataques": "2D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -335,7 +335,7 @@
       "era": "Future",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 6,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -351,7 +351,7 @@
           {
             "nombre": "Sniper Rifle (Line, Elite)",
             "ataques": "2D",
-            "distancia": "28\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -392,7 +392,7 @@
       "era": "Future",
       "clase": "Vehicle",
       "perfil": {
-        "movimiento": "10\"",
+        "movimiento": "7\"",
         "vidas": 8,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -408,7 +408,7 @@
           {
             "nombre": "Light Machine Gun",
             "ataques": "3D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -439,7 +439,7 @@
       "era": "Future",
       "clase": "Vehicle",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 18,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -467,7 +467,7 @@
           {
             "nombre": "Main Cannon",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "4",
             "danio_critico": "5",
@@ -514,7 +514,7 @@
           {
             "nombre": "Siege Cannon",
             "ataques": "1D",
-            "distancia": "36\"",
+            "distancia": "24\"",
             "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
@@ -527,7 +527,7 @@
           {
             "nombre": "Electromagnetic Cannon (Vehicle, Monster)",
             "ataques": "2D",
-            "distancia": "30\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
@@ -558,7 +558,7 @@
       "era": "Future",
       "clase": "Hero",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 10,
         "salvacion": "3+",
         "velocidad": "+3\"",
@@ -576,7 +576,7 @@
           {
             "nombre": "Energy Rifle",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "4",
@@ -635,7 +635,7 @@
           {
             "nombre": "Destruction Cannon",
             "ataques": "2D6",
-            "distancia": "28\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
@@ -728,7 +728,7 @@
           {
             "nombre": "Longbow",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -793,7 +793,7 @@
       "era": "Past",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 4,
         "salvacion": "5+",
         "velocidad": "+4\"",
@@ -809,7 +809,7 @@
           {
             "nombre": "Scout Bow",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -840,7 +840,7 @@
       "era": "Past",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 8,
         "salvacion": "3+",
         "velocidad": "+3\"",
@@ -874,7 +874,7 @@
       "era": "Past",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "10\"",
+        "movimiento": "7\"",
         "vidas": 7,
         "salvacion": "4+",
         "velocidad": "+5\"",
@@ -890,7 +890,7 @@
           {
             "nombre": "Throwing Spear",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -937,7 +937,7 @@
           {
             "nombre": "Giant Crossbow (Vehicle, Monster)",
             "ataques": "3D",
-            "distancia": "28\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
@@ -984,7 +984,7 @@
           {
             "nombre": "Catapult Projectile",
             "ataques": "1D6",
-            "distancia": "30\"",
+            "distancia": "24\"",
             "impactos": "-",
             "danio": "3",
             "danio_critico": "4",
@@ -1050,7 +1050,7 @@
       "era": "Past",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 16,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -1133,7 +1133,7 @@
       "era": "Past",
       "clase": "Titan",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 28,
         "salvacion": "2+",
         "velocidad": "+2\"",

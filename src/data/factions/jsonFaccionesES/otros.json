@@ -110,6 +110,70 @@
       }
     },
     {
+      "nombre_unidad": "Presidente corrupto",
+      "era": "Futuro",
+      "clase": "Héroe",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 13,
+        "especialidad": "Mientras esta unidad está en juego, la habilidad de facción del enemigo queda deshabilitada.",
+        "especialidad_escaramuza": "Mientras esta unidad está en juego, la habilidad de facción del enemigo queda deshabilitada.",
+        "especialidad_escuadra": "Mientras esta unidad está en juego, la habilidad de facción del enemigo queda deshabilitada.",
+        "especialidad_nombre": "Red de corrupción",
+        "especialidad_nombre_escaramuza": "Red de corrupción",
+        "especialidad_nombre_escuadra": "Red de corrupción"
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Discurso interminable",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Directo"
+            ],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Promesa vacía",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "3+",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Inestable"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Maletín ministerial",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Fiable"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
       "nombre_unidad": "Demonio del Pasado",
       "era": "Pasado",
       "clase": "Monstruo",
@@ -117,7 +181,7 @@
         "movimiento": "5\"",
         "vidas": 26,
         "salvacion": "3+",
-        "velocidad": "+1\"",
+        "velocidad": "1",
         "escuadra": {
           "min": 1,
           "max": 1

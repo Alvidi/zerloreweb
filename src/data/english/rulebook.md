@@ -146,20 +146,9 @@ Each turn consists of the following phases:
 At the beginning of each turn, both players make the **Initiative roll**.
 
 - Each player rolls **1D6**. The player or team with the highest result **acts first** during that turn. In case of a tie, roll again.
-- Each player gains **1 Reroll Token** (tokens carry over between turns).
 - Starting with the player with the highest Initiative, each player may deploy units from Reserve at command posts they control (free).
 
 In team games, players on the same side may take a brief moment to coordinate their strategy before continuing.
-
-### Reroll Tokens
-
-**Reroll Tokens** are the game's strategic resource. Each player gains **1 Reroll Token** at the start of each turn, and they carry over between turns.
-
-**Using Reroll Tokens:**
-
-- **Reroll one of your own rolls** (attack, save, initiative, etc.). The second roll is the final result. A roll can only be repeated once.
-
-Reroll Tokens may be spent at any appropriate time during the game.
 
 ## 2. Activation Phase
 

@@ -5100,12 +5100,10 @@ mark {
   height: 112px;
 }
 
-.rules-token-preview[data-token-preview='state_conquest_blue'].has-image {
-  width: 112px;
-  height: 112px;
-}
-
-.rules-token-preview[data-token-preview='state_conquest_red'].has-image {
+.rules-token-preview[data-token-preview='state_conquest_blue'].has-image,
+.rules-token-preview[data-token-preview='state_conquest_red'].has-image,
+.rules-token-preview[data-token-preview='state_conquest_green'].has-image,
+.rules-token-preview[data-token-preview='state_conquest_yellow'].has-image {
   width: 112px;
   height: 112px;
 }

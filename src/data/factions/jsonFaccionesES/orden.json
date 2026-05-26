@@ -27,10 +27,10 @@
         "frase": "Conoce a tu enemigo antes de levantar el arma."
       },
       {
-        "id": "mando-reservado",
-        "nombre": "Mando Reservado",
-        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
-        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
+        "id": "mando-decisivo",
+        "nombre": "Mando Decisivo",
+        "descripcion_escaramuza": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
+        "descripcion_escuadra": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
         "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
@@ -41,7 +41,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 4,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -57,7 +57,7 @@
           {
             "nombre": "Fusil estándar",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -88,7 +88,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -135,7 +135,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -151,7 +151,7 @@
           {
             "nombre": "Arma pesada",
             "ataques": "1D6",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "5+",
             "danio": "2",
             "danio_critico": "2",
@@ -194,7 +194,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+4\"",
@@ -210,7 +210,7 @@
           {
             "nombre": "Pistola reglamentaria",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "1",
@@ -288,7 +288,7 @@
       "era": "Futuro",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -304,7 +304,7 @@
           {
             "nombre": "Pistola táctica",
             "ataques": "2D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -335,7 +335,7 @@
       "era": "Futuro",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 6,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -351,7 +351,7 @@
           {
             "nombre": "Rifle de francotirador (Línea, Élite)",
             "ataques": "2D",
-            "distancia": "28\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -392,7 +392,7 @@
       "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "10\"",
+        "movimiento": "7\"",
         "vidas": 8,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -408,7 +408,7 @@
           {
             "nombre": "Ametralladora ligera",
             "ataques": "3D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -439,7 +439,7 @@
       "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 18,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -467,7 +467,7 @@
           {
             "nombre": "Cañón principal",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "4",
             "danio_critico": "5",
@@ -514,7 +514,7 @@
           {
             "nombre": "Cañón de asedio",
             "ataques": "1D",
-            "distancia": "36\"",
+            "distancia": "24\"",
             "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
@@ -527,7 +527,7 @@
           {
             "nombre": "Cañón electromagnético (Vehículo, Monstruo)",
             "ataques": "2D",
-            "distancia": "30\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
@@ -558,7 +558,7 @@
       "era": "Futuro",
       "clase": "Héroe",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 10,
         "salvacion": "3+",
         "velocidad": "+3\"",
@@ -576,7 +576,7 @@
           {
             "nombre": "Fusil de energía",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "4",
@@ -635,7 +635,7 @@
           {
             "nombre": "Cañón de destrucción",
             "ataques": "2D6",
-            "distancia": "28\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
@@ -728,7 +728,7 @@
           {
             "nombre": "Arco largo",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -793,7 +793,7 @@
       "era": "Pasado",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 4,
         "salvacion": "5+",
         "velocidad": "+4\"",
@@ -809,7 +809,7 @@
           {
             "nombre": "Arco de explorador",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -840,7 +840,7 @@
       "era": "Pasado",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 8,
         "salvacion": "3+",
         "velocidad": "+3\"",
@@ -874,7 +874,7 @@
       "era": "Pasado",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "10\"",
+        "movimiento": "7\"",
         "vidas": 7,
         "salvacion": "4+",
         "velocidad": "+5\"",
@@ -890,7 +890,7 @@
           {
             "nombre": "Lanza arrojadiza",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -937,7 +937,7 @@
           {
             "nombre": "Ballesta gigante (Vehículo, Monstruo)",
             "ataques": "3D",
-            "distancia": "28\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "6",
@@ -984,7 +984,7 @@
           {
             "nombre": "Proyectil de catapulta",
             "ataques": "1D6",
-            "distancia": "30\"",
+            "distancia": "24\"",
             "impactos": "-",
             "danio": "3",
             "danio_critico": "4",
@@ -1050,7 +1050,7 @@
       "era": "Pasado",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 16,
         "salvacion": "4+",
         "velocidad": "+2\"",
@@ -1133,7 +1133,7 @@
       "era": "Pasado",
       "clase": "Titán",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 28,
         "salvacion": "2+",
         "velocidad": "+2\"",

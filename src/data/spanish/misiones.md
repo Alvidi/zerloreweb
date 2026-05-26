@@ -41,10 +41,6 @@ Si un jugador captura el Cuartel General enemigo, gana la partida en ese momento
 **④ Victoria normal**  
 Si ningún CG cae al término de la partida, gana quien más puntos tenga. En caso de empate, gana quien controle más puestos de mando.
 
-## Variantes
-
-Los costes y la economía de Guerra Total son los valores **estándar** de esta misión. Si los jugadores quieren una experiencia distinta — más lenta, más explosiva, con límites en unidades por turno, etc. — son libres de acordar otros valores antes de empezar. La imaginación del jugador manda; lo importante es que todos estén de acuerdo antes de la primera tirada.
-
 ## Mapas sugeridos para Escaramuza
 
 Estos mapas usan tablero de **36" x 36"** y puestos de mando circulares de **3"**. Cada jugador se sitúa en el color de su **Cuartel General**. Los puestos negros son puestos de mando neutrales.

@@ -146,20 +146,9 @@ Cada turno se compone de las siguientes fases:
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 
 - Cada jugador tira **1D6**. El jugador o equipo con el resultado más alto **actúa primero** durante ese turno. En caso de empate, se repite la tirada.
-- Cada jugador gana **1 Ficha de Reroll** (se acumula entre turnos).
 - Empezando por el jugador con mayor Iniciativa, cada jugador puede desplegar unidades desde Reserva en los puestos de mando que controle (gratuito).
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
-
-### Fichas de Reroll
-
-Las **Fichas de Reroll** son el recurso estratégico del juego. Cada jugador gana **1 Ficha de Reroll** al inicio de cada turno, acumulables entre turnos.
-
-**Uso de las Fichas de Reroll:**
-
-- **Repetir una tirada propia** (ataque, salvación, iniciativa, etc.). La segunda tirada es el resultado final. Una misma tirada solo puede repetirse una vez.
-
-Las Fichas de Reroll pueden gastarse en cualquier momento apropiado durante la partida.
 
 ## 2. Fase de Activaciones
 

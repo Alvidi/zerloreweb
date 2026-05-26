@@ -27,10 +27,10 @@
         "frase": "Siempre se tiene una segunda oportunidad."
       },
       {
-        "id": "mando-reservado",
-        "nombre": "Mando Reservado",
-        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
-        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
+        "id": "mando-decisivo",
+        "nombre": "Mando Decisivo",
+        "descripcion_escaramuza": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
+        "descripcion_escuadra": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
         "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
@@ -57,7 +57,7 @@
           {
             "nombre": "Rifle de resonancia",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -104,7 +104,7 @@
           {
             "nombre": "Lanzador de energía",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -135,7 +135,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 6,
         "salvacion": "3+",
         "velocidad": "+5\"",
@@ -169,7 +169,7 @@
       "era": "Futuro",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 10,
         "salvacion": "2+",
         "velocidad": "+3\"",
@@ -232,7 +232,7 @@
           {
             "nombre": "Fusil del vacío",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -313,7 +313,7 @@
           {
             "nombre": "Cañón de calor",
             "ataques": "2D6",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
@@ -325,7 +325,7 @@
           {
             "nombre": "Rayo de disrupción",
             "ataques": "3D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "-",
             "danio": "2",
             "danio_critico": "3",
@@ -356,7 +356,7 @@
       "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 16,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -403,7 +403,7 @@
       "era": "Futuro",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 12,
         "salvacion": "3+",
         "velocidad": "+2\"",
@@ -431,7 +431,7 @@
           {
             "nombre": "Cañón de disrupción (Vehículo)",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -462,7 +462,7 @@
       "era": "Futuro",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 14,
         "salvacion": "2+",
         "velocidad": "+3\"",
@@ -478,7 +478,7 @@
           {
             "nombre": "Pulso etéreo",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -511,7 +511,7 @@
       "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada).",
       "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos.",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 9,
         "salvacion": "2+",
         "velocidad": "+4\"",
@@ -530,7 +530,7 @@
           {
             "nombre": "Lanza del oráculo",
             "ataques": "3D",
-            "distancia": "22\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -589,7 +589,7 @@
           {
             "nombre": "Cañón del juicio final",
             "ataques": "2D6",
-            "distancia": "30\"",
+            "distancia": "24\"",
             "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",
@@ -602,7 +602,7 @@
           {
             "nombre": "Batería del Legado",
             "ataques": "2D",
-            "distancia": "26\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -735,7 +735,7 @@
       "era": "Pasado",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "5+",
         "velocidad": "+5\"",
@@ -769,7 +769,7 @@
       "era": "Pasado",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 8,
         "salvacion": "3+",
         "velocidad": "+5\"",
@@ -819,7 +819,7 @@
           {
             "nombre": "Martillo lanzado",
             "ataques": "1D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -866,7 +866,7 @@
           {
             "nombre": "Arco sagrado",
             "ataques": "3D",
-            "distancia": "22\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -897,7 +897,7 @@
       "era": "Pasado",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 18,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -991,7 +991,7 @@
       "era": "Pasado",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 14,
         "salvacion": "3+",
         "velocidad": "+3\"",
@@ -1007,7 +1007,7 @@
           {
             "nombre": "Lanza celestial",
             "ataques": "3D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -1054,7 +1054,7 @@
           {
             "nombre": "Martillo del maestre",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -1085,7 +1085,7 @@
       "era": "Pasado",
       "clase": "Titán",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 28,
         "salvacion": "2+",
         "velocidad": "+3\"",
@@ -1101,7 +1101,7 @@
           {
             "nombre": "Rayo divino",
             "ataques": "2D6",
-            "distancia": "26\"",
+            "distancia": "24\"",
             "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",

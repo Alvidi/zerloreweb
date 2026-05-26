@@ -110,6 +110,70 @@
       }
     },
     {
+      "nombre_unidad": "Corrupt President",
+      "era": "Future",
+      "clase": "Hero",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "salvacion": "4+",
+        "velocidad": "+3\"",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 13,
+        "especialidad": "While this unit is in play, the enemy faction ability is disabled.",
+        "especialidad_escaramuza": "While this unit is in play, the enemy faction ability is disabled.",
+        "especialidad_escuadra": "While this unit is in play, the enemy faction ability is disabled.",
+        "especialidad_nombre": "Corruption Network",
+        "especialidad_nombre_escaramuza": "Corruption Network",
+        "especialidad_nombre_escuadra": "Corruption Network"
+      },
+      "armas": {
+        "disparo": [
+          {
+            "nombre": "Endless Speech",
+            "ataques": "2D",
+            "distancia": "12\"",
+            "impactos": null,
+            "danio": "1",
+            "danio_critico": "2",
+            "habilidades_arma": [
+              "Direct"
+            ],
+            "valor_extra": 0
+          },
+          {
+            "nombre": "Empty Promise",
+            "ataques": "1D",
+            "distancia": "18\"",
+            "impactos": "3+",
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Unstable"
+            ],
+            "valor_extra": 0
+          }
+        ],
+        "cuerpo_a_cuerpo": [
+          {
+            "nombre": "Ministerial Briefcase",
+            "ataques": "2D",
+            "distancia": null,
+            "impactos": null,
+            "danio": "2",
+            "danio_critico": "3",
+            "habilidades_arma": [
+              "Reliable"
+            ],
+            "valor_extra": 0
+          }
+        ]
+      }
+    },
+    {
       "nombre_unidad": "Demon of the Past",
       "era": "Past",
       "clase": "Monster",
@@ -117,7 +181,7 @@
         "movimiento": "5\"",
         "vidas": 26,
         "salvacion": "3+",
-        "velocidad": "+1\"",
+        "velocidad": "1",
         "escuadra": {
           "min": 1,
           "max": 1

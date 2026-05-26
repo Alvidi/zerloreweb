@@ -8,8 +8,8 @@
       {
         "id": "marea-infinita",
         "nombre": "Marea Infinita",
-        "descripcion_escaramuza": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
-        "descripcion_escuadra": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
+        "descripcion_escaramuza": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
+        "descripcion_escuadra": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
         "frase": "El CAOS no se acaba. El rival tiene que destruirte muchas veces para librarse de ti."
       },
       {
@@ -27,10 +27,10 @@
         "frase": "Los débiles alimentan a los fuertes."
       },
       {
-        "id": "mando-reservado",
-        "nombre": "Mando Reservado",
-        "descripcion_escaramuza": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
-        "descripcion_escuadra": "Al inicio de cada Fase de Iniciativa, este jugador gana 1 Ficha de Reroll adicional.",
+        "id": "mando-decisivo",
+        "nombre": "Mando Decisivo",
+        "descripcion_escaramuza": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
+        "descripcion_escuadra": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
         "frase": "La mejor batalla es la que se gana con paciencia."
       }
     ]
@@ -41,7 +41,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 3,
         "salvacion": "5+",
         "velocidad": "+4\"",
@@ -57,7 +57,7 @@
           {
             "nombre": "Proyectil sucio",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "1",
@@ -88,7 +88,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 4,
         "salvacion": "5+",
         "velocidad": "+5\"",
@@ -169,7 +169,7 @@
       "era": "Futuro",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 4,
         "salvacion": "5+",
         "velocidad": "+3\"",
@@ -185,7 +185,7 @@
           {
             "nombre": "Espinas arrojadizas",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -232,7 +232,7 @@
           {
             "nombre": "Proyectil ácido",
             "ataques": "1D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -263,7 +263,7 @@
       "era": "Futuro",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 8,
         "salvacion": "4+",
         "velocidad": "+4\"",
@@ -279,7 +279,7 @@
           {
             "nombre": "Lanzador de bilis",
             "ataques": "1D6",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
@@ -310,7 +310,7 @@
       "era": "Futuro",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "10\"",
+        "movimiento": "7\"",
         "vidas": 6,
         "salvacion": "4+",
         "velocidad": "+5\"",
@@ -373,7 +373,7 @@
           {
             "nombre": "Proyectiles espinosos",
             "ataques": "2D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
@@ -464,7 +464,7 @@
       "era": "Futuro",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 14,
         "salvacion": "5+",
         "velocidad": "+2\"",
@@ -575,7 +575,7 @@
       "era": "Futuro",
       "clase": "Titán",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 26,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -603,7 +603,7 @@
           {
             "nombre": "Proyectil masivo",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
@@ -621,7 +621,9 @@
             "impactos": null,
             "danio": "4",
             "danio_critico": "6",
-            "habilidades_arma": ["Fiable"],
+            "habilidades_arma": [
+              "Fiable"
+            ],
             "valor_extra": 0
           },
           {
@@ -725,7 +727,7 @@
       "era": "Pasado",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 3,
         "salvacion": "6+",
         "velocidad": "+3\"",
@@ -741,7 +743,7 @@
           {
             "nombre": "Arco corto",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
@@ -840,7 +842,7 @@
       "era": "Pasado",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "9\"",
+        "movimiento": "7\"",
         "vidas": 7,
         "salvacion": "4+",
         "velocidad": "+5\"",
@@ -856,7 +858,7 @@
           {
             "nombre": "Lanza arrojadiza",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
@@ -903,7 +905,7 @@
           {
             "nombre": "Rayo salvaje",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -934,7 +936,7 @@
       "era": "Pasado",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 16,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -981,7 +983,7 @@
       "era": "Pasado",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 12,
         "salvacion": "5+",
         "velocidad": "+4\"",
@@ -1015,7 +1017,7 @@
       "era": "Pasado",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 14,
         "salvacion": "4+",
         "velocidad": "+1\"",
@@ -1132,7 +1134,7 @@
           {
             "nombre": "Lanzapeñascos",
             "ataques": "2D6",
-            "distancia": "22\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",

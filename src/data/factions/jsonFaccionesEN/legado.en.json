@@ -27,10 +27,10 @@
         "frase": "There is always a second chance."
       },
       {
-        "id": "reserved-command",
-        "nombre": "Reserved Command",
-        "descripcion_escaramuza": "At the start of each Initiative Phase, this player gains 1 additional Reroll Token.",
-        "descripcion_escuadra": "At the start of each Initiative Phase, this player gains 1 additional Reroll Token.",
+        "id": "decisive-command",
+        "nombre": "Decisive Command",
+        "descripcion_escaramuza": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
+        "descripcion_escuadra": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
         "frase": "The best battle is won with patience."
       }
     ]
@@ -57,7 +57,7 @@
           {
             "nombre": "Resonance Rifle",
             "ataques": "2D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -104,7 +104,7 @@
           {
             "nombre": "Energy Launcher",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -135,7 +135,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 6,
         "salvacion": "3+",
         "velocidad": "+5\"",
@@ -169,7 +169,7 @@
       "era": "Future",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 10,
         "salvacion": "2+",
         "velocidad": "+3\"",
@@ -232,7 +232,7 @@
           {
             "nombre": "Void Rifle",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -313,7 +313,7 @@
           {
             "nombre": "Heat Cannon",
             "ataques": "2D6",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "4",
@@ -325,7 +325,7 @@
           {
             "nombre": "Disruption Beam",
             "ataques": "3D",
-            "distancia": "16\"",
+            "distancia": "18\"",
             "impactos": "-",
             "danio": "2",
             "danio_critico": "3",
@@ -356,7 +356,7 @@
       "era": "Future",
       "clase": "Vehicle",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 16,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -403,7 +403,7 @@
       "era": "Future",
       "clase": "Vehicle",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 12,
         "salvacion": "3+",
         "velocidad": "+2\"",
@@ -431,7 +431,7 @@
           {
             "nombre": "Disruption Cannon (Vehicle)",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -462,7 +462,7 @@
       "era": "Future",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 14,
         "salvacion": "2+",
         "velocidad": "+3\"",
@@ -478,7 +478,7 @@
           {
             "nombre": "Ethereal Pulse",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -511,7 +511,7 @@
       "especialidad_escaramuza": "Once per turn, it may swap its position with any allied unit within 18\" or less (it cannot be locked in melee).",
       "especialidad_escuadra": "Once per turn, the squad may swap its position with any allied unit within 18\" or less.",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 9,
         "salvacion": "2+",
         "velocidad": "+4\"",
@@ -530,7 +530,7 @@
           {
             "nombre": "Oracle Spear",
             "ataques": "3D",
-            "distancia": "22\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -589,7 +589,7 @@
           {
             "nombre": "Doomsday Cannon",
             "ataques": "2D6",
-            "distancia": "30\"",
+            "distancia": "24\"",
             "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",
@@ -602,7 +602,7 @@
           {
             "nombre": "Legacy Battery",
             "ataques": "2D",
-            "distancia": "26\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -735,7 +735,7 @@
       "era": "Past",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "5+",
         "velocidad": "+5\"",
@@ -769,7 +769,7 @@
       "era": "Past",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 8,
         "salvacion": "3+",
         "velocidad": "+5\"",
@@ -819,7 +819,7 @@
           {
             "nombre": "Thrown Hammer",
             "ataques": "1D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -866,7 +866,7 @@
           {
             "nombre": "Sacred Bow",
             "ataques": "3D",
-            "distancia": "22\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -897,7 +897,7 @@
       "era": "Past",
       "clase": "Vehicle",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 18,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -991,7 +991,7 @@
       "era": "Past",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 14,
         "salvacion": "3+",
         "velocidad": "+3\"",
@@ -1007,7 +1007,7 @@
           {
             "nombre": "Celestial Lance",
             "ataques": "3D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "3+",
             "danio": "3",
             "danio_critico": "5",
@@ -1054,7 +1054,7 @@
           {
             "nombre": "Master's Hammer",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "3+",
             "danio": "2",
             "danio_critico": "3",
@@ -1085,7 +1085,7 @@
       "era": "Past",
       "clase": "Titan",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 28,
         "salvacion": "2+",
         "velocidad": "+3\"",
@@ -1101,7 +1101,7 @@
           {
             "nombre": "Divine Ray",
             "ataques": "2D6",
-            "distancia": "26\"",
+            "distancia": "24\"",
             "impactos": "2+",
             "danio": "5",
             "danio_critico": "7",

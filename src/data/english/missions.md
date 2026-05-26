@@ -41,10 +41,6 @@ If a player captures the enemy Headquarters, they win the battle immediately, re
 **④ Standard victory**  
 If no HQ falls by the end of the battle, the player with the most points wins. In case of a tie, the player controlling more command posts wins.
 
-## Variants
-
-The costs and economy of Total War are the **standard** values for this mission. If players want a different experience — slower, more explosive, with limits on units per turn, etc. — they are free to agree on other values before starting. Player imagination leads; what matters is that everyone agrees before the first roll.
-
 ## Suggested Skirmish Maps
 
 These maps use a **36" x 36"** battlefield and circular **3"** command posts. Each player starts in the colour of their **Headquarters**. Black command posts are neutral command posts.

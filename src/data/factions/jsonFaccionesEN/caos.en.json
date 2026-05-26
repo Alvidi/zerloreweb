@@ -8,8 +8,8 @@
       {
         "id": "endless-tide",
         "nombre": "Endless Tide",
-        "descripcion_escaramuza": "At the end of each turn, one CHAOS Line unit destroyed during that turn returns to the battlefield with all its Wounds, deploying in contact with any command post the player controls. If several units were destroyed, the player chooses which one returns; the others are lost permanently.",
-        "descripcion_escuadra": "At the end of each turn, one CHAOS Line unit destroyed during that turn returns to the battlefield with all its Wounds, deploying in contact with any command post the player controls. If several units were destroyed, the player chooses which one returns; the others are lost permanently.",
+        "descripcion_escaramuza": "At the end of each turn, one CHAOS Line unit destroyed during that turn returns to the battlefield with all its Wounds, deploying in contact with any command post the player controls. It does not spend Command Tokens. If several units were destroyed, the player chooses which one returns; the others are lost permanently.",
+        "descripcion_escuadra": "At the end of each turn, one CHAOS Line unit destroyed during that turn returns to the battlefield with all its Wounds, deploying in contact with any command post the player controls. It does not spend Command Tokens. If several units were destroyed, the player chooses which one returns; the others are lost permanently.",
         "frase": "CHAOS does not end. The opponent must destroy you many times to be rid of you."
       },
       {
@@ -27,10 +27,10 @@
         "frase": "The weak feed the strong."
       },
       {
-        "id": "reserved-command",
-        "nombre": "Reserved Command",
-        "descripcion_escaramuza": "At the start of each Initiative Phase, this player gains 1 additional Reroll Token.",
-        "descripcion_escuadra": "At the start of each Initiative Phase, this player gains 1 additional Reroll Token.",
+        "id": "decisive-command",
+        "nombre": "Decisive Command",
+        "descripcion_escaramuza": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
+        "descripcion_escuadra": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
         "frase": "The best battle is won with patience."
       }
     ]
@@ -41,7 +41,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 3,
         "salvacion": "5+",
         "velocidad": "+4\"",
@@ -57,7 +57,7 @@
           {
             "nombre": "Dirty Projectile",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "1",
@@ -88,7 +88,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 4,
         "salvacion": "5+",
         "velocidad": "+5\"",
@@ -169,7 +169,7 @@
       "era": "Future",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 4,
         "salvacion": "5+",
         "velocidad": "+3\"",
@@ -185,7 +185,7 @@
           {
             "nombre": "Thrown Spines",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "1",
             "danio_critico": "2",
@@ -232,7 +232,7 @@
           {
             "nombre": "Acid Projectile",
             "ataques": "1D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -263,7 +263,7 @@
       "era": "Future",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 8,
         "salvacion": "4+",
         "velocidad": "+4\"",
@@ -279,7 +279,7 @@
           {
             "nombre": "Bile Launcher",
             "ataques": "1D6",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": null,
             "danio": "2",
             "danio_critico": "3",
@@ -310,7 +310,7 @@
       "era": "Future",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "10\"",
+        "movimiento": "7\"",
         "vidas": 6,
         "salvacion": "4+",
         "velocidad": "+5\"",
@@ -373,7 +373,7 @@
           {
             "nombre": "Spiked Projectiles",
             "ataques": "2D",
-            "distancia": "10\"",
+            "distancia": "12\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
@@ -464,7 +464,7 @@
       "era": "Future",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 14,
         "salvacion": "5+",
         "velocidad": "+2\"",
@@ -575,7 +575,7 @@
       "era": "Future",
       "clase": "Titan",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 26,
         "salvacion": "3+",
         "velocidad": "+1\"",
@@ -603,7 +603,7 @@
           {
             "nombre": "Massive Projectile",
             "ataques": "2D",
-            "distancia": "20\"",
+            "distancia": "18\"",
             "impactos": "4+",
             "danio": "5",
             "danio_critico": "7",
@@ -725,7 +725,7 @@
       "era": "Past",
       "clase": "Line",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 3,
         "salvacion": "6+",
         "velocidad": "+3\"",
@@ -741,7 +741,7 @@
           {
             "nombre": "Short Bow",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
@@ -840,7 +840,7 @@
       "era": "Past",
       "clase": "Elite",
       "perfil": {
-        "movimiento": "9\"",
+        "movimiento": "7\"",
         "vidas": 7,
         "salvacion": "4+",
         "velocidad": "+5\"",
@@ -856,7 +856,7 @@
           {
             "nombre": "Thrown Spear",
             "ataques": "1D",
-            "distancia": "8\"",
+            "distancia": "6\"",
             "impactos": "5+",
             "danio": "1",
             "danio_critico": "2",
@@ -903,7 +903,7 @@
           {
             "nombre": "Wild Bolt",
             "ataques": "2D",
-            "distancia": "14\"",
+            "distancia": "12\"",
             "impactos": "4+",
             "danio": "2",
             "danio_critico": "3",
@@ -934,7 +934,7 @@
       "era": "Past",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "5\"",
         "vidas": 16,
         "salvacion": "4+",
         "velocidad": "+3\"",
@@ -981,7 +981,7 @@
       "era": "Past",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "8\"",
+        "movimiento": "7\"",
         "vidas": 12,
         "salvacion": "5+",
         "velocidad": "+4\"",
@@ -1015,7 +1015,7 @@
       "era": "Past",
       "clase": "Monster",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 14,
         "salvacion": "4+",
         "velocidad": "+1\"",
@@ -1132,7 +1132,7 @@
           {
             "nombre": "Bestial Cannons",
             "ataques": "2D6",
-            "distancia": "22\"",
+            "distancia": "24\"",
             "impactos": "3+",
             "danio": "4",
             "danio_critico": "5",
