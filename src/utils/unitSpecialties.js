@@ -68,8 +68,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Shove', description: 'During its activation, this unit may spend 1 action to push an enemy unit locked with it 1", ending the melee combat. Shove ignores Anchored.' },
   },
   {
-    es: { name: 'Terror', description: 'Las unidades enemigas a 3" o menos de esta unidad no pueden usar Fichas de Mando para repetir tiradas.' },
-    en: { name: 'Terror', description: 'Enemy units within 3" of this unit cannot use Command Tokens to reroll dice.' },
+    es: { name: 'Terror', description: 'Las unidades enemigas a 3" o menos de esta unidad no pueden usar sus especialidades.' },
+    en: { name: 'Terror', description: 'Enemy units within 3" of this unit cannot use their specialties.' },
   },
   {
     es: { name: 'Tirador', description: 'Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas.' },

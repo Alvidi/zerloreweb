@@ -32,6 +32,13 @@
         "descripcion_escaramuza": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
         "descripcion_escuadra": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
         "frase": "The best battle is won with patience."
+      },
+      {
+        "id": "iron-march",
+        "nombre": "Iron March",
+        "descripcion_escaramuza": "All units in this army replace their Speed value with +4\", regardless of their profile.",
+        "descripcion_escuadra": "All units in this army replace their Speed value with +4\", regardless of their profile.",
+        "frase": "We leave no one behind"
       }
     ]
   },
@@ -700,7 +707,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Reliable"
+              "Reach"
             ],
             "valor_extra": 0
           }
@@ -781,7 +788,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Piercing"
+              "Reach"
             ],
             "valor_extra": 0
           }

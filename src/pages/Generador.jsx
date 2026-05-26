@@ -563,7 +563,11 @@ function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl,
           <div className="unit-sheet-slot unit-sheet-faction-mark" aria-hidden="true">
             <img src={factionLogoSrc} alt="" />
           </div>
-        ) : null}
+        ) : (
+          <div className="unit-sheet-slot unit-sheet-faction-mark unit-sheet-faction-mark-fallback" aria-hidden="true">
+            ?
+          </div>
+        )}
         <div className="unit-sheet-slot unit-sheet-name">{unit.nombre}</div>
         <div className="unit-sheet-slot unit-sheet-type">{unit.tipo}</div>
         <div className="unit-sheet-slot unit-sheet-value">{draftTotal}</div>
@@ -1253,8 +1257,10 @@ function Generador() {
               <>
                 <div className="faction-summary">
                   <div className="faction-header">
-                    {factionImages[selectedFaction.id] && (
+                    {factionImages[selectedFaction.id] ? (
                       <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
+                    ) : (
+                      <span className="faction-header-fallback" aria-hidden="true">?</span>
                     )}
                     <h3>{selectedFaction.nombre}</h3>
                   </div>

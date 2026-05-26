@@ -36,7 +36,7 @@ Al final de cada turno, cada jugador suma **10 puntos** por cada puesto de mando
 Al final de cada turno, cada jugador suma puntos por las unidades enemigas destruidas durante ese turno. Cada unidad destruida otorga tantos puntos como su **valor en puntos**.
 
 **③ Victoria inmediata**  
-Si un jugador captura el Cuartel General enemigo, gana la partida en ese momento, independientemente de la puntuación acumulada.
+Si un jugador captura el Cuartel General enemigo, gana la partida en ese momento, independientemente de la puntuación acumulada. También, una vez desplegadas las primeras unidades, si un jugador elimina todas las unidades del rival y este no tiene más unidades en el campo de batalla, se considera victoria inmediata.
 
 **④ Victoria normal**  
 Si ningún CG cae al término de la partida, gana quien más puntos tenga. En caso de empate, gana quien controle más puestos de mando.

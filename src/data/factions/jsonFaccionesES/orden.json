@@ -32,6 +32,13 @@
         "descripcion_escaramuza": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
         "descripcion_escuadra": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
         "frase": "La mejor batalla es la que se gana con paciencia."
+      },
+      {
+        "id": "marcha-de-hierro",
+        "nombre": "Marcha de Hierro",
+        "descripcion_escaramuza": "Todas las unidades de este ejército reemplazan su valor de Velocidad por +4\", independientemente de su perfil.",
+        "descripcion_escuadra": "Todas las unidades de este ejército reemplazan su valor de Velocidad por +4\", independientemente de su perfil.",
+        "frase": "No dejamos a nadie atrás"
       }
     ]
   },
@@ -700,7 +707,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Fiable"
+              "Alcance"
             ],
             "valor_extra": 0
           }
@@ -781,7 +788,7 @@
             "danio": "2",
             "danio_critico": "3",
             "habilidades_arma": [
-              "Perforante"
+              "Alcance"
             ],
             "valor_extra": 0
           }

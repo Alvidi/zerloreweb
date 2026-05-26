@@ -36,7 +36,7 @@ At the end of each turn, each player scores **10 points** for each command post 
 At the end of each turn, each player scores points for enemy units destroyed during that turn. Each destroyed unit grants points equal to its **points value**.
 
 **③ Immediate victory**  
-If a player captures the enemy Headquarters, they win the battle immediately, regardless of the points scored so far.
+If a player captures the enemy Headquarters, they win the battle immediately, regardless of the points scored so far. Also, once the first units have been deployed, if a player destroys all enemy units and the opponent has no units left on the battlefield, this counts as an immediate victory.
 
 **④ Standard victory**  
 If no HQ falls by the end of the battle, the player with the most points wins. In case of a tie, the player controlling more command posts wins.

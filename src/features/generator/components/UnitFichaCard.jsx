@@ -163,11 +163,13 @@ const FACTION_LABELS = {
     orden: 'Orden',
     caos: 'Caos',
     legado: 'Legado',
+    otros: 'Otros',
   },
   en: {
     orden: 'Order',
     caos: 'Chaos',
     legado: 'Legacy',
+    otros: 'Others',
   },
 }
 
@@ -175,6 +177,7 @@ const FACTION_COLORS = {
   orden: '#ff7a6b',
   caos: '#b37aff',
   legado: '#f0d84a',
+  otros: '#7fd6ff',
 }
 
 const getFactionToken = (factionId = '') => {
@@ -186,6 +189,7 @@ const getFactionToken = (factionId = '') => {
 
   if (normalized.includes('caos')) return 'caos'
   if (normalized.includes('legado')) return 'legado'
+  if (normalized.includes('otros') || normalized.includes('other')) return 'otros'
   return 'orden'
 }
 

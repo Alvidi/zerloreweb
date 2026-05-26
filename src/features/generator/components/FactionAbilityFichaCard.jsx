@@ -181,10 +181,12 @@ const getFactionLabel = (factionId = '', lang = 'es') => {
   if (lang === 'en') {
     if (id.includes('caos')) return 'Chaos'
     if (id.includes('legado')) return 'Legacy'
+    if (id.includes('otros') || id.includes('other')) return 'Others'
     return 'Order'
   }
   if (id.includes('caos')) return 'Caos'
   if (id.includes('legado')) return 'Legado'
+  if (id.includes('otros') || id.includes('other')) return 'Otros'
   return 'Orden'
 }
 
@@ -195,6 +197,7 @@ const getFactionToken = (factionId = '') => {
     .replace(/[\u0300-\u036f]/g, '')
   if (id.includes('caos')) return 'caos'
   if (id.includes('legado')) return 'legado'
+  if (id.includes('otros') || id.includes('other')) return 'otros'
   return 'orden'
 }
 
@@ -202,6 +205,7 @@ const FACTION_COLORS = {
   orden: '#ff7a6b',
   caos: '#b37aff',
   legado: '#f0d84a',
+  otros: '#7fd6ff',
 }
 
 const ABILITY_TYPE_COLOR = '#ff9f43'

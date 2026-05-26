@@ -188,6 +188,7 @@ export const getAbilityLabel = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.ignoreCover) return 'Ignore Cover'
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) return 'Arcing'
+  if (abilityId === WEAPON_ABILITY_IDS.reach) return 'Reach'
   if (abilityId === WEAPON_ABILITY_IDS.unstable) return 'Unstable'
   if (abilityId === WEAPON_ABILITY_IDS.direct) return 'Direct'
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) return 'Guerrilla'

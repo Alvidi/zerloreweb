@@ -687,7 +687,7 @@ Heroes and some experimental units may have unique specialties described directl
 | **Accurate** | If this unit does not move, it gains **1 Precision** in Shooting. | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
 | **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. If its player only has **1 command post or HQ**, it cannot be deployed. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
 | **Vanguard** | It may be deployed within **9"** of an allied command post. | **Devourer** | When this unit destroys an enemy unit in melee, it recovers **1D3 lost Wounds**. |
-| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use Reroll Tokens to reroll dice. |
+| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use their specialties. |
 | **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
 | **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Rush against a unit, it gains **+1 melee attack die** during that combat. |
 | **Out of Control** | If this unit reaches 50% of its Wounds, it attacks the nearest allied or enemy unit in melee, adding **1D** more attack. If it is already locked, it continues. If there is no nearby unit, it moves toward it. | **Boom!** | When this unit dies, it explodes and affects units within **6"** of it, inflicting **1D6**. |
@@ -819,6 +819,7 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Direct** | This weapon does not make a Precision roll. |
 | **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
+| **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |
 
 ## Weapons Conditioned by Type
 
