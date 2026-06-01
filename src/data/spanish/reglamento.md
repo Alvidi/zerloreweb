@@ -815,7 +815,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | **Perforante**    | Los impactos críticos de esta arma empeoran la **Salvación** del objetivo en **1**.                                                                                                     |
 | **Inestable**     | Tras resolver el ataque, lanza 1D6. Con resultado de **1–2**, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
 | **Multiuso**      | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad con la que está combatiendo cuerpo a cuerpo.                                          |
-| **Directo**       | Esta arma no realiza tirada de Precisión.                                                                                                                                               |
+| **Directo**       | Esta arma impacta directamente, no tiene Precisión.                                                                                                                                      |
 | **Explosiva**     | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **aliadas y enemigas** a **3"** del objetivo.                              |
 | **Parabólica**    | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**.                                                                           |
 | **Alcance**       | Esta arma CaC puede usarse contra cualquier unidad enemiga a **3" o menos**, esté o no trabada con esta unidad.                                                                        |

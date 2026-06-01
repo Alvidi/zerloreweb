@@ -816,7 +816,7 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Piercing** | Critical hits from this weapon worsen the target's **Save** by **1**. |
 | **Unstable** | After resolving the attack, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage it inflicted on the target. If the attack caused no damage, there is no backlash. |
 | **Multi-use** | This weapon can be used while the unit is locked in melee combat, against the unit it is fighting in melee combat. |
-| **Direct** | This weapon does not make a Precision roll. |
+| **Direct** | This weapon hits directly and has no Precision. |
 | **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 | **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |

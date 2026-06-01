@@ -111,6 +111,11 @@ export const getAbilityDescription = (ability, lang = 'es') => {
       ? 'Can attack targets without direct line of sight, as long as they are within Range.'
       : 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia.'
   }
+  if (abilityId === WEAPON_ABILITY_IDS.reach) {
+    return lang === 'en'
+      ? 'This melee weapon can be used against any enemy unit within 3", whether or not it is locked with this unit.'
+      : 'Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad.'
+  }
   if (abilityId === WEAPON_ABILITY_IDS.unstable) {
     return lang === 'en'
       ? 'After attacking, roll 1D6: on 1-2, this unit suffers the same damage dealt to the target. If the target received no hits, this unit also suffers nothing.'
@@ -118,8 +123,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.direct) {
     return lang === 'en'
-      ? 'Hits automatically, no Precision roll required.'
-      : 'Impacta automáticamente, sin tirada de Precisión.'
+      ? 'This weapon hits directly and has no Precision.'
+      : 'Esta arma impacta directamente, no tiene Precisión.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) {
     return lang === 'en'

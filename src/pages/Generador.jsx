@@ -1448,7 +1448,10 @@ function Generador() {
                                       <button
                                         type="button"
                                         className="unit-image-clear"
-                                        onClick={() => updateArmyUnitSelection(entry.uid, { imageDataUrl: '' })}
+                                        onClick={(event) => {
+                                          event.stopPropagation()
+                                          updateArmyUnitSelection(entry.uid, { imageDataUrl: '' })
+                                        }}
                                         aria-label={t('generator.removeImage')}
                                         title={t('generator.removeImage')}
                                       >

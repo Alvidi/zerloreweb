@@ -3703,6 +3703,7 @@ button {
   font-size: 0.85rem;
   line-height: 1;
   cursor: pointer;
+  z-index: 3;
 }
 
 .unit-image-clear:hover {
@@ -7299,7 +7300,9 @@ mark {
 
 .ficha-hab-line-desc {
   margin-top: 1px;
-  opacity: 0.85;
+  font-weight: 500;
+  line-height: 1.22;
+  opacity: 0.88;
 }
 
 .ability-ficha-illustration {
