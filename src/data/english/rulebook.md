@@ -25,8 +25,6 @@ A **squad** is a unit made up of several miniatures that share activation, actio
 
 In Grand Battle mode, all miniatures in a squad must stay within **1" or less** of at least 2 other miniatures in the same squad (or 1 if the squad has only 2 miniatures), forming a coherent group.
 
-Miniature placement only affects **which miniatures can attack** in melee combat and does not modify the number of actions, state, or activation of the squad.
-
 ![Single miniature versus a squad]({{miniatureVsSquadImage}})
 
 > Throughout the rulebook, when a rule mentions a **"unit"**, it also applies to a **"squad"** in Grand Battle mode, unless stated otherwise.
@@ -41,13 +39,12 @@ ZeroLore is miniature-agnostic, but bases proportional to the unit type are reco
 | Bulky Elite / Monsters  | 50 – 60 mm round   |
 | Light Vehicles          | 40 – 60 mm         |
 | Medium / Heavy Vehicles | 60 – 80 mm or oval |
-| Titans                  | 100 mm or larger   |
 
 These are guidelines. The criterion is that the base is consistent with the visual size of the miniature and does not provide an unfair tactical advantage.
 
 ### Dice and Rolls
 
-ZeroLore always uses six-sided dice (1D6) and three-sided dice for some rules (1D3).
+ZeroLore always uses six-sided dice (1D6) and three-sided dice for some weapons (1D3).
 
 Throughout the game, different types of rolls are made: **initiative**, **precision**, **save**, etc.
 Each is explained in detail in its corresponding section.
@@ -78,8 +75,8 @@ ZeroLore can be played in two main modes: **Skirmish** and **Grand Battle**.
 
 The game mode is chosen **before starting the game**, and all players must use the same mode.
 
-- **Skirmish Mode**: each miniature acts as an independent unit. A more tactical and narrative mode, ideal for quick games and small tables. **Vehicles and Titans cannot be included in Skirmish**: those unit types are reserved for Grand Battle mode.
-- **Grand Battle Mode**: units are grouped into squads that act as a single entity. Designed for larger-scale battles, where all unit types are available, including Vehicles and Titans.
+- **Skirmish Mode**: each miniature acts as an independent unit. A more tactical and narrative mode, ideal for quick games and small tables. **Vehicles cannot be included in Skirmish**: this unit type is reserved for Grand Battle mode.
+- **Grand Battle Mode**: units are grouped into squads that act as a single entity. Designed for larger-scale battles, where all unit types are available, including Vehicles.
 
 Unless stated otherwise, all rules in the rulebook apply to both modes.
 
@@ -87,11 +84,11 @@ Unless stated otherwise, all rules in the rulebook apply to both modes.
 
 ZeroLore allows games set in different thematic eras. Before starting the game, the players agree on one of the following options:
 
-- **Past**: only units with the _Past_ keyword may be used. Games set in fantasy environments.
-- **Future**: only units with the _Future_ keyword may be used. Games set in science-fiction environments.
-- **No restriction**: Past against Future, anything goes. ZeroLore uses the same profile and ability format for all factions, so any unit can face any other regardless of its era.
+- **Past**: only heroes and units with weapons with the _Past_ keyword may be used. Games set in fantasy environments.
+- **Future**: only heroes and units with weapons with the _Future_ keyword may be used. Games set in science-fiction environments.
+- **No restriction**: Past and Future, anything goes. ZeroLore uses the same profile and ability format for all factions, so any unit can face any other regardless of its era.
 
-Each unit indicates its era on its profile. Units without a tag are compatible with any mode.
+Each unit indicates its era on its profile.
 
 ---
 
@@ -163,9 +160,9 @@ Activating a unit means:
 - Taking its **2 available actions**.
 - Fully resolving its effects.
 
-Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (green side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
+Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
 
-![Unit with the grey and green activation token]({{activationImage}})
+![Unit with the grey and orange activation token]({{activationImage}})
 
 ## 3. End of Turn
 
@@ -328,62 +325,36 @@ When a unit loses all its Wounds, it is removed from the game as destroyed.
 
 Melee combat occurs when two units are **in base contact**. At that point, both units become **locked in combat**.
 
-## Charging with a Rush
+## Starting Combat
 
-To initiate melee combat, a unit must make a **Rush** and enter base contact with an enemy unit.
+To initiate melee combat, a unit must perform the **Rush** action and enter base contact with an enemy unit. Rush is explained in detail in the Unit Actions section.
 
-- The unit moves up to its **Movement + Speed** value.
-- If the unit **does not reach** the target, it ends its movement where it arrived.
-- If the charge succeeds, the unit places its base in contact with the target and is considered locked.
-
-A successful charge **grants a free melee attack action**.
+A Rush into an enemy unit **grants one free melee attack action**.
 
 ## Locked Units
 
-When two units are in base contact:
+When two units are in base contact, they are considered locked in melee combat.
 
-- They are considered locked in melee combat.
-- Both units may only use **melee combat** or **retreat** actions.
-- They remain locked until one of them is destroyed or retreats.
+A locked unit may only use the **Melee Attack** or **Retreat** actions. Each unit attacks during its own activation, spending its actions as normal.
 
-Each locked unit attacks during its own activation, spending its actions as normal.
+![Two locked units in base contact with a retreat option]({{lockedUnitsImage}})
 
 A unit may use the **Rush** action to charge a unit that is already locked in combat. After the charge, all involved units are considered locked in the same combat.
 
-When a unit locked with several units activates and is going to make a melee attack, it may choose which locked enemy unit it attacks.
+When a unit locked with several units activates and is going to make a melee attack, it may choose which locked enemy unit it attacks during that activation.
 
-To become unlocked:
+Units remain locked until one of the two is destroyed or retreats following the retreat rules.
 
-- Destroy the enemy unit
-- Declare a retreat following the retreat rules.
+## Resolving Melee Combat
 
-## Melee Attacks
+Melee combat is resolved following this sequence:
 
-A melee attack is resolved following this sequence:
+1. The attacking unit rolls the **Attacks** dice from its melee weapon profile.
+2. Results of **1 and 2** are misses. A result of **6** is a critical hit.
+3. The defender rolls as many **Save** dice as hits received. Critical hits can only be blocked with a defensive 6.
+4. Unblocked hits inflict the attacking weapon's base or critical damage.
 
-1. Attack by the active unit
-2. Defender's saves
-3. Apply damage
-
-### 1. Attack
-
-The attacking unit rolls the **Attacks** dice indicated in its melee profile.
-
-- Results of **1 and 2** are misses.
-- All other results are hits.
-- A result of **6** is a critical hit, unless a rule states otherwise.
-
-### 2. Saves
-
-The defending player rolls as many dice as hits received.
-
-- Each result **equal to or above their Save value** blocks a hit.
-- Critical hits can only be blocked by a **defensive 6**.
-- Unblocked hits deal the base or critical damage of the attacking weapon.
-
-### 3. Apply Damage
-
-Each unblocked hit deals the damage indicated by the weapon. If the unit loses all its Wounds, it is removed from the game as destroyed. If it survives, both units remain locked.
+If the defender survives, it may attack during its own activation by spending its actions as normal.
 
 ## Vehicles and Monsters in Melee
 
@@ -391,15 +362,13 @@ Each unblocked hit deals the damage indicated by the weapon. If the unit loses a
 
 In addition, these units may be attacked at range even while locked in melee combat.
 
-## Titans in Melee
-
-A Titan may **only Rush against another Titan**. Line units, Elite units, Heroes, Vehicles, and Monsters **cannot lock** a Titan by themselves.
-
-Titans follow the same general melee combat rules, except for their special rules.
+![Vehicle locked in melee that can shoot and be targeted by ranged attacks]({{vehicleMonsterMeleeImage}})
 
 ## Shooting at Locked Units
 
 A unit locked in melee combat **cannot be attacked at range** by units outside the combat, unless an ability states otherwise.
+
+**Exception:** Vehicles and Monsters can be attacked at range even while locked in melee combat.
 
 ---
 
@@ -413,11 +382,11 @@ If at least one miniature in an enemy squad is visible to the attacker, the enti
 
 ## Using Weapons in Squads
 
-In Grand Battle, each miniature uses the weapon it has equipped.
+In Grand Battle, each miniature uses the weapons it has equipped.
 
 When a Hero is part of a squad, they resolve their attacks independently from the rest of the unit.
 
-All weapons in the squad must attack the **same target**, unless a rule states otherwise.
+All miniatures in the squad attack the same target with the chosen weapon, unless a rule states otherwise.
 
 ## Melee Combat in Squads
 
@@ -428,6 +397,8 @@ In Grand Battle, even if a squad is in contact with multiple enemy squads, when 
 As soon as one miniature in the squad makes base contact with an enemy unit, **the entire squad is considered locked** and all its miniatures participate in the combat.
 
 Even if physically only one miniature in the squad is in base contact with the enemy, the whole squad takes part in the combat and resolves its attacks together.
+
+![Squad melee combat with one miniature in contact and the whole squad participating]({{squadMeleeImage}})
 
 The attack action is considered **consumed by the entire squad**.
 
@@ -442,6 +413,8 @@ If the chosen miniature is destroyed and there is remaining damage to assign, th
 # Cover
 
 Cover modifies the defence of attacked units. To benefit from cover, **the unit must have its base in direct contact with the scenery element acting as cover**. If there is no base contact, there is no cover.
+
+![Cover example with one unit in direct contact with a barricade and another separated without cover]({{coverImage}})
 
 **What counts as cover?**
 
@@ -463,7 +436,7 @@ If the attacker can see the target miniature's head, it is considered visible an
 
 **Clarifications**
 
-- **Vehicles, Monsters, and Titans** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection, unless the unit is completely out of line of sight.
+- **Vehicles and Monsters** do not benefit from any type of cover. Their size prevents any obstacle from providing effective protection, unless the unit is completely out of line of sight.
 
 Friendly or enemy miniatures that completely block the view act as obstacles for line of sight purposes.
 
@@ -505,15 +478,13 @@ _(See the Melee Combat section for the full resolution.)_
 
 # Command Posts and Deployment
 
-Command posts are strategic positions spread across the battlefield. They are represented on the table with the **circular command post token**. In Skirmish, use the **3"** token; in Grand Battle, use the **6"** token. Besides being objectives to capture, they are the only points from which units may deploy.
+Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy.
 
 When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
 
 ![Unit capturing a command post with its control flag]({{commandPostControlImage}})
 
 ## Headquarters
-
-Before deployment, each player designates one of their initial Command Posts as their **Headquarters**.
 
 - It works as a normal command post for control and deployment.
 - Each player has only one Headquarters. If it is captured by the enemy, the game ends automatically.
@@ -524,9 +495,9 @@ At the end of each turn, if both players have units on the same command post, co
 
 **Units locked in melee:** units from both sides that are engaged in melee within a command post **do not count toward control**. They are treated as if they did not exist for the purpose of the post until that combat is resolved.
 
-In case of a tie, the post remains under the control of whoever already held it. If neither side has units there, the post keeps its last owner.
+In case of a tie, the post remains under the control of whoever already held it.
 
-To deploy a unit at a command post, the player must control it first, and the unit must be in contact with it. If the post is occupied by enemy units, even if it is still owned by Value, you cannot deploy there.
+To deploy a unit at a command post, the post must be under the player's control, and the unit must be in contact with it. If the post is occupied by enemy units, even if it is still owned by Value, you cannot deploy there.
 
 Units that cannot be deployed during the initial turn remain in **reserve**.
 
@@ -603,27 +574,16 @@ Characteristics:
 
 General characteristics:
 
+- Only **one single Hero** may be included per army, unless a rule or ability states otherwise.
 - They are singular units that act as **a single miniature**.
 - All their rules and abilities are described in their profile.
 
 ### Special Hero Rules
 
-- They have unique abilities that define their tactical role. Their abilities and specialty are shown on their profile.
-- In Grand Battle mode, the **Hero must join a squad before deployment**. A Hero that is not part of a squad cannot be included in the army in this mode. While they are part of that squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently: damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
-
-## 6. Titans
-
-A **Titan** is a colossal unit representing war machines or giant creatures whose presence dominates the battlefield.
-
-Titans do not operate as conventional units and follow special rules due to their size, mass, and the impossibility of being stopped by lesser forces.
-
-Titans are **slow** units, extremely resilient, and very visible. They are not designed to play fine objective control, but to **condition space**, break formations, and force the enemy to react.
-
-### General Titan Rules
-
-- A Titan **cannot capture or control command posts**, unless a rule states otherwise.
-- During **movement**, a Titan may **move through scenery elements** as large as the unit, as long as it **does not end its movement on them**.
-- A Titan **cannot be placed, stop, or remain** on a piece of scenery, nor use it as a surface, even if it can pass over it.
+- **The Hero is mandatory in every game.** Every army must include exactly one Hero in its army.
+- **Faction ability.** Each Hero carries an ability that affects all allied units while they are on the battlefield. This ability is shown on their profile. **If the Hero is eliminated, the faction ability is lost** for the rest of the game.
+- In Grand Battle mode, the **Hero must join a squad before deployment**. A Hero that is not part of a squad cannot be included in the army in this mode.
+- While part of a squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently; damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
 
 # Unit Profiles
 
@@ -639,7 +599,7 @@ The profile of a unit contains the following values:
 
 Defines the **functional role** of the unit within the army.
 
-It determines whether it can capture objectives, whether it can be a hero or leader, and what special rules it may apply according to its type (Line, Elite, Vehicle, Monster, Hero, or Titan).
+It determines whether it can capture objectives, whether it can be a hero or leader, and what special rules it may apply according to its type (Line, Elite, Vehicle, Monster, or Hero).
 
 ### Movement
 
@@ -691,7 +651,7 @@ Heroes and some experimental units may have unique specialties described directl
 | **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
 | **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Rush against a unit, it gains **+1 melee attack die** during that combat. |
 | **Out of Control** | If this unit reaches 50% of its Wounds, it attacks the nearest allied or enemy unit in melee, adding **1D** more attack. If it is already locked, it continues. If there is no nearby unit, it moves toward it. | **Boom!** | When this unit dies, it explodes and affects units within **6"** of it, inflicting **1D6**. |
-| **Crushing** | During its movement or Rush, if it passes over a **Line or Elite** unit, that unit is **destroyed automatically**. | | |
+| **Crushing** | During its Rush, if it locks a **Line or Elite** unit, that unit automatically suffers **1D3 damage**. | | |
 
 ### Squads
 
@@ -812,6 +772,7 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | Weapon ability | Description |
 | --- | --- |
 | **Reliable** | This weapon has no special rules. |
+| **Dead Angle** | This weapon cannot shoot at targets within half its range. |
 | **Brutal X+** | Hits from this weapon count as critical hits on a natural result of **X+** on the attack roll. |
 | **Piercing** | Critical hits from this weapon worsen the target's **Save** by **1**. |
 | **Unstable** | After resolving the attack, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage it inflicted on the target. If the attack caused no damage, there is no backlash. |
@@ -821,47 +782,34 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 | **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |
 
-## Weapons Conditioned by Type
+## Secondary Weapons
 
-Some weapons are not valid against every target. When a weapon name includes one or more unit types in parentheses, the weapon **can only attack units of those types**. Weapons without parentheses can attack any unit type.
+If a unit has two weapons of the same type (two ranged or two melee), the **first weapon** on its profile can attack any unit. The **second weapon** is a specialised weapon: it shows in parentheses the only classes it can target.
+
+If a unit only has one weapon of a given type, that weapon can attack anything.
 
 Examples:
 
-- **Rocket launcher (Vehicle)** can only attack Vehicles.
-- **Sniper rifle (Line, Elite)** can only attack Line and Elite units.
-- **Annihilation cannon (Elite, Hero, Titan)** can only attack Elite units, Heroes, and Titans.
-
-If the target does not belong to one of the listed types, the weapon **cannot be used** against it. This represents specialised weapons: an anti-vehicle rocket launcher is not wasted on light infantry.
+- **Fusion Grenade (Vehicle, Monster only)** — can only be declared against Vehicles or Monsters; it cannot be used against any other class.
+- **Flail (Hero only)** — can only attack Heroes.
 
 ## Ability Limit per Weapon
 
 Unless stated otherwise, each weapon should have **a single weapon ability**.
 
-Especially powerful, unique, or exceptional weapons may have more than one ability, but this should be reserved for specific cases such as weapons used by Heroes, Monsters, Vehicles, or Titans.
+Especially powerful, unique, or exceptional weapons may have more than one ability, but this should be reserved for specific cases such as weapons used by Heroes, Monsters, or Vehicles.
 
 ---
 
 # Faction Abilities
 
-Each faction has a **range of faction abilities** that represent different ways of waging war. A faction may focus on melee combat, ranged battlefield control, the weight of heavy machinery, or any other playstyle.
+**Each Hero carries their own faction ability**, which defines the army's playstyle while the Hero is on the battlefield.
 
-Before the game begins, each player must **choose one faction ability** from those available to their faction. This choice represents the army's **play mode** for the battle and defines how its units behave on the battlefield.
+- The faction ability automatically applies to all allied units; it does not require activation or actions.
+- If the Hero is eliminated, the ability is lost for the rest of the game.
+- Each Hero's faction ability is shown on their unit profile.
 
-**Basic rules:**
-
-- Each player chooses **one single faction ability** before the game begins.
-- The choice must be declared to the opponent before deployment.
-- The ability automatically applies to every unit of the faction for the entire game; it requires no activation and no action cost.
-- **The faction ability cannot be changed during the game.**
-- Faction abilities **have no point cost**; they are included in the chosen play mode.
-
-Each faction ability introduces a **unique mechanic** that changes how that army plays, not just numerical bonuses. Choosing the right faction ability is the first major strategic decision of the game.
-
-As the game evolves, new faction abilities will be added to give each playstyle more variety.
-
-![Visual example of a faction ability sheet]({{factionAbilityProfileImage}})
-
----
+Choosing which Hero to bring is the first major strategic decision of the game.
 
 ## General Considerations
 

@@ -2,24 +2,17 @@ import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
-import FactionAbilityFichaCard from '../features/generator/components/FactionAbilityFichaCard.jsx'
 import { getAbilityDescription, getAbilityLabel } from '../utils/abilities.js'
 import { buildLocalizedFactionEntries } from '../utils/factionLocalization.js'
 import CustomSelect from '../features/generator/components/CustomSelect.jsx'
-import {
-  getFactionAbilityIllustrationSrc,
-} from '../features/generator/factionAbilityBadges.js'
 import { getUnitTypeBadgeSrc } from '../features/generator/unitTypeBadges.js'
-import abilityIconSrc from '../images/units_icons/hability.png'
 import {
-  applyPassiveGroupEffectsToFaction,
   buildArmyUnitDisplayNames,
   clampSquadSize,
   computeUnitTotal,
   formatSpeedValue,
   factionImages,
   generateArmyByValue,
-  getFactionSkillDescriptionForMode,
   getFixedUnitLoadout,
   getUnitSpecialtyLabelForMode,
   isFactionData,
@@ -34,7 +27,7 @@ const factionSheetTemplates = {
   caos: new URL('../images/fichas/ficha_caos.webp', import.meta.url).href,
   legado: new URL('../images/fichas/ficha_legado.webp', import.meta.url).href,
 }
-const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster', 'titan']
+const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster']
 const MAX_UNIT_IMAGE_SIDE = 1600
 const IMAGE_CROP_ASPECT_RATIO = 686 / 473
 const IMAGE_CROP_VIEWPORT_WIDTH = 360
@@ -189,107 +182,52 @@ const getUnitTypeOrder = (type) => {
   return match === -1 ? preferredUnitTypeOrder.length : match
 }
 
+const getUnitSortValue = (unit) => {
+  const value = Number(unit?.valor_base ?? unit?.valor ?? 0)
+  return Number.isFinite(value) ? value : 0
+}
+
+const getUnitEraOrder = (unit) => {
+  const eraToken = getUnitEraTokens(unit)[0] || ''
+  if (eraToken === 'future') return 0
+  if (eraToken === 'past') return 1
+  return 2
+}
+
 const sortUnitsByType = (units) =>
   [...units].sort((a, b) => {
     const orderDiff = getUnitTypeOrder(a?.tipo) - getUnitTypeOrder(b?.tipo)
     if (orderDiff !== 0) return orderDiff
+    const valueDiff = getUnitSortValue(a) - getUnitSortValue(b)
+    if (valueDiff !== 0) return valueDiff
     return String(a?.nombre || '').localeCompare(String(b?.nombre || ''), 'es', { sensitivity: 'base' })
   })
 
-const getFactionPassiveSelectionMode = (faction) => {
-  if (faction?.seleccion_habilidades === 'grupo') return 'grupo'
-  if (faction?.seleccion_habilidades === 'group') return 'grupo'
-  return 'individual'
-}
-
-const getFactionAbilityOptions = (faction) =>
-  Array.isArray(faction?.habilidades_faccion) ? faction.habilidades_faccion : []
-
-const getFactionAbilitySelectionLimit = (faction) =>
-  Math.min(1, getFactionAbilityOptions(faction).length || 1)
-
-const sanitizeFactionAbilityIds = (faction, skillIds) => {
-  if (getFactionPassiveSelectionMode(faction) === 'grupo') return []
-  const options = getFactionAbilityOptions(faction)
-  const availableIds = new Set(options.map((skill) => skill.id))
-  const uniqueIds = []
-  ;(Array.isArray(skillIds) ? skillIds : []).forEach((skillId) => {
-    if (!availableIds.has(skillId) || uniqueIds.includes(skillId)) return
-    uniqueIds.push(skillId)
+const sortHeroUnitsByEra = (units) =>
+  [...units].sort((a, b) => {
+    const eraDiff = getUnitEraOrder(a) - getUnitEraOrder(b)
+    if (eraDiff !== 0) return eraDiff
+    const valueDiff = getUnitSortValue(a) - getUnitSortValue(b)
+    if (valueDiff !== 0) return valueDiff
+    return String(a?.nombre || '').localeCompare(String(b?.nombre || ''), 'es', { sensitivity: 'base' })
   })
-  return uniqueIds.slice(0, getFactionAbilitySelectionLimit(faction))
+
+const unitMatchesEraToken = (unit, eraToken) => {
+  if (!eraToken) return true
+  const eraTokens = getUnitEraTokens(unit)
+  return !eraTokens.length || eraTokens.includes(eraToken)
 }
 
-const buildFactionAbilitySelection = (faction, skillIds) => {
-  const mode = getFactionPassiveSelectionMode(faction)
-  if (mode === 'grupo') return null
+const getUnitsForGeneratorContext = (faction) => sortUnitsByType(faction?.unidades || [])
 
-  const options = getFactionAbilityOptions(faction)
-  const abilityById = new Map(options.map((skill) => [skill.id, skill]))
-  const safeIds = sanitizeFactionAbilityIds(faction, skillIds)
-  const habilidades = safeIds.map((skillId) => abilityById.get(skillId)).filter(Boolean)
-  if (!habilidades.length) return null
-
-  return {
-    id: safeIds.join('|'),
-    nombre: habilidades.map((skill) => skill.nombre).join(' · '),
-    habilidades,
-    tipo: mode,
-    coste_total: 0,
-  }
+const getGeneratorUnitUid = (unit, index) => {
+  const eraKey = getUnitEraTokens(unit).join('-') || 'any'
+  return `${unit?.id || `unit-${index}`}::${eraKey}::${index}`
 }
 
-const getFactionPassiveSelections = (faction) => {
-  if (!faction) return []
-  if (getFactionPassiveSelectionMode(faction) !== 'grupo') {
-    return getFactionAbilityOptions(faction).map((skill) => ({
-      id: skill.id,
-      nombre: skill.nombre,
-      habilidades: [skill],
-      tipo: getFactionPassiveSelectionMode(faction),
-      coste_total: 0,
-    }))
-  }
-  return Array.isArray(faction.grupos_habilidades_faccion) ? faction.grupos_habilidades_faccion : []
-}
-const getFirstPassiveGroupId = (faction) =>
-  getFactionPassiveSelectionMode(faction) === 'grupo' ? getFactionPassiveSelections(faction)?.[0]?.id || '' : ''
-const sanitizePassiveGroupId = (faction, passiveGroupId) => {
-  const options = getFactionPassiveSelections(faction)
-  if (!options.length) return ''
-  if (!passiveGroupId) return ''
-  return options.some((option) => option.id === passiveGroupId) ? passiveGroupId : ''
-}
-const cleanPassiveGroupName = (value) => String(value || '').replace(/^\s*\d+\.\s*/, '').trim()
-const getPassiveGroupDisplayName = (group, t, fallbackIndex = 0) =>
-  cleanPassiveGroupName(group?.nombre) || `${t('generator.defaultPassiveSet')} ${fallbackIndex + 1}`
-const getPassiveSelectionDisplayName = (selection, faction, t, fallbackIndex = 0) =>
-  getFactionPassiveSelectionMode(faction) !== 'grupo'
-    ? String(selection?.nombre || '').trim() || `${t('generator.passive')} ${fallbackIndex + 1}`
-    : getPassiveGroupDisplayName(selection, t, fallbackIndex)
-const getPassiveSelectionLabelKey = (faction, singularKey, groupKey) =>
-  getFactionPassiveSelectionMode(faction) === 'grupo' ? groupKey : singularKey
+const getUnitIdentityKey = (unit) => `${unit?.id || ''}::${getUnitEraTokens(unit).join('-') || 'any'}`
 
-const getPassiveSelectionCost = (selection) => {
-  void selection
-  return 0
-}
-
-const getVisibleUnitsForGeneratorContext = (faction, eraToken, mode) =>
-  sortUnitsByType((faction?.unidades || []).filter((unit) => {
-    const eraTokens = getUnitEraTokens(unit)
-    const matchesEra = !eraTokens.length || eraTokens.includes(eraToken)
-    return matchesEra && isUnitTypeAllowedInGameMode(unit.tipo, mode)
-  }))
-
-const getMinimumUnitCost = (units, mode) =>
-  units.reduce((minimum, unit) => {
-    const fixedLoadout = getFixedUnitLoadout(unit)
-    const squadSize = mode === 'escuadra' ? clampSquadSize(unit.escuadra_min, unit) : 1
-    const cost = computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, squadSize, null, mode)
-    if (!Number.isFinite(cost) || cost <= 0) return minimum
-    return Math.min(minimum, cost)
-  }, Number.POSITIVE_INFINITY)
+const isHeroUnit = (unit) => getUnitTypeToken(unit?.tipo) === 'hero'
 
 const getSquadFichaValue = (unit, mode, squadSize) =>
   mode === 'escuadra' ? String(clampSquadSize(squadSize ?? unit?.escuadra_min, unit)) : '-'
@@ -306,86 +244,47 @@ const randomizeList = (items) => {
   return next
 }
 
-const buildRandomPassiveCandidate = (faction, passiveOptions, target, mode, eraToken) => {
-  const selectionMode = getFactionPassiveSelectionMode(faction)
-  const options = randomizeList(passiveOptions || [])
-  const candidateBudget = Math.max(0, Math.floor(target * (mode === 'escuadra' ? 0.28 : 0.24)))
-
-  if (!options.length) {
-    const units = getVisibleUnitsForGeneratorContext(faction, eraToken, mode)
-    return { selection: null, skillIds: [], passiveGroupId: '', cost: 0, factionWithPassives: faction, units }
+const createGeneratedUnitEntry = (unit, mode, era = '') => {
+  const fixedLoadout = getFixedUnitLoadout(unit, era)
+  const squadSize = mode === 'escuadra' ? clampSquadSize(unit.escuadra_min, unit) : 1
+  return {
+    uid: `${unit.id}-${Date.now()}-${Math.random()}`,
+    base: unit,
+    shooting: fixedLoadout.shooting,
+    meleeList: fixedLoadout.meleeList,
+    melee: fixedLoadout.melee,
+    squadSize,
+    perMiniLoadouts: null,
+    total: computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, squadSize, null, mode),
   }
-
-  const makeCandidate = (selection, skillIds = [], passiveGroupId = '') => {
-    const cost = getPassiveSelectionCost(selection)
-    const factionWithPassives = applyPassiveGroupEffectsToFaction(faction, selection)
-    const units = getVisibleUnitsForGeneratorContext(factionWithPassives, eraToken, mode)
-    const minimumUnitCost = getMinimumUnitCost(units, mode)
-    const leavesRoomForUnit = Number.isFinite(minimumUnitCost) && target - cost >= minimumUnitCost
-    return { selection, skillIds, passiveGroupId, cost, factionWithPassives, units, leavesRoomForUnit }
-  }
-
-  if (selectionMode === 'multiple') {
-    const limit = getFactionAbilitySelectionLimit(faction)
-    const selectedIds = []
-    let selectedCost = 0
-    options.forEach((option) => {
-      if (selectedIds.length >= limit) return
-      const optionCost = getPassiveSelectionCost(option)
-      if (optionCost <= 0) {
-        selectedIds.push(option.id)
-        return
-      }
-      if (selectedCost + optionCost <= candidateBudget || !selectedIds.length) {
-        selectedIds.push(option.id)
-        selectedCost += optionCost
-      }
-    })
-
-    const selection = buildFactionAbilitySelection(faction, selectedIds)
-    const candidate = makeCandidate(selection, selectedIds, '')
-    if (candidate.leavesRoomForUnit) return candidate
-  } else {
-    const affordableOptions = options
-      .map((option) => makeCandidate(option, [], option.id))
-      .filter((candidate) => candidate.leavesRoomForUnit)
-      .sort((left, right) => {
-        const leftBudgetFit = left.cost <= candidateBudget ? 0 : 1
-        const rightBudgetFit = right.cost <= candidateBudget ? 0 : 1
-        return leftBudgetFit - rightBudgetFit || left.cost - right.cost
-      })
-
-    if (affordableOptions.length) {
-      const focusedPool = affordableOptions.slice(0, Math.min(4, affordableOptions.length))
-      return focusedPool[Math.floor(Math.random() * focusedPool.length)]
-    }
-  }
-
-  const units = getVisibleUnitsForGeneratorContext(faction, eraToken, mode)
-  return { selection: null, skillIds: [], passiveGroupId: '', cost: 0, factionWithPassives: faction, units }
 }
 
-const PASSIVE_GROUP_ICON_PATHS = [
-  'M12 4.5l4 3v5.3c0 3.1-1.7 5.8-4 6.7-2.3-.9-4-3.6-4-6.7V7.5l4-3z',
-  'M12 4.5l6 6-6 9-6-9 6-6zm0 3.2-2.8 2.8L12 15l2.8-4.5L12 7.7z',
-  'M6.5 15.5 12 4.5l5.5 11H6.5zm5.5-6.8-1.8 3.8h3.6L12 8.7z',
-  'M12 5.2c3.5 0 6.3 2.6 6.3 5.8S15.5 16.8 12 19c-3.5-2.2-6.3-4.8-6.3-8S8.5 5.2 12 5.2zm0 3.1c-1.7 0-3.2 1.2-3.2 2.8 0 1.4 1.2 2.8 3.2 4.2 2-1.4 3.2-2.8 3.2-4.2 0-1.6-1.5-2.8-3.2-2.8z',
-  'M7 6.2h10v3.4h-2.8v8.2H9.8V9.6H7V6.2zm4.1 3.4v5.1h1.8V9.6h-1.8z',
-  'M12 4.6 14 8.7l4.5.6-3.2 3.1.8 4.5-4.1-2.2-4.1 2.2.8-4.5-3.2-3.1 4.5-.6 2-4.1z',
-  'M6.2 9.2 12 4.8l5.8 4.4v7.6H6.2V9.2zm3 1.5v3.1h5.6v-3.1L12 8.5l-2.8 2.2z',
-  'M12 5.1c4 0 6.9 2.8 6.9 6.9S16 18.9 12 18.9 5.1 16 5.1 12 8 5.1 12 5.1zm0 3.1a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z',
-]
+const generateArmyWithRequiredHero = (faction, target, mode, era = '') => {
+  const visibleUnits = getUnitsForGeneratorContext(faction)
+  const heroCandidates = visibleUnits.filter(isHeroUnit)
+  if (!heroCandidates.length) return { units: [], total: 0, score: Number.NEGATIVE_INFINITY }
 
-const hashPassiveId = (value) =>
-  Array.from(String(value || '')).reduce((acc, char) => ((acc << 5) - acc + char.charCodeAt(0)) | 0, 0)
+  let bestResult = null
+  randomizeList(heroCandidates).forEach((hero) => {
+    const heroEntry = createGeneratedUnitEntry(hero, mode, era)
+    if (heroEntry.total > target) return
 
-const getPassiveGroupIconStyle = (groupId) => {
-  const hash = Math.abs(hashPassiveId(groupId))
-  return {
-    path: PASSIVE_GROUP_ICON_PATHS[hash % PASSIVE_GROUP_ICON_PATHS.length],
-    hue: hash % 360,
-    rotate: (hash % 24) - 12,
-  }
+    const regularCandidates = visibleUnits.filter((unit) =>
+      !isHeroUnit(unit) && isUnitTypeAllowedInGameMode(unit.tipo, mode),
+    )
+    const remainingTarget = Math.max(0, Math.floor(target - heroEntry.total))
+    const regularResult = regularCandidates.length && remainingTarget > 0
+      ? generateArmyByValue({ ...faction, unidades: regularCandidates }, remainingTarget, mode)
+      : { units: [], total: 0, score: 0 }
+    const units = [heroEntry, ...(regularResult.units || [])]
+    const total = heroEntry.total + Number(regularResult.total || 0)
+    const score = total + Number(regularResult.score || 0) / 10
+    if (!bestResult || score > bestResult.score || (score === bestResult.score && total > bestResult.total)) {
+      bestResult = { units, total, score }
+    }
+  })
+
+  return bestResult || { units: [], total: 0, score: Number.NEGATIVE_INFINITY }
 }
 
 function SpinnerIcon() {
@@ -449,57 +348,6 @@ function GameModePicker({ value, onChange, t }) {
         })}
       </div>
     </div>
-  )
-}
-
-function PassiveGroupIcon({ groupId }) {
-  const icon = getPassiveGroupIconStyle(groupId)
-
-  return (
-    <span
-      className="passive-group-icon-shape"
-      style={{
-        '--passive-group-icon-hue': `${icon.hue}`,
-        '--passive-group-icon-rotate': `${icon.rotate}deg`,
-      }}
-      aria-hidden="true"
-    >
-      <svg className="passive-group-icon-svg" viewBox="0 0 24 24">
-        <path d="M12 2.8c5 0 9.2 4 9.2 9.2S17 21.2 12 21.2 2.8 17 2.8 12 7 2.8 12 2.8z" />
-        <path d={icon.path} />
-      </svg>
-    </span>
-  )
-}
-
-function FactionSelectLabel({ label, iconSrc }) {
-  return (
-    <span className="faction-select-option-label">
-      <span className="faction-select-option-icon" aria-hidden="true">
-        {iconSrc ? <img src={iconSrc} alt="" /> : <span className="faction-select-option-fallback">?</span>}
-      </span>
-      <span>{label}</span>
-    </span>
-  )
-}
-
-function FactionAbilityIcon({ skill }) {
-  const illustrationSrc = getFactionAbilityIllustrationSrc(skill?.id, skill?.nombre)
-  const [isPreviewVisible, setIsPreviewVisible] = useState(false)
-
-  return (
-    <span
-      className={`faction-ability-icon${illustrationSrc ? ' has-hover-preview' : ''}`}
-      onMouseEnter={illustrationSrc ? () => setIsPreviewVisible(true) : undefined}
-      onMouseLeave={illustrationSrc ? () => setIsPreviewVisible(false) : undefined}
-    >
-      <img src={abilityIconSrc} alt="" aria-hidden="true" />
-      {illustrationSrc && isPreviewVisible ? (
-        <span className="faction-ability-hover-preview" aria-hidden="true">
-          <img src={illustrationSrc} alt="" loading="lazy" />
-        </span>
-      ) : null}
-    </span>
   )
 }
 
@@ -606,6 +454,35 @@ function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl,
   )
 }
 
+function EraWorldPicker({ value, onChange, t }) {
+  const options = [
+    { value: 'future', label: t('generator.future'), className: 'era-world-button-future' },
+    { value: 'past', label: t('generator.past'), className: 'era-world-button-past' },
+  ]
+  return (
+    <div className="field field-era-worlds">
+      <span>{t('generator.era')}</span>
+      <div className="era-world-switch" role="radiogroup" aria-label={t('generator.era')}>
+        {options.map((option) => {
+          const isActive = option.value === value
+          return (
+            <button
+              key={option.value}
+              type="button"
+              className={`era-world-button ${option.className}${isActive ? ' active' : ''}`}
+              onClick={() => onChange(option.value)}
+              role="radio"
+              aria-checked={isActive}
+            >
+              {option.label}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 function Generador() {
   const { t, lang } = useI18n()
   const [, startTransition] = useTransition()
@@ -617,20 +494,18 @@ function Generador() {
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
   const [selectedEra, setSelectedEra] = useState('future')
+  const [heroChosen, setHeroChosen] = useState(false)
   const [manualUnitDrafts, setManualUnitDrafts] = useState({})
-  const [selectedPassiveGroupId, setSelectedPassiveGroupId] = useState('')
-  const [selectedFactionSkillIds, setSelectedFactionSkillIds] = useState([])
   const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
   const [armyDownloadError, setArmyDownloadError] = useState('')
   const [isRandomArmyModalOpen, setIsRandomArmyModalOpen] = useState(false)
   const [randomArmyTargetValue, setRandomArmyTargetValue] = useState('')
   const [randomArmyError, setRandomArmyError] = useState('')
+  const [isGeneratingArmy, setIsGeneratingArmy] = useState(false)
   const [pendingSquadUnitId, setPendingSquadUnitId] = useState('')
   const [pendingSquadSize, setPendingSquadSize] = useState(1)
   const [openManualUnitId, setOpenManualUnitId] = useState('')
   const [openArmyUnitUid, setOpenArmyUnitUid] = useState('')
-  const [openFactionAbilityGroupId, setOpenFactionAbilityGroupId] = useState('')
-  const [openArmyAbilityId, setOpenArmyAbilityId] = useState('')
   const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
   const [imageCropDraft, setImageCropDraft] = useState(null)
   const [selectedArmyUnitSelections, setSelectedArmyUnitSelections] = useState([])
@@ -645,55 +520,28 @@ function Generador() {
   }, [factions, selectedFactionId])
 
   const selectedFaction = factions.find((faction) => faction.id === selectedFactionIdSafe) || null
-  const selectedPassiveOptions = useMemo(() => getFactionPassiveSelections(selectedFaction), [selectedFaction])
-  const selectedFactionSkillIdsSafe = useMemo(
-    () => sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds),
-    [selectedFaction, selectedFactionSkillIds],
-  )
   const factionSelectOptions = useMemo(
-    () =>
-      factions.map((faction) => ({
-        value: faction.id,
-        label: <FactionSelectLabel label={faction.nombre} iconSrc={factionImages[faction.id]} />,
-      })),
+    () => factions.map((faction) => ({ value: faction.id, label: faction.nombre })),
     [factions],
   )
-  const selectedPassiveGroupIdSafe = useMemo(
-    () => sanitizePassiveGroupId(selectedFaction, selectedPassiveGroupId),
-    [selectedFaction, selectedPassiveGroupId],
-  )
-  const selectedPassiveGroup = useMemo(
-    () => selectedPassiveOptions.find((group) => group.id === selectedPassiveGroupIdSafe) || null,
-    [selectedPassiveOptions, selectedPassiveGroupIdSafe],
-  )
-  const selectedFactionSelection = useMemo(
-    () =>
-      getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
-        ? buildFactionAbilitySelection(selectedFaction, selectedFactionSkillIdsSafe)
-        : selectedPassiveGroup,
-    [selectedFaction, selectedFactionSkillIdsSafe, selectedPassiveGroup],
-  )
-  const selectedFactionWithPassives = useMemo(
-    () => applyPassiveGroupEffectsToFaction(selectedFaction, selectedFactionSelection),
-    [selectedFaction, selectedFactionSelection],
-  )
-  const manualCurrentSelection = selectedFactionSelection
-  const availableEraTokens = useMemo(() => {
-    const tokens = new Set(
-      (selectedFactionWithPassives?.unidades || [])
-        .flatMap((unit) => getUnitEraTokens(unit))
-        .filter((token) => token === 'future' || token === 'past'),
-    )
-
-    return ['future', 'past'].filter((token) => tokens.has(token))
-  }, [selectedFactionWithPassives])
   const visibleManualUnits = useMemo(() => {
-    if (!selectedFactionWithPassives?.unidades?.length) return []
-    return getVisibleUnitsForGeneratorContext(selectedFactionWithPassives, selectedEra, gameMode)
-  }, [selectedFactionWithPassives, gameMode, selectedEra])
+    if (!selectedFaction?.unidades?.length) return []
+    return getUnitsForGeneratorContext(selectedFaction).map((unit, index) => ({
+      ...unit,
+      generatorUid: getGeneratorUnitUid(unit, index),
+    }))
+  }, [selectedFaction])
+  const visibleHeroUnits = useMemo(
+    () => sortHeroUnitsByEra(visibleManualUnits.filter(isHeroUnit)),
+    [visibleManualUnits],
+  )
+  const visibleRegularUnits = useMemo(
+    () => visibleManualUnits.filter((unit) => !isHeroUnit(unit)),
+    [visibleManualUnits],
+  )
 
   const getManualUnitDraft = (unit) => {
-    const draft = manualUnitDrafts[unit.id] || {}
+    const draft = manualUnitDrafts[unit.generatorUid || unit.id] || {}
     return {
       squadSize: gameMode === 'escuadra' ? clampSquadSize(draft.squadSize ?? unit.escuadra_min, unit) : 1,
     }
@@ -702,12 +550,12 @@ function Generador() {
   const exportUnits = useMemo(
     () =>
       visibleManualUnits.map((unit) => {
-        const draft = manualUnitDrafts[unit.id] || {}
+        const draft = manualUnitDrafts[unit.generatorUid || unit.id] || {}
         const squadSize = gameMode === 'escuadra' ? clampSquadSize(draft.squadSize ?? unit.escuadra_min, unit) : 1
-        const fixedLoadout = getFixedUnitLoadout(unit)
+        const fixedLoadout = getFixedUnitLoadout(unit, selectedEra)
         const total = computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, squadSize, null, gameMode)
         return {
-          uid: unit.id,
+          uid: unit.generatorUid || unit.id,
           base: unit,
           shooting: fixedLoadout.shooting,
           meleeList: fixedLoadout.meleeList,
@@ -718,16 +566,8 @@ function Generador() {
           total,
         }
       }),
-    [visibleManualUnits, manualUnitDrafts, gameMode],
+    [visibleManualUnits, manualUnitDrafts, gameMode, selectedEra],
   )
-  const selectedAbilityRows = useMemo(
-    () => manualCurrentSelection?.habilidades || selectedFactionSelection?.habilidades || [],
-    [manualCurrentSelection, selectedFactionSelection],
-  )
-  useEffect(() => {
-    if (selectedAbilityRows.length) setArmyDownloadError('')
-  }, [selectedAbilityRows.length])
-  const abilityExportPages = useMemo(() => chunkItems(selectedAbilityRows, 2), [selectedAbilityRows])
   const selectedArmyUnits = useMemo(() => {
     const unitsById = new Map(exportUnits.map((unit) => [unit.uid, unit]))
     return selectedArmyUnitSelections
@@ -753,14 +593,18 @@ function Generador() {
       })
       .filter(Boolean)
   }, [exportUnits, selectedArmyUnitSelections, gameMode])
-  const exportUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(selectedArmyUnits), [selectedArmyUnits])
-  const currentAbilityTotalValue = useMemo(
-    () => 0,
-    [],
+  const selectedHeroEntries = useMemo(() => selectedArmyUnits.filter((entry) => isHeroUnit(entry.base)), [selectedArmyUnits])
+  const selectedRegularArmyUnits = useMemo(() => selectedArmyUnits.filter((entry) => !isHeroUnit(entry.base)), [selectedArmyUnits])
+  const selectedHeroCount = selectedHeroEntries.length
+  const selectedHeroSourceUid = selectedHeroEntries[0]?.sourceUid || ''
+  const visibleUnlockedRegularUnits = useMemo(
+    () => (selectedEra && heroChosen ? visibleRegularUnits : []),
+    [selectedEra, heroChosen, visibleRegularUnits],
   )
+  const exportUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(selectedArmyUnits), [selectedArmyUnits])
   const currentArmyTotalValue = useMemo(
-    () => selectedArmyUnits.reduce((sum, unit) => sum + Number(unit?.total || 0), 0) + currentAbilityTotalValue,
-    [selectedArmyUnits, currentAbilityTotalValue],
+    () => selectedArmyUnits.reduce((sum, unit) => sum + Number(unit?.total || 0), 0),
+    [selectedArmyUnits],
   )
   const armyExportPages = useMemo(() => chunkItems(selectedArmyUnits, 2), [selectedArmyUnits])
 
@@ -768,6 +612,12 @@ function Generador() {
     setSelectedArmyUnitSelections((current) =>
       current.map((selection) => (selection.selectionId === selectionId ? { ...selection, ...nextPatch } : selection)),
     )
+  }
+
+  const getUnitUnlockDisabledReason = (unit) => {
+    if (isHeroUnit(unit)) return ''
+    if (!isUnitTypeAllowedInGameMode(unit.tipo, gameMode)) return t('generator.unitUnavailableInMode')
+    return ''
   }
 
   const handleArmyUnitImageChange = (entry, event) => {
@@ -874,24 +724,6 @@ function Generador() {
   }, [])
 
   useEffect(() => {
-    if (!selectedFaction) return
-    if (getFactionPassiveSelectionMode(selectedFaction) !== 'grupo') return
-    if (selectedPassiveGroupIdSafe) return
-    const fallbackGroupId = getFirstPassiveGroupId(selectedFaction)
-    if (fallbackGroupId) {
-      const timeoutId = window.setTimeout(() => setSelectedPassiveGroupId(fallbackGroupId), 0)
-      return () => window.clearTimeout(timeoutId)
-    }
-  }, [selectedFaction, selectedPassiveGroupIdSafe])
-
-  useEffect(() => {
-    if (!availableEraTokens.length) return
-    if (availableEraTokens.includes(selectedEra)) return
-    const timeoutId = window.setTimeout(() => setSelectedEra(availableEraTokens[0]), 0)
-    return () => window.clearTimeout(timeoutId)
-  }, [availableEraTokens, selectedEra])
-
-  useEffect(() => {
     if (typeof document === 'undefined') return undefined
     const hasOpenModal = Boolean(imageCropDraft || isRandomArmyModalOpen || pendingSquadUnitId)
     const previousOverflow = document.body.style.overflow
@@ -909,10 +741,6 @@ function Generador() {
     const preparePreview = async () => {
       await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
       const sheetNodes = []
-      abilityExportPages.forEach((_, pageIndex) => {
-        const pageNode = armySheetRefs.current.get(`ability-${pageIndex}`)
-        if (pageNode) sheetNodes.push(pageNode)
-      })
       armyExportPages.forEach((_, pageIndex) => {
         const pageNode = armySheetRefs.current.get(`page-${pageIndex}`)
         if (pageNode) sheetNodes.push(pageNode)
@@ -923,7 +751,7 @@ function Generador() {
     preparePreview().catch(() => {})
 
     return undefined
-  }, [isArmyPrintPreviewOpen, abilityExportPages, armyExportPages])
+  }, [isArmyPrintPreviewOpen, armyExportPages])
 
   useEffect(() => {
     if (!isArmyPrintPreviewOpen || !armyExportStageRef.current) return undefined
@@ -934,10 +762,6 @@ function Generador() {
       await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
 
       const sheetNodes = []
-      abilityExportPages.forEach((_, pageIndex) => {
-        const pageNode = armySheetRefs.current.get(`ability-${pageIndex}`)
-        if (pageNode) sheetNodes.push(pageNode)
-      })
       armyExportPages.forEach((_, pageIndex) => {
         const pageNode = armySheetRefs.current.get(`page-${pageIndex}`)
         if (pageNode) sheetNodes.push(pageNode)
@@ -953,13 +777,6 @@ function Generador() {
         const canvas = await cardRef?.captureAsCanvas?.()
         if (!canvas) throw new Error(`Missing export card capture: ${cardKey}`)
         return canvas
-      }
-
-      for (const [pageIndex, pageEntries] of abilityExportPages.entries()) {
-        const cardCanvases = await Promise.all(pageEntries.map((skill, cardIndex) =>
-          captureCardCanvas(`ability-${pageIndex}-${skill.id || skill.nombre || cardIndex}`),
-        ))
-        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
       }
 
       for (const [pageIndex, pageEntries] of armyExportPages.entries()) {
@@ -1004,21 +821,16 @@ function Generador() {
     return () => {
       cancelled = true
     }
-  }, [isArmyPrintPreviewOpen, abilityExportPages, armyExportPages, selectedFaction, gameMode, lang, exportUnitDisplayNames, getEraLabel])
+  }, [isArmyPrintPreviewOpen, armyExportPages, selectedFaction, gameMode, lang, exportUnitDisplayNames, getEraLabel])
 
   const handleFactionChange = (event) => {
     const next = event.target.value
-    const nextFaction = factions.find((faction) => faction.id === next)
-    const nextPassiveGroupId = getFactionPassiveSelectionMode(nextFaction) === 'grupo' ? getFirstPassiveGroupId(nextFaction) : ''
-    const nextFactionSkillIds = []
     startTransition(() => {
       setSelectedFactionId(next)
-      setSelectedPassiveGroupId(nextPassiveGroupId)
-      setSelectedFactionSkillIds(nextFactionSkillIds)
+      setSelectedEra('')
+      setHeroChosen(false)
       setOpenManualUnitId('')
       setOpenArmyUnitUid('')
-      setOpenFactionAbilityGroupId('')
-      setOpenArmyAbilityId('')
       setPendingSquadUnitId('')
       setSelectedArmyUnitSelections([])
       setManualUnitDrafts({})
@@ -1028,23 +840,75 @@ function Generador() {
 
   const handleGameModeChange = (nextMode) => {
     setGameMode(nextMode)
+    setSelectedEra('')
+    setHeroChosen(false)
     setOpenManualUnitId('')
     setOpenArmyUnitUid('')
-    setOpenFactionAbilityGroupId('')
-    setOpenArmyAbilityId('')
     setPendingSquadUnitId('')
     setSelectedArmyUnitSelections([])
   }
 
+  const handleEraChange = (nextEra) => {
+    setSelectedEra(nextEra)
+    setHeroChosen(false)
+    setOpenManualUnitId('')
+    setOpenArmyUnitUid('')
+    setPendingSquadUnitId('')
+    setSelectedArmyUnitSelections([])
+    setArmyDownloadError('')
+  }
+
+  const handleSelectHeroUnit = (unitId) => {
+    const unitEntry = exportUnits.find((entry) => entry.uid === unitId)
+    if (!unitEntry || !isHeroUnit(unitEntry.base)) return
+    if (selectedHeroSourceUid === unitEntry.uid) return
+
+    armyUnitSelectionCounterRef.current += 1
+    const heroSelection = {
+      selectionId: `${unitId}::${armyUnitSelectionCounterRef.current}`,
+      unitId,
+      squadSize: 1,
+    }
+
+    setSelectedArmyUnitSelections([heroSelection])
+    setHeroChosen(true)
+    setPendingSquadUnitId('')
+    setOpenArmyUnitUid('')
+    setArmyDownloadError('')
+  }
+
   const addArmyUnitSelection = (unitId, squadSize) => {
+    const unitEntry = exportUnits.find((entry) => entry.uid === unitId)
+    if (unitEntry && isHeroUnit(unitEntry.base) && selectedHeroCount >= 1) {
+      setArmyDownloadError(t('generator.heroAlreadyAdded'))
+      return false
+    }
+    if (unitEntry && !isHeroUnit(unitEntry.base)) {
+      const unlockDisabledReason = getUnitUnlockDisabledReason(unitEntry.base)
+      if (unlockDisabledReason) {
+        setArmyDownloadError(unlockDisabledReason)
+        return false
+      }
+    }
     armyUnitSelectionCounterRef.current += 1
     const selectionId = `${unitId}::${armyUnitSelectionCounterRef.current}`
     setSelectedArmyUnitSelections((current) => [...current, { selectionId, unitId, squadSize }])
+    setArmyDownloadError('')
+    return true
   }
 
   const handleAddArmyUnit = (unitId) => {
     const unitEntry = exportUnits.find((entry) => entry.uid === unitId)
     if (!unitEntry) return
+    if (isHeroUnit(unitEntry.base)) {
+      handleSelectHeroUnit(unitId)
+      return
+    }
+    const unlockDisabledReason = getUnitUnlockDisabledReason(unitEntry.base)
+    if (unlockDisabledReason) {
+      setArmyDownloadError(unlockDisabledReason)
+      return
+    }
     if (gameMode !== 'escuadra') {
       addArmyUnitSelection(unitId, 1)
       return
@@ -1067,42 +931,18 @@ function Generador() {
     if (!pendingSquadUnitId) return
     const unitEntry = exportUnits.find((entry) => entry.uid === pendingSquadUnitId)
     if (!unitEntry) return
-    addArmyUnitSelection(pendingSquadUnitId, clampSquadSize(pendingSquadSize, unitEntry.base))
-    setPendingSquadUnitId('')
+    if (addArmyUnitSelection(pendingSquadUnitId, clampSquadSize(pendingSquadSize, unitEntry.base))) {
+      setPendingSquadUnitId('')
+    }
   }
 
   const handleRemoveArmyUnit = (selectionId) => {
     setSelectedArmyUnitSelections((current) => current.filter((selection) => selection.selectionId !== selectionId))
   }
 
-  const handleAddArmyPassive = (groupId) => {
-    if (!selectedFaction) return
-    if (getFactionPassiveSelectionMode(selectedFaction) === 'multiple') {
-      const currentIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
-      if (currentIds.includes(groupId) || currentIds.length >= getFactionAbilitySelectionLimit(selectedFaction)) return
-      setSelectedFactionSkillIds([...currentIds, groupId])
-      setSelectedPassiveGroupId('')
-    } else {
-      setSelectedPassiveGroupId(groupId)
-      setSelectedFactionSkillIds([])
-    }
-    setArmyDownloadError('')
-  }
-
-  const handleRemoveArmyPassive = (groupId) => {
-    if (!selectedFaction) return
-    if (getFactionPassiveSelectionMode(selectedFaction) === 'multiple') {
-      setSelectedFactionSkillIds((current) => current.filter((id) => id !== groupId))
-      return
-    }
-    void groupId
-    setSelectedPassiveGroupId('')
-  }
-
   const handleResetCurrentArmy = () => {
     setSelectedArmyUnitSelections([])
-    setSelectedFactionSkillIds([])
-    setSelectedPassiveGroupId(getFactionPassiveSelectionMode(selectedFaction) === 'grupo' ? getFirstPassiveGroupId(selectedFaction) : '')
+    setHeroChosen(false)
     setArmyDownloadError('')
   }
 
@@ -1134,51 +974,47 @@ function Generador() {
       return
     }
 
-    let bestResult = null
-    const attempts = 18
-    for (let index = 0; index < attempts; index += 1) {
-      const passiveCandidate = buildRandomPassiveCandidate(selectedFaction, selectedPassiveOptions, target, gameMode, selectedEra)
-      const unitTarget = Math.max(0, Math.floor(target - passiveCandidate.cost))
-      if (unitTarget <= 0 || !passiveCandidate.units.length) continue
+    setIsGeneratingArmy(true)
 
-      const randomFactionSource = passiveCandidate.factionWithPassives
-        ? {
-            ...passiveCandidate.factionWithPassives,
-            unidades: passiveCandidate.units,
-          }
-        : null
-      const result = generateArmyByValue(randomFactionSource, unitTarget, gameMode)
-      if (!result.units.length) continue
+    setTimeout(() => {
+      const eraFilteredFaction = selectedEra
+        ? { ...selectedFaction, unidades: selectedFaction.unidades.filter((unit) => unitMatchesEraToken(unit, selectedEra)) }
+        : selectedFaction
 
-      const total = result.total + passiveCandidate.cost
-      const passiveScore = passiveCandidate.selection ? Math.min(12, Math.max(3, passiveCandidate.cost || 3)) : 0
-      const score = total + passiveScore + (result.score || 0) / 10
-      if (!bestResult || score > bestResult.score) {
-        bestResult = { ...result, passiveCandidate, total, score }
+      let bestResult = null
+      const attempts = 24
+      for (let index = 0; index < attempts; index += 1) {
+        const result = generateArmyWithRequiredHero(eraFilteredFaction, target, gameMode, selectedEra)
+        if (!result.units.length) continue
+
+        const total = result.total
+        const score = total + (result.score || 0) / 10
+        if (!bestResult || score > bestResult.score) {
+          bestResult = { ...result, total, score }
+        }
       }
-    }
 
-    if (!bestResult?.units?.length) {
-      setRandomArmyError(t('generator.randomArmyNoResult'))
-      return
-    }
+      setIsGeneratingArmy(false)
 
-    const selectionMode = getFactionPassiveSelectionMode(selectedFaction)
-    if (selectionMode === 'multiple') {
-      setSelectedFactionSkillIds(bestResult.passiveCandidate.skillIds || [])
-      setSelectedPassiveGroupId('')
-    } else {
-      setSelectedFactionSkillIds([])
-      setSelectedPassiveGroupId(bestResult.passiveCandidate.passiveGroupId || getFirstPassiveGroupId(selectedFaction))
-    }
-    setSelectedArmyUnitSelections(
-      bestResult.units
-        .filter((entry) => entry?.base?.id)
-        .map((entry) => createArmyUnitSelection(entry.base.id, { squadSize: entry.squadSize })),
-    )
-    setActiveGeneratorSection('army')
-    setIsRandomArmyModalOpen(false)
-    setRandomArmyError('')
+      if (!bestResult?.units?.length) {
+        setRandomArmyError(t('generator.randomArmyNoResult'))
+        return
+      }
+
+      const exportUnitByIdentity = new Map(exportUnits.map((entry) => [getUnitIdentityKey(entry.base), entry.uid]))
+      setSelectedArmyUnitSelections(
+        bestResult.units
+          .filter((entry) => entry?.base?.id)
+          .map((entry) => {
+            const unitId = exportUnitByIdentity.get(getUnitIdentityKey(entry.base)) || entry.base.id
+            return createArmyUnitSelection(unitId, { squadSize: entry.squadSize })
+          }),
+      )
+      setHeroChosen(true)
+      setActiveGeneratorSection('army')
+      setIsRandomArmyModalOpen(false)
+      setRandomArmyError('')
+    }, 0)
   }
 
   useEffect(() => {
@@ -1202,9 +1038,9 @@ function Generador() {
   }
 
   const handleDownloadArmyPdf = () => {
-    if ((!selectedArmyUnits.length && !selectedAbilityRows.length) || isArmyPrintPreviewOpen) return
-    if (selectedPassiveOptions.length && !selectedAbilityRows.length) {
-      setArmyDownloadError(t('generator.missingFactionAbility'))
+    if (!selectedArmyUnits.length || isArmyPrintPreviewOpen) return
+    if (selectedHeroCount !== 1) {
+      setArmyDownloadError(selectedHeroCount > 1 ? t('generator.singleHeroRequired') : t('generator.requiredHero'))
       return
     }
     if (typeof window === 'undefined') return
@@ -1224,47 +1060,32 @@ function Generador() {
         <div className="generator-main">
           <div className="manual-panel">
             <GameModePicker value={gameMode} onChange={handleGameModeChange} t={t} />
-            <div className="field">
-              <span>{t('generator.faction')}</span>
-              <CustomSelect
-                t={t}
-                value={selectedFactionIdSafe}
-                onChange={(next) => handleFactionChange({ target: { value: next } })}
-                options={factionSelectOptions}
-              />
-            </div>
-            {availableEraTokens.length ? (
-              <div className="field field-era-worlds">
-                <span>{t('generator.era')}</span>
-                <div className="era-world-switch" role="radiogroup" aria-label={t('generator.era')}>
-                  {availableEraTokens.map((eraToken) => (
-                    <button
-                      key={eraToken}
-                      type="button"
-                      role="radio"
-                      aria-checked={selectedEra === eraToken}
-                      className={`era-world-button era-world-button-${eraToken}${selectedEra === eraToken ? ' active' : ''}`}
-                      onClick={() => setSelectedEra(eraToken)}
-                    >
-                      {getEraLabel(eraToken)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : null}
 
             {selectedFaction && (
               <>
                 <div className="faction-summary">
-                  <div className="faction-header">
-                    {factionImages[selectedFaction.id] ? (
-                      <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
-                    ) : (
-                      <span className="faction-header-fallback" aria-hidden="true">?</span>
-                    )}
-                    <h3>{selectedFaction.nombre}</h3>
+                  <div className="field faction-summary-select">
+                    <span>{t('generator.faction')}</span>
+                    <CustomSelect
+                      t={t}
+                      value={selectedFactionIdSafe}
+                      onChange={(next) => handleFactionChange({ target: { value: next } })}
+                      options={factionSelectOptions}
+                    />
                   </div>
-                  <p className="faction-description">{selectedFaction.estilo}</p>
+                  <div className="faction-summary-main">
+                    <div className="faction-header">
+                      {factionImages[selectedFaction.id] ? (
+                        <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
+                      ) : (
+                        <span className="faction-header-fallback" aria-hidden="true">?</span>
+                      )}
+                      <div className="faction-heading-copy">
+                        <p className="faction-description">{selectedFaction.estilo}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <EraWorldPicker value={selectedEra} onChange={handleEraChange} t={t} />
                 </div>
                 <div className="generator-section-tabs" role="tablist" aria-label={t('generator.sectionTabs')}>
                   <button
@@ -1278,139 +1099,105 @@ function Generador() {
                   </button>
                   <button
                     type="button"
-                    role="tab"
-                    aria-selected={activeGeneratorSection === 'passives'}
-                    className={`generator-section-tab${activeGeneratorSection === 'passives' ? ' active' : ''}`}
-                    onClick={() => setActiveGeneratorSection('passives')}
+                    className="generator-section-tab"
+                    onClick={handleOpenRandomArmyModal}
                   >
-                    {t('generator.passives')}
+                    {t('generator.randomArmy')}
                   </button>
                   <button
                     type="button"
                     role="tab"
                     aria-selected={activeGeneratorSection === 'army'}
-                    className={`generator-section-tab generator-section-tab-army${activeGeneratorSection === 'army' ? ' active' : ''}`}
+                    className={`generator-section-tab${activeGeneratorSection === 'army' ? ' active' : ''}`}
                     onClick={() => setActiveGeneratorSection('army')}
                   >
                     <span>{t('generator.currentArmy')}:</span>
                     <span className="generator-section-tab-count">{currentArmyTotalValue} {t('generator.valueUnit')}</span>
                   </button>
                 </div>
-                {activeGeneratorSection === 'passives' && selectedPassiveOptions.length > 0 && (
-                  <div className="generator-subsection generator-listing-field">
-                    <div className="generator-listing-head">
-                      <span className="generator-listing-note">{t('generator.requiredFactionAbility')}</span>
-                    </div>
-                    <div className="passive-group-list passive-group-list-inline unit-list">
-                      {selectedPassiveOptions.map((group, index) => {
-                        const currentMultipleIds = sanitizeFactionAbilityIds(selectedFaction, selectedFactionSkillIds)
-                        const factionAbilityLimit = getFactionAbilitySelectionLimit(selectedFaction)
-                        const isActive = getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
-                          ? currentMultipleIds.includes(group.id)
-                          : group.id === selectedPassiveGroupIdSafe
-                        const isDisabled = getFactionPassiveSelectionMode(selectedFaction) === 'multiple'
-                          && !isActive
-                          && currentMultipleIds.length >= factionAbilityLimit
-
-                        return (
-                          <article
-                            key={group.id}
-                            className={`unit-card passive-group-card${isActive ? ' active' : ''}${isDisabled ? ' is-disabled' : ''}`}
-                          >
-                            <div className="unit-card-header">
-                              <div className="unit-card-summary">
-                                <span className="unit-card-thumb-wrap passive-group-thumb-wrap" aria-hidden="true">
-                                  <span className="unit-card-thumb-frame passive-group-thumb-frame">
-                                    <span className="unit-card-thumb-canvas passive-group-thumb-canvas">
-                                      <FactionAbilityIcon skill={group.habilidades?.[0] || { id: group.id }} factionId={selectedFaction?.id} />
-                                    </span>
-                                  </span>
-                                </span>
-                                <div className="passive-group-heading unit-card-heading">
-                                  <div className="unit-card-title-row">
-                                    <h4>{getPassiveSelectionDisplayName(group, selectedFaction, t, index)}</h4>
-                                  </div>
-                                  <div className="passive-group-kind">
-                                    {t(getPassiveSelectionLabelKey(selectedFaction, 'generator.passive', 'generator.passiveSet'))}
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="unit-card-header-actions">
-                                <button
-                                  type="button"
-                                  className="ghost small"
-                                  onClick={() => setOpenFactionAbilityGroupId(group.id)}
-                                >
-                                  {t('generator.viewCard')}
-                                </button>
-                                <button
-                                  type="button"
-                                  className="ghost small"
-                                  disabled={isDisabled || isActive}
-                                  onClick={() => handleAddArmyPassive(group.id)}
-                                >
-                                  {t('generator.add')}
-                                </button>
-                              </div>
-                            </div>
-                          </article>
-                        )
-                      })}
-                    </div>
-                  </div>
-                )}
                 {activeGeneratorSection === 'units' ? (
                 <div className="generator-subsection generator-listing-field">
-                  <div className="unit-list">
-                  {visibleManualUnits.map((unit) => {
-                    const draft = getManualUnitDraft(unit)
-                    const fixedLoadout = getFixedUnitLoadout(unit)
-                    const draftTotal = computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, draft.squadSize, null, gameMode)
-                    const displayValue = gameMode === 'escuadra' ? unit.valor_base : draftTotal
-                    return (
-                      <article className="unit-card" key={unit.id}>
-                        <div className="unit-card-header">
-                          <div className="unit-card-summary">
-                            <span className="unit-card-thumb-wrap" aria-hidden="true">
-                              <span className="unit-card-thumb-frame">
-                                <span className="unit-card-thumb-canvas">
-                                  <img
-                                    className="unit-card-thumb fallback"
-                                    src={getUnitTypeBadgeSrc(unit.tipo, unit.eras)}
-                                    alt=""
-                                  />
-                                </span>
-                              </span>
-                            </span>
-                            <div className="unit-card-heading">
-                              <div className="unit-card-title-row">
-                                <h4>{unit.nombre}</h4>
+                  {[
+                    { key: 'heroes', label: t('generator.heroes'), units: visibleHeroUnits },
+                    {
+                      key: 'units',
+                      label: t('generator.units'),
+                      units: visibleUnlockedRegularUnits,
+                    },
+                  ].map((section) => section.units.length ? (
+                    <div className="unit-list-section" key={`manual-${section.key}`}>
+                      <p className="unit-list-section-label">{section.label}</p>
+                      <div className="unit-list">
+                        {section.units.map((unit) => {
+                          const draft = getManualUnitDraft(unit)
+                          const fixedLoadout = getFixedUnitLoadout(unit, selectedEra)
+                          const draftTotal = computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, draft.squadSize, null, gameMode)
+                          const displayValue = gameMode === 'escuadra' ? unit.valor_base : draftTotal
+                          const unitIsHero = isHeroUnit(unit)
+                          const unitKey = unit.generatorUid || unit.id
+                          const isSelectedHero = unitIsHero && selectedHeroSourceUid === unitKey
+                          const unlockDisabledReason = getUnitUnlockDisabledReason(unit)
+                          const unitDisabled = !unitIsHero && Boolean(unlockDisabledReason)
+                          const disabledTitle = unlockDisabledReason
+                          return (
+                            <article className={`unit-card${unitDisabled ? ' is-disabled' : ''}${isSelectedHero ? ' is-selected' : ''}`} key={unitKey}>
+                              <div className="unit-card-header">
+                                <div className="unit-card-summary">
+                                  <span className="unit-card-thumb-wrap" aria-hidden="true">
+                                    <span className="unit-card-thumb-frame">
+                                      <span className="unit-card-thumb-canvas">
+                                        <img
+                                          className="unit-card-thumb fallback"
+                                          src={getUnitTypeBadgeSrc(unit.tipo, selectedEra)}
+                                          alt=""
+                                        />
+                                      </span>
+                                    </span>
+                                  </span>
+                                  <div className="unit-card-heading">
+                                    <div className="unit-card-title-row">
+                                      <h4>{unit.nombre}</h4>
+                                    </div>
+                                    <div className={`unit-card-type unit-type-${getUnitTypeToken(unit.tipo)}${unitIsHero && selectedEra ? ` unit-era-${selectedEra}` : ''}`}>
+                                      {unit.tipo}
+                                      {selectedEra ? (
+                                        <span className="unit-card-era-list">
+                                          <span className={`unit-era-badge unit-era-${selectedEra}`}>
+                                            {getEraLabel(selectedEra)}
+                                          </span>
+                                        </span>
+                                      ) : null}
+                                    </div>
+                                    <div className="unit-card-inline-value">{displayValue} {t('generator.valueUnit')}</div>
+                                  </div>
+                                </div>
+                                <div className="unit-card-header-actions">
+                                  <button
+                                    type="button"
+                                    className="ghost small"
+                                    onClick={() => setOpenManualUnitId(unitKey)}
+                                  >
+                                    {t('generator.viewCard')}
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="ghost small"
+                                    disabled={unitDisabled || isSelectedHero}
+                                    title={disabledTitle || undefined}
+                                    onClick={() => handleAddArmyUnit(unitKey)}
+                                  >
+                                    {unitIsHero
+                                      ? (isSelectedHero ? t('generator.chosenHeroButton') : t('generator.chooseHeroButton'))
+                                      : t('generator.add')}
+                                  </button>
+                                </div>
                               </div>
-                              <div className={`unit-card-type unit-type-${getUnitTypeToken(unit.tipo)}`}>{unit.tipo}</div>
-                              <div className="unit-card-inline-value">{displayValue} {t('generator.valueUnit')}</div>
-                            </div>
-                          </div>
-                          <div className="unit-card-header-actions">
-                            <button
-                              type="button"
-                              className="ghost small"
-                              onClick={() => setOpenManualUnitId(unit.id)}
-                            >
-                              {t('generator.viewCard')}
-                            </button>
-                            <button
-                              type="button"
-                              className="ghost small"
-                              onClick={() => handleAddArmyUnit(unit.id)}
-                            >
-                              {t('generator.add')}
-                            </button>
-                          </div>
-                        </div>
-                      </article>
-                    )
-                  })}
-                  </div>
+                            </article>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  ) : null)}
                 </div>
                 ) : null}
                 {activeGeneratorSection === 'army' ? (
@@ -1423,18 +1210,21 @@ function Generador() {
                         </p>
                       </div>
                     </div>
-                    {selectedArmyUnits.length ? (
-                      <div className="army-modal-section">
-                        <p className="army-modal-section-label">{t('generator.factionUnits')}</p>
+                    {[
+                      { key: 'hero', label: t('generator.requiredHeroSlot'), entries: selectedHeroEntries },
+                      { key: 'units', label: t('generator.units'), entries: selectedRegularArmyUnits },
+                    ].map((section) => section.entries.length ? (
+                      <div className="army-modal-section" key={`current-army-${section.key}`}>
+                        <p className="army-modal-section-label">{section.label}</p>
                         <div className="army-list army-list-compact">
-                          {selectedArmyUnits.map((entry) => (
+                          {section.entries.map((entry) => (
                             <article key={`current-unit-${entry.uid}`} className="unit-card army-unit">
                               <div className="unit-card-header army-unit-header">
                                 <div className="unit-card-summary army-unit-summary">
                                   <div className="unit-card-thumb-wrap army-unit-image-wrap">
                                     <img
                                       className={`unit-card-thumb army-unit-thumb${entry.imageDataUrl ? '' : ' fallback'}`}
-                                      src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, entry.base.eras)}
+                                      src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, selectedEra)}
                                       alt={entry.base.nombre}
                                     />
                                     <input
@@ -1463,7 +1253,16 @@ function Generador() {
                                     <div className="unit-card-title-row">
                                       <h4>{exportUnitDisplayNames.get(entry.uid) || entry.base.nombre}</h4>
                                     </div>
-                                    <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}`}>{entry.base.tipo}</div>
+                                    <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}${isHeroUnit(entry.base) && selectedEra ? ` unit-era-${selectedEra}` : ''}`}>
+                                      {entry.base.tipo}
+                                      {selectedEra ? (
+                                        <span className="unit-card-era-list">
+                                          <span className={`unit-era-badge unit-era-${selectedEra}`}>
+                                            {getEraLabel(selectedEra)}
+                                          </span>
+                                        </span>
+                                      ) : null}
+                                    </div>
                                     <div className="unit-card-inline-value">{entry.total} {t('generator.valueUnit')}</div>
                                   </div>
                                 </div>
@@ -1494,48 +1293,8 @@ function Generador() {
                           ))}
                         </div>
                       </div>
-                    ) : null}
-                    {selectedAbilityRows.length ? (
-                      <div className="army-modal-section">
-                        <p className="army-modal-section-label">{t('generator.passives')}</p>
-                        <div className="army-list army-list-compact">
-                          {selectedAbilityRows.map((skill) => (
-                            <article key={`current-passive-${skill.id || skill.nombre}`} className="unit-card army-unit">
-                              <div className="unit-card-header army-unit-header">
-                                <div className="unit-card-summary army-unit-summary">
-                                  <span className="unit-card-thumb-wrap army-unit-image-wrap" aria-hidden="true">
-                                    <img className="unit-card-thumb army-unit-thumb fallback" src={abilityIconSrc} alt="" />
-                                  </span>
-                                  <div className="unit-card-heading">
-                                    <div className="unit-card-title-row">
-                                      <h4>{skill.nombre || skill.id}</h4>
-                                    </div>
-                                    <div className="unit-card-type">{t('generator.passive')}</div>
-                                  </div>
-                                </div>
-                                <div className="unit-card-header-actions army-unit-actions">
-                                  <button
-                                    type="button"
-                                    className="ghost small"
-                                    onClick={() => setOpenArmyAbilityId(skill.id || skill.nombre)}
-                                  >
-                                    {t('generator.viewCard')}
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="ghost small"
-                                    onClick={() => handleRemoveArmyPassive(skill.id)}
-                                  >
-                                    {t('generator.delete')}
-                                  </button>
-                                </div>
-                              </div>
-                            </article>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
-                    {!selectedAbilityRows.length && !selectedArmyUnits.length ? (
+                    ) : null)}
+                    {!selectedArmyUnits.length ? (
                       <p className="empty-state">{t('generator.noUnitsYet')}</p>
                     ) : null}
                     <div className="army-actions">
@@ -1543,7 +1302,7 @@ function Generador() {
                         type="button"
                         className="primary small"
                         onClick={handleDownloadArmyPdf}
-                        disabled={(!selectedArmyUnits.length && !selectedAbilityRows.length) || isArmyPrintPreviewOpen}
+                        disabled={!selectedArmyUnits.length || isArmyPrintPreviewOpen}
                         aria-busy={isArmyPrintPreviewOpen ? 'true' : 'false'}
                       >
                         {isArmyPrintPreviewOpen ? <SpinnerIcon /> : null}
@@ -1551,9 +1310,6 @@ function Generador() {
                       </button>
                       <button type="button" className="ghost small" onClick={handleResetCurrentArmy}>
                         {t('generator.resetArmy')}
-                      </button>
-                      <button type="button" className="ghost small" onClick={handleOpenRandomArmyModal}>
-                        {t('generator.randomArmy')}
                       </button>
                     </div>
                     {armyDownloadError ? (
@@ -1586,11 +1342,6 @@ function Generador() {
                         </button>
                       </div>
                       <div className="unit-modal-body">
-                        <div className="random-army-context">
-                          <span>{selectedFaction?.nombre || t('generator.noFaction')}</span>
-                          <span>{getEraLabel(selectedEra)}</span>
-                          <span>{gameMode === 'escuadra' ? t('generator.squad') : t('generator.skirmish')}</span>
-                        </div>
                         <label className="field">
                           <span>{t('generator.randomArmyValueLabel')}</span>
                           <input
@@ -1611,11 +1362,12 @@ function Generador() {
                         {randomArmyError ? <p className="random-army-error">{randomArmyError}</p> : null}
                       </div>
                       <div className="unit-modal-footer">
-                        <button type="button" className="ghost small" onClick={handleCloseRandomArmyModal}>
+                        <button type="button" className="ghost small" onClick={handleCloseRandomArmyModal} disabled={isGeneratingArmy}>
                           {t('generator.cancel')}
                         </button>
-                        <button type="submit" className="primary small">
-                          {t('generator.randomArmyGenerate')}
+                        <button type="submit" className="primary small" disabled={isGeneratingArmy} aria-busy={isGeneratingArmy ? 'true' : 'false'}>
+                          {isGeneratingArmy ? <SpinnerIcon /> : null}
+                          <span>{isGeneratingArmy ? t('generator.randomArmyGenerating') : t('generator.randomArmyGenerate')}</span>
                         </button>
                       </div>
                     </form>
@@ -1629,7 +1381,7 @@ function Generador() {
                   const min = clampSquadSize(unitEntry.base.escuadra_min, unitEntry.base)
                   const max = clampSquadSize(unitEntry.base.escuadra_max, unitEntry.base)
                   const sizeOptions = Array.from({ length: Math.max(1, max - min + 1) }, (_, index) => min + index)
-                  const fixedLoadout = getFixedUnitLoadout(unitEntry.base)
+                  const fixedLoadout = getFixedUnitLoadout(unitEntry.base, selectedEra)
                   const selectedSquadValue = computeUnitTotal(
                     unitEntry.base,
                     fixedLoadout.shooting,
@@ -1693,10 +1445,10 @@ function Generador() {
                 {/* Modal de vista previa de ficha */}
                 {openManualUnitId || openArmyUnitUid ? (() => {
                   const previewEntry = openArmyUnitUid ? selectedArmyUnits.find((entry) => entry.uid === openArmyUnitUid) : null
-                  const previewUnit = previewEntry?.base || visibleManualUnits.find((u) => u.id === openManualUnitId)
+                  const previewUnit = previewEntry?.base || visibleManualUnits.find((u) => (u.generatorUid || u.id) === openManualUnitId)
                   if (!previewUnit) return null
                   const previewDraft = getManualUnitDraft(previewUnit)
-                  const previewLoadout = previewEntry || getFixedUnitLoadout(previewUnit)
+                  const previewLoadout = previewEntry || getFixedUnitLoadout(previewUnit, selectedEra)
                   const previewTotal = previewEntry?.total || computeUnitTotal(
                     previewUnit,
                     previewLoadout.shooting,
@@ -1709,8 +1461,7 @@ function Generador() {
                   const previewDisplayName = previewEntry
                     ? exportUnitDisplayNames.get(previewEntry.uid) || previewUnit.nombre
                     : previewUnit.nombre
-                  const previewEraTokens = getUnitEraTokens(previewUnit)
-                  const previewEraLabel = previewEraTokens.length ? previewEraTokens.map((token) => getEraLabel(token)).join(' / ') : ''
+                  const previewEraLabel = selectedEra ? getEraLabel(selectedEra) : ''
                   const closePreview = () => {
                     setOpenManualUnitId('')
                     setOpenArmyUnitUid('')
@@ -1760,61 +1511,6 @@ function Generador() {
                     document.body,
                   ) : null
                 })() : null}
-                {openFactionAbilityGroupId || openArmyAbilityId ? (() => {
-                  const previewArmyAbility = openArmyAbilityId
-                    ? selectedAbilityRows.find((skill) => (skill.id || skill.nombre) === openArmyAbilityId)
-                    : null
-                  const previewGroup = openFactionAbilityGroupId
-                    ? selectedPassiveOptions.find((group) => group.id === openFactionAbilityGroupId)
-                    : null
-                  const previewAbilities = previewArmyAbility
-                    ? [previewArmyAbility]
-                    : Array.isArray(previewGroup?.habilidades) ? previewGroup.habilidades : []
-                  const previewAbilityLabel = previewArmyAbility?.nombre
-                    || (previewGroup ? getPassiveSelectionDisplayName(previewGroup, selectedFaction, t) : '')
-                  if (!previewAbilities.length) return null
-                  const closeAbilityPreview = () => {
-                    setOpenFactionAbilityGroupId('')
-                    setOpenArmyAbilityId('')
-                  }
-
-                  return typeof document !== 'undefined' ? createPortal(
-                    <div
-                      className="unit-preview-modal"
-                      role="dialog"
-                      aria-modal="true"
-                      aria-label={previewAbilityLabel}
-                      onClick={closeAbilityPreview}
-                    >
-                      <div className="unit-preview-modal-inner" onClick={(e) => e.stopPropagation()}>
-                        <div className="unit-preview-modal-bar">
-                          <div className="unit-preview-modal-actions">
-                            <button
-                              type="button"
-                              className="ghost small"
-                              onClick={closeAbilityPreview}
-                              aria-label={t('generator.close')}
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        </div>
-                        <div className="unit-preview-modal-card ability-preview-modal-card-list">
-                          {previewAbilities.map((skill) => (
-                            <FactionAbilityFichaCard
-                              key={`preview-ability-ficha-${skill.id || skill.nombre}`}
-                              ability={skill}
-                              factionId={selectedFaction?.id}
-                              gameMode={gameMode}
-                              description={getFactionSkillDescriptionForMode(skill, gameMode)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>,
-                    document.body,
-                  ) : null
-                })() : null}
               </>
             )}
           </div>
@@ -1822,32 +1518,6 @@ function Generador() {
       </div>
       {isArmyPrintPreviewOpen ? (
         <div ref={armyExportStageRef} className="army-export-stage army-export-stage-hidden" aria-hidden="true">
-          {abilityExportPages
-            ? abilityExportPages.map((pageEntries, pageIndex) => (
-                <div
-                  key={`ability-export-page-${pageIndex}`}
-                  ref={(node) => setArmySheetRef(`ability-${pageIndex}`, node)}
-                  className="army-export-sheet army-export-sheet-cards"
-                >
-                  {pageEntries.map((skill, cardIndex) => {
-                    const cardKey = `ability-${pageIndex}-${skill.id || skill.nombre || cardIndex}`
-                    return (
-                    <div key={`ability-export-${skill.id || skill.nombre || cardIndex}`} className="army-export-sheet-slot">
-                      <div className="army-export-card-host">
-                        <FactionAbilityFichaCard
-                          ref={(node) => setArmyCardRef(cardKey, node)}
-                          ability={skill}
-                          factionId={selectedFaction?.id}
-                          gameMode={gameMode}
-                          description={getFactionSkillDescriptionForMode(skill, gameMode)}
-                        />
-                      </div>
-                    </div>
-                    )
-                  })}
-                </div>
-              ))
-            : null}
           {armyExportPages
             ? armyExportPages.map((pageEntries, pageIndex) => (
                 <div
@@ -1858,10 +1528,7 @@ function Generador() {
                   {pageEntries.map((entry, cardIndex) => {
                     const cardKey = `unit-${pageIndex}-${entry.uid || cardIndex}`
                     const displayName = exportUnitDisplayNames.get(entry.uid) || entry.base.nombre
-                    const unitEraTokens = getUnitEraTokens(entry.base)
-                    const unitEraLabel = unitEraTokens.length
-                      ? unitEraTokens.map((token) => getEraLabel(token)).join(' / ')
-                      : ''
+                    const unitEraLabel = selectedEra ? getEraLabel(selectedEra) : ''
 
                     return (
                       <div key={`army-export-${entry.uid}`} className="army-export-sheet-slot" data-army-export-slot={entry.uid}>

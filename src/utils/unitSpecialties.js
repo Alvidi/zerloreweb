@@ -88,24 +88,12 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Brutal Charge', description: 'When this unit makes a Rush against a unit, it gains +1 melee attack die during that combat.' },
   },
   {
-    es: { name: 'Boom!', description: 'Cuando esta unidad es destruida, explota afectando a todas las unidades a 6" de ella, que reciben 1D6 de daño.' },
-    en: { name: 'Boom!', description: 'When this unit is destroyed, it explodes and affects all units within 6" of it, which suffer 1D6 damage.' },
+    es: { name: 'Boom!', description: 'Cuando esta unidad muere explota afectando a unidades que estén a 6" de esta, infligiendo 1D6.' },
+    en: { name: 'Boom!', description: 'When this unit dies, it explodes and affects units within 6" of it, inflicting 1D6.' },
   },
   {
-    es: { name: 'Aplastamiento', description: 'Durante su movimiento o Acometida, si esta unidad pasa por encima de una unidad de Línea o Élite, dicha unidad es destruida automáticamente.' },
-    en: { name: 'Crushing', description: 'During its movement or Rush, if this unit passes over a Line or Elite unit, that unit is destroyed automatically.' },
-  },
-  {
-    es: { name: 'Mercenario', description: 'Esta unidad puede ser reactivada una segunda vez en el mismo turno gastando 1 Ficha de Mando. Recupera sus 2 acciones para esta segunda activación. Solo puede reactivarse una vez por turno.' },
-    en: { name: 'Mercenary', description: 'This unit may be reactivated a second time in the same turn by spending 1 Command Token. It regains its 2 actions for this second activation. It can only be reactivated once per turn.' },
-  },
-  {
-    es: { name: 'Portaestandarte', description: 'Las unidades aliadas a 6" de esta unidad no necesitan realizar chequeos por retirada.' },
-    en: { name: 'Standard Bearer', description: 'Allied units within 6" of this unit do not need to make retreat checks.' },
-  },
-  {
-    es: { name: 'Teletransporte', description: 'Esta unidad utiliza las reglas de teletransporte indicadas por su ficha o por su habilidad de facción.' },
-    en: { name: 'Teleport', description: 'This unit uses the teleport rules listed on its profile or faction ability.' },
+    es: { name: 'Aplastamiento', description: 'Durante su acometida, si traba a una unidad de Línea o Élite, dicha unidad recibe automáticamente daño de 1D3.' },
+    en: { name: 'Crushing', description: 'During its Rush, if it locks a Line or Elite unit, that unit automatically suffers 1D3 damage.' },
   },
 ]
 

@@ -2,1130 +2,322 @@
   "id": "legado",
   "faccion": {
     "nombre": "Legacy",
-    "estilo_juego": "A control-and-positioning faction built around quality over quantity. Its units are the toughest in the game, but it fields fewer of them. It uses portals to appear where the enemy least expects, revives its fallen with a chance roll, and strikes back even in death. The battlefield belongs to it if the player is patient. Ideal for strategic players who enjoy micromanagement, positioning, and making every unit count.",
-    "seleccion_habilidades": "individual",
-    "habilidades_faccion": [
-      {
-        "id": "last-breath",
-        "nombre": "Last Breath",
-        "descripcion_escaramuza": "When a LEGACY unit is destroyed, it makes one final ranged or melee attack whether it has actions or not.",
-        "descripcion_escuadra": "When a LEGACY unit is destroyed, it makes one final ranged or melee attack whether it has actions or not.",
-        "frase": "Nothing dies easily."
-      },
-      {
-        "id": "the-void-calls",
-        "nombre": "The Void Calls",
-        "descripcion_escaramuza": "Once per turn, during the Initiative Phase and before any activation, LEGACY may swap the positions of any two allied units on the battlefield, as long as neither is locked in melee.",
-        "descripcion_escuadra": "Once per turn, during the Initiative Phase and before any activation, LEGACY may swap the positions of any two allied units on the battlefield, as long as neither is locked in melee.",
-        "frase": "The opponent cannot plan anything against you."
-      },
-      {
-        "id": "echoes-of-the-past",
-        "nombre": "Echoes of the Past",
-        "descripcion_escaramuza": "When a LEGACY unit is destroyed, roll 1D6. On a 5 or 6, instead of removing it from the game, it returns to Reserve.",
-        "descripcion_escuadra": "When a LEGACY unit is destroyed, roll 1D6. On a 5 or 6, instead of removing it from the game, it returns to Reserve.",
-        "frase": "There is always a second chance."
-      },
-      {
-        "id": "decisive-command",
-        "nombre": "Decisive Command",
-        "descripcion_escaramuza": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
-        "descripcion_escuadra": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
-        "frase": "The best battle is won with patience."
-      }
-    ]
+    "estilo_juego": "An elite, expensive and hard-hitting faction. Few units, but each one is worth several: 3+ and 2+ saves, superior profiles and small squads. It loses the activation war by numbers, and makes up for it with extreme durability, counterattack (Ready) and the ability to reposition where it hurts. Ideal for players who prefer quality over quantity and games of surgical precision.",
+    "seleccion_habilidades": "",
+    "habilidades_faccion": [],
+    "grupos_habilidades_faccion": []
   },
   "unidades": [
     {
-      "nombre_unidad": "Eternal Guardians",
-      "era": "Future",
+      "nombre_unidad": "Crusaders",
       "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 5
-        },
-        "valor": 7,
-        "especialidad": "Evasive"
-      },
+      "perfil": { "especialidad": "Soldier" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Resonance Rifle",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Spectral Spear",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Battle Rifle", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Battle Blade", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Consecrated Crossbow", "habilidades_arma": ["Brutal 5+"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Consecrated Sword", "habilidades_arma": ["Reliable"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Veil Guardians",
+      "clase": "Line",
+      "perfil": { "especialidad": "Guard" },
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Assault Shotgun", "habilidades_arma": ["Multi-use"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Tactical Mace", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hammer and Shield", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Halberd", "habilidades_arma": ["Reach"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Sacred Vanguard",
+      "clase": "Line",
+      "perfil": { "especialidad": "Vanguard" },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Light Carbine", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Fusion Grenade", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Vanguard Blade", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Blessed Bow", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sword and Dagger", "habilidades_arma": ["Brutal 5+"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Oathbound",
+      "clase": "Line",
+      "perfil": { "especialidad": "Anchored" },
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Assault Rifle", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Oathbound Axe", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Energy Flail", "habilidades_arma": ["Brutal 4+"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ancestral Axe", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Blessed Flail", "habilidades_arma": ["Brutal 4+"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Assault Knights",
+      "clase": "Elite",
+      "perfil": { "especialidad": "Brutal Charge" },
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Heavy Pistol", "habilidades_arma": ["Multi-use"] }],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Runic Sword", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Energy Hammer", "habilidades_arma": ["Brutal 5+"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Twin Blade", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Blessed Greatsword", "habilidades_arma": ["Brutal 5+"] }
+          ]
+        }
       }
     },
     {
       "nombre_unidad": "Custodians",
-      "era": "Future",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 6,
-        "salvacion": "3+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 3,
-          "max": 5
-        },
-        "valor": 8,
-        "especialidad": "Evasive"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Energy Launcher",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Shield and Sword",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Templars",
-      "era": "Future",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 6,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 3,
-          "max": 5
-        },
-        "valor": 9,
-        "especialidad": "Resilient"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Energy Swords",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Immortals",
-      "era": "Future",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 10,
-        "salvacion": "2+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 14,
-        "especialidad": "Shooter"
-      },
+      "perfil": { "especialidad": "Resilient" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Annihilation Cannon (Elite, Hero, Titan)",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Spectral Scythe",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Hand Cannon", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Energy Fist", "habilidades_arma": ["Brutal 5+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Hammer of Judgement", "habilidades_arma": ["Brutal 5+"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Void Stalkers",
-      "era": "Future",
+      "nombre_unidad": "Judgement Gunners",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 7,
-        "salvacion": "3+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 2,
-          "max": 4
-        },
-        "valor": 10,
-        "especialidad": "Reinforcement Blockade"
-      },
+      "perfil": { "especialidad": "Accurate" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Void Rifle",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Void Dagger",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Laser Cannon", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
+            { "nombre": "Salvo Rifle", "habilidades_arma": ["Reliable"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Judgement Crossbow", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
+            { "nombre": "Rapid Bow", "habilidades_arma": ["Reliable"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Dagger", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Void Shadows",
-      "era": "Future",
+      "nombre_unidad": "War Sanctar",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 7,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 12,
-        "especialidad": "Evasive"
-      },
+      "perfil": { "especialidad": "Support" },
       "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Spectral Blade",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Sacred Pistol", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "War Staff", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Staff of Light", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Legacy Colossus",
-      "era": "Future",
+      "nombre_unidad": "Legacy Spectres",
+      "clase": "Elite",
+      "perfil": { "especialidad": "Flying" },
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Twin Pistols", "habilidades_arma": ["Multi-use"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Spectral Claws", "habilidades_arma": ["Brutal 5+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Twin Scythes", "habilidades_arma": ["Brutal 5+"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Relic Custodian",
+      "clase": "Elite",
+      "perfil": { "especialidad": "Captor" },
+      "armas": {
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Banner-Spear", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Banner", "habilidades_arma": ["Reliable"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Armoured Sentinel",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 20,
-        "salvacion": "2+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 19,
-        "especialidad": "Berserker"
-      },
+      "perfil": { "especialidad": "Shooter" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Heat Cannon",
-            "ataques": "2D6",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Explosive"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Disruption Beam",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "-",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Direct"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Colossal Stomp",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Twin Cannon", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Heavy Flamethrower", "habilidades_arma": ["Direct"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Demolishing Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Twin Ballista", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Pitch Sprayer", "habilidades_arma": ["Direct"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Siege Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Spectral Sentinel",
-      "era": "Future",
+      "nombre_unidad": "Sacred War Chariot",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 16,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 15,
-        "especialidad": "Accurate"
-      },
+      "perfil": { "especialidad": "Mobile Cover" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Spectral Cannon",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Crush",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Judgement Cannon", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
+            { "nombre": "Support Bolter", "habilidades_arma": ["Reliable"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Plates", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Sacred Trebuchet", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
+            { "nombre": "Support Crossbow", "habilidades_arma": ["Reliable"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Blessed Plates", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Void Bearer",
-      "era": "Future",
+      "nombre_unidad": "Judgement Artillery",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 12,
-        "salvacion": "3+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 13,
-        "especialidad": "Teleport"
-      },
+      "perfil": { "especialidad": "Emplaced" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Energy Batteries (Line, Elite)",
-            "ataques": "4D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Disruption Cannon (Vehicle)",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Spectral Strike",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Sacred Mortar", "habilidades_arma": ["Arcing", "Dead Angle"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Butt", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Blessed Trebuchet", "habilidades_arma": ["Arcing", "Dead Angle"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Butt", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Void Ethereal",
-      "era": "Future",
+      "nombre_unidad": "Royal Griffin",
       "clase": "Monster",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 14,
-        "salvacion": "2+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16,
-        "especialidad": "Mobile Cover"
-      },
+      "perfil": { "especialidad": "Flying" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Ethereal Pulse",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Ethereal Strike",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Imperial Claws", "habilidades_arma": ["Brutal 4+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Royal Claws", "habilidades_arma": ["Brutal 4+"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Legacy Oracle",
-      "era": "Future",
-      "clase": "Hero",
-      "especialidad_escaramuza": "Once per turn, it may swap its position with any allied unit within 18\" or less (it cannot be locked in melee).",
-      "especialidad_escuadra": "Once per turn, the squad may swap its position with any allied unit within 18\" or less.",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "2+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 18,
-        "especialidad_escaramuza": "Once per turn, it may swap its position with any allied unit within 18\" or less (it cannot be locked in melee).",
-        "especialidad_escuadra": "Once per turn, the squad may swap its position with any allied unit within 18\" or less.",
-        "especialidad_nombre_escaramuza": "Legacy Oracle",
-        "especialidad_nombre_escuadra": "Legacy Oracle"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Oracle Spear",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Oracle Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Void Touch",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "The Ancestor",
-      "era": "Future",
-      "clase": "Titan",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 30,
-        "salvacion": "2+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 48,
-        "especialidad": "Resilient"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Doomsday Cannon",
-            "ataques": "2D6",
-            "distancia": "24\"",
-            "impactos": "2+",
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Explosive",
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Legacy Battery",
-            "ataques": "2D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Explosive"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sword of the End",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "6",
-            "danio_critico": "8",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Squires",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 5,
-        "especialidad": "Mobile Cover"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sword and Shield",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Men-at-Arms",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 6,
-        "especialidad": "Resilient"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Long Spear",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reach"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Crusaders",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 2,
-          "max": 5
-        },
-        "valor": 7,
-        "especialidad": "Brutal Charge"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Crusader Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Warrior Monks",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "5+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 2,
-          "max": 5
-        },
-        "valor": 6,
-        "especialidad": "Brutal Charge"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sacred Fists",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Knights of the Sacred",
-      "era": "Past",
-      "clase": "Elite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 8,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 13,
-        "especialidad": "Brutal Charge"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cavalry Lance",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Sacred Paladins",
-      "era": "Past",
-      "clase": "Elite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "2+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 14,
-        "especialidad": "Resilient"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Thrown Hammer",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sacred Hammer",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Temple Archers",
-      "era": "Past",
-      "clase": "Elite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 7,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 10,
-        "especialidad": "Accurate"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Sacred Bow",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Temple Dagger",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Stone Colossus",
-      "era": "Past",
-      "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 18,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16,
-        "especialidad": "Resilient"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Catapult Fists",
-            "ataques": "2D6",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Explosive"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Stone Punch",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Bearer of Faith",
-      "era": "Past",
-      "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 14,
-        "salvacion": "3+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "Mobile Cover"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Relic Launcher",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sacred Stomp",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Fallen Angel",
-      "era": "Past",
+      "nombre_unidad": "Penitent Colossus",
       "clase": "Monster",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 14,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 15,
-        "especialidad": "Flying"
-      },
+      "perfil": { "especialidad": "Terror" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Celestial Lance",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Divine Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Colossal Greatsword", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Penitent Chains", "habilidades_arma": ["Reach"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ancestral Greatsword", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Chains of Penance", "habilidades_arma": ["Reach"] }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Grand Master",
-      "era": "Past",
+      "nombre_unidad": "Legacy Grand Master",
       "clase": "Hero",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "2+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 18,
-        "especialidad": "Once per turn, it may consecrate an allied unit within 12\": until the end of the turn, its melee attacks inflict +1 Damage and its critical hits inflict +1 critical Damage. Allied units within 6\" may reroll one failed Save die per activation."
-      },
+      "habilidad_faccion": "Once per turn, during the Initiative Phase, you may remove a Legacy unit from the battlefield and redeploy it in contact with a command post under your control.",
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Master's Hammer",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sacred Greatsword",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Relic Pistol", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sword of Judgement", "habilidades_arma": ["Brutal 5+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Ancestral Sword", "habilidades_arma": ["Brutal 5+"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "The Archangel",
-      "era": "Past",
-      "clase": "Titan",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 28,
-        "salvacion": "2+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 46,
-        "especialidad": "Devourer"
-      },
+      "nombre_unidad": "High Chaplain",
+      "clase": "Hero",
+      "habilidad_faccion": "Legacy units within 6\" or less may perform the Ready action spending only 1 action.",
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Divine Ray",
-            "ataques": "2D6",
-            "distancia": "24\"",
-            "impactos": "2+",
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Explosive",
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sword of Judgment",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "7",
-            "danio_critico": "9",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Command Pistol", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Relic Mace", "habilidades_arma": ["Brutal 5+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Hammer", "habilidades_arma": ["Brutal 5+"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Eternal Seer",
+      "clase": "Hero",
+      "habilidad_faccion": "Once per game, at the end of a turn, return a destroyed Legacy unit to the field with half its Wounds per miniature (rounded up), deploying it at a command post under your control.",
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Arcane Staff", "habilidades_arma": ["Explosive"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Staff of Time", "habilidades_arma": ["Brutal 4+"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Runic Staff", "habilidades_arma": ["Explosive"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Ancestral Staff", "habilidades_arma": ["Brutal 4+"] }]
+        }
       }
     }
   ]

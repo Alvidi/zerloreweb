@@ -77,8 +77,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.gunslinger) {
     return lang === 'en'
-      ? 'Can be used while locked in melee, against the unit it is fighting in melee.'
-      : 'Puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad con la que combate cuerpo a cuerpo.'
+      ? 'This weapon can be used while the unit is locked in melee combat, against the unit it is fighting in melee combat.'
+      : 'Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad que está en cuerpo a cuerpo.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
@@ -118,13 +118,13 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.unstable) {
     return lang === 'en'
-      ? 'After attacking, roll 1D6: on 1-2, this unit suffers the same damage dealt to the target. If the target received no hits, this unit also suffers nothing.'
-      : 'Tras atacar, tira 1D6: con 1-2, la unidad recibe los mismos puntos de daño que recibió el objetivo. Si el objetivo no recibió ningún impacto, esta tampoco recibe nada.'
+      ? 'After resolving the attack, roll 1D6. On a 1-2, the unit carrying this weapon suffers the same damage it inflicted on the target. If the attack caused no damage, there is no backlash.'
+      : 'Tras resolver el ataque, lanza 1D6. Con resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.direct) {
     return lang === 'en'
       ? 'This weapon hits directly and has no Precision.'
-      : 'Esta arma impacta directamente, no tiene Precisión.'
+      : 'Esta arma impacta directamente, no tiene precisión.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.guerrilla) {
     return lang === 'en'

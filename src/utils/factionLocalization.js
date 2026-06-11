@@ -50,10 +50,31 @@ const mergeWeaponsTranslation = (esWeapons, enWeapons) =>
 const mergeUnitsTranslation = (esUnits, enUnits) =>
   (Array.isArray(esUnits) ? esUnits : []).map((unit, index) => {
     const translated = enUnits?.[index]
+    const esArmas = unit?.armas || {}
+    const enArmas = translated?.armas || {}
+    const hasDualEra = !!(esArmas.futuro || esArmas.pasado)
+    const mergedArmas = hasDualEra
+      ? {
+          ...esArmas,
+          futuro: {
+            disparo: mergeWeaponsTranslation(esArmas.futuro?.disparo, enArmas.futuro?.disparo),
+            cuerpo_a_cuerpo: mergeWeaponsTranslation(esArmas.futuro?.cuerpo_a_cuerpo, enArmas.futuro?.cuerpo_a_cuerpo),
+          },
+          pasado: {
+            disparo: mergeWeaponsTranslation(esArmas.pasado?.disparo, enArmas.pasado?.disparo),
+            cuerpo_a_cuerpo: mergeWeaponsTranslation(esArmas.pasado?.cuerpo_a_cuerpo, enArmas.pasado?.cuerpo_a_cuerpo),
+          },
+        }
+      : {
+          ...esArmas,
+          disparo: mergeWeaponsTranslation(esArmas.disparo, enArmas.disparo),
+          cuerpo_a_cuerpo: mergeWeaponsTranslation(esArmas.cuerpo_a_cuerpo, enArmas.cuerpo_a_cuerpo),
+        }
     return {
       ...unit,
       nombre_unidad: translated?.nombre_unidad || unit?.nombre_unidad || '',
       clase: translated?.clase || unit?.clase || '',
+      habilidad_faccion: translated?.habilidad_faccion || unit?.habilidad_faccion || '',
       perfil: {
         ...(unit?.perfil || {}),
         especialidad: translated?.perfil?.especialidad ?? unit?.perfil?.especialidad ?? '-',
@@ -86,11 +107,7 @@ const mergeUnitsTranslation = (esUnits, enUnits) =>
           ?? unit?.perfil?.especialidad_nombre
           ?? '',
       },
-      armas: {
-        ...(unit?.armas || {}),
-        disparo: mergeWeaponsTranslation(unit?.armas?.disparo, translated?.armas?.disparo),
-        cuerpo_a_cuerpo: mergeWeaponsTranslation(unit?.armas?.cuerpo_a_cuerpo, translated?.armas?.cuerpo_a_cuerpo),
-      },
+      armas: mergedArmas,
     }
   })
 
@@ -137,7 +154,7 @@ export const mergeFactionLanguageData = ({ esData, enData, lang }) => {
 export const buildLocalizedFactionEntries = (factionModules, lang) => {
   const esByBase = new Map()
   const enByBase = new Map()
-  const preferredOrder = ['orden', 'caos', 'legado', 'otros']
+  const preferredOrder = ['orden', 'caos', 'legado']
 
   Object.entries(factionModules).forEach(([path, module]) => {
     const filename = path.split('/').pop() || ''

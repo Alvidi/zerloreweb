@@ -149,7 +149,6 @@ const UNIT_TYPE_COLORS = {
   vehicle: '#f0d84a',
   monster: '#ff5454',
   hero: '#6fe9e2',
-  titan: '#b37aff',
 }
 
 const ERA_COLORS = {
@@ -163,13 +162,11 @@ const FACTION_LABELS = {
     orden: 'Orden',
     caos: 'Caos',
     legado: 'Legado',
-    otros: 'Otros',
   },
   en: {
     orden: 'Order',
     caos: 'Chaos',
     legado: 'Legacy',
-    otros: 'Others',
   },
 }
 
@@ -177,7 +174,6 @@ const FACTION_COLORS = {
   orden: '#ff7a6b',
   caos: '#b37aff',
   legado: '#f0d84a',
-  otros: '#7fd6ff',
 }
 
 const getFactionToken = (factionId = '') => {
@@ -189,7 +185,6 @@ const getFactionToken = (factionId = '') => {
 
   if (normalized.includes('caos')) return 'caos'
   if (normalized.includes('legado')) return 'legado'
-  if (normalized.includes('otros') || normalized.includes('other')) return 'otros'
   return 'orden'
 }
 
@@ -217,6 +212,42 @@ const formatHabilidades = (habilidades = []) => {
     .map((label) => ensureFichaText(label, ''))
     .filter(Boolean)
     .join('\n')
+}
+
+const getWeaponNameParts = (weaponName) => {
+  const rawName = ensureFichaText(weaponName, '')
+  const targets = Array.from(rawName.matchAll(/\(([^)]+)\)/g))
+    .map((match) => match[1].trim())
+    .filter(Boolean)
+
+  const cleanName = rawName
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  return {
+    title: ensureFichaText(cleanName, rawName),
+    target: targets.join(', '),
+  }
+}
+
+const getWeaponTargetLabel = (lang = 'es') =>
+  lang === 'en' ? 'Targets:' : 'Objetivos:'
+
+const getWeaponTargetMarker = (lang = 'es') =>
+  lang === 'en' ? '(targets)' : '(objetivos)'
+
+const isFactionAbilitySpecialty = (label = '') => {
+  const normalized = String(label || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '')
+    .trim()
+
+  return normalized === 'hab.faccion'
+    || normalized === 'habfaccion'
+    || normalized === 'factionability'
 }
 
 const clampGuideRect = (guide) => ({
@@ -545,7 +576,9 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
   const especialidad = getUnitSpecialtyForMode(unit, gameMode, lang)
   const especialidadNombre = getUnitSpecialtyLabelForMode(unit, gameMode)
   const shouldShowEspecialidadNombre = especialidadNombre && especialidadNombre !== '-' && especialidadNombre !== especialidad
+  const isFactionAbility = isFactionAbilitySpecialty(especialidadNombre)
   const unitTypeToken = getUnitTypeToken(unit.tipo)
+  const squadDisplay = unitTypeToken === 'hero' ? '-' : (unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}`)
   const fallbackBadgeSrc = getUnitTypeBadgeSrc(unit.tipo, unit.eras || eraLabel)
   const addImageLabel = lang === 'en' ? 'ADD IMAGE' : 'AÑADIR IMAGEN'
   const addImageAriaLabel = lang === 'en' ? 'Add unit image' : 'Añadir imagen de unidad'
@@ -781,7 +814,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
             { key: 'VIDAS', idx: 1, value: unit.vidas },
             { key: 'SALV',  idx: 2, value: unit.salvacion },
             { key: 'VEL',   idx: 3, value: formatSpeedValue(unit.velocidad) },
-            { key: 'ESC',   idx: 4, value: unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}` },
+            { key: 'ESC',   idx: 4, value: squadDisplay },
           ].map(({ key, idx, value }) => (
             <StatCell
               key={key}
@@ -796,7 +829,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
 
           {/* Especialidad */}
           <AutoFitText
-            className="ficha-abs ficha-especialidad-text"
+            className={`ficha-abs ficha-especialidad-text${isFactionAbility ? ' ficha-especialidad-faction-ability' : ''}`}
             style={rectToStyle(guideMap.ESPECIALIDAD || FICHA_LAYOUT.specialty)}
             maxFontSize={18}
             minFontSize={10}
@@ -804,8 +837,11 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
             fitKey={`${especialidadNombre || ''}:${especialidad || ''}-${guideMap.ESPECIALIDAD?.w || FICHA_LAYOUT.specialty.w}-${guideMap.ESPECIALIDAD?.h || FICHA_LAYOUT.specialty.h}`}
           >
             <div className="ficha-specialty-line">
-              {shouldShowEspecialidadNombre ? <strong>{ensureFichaText(especialidadNombre)}</strong> : null}
-              <div className="ficha-specialty-desc">{ensureFichaText(especialidad)}</div>
+              {shouldShowEspecialidadNombre ? <strong>{ensureFichaText(especialidadNombre)}:</strong> : null}
+              <span className="ficha-specialty-desc">
+                {shouldShowEspecialidadNombre ? ' ' : ''}
+                {ensureFichaText(especialidad)}
+              </span>
             </div>
           </AutoFitText>
 
@@ -831,6 +867,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
               fallbackTop={DISPARO_ROW_0 + i * DISPARO_ROW_H}
               fallbackRowH={DISPARO_ROW_H}
               isMelee={false}
+              lang={lang}
             />
           ))}
           {disparo.length === 1 ? (
@@ -866,6 +903,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
               fallbackTop={CAC_ROW_0 + i * CAC_ROW_H}
               fallbackRowH={CAC_ROW_H}
               isMelee={true}
+              lang={lang}
             />
           ))}
           {melee.length === 1 ? (
@@ -967,12 +1005,29 @@ const getWeaponFieldRect = (guideMap, prefix, rowIndex, fieldKey, fallbackArea, 
   }
 }
 
+const extractAbilityTargets = (habilidades = []) =>
+  habilidades
+    .map((h) => {
+      const raw = typeof h === 'string' ? h : (h?.nombre || h?.id || '')
+      const m = raw.match(/\(([^)]+)\)/)
+      return m ? m[1].trim() : ''
+    })
+    .filter(Boolean)
+
 // ─── Fila de datos de arma ───────────────────────────────────────────────
-function WeaponRow({ weapon, guideMap, prefix, rowIndex, fallbackArea, fallbackTop, fallbackRowH, isMelee }) {
+function WeaponRow({ weapon, guideMap, prefix, rowIndex, fallbackArea, fallbackTop, fallbackRowH, isMelee, lang = 'es' }) {
   const danio = formatDanio(weapon.danio, weapon.danio_critico)
   const habs  = formatHabilidades(weapon.habilidades)
+  const { title, target: nameTarget } = getWeaponNameParts(weapon.nombre)
+  const abilityTargets = extractAbilityTargets(weapon.habilidades)
+  const hasTarget = nameTarget || abilityTargets.length > 0
   const fieldValues = {
-    ARMA: ensureFichaText(weapon.nombre),
+    ARMA: hasTarget ? (
+      <span className="ficha-weapon-name-with-target">
+        <span>{title}</span>
+        <span className="ficha-weapon-target-marker"> {getWeaponTargetMarker(lang)}</span>
+      </span>
+    ) : title,
     ATAQUES: ensureFichaText(weapon.ataques),
     ALCANCE: isMelee ? '-' : ensureFichaText(weapon.distancia),
     PRECISION: isMelee ? '-' : ensureFichaText(weapon.impactos),
@@ -1027,43 +1082,69 @@ function EmptyRow({ guideMap, prefix, rowIndex, fallbackArea, fallbackTop, fallb
 
 // ─── Bloque de habilidades de arma ──────────────────────────────────────
 function WeaponAbilities({ disparo, melee, guideMap, lang = 'es' }) {
-  const all   = [...disparo, ...melee]
-  const lines = []
-  const seen = new Set()
+  const targetLabel = getWeaponTargetLabel(lang)
+  const all = [...disparo, ...melee]
+  const weaponBlocks = all
+    .map((w) => {
+      const { title, target: nameTarget } = getWeaponNameParts(w?.nombre)
+      const abilityTargets = extractAbilityTargets(w?.habilidades || [])
+      const allTargets = [...new Set([...(nameTarget ? [nameTarget] : []), ...abilityTargets])]
+      const target = allTargets.join(', ')
+      const abilities = (w?.habilidades || [])
+        .map((h) => {
+          const raw = typeof h === 'string' ? h : (h?.nombre || h?.id || '')
+          const nombre = ensureFichaText(getAbilityLabel(raw, lang) || raw, '')
+          const desc = ensureFichaText(
+            getAbilityDescription(raw, lang) || (typeof h === 'object' ? (h?.descripcion || '') : ''),
+            '',
+          )
+          return nombre ? { nombre, desc } : null
+        })
+        .filter(Boolean)
 
-  all.forEach((w) => {
-    ;(w.habilidades || []).forEach((h) => {
-      const raw = typeof h === 'string' ? h : (h?.nombre || h?.id || '')
-      const nombre = ensureFichaText(getAbilityLabel(raw, lang) || raw, '')
-      const desc = ensureFichaText(getAbilityDescription(raw, lang) || (typeof h === 'object' ? (h?.descripcion || '') : ''), '')
-      const key = `${nombre}::${desc}`
-      if (!nombre || seen.has(key)) return
-      seen.add(key)
-      lines.push({ nombre, desc })
+      if (!target && !abilities.length) return null
+      return { title, target, abilities }
     })
-  })
-
-  if (!lines.length) {
-    lines.push({ nombre: '-', desc: '' })
-  }
+    .filter(Boolean)
 
   const abilityRect = guideMap?.HABILIDADES || FICHA_LAYOUT.abilities
+  const fitKey = weaponBlocks.length
+    ? weaponBlocks
+        .map((block) => `${block.title}:${block.target}:${block.abilities.map((ability) => `${ability.nombre}:${ability.desc}`).join(',')}`)
+        .join('|')
+    : '-'
 
   return (
     <AutoFitText
       className="ficha-abs ficha-hab-content"
       style={{ ...rectToStyle(abilityRect), maxHeight: abilityRect.h }}
-      maxFontSize={18}
+      maxFontSize={17}
       minFontSize={10}
       step={0.5}
-      fitKey={`${lines.map((line) => `${line.nombre}:${line.desc}`).join('|')}-${abilityRect.w}-${abilityRect.h}`}
+      fitKey={`${fitKey}-${abilityRect.w}-${abilityRect.h}`}
     >
-      {lines.map((line, i) => (
-        <div key={i} className="ficha-hab-line">
-          <strong>{line.nombre}</strong>
-          {line.desc ? <div className="ficha-hab-line-desc">{line.desc}</div> : null}
+      {weaponBlocks.length ? (
+        weaponBlocks.map((block, i) => (
+          <div key={`${block.title}-${i}`} className="ficha-hab-weapon">
+            <strong className="ficha-hab-weapon-title">{block.title}</strong>
+            {block.target ? (
+              <div className="ficha-hab-target">
+                <span>{targetLabel}</span> {block.target}
+              </div>
+            ) : null}
+            {block.abilities.map((line, abilityIndex) => (
+              <div key={`${line.nombre}-${abilityIndex}`} className="ficha-hab-line">
+                <strong>{line.nombre}:</strong>
+                {line.desc ? <span className="ficha-hab-line-desc"> {line.desc}</span> : null}
+              </div>
+            ))}
+          </div>
+        ))
+      ) : (
+        <div className="ficha-hab-line">
+          <strong>-</strong>
         </div>
-      ))}
+      )}
     </AutoFitText>
   )
 }

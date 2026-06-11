@@ -2,1162 +2,573 @@
   "id": "caos",
   "faccion": {
     "nombre": "Caos",
-    "estilo_juego": "Facción de oleadas y presión constante, diseñada para saturar al enemigo con números y nunca dejar de avanzar. Sus unidades de Línea son las más baratas del juego: caen con facilidad pero reaparecen turno tras turno desde los puestos de mando. El cuerpo a cuerpo y el control del espacio son su arma principal. Ideal para jugadores que disfrutan de la presión sostenida, el desgaste progresivo y el caos controlado.",
-    "seleccion_habilidades": "individual",
-    "habilidades_faccion": [
-      {
-        "id": "marea-infinita",
-        "nombre": "Marea Infinita",
-        "descripcion_escaramuza": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
-        "descripcion_escuadra": "Al final de cada turno, una unidad de Línea CAOS destruida durante ese turno vuelve al campo con todas sus Vidas, desplegándose en contacto con cualquier puesto de mando que el jugador controle. No gasta Fichas de Mando. Si han sido destruidas varias unidades, el jugador elige cuál vuelve; las demás se pierden definitivamente.",
-        "frase": "El CAOS no se acaba. El rival tiene que destruirte muchas veces para librarse de ti."
-      },
-      {
-        "id": "la-presa",
-        "nombre": "La Presa",
-        "descripcion_escaramuza": "Una vez por turno, en la Fase de Iniciativa, el jugador designa UNA unidad enemiga visible. Todos los ataques CaC de unidades CAOS contra esa unidad no consideran los resultados de 1 y 2 como fallos.",
-        "descripcion_escuadra": "Una vez por turno, en la Fase de Iniciativa, el jugador designa UNA unidad enemiga visible. Todos los ataques CaC de unidades CAOS contra esa unidad no consideran los resultados de 1 y 2 como fallos.",
-        "frase": "Cuando la manada elige, el resto solo mira."
-      },
-      {
-        "id": "banquete-de-sangre",
-        "nombre": "Banquete de Sangre",
-        "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa, el jugador CAOS puede sacrificar una unidad de Línea CAOS que controle. Esa unidad se retira del campo sin dar puntos al rival y sin contar como destruida a efectos de misión. La unidad transfiere sus Vidas restantes a otra unidad CAOS; la unidad receptora recupera Vidas hasta su máximo y el resto se descarta.",
-        "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa, el jugador CAOS puede sacrificar una unidad de Línea CAOS que controle. Esa unidad se retira del campo sin dar puntos al rival y sin contar como destruida a efectos de misión. La unidad transfiere sus Vidas restantes a otra unidad CAOS; la unidad receptora recupera Vidas hasta su máximo y el resto se descarta.",
-        "frase": "Los débiles alimentan a los fuertes."
-      },
-      {
-        "id": "mando-decisivo",
-        "nombre": "Mando Decisivo",
-        "descripcion_escaramuza": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
-        "descripcion_escuadra": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
-        "frase": "La mejor batalla es la que se gana con paciencia."
-      }
-    ]
+    "estilo_juego": "Facción agresiva e imparable centrada en la superioridad numérica y el asalto frontal desmesurado. Sus unidades son prescindibles por diseño: baratas, violentas y difíciles de detener en masa. Sacrifica precisión y disciplina a cambio de presión constante, oleadas de cuerpo a cuerpo y la capacidad de devolver unidades destruidas al campo de batalla.",
+    "seleccion_habilidades": "",
+    "habilidades_faccion": [],
+    "grupos_habilidades_faccion": []
   },
   "unidades": [
     {
-      "nombre_unidad": "Alimañas",
-      "era": "Futuro",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 3,
-        "salvacion": "5+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 4,
-          "max": 10
-        },
-        "valor": 3,
-        "especialidad": "Soldado"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Proyectil sucio",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "1",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Garras",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Asoladores",
-      "era": "Futuro",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 4,
-          "max": 6
-        },
-        "valor": 5,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Veneno arrojadizo",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cuchillas de asalto",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Reventadores",
-      "era": "Futuro",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 3,
-        "salvacion": "6+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 4,
-        "especialidad": "Berserker"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cuerpo explosivo",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Saeteadores",
-      "era": "Futuro",
+      "nombre_unidad": "Chusma Salvaje",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
+        "vidas": 3,
+        "salvacion": "6+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 8, "max": 16 },
+        "valor": 3,
+        "especialidad": "Porrazo"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Puño brutal", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Mordida (solo Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
         },
-        "valor": 6,
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Porra astillada", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Colmillo salvaje (solo Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Cazadores de Manada",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 3,
+        "salvacion": "6+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 5, "max": 10 },
+        "valor": 4,
         "especialidad": "Avanzadilla"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Espinas arrojadizas",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Garras cortantes",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Aguijón tóxico", "ataques": "1D", "distancia": "8\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Garra mutante", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Colmillo tóxico (solo Élite, Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Jabalina de hueso", "ataques": "1D", "distancia": "8\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Garra afilada", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Colmillo (solo Élite, Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Acorazados",
-      "era": "Futuro",
-      "clase": "Élite",
+      "nombre_unidad": "Portadores de Plaga",
+      "clase": "Línea",
       "perfil": {
-        "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 11,
+        "movimiento": "4\"",
+        "vidas": 5,
+        "salvacion": "5+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 5, "max": 10 },
+        "valor": 6,
         "especialidad": "Resistente"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Proyectil ácido",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Mandíbulas acorazadas",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Aspersor de toxinas", "ataques": "1D6", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Mayal corrompido", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Porra infectada (solo Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Mayal oxidado", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Maza de huesos (solo Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Devastadores",
-      "era": "Futuro",
-      "clase": "Élite",
+      "nombre_unidad": "Devastadores del Caos",
+      "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
-        "vidas": 8,
-        "salvacion": "4+",
+        "vidas": 4,
+        "salvacion": "5+",
         "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 10,
-        "especialidad": "Carga brutal"
+        "escuadra": { "min": 5, "max": 10 },
+        "valor": 5,
+        "especialidad": "Porrazo"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanzador de bilis",
-            "ataques": "1D6",
-            "distancia": "6\"",
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Directo"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Garras devastadoras",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola caótica", "ataques": "1D", "distancia": "6\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hacha de caos", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hacha de guerra", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Jinetes del Apocalipsis",
-      "era": "Futuro",
+      "nombre_unidad": "Saqueadores",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 4,
+        "salvacion": "5+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 5, "max": 10 },
+        "valor": 5,
+        "especialidad": "Soldado"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Rifle desguazado", "ataques": "2D", "distancia": "12\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Lanzador de fragmentos (solo Línea)", "ataques": "1D", "distancia": "10\"", "impactos": "5+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Explosiva"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Bayoneta oxidada", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Arco crudo", "ataques": "1D", "distancia": "12\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Honda de guerra (solo Línea)", "ataques": "1D3", "distancia": "8\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Explosiva"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Cuchillo de hueso", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Berserkers del Caos",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "7\"",
+        "movimiento": "6\"",
         "vidas": 6,
-        "salvacion": "4+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 2,
-          "max": 4
-        },
+        "salvacion": "5+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 3, "max": 6 },
         "valor": 9,
         "especialidad": "Carga brutal"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Espinas de montura",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Multiusos"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Lanza de montura",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hacha doble", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hacha doble de guerra", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Bestia de Carga",
-      "era": "Futuro",
-      "clase": "Monstruo",
+      "nombre_unidad": "Portadores de Veneno",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "7\"",
-        "vidas": 18,
-        "salvacion": "4+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 13,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Proyectiles espinosos",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Aplastamiento",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Embestida (Vehículo)",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Garrapato",
-      "era": "Futuro",
-      "clase": "Monstruo",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 20,
-        "salvacion": "4+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "Cobertura móvil"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Enjambre de esporas",
-            "ataques": "1D6",
-            "distancia": "12\"",
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Directo",
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Aguijón venenoso",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Corrosivo",
-      "era": "Futuro",
-      "clase": "Monstruo",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 14,
-        "salvacion": "5+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 12,
-        "especialidad": "Certero"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Chorro ácido (Vehículo, Monstruo)",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Mandíbulas corrosivas",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Agente del Caos",
-      "era": "Futuro",
-      "clase": "Héroe",
-      "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
-      "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 10,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 15,
-        "especialidad_escaramuza": "Las unidades aliadas a 6\" ganan +1 dado de ataque en CaC. Cuando esta unidad elimina una unidad enemiga, todas las unidades aliadas a 6\" pueden moverse inmediatamente 2\" de forma gratuita.",
-        "especialidad_escuadra": "Las unidades en escuadra con este héroe ganan +1 dado de ataque en CaC. Cuando la escuadra elimina una unidad enemiga, puede moverse inmediatamente 2\" de forma gratuita.",
-        "especialidad_nombre_escaramuza": "Señor de la Cacería",
-        "especialidad_nombre_escuadra": "Señor de la Cacería"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Proyectil vivo",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Garras del Señor",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Colmillo del Alfa (Élite, Héroe)",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "El Gran Devorador",
-      "era": "Futuro",
-      "clase": "Titán",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 26,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 42,
-        "especialidad": "Boom!"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Escupitajo ácido",
-            "ataques": "2D6",
-            "distancia": "18\"",
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Directo"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Proyectil masivo",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Aplastamiento titánico",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Dientes del abismo (línea, élite, héroe)",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Alimaña",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 3,
-        "salvacion": "6+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 4,
-          "max": 12
-        },
-        "valor": 3,
-        "especialidad": "Berserker"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanza piedra",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "1",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Garfio oxidado",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Guerreros de la Casta",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "5+",
         "velocidad": "+4\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 5,
-        "especialidad": "Carga brutal"
+        "escuadra": { "min": 2, "max": 4 },
+        "valor": 8,
+        "especialidad": "Certero"
       },
       "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Hacha de guerra",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Lanzador de esporas", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Cuchillo tóxico", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 },
+            { "nombre": "Garfio de combate (solo Élite, Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Arco venenoso", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hoja envenenada", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 },
+            { "nombre": "Garfio de hueso (solo Élite, Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Hostigadores de la Horda",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 3,
-        "salvacion": "6+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 4,
-          "max": 8
-        },
-        "valor": 4,
-        "especialidad": "Tirador"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Arco corto",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cuchillo dentado",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Brutos de Guerra",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 6,
-        "salvacion": "4+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 2,
-          "max": 4
-        },
-        "valor": 6,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Mandoble salvaje",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Campeones de la Horda",
-      "era": "Pasado",
+      "nombre_unidad": "Campeones Mutantes",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 12,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Hacha del campeón",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Jinetes Salvajes",
-      "era": "Pasado",
-      "clase": "Élite",
-      "perfil": {
-        "movimiento": "7\"",
         "vidas": 7,
         "salvacion": "4+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 10,
-        "especialidad": "Carga brutal"
+        "velocidad": "+2\"",
+        "escuadra": { "min": 2, "max": 4 },
+        "valor": 11,
+        "especialidad": "Porrazo"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanza arrojadiza",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "5+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Lanza de montura",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Puño de plasma", "ataques": "1D", "distancia": "6\"", "impactos": "5+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Inestable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Brazo mutante", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Tenaza bioquímica (solo Élite, Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "4", "danio_critico": "6", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Maza ceremonial", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Zarpa brutal (solo Élite, Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "4", "danio_critico": "6", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Chamanes Tribales",
-      "era": "Pasado",
+      "nombre_unidad": "Artilleros del Caos",
       "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
-        "salvacion": "5+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 2
-        },
+        "salvacion": "4+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 2, "max": 4 },
         "valor": 9,
-        "especialidad": "Terror"
+        "especialidad": "Asentado"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Rayo salvaje",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Inestable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Bastón mágico",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Cañón de biomasa", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Lanzador corrosivo (solo Línea)", "ataques": "1D6", "distancia": "8\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Bayoneta táctica", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Ballesta de asedio", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Catapulta portátil (solo Línea)", "ataques": "1D3", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Daga de campo", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Troll de Guerra",
-      "era": "Pasado",
-      "clase": "Monstruo",
+      "nombre_unidad": "Chatarrón de Asalto",
+      "clase": "Vehículo",
       "perfil": {
-        "movimiento": "5\"",
-        "vidas": 16,
+        "movimiento": "7\"",
+        "vidas": 8,
         "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
+        "velocidad": "+4\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 11,
+        "especialidad": "Carga brutal"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Cañón desguazado", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Lanzallamas tosco", "ataques": "1D6", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Cuchillas de asalto", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Espolón (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
         },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Balista de asalto", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Lanzafuego", "ataques": "1D6", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ariete con pinchos", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Espolón (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Carroña Pesada",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 12,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
         "valor": 13,
         "especialidad": "Resistente"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Roca arrojada",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Porrazo",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Gran Araña",
-      "era": "Pasado",
-      "clase": "Monstruo",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 12,
-        "salvacion": "5+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
+        "futuro": {
+          "disparo": [
+            { "nombre": "Cañón de plasma inestable", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "6", "habilidades_arma": ["Inestable", "Perforante"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Placas aplastantes", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
         },
-        "valor": 11,
-        "especialidad": "Anclado"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Mordisco venenoso",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "pasado": {
+          "disparo": [
+            { "nombre": "Balista pesada", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Placas aplastantes", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Máquina de Guerra Tribal",
-      "era": "Pasado",
-      "clase": "Monstruo",
+      "nombre_unidad": "Mortero del Caos",
+      "clase": "Vehículo",
       "perfil": {
         "movimiento": "3\"",
-        "vidas": 14,
+        "vidas": 9,
         "salvacion": "4+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "Tirador"
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 12,
+        "especialidad": "Asentado"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Catapulta tribal",
-            "ataques": "1D6",
-            "distancia": "24\"",
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Explosiva",
-              "Parabólica"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Embestida",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Lanzador de plaga", "ataques": "1D6", "distancia": "24\"", "impactos": "5+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Parabólica", "Ángulo muerto"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Colmillos de acero", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Catapulta de roca", "ataques": "1D3", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica", "Ángulo muerto"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Embestida", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Caudillo de Guerra",
-      "era": "Pasado",
+      "nombre_unidad": "Gran Devorador",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 11,
+        "salvacion": "4+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 12,
+        "especialidad": "Carga brutal"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Escupitajo corrosivo", "ataques": "1D3", "distancia": "8\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Mandíbulas abisales", "ataques": "3D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 },
+            { "nombre": "Garras desgarradoras (solo Línea, Élite)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Escupitajo ácido", "ataques": "1D3", "distancia": "8\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Mandíbulas gigantes", "ataques": "3D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 },
+            { "nombre": "Garras primitivas (solo Línea, Élite)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Titán Corrupto",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 13,
+        "salvacion": "4+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 14,
+        "especialidad": "Porrazo"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Lanzador de misiles salvaje", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Inestable", "Explosiva"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Puño de caos", "ataques": "4D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "6", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Balista de hombro", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Inestable", "Explosiva"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Maza corrupta", "ataques": "4D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "6", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Engendro Mecánico",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 10,
+        "salvacion": "4+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 12,
+        "especialidad": "Carga brutal"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Cañón de tornillo", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Inestable"], "valor_extra": 0 },
+            { "nombre": "Lanzallamas caótico", "ataques": "1D6", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Puño de hierro", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Garra trituradora (solo Vehículo, Monstruo)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Balista improvisada", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Inestable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Mazo de piedra", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Zarpa trituradora (solo Vehículo, Monstruo)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Caudillo del Caos",
       "clase": "Héroe",
+      "habilidad_faccion": "Durante la Fase de Iniciativa, el jugador puede sacrificar una unidad de Línea (se retira del campo, sin dar puntos al rival). Esa unidad transfiere sus Vidas restantes a otra unidad aliada, hasta su tope.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
         "salvacion": "3+",
-        "velocidad": "+6\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16,
-        "especialidad": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por cada Vida perdida.",
-        "especialidad_escaramuza": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por cada Vida perdida.",
-        "especialidad_escuadra": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por unidad perdida de su escuadra.",
-        "especialidad_nombre_escaramuza": "Furia del Caudillo",
-        "especialidad_nombre_escuadra": "Furia del Caudillo"
+        "velocidad": "+4\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 17
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Hacha arrojadiza",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cuchilla gigante",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      },
-      "especialidad_escaramuza": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por cada Vida perdida.",
-      "especialidad_escuadra": "Esta unidad gana +1 dado de ataque en cuerpo a cuerpo por unidad perdida de su escuadra."
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola de caos", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada corrupta", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada oscura", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
     },
     {
-      "nombre_unidad": "Gran Destructor",
-      "era": "Pasado",
-      "clase": "Titán",
+      "nombre_unidad": "Bestialord",
+      "clase": "Héroe",
+      "habilidad_faccion": "Al final de cada turno, una unidad de Línea destruida durante ese turno vuelve a un puesto de mando con todas sus Vidas. Si no hay ningún puesto de mando, vuelve a reserva.",
       "perfil": {
-        "movimiento": "5\"",
-        "vidas": 30,
+        "movimiento": "6\"",
+        "vidas": 11,
         "salvacion": "3+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 44,
-        "especialidad": "Resistente"
+        "velocidad": "+6\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 18
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanzapeñascos",
-            "ataques": "2D6",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Puño aplastador",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "7",
-            "danio_critico": "9",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Ballesta de toxinas", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Cadenas de guerra", "ataques": "4D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Arco de guerra", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Mayal gigante", "ataques": "4D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Profeta de la Aniquilación",
+      "clase": "Héroe",
+      "habilidad_faccion": "Cuando dos o más unidades Caos ataquen CaC al mismo objetivo en el mismo turno, todas obtienen +1D en esos ataques.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 9,
+        "salvacion": "4+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 16
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Bastón de plasma", "ataques": "1D", "distancia": "8\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Inestable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Lanza corrupta", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Lanza de hueso", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
       }
     }
   ]

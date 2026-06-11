@@ -3,12 +3,10 @@ import eliteBadge from '../../images/units_icons/elite.png'
 import vehicleBadge from '../../images/units_icons/vehicle.png'
 import monsterBadge from '../../images/units_icons/monster.png'
 import heroBadge from '../../images/units_icons/hero.png'
-import titanBadge from '../../images/units_icons/titan.png'
 import linePastBadge from '../../images/units_icons/past/line.png'
 import elitePastBadge from '../../images/units_icons/past/elite.png'
 import vehiclePastBadge from '../../images/units_icons/past/vehicle.png'
 import heroPastBadge from '../../images/units_icons/past/hero.png'
-import titanPastBadge from '../../images/units_icons/past/titan.png'
 import { getUnitTypeToken } from './generatorUtils.js'
 
 export const unitTypeBadgeByToken = {
@@ -17,7 +15,6 @@ export const unitTypeBadgeByToken = {
   vehicle: vehicleBadge,
   monster: monsterBadge,
   hero: heroBadge,
-  titan: titanBadge,
 }
 
 export const pastUnitTypeBadgeByToken = {
@@ -25,7 +22,6 @@ export const pastUnitTypeBadgeByToken = {
   elite: elitePastBadge,
   vehicle: vehiclePastBadge,
   hero: heroPastBadge,
-  titan: titanPastBadge,
 }
 
 const normalizeEraToken = (era = '') => {

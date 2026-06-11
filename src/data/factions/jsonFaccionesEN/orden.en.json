@@ -2,1184 +2,289 @@
   "id": "orden",
   "faccion": {
     "nombre": "Order",
-    "estilo_juego": "A disciplined and methodical faction focused on territorial control and sustained fire. Its units perform best when they hold position and coordinate tactically. It sacrifices mobility for power and precision. Ideal for players who enjoy planning each turn, establishing defensive lines, and punishing the enemy with balanced units.",
-    "seleccion_habilidades": "individual",
-    "habilidades_faccion": [
-      {
-        "id": "chain-of-command",
-        "nombre": "Chain of Command",
-        "descripcion_escaramuza": "Once per turn, when an ORDER unit activates, another ORDER unit within 6\" may activate immediately afterwards without waiting for the opponent's turn.",
-        "descripcion_escuadra": "Once per turn, when an ORDER unit activates, another ORDER unit within 6\" may activate immediately afterwards without waiting for the opponent's turn.",
-        "frase": "Order is the origin of justice"
-      },
-      {
-        "id": "fortification",
-        "nombre": "Fortification",
-        "descripcion_escaramuza": "Command posts under your control count as being in cover.",
-        "descripcion_escuadra": "Command posts under your control count as being in cover.",
-        "frase": "Where we plant the banner, not one step back."
-      },
-      {
-        "id": "doctrine",
-        "nombre": "Doctrine",
-        "descripcion_escaramuza": "Before the game begins, choose one enemy unit type (Line, Elite, Vehicle, Monster, Hero, or Titan). While your Order units attack units of that type, they ignore cover when shooting and ignore the Berserker and Resilient specialties.",
-        "descripcion_escuadra": "Before the game begins, choose one enemy unit type (Line, Elite, Vehicle, Monster, Hero, or Titan). While your Order units attack units of that type, they ignore cover when shooting and ignore the Berserker and Resilient specialties.",
-        "frase": "Know your enemy before raising your weapon."
-      },
-      {
-        "id": "decisive-command",
-        "nombre": "Decisive Command",
-        "descripcion_escaramuza": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
-        "descripcion_escuadra": "Once per turn, this player may reroll 2 of their own rolls (attack, save, initiative, etc.). Each roll can only be rerolled once.",
-        "frase": "The best battle is won with patience."
-      },
-      {
-        "id": "iron-march",
-        "nombre": "Iron March",
-        "descripcion_escaramuza": "All units in this army replace their Speed value with +4\", regardless of their profile.",
-        "descripcion_escuadra": "All units in this army replace their Speed value with +4\", regardless of their profile.",
-        "frase": "We leave no one behind"
-      }
-    ]
+    "estilo_juego": "A disciplined and methodical faction focused on territorial control and sustained fire. Its units perform best when holding position and coordinating tactically. It sacrifices some raw power in exchange for precision, resilience and command discipline.",
+    "seleccion_habilidades": "",
+    "habilidades_faccion": [],
+    "grupos_habilidades_faccion": []
   },
   "unidades": [
     {
-      "nombre_unidad": "Line Soldier",
-      "era": "Future",
+      "nombre_unidad": "Line Guard",
       "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "4+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 4,
-          "max": 6
-        },
-        "valor": 5,
-        "especialidad": "Soldier"
-      },
+      "perfil": { "especialidad": "Soldier" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Standard Rifle",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Fists",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "1",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Laser Rifle", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Bayonet", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "War Bow", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Short Sword", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Incendiaries",
-      "era": "Future",
+      "nombre_unidad": "Assault Infantry",
       "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 7,
-        "especialidad": "Soldier"
-      },
+      "perfil": { "especialidad": "Shove" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Flamethrower",
-            "ataques": "1D6",
-            "distancia": "6\"",
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Direct"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Combat Knife",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Assault Pistol", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Energy Mace", "habilidades_arma": ["Brutal 4+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Spear", "habilidades_arma": ["Piercing (Line, Elite, Hero, Monster)"] },
+            { "nombre": "Combat Dagger", "habilidades_arma": ["Brutal 4+"] }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Sappers",
-      "era": "Future",
+      "nombre_unidad": "Support Gunners",
       "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 7,
-        "especialidad": "Accurate"
-      },
+      "perfil": { "especialidad": "Accurate" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Heavy Weapon",
-            "ataques": "1D6",
-            "distancia": "12\"",
-            "impactos": "5+",
-            "danio": "2",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Rocket Launcher (Vehicle, Monster)",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sapper Knife",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Flamethrower", "habilidades_arma": ["Direct"] },
+            { "nombre": "Support Rifle", "habilidades_arma": ["Dead Angle"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Longbow", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Dagger", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Shock Infantry",
-      "era": "Future",
+      "nombre_unidad": "Heavy Scouts",
       "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 4,
-          "max": 8
-        },
-        "valor": 6,
-        "especialidad": "Shove"
-      },
+      "perfil": { "especialidad": "Vanguard" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Regulation Pistol",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "1",
-            "habilidades_arma": [
-              "Multi-use"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Guard Mace",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Carbine", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Explosive Charge", "habilidades_arma": ["Unstable"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Axe", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Scout Pike", "habilidades_arma": ["Reach"] }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Armored Guards",
-      "era": "Future",
+      "nombre_unidad": "Heavy Weapons Team",
+      "clase": "Line",
+      "perfil": { "especialidad": "Emplaced" },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Autocannon", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Grenade Launcher", "habilidades_arma": ["Explosive"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Siege Crossbow", "habilidades_arma": ["Piercing (Vehicle, Monster)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Short Sword", "habilidades_arma": ["Reliable"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Heavy Guard",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 8,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 4
-        },
-        "valor": 10,
-        "especialidad": "Resilient"
-      },
+      "perfil": { "especialidad": "Resilient" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Armored Assault Rifle",
-            "ataques": "3D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Energy Fists",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Plasma Rifle", "habilidades_arma": ["Brutal 5+"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Combat Sword", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Heavy Crossbow", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Field Medic",
-      "era": "Future",
+      "nombre_unidad": "Elite Hunters",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 8,
-        "especialidad": "Support"
-      },
+      "perfil": { "especialidad": "Accurate" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Tactical Pistol",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Multi-use"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Surgical Knife",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Precision Rifle", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Knife", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Hunting Bow", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Rapier", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Snipers",
-      "era": "Future",
+      "nombre_unidad": "War Medic",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 6,
-        "salvacion": "4+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 2,
-          "max": 4
-        },
-        "valor": 8,
-        "especialidad": "Accurate"
-      },
+      "perfil": { "especialidad": "Support" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Sniper Rifle (Line, Elite)",
-            "ataques": "2D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Anti-Materiel Rifle (Vehicle, Monster)",
-            "ataques": "1D",
-            "distancia": "24\"",
-            "impactos": "4+",
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Combat Knife",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Pistol", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Combat Scalpel", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Staff", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Recon Vehicle",
-      "era": "Future",
-      "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 8,
-        "salvacion": "4+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 10,
-        "especialidad": "Vanguard"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Light Machine Gun",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Ram",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Line Tank",
-      "era": "Future",
-      "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 18,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "Shooter"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Machine Gun (Line, Elite)",
-            "ataques": "4D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Main Cannon",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Explosive"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Strike",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Heavy Artillery",
-      "era": "Future",
-      "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "-",
-        "vidas": 12,
-        "salvacion": "4+",
-        "velocidad": "-",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 13,
-        "especialidad": "Emplaced"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Siege Cannon",
-            "ataques": "1D",
-            "distancia": "24\"",
-            "impactos": "4+",
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Explosive",
-              "Arcing"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Electromagnetic Cannon (Vehicle, Monster)",
-            "ataques": "2D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cannon Strike",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Field General",
-      "era": "Future",
-      "clase": "Hero",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 10,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16,
-        "especialidad": "All allied units within 6\" of this hero may reroll all failed Shooting and melee dice.",
-        "especialidad_escaramuza": "All allied units within 6\" of this hero may reroll all failed Shooting and melee dice.",
-        "especialidad_escuadra": "While this hero is part of a squad, all allied units within 6\" of this hero may reroll all failed Shooting and melee dice."
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Energy Rifle",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Command Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Energy Fist (Elite)",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Assault Bastion",
-      "era": "Future",
-      "clase": "Titan",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 32,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 45,
-        "especialidad": "Shooter"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Destruction Cannon",
-            "ataques": "2D6",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Orbital Missile Launcher",
-            "ataques": "2D",
-            "distancia": "24\"",
-            "impactos": "4+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Explosive"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Siege Fist",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "City Guards",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 4,
-        "especialidad": "Resilient"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Spear and Shield",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reach"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Kingdom Archers",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 6,
-        "especialidad": "Accurate"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Longbow",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Dagger",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Spearmen",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 5,
-        "especialidad": "Anchored"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Formation Spear",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reach"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Northern Scouts",
-      "era": "Past",
-      "clase": "Line",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 2,
-          "max": 4
-        },
-        "valor": 6,
-        "especialidad": "Vanguard"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Scout Bow",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Scout Sword",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Citadel Guard",
-      "era": "Past",
+      "nombre_unidad": "Light Cavalry",
       "clase": "Elite",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 8,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 11,
-        "especialidad": "Resilient"
-      },
+      "perfil": { "especialidad": "Brutal Charge" },
       "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Guard Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Plasma Pistol", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Sabre", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Cavalry Lance", "habilidades_arma": ["Brutal 5+ (Line, Elite)"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Kingdom Cavalry",
-      "era": "Past",
-      "clase": "Elite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 7,
-        "salvacion": "4+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 11,
-        "especialidad": "Brutal Charge"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Throwing Spear",
-            "ataques": "1D",
-            "distancia": "6\"",
-            "impactos": "4+",
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Multi-use"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cavalry Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Siege Ballista",
-      "era": "Past",
+      "nombre_unidad": "Vanguard Vehicle",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 10,
-        "salvacion": "4+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 12,
-        "especialidad": "Accurate"
-      },
+      "perfil": { "especialidad": "Shooter" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Giant Crossbow (Vehicle, Monster)",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Piercing"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Ram",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Light Cannon", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Coaxial Bolter", "habilidades_arma": ["Brutal 5+ (Line, Elite)"] }
+          ],
+          "cuerpo_a_cuerpo": [{ "nombre": "Ram Plates", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Double Ballista", "habilidades_arma": ["Piercing"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Battering Ram", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Trebuchet",
-      "era": "Past",
+      "nombre_unidad": "Line Vehicle",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "-",
-        "vidas": 10,
-        "salvacion": "4+",
-        "velocidad": "-",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 13,
-        "especialidad": "Emplaced"
-      },
+      "perfil": { "especialidad": "Resilient" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Catapult Projectile",
-            "ataques": "1D6",
-            "distancia": "24\"",
-            "impactos": "-",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Explosive",
-              "Arcing"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Ram",
-            "ataques": "1D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "1",
-            "danio_critico": "2",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Main Cannon", "habilidades_arma": ["Piercing (Vehicle, Monster)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Reinforced Plates", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Heavy Crossbow", "habilidades_arma": ["Piercing (Vehicle, Monster)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Reinforced Plates", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Armored Ram",
-      "era": "Past",
+      "nombre_unidad": "Siege Artillery",
       "clase": "Vehicle",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 14,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "Mobile Cover"
-      },
+      "perfil": { "especialidad": "Emplaced" },
       "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Battering Ram",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Heavy Mortar", "habilidades_arma": ["Arcing", "Dead Angle"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Cannon Butt", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Trebuchet", "habilidades_arma": ["Arcing", "Dead Angle"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Butt", "habilidades_arma": ["Reliable"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Tamed Troll",
-      "era": "Past",
+      "nombre_unidad": "War Beast",
       "clase": "Monster",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 16,
-        "salvacion": "4+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 13,
-        "especialidad": "Anchored"
-      },
+      "perfil": { "especialidad": "Brutal Charge" },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Thrown Rock",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Reliable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Brutal Club",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Cybernetic Claws", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Mechanical Bite", "habilidades_arma": ["Unstable"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Beast Claws", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Fierce Bite", "habilidades_arma": ["Unstable"] }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Kingdom Captain",
-      "era": "Past",
+      "nombre_unidad": "War Automaton",
+      "clase": "Vehicle",
+      "perfil": { "especialidad": "Resilient" },
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Shoulder Cannon", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Hydraulic Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Stone Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] },
+            { "nombre": "Extendable Arm", "habilidades_arma": ["Reach"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Regiment Commander",
       "clase": "Hero",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 8,
-        "salvacion": "3+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "All allied units within 6\" of this hero may reroll all failed melee dice.",
-        "especialidad_escaramuza": "All allied units within 6\" of this hero may reroll all failed melee dice.",
-        "especialidad_escuadra": "While this hero is part of a squad, all allied units within 6\" of this hero may reroll all failed melee dice."
-      },
+      "habilidad_faccion": "Once per turn, when an Order unit activates, another Order unit within 6\" or less may activate immediately afterwards.",
       "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Captain Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Command Pistol", "habilidades_arma": ["Reliable"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Command Sword", "habilidades_arma": ["Brutal 5+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Command Sword", "habilidades_arma": ["Brutal 5+"] }]
+        }
       }
     },
     {
-      "nombre_unidad": "Sovereign Titan",
-      "era": "Past",
-      "clase": "Titan",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 28,
-        "salvacion": "2+",
-        "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 42,
-        "especialidad": "Standard Bearer"
-      },
+      "nombre_unidad": "Unyielding Sentinel",
+      "clase": "Hero",
+      "habilidad_faccion": "Command posts under your control count as cover for your units.",
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Sovereign Bow",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "2+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Sovereign Sword",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "6",
-            "danio_critico": "8",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [{ "nombre": "Heavy Rifle", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [{ "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Field Strategist",
+      "clase": "Hero",
+      "habilidad_faccion": "Once per turn, reroll 2 of your own dice (each can only be rerolled once).",
+      "armas": {
+        "futuro": {
+          "disparo": [{ "nombre": "Precision Pistol", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Officer Sabre", "habilidades_arma": ["Reliable"] }]
+        },
+        "pasado": {
+          "disparo": [{ "nombre": "Short Bow", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
+          "cuerpo_a_cuerpo": [{ "nombre": "Officer Sabre", "habilidades_arma": ["Reliable"] }]
+        }
       }
     }
   ]

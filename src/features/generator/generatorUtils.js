@@ -82,7 +82,6 @@ export const getUnitTypeToken = (type) => {
   if (normalized.includes('vehiculo') || normalized.includes('vehicle')) return 'vehicle'
   if (normalized.includes('monstruo') || normalized.includes('monster')) return 'monster'
   if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
-  if (normalized.includes('titan') || normalized.includes('titante')) return 'titan'
   return 'line'
 }
 
@@ -128,7 +127,7 @@ export const isUnitTypeAllowedInGameMode = (type, gameMode) => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
 
-  return !normalized.includes('vehiculo') && !normalized.includes('vehicle') && !normalized.includes('titan')
+  return !normalized.includes('vehiculo') && !normalized.includes('vehicle')
 }
 
 const getEraToken = (value) => {
@@ -317,30 +316,54 @@ const normalizeUnit = (unit, index) => {
     perfil.escuadra?.min ?? unit.escuadra_min ?? unit.escuadra?.min,
     perfil.escuadra?.max ?? unit.escuadra_max ?? unit.escuadra?.max,
   )
-  const disparo = (armas.disparo || unit.armas_disparo || []).map((weapon) =>
-    normalizeWeapon(weapon, 'disparo'),
-  )
-  const melee = (armas.cuerpo_a_cuerpo || unit.armas_melee || []).map((weapon) =>
-    normalizeWeapon(weapon, 'melee'),
-  )
-  const especialidad = normalizeTextValue(perfil.especialidad ?? unit.especialidad, '-')
-  const especialidadNombre = normalizeTextValue(perfil.especialidad_nombre ?? unit.especialidad_nombre, '')
-  const especialidadEscaramuza = normalizeTextValue(
-    perfil.especialidad_escaramuza ?? unit.especialidad_escaramuza ?? perfil.especialidad ?? unit.especialidad,
-    especialidad,
-  )
-  const especialidadNombreEscaramuza = normalizeTextValue(
-    perfil.especialidad_nombre_escaramuza ?? unit.especialidad_nombre_escaramuza ?? perfil.especialidad_nombre ?? unit.especialidad_nombre,
-    especialidadNombre,
-  )
-  const especialidadEscuadra = normalizeTextValue(
-    perfil.especialidad_escuadra ?? unit.especialidad_escuadra ?? perfil.especialidad ?? unit.especialidad,
-    especialidadEscaramuza,
-  )
-  const especialidadNombreEscuadra = normalizeTextValue(
-    perfil.especialidad_nombre_escuadra ?? unit.especialidad_nombre_escuadra ?? perfil.especialidad_nombre ?? unit.especialidad_nombre,
-    especialidadNombreEscaramuza,
-  )
+
+  const hasDualEra = !!(armas.futuro || armas.pasado)
+  const disparoFuturo = (armas.futuro?.disparo || []).map((w) => normalizeWeapon(w, 'disparo'))
+  const caCFuturo = (armas.futuro?.cuerpo_a_cuerpo || []).map((w) => normalizeWeapon(w, 'melee'))
+  const disparoPasado = (armas.pasado?.disparo || []).map((w) => normalizeWeapon(w, 'disparo'))
+  const caCPasado = (armas.pasado?.cuerpo_a_cuerpo || []).map((w) => normalizeWeapon(w, 'melee'))
+
+  const disparo = hasDualEra
+    ? (disparoFuturo.length ? disparoFuturo : disparoPasado)
+    : (armas.disparo || unit.armas_disparo || []).map((weapon) => normalizeWeapon(weapon, 'disparo'))
+  const melee = hasDualEra
+    ? (caCFuturo.length ? caCFuturo : caCPasado)
+    : (armas.cuerpo_a_cuerpo || unit.armas_melee || []).map((weapon) => normalizeWeapon(weapon, 'melee'))
+  const rawEspecialidad = perfil.especialidad ?? unit.especialidad
+  const rawEspecialidadNombre = perfil.especialidad_nombre ?? unit.especialidad_nombre
+  const habilidadFaccion = unit.habilidad_faccion || ''
+  const isHeroWithFactionAbility = !!(habilidadFaccion && !rawEspecialidad && !rawEspecialidadNombre)
+
+  const especialidad = isHeroWithFactionAbility
+    ? habilidadFaccion
+    : normalizeTextValue(rawEspecialidad, '-')
+  const especialidadNombre = isHeroWithFactionAbility
+    ? 'Hab. Facción'
+    : normalizeTextValue(rawEspecialidadNombre, '')
+  const especialidadEscaramuza = isHeroWithFactionAbility
+    ? habilidadFaccion
+    : normalizeTextValue(
+        perfil.especialidad_escaramuza ?? unit.especialidad_escaramuza ?? rawEspecialidad,
+        especialidad,
+      )
+  const especialidadNombreEscaramuza = isHeroWithFactionAbility
+    ? 'Hab. Facción'
+    : normalizeTextValue(
+        perfil.especialidad_nombre_escaramuza ?? unit.especialidad_nombre_escaramuza ?? rawEspecialidadNombre,
+        especialidadNombre,
+      )
+  const especialidadEscuadra = isHeroWithFactionAbility
+    ? habilidadFaccion
+    : normalizeTextValue(
+        perfil.especialidad_escuadra ?? unit.especialidad_escuadra ?? rawEspecialidad,
+        especialidadEscaramuza,
+      )
+  const especialidadNombreEscuadra = isHeroWithFactionAbility
+    ? 'Hab. Facción'
+    : normalizeTextValue(
+        perfil.especialidad_nombre_escuadra ?? unit.especialidad_nombre_escuadra ?? rawEspecialidadNombre,
+        especialidadNombreEscaramuza,
+      )
 
   return {
     id: unit.id || slugify(unit.nombre_unidad || unit.nombre || `${index}`),
@@ -363,6 +386,12 @@ const normalizeUnit = (unit, index) => {
     armas_disparo: disparo,
     armas_melee: melee,
     max_armas_disparo: getMaxDisparo({ ...unit, perfil }),
+    habilidad_faccion: unit.habilidad_faccion || '',
+    has_dual_era_weapons: hasDualEra,
+    armas_disparo_future: hasDualEra ? disparoFuturo : null,
+    armas_melee_future: hasDualEra ? caCFuturo : null,
+    armas_disparo_past: hasDualEra ? disparoPasado : null,
+    armas_melee_past: hasDualEra ? caCPasado : null,
   }
 }
 
@@ -476,11 +505,22 @@ export const selectionHasWeaponLimitError = (entry, armyUnits = [], gameMode = '
   return false
 }
 
-export const getFixedUnitLoadout = (unit) => ({
-  shooting: Array.isArray(unit?.armas_disparo) ? unit.armas_disparo.filter(Boolean) : [],
-  meleeList: Array.isArray(unit?.armas_melee) ? unit.armas_melee.filter(Boolean) : [],
-  melee: Array.isArray(unit?.armas_melee) ? unit.armas_melee[0] || null : null,
-})
+export const getFixedUnitLoadout = (unit, era = '') => {
+  if (unit?.has_dual_era_weapons && era) {
+    const shooting = era === 'past' ? (unit.armas_disparo_past || []) : (unit.armas_disparo_future || [])
+    const meleeList = era === 'past' ? (unit.armas_melee_past || []) : (unit.armas_melee_future || [])
+    return {
+      shooting: shooting.filter(Boolean),
+      meleeList: meleeList.filter(Boolean),
+      melee: meleeList.filter(Boolean)[0] || null,
+    }
+  }
+  return {
+    shooting: Array.isArray(unit?.armas_disparo) ? unit.armas_disparo.filter(Boolean) : [],
+    meleeList: Array.isArray(unit?.armas_melee) ? unit.armas_melee.filter(Boolean) : [],
+    melee: Array.isArray(unit?.armas_melee) ? unit.armas_melee[0] || null : null,
+  }
+}
 
 export const computeUnitTotal = (unit, shooting, melee, squadSize, perMiniLoadouts, gameMode = 'escuadra') => {
   const perMiniCost = () => unit.valor_base
@@ -618,9 +658,6 @@ const getUnitSelectionWeight = (unit, currentUnits, gameMode) => {
     case 'monster':
       weight = roleCounts.monster ? 0.6 : 1
       break
-    case 'titan':
-      weight = roleCounts.titan ? 0.05 : 0.35
-      break
     default:
       weight = 1
       break
@@ -648,15 +685,13 @@ const getArmyGenerationScore = (units, total, target, gameMode) => {
   if (roleCounts.elite) score += 5
   if (roleCounts.hero) score += 2
 
-  if (gameMode === 'escuadra' && (roleCounts.vehicle || roleCounts.monster || roleCounts.titan)) {
+  if (gameMode === 'escuadra' && (roleCounts.vehicle || roleCounts.monster)) {
     score += 3
   }
 
   if (!roleCounts.line) score -= 18
   if (units.length <= 1) score -= 10
   if ((roleCounts.hero || 0) > 1) score -= (roleCounts.hero - 1) * 4
-  if ((roleCounts.titan || 0) > 1) score -= (roleCounts.titan - 1) * 8
-
   byBase.forEach((count) => {
     if (count > 2) {
       score -= (count - 2) * 3

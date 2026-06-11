@@ -6,12 +6,11 @@ import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
 import misionesEnMd from '../data/english/missions.md?raw'
 import legadoData from '../data/factions/jsonFaccionesES/legado.json'
-import ordenData from '../data/factions/jsonFaccionesES/orden.json'
 import legadoEnData from '../data/factions/jsonFaccionesEN/legado.en.json'
-import ordenEnData from '../data/factions/jsonFaccionesEN/orden.en.json'
+import caosData from '../data/factions/jsonFaccionesES/caos.json'
+import caosEnData from '../data/factions/jsonFaccionesEN/caos.en.json'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
-import FactionAbilityFichaCard from '../features/generator/components/FactionAbilityFichaCard.jsx'
-import { getFactionSkillDescriptionForMode, normalizeFaction } from '../features/generator/generatorUtils.js'
+import { normalizeFaction } from '../features/generator/generatorUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
@@ -34,6 +33,10 @@ import activationOverviewImage from '../images/webimagen/imagen_7.webp'
 import turnStructureImage from '../images/webimagen/imagen_8.webp'
 import commandPostControlImage from '../images/webimagen/imagen_9.webp'
 import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
+import lockedUnitsImage from '../images/webimagen/imagen_11.webp'
+import squadMeleeImage from '../images/webimagen/imagen_12.webp'
+import coverImage from '../images/webimagen/imagen_13.webp'
+import vehicleMonsterMeleeImage from '../images/webimagen/imagen_14.webp'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
 import grandBattle4pExposedMap from '../images/maps/gran-batalla-4p-cuarteles-expuestos.svg'
 import grandBattle4pCornersMap from '../images/maps/gran-batalla-4p-esquinas.svg'
@@ -45,19 +48,17 @@ import unitTypeEliteIcon from '../images/units_icons/elite.png'
 import unitTypeVehicleIcon from '../images/units_icons/vehicle.png'
 import unitTypeMonsterIcon from '../images/units_icons/monster.png'
 import unitTypeHeroIcon from '../images/units_icons/hero.png'
-import unitTypeTitanIcon from '../images/units_icons/titan.png'
 import unitTypeLinePastIcon from '../images/units_icons/past/line.png'
 import unitTypeElitePastIcon from '../images/units_icons/past/elite.png'
 import unitTypeVehiclePastIcon from '../images/units_icons/past/vehicle.png'
 import unitTypeHeroPastIcon from '../images/units_icons/past/hero.png'
-import unitTypeTitanPastIcon from '../images/units_icons/past/titan.png'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
-const RULES_ABILITY_PROFILE_SLOT_SRC = 'rules-ability-profile-slot'
+const RULES_HERO_PROFILE_SLOT_SRC = 'rules-hero-profile-slot'
 
 const normalizeHeadingText = (value) =>
   String(value || '')
@@ -81,7 +82,9 @@ const RULES_ASSET_PLACEHOLDERS = {
   activationImage: activationOverviewImage,
   climbingImage,
   commandPostControlImage,
+  coverImage,
   lineOfSightImage,
+  lockedUnitsImage,
   measurementImage,
   miniatureVsSquadImage,
   rangedAttackSequenceImage,
@@ -89,11 +92,13 @@ const RULES_ASSET_PLACEHOLDERS = {
   grandBattle4pCornersMap,
   grandBattle4pWideMap,
   sprintImage,
+  squadMeleeImage,
   totalWarCenterMap,
   totalWarCornersMap,
   turnStructureImage,
-  factionAbilityProfileImage: RULES_ABILITY_PROFILE_SLOT_SRC,
+  vehicleMonsterMeleeImage,
   unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,
+  heroProfileImage: RULES_HERO_PROFILE_SLOT_SRC,
 }
 
 const RULES_UNIT_TYPE_ICONS = [
@@ -102,17 +107,16 @@ const RULES_UNIT_TYPE_ICONS = [
   { id: 'vehicle', imageSrc: unitTypeVehicleIcon, pastImageSrc: unitTypeVehiclePastIcon, labelEs: 'Vehículo', labelEn: 'Vehicle', sectionHeadings: ['3 vehiculos', '3 vehicles'] },
   { id: 'monster', imageSrc: unitTypeMonsterIcon, labelEs: 'Monstruo', labelEn: 'Monster', sectionHeadings: ['4 monstruos', '4 monsters'] },
   { id: 'hero', imageSrc: unitTypeHeroIcon, pastImageSrc: unitTypeHeroPastIcon, labelEs: 'Héroe', labelEn: 'Hero', sectionHeadings: ['5 heroes', '5 heroes'] },
-  { id: 'titan', imageSrc: unitTypeTitanIcon, pastImageSrc: unitTypeTitanPastIcon, labelEs: 'Titán', labelEn: 'Titan', sectionHeadings: ['6 titanes', '6 titans'] },
 ]
 
 const RULES_EXAMPLE_FACTIONS = {
   es: {
     legado: normalizeFaction(legadoData, 0, 'legado'),
-    orden: normalizeFaction(ordenData, 0, 'orden'),
+    caos: normalizeFaction(caosData, 1, 'caos'),
   },
   en: {
     legado: normalizeFaction(legadoEnData, 0, 'legado'),
-    orden: normalizeFaction(ordenEnData, 0, 'orden'),
+    caos: normalizeFaction(caosEnData, 1, 'caos'),
   },
 }
 
@@ -124,10 +128,16 @@ const getRulesExampleUnit = (lang = 'es') => {
   return units.find((unit) => unit.nombre === preferredName) || units[0]
 }
 
-const getRulesExampleAbility = (lang = 'es') => {
-  const abilities = getRulesExampleFactionSet(lang).orden.habilidades_faccion || []
-  const preferredId = lang === 'en' ? 'fortification' : 'fortificacion'
-  return abilities.find((ability) => ability.id === preferredId) || abilities[0]
+const getRulesExampleHero = (lang = 'es') => {
+  const units = getRulesExampleFactionSet(lang).caos.unidades || []
+  const preferredName = lang === 'en' ? 'Demonic Cyborg' : 'cyborg demoniaco'
+  return units.find((unit) => unit.nombre === preferredName) || units.find((unit) => {
+    const normalizedType = String(unit.tipo || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+    return normalizedType.includes('hero') || normalizedType.includes('heroe')
+  })
 }
 
 function RulesFichaSlot({ type, lang }) {
@@ -152,15 +162,17 @@ function RulesFichaSlot({ type, lang }) {
     )
   }
 
-  if (type === 'ability') {
-    const ability = getRulesExampleAbility(lang)
-    if (!ability) return null
+  if (type === 'hero') {
+    const unit = getRulesExampleHero(lang)
+    if (!unit) return null
     return (
-      <div className="rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-ability">
-        <FactionAbilityFichaCard
-          ability={ability}
-          factionId="orden"
-          description={getFactionSkillDescriptionForMode(ability, 'escaramuza')}
+      <div className="rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-hero">
+        <UnitFichaCard
+          unit={unit}
+          factionId="caos"
+          imageDataUrl=""
+          gameMode="escaramuza"
+          eraLabel={lang === 'en' ? 'Future' : 'Futuro'}
           lang={lang}
           showLayoutToolbar={false}
         />
@@ -172,7 +184,7 @@ function RulesFichaSlot({ type, lang }) {
 }
 
 const renderRulesHtmlWithFichaSlots = (html, lang) => {
-  const slotPattern = /<div data-rules-ficha-slot="(unit|ability)"><\/div>/g
+  const slotPattern = /<div data-rules-ficha-slot="(unit|hero)"><\/div>/g
   const nodes = []
   let lastIndex = 0
   let match
@@ -371,12 +383,15 @@ function Reglamento() {
     }
     Array.from(doc.querySelectorAll('img')).forEach((image) => {
       const src = image.getAttribute('src') || ''
-      const isUnitFicha = src === RULES_UNIT_PROFILE_SLOT_SRC
-      const isAbilityFicha = src === RULES_ABILITY_PROFILE_SLOT_SRC
-      if (!isUnitFicha && !isAbilityFicha) return
+      const slotTypeBySrc = {
+        [RULES_UNIT_PROFILE_SLOT_SRC]: 'unit',
+        [RULES_HERO_PROFILE_SLOT_SRC]: 'hero',
+      }
+      const slotType = slotTypeBySrc[src]
+      if (!slotType) return
 
       const slot = doc.createElement('div')
-      slot.dataset.rulesFichaSlot = isUnitFicha ? 'unit' : 'ability'
+      slot.dataset.rulesFichaSlot = slotType
       const paragraph = image.closest('p')
       if (paragraph) {
         paragraph.replaceWith(slot)
@@ -1117,10 +1132,6 @@ function Reglamento() {
             justify-content: center;
             break-inside: avoid;
           }
-          .rules-pdf-sheet .rules-html .rules-profile-image-row:has(.rules-profile-image-ability) {
-            width: 60%;
-            max-width: 60%;
-          }
           .rules-pdf-sheet .rules-html .rules-profile-image {
             display: block;
             width: 100%;
@@ -1207,7 +1218,7 @@ function Reglamento() {
           }
           .rules-pdf-sheet .rules-html .rules-unit-type-gallery {
             display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
             margin: 16px 0 22px;
             padding: 12px;

@@ -2,1130 +2,554 @@
   "id": "legado",
   "faccion": {
     "nombre": "Legado",
-    "estilo_juego": "Facción de control y posicionamiento que apuesta por la calidad sobre la cantidad. Sus unidades son las más resistentes del juego pero dispone de menos. Usa portales para teleportarse donde el rival no espera, revive a sus caídos con probabilidad y contraataca incluso al morir. El control del tablero es suyo si el jugador es paciente. Ideal para jugadores estratégicos que disfrutan de la microgestión, el posicionamiento y hacer que cada unidad cuente.",
-    "seleccion_habilidades": "individual",
-    "habilidades_faccion": [
-      {
-        "id": "el-ultimo-aliento",
-        "nombre": "El Último Aliento",
-        "descripcion_escaramuza": "Cuando una unidad LEGADO es destruida, realiza un último ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
-        "descripcion_escuadra": "Cuando una unidad LEGADO es destruida, realiza un último ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
-        "frase": "Nada muere fácil."
-      },
-      {
-        "id": "el-vacio-llama",
-        "nombre": "El Vacío llama",
-        "descripcion_escaramuza": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, LEGADO puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
-        "descripcion_escuadra": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, LEGADO puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
-        "frase": "El rival no puede planificar nada contra ti."
-      },
-      {
-        "id": "ecos-del-pasado",
-        "nombre": "Ecos del pasado",
-        "descripcion_escaramuza": "Cuando una unidad LEGADO sea destruida, lanza 1D6. Con 5 o 6, en lugar de retirarla del juego, vuelve a Reserva.",
-        "descripcion_escuadra": "Cuando una unidad LEGADO sea destruida, lanza 1D6. Con 5 o 6, en lugar de retirarla del juego, vuelve a Reserva.",
-        "frase": "Siempre se tiene una segunda oportunidad."
-      },
-      {
-        "id": "mando-decisivo",
-        "nombre": "Mando Decisivo",
-        "descripcion_escaramuza": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
-        "descripcion_escuadra": "Una vez por turno, este jugador puede repetir 2 tiradas propias (ataque, salvación, iniciativa, etc.). Cada tirada solo puede repetirse una vez.",
-        "frase": "La mejor batalla es la que se gana con paciencia."
-      }
-    ]
+    "estilo_juego": "Facción de élite, cara y contundente. Pocas unidades, pero cada una vale por varias: salvaciones de 3+ y 2+, perfiles superiores y escuadras pequeñas. Pierde la guerra de activaciones por números, y lo compensa con durabilidad extrema, contraataque (Preparado) y la capacidad de reposicionarse donde duele. Cada baja propia es un drama; cada decisión, importante. Ideal para jugadores que prefieren calidad sobre cantidad y partidas de precisión quirúrgica.",
+    "seleccion_habilidades": "",
+    "habilidades_faccion": [],
+    "grupos_habilidades_faccion": []
   },
   "unidades": [
     {
-      "nombre_unidad": "Guardianes Eternos",
-      "era": "Futuro",
+      "nombre_unidad": "Cruzados",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
         "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 5
-        },
-        "valor": 7,
-        "especialidad": "Evasivo"
+        "velocidad": "+2\"",
+        "escuadra": { "min": 3, "max": 6 },
+        "valor": 8,
+        "especialidad": "Soldado"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Rifle de resonancia",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Lanza espectral",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Rifle de batalla", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hoja de batalla", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Ballesta consagrada", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada consagrada", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Guardianes del Velo",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 3, "max": 6 },
+        "valor": 9,
+        "especialidad": "Guardia"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Escopeta de asalto", "ataques": "1D3", "distancia": "8\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Maza táctica", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Martillo y escudo", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Alabarda (solo Élite, Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Vanguardia Sagrada",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 4,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 3, "max": 6 },
+        "valor": 9,
+        "especialidad": "Avanzadilla"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Carabina ligera", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Granada de fusión (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "6\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Cuchilla de vanguardia", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Arco bendecido", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada y daga", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Juramentados",
+      "clase": "Línea",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 5,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 3, "max": 6 },
+        "valor": 9,
+        "especialidad": "Anclado"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Rifle de asalto", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hacha juramentada", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Mangual de energía (solo Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hacha ancestral", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Mangual bendito (solo Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Caballeros de Asalto",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 7,
+        "salvacion": "3+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 2, "max": 4 },
+        "valor": 13,
+        "especialidad": "Carga brutal"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola pesada", "ataques": "1D", "distancia": "8\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada rúnica", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Martillo de energía (solo Élite, Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hoja gemela", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Mandoble bendito (solo Élite, Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
       "nombre_unidad": "Custodios",
-      "era": "Futuro",
-      "clase": "Línea",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 8,
+        "salvacion": "2+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 2, "max": 3 },
+        "valor": 15,
+        "especialidad": "Resistente"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Cañón de mano", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Puño energético", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Martillo del juicio", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Tiradores del Juicio",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
         "salvacion": "3+",
         "velocidad": "+2\"",
-        "escuadra": {
-          "min": 3,
-          "max": 5
-        },
-        "valor": 8,
-        "especialidad": "Evasivo"
+        "escuadra": { "min": 2, "max": 4 },
+        "valor": 12,
+        "especialidad": "Certero"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanzador de energía",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Escudo y espada",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Rifle de salvas", "ataques": "3D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Cañón láser (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "24\"", "impactos": "3+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Arco rápido", "ataques": "3D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Ballesta del juicio (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "24\"", "impactos": "3+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Daga", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Templarios",
-      "era": "Futuro",
-      "clase": "Línea",
+      "nombre_unidad": "Sanctor de Guerra",
+      "clase": "Élite",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
         "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 3,
-          "max": 5
-        },
-        "valor": 9,
-        "especialidad": "Resistente"
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 3 },
+        "valor": 10,
+        "especialidad": "Soporte"
       },
       "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espadas de energía",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola sagrada", "ataques": "1D", "distancia": "8\"", "impactos": "3+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Báculo de guerra", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Báculo de luz", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Inmortales",
-      "era": "Futuro",
+      "nombre_unidad": "Espectros del Legado",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "3\"",
-        "vidas": 10,
-        "salvacion": "2+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
+        "movimiento": "6\"",
+        "vidas": 5,
+        "salvacion": "4+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 2, "max": 4 },
+        "valor": 11,
+        "especialidad": "Volador"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistolas gemelas", "ataques": "2D", "distancia": "10\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Garras espectrales", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
         },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Hoces gemelas", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Custodio de Reliquias",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 2 },
+        "valor": 10,
+        "especialidad": "Capturador"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Estandarte-lanza", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Estandarte sagrado", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Centinela Blindado",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
         "valor": 14,
         "especialidad": "Tirador"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Cañón de aniquilación (Élite, Héroe, Titán)",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Guadaña espectral",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Acechadores del Vacío",
-      "era": "Futuro",
-      "clase": "Élite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 7,
-        "salvacion": "3+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 2,
-          "max": 4
+        "futuro": {
+          "disparo": [
+            { "nombre": "Cañón gemelo", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Lanzallamas pesado (solo Línea)", "ataques": "1D6", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Puño demoledor", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
         },
-        "valor": 10,
-        "especialidad": "Bloqueo de refuerzos"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Fusil del vacío",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Daga del vacío",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "pasado": {
+          "disparo": [
+            { "nombre": "Balista gemela", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Rociador de brea (solo Línea)", "ataques": "1D6", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Puño de asedio", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Sombras del Vacío",
-      "era": "Futuro",
-      "clase": "Élite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 7,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 12,
-        "especialidad": "Evasivo"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Cuchilla espectral",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Coloso del Legado",
-      "era": "Futuro",
+      "nombre_unidad": "Carro de Guerra Sagrado",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "5\"",
-        "vidas": 20,
-        "salvacion": "2+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 19,
-        "especialidad": "Berserker"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Cañón de calor",
-            "ataques": "2D6",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Rayo de disrupción",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "-",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Directo"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Pisotón colosal",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Centinela Espectral",
-      "era": "Futuro",
-      "clase": "Vehículo",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 16,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 15,
-        "especialidad": "Certero"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Cañón espectral",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Aplastar",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Portador del Vacío",
-      "era": "Futuro",
-      "clase": "Vehículo",
-      "perfil": {
-        "movimiento": "7\"",
+        "movimiento": "4\"",
         "vidas": 12,
-        "salvacion": "3+",
+        "salvacion": "2+",
         "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 13,
-        "especialidad": "Teletransporte"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Baterías de energía (Línea, Élite)",
-            "ataques": "4D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Cañón de disrupción (Vehículo)",
-            "ataques": "2D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Golpe espectral",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Etéreo del Vacío",
-      "era": "Futuro",
-      "clase": "Monstruo",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 14,
-        "salvacion": "2+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16,
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 17,
         "especialidad": "Cobertura móvil"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Pulso etéreo",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Golpe etéreo",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Oráculo del Legado",
-      "era": "Futuro",
-      "clase": "Héroe",
-      "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada).",
-      "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos.",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "2+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
+        "futuro": {
+          "disparo": [
+            { "nombre": "Bólter de apoyo", "ataques": "3D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Cañón del juicio (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "24\"", "impactos": "4+", "danio": "4", "danio_critico": "6", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Placas sagradas", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
         },
-        "valor": 18,
-        "especialidad_escaramuza": "Una vez por turno puede intercambiar su posición con cualquier unidad aliada a 18\" o menos (no puede estar trabada).",
-        "especialidad_escuadra": "Una vez por turno la escuadra puede intercambiar su posición con cualquier unidad aliada a 18\" o menos.",
-        "especialidad_nombre_escaramuza": "Oráculo del Legado",
-        "especialidad_nombre_escuadra": "Oráculo del Legado"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanza del oráculo",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espada del oráculo",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Toque del vacío",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "pasado": {
+          "disparo": [
+            { "nombre": "Ballesta de apoyo", "ataques": "3D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Trabuco sagrado (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "24\"", "impactos": "4+", "danio": "4", "danio_critico": "6", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Placas benditas", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "El Ancestral",
-      "era": "Futuro",
-      "clase": "Titán",
-      "perfil": {
-        "movimiento": "3\"",
-        "vidas": 30,
-        "salvacion": "2+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 48,
-        "especialidad": "Resistente"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Cañón del juicio final",
-            "ataques": "2D6",
-            "distancia": "24\"",
-            "impactos": "2+",
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Explosiva",
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          },
-          {
-            "nombre": "Batería del Legado",
-            "ataques": "2D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espada del fin",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "6",
-            "danio_critico": "8",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Escuderos",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 4,
-        "salvacion": "5+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 5,
-        "especialidad": "Cobertura móvil"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espada y escudo",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Hombres de Armas",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 3,
-          "max": 6
-        },
-        "valor": 6,
-        "especialidad": "Resistente"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Lanza larga",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Alcance"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Cruzados",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "4+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 2,
-          "max": 5
-        },
-        "valor": 7,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espada de cruzada",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Monjes Combatientes",
-      "era": "Pasado",
-      "clase": "Línea",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 5,
-        "salvacion": "5+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 2,
-          "max": 5
-        },
-        "valor": 6,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Puños sagrados",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Caballeros del Sagrado",
-      "era": "Pasado",
-      "clase": "Élite",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 8,
-        "salvacion": "3+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 13,
-        "especialidad": "Carga brutal"
-      },
-      "armas": {
-        "disparo": [],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Lanza de caballería",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Perforante"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Paladines Sagrados",
-      "era": "Pasado",
-      "clase": "Élite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 9,
-        "salvacion": "2+",
-        "velocidad": "+4\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 14,
-        "especialidad": "Resistente"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Martillo lanzado",
-            "ataques": "1D",
-            "distancia": "12\"",
-            "impactos": "4+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Martillo sagrado",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Arqueros del Templo",
-      "era": "Pasado",
-      "clase": "Élite",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 7,
-        "salvacion": "4+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 3
-        },
-        "valor": 10,
-        "especialidad": "Certero"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Arco sagrado",
-            "ataques": "3D",
-            "distancia": "24\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Daga del templo",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Coloso de Piedra",
-      "era": "Pasado",
+      "nombre_unidad": "Artillería del Juicio",
       "clase": "Vehículo",
       "perfil": {
         "movimiento": "3\"",
-        "vidas": 18,
-        "salvacion": "3+",
-        "velocidad": "+1\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16,
-        "especialidad": "Resistente"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Puños catapulta",
-            "ataques": "2D6",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Explosiva"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Puñetazo de piedra",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "Portador de la Fe",
-      "era": "Pasado",
-      "clase": "Vehículo",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 14,
-        "salvacion": "3+",
+        "vidas": 9,
+        "salvacion": "4+",
         "velocidad": "+2\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 14,
-        "especialidad": "Cobertura móvil"
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 13,
+        "especialidad": "Asentado"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanzador de reliquias",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Pisotón sagrado",
-            "ataques": "2D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "3",
-            "danio_critico": "4",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [
+            { "nombre": "Mortero sagrado", "ataques": "1D3", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica", "Ángulo muerto"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Trabuquete bendito", "ataques": "1D3", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica", "Ángulo muerto"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Ángel Caído",
-      "era": "Pasado",
+      "nombre_unidad": "Grifo Real",
       "clase": "Monstruo",
       "perfil": {
         "movimiento": "7\"",
-        "vidas": 14,
-        "salvacion": "3+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 15,
+        "vidas": 9,
+        "salvacion": "4+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 13,
         "especialidad": "Volador"
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Lanza celestial",
-            "ataques": "3D",
-            "distancia": "18\"",
-            "impactos": "3+",
-            "danio": "3",
-            "danio_critico": "5",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espada divina",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Garras imperiales", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Garras reales", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
       }
     },
     {
-      "nombre_unidad": "Gran Maestre",
-      "era": "Pasado",
+      "nombre_unidad": "Coloso Penitente",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "salvacion": "3+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 15,
+        "especialidad": "Terror"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espadón colosal", "ataques": "3D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
+            { "nombre": "Cadenas penitentes (solo Línea, Élite)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espadón ancestral", "ataques": "3D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
+            { "nombre": "Cadenas de penitencia (solo Línea, Élite)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Gran Maestre del Legado",
       "clase": "Héroe",
+      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa, puedes retirar una unidad Legado del campo de batalla y desplegarla en contacto con un puesto de mando bajo tu control.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 11,
+        "salvacion": "2+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 21
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola reliquia", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada del juicio", "ataques": "3D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Espada ancestral", "ataques": "3D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Alto Capellán",
+      "clase": "Héroe",
+      "habilidad_faccion": "Las unidades Legado a 6\" o menos pueden realizar la acción Preparado gastando solo 1 acción.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 18
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola de mando", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Maza reliquia", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Martillo sagrado", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Vidente Eterno",
+      "clase": "Héroe",
+      "habilidad_faccion": "Una vez por partida, al final de un turno, devuelve al campo una unidad Legado destruida con la mitad de sus Vidas por miniatura (redondeando hacia arriba), desplegándola en un puesto de mando bajo tu control.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
-        "salvacion": "2+",
-        "velocidad": "+5\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 18,
-        "especialidad": "Una vez por turno puede consagrar a una unidad aliada a 12\": hasta el final del turno sus ataques CaC infligen +1 Daño y sus críticos +1 Daño crítico. Las unidades aliadas a 6\" pueden repetir un dado de Salvación fallido por activación."
+        "salvacion": "3+",
+        "velocidad": "+4\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 19
       },
       "armas": {
-        "disparo": [
-          {
-            "nombre": "Martillo del maestre",
-            "ataques": "2D",
-            "distancia": "12\"",
-            "impactos": "3+",
-            "danio": "2",
-            "danio_critico": "3",
-            "habilidades_arma": [
-              "Fiable"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espadón sagrado",
-            "ataques": "4D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "4",
-            "danio_critico": "6",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
-      }
-    },
-    {
-      "nombre_unidad": "El Arcángel",
-      "era": "Pasado",
-      "clase": "Titán",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 28,
-        "salvacion": "2+",
-        "velocidad": "+3\"",
-        "escuadra": {
-          "min": 1,
-          "max": 1
+        "futuro": {
+          "disparo": [
+            { "nombre": "Báculo arcano", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Explosiva"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Báculo del tiempo", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
         },
-        "valor": 46,
-        "especialidad": "Devorador"
-      },
-      "armas": {
-        "disparo": [
-          {
-            "nombre": "Rayo divino",
-            "ataques": "2D6",
-            "distancia": "24\"",
-            "impactos": "2+",
-            "danio": "5",
-            "danio_critico": "7",
-            "habilidades_arma": [
-              "Explosiva",
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ],
-        "cuerpo_a_cuerpo": [
-          {
-            "nombre": "Espada del juicio",
-            "ataques": "3D",
-            "distancia": null,
-            "impactos": null,
-            "danio": "7",
-            "danio_critico": "9",
-            "habilidades_arma": [
-              "Brutal 5+"
-            ],
-            "valor_extra": 0
-          }
-        ]
+        "pasado": {
+          "disparo": [
+            { "nombre": "Báculo rúnico", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Explosiva"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Báculo ancestral", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
       }
     }
   ]
