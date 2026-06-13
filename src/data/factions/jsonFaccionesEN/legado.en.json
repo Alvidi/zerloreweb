@@ -11,32 +11,88 @@
     {
       "nombre_unidad": "Crusaders",
       "clase": "Line",
-      "perfil": { "especialidad": "Soldier" },
+      "perfil": {
+        "especialidad": "Soldier"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Battle Rifle", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Battle Blade", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Battle Rifle",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Battle Blade",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Consecrated Crossbow", "habilidades_arma": ["Brutal 5+"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Consecrated Sword", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Consecrated Crossbow",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Consecrated Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Veil Guardians",
       "clase": "Line",
-      "perfil": { "especialidad": "Guard" },
+      "perfil": {
+        "especialidad": "Guard"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Assault Shotgun", "habilidades_arma": ["Multi-use"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Tactical Mace", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Assault Shotgun",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Tactical Mace",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Hammer and Shield", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Halberd", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Hammer and Shield",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Halberd (only Elite, Hero)",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
           ]
         }
       }
@@ -44,38 +100,100 @@
     {
       "nombre_unidad": "Sacred Vanguard",
       "clase": "Line",
-      "perfil": { "especialidad": "Vanguard" },
+      "perfil": {
+        "especialidad": "Vanguard"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Light Carbine", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Fusion Grenade", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }
+            {
+              "nombre": "Light Carbine",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Fusion Grenade (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Vanguard Blade", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Vanguard Blade",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Blessed Bow", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sword and Dagger", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Blessed Bow",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sword and Dagger",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Oathbound",
       "clase": "Line",
-      "perfil": { "especialidad": "Anchored" },
+      "perfil": {
+        "especialidad": "Anchored"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Assault Rifle", "habilidades_arma": ["Reliable"] }],
+          "disparo": [
+            {
+              "nombre": "Assault Rifle",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Oathbound Axe", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Energy Flail", "habilidades_arma": ["Brutal 4+"] }
+            {
+              "nombre": "Oathbound Axe",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Energy Flail (only Hero)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ancestral Axe", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Blessed Flail", "habilidades_arma": ["Brutal 4+"] }
+            {
+              "nombre": "Ancestral Axe",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Blessed Flail (only Hero)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
           ]
         }
       }
@@ -83,194 +201,486 @@
     {
       "nombre_unidad": "Assault Knights",
       "clase": "Elite",
-      "perfil": { "especialidad": "Brutal Charge" },
+      "perfil": {
+        "especialidad": "Brutal Charge"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Heavy Pistol", "habilidades_arma": ["Multi-use"] }],
+          "disparo": [
+            {
+              "nombre": "Heavy Pistol",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Runic Sword", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Energy Hammer", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Runic Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Energy Hammer (only Elite, Hero)",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Twin Blade", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Blessed Greatsword", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Twin Blade",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Blessed Greatsword (only Elite, Hero)",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         }
       }
     },
     {
-      "nombre_unidad": "Custodians",
+      "nombre_unidad": "Bulwarks",
       "clase": "Elite",
-      "perfil": { "especialidad": "Resilient" },
+      "perfil": {
+        "especialidad": "Resilient"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Hand Cannon", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Energy Fist", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Hand Cannon",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Energy Fist",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Hammer of Judgement", "habilidades_arma": ["Brutal 5+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hammer of Judgement",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Judgement Gunners",
       "clase": "Elite",
-      "perfil": { "especialidad": "Accurate" },
+      "perfil": {
+        "especialidad": "Accurate"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Laser Cannon", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
-            { "nombre": "Salvo Rifle", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Salvo Rifle",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Laser Cannon (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Rifle Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [
-            { "nombre": "Judgement Crossbow", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
-            { "nombre": "Rapid Bow", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Rapid Bow",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Judgement Crossbow (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Dagger", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Dagger",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "War Sanctar",
       "clase": "Elite",
-      "perfil": { "especialidad": "Support" },
+      "perfil": {
+        "especialidad": "Support"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Sacred Pistol", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "War Staff", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Sacred Pistol",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "War Staff",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Staff of Light", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Staff of Light",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Legacy Spectres",
       "clase": "Elite",
-      "perfil": { "especialidad": "Flying" },
+      "perfil": {
+        "especialidad": "Flying"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Twin Pistols", "habilidades_arma": ["Multi-use"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Spectral Claws", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Twin Pistols",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Spectral Claws",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Twin Scythes", "habilidades_arma": ["Brutal 5+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Twin Scythes",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Relic Custodian",
       "clase": "Elite",
-      "perfil": { "especialidad": "Captor" },
+      "perfil": {
+        "especialidad": "Captor"
+      },
       "armas": {
         "futuro": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Banner-Spear", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Banner-Spear",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Banner", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sacred Banner",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Armoured Sentinel",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Shooter" },
+      "perfil": {
+        "especialidad": "Shooter"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Twin Cannon", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Heavy Flamethrower", "habilidades_arma": ["Direct"] }
+            {
+              "nombre": "Twin Cannon",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Heavy Flamethrower (only Line)",
+              "habilidades_arma": [
+                "Direct"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Demolishing Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Demolishing Fist",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [
-            { "nombre": "Twin Ballista", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Pitch Sprayer", "habilidades_arma": ["Direct"] }
+            {
+              "nombre": "Twin Ballista",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Pitch Sprayer (only Line)",
+              "habilidades_arma": [
+                "Direct"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Siege Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Siege Fist",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Sacred War Chariot",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Mobile Cover" },
+      "perfil": {
+        "especialidad": "Mobile Cover"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Judgement Cannon", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
-            { "nombre": "Support Bolter", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Support Machine Gun",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Judgement Cannon (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Plates", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sacred Plates",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [
-            { "nombre": "Sacred Trebuchet", "habilidades_arma": ["Piercing (Vehicle, Monster)"] },
-            { "nombre": "Support Crossbow", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Support Crossbow",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Sacred Trebuchet (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Blessed Plates", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Blessed Plates",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Judgement Artillery",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Emplaced" },
+      "perfil": {
+        "especialidad": "Emplaced"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Sacred Mortar", "habilidades_arma": ["Arcing", "Dead Angle"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Butt", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Sacred Mortar",
+              "habilidades_arma": [
+                "Arcing",
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Blessed Trebuchet", "habilidades_arma": ["Arcing", "Dead Angle"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Butt", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Blessed Trebuchet",
+              "habilidades_arma": [
+                "Arcing",
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Royal Griffin",
       "clase": "Monster",
-      "perfil": { "especialidad": "Flying" },
+      "perfil": {
+        "especialidad": "Flying"
+      },
       "armas": {
         "futuro": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Imperial Claws", "habilidades_arma": ["Brutal 4+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Imperial Claws",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Royal Claws", "habilidades_arma": ["Brutal 4+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Royal Claws",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Penitent Colossus",
       "clase": "Monster",
-      "perfil": { "especialidad": "Terror" },
+      "perfil": {
+        "especialidad": "Terror"
+      },
       "armas": {
         "futuro": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Colossal Greatsword", "habilidades_arma": ["Brutal 5+"] },
-            { "nombre": "Penitent Chains", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Colossal Greatsword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            {
+              "nombre": "Penitent Chains (only Line, Elite)",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ancestral Greatsword", "habilidades_arma": ["Brutal 5+"] },
-            { "nombre": "Chains of Penance", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Ancestral Greatsword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            {
+              "nombre": "Chains of Penance (only Line, Elite)",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
           ]
         }
       }
@@ -278,45 +688,115 @@
     {
       "nombre_unidad": "Legacy Grand Master",
       "clase": "Hero",
-      "habilidad_faccion": "Once per turn, during the Initiative Phase, you may remove a Legacy unit from the battlefield and redeploy it in contact with a command post under your control.",
+      "habilidad_faccion": "When a LEGACY unit is destroyed, roll 1D6. On a 5 or 6, instead of removing it from the game, it returns to Reserve.",
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Relic Pistol", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sword of Judgement", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Relic Pistol",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sword of Judgement",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Ancestral Sword", "habilidades_arma": ["Brutal 5+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ancestral Sword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "High Chaplain",
       "clase": "Hero",
-      "habilidad_faccion": "Legacy units within 6\" or less may perform the Ready action spending only 1 action.",
+      "habilidad_faccion": "When a LEGACY unit is destroyed, it performs one final ranged or melee attack regardless of available actions.",
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Command Pistol", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Relic Mace", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Command Pistol",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Relic Mace",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Hammer", "habilidades_arma": ["Brutal 5+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sacred Hammer",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Eternal Seer",
       "clase": "Hero",
-      "habilidad_faccion": "Once per game, at the end of a turn, return a destroyed Legacy unit to the field with half its Wounds per miniature (rounded up), deploying it at a command post under your control.",
+      "habilidad_faccion": "Once per turn, during the Initiative Phase and before any activation, LEGACY may swap the positions of any two allied units on the field, as long as neither is locked in combat.",
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Arcane Staff", "habilidades_arma": ["Explosive"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Staff of Time", "habilidades_arma": ["Brutal 4+"] }]
+          "disparo": [
+            {
+              "nombre": "Arcane Staff",
+              "habilidades_arma": [
+                "Explosive"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Staff of Time",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Runic Staff", "habilidades_arma": ["Explosive"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Ancestral Staff", "habilidades_arma": ["Brutal 4+"] }]
+          "disparo": [
+            {
+              "nombre": "Runic Staff",
+              "habilidades_arma": [
+                "Explosive"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ancestral Staff",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
         }
       }
     }

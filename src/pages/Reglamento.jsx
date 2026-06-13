@@ -43,6 +43,13 @@ import grandBattle4pCornersMap from '../images/maps/gran-batalla-4p-esquinas.svg
 import grandBattle4pWideMap from '../images/maps/gran-batalla-4p-72x48.svg'
 import totalWarCenterMap from '../images/maps/guerra-total-4p-centro.svg'
 import totalWarCornersMap from '../images/maps/guerra-total-4p-esquinas.svg'
+import totalWarExposedMap from '../images/maps/guerra-total-4p-expuestos.svg'
+import grandBattle4pExposedMapEn from '../images/maps/gran-batalla-4p-cuarteles-expuestos.en.svg'
+import grandBattle4pCornersMapEn from '../images/maps/gran-batalla-4p-esquinas.en.svg'
+import grandBattle4pWideMapEn from '../images/maps/gran-batalla-4p-72x48.en.svg'
+import totalWarCenterMapEn from '../images/maps/guerra-total-4p-centro.en.svg'
+import totalWarCornersMapEn from '../images/maps/guerra-total-4p-esquinas.en.svg'
+import totalWarExposedMapEn from '../images/maps/guerra-total-4p-expuestos.en.svg'
 import unitTypeLineIcon from '../images/units_icons/line.png'
 import unitTypeEliteIcon from '../images/units_icons/elite.png'
 import unitTypeVehicleIcon from '../images/units_icons/vehicle.png'
@@ -78,27 +85,31 @@ const escapeHtml = (value) =>
     .replace(/'/g, '&#39;')
 
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
-const RULES_ASSET_PLACEHOLDERS = {
-  activationImage: activationOverviewImage,
-  climbingImage,
-  commandPostControlImage,
-  coverImage,
-  lineOfSightImage,
-  lockedUnitsImage,
-  measurementImage,
-  miniatureVsSquadImage,
-  rangedAttackSequenceImage,
-  grandBattle4pExposedMap,
-  grandBattle4pCornersMap,
-  grandBattle4pWideMap,
-  sprintImage,
-  squadMeleeImage,
-  totalWarCenterMap,
-  totalWarCornersMap,
-  turnStructureImage,
-  vehicleMonsterMeleeImage,
-  unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,
-  heroProfileImage: RULES_HERO_PROFILE_SLOT_SRC,
+const getRulesAssetPlaceholders = (lang = 'es') => {
+  const en = lang === 'en'
+  return {
+    activationImage: activationOverviewImage,
+    climbingImage,
+    commandPostControlImage,
+    coverImage,
+    lineOfSightImage,
+    lockedUnitsImage,
+    measurementImage,
+    miniatureVsSquadImage,
+    rangedAttackSequenceImage,
+    grandBattle4pExposedMap: en ? grandBattle4pExposedMapEn : grandBattle4pExposedMap,
+    grandBattle4pCornersMap: en ? grandBattle4pCornersMapEn : grandBattle4pCornersMap,
+    grandBattle4pWideMap: en ? grandBattle4pWideMapEn : grandBattle4pWideMap,
+    totalWarCenterMap: en ? totalWarCenterMapEn : totalWarCenterMap,
+    totalWarCornersMap: en ? totalWarCornersMapEn : totalWarCornersMap,
+    totalWarExposedMap: en ? totalWarExposedMapEn : totalWarExposedMap,
+    sprintImage,
+    squadMeleeImage,
+    turnStructureImage,
+    vehicleMonsterMeleeImage,
+    unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,
+    heroProfileImage: RULES_HERO_PROFILE_SLOT_SRC,
+  }
 }
 
 const RULES_UNIT_TYPE_ICONS = [
@@ -233,8 +244,8 @@ const getSafeRulesPdfSplitCount = (nodes, candidateCount) => {
   return safeCount
 }
 
-const replaceRulesAssetPlaceholders = (markdown) =>
-  Object.entries(RULES_ASSET_PLACEHOLDERS).reduce(
+const replaceRulesAssetPlaceholders = (markdown, lang = 'es') =>
+  Object.entries(getRulesAssetPlaceholders(lang)).reduce(
     (output, [key, value]) => output.replaceAll(`{{${key}}}`, value),
     markdown,
   )
@@ -325,8 +336,8 @@ function Reglamento() {
     if (isTokensMode) {
       return ''
     }
-    return marked(replaceRulesAssetPlaceholders(activeMarkdown))
-  }, [activeMarkdown, isTokensMode])
+    return marked(replaceRulesAssetPlaceholders(activeMarkdown, lang))
+  }, [activeMarkdown, isTokensMode, lang])
   const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
   const printCoverCreditLabel = lang === 'en' ? 'by alvidi' : 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
@@ -796,7 +807,7 @@ function Reglamento() {
     const firstHeading = doc.querySelector('h1')
     const documentHeading = rulesMode === 'missions'
       ? {
-        id: 'mission-total-war',
+        id: 'mission-basic',
         title: t('rules.modeMissions'),
       }
       : firstHeading
@@ -1817,8 +1828,8 @@ function Reglamento() {
       }
 
       const filename = lang === 'en'
-        ? (rulesMode === 'missions' ? 'zerolore-mission-total-war-en.pdf' : 'zerolore-rulebook-en.pdf')
-        : (rulesMode === 'missions' ? 'zerolore-mision-guerra-total-es.pdf' : 'zerolore-reglamento-es.pdf')
+        ? (rulesMode === 'missions' ? 'zerolore-missions-en.pdf' : 'zerolore-rulebook-en.pdf')
+        : (rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf')
 
       doc.save(filename)
     } finally {

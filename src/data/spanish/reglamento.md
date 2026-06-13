@@ -229,6 +229,10 @@ Si durante la Acometida la unidad entra en contacto de peana con una unidad enem
 
 Si la Acometida no consigue alcanzar al objetivo, la unidad termina su movimiento donde llegó.
 
+**Aclaración:** cualquier movimiento que termine en contacto de peana con una unidad enemiga se considera una Acometida y consume 2 acciones, aunque el objetivo esté tan cerca que no necesites la Velocidad. No es posible entrar en contacto usando solo la acción Moverse.
+
+_Ejemplo: tus Cruzados (Movimiento 5", Velocidad +2") tienen una unidad enemiga a 4". Declaran Acometida, se mueven 4" y entran en contacto: es una carga, atacan gratis. El defensor responderá en su propia activación._
+
 ![Unidad realizando una Acometida]({{sprintImage}})
 
 ## Retirada
@@ -289,6 +293,7 @@ Cada arma indica cuántos **Ataques** realiza.
 
 - Se lanzan tantos dados como indique el valor de Ataques del arma.
 - Cada dado representa un disparo o proyectil independiente.
+- **Límite de dados:** una unidad nunca lanza más de **12 dados** en una misma tirada de ataque, independientemente del número de miniaturas o del arma utilizada.
 
 ## 3. Tirada de precisión
 
@@ -347,7 +352,7 @@ Las unidades permanecen trabadas hasta que una de las dos sea eliminada o se ret
 
 El combate cuerpo a cuerpo se resuelve siguiendo esta secuencia:
 
-1. La unidad atacante lanza los dados de **Ataques** de su perfil de arma cuerpo a cuerpo.
+1. La unidad atacante lanza los dados de **Ataques** de su perfil de arma cuerpo a cuerpo (máximo **12 dados**, igual que en disparo).
 2. Los resultados de **1 y 2** se consideran fallos. Un resultado de **6** es un impacto crítico.
 3. El defensor lanza tantos dados de **Salvación** como impactos haya recibido. Los impactos críticos solo pueden bloquearse con un 6 defensivo.
 4. Los impactos no bloqueados infligen el daño base o crítico del arma atacante.
@@ -392,9 +397,7 @@ Todas las miniaturas de la escuadra atacan con el arma elegida al mismo objetivo
 
 En Gran Batalla, aunque una escuadra pueda estar en contacto con varias escuadras enemigas, al realizar un ataque cuerpo a cuerpo debe **elegir una única escuadra objetivo**.
 
-En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad enemiga, **la escuadra entera se considera trabada** y todas sus miniaturas participan en el combate.
-
-Aunque físicamente solo una miniatura de la escuadra esté en contacto de peana con el enemigo, toda la escuadra participa en el combate y realiza sus ataques de forma conjunta.
+En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad enemiga, **la escuadra entera se considera trabada** y todas sus miniaturas participan en el combate. Con que físicamente solo una miniatura de la escuadra esté en contacto de peana con el enemigo, toda la escuadra participa en el combate y realiza sus ataques de forma conjunta.
 
 ![Combate cuerpo a cuerpo en escuadras con una miniatura en contacto y toda la escuadra participando]({{squadMeleeImage}})
 
@@ -779,6 +782,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | **Explosiva**     | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **(aliadas y enemigas)** a 3" del objetivo.                                |
 | **Parabólica**    | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**.                                                                           |
 | **Alcance**       | Esta arma CaC puede usarse contra cualquier unidad enemiga a **3" o menos**, esté o no trabada con esta unidad.                                                                        |
+| **Errática**      | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma durante ese ataque.                                                                                      |
 
 ## Armas secundarias
 
@@ -790,12 +794,6 @@ Ejemplos:
 
 - **Granada de fusión (solo Vehículo, Monstruo)** — solo puede declararse contra Vehículos o Monstruos; contra el resto de clases no puede usarse.
 - **Mangual (solo Héroe)** — solo puede atacar a Héroes.
-
-## Límite de habilidades por arma
-
-Salvo que se indique lo contrario, cada arma debería tener **una única habilidad de arma**.
-
-Las armas especialmente poderosas, únicas o excepcionales pueden tener más de una habilidad, pero esto debería reservarse para casos concretos como armas de Héroes, Monstruos o Vehículos.
 
 ---
 

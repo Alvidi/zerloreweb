@@ -1,246 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1496" height="1714" viewBox="0 0 1496 1714" role="img" aria-labelledby="title desc">
-  <title id="title">Guerra Total - Gran Batalla 4 jugadores esquinas</title>
-  <desc id="desc">ZeroLore 46 inch by 46 inch map. Command post centers use inch coordinates. Command post token diameter: 6 inches.</desc>
-  <metadata>
-    board-size-in: 46x46;
-    grid-step-in: 3;
-    major-step-in: 6;
-    command-post-token-diameter-in: 6;
-    coordinate-origin: top-left;
-  </metadata>
+<svg xmlns="http://www.w3.org/2000/svg" width="1496" height="1766" viewBox="0 0 1496 1766" role="img" aria-labelledby="title desc">
+  <title id="title">ZeroLore · Gran Batalla 46×46"</title>
+  <desc id="desc">ZeroLore 46x46 inch map. Command post centers in inch coordinates. Token diameter 3 inches.</desc>
   <defs>
-    <radialGradient id="zone-red" cx="0%" cy="100%" r="110%">
-      <stop offset="0%" stop-color="#ff1f2d" stop-opacity="0.5"/>
-      <stop offset="78%" stop-color="#ff1f2d" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#ff1f2d" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="zone-blue" cx="100%" cy="0%" r="110%">
-      <stop offset="0%" stop-color="#347cff" stop-opacity="0.44"/>
-      <stop offset="78%" stop-color="#347cff" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#347cff" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="zone-green" cx="0%" cy="0%" r="110%">
-      <stop offset="0%" stop-color="#39c950" stop-opacity="0.42"/>
-      <stop offset="78%" stop-color="#39c950" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#39c950" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="zone-yellow" cx="100%" cy="100%" r="110%">
-      <stop offset="0%" stop-color="#f6d900" stop-opacity="0.48"/>
-      <stop offset="78%" stop-color="#f6d900" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#f6d900" stop-opacity="0"/>
-    </radialGradient>
+    <radialGradient id="zone-1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff1f2d" stop-opacity="0.34"/><stop offset="60%" stop-color="#ff1f2d" stop-opacity="0.10"/><stop offset="100%" stop-color="#ff1f2d" stop-opacity="0"/></radialGradient>
+    <radialGradient id="zone-2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#347cff" stop-opacity="0.34"/><stop offset="60%" stop-color="#347cff" stop-opacity="0.10"/><stop offset="100%" stop-color="#347cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="zone-3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#39c950" stop-opacity="0.34"/><stop offset="60%" stop-color="#39c950" stop-opacity="0.10"/><stop offset="100%" stop-color="#39c950" stop-opacity="0"/></radialGradient>
+    <radialGradient id="zone-4" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f6d900" stop-opacity="0.34"/><stop offset="60%" stop-color="#f6d900" stop-opacity="0.10"/><stop offset="100%" stop-color="#f6d900" stop-opacity="0"/></radialGradient>
+    <clipPath id="board-clip"><rect x="58" y="128" width="1380" height="1380"/></clipPath>
   </defs>
   <rect width="100%" height="100%" fill="#ffffff"/>
-  <text x="148" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">3&quot;</text>
-<text x="148" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">3&quot;</text>
-<text x="238" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">6&quot;</text>
-<text x="238" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">6&quot;</text>
-<text x="328" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">9&quot;</text>
-<text x="328" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">9&quot;</text>
-<text x="418" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">12&quot;</text>
-<text x="418" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">12&quot;</text>
-<text x="508" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">15&quot;</text>
-<text x="508" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">15&quot;</text>
-<text x="598" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">18&quot;</text>
-<text x="598" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">18&quot;</text>
-<text x="688" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">21&quot;</text>
-<text x="688" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">21&quot;</text>
-<text x="778" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">24&quot;</text>
-<text x="778" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">24&quot;</text>
-<text x="868" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">27&quot;</text>
-<text x="868" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">27&quot;</text>
-<text x="958" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">30&quot;</text>
-<text x="958" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">30&quot;</text>
-<text x="1048" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">33&quot;</text>
-<text x="1048" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">33&quot;</text>
-<text x="1138" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">36&quot;</text>
-<text x="1138" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">36&quot;</text>
-<text x="1228" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">39&quot;</text>
-<text x="1228" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">39&quot;</text>
-<text x="1318" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">42&quot;</text>
-<text x="1318" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">42&quot;</text>
-<text x="1408" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">45&quot;</text>
-<text x="1408" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">45&quot;</text>
-<text x="1438" y="36" class="measure top" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">46&quot;</text>
-<text x="1438" y="1467" class="measure bottom" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="middle">46&quot;</text>
-<text x="44" y="156" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">3&quot;</text>
-<text x="1452" y="156" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">3&quot;</text>
-<text x="44" y="246" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">6&quot;</text>
-<text x="1452" y="246" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">6&quot;</text>
-<text x="44" y="336" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">9&quot;</text>
-<text x="1452" y="336" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">9&quot;</text>
-<text x="44" y="426" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">12&quot;</text>
-<text x="1452" y="426" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">12&quot;</text>
-<text x="44" y="516" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">15&quot;</text>
-<text x="1452" y="516" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">15&quot;</text>
-<text x="44" y="606" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">18&quot;</text>
-<text x="1452" y="606" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">18&quot;</text>
-<text x="44" y="696" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">21&quot;</text>
-<text x="1452" y="696" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">21&quot;</text>
-<text x="44" y="786" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">24&quot;</text>
-<text x="1452" y="786" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">24&quot;</text>
-<text x="44" y="876" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">27&quot;</text>
-<text x="1452" y="876" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">27&quot;</text>
-<text x="44" y="966" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">30&quot;</text>
-<text x="1452" y="966" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">30&quot;</text>
-<text x="44" y="1056" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">33&quot;</text>
-<text x="1452" y="1056" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">33&quot;</text>
-<text x="44" y="1146" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">36&quot;</text>
-<text x="1452" y="1146" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">36&quot;</text>
-<text x="44" y="1236" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">39&quot;</text>
-<text x="1452" y="1236" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">39&quot;</text>
-<text x="44" y="1326" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">42&quot;</text>
-<text x="1452" y="1326" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">42&quot;</text>
-<text x="44" y="1416" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">45&quot;</text>
-<text x="1452" y="1416" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">45&quot;</text>
-<text x="44" y="1446" class="measure left" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="end">46&quot;</text>
-<text x="1452" y="1446" class="measure right" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="900" fill="#050505" text-anchor="start">46&quot;</text>
-  <g class="board" data-board-size-in="46">
-    <rect x="58" y="58" width="1380" height="1380" class="board-bg" fill="#fbfbfa"/>
-    <rect x="58" y="1093" width="345" height="345" fill="url(#zone-red)"/>
-<rect x="1093" y="58" width="345" height="345" fill="url(#zone-blue)"/>
-<rect x="58" y="58" width="345" height="345" fill="url(#zone-green)"/>
-<rect x="1093" y="1093" width="345" height="345" fill="url(#zone-yellow)"/>
-    <line x1="148" y1="58" x2="148" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="238" y1="58" x2="238" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="328" y1="58" x2="328" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="418" y1="58" x2="418" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="508" y1="58" x2="508" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="598" y1="58" x2="598" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="688" y1="58" x2="688" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="778" y1="58" x2="778" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="868" y1="58" x2="868" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="958" y1="58" x2="958" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="1048" y1="58" x2="1048" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="1138" y1="58" x2="1138" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="1228" y1="58" x2="1228" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="1318" y1="58" x2="1318" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="1408" y1="58" x2="1408" y2="1438" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="148" x2="1438" y2="148" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="238" x2="1438" y2="238" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="328" x2="1438" y2="328" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="418" x2="1438" y2="418" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="508" x2="1438" y2="508" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="598" x2="1438" y2="598" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="688" x2="1438" y2="688" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="778" x2="1438" y2="778" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="868" x2="1438" y2="868" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="958" x2="1438" y2="958" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="1048" x2="1438" y2="1048" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="1138" x2="1438" y2="1138" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="1228" x2="1438" y2="1228" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="1318" x2="1438" y2="1318" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="58" y1="1408" x2="1438" y2="1408" class="grid-line" stroke="#d8d8d8" stroke-width="1"/>
-<line x1="748" y1="58" x2="748" y2="1438" class="center-line" stroke="#111111" stroke-width="1.5" stroke-dasharray="8 10"/>
-<line x1="58" y1="748" x2="1438" y2="748" class="center-line" stroke="#111111" stroke-width="1.5" stroke-dasharray="8 10"/>
-    <rect x="58" y="58" width="1380" height="1380" class="board-border" fill="none" stroke="#0b0b0b" stroke-width="2.2"/>
-    
-    <g class="post post-red" data-post="1" data-x-in="8" data-y-in="38" data-token-diameter-in="6">
-      <circle cx="298" cy="1198" r="90" class="post-footprint" fill="none" stroke="#ff1717" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="298" cy="1198" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="298" cy="1198" r="22" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
-      <text x="298" y="1212" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">1</text>
+  <text x="748" y="42" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900" fill="#0b0b0b" text-anchor="middle">ZeroLore · Gran Batalla 46×46"</text>
+  <text x="148" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">3&quot;</text>
+  <text x="238" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">6&quot;</text>
+  <text x="328" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">9&quot;</text>
+  <text x="418" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">12&quot;</text>
+  <text x="508" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">15&quot;</text>
+  <text x="598" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">18&quot;</text>
+  <text x="688" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">21&quot;</text>
+  <text x="778" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">24&quot;</text>
+  <text x="868" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">27&quot;</text>
+  <text x="958" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">30&quot;</text>
+  <text x="1048" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">33&quot;</text>
+  <text x="1138" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">36&quot;</text>
+  <text x="1228" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">39&quot;</text>
+  <text x="1318" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">42&quot;</text>
+  <text x="1408" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">45&quot;</text>
+  <text x="44" y="224" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">3&quot;</text>
+  <text x="44" y="314" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">6&quot;</text>
+  <text x="44" y="404" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">9&quot;</text>
+  <text x="44" y="494" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">12&quot;</text>
+  <text x="44" y="584" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">15&quot;</text>
+  <text x="44" y="674" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">18&quot;</text>
+  <text x="44" y="764" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">21&quot;</text>
+  <text x="44" y="854" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">24&quot;</text>
+  <text x="44" y="944" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">27&quot;</text>
+  <text x="44" y="1034" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">30&quot;</text>
+  <text x="44" y="1124" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">33&quot;</text>
+  <text x="44" y="1214" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">36&quot;</text>
+  <text x="44" y="1304" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">39&quot;</text>
+  <text x="44" y="1394" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">42&quot;</text>
+  <text x="44" y="1484" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="end">45&quot;</text>
+  <g class="board" data-board-size-in="46x46">
+    <rect x="58" y="128" width="1380" height="1380" class="board-bg" fill="#fbfbfa"/>
+    <g clip-path="url(#board-clip)">
+      <circle cx="298" cy="1268" r="195.0" fill="url(#zone-1)"/>
+      <circle cx="1198" cy="368" r="195.0" fill="url(#zone-2)"/>
+      <circle cx="298" cy="368" r="195.0" fill="url(#zone-3)"/>
+      <circle cx="1198" cy="1268" r="195.0" fill="url(#zone-4)"/>
     </g>
-
-    <g class="post post-blue" data-post="2" data-x-in="38" data-y-in="8" data-token-diameter-in="6">
-      <circle cx="1198" cy="298" r="90" class="post-footprint" fill="none" stroke="#1266ff" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="1198" cy="298" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="1198" cy="298" r="22" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
-      <text x="1198" y="312" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">2</text>
+    <line x1="148" y1="128" x2="148" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="238" y1="128" x2="238" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="328" y1="128" x2="328" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="418" y1="128" x2="418" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="508" y1="128" x2="508" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="598" y1="128" x2="598" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="688" y1="128" x2="688" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="748" y1="128" x2="748" y2="1508" stroke="#111" stroke-width="1.5" stroke-dasharray="8 10"/>
+    <line x1="778" y1="128" x2="778" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="868" y1="128" x2="868" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="958" y1="128" x2="958" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="1048" y1="128" x2="1048" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="1138" y1="128" x2="1138" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="1228" y1="128" x2="1228" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="1318" y1="128" x2="1318" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="1408" y1="128" x2="1408" y2="1508" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="218" x2="1438" y2="218" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="308" x2="1438" y2="308" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="398" x2="1438" y2="398" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="488" x2="1438" y2="488" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="578" x2="1438" y2="578" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="668" x2="1438" y2="668" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="758" x2="1438" y2="758" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="818" x2="1438" y2="818" stroke="#111" stroke-width="1.5" stroke-dasharray="8 10"/>
+    <line x1="58" y1="848" x2="1438" y2="848" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="938" x2="1438" y2="938" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="1028" x2="1438" y2="1028" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="1118" x2="1438" y2="1118" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="1208" x2="1438" y2="1208" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="1298" x2="1438" y2="1298" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="1388" x2="1438" y2="1388" stroke="#d8d8d8" stroke-width="1"/>
+    <line x1="58" y1="1478" x2="1438" y2="1478" stroke="#d8d8d8" stroke-width="1"/>
+    <rect x="58" y="128" width="1380" height="1380" fill="none" stroke="#0b0b0b" stroke-width="2.2"/>
+    <line x1="298" y1="1268" x2="508" y2="1058" stroke="#1266ff" stroke-width="2" stroke-dasharray="4 5" opacity="0.7"/>
+    <rect x="377" y="1149" width="52" height="22" rx="4" fill="#ffffff" stroke="#1266ff" stroke-width="1"/>
+    <text x="403" y="1165" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="900" fill="#1266ff" text-anchor="middle">9.9&quot;</text>
+    <line x1="298" y1="1268" x2="1198" y2="368" stroke="#888" stroke-width="1.5" stroke-dasharray="2 6" opacity="0.55"/>
+    <rect x="714" y="805" width="68" height="22" rx="4" fill="#ffffff" stroke="#888" stroke-width="1"/>
+    <text x="748" y="821" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#555" text-anchor="middle">CG-CG 42.4&quot;</text>
+    <g class="post" data-post="1" data-x-in="8" data-y-in="38" data-token-diameter-in="3">
+      <circle cx="298" cy="1268" r="45" fill="none" stroke="#ff1717" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="298" cy="1268" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="298" cy="1268" r="22" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
+      <text x="298" y="1282" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">1</text>
     </g>
-
-    <g class="post post-green" data-post="3" data-x-in="8" data-y-in="8" data-token-diameter-in="6">
-      <circle cx="298" cy="298" r="90" class="post-footprint" fill="none" stroke="#18bf2c" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="298" cy="298" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="298" cy="298" r="22" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
-      <text x="298" y="312" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">3</text>
+    <g class="post" data-post="2" data-x-in="38" data-y-in="8" data-token-diameter-in="3">
+      <circle cx="1198" cy="368" r="45" fill="none" stroke="#1266ff" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="1198" cy="368" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="1198" cy="368" r="22" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
+      <text x="1198" y="382" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">2</text>
     </g>
-
-    <g class="post post-yellow" data-post="4" data-x-in="38" data-y-in="38" data-token-diameter-in="6">
-      <circle cx="1198" cy="1198" r="90" class="post-footprint" fill="none" stroke="#ffd900" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="1198" cy="1198" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="1198" cy="1198" r="22" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
-      <text x="1198" y="1212" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">4</text>
+    <g class="post" data-post="3" data-x-in="8" data-y-in="8" data-token-diameter-in="3">
+      <circle cx="298" cy="368" r="45" fill="none" stroke="#18bf2c" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="298" cy="368" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="298" cy="368" r="22" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
+      <text x="298" y="382" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">3</text>
     </g>
-
-    <g class="post post-neutral" data-post="5" data-x-in="23" data-y-in="23" data-token-diameter-in="6">
-      <circle cx="748" cy="748" r="90" class="post-footprint" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="748" cy="748" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="748" cy="748" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="748" y="762" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">5</text>
+    <g class="post" data-post="4" data-x-in="38" data-y-in="38" data-token-diameter-in="3">
+      <circle cx="1198" cy="1268" r="45" fill="none" stroke="#ffd900" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="1198" cy="1268" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="1198" cy="1268" r="22" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
+      <text x="1198" y="1282" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">4</text>
     </g>
-
-    <g class="post post-neutral" data-post="6" data-x-in="15" data-y-in="15" data-token-diameter-in="6">
-      <circle cx="508" cy="508" r="90" class="post-footprint" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="508" cy="508" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="508" cy="508" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="508" y="522" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">6</text>
+    <g class="post" data-post="5" data-x-in="23" data-y-in="23" data-token-diameter-in="3">
+      <circle cx="748" cy="818" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="748" cy="818" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="748" cy="818" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="748" y="832" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">5</text>
     </g>
-
-    <g class="post post-neutral" data-post="7" data-x-in="31" data-y-in="15" data-token-diameter-in="6">
-      <circle cx="988" cy="508" r="90" class="post-footprint" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="988" cy="508" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="988" cy="508" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="988" y="522" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">7</text>
+    <g class="post" data-post="6" data-x-in="15" data-y-in="15" data-token-diameter-in="3" opacity="0.30">
+      <circle cx="508" cy="578" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="508" cy="578" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="508" cy="578" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="508" y="592" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">6</text>
+      <text x="508" y="640" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#b00" text-anchor="middle">Solo 3-4 jugadores</text>
     </g>
-
-    <g class="post post-neutral" data-post="8" data-x-in="15" data-y-in="31" data-token-diameter-in="6">
-      <circle cx="508" cy="988" r="90" class="post-footprint" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="508" cy="988" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="508" cy="988" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="508" y="1002" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">8</text>
+    <g class="post" data-post="7" data-x-in="31" data-y-in="15" data-token-diameter-in="3">
+      <circle cx="988" cy="578" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="988" cy="578" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="988" cy="578" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="988" y="592" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">7</text>
     </g>
-
-    <g class="post post-neutral" data-post="9" data-x-in="31" data-y-in="31" data-token-diameter-in="6">
-      <circle cx="988" cy="988" r="90" class="post-footprint" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="988" cy="988" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="988" cy="988" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="988" y="1002" class="post-number" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">9</text>
+    <g class="post" data-post="8" data-x-in="15" data-y-in="31" data-token-diameter-in="3">
+      <circle cx="508" cy="1058" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="508" cy="1058" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="508" cy="1058" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="508" y="1072" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">8</text>
+    </g>
+    <g class="post" data-post="9" data-x-in="31" data-y-in="31" data-token-diameter-in="3" opacity="0.30">
+      <circle cx="988" cy="1058" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="988" cy="1058" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="988" cy="1058" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="988" y="1072" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">9</text>
+      <text x="988" y="1120" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#b00" text-anchor="middle">Solo 3-4 jugadores</text>
     </g>
   </g>
-  
-    <g class="legend">
-      <rect x="38" y="1500" width="1420" height="176" fill="#ffffff" stroke="#111111" stroke-width="2"/>
-      
-          <g transform="translate(86, 1548)">
-            <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-            <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
-            <text x="0" y="11" class="legend-number" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">1</text>
-            <text x="44" y="-8" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">RED HQ</text>
-            <text x="44" y="18" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">COMMAND POST</text>
-          </g>
-
-          <g transform="translate(559.3333333333333, 1548)">
-            <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-            <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
-            <text x="0" y="11" class="legend-number" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">2</text>
-            <text x="44" y="-8" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">BLUE HQ</text>
-            <text x="44" y="18" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">COMMAND POST</text>
-          </g>
-
-          <g transform="translate(1032.6666666666665, 1548)">
-            <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-            <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
-            <text x="0" y="11" class="legend-number" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">3</text>
-            <text x="44" y="-8" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">GREEN HQ</text>
-            <text x="44" y="18" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">COMMAND POST</text>
-          </g>
-
-          <g transform="translate(86, 1618)">
-            <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-            <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
-            <text x="0" y="11" class="legend-number" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">4</text>
-            <text x="44" y="-8" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">YELLOW HQ</text>
-            <text x="44" y="18" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">COMMAND POST</text>
-          </g>
-
-          <g transform="translate(559.3333333333333, 1618)">
-            <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-            <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-            
-            <text x="44" y="-8" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">NEUTRAL</text>
-            <text x="44" y="18" class="legend-label" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111111">COMMAND POSTS</text>
-          </g>
+  <g class="legend">
+    <rect x="38" y="1570" width="1420" height="176" fill="#ffffff" stroke="#111" stroke-width="2"/>
+    <g transform="translate(86, 1618)">
+      <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
+      <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">1</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">ROJO CG</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
     </g>
+    <g transform="translate(546, 1618)">
+      <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
+      <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">2</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">AZUL CG</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+    </g>
+    <g transform="translate(1006, 1618)">
+      <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
+      <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">3</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">VERDE CG</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+    </g>
+    <g transform="translate(86, 1688)">
+      <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
+      <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">4</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">AMARILLO CG</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+    </g>
+    <g transform="translate(546, 1688)">
+      <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">NEUTRAL</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTOS NEUTRALES</text>
+    </g>
+  </g>
 </svg>

@@ -11,32 +11,88 @@
     {
       "nombre_unidad": "Line Guard",
       "clase": "Line",
-      "perfil": { "especialidad": "Soldier" },
+      "perfil": {
+        "especialidad": "Soldier"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Laser Rifle", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Bayonet", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Laser Rifle",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bayonet",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "War Bow", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Short Sword", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "War Bow",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Short Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Assault Infantry",
       "clase": "Line",
-      "perfil": { "especialidad": "Shove" },
+      "perfil": {
+        "especialidad": "Shove"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Assault Pistol", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Energy Mace", "habilidades_arma": ["Brutal 4+"] }]
+          "disparo": [
+            {
+              "nombre": "Assault Pistol",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Energy Mace",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Spear", "habilidades_arma": ["Piercing (Line, Elite, Hero, Monster)"] },
-            { "nombre": "Combat Dagger", "habilidades_arma": ["Brutal 4+"] }
+            {
+              "nombre": "Spear",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Combat Dagger (only Elite)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
           ]
         }
       }
@@ -44,35 +100,94 @@
     {
       "nombre_unidad": "Support Gunners",
       "clase": "Line",
-      "perfil": { "especialidad": "Accurate" },
+      "perfil": {
+        "especialidad": "Accurate"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Flamethrower", "habilidades_arma": ["Direct"] },
-            { "nombre": "Support Rifle", "habilidades_arma": ["Dead Angle"] }
+            {
+              "nombre": "Support Rifle",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            },
+            {
+              "nombre": "Flamethrower (only Line)",
+              "habilidades_arma": [
+                "Direct"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Rifle Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Longbow", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Dagger", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Longbow",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Dagger",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Heavy Scouts",
       "clase": "Line",
-      "perfil": { "especialidad": "Vanguard" },
+      "perfil": {
+        "especialidad": "Vanguard"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Carbine", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Explosive Charge", "habilidades_arma": ["Unstable"] }]
+          "disparo": [
+            {
+              "nombre": "Carbine",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Explosive Charge",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Axe", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Scout Pike", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Axe",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Scout Pike (only Line, Elite)",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
           ]
         }
       }
@@ -80,146 +195,402 @@
     {
       "nombre_unidad": "Heavy Weapons Team",
       "clase": "Line",
-      "perfil": { "especialidad": "Emplaced" },
+      "perfil": {
+        "especialidad": "Emplaced"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Autocannon", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Grenade Launcher", "habilidades_arma": ["Explosive"] }
+            {
+              "nombre": "Autocannon",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Grenade Launcher (only Line)",
+              "habilidades_arma": [
+                "Explosive"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Rifle Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Siege Crossbow", "habilidades_arma": ["Piercing (Vehicle, Monster)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Short Sword", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Siege Crossbow",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Short Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Heavy Guard",
       "clase": "Elite",
-      "perfil": { "especialidad": "Resilient" },
+      "perfil": {
+        "especialidad": "Resilient"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Plasma Rifle", "habilidades_arma": ["Brutal 5+"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Combat Sword", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Plasma Rifle",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Combat Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Heavy Crossbow", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Heavy Crossbow",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Greatsword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Elite Hunters",
       "clase": "Elite",
-      "perfil": { "especialidad": "Accurate" },
+      "perfil": {
+        "especialidad": "Accurate"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Precision Rifle", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Knife", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Precision Rifle",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Knife",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Hunting Bow", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Rapier", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Hunting Bow",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Rapier",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "War Medic",
       "clase": "Elite",
-      "perfil": { "especialidad": "Support" },
+      "perfil": {
+        "especialidad": "Support"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Pistol", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Combat Scalpel", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Pistol",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Combat Scalpel",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sacred Staff", "habilidades_arma": ["Reliable"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sacred Staff",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Light Cavalry",
       "clase": "Elite",
-      "perfil": { "especialidad": "Brutal Charge" },
+      "perfil": {
+        "especialidad": "Brutal Charge"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Plasma Pistol", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Sabre", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Plasma Pistol",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sabre",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Cavalry Lance", "habilidades_arma": ["Brutal 5+ (Line, Elite)"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cavalry Lance",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Vanguard Vehicle",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Shooter" },
+      "perfil": {
+        "especialidad": "Shooter"
+      },
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Light Cannon", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Coaxial Bolter", "habilidades_arma": ["Brutal 5+ (Line, Elite)"] }
+            {
+              "nombre": "Light Cannon",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Coaxial Machine Gun (only Line, Elite)",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ],
-          "cuerpo_a_cuerpo": [{ "nombre": "Ram Plates", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ram Plates",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Double Ballista", "habilidades_arma": ["Piercing"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Battering Ram", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+          "disparo": [
+            {
+              "nombre": "Double Ballista",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Battering Ram",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Line Vehicle",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Resilient" },
+      "perfil": {
+        "especialidad": "Resilient"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Main Cannon", "habilidades_arma": ["Piercing (Vehicle, Monster)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Reinforced Plates", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Main Cannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Reinforced Plates",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Heavy Crossbow", "habilidades_arma": ["Piercing (Vehicle, Monster)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Reinforced Plates", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Heavy Crossbow",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Reinforced Plates",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "Siege Artillery",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Emplaced" },
+      "perfil": {
+        "especialidad": "Emplaced"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Heavy Mortar", "habilidades_arma": ["Arcing", "Dead Angle"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Cannon Butt", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Heavy Mortar",
+              "habilidades_arma": [
+                "Arcing",
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cannon Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Trebuchet", "habilidades_arma": ["Arcing", "Dead Angle"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Butt", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Trebuchet",
+              "habilidades_arma": [
+                "Arcing",
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     },
     {
       "nombre_unidad": "War Beast",
       "clase": "Monster",
-      "perfil": { "especialidad": "Brutal Charge" },
+      "perfil": {
+        "especialidad": "Brutal Charge"
+      },
       "armas": {
         "futuro": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Cybernetic Claws", "habilidades_arma": ["Brutal 4+"] },
-            { "nombre": "Mechanical Bite", "habilidades_arma": ["Unstable"] }
+            {
+              "nombre": "Cybernetic Claws",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Mechanical Bite (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Beast Claws", "habilidades_arma": ["Brutal 4+"] },
-            { "nombre": "Fierce Bite", "habilidades_arma": ["Unstable"] }
+            {
+              "nombre": "Beast Claws",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Fierce Bite (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
           ]
         }
       }
@@ -227,17 +598,88 @@
     {
       "nombre_unidad": "War Automaton",
       "clase": "Vehicle",
-      "perfil": { "especialidad": "Resilient" },
+      "perfil": {
+        "especialidad": "Resilient"
+      },
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Shoulder Cannon", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Hydraulic Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] }]
+          "disparo": [
+            {
+              "nombre": "Shoulder Cannon",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hydraulic Fist",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Stone Fist", "habilidades_arma": ["Brutal 5+ (Vehicle, Monster)"] },
-            { "nombre": "Extendable Arm", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Stone Fist",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            {
+              "nombre": "Extendable Arm (only Line, Elite)",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Winged Cavalry",
+      "clase": "Elite",
+      "perfil": {
+        "especialidad": "Flying"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            {
+              "nombre": "Aerial Carbine",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Flight Sabre",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            {
+              "nombre": "Javelins",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Diving Lance",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         }
       }
@@ -248,12 +690,33 @@
       "habilidad_faccion": "Once per turn, when an Order unit activates, another Order unit within 6\" or less may activate immediately afterwards.",
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Command Pistol", "habilidades_arma": ["Reliable"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Command Sword", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Command Pistol",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Command Sword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Command Sword", "habilidades_arma": ["Brutal 5+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Command Sword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
@@ -263,12 +726,33 @@
       "habilidad_faccion": "Command posts under your control count as cover for your units.",
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Heavy Rifle", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }]
+          "disparo": [
+            {
+              "nombre": "Heavy Rifle",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Greatsword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         },
         "pasado": {
           "disparo": [],
-          "cuerpo_a_cuerpo": [{ "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }]
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Greatsword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
         }
       }
     },
@@ -278,12 +762,40 @@
       "habilidad_faccion": "Once per turn, reroll 2 of your own dice (each can only be rerolled once).",
       "armas": {
         "futuro": {
-          "disparo": [{ "nombre": "Precision Pistol", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Officer Sabre", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Precision Pistol",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Officer Sabre",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         },
         "pasado": {
-          "disparo": [{ "nombre": "Short Bow", "habilidades_arma": ["Brutal 5+ (Elite, Hero)"] }],
-          "cuerpo_a_cuerpo": [{ "nombre": "Officer Sabre", "habilidades_arma": ["Reliable"] }]
+          "disparo": [
+            {
+              "nombre": "Short Bow",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Officer Sabre",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
         }
       }
     }

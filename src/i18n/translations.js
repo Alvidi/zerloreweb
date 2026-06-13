@@ -35,7 +35,7 @@ export const translations = {
       sectionFallback: 'Sección',
       modeLabel: 'Sección',
       modeRules: 'Reglamento',
-      modeMissions: 'Misión - Guerra Total',
+      modeMissions: 'Misiones',
       modeTokens: 'Tokens',
       tokens: {
         title: 'Generador de tokens',
@@ -291,7 +291,7 @@ export const translations = {
       sectionFallback: 'Section',
       modeLabel: 'Section',
       modeRules: 'Rulebook',
-      modeMissions: 'Mission - Total War',
+      modeMissions: 'Missions',
       modeTokens: 'Tokens',
       tokens: {
         title: 'Token generator',

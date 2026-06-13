@@ -164,7 +164,7 @@
       }
     },
     {
-      "nombre_unidad": "Custodios",
+      "nombre_unidad": "Baluartes",
       "clase": "Élite",
       "perfil": {
         "movimiento": "4\"",
@@ -358,7 +358,7 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Bólter de apoyo", "ataques": "3D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Ametralladora de apoyo", "ataques": "3D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
             { "nombre": "Cañón del juicio (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "24\"", "impactos": "4+", "danio": "4", "danio_critico": "6", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
@@ -466,7 +466,7 @@
     {
       "nombre_unidad": "Gran Maestre del Legado",
       "clase": "Héroe",
-      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa, puedes retirar una unidad Legado del campo de batalla y desplegarla en contacto con un puesto de mando bajo tu control.",
+      "habilidad_faccion": "Cuando una unidad LEGADO sea destruida, lanza 1D6. Con 5 o 6, en lugar de retirarla del juego, vuelve a Reserva.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 11,
@@ -495,7 +495,7 @@
     {
       "nombre_unidad": "Alto Capellán",
       "clase": "Héroe",
-      "habilidad_faccion": "Las unidades Legado a 6\" o menos pueden realizar la acción Preparado gastando solo 1 acción.",
+      "habilidad_faccion": "Cuando una unidad LEGADO es destruida, realiza un ultimo ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -524,7 +524,7 @@
     {
       "nombre_unidad": "Vidente Eterno",
       "clase": "Héroe",
-      "habilidad_faccion": "Una vez por partida, al final de un turno, devuelve al campo una unidad Legado destruida con la mitad de sus Vidas por miniatura (redondeando hacia arriba), desplegándola en un puesto de mando bajo tu control.",
+      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, LEGADO puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,

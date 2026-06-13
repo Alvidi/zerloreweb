@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1196" height="1466" viewBox="0 0 1196 1466" role="img" aria-labelledby="title desc">
-  <title id="title">ZeroLore · Escaramuza 36×36"</title>
+  <title id="title">ZeroLore · Skirmish 36×36"</title>
   <desc id="desc">ZeroLore 36x36 inch map. Command post centers in inch coordinates. Token diameter 3 inches.</desc>
   <defs>
     <radialGradient id="zone-1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff1f2d" stop-opacity="0.34"/><stop offset="60%" stop-color="#ff1f2d" stop-opacity="0.10"/><stop offset="100%" stop-color="#ff1f2d" stop-opacity="0"/></radialGradient>
@@ -10,7 +10,7 @@
     <clipPath id="board-clip"><rect x="58" y="128" width="1080" height="1080"/></clipPath>
   </defs>
   <rect width="100%" height="100%" fill="#ffffff"/>
-  <text x="598" y="42" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900" fill="#0b0b0b" text-anchor="middle">ZeroLore · Escaramuza 36×36"</text>
+  <text x="598" y="42" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900" fill="#0b0b0b" text-anchor="middle">ZeroLore · Skirmish 36×36"</text>
   <text x="148" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">3&quot;</text>
   <text x="238" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">6&quot;</text>
   <text x="328" y="116" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" fill="#222" text-anchor="middle">9&quot;</text>
@@ -36,10 +36,10 @@
   <g class="board" data-board-size-in="36x36">
     <rect x="58" y="128" width="1080" height="1080" class="board-bg" fill="#fbfbfa"/>
     <g clip-path="url(#board-clip)">
-      <circle cx="508" cy="758" r="195.0" fill="url(#zone-1)"/>
-      <circle cx="688" cy="578" r="195.0" fill="url(#zone-2)"/>
-      <circle cx="508" cy="578" r="195.0" fill="url(#zone-3)"/>
-      <circle cx="688" cy="758" r="195.0" fill="url(#zone-4)"/>
+      <circle cx="238" cy="1028" r="195.0" fill="url(#zone-1)"/>
+      <circle cx="958" cy="308" r="195.0" fill="url(#zone-2)"/>
+      <circle cx="238" cy="308" r="195.0" fill="url(#zone-3)"/>
+      <circle cx="958" cy="1028" r="195.0" fill="url(#zone-4)"/>
     </g>
     <line x1="148" y1="128" x2="148" y2="1208" stroke="#d8d8d8" stroke-width="1"/>
     <line x1="238" y1="128" x2="238" y2="1208" stroke="#d8d8d8" stroke-width="1"/>
@@ -64,35 +64,35 @@
     <line x1="58" y1="1028" x2="1138" y2="1028" stroke="#d8d8d8" stroke-width="1"/>
     <line x1="58" y1="1118" x2="1138" y2="1118" stroke="#d8d8d8" stroke-width="1"/>
     <rect x="58" y="128" width="1080" height="1080" fill="none" stroke="#0b0b0b" stroke-width="2.2"/>
-    <line x1="508" y1="758" x2="598" y2="668" stroke="#1266ff" stroke-width="2" stroke-dasharray="4 5" opacity="0.7"/>
-    <rect x="527" y="699" width="52" height="22" rx="4" fill="#ffffff" stroke="#1266ff" stroke-width="1"/>
-    <text x="553" y="715" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="900" fill="#1266ff" text-anchor="middle">4.2&quot;</text>
-    <line x1="508" y1="758" x2="688" y2="578" stroke="#888" stroke-width="1.5" stroke-dasharray="2 6" opacity="0.55"/>
+    <line x1="238" y1="1028" x2="418" y2="848" stroke="#1266ff" stroke-width="2" stroke-dasharray="4 5" opacity="0.7"/>
+    <rect x="302" y="924" width="52" height="22" rx="4" fill="#ffffff" stroke="#1266ff" stroke-width="1"/>
+    <text x="328" y="940" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="900" fill="#1266ff" text-anchor="middle">8.5&quot;</text>
+    <line x1="238" y1="1028" x2="958" y2="308" stroke="#888" stroke-width="1.5" stroke-dasharray="2 6" opacity="0.55"/>
     <rect x="564" y="655" width="68" height="22" rx="4" fill="#ffffff" stroke="#888" stroke-width="1"/>
-    <text x="598" y="671" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#555" text-anchor="middle">CG-CG 8.5&quot;</text>
-    <g class="post" data-post="1" data-x-in="15" data-y-in="21" data-token-diameter-in="3">
-      <circle cx="508" cy="758" r="45" fill="none" stroke="#ff1717" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="508" cy="758" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="508" cy="758" r="22" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
-      <text x="508" y="772" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">1</text>
+    <text x="598" y="671" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#555" text-anchor="middle">HQ-HQ 33.9&quot;</text>
+    <g class="post" data-post="1" data-x-in="6" data-y-in="30" data-token-diameter-in="3">
+      <circle cx="238" cy="1028" r="45" fill="none" stroke="#ff1717" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="238" cy="1028" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="238" cy="1028" r="22" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
+      <text x="238" y="1042" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">1</text>
     </g>
-    <g class="post" data-post="2" data-x-in="21" data-y-in="15" data-token-diameter-in="3">
-      <circle cx="688" cy="578" r="45" fill="none" stroke="#1266ff" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="688" cy="578" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="688" cy="578" r="22" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
-      <text x="688" y="592" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">2</text>
+    <g class="post" data-post="2" data-x-in="30" data-y-in="6" data-token-diameter-in="3">
+      <circle cx="958" cy="308" r="45" fill="none" stroke="#1266ff" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="958" cy="308" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="958" cy="308" r="22" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
+      <text x="958" y="322" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">2</text>
     </g>
-    <g class="post" data-post="3" data-x-in="15" data-y-in="15" data-token-diameter-in="3">
-      <circle cx="508" cy="578" r="45" fill="none" stroke="#18bf2c" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="508" cy="578" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="508" cy="578" r="22" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
-      <text x="508" y="592" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">3</text>
+    <g class="post" data-post="3" data-x-in="6" data-y-in="6" data-token-diameter-in="3">
+      <circle cx="238" cy="308" r="45" fill="none" stroke="#18bf2c" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="238" cy="308" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="238" cy="308" r="22" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
+      <text x="238" y="322" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">3</text>
     </g>
-    <g class="post" data-post="4" data-x-in="21" data-y-in="21" data-token-diameter-in="3">
-      <circle cx="688" cy="758" r="45" fill="none" stroke="#ffd900" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="688" cy="758" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="688" cy="758" r="22" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
-      <text x="688" y="772" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">4</text>
+    <g class="post" data-post="4" data-x-in="30" data-y-in="30" data-token-diameter-in="3">
+      <circle cx="958" cy="1028" r="45" fill="none" stroke="#ffd900" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="958" cy="1028" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="958" cy="1028" r="22" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
+      <text x="958" y="1042" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">4</text>
     </g>
     <g class="post" data-post="5" data-x-in="18" data-y-in="18" data-token-diameter-in="3">
       <circle cx="598" cy="668" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
@@ -100,31 +100,31 @@
       <circle cx="598" cy="668" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
       <text x="598" y="682" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">5</text>
     </g>
-    <g class="post" data-post="6" data-x-in="6" data-y-in="6" data-token-diameter-in="3" opacity="0.30">
-      <circle cx="238" cy="308" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="238" cy="308" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="238" cy="308" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="238" y="322" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">6</text>
-      <text x="238" y="370" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#b00" text-anchor="middle">Solo 3-4 jugadores</text>
+    <g class="post" data-post="6" data-x-in="12" data-y-in="12" data-token-diameter-in="3" opacity="0.30">
+      <circle cx="418" cy="488" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="418" cy="488" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="418" cy="488" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="418" y="502" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">6</text>
+      <text x="418" y="550" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#b00" text-anchor="middle">3-4 players only</text>
     </g>
-    <g class="post" data-post="7" data-x-in="30" data-y-in="6" data-token-diameter-in="3">
-      <circle cx="958" cy="308" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="958" cy="308" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="958" cy="308" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="958" y="322" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">7</text>
+    <g class="post" data-post="7" data-x-in="24" data-y-in="12" data-token-diameter-in="3">
+      <circle cx="778" cy="488" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="778" cy="488" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="778" cy="488" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="778" y="502" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">7</text>
     </g>
-    <g class="post" data-post="8" data-x-in="6" data-y-in="30" data-token-diameter-in="3">
-      <circle cx="238" cy="1028" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="238" cy="1028" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="238" cy="1028" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="238" y="1042" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">8</text>
+    <g class="post" data-post="8" data-x-in="12" data-y-in="24" data-token-diameter-in="3">
+      <circle cx="418" cy="848" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="418" cy="848" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="418" cy="848" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="418" y="862" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">8</text>
     </g>
-    <g class="post" data-post="9" data-x-in="30" data-y-in="30" data-token-diameter-in="3" opacity="0.30">
-      <circle cx="958" cy="1028" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
-      <circle cx="958" cy="1028" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
-      <circle cx="958" cy="1028" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
-      <text x="958" y="1042" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">9</text>
-      <text x="958" y="1090" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#b00" text-anchor="middle">Solo 3-4 jugadores</text>
+    <g class="post" data-post="9" data-x-in="24" data-y-in="24" data-token-diameter-in="3" opacity="0.30">
+      <circle cx="778" cy="848" r="45" fill="none" stroke="#111111" stroke-width="2" stroke-opacity="0.18" stroke-dasharray="7 8"/>
+      <circle cx="778" cy="848" r="28" fill="#ffffff" stroke="#101010" stroke-width="5"/>
+      <circle cx="778" cy="848" r="22" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
+      <text x="778" y="862" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="900" fill="#050505" text-anchor="middle">9</text>
+      <text x="778" y="910" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" fill="#b00" text-anchor="middle">3-4 players only</text>
     </g>
   </g>
   <g class="legend">
@@ -133,35 +133,35 @@
       <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
       <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#ff1717" stroke-width="7"/>
       <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">1</text>
-      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">ROJO CG</text>
-      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">RED HQ</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">COMMAND POST</text>
     </g>
     <g transform="translate(446, 1318)">
       <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
       <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#1266ff" stroke-width="7"/>
       <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">2</text>
-      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">AZUL CG</text>
-      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">BLUE HQ</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">COMMAND POST</text>
     </g>
     <g transform="translate(806, 1318)">
       <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
       <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#18bf2c" stroke-width="7"/>
       <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">3</text>
-      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">VERDE CG</text>
-      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">GREEN HQ</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">COMMAND POST</text>
     </g>
     <g transform="translate(86, 1388)">
       <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
       <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#ffd900" stroke-width="7"/>
       <text x="0" y="11" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#050505" text-anchor="middle">4</text>
-      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">AMARILLO CG</text>
-      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTO DE MANDO</text>
+      <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">YELLOW HQ</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">COMMAND POST</text>
     </g>
     <g transform="translate(446, 1388)">
       <circle cx="0" cy="0" r="25" fill="#ffffff" stroke="#101010" stroke-width="5"/>
       <circle cx="0" cy="0" r="19" fill="#f9f9f9" stroke="#111111" stroke-width="0"/>
       <text x="44" y="-8" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">NEUTRAL</text>
-      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">PUESTOS NEUTRALES</text>
+      <text x="44" y="18" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#111">NEUTRAL POSTS</text>
     </g>
   </g>
 </svg>

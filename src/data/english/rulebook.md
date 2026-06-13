@@ -231,6 +231,10 @@ If during the Rush the unit enters base contact with an enemy unit, it counts as
 
 If the Rush does not reach the target, the unit ends its movement where it arrived.
 
+**Clarification:** any movement that ends in base contact with an enemy unit counts as a Rush and costs 2 actions, even if the target is close enough that you don't need the Speed bonus. It is not possible to enter base contact using only the Move action.
+
+_Example: your Crusaders (Movement 5", Speed +2") have an enemy unit 4" away. They declare a Rush, move 4" and enter contact: it's a charge, they attack for free. The defender will respond on their own activation._
+
 ![Unit making a Rush action]({{sprintImage}})
 
 ## Retreat
@@ -291,6 +295,7 @@ Each weapon indicates how many **Attacks** it makes.
 
 - Roll as many dice as the weapon's Attacks value indicates.
 - Each die represents an independent shot or projectile.
+- **Dice cap:** a unit never rolls more than **12 dice** in a single attack roll, regardless of the number of miniatures or the weapon used.
 
 ## 3. Roll Precision
 
@@ -349,7 +354,7 @@ Units remain locked until one of the two is destroyed or retreats following the 
 
 Melee combat is resolved following this sequence:
 
-1. The attacking unit rolls the **Attacks** dice from its melee weapon profile.
+1. The attacking unit rolls the **Attacks** dice from its melee weapon profile (maximum **12 dice**, same as ranged).
 2. Results of **1 and 2** are misses. A result of **6** is a critical hit.
 3. The defender rolls as many **Save** dice as hits received. Critical hits can only be blocked with a defensive 6.
 4. Unblocked hits inflict the attacking weapon's base or critical damage.
@@ -781,6 +786,7 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 | **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |
+| **Erratic** | Before resolving the attack, roll 1D6: the result becomes the weapon's Precision for that attack. |
 
 ## Secondary Weapons
 
