@@ -27,7 +27,7 @@ const factionSheetTemplates = {
   caos: new URL('../images/fichas/ficha_caos.webp', import.meta.url).href,
   legado: new URL('../images/fichas/ficha_legado.webp', import.meta.url).href,
 }
-const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'vehicle', 'monster']
+const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'monster', 'vehicle']
 const MAX_UNIT_IMAGE_SIDE = 1600
 const IMAGE_CROP_ASPECT_RATIO = 686 / 473
 const IMAGE_CROP_VIEWPORT_WIDTH = 360
@@ -597,8 +597,8 @@ function Generador() {
   const selectedHeroCount = selectedHeroEntries.length
   const selectedHeroSourceUid = selectedHeroEntries[0]?.sourceUid || ''
   const visibleUnlockedRegularUnits = useMemo(
-    () => (selectedEra ? visibleRegularUnits : []),
-    [selectedEra, visibleRegularUnits],
+    () => (selectedHeroCount > 0 ? visibleRegularUnits : []),
+    [selectedHeroCount, visibleRegularUnits],
   )
   const exportUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(selectedArmyUnits), [selectedArmyUnits])
   const currentArmyTotalValue = useMemo(
@@ -824,16 +824,14 @@ function Generador() {
 
   const handleFactionChange = (event) => {
     const next = event.target.value
-    startTransition(() => {
-      setSelectedFactionId(next)
-      setSelectedEra('')
-      setOpenManualUnitId('')
-      setOpenArmyUnitUid('')
-      setPendingSquadUnitId('')
-      setSelectedArmyUnitSelections([])
-      setManualUnitDrafts({})
-      setArmyDownloadError('')
-    })
+    setSelectedFactionId(next)
+    setSelectedEra('')
+    setOpenManualUnitId('')
+    setOpenArmyUnitUid('')
+    setPendingSquadUnitId('')
+    setSelectedArmyUnitSelections([])
+    setManualUnitDrafts({})
+    setArmyDownloadError('')
   }
 
   const handleGameModeChange = (nextMode) => {
