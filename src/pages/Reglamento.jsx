@@ -819,6 +819,9 @@ function Reglamento() {
     if (firstHeading && rulesMode !== 'missions') {
       firstHeading.remove()
     }
+    Array.from(doc.querySelectorAll('img')).forEach((img) => {
+      if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy')
+    })
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc, documentHeading }
   }, [t, lang, rulesHtml, isTokensMode, rulesMode, isSpecialtyTableOpen])

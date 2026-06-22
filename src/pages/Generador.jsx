@@ -1074,7 +1074,7 @@ function Generador() {
                   <div className="faction-summary-main">
                     <div className="faction-header">
                       {factionImages[selectedFaction.id] ? (
-                        <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} />
+                        <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} loading="lazy" />
                       ) : (
                         <span className="faction-header-fallback" aria-hidden="true">?</span>
                       )}
