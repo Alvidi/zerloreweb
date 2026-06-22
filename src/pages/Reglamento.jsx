@@ -1828,8 +1828,8 @@ function Reglamento() {
       }
 
       const filename = lang === 'en'
-        ? (rulesMode === 'missions' ? 'zerolore-missions-en.pdf' : 'zerolore-rulebook-en.pdf')
-        : (rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf')
+        ? (rulesMode === 'missions' ? 'zerolore-mission-1-en.pdf' : 'zerolore-rulebook-en.pdf')
+        : (rulesMode === 'missions' ? 'zerolore-mision-1-es.pdf' : 'zerolore-reglamento-es.pdf')
 
       doc.save(filename)
     } finally {

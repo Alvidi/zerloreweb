@@ -494,7 +494,6 @@ function Generador() {
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
   const [selectedEra, setSelectedEra] = useState('future')
-  const [heroChosen, setHeroChosen] = useState(false)
   const [manualUnitDrafts, setManualUnitDrafts] = useState({})
   const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
   const [armyDownloadError, setArmyDownloadError] = useState('')
@@ -598,8 +597,8 @@ function Generador() {
   const selectedHeroCount = selectedHeroEntries.length
   const selectedHeroSourceUid = selectedHeroEntries[0]?.sourceUid || ''
   const visibleUnlockedRegularUnits = useMemo(
-    () => (selectedEra && (heroChosen || selectedHeroCount >= 1) ? visibleRegularUnits : []),
-    [selectedEra, heroChosen, selectedHeroCount, visibleRegularUnits],
+    () => (selectedEra ? visibleRegularUnits : []),
+    [selectedEra, visibleRegularUnits],
   )
   const exportUnitDisplayNames = useMemo(() => buildArmyUnitDisplayNames(selectedArmyUnits), [selectedArmyUnits])
   const currentArmyTotalValue = useMemo(
@@ -828,7 +827,6 @@ function Generador() {
     startTransition(() => {
       setSelectedFactionId(next)
       setSelectedEra('')
-      setHeroChosen(false)
       setOpenManualUnitId('')
       setOpenArmyUnitUid('')
       setPendingSquadUnitId('')
@@ -840,7 +838,6 @@ function Generador() {
 
   const handleGameModeChange = (nextMode) => {
     setGameMode(nextMode)
-    setHeroChosen(false)
     setOpenManualUnitId('')
     setOpenArmyUnitUid('')
     setPendingSquadUnitId('')
@@ -850,7 +847,6 @@ function Generador() {
   const handleEraChange = (nextEra) => {
     if (nextEra === selectedEra) return
     setSelectedEra(nextEra)
-    setHeroChosen(false)
     setActiveGeneratorSection('units')
     setOpenManualUnitId('')
     setOpenArmyUnitUid('')
@@ -872,7 +868,6 @@ function Generador() {
     }
 
     setSelectedArmyUnitSelections([heroSelection])
-    setHeroChosen(true)
     setPendingSquadUnitId('')
     setOpenArmyUnitUid('')
     setArmyDownloadError('')
@@ -941,14 +936,12 @@ function Generador() {
     const removed = selectedArmyUnitSelections.find((s) => s.selectionId === selectionId)
     const removedUnit = removed ? exportUnits.find((e) => e.uid === removed.unitId) : null
     if (removedUnit && isHeroUnit(removedUnit.base)) {
-      setHeroChosen(false)
     }
     setSelectedArmyUnitSelections((current) => current.filter((selection) => selection.selectionId !== selectionId))
   }
 
   const handleResetCurrentArmy = () => {
     setSelectedArmyUnitSelections([])
-    setHeroChosen(false)
     setArmyDownloadError('')
   }
 
@@ -1016,7 +1009,6 @@ function Generador() {
             return createArmyUnitSelection(unitId, { squadSize: entry.squadSize })
           }),
       )
-      setHeroChosen(true)
       setActiveGeneratorSection('army')
       setIsRandomArmyModalOpen(false)
       setRandomArmyError('')

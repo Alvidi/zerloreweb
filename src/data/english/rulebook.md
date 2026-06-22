@@ -23,7 +23,7 @@ A **squad** is a unit made up of several miniatures that share activation, actio
 
 **Squad coherence and placement**
 
-In Grand Battle mode, all miniatures in a squad must stay within **1" or less** of at least 2 other miniatures in the same squad (or 1 if the squad has only 2 miniatures), forming a coherent group.
+In Grand Battle mode, each miniature in a squad must stay within **1" or less of at least one other miniature in the same squad**, forming a coherent group. As long as that chain is unbroken, the squad can adopt any formation you like: line, wedge, or clustered.
 
 ![Single miniature versus a squad]({{miniatureVsSquadImage}})
 
@@ -210,6 +210,8 @@ To climb:
 2. Then, the vertical height it wishes to climb is measured, consuming movement.
 
 Units with the **Flyer** specialty may climb obstacles diagonally.
+
+**Vehicles and Monsters at height.** **Vehicles cannot climb** structures, platforms, or elevated floors: they move at ground level only. **Monsters may climb**, provided they **physically fit in the space** they are accessing. If the miniature does not fit on that floor or platform — for example, its head hits the ceiling of a multi-storey building — it cannot be placed there.
 
 ![Unit climbing an obstacle and reaching an elevated position]({{climbingImage}})
 

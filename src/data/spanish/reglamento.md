@@ -23,7 +23,7 @@ Una **escuadra** es una unidad compuesta por varias miniaturas que comparten act
 
 **Coherencia y colocación de escuadras**
 
-En modo Gran Batalla, todas las miniaturas que formen parte de una escuadra deben mantenerse a **1" o menos** de al menos 2 miniaturas de la misma escuadra, o de 1 en caso de escuadras formadas por 2 miniaturas, formando un grupo coherente.
+En modo Gran Batalla, cada miniatura de una escuadra debe mantenerse a **1" o menos de al menos otra miniatura de la misma escuadra**, formando un grupo coherente. Mientras esa cadena no se rompa, la escuadra puede adoptar la formación que quieras: en línea, en cuña o agrupada.
 
 ![Miniatura individual frente a una escuadra]({{miniatureVsSquadImage}})
 
@@ -208,6 +208,8 @@ Para trepar:
 
 1. La unidad debe mover hasta tocar la base del obstáculo con su peana. A continuación, se mide la altura vertical que desea escalar, consumiendo movimiento.
 2. Las unidades con la especialidad **Volador** pueden subir obstáculos de manera diagonal.
+
+**Vehículos y Monstruos en altura.** Los **Vehículos no pueden subir** a estructuras, plataformas ni pisos elevados: se mueven solo a nivel de suelo. Los **Monstruos sí pueden subir**, siempre que **quepan físicamente en el espacio** al que acceden. Si la miniatura no entra en esa planta o plataforma —por ejemplo, su cabeza choca con el piso superior de un edificio de varias plantas—, no puede colocarse ahí.
 
 ![Unidad trepando un obstáculo y alcanzando una posición elevada]({{climbingImage}})
 
