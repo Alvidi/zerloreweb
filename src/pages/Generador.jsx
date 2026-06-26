@@ -842,9 +842,9 @@ function Generador() {
       })
 
       const pdfFileName = createArmyPdfFileName(selectedFaction?.nombre || 'ZeroLore')
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && 'ontouchend' in document
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
       if (isIOS) {
-        window.open(doc.output('bloburl'), '_blank')
+        window.location.href = doc.output('bloburl')
       } else {
         doc.save(pdfFileName)
       }
