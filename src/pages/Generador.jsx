@@ -841,7 +841,13 @@ function Generador() {
         doc.addImage(canvas, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST')
       })
 
-      doc.save(createArmyPdfFileName(selectedFaction?.nombre || 'ZeroLore'))
+      const pdfFileName = createArmyPdfFileName(selectedFaction?.nombre || 'ZeroLore')
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && 'ontouchend' in document
+      if (isIOS) {
+        window.open(doc.output('bloburl'), '_blank')
+      } else {
+        doc.save(pdfFileName)
+      }
       if (!cancelled) {
         setIsArmyPrintPreviewOpen(false)
       }
@@ -1298,8 +1304,15 @@ function Generador() {
                                           <h4>{entry.base.nombre}</h4>
                                           {count > 1 ? <span className="army-unit-count-badge">×{count}</span> : null}
                                         </div>
-                                        <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}`}>
+                                        <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}${isHeroUnit(entry.base) && selectedEra ? ` unit-era-${selectedEra}` : ''}`}>
                                           {entry.base.tipo}
+                                          {selectedEra ? (
+                                            <span className="unit-card-era-list">
+                                              <span className={`unit-era-badge unit-era-${selectedEra}`}>
+                                                {getEraLabel(selectedEra)}
+                                              </span>
+                                            </span>
+                                          ) : null}
                                         </div>
                                         <div className="unit-card-inline-value">{totalValue} {t('generator.valueUnit')}</div>
                                       </div>
