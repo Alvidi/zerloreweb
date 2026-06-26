@@ -46,13 +46,13 @@ const LAYOUT_EVENT = 'zerolore:mission-ficha-layout-updated'
 const DEV_KEY = 'zerolore.generator.layout-dev'
 
 const DEFAULT_GUIDES = [
-  { label: 'MISION',      x: 50,  y: 30,  w: 300, h: 55  },
-  { label: 'NUMERO',      x: 200, y: 500, w: 300, h: 80  },
-  { label: 'TITULO',      x: 50,  y: 130, w: 600, h: 70  },
-  { label: 'LORE',        x: 50,  y: 215, w: 600, h: 55  },
-  { label: 'OBJETIVO',    x: 50,  y: 285, w: 600, h: 130 },
-  { label: 'DESCRIPCION', x: 50,  y: 430, w: 600, h: 450 },
-  { label: 'PUNTOS',      x: 50,  y: 900, w: 600, h: 70  },
+  { label: 'MISION',      x: 31,  y: 186, w: 190, h: 54  },
+  { label: 'NUMERO',      x: 634, y: 186, w: 88,  h: 57  },
+  { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 70  },
+  { label: 'LORE',        x: 48,  y: 282, w: 645, h: 55  },
+  { label: 'OBJETIVO',    x: 50,  y: 345, w: 641, h: 130 },
+  { label: 'DESCRIPCION', x: 50,  y: 488, w: 645, h: 397 },
+  { label: 'PUNTOS',      x: 50,  y: 900, w: 648, h: 70  },
 ]
 
 const clamp = (guide) => ({
