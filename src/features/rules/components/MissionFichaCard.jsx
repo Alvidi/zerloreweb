@@ -48,7 +48,7 @@ const DEV_KEY = 'zerolore.generator.layout-dev'
 const DEFAULT_GUIDES = [
   { label: 'MISION',      x: 31,  y: 186, w: 190, h: 54  },
   { label: 'NUMERO',      x: 634, y: 186, w: 88,  h: 57  },
-  { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 110 },
+  { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 70  },
   { label: 'LORE',        x: 48,  y: 282, w: 645, h: 55  },
   { label: 'OBJETIVO',    x: 50,  y: 345, w: 641, h: 130 },
   { label: 'DESCRIPCION', x: 50,  y: 488, w: 645, h: 397 },
@@ -328,7 +328,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
           <AutoFitText
             className="mission-abs mission-titulo"
             style={fieldStyle('TITULO')}
-            maxFontSize={72}
+            maxFontSize={48}
             minFontSize={18}
             fitKey={ficha.title}
           >

@@ -26,7 +26,7 @@
             { "nombre": "Rifle de batalla", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Hoja de batalla", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Hoja de batalla", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
           ]
         },
         "pasado": {
@@ -54,16 +54,16 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Escopeta de asalto", "ataques": "1D3", "distancia": "6\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+            { "nombre": "Escopeta de asalto", "ataques": "2D", "distancia": "6\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Maza táctica", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Maza táctica", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Martillo y escudo", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Martillo y escudo", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
             { "nombre": "Alabarda (solo Élite, Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
           ]
         }
@@ -150,14 +150,14 @@
             { "nombre": "Pistola pesada", "ataques": "1D", "distancia": "6\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espada rúnica", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Espada rúnica", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
             { "nombre": "Martillo de energía (solo Élite, Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Hoja gemela", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
+            { "nombre": "Hoja gemela", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
             { "nombre": "Mandoble bendito (solo Élite, Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
           ]
         }
@@ -178,14 +178,16 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Cañón de mano", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Cañón de mano", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Puño energético", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
           ]
         },
         "pasado": {
-          "disparo": [],
+          "disparo": [
+            { "nombre": "Ballesta de asedio", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+          ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Martillo del juicio", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
           ]
@@ -243,13 +245,13 @@
             { "nombre": "Pistola sagrada", "ataques": "1D", "distancia": "6\"", "impactos": "3+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Báculo de guerra", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Báculo de guerra", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Báculo de luz", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Báculo de luz", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
           ]
         }
       }
@@ -297,15 +299,17 @@
       },
       "armas": {
         "futuro": {
-          "disparo": [],
+          "disparo": [
+            { "nombre": "Pistola consagrada", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+          ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Estandarte-lanza", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Estandarte-lanza", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Estandarte sagrado", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Estandarte sagrado", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
           ]
         }
       }
@@ -421,7 +425,9 @@
       },
       "armas": {
         "futuro": {
-          "disparo": [],
+          "disparo": [
+            { "nombre": "Chillido desgarrador", "ataques": "1D3", "distancia": "8\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+          ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Garras imperiales", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
           ]

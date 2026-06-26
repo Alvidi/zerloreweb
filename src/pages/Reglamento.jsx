@@ -1081,7 +1081,7 @@ function Reglamento() {
         const GUIDE_DEFAULTS = [
           { label: 'MISION',      x: 31,  y: 186, w: 190, h: 54  },
           { label: 'NUMERO',      x: 634, y: 186, w: 88,  h: 57  },
-          { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 110 },
+          { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 70  },
           { label: 'LORE',        x: 48,  y: 282, w: 645, h: 55  },
           { label: 'OBJETIVO',    x: 50,  y: 345, w: 641, h: 130 },
           { label: 'DESCRIPCION', x: 50,  y: 488, w: 645, h: 397 },
@@ -1118,19 +1118,28 @@ function Reglamento() {
         if (!templateImg) { setIsGeneratingRulesPdf(false); return }
 
         // ── generar PDF ─────────────────────────────────────────────────────
+        // Tamaño magic: plegada ~66×88mm → desplegar = 132×88mm. A4 landscape = 4 cartas (2×2)
         const { jsPDF } = await import('jspdf')
-        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' })
-        const PW = doc.internal.pageSize.getWidth()
-        const PH = doc.internal.pageSize.getHeight()
-        const cardW = PW
-        const cardH = cardW * (1023 / 1537)
-        const gap = 6
-        const topMargin = (PH - cardH * 2 - gap) / 2
+        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' })
+        const PW = doc.internal.pageSize.getWidth()   // 297mm
+        const PH = doc.internal.pageSize.getHeight()  // 210mm
+        const cols = 2
+        const rows = 2
+        const cardsPerPage = cols * rows
+        const gap = 4
+        const cardH = 88
+        const cardW = cardH * (1537 / 1023)  // ~132mm
+        const marginX = (PW - cols * cardW - gap * (cols - 1)) / 2
+        const marginY = (PH - rows * cardH - gap * (rows - 1)) / 2
 
-        for (let i = 0; i < missions.length; i += 2) {
+        for (let i = 0; i < missions.length; i += cardsPerPage) {
           if (i > 0) doc.addPage()
-          for (let j = 0; j < 2 && i + j < missions.length; j++) {
+          for (let j = 0; j < cardsPerPage && i + j < missions.length; j++) {
             const m = missions[i + j]
+            const col = j % cols
+            const row = Math.floor(j / cols)
+            const x = marginX + col * (cardW + gap)
+            const y = marginY + row * (cardH + gap)
             const canvas = document.createElement('canvas')
             canvas.width = 1537
             canvas.height = 1023
@@ -1146,7 +1155,7 @@ function Reglamento() {
             if (m.number) drawFit(ctx, m.number, guideMap.NUMERO, { family: 'Cinzel', color: '#ffffff', maxSz: 36, minSz: 18, weight: '700', shadow: true })
 
             // TITULO
-            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: 'Cinzel', color: '#ffffff', maxSz: 72, minSz: 18, weight: '700', shadow: true })
+            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: 'Cinzel', color: '#ffffff', maxSz: 48, minSz: 18, weight: '700', shadow: true })
 
             // LORE
             if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: '"Space Grotesk"', color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic' })
@@ -1172,7 +1181,7 @@ function Reglamento() {
               if (m.meta) drawFit(ctx, m.meta, { ...g, y: g.y + 36, h: g.h - 36 }, { color: '#7a5810', maxSz: 28, minSz: 10, weight: '600' })
             }
 
-            doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, topMargin + j * (cardH + gap), cardW, cardH)
+            doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', x, y, cardW, cardH)
           }
         }
 
@@ -1475,7 +1484,7 @@ function Reglamento() {
             letter-spacing: 0.04em;
           }
           .rules-pdf-sheet .rules-html .rules-unit-type-section-badge {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 9px;
             margin: 0 0 12px;
@@ -1803,19 +1812,23 @@ function Reglamento() {
       captureRoot.querySelectorAll('.rules-specialty-details').forEach((details) => {
         details.classList.add('is-open')
       })
+      const pdfSheetPadding = 38
+      const pdfInnerWidth = 1040 - pdfSheetPadding * 2
       captureRoot.querySelectorAll('.rules-ficha-card-example').forEach((example) => {
         const fichaWrapper = example.querySelector('.ficha-wrapper')
         const fichaCard = example.querySelector('.ficha-card')
         if (!fichaWrapper || !fichaCard) return
-        const containerWidth = example.offsetWidth || 870
-        const scale = containerWidth / 1537
+        const targetWidth = Math.round(pdfInnerWidth * 0.86)
+        const scale = targetWidth / 1537
         fichaCard.style.transform = `scale(${scale})`
         fichaCard.style.transformOrigin = 'top left'
         fichaCard.style.width = '1537px'
         fichaCard.style.height = '1023px'
-        fichaWrapper.style.width = `${containerWidth}px`
+        fichaWrapper.style.width = `${targetWidth}px`
         fichaWrapper.style.height = `${Math.round(1023 * scale)}px`
         fichaWrapper.style.overflow = 'hidden'
+        example.style.width = `${targetWidth}px`
+        example.style.maxWidth = `${targetWidth}px`
         example.style.overflow = 'hidden'
       })
 

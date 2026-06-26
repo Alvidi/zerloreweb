@@ -97,7 +97,7 @@
           "max": 10
         },
         "valor": 4,
-        "especialidad": "Avanzadilla"
+        "especialidad": "Evasivo"
       },
       "armas": {
         "futuro": {
@@ -373,7 +373,7 @@
             {
               "nombre": "Lanzador de fragmentos (solo Línea)",
               "ataques": "1D",
-              "distancia": "10\"",
+              "distancia": "12\"",
               "impactos": "5+",
               "danio": "1",
               "danio_critico": "2",
@@ -408,14 +408,14 @@
               "danio": "1",
               "danio_critico": "1",
               "habilidades_arma": [
-                "Fiable"
+                "Multiuso"
               ],
               "valor_extra": 0
             },
             {
               "nombre": "Honda de guerra (solo Línea)",
               "ataques": "2D",
-              "distancia": "8\"",
+              "distancia": "6\"",
               "impactos": "5+",
               "danio": "1",
               "danio_critico": "1",
@@ -455,7 +455,7 @@
           "max": 4
         },
         "valor": 9,
-        "especialidad": "Carga brutal"
+        "especialidad": "Berserker"
       },
       "armas": {
         "futuro": {
@@ -609,7 +609,7 @@
           "max": 4
         },
         "valor": 11,
-        "especialidad": "Porrazo"
+        "especialidad": "Despiadado"
       },
       "armas": {
         "futuro": {
@@ -917,7 +917,7 @@
       "nombre_unidad": "Carroña Pesada",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 12,
         "salvacion": "3+",
         "velocidad": "+2\"",
@@ -1085,7 +1085,7 @@
           "max": 1
         },
         "valor": 12,
-        "especialidad": "Carga brutal"
+        "especialidad": "Devorador"
       },
       "armas": {
         "futuro": {
@@ -1187,7 +1187,7 @@
           "max": 1
         },
         "valor": 14,
-        "especialidad": "Porrazo"
+        "especialidad": "Descontrol"
       },
       "armas": {
         "futuro": {
@@ -1267,7 +1267,7 @@
           "max": 1
         },
         "valor": 12,
-        "especialidad": "Carga brutal"
+        "especialidad": "¡Boom!"
       },
       "armas": {
         "futuro": {
@@ -1330,11 +1330,11 @@
               "nombre": "Balista improvisada",
               "ataques": "1D",
               "distancia": "12\"",
-              "impactos": "4+",
+              "impactos": null,
               "danio": "2",
               "danio_critico": "3",
               "habilidades_arma": [
-                "Inestable"
+                "Errática"
               ],
               "valor_extra": 0
             }

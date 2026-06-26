@@ -88,6 +88,10 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Brutal Charge', description: 'When this unit makes a Rush against a unit, it gains +1 melee attack die during that combat.' },
   },
   {
+    es: { name: 'Descontrol', description: 'Si esta unidad llega al 50% de su vida, ataca a la unidad aliada o enemiga más cercana cuerpo a cuerpo, sumando 1D más de ataque. Si ya está trabada, continúa. Si no tiene ninguna unidad cercana, se mueve hacia ella.' },
+    en: { name: 'Rampage', description: 'If this unit reaches 50% of its Wounds, it attacks the nearest allied or enemy unit in melee, adding 1D more to the attack. If already locked, it continues. If no unit is nearby, it moves toward the closest one.' },
+  },
+  {
     es: { name: 'Boom!', description: 'Cuando esta unidad muere explota afectando a unidades que estén a 6" de esta, infligiendo 1D6.' },
     en: { name: 'Boom!', description: 'When this unit dies, it explodes and affects units within 6" of it, inflicting 1D6.' },
   },

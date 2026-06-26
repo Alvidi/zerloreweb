@@ -34,11 +34,8 @@ const IMAGE_CROP_VIEWPORT_WIDTH = 360
 const IMAGE_CROP_VIEWPORT_HEIGHT = Math.round(IMAGE_CROP_VIEWPORT_WIDTH / IMAGE_CROP_ASPECT_RATIO)
 const FICHA_CARD_W = 1537
 const FICHA_CARD_H = 1023
-const EXPORT_PAGE_W = 1240
-const EXPORT_PAGE_H = 1754
-const EXPORT_PAGE_PAD_X = 56
-const EXPORT_PAGE_PAD_Y = 52
-const EXPORT_PAGE_GAP = 28
+const EXPORT_PAGE_W = 1754  // A4 landscape ~297mm × 5.9px/mm
+const EXPORT_PAGE_H = 1240  // A4 landscape ~210mm × 5.9px/mm
 const EXPORT_RASTER_SCALE = 2
 
 const readFileAsDataUrl = (file) =>
@@ -157,18 +154,21 @@ const renderExportPageCanvas = async (cardCanvases, scale = EXPORT_RASTER_SCALE)
   ctx.fillStyle = '#f8f5ed'
   ctx.fillRect(0, 0, EXPORT_PAGE_W, EXPORT_PAGE_H)
 
-  const slotHeight = (EXPORT_PAGE_H - (EXPORT_PAGE_PAD_Y * 2) - EXPORT_PAGE_GAP) / 2
-  const maxCardWidth = EXPORT_PAGE_W - EXPORT_PAGE_PAD_X * 2
-  const maxCardHeight = slotHeight
-  const cardScale = Math.min(maxCardWidth / FICHA_CARD_W, maxCardHeight / FICHA_CARD_H)
-  const cardWidth = Math.round(FICHA_CARD_W * cardScale)
-  const cardHeight = Math.round(FICHA_CARD_H * cardScale)
-  const cardX = Math.round((EXPORT_PAGE_W - cardWidth) / 2)
+  // 2×2 grid, ~132×88mm por carta (plegada = ~66×88mm, tamaño Magic)
+  const cols = 2
+  const rows = 2
+  const gap = 24  // ~4mm
+  const cardHeight = 519  // ~88mm
+  const cardWidth = Math.round(cardHeight * (FICHA_CARD_W / FICHA_CARD_H))  // ~780px (~132mm)
+  const marginX = Math.round((EXPORT_PAGE_W - cols * cardWidth - gap * (cols - 1)) / 2)
+  const marginY = Math.round((EXPORT_PAGE_H - rows * cardHeight - gap * (rows - 1)) / 2)
 
   cardCanvases.forEach((cardCanvas, index) => {
-    const slotY = EXPORT_PAGE_PAD_Y + index * (slotHeight + EXPORT_PAGE_GAP)
-    const cardY = Math.round(slotY + (slotHeight - cardHeight) / 2)
-    ctx.drawImage(cardCanvas, cardX, cardY, cardWidth, cardHeight)
+    const col = index % cols
+    const row = Math.floor(index / cols)
+    const x = marginX + col * (cardWidth + gap)
+    const y = marginY + row * (cardHeight + gap)
+    ctx.drawImage(cardCanvas, x, y, cardWidth, cardHeight)
   })
 
   return pageCanvas
@@ -635,7 +635,7 @@ function Generador() {
     ]
   }, [gameMode, armyRegularUnitGroups, selectedArmyUnits, selectedHeroEntries])
 
-  const armyExportPages = useMemo(() => chunkItems(armyExportEntries, 2), [armyExportEntries])
+  const armyExportPages = useMemo(() => chunkItems(armyExportEntries, 4), [armyExportEntries])
 
   const updateArmyUnitSelection = (selectionId, nextPatch) => {
     setSelectedArmyUnitSelections((current) =>
@@ -821,7 +821,7 @@ function Generador() {
       }
 
       const doc = new jsPDF({
-        orientation: 'portrait',
+        orientation: 'landscape',
         unit: 'mm',
         format: 'a4',
         compress: true,
