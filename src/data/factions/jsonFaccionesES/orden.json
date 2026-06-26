@@ -1111,7 +1111,7 @@
       "nombre_unidad": "Caballería Alada",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+6\"",
@@ -1158,7 +1158,7 @@
             {
               "nombre": "Jabalinas",
               "ataques": "1D",
-              "distancia": "10\"",
+              "distancia": "12\"",
               "impactos": "4+",
               "danio": "1",
               "danio_critico": "2",

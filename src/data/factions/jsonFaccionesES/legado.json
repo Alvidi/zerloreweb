@@ -54,7 +54,7 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Escopeta de asalto", "ataques": "1D3", "distancia": "8\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+            { "nombre": "Escopeta de asalto", "ataques": "1D3", "distancia": "6\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Maza táctica", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
@@ -73,7 +73,7 @@
       "nombre_unidad": "Vanguardia Sagrada",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 4,
         "salvacion": "3+",
         "velocidad": "+4\"",
@@ -116,7 +116,7 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Rifle de asalto", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Rifle de asalto", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Hacha juramentada", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
@@ -136,7 +136,7 @@
       "nombre_unidad": "Caballeros de Asalto",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 7,
         "salvacion": "3+",
         "velocidad": "+6\"",
@@ -147,7 +147,7 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Pistola pesada", "ataques": "1D", "distancia": "8\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+            { "nombre": "Pistola pesada", "ataques": "1D", "distancia": "6\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Espada rúnica", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
@@ -167,7 +167,7 @@
       "nombre_unidad": "Baluartes",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 8,
         "salvacion": "2+",
         "velocidad": "+2\"",
@@ -240,7 +240,7 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Pistola sagrada", "ataques": "1D", "distancia": "8\"", "impactos": "3+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            { "nombre": "Pistola sagrada", "ataques": "1D", "distancia": "6\"", "impactos": "3+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Báculo de guerra", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
@@ -258,7 +258,7 @@
       "nombre_unidad": "Espectros del Legado",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 5,
         "salvacion": "4+",
         "velocidad": "+6\"",
@@ -269,7 +269,7 @@
       "armas": {
         "futuro": {
           "disparo": [
-            { "nombre": "Pistolas gemelas", "ataques": "2D", "distancia": "10\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
+            { "nombre": "Pistolas gemelas", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Garras espectrales", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
@@ -347,7 +347,7 @@
       "nombre_unidad": "Carro de Guerra Sagrado",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 12,
         "salvacion": "2+",
         "velocidad": "+2\"",
@@ -495,7 +495,7 @@
     {
       "nombre_unidad": "Alto Capellán",
       "clase": "Héroe",
-      "habilidad_faccion": "Cuando una unidad LEGADO es destruida, realiza un ultimo ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
+      "habilidad_faccion": "Cuando una unidad aliada es destruida, realiza un ultimo ataque a distancia o a cuerpo a cuerpo tenga o no acciones.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -524,7 +524,7 @@
     {
       "nombre_unidad": "Vidente Eterno",
       "clase": "Héroe",
-      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, LEGADO puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
+      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, una unidad aliada puede intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
@@ -548,6 +548,35 @@
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Báculo ancestral", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Centinela del Bastión",
+      "clase": "Héroe",
+      "habilidad_faccion": "Las unidades aliadas de tipo Élite y Héroe solo pueden ser objetivo de ataques a distancia si la unidad atacante está a 12\" o menos.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "salvacion": "2+",
+        "velocidad": "+2\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 20
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Pistola reliquia", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Maza del bastión", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Maza ancestral", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
           ]
         }
       }

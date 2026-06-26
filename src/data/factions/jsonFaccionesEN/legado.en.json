@@ -799,6 +799,42 @@
           ]
         }
       }
+    },
+    {
+      "nombre_unidad": "Bastion Sentinel",
+      "clase": "Hero",
+      "habilidad_faccion": "Allied Elite and Hero units can only be targeted by ranged attacks if the attacking unit is within 12\" or less.",
+      "armas": {
+        "futuro": {
+          "disparo": [
+            {
+              "nombre": "Relic Pistol",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bastion Mace",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ancestral Mace",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

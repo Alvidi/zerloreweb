@@ -1,4 +1,5 @@
 import { useMemo, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
@@ -10,6 +11,7 @@ import legadoEnData from '../data/factions/jsonFaccionesEN/legado.en.json'
 import caosData from '../data/factions/jsonFaccionesES/caos.json'
 import caosEnData from '../data/factions/jsonFaccionesEN/caos.en.json'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
+import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import { normalizeFaction } from '../features/generator/generatorUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
@@ -38,18 +40,7 @@ import squadMeleeImage from '../images/webimagen/imagen_12.webp'
 import coverImage from '../images/webimagen/imagen_13.webp'
 import vehicleMonsterMeleeImage from '../images/webimagen/imagen_14.webp'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
-import grandBattle4pExposedMap from '../images/maps/gran-batalla-4p-cuarteles-expuestos.svg'
-import grandBattle4pCornersMap from '../images/maps/gran-batalla-4p-esquinas.svg'
-import grandBattle4pWideMap from '../images/maps/gran-batalla-4p-72x48.svg'
-import totalWarCenterMap from '../images/maps/guerra-total-4p-centro.svg'
-import totalWarCornersMap from '../images/maps/guerra-total-4p-esquinas.svg'
-import totalWarExposedMap from '../images/maps/guerra-total-4p-expuestos.svg'
-import grandBattle4pExposedMapEn from '../images/maps/gran-batalla-4p-cuarteles-expuestos.en.svg'
-import grandBattle4pCornersMapEn from '../images/maps/gran-batalla-4p-esquinas.en.svg'
-import grandBattle4pWideMapEn from '../images/maps/gran-batalla-4p-72x48.en.svg'
-import totalWarCenterMapEn from '../images/maps/guerra-total-4p-centro.en.svg'
-import totalWarCornersMapEn from '../images/maps/guerra-total-4p-esquinas.en.svg'
-import totalWarExposedMapEn from '../images/maps/guerra-total-4p-expuestos.en.svg'
+import fichasMisionesImg from '../images/fichas/misiones.png'
 import unitTypeLineIcon from '../images/units_icons/line.png'
 import unitTypeEliteIcon from '../images/units_icons/elite.png'
 import unitTypeVehicleIcon from '../images/units_icons/vehicle.png'
@@ -97,12 +88,6 @@ const getRulesAssetPlaceholders = (lang = 'es') => {
     measurementImage,
     miniatureVsSquadImage,
     rangedAttackSequenceImage,
-    grandBattle4pExposedMap: en ? grandBattle4pExposedMapEn : grandBattle4pExposedMap,
-    grandBattle4pCornersMap: en ? grandBattle4pCornersMapEn : grandBattle4pCornersMap,
-    grandBattle4pWideMap: en ? grandBattle4pWideMapEn : grandBattle4pWideMap,
-    totalWarCenterMap: en ? totalWarCenterMapEn : totalWarCenterMap,
-    totalWarCornersMap: en ? totalWarCornersMapEn : totalWarCornersMap,
-    totalWarExposedMap: en ? totalWarExposedMapEn : totalWarExposedMap,
     sprintImage,
     squadMeleeImage,
     turnStructureImage,
@@ -300,6 +285,8 @@ function Reglamento() {
   const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
   const [isSpecialtyTableOpen, setIsSpecialtyTableOpen] = useState(false)
+  const [showMisionFichaModal, setShowMisionFichaModal] = useState(false)
+  const [activeMissionFicha, setActiveMissionFicha] = useState(null)
   const modeParam = searchParams.get('mode')
   const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'rules'
   const isTokensMode = rulesMode === 'tokens'
@@ -831,15 +818,42 @@ function Reglamento() {
 
     const handleRulesClick = (event) => {
       const toggle = event.target.closest('[data-rules-specialty-toggle="true"]')
-      if (!toggle || !contentRef.current?.contains(toggle)) return
-      event.preventDefault()
-      setIsSpecialtyTableOpen((current) => !current)
+      if (toggle && contentRef.current?.contains(toggle)) {
+        event.preventDefault()
+        setIsSpecialtyTableOpen((current) => !current)
+      }
     }
 
     const currentContent = contentRef.current
     currentContent.addEventListener('click', handleRulesClick)
     return () => currentContent.removeEventListener('click', handleRulesClick)
   }, [renderedHtml])
+
+  useEffect(() => {
+    const extractMissionNumber = (title) => title.match(/^(\d+)\s*-\s*/)?.[1] || ''
+    const stripLabel = (el) => {
+      if (!el) return ''
+      const label = el.querySelector('.rules-mission-label')
+      const full = el.textContent?.trim() || ''
+      const labelText = label?.textContent?.trim() || ''
+      return labelText ? full.replace(labelText, '').trim() : full
+    }
+    window.__zeroloreOpenMissionFicha = (btn) => {
+      const card = btn.closest('.rules-mission-card')
+      if (!card) return
+      const title = card.querySelector('.rules-mission-card-title')?.textContent?.trim() || ''
+      setActiveMissionFicha({
+        title,
+        flavor: card.querySelector('.rules-mission-card-flavor')?.textContent?.trim().replace(/^["""]/g, '').replace(/["""']$/g, '').trim() || '',
+        summary: stripLabel(card.querySelector('.rules-mission-card-summary')),
+        copy: stripLabel(card.querySelector('.rules-mission-card-copy')),
+        meta: stripLabel(card.querySelector('.rules-mission-card-meta')),
+        number: extractMissionNumber(title) || btn.dataset.number || '',
+      })
+      setShowMisionFichaModal(true)
+    }
+    return () => { delete window.__zeroloreOpenMissionFicha }
+  }, [setActiveMissionFicha, setShowMisionFichaModal])
 
   // Scroll spy para resaltar sección activa
   useEffect(() => {
@@ -881,6 +895,7 @@ function Reglamento() {
     return tocItems.filter((item) => normalizeHeadingText(item.title).includes(q))
   }, [tocItems, searchTerm])
 
+  // Dispara captura PDF cuando el stage de exportación está montado
   const setMode = (nextMode) => {
     setSearchTerm('')
     setActiveSection('')
@@ -989,8 +1004,186 @@ function Reglamento() {
   const handleDownloadPdf = async () => {
     if (typeof window === 'undefined' || isTokensMode || isGeneratingRulesPdf) return
 
-    let captureRoot = null
     setIsGeneratingRulesPdf(true)
+
+    if (rulesMode === 'missions') {
+      try {
+        // ── helpers canvas ──────────────────────────────────────────────────
+        const wrapTextC = (ctx, text, maxW) => {
+          const words = String(text).split(/\s+/)
+          const lines = []
+          let line = ''
+          for (const word of words) {
+            const test = line ? `${line} ${word}` : word
+            if (line && ctx.measureText(test).width > maxW) { lines.push(line); line = word }
+            else line = test
+          }
+          if (line) lines.push(line)
+          return lines
+        }
+
+        const drawFit = (ctx, text, g, { family = '"Space Grotesk"', color = '#222', maxSz = 22, minSz = 8, weight = '400', style = '', align = 'center', shadow = false } = {}) => {
+          if (!text || !g) return
+          ctx.save()
+          if (shadow) { ctx.shadowColor = 'rgba(0,0,0,0.85)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 1; ctx.shadowOffsetY = 1 }
+          ctx.fillStyle = color
+          ctx.textAlign = align === 'center' ? 'center' : 'left'
+          ctx.textBaseline = 'middle'
+          let sz = maxSz
+          let lines = []
+          while (sz >= minSz) {
+            ctx.font = [style, weight, `${sz}px`, family].filter(Boolean).join(' ')
+            lines = wrapTextC(ctx, text, g.w - 4)
+            if (lines.length * sz * 1.35 <= g.h) break
+            sz = Math.max(minSz, sz - 0.5)
+          }
+          const lineH = sz * 1.35
+          const totalH = lines.length * lineH
+          const startY = g.y + g.h / 2 - totalH / 2 + lineH / 2
+          const x = align === 'center' ? g.x + g.w / 2 : g.x + 2
+          lines.forEach((l, i) => ctx.fillText(l, x, startY + i * lineH))
+          ctx.restore()
+        }
+
+        const drawLabel = (ctx, text, g, offsetY = 9) => {
+          ctx.save()
+          ctx.fillStyle = '#8b6914'
+          ctx.font = '700 13px Rajdhani'
+          ctx.textAlign = 'center'
+          ctx.textBaseline = 'middle'
+          ctx.fillText(text, g.x + g.w / 2, g.y + offsetY)
+          ctx.restore()
+        }
+
+        // ── extraer datos de misiones del DOM ───────────────────────────────
+        const extractMissionNumber = (title) => title.match(/^(\d+)\s*-\s*/)?.[1] || ''
+        const stripLabel = (el) => {
+          if (!el) return ''
+          const lbl = el.querySelector('.rules-mission-label')
+          const full = el.textContent?.trim() || ''
+          const lblText = lbl?.textContent?.trim() || ''
+          return lblText ? full.replace(lblText, '').trim() : full
+        }
+        const cards = Array.from(contentRef.current?.querySelectorAll('.rules-mission-card') || [])
+        const missions = cards.map((card) => {
+          const title = card.querySelector('.rules-mission-card-title')?.textContent?.trim() || ''
+          return {
+            title,
+            flavor: card.querySelector('.rules-mission-card-flavor')?.textContent?.trim().replace(/^["""]/g, '').replace(/["""']$/g, '').trim() || '',
+            summary: stripLabel(card.querySelector('.rules-mission-card-summary')),
+            copy: stripLabel(card.querySelector('.rules-mission-card-copy')),
+            meta: stripLabel(card.querySelector('.rules-mission-card-meta')),
+            number: extractMissionNumber(title) || '',
+          }
+        })
+
+        // ── leer posiciones guardadas en localStorage (mismo storage que layout mode) ──
+        const GUIDE_DEFAULTS = [
+          { label: 'MISION',      x: 31,  y: 201, w: 187, h: 26  },
+          { label: 'NUMERO',      x: 643, y: 191, w: 76,  h: 44  },
+          { label: 'TITULO',      x: 50,  y: 130, w: 600, h: 70  },
+          { label: 'LORE',        x: 50,  y: 215, w: 600, h: 55  },
+          { label: 'OBJETIVO',    x: 50,  y: 285, w: 600, h: 130 },
+          { label: 'DESCRIPCION', x: 50,  y: 430, w: 600, h: 450 },
+          { label: 'PUNTOS',      x: 50,  y: 900, w: 600, h: 70  },
+        ]
+        const guideMap = (() => {
+          try {
+            const raw = localStorage.getItem('zerolore.rules.mission-ficha-layout.v1')
+            const saved = raw ? JSON.parse(raw) : []
+            const savedMap = new Map(Array.isArray(saved) ? saved.filter(g => g?.label).map(g => [g.label, g]) : [])
+            return Object.fromEntries(
+              GUIDE_DEFAULTS.map(def => {
+                const s = savedMap.get(def.label)
+                return [def.label, s ? { ...def, x: s.x ?? def.x, y: s.y ?? def.y, w: s.w ?? def.w, h: s.h ?? def.h } : def]
+              })
+            )
+          } catch { return Object.fromEntries(GUIDE_DEFAULTS.map(g => [g.label, g])) }
+        })()
+
+        // ── cargar fuentes + imagen plantilla ───────────────────────────────
+        await Promise.allSettled([
+          document.fonts.load('700 42px Cinzel'),
+          document.fonts.load('700 20px Rajdhani'),
+          document.fonts.load('400 20px "Space Grotesk"'),
+          document.fonts.load('600 20px "Space Grotesk"'),
+        ])
+
+        const templateImg = await new Promise((res) => {
+          const i = new Image()
+          i.onload = () => res(i)
+          i.onerror = () => res(null)
+          i.src = fichasMisionesImg
+        })
+        if (!templateImg) { setIsGeneratingRulesPdf(false); return }
+
+        // ── generar PDF ─────────────────────────────────────────────────────
+        const { jsPDF } = await import('jspdf')
+        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' })
+        const PW = doc.internal.pageSize.getWidth()
+        const PH = doc.internal.pageSize.getHeight()
+        const cardW = PW
+        const cardH = cardW * (1023 / 1537)
+        const gap = 6
+        const topMargin = (PH - cardH * 2 - gap) / 2
+
+        for (let i = 0; i < missions.length; i += 2) {
+          if (i > 0) doc.addPage()
+          for (let j = 0; j < 2 && i + j < missions.length; j++) {
+            const m = missions[i + j]
+            const canvas = document.createElement('canvas')
+            canvas.width = 1537
+            canvas.height = 1023
+            const ctx = canvas.getContext('2d')
+
+            // Fondo
+            ctx.drawImage(templateImg, 0, 0, 1537, 1023)
+
+            // MISIÓN
+            drawFit(ctx, 'MISIÓN', guideMap.MISION, { family: 'Rajdhani', color: '#ffffff', maxSz: 22, minSz: 12, weight: '700', shadow: true })
+
+            // NUMERO
+            if (m.number) drawFit(ctx, m.number, guideMap.NUMERO, { family: 'Cinzel', color: '#ffffff', maxSz: 36, minSz: 18, weight: '700', shadow: true })
+
+            // TITULO
+            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: 'Cinzel', color: '#ffffff', maxSz: 42, minSz: 18, weight: '700', shadow: true })
+
+            // LORE
+            if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: '"Space Grotesk"', color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic' })
+
+            // OBJETIVO
+            if (guideMap.OBJETIVO) {
+              const g = guideMap.OBJETIVO
+              drawLabel(ctx, 'OBJETIVO', g)
+              if (m.summary) drawFit(ctx, m.summary, { ...g, y: g.y + 20, h: g.h - 20 }, { maxSz: 22, minSz: 10 })
+            }
+
+            // DESCRIPCION
+            if (guideMap.DESCRIPCION) {
+              const g = guideMap.DESCRIPCION
+              drawLabel(ctx, 'DESCRIPCIÓN', g)
+              if (m.copy) drawFit(ctx, m.copy, { ...g, y: g.y + 20, h: g.h - 20 }, { maxSz: 22, minSz: 10 })
+            }
+
+            // PUNTOS
+            if (guideMap.PUNTOS) {
+              const g = guideMap.PUNTOS
+              drawLabel(ctx, 'PUNTOS', g)
+              if (m.meta) drawFit(ctx, m.meta, { ...g, y: g.y + 20, h: g.h - 20 }, { color: '#7a5810', maxSz: 22, minSz: 10, weight: '600' })
+            }
+
+            doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, topMargin + j * (cardH + gap), cardW, cardH)
+          }
+        }
+
+        doc.save(lang === 'en' ? 'zerolore-missions-fichas.pdf' : 'zerolore-misiones-fichas.pdf')
+      } finally {
+        setIsGeneratingRulesPdf(false)
+      }
+      return
+    }
+
+    let captureRoot = null
 
     try {
       const [{ jsPDF }, { default: html2canvas }] = await Promise.all([
@@ -1488,6 +1681,7 @@ function Reglamento() {
             border-top: 0;
             color: #444444;
             font-style: italic;
+            font-weight: 300;
           }
           .rules-pdf-sheet .rules-html .rules-mission-card-meta {
             padding: 0;
@@ -1499,6 +1693,13 @@ function Reglamento() {
             display: block;
             margin-bottom: 4px;
             font-size: 10px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+          }
+          .rules-pdf-sheet .rules-html .rules-mission-label {
+            color: #888888;
+            font-size: 9px;
+            font-weight: 700;
             letter-spacing: 0.06em;
             text-transform: uppercase;
           }
@@ -1831,8 +2032,8 @@ function Reglamento() {
       }
 
       const filename = lang === 'en'
-        ? (rulesMode === 'missions' ? 'zerolore-mission-1-en.pdf' : 'zerolore-rulebook-en.pdf')
-        : (rulesMode === 'missions' ? 'zerolore-mision-1-es.pdf' : 'zerolore-reglamento-es.pdf')
+        ? (rulesMode === 'missions' ? 'zerolore-missions-en.pdf' : 'zerolore-rulebook-en.pdf')
+        : (rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf')
 
       doc.save(filename)
     } finally {
@@ -2169,22 +2370,24 @@ function Reglamento() {
                 <>
                   <div className="rules-document-head">
                     <h1 id={documentHeading.id}>{documentHeading.title}</h1>
-                    <button
-                      type="button"
-                      className="primary rules-download-button"
-                      onClick={handleDownloadPdf}
-                      disabled={isGeneratingRulesPdf}
-                      aria-busy={isGeneratingRulesPdf}
-                    >
-                      {isGeneratingRulesPdf ? (
-                        <span className="rules-pdf-button-content">
-                          <span className="rules-pdf-spinner" aria-hidden="true" />
-                          {t('rules.generatingPdf')}
-                        </span>
-                      ) : (
-                        t('rules.downloadPdf')
-                      )}
-                    </button>
+                    <div className="rules-document-head-actions">
+                      <button
+                        type="button"
+                        className="primary rules-download-button"
+                        onClick={handleDownloadPdf}
+                        disabled={isGeneratingRulesPdf}
+                        aria-busy={isGeneratingRulesPdf}
+                      >
+                        {isGeneratingRulesPdf ? (
+                          <span className="rules-pdf-button-content">
+                            <span className="rules-pdf-spinner" aria-hidden="true" />
+                            {t('rules.generatingPdf')}
+                          </span>
+                        ) : (
+                          t('rules.downloadPdf')
+                        )}
+                      </button>
+                    </div>
                   </div>
                   {shouldShowRulesHeader && (
                     <div className="rules-hero-banner" aria-hidden="true">
@@ -2208,6 +2411,27 @@ function Reglamento() {
         >
           ↑
         </button>
+      )}
+      {showMisionFichaModal && activeMissionFicha && typeof document !== 'undefined' && createPortal(
+        <div
+          className="mision-ficha-modal-overlay"
+          onClick={() => { setShowMisionFichaModal(false); setActiveMissionFicha(null) }}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="mision-ficha-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="mision-ficha-modal-bar">
+              <button
+                type="button"
+                className="mision-ficha-modal-close"
+                onClick={() => { setShowMisionFichaModal(false); setActiveMissionFicha(null) }}
+                aria-label="Cerrar"
+              >×</button>
+            </div>
+            <MissionFichaCard ficha={activeMissionFicha} />
+          </div>
+        </div>,
+        document.body,
       )}
     </section>
   )

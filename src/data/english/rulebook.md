@@ -55,7 +55,7 @@ In ZeroLore there are two types of rules: **general rules**, which belong to thi
 
 When a rule contradicts or modifies a rule from the rulebook, **the rule on the unit profile always takes priority**.
 
-_Example: the rulebook says a locked unit cannot shoot. If a weapon has the Gunslinger ability, that special rule lets you shoot while locked, and that takes precedence._
+_Example: the rulebook says a locked unit cannot shoot. If a weapon has the Multi-use ability, that special rule lets you shoot while locked, and that takes precedence._
 
 ### Number of Players
 
@@ -449,6 +449,8 @@ Friendly or enemy miniatures that completely block the view act as obstacles for
 
 If a unit is partially visible but not in contact with any cover, no defensive bonuses apply.
 
+If the attacker has a **clear line of sight to the entire unit** — with no part of any scenery element between attacker and target — **there is no cover**, even if the unit is in physical contact with that element. Cover requires the obstacle to actually block part of the shot, not just be nearby.
+
 ---
 
 # Unit States
@@ -800,12 +802,6 @@ Examples:
 
 - **Fusion Grenade (Vehicle, Monster only)** — can only be declared against Vehicles or Monsters; it cannot be used against any other class.
 - **Flail (Hero only)** — can only attack Heroes.
-
-## Ability Limit per Weapon
-
-Unless stated otherwise, each weapon should have **a single weapon ability**.
-
-Especially powerful, unique, or exceptional weapons may have more than one ability, but this should be reserved for specific cases such as weapons used by Heroes, Monsters, or Vehicles.
 
 ---
 

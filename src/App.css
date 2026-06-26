@@ -2379,6 +2379,14 @@ button {
   gap: 12px;
 }
 
+.army-unit-count-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .unit-card-value {
   color: var(--accent);
   font-size: 0.98rem;
@@ -4946,6 +4954,13 @@ mark {
   margin: 0 !important;
 }
 
+.rules-document-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
 .rules-download-button {
   flex: 0 0 auto;
   padding: 9px 14px;
@@ -4954,6 +4969,174 @@ mark {
   text-transform: none;
   letter-spacing: 0.02em;
   font-size: 0.82rem;
+}
+
+.rules-html .rules-mission-view-btn {
+  align-self: start;
+  margin-top: 4px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.rules-html .rules-mission-view-btn:hover {
+  background: var(--accent);
+  color: #1a1a1a;
+}
+
+/* ── Modal ficha misión — mismo patrón que unit-preview-modal ── */
+.mision-ficha-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 4, 6, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.mision-ficha-modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.mision-ficha-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.mision-ficha-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #1a1a1a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+/* ── Texto sobre ficha de misión (coordenadas en píxeles sobre 1537×1023) ── */
+.mission-abs {
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.mission-mision-label {
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.mission-numero {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+}
+
+
+.mission-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+}
+
+.mission-lore {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.mission-objetivo,
+.mission-descripcion,
+.mission-puntos {
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.4;
+  color: #1a1a1a;
+  text-align: center;
+  gap: 6px;
+}
+
+.mission-objetivo p,
+.mission-descripcion p,
+.mission-puntos p {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1em;
+  line-height: 1.4;
+  color: #1a1a1a;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.mission-puntos p {
+  color: #7a5810;
+  font-weight: 600;
+}
+
+.mission-field-label {
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b6914;
+  display: block;
+  text-align: center;
+}
+
+.mision-ficha-modal-img {
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 .rules-mode-switch .ghost {
@@ -6079,11 +6262,9 @@ mark {
   display: grid;
   gap: 10px;
   padding: 14px 0 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: transparent;
   box-shadow: none;
   overflow: visible;
-  isolation: auto;
 }
 
 .rules-html .rules-mission-card::before {
@@ -6093,6 +6274,12 @@ mark {
   height: 1px;
   background: linear-gradient(90deg, rgba(200, 170, 104, 0.45), rgba(255, 255, 255, 0.02));
   pointer-events: none;
+}
+
+.rules-html .rules-mission-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .rules-html .rules-mission-card-badge {
@@ -6122,8 +6309,7 @@ mark {
 }
 
 .rules-html .rules-mission-card-summary {
-  padding: 0 0 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
   color: var(--text-main);
   font-size: 1rem;
 }
@@ -6134,6 +6320,7 @@ mark {
   border-top: 0;
   color: #f0caa1;
   font-style: italic;
+  font-weight: 300;
   line-height: 1.62;
 }
 
@@ -6161,6 +6348,14 @@ mark {
 .rules-html .rules-mission-card-meta .rules-mission-card-meta-label {
   display: block;
   margin-bottom: 5px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rules-html .rules-mission-label {
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 700;

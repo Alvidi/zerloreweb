@@ -605,7 +605,37 @@ function Generador() {
     () => selectedArmyUnits.reduce((sum, unit) => sum + Number(unit?.total || 0), 0),
     [selectedArmyUnits],
   )
-  const armyExportPages = useMemo(() => chunkItems(selectedArmyUnits, 2), [selectedArmyUnits])
+
+  const armyRegularUnitGroups = useMemo(() => {
+    if (gameMode !== 'escaramuza') return null
+    const groups = new Map()
+    for (const entry of selectedRegularArmyUnits) {
+      const key = entry.sourceUid
+      if (groups.has(key)) {
+        const g = groups.get(key)
+        g.count += 1
+        g.totalValue += entry.total
+        g.selectionIds.push(entry.uid)
+      } else {
+        groups.set(key, { entry, count: 1, totalValue: entry.total, selectionIds: [entry.uid] })
+      }
+    }
+    return Array.from(groups.values())
+  }, [gameMode, selectedRegularArmyUnits])
+
+  const armyExportEntries = useMemo(() => {
+    if (gameMode !== 'escaramuza' || !armyRegularUnitGroups) return selectedArmyUnits
+    return [
+      ...selectedHeroEntries,
+      ...armyRegularUnitGroups.map(({ entry, count, totalValue }) => ({
+        ...entry,
+        _count: count,
+        total: totalValue,
+      })),
+    ]
+  }, [gameMode, armyRegularUnitGroups, selectedArmyUnits, selectedHeroEntries])
+
+  const armyExportPages = useMemo(() => chunkItems(armyExportEntries, 2), [armyExportEntries])
 
   const updateArmyUnitSelection = (selectionId, nextPatch) => {
     setSelectedArmyUnitSelections((current) =>
@@ -1207,89 +1237,140 @@ function Generador() {
                       </div>
                     </div>
                     {[
-                      { key: 'hero', label: t('generator.requiredHeroSlot'), entries: selectedHeroEntries },
-                      { key: 'units', label: t('generator.units'), entries: selectedRegularArmyUnits },
-                    ].map((section) => section.entries.length ? (
-                      <div className="army-modal-section" key={`current-army-${section.key}`}>
-                        <p className="army-modal-section-label">{section.label}</p>
-                        <div className="army-list army-list-compact">
-                          {section.entries.map((entry) => (
-                            <article key={`current-unit-${entry.uid}`} className="unit-card army-unit">
-                              <div className="unit-card-header army-unit-header">
-                                <div className="unit-card-summary army-unit-summary">
-                                  <div className="unit-card-thumb-wrap army-unit-image-wrap">
-                                    <img
-                                      className={`unit-card-thumb army-unit-thumb${entry.imageDataUrl ? '' : ' fallback'}`}
-                                      src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, selectedEra)}
-                                      alt={entry.base.nombre}
-                                    />
-                                    <input
-                                      id={`army-unit-image-${entry.uid}`}
-                                      type="file"
-                                      accept="image/*"
-                                      className="unit-image-input"
-                                      onChange={(event) => handleArmyUnitImageChange(entry, event)}
-                                    />
-                                    {entry.imageDataUrl ? (
+                      { key: 'hero', label: t('generator.requiredHeroSlot'), entries: selectedHeroEntries, groups: null },
+                      {
+                        key: 'units',
+                        label: t('generator.units'),
+                        entries: armyRegularUnitGroups ? null : selectedRegularArmyUnits,
+                        groups: armyRegularUnitGroups,
+                      },
+                    ].map((section) => {
+                      const hasContent = section.groups ? section.groups.length > 0 : section.entries.length > 0
+                      if (!hasContent) return null
+                      return (
+                        <div className="army-modal-section" key={`current-army-${section.key}`}>
+                          <p className="army-modal-section-label">{section.label}</p>
+                          <div className="army-list army-list-compact">
+                            {section.groups
+                              ? section.groups.map(({ entry, count, totalValue, selectionIds }) => (
+                                <article key={`current-unit-group-${entry.sourceUid}`} className="unit-card army-unit">
+                                  <div className="unit-card-header army-unit-header">
+                                    <div className="unit-card-summary army-unit-summary">
+                                      <div className="unit-card-thumb-wrap army-unit-image-wrap">
+                                        <img
+                                          className={`unit-card-thumb army-unit-thumb${entry.imageDataUrl ? '' : ' fallback'}`}
+                                          src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, selectedEra)}
+                                          alt={entry.base.nombre}
+                                        />
+                                      </div>
+                                      <div className="unit-card-heading">
+                                        <div className="unit-card-title-row">
+                                          <h4>{entry.base.nombre}</h4>
+                                          {count > 1 ? <span className="army-unit-count-badge">×{count}</span> : null}
+                                        </div>
+                                        <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}`}>
+                                          {entry.base.tipo}
+                                        </div>
+                                        <div className="unit-card-inline-value">{totalValue} {t('generator.valueUnit')}</div>
+                                      </div>
+                                    </div>
+                                    <div className="unit-card-header-actions army-unit-actions">
                                       <button
                                         type="button"
-                                        className="unit-image-clear"
-                                        onClick={(event) => {
-                                          event.stopPropagation()
-                                          updateArmyUnitSelection(entry.uid, { imageDataUrl: '' })
-                                        }}
-                                        aria-label={t('generator.removeImage')}
-                                        title={t('generator.removeImage')}
+                                        className="ghost small"
+                                        onClick={() => setOpenArmyUnitUid(entry.uid)}
                                       >
-                                        ×
+                                        {t('generator.viewCard')}
                                       </button>
-                                    ) : null}
-                                  </div>
-                                  <div className="unit-card-heading">
-                                    <div className="unit-card-title-row">
-                                      <h4>{exportUnitDisplayNames.get(entry.uid) || entry.base.nombre}</h4>
+                                      <button
+                                        type="button"
+                                        className="ghost small"
+                                        onClick={() => handleRemoveArmyUnit(selectionIds.at(-1))}
+                                      >
+                                        {t('generator.delete')}
+                                      </button>
                                     </div>
-                                    <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}${isHeroUnit(entry.base) && selectedEra ? ` unit-era-${selectedEra}` : ''}`}>
-                                      {entry.base.tipo}
-                                      {selectedEra ? (
-                                        <span className="unit-card-era-list">
-                                          <span className={`unit-era-badge unit-era-${selectedEra}`}>
-                                            {getEraLabel(selectedEra)}
-                                          </span>
-                                        </span>
-                                      ) : null}
-                                    </div>
-                                    <div className="unit-card-inline-value">{entry.total} {t('generator.valueUnit')}</div>
                                   </div>
-                                </div>
-                                <div className="unit-card-header-actions army-unit-actions">
-                                  <label
-                                    htmlFor={`army-unit-image-${entry.uid}`}
-                                    className="ghost small army-unit-image-button"
-                                  >
-                                    {entry.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
-                                  </label>
-                                  <button
-                                    type="button"
-                                    className="ghost small"
-                                    onClick={() => setOpenArmyUnitUid(entry.uid)}
-                                  >
-                                    {t('generator.viewCard')}
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="ghost small"
-                                    onClick={() => handleRemoveArmyUnit(entry.uid)}
-                                  >
-                                    {t('generator.delete')}
-                                  </button>
-                                </div>
-                              </div>
-                            </article>
-                          ))}
+                                </article>
+                              ))
+                              : section.entries.map((entry) => (
+                                <article key={`current-unit-${entry.uid}`} className="unit-card army-unit">
+                                  <div className="unit-card-header army-unit-header">
+                                    <div className="unit-card-summary army-unit-summary">
+                                      <div className="unit-card-thumb-wrap army-unit-image-wrap">
+                                        <img
+                                          className={`unit-card-thumb army-unit-thumb${entry.imageDataUrl ? '' : ' fallback'}`}
+                                          src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, selectedEra)}
+                                          alt={entry.base.nombre}
+                                        />
+                                        <input
+                                          id={`army-unit-image-${entry.uid}`}
+                                          type="file"
+                                          accept="image/*"
+                                          className="unit-image-input"
+                                          onChange={(event) => handleArmyUnitImageChange(entry, event)}
+                                        />
+                                        {entry.imageDataUrl ? (
+                                          <button
+                                            type="button"
+                                            className="unit-image-clear"
+                                            onClick={(event) => {
+                                              event.stopPropagation()
+                                              updateArmyUnitSelection(entry.uid, { imageDataUrl: '' })
+                                            }}
+                                            aria-label={t('generator.removeImage')}
+                                            title={t('generator.removeImage')}
+                                          >
+                                            ×
+                                          </button>
+                                        ) : null}
+                                      </div>
+                                      <div className="unit-card-heading">
+                                        <div className="unit-card-title-row">
+                                          <h4>{exportUnitDisplayNames.get(entry.uid) || entry.base.nombre}</h4>
+                                        </div>
+                                        <div className={`unit-card-type unit-type-${getUnitTypeToken(entry.base.tipo)}${isHeroUnit(entry.base) && selectedEra ? ` unit-era-${selectedEra}` : ''}`}>
+                                          {entry.base.tipo}
+                                          {selectedEra ? (
+                                            <span className="unit-card-era-list">
+                                              <span className={`unit-era-badge unit-era-${selectedEra}`}>
+                                                {getEraLabel(selectedEra)}
+                                              </span>
+                                            </span>
+                                          ) : null}
+                                        </div>
+                                        <div className="unit-card-inline-value">{entry.total} {t('generator.valueUnit')}</div>
+                                      </div>
+                                    </div>
+                                    <div className="unit-card-header-actions army-unit-actions">
+                                      <label
+                                        htmlFor={`army-unit-image-${entry.uid}`}
+                                        className="ghost small army-unit-image-button"
+                                      >
+                                        {entry.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
+                                      </label>
+                                      <button
+                                        type="button"
+                                        className="ghost small"
+                                        onClick={() => setOpenArmyUnitUid(entry.uid)}
+                                      >
+                                        {t('generator.viewCard')}
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="ghost small"
+                                        onClick={() => handleRemoveArmyUnit(entry.uid)}
+                                      >
+                                        {t('generator.delete')}
+                                      </button>
+                                    </div>
+                                  </div>
+                                </article>
+                              ))}
+                          </div>
                         </div>
-                      </div>
-                    ) : null)}
+                      )
+                    })}
                     {!selectedArmyUnits.length ? (
                       <p className="empty-state">{t('generator.noUnitsYet')}</p>
                     ) : null}
@@ -1443,6 +1524,8 @@ function Generador() {
                   const previewEntry = openArmyUnitUid ? selectedArmyUnits.find((entry) => entry.uid === openArmyUnitUid) : null
                   const previewUnit = previewEntry?.base || visibleManualUnits.find((u) => (u.generatorUid || u.id) === openManualUnitId)
                   if (!previewUnit) return null
+                  const previewSourceUid = previewEntry?.sourceUid || previewUnit?.generatorUid || previewUnit?.id
+                  const previewGroup = armyRegularUnitGroups?.find((g) => g.entry.sourceUid === previewSourceUid) ?? null
                   const previewDraft = getManualUnitDraft(previewUnit)
                   const previewLoadout = previewEntry || getFixedUnitLoadout(previewUnit, selectedEra)
                   const previewTotal = previewEntry?.total || computeUnitTotal(
@@ -1491,9 +1574,13 @@ function Generador() {
                               armas_disparo: previewLoadout.shooting,
                               armas_melee: previewLoadout.meleeList || [],
                               valor_base: previewValue,
-                              escuadra_display: previewEntry
-                                ? getSquadFichaValue(previewUnit, gameMode, previewEntry.squadSize ?? previewDraft.squadSize)
-                                : undefined,
+                              escuadra_display: gameMode === 'escaramuza'
+                                ? (previewEntry
+                                  ? `×${previewGroup?.count ?? 1}`
+                                  : getSquadFichaValue(previewUnit, gameMode, previewDraft.squadSize))
+                                : previewEntry
+                                  ? getSquadFichaValue(previewUnit, gameMode, previewEntry.squadSize ?? previewDraft.squadSize)
+                                  : undefined,
                             }}
                             factionId={selectedFaction?.id}
                             imageDataUrl={previewEntry?.imageDataUrl || ''}
@@ -1537,7 +1624,9 @@ function Generador() {
                               armas_disparo: entry.shooting,
                               armas_melee: entry.meleeList || [],
                               valor_base: getUnitFichaValue(entry.base, gameMode, entry.total),
-                              escuadra_display: getSquadFichaValue(entry.base, gameMode, entry.squadSize),
+                              escuadra_display: gameMode === 'escaramuza'
+                                ? `×${entry._count ?? 1}`
+                                : getSquadFichaValue(entry.base, gameMode, entry.squadSize),
                             }}
                             factionId={selectedFaction?.id}
                             imageDataUrl={entry.imageDataUrl}

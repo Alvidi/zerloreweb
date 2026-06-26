@@ -88,7 +88,7 @@
       "nombre_unidad": "Cazadores de Manada",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 3,
         "salvacion": "6+",
         "velocidad": "+6\"",
@@ -105,7 +105,7 @@
             {
               "nombre": "Aguijón tóxico",
               "ataques": "1D",
-              "distancia": "8\"",
+              "distancia": "6\"",
               "impactos": "5+",
               "danio": "1",
               "danio_critico": "1",
@@ -147,7 +147,7 @@
             {
               "nombre": "Jabalina de hueso",
               "ataques": "1D",
-              "distancia": "8\"",
+              "distancia": "6\"",
               "impactos": "5+",
               "danio": "1",
               "danio_critico": "1",
@@ -190,7 +190,7 @@
       "nombre_unidad": "Pestilentes",
       "clase": "Línea",
       "perfil": {
-        "movimiento": "4\"",
+        "movimiento": "3\"",
         "vidas": 5,
         "salvacion": "5+",
         "velocidad": "+2\"",
@@ -276,7 +276,7 @@
       }
     },
     {
-      "nombre_unidad": "Arrasadores del Caos",
+      "nombre_unidad": "Arrasadores",
       "clase": "Línea",
       "perfil": {
         "movimiento": "5\"",
@@ -443,10 +443,10 @@
       }
     },
     {
-      "nombre_unidad": "Berserkers del Caos",
+      "nombre_unidad": "Berserkers",
       "clase": "Élite",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 6,
         "salvacion": "5+",
         "velocidad": "+6\"",
@@ -717,8 +717,8 @@
             },
             {
               "nombre": "Lanzador corrosivo (solo Línea)",
-              "ataques": "1D6",
-              "distancia": "8\"",
+              "ataques": "2D",
+              "distancia": "6\"",
               "impactos": null,
               "danio": "1",
               "danio_critico": "2",
@@ -1076,7 +1076,7 @@
       "nombre_unidad": "Bestia Devoradora",
       "clase": "Monstruo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 11,
         "salvacion": "4+",
         "velocidad": "+6\"",
@@ -1093,7 +1093,7 @@
             {
               "nombre": "Escupitajo corrosivo",
               "ataques": "1D3",
-              "distancia": "8\"",
+              "distancia": "6\"",
               "impactos": null,
               "danio": "1",
               "danio_critico": "2",
@@ -1135,7 +1135,7 @@
             {
               "nombre": "Aliento de fuego",
               "ataques": "1D3",
-              "distancia": "8\"",
+              "distancia": "6\"",
               "impactos": null,
               "danio": "1",
               "danio_critico": "2",
@@ -1258,7 +1258,7 @@
       "nombre_unidad": "Engendro Mecánico",
       "clase": "Vehículo",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 10,
         "salvacion": "4+",
         "velocidad": "+4\"",
@@ -1371,7 +1371,7 @@
     {
       "nombre_unidad": "Caudillo del Caos",
       "clase": "Héroe",
-      "habilidad_faccion": "Durante la Fase de Iniciativa, el jugador puede sacrificar una unidad de Línea (se retira del campo, sin dar puntos al rival). Esa unidad transfiere sus Vidas restantes a otra unidad aliada, hasta su tope.",
+      "habilidad_faccion": "Durante la Fase de Iniciativa, el jugador puede sacrificar una unidad de Línea (se retira del campo, sin dar puntos al rival). Esa unidad transfiere sus Vidas restantes a otra unidad aliada, hasta su tope. No funciona si está trabada.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -1438,7 +1438,7 @@
       "clase": "Héroe",
       "habilidad_faccion": "Al final de cada turno, una unidad de Línea destruida durante ese turno vuelve a un puesto de mando con todas sus Vidas. Si no hay ningún puesto de mando, vuelve a reserva.",
       "perfil": {
-        "movimiento": "6\"",
+        "movimiento": "7\"",
         "vidas": 11,
         "salvacion": "3+",
         "velocidad": "+6\"",
@@ -1532,7 +1532,7 @@
             {
               "nombre": "Bastón de plasma",
               "ataques": "1D",
-              "distancia": "8\"",
+              "distancia": "6\"",
               "impactos": "4+",
               "danio": "2",
               "danio_critico": "4",
