@@ -843,7 +843,7 @@ function Reglamento() {
       if (!card) return
       const title = card.querySelector('.rules-mission-card-title')?.textContent?.trim() || ''
       setActiveMissionFicha({
-        title,
+        title: title.replace(/^\d+\s*-\s*/, ''),
         flavor: card.querySelector('.rules-mission-card-flavor')?.textContent?.trim().replace(/^["""]/g, '').replace(/["""']$/g, '').trim() || '',
         summary: stripLabel(card.querySelector('.rules-mission-card-summary')),
         copy: stripLabel(card.querySelector('.rules-mission-card-copy')),
@@ -1045,10 +1045,10 @@ function Reglamento() {
           ctx.restore()
         }
 
-        const drawLabel = (ctx, text, g, offsetY = 9) => {
+        const drawLabel = (ctx, text, g, offsetY = 16) => {
           ctx.save()
           ctx.fillStyle = '#8b6914'
-          ctx.font = '700 13px Rajdhani'
+          ctx.font = '700 24px Rajdhani'
           ctx.textAlign = 'center'
           ctx.textBaseline = 'middle'
           ctx.fillText(text, g.x + g.w / 2, g.y + offsetY)
@@ -1068,7 +1068,7 @@ function Reglamento() {
         const missions = cards.map((card) => {
           const title = card.querySelector('.rules-mission-card-title')?.textContent?.trim() || ''
           return {
-            title,
+            title: title.replace(/^\d+\s*-\s*/, ''),
             flavor: card.querySelector('.rules-mission-card-flavor')?.textContent?.trim().replace(/^["""]/g, '').replace(/["""']$/g, '').trim() || '',
             summary: stripLabel(card.querySelector('.rules-mission-card-summary')),
             copy: stripLabel(card.querySelector('.rules-mission-card-copy')),
@@ -1079,13 +1079,13 @@ function Reglamento() {
 
         // ── leer posiciones guardadas en localStorage (mismo storage que layout mode) ──
         const GUIDE_DEFAULTS = [
-          { label: 'MISION',      x: 31,  y: 201, w: 187, h: 26  },
-          { label: 'NUMERO',      x: 643, y: 191, w: 76,  h: 44  },
-          { label: 'TITULO',      x: 50,  y: 130, w: 600, h: 70  },
-          { label: 'LORE',        x: 50,  y: 215, w: 600, h: 55  },
-          { label: 'OBJETIVO',    x: 50,  y: 285, w: 600, h: 130 },
-          { label: 'DESCRIPCION', x: 50,  y: 430, w: 600, h: 450 },
-          { label: 'PUNTOS',      x: 50,  y: 900, w: 600, h: 70  },
+          { label: 'MISION',      x: 31,  y: 186, w: 190, h: 54  },
+          { label: 'NUMERO',      x: 634, y: 186, w: 88,  h: 57  },
+          { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 110 },
+          { label: 'LORE',        x: 48,  y: 282, w: 645, h: 55  },
+          { label: 'OBJETIVO',    x: 50,  y: 345, w: 641, h: 130 },
+          { label: 'DESCRIPCION', x: 50,  y: 488, w: 645, h: 397 },
+          { label: 'PUNTOS',      x: 50,  y: 900, w: 648, h: 70  },
         ]
         const guideMap = (() => {
           try {
@@ -1146,7 +1146,7 @@ function Reglamento() {
             if (m.number) drawFit(ctx, m.number, guideMap.NUMERO, { family: 'Cinzel', color: '#ffffff', maxSz: 36, minSz: 18, weight: '700', shadow: true })
 
             // TITULO
-            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: 'Cinzel', color: '#ffffff', maxSz: 42, minSz: 18, weight: '700', shadow: true })
+            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: 'Cinzel', color: '#ffffff', maxSz: 72, minSz: 18, weight: '700', shadow: true })
 
             // LORE
             if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: '"Space Grotesk"', color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic' })
@@ -1155,21 +1155,21 @@ function Reglamento() {
             if (guideMap.OBJETIVO) {
               const g = guideMap.OBJETIVO
               drawLabel(ctx, 'OBJETIVO', g)
-              if (m.summary) drawFit(ctx, m.summary, { ...g, y: g.y + 20, h: g.h - 20 }, { maxSz: 22, minSz: 10 })
+              if (m.summary) drawFit(ctx, m.summary, { ...g, y: g.y + 36, h: g.h - 36 }, { maxSz: 28, minSz: 10 })
             }
 
             // DESCRIPCION
             if (guideMap.DESCRIPCION) {
               const g = guideMap.DESCRIPCION
               drawLabel(ctx, 'DESCRIPCIÓN', g)
-              if (m.copy) drawFit(ctx, m.copy, { ...g, y: g.y + 20, h: g.h - 20 }, { maxSz: 22, minSz: 10 })
+              if (m.copy) drawFit(ctx, m.copy, { ...g, y: g.y + 36, h: g.h - 36 }, { maxSz: 28, minSz: 10 })
             }
 
             // PUNTOS
             if (guideMap.PUNTOS) {
               const g = guideMap.PUNTOS
               drawLabel(ctx, 'PUNTOS', g)
-              if (m.meta) drawFit(ctx, m.meta, { ...g, y: g.y + 20, h: g.h - 20 }, { color: '#7a5810', maxSz: 22, minSz: 10, weight: '600' })
+              if (m.meta) drawFit(ctx, m.meta, { ...g, y: g.y + 36, h: g.h - 36 }, { color: '#7a5810', maxSz: 28, minSz: 10, weight: '600' })
             }
 
             doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, topMargin + j * (cardH + gap), cardW, cardH)
@@ -1216,7 +1216,7 @@ function Reglamento() {
             width: 1040px;
             background: #ffffff;
             color: #111111;
-            padding: 34px 44px 40px;
+            padding: 20px 38px 24px;
             box-sizing: border-box;
             font-family: Georgia, "Times New Roman", serif;
           }
@@ -1264,21 +1264,21 @@ function Reglamento() {
             hyphens: none;
           }
           .rules-pdf-sheet .rules-html h1 {
-            margin: 38px 0 18px;
-            padding-bottom: 12px;
+            margin: 22px 0 12px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #cfcfcf;
             font-family: "Cinzel", Georgia, serif;
             font-size: 31px;
             line-height: 1.18;
           }
           .rules-pdf-sheet .rules-html h2 {
-            margin: 30px 0 16px;
+            margin: 16px 0 10px;
             font-family: "Cinzel", Georgia, serif;
             font-size: 23px;
             line-height: 1.22;
           }
           .rules-pdf-sheet .rules-html h3 {
-            margin: 24px 0 14px;
+            margin: 14px 0 8px;
             font-size: 18px;
             line-height: 1.24;
           }
@@ -1315,7 +1315,7 @@ function Reglamento() {
             width: 100%;
             max-width: 100%;
             height: auto;
-            max-height: 520px;
+            max-height: 360px;
             object-fit: contain;
             border: 1px solid #d7d7d7;
             background: #ffffff;
@@ -1331,9 +1331,9 @@ function Reglamento() {
             color: #111111;
           }
           .rules-pdf-sheet .rules-html .rules-profile-image-row {
-            width: 72%;
-            max-width: 72%;
-            margin: 18px 0 22px;
+            width: 56%;
+            max-width: 56%;
+            margin: 10px 0 14px;
             transform: none;
             display: flex;
             justify-content: center;
@@ -1344,8 +1344,19 @@ function Reglamento() {
             width: 100%;
             max-width: 100%;
             height: auto;
-            max-height: 960px;
+            max-height: 480px;
             object-fit: contain;
+          }
+          .rules-pdf-sheet .rules-html .rules-ficha-card-example {
+            width: 86% !important;
+            max-width: 86% !important;
+            margin: 14px 0 18px;
+            overflow: hidden;
+          }
+          .rules-pdf-sheet .rules-html h1 img,
+          .rules-pdf-sheet .rules-html h2 img,
+          .rules-pdf-sheet .rules-html h3 img {
+            display: none;
           }
           .rules-pdf-sheet .rules-html .rules-hero-banner {
             position: relative;
@@ -1792,6 +1803,21 @@ function Reglamento() {
       captureRoot.querySelectorAll('.rules-specialty-details').forEach((details) => {
         details.classList.add('is-open')
       })
+      captureRoot.querySelectorAll('.rules-ficha-card-example').forEach((example) => {
+        const fichaWrapper = example.querySelector('.ficha-wrapper')
+        const fichaCard = example.querySelector('.ficha-card')
+        if (!fichaWrapper || !fichaCard) return
+        const containerWidth = example.offsetWidth || 870
+        const scale = containerWidth / 1537
+        fichaCard.style.transform = `scale(${scale})`
+        fichaCard.style.transformOrigin = 'top left'
+        fichaCard.style.width = '1537px'
+        fichaCard.style.height = '1023px'
+        fichaWrapper.style.width = `${containerWidth}px`
+        fichaWrapper.style.height = `${Math.round(1023 * scale)}px`
+        fichaWrapper.style.overflow = 'hidden'
+        example.style.overflow = 'hidden'
+      })
 
       if (document.fonts?.ready) {
         await document.fonts.ready
@@ -1894,7 +1920,7 @@ function Reglamento() {
         if (rulesHtmlRoot && missionGrid && missionCards.length) {
           const introNodes = Array.from(rulesHtmlRoot.childNodes).filter((node) => node !== missionGrid)
           const pxPerMm = captureTarget.scrollWidth / contentWidthMm
-          const maxSheetHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm) - 12)
+          const maxSheetHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm) - 4)
           const builtSheets = []
 
           const buildMissionSheet = ({ includeIntro, cards }) => {
@@ -1979,7 +2005,7 @@ function Reglamento() {
 
         if (rulesHtmlRoot && contentNodes.length) {
           const pxPerMm = captureTarget.scrollWidth / contentWidthMm
-          const maxSheetHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm) - 12)
+          const maxSheetHeightPx = Math.max(1, Math.floor(contentHeightMm * pxPerMm) - 4)
           const builtSheets = []
 
           const buildRulesSheet = (nodes) => {
