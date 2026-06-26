@@ -842,12 +842,7 @@ function Generador() {
       })
 
       const pdfFileName = createArmyPdfFileName(selectedFaction?.nombre || 'ZeroLore')
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
-      if (isIOS) {
-        window.location.href = doc.output('bloburl')
-      } else {
-        doc.save(pdfFileName)
-      }
+      doc.save(pdfFileName)
       if (!cancelled) {
         setIsArmyPrintPreviewOpen(false)
       }
