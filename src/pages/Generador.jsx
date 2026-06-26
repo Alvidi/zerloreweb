@@ -596,6 +596,13 @@ function Generador() {
   const selectedRegularArmyUnits = useMemo(() => selectedArmyUnits.filter((entry) => !isHeroUnit(entry.base)), [selectedArmyUnits])
   const selectedHeroCount = selectedHeroEntries.length
   const selectedHeroSourceUid = selectedHeroEntries[0]?.sourceUid || ''
+  const regularUnitCountMap = useMemo(() => {
+    const map = new Map()
+    for (const entry of selectedRegularArmyUnits) {
+      map.set(entry.sourceUid, (map.get(entry.sourceUid) || 0) + 1)
+    }
+    return map
+  }, [selectedRegularArmyUnits])
   const visibleUnlockedRegularUnits = useMemo(
     () => (selectedHeroCount > 0 ? visibleRegularUnits : []),
     [selectedHeroCount, visibleRegularUnits],
@@ -1162,11 +1169,12 @@ function Generador() {
                           const unitIsHero = isHeroUnit(unit)
                           const unitKey = unit.generatorUid || unit.id
                           const isSelectedHero = unitIsHero && selectedHeroSourceUid === unitKey
+                          const unitCount = !unitIsHero ? (regularUnitCountMap.get(unitKey) || 0) : 0
                           const unlockDisabledReason = getUnitUnlockDisabledReason(unit)
                           const unitDisabled = !unitIsHero && Boolean(unlockDisabledReason)
                           const disabledTitle = unlockDisabledReason
                           return (
-                            <article className={`unit-card${unitDisabled ? ' is-disabled' : ''}${isSelectedHero ? ' is-selected' : ''}`} key={unitKey}>
+                            <article className={`unit-card${unitDisabled ? ' is-disabled' : ''}${isSelectedHero ? ' is-selected' : ''}${unitCount > 0 ? ' is-in-army' : ''}`} key={unitKey}>
                               <div className="unit-card-header">
                                 <div className="unit-card-summary">
                                   <span className="unit-card-thumb-wrap" aria-hidden="true">
@@ -1183,6 +1191,7 @@ function Generador() {
                                   <div className="unit-card-heading">
                                     <div className="unit-card-title-row">
                                       <h4>{unit.nombre}</h4>
+                                      {unitCount > 0 ? <span className="army-unit-count-badge">×{unitCount}</span> : null}
                                     </div>
                                     <div className={`unit-card-type unit-type-${getUnitTypeToken(unit.tipo)}${unitIsHero && selectedEra ? ` unit-era-${selectedEra}` : ''}`}>
                                       {unit.tipo}
@@ -1262,6 +1271,27 @@ function Generador() {
                                           src={entry.imageDataUrl || getUnitTypeBadgeSrc(entry.base.tipo, selectedEra)}
                                           alt={entry.base.nombre}
                                         />
+                                        <input
+                                          id={`army-unit-image-${entry.uid}`}
+                                          type="file"
+                                          accept="image/*"
+                                          className="unit-image-input"
+                                          onChange={(event) => handleArmyUnitImageChange(entry, event)}
+                                        />
+                                        {entry.imageDataUrl ? (
+                                          <button
+                                            type="button"
+                                            className="unit-image-clear"
+                                            onClick={(event) => {
+                                              event.stopPropagation()
+                                              updateArmyUnitSelection(entry.uid, { imageDataUrl: '' })
+                                            }}
+                                            aria-label={t('generator.removeImage')}
+                                            title={t('generator.removeImage')}
+                                          >
+                                            ×
+                                          </button>
+                                        ) : null}
                                       </div>
                                       <div className="unit-card-heading">
                                         <div className="unit-card-title-row">
@@ -1275,6 +1305,12 @@ function Generador() {
                                       </div>
                                     </div>
                                     <div className="unit-card-header-actions army-unit-actions">
+                                      <label
+                                        htmlFor={`army-unit-image-${entry.uid}`}
+                                        className="ghost small army-unit-image-button"
+                                      >
+                                        {entry.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
+                                      </label>
                                       <button
                                         type="button"
                                         className="ghost small"
