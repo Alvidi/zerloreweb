@@ -16,8 +16,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Resilient', description: 'The first time each turn this unit suffers damage, reduce that damage by 1D3.' },
   },
   {
-    es: { name: 'Soporte', description: 'Esta unidad puede gastar 2 acciones para elegir una unidad aliada a 6" o menos. Esa unidad recupera 1D3 Vidas perdidas.' },
-    en: { name: 'Support', description: 'This unit may spend 2 actions to choose an allied unit within 6". That unit recovers 1D3 lost Wounds.' },
+    es: { name: 'Soporte', description: 'En su activación, en lugar de actuar, puede curar a una unidad aliada a 6" o menos: esa unidad recupera 1D3 Vidas perdidas.' },
+    en: { name: 'Support', description: 'During its activation, instead of acting, it may heal an allied unit within 6": that unit recovers 1D3 lost Wounds.' },
   },
   {
     es: { name: 'Evasivo', description: 'La primera vez cada turno que esta unidad sea objetivo de un ataque de Disparo, puede moverse hasta 2" antes de resolver el ataque.' },
@@ -40,8 +40,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Berserker', description: 'Enemy units attacking this unit in melee miss on natural results of 1, 2, or 3.' },
   },
   {
-    es: { name: 'Certero', description: 'Si esta unidad no se mueve, gana 1 de Precisión en Disparo.' },
-    en: { name: 'Accurate', description: 'If this unit does not move, it gains 1 Precision in Shooting.' },
+    es: { name: 'Certero', description: 'Cuando hace Disparo pesado, además mejora en 1 su Precisión (p. ej. de 4+ a 3+).' },
+    en: { name: 'Accurate', description: 'When it makes a Heavy Shot, it also improves its Precision by 1 (e.g. from 4+ to 3+).' },
   },
   {
     es: { name: 'Bloqueo de refuerzos', description: 'Mientras esta unidad esté a 3" o menos de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos.' },
@@ -64,16 +64,16 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Devourer', description: 'When this unit destroys an enemy unit in melee, it recovers 1D3 lost Wounds.' },
   },
   {
-    es: { name: 'Porrazo', description: 'Durante su activación, esta unidad puede gastar 1 acción para empujar 1" a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. Porrazo ignora la habilidad Anclado.' },
-    en: { name: 'Shove', description: 'During its activation, this unit may spend 1 action to push an enemy unit locked with it 1", ending the melee combat. Shove ignores Anchored.' },
+    es: { name: 'Porrazo', description: 'Al atacar en cuerpo a cuerpo, esta unidad puede empujar 1" a una unidad enemiga trabada con ella, terminando el combate. No consume acción aparte. Porrazo ignora Anclado.' },
+    en: { name: 'Shove', description: 'When attacking in melee, this unit may push 1" an enemy unit locked with it, ending the combat. This does not use an action. Shove ignores Anchored.' },
   },
   {
     es: { name: 'Terror', description: 'Las unidades enemigas a 3" o menos de esta unidad no pueden usar sus especialidades.' },
     en: { name: 'Terror', description: 'Enemy units within 3" of this unit cannot use their specialties.' },
   },
   {
-    es: { name: 'Tirador', description: 'Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas.' },
-    en: { name: 'Shooter', description: 'This unit may use two ranged attack actions with different weapons.' },
+    es: { name: 'Tirador', description: 'Cuando hace Disparo pesado, esta unidad dispara con sus dos armas (al mismo objetivo o a dos distintos).' },
+    en: { name: 'Shooter', description: 'When it makes a Heavy Shot, this unit fires with both weapons (at the same target or two different ones).' },
   },
   {
     es: { name: 'Cobertura móvil', description: 'Las unidades aliadas a 3" o menos de esta unidad cuentan como en cobertura contra ataques de Disparo.' },
@@ -84,8 +84,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Flying', description: 'This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures.' },
   },
   {
-    es: { name: 'Carga brutal', description: 'Cuando esta unidad realiza una Acometida contra una unidad, gana +1 dado de ataque CaC durante ese combate.' },
-    en: { name: 'Brutal Charge', description: 'When this unit makes a Rush against a unit, it gains +1 melee attack die during that combat.' },
+    es: { name: 'Carga brutal', description: 'Cuando esta unidad realiza una carga contra una unidad, gana +1 dado de ataque CaC durante ese combate.' },
+    en: { name: 'Brutal Charge', description: 'When this unit charges a unit, it gains +1 melee attack die during that combat.' },
   },
   {
     es: { name: 'Descontrol', description: 'Si esta unidad llega al 50% de su vida, ataca a la unidad aliada o enemiga más cercana cuerpo a cuerpo, sumando 1D más de ataque. Si ya está trabada, continúa. Si no tiene ninguna unidad cercana, se mueve hacia ella.' },
@@ -96,8 +96,16 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Boom!', description: 'When this unit dies, it explodes and affects units within 6" of it, inflicting 1D6.' },
   },
   {
-    es: { name: 'Aplastamiento', description: 'Durante su acometida, si traba a una unidad de Línea o Élite, dicha unidad recibe automáticamente daño de 1D3.' },
-    en: { name: 'Crushing', description: 'During its Rush, if it locks a Line or Elite unit, that unit automatically suffers 1D3 damage.' },
+    es: { name: 'Aplastamiento', description: 'Durante su carga, si traba a una unidad de Línea o Élite, dicha unidad recibe automáticamente 1D3 de daño.' },
+    en: { name: 'Crushing', description: 'During its charge, if it locks a Line or Elite unit, that unit automatically suffers 1D3 damage.' },
+  },
+  {
+    es: { name: 'Contragolpe', description: 'La primera vez cada turno que esta unidad sea atacada en cuerpo a cuerpo —aunque no sea su activación—, responde de inmediato con un ataque cuerpo a cuerpo gratuito contra el atacante. No consume acción.' },
+    en: { name: 'Counter', description: 'The first time each turn this unit is attacked in melee — even if it is not its activation — it immediately responds with a free melee attack against the attacker. This does not use an action.' },
+  },
+  {
+    es: { name: 'Preparado', description: 'La primera vez cada turno que esta unidad sea atacada a distancia, tras resolver el ataque puede disparar de inmediato con una de sus armas a distancia contra el atacante, si está en alcance y línea de visión. No consume acción.' },
+    en: { name: 'Ready', description: 'The first time each turn this unit is targeted by a ranged attack, after resolving the attack it may immediately fire one of its ranged weapons at the attacker, if in range and line of sight. This does not use an action.' },
   },
 ]
 

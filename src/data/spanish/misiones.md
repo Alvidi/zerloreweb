@@ -8,19 +8,22 @@ Antes de comenzar, los jugadores acuerdan:
 - El **número de turnos** — recomendado: **5**.
 - El **valor total del ejército** de cada jugador.
 - El **modo de juego** — Escaramuza o Gran Batalla.
-- La **misión** que se va a jugar. Cada misión define sus propios objetivos.
+- El número de **misiones** que se va a jugar. Cada misión define sus propios objetivos.
 
-La partida acaba **inmediatamente** en cuanto un jugador conquista el Cuartel General del rival.
+La partida se puede ganar de dos maneras: conquistando el CG enemigo —victoria inmediata— o por puntos. ¿Cómo se consiguen puntos?
 
-Las misiones se escogen al azar, bien escogiendo de una baraja o, si no está disponible, tirando dados — el número que salga indica la misión. Cada jugador tiene **2 misiones** activas en todo momento. Una vez elegidas, no se podrán descartar hasta la siguiente **Fase de Iniciativa**. Si una misión se completa o se descarta, el jugador deberá volver a tirar para obtener otra.
+1. **Conquistando puestos de mando** — cada puesto de mando proporciona **5 pts por turno**, incluido el CG.
+2. **Completando misiones** — cada misión completada proporciona puntos. Los jugadores acuerdan cuántas misiones se llevan a la batalla.
+
+Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**. En el primer turno, en la fase de iniciativa, una vez escogidas las misiones, los jugadores tienen la posibilidad de cambiarlas por otras una vez. Después, solo se podrán cambiar en la siguiente **Fase de Iniciativa**. Las cartas descartadas vuelven a la baraja. Si una misión se completa, se indica a los jugadores, se saca de la baraja y se queda el jugador que la completó.
 
 <div class="rules-mission-grid">
 
 <div class="rules-mission-card" data-number="1">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">1 - Furia Titánica</h3><button class="rules-mission-view-btn" type="button" data-number="1" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Que tiemble la tierra a su paso."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Con un Monstruo o Vehículo tuyo, destruye una unidad enemiga este turno</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Una de tus piezas Monstruo o Vehículo debe destruir una unidad enemiga este turno (a tiros o al asalto). En Escaramuza solo aplica a Monstruos (no hay vehículos); en Gran Batalla, a ambos. Premia meter a la bestia en faena.</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Con un Monstruo o Vehículo tuyo (o tu Héroe si no tienes ninguno), destruye una unidad enemiga este turno</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Una de tus piezas Monstruo o Vehículo debe destruir una unidad enemiga este turno (a tiros o al asalto). En Escaramuza solo aplica a Monstruos (no hay vehículos); en Gran Batalla, a ambos. Premia meter a la bestia en faena. Si no tienes ningún Monstruo ni Vehículo en tu lista, lo cumple tu Héroe.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
 </div>
 
@@ -67,8 +70,8 @@ Las misiones se escogen al azar, bien escogiendo de una baraja o, si no está di
 <div class="rules-mission-card" data-number="7">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">7 - Rey contra Rey</h3><button class="rules-mission-view-btn" type="button" data-number="7" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Que lo decidan los que mandan."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Tu héroe realiza una acometida contra otro héroe</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Tu Héroe debe lanzar una acometida (carga) contra el Héroe enemigo. En Escaramuza, héroe contra héroe directamente; en Gran Batalla, la escuadra de tu Héroe carga a la escuadra en la que va el Héroe rival (o al Héroe suelto si ya perdió la suya). Basta con declarar y resolver la carga: no hace falta matarlo.</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Tu héroe Carga contra otro héroe</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Tu Héroe debe Cargar contra el Héroe enemigo. En Escaramuza, héroe contra héroe directamente; en Gran Batalla, la escuadra de tu Héroe carga a la escuadra en la que va el Héroe rival (o al Héroe suelto si ya perdió la suya). Basta con declarar y resolver la carga: no hace falta matarlo.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
 </div>
 
@@ -99,9 +102,9 @@ Las misiones se escogen al azar, bien escogiendo de una baraja o, si no está di
 <div class="rules-mission-card" data-number="11">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">11 - Expansión</h3><button class="rules-mission-view-btn" type="button" data-number="11" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"No alcanzo ver mi imperio."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Gana 5 pts por cada puesto de mando que controles</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Al final del turno cuentas todos los puestos de mando que controles —incluido tu Cuartel General— y ganas 5 pts por cada uno. Es un golpe único: tras puntuar, la misión se descarta y robas otra. Recompensa expandirte y dominar el mapa en el momento justo.</p>
-<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 5 pts por puesto y CG controlado</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Conquista al menos 2 puestos de mando neutrales</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Al final del turno, controla 2 o más puestos de mando que al inicio de la partida fueran neutrales (ni tuyos ni del rival).</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
 </div>
 
 <div class="rules-mission-card" data-number="12">
@@ -156,15 +159,15 @@ Las misiones se escogen al azar, bien escogiendo de una baraja o, si no está di
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">18 - Carga Sagrada</h3><button class="rules-mission-view-btn" type="button" data-number="18" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Manos ocupadas, gloria aplazada."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Tu Héroe porta el token y gana 5 pts por cada turno que lo termine a 9" o menos de un puesto de mando (no CG)</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Mientras lo lleve, el Héroe no puede atacar (ni a distancia ni en CaC) ni usar Preparado; sí puede moverse y conserva su habilidad de facción. Al final del turno, si lo porta a 9" o menos de un puesto de mando (no CG), ganas 5 pts; si está más lejos o solo cerca de un CG, ese turno no puntúa. Puedes soltar el token voluntariamente (cae donde estés y cualquiera puede recogerlo): al hacerlo, esta misión se descarta automáticamente. Lo mismo ocurre si el Héroe muere.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Mientras lo lleve, el Héroe no puede atacar (ni a distancia ni en CaC); sí puede moverse y conserva su habilidad de facción. Al final del turno, si lo porta a 9" o menos de un puesto de mando (no CG), ganas 5 pts; si está más lejos o solo cerca de un CG, ese turno no puntúa. Puedes soltar el token voluntariamente (cae donde estés y cualquiera puede recogerlo): al hacerlo, esta misión se descarta automáticamente. Lo mismo ocurre si el Héroe muere.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 5 pts por turno portando a 9" o menos de un puesto (no CG)</p>
 </div>
 
 <div class="rules-mission-card" data-number="19">
-<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">19 - Emboscada</h3><button class="rules-mission-view-btn" type="button" data-number="19" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
-<p class="rules-mission-card-flavor"><em>"El que golpea primero no siempre golpea mejor."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad enemiga con un ataque de Preparado</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> La baja debe venir del contraataque gratuito de Preparado (al ser disparado o cargado mientras la unidad estaba Preparada). Premia tender la trampa y castigar al que se lanza sobre ti.</p>
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">19 - Atrincherado</h3><button class="rules-mission-view-btn" type="button" data-number="19" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Clava los pies, apunta y no falles."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad enemiga con un ataque de Disparo pesado</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> La baja debe venir de un ataque de Disparo pesado (la unidad no se movió ese turno y disparó con +1 al daño). Premia plantarse, aguantar la posición y castigar desde una línea de fuego fija.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
 </div>
 
@@ -174,6 +177,54 @@ Las misiones se escogen al azar, bien escogiendo de una baraja o, si no está di
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Sé el primero en destruir una unidad enemiga en el turno</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Consíguela si eres el primer jugador en destruir una unidad enemiga durante el turno. Solo uno puede llevársela cada turno, así que premia la iniciativa y el primer golpe.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 15 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="21">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">21 - Carga épica</h3><button class="rules-mission-view-btn" type="button" data-number="21" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"El impacto que rompe la línea."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad enemiga con el ataque gratuito de una carga</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> La unidad debe caer con el ataque cuerpo a cuerpo gratuito que da la carga (el golpe al entrar en contacto de peana). No cuenta rematarla después en otra activación. Premia el ímpetu: cargar y reventar al rival de un solo impulso.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="22">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">22 - Kamikaze War</h3><button class="rules-mission-view-btn" type="button" data-number="22" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Lo que estalla no distingue bando."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Recoge el token y detónalo alcanzando a 2 o más unidades aliadas o enemigas</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Una unidad recoge el token (peana con peana) y, gastando una acción, lo detona: estalla en un radio de 6" e inflige 1D6 de daño a cada unidad dentro del radio (aliada o enemiga), incluyendo la portadora. Solo puntúa si la explosión alcanza a 2 o más unidades (sin contar la portadora): las 2 primeras dan 20 pts y cada unidad extra alcanzada suma +5.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts (mínimo 2 unidades) + 5 pts por cada unidad extra</p>
+</div>
+
+<div class="rules-mission-card" data-number="23">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">23 - Duelo a distancia</h3><button class="rules-mission-view-btn" type="button" data-number="23" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"La muerte llega antes que el sonido."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad enemiga a 18" o más</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> La baja debe venir de un ataque a distancia disparado desde 18" o más (se mide del atacante al objetivo). Premia las armas de gran alcance y la puntería paciente desde la retaguardia.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="24">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">24 - Marea imparable</h3><button class="rules-mission-view-btn" type="button" data-number="24" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Nadie aguanta dos frentes."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Carga a una unidad enemiga que esté ya trabada en combate con una unidad aliada</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Declara Cargar contra una unidad enemiga que ya esté trabada con una unidad aliada tuya, sumándote a ese combate. Premia rodear y abrumar: caer sobre el flanco del que ya está ocupado defendiéndose.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="25">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">25 - Sin bajas</h3><button class="rules-mission-view-btn" type="button" data-number="25" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Ni uno menos."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Termina un turno (del 2 en adelante) sin perder ninguna unidad</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> A partir del turno 2, termina un turno completo sin perder ni una sola unidad. Premia la disciplina defensiva y la buena gestión de bajas; más difícil cuanto más avanza la matanza.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 10 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="26">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">26 - Control absoluto</h3><button class="rules-mission-view-btn" type="button" data-number="26" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Todo el mapa, bajo una sola bandera."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Al final de un turno, controla TODOS los puestos de mando de la mesa a la vez</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Al final de un turno, controla todos los puestos de mando de la mesa a la vez —incluido tu Cuartel General y el del rival—. Es la dominación total: hay que barrer al enemigo de cada objetivo. Casi imposible, pero si la clavas defines la partida.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 40 pts</p>
 </div>
 
 </div>

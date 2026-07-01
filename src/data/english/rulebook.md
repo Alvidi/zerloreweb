@@ -90,6 +90,8 @@ ZeroLore allows games set in different thematic eras. Before starting the game, 
 
 Each unit indicates its era on its profile.
 
+**Weapon set selection.** Each unit comes with X **weapon sets** — with the **same base stats** but different weapons. In **Past** or **Future** games, all units use the set for that era (the easy, fast option). In **No restriction**, each player chooses **per unit** which set to use when building their list — you can mix Past and Future in the same army — and that set is kept for the whole game. The choice is **per unit entry in the list**: you can include the same unit multiple times with different sets. Within a squad, all miniatures share the same set.
+
 ---
 
 # Measuring Distances
@@ -157,7 +159,7 @@ After the Initiative Phase comes the **Activation Phase**.
 Activating a unit means:
 
 - Declaring it as the active unit.
-- Taking its **2 available actions**.
+- Taking **one action**.
 - Fully resolving its effects.
 
 Once a unit has been activated, **it cannot be activated again** during that turn. To keep track of activations, each unit is marked with the **activation token** (orange side = activated, grey side = not yet activated). At the start of each turn, all tokens are flipped back to the grey side.
@@ -174,27 +176,23 @@ During the End of Turn, effects that state they resolve at the end of the turn a
 
 # Unit Actions
 
-Each time a unit is activated during the Activation Phase, it may take **up to two actions**.
-
-- Actions **cannot be repeated** during the same activation, unless a rule states otherwise.
-- The order in which actions are taken is free.
-- If a unit cannot or does not wish to use an action, it is lost.
+Each time a unit is activated during the Activation Phase, it chooses and takes **one single action** from the list. If a unit cannot or does not wish to act, its action is lost.
 
 Available actions for all units:
 
-- **Move** – 1 action
-- **Shoot** – 1 action
-- **Ready** – 2 actions
-- **Retreat** – 2 actions
-- **Rush** – 2 actions
-- **Melee Attack** – 2 actions
+- **Move and Shoot**
+- **Heavy Shoot**
+- **Charge**
+- **Melee Attack**
+- **Run**
+- **Retreat**
 
 ## Movement
 
 When a unit moves, it may travel up to its **Movement** value in inches (").
 
 - Units may move in any direction.
-- A unit cannot move to within **1" of an enemy unit**, except when making a Rush.
+- A unit cannot move to within **1" of an enemy unit**, except when Charging.
 - Movement may be used to go around obstacles or freely reposition on the battlefield.
 
 ### Terrain and Obstacles
@@ -215,29 +213,25 @@ Units with the **Flyer** specialty may climb obstacles diagonally.
 
 ![Unit climbing an obstacle and reaching an elevated position]({{climbingImage}})
 
-## Rush
+## Heavy Shoot
 
-A **Rush** is an action that lets a unit move at high speed, either to reposition or to initiate melee combat.
+A unit may dig in to shoot with greater power. When using **Heavy Shoot**, the unit **does not move** during that activation and makes a ranged attack with one of its weapons; the **total damage dealt increases by +1**.
 
-When making a Rush, the unit spends **2 actions** and moves up to its **Movement + Speed** value in inches.
+- Cannot be combined with movement: if you want to move, use **Move and Shoot**.
+- Cannot be used while locked in melee combat.
 
-A Rush can be used in two ways:
+## Charge and Run
 
-**1. Extended movement**
+**Charge** and **Run** use the same movement: the unit moves up to its **Movement + Speed** in inches.
 
-The unit moves to reposition. During a Rush, it cannot make ranged attacks unless a rule states otherwise.
+- **Run:** the unit repositions; it cannot attack that turn.
+- **Charge:** the unit advances toward the enemy; if it enters **base contact** with an enemy unit, it counts as a charge and makes **one free melee attack**. If it does not reach the target, it ends its movement where it arrived.
 
-**2. Charging the enemy**
+**Clarification:** any movement that ends in base contact with an enemy unit counts as a **Charge** (Charge action). It is not possible to enter base contact using the Move and Shoot action.
 
-If during the Rush the unit enters base contact with an enemy unit, it counts as a **charge**. A successful charge allows the unit to make **one free melee attack** without spending additional actions.
+_Example: your Crusaders (Movement 5", Speed +2") have an enemy unit 6" away. They declare Charge, move 7" and enter contact: they attack for free. The defender will respond on their own activation._
 
-If the Rush does not reach the target, the unit ends its movement where it arrived.
-
-**Clarification:** any movement that ends in base contact with an enemy unit counts as a Rush and costs 2 actions, even if the target is close enough that you don't need the Speed bonus. It is not possible to enter base contact using only the Move action.
-
-_Example: your Crusaders (Movement 5", Speed +2") have an enemy unit 4" away. They declare a Rush, move 4" and enter contact: it's a charge, they attack for free. The defender will respond on their own activation._
-
-![Unit making a Rush action]({{sprintImage}})
+![Unit making a Charge]({{sprintImage}})
 
 ## Retreat
 
@@ -245,20 +239,11 @@ A unit may retreat at any time, even if locked in melee combat.
 
 To retreat:
 
-- The unit spends **2 actions**.
+- The unit uses its action (**Retreat**).
 - It moves using its **Movement** value toward an allied command post.
-- Upon retreating, its **Value does not count for objective or command post control** until it recovers.
+- Upon retreating, its **Value does not count for objective or command post control** until it regroups.
 
-The unit automatically recovers at the start of its next activation if it has reached an allied command post. If it has not reached one, it continues retreating.
-
-## Ready
-
-A unit that uses the **Ready** action adopts a defensive posture.
-
-- **If shot:** performs a free ranged attack against the attacker.
-- **If charged:** attacks first in melee before receiving the charge attack.
-
-These attacks do not consume actions. The Ready state lasts until the end of the turn.
+The unit automatically regroups at the start of its next activation if it has reached an allied command post. If it has not reached one, it continues retreating.
 
 ---
 
@@ -297,7 +282,6 @@ Each weapon indicates how many **Attacks** it makes.
 
 - Roll as many dice as the weapon's Attacks value indicates.
 - Each die represents an independent shot or projectile.
-- **Dice cap:** a unit never rolls more than **12 dice** in a single attack roll, regardless of the number of miniatures or the weapon used.
 
 ## 3. Roll Precision
 
@@ -334,19 +318,19 @@ Melee combat occurs when two units are **in base contact**. At that point, both 
 
 ## Starting Combat
 
-To initiate melee combat, a unit must perform the **Rush** action and enter base contact with an enemy unit. Rush is explained in detail in the Unit Actions section.
+To initiate melee combat, a unit must **Charge** and enter base contact with an enemy unit (the Charge action is explained in the Unit Actions section).
 
-A Rush into an enemy unit **grants one free melee attack action**.
+A charge **grants one free melee attack**.
 
 ## Locked Units
 
 When two units are in base contact, they are considered locked in melee combat.
 
-A locked unit may only use the **Melee Attack** or **Retreat** actions. Each unit attacks during its own activation, spending its actions as normal.
+A locked unit may only use the **Melee Attack** or **Retreat** actions. Each unit attacks during its own activation using its action.
 
 ![Two locked units in base contact with a retreat option]({{lockedUnitsImage}})
 
-A unit may use the **Rush** action to charge a unit that is already locked in combat. After the charge, all involved units are considered locked in the same combat.
+A unit may **Charge** a unit that is already locked in combat. After the charge, all involved units are considered locked in the same combat.
 
 When a unit locked with several units activates and is going to make a melee attack, it may choose which locked enemy unit it attacks during that activation.
 
@@ -356,12 +340,12 @@ Units remain locked until one of the two is destroyed or retreats following the 
 
 Melee combat is resolved following this sequence:
 
-1. The attacking unit rolls the **Attacks** dice from its melee weapon profile (maximum **12 dice**, same as ranged).
+1. The attacking unit rolls the **Attacks** dice from its melee weapon profile.
 2. Results of **1 and 2** are misses. A result of **6** is a critical hit.
 3. The defender rolls as many **Save** dice as hits received. Critical hits can only be blocked with a defensive 6.
 4. Unblocked hits inflict the attacking weapon's base or critical damage.
 
-If the defender survives, it may attack during its own activation by spending its actions as normal.
+If the defender survives, it may attack during its own activation using its action.
 
 ## Vehicles and Monsters in Melee
 
@@ -461,27 +445,21 @@ These states represent specific tactical situations and have clear rules for ent
 
 The main states in ZeroLore are:
 
-- **Ready**
 - **Retreat**
-- **Engaged**
-
-## Ready Unit
-
-A unit enters the **Ready** state when it uses the _Ready_ action during its activation. _(explained in the section: Unit Actions)_
-The Ready state is shown by placing the **shield token** next to the miniature. It is removed at the end of the turn.
+- **Locked**
 
 ## Retreating Unit
 
 A unit enters **Retreat** when it declares the _Retreat_ action. _(explained in the section: Unit Actions)_
 The Retreat state is shown by placing the **retreat token** (arrow) next to the miniature. It is removed when the unit regroups or reaches a friendly command post.
 
-## Engaged Units
+## Locked Units
 
-Two units are considered **engaged** when they are in base contact. While they are engaged:
+Two units are considered **locked** when they are in base contact:
 
-- They may only use **melee combat** or **retreat** actions.
+- They may only use **Melee Attack** or **Retreat** actions.
 - They cannot be attacked at range by units outside the combat.
-- They remain engaged until one is destroyed or declares retreat.
+- They remain locked until one is destroyed or declares retreat.
 
 _(See the Melee Combat section for the full resolution.)_
 
@@ -495,8 +473,7 @@ When a player captures a command post, they place their coloured **flag token** 
 
 ## Headquarters
 
-- It works as a normal command post for control and deployment.
-- Each player has only one Headquarters. If it is captured by the enemy, the game ends automatically.
+It works as a normal command post for control and deployment. There must always be exactly one Headquarters per player.
 
 **Control at the end of the turn**
 
@@ -650,17 +627,18 @@ Heroes and some experimental units may have unique specialties described directl
 | Specialty | Description | Specialty | Description |
 | --- | --- | --- | --- |
 | **Soldier** | This unit has no specialty. | **Resilient** | The first time each turn this unit suffers damage, reduce that damage by **1D3**. |
-| **Support** | This unit may spend **2 actions** to choose an allied unit within **6"**. That unit recovers **1D3 lost Wounds**. | **Evasive** | The first time each turn this unit is targeted by a **Shooting** attack, it may move up to **2"** before resolving the attack. |
+| **Support** | During its activation, instead of acting, it may heal an allied unit within **6"**: that unit recovers **1D3 lost Wounds**. | **Evasive** | The first time each turn this unit is targeted by a **Shooting** attack, it may move up to **2"** before resolving the attack. |
 | **Guard** | Once per turn, when an allied unit within **6"** suffers damage, this unit may suffer up to **2 points of that damage** instead. | **Anchored** | Enemy units locked with this unit cannot declare **Retreat**. |
 | **Ruthless** | When this unit deals damage in melee, critical hits inflict **+1 critical damage**. | **Berserker** | Enemy units attacking this unit in melee miss on natural results of **1, 2, or 3**. |
-| **Accurate** | If this unit does not move, it gains **1 Precision** in Shooting. | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
+| **Accurate** | When making **Heavy Shoot**, it also improves its Precision by 1 (e.g. from 4+ to 3+). | **Reinforcement Blockade** | While this unit is within **3"** of an enemy command post, that command post cannot deploy reinforcements. |
 | **Emplaced** | This unit cannot move and blocks reinforcement deployment at its command post. If its player only has **1 command post or HQ**, it cannot be deployed. | **Captor** | This unit counts as double its **Value** when controlling or contesting command posts. |
 | **Vanguard** | It may be deployed within **9"** of an allied command post. | **Devourer** | When this unit destroys an enemy unit in melee, it recovers **1D3 lost Wounds**. |
-| **Shove** | During its activation, this unit may spend **1 action** to push an enemy unit locked with it **1"**, ending the melee combat. **Shove ignores Anchored**. | **Terror** | Enemy units within **3"** of this unit cannot use their specialties. |
-| **Shooter** | This unit may use two ranged attack actions with different weapons. | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
-| **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Rush against a unit, it gains **+1 melee attack die** during that combat. |
+| **Shove** | When attacking in melee, this unit may push an enemy unit locked with it **1"**, ending the melee combat. This does not use a separate action. **Shove ignores Anchored.** | **Terror** | Enemy units within **3"** of this unit cannot use their specialties. |
+| **Shooter** | When making **Heavy Shoot**, this unit fires with **both weapons** (at the same target or two different targets). | **Mobile Cover** | Allied units within **3"** of this unit count as being in cover against Shooting attacks. |
+| **Flying** | This unit ignores terrain and obstacles during movement, and may climb diagonally at no additional cost. It cannot end its movement on top of other miniatures. | **Brutal Charge** | When this unit makes a Charge against a unit, it gains **+1 melee attack die** during that combat. |
 | **Out of Control** | If this unit reaches 50% of its Wounds, it attacks the nearest allied or enemy unit in melee, adding **1D** more attack. If it is already locked, it continues. If there is no nearby unit, it moves toward it. | **Boom!** | When this unit dies, it explodes and affects units within **6"** of it, inflicting **1D6**. |
-| **Crushing** | During its Rush, if it locks a **Line or Elite** unit, that unit automatically suffers **1D3 damage**. | | |
+| **Crushing** | During its **Charge**, if it locks a **Line or Elite** unit, that unit automatically suffers **1D3 damage**. | **Counterstrike** | The **first time each turn** this unit is attacked in melee — even if it is not its activation — it immediately responds with a **free melee attack** against the attacker. This does not use an action. |
+| **Ready** | The **first time each turn** this unit is targeted by a ranged attack, after resolving the attack it may immediately **fire one of its ranged weapons** at the attacker, if in range and line of sight. This does not use an action. | | |
 
 ### Squads
 
@@ -791,6 +769,7 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 | **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |
 | **Erratic** | Before resolving the attack, roll 1D6: the result becomes the weapon's Precision for that attack. |
+| **Sweep** | Melee weapon. When attacking, instead of choosing a single target, this weapon **attacks ALL enemy units locked with it**. Resolve the attack separately against each one. |
 
 ## Secondary Weapons
 

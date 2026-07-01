@@ -90,6 +90,8 @@ ZeroLore permite jugar partidas ambientadas en distintas eras temáticas. Antes 
 
 Cada unidad indica su era en su ficha.
 
+**Elección de set de armas.** Cada unidad trae X **sets de armas** — con las **mismas estadísticas base de la unidad** pero armas distintas. En partidas de era **Pasado** o **Futuro**, todas las unidades usan el set de esa era (lo fácil y rápido). En **Sin restricción**, cada jugador elige **por unidad** qué set usar al montar su lista —puedes mezclar Pasado y Futuro en el mismo ejército— y ese set se mantiene toda la partida. La elección es **por unidad de la lista**: puedes incluir la misma unidad varias veces con sets distintos. Dentro de una escuadra, todas las miniaturas comparten el mismo set.
+
 ---
 
 # Medición de distancias
@@ -157,7 +159,7 @@ Después de la Fase de Iniciativa comienza la **Fase de Activaciones**.
 Activar una unidad significa:
 
 - Declararla como la unidad activa.
-- Realizar las 2 acciones disponibles.
+- Realizar **una acción**.
 - Resolver completamente sus efectos.
 
 Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
@@ -174,27 +176,23 @@ Durante el Fin de Turno se terminan los efectos que indiquen resolverse al final
 
 # Acciones de una unidad
 
-Cada vez que una unidad es activada durante la Fase de Activaciones, puede realizar **hasta dos acciones**.
+Cada vez que una unidad es activada durante la Fase de Activaciones, elige y realiza **una sola acción** de la lista. Si una unidad no puede o no desea actuar, su acción se pierde.
 
-- Las acciones **no pueden repetirse** durante la misma activación, salvo que una regla indique lo contrario.
-- El orden en que se realizan las acciones es libre.
-- Si una unidad no puede o no desea usar una acción, esta se pierde.
+Las acciones disponibles para todas las unidades son:
 
-Las acciones disponibles para todas las unidades son las siguientes:
-
-- **Moverse** – 1 acción
-- **Atacar a distancia** – 1 acción
-- **Preparado** – 2 acciones
-- **Retirarse** – 2 acciones
-- **Acometida** – 2 acciones
-- **Atacar cuerpo a cuerpo** – 2 acciones
+- **Mover y disparar**
+- **Disparo pesado**
+- **Cargar**
+- **Atacar cuerpo a cuerpo**
+- **Carrera**
+- **Retirarse**
 
 ## Movimiento
 
 Cuando una unidad se mueve, puede desplazarse hasta su valor de **Movimiento** en pulgadas (").
 
 - Las unidades pueden moverse en cualquier dirección.
-- No se puede mover una unidad a menos de **1" de una unidad enemiga**, salvo acometida.
+- No se puede mover una unidad a menos de **1" de una unidad enemiga**, salvo al Cargar.
 - El movimiento puede utilizarse para rodear obstáculos o posicionarse libremente en el campo de batalla.
 
 ### Terreno y obstáculos
@@ -213,29 +211,25 @@ Para trepar:
 
 ![Unidad trepando un obstáculo y alcanzando una posición elevada]({{climbingImage}})
 
-## Acometida
+## Disparo pesado
 
-La **Acometida** es una acción que permite a una unidad moverse a alta velocidad, ya sea para reposicionarse o para iniciar un combate cuerpo a cuerpo.
+Una unidad puede afincarse para disparar con más potencia. Al usar **Disparo pesado**, la unidad **no se mueve** durante esa activación y realiza un ataque a distancia con una de sus armas; el **daño total infligido aumenta en +1**.
 
-Al realizar una Acometida, la unidad consume **2 acciones** y se mueve hasta su valor de **Movimiento + Velocidad** en pulgadas.
+- No puede combinarse con movimiento: si quieres moverte, usa **Mover y disparar**.
+- No puede usarse estando trabada en combate cuerpo a cuerpo.
 
-La Acometida puede usarse de dos formas:
+## Cargar y Carrera
 
-**1. Movimiento extendido**
+**Cargar** y **Carrera** usan el mismo movimiento: la unidad se desplaza hasta su **Movimiento + Velocidad** en pulgadas.
 
-La unidad se desplaza para reposicionarse. Durante una Acometida no se pueden realizar ataques a distancia, salvo que una regla indique lo contrario.
+- **Carrera:** la unidad se reposiciona; ese turno no puede atacar.
+- **Cargar:** la unidad avanza hacia el enemigo; si entra en **contacto de peana** con una unidad enemiga, es una **carga** y realiza **un ataque cuerpo a cuerpo gratuito**. Si no alcanza al objetivo, termina su movimiento donde llegó.
 
-**2. Carga al enemigo**
+**Aclaración:** cualquier movimiento que termine en contacto de peana con una unidad enemiga es una **carga** (acción Cargar). No es posible entrar en contacto con la acción Mover y disparar.
 
-Si durante la Acometida la unidad entra en contacto de peana con una unidad enemiga, se considera una **carga**. Una carga exitosa permite a la unidad realizar **un ataque cuerpo a cuerpo gratuito** sin gastar acciones adicionales.
+_Ejemplo: tus Cruzados (Movimiento 5", Velocidad +2") tienen una unidad enemiga a 6". Declaran Cargar, se mueven 7" y entran en contacto: atacan gratis. El defensor responderá en su propia activación._
 
-Si la Acometida no consigue alcanzar al objetivo, la unidad termina su movimiento donde llegó.
-
-**Aclaración:** cualquier movimiento que termine en contacto de peana con una unidad enemiga se considera una Acometida y consume 2 acciones, aunque el objetivo esté tan cerca que no necesites la Velocidad. No es posible entrar en contacto usando solo la acción Moverse.
-
-_Ejemplo: tus Cruzados (Movimiento 5", Velocidad +2") tienen una unidad enemiga a 4". Declaran Acometida, se mueven 4" y entran en contacto: es una carga, atacan gratis. El defensor responderá en su propia activación._
-
-![Unidad realizando una Acometida]({{sprintImage}})
+![Unidad realizando una carga]({{sprintImage}})
 
 ## Retirada
 
@@ -243,20 +237,11 @@ Una unidad puede retirarse en cualquier momento, incluso si está trabada en com
 
 Para realizar una retirada:
 
-- La unidad consume **2 acciones**.
+- La unidad usa su acción (**Retirarse**).
 - Se mueve usando su valor de **Movimiento** en dirección a un puesto de mando aliado.
 - Al entrar en retirada, su **Valor no cuenta para el control de objetivos o puestos de mando** hasta que se recomponga.
 
 La unidad se recompone automáticamente al inicio de su siguiente activación si ha alcanzado un puesto de mando aliado. Si no lo ha alcanzado, continúa en retirada.
-
-## Preparado
-
-Una unidad que utiliza la acción **Preparado** adopta una postura defensiva. Siempre que reciba un ataque enemigo durante el turno, puede responder inmediatamente:
-
-- **Si es disparada:** realiza un disparo gratuito con una de sus armas a distancia contra el atacante.
-- **Si es cargada:** ataca primero en cuerpo a cuerpo, antes de recibir el ataque de carga.
-
-Estos ataques no consumen acciones. El estado de Preparado dura hasta que finaliza el turno.
 
 ---
 
@@ -295,7 +280,6 @@ Cada arma indica cuántos **Ataques** realiza.
 
 - Se lanzan tantos dados como indique el valor de Ataques del arma.
 - Cada dado representa un disparo o proyectil independiente.
-- **Límite de dados:** una unidad nunca lanza más de **12 dados** en una misma tirada de ataque, independientemente del número de miniaturas o del arma utilizada.
 
 ## 3. Tirada de precisión
 
@@ -332,19 +316,19 @@ El combate cuerpo a cuerpo ocurre cuando dos unidades se encuentran **en contact
 
 ## Iniciar un combate
 
-Para iniciar un combate cuerpo a cuerpo, una unidad debe realizar la acción **Acometida** y entrar en contacto de peana con una unidad enemiga. La Acometida se explica en detalle en la sección de Acciones.
+Para iniciar un combate cuerpo a cuerpo, una unidad debe **Cargar** y entrar en contacto de peana con una unidad enemiga (la acción Cargar se explica en la sección de Acciones).
 
-Una acometida contra una unidad **aporta una acción de ataque cuerpo a cuerpo gratuita**.
+Una carga **aporta un ataque cuerpo a cuerpo gratuito**.
 
 ## Unidades trabadas
 
 Cuando dos unidades están en contacto de peana se consideran trabadas en combate cuerpo a cuerpo.
 
-Una unidad trabada solo puede usar las acciones de **Atacar cuerpo a cuerpo** o **Retirarse**. Cada unidad ataca en su propia activación gastando sus acciones de forma normal.
+Una unidad trabada solo puede usar las acciones de **Atacar cuerpo a cuerpo** o **Retirarse**. Cada unidad ataca en su propia activación usando su acción.
 
 ![Dos unidades trabadas en contacto de peana con opción de retirada]({{lockedUnitsImage}})
 
-Una unidad puede usar la acción **Acometida** para cargar a una unidad ya trabada en combate. Tras la carga, todas las unidades involucradas se consideran trabadas en el mismo combate.
+Una unidad puede **Cargar** contra una unidad ya trabada en combate. Tras la carga, todas las unidades involucradas se consideran trabadas en el mismo combate.
 
 Cuando una unidad que está trabada con varias unidades, se activa y va a atacar cuerpo a cuerpo, puede elegir a cuál de las unidades enemigas trabadas con ella ataca en esa activación.
 
@@ -354,12 +338,12 @@ Las unidades permanecen trabadas hasta que una de las dos sea eliminada o se ret
 
 El combate cuerpo a cuerpo se resuelve siguiendo esta secuencia:
 
-1. La unidad atacante lanza los dados de **Ataques** de su perfil de arma cuerpo a cuerpo (máximo **12 dados**, igual que en disparo).
+1. La unidad atacante lanza los dados de **Ataques** de su perfil de arma cuerpo a cuerpo.
 2. Los resultados de **1 y 2** se consideran fallos. Un resultado de **6** es un impacto crítico.
 3. El defensor lanza tantos dados de **Salvación** como impactos haya recibido. Los impactos críticos solo pueden bloquearse con un 6 defensivo.
 4. Los impactos no bloqueados infligen el daño base o crítico del arma atacante.
 
-Si el defensor sobrevive, podrá atacar en su propia activación gastando sus acciones de forma normal.
+Si el defensor sobrevive, podrá atacar en su propia activación usando su acción.
 
 ## Vehículos y monstruos en combate cuerpo a cuerpo
 
@@ -457,14 +441,8 @@ Estos estados representan situaciones tácticas concretas y tienen reglas claras
 
 Los estados principales en ZeroLore son:
 
-- **Preparado**
 - **Retirada**
 - **Trabada**
-
-## Unidad preparada
-
-Una unidad entra en estado **Preparado** cuando utiliza la acción _Preparado_ durante su activación. _(explicado en la sección: acciones de unidades)_
-El estado Preparado se indica colocando el **token de escudo** junto a la miniatura. Se retira al final del turno.
 
 ## Unidad en retirada
 
@@ -491,8 +469,7 @@ Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla*
 
 ## Cuartel General
 
-- Funciona como un puesto de mando normal a efectos de control y despliegue.
-- Cada jugador tiene un solo Cuartel General. Si este es conquistado por el enemigo la partida se acaba automaticamente.
+Funciona como un puesto de mando normal a efectos de control y despliegue, siempre tiene que haber un Cuartel General por jugador obligatorio.
 
 **Control al final de turno**
 
@@ -612,7 +589,7 @@ Indica la **distancia máxima**, en pulgadas ("), que la unidad puede desplazars
 
 Este valor también se utiliza como base para:
 
-- **Acometida** (Movimiento + Velocidad)
+- **Cargar / Carrera** (Movimiento + Velocidad)
 - **Retirada**
 
 ### Vidas
@@ -633,7 +610,7 @@ Una Salvación de **4+** bloquea impactos con resultados de **4, 5 o 6**.
 
 ### Velocidad
 
-Representa la **distancia adicional**, en pulgadas ("), que la unidad puede recorrer al realizar una **Acometida**.
+Representa la **distancia adicional**, en pulgadas ("), que la unidad puede recorrer al **Cargar** o en **Carrera**.
 
 Una unidad con mayor Velocidad puede cubrir más terreno en un solo impulso y alcanzar objetivos más lejanos al cargar.
 
@@ -646,17 +623,18 @@ Los héroes y algunas unidades experimentales tiene especialidades distintas.
 | Especialidad    | Descripción                                                                                                                                                                                           | Especialidad             | Descripción                                                                                                                                                                                                                               |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Soldado**     | Esta unidad no tienen ninguna especialidad.                                                                                                                                                           | **Resistente**           | La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3.**                                                                                                                                                        |
-| **Soporte**     | Esta unidad puede gastar **2 acciones** para elegir una unidad aliada a **6" o menos**. Esa unidad recupera **1D3 Vidas** perdidas.                                                                   | **Evasivo**              | La primera vez cada turno que esta unidad sea objetivo de un ataque de **Disparo**, puede moverse hasta **2"** antes de resolver el ataque.                                                                                               |
+| **Soporte**     | En su activación, en lugar de actuar, puede curar a una unidad aliada a **6" o menos**: esa unidad recupera **1D3 Vidas** perdidas.                                                                   | **Evasivo**              | La primera vez cada turno que esta unidad sea objetivo de un ataque de **Disparo**, puede moverse hasta **2"** antes de resolver el ataque.                                                                                               |
 | **Guardia**     | Una vez por turno, cuando una unidad aliada **a 6" o menos** reciba daño, esta unidad puede recibir hasta 2 puntos de ese daño en su lugar.                                                           | **Anclado**              | Las unidades enemigas trabadas con esta unidad no pueden declarar **Retirada**.                                                                                                                                                           |
 | **Despiadado**  | Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen +1 daño crítico.                                                                                                   | **Berserker**            | Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3.**                                                                                                                       |
-| **Certero**     | Si esta unidad no se mueve, gana 1 de precisión en disparo.                                                                                                                                           | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos.                                                                                                               |
+| **Certero**     | Cuando hace **Disparo pesado**, además mejora en 1 su Precisión (p. ej. de 4+ a 3+).                                                                                                                 | **Bloqueo de refuerzos** | Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos.                                                                                                               |
 | **Asentado**    | Esta unidad no puede moverse y bloquea el despliegue de refuerzos en su puesto de mando. Si el jugador solo tiene 1 puesto/CG no puede ser desplegada.                                                | **Capturador**           | Esta unidad cuenta como el doble de su Valor al controlar o disputar puestos de mando.                                                                                                                                                    |
 | **Avanzadilla** | Puede ser desplegada a **9"** de un puesto de mando aliado.                                                                                                                                           | **Devorador**            | Cuando esta unidad destruye una unidad enemiga en CaC, recupera **1D3 Vidas perdidas**.                                                                                                                                                   |
-| **Porrazo**     | Durante su activación, esta unidad puede gastar 1 acción para empujar 1" a una unidad enemiga trabada con ella, terminando el combate cuerpo a cuerpo. **Porrazo ignora la habilidad Anclado.**       | **Terror**               | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar sus especialidades.                                                                                                                                                   |
-| **Tirador**     | Esta unidad puede utilizar dos acciones de ataque a distancia con distintas armas.                                                                                                                    | **Cobertura móvil**      | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo.                                                                                                                                 |
-| **Volador**     | Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas.                              | **Carga brutal**         | Cuando esta unidad realiza una Acometida contra una unidad, gana **+1 dado de ataque CaC** durante ese combate.                                                                                                                           |
-| **Descontrol**  | Si esta unidad llega al 50% de su vida, ataca a la unidad aliada o enemiga más cercana cuerpo a cuerpo, sumando **1D** más de ataque. Si ya está trabada, continúa. Si no tiene ninguna unidad cercana, se mueve hacia ella. | **¡Boom!** | Cuando esta unidad muere explota afectando a unidades que estén a **6"** de esta, infligiendo **1D6**. |
-| **Aplastamiento** | durante su acometida, si traba a una unidad de **Línea o élite**, dicha unidad recibe automáticamente daño de 1D3. | | |
+| **Porrazo**     | Al atacar en cuerpo a cuerpo, esta unidad puede empujar **1"** a una unidad enemiga trabada con ella, terminando el combate. No consume acción aparte. **Porrazo ignora Anclado.**                    | **Terror**               | Las unidades enemigas a **3" o menos** de esta unidad no pueden usar sus especialidades.                                                                                                                                                   |
+| **Tirador**     | Cuando hace **Disparo pesado**, esta unidad dispara con sus **dos armas** (al mismo objetivo o a dos distintos).                                                                                      | **Cobertura móvil**      | Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo.                                                                                                                                 |
+| **Volador**     | Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas.                              | **Carga brutal**         | Cuando esta unidad realiza una carga contra una unidad, gana **+1 dado de ataque CaC** durante ese combate.                                                                                                                              |
+| **Descontrol**  | Si esta unidad llega al 50% de su vida, ataca a la unidad aliada o enemiga más cercana cuerpo a cuerpo, sumando **1D** más de ataque. Si ya está trabada, continúa. Si no tiene ninguna unidad cercana, se mueve hacia ella. | **¡Boom!** | Cuando esta unidad muere, explota afectando a las unidades a **6"** de ella, infligiendo **1D6** de daño. |
+| **Aplastamiento** | Durante su **carga**, si traba a una unidad de **Línea o Élite**, dicha unidad recibe automáticamente **1D3** de daño. | **Contragolpe** | La **primera vez cada turno** que esta unidad sea atacada en cuerpo a cuerpo —aunque no sea su activación—, responde de inmediato con un **ataque cuerpo a cuerpo gratuito** contra el atacante. No consume acción. |
+| **Preparado** | La **primera vez cada turno** que esta unidad sea atacada a distancia, tras resolver el ataque puede **disparar de inmediato** con una de sus armas a distancia contra el atacante, si está en alcance y línea de visión. No consume acción. | | |
 
 ### Escuadras
 
@@ -785,6 +763,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | **Parabólica**    | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**.                                                                           |
 | **Alcance**       | Esta arma CaC puede usarse contra cualquier unidad enemiga a **3" o menos**, esté o no trabada con esta unidad.                                                                        |
 | **Errática**      | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma durante ese ataque.                                                                                      |
+| **Barrido**       | Arma de cuerpo a cuerpo. Al atacar, en vez de elegir un objetivo, **ataca a TODAS las unidades enemigas trabadas con ella**. Resuelve el ataque por separado contra cada una.         |
 
 ## Armas secundarias
 

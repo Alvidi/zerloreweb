@@ -2,7 +2,7 @@
   "id": "caos",
   "faccion": {
     "nombre": "Chaos",
-    "estilo_juego": "An aggressive and unstoppable faction focused on numerical superiority and overwhelming frontal assault. Its units are expendable by design: cheap, violent and hard to stop en masse. It sacrifices precision and discipline in exchange for constant pressure, waves of melee and the ability to return destroyed units to the battlefield.",
+    "estilo_juego": "An aggressive and unstoppable faction centered on numerical superiority and overwhelming frontal assault. Its units are expendable by design: cheap, violent and hard to stop en masse. It trades precision and discipline for constant pressure, waves of melee, and the ability to return destroyed units to the field.",
     "seleccion_habilidades": "",
     "habilidades_faccion": [],
     "grupos_habilidades_faccion": []
@@ -18,35 +18,15 @@
         "futuro": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Brutal Fist",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Bite (only Elite)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Brutal Fist", "habilidades_arma": ["Sweep"] },
+            { "nombre": "Bite (only Elite)", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Splintered Club",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Savage Fang (only Elite)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Splintered Club", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Savage Fang (only Elite)", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -55,55 +35,25 @@
       "nombre_unidad": "Pack Hunters",
       "clase": "Line",
       "perfil": {
-        "especialidad": "Vanguard"
+        "especialidad": "Evasive"
       },
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Toxic Stinger",
-              "habilidades_arma": [
-                "Multi-use"
-              ]
-            }
+            { "nombre": "Toxic Sting", "habilidades_arma": ["Multi-use"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Mutant Claw",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Toxic Fang (only Elite, Hero)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Mutant Claw", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Toxic Fang (only Elite, Hero)", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Bone Javelin",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Bone Javelin", "habilidades_arma": ["Reliable"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Sharpened Claw",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Fang (only Elite, Hero)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Sharp Claw", "habilidades_arma": ["Reach"] },
+            { "nombre": "Fang (only Elite, Hero)", "habilidades_arma": ["Erratic"] }
           ]
         }
       }
@@ -117,49 +67,24 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Toxin Sprayer",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Toxin Sprayer", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Corrupted Flail",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Infected Club (only Elite)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Corrupted Flail", "habilidades_arma": ["Reach"] },
+            { "nombre": "Infected Club (only Elite)", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Rusted Flail",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Bone Mace (only Elite)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Rusted Flail", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Bone Mace (only Elite)", "habilidades_arma": ["Direct"] }
           ]
         }
       }
     },
     {
-      "nombre_unidad": "Chaos Ravagers",
+      "nombre_unidad": "Ravagers",
       "clase": "Line",
       "perfil": {
         "especialidad": "Shove"
@@ -167,37 +92,22 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Chaos Pistol",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Chaotic Pistol", "habilidades_arma": ["Reliable"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Chaos Axe",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Chaos Axe", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "War Axe",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "War Axe", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
     },
     {
-      "nombre_unidad": "Pillagers",
+      "nombre_unidad": "Plunderers",
       "clase": "Line",
       "perfil": {
         "especialidad": "Soldier"
@@ -205,81 +115,41 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Scrap Rifle",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Fragment Launcher (only Line)",
-              "habilidades_arma": [
-                "Explosive"
-              ]
-            }
+            { "nombre": "Scrapped Rifle", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Fragment Launcher (only Line)", "habilidades_arma": ["Explosive"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Rusty Bayonet",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Rusted Bayonet", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Crude Bow",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "War Sling (only Line)",
-              "habilidades_arma": [
-                "Explosive"
-              ]
-            }
+            { "nombre": "Crude Bow", "habilidades_arma": ["Multi-use"] },
+            { "nombre": "War Sling (only Line)", "habilidades_arma": ["Explosive"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Bone Knife",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Bone Knife", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
     },
     {
-      "nombre_unidad": "Chaos Berserkers",
+      "nombre_unidad": "Berserkers",
       "clase": "Elite",
       "perfil": {
-        "especialidad": "Brutal Charge"
+        "especialidad": "Berserker"
       },
       "armas": {
         "futuro": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Double Axe",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Double Axe", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Double War Axe",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Double War Axe", "habilidades_arma": ["Brutal 4+"] }
           ]
         }
       }
@@ -293,50 +163,20 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Spore Launcher",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Spore Launcher", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Toxic Knife",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            },
-            {
-              "nombre": "Combat Hook (only Elite, Hero)",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Toxic Knife", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Combat Hook (only Elite, Hero)", "habilidades_arma": ["Piercing"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Venom Bow",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Poison Bow", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Poisoned Blade",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            },
-            {
-              "nombre": "Bone Hook (only Elite, Hero)",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Poisoned Blade", "habilidades_arma": ["Reach"] },
+            { "nombre": "Bone Hook (only Elite, Hero)", "habilidades_arma": ["Reach"] }
           ]
         }
       }
@@ -345,48 +185,23 @@
       "nombre_unidad": "Mutant Champions",
       "clase": "Elite",
       "perfil": {
-        "especialidad": "Shove"
+        "especialidad": "Ruthless"
       },
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Plasma Fist",
-              "habilidades_arma": [
-                "Unstable"
-              ]
-            }
+            { "nombre": "Plasma Fist", "habilidades_arma": ["Unstable"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Mutant Arm",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Biochemical Pincer (only Elite, Hero)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Mutant Arm", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Biochemical Pincer (only Elite, Hero)", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ceremonial Mace",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Brutal Talon (only Elite, Hero)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Ceremonial Mace", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Brutal Claw (only Elite, Hero)", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -400,56 +215,26 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Biomass Cannon",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Corrosive Launcher (only Line)",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Biomass Cannon", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Corrosive Launcher (only Line)", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Tactical Bayonet",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Tactical Bayonet", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Siege Crossbow",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Portable Catapult (only Line)",
-              "habilidades_arma": [
-                "Arcing"
-              ]
-            }
+            { "nombre": "Siege Crossbow", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Portable Catapult (only Line)", "habilidades_arma": ["Arcing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Field Dagger",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Field Dagger", "habilidades_arma": ["Erratic"] }
           ]
         }
       }
     },
     {
-      "nombre_unidad": "Assault Scrapwagon",
+      "nombre_unidad": "Assault Scrapheap",
       "clase": "Vehicle",
       "perfil": {
         "especialidad": "Brutal Charge"
@@ -457,62 +242,22 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Scrap Cannon",
-              "habilidades_arma": [
-                "Erratic"
-              ]
-            },
-            {
-              "nombre": "Crude Flamethrower",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Scrapped Cannon", "habilidades_arma": ["Erratic"] },
+            { "nombre": "Rough Flamethrower", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Assault Blades",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Spur (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Assault Blades", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Spur (only Vehicle, Monster)", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Assault Ballista",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Fire Thrower",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Assault Ballista", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Fire Thrower", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Spiked Ram",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Spur (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Spiked Ram", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Spur (only Vehicle, Monster)", "habilidades_arma": ["Direct"] }
           ]
         }
       }
@@ -526,39 +271,19 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Unstable Plasma Cannon",
-              "habilidades_arma": [
-                "Unstable",
-                "Piercing"
-              ]
-            }
+            { "nombre": "Unstable Plasma Cannon", "habilidades_arma": ["Unstable", "Piercing"] },
+            { "nombre": "Plague Spitter (only Line, Elite)", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Crushing Plates",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Crushing Plates", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Heavy Ballista",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Heavy Ballista", "habilidades_arma": ["Piercing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Crushing Plates",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Scrap Ram", "habilidades_arma": ["Direct"] }
           ]
         }
       }
@@ -572,40 +297,18 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Plague Launcher",
-              "habilidades_arma": [
-                "Arcing",
-                "Dead Angle"
-              ]
-            }
+            { "nombre": "Plague Launcher", "habilidades_arma": ["Arcing", "Dead Angle"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Steel Fangs",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Steel Fangs", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Rock Catapult",
-              "habilidades_arma": [
-                "Arcing",
-                "Dead Angle"
-              ]
-            }
+            { "nombre": "Rock Catapult", "habilidades_arma": ["Arcing", "Dead Angle"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ram",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Ram", "habilidades_arma": ["Brutal 5+"] }
           ]
         }
       }
@@ -614,55 +317,25 @@
       "nombre_unidad": "Devouring Beast",
       "clase": "Monster",
       "perfil": {
-        "especialidad": "Brutal Charge"
+        "especialidad": "Predator"
       },
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Corrosive Spit",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Corrosive Spit", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Abyssal Jaws",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            },
-            {
-              "nombre": "Rending Claws (only Line, Elite)",
-              "habilidades_arma": [
-                "Reach"
-              ]
-            }
+            { "nombre": "Abyssal Jaws", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Shredding Claws (only Line, Elite)", "habilidades_arma": ["Reach"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Acid Spit",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Fire Breath", "habilidades_arma": ["Erratic"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Giant Jaws",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            },
-            {
-              "nombre": "Primitive Claws (only Line, Elite)",
-              "habilidades_arma": [
-                "Reach"
-              ]
-            }
+            { "nombre": "Giant Jaws", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Primitive Claws (only Line, Elite)", "habilidades_arma": ["Brutal 5+"] }
           ]
         }
       }
@@ -671,108 +344,52 @@
       "nombre_unidad": "Corrupt Titan",
       "clase": "Monster",
       "perfil": {
-        "especialidad": "Shove"
+        "especialidad": "Reckless"
       },
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Savage Missile Launcher",
-              "habilidades_arma": [
-                "Unstable",
-                "Explosive"
-              ]
-            }
+            { "nombre": "Wild Missile Launcher", "habilidades_arma": ["Unstable", "Explosive"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Chaos Fist",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Chaos Fist", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Stomp (only Line, Elite)", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Shoulder Ballista",
-              "habilidades_arma": [
-                "Unstable",
-                "Explosive"
-              ]
-            }
+            { "nombre": "Shoulder Ballista", "habilidades_arma": ["Arcing", "Explosive"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Corrupt Mace",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Corrupt Mace", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
     },
     {
-      "nombre_unidad": "Mechanical Abomination",
+      "nombre_unidad": "Mechanical Spawn",
       "clase": "Vehicle",
       "perfil": {
-        "especialidad": "Brutal Charge"
+        "especialidad": "Boom!"
       },
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Screw Cannon",
-              "habilidades_arma": [
-                "Unstable"
-              ]
-            },
-            {
-              "nombre": "Chaotic Flamethrower",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Screw Cannon", "habilidades_arma": ["Unstable"] },
+            { "nombre": "Chaotic Flamethrower", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Iron Fist",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Crusher Claw (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Iron Fist", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Shredding Claw (only Vehicle, Monster)", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Improvised Ballista",
-              "habilidades_arma": [
-                "Unstable"
-              ]
-            }
+            { "nombre": "Improvised Ballista", "habilidades_arma": ["Erratic"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Stone Maul",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Crusher Claw (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Stone Maul", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Shredding Talon (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -780,35 +397,21 @@
     {
       "nombre_unidad": "Chaos Warlord",
       "clase": "Hero",
-      "habilidad_faccion": "During the Initiative Phase, the player may sacrifice a Line unit (it leaves the field without granting points to the opponent). That unit transfers its remaining Wounds to another allied unit, up to its maximum.",
+      "habilidad_faccion": "During the Initiative Phase, the player may sacrifice a Line unit (it is removed from the field, without giving the opponent any points). That unit transfers its remaining Lives to another allied unit, up to its maximum. Does not work if engaged.",
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Chaos Pistol",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Chaos Pistol", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Corrupt Sword",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Corrupt Sword", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Executioner Axe (only Hero)", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Dark Sword",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Dark Sword", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -816,42 +419,23 @@
     {
       "nombre_unidad": "Lord of Beasts",
       "clase": "Hero",
-      "habilidad_faccion": "At the end of each turn, one Line unit destroyed during that turn returns to a command post with all its Wounds. If there is no command post, it returns to reserve.",
+      "habilidad_faccion": "At the end of each turn, a Line unit destroyed during that turn returns to a command post with all its Lives. If there is no command post, it returns to reserve.",
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Toxin Crossbow",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Toxin Crossbow", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "War Chains",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "War Chains", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Dominion Whip (only Line, Elite)", "habilidades_arma": ["Reach"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "War Bow",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "War Bow", "habilidades_arma": ["Arcing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Giant Flail",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Giant Flail", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -859,35 +443,87 @@
     {
       "nombre_unidad": "Prophet of Annihilation",
       "clase": "Hero",
-      "habilidad_faccion": "When two or more Chaos units attack in melee against the same target in the same turn, all of them gain +1D on those attacks.",
+      "habilidad_faccion": "When two or more Chaos units attack in melee against the same target in the same turn, they all gain +1D to those attacks.",
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Plasma Staff",
-              "habilidades_arma": [
-                "Unstable"
-              ]
-            }
+            { "nombre": "Plasma Staff", "habilidades_arma": ["Unstable"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Corrupt Spear",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Corrupt Lance", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Bone Spear",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Bone Lance", "habilidades_arma": ["Piercing"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Immortal Necromancer",
+      "clase": "Hero",
+      "habilidad_faccion": "When an allied Line or Elite unit is destroyed, leave the miniature where it fell and roll 1D6: on a 5 or 6 it revives in the same spot with half its Lives (rounded up); otherwise, it is removed. Each unit can only revive once.",
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Soul Staff", "habilidades_arma": ["Unstable"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Sepulchral Scythe", "habilidades_arma": ["Brutal 4+"] },
+            { "nombre": "Withering Touch (only Hero)", "habilidades_arma": ["Piercing"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Bone Scythe", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Fleshless Claw (only Hero)", "habilidades_arma": ["Brutal 5+"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Summoner",
+      "clase": "Hero",
+      "habilidad_faccion": "During the Initiative Phase you may deploy units from Reserve within 6\" or less of this Hero, as if it were a command post you control. Does not work if the Hero is on a command post.",
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Invoking Flame", "habilidades_arma": ["Unstable"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ritual Sceptre", "habilidades_arma": ["Brutal 5+"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Howling Skull", "habilidades_arma": ["Erratic"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Sacrificial Staff", "habilidades_arma": ["Piercing"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Chosen Warlock",
+      "clase": "Hero (Monster)",
+      "habilidad_faccion": "Once per game, at the start of its activation it may transform into a Monster for 2 turns — use all values in parentheses (stats and weapons). At the end of the 2nd turn after transforming, it is removed from the game (consumed; does not count as a casualty for the opponent).",
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Hex", "habilidades_arma": ["Unstable (Direct)"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ritual Dagger", "habilidades_arma": ["Reliable (Brutal 4+)"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ritual Knife", "habilidades_arma": ["Piercing (Reach)"] }
           ]
         }
       }

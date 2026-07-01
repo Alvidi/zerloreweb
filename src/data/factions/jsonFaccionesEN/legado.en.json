@@ -2,7 +2,7 @@
   "id": "legado",
   "faccion": {
     "nombre": "Legacy",
-    "estilo_juego": "An elite, expensive and hard-hitting faction. Few units, but each one is worth several: 3+ and 2+ saves, superior profiles and small squads. It loses the activation war by numbers, and makes up for it with extreme durability, counterattack (Ready) and the ability to reposition where it hurts. Ideal for players who prefer quality over quantity and games of surgical precision.",
+    "estilo_juego": "An elite, expensive and hard-hitting faction. Few units, but each one is worth several: 3+ and 2+ saves, superior profiles and small squads. It loses the activation war by numbers, and makes up for it with extreme durability and the ability to reposition where it hurts. Each of your own casualties is a setback; every decision matters. Ideal for players who prefer quality over quantity and games of surgical precision.",
     "seleccion_habilidades": "",
     "habilidades_faccion": [],
     "grupos_habilidades_faccion": []
@@ -17,38 +17,19 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Battle Rifle",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Battle Rifle", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Missile Launcher (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Battle Blade",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Battle Blade", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Consecrated Crossbow",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Consecrated Crossbow", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Consecrated Sword",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Consecrated Sword", "habilidades_arma": ["Reliable"] }
           ]
         }
       }
@@ -62,37 +43,17 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Assault Shotgun",
-              "habilidades_arma": [
-                "Multi-use"
-              ]
-            }
+            { "nombre": "Assault Shotgun", "habilidades_arma": ["Multi-use"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Tactical Mace",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Tactical Mace", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Hammer and Shield",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Halberd (only Elite, Hero)",
-              "habilidades_arma": [
-                "Reach"
-              ]
-            }
+            { "nombre": "Hammer and Shield", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Halberd (only Elite, Hero)", "habilidades_arma": ["Reach"] }
           ]
         }
       }
@@ -106,94 +67,19 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Light Carbine",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Fusion Grenade (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Light Carbine", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Fusion Grenade (only Vehicle, Monster)", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Vanguard Blade",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Vanguard Blade", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Blessed Bow",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Blessed Bow", "habilidades_arma": ["Dead Angle"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Sword and Dagger",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    {
-      "nombre_unidad": "Oathbound",
-      "clase": "Line",
-      "perfil": {
-        "especialidad": "Anchored"
-      },
-      "armas": {
-        "futuro": {
-          "disparo": [
-            {
-              "nombre": "Assault Rifle",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
-          ],
-          "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Oathbound Axe",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Energy Flail (only Hero)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
-          ]
-        },
-        "pasado": {
-          "disparo": [],
-          "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ancestral Axe",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Blessed Flail (only Hero)",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Sword and Dagger", "habilidades_arma": ["Brutal 5+"] }
           ]
         }
       }
@@ -207,43 +93,18 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Heavy Pistol",
-              "habilidades_arma": [
-                "Multi-use"
-              ]
-            }
+            { "nombre": "Heavy Pistol", "habilidades_arma": ["Multi-use"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Runic Sword",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Energy Hammer (only Elite, Hero)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Runic Sword", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Energy Hammer (only Elite, Hero)", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Twin Blade",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Blessed Greatsword (only Elite, Hero)",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Twin Blade", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Blessed Greatsword (only Elite, Hero)", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -257,31 +118,18 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Hand Cannon",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Hand Cannon", "habilidades_arma": ["Piercing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Energy Fist",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Energy Fist", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
-          "disparo": [],
+          "disparo": [
+            { "nombre": "Siege Crossbow", "habilidades_arma": ["Piercing"] }
+          ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Hammer of Judgement",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Hammer of Judgement", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -295,50 +143,20 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Salvo Rifle",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Laser Cannon (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Salvo Rifle", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Laser Cannon (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Rifle Butt",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Rapid Bow",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Judgement Crossbow (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Rapid Bow", "habilidades_arma": ["Multi-use"] },
+            { "nombre": "Judgement Crossbow (only Vehicle, Monster)", "habilidades_arma": ["Dead Angle"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Dagger",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Dagger", "habilidades_arma": ["Brutal 5+"] }
           ]
         }
       }
@@ -352,31 +170,16 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Sacred Pistol",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Sacred Pistol", "habilidades_arma": ["Reliable"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "War Staff",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "War Staff", "habilidades_arma": ["Reach"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Staff of Light",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Staff of Light", "habilidades_arma": ["Reliable"] }
           ]
         }
       }
@@ -390,31 +193,16 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Twin Pistols",
-              "habilidades_arma": [
-                "Multi-use"
-              ]
-            }
+            { "nombre": "Twin Pistols", "habilidades_arma": ["Multi-use"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Spectral Claws",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Spectral Claws", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Twin Scythes",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Twin Scythes", "habilidades_arma": ["Reach"] }
           ]
         }
       }
@@ -427,25 +215,17 @@
       },
       "armas": {
         "futuro": {
-          "disparo": [],
+          "disparo": [
+            { "nombre": "Consecrated Pistol", "habilidades_arma": ["Reliable"] }
+          ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Banner-Spear",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Banner-Spear", "habilidades_arma": ["Reach"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Sacred Banner",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Sacred Banner", "habilidades_arma": ["Reliable"] }
           ]
         }
       }
@@ -459,50 +239,20 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Twin Cannon",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Heavy Flamethrower (only Line)",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Twin Cannon", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Heavy Flamethrower (only Line)", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Demolishing Fist",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Demolishing Fist", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Twin Ballista",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Pitch Sprayer (only Line)",
-              "habilidades_arma": [
-                "Direct"
-              ]
-            }
+            { "nombre": "Twin Ballista", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Pitch Sprayer (only Line)", "habilidades_arma": ["Direct"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Siege Fist",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Siege Fist", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -516,50 +266,20 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Support Machine Gun",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Judgement Cannon (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Support Machine Gun", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Judgement Cannon (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Sacred Plates",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Sacred Plates", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Support Crossbow",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            },
-            {
-              "nombre": "Sacred Trebuchet (only Vehicle, Monster)",
-              "habilidades_arma": [
-                "Piercing"
-              ]
-            }
+            { "nombre": "Support Crossbow", "habilidades_arma": ["Dead Angle"] },
+            { "nombre": "Sacred Trebuchet (only Vehicle, Monster)", "habilidades_arma": ["Arcing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Blessed Plates",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Blessed Plates", "habilidades_arma": ["Reliable"] }
           ]
         }
       }
@@ -573,40 +293,18 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Sacred Mortar",
-              "habilidades_arma": [
-                "Arcing",
-                "Dead Angle"
-              ]
-            }
+            { "nombre": "Sacred Mortar", "habilidades_arma": ["Arcing", "Dead Angle"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Butt",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Butt", "habilidades_arma": ["Reliable"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Blessed Trebuchet",
-              "habilidades_arma": [
-                "Arcing",
-                "Dead Angle"
-              ]
-            }
+            { "nombre": "Blessed Trebuchet", "habilidades_arma": ["Arcing", "Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Butt",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
+            { "nombre": "Butt", "habilidades_arma": ["Reliable"] }
           ]
         }
       }
@@ -619,25 +317,17 @@
       },
       "armas": {
         "futuro": {
-          "disparo": [],
+          "disparo": [
+            { "nombre": "Tearing Screech", "habilidades_arma": ["Direct"] }
+          ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Imperial Claws",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Imperial Claws", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Royal Claws",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Royal Claws", "habilidades_arma": ["Sweep"] }
           ]
         }
       }
@@ -652,35 +342,40 @@
         "futuro": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Colossal Greatsword",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            },
-            {
-              "nombre": "Penitent Chains (only Line, Elite)",
-              "habilidades_arma": [
-                "Reach"
-              ]
-            }
+            { "nombre": "Colossal Greatsword", "habilidades_arma": ["Sweep"] },
+            { "nombre": "Penitent Chains (only Line, Elite)", "habilidades_arma": ["Reach"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ancestral Greatsword",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            },
-            {
-              "nombre": "Chains of Penance (only Line, Elite)",
-              "habilidades_arma": [
-                "Reach"
-              ]
-            }
+            { "nombre": "Ancestral Greatsword", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Chains of Penance (only Line, Elite)", "habilidades_arma": ["Brutal 5+"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Oathbound",
+      "clase": "Line",
+      "perfil": {
+        "especialidad": "Anchored"
+      },
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Assault Rifle", "habilidades_arma": ["Reliable"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Oathbound Axe", "habilidades_arma": ["Reliable"] },
+            { "nombre": "Energy Flail (only Hero)", "habilidades_arma": ["Brutal 4+"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ancestral Axe", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Blessed Flail (only Hero)", "habilidades_arma": ["Piercing"] }
           ]
         }
       }
@@ -692,31 +387,17 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Relic Pistol",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Relic Pistol", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Fusion Pistol (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Sword of Judgement",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Sword of Judgement", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ancestral Sword",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Ancestral Sword", "habilidades_arma": ["Sweep"] }
           ]
         }
       }
@@ -724,35 +405,21 @@
     {
       "nombre_unidad": "High Chaplain",
       "clase": "Hero",
-      "habilidad_faccion": "When a LEGACY unit is destroyed, it performs one final ranged or melee attack regardless of available actions.",
+      "habilidad_faccion": "When an allied unit is destroyed, it performs one final ranged or melee attack even if it has already been activated.",
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Command Pistol",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Command Pistol", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Relic Mace",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Relic Mace", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Mace of Anathema (only Hero)", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Sacred Hammer",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Sacred Hammer", "habilidades_arma": ["Brutal 5+"] }
           ]
         }
       }
@@ -760,42 +427,22 @@
     {
       "nombre_unidad": "Eternal Seer",
       "clase": "Hero",
-      "habilidad_faccion": "Once per turn, during the Initiative Phase and before any activation, LEGACY may swap the positions of any two allied units on the field, as long as neither is locked in combat.",
+      "habilidad_faccion": "Once per turn, during the Initiative Phase and before any activation, a LEGACY allied unit may swap the positions of any two allied units on the field, as long as neither is locked in combat.",
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Arcane Staff",
-              "habilidades_arma": [
-                "Explosive"
-              ]
-            }
+            { "nombre": "Arcane Staff", "habilidades_arma": ["Explosive"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Staff of Time",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Staff of Time", "habilidades_arma": ["Brutal 4+"] }
           ]
         },
         "pasado": {
           "disparo": [
-            {
-              "nombre": "Runic Staff",
-              "habilidades_arma": [
-                "Explosive"
-              ]
-            }
+            { "nombre": "Runic Staff", "habilidades_arma": ["Arcing"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ancestral Staff",
-              "habilidades_arma": [
-                "Brutal 4+"
-              ]
-            }
+            { "nombre": "Ancestral Staff", "habilidades_arma": ["Reach"] }
           ]
         }
       }
@@ -807,31 +454,62 @@
       "armas": {
         "futuro": {
           "disparo": [
-            {
-              "nombre": "Relic Pistol",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Relic Pistol", "habilidades_arma": ["Brutal 5+"] }
           ],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Bastion Mace",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Bastion Mace", "habilidades_arma": ["Brutal 5+"] }
           ]
         },
         "pasado": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            {
-              "nombre": "Ancestral Mace",
-              "habilidades_arma": [
-                "Brutal 5+"
-              ]
-            }
+            { "nombre": "Ancestral Mace", "habilidades_arma": ["Piercing"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Portal Weaver",
+      "clase": "Hero",
+      "habilidad_faccion": "Once per turn, during the Initiative Phase, an allied unit in contact with a command post may teleport to another command post you control. It cannot be engaged in combat.",
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Portal Staff", "habilidades_arma": ["Explosive"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Staff of Light", "habilidades_arma": ["Brutal 4+"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [
+            { "nombre": "Translation Rod", "habilidades_arma": ["Arcing"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ancestral Sceptre", "habilidades_arma": ["Piercing"] }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Herald of Advance",
+      "clase": "Hero",
+      "habilidad_faccion": "Once per turn, an allied unit that has already been activated may activate again to perform only a Run action.",
+      "armas": {
+        "futuro": {
+          "disparo": [
+            { "nombre": "Advance Pistol", "habilidades_arma": ["Brutal 5+"] }
+          ],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "March Lance", "habilidades_arma": ["Brutal 5+"] },
+            { "nombre": "Blade of Judgement (only Hero)", "habilidades_arma": ["Piercing"] }
+          ]
+        },
+        "pasado": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            { "nombre": "Ancestral Lance", "habilidades_arma": ["Piercing"] },
+            { "nombre": "Sacred Estoc (only Hero)", "habilidades_arma": ["Brutal 4+"] }
           ]
         }
       }

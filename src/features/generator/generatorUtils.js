@@ -77,11 +77,11 @@ export const getUnitTypeToken = (type) => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
 
+  if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
   if (normalized.includes('linea') || normalized.includes('line')) return 'line'
   if (normalized.includes('elite')) return 'elite'
   if (normalized.includes('vehiculo') || normalized.includes('vehicle')) return 'vehicle'
   if (normalized.includes('monstruo') || normalized.includes('monster')) return 'monster'
-  if (normalized.includes('heroe') || normalized.includes('hero')) return 'hero'
   return 'line'
 }
 

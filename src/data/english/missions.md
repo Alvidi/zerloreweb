@@ -8,19 +8,22 @@ Before starting, players agree on:
 - The **number of turns** — recommended: **5**.
 - Each player's **total army value**.
 - The **game mode** — Skirmish or Grand Battle.
-- The **mission** being played. Each mission defines its own objectives.
+- The number of **missions** being played. Each mission defines its own objectives.
 
-The battle ends **immediately** as soon as a player captures the rival's Headquarters.
+The game can be won in two ways: capturing the enemy HQ — an immediate victory — or by points. How are points earned?
 
-Missions are chosen at random — either by drawing from a deck or, if unavailable, by rolling dice — the number rolled indicates the mission. Each player has **2 active missions** at all times. Once chosen, they cannot be discarded until the next **Initiative Phase**. If a mission is completed or discarded, the player must roll again for a new one.
+1. **Capturing command posts** — each command post provides **5 pts per turn**, including the HQ.
+2. **Completing missions** — each completed mission provides points. Players agree on how many missions they bring to the battle.
+
+Missions are chosen from the mission deck; each player must have **2**. In the first turn, during the initiative phase, once missions are chosen, players may swap them for new ones once. After that, they can only be swapped in the next **Initiative Phase**. Discarded cards return to the deck. If a mission is completed, it is announced, removed from the deck, and kept by the player who completed it.
 
 <div class="rules-mission-grid">
 
 <div class="rules-mission-card" data-number="1">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">1 - Titanic Fury</h3><button class="rules-mission-view-btn" type="button" data-number="1" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
 <p class="rules-mission-card-flavor"><em>"Let the earth tremble at its passing."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> With one of your Monsters or Vehicles, destroy an enemy unit this turn</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> One of your Monster or Vehicle pieces must destroy an enemy unit this turn (by shooting or assault). In Skirmish only Monsters apply (no vehicles); in Grand Battle, both. Rewards sending the beast into action.</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> With one of your Monsters or Vehicles (or your Hero if you have none), destroy an enemy unit this turn</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> One of your Monster or Vehicle pieces must destroy an enemy unit this turn (by shooting or charging). In Skirmish only Monsters apply (no vehicles); in Grand Battle, both. Rewards sending the beast into action. If you have no Monster or Vehicle in your list, your Hero fulfils this mission instead.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
 </div>
 
@@ -99,9 +102,9 @@ Missions are chosen at random — either by drawing from a deck or, if unavailab
 <div class="rules-mission-card" data-number="11">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">11 - Expansion</h3><button class="rules-mission-view-btn" type="button" data-number="11" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
 <p class="rules-mission-card-flavor"><em>"I cannot see the end of my empire."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Gain 5 pts for each command post you control</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> At the end of the turn, count all the command posts you control — including your HQ — and gain 5 pts for each one. It's a one-time score: after scoring, the mission is discarded and you draw another. Rewards expanding and dominating the map at the right moment.</p>
-<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 5 pts per controlled post and HQ</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Conquer at least 2 neutral command posts</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> At the end of the turn, control 2 or more command posts that were neutral (belonging to neither player) at the start of the game.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
 </div>
 
 <div class="rules-mission-card" data-number="12">
@@ -156,15 +159,15 @@ Missions are chosen at random — either by drawing from a deck or, if unavailab
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">18 - Sacred Burden</h3><button class="rules-mission-view-btn" type="button" data-number="18" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
 <p class="rules-mission-card-flavor"><em>"Hands full, glory deferred."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Your Hero carries the token and gains 5 pts for each turn they end within 9" or less of a command post (not HQ)</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> While carrying it, the Hero cannot attack (ranged or melee) or use Ready; they can still move and keep their faction ability. At the end of the turn, if they carry it within 9" or less of a command post (not HQ), you gain 5 pts; if they're further away or only near an HQ, that turn doesn't score. You can drop the token voluntarily (it falls where you are and anyone can pick it up): doing so automatically discards this mission. The same happens if the Hero dies.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> While carrying it, the Hero cannot attack (ranged or melee); they can still move and keep their faction ability. At the end of the turn, if they carry it within 9" or less of a command post (not HQ), you gain 5 pts; if they're further away or only near an HQ, that turn doesn't score. You can drop the token voluntarily (it falls where you are and anyone can pick it up): doing so automatically discards this mission. The same happens if the Hero dies.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 5 pts per turn carrying it within 9" or less of a post (not HQ)</p>
 </div>
 
 <div class="rules-mission-card" data-number="19">
-<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">19 - Ambush</h3><button class="rules-mission-view-btn" type="button" data-number="19" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
-<p class="rules-mission-card-flavor"><em>"The one who strikes first doesn't always strike best."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Destroy an enemy unit with a Ready attack</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> The kill must come from the free Ready counterattack (when shot at or charged while the unit was on Ready). Rewards setting the trap and punishing whoever rushes at you.</p>
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">19 - Entrenched</h3><button class="rules-mission-view-btn" type="button" data-number="19" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"Plant your feet, aim, and don't miss."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Destroy an enemy unit with a Heavy Shoot attack</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> The kill must come from a Heavy Shoot attack (the unit did not move that turn and fired with +1 damage). Rewards holding position and punishing the enemy from a fixed firing line.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
 </div>
 
@@ -174,6 +177,54 @@ Missions are chosen at random — either by drawing from a deck or, if unavailab
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Be the first to destroy an enemy unit this turn</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> Achieve this if you are the first player to destroy an enemy unit during the turn. Only one player can claim it each turn, so it rewards initiative and the first strike.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 15 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="21">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">21 - Epic Charge</h3><button class="rules-mission-view-btn" type="button" data-number="21" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"The impact that breaks the line."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Destroy an enemy unit with the free attack from a Charge</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> The unit must fall to the free melee attack granted by the Charge (the strike upon entering base contact). Finishing them off in a later activation does not count. Rewards momentum: charging in and destroying the opponent in one burst.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="22">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">22 - Kamikaze War</h3><button class="rules-mission-view-btn" type="button" data-number="22" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"What explodes doesn't choose sides."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Pick up the token and detonate it hitting 2 or more allied or enemy units</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> A unit picks up the token (base contact) and, spending an action, detonates it: it explodes in a 6" radius and inflicts 1D6 damage to every unit within the radius (allied or enemy), including the carrier. Only scores if the explosion hits 2 or more units (not counting the carrier): the first 2 give 20 pts and each additional unit hit adds +5.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts (minimum 2 units) + 5 pts per extra unit</p>
+</div>
+
+<div class="rules-mission-card" data-number="23">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">23 - Long-Range Duel</h3><button class="rules-mission-view-btn" type="button" data-number="23" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"Death arrives before the sound."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Destroy an enemy unit at 18" or more</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> The kill must come from a ranged attack fired from 18" or more away (measured from attacker to target). Rewards long-range weapons and patient marksmanship from the rear.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="24">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">24 - Unstoppable Tide</h3><button class="rules-mission-view-btn" type="button" data-number="24" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"Nobody holds two fronts."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Charge an enemy unit that is already locked in combat with an allied unit</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> Declare Charge against an enemy unit that is already locked with one of your allied units, joining that combat. Rewards surrounding and overwhelming: hitting the flank of whoever is already busy defending.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="25">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">25 - No Casualties</h3><button class="rules-mission-view-btn" type="button" data-number="25" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"Not one less."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> End a turn (from turn 2 onwards) without losing a single unit</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> From turn 2 onwards, complete a full turn without losing a single unit. Rewards defensive discipline and solid casualty management; harder as the carnage advances.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 10 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="26">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">26 - Absolute Control</h3><button class="rules-mission-view-btn" type="button" data-number="26" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"The whole map, under one banner."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> At the end of a turn, control ALL command posts on the table at once</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> At the end of a turn, control every command post on the table at once — including your HQ and your opponent's. Total domination: you must sweep the enemy from every objective. Nearly impossible, but pulling it off defines the game.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 40 pts</p>
 </div>
 
 </div>
