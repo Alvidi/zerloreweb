@@ -95,7 +95,7 @@
             { "nombre": "Carbine", "habilidades_arma": ["Reliable"] }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Explosive Charge", "habilidades_arma": ["Explosive"] }
+            { "nombre": "Explosive Charge", "habilidades_arma": ["Explosive (2)"] }
           ]
         },
         "pasado": {
@@ -117,7 +117,7 @@
         "futuro": {
           "disparo": [
             { "nombre": "Autocannon", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Grenade Launcher (only Line)", "habilidades_arma": ["Explosive"] }
+            { "nombre": "Grenade Launcher (only Line)", "habilidades_arma": ["Explosive (2)"] }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }
@@ -299,7 +299,7 @@
         },
         "pasado": {
           "disparo": [
-            { "nombre": "Trebuchet", "habilidades_arma": ["Arcing", "Explosive"] }
+            { "nombre": "Trebuchet", "habilidades_arma": ["Arcing", "Explosive (2)"] }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Butt", "habilidades_arma": ["Reliable"] }

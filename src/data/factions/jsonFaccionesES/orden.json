@@ -119,7 +119,7 @@
             { "nombre": "Carabina", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Carga explosiva", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Explosiva"], "valor_extra": 0 }
+            { "nombre": "Carga explosiva", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Explosiva (2)"], "valor_extra": 0 }
           ]
         },
         "pasado": {
@@ -147,7 +147,7 @@
         "futuro": {
           "disparo": [
             { "nombre": "Cañón automático", "ataques": "3D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Lanzagranadas (solo Línea)", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Explosiva"], "valor_extra": 0 }
+            { "nombre": "Lanzagranadas (solo Línea)", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Explosiva (2)"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
@@ -371,7 +371,7 @@
         },
         "pasado": {
           "disparo": [
-            { "nombre": "Trabuquete", "ataques": "1D3", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica", "Explosiva"], "valor_extra": 0 }
+            { "nombre": "Trabuquete", "ataques": "1D3", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica", "Explosiva (2)"], "valor_extra": 0 }
           ],
           "cuerpo_a_cuerpo": [
             { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }

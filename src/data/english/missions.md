@@ -8,14 +8,14 @@ Before starting, players agree on:
 - The **number of turns** — recommended: **5**.
 - Each player's **total army value**.
 - The **game mode** — Skirmish or Grand Battle.
-- The number of **missions** being played. Each mission defines its own objectives.
+- The **missions** being played. Each mission defines its own objectives.
 
 The game can be won in two ways: capturing the enemy HQ — an immediate victory — or by points. How are points earned?
 
 1. **Capturing command posts** — each command post provides **5 pts per turn**, including the HQ.
-2. **Completing missions** — each completed mission provides points. Players agree on how many missions they bring to the battle.
+2. **Completing missions** — each completed mission provides points. Each player brings **2 missions** to the battle.
 
-Missions are chosen from the mission deck; each player must have **2**. In the first turn, during the initiative phase, once missions are chosen, players may swap them for new ones once. After that, they can only be swapped in the next **Initiative Phase**. Discarded cards return to the deck. If a mission is completed, it is announced, removed from the deck, and kept by the player who completed it.
+Missions are chosen from the mission deck; each player must have **2**. In the first turn, during the initiative phase, once missions are chosen, players may swap them for new ones once. After that, they can only be swapped in the next **Initiative Phase**. Discarded cards return to the deck. When a mission is completed, it is announced to the players, checked, removed from the deck, and kept by the player who completed it.
 
 <div class="rules-mission-grid">
 
@@ -225,6 +225,14 @@ Missions are chosen from the mission deck; each player must have **2**. In the f
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> At the end of a turn, control ALL command posts on the table at once</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> At the end of a turn, control every command post on the table at once — including your HQ and your opponent's. Total domination: you must sweep the enemy from every objective. Nearly impossible, but pulling it off defines the game.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 40 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="27">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">27 - Scorched Earth</h3><button class="rules-mission-view-btn" type="button" data-number="27" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
+<p class="rules-mission-card-flavor"><em>"If it can't be mine, let it burn."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Let the enemy conquer one of your command posts; that post gives them no points this turn</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> Complete this mission if, at the end of the turn, your opponent controls a command post you held at the end of the previous turn (your HQ does not count). That post grants the opponent no points this turn: you left them only ashes. It is the territorial twin of Martyr — you yield ground today to cash in the play.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 15 pts</p>
 </div>
 
 </div>

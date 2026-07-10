@@ -8,14 +8,14 @@ Antes de comenzar, los jugadores acuerdan:
 - El **número de turnos** — recomendado: **5**.
 - El **valor total del ejército** de cada jugador.
 - El **modo de juego** — Escaramuza o Gran Batalla.
-- El número de **misiones** que se va a jugar. Cada misión define sus propios objetivos.
+- Las **misiones** que se van a jugar. Cada misión define sus propios objetivos.
 
 La partida se puede ganar de dos maneras: conquistando el CG enemigo —victoria inmediata— o por puntos. ¿Cómo se consiguen puntos?
 
 1. **Conquistando puestos de mando** — cada puesto de mando proporciona **5 pts por turno**, incluido el CG.
-2. **Completando misiones** — cada misión completada proporciona puntos. Los jugadores acuerdan cuántas misiones se llevan a la batalla.
+2. **Completando misiones** — cada misión completada proporciona puntos. Cada jugador lleva **2 misiones** a la batalla.
 
-Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**. En el primer turno, en la fase de iniciativa, una vez escogidas las misiones, los jugadores tienen la posibilidad de cambiarlas por otras una vez. Después, solo se podrán cambiar en la siguiente **Fase de Iniciativa**. Las cartas descartadas vuelven a la baraja. Si una misión se completa, se indica a los jugadores, se saca de la baraja y se queda el jugador que la completó.
+Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**. En el primer turno, en la fase de iniciativa, una vez escogidas las misiones, los jugadores tienen la posibilidad de cambiarlas por otras una vez. Después, solo se podrán cambiar en la siguiente **Fase de Iniciativa**. Las cartas descartadas vuelven a la baraja. Cuando una misión se completa, se anuncia a los jugadores, se comprueba, se retira de la baraja y se la queda el jugador que la completó.
 
 <div class="rules-mission-grid">
 
@@ -101,7 +101,7 @@ Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**.
 
 <div class="rules-mission-card" data-number="11">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">11 - Expansión</h3><button class="rules-mission-view-btn" type="button" data-number="11" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
-<p class="rules-mission-card-flavor"><em>"No alcanzo ver mi imperio."</em></p>
+<p class="rules-mission-card-flavor"><em>"No alcanzo a ver mi imperio."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Conquista al menos 2 puestos de mando neutrales</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Al final del turno, controla 2 o más puestos de mando que al inicio de la partida fueran neutrales (ni tuyos ni del rival).</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
@@ -225,6 +225,14 @@ Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**.
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Al final de un turno, controla TODOS los puestos de mando de la mesa a la vez</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Al final de un turno, controla todos los puestos de mando de la mesa a la vez —incluido tu Cuartel General y el del rival—. Es la dominación total: hay que barrer al enemigo de cada objetivo. Casi imposible, pero si la clavas defines la partida.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 40 pts</p>
+</div>
+
+<div class="rules-mission-card" data-number="27">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">27 - Quema de tierra</h3><button class="rules-mission-view-btn" type="button" data-number="27" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Si no puede ser mío, que sea ceniza."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Deja que el enemigo conquiste un puesto de mando tuyo; ese puesto no le dará puntos ese turno</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Completa esta misión si, al final del turno, el rival controla un puesto de mando que tú controlabas al final del turno anterior (tu Cuartel General no cuenta). Ese puesto no otorga puntos al rival este turno: le has dejado solo cenizas. Es el gemelo territorial de Mártir — cedes terreno hoy para cobrar la jugada.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 15 pts</p>
 </div>
 
 </div>

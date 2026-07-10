@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import fichasMisionesImg from '../../../images/fichas/misiones.png'
+import fichasItemImg from '../../../images/fichas/ficha_item.png'
 
 // ── AutoFitText: reduce el font-size hasta que el contenido quepa en la caja ──
 function useAutoFitBox({ maxFontSize, minFontSize = 7, step = 0.5, dependencyKey = '' }) {
@@ -41,18 +42,31 @@ function AutoFitText({ as: Tag = 'div', className, style, children, maxFontSize,
 
 const CARD_W = 1537
 const CARD_H = 1023
-const STORAGE_KEY = 'zerolore.rules.mission-ficha-layout.v1'
+const MISSION_STORAGE_KEY = 'zerolore.rules.mission-ficha-layout.v1'
+const ITEM_STORAGE_KEY = 'zerolore.rules.item-ficha-layout.v1'
 const LAYOUT_EVENT = 'zerolore:mission-ficha-layout-updated'
 const DEV_KEY = 'zerolore.generator.layout-dev'
 
 const DEFAULT_GUIDES = [
-  { label: 'MISION',      x: 31,  y: 186, w: 190, h: 54  },
-  { label: 'NUMERO',      x: 634, y: 186, w: 88,  h: 57  },
-  { label: 'TITULO',      x: 134, y: 77,  w: 600, h: 70  },
-  { label: 'LORE',        x: 48,  y: 282, w: 645, h: 55  },
-  { label: 'OBJETIVO',    x: 50,  y: 345, w: 641, h: 130 },
-  { label: 'DESCRIPCION', x: 50,  y: 488, w: 645, h: 397 },
-  { label: 'PUNTOS',      x: 50,  y: 900, w: 648, h: 70  },
+  { label: 'MISION',       x: 31,  y: 186, w: 190, h: 54  },
+  { label: 'VALOR_LABEL',  x: 510, y: 186, w: 116, h: 54  },
+  { label: 'NUMERO',       x: 634, y: 186, w: 88,  h: 57  },
+  { label: 'TITULO',       x: 134, y: 77,  w: 600, h: 70  },
+  { label: 'LORE',         x: 48,  y: 282, w: 645, h: 55  },
+  { label: 'OBJETIVO',     x: 50,  y: 345, w: 641, h: 130 },
+  { label: 'DESCRIPCION',  x: 50,  y: 488, w: 645, h: 397 },
+  { label: 'PUNTOS',       x: 50,  y: 900, w: 648, h: 70  },
+]
+
+const DEFAULT_ITEM_GUIDES = [
+  { label: 'MISION',       x: 31,  y: 186, w: 190, h: 54  },
+  { label: 'VALOR_LABEL',  x: 510, y: 186, w: 116, h: 54  },
+  { label: 'NUMERO',       x: 634, y: 186, w: 88,  h: 57  },
+  { label: 'TITULO',       x: 169, y: 70,  w: 547, h: 70  },
+  { label: 'LORE',         x: 48,  y: 282, w: 645, h: 55  },
+  { label: 'OBJETIVO',     x: 50,  y: 345, w: 641, h: 130 },
+  { label: 'DESCRIPCION',  x: 50,  y: 488, w: 645, h: 397 },
+  { label: 'PUNTOS',       x: 50,  y: 900, w: 648, h: 70  },
 ]
 
 const clamp = (guide) => ({
@@ -63,13 +77,13 @@ const clamp = (guide) => ({
   h: Math.max(18, Math.min(CARD_H, guide.h)),
 })
 
-const sanitize = (raw) => {
+const sanitize = (raw, defaults = DEFAULT_GUIDES) => {
   const rawMap = new Map(
     Array.isArray(raw)
       ? raw.filter((g) => g?.label).map((g) => [g.label, g])
       : [],
   )
-  return DEFAULT_GUIDES.map((def) => {
+  return defaults.map((def) => {
     const stored = rawMap.get(def.label)
     if (!stored) return { ...def }
     return clamp({
@@ -82,20 +96,20 @@ const sanitize = (raw) => {
   })
 }
 
-const load = () => {
+const load = (storageKey, defaults = DEFAULT_GUIDES) => {
   try {
-    const raw = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY)
-    return raw ? sanitize(JSON.parse(raw)) : sanitize([])
+    const raw = typeof window !== 'undefined' && window.localStorage.getItem(storageKey)
+    return raw ? sanitize(JSON.parse(raw), defaults) : sanitize([], defaults)
   } catch {
-    return sanitize([])
+    return sanitize([], defaults)
   }
 }
 
-const persist = (guides) => {
-  const normalized = sanitize(guides)
+const persist = (guides, storageKey, defaults = DEFAULT_GUIDES) => {
+  const normalized = sanitize(guides, defaults)
   if (typeof window !== 'undefined') {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized))
-    window.dispatchEvent(new CustomEvent(LAYOUT_EVENT, { detail: normalized }))
+    window.localStorage.setItem(storageKey, JSON.stringify(normalized))
+    window.dispatchEvent(new CustomEvent(LAYOUT_EVENT, { detail: { normalized, storageKey } }))
   }
   return normalized
 }
@@ -113,13 +127,15 @@ const resizeOrMove = (guide, interaction, pos) => {
   return clamp({ ...guide, x: interaction.originX + dx, y: interaction.originY + dy })
 }
 
-const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLayout = false }, ref) {
+const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLayout = false, isItem = false }, ref) {
+  const storageKey = isItem ? ITEM_STORAGE_KEY : MISSION_STORAGE_KEY
+  const guideDefaults = isItem ? DEFAULT_ITEM_GUIDES : DEFAULT_GUIDES
   const wrapperRef = useRef(null)
   const cardRef    = useRef(null)
   const latestRef  = useRef(null)
   const historyRef = useRef([])
 
-  const [guides, setGuides]           = useState(() => load())
+  const [guides, setGuides]           = useState(() => load(storageKey, guideDefaults))
   const [isLayout, setIsLayout]       = useState(false)
   const [canLayout]                   = useState(() => !disableLayout && canAccess())
   const [cursorPos, setCursorPos]     = useState(null)
@@ -166,10 +182,10 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
 
   // Sync from other tabs / windows
   useEffect(() => {
-    const handleEvent = (e) => setGuides(sanitize(e.detail))
+    const handleEvent = (e) => { if (e.detail?.storageKey === storageKey) setGuides(sanitize(e.detail.normalized, guideDefaults)) }
     const handleStorage = (e) => {
-      if (e.key !== STORAGE_KEY || !e.newValue) return
-      try { setGuides(sanitize(JSON.parse(e.newValue))) } catch { /* ignore */ }
+      if (e.key !== storageKey || !e.newValue) return
+      try { setGuides(sanitize(JSON.parse(e.newValue), guideDefaults)) } catch { /* ignore */ }
     }
     window.addEventListener(LAYOUT_EVENT, handleEvent)
     window.addEventListener('storage', handleStorage)
@@ -183,7 +199,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
   useEffect(() => {
     if (!unsaved) return undefined
     const id = window.setTimeout(() => {
-      persist(latestRef.current)
+      persist(latestRef.current, storageKey, guideDefaults)
       setUnsaved(false)
       setSaveState('saved')
     }, 600)
@@ -233,7 +249,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
     setUnsaved(true)
     setSaveState('idle')
     setGuides((prev) => {
-      const next = sanitize(prev).map((g) =>
+      const next = sanitize(prev, guideDefaults).map((g) =>
         g.label === interaction.label ? resizeOrMove(g, interaction, pos) : g,
       )
       latestRef.current = next
@@ -245,7 +261,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
   const handleMouseDown  = (e) => { if (isLayout) setLockedPos(getCardPos(e.clientX, e.clientY)) }
   const handleMouseUp    = () => {
     if (interaction) {
-      persist(latestRef.current)
+      persist(latestRef.current, storageKey, guideDefaults)
       setUnsaved(false)
       setSaveState('saved')
     }
@@ -300,7 +316,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
         onMouseUp={handleMouseUp}
       >
         {/* Plantilla */}
-        <img src={fichasMisionesImg} className="ficha-template-img" alt="" aria-hidden="true" />
+        <img src={isItem ? fichasItemImg : fichasMisionesImg} className="ficha-template-img" alt="" aria-hidden="true" />
 
         {/* Capa de texto */}
         <div className="ficha-data-layer">
@@ -310,10 +326,22 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
             style={fieldStyle('MISION')}
             maxFontSize={22}
             minFontSize={12}
-            fitKey="MISIÓN"
+            fitKey={ficha.misionLabel || 'MISIÓN'}
           >
-            MISIÓN
+            {ficha.misionLabel || 'MISIÓN'}
           </AutoFitText>
+
+          {ficha.valorLabel && (
+            <AutoFitText
+              className="mission-abs mission-mision-label"
+              style={fieldStyle('VALOR_LABEL')}
+              maxFontSize={22}
+              minFontSize={12}
+              fitKey={ficha.valorLabel}
+            >
+              {ficha.valorLabel}
+            </AutoFitText>
+          )}
 
           <AutoFitText
             className="mission-abs mission-numero"
@@ -354,7 +382,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
             minFontSize={16}
             fitKey={ficha.summary}
           >
-            <span className="mission-field-label">Objetivo</span>
+            <span className="mission-field-label">{ficha.objetivoLabel || 'Objetivo'}</span>
             <p>{ficha.summary}</p>
           </AutoFitText>
 
@@ -371,16 +399,18 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
             </AutoFitText>
           )}
 
-          <AutoFitText
-            className="mission-abs mission-puntos"
-            style={fieldStyle('PUNTOS')}
-            maxFontSize={26}
-            minFontSize={16}
-            fitKey={ficha.meta}
-          >
-            <span className="mission-field-label">Puntos</span>
-            <p>{ficha.meta}</p>
-          </AutoFitText>
+          {ficha.meta && (
+            <AutoFitText
+              className="mission-abs mission-puntos"
+              style={fieldStyle('PUNTOS')}
+              maxFontSize={26}
+              minFontSize={16}
+              fitKey={ficha.meta}
+            >
+              <span className="mission-field-label">Puntos</span>
+              <p>{ficha.meta}</p>
+            </AutoFitText>
+          )}
 
         </div>
 

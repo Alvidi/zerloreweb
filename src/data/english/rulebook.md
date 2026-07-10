@@ -399,6 +399,8 @@ When a squad takes damage, the owning player decides which miniature takes the d
 
 If the chosen miniature is destroyed and there is remaining damage to assign, the player must choose another miniature in the squad to take the remaining damage, following the same rules.
 
+If the attack comes from a **weapon with a class restriction**, damage may only be assigned to miniatures of the permitted classes *(see Restricted Weapons)*.
+
 ---
 
 # Cover
@@ -467,7 +469,7 @@ _(See the Melee Combat section for the full resolution.)_
 
 Command posts are strategic positions spread across the battlefield. They are represented on the table with the **command post token** (circle or square). Besides being objectives to capture, they are the only points from which units may deploy.
 
-When a player captures a command post, they place their coloured **flag token** on top of the orange token to show control. If the opponent captures it back, the flag is replaced with theirs.
+When a player captures a command post, they place their coloured **flag token** on top of the command post to show control. If the opponent captures it back, the flag is replaced with theirs.
 
 ![Unit capturing a command post with its control flag]({{commandPostControlImage}})
 
@@ -566,10 +568,10 @@ General characteristics:
 
 ### Special Hero Rules
 
-- **The Hero is mandatory in every game.** Every army must include exactly one Hero in its army.
+- **The Hero is mandatory in every game.** Every army must include exactly one Hero.
 - **Faction ability.** Each Hero carries an ability that affects all allied units while they are on the battlefield. This ability is shown on their profile. **If the Hero is eliminated, the faction ability is lost** for the rest of the game.
-- In Grand Battle mode, the **Hero must join a squad before deployment**. A Hero that is not part of a squad cannot be included in the army in this mode.
-- While part of a squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently; damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad.
+- In Grand Battle mode, the **Hero must join a squad before deployment**.
+- While part of a squad, their Movement, Save, and Speed values replace the squad's. The hero keeps their own Wounds independently; damage is always assigned to the rest of the squad first. The hero is the last model to fall and can only take damage when no other miniature remains in the squad, **except against weapons whose restriction includes Hero** *(see Restricted Weapons)*.
 
 # Unit Profiles
 
@@ -593,7 +595,7 @@ Indicates the **maximum distance**, in inches ("), the unit may travel when taki
 
 This value is also used for:
 
-- Rush (Movement + Speed)
+- Charge / Run (Movement + Speed)
 - Retreat
 
 ### Wounds
@@ -614,7 +616,7 @@ A Save of **4+** blocks hits on results of **4, 5, or 6**.
 
 ### Speed
 
-Represents the **additional distance**, in inches ("), that the unit may travel when making a **Rush**.
+Represents the **additional distance**, in inches ("), that the unit may travel when **Charging** or **Running**.
 
 A unit with higher Speed can cover more ground in a single burst and reach more distant targets when charging.
 
@@ -765,15 +767,19 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Unstable** | After resolving the attack, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage it inflicted on the target. If the attack caused no damage, there is no backlash. |
 | **Multi-use** | This weapon can be used while the unit is locked in melee combat, against the unit it is fighting in melee combat. |
 | **Direct** | This weapon hits directly and has no Precision. |
-| **Explosive** | When a unit suffers hits from this ability, the damage caused also applies to all **allied and enemy** units within **3"** of the target. |
+| **Explosive (X)** | Resolve the attack against the target unit. The damage it suffers is also applied to **X different units** (allied or enemy) within 3" or less of the hit miniature, chosen by the attacker. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 | **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |
 | **Erratic** | Before resolving the attack, roll 1D6: the result becomes the weapon's Precision for that attack. |
 | **Sweep** | Melee weapon. When attacking, instead of choosing a single target, this weapon **attacks ALL enemy units locked with it**. Resolve the attack separately against each one. |
 
-## Secondary Weapons
+**Note:** Direct and Erratic are abilities exclusive to **ranged weapons**; they cannot appear on melee weapons.
 
-If a unit has two weapons of the same type (two ranged or two melee), the **first weapon** on its profile can attack any unit. The **second weapon** is a specialised weapon: it shows in parentheses the only classes it can target.
+**Note on Explosive:** the replicated damage is independent of the main attack: each chosen unit suffers it immediately, and its owner assigns it to one of their miniatures **within 3" or less of the hit miniature** (normal assignment then continues). If the attack caused no damage to the target, there is no explosion.
+
+## Restricted Weapons
+
+Some weapons show in parentheses the **only classes they can attack**. These weapons cannot declare attacks against any other class. Weapons without parentheses can attack any unit.
 
 If a unit only has one weapon of a given type, that weapon can attack anything.
 
@@ -781,6 +787,24 @@ Examples:
 
 - **Fusion Grenade (Vehicle, Monster only)** — can only be declared against Vehicles or Monsters; it cannot be used against any other class.
 - **Flail (Hero only)** — can only attack Heroes.
+
+**Restricted Weapons and Squads with a Hero**
+- A weapon **with no restriction** works as normal: damage is assigned to the squad and the Hero is the last to be harmed.
+- A weapon **(Hero only)** may attack a squad containing a Hero, but **all its damage goes to the Hero** directly. Excess damage is lost.
+- A weapon with **two classes** against a squad that contains both: the attacker **declares a focus** when attacking (the Hero or the squad). Damage starts with the focus and any excess passes to the other side **only if its class is among the weapon's permitted classes**; otherwise it is lost.
+*General rule: damage may only affect miniatures whose class is permitted by the weapon; damage that finds no legal recipient is lost.*
+*Example: a Flail (Hero only) against a Line squad with a Hero → all damage goes to the Hero, excess is lost. A Hook (Elite, Hero only) focused on an Elite squad with a Hero → the squad falls and excess reaches the Hero. The same Hook against a Line squad with a Hero → focus can only be declared on the Hero, and excess is lost (the weapon cannot attack Line).*
+
+---
+
+# Items and Equipment
+**Items** are single-use equipment purchased with **Value** when building your list and assigned to a specific unit at deployment. The complete catalogue of items, with their cost and which units can equip each one, can be found in its own section.
+- Each unit may equip **a single item**.
+- An army may repeat items, with a **maximum of 3 copies of the same item**. *(Example: you can equip a grenade on three different units, but not a fourth grenade.)*
+- The item belongs to **the unit, not each individual miniature**: a squad uses the item ONCE, regardless of how many miniatures it has.
+- Attacks and effects generated by an item (such as a Grenade) **do not benefit from actions or specialties** (Heavy Shoot, Accurate, Shooter…): they do exactly what their card says.
+- **Timing:** each item states on its card **when** it can be used ("when activating", "when declared a target", "when deploying"…). If that moment passes without declaring it, the item cannot be applied retroactively *(see Forgotten Actions, under General Considerations)*.
+- After use, the item is discarded.
 
 ---
 

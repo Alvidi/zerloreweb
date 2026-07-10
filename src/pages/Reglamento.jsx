@@ -2467,7 +2467,7 @@ function Reglamento() {
                 aria-label="Cerrar"
               >×</button>
             </div>
-            <MissionFichaCard ficha={activeMissionFicha} />
+            <MissionFichaCard ficha={activeMissionFicha} isItem={Boolean(activeMissionFicha?.misionLabel)} />
           </div>
         </div>,
         document.body,

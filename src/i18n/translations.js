@@ -38,6 +38,7 @@ export const translations = {
       modeRules: 'Reglamento',
       modeMissions: 'Misiones',
       modeTokens: 'Tokens',
+      modeItems: 'Equipamiento',
       tokens: {
         title: 'Generador de tokens',
         intro: 'Selecciona cuántos tokens necesitas de cada tipo y genera un PDF listo para imprimir y recortar.',
@@ -84,7 +85,7 @@ export const translations = {
       faction: 'Facción',
       factionUnits: 'Unidades de facción',
       heroes: 'Héroes',
-      requiredHeroSlot: 'Héroe obligatorio',
+      requiredHeroSlot: 'Héroe',
       requiredHero: 'El ejército necesita exactamente un héroe.',
       singleHeroRequired: 'El ejército solo puede tener un héroe.',
       heroAlreadyAdded: 'Ya has añadido un héroe. Solo puede haber uno.',
@@ -296,6 +297,7 @@ export const translations = {
       modeRules: 'Rulebook',
       modeMissions: 'Missions',
       modeTokens: 'Tokens',
+      modeItems: 'Equipment',
       tokens: {
         title: 'Token generator',
         intro: 'Choose how many tokens you need of each type and generate a print-ready PDF to cut out.',
@@ -342,7 +344,7 @@ export const translations = {
       faction: 'Faction',
       factionUnits: 'Faction units',
       heroes: 'Heroes',
-      requiredHeroSlot: 'Required hero',
+      requiredHeroSlot: 'Hero',
       requiredHero: 'The army needs exactly one hero.',
       singleHeroRequired: 'The army can only include one hero.',
       heroAlreadyAdded: 'You have already added a hero. Only one is allowed.',

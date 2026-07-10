@@ -57,7 +57,7 @@ Cuando una regla contradiga o modifique una regla del reglamento, **las reglas d
 
 _Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Multiuso, esa regla especial permite disparar aunque estés trabado — y eso manda._
 
-### Numero de jugadores
+### Número de jugadores
 
 ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 
@@ -395,6 +395,8 @@ En caso de que una escuadra sufra daños, el jugador poseedor de la escuadra dec
 
 Si la miniatura elegida es eliminada y aún queda daño por asignar, el jugador debe elegir otra miniatura de la escuadra a la que aplicar el daño restante, siguiendo las mismas reglas.
 
+Si el ataque proviene de un **arma con restricción de clases**, el daño solo puede asignarse a miniaturas de las clases permitidas *(ver Armas restringidas)*.
+
 ---
 
 # Coberturas
@@ -562,10 +564,10 @@ Características generales:
 
 ### Reglas especiales de los héroes:
 
-- **El Héroe es obligatorio en partida.** Todo ejército debe incluir exactamente un Héroe en su ejercito.
+- **El Héroe es obligatorio en partida.** Todo ejército debe incluir exactamente un Héroe.
 - **Habilidad de facción.** Cada Héroe porta una habilidad que afecta a todas las unidades aliadas mientras esté en el campo de batalla. Esta habilidad se indica en su ficha. **Si el Héroe es eliminado, la habilidad de facción se pierde** para el resto de la partida.
-- En modo Gran Batalla, el **Héroe debe unirse obligatoriamente a una escuadra antes del despliegue**. Un Héroe que no forme parte de ninguna escuadra no puede incluirse en el ejército en este modo.
-- Mientras forme parte de una escuadra, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente — el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer: solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
+- En modo Gran Batalla, el **Héroe debe unirse obligatoriamente a una escuadra antes del despliegue**.
+- Mientras forme parte de una escuadra, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente — el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer: solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra, **salvo frente a armas cuya restricción incluya Héroe** *(ver Armas restringidas)*.
 
 # Perfiles de unidad
 
@@ -618,11 +620,11 @@ Una unidad con mayor Velocidad puede cubrir más terreno en un solo impulso y al
 
 Incluye comportamientos especiales listados abajo, estas reglas se aplican siempre que la unidad esté en juego, salvo que se indique lo contrario.
 
-Los héroes y algunas unidades experimentales tiene especialidades distintas.
+Los héroes y algunas unidades experimentales tienen especialidades distintas.
 
 | Especialidad    | Descripción                                                                                                                                                                                           | Especialidad             | Descripción                                                                                                                                                                                                                               |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Soldado**     | Esta unidad no tienen ninguna especialidad.                                                                                                                                                           | **Resistente**           | La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3.**                                                                                                                                                        |
+| **Soldado**     | Esta unidad no tiene ninguna especialidad.                                                                                                                                                           | **Resistente**           | La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3.**                                                                                                                                                        |
 | **Soporte**     | En su activación, en lugar de actuar, puede curar a una unidad aliada a **6" o menos**: esa unidad recupera **1D3 Vidas** perdidas.                                                                   | **Evasivo**              | La primera vez cada turno que esta unidad sea objetivo de un ataque de **Disparo**, puede moverse hasta **2"** antes de resolver el ataque.                                                                                               |
 | **Guardia**     | Una vez por turno, cuando una unidad aliada **a 6" o menos** reciba daño, esta unidad puede recibir hasta 2 puntos de ese daño en su lugar.                                                           | **Anclado**              | Las unidades enemigas trabadas con esta unidad no pueden declarar **Retirada**.                                                                                                                                                           |
 | **Despiadado**  | Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen +1 daño crítico.                                                                                                   | **Berserker**            | Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3.**                                                                                                                       |
@@ -648,7 +650,7 @@ Representa el **coste en puntos** de la unidad.
 
 - Se utiliza para equilibrar enfrentamientos.
 - Determina el tamaño y composición de los ejércitos.
-- También se emplea para calcular la puntuación el haber varias unidades en un mismo puesto de mando
+- También se emplea para calcular la puntuación al haber varias unidades en un mismo puesto de mando
 
 ### Equipamiento de armas
 
@@ -678,7 +680,7 @@ Alcance máximo del arma en pulgadas (").
 
 La unidad solo puede atacar objetivos dentro de este rango.
 
-### Precision
+### Precisión
 
 Resultado mínimo necesario en cada dado para impactar.
 
@@ -726,12 +728,12 @@ En ZeroLore verás valores expresados como 4+, 5+, 3+, etc. Esto significa el re
 - **5+** → necesitas sacar 5 o 6 → 2 de cada 6 → ~33%
 - **3+** → necesitas sacar 3, 4, 5 o 6 → 4 de cada 6 → ~67%
 
-Cuando una regla dice **+1 al valor de Precision**, el número necesario sube — es peor para el atacante. Si tu arma impacta con 4+ y recibes +1, ahora necesitas 5+. Al contrario, **-1 al valor de Precision** es una ventaja: si impactas con 4+ y obtienes -1, ahora impactas con 3+. Esto aplica igual a Salvaciones.
+Cuando una regla dice **+1 al valor de Precisión**, el número necesario sube — es peor para el atacante. Si tu arma impacta con 4+ y recibes +1, ahora necesitas 5+. Al contrario, **-1 al valor de Precisión** es una ventaja: si impactas con 4+ y obtienes -1, ahora impactas con 3+. Esto aplica igual a Salvaciones.
 
 Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Salvación e Impactos tienen los siguientes límites:
 
 - **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
-- **Precision máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
+- **Precisión máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
 
 ## Habilidades de armas y especialidades de unidades
 
@@ -759,22 +761,42 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | **Inestable**     | Tras resolver el ataque, lanza 1D6. Con resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso.    |
 | **Multiuso**      | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad que está en cuerpo a cuerpo.                                                           |
 | **Directo**       | Esta arma impacta directamente, no tiene precisión.                                                                                                                                      |
-| **Explosiva**     | Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades **(aliadas y enemigas)** a 3" del objetivo.                                |
+| **Explosiva (X)** | Resuelve el ataque contra la unidad objetivo. El daño que esta sufra se aplica también a **X unidades distintas** (aliadas o enemigas) situadas a 3" o menos de la miniatura impactada, elegidas por el atacante. |
 | **Parabólica**    | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**.                                                                           |
 | **Alcance**       | Esta arma CaC puede usarse contra cualquier unidad enemiga a **3" o menos**, esté o no trabada con esta unidad.                                                                        |
 | **Errática**      | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma durante ese ataque.                                                                                      |
 | **Barrido**       | Arma de cuerpo a cuerpo. Al atacar, en vez de elegir un objetivo, **ataca a TODAS las unidades enemigas trabadas con ella**. Resuelve el ataque por separado contra cada una.         |
 
-## Armas secundarias
+**Nota:** Directo y Errática son habilidades exclusivas de las **armas a distancia**; no pueden aparecer en armas de cuerpo a cuerpo.
 
-Si una unidad tiene dos armas del mismo tipo (dos de disparo o dos de cuerpo a cuerpo), la **primera arma** de su ficha puede atacar a cualquier unidad. La **segunda arma** es un arma especializada: indica entre paréntesis las únicas clases a las que puede atacar.
+**Nota sobre Explosiva:** el daño replicado es independiente del ataque principal: cada unidad elegida lo sufre en el acto, y su propietario lo asigna a una de sus miniaturas **situada a 3" o menos de la miniatura impactada** (después continúa la asignación normal). Si el ataque no causó daño al objetivo, no hay explosión.
 
-Si una unidad solo tiene un arma de un tipo, esa arma puede atacar a todo.
+## Armas restringidas
+
+Algunas armas indican entre paréntesis las **únicas clases a las que pueden atacar**. Estas armas no pueden declarar ataques contra ninguna otra clase. Las armas sin paréntesis pueden atacar a cualquier unidad.
 
 Ejemplos:
 
 - **Granada de fusión (solo Vehículo, Monstruo)** — solo puede declararse contra Vehículos o Monstruos; contra el resto de clases no puede usarse.
 - **Mangual (solo Héroe)** — solo puede atacar a Héroes.
+
+**Armas restringidas y escuadras con Héroe**
+- Un arma **sin restricción** funciona como siempre: el daño se asigna a la escuadra y el Héroe es el último en ser dañado.
+- Un arma **(solo Héroe)** puede atacar a una escuadra que contenga un Héroe, pero **todo su daño va al Héroe** directamente. El daño sobrante se pierde.
+- Un arma con **dos clases** contra una escuadra que contenga ambas: el atacante **declara el foco** al atacar (el Héroe o la escuadra). El daño empieza por el foco y el sobrante pasa al otro lado **solo si su clase está entre las del arma**; si no, se pierde.
+*Regla general: el daño solo puede tocar miniaturas cuya clase esté permitida por el arma; el daño que no encuentra receptor legal, se pierde.*
+*Ejemplo: un Mangual (solo Héroe) contra una escuadra de Línea con Héroe → todo el daño al Héroe, el sobrante se pierde. Un Garfio (solo Élite, Héroe) con foco en una escuadra de Élite con Héroe → cae la escuadra y el sobrante alcanza al Héroe. El mismo Garfio contra una escuadra de Línea con Héroe → solo puede declarar foco en el Héroe, y su sobrante se pierde (el arma no puede atacar Línea).*
+
+---
+
+# Objetos y equipamiento
+Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al montar la lista y se asigna a una unidad concreta al desplegar. El catálogo completo de objetos, con su coste y qué unidades pueden equipar cada uno, se encuentra en su propia sección.
+- Cada unidad puede equipar **un solo objeto**.
+- Un ejército puede repetir objetos, con un **máximo de 3 copias del mismo objeto**. *(Ejemplo: puedes equipar una granada a tres unidades distintas, pero no una cuarta granada.)*
+- El objeto es **de la unidad, no de cada miniatura**: una escuadra usa el objeto UNA sola vez, tenga las miniaturas que tenga.
+- Los ataques y efectos generados por un objeto (como la Granada) **no se benefician de acciones ni especialidades** (Disparo pesado, Certero, Tirador…): hacen exactamente lo que dice su carta.
+- **Momento de uso:** cada objeto indica en su carta **cuándo** puede usarse ("al activarse", "al ser declarada objetivo", "al desplegar"…). Si ese momento pasa sin declararlo, el objeto no puede aplicarse retroactivamente *(ver Acciones olvidadas, en Consideraciones generales)*.
+- Tras usarse, el objeto se descarta.
 
 ---
 
