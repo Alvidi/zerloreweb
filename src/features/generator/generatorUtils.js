@@ -356,7 +356,15 @@ const normalizeUnit = (unit, index) => {
   const rawEspecialidad = perfil.especialidad ?? unit.especialidad
   const rawEspecialidadNombre = perfil.especialidad_nombre ?? unit.especialidad_nombre
   const habilidadFaccion = unit.habilidad_faccion || ''
-  const isHeroWithFactionAbility = !!(habilidadFaccion && !rawEspecialidad && !rawEspecialidadNombre)
+  const hasSpecialtyValue = (value) => {
+    const normalized = String(value ?? '').trim()
+    return normalized !== '' && normalized !== '-' && normalized !== '—'
+  }
+  const isHeroWithFactionAbility = !!(
+    habilidadFaccion
+    && !hasSpecialtyValue(rawEspecialidad)
+    && !hasSpecialtyValue(rawEspecialidadNombre)
+  )
 
   const especialidad = isHeroWithFactionAbility
     ? habilidadFaccion
