@@ -31,8 +31,9 @@ function useAutoFitBox({ maxFontSize, minFontSize = 7, step = 0.5, dependencyKey
   return ref
 }
 
-function AutoFitText({ as: Tag = 'div', className, style, children, maxFontSize, minFontSize = 7, step = 0.5, fitKey = '', ...rest }) {
+function AutoFitText({ as = 'div', className, style, children, maxFontSize, minFontSize = 7, step = 0.5, fitKey = '', ...rest }) {
   const ref = useAutoFitBox({ maxFontSize, minFontSize, step, dependencyKey: fitKey })
+  const Tag = as
   return (
     <Tag ref={ref} className={className} style={{ ...style, fontSize: `${maxFontSize}px` }} {...rest}>
       {children}
@@ -193,7 +194,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
       window.removeEventListener(LAYOUT_EVENT, handleEvent)
       window.removeEventListener('storage', handleStorage)
     }
-  }, [])
+  }, [guideDefaults, storageKey])
 
   // Auto-save 600ms after last drag
   useEffect(() => {
@@ -204,7 +205,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
       setSaveState('saved')
     }, 600)
     return () => window.clearTimeout(id)
-  }, [unsaved])
+  }, [guideDefaults, storageKey, unsaved])
 
   // Clear "saved" badge after 1.8s
   useEffect(() => {

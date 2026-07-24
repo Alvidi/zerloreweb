@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
@@ -16,7 +16,6 @@ import {
   computeUnitTotal,
   formatSpeedValue,
   factionImages,
-  generateArmyByValue,
   getFixedUnitLoadout,
   getUnitSpecialtyLabelForMode,
   isFactionData,
@@ -223,20 +222,12 @@ const sortHeroUnitsByEra = (units) =>
     return String(a?.nombre || '').localeCompare(String(b?.nombre || ''), 'es', { sensitivity: 'base' })
   })
 
-const unitMatchesEraToken = (unit, eraToken) => {
-  if (!eraToken) return true
-  const eraTokens = getUnitEraTokens(unit)
-  return !eraTokens.length || eraTokens.includes(eraToken)
-}
-
 const getUnitsForGeneratorContext = (faction) => sortUnitsByType(faction?.unidades || [])
 
 const getGeneratorUnitUid = (unit, index) => {
   const eraKey = getUnitEraTokens(unit).join('-') || 'any'
   return `${unit?.id || `unit-${index}`}::${eraKey}::${index}`
 }
-
-const getUnitIdentityKey = (unit) => `${unit?.id || ''}::${getUnitEraTokens(unit).join('-') || 'any'}`
 
 const isHeroUnit = (unit) => getUnitTypeToken(unit?.tipo) === 'hero'
 
@@ -245,58 +236,6 @@ const getSquadFichaValue = (unit, mode, squadSize) =>
 
 const getUnitFichaValue = (unit, mode, totalValue) =>
   mode === 'escuadra' ? unit?.valor_base : (totalValue ?? unit?.valor_base)
-
-const randomizeList = (items) => {
-  const next = [...items]
-  for (let index = next.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1))
-    ;[next[index], next[swapIndex]] = [next[swapIndex], next[index]]
-  }
-  return next
-}
-
-const createGeneratedUnitEntry = (unit, mode, era = '') => {
-  const fixedLoadout = getFixedUnitLoadout(unit, era)
-  const squadSize = mode === 'escuadra' ? clampSquadSize(unit.escuadra_min, unit) : 1
-  return {
-    uid: `${unit.id}-${Date.now()}-${Math.random()}`,
-    base: unit,
-    shooting: fixedLoadout.shooting,
-    meleeList: fixedLoadout.meleeList,
-    melee: fixedLoadout.melee,
-    squadSize,
-    perMiniLoadouts: null,
-    total: computeUnitTotal(unit, fixedLoadout.shooting, fixedLoadout.melee, squadSize, null, mode),
-  }
-}
-
-const generateArmyWithRequiredHero = (faction, target, mode, era = '') => {
-  const visibleUnits = getUnitsForGeneratorContext(faction)
-  const heroCandidates = visibleUnits.filter(isHeroUnit)
-  if (!heroCandidates.length) return { units: [], total: 0, score: Number.NEGATIVE_INFINITY }
-
-  let bestResult = null
-  randomizeList(heroCandidates).forEach((hero) => {
-    const heroEntry = createGeneratedUnitEntry(hero, mode, era)
-    if (heroEntry.total > target) return
-
-    const regularCandidates = visibleUnits.filter((unit) =>
-      !isHeroUnit(unit) && isUnitTypeAllowedInGameMode(unit.tipo, mode),
-    )
-    const remainingTarget = Math.max(0, Math.floor(target - heroEntry.total))
-    const regularResult = regularCandidates.length && remainingTarget > 0
-      ? generateArmyByValue({ ...faction, unidades: regularCandidates }, remainingTarget, mode)
-      : { units: [], total: 0, score: 0 }
-    const units = [heroEntry, ...(regularResult.units || [])]
-    const total = heroEntry.total + Number(regularResult.total || 0)
-    const score = total + Number(regularResult.score || 0) / 10
-    if (!bestResult || score > bestResult.score || (score === bestResult.score && total > bestResult.total)) {
-      bestResult = { units, total, score }
-    }
-  })
-
-  return bestResult || { units: [], total: 0, score: Number.NEGATIVE_INFINITY }
-}
 
 function SpinnerIcon() {
   return (
@@ -468,7 +407,6 @@ function UnitSheetPreview({ unit, factionId, gameMode, draftTotal, imageDataUrl,
 
 function Generador() {
   const { t, lang } = useI18n()
-  const [, startTransition] = useTransition()
   const factions = useMemo(() => {
     return buildLocalizedFactionEntries(factionModules, lang)
       .filter((item) => item && isFactionData(item.data))
@@ -481,10 +419,6 @@ function Generador() {
   const [manualUnitDrafts, setManualUnitDrafts] = useState({})
   const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
   const [armyDownloadError, setArmyDownloadError] = useState('')
-  const [isRandomArmyModalOpen, setIsRandomArmyModalOpen] = useState(false)
-  const [randomArmyTargetValue, setRandomArmyTargetValue] = useState('')
-  const [randomArmyError, setRandomArmyError] = useState('')
-  const [isGeneratingArmy, setIsGeneratingArmy] = useState(false)
   const [pendingSquadUnitId, setPendingSquadUnitId] = useState('')
   const [pendingSquadSize, setPendingSquadSize] = useState(1)
   const [openManualUnitId, setOpenManualUnitId] = useState('')
@@ -783,7 +717,7 @@ function Generador() {
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
-    const hasOpenModal = Boolean(imageCropDraft || isRandomArmyModalOpen || pendingSquadUnitId)
+    const hasOpenModal = Boolean(imageCropDraft || pendingSquadUnitId)
     const previousOverflow = document.body.style.overflow
     if (hasOpenModal) {
       document.body.style.overflow = 'hidden'
@@ -791,7 +725,7 @@ function Generador() {
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [imageCropDraft, isRandomArmyModalOpen, pendingSquadUnitId])
+  }, [imageCropDraft, pendingSquadUnitId])
 
   useEffect(() => {
     if (!isArmyPrintPreviewOpen) return undefined
@@ -1013,10 +947,6 @@ function Generador() {
   }
 
   const handleRemoveArmyUnit = (selectionId) => {
-    const removed = selectedArmyUnitSelections.find((s) => s.selectionId === selectionId)
-    const removedUnit = removed ? exportUnits.find((e) => e.uid === removed.unitId) : null
-    if (removedUnit && isHeroUnit(removedUnit.base)) {
-    }
     setSelectedArmyUnitSelections((current) => current.filter((selection) => selection.selectionId !== selectionId))
   }
 
@@ -1024,72 +954,6 @@ function Generador() {
     setSelectedArmyUnitSelections([])
     setSelectedItems({})
     setArmyDownloadError('')
-  }
-
-  const createArmyUnitSelection = (unitId, patch = {}) => {
-    armyUnitSelectionCounterRef.current += 1
-    return {
-      selectionId: `${unitId}::${armyUnitSelectionCounterRef.current}`,
-      unitId,
-      ...patch,
-    }
-  }
-
-  const handleOpenRandomArmyModal = () => {
-    setRandomArmyTargetValue(String(currentArmyTotalValue || (gameMode === 'escuadra' ? 100 : 50)))
-    setRandomArmyError('')
-    setIsRandomArmyModalOpen(true)
-  }
-
-  const handleCloseRandomArmyModal = () => {
-    setIsRandomArmyModalOpen(false)
-    setRandomArmyError('')
-  }
-
-  const handleGenerateRandomArmy = (event) => {
-    event.preventDefault()
-    const target = Number(randomArmyTargetValue)
-    if (!Number.isFinite(target) || target <= 0) {
-      setRandomArmyError(t('generator.randomArmyInvalidValue'))
-      return
-    }
-
-    setIsGeneratingArmy(true)
-
-    setTimeout(() => {
-      let bestResult = null
-      const attempts = 24
-      for (let index = 0; index < attempts; index += 1) {
-        const result = generateArmyWithRequiredHero(selectedFaction, target, gameMode, 'dominion')
-        if (!result.units.length) continue
-
-        const total = result.total
-        const score = total + (result.score || 0) / 10
-        if (!bestResult || score > bestResult.score) {
-          bestResult = { ...result, total, score }
-        }
-      }
-
-      setIsGeneratingArmy(false)
-
-      if (!bestResult?.units?.length) {
-        setRandomArmyError(t('generator.randomArmyNoResult'))
-        return
-      }
-
-      const exportUnitByIdentity = new Map(exportUnits.map((entry) => [getUnitIdentityKey(entry.base), entry.uid]))
-      setSelectedArmyUnitSelections(
-        bestResult.units
-          .filter((entry) => entry?.base?.id)
-          .map((entry) => {
-            const unitId = exportUnitByIdentity.get(getUnitIdentityKey(entry.base)) || entry.base.id
-            return createArmyUnitSelection(unitId, { squadSize: entry.squadSize })
-          }),
-      )
-      setActiveGeneratorSection('army')
-      setIsRandomArmyModalOpen(false)
-      setRandomArmyError('')
-    }, 0)
   }
 
   useEffect(() => {
@@ -1328,7 +1192,7 @@ function Generador() {
                   {selectedHeroCount > 0 && <div className="unit-list-section">
                     <p className="unit-list-section-label">{t('rules.modeItems')}</p>
                     <div className="unit-list">
-                      {activeItems.map((item, index) => {
+                      {activeItems.map((item) => {
                         const itemCount = selectedItems[item.id] || 0
                         return (
                           <article key={item.id} className={`unit-card${itemCount > 0 ? ' is-in-army' : ''}`}>

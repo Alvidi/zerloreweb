@@ -10,13 +10,6 @@ const parseAbilityNumber = (raw) => {
   return numMatch ? numMatch[0] : null
 }
 
-const ensureSigned = (value) => {
-  if (!value) return 'X'
-  if (value.startsWith('+') || value.startsWith('-')) return value
-  if (value.endsWith('+')) return value
-  return `+${value}`
-}
-
 export const getAbilityDescription = (ability, lang = 'es') => {
   if (!ability) return ''
   const raw = String(ability).trim()
@@ -60,8 +53,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
-      ? 'When a unit suffers hits from this ability, the damage caused also applies to all allied and enemy units within 3" of the target.'
-      : 'Cuando una unidad recibe impactos con esta habilidad, el daño causado se aplica también a todas las unidades aliadas y enemigas a 3" del objetivo.'
+      ? 'If the target suffers damage, choose up to X additional allied or enemy miniatures within 3" of the hit miniature; each suffers the same damage. Add together damage dealt within the same squad and assign it normally.'
+      : 'Si el objetivo sufre daño, elige hasta X miniaturas adicionales aliadas o enemigas a 3" de la miniatura impactada; cada una sufre el mismo daño. Suma el daño causado dentro de una misma escuadra y asígnalo normalmente.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
     return lang === 'en'

@@ -76,8 +76,7 @@ const escapeHtml = (value) =>
     .replace(/'/g, '&#39;')
 
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
-const getRulesAssetPlaceholders = (lang = 'es') => {
-  const en = lang === 'en'
+const getRulesAssetPlaceholders = () => {
   return {
     activationImage: activationOverviewImage,
     climbingImage,

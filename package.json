@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.78.0",
     "jspdf": "^4.0.0",
     "marked": "^17.0.5",
     "react": "^19.2.0",

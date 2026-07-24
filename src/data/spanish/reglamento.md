@@ -92,8 +92,6 @@ Cada era define la identidad de las armas de un ejército. No cambia las estadí
 
 Cada unidad indica en su ficha el set de era que utiliza.
 
-**Elección de set de armas.** Cada unidad trae varios **sets de armas** —uno por era— con las **mismas estadísticas base de la unidad** pero armas distintas. En partidas de una era concreta (Primal, Kingdom, Dominion o Ascension), todas las unidades usan el set de esa era (lo fácil y rápido). En **Sin restricción**, cada jugador elige **por unidad** qué set usar al montar su lista —puedes mezclar eras en el mismo ejército— y ese set se mantiene toda la partida. La elección es **por unidad de la lista**: puedes incluir la misma unidad varias veces con sets distintos. Dentro de una escuadra, todas las miniaturas comparten el mismo set.
-
 ---
 
 # Medición de distancias
@@ -763,15 +761,13 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | **Inestable**     | Tras resolver el ataque, lanza 1D6. Con resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso.    |
 | **Multiuso**      | Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad que está en cuerpo a cuerpo.                                                           |
 | **Directo**       | Esta arma impacta directamente, no tiene precisión.                                                                                                                                      |
-| **Explosiva (X)** | Resuelve el ataque contra la unidad objetivo. El daño que esta sufra se aplica también a **X unidades distintas** (aliadas o enemigas) situadas a 3" o menos de la miniatura impactada, elegidas por el atacante. |
+| **Explosiva (X)** | Si el objetivo sufre daño, el atacante elige hasta **X miniaturas adicionales**, aliadas o enemigas, a 3" de la miniatura impactada; cada una sufre el mismo daño. En una misma escuadra, se suma todo ese daño y su propietario lo asigna normalmente. |
 | **Parabólica**    | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**.                                                                           |
 | **Alcance**       | Esta arma CaC puede usarse contra cualquier unidad enemiga a **3" o menos**, esté o no trabada con esta unidad.                                                                        |
-| **Errática**      | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma durante ese ataque.                                                                                      |
+| **Errática**      | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma a distancia durante ese ataque.                                                                         |
 | **Barrido**       | Arma de cuerpo a cuerpo. Al atacar, en vez de elegir un objetivo, **ataca a TODAS las unidades enemigas trabadas con ella**. Resuelve el ataque por separado contra cada una.         |
 
 **Nota:** Directo y Errática son habilidades exclusivas de las **armas a distancia**; no pueden aparecer en armas de cuerpo a cuerpo.
-
-**Nota sobre Explosiva:** el daño replicado es independiente del ataque principal: cada unidad elegida lo sufre en el acto, y su propietario lo asigna a una de sus miniaturas **situada a 3" o menos de la miniatura impactada** (después continúa la asignación normal). Si el ataque no causó daño al objetivo, no hay explosión.
 
 ## Armas restringidas
 

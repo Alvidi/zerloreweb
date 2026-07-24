@@ -582,7 +582,12 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
   const shouldShowEspecialidadNombre = especialidadNombre && especialidadNombre !== '-' && especialidadNombre !== especialidad
   const isFactionAbility = isFactionAbilitySpecialty(especialidadNombre)
   const unitTypeToken = getUnitTypeToken(unit.tipo)
-  const squadDisplay = unitTypeToken === 'hero' ? '-' : (unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}`)
+  const isStandardSoloHero = unitTypeToken === 'hero'
+    && Number(unit.escuadra_min) === 1
+    && Number(unit.escuadra_max) === 1
+  const squadDisplay = isStandardSoloHero
+    ? '-'
+    : (unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}`)
   const fallbackBadgeSrc = getUnitTypeBadgeSrc(unit.tipo, eraLabel || unit.eras)
   const addImageLabel = lang === 'en' ? 'ADD IMAGE' : 'AÑADIR IMAGEN'
   const addImageAriaLabel = lang === 'en' ? 'Add unit image' : 'Añadir imagen de unidad'

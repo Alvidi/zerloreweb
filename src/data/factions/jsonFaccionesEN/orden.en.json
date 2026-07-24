@@ -16,14 +16,7 @@
       },
       "armas": {
         "primal": {
-          "disparo": [
-            {
-              "nombre": "Flint Javelin",
-              "habilidades_arma": [
-                "Reliable"
-              ]
-            }
-          ],
+          "disparo": [],
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Guard Spear",
@@ -34,14 +27,7 @@
           ]
         },
         "kingdom": {
-          "disparo": [
-            {
-              "nombre": "Stone",
-              "habilidades_arma": [
-                "Arcing"
-              ]
-            }
-          ],
+          "disparo": [],
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Short Sword",
@@ -1200,14 +1186,7 @@
           ]
         },
         "dominion": {
-          "disparo": [
-            {
-              "nombre": "Command Pistol",
-              "habilidades_arma": [
-                "Multi-use"
-              ]
-            }
-          ],
+          "disparo": [],
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Command Sword",
@@ -1620,6 +1599,85 @@
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Spectral Blade",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Marshal of the Guard",
+      "clase": "Hero",
+      "habilidad_faccion": "Deploys with 2 Line Guardians (4 Lives each) and forms a 3/3 squad with them in all game modes; it cannot join another squad. Damage is assigned to the Guardians first. When attacking, multiply the Hero weapon's Attacks by the number of surviving miniatures in the squad. The Guardians do not attack separately.",
+      "armas": {
+        "primal": {
+          "disparo": [
+            {
+              "nombre": "Escort Javelins",
+              "habilidades_arma": [
+                "Erratic"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "First Guard Weapons",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [
+            {
+              "nombre": "Guard Crossbows",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Royal Guard Lances",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Protection Carbines",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Command Weapons",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Photonic Rifles",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Custodian Blades",
               "habilidades_arma": [
                 "Piercing"
               ]

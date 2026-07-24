@@ -22,20 +22,7 @@
       },
       "armas": {
         "primal": {
-          "disparo": [
-            {
-              "nombre": "Jabalina de sílex",
-              "ataques": "1D",
-              "distancia": "12\"",
-              "impactos": "4+",
-              "danio": "1",
-              "danio_critico": "2",
-              "habilidades_arma": [
-                "Fiable"
-              ],
-              "valor_extra": 0
-            }
-          ],
+          "disparo": [],
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Lanza de guardia",
@@ -52,20 +39,7 @@
           ]
         },
         "kingdom": {
-          "disparo": [
-            {
-              "nombre": "Piedra",
-              "ataques": "1D",
-              "distancia": "18\"",
-              "impactos": "5+",
-              "danio": "1",
-              "danio_critico": "1",
-              "habilidades_arma": [
-                "Parabólica"
-              ],
-              "valor_extra": 0
-            }
-          ],
+          "disparo": [],
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Espada corta",
@@ -2000,20 +1974,7 @@
           ]
         },
         "dominion": {
-          "disparo": [
-            {
-              "nombre": "Pistola de mando",
-              "ataques": "2D",
-              "distancia": "6\"",
-              "impactos": "3+",
-              "danio": "1",
-              "danio_critico": "2",
-              "habilidades_arma": [
-                "Multiuso"
-              ],
-              "valor_extra": 0
-            }
-          ],
+          "disparo": [],
           "cuerpo_a_cuerpo": [
             {
               "nombre": "Espada de mando",
@@ -2728,6 +2689,144 @@
               "impactos": null,
               "danio": "3",
               "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "Mariscal de la Guardia",
+      "clase": "Héroe",
+      "habilidad_faccion": "Despliega con 2 Guardianes de Línea (4 Vidas cada uno) y forma con ellos una escuadra 3/3 en todos los modos; no puede unirse a otra. El daño se asigna primero a los Guardianes. Al atacar, multiplica los Ataques del arma del Héroe por el número de miniaturas vivas de la escuadra. Los Guardianes no atacan por separado.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 9,
+        "salvacion": "3+",
+        "velocidad": "+4\"",
+        "escuadra": {
+          "min": 3,
+          "max": 3
+        },
+        "valor": 22
+      },
+      "armas": {
+        "primal": {
+          "disparo": [
+            {
+              "nombre": "Jabalinas de escolta",
+              "ataques": "2D",
+              "distancia": "6\"",
+              "impactos": "5+",
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Errática"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Armas de la primera guardia",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [
+            {
+              "nombre": "Ballestas de la guardia",
+              "ataques": "1D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Lanzas de la guardia real",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Carabinas de protección",
+              "ataques": "2D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Multiuso"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Armas de mando",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Fusiles fotónicos",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Filos de custodia",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
               "habilidades_arma": [
                 "Perforante"
               ],

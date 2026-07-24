@@ -92,8 +92,6 @@ Each era defines the identity of an army's weapons. It does not change a unit's 
 
 Each unit indicates on its profile which era set it uses.
 
-**Weapon set selection.** Each unit comes with several **weapon sets** — one per era — with the **same base stats** but different weapons. In games restricted to a specific era (Primal, Kingdom, Dominion, or Ascension), all units use that era's set. In **No restriction**, each player chooses **per unit** which set to use when building their list; eras can be mixed within the same army, and that set is kept for the whole game. The choice is **per unit entry in the list**: the same unit can be included multiple times with different sets. Within a squad, all miniatures share the same set.
-
 ---
 
 # Measuring Distances
@@ -769,15 +767,13 @@ When a unit makes an attack, it must choose a single valid weapon from its profi
 | **Unstable** | After resolving the attack, roll 1D6. On a **1–2**, the unit carrying this weapon suffers the same damage it inflicted on the target. If the attack caused no damage, there is no backlash. |
 | **Multi-use** | This weapon can be used while the unit is locked in melee combat, against the unit it is fighting in melee combat. |
 | **Direct** | This weapon hits directly and has no Precision. |
-| **Explosive (X)** | Resolve the attack against the target unit. The damage it suffers is also applied to **X different units** (allied or enemy) within 3" or less of the hit miniature, chosen by the attacker. |
+| **Explosive (X)** | If the target suffers damage, the attacker chooses up to **X additional miniatures**, allied or enemy, within 3" of the hit miniature; each suffers the same damage. Within the same squad, all this damage is added together and assigned normally by its owner. |
 | **Arcing** | This weapon can attack targets without direct line of sight, as long as they are within its **Range**. |
 | **Reach** | This melee weapon can be used against any enemy unit within **3"**, whether or not it is locked with this unit. |
-| **Erratic** | Before resolving the attack, roll 1D6: the result becomes the weapon's Precision for that attack. |
+| **Erratic** | Before resolving the attack, roll 1D6: the result becomes the ranged weapon's Precision for that attack. |
 | **Sweep** | Melee weapon. When attacking, instead of choosing a single target, this weapon **attacks ALL enemy units locked with it**. Resolve the attack separately against each one. |
 
 **Note:** Direct and Erratic are abilities exclusive to **ranged weapons**; they cannot appear on melee weapons.
-
-**Note on Explosive:** the replicated damage is independent of the main attack: each chosen unit suffers it immediately, and its owner assigns it to one of their miniatures **within 3" or less of the hit miniature** (normal assignment then continues). If the attack caused no damage to the target, there is no explosion.
 
 ## Restricted Weapons
 
