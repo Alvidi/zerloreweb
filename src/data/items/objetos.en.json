@@ -76,13 +76,6 @@
       "descripcion": "During its activation, all units within 3\" (including those locked in combat) automatically retreat.",
       "equipacion": ["Monster"],
       "valor": 3
-    },
-    {
-      "id": "espia",
-      "nombre": "Spy",
-      "descripcion": "During an Initiative Phase: may look at one of the opponent's missions.",
-      "equipacion": ["Hero"],
-      "valor": 4
     }
   ]
 }

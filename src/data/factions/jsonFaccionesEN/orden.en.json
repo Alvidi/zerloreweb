@@ -15,20 +15,76 @@
         "especialidad": "Soldier"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Laser Rifle", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Flint Javelin",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Bayonet", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Guard Spear",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Stone", "habilidades_arma": ["Arcing"] }
+            {
+              "nombre": "Stone",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Short Sword", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Short Sword",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Laser Rifle",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bayonet",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Arc Carbine",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Photon Blade",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -40,19 +96,60 @@
         "especialidad": "Shove"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Assault Pistol", "habilidades_arma": ["Multi-use"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Energy Mace", "habilidades_arma": ["Brutal 4+"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Spear", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Combat Dagger (only Elite)", "habilidades_arma": ["Brutal 4+"] }
+            {
+              "nombre": "Basalt Axe",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Obsidian Spike (only Elite)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Spear",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            },
+            {
+              "nombre": "Combat Dagger (only Elite)",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Energy Mace",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Phase Spear",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -64,21 +161,88 @@
         "especialidad": "Accurate"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Support Rifle", "habilidades_arma": ["Dead Angle"] },
-            { "nombre": "Flamethrower (only Line)", "habilidades_arma": ["Direct"] }
+            {
+              "nombre": "War Sling",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Bone Dagger",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Longbow", "habilidades_arma": ["Arcing"] }
+            {
+              "nombre": "Longbow",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Dagger", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Dagger",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Support Rifle",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            },
+            {
+              "nombre": "Flamethrower (only Line)",
+              "habilidades_arma": [
+                "Direct"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Rail Rifle",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            },
+            {
+              "nombre": "Scatter Pulse (only Line, Elite)",
+              "habilidades_arma": [
+                "Explosive (1)"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Rail Stock",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -90,19 +254,66 @@
         "especialidad": "Reinforce Block"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Carbine", "habilidades_arma": ["Reliable"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Explosive Charge", "habilidades_arma": ["Explosive (2)"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Axe", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Scout Pike (only Line, Elite)", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Flint Axe",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Ambush Spear (only Line, Elite)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Axe",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Scout Pike (only Line, Elite)",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Explosive Charge",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Jump Blades",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            {
+              "nombre": "Phase Cutter (only Line, Elite)",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            }
           ]
         }
       }
@@ -114,21 +325,89 @@
         "especialidad": "Emplaced"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Autocannon", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Grenade Launcher (only Line)", "habilidades_arma": ["Explosive (2)"] }
+            {
+              "nombre": "Tribal Stone-thrower",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Rifle Butt", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Felling Axe",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Siege Crossbow", "habilidades_arma": ["Dead Angle"] }
+            {
+              "nombre": "Siege Crossbow",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Short Sword", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Short Sword",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Autocannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Grenade Launcher (only Line)",
+              "habilidades_arma": [
+                "Explosive (2)"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Plasma Cannon",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            },
+            {
+              "nombre": "Micro-missile Launcher (only Line)",
+              "habilidades_arma": [
+                "Arcing",
+                "Explosive (1)"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Reinforced Stock",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -140,20 +419,62 @@
         "especialidad": "Counterstrike"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Plasma Rifle", "habilidades_arma": ["Brutal 5+"] }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Combat Sword", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Monolith Mace",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Greatsword",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "dominion": {
           "disparo": [
-            { "nombre": "Heavy Crossbow", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Plasma Rifle",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Combat Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Gauss Rifle",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Energy Sword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         }
       }
@@ -165,21 +486,95 @@
         "especialidad": "Accurate"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Precision Rifle", "habilidades_arma": ["Brutal 5+"] },
-            { "nombre": "Fusion Rifle (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "War Bow",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            },
+            {
+              "nombre": "Bone Harpoon (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Knife", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Flint Knife",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Hunting Bow", "habilidades_arma": ["Dead Angle"] }
+            {
+              "nombre": "Hunting Bow",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Estoc", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Estoc",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Precision Rifle",
+              "habilidades_arma": [
+                "Brutal 5+",
+                "Dead Angle"
+              ]
+            },
+            {
+              "nombre": "Fusion Rifle (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Knife",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Tracking Rifle",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            },
+            {
+              "nombre": "Anti-materiel Rifle (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Light Blade",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -191,18 +586,48 @@
         "especialidad": "Support"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistol", "habilidades_arma": ["Reliable"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Combat Scalpel", "habilidades_arma": ["Reliable"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Sacred Staff", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Bone Staff",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sacred Staff",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Combat Scalpel",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Nano-edge Scalpel",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -214,18 +639,48 @@
         "especialidad": "Brutal Charge"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Plasma Pistol", "habilidades_arma": ["Reliable"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Sabre", "habilidades_arma": ["Brutal 5+"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Cavalry Lance", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Hunting Spear",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cavalry Lance",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sabre",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Gravity Lance",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -237,21 +692,74 @@
         "especialidad": "Shooter"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Light Cannon", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Coaxial Machine Gun (only Line, Elite)", "habilidades_arma": ["Brutal 5+"] }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ram Plates", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Blade Wheels",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ram",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "dominion": {
           "disparo": [
-            { "nombre": "Double Ballista", "habilidades_arma": ["Arcing"] }
+            {
+              "nombre": "Light Cannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Coaxial Machine Gun (only Line, Elite)",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ram", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Ram Plates",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Particle Cannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Micro-missiles (only Line, Elite)",
+              "habilidades_arma": [
+                "Explosive (1)"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Gravity Ram",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         }
       }
@@ -263,21 +771,75 @@
         "especialidad": "Resilient"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Main Cannon", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Hull Machine Gun (only Line, Elite)", "habilidades_arma": ["Brutal 5+"] }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Reinforced Plates", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "War Horn",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Heavy Crossbow", "habilidades_arma": ["Arcing"] }
+            {
+              "nombre": "Heavy Crossbow",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Iron Spur", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Iron Spur",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Main Cannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Hull Machine Gun (only Line, Elite)",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Reinforced Plates",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Siege Laser",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Energy Plates",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -289,20 +851,80 @@
         "especialidad": "Emplaced"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Heavy Mortar", "habilidades_arma": ["Arcing", "Dead Angle"] }
+            {
+              "nombre": "Sinew Catapult",
+              "habilidades_arma": [
+                "Arcing",
+                "Explosive (2)"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Cannon Butt", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Wooden Stock",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Trebuchet", "habilidades_arma": ["Arcing", "Explosive (2)"] }
+            {
+              "nombre": "Trebuchet",
+              "habilidades_arma": [
+                "Arcing",
+                "Explosive (2)"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Butt", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Butt",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Heavy Mortar",
+              "habilidades_arma": [
+                "Arcing",
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cannon Butt",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Singularity Cannon",
+              "habilidades_arma": [
+                "Unstable",
+                "Explosive (2)"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cannon Stock",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -314,18 +936,72 @@
         "especialidad": "Crushing"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Cybernetic Claws", "habilidades_arma": ["Sweep"] },
-            { "nombre": "Mechanical Bite (only Vehicle, Monster)", "habilidades_arma": ["Brutal 4+"] }
+            {
+              "nombre": "Primal Claws",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Crushing Fang (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Beast Claws", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Fierce Bite (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Beast Claws",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            },
+            {
+              "nombre": "Fierce Bite (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cybernetic Claws",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            },
+            {
+              "nombre": "Mechanical Bite (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Void Claws",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Plasma Bite (only Vehicle, Monster)",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            }
           ]
         }
       }
@@ -337,19 +1013,74 @@
         "especialidad": "Resilient"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Shoulder Cannon", "habilidades_arma": ["Piercing"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Hydraulic Fist", "habilidades_arma": ["Brutal 5+"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Stone Fist", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Extendable Arm (only Line, Elite)", "habilidades_arma": ["Reach"] }
+            {
+              "nombre": "Stone Fist",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Chain Arm (only Line, Elite)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Stone Fist",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Extendable Arm (only Line, Elite)",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Shoulder Cannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hydraulic Fist",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Shoulder Beam",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Phase Fist",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         }
       }
@@ -361,20 +1092,76 @@
         "especialidad": "Flying"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Aerial Carbine", "habilidades_arma": ["Reliable"] }
+            {
+              "nombre": "Feathered Javelin",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Flight Sabre", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Diving Talons",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Javelins", "habilidades_arma": ["Arcing"] }
+            {
+              "nombre": "Javelins",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Diving Lance", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Diving Lance",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Aerial Carbine",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Flight Sabre",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Antimatter Carbine",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Gravity Saber",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }
@@ -384,19 +1171,68 @@
       "clase": "Hero",
       "habilidad_faccion": "Once per turn, when an Order unit activates, another Order unit within 6\" or less may activate immediately afterwards.",
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Command Pistol", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Fusion Pistol (only Vehicle, Monster)", "habilidades_arma": ["Piercing"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Command Sword", "habilidades_arma": ["Brutal 5+"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Command Sword", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "First Command Axe",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Chieftain's Point (only Hero)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Command Sword",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Command Pistol",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Command Sword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Impulse Pistol",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Light Sword",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
           ]
         }
       }
@@ -406,19 +1242,67 @@
       "clase": "Hero",
       "habilidad_faccion": "Command posts under your control count as cover for your units.",
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Heavy Rifle", "habilidades_arma": ["Brutal 5+"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Greatsword", "habilidades_arma": ["Brutal 5+"] },
-            { "nombre": "Executioner Slash (only Hero)", "habilidades_arma": ["Brutal 4+"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Greatsword", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Threshold Hammer",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Judgement Blow (only Hero)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Greatsword",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Greatsword",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Executioner Slash (only Hero)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Heavy Solar Rifle",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Solar Greatsword",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
           ]
         }
       }
@@ -428,21 +1312,80 @@
       "clase": "Hero",
       "habilidad_faccion": "Once per turn, reroll 2 of your own dice (each one can only be rerolled once).",
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Precision Pistol", "habilidades_arma": ["Brutal 5+"] }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Officer's Sabre", "habilidades_arma": ["Reliable"] },
-            { "nombre": "Precise Thrust (only Hero)", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Waystaff",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Dagger of Fate (only Hero)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Officer's Sabre",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
           "disparo": [
-            { "nombre": "Short Bow", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Precision Pistol",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Officer's Sabre", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Officer's Sabre",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Precise Thrust (only Hero)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Phase Pistol",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Monomolecular Saber",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            {
+              "nombre": "Phase Thrust (only Hero)",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            }
           ]
         }
       }
@@ -452,20 +1395,72 @@
       "clase": "Hero",
       "habilidad_faccion": "Enemy units within 6\" of allied units cannot declare Charge.",
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Command Pistol", "habilidades_arma": ["Brutal 5+"] }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Iron Sceptre", "habilidades_arma": ["Brutal 5+"] },
-            { "nombre": "Executioner Blade (only Hero)", "habilidades_arma": ["Piercing"] }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ancestral Mace", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Viceroy's Estoc (only Hero)", "habilidades_arma": ["Brutal 4+"] }
+            {
+              "nombre": "Bone Scepter",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Viceroy's Point (only Hero)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ancestral Mace",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Viceroy's Estoc (only Hero)",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Iron Sceptre",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Executioner Blade (only Hero)",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Containment Scepter",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            {
+              "nombre": "Energy Edge (only Hero)",
+              "habilidades_arma": [
+                "Unstable"
+              ]
+            }
           ]
         }
       }
@@ -475,21 +1470,160 @@
       "clase": "Hero/Vehicle",
       "habilidad_faccion": "During the turn, if this hero fires at an enemy unit, all allied units that fire at that same unit gain the Direct weapon ability on any weapon.",
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Command Cannon", "habilidades_arma": ["Piercing"] },
-            { "nombre": "Command Machine Gun (only Line, Elite)", "habilidades_arma": ["Brutal 5+"] }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Armored Rush", "habilidades_arma": ["Brutal 5+"] }
+            {
+              "nombre": "Tusk Charge",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Siege Cannon", "habilidades_arma": ["Arcing"] }
+            {
+              "nombre": "Siege Cannon",
+              "habilidades_arma": [
+                "Arcing"
+              ]
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Command Ram", "habilidades_arma": ["Piercing"] }
+            {
+              "nombre": "Command Ram",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Command Cannon",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            },
+            {
+              "nombre": "Command Machine Gun (only Line, Elite)",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Armored Rush",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Solar Command Cannon",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            },
+            {
+              "nombre": "Drone Battery (only Line, Elite)",
+              "habilidades_arma": [
+                "Explosive (1)"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Gravity Charge",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "The Spy",
+      "clase": "Hero",
+      "habilidad_faccion": "At the start of each Initiative Phase, the opponent reveals all missions they currently have. If the game mode does not use missions, they reveal all active secret objectives or scoring conditions. That information remains visible while The Spy is on the battlefield.",
+      "perfil": {},
+      "armas": {
+        "primal": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Flint Knives",
+              "habilidades_arma": [
+                "Sweep"
+              ]
+            },
+            {
+              "nombre": "Hunter's Claw (only Hero)",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [
+            {
+              "nombre": "Wrist Crossbow",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cutting Dagger",
+              "habilidades_arma": [
+                "Reach"
+              ]
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Silenced Pistol",
+              "habilidades_arma": [
+                "Multi-use"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Tactical Blade",
+              "habilidades_arma": [
+                "Reliable"
+              ]
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Shadow Pistol",
+              "habilidades_arma": [
+                "Dead Angle"
+              ]
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Spectral Blade",
+              "habilidades_arma": [
+                "Piercing"
+              ]
+            }
           ]
         }
       }

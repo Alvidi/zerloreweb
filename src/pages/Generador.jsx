@@ -33,15 +33,6 @@ const factionSheetTemplates = {
 }
 const preferredUnitTypeOrder = ['line', 'elite', 'hero', 'monster', 'vehicle']
 
-const EQUIP_TOKEN_MAP = {
-  linea: 'line', line: 'line',
-  elite: 'elite',
-  heroe: 'hero', hero: 'hero',
-  vehiculo: 'vehicle', vehicle: 'vehicle',
-  monstruo: 'monster', monster: 'monster',
-}
-const equipToken = (cls) =>
-  EQUIP_TOKEN_MAP[cls.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')] || ''
 const MAX_UNIT_IMAGE_SIDE = 1600
 const IMAGE_CROP_ASPECT_RATIO = 686 / 473
 const IMAGE_CROP_VIEWPORT_WIDTH = 360
@@ -190,6 +181,13 @@ const renderExportPageCanvas = async (cardCanvases, scale = EXPORT_RASTER_SCALE)
 
 const getUnitEraTokens = (unit) => (Array.isArray(unit?.eras) ? unit.eras.map((era) => era.token).filter(Boolean) : [])
 
+const PREVIEW_ERA_OPTIONS = [
+  { value: 'primal', translationKey: 'generator.primal' },
+  { value: 'kingdom', translationKey: 'generator.kingdom' },
+  { value: 'dominion', translationKey: 'generator.dominion' },
+  { value: 'ascension', translationKey: 'generator.ascension' },
+]
+
 const getUnitTypeOrder = (type) => {
   const token = getUnitTypeToken(type)
   const match = preferredUnitTypeOrder.indexOf(token)
@@ -203,9 +201,8 @@ const getUnitSortValue = (unit) => {
 
 const getUnitEraOrder = (unit) => {
   const eraToken = getUnitEraTokens(unit)[0] || ''
-  if (eraToken === 'future') return 0
-  if (eraToken === 'past') return 1
-  return 2
+  const eraIndex = PREVIEW_ERA_OPTIONS.findIndex((option) => option.value === eraToken)
+  return eraIndex === -1 ? PREVIEW_ERA_OPTIONS.length : eraIndex
 }
 
 const sortUnitsByType = (units) =>
@@ -479,7 +476,7 @@ function Generador() {
   }, [lang])
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedFactionId, setSelectedFactionId] = useState(factions[0]?.id || '')
-  const [globalEra, setGlobalEra] = useState('future')
+  const [globalEra, setGlobalEra] = useState('dominion')
   const [unitEraMap, setUnitEraMap] = useState({})
   const [manualUnitDrafts, setManualUnitDrafts] = useState({})
   const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
@@ -492,6 +489,7 @@ function Generador() {
   const [pendingSquadSize, setPendingSquadSize] = useState(1)
   const [openManualUnitId, setOpenManualUnitId] = useState('')
   const [openArmyUnitUid, setOpenArmyUnitUid] = useState('')
+  const [previewEraMap, setPreviewEraMap] = useState({})
   const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
   const [selectedItems, setSelectedItems] = useState({})
   const [showItemFichaModal, setShowItemFichaModal] = useState(false)
@@ -502,13 +500,19 @@ function Generador() {
   const armyCardRefs = useRef(new Map())
   const armyExportStageRef = useRef(null)
   const armyUnitSelectionCounterRef = useRef(0)
-  const getEraLabel = useCallback((token) => (token === 'future' ? t('generator.future') : t('generator.past')), [t])
+  const getEraLabel = useCallback((token) => {
+    const eraOption = PREVIEW_ERA_OPTIONS.find((option) => option.value === token)
+    if (eraOption) return t(eraOption.translationKey)
+    if (token === 'future') return t('generator.future')
+    if (token === 'past') return t('generator.past')
+    return token
+  }, [t])
   const getUnitEra = useCallback((unit) => {
     if (globalEra !== 'todas') return globalEra
     const key = unit.generatorUid || unit.id
     const tokens = getUnitEraTokens(unit)
     if (tokens.length === 1) return tokens[0]
-    return unitEraMap[key] || 'future'
+    return unitEraMap[key] || getUnitEraTokens(unit)[0] || 'dominion'
   }, [unitEraMap, globalEra])
   const handleUnitEraChange = useCallback((unitKey, era) => {
     setUnitEraMap((prev) => ({ ...prev, [unitKey]: era }))
@@ -900,7 +904,7 @@ function Generador() {
   const handleFactionChange = (event) => {
     const next = event.target.value
     setSelectedFactionId(next)
-    setGlobalEra('future')
+    setGlobalEra('dominion')
     setUnitEraMap({})
     setOpenManualUnitId('')
     setOpenArmyUnitUid('')
@@ -1056,7 +1060,7 @@ function Generador() {
       let bestResult = null
       const attempts = 24
       for (let index = 0; index < attempts; index += 1) {
-        const result = generateArmyWithRequiredHero(selectedFaction, target, gameMode, 'future')
+        const result = generateArmyWithRequiredHero(selectedFaction, target, gameMode, 'dominion')
         if (!result.units.length) continue
 
         const total = result.total
@@ -1152,29 +1156,7 @@ function Generador() {
                         ))}
                       </div>
                     </div>
-                    <div className="field faction-era-select">
-                      <span>{t('generator.era')}</span>
-                      <div className="faction-era-picker" role="radiogroup" aria-label={t('generator.era')}>
-                        {[
-                          { value: 'todas', label: t('generator.allEras') },
-                          { value: 'future', label: t('generator.future') },
-                          { value: 'past', label: t('generator.past') },
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            className={`unit-era-pick-btn${option.value === 'future' ? ' era-world-button-future' : option.value === 'past' ? ' era-world-button-past' : ' era-world-button-all'}${globalEra === option.value ? ' active' : ''}`}
-                            aria-pressed={globalEra === option.value}
-                            onClick={() => setGlobalEra(option.value)}
-                          >
-                            {option.label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="faction-summary-main">
-                    <div className="faction-header">
+                    <div className="faction-header faction-header-under-selector">
                       {factionImages[selectedFaction.id] ? (
                         <img src={factionImages[selectedFaction.id]} alt={selectedFaction.nombre} loading="lazy" />
                       ) : (
@@ -1182,6 +1164,28 @@ function Generador() {
                       )}
                       <div className="faction-heading-copy">
                         <p className="faction-description">{selectedFaction.estilo}</p>
+                      </div>
+                    </div>
+                    <div className="field faction-era-select">
+                      <span>{t('generator.era')}</span>
+                      <div className="faction-era-picker" role="radiogroup" aria-label={t('generator.era')}>
+                        {[
+                          { value: 'todas', label: t('generator.allEras') },
+                          ...PREVIEW_ERA_OPTIONS.map((option) => ({
+                            value: option.value,
+                            label: t(option.translationKey),
+                          })),
+                        ].map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`unit-era-pick-btn era-world-button-${option.value}${globalEra === option.value ? ' active' : ''}`}
+                            aria-pressed={globalEra === option.value}
+                            onClick={() => setGlobalEra(option.value)}
+                          >
+                            {option.label}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -1230,7 +1234,7 @@ function Generador() {
                           const unitIsHero = isHeroUnit(unit)
                           const isSelectedHero = unitIsHero && selectedHeroSourceUid === unitKey
                           const eraCountEntries = !unitIsHero
-                            ? ['future', 'past', 'any'].flatMap((era) => {
+                            ? [...PREVIEW_ERA_OPTIONS.map((option) => option.value), 'any'].flatMap((era) => {
                                 const count = regularUnitCountMap.get(`${unitKey}::${era}`) || 0
                                 return count > 0 ? [{ era, count }] : []
                               })
@@ -1267,6 +1271,13 @@ function Generador() {
                                     </div>
                                     <div className={`unit-card-type unit-type-${getUnitTypeToken(unit.tipo)}${unitIsHero && unitEra ? ` unit-era-${unitEra}` : ''}`}>
                                       {unit.tipo}
+                                      {unitEra ? (
+                                        <span className="unit-card-era-list">
+                                          <span className={`unit-era-badge unit-era-${unitEra}`}>
+                                            {getEraLabel(unitEra)}
+                                          </span>
+                                        </span>
+                                      ) : null}
                                     </div>
                                     <div className="unit-card-inline-value">{displayValue} {t('generator.valueUnit')}</div>
                                   </div>
@@ -1294,22 +1305,17 @@ function Generador() {
                               </div>
                               {unit.has_dual_era_weapons && globalEra === 'todas' ? (
                                 <div className="unit-card-era-picker" role="group" aria-label={t('generator.era')}>
-                                  <button
-                                    type="button"
-                                    className={`unit-era-pick-btn era-world-button-past${unitEra === 'past' ? ' active' : ''}`}
-                                    aria-pressed={unitEra === 'past'}
-                                    onClick={() => handleUnitEraChange(unitKey, 'past')}
-                                  >
-                                    {t('generator.past')}
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className={`unit-era-pick-btn era-world-button-future${unitEra === 'future' ? ' active' : ''}`}
-                                    aria-pressed={unitEra === 'future'}
-                                    onClick={() => handleUnitEraChange(unitKey, 'future')}
-                                  >
-                                    {t('generator.future')}
-                                  </button>
+                                  {PREVIEW_ERA_OPTIONS.map((option) => (
+                                    <button
+                                      key={option.value}
+                                      type="button"
+                                      className={`unit-era-pick-btn era-world-button-${option.value}${unitEra === option.value ? ' active' : ''}`}
+                                      aria-pressed={unitEra === option.value}
+                                      onClick={() => handleUnitEraChange(unitKey, option.value)}
+                                    >
+                                      {t(option.translationKey)}
+                                    </button>
+                                  ))}
                                 </div>
                               ) : null}
                             </article>
@@ -1340,7 +1346,7 @@ function Generador() {
                                     <h4>{item.nombre}</h4>
                                     {itemCount > 0 && <span className="army-unit-count-badge">×{itemCount}</span>}
                                   </div>
-                                  <div className="unit-card-type">{item.equipacion.map((cls) => <span key={cls} className={`unit-type-${equipToken(cls)}`}>{cls}</span>)}</div>
+                                  <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
                                   <div className="unit-card-inline-value">{item.valor} {t('generator.valueUnit')}</div>
                                 </div>
                               </div>
@@ -1580,7 +1586,7 @@ function Generador() {
                                         <h4>{item.nombre}</h4>
                                         {count > 1 && <span className="army-unit-count-badge">×{count}</span>}
                                       </div>
-                                      <div className="unit-card-type">{item.equipacion.map((cls) => <span key={cls} className={`unit-type-${equipToken(cls)}`}>{cls}</span>)}</div>
+                                      <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
                                       <div className="unit-card-inline-value">{item.valor * count} {t('generator.valueUnit')}</div>
                                     </div>
                                   </div>
@@ -1715,8 +1721,13 @@ function Generador() {
                   const previewSourceUid = previewEntry?.sourceUid || previewUnit?.generatorUid || previewUnit?.id
                   const previewGroup = armyRegularUnitGroups?.find((g) => g.entry.sourceUid === previewSourceUid) ?? null
                   const previewDraft = getManualUnitDraft(previewUnit)
-                  const previewUnitEra = previewEntry?.era || getUnitEra(previewUnit)
-                  const previewLoadout = previewEntry || getFixedUnitLoadout(previewUnit, previewUnitEra)
+                  const showPreviewEraPicker = globalEra === 'todas'
+                  const previewUnitEra = showPreviewEraPicker
+                    ? (previewEraMap[previewSourceUid] || PREVIEW_ERA_OPTIONS[0].value)
+                    : (previewEntry?.era || getUnitEra(previewUnit))
+                  const previewLoadout = showPreviewEraPicker
+                    ? getFixedUnitLoadout(previewUnit, previewUnitEra)
+                    : (previewEntry || getFixedUnitLoadout(previewUnit, previewUnitEra))
                   const previewTotal = previewEntry?.total || computeUnitTotal(
                     previewUnit,
                     previewLoadout.shooting,
@@ -1729,7 +1740,10 @@ function Generador() {
                   const previewDisplayName = previewEntry
                     ? exportUnitDisplayNames.get(previewEntry.uid) || previewUnit.nombre
                     : previewUnit.nombre
-                  const previewEraLabel = previewUnitEra ? getEraLabel(previewUnitEra) : ''
+                  const provisionalEra = PREVIEW_ERA_OPTIONS.find((option) => option.value === previewUnitEra)
+                  const previewEraLabel = provisionalEra
+                    ? t(provisionalEra.translationKey)
+                    : (previewUnitEra ? getEraLabel(previewUnitEra) : '')
                   const closePreview = () => {
                     setOpenManualUnitId('')
                     setOpenArmyUnitUid('')
@@ -1744,6 +1758,28 @@ function Generador() {
                     >
                       <div className="unit-preview-modal-inner" onClick={(e) => e.stopPropagation()}>
                         <div className="unit-preview-modal-bar">
+                          {showPreviewEraPicker ? (
+                            <div
+                              className="unit-preview-era-picker"
+                              role="radiogroup"
+                              aria-label={t('generator.previewEra')}
+                            >
+                              {PREVIEW_ERA_OPTIONS.map((option, index) => (
+                                <button
+                                  key={option.value}
+                                  type="button"
+                                  className={`unit-preview-era-button unit-preview-era-button-${index + 1}${previewUnitEra === option.value ? ' active' : ''}`}
+                                  aria-pressed={previewUnitEra === option.value}
+                                  onClick={() => setPreviewEraMap((current) => ({
+                                    ...current,
+                                    [previewSourceUid]: option.value,
+                                  }))}
+                                >
+                                  {t(option.translationKey)}
+                                </button>
+                              ))}
+                            </div>
+                          ) : null}
                           <div className="unit-preview-modal-actions">
                             <button
                               type="button"

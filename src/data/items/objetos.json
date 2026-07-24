@@ -76,13 +76,6 @@
       "descripcion": "Durante su activación, todas las unidades a 3\" (incluidas las que están trabadas) entran en retirada automáticamente.",
       "equipacion": ["Monstruo"],
       "valor": 3
-    },
-    {
-      "id": "espia",
-      "nombre": "Espía",
-      "descripcion": "En una fase de iniciativa: puede mirar una de las misiones del contrincante.",
-      "equipacion": ["Héroe"],
-      "valor": 4
     }
   ]
 }

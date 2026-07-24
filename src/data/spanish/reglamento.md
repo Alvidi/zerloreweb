@@ -82,15 +82,17 @@ Salvo que se indique lo contrario, todas las reglas del reglamento se aplican a 
 
 ### Era de juego
 
-ZeroLore permite jugar partidas ambientadas en distintas eras temáticas. Antes de comenzar la partida, los jugadores acuerdan una de las siguientes opciones:
+Cada era define la identidad de las armas de un ejército. No cambia las estadísticas base ni el rol de una unidad, sino la forma en la que combate. Ninguna era es superior a otra: cada una ofrece ventajas en unas situaciones y limitaciones en otras. Antes de comenzar la partida, los jugadores acuerdan una de las siguientes opciones:
 
-- **Past** — solo se utilizan héroes y unidades con armas con la palabra clave _Past_. Partidas ambientadas en entornos de fantasía.
-- **Future** — solo se utilizan héroes y unidades con armas con la palabra clave _Future_. Partidas ambientadas en entornos de ciencia ficción.
-- **Sin restricción** — Pasado y futuro, todo vale. ZeroLore utiliza el mismo formato de fichas y habilidades para todas las facciones, por lo que cualquier unidad puede enfrentarse a cualquier otra independientemente de su era.
+- **Primal:** prioriza combate cercano, movilidad, lanzas, bestias y armas sencillas.
+- **Kingdom:** combina cuerpo a cuerpo, arcos, ballestas e ingenios de asedio.
+- **Dominion:** prioriza disparo, alcance, armas especiales y fuego de apoyo.
+- **Ascension:** representa tecnología avanzada, precisión, energía y potencia a distancia.
+- **Sin restricción** — todo vale. ZeroLore utiliza el mismo formato de fichas y habilidades para todas las facciones, por lo que cualquier unidad puede enfrentarse a cualquier otra independientemente de su era.
 
-Cada unidad indica su era en su ficha.
+Cada unidad indica en su ficha el set de era que utiliza.
 
-**Elección de set de armas.** Cada unidad trae X **sets de armas** — con las **mismas estadísticas base de la unidad** pero armas distintas. En partidas de era **Pasado** o **Futuro**, todas las unidades usan el set de esa era (lo fácil y rápido). En **Sin restricción**, cada jugador elige **por unidad** qué set usar al montar su lista —puedes mezclar Pasado y Futuro en el mismo ejército— y ese set se mantiene toda la partida. La elección es **por unidad de la lista**: puedes incluir la misma unidad varias veces con sets distintos. Dentro de una escuadra, todas las miniaturas comparten el mismo set.
+**Elección de set de armas.** Cada unidad trae varios **sets de armas** —uno por era— con las **mismas estadísticas base de la unidad** pero armas distintas. En partidas de una era concreta (Primal, Kingdom, Dominion o Ascension), todas las unidades usan el set de esa era (lo fácil y rápido). En **Sin restricción**, cada jugador elige **por unidad** qué set usar al montar su lista —puedes mezclar eras en el mismo ejército— y ese set se mantiene toda la partida. La elección es **por unidad de la lista**: puedes incluir la misma unidad varias veces con sets distintos. Dentro de una escuadra, todas las miniaturas comparten el mismo set.
 
 ---
 

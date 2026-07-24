@@ -21,20 +21,124 @@
         "especialidad": "Soldado"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Rifle láser", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Jabalina de sílex",
+              "ataques": "1D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Bayoneta", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Lanza de guardia",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Piedra", "ataques": "1D", "distancia": "18\"", "impactos": "5+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+            {
+              "nombre": "Piedra",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "5+",
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espada corta", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Espada corta",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Rifle láser",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bayoneta",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Carabina de arco",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cuchilla fotónica",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -52,19 +156,96 @@
         "especialidad": "Porrazo"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistola de asalto", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Multiuso"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Maza de energía", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Lanza", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Puñal de combate (solo Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+            {
+              "nombre": "Hacha de basalto",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Punzón de obsidiana (solo Élite)",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Lanza",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Puñal de combate (solo Élite)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Maza de energía",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Lanza de fase",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -82,21 +263,148 @@
         "especialidad": "Certero"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Rifle de apoyo", "ataques": "1D", "distancia": "24\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Ángulo muerto"], "valor_extra": 0 },
-            { "nombre": "Lanzallamas (solo Línea)", "ataques": "2D", "distancia": "6\"", "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Directo"], "valor_extra": 0 }
+            {
+              "nombre": "Honda de guerra",
+              "ataques": "2D",
+              "distancia": "12\"",
+              "impactos": "5+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Daga de hueso",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Arco largo", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+            {
+              "nombre": "Arco largo",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Daga", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Daga",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Rifle de apoyo",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Lanzallamas (solo Línea)",
+              "ataques": "2D",
+              "distancia": "6\"",
+              "impactos": "—",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Directo"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Culata",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Rifle de riel",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Pulso de dispersión (solo Línea, Élite)",
+              "ataques": "2D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Explosiva (1)"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Culata de riel",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -114,19 +422,108 @@
         "especialidad": "Bloqueo de refuerzos"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Carabina", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Carga explosiva", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Explosiva (2)"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Hacha", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
-            { "nombre": "Pica de exploración (solo Línea, Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+            {
+              "nombre": "Hacha de sílex",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Lanza de emboscada (solo Línea, Élite)",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hacha",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Pica de exploración (solo Línea, Élite)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Carga explosiva",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cuchillas de salto",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Cortador de fase (solo Línea, Élite)",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Inestable"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -144,21 +541,149 @@
         "especialidad": "Asentado"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Cañón automático", "ataques": "3D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Lanzagranadas (solo Línea)", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Explosiva (2)"], "valor_extra": 0 }
+            {
+              "nombre": "Lanzapiedras tribal",
+              "ataques": "1D3",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Hacha de tala",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Ballesta de asedio", "ataques": "1D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Ángulo muerto"], "valor_extra": 0 }
+            {
+              "nombre": "Ballesta de asedio",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espada corta", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Espada corta",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Cañón automático",
+              "ataques": "3D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Mortero (solo Línea)",
+              "ataques": "1D3",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Explosiva (2)"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Culata",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Cañón de plasma",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Inestable"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Lanzador de microcohetes (solo Línea)",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Parabólica",
+                "Explosiva (1)"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Culata reforzada",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -176,20 +701,98 @@
         "especialidad": "Contragolpe"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Rifle de plasma", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espada de combate", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Maza de monolito",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Espadón",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
           "disparo": [
-            { "nombre": "Ballesta pesada", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Rifle de plasma",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espadón", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+            {
+              "nombre": "Espada de combate",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Fusil Gauss",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Espada de energía",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -207,21 +810,161 @@
         "especialidad": "Certero"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Rifle de precisión", "ataques": "1D", "distancia": "24\"", "impactos": "3+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
-            { "nombre": "Rifle de fusión (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Arco de guerra",
+              "ataques": "2D",
+              "distancia": "12\"",
+              "impactos": "5+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Arpón de hueso (solo Vehículo, Monstruo)",
+              "ataques": "1D",
+              "distancia": "6\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Cuchillo", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Cuchillo de pedernal",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Arco de caza", "ataques": "1D", "distancia": "24\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Ángulo muerto"], "valor_extra": 0 }
+            {
+              "nombre": "Arco de caza",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Estoque", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Estoque",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Rifle de precisión",
+              "ataques": "2D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Brutal 5+",
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Rifle de fusión (solo Vehículo, Monstruo)",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "3+",
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cuchillo",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Rifle de rastreo",
+              "ataques": "1D",
+              "distancia": "30\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Rifle antimaterial (solo Vehículo, Monstruo)",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Inestable"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hoja ligera",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -239,18 +982,72 @@
         "especialidad": "Soporte"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistola", "ataques": "1D", "distancia": "6\"", "impactos": "4+", "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Bisturí de combate", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Bastón sagrado", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+            {
+              "nombre": "Bastón de hueso",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bastón sagrado",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bisturí de combate",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Bisturí de nanofilo",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -268,18 +1065,72 @@
         "especialidad": "Carga brutal"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistola de plasma", "ataques": "1D3", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Sable", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Lanza de caballería", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Lanza de caza",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Lanza de caballería",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sable",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Lanza gravitatoria",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -297,21 +1148,122 @@
         "especialidad": "Tirador"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Cañón ligero", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "3", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Ametralladora coaxial (solo Línea, Élite)", "ataques": "2D6", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Placas de embiste", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+            {
+              "nombre": "Ruedas de cuchilla",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Ariete",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
           "disparo": [
-            { "nombre": "Balista doble", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+            {
+              "nombre": "Cañón ligero",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Ametralladora coaxial (solo Línea, Élite)",
+              "ataques": "2D6",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ariete", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Placas de embiste",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Cañón de partículas",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "3+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Microcohetes (solo Línea, Élite)",
+              "ataques": "2D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Explosiva (1)"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Espolón gravitatorio",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -329,21 +1281,123 @@
         "especialidad": "Resistente"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Cañón principal", "ataques": "1D", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Ametralladora de casco (solo Línea, Élite)", "ataques": "1D6", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Placas reforzadas", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Trompa de guerra",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Ballesta pesada", "ataques": "1D", "distancia": "24\"", "impactos": "3+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+            {
+              "nombre": "Ballesta pesada",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espolón de hierro", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+            {
+              "nombre": "Espolón de hierro",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Cañón principal",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Ametralladora de casco (solo Línea, Élite)",
+              "ataques": "1D6",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Placas reforzadas",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Láser de asedio",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Placas de energía",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -361,20 +1415,128 @@
         "especialidad": "Asentado"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Mortero pesado", "ataques": "1D6", "distancia": "24\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Parabólica", "Ángulo muerto"], "valor_extra": 0 }
+            {
+              "nombre": "Catapulta de tendones",
+              "ataques": "1D3",
+              "distancia": "18\"",
+              "impactos": "5+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Parabólica",
+                "Explosiva (2)"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Culata del cañón", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Culata de madera",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Trabuquete", "ataques": "1D3", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica", "Explosiva (2)"], "valor_extra": 0 }
+            {
+              "nombre": "Trabuquete",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Parabólica",
+                "Explosiva (2)"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Culata", "ataques": "1D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "1", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Culata",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Mortero pesado",
+              "ataques": "1D6",
+              "distancia": "24\"",
+              "impactos": "5+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Parabólica",
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Culata del cañón",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Cañón de singularidad",
+              "ataques": "2D",
+              "distancia": "30\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Inestable",
+                "Explosiva (2)"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Culata de cañón",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -392,18 +1554,120 @@
         "especialidad": "Aplastamiento"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Garras cibernéticas", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Barrido"], "valor_extra": 0 },
-            { "nombre": "Mordida mecánica (solo Vehículo, Monstruo)", "ataques": "1D3", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+            {
+              "nombre": "Zarpas primordiales",
+              "ataques": "5D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Colmillo triturador (solo Vehículo, Monstruo)",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Garras de bestia", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Mordisco feroz (solo Vehículo, Monstruo)", "ataques": "1D3", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Garras de bestia",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Mordisco feroz (solo Vehículo, Monstruo)",
+              "ataques": "5D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Garras cibernéticas",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Mordida mecánica (solo Vehículo, Monstruo)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "5",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Garras de vacío",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Mordida de plasma (solo Vehículo, Monstruo)",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "8",
+              "habilidades_arma": [
+                "Inestable"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -421,19 +1685,122 @@
         "especialidad": "Resistente"
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Cañón de hombro", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Puño hidráulico", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Puño de piedra", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Brazo extensible (solo Línea, Élite)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Alcance"], "valor_extra": 0 }
+            {
+              "nombre": "Puño de roca",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Brazo de cadena (solo Línea, Élite)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Puño de piedra",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Brazo extensible (solo Línea, Élite)",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Cañón de hombro",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Puño hidráulico",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Rayo de hombro",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Puño de fase",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -451,20 +1818,124 @@
         "especialidad": "Volador"
       },
       "armas": {
-        "futuro": {
+        "primal": {
           "disparo": [
-            { "nombre": "Carabina aérea", "ataques": "2D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 }
+            {
+              "nombre": "Jabalina de pluma",
+              "ataques": "2D",
+              "distancia": "6\"",
+              "impactos": "5+",
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Sable de vuelo", "ataques": "2D", "distancia": null, "impactos": null, "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+            {
+              "nombre": "Garras de picado",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Jabalinas", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+            {
+              "nombre": "Jabalinas",
+              "ataques": "1D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Lanza de picado", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Lanza de picado",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Carabina aérea",
+              "ataques": "3D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Multiuso"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sable de vuelo",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Carabina de antimateria",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "3+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sable de gravedad",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -482,19 +1953,110 @@
         "valor": 16
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistola de mando", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
-            { "nombre": "Pistola de fusión (solo Vehículo, Monstruo)", "ataques": "1D", "distancia": "6\"", "impactos": "3+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Espada de mando", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Espada de mando", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Hacha del primer mando",
+              "ataques": "5D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Punta del caudillo (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Espada de mando",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Pistola de mando",
+              "ataques": "2D",
+              "distancia": "6\"",
+              "impactos": "3+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Multiuso"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Espada de mando",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Pistola de impulso",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Espada de luz",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -512,19 +2074,109 @@
         "valor": 20
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Fusil pesado", "ataques": "2D", "distancia": "18\"", "impactos": "3+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Mandoble", "ataques": "3D", "distancia": null, "impactos": null, "danio": "4", "danio_critico": "6", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
-            { "nombre": "Tajo ejecutor (solo Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "4", "danio_critico": "6", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Mandoble", "ataques": "3D", "distancia": null, "impactos": null, "danio": "4", "danio_critico": "6", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Martillo del umbral",
+              "ataques": "5D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Golpe de juicio (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Mandoble",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Mandoble",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "5",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Tajo ejecutor (solo Héroe)",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Fusil solar pesado",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Mandoble solar",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "5",
+              "danio_critico": "8",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -542,21 +2194,134 @@
         "valor": 18
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistola de precisión", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Sable de oficial", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Fiable"], "valor_extra": 0 },
-            { "nombre": "Estocada precisa (solo Héroe)", "ataques": "1D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Bastón de ruta",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Daga del destino (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sable de oficial",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
           "disparo": [
-            { "nombre": "Arco corto", "ataques": "1D", "distancia": "12\"", "impactos": "4+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+            {
+              "nombre": "Pistola de precisión",
+              "ataques": "2D",
+              "distancia": "6\"",
+              "impactos": "3+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Multiuso"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Sable de oficial", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "3", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Sable de oficial",
+              "ataques": "1D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Estocada precisa (solo Héroe)",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Pistola de fase",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Sable monomolecular",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Estocada de fase (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Inestable"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
@@ -574,27 +2339,127 @@
         "valor": 18
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Pistola de mando", "ataques": "1D", "distancia": "12\"", "impactos": "3+", "danio": "2", "danio_critico": "3", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
-          "cuerpo_a_cuerpo": [
-            { "nombre": "Cetro de hierro", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 },
-            { "nombre": "Filo ejecutor (solo Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
-          ]
-        },
-        "pasado": {
+        "primal": {
           "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Maza ancestral", "ataques": "3D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Estoque del virrey (solo Héroe)", "ataques": "2D", "distancia": null, "impactos": null, "danio": "3", "danio_critico": "5", "habilidades_arma": ["Brutal 4+"], "valor_extra": 0 }
+            {
+              "nombre": "Cetro de hueso",
+              "ataques": "5D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Punta del virrey (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Maza ancestral",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Estoque del virrey (solo Héroe)",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cetro de hierro",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Filo ejecutor (solo Héroe)",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 4+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cetro de contención",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Filo de energía (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "4",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Inestable"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }
     },
     {
       "nombre_unidad": "Acorazado de Mando",
-      "clase": "Héroe/Vehículo",
+      "clase": "Héroe (Vehículo)",
       "habilidad_faccion": "Durante el turno, si este héroe dispara contra una unidad enemiga, todas las unidades aliadas que disparen contra esa unidad ganan la hab. de arma Directo en cualquier arma.",
       "perfil": {
         "movimiento": "5\"",
@@ -605,21 +2470,269 @@
         "valor": 22
       },
       "armas": {
-        "futuro": {
-          "disparo": [
-            { "nombre": "Cañón de mando", "ataques": "2D", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Perforante"], "valor_extra": 0 },
-            { "nombre": "Ametralladora de mando (solo Línea, Élite)", "ataques": "2D", "distancia": "18\"", "impactos": "4+", "danio": "1", "danio_critico": "2", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
-          ],
+        "primal": {
+          "disparo": [],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Embestida acorazada", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Brutal 5+"], "valor_extra": 0 }
+            {
+              "nombre": "Embestida de colmillo",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            }
           ]
         },
-        "pasado": {
+        "kingdom": {
           "disparo": [
-            { "nombre": "Cañón de asedio", "ataques": "2D", "distancia": "24\"", "impactos": "4+", "danio": "3", "danio_critico": "5", "habilidades_arma": ["Parabólica"], "valor_extra": 0 }
+            {
+              "nombre": "Cañón de asedio",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "4+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Parabólica"
+              ],
+              "valor_extra": 0
+            }
           ],
           "cuerpo_a_cuerpo": [
-            { "nombre": "Ariete de mando", "ataques": "2D", "distancia": null, "impactos": null, "danio": "2", "danio_critico": "4", "habilidades_arma": ["Perforante"], "valor_extra": 0 }
+            {
+              "nombre": "Ariete de mando",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Cañón de mando",
+              "ataques": "2D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Ametralladora de mando (solo Línea, Élite)",
+              "ataques": "3D",
+              "distancia": "12\"",
+              "impactos": "4+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Multiuso"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Embestida acorazada",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Cañón de mando solar",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Batería de drones (solo Línea, Élite)",
+              "ataques": "1D3",
+              "distancia": "18\"",
+              "impactos": "3+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Explosiva (1)"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Embestida gravitatoria",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "nombre_unidad": "El Espía",
+      "clase": "Héroe",
+      "habilidad_faccion": "Al inicio de cada Fase de Iniciativa, el rival revela todas las misiones que tenga actualmente. Si el modo de juego no utiliza misiones, revela todos los objetivos secretos o condiciones de puntuación que tenga activos. Esa información permanece visible mientras El Espía esté en el campo de batalla.",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "salvacion": "4+",
+        "velocidad": "+6\"",
+        "escuadra": { "min": 1, "max": 1 },
+        "valor": 15
+      },
+      "armas": {
+        "primal": {
+          "disparo": [],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Cuchillos de sílex",
+              "ataques": "4D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Barrido"
+              ],
+              "valor_extra": 0
+            },
+            {
+              "nombre": "Garra de cazador (solo Héroe)",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "kingdom": {
+          "disparo": [
+            {
+              "nombre": "Ballesta de muñeca",
+              "ataques": "1D",
+              "distancia": "18\"",
+              "impactos": "4+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Daga de corte",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "1",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Alcance"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "dominion": {
+          "disparo": [
+            {
+              "nombre": "Pistola silenciada",
+              "ataques": "2D",
+              "distancia": "12\"",
+              "impactos": "3+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Multiuso"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hoja táctica",
+              "ataques": "2D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Fiable"
+              ],
+              "valor_extra": 0
+            }
+          ]
+        },
+        "ascension": {
+          "disparo": [
+            {
+              "nombre": "Pistola de sombra",
+              "ataques": "1D",
+              "distancia": "24\"",
+              "impactos": "3+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Ángulo muerto"
+              ],
+              "valor_extra": 0
+            }
+          ],
+          "cuerpo_a_cuerpo": [
+            {
+              "nombre": "Hoja espectral",
+              "ataques": "3D",
+              "distancia": null,
+              "impactos": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Perforante"
+              ],
+              "valor_extra": 0
+            }
           ]
         }
       }

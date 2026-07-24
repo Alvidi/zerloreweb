@@ -138,6 +138,10 @@ const getEraToken = (value) => {
     .trim()
 
   if (!normalized) return ''
+  if (normalized.includes('primal')) return 'primal'
+  if (normalized.includes('kingdom')) return 'kingdom'
+  if (normalized.includes('dominion')) return 'dominion'
+  if (normalized.includes('ascension')) return 'ascension'
   if (normalized.includes('futuro') || normalized.includes('future')) return 'future'
   if (normalized.includes('pasado') || normalized.includes('past')) return 'past'
   return ''
@@ -317,17 +321,37 @@ const normalizeUnit = (unit, index) => {
     perfil.escuadra?.max ?? unit.escuadra_max ?? unit.escuadra?.max,
   )
 
-  const hasDualEra = !!(armas.futuro || armas.pasado)
-  const disparoFuturo = (armas.futuro?.disparo || []).map((w) => normalizeWeapon(w, 'disparo'))
-  const caCFuturo = (armas.futuro?.cuerpo_a_cuerpo || []).map((w) => normalizeWeapon(w, 'melee'))
-  const disparoPasado = (armas.pasado?.disparo || []).map((w) => normalizeWeapon(w, 'disparo'))
-  const caCPasado = (armas.pasado?.cuerpo_a_cuerpo || []).map((w) => normalizeWeapon(w, 'melee'))
+  const rawEraLoadouts = {
+    ...(armas.futuro ? { future: armas.futuro } : {}),
+    ...(armas.pasado ? { past: armas.pasado } : {}),
+    ...Object.fromEntries(
+      ['primal', 'kingdom', 'dominion', 'ascension']
+        .filter((era) => armas[era])
+        .map((era) => [era, armas[era]]),
+    ),
+  }
+  const eraLoadouts = Object.fromEntries(
+    Object.entries(rawEraLoadouts).map(([era, loadout]) => [
+      era,
+      {
+        shooting: (loadout?.disparo || []).map((weapon) => normalizeWeapon(weapon, 'disparo')),
+        meleeList: (loadout?.cuerpo_a_cuerpo || []).map((weapon) => normalizeWeapon(weapon, 'melee')),
+      },
+    ]),
+  )
+  const hasEraWeapons = Object.keys(eraLoadouts).length > 0
+  const defaultEraLoadout = eraLoadouts.dominion
+    || eraLoadouts.future
+    || eraLoadouts.kingdom
+    || eraLoadouts.past
+    || Object.values(eraLoadouts)[0]
+    || { shooting: [], meleeList: [] }
 
-  const disparo = hasDualEra
-    ? (disparoFuturo.length ? disparoFuturo : disparoPasado)
+  const disparo = hasEraWeapons
+    ? defaultEraLoadout.shooting
     : (armas.disparo || unit.armas_disparo || []).map((weapon) => normalizeWeapon(weapon, 'disparo'))
-  const melee = hasDualEra
-    ? (caCFuturo.length ? caCFuturo : caCPasado)
+  const melee = hasEraWeapons
+    ? defaultEraLoadout.meleeList
     : (armas.cuerpo_a_cuerpo || unit.armas_melee || []).map((weapon) => normalizeWeapon(weapon, 'melee'))
   const rawEspecialidad = perfil.especialidad ?? unit.especialidad
   const rawEspecialidadNombre = perfil.especialidad_nombre ?? unit.especialidad_nombre
@@ -369,7 +393,13 @@ const normalizeUnit = (unit, index) => {
     id: unit.id || slugify(unit.nombre_unidad || unit.nombre || `${index}`),
     nombre: unit.nombre_unidad || unit.nombre || `Unidad ${index + 1}`,
     tipo: unit.clase || unit.tipo || 'Línea',
-    eras: normalizeEraEntries(unit.era || unit.zona_temporal || unit.periodo || unit.timeline || ''),
+    eras: normalizeEraEntries(
+      unit.era
+      || unit.zona_temporal
+      || unit.periodo
+      || unit.timeline
+      || Object.keys(eraLoadouts),
+    ),
     movimiento: perfil.movimiento ?? unit.movimiento ?? '-',
     vidas: perfil.vidas ?? unit.vidas ?? '-',
     salvacion: String(perfil.salvacion ?? unit.salvacion ?? '-').replace(/^\+?(\d+)\+?$/, '$1+'),
@@ -387,11 +417,8 @@ const normalizeUnit = (unit, index) => {
     armas_melee: melee,
     max_armas_disparo: getMaxDisparo({ ...unit, perfil }),
     habilidad_faccion: unit.habilidad_faccion || '',
-    has_dual_era_weapons: hasDualEra,
-    armas_disparo_future: hasDualEra ? disparoFuturo : null,
-    armas_melee_future: hasDualEra ? caCFuturo : null,
-    armas_disparo_past: hasDualEra ? disparoPasado : null,
-    armas_melee_past: hasDualEra ? caCPasado : null,
+    has_dual_era_weapons: hasEraWeapons,
+    era_loadouts: eraLoadouts,
   }
 }
 
@@ -506,9 +533,9 @@ export const selectionHasWeaponLimitError = (entry, armyUnits = [], gameMode = '
 }
 
 export const getFixedUnitLoadout = (unit, era = '') => {
-  if (unit?.has_dual_era_weapons && era) {
-    const shooting = era === 'past' ? (unit.armas_disparo_past || []) : (unit.armas_disparo_future || [])
-    const meleeList = era === 'past' ? (unit.armas_melee_past || []) : (unit.armas_melee_future || [])
+  if (unit?.has_dual_era_weapons && era && unit.era_loadouts?.[era]) {
+    const shooting = unit.era_loadouts[era].shooting || []
+    const meleeList = unit.era_loadouts[era].meleeList || []
     return {
       shooting: shooting.filter(Boolean),
       meleeList: meleeList.filter(Boolean),

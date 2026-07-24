@@ -138,8 +138,10 @@ const getEraToken = (label = '') => {
     .replace(/[\u0300-\u036f]/g, '')
     .trim()
 
-  if (normalized.includes('futuro') || normalized.includes('future')) return 'future'
-  if (normalized.includes('pasado') || normalized.includes('past')) return 'past'
+  if (normalized.includes('primal')) return 'primal'
+  if (normalized.includes('kingdom') || normalized.includes('pasado') || normalized.includes('past')) return 'kingdom'
+  if (normalized.includes('dominion') || normalized.includes('futuro') || normalized.includes('future')) return 'dominion'
+  if (normalized.includes('ascension')) return 'ascension'
   return 'neutral'
 }
 
@@ -152,8 +154,10 @@ const UNIT_TYPE_COLORS = {
 }
 
 const ERA_COLORS = {
-  future: '#6fe7dd',
-  past: '#d86aa2',
+  primal: '#d79b5e',
+  kingdom: '#d86aa2',
+  dominion: '#6fe7dd',
+  ascension: '#8ecf7a',
   neutral: 'var(--accent)',
 }
 
@@ -579,7 +583,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard({ unit, factionId, image
   const isFactionAbility = isFactionAbilitySpecialty(especialidadNombre)
   const unitTypeToken = getUnitTypeToken(unit.tipo)
   const squadDisplay = unitTypeToken === 'hero' ? '-' : (unit.escuadra_display ?? `${unit.escuadra_min}/${unit.escuadra_max}`)
-  const fallbackBadgeSrc = getUnitTypeBadgeSrc(unit.tipo, unit.eras || eraLabel)
+  const fallbackBadgeSrc = getUnitTypeBadgeSrc(unit.tipo, eraLabel || unit.eras)
   const addImageLabel = lang === 'en' ? 'ADD IMAGE' : 'AÑADIR IMAGEN'
   const addImageAriaLabel = lang === 'en' ? 'Add unit image' : 'Añadir imagen de unidad'
   const eraToken = getEraToken(eraLabel)
@@ -1005,22 +1009,12 @@ const getWeaponFieldRect = (guideMap, prefix, rowIndex, fieldKey, fallbackArea, 
   }
 }
 
-const extractAbilityTargets = (habilidades = []) =>
-  habilidades
-    .map((h) => {
-      const raw = typeof h === 'string' ? h : (h?.nombre || h?.id || '')
-      const m = raw.match(/\(([^)]+)\)/)
-      return m ? m[1].trim() : ''
-    })
-    .filter(Boolean)
-
 // ─── Fila de datos de arma ───────────────────────────────────────────────
 function WeaponRow({ weapon, guideMap, prefix, rowIndex, fallbackArea, fallbackTop, fallbackRowH, isMelee, lang = 'es' }) {
   const danio = formatDanio(weapon.danio, weapon.danio_critico)
   const habs  = formatHabilidades(weapon.habilidades)
   const { title, target: nameTarget } = getWeaponNameParts(weapon.nombre)
-  const abilityTargets = extractAbilityTargets(weapon.habilidades)
-  const hasTarget = nameTarget || abilityTargets.length > 0
+  const hasTarget = Boolean(nameTarget)
   const fieldValues = {
     ARMA: hasTarget ? (
       <span className="ficha-weapon-name-with-target">
@@ -1087,9 +1081,7 @@ function WeaponAbilities({ disparo, melee, guideMap, lang = 'es' }) {
   const weaponBlocks = all
     .map((w) => {
       const { title, target: nameTarget } = getWeaponNameParts(w?.nombre)
-      const abilityTargets = extractAbilityTargets(w?.habilidades || [])
-      const allTargets = [...new Set([...(nameTarget ? [nameTarget] : []), ...abilityTargets])]
-      const target = allTargets.join(', ')
+      const target = nameTarget
       const abilities = (w?.habilidades || [])
         .map((h) => {
           const raw = typeof h === 'string' ? h : (h?.nombre || h?.id || '')

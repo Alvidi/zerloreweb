@@ -52,18 +52,22 @@ const mergeUnitsTranslation = (esUnits, enUnits) =>
     const translated = enUnits?.[index]
     const esArmas = unit?.armas || {}
     const enArmas = translated?.armas || {}
-    const hasDualEra = !!(esArmas.futuro || esArmas.pasado)
-    const mergedArmas = hasDualEra
+    const eraKeys = ['primal', 'kingdom', 'dominion', 'ascension']
+    const hasEraWeapons = eraKeys.some((era) => esArmas[era]) || !!(esArmas.futuro || esArmas.pasado)
+    const mergedArmas = hasEraWeapons
       ? {
           ...esArmas,
-          futuro: {
-            disparo: mergeWeaponsTranslation(esArmas.futuro?.disparo, enArmas.futuro?.disparo),
-            cuerpo_a_cuerpo: mergeWeaponsTranslation(esArmas.futuro?.cuerpo_a_cuerpo, enArmas.futuro?.cuerpo_a_cuerpo),
-          },
-          pasado: {
-            disparo: mergeWeaponsTranslation(esArmas.pasado?.disparo, enArmas.pasado?.disparo),
-            cuerpo_a_cuerpo: mergeWeaponsTranslation(esArmas.pasado?.cuerpo_a_cuerpo, enArmas.pasado?.cuerpo_a_cuerpo),
-          },
+          ...Object.fromEntries(
+            eraKeys
+              .filter((era) => esArmas[era])
+              .map((era) => [
+                era,
+                {
+                  disparo: mergeWeaponsTranslation(esArmas[era]?.disparo, enArmas[era]?.disparo),
+                  cuerpo_a_cuerpo: mergeWeaponsTranslation(esArmas[era]?.cuerpo_a_cuerpo, enArmas[era]?.cuerpo_a_cuerpo),
+                },
+              ]),
+          ),
         }
       : {
           ...esArmas,

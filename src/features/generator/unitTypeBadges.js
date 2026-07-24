@@ -1,49 +1,50 @@
-import lineBadge from '../../images/units_icons/line.png'
-import eliteBadge from '../../images/units_icons/elite.png'
-import vehicleBadge from '../../images/units_icons/vehicle.png'
-import monsterBadge from '../../images/units_icons/monster.png'
-import heroBadge from '../../images/units_icons/hero.png'
-import linePastBadge from '../../images/units_icons/past/line.png'
-import elitePastBadge from '../../images/units_icons/past/elite.png'
-import vehiclePastBadge from '../../images/units_icons/past/vehicle.png'
-import heroPastBadge from '../../images/units_icons/past/hero.png'
 import { getUnitTypeToken } from './generatorUtils.js'
 
-export const unitTypeBadgeByToken = {
-  line: lineBadge,
-  elite: eliteBadge,
-  vehicle: vehicleBadge,
-  monster: monsterBadge,
-  hero: heroBadge,
-}
+const badgeModules = import.meta.glob('../../images/units_icons/*/*.png', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
 
-export const pastUnitTypeBadgeByToken = {
-  line: linePastBadge,
-  elite: elitePastBadge,
-  vehicle: vehiclePastBadge,
-  hero: heroPastBadge,
-}
+const badgeByEraAndType = Object.entries(badgeModules).reduce((badges, [path, src]) => {
+  const match = path.match(/units_icons\/([^/]+)\/([^/]+)\.png$/)
+  if (!match) return badges
+  const [, era, type] = match
+  const normalizedType = type === 'heroe' ? 'hero' : type
+  if (!badges[era]) badges[era] = {}
+  badges[era][normalizedType] = src
+  return badges
+}, {})
 
 const normalizeEraToken = (era = '') => {
   if (Array.isArray(era)) {
-    return era.some((entry) => normalizeEraToken(entry) === 'past') ? 'past' : ''
+    return era.map(normalizeEraToken).find(Boolean) || ''
   }
   if (era && typeof era === 'object') {
     return normalizeEraToken(era.token || era.label || era.nombre || era.name || '')
   }
+
   const normalized = String(era || '')
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-  if (normalized.includes('pasado') || normalized.includes('past')) return 'past'
-  if (normalized.includes('futuro') || normalized.includes('future')) return 'future'
+
+  if (normalized.includes('primal')) return 'primal'
+  if (normalized.includes('kingdom') || normalized.includes('pasado') || normalized.includes('past')) return 'kingdom'
+  if (normalized.includes('ascension')) return 'ascension'
+  if (normalized.includes('dominion') || normalized.includes('futuro') || normalized.includes('future')) return 'dominion'
   return ''
 }
 
 export const getUnitTypeBadgeSrc = (type, era = '') => {
-  const token = getUnitTypeToken(type)
-  if (normalizeEraToken(era) === 'past') {
-    return pastUnitTypeBadgeByToken[token] || unitTypeBadgeByToken[token] || lineBadge
-  }
-  return unitTypeBadgeByToken[token] || lineBadge
+  const typeToken = getUnitTypeToken(type)
+  const eraToken = normalizeEraToken(era)
+  const preferredEraBadges = badgeByEraAndType[eraToken] || {}
+  const fallbackEraBadges = badgeByEraAndType.dominion || badgeByEraAndType.kingdom || {}
+
+  return preferredEraBadges[typeToken]
+    || fallbackEraBadges[typeToken]
+    || preferredEraBadges.line
+    || fallbackEraBadges.line
+    || ''
 }

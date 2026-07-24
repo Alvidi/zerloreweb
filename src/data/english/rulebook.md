@@ -82,15 +82,17 @@ Unless stated otherwise, all rules in the rulebook apply to both modes.
 
 ### Era of Play
 
-ZeroLore allows games set in different thematic eras. Before starting the game, the players agree on one of the following options:
+Each era defines the identity of an army's weapons. It does not change a unit's base statistics or role, but rather how it fights. No era is superior to another: each offers advantages in some situations and limitations in others. Before starting the game, the players agree on one of the following options:
 
-- **Past**: only heroes and units with weapons with the _Past_ keyword may be used. Games set in fantasy environments.
-- **Future**: only heroes and units with weapons with the _Future_ keyword may be used. Games set in science-fiction environments.
-- **No restriction**: Past and Future, anything goes. ZeroLore uses the same profile and ability format for all factions, so any unit can face any other regardless of its era.
+- **Primal:** prioritizes close combat, mobility, spears, beasts, and simple weapons.
+- **Kingdom:** combines melee combat, bows, crossbows, and siege engines.
+- **Dominion:** prioritizes shooting, range, special weapons, and supporting fire.
+- **Ascension:** represents advanced technology, precision, energy, and ranged power.
+- **No restriction:** anything goes. ZeroLore uses the same profile and ability format for all factions, so any unit can face any other regardless of its era.
 
-Each unit indicates its era on its profile.
+Each unit indicates on its profile which era set it uses.
 
-**Weapon set selection.** Each unit comes with X **weapon sets** — with the **same base stats** but different weapons. In **Past** or **Future** games, all units use the set for that era (the easy, fast option). In **No restriction**, each player chooses **per unit** which set to use when building their list — you can mix Past and Future in the same army — and that set is kept for the whole game. The choice is **per unit entry in the list**: you can include the same unit multiple times with different sets. Within a squad, all miniatures share the same set.
+**Weapon set selection.** Each unit comes with several **weapon sets** — one per era — with the **same base stats** but different weapons. In games restricted to a specific era (Primal, Kingdom, Dominion, or Ascension), all units use that era's set. In **No restriction**, each player chooses **per unit** which set to use when building their list; eras can be mixed within the same army, and that set is kept for the whole game. The choice is **per unit entry in the list**: the same unit can be included multiple times with different sets. Within a squad, all miniatures share the same set.
 
 ---
 
