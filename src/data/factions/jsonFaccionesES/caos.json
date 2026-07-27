@@ -2305,7 +2305,7 @@
     {
       "nombre_unidad": "Caudillo del Caos",
       "clase": "Héroe",
-      "habilidad_faccion": "Durante la Fase de Iniciativa, el jugador puede sacrificar una unidad de Línea (se retira del campo, sin dar puntos al rival). Esa unidad transfiere sus Vidas restantes a otra unidad aliada, hasta su tope. No funciona si está trabada.",
+      "habilidad_faccion": "Durante la Fase de Iniciativa, el jugador puede sacrificar una unidad de Línea (se retira del campo, sin dar puntos al rival). Esa unidad transfiere sus Vidas restantes a otra unidad aliada, hasta su tope. No funciona si está trabada",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -2724,7 +2724,7 @@
     {
       "nombre_unidad": "Nigromante Inmortal",
       "clase": "Héroe",
-      "habilidad_faccion": "Cuando una unidad aliada de Línea o Élite es destruida, deja la miniatura donde cayó y tira 1D6: con 5 o 6 revive en el mismo sitio con la mitad de sus Vidas (redondeando hacia arriba); si no, se retira. Cada unidad solo puede revivir una vez.",
+      "habilidad_faccion": "Cuando una unidad aliada de Línea o Élite es destruida, deja la miniatura donde cayó y tira 1D6: con 5 o 6 revive en el mismo sitio con la mitad de sus Vidas (redondeando hacia arriba); si no, se retira.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -2872,7 +2872,7 @@
     {
       "nombre_unidad": "Invocador",
       "clase": "Héroe",
-      "habilidad_faccion": "Durante la Fase de Iniciativa puedes desplegar unidades desde Reserva a 6\" o menos de este Héroe, como si fuera un puesto de mando que controlas. No funciona si el Héroe está sobre un puesto de mando.",
+      "habilidad_faccion": "Durante la Fase de Iniciativa puedes desplegar unidades desde Reserva a 3\" o menos de este Héroe, como si fuera un puesto de mando que controlas. No funciona si el Héroe está sobre un puesto de mando.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
@@ -2997,7 +2997,7 @@
     {
       "nombre_unidad": "Brujo Elegido",
       "clase": "Héroe (Monstruo)",
-      "habilidad_faccion": "1 vez/partida al inicio de su activación puede transformarse en Monstruo durante 2 turnos — usa todos los valores entre paréntesis (stats y armas). Al final del 2.º turno desde que se transforma, se retira del juego (se consume; no cuenta como baja para el rival). En monstruo se separa de la escuadra en gran combate.",
+      "habilidad_faccion": "1 vez/partida al inicio de su activación puede transformarse en Monstruo durante 2 turnos — usa todos los valores entre paréntesis (stats y armas). Al final del 2.º turno desde que se transforma, se retira del juego (se consume; no cuenta como baja para el rival). En monstruo se separa de la escuadra en gran combate",
       "perfil": {
         "movimiento": "5\" (7\")",
         "vidas": "8 (14)",
@@ -3109,7 +3109,7 @@
     {
       "nombre_unidad": "El Detonador",
       "clase": "Héroe",
-      "habilidad_faccion": "1 vez por turno, en su activación, puede detonar una unidad aliada de Línea o Élite a 6\" o menos. Esa unidad sufre 1D6 de daño (no queda destruida automáticamente por este efecto). Después, todas las unidades —aliadas y enemigas— a 6\" de la unidad detonada sufren daño con efecto Explosiva. El propio Detonador puede verse afectado si está en el radio.",
+      "habilidad_faccion": "1 vez por turno, en su activación, puede detonar una unidad aliada de Línea o Élite. Esa unidad sufre 1D6 de daño. Después, todas las unidades —aliadas y enemigas— a 6\" de la unidad detonada sufren el mismo daño, con efecto Explosiva.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 9,
@@ -3236,7 +3236,7 @@
     {
       "nombre_unidad": "La Supermente",
       "clase": "Héroe (Monstruo)",
-      "habilidad_faccion": "No puede moverse ni equipar objetos de movimiento (Estimulante, Bengala). Cuando este Héroe es destruido, en lugar de retirarse vuelve a Reserva y puede volver a desplegarse en turnos posteriores.",
+      "habilidad_faccion": "No puede moverse ni equipar objetos de movimiento. Cuando este Héroe es destruido, en lugar de ser retirado del campo de batalla, vuelve a Reserva y puede volver a desplegarse en turnos posteriores.",
       "perfil": {
         "movimiento": "0\"",
         "vidas": 12,

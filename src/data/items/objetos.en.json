@@ -3,14 +3,14 @@
     {
       "id": "granada",
       "nombre": "Grenade",
-      "descripcion": "During its activation, in addition to its action, the unit may throw the grenade: choose an enemy unit within 6\" or less, which suffers 1D6 direct damage (no save). Explosive (1). One grenade per unit, regardless of how many miniatures it has.",
+      "descripcion": "During its activation, the unit may use this item, consuming its action: choose an enemy unit within 6\" or less, which suffers 1D6 direct damage (no save). Explosive (1). One grenade per unit, regardless of how many miniatures it has.",
       "equipacion": ["Line"],
       "valor": 3
     },
     {
       "id": "botiquin",
       "nombre": "Medkit",
-      "descripcion": "During its activation: the unit recovers 3 lost Wounds.",
+      "descripcion": "During its activation, the unit may use this item, consuming its action, to recover 3 lost Wounds.",
       "equipacion": ["Line", "Elite", "Hero"],
       "valor": 2
     },
@@ -45,7 +45,7 @@
     {
       "id": "cortina-de-humo",
       "nombre": "Smoke Screen",
-      "descripcion": "When activated: the unit counts as in cover until the end of the turn.",
+      "descripcion": "During its activation, the unit may use this item, consuming its action: it counts as in cover until the end of the turn.",
       "equipacion": ["Line", "Elite"],
       "valor": 2
     },
@@ -73,7 +73,7 @@
     {
       "id": "grunido",
       "nombre": "Roar",
-      "descripcion": "During its activation, all units within 3\" (including those locked in combat) automatically retreat.",
+      "descripcion": "During its activation, the unit may use this item, consuming its action: all units within 3\", allied and enemy, including those locked in combat, are returned to their nearest command posts.",
       "equipacion": ["Monster"],
       "valor": 3
     }

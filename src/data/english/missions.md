@@ -159,15 +159,15 @@ Missions are chosen from the mission deck; each player must have **2**. In the f
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">18 - Sacred Burden</h3><button class="rules-mission-view-btn" type="button" data-number="18" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
 <p class="rules-mission-card-flavor"><em>"Hands full, glory deferred."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Your Hero carries the token and gains 5 pts for each turn they end within 9" or less of a command post (not HQ)</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> While carrying it, the Hero cannot attack (ranged or melee); they can still move and keep their faction ability. At the end of the turn, if they carry it within 9" or less of a command post (not HQ), you gain 5 pts; if they're further away or only near an HQ, that turn doesn't score. You can drop the token voluntarily (it falls where you are and anyone can pick it up): doing so automatically discards this mission. The same happens if the Hero dies.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> While carrying it, the Hero cannot attack (ranged or melee); they can still move and keep their faction ability. At the end of the turn, if they carry it within 9" or less of a command post (not HQ), you gain 5 pts; if they're further away or only near an HQ, that turn doesn't score. You can drop the token voluntarily (it falls where you are): doing so automatically discards this mission. The same happens if the Hero dies.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 5 pts per turn carrying it within 9" or less of a post (not HQ)</p>
 </div>
 
 <div class="rules-mission-card" data-number="19">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">19 - Entrenched</h3><button class="rules-mission-view-btn" type="button" data-number="19" onclick="window.__zeroloreOpenMissionFicha(this)">View card</button></div>
 <p class="rules-mission-card-flavor"><em>"Plant your feet, aim, and don't miss."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Destroy an enemy unit with a Heavy Shoot attack</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> The kill must come from a Heavy Shoot attack (the unit did not move that turn and fired with +1 damage). Rewards holding position and punishing the enemy from a fixed firing line.</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Destroy an enemy unit using the Shoot action</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> The kill must come from a ranged attack made through the Shoot action. The attacking unit must remain stationary during that activation. Rewards holding position and punishing the enemy from a fixed firing line.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
 </div>
 
@@ -232,11 +232,11 @@ Missions are chosen from the mission deck; each player must have **2**. In the f
 <p class="rules-mission-card-flavor"><em>"If it can't be mine, let it burn."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objective:</span> Let the enemy conquer one of your command posts; that post gives them no points this turn</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Description:</span> Complete this mission if, at the end of the turn, your opponent controls a command post you held at the end of the previous turn (your HQ does not count). That post grants the opponent no points this turn: you left them only ashes. It is the territorial twin of Martyr — you yield ground today to cash in the play.</p>
-<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 15 pts</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Points:</span> 20 pts</p>
 </div>
 
 </div>
 
 ---
 
-**Token note:** Mission tokens are placed 9" from a neutral command post; a randomly chosen player places it wherever they wish. If a token mission is completed, the token is replaced by a player from the opposing team to the one who placed it before, and so on. A unit that bases contact with the token picks it up; if it dies while carrying it, the token remains where the unit was. A player without an active token mission cannot carry it.
+**Token note:** Mission tokens are placed 9" from a neutral command post; a randomly chosen player places it wherever they wish. If a mission is completed, the token is replaced by a player from the opposing team to the one who placed it before, and so on. A unit that makes base contact with the token picks it up; if it dies while carrying it, the token remains where the unit was. A player without a mission that requires carrying the token cannot pick it up.

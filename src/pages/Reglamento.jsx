@@ -19,7 +19,6 @@ import damage3Token from '../images/tokens/damage-3-red.svg'
 import damage5Token from '../images/tokens/damage-5-red.svg'
 import damage10Token from '../images/tokens/damage-10-red.svg'
 import stateReadyToken from '../images/tokens/preparado-blue.svg'
-import stateRetreatToken from '../images/tokens/retirada-blue.svg'
 import conquestBlueToken from '../images/tokens/conquista-blue.svg'
 import conquestGreenToken from '../images/tokens/conquista-green.svg'
 import conquestRedToken from '../images/tokens/conquista-red.svg'
@@ -242,7 +241,6 @@ const TOKEN_DEFINITIONS = [
   { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
   { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
   { id: 'state_activation_green', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivatedGreen', diameterMm: 32, previewSize: 'medium', imageSrc: activationGreenToken },
-  { id: 'state_retreat', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateRetreat', diameterMm: 32, previewSize: 'medium', imageSrc: stateRetreatToken },
   { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
   { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
   { id: 'state_conquest_green', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestGreen', diameterMm: 32, previewSize: 'medium', imageSrc: conquestGreenToken },
@@ -676,11 +674,6 @@ function Reglamento() {
             matcher: ['token de escudo', 'shield token'],
             label: t('rules.tokens.types.stateReady'),
             imageSrc: stateReadyToken,
-          },
-          {
-            matcher: ['token de retirada', 'retreat token'],
-            label: t('rules.tokens.types.stateRetreat'),
-            imageSrc: stateRetreatToken,
           },
         ]
 

@@ -43,8 +43,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.gunslinger) {
     return lang === 'en'
-      ? 'This weapon can be used while the unit is locked in melee combat, against the unit it is fighting in melee combat.'
-      : 'Esta arma puede usarse aunque la unidad esté trabada en combate cuerpo a cuerpo, contra la unidad que está en cuerpo a cuerpo.'
+      ? 'This weapon can shoot even while the unit is locked in melee combat.'
+      : 'Esta arma puede disparar aunque la unidad esté trabada en combate cuerpo a cuerpo.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.direct) {
     return lang === 'en'
@@ -53,8 +53,8 @@ export const getAbilityDescription = (ability, lang = 'es') => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
     return lang === 'en'
-      ? 'If the target suffers damage, choose up to X additional allied or enemy miniatures within 3" of the hit miniature; each suffers the same damage. Add together damage dealt within the same squad and assign it normally.'
-      : 'Si el objetivo sufre daño, elige hasta X miniaturas adicionales aliadas o enemigas a 3" de la miniatura impactada; cada una sufre el mismo daño. Suma el daño causado dentro de una misma escuadra y asígnalo normalmente.'
+      ? 'If the target suffers damage, choose up to X additional allied or enemy miniatures within 3" of the hit miniature; each suffers the same direct damage. In a squad, its owner assigns it following the normal squad rules.'
+      : 'Si el objetivo sufre daño, elige hasta X miniaturas adicionales aliadas o enemigas a 3" de la miniatura impactada; cada una sufre el mismo daño directo. En una escuadra, su propietario lo asigna siguiendo las reglas normales de la escuadra.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
     return lang === 'en'

@@ -3,14 +3,14 @@
     {
       "id": "granada",
       "nombre": "Granada",
-      "descripcion": "Durante su activación, además de su acción, la unidad puede lanzar la granada: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1). Una sola granada por unidad, tenga las miniaturas que tenga.",
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1). Una sola granada por unidad, tenga las miniaturas que tenga.",
       "equipacion": ["Línea"],
       "valor": 3
     },
     {
       "id": "botiquin",
       "nombre": "Botiquín",
-      "descripcion": "Durante su activación: la unidad recupera 3 Vidas perdidas.",
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción, para recuperar 3 Vidas perdidas.",
       "equipacion": ["Línea", "Élite", "Héroe"],
       "valor": 2
     },
@@ -45,14 +45,14 @@
     {
       "id": "cortina-de-humo",
       "nombre": "Cortina de humo",
-      "descripcion": "Al activarse: la unidad cuenta como en cobertura hasta el final del turno.",
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción: cuenta como en cobertura hasta el final del turno.",
       "equipacion": ["Línea", "Élite"],
       "valor": 2
     },
     {
       "id": "estimulante",
       "nombre": "Estimulante",
-      "descripcion": "Al activarse: +3\" a su movimiento durante esa activación (también al Cargar o en Carrera).",
+      "descripcion": "Al activarse: +3\" a su movimiento durante esa activación (también al Cargar o Correr).",
       "equipacion": ["Línea", "Élite", "Héroe"],
       "valor": 1
     },
@@ -73,7 +73,7 @@
     {
       "id": "grunido",
       "nombre": "Gruñido",
-      "descripcion": "Durante su activación, todas las unidades a 3\" (incluidas las que están trabadas) entran en retirada automáticamente.",
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción: todas las unidades a 3\", tanto aliadas como enemigas, incluidas las que están trabadas, son devueltas a sus puestos de mando más cercanos.",
       "equipacion": ["Monstruo"],
       "valor": 3
     }

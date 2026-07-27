@@ -28,8 +28,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Guard', description: 'Once per turn, when an allied unit within 6" suffers damage, this unit may suffer up to 2 points of that damage instead.' },
   },
   {
-    es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden declarar Retirada.' },
-    en: { name: 'Anchored', description: 'Enemy units locked with this unit cannot declare Retreat.' },
+    es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden realizar la acción Destrabarse.' },
+    en: { name: 'Anchored', description: 'Enemy units locked with this unit cannot perform the Disengage action.' },
   },
   {
     es: { name: 'Despiadado', description: 'Cuando esta unidad inflige daño en cuerpo a cuerpo, los impactos críticos infligen +1 daño crítico.' },
@@ -40,8 +40,8 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Berserker', description: 'Enemy units attacking this unit in melee miss on natural results of 1, 2, or 3.' },
   },
   {
-    es: { name: 'Certero', description: 'Cuando hace Disparo pesado, además mejora en 1 su Precisión (p. ej. de 4+ a 3+).' },
-    en: { name: 'Accurate', description: 'When it makes a Heavy Shot, it also improves its Precision by 1 (e.g. from 4+ to 3+).' },
+    es: { name: 'Certero', description: 'Cuando esta unidad realiza una Maniobra, no empeora la Precisión de su ataque por haberse movido.' },
+    en: { name: 'Accurate', description: 'When this unit performs a Maneuver, its attack does not worsen its Precision for having moved.' },
   },
   {
     es: { name: 'Bloqueo de refuerzos', description: 'Mientras esta unidad esté a 3" o menos de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos.' },
@@ -64,16 +64,16 @@ const UNIT_SPECIALTIES = [
     en: { name: 'Devourer', description: 'When this unit destroys an enemy unit in melee, it recovers 1D3 lost Wounds.' },
   },
   {
-    es: { name: 'Porrazo', description: 'Al atacar en cuerpo a cuerpo, esta unidad puede empujar 1" a una unidad enemiga trabada con ella, terminando el combate. No consume acción aparte. Porrazo ignora Anclado.' },
-    en: { name: 'Shove', description: 'When attacking in melee, this unit may push 1" an enemy unit locked with it, ending the combat. This does not use an action. Shove ignores Anchored.' },
+    es: { name: 'Porrazo', description: 'En su activación, esta unidad puede realizar la acción Destrabarse sin efectuar el chequeo. Puede hacerlo aunque esté trabada con una unidad con Anclado.' },
+    en: { name: 'Shove', description: 'During its activation, this unit may perform the Disengage action without making the check. It may do so even while locked with a unit that has Anchored.' },
   },
   {
     es: { name: 'Terror', description: 'Las unidades enemigas a 3" o menos de esta unidad no pueden usar sus especialidades.' },
     en: { name: 'Terror', description: 'Enemy units within 3" of this unit cannot use their specialties.' },
   },
   {
-    es: { name: 'Tirador', description: 'Cuando hace Disparo pesado, esta unidad dispara con sus dos armas (al mismo objetivo o a dos distintos).' },
-    en: { name: 'Shooter', description: 'When it makes a Heavy Shot, this unit fires with both weapons (at the same target or two different ones).' },
+    es: { name: 'Tirador', description: 'Cuando esta unidad realiza la acción Disparar, puede atacar una vez con cada una de sus armas a distancia, al mismo objetivo o a objetivos distintos.' },
+    en: { name: 'Shooter', description: 'When this unit performs the Shoot action, it may attack once with each of its ranged weapons, at the same target or different targets.' },
   },
   {
     es: { name: 'Cobertura móvil', description: 'Las unidades aliadas a 3" o menos de esta unidad cuentan como en cobertura contra ataques de Disparo.' },

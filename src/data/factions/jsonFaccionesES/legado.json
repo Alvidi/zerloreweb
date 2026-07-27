@@ -2631,7 +2631,7 @@
     {
       "nombre_unidad": "Heraldo del Avance",
       "clase": "Héroe",
-      "habilidad_faccion": "Una vez por turno, una unidad aliada que ya se haya activado puede volver a activarse para realizar únicamente una acción de Carrera.",
+      "habilidad_faccion": "Una vez por turno, una unidad aliada que ya se haya activado puede volver a activarse para realizar únicamente una acción de Correr.",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 10,

@@ -159,15 +159,15 @@ Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**.
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">18 - Carga Sagrada</h3><button class="rules-mission-view-btn" type="button" data-number="18" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Manos ocupadas, gloria aplazada."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Tu Héroe porta el token y gana 5 pts por cada turno que lo termine a 9" o menos de un puesto de mando (no CG)</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Mientras lo lleve, el Héroe no puede atacar (ni a distancia ni en CaC); sí puede moverse y conserva su habilidad de facción. Al final del turno, si lo porta a 9" o menos de un puesto de mando (no CG), ganas 5 pts; si está más lejos o solo cerca de un CG, ese turno no puntúa. Puedes soltar el token voluntariamente (cae donde estés y cualquiera puede recogerlo): al hacerlo, esta misión se descarta automáticamente. Lo mismo ocurre si el Héroe muere.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Mientras lo lleve, el Héroe no puede atacar (ni a distancia ni en CaC); sí puede moverse y conserva su habilidad de facción. Al final del turno, si lo porta a 9" o menos de un puesto de mando (no CG), ganas 5 pts; si está más lejos o solo cerca de un CG, ese turno no puntúa. Puedes soltar el token voluntariamente (cae donde estés): al hacerlo, esta misión se descarta automáticamente. Lo mismo ocurre si el Héroe muere.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 5 pts por turno portando a 9" o menos de un puesto (no CG)</p>
 </div>
 
 <div class="rules-mission-card" data-number="19">
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">19 - Atrincherado</h3><button class="rules-mission-view-btn" type="button" data-number="19" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Clava los pies, apunta y no falles."</em></p>
-<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad enemiga con un ataque de Disparo pesado</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> La baja debe venir de un ataque de Disparo pesado (la unidad no se movió ese turno y disparó con +1 al daño). Premia plantarse, aguantar la posición y castigar desde una línea de fuego fija.</p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad enemiga mediante la acción Disparar</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> La baja debe proceder de un ataque a distancia realizado mediante la acción Disparar. La unidad atacante debe permanecer inmóvil durante esa activación. Premia plantarse, aguantar la posición y castigar desde una línea de fuego fija.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
 </div>
 
@@ -232,11 +232,11 @@ Las misiones se escogen de la baraja de misiones; cada jugador debe tener **2**.
 <p class="rules-mission-card-flavor"><em>"Si no puede ser mío, que sea ceniza."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Deja que el enemigo conquiste un puesto de mando tuyo; ese puesto no le dará puntos ese turno</p>
 <p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Completa esta misión si, al final del turno, el rival controla un puesto de mando que tú controlabas al final del turno anterior (tu Cuartel General no cuenta). Ese puesto no otorga puntos al rival este turno: le has dejado solo cenizas. Es el gemelo territorial de Mártir — cedes terreno hoy para cobrar la jugada.</p>
-<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 15 pts</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 20 pts</p>
 </div>
 
 </div>
 
 ---
 
-**Nota sobre tokens:** Los tokens de misión se colocan a 9" de un puesto de mando neutral; un jugador elegido al azar lo sitúa donde desee. Si una misión de token se completa, el token vuelve a ser colocado por un jugador del equipo contrario al que lo colocó antes, y así sucesivamente. Una unidad que haga peana con el token lo recoge; si muere portándolo, el token queda en el lugar donde estaba la unidad. Un jugador sin misión de token activa no puede portarlo.
+**Nota sobre tokens:** Los tokens de misión se colocan a 9" de un puesto de mando neutral; un jugador elegido al azar lo sitúa donde desee. Si se completa una misión, el token vuelve a ser colocado por un jugador del equipo contrario al que lo colocó antes, y así sucesivamente. Una unidad que haga contacto de peana con el token lo recoge; si muere portándolo, el token queda en el lugar donde estaba la unidad. Un jugador sin una misión de portar el token no puede recogerlo.

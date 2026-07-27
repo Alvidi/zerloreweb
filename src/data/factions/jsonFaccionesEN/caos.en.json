@@ -1330,7 +1330,7 @@
     {
       "nombre_unidad": "Chaos Warlord",
       "clase": "Hero",
-      "habilidad_faccion": "During the Initiative Phase, the player may sacrifice a Line unit (it is removed from the field, without giving the opponent any points). That unit transfers its remaining Lives to another allied unit, up to its maximum. Does not work if engaged.",
+      "habilidad_faccion": "During the Initiative Phase, the player may sacrifice a Line unit (it is removed from the field without giving the opponent any points). That unit transfers its remaining Lives to another allied unit, up to its maximum. This does not work if it is engaged.",
       "armas": {
         "primal": {
           "disparo": [],
@@ -1566,7 +1566,7 @@
     {
       "nombre_unidad": "Immortal Necromancer",
       "clase": "Hero",
-      "habilidad_faccion": "When an allied Line or Elite unit is destroyed, leave the miniature where it fell and roll 1D6: on a 5 or 6 it revives in the same spot with half its Lives (rounded up); otherwise, it is removed. Each unit can only revive once.",
+      "habilidad_faccion": "When an allied Line or Elite unit is destroyed, leave the miniature where it fell and roll 1D6: on a 5 or 6 it revives in the same spot with half its Lives (rounded up); otherwise, it is removed.",
       "armas": {
         "primal": {
           "disparo": [],
@@ -1649,7 +1649,7 @@
     {
       "nombre_unidad": "Summoner",
       "clase": "Hero",
-      "habilidad_faccion": "During the Initiative Phase you may deploy units from Reserve within 6\" or less of this Hero, as if it were a command post you control. Does not work if the Hero is on a command post.",
+      "habilidad_faccion": "During the Initiative Phase, you may deploy units from Reserve within 3\" of this Hero, as if it were a command post you control. This does not work if the Hero is on a command post.",
       "armas": {
         "primal": {
           "disparo": [],
@@ -1721,7 +1721,7 @@
     {
       "nombre_unidad": "Chosen Warlock",
       "clase": "Hero (Monster)",
-      "habilidad_faccion": "Once per game, at the start of its activation it may transform into a Monster for 2 turns — use all values in parentheses (stats and weapons). At the end of the 2nd turn after transforming, it is removed from the game (consumed; does not count as a casualty for the opponent). In Monster form it separates from the squad in Grand Battle.",
+      "habilidad_faccion": "Once per game, at the start of its activation, it may transform into a Monster for 2 turns — use all values in parentheses (stats and weapons). At the end of the 2nd turn after transforming, it is removed from the game (consumed; it does not count as a casualty for the opponent). In Monster form, it separates from the squad in Grand Battle.",
       "armas": {
         "primal": {
           "disparo": [],
@@ -1786,7 +1786,7 @@
     {
       "nombre_unidad": "The Detonator",
       "clase": "Hero",
-      "habilidad_faccion": "Once per turn, during its activation, it may detonate an allied Line or Elite unit within 6\". That unit suffers 1D6 damage (it is not automatically destroyed by this effect). Then, all allied and enemy units within 6\" of the detonated unit suffer damage with the Explosive effect. The Detonator itself can be affected if it is within the radius.",
+      "habilidad_faccion": "Once per turn, during its activation, it may detonate an allied Line or Elite unit. That unit suffers 1D6 damage. Then, all allied and enemy units within 6\" of the detonated unit suffer the same damage, with the Explosive effect.",
       "armas": {
         "primal": {
           "disparo": [
@@ -1860,7 +1860,7 @@
     {
       "nombre_unidad": "The Overmind",
       "clase": "Hero (Monster)",
-      "habilidad_faccion": "It cannot move or equip movement items (Stimulant, Flare). When this Hero is destroyed, instead of being removed it returns to Reserve and may be deployed again in later turns.",
+      "habilidad_faccion": "It cannot move or equip movement items. When this Hero is destroyed, instead of being removed from the battlefield, it returns to Reserve and may be deployed again in later turns.",
       "armas": {
         "primal": {
           "disparo": [],
