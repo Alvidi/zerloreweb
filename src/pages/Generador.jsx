@@ -5,7 +5,6 @@ import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import itemIcon from '../images/units_icons/equipamiento.png'
 import objetosData from '../data/items/objetos.json'
-import objetosEnData from '../data/items/objetos.en.json'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
 import {
   DEFAULT_ROLE_ID,
@@ -304,7 +303,7 @@ function RoleRoster({ counts, names, onAdd, onRemove, addLabel, removeLabel, dis
 
 // ─── Página ───────────────────────────────────────────────────────────────
 function Generador() {
-  const { t, lang } = useI18n()
+  const { t } = useI18n()
 
   const [gameMode, setGameMode] = useState('escaramuza')
   const [selectedHeroId, setSelectedHeroId] = useState('')
@@ -329,7 +328,7 @@ function Generador() {
   const modalCardRef = useRef(null)
   const selectionCounterRef = useRef(0)
 
-  const activeItems = lang === 'en' ? objetosEnData.objetos : objetosData.objetos
+  const activeItems = objetosData.objetos
 
   const getRoleFor = (unidadId) => roleByUnidad[unidadId] || DEFAULT_ROLE_ID
 
@@ -531,12 +530,12 @@ function Generador() {
       title: item.nombre,
       flavor: '',
       // Notion ya no restringe objetos por clase: cualquier unidad puede equiparlos.
-      summary: lang === 'en' ? 'Any unit' : 'Cualquier unidad',
+      summary: 'Cualquier unidad',
       copy: item.descripcion,
       meta: '',
-      misionLabel: lang === 'en' ? 'OBJECT' : 'OBJETO',
-      valorLabel: lang === 'en' ? 'VALUE' : 'VALOR',
-      objetivoLabel: lang === 'en' ? 'Equipment' : 'Equipación',
+      misionLabel: 'OBJETO',
+      valorLabel: 'VALOR',
+      objetivoLabel: 'Equipación',
     })
     setShowItemFichaModal(true)
   }
@@ -1191,7 +1190,7 @@ function Generador() {
               ) : <span />}
               <div className="unit-preview-modal-actions">
                 <button type="button" className="ghost small" onClick={handleDownloadModalFicha}>
-                  {lang === 'en' ? 'Download PDF' : 'Descargar PDF'}
+                  Descargar PDF
                 </button>
                 <button type="button" className="ghost small" onClick={closePreview} aria-label={t('generator.close')}>✕</button>
               </div>
@@ -1202,7 +1201,6 @@ function Generador() {
                 entry={previewItem.entry}
                 imageDataUrl={previewItem.imageDataUrl}
                 gameMode={gameMode}
-                lang={lang}
               />
             </div>
           </div>
@@ -1227,7 +1225,6 @@ function Generador() {
                       entry={item.entry}
                       imageDataUrl={item.imageDataUrl}
                       gameMode={gameMode}
-                      lang={lang}
                     />
                   </div>
                 </div>

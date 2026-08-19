@@ -82,12 +82,12 @@ const formatEscuadra = (escuadra) => {
   return `${min}/${max}`
 }
 
-/** "A", "A y B", "A, B y C" — con "and" en inglés. */
-const formatList = (values, lang = 'es') => {
+/** "A", "A y B", "A, B y C". */
+const formatList = (values) => {
   const items = values.filter(Boolean)
   if (items.length <= 1) return items.join('')
   const last = items[items.length - 1]
-  return `${items.slice(0, -1).join(', ')} ${lang === 'en' ? 'and' : 'y'} ${last}`
+  return `${items.slice(0, -1).join(', ')} y ${last}`
 }
 
 const abilityList = (weapon) =>
@@ -178,14 +178,14 @@ function FitBox({ className, rect, children, maxFontSize, minFontSize = 8, fitKe
 
 const box = (rect) => ({ left: rect.x, top: rect.y, width: rect.w, height: rect.h })
 
-function WeaponRow({ weapon, y, h, lang }) {
+function WeaponRow({ weapon, y, h }) {
   if (!weapon) return null
   const values = {
     ataques: text(weapon.ataques),
     distancia: text(weapon.distancia),
     precision: text(weapon.precision),
     danio: formatDanio(weapon),
-    habilidades: abilityList(weapon).map((a) => getAbilityLabel(a, lang)).join('\n') || '-',
+    habilidades: abilityList(weapon).map((a) => getAbilityLabel(a)).join('\n') || '-',
   }
 
   return WEAPON_COLUMNS.map((column) => (
@@ -250,7 +250,7 @@ const alignTextBoxesForCapture = (liveCard, clonedDoc) => {
 }
 
 const UnitFichaCard = forwardRef(function UnitFichaCard(
-  { entry, imageDataUrl, gameMode = 'escaramuza', lang = 'es', onImageClick },
+  { entry, imageDataUrl, gameMode = 'escaramuza', onImageClick },
   ref,
 ) {
   const wrapperRef = useRef(null)
@@ -339,19 +339,19 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
   const ventajaBonus = getVentajaClase(gameMode)
 
   const abilityName = isHero
-    ? (lang === 'en' ? 'Faction ability' : 'Habilidad de facción')
+    ? 'Habilidad de facción'
     : (entry.habilidad || '')
   const abilityDescription = isHero
     ? entry.habilidad_faccion
-    : resolveUnitSpecialtyDescription(entry.habilidad, lang)
+    : resolveUnitSpecialtyDescription(entry.habilidad)
 
   // Las habilidades se agrupan por arma: primero las de disparo, luego las de
   // cuerpo a cuerpo, separadas por una línea.
   const buildNotes = (weapon) =>
     abilityList(weapon).reduce((unique, ability) => {
-      const label = getAbilityLabel(ability, lang)
+      const label = getAbilityLabel(ability)
       if (unique.some((item) => item.label === label)) return unique
-      unique.push({ label, description: getAbilityDescription(ability, lang) })
+      unique.push({ label, description: getAbilityDescription(ability) })
       return unique
     }, [])
 
@@ -373,7 +373,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
               {classBadgeSrc ? (
                 <img className="ficha2-img-placeholder-badge" src={classBadgeSrc} alt="" />
               ) : null}
-              <span>{lang === 'en' ? 'Add image' : 'Añadir imagen'}</span>
+              <span>Añadir imagen</span>
             </button>
           )}
         </div>
@@ -433,8 +433,8 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
           {abilityDescription ? <span>{abilityDescription}</span> : null}
         </FitBox>
 
-        <WeaponRow weapon={shooting} y={LAYOUT.shooting.y} h={LAYOUT.shooting.h} lang={lang} />
-        <WeaponRow weapon={melee} y={LAYOUT.melee.y} h={LAYOUT.melee.h} lang={lang} />
+        <WeaponRow weapon={shooting} y={LAYOUT.shooting.y} h={LAYOUT.shooting.h} />
+        <WeaponRow weapon={melee} y={LAYOUT.melee.y} h={LAYOUT.melee.h} />
 
         <FitBox
           className="ficha2-weapon-abilities"
@@ -445,7 +445,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
         >
           {fuerteContra.length ? (
             <p className="ficha2-ability-advantage">
-              +{ventajaBonus} {lang === 'en' ? 'to total damage against' : 'al daño total contra'}: {formatList(fuerteContra, lang)}
+              +{ventajaBonus} al daño total contra: {formatList(fuerteContra)}
             </p>
           ) : null}
           {weaponAbilityGroups.map((group, index) => (

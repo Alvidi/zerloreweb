@@ -3,13 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import zeroloreLogo from '../images/zeroloreLogo.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const LANGUAGE_OPTIONS = [
-  { code: 'es', flag: '🇪🇸', label: 'ES' },
-  { code: 'en', flag: '🇬🇧', label: 'EN' },
-]
-
 function Nav() {
-  const { lang, setLang, t } = useI18n()
+  const { t } = useI18n()
   const location = useLocation()
   const [mobileMenuPath, setMobileMenuPath] = useState(null)
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
@@ -39,13 +34,9 @@ function Nav() {
   const toggleMobileMenu = () => {
     setMobileMenuPath((prevPath) => (prevPath === location.pathname ? null : location.pathname))
   }
-  const handleMobileLangChange = (nextLang) => {
-    setLang(nextLang)
-    closeMobileMenu()
-  }
 
   return (
-    <nav className="nav" aria-label="Main navigation">
+    <nav className="nav" aria-label="Navegación principal">
       <Link className="logo" to="/" onClick={closeMobileMenu}>
         <span className="logo-box" aria-hidden="true">
           <img src={zeroloreLogo} alt="" className="logo-mark" />
@@ -70,24 +61,11 @@ function Nav() {
           </a>
         ))}
       </div>
-      <div className="lang-switch" aria-label="Language switch">
-        {LANGUAGE_OPTIONS.map((language) => (
-          <button
-            key={language.code}
-            type="button"
-            className={`lang-btn ${lang === language.code ? 'active' : ''}`}
-            onClick={() => setLang(language.code)}
-            aria-label={language.code === 'en' ? 'English' : 'Español'}
-          >
-            <span className="lang-btn-flag" aria-hidden="true">{language.flag}</span>
-            <span>{language.label}</span>
-          </button>
-        ))}
-      </div>
+
       <button
         type="button"
         className={`nav-mobile-toggle ${isMobileMenuOpen ? 'open' : ''}`}
-        aria-label={lang === 'en' ? 'Toggle navigation menu' : 'Abrir menú de navegación'}
+        aria-label="Abrir menú de navegación"
         aria-expanded={isMobileMenuOpen}
         onClick={toggleMobileMenu}
       >
@@ -100,7 +78,7 @@ function Nav() {
       <button
         type="button"
         className={`nav-mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}
-        aria-label={lang === 'en' ? 'Close navigation menu' : 'Cerrar menú de navegación'}
+        aria-label="Cerrar menú de navegación"
         onClick={closeMobileMenu}
       />
       <div className={`nav-mobile-panel ${isMobileMenuOpen ? 'open' : ''}`}>
@@ -122,20 +100,6 @@ function Nav() {
               {social.icon}
               <span>{t(`nav.${social.key}`)}</span>
             </a>
-          ))}
-        </div>
-        <div className="nav-mobile-lang" aria-label={lang === 'en' ? 'Language switch' : 'Selector de idioma'}>
-          {LANGUAGE_OPTIONS.map((language) => (
-            <button
-              key={language.code}
-              type="button"
-              className={`lang-btn ${lang === language.code ? 'active' : ''}`}
-              onClick={() => handleMobileLangChange(language.code)}
-              aria-label={language.code === 'en' ? 'English' : 'Español'}
-            >
-              <span className="lang-btn-flag" aria-hidden="true">{language.flag}</span>
-              <span>{language.label}</span>
-            </button>
           ))}
         </div>
       </div>

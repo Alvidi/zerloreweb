@@ -1,12 +1,11 @@
 import { useMemo } from 'react'
 import { marked } from 'marked'
 import legalMd from '../data/spanish/legal.md?raw'
-import legalEnMd from '../data/english/legal.md?raw'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 function DerechosAutor() {
-  const { lang, t } = useI18n()
-  const activeMarkdown = lang === 'en' ? legalEnMd : legalMd
+  const { t } = useI18n()
+  const activeMarkdown = legalMd
   const html = useMemo(() => marked(activeMarkdown), [activeMarkdown])
 
   return (

@@ -3,9 +3,7 @@ import { createPortal } from 'react-dom'
 import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
-import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
-import misionesEnMd from '../data/english/missions.md?raw'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import { buildHeroEntry, buildUnitEntry } from '../features/generator/catalogUtils.js'
@@ -83,15 +81,15 @@ const getRulesAssetPlaceholders = () => {
 }
 
 const RULES_UNIT_TYPE_ICONS = [
-  { id: 'choque', labelEs: 'Choque', labelEn: 'Shock' },
-  { id: 'elite', labelEs: 'Élite', labelEn: 'Elite' },
-  { id: 'especialista', labelEs: 'Especialistas', labelEn: 'Specialists' },
-  { id: 'comando', labelEs: 'Comando', labelEn: 'Commando' },
-  { id: 'asaltante', labelEs: 'Asaltante', labelEn: 'Raider' },
-  { id: 'monstruo', labelEs: 'Monstruos', labelEn: 'Monsters' },
-  { id: 'vehiculo', labelEs: 'Vehículos', labelEn: 'Vehicles' },
-  { id: 'artilleria', labelEs: 'Artillería', labelEn: 'Artillery' },
-  { id: 'heroe', labelEs: 'Héroes', labelEn: 'Heroes' },
+  { id: 'choque', label: 'Choque' },
+  { id: 'elite', label: 'Élite' },
+  { id: 'especialista', label: 'Especialistas' },
+  { id: 'comando', label: 'Comando' },
+  { id: 'asaltante', label: 'Asaltante' },
+  { id: 'monstruo', label: 'Monstruos' },
+  { id: 'vehiculo', label: 'Vehículos' },
+  { id: 'artilleria', label: 'Artillería' },
+  { id: 'heroe', label: 'Héroes' },
 ].map((unitType) => ({ ...unitType, imageSrc: getUnitClassBadgeSrc(unitType.id) }))
 
 // Fichas de ejemplo del reglamento, tomadas del catálogo.
@@ -223,10 +221,10 @@ function Reglamento() {
   const isTokensMode = rulesMode === 'tokens'
   const activeMarkdown = useMemo(() => {
     if (rulesMode === 'missions') {
-      return lang === 'en' ? misionesEnMd : misionesMd
+      return misionesMd
     }
-    return lang === 'en' ? reglamentoEnMd : reglamentoMd
-  }, [lang, rulesMode])
+    return reglamentoMd
+  }, [rulesMode])
   const tokenOptions = useMemo(
     () =>
       TOKEN_DEFINITIONS.map((token) => ({
@@ -257,7 +255,7 @@ function Reglamento() {
     return marked(replaceRulesAssetPlaceholders(activeMarkdown, lang))
   }, [activeMarkdown, isTokensMode, lang])
   const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
-  const printCoverCreditLabel = lang === 'en' ? 'by alvidi' : 'por alvidi'
+  const printCoverCreditLabel = 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
 
   const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, weaponAbilityTableHtml } = useMemo(() => {
@@ -315,14 +313,14 @@ function Reglamento() {
         headingTags: 'h3',
         matchesHeading: (normalized) => normalized === 'habilidad de unidad' || normalized === 'unit ability',
         modalKey: 'specialty',
-        triggerLabel: lang === 'en' ? 'View specialty table' : 'Ver tabla de especialidades',
+        triggerLabel: 'Ver tabla de especialidades',
       })
 
       weaponAbilityTableHtml = extractTableIntoModalTrigger({
         headingTags: 'h1',
         matchesHeading: (normalized) => normalized === 'habilidades de armas' || normalized === 'weapon abilities',
         modalKey: 'weaponAbility',
-        triggerLabel: lang === 'en' ? 'View weapon abilities table' : 'Ver tabla de habilidades de arma',
+        triggerLabel: 'Ver tabla de habilidades de arma',
       })
     }
     Array.from(doc.querySelectorAll('img')).forEach((image) => {
@@ -371,7 +369,7 @@ function Reglamento() {
 
           const label = doc.createElement('p')
           label.className = 'rules-unit-type-gallery-label'
-          label.textContent = lang === 'en' ? unitType.labelEn : unitType.labelEs
+          label.textContent = unitType.label
 
           item.appendChild(mark)
           item.appendChild(label)
@@ -652,7 +650,7 @@ function Reglamento() {
     })
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, weaponAbilityTableHtml }
-  }, [t, lang, rulesHtml, isTokensMode, rulesMode])
+  }, [t, rulesHtml, isTokensMode, rulesMode])
 
   useEffect(() => {
     if (!contentRef.current) return undefined
@@ -1026,7 +1024,7 @@ function Reglamento() {
           }
         }
 
-        doc.save(lang === 'en' ? 'zerolore-missions-fichas.pdf' : 'zerolore-misiones-fichas.pdf')
+        doc.save('zerolore-misiones-fichas.pdf')
       } finally {
         setIsGeneratingRulesPdf(false)
       }
@@ -1852,9 +1850,7 @@ function Reglamento() {
         }
       }
 
-      const filename = lang === 'en'
-        ? (rulesMode === 'missions' ? 'zerolore-missions-en.pdf' : 'zerolore-rulebook-en.pdf')
-        : (rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf')
+      const filename = rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf'
 
       doc.save(filename)
     } finally {
@@ -2044,7 +2040,7 @@ function Reglamento() {
         rowHeight = Math.max(rowHeight, cellSize)
       })
 
-      doc.save(lang === 'en' ? 'zerolore_tokens_en.pdf' : 'zerolore_tokens_es.pdf')
+      doc.save('zerolore_tokens_es.pdf')
     } finally {
       setIsGeneratingTokensPdf(false)
     }
@@ -2265,8 +2261,8 @@ function Reglamento() {
             <div className="rules-table-modal-header">
               <h2>
                 {openTableModal === 'specialty'
-                  ? (lang === 'en' ? 'Specialty table' : 'Tabla de especialidades')
-                  : (lang === 'en' ? 'Weapon abilities table' : 'Tabla de habilidades de arma')}
+                  ? 'Tabla de especialidades'
+                  : 'Tabla de habilidades de arma'}
               </h2>
               <button
                 type="button"

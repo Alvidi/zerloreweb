@@ -1,16 +1,12 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo } from 'react'
 import { translations } from './translations.js'
 
 const I18nContext = createContext(null)
 
-const STORAGE_KEY = 'zerolore_lang'
+// El proyecto va solo en español hasta que el contenido esté cerrado; se
+// mantiene el sistema de i18n en pie para que traducir sea solo añadir el
+// paquete de idioma.
 const DEFAULT_LANG = 'es'
-
-function getInitialLanguage() {
-  const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved === 'es' || saved === 'en') return saved
-  return DEFAULT_LANG
-}
 
 function getByPath(obj, path) {
   return path.split('.').reduce((current, segment) => {
@@ -20,21 +16,16 @@ function getByPath(obj, path) {
 }
 
 export function I18nProvider({ children }) {
-  const [lang, setLang] = useState(getInitialLanguage)
+  const lang = DEFAULT_LANG
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, lang)
     document.documentElement.lang = lang
   }, [lang])
 
   const value = useMemo(() => {
-    const t = (path) => {
-      const currentPack = translations[lang] ?? translations[DEFAULT_LANG]
-      const defaultPack = translations[DEFAULT_LANG]
-      return getByPath(currentPack, path) ?? getByPath(defaultPack, path) ?? path
-    }
-
-    return { lang, setLang, t }
+    const pack = translations[DEFAULT_LANG]
+    const t = (path) => getByPath(pack, path) ?? path
+    return { lang, t }
   }, [lang])
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>

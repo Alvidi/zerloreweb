@@ -1,13 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
-import { useI18n } from '../i18n/I18nContext.jsx'
 import homeEsMd from '../data/spanish/home.md?raw'
-import homeEnMd from '../data/english/home.md?raw'
 import { parseHomeContent } from '../utils/homeContent.js'
 
 function Home() {
   const navigate = useNavigate()
-  const { lang } = useI18n()
   const discordUrl = 'https://discord.gg/6ZMGUUTRQT'
   const contactEmail = 'zeroloretmg@gmail.com'
   const pillars = [
@@ -18,7 +15,7 @@ function Home() {
     'scale',
     'factions',
   ]
-  const content = useMemo(() => parseHomeContent(lang === 'en' ? homeEnMd : homeEsMd), [lang])
+  const content = useMemo(() => parseHomeContent(homeEsMd), [])
 
   return (
     <>

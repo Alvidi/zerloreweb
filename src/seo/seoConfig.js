@@ -40,47 +40,12 @@ export const SEO_BY_LANG = {
       pageType: 'WebPage',
     },
   },
-  en: {
-    '/': {
-      title: 'ZeroLore | Miniatures Wargame',
-      description:
-        'ZeroLore is a miniatures wargame for building your own battles, factions, and scenarios.',
-      summary:
-        'Discover ZeroLore, read the rules, and prepare your armies for skirmish and grand battle matches.',
-      pageType: 'WebSite',
-    },
-    '/reglamento': {
-      title: 'Rules | ZeroLore',
-      description:
-        'Read the ZeroLore rules: a fast, brutal, and cinematic system for your tabletop matches.',
-      summary:
-        'Review the core rules, actions, combat, states, command posts, and strategic abilities for ZeroLore.',
-      pageType: 'Article',
-    },
-    '/generador': {
-      title: 'Armies | ZeroLore',
-      description:
-        'Explore ZeroLore factions, units, and abilities, then download your army ready to print.',
-      summary:
-        'Browse units, faction abilities, and downloadable army cards for ZeroLore.',
-      pageType: 'WebApplication',
-    },
-    '/derechos-de-autor': {
-      title: 'Copyright | ZeroLore',
-      description:
-        'ZeroLore legal notice: copyright, usage rights, and intellectual property for the project.',
-      summary:
-        'Review ZeroLore usage terms, authorship, and copyright information.',
-      pageType: 'WebPage',
-    },
-  },
 }
 
 export const ROUTE_PATHS = ['/', '/reglamento', '/generador', '/derechos-de-autor']
 
 export const LOCALE_BY_LANG = {
   es: 'es_ES',
-  en: 'en_US',
 }
 
 export function normalizeSiteUrl(value) {
@@ -95,7 +60,7 @@ export function joinSiteUrl(siteUrl, path) {
 }
 
 export function getMetaForPath(pathname, lang = DEFAULT_SEO_LANG) {
-  const normalizedLang = lang === 'es' || lang === 'en' ? lang : DEFAULT_SEO_LANG
+  const normalizedLang = lang === 'es' ? lang : DEFAULT_SEO_LANG
   const pack = SEO_BY_LANG[normalizedLang] || SEO_BY_LANG[DEFAULT_SEO_LANG]
   return pack[pathname] || pack['/']
 }
@@ -103,7 +68,7 @@ export function getMetaForPath(pathname, lang = DEFAULT_SEO_LANG) {
 export function buildStructuredData({ siteUrl, pathname, lang = DEFAULT_SEO_LANG }) {
   const meta = getMetaForPath(pathname, lang)
   const url = joinSiteUrl(siteUrl, pathname)
-  const inLanguage = lang === 'es' ? 'es' : 'en'
+  const inLanguage = 'es'
   const sameAs = [
     'https://discord.gg/6ZMGUUTRQT',
     'https://www.youtube.com/@zeroloretmg',
