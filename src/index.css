@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
 
 :root {
   color: #ffffff;
@@ -15,6 +15,17 @@
   --accent: #d7c69a;
   --accent-soft: rgba(200, 170, 104, 0.18);
   --metal: #a7b0c0;
+  /* Colores de clase, tomados de los iconos de units_icons/ */
+  --class-choque: #c3c7ce;
+  --class-elite: #a893d8;
+  --class-especialista: #9cce58;
+  --class-comando: #5684d1;
+  --class-asaltante: #f06f9f;
+  --class-monstruo: #ef3838;
+  --class-vehiculo: #ff8c28;
+  --class-artilleria: #d88a4f;
+  --class-heroe: #ff28a3;
+  --class-equipment: #f1c636;
   --line: rgba(255, 255, 255, 0.12);
   --glow: rgba(214, 190, 132, 0.32);
   --max-width: 1200px;

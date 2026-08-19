@@ -11,6 +11,7 @@ export const WEAPON_ABILITY_IDS = {
   reach:         'reach',
   erratic:       'erratic',
   sweep:         'sweep',
+  anti:          'anti',
 }
 
 export const normalizeAbilityText = (value) =>
@@ -33,6 +34,7 @@ const WEAPON_ABILITY_DEFINITIONS = [
   { id: WEAPON_ABILITY_IDS.reach,         aliases: ['alcance', 'reach'],                                                 conditionKey: null },
   { id: WEAPON_ABILITY_IDS.erratic,       aliases: ['erratica', 'erratic'],                                              conditionKey: null },
   { id: WEAPON_ABILITY_IDS.sweep,         aliases: ['barrido', 'sweep'],                                                 conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.anti,          aliases: ['anti'],                                                             conditionKey: null },
 ]
 
 const definitionById = new Map(WEAPON_ABILITY_DEFINITIONS.map((definition) => [definition.id, definition]))

@@ -3,79 +3,44 @@
     {
       "id": "granada",
       "nombre": "Grenade",
-      "descripcion": "During its activation, the unit may use this item, consuming its action: choose an enemy unit within 6\" or less, which suffers 1D6 direct damage (no save). Explosive (1). One grenade per unit, regardless of how many miniatures it has.",
-      "equipacion": ["Line"],
+      "descripcion": "During its activation, the unit may use this item, consuming 1 action: choose an enemy unit within 6\" or less, which suffers 1D6 direct damage (no save). Explosive (1). One grenade per unit, regardless of how many miniatures it has.",
       "valor": 3
     },
     {
       "id": "botiquin",
       "nombre": "Medkit",
-      "descripcion": "During its activation, the unit may use this item, consuming its action, to recover 3 lost Wounds.",
-      "equipacion": ["Line", "Elite", "Hero"],
+      "descripcion": "During its activation, the unit may use this item, consuming 1 action, to recover 3 lost Wounds.",
       "valor": 2
     },
     {
       "id": "escudo",
       "nombre": "Shield",
-      "descripcion": "When the unit is declared the target of an attack (ranged or melee), before any dice are rolled: it ignores all damage from that attack. If the attack had Explosive, there is no explosion.",
-      "equipacion": ["Line", "Hero"],
+      "descripcion": "When the unit is declared the target of an attack (ranged or melee), before rolling any dice: ignore all damage from that attack.",
       "valor": 4
-    },
-    {
-      "id": "anti-vehiculo",
-      "nombre": "Anti-Vehicle",
-      "descripcion": "Declare when attacking a Vehicle: that attack inflicts +2 to the total final bonus damage.",
-      "equipacion": ["Line", "Elite", "Hero"],
-      "valor": 2
-    },
-    {
-      "id": "anti-heroe",
-      "nombre": "Anti-Hero",
-      "descripcion": "Declare when attacking a Hero: that attack inflicts +2 to the total final bonus damage.",
-      "equipacion": ["Line", "Elite", "Hero"],
-      "valor": 2
-    },
-    {
-      "id": "anti-monstruo",
-      "nombre": "Anti-Monster",
-      "descripcion": "Declare when attacking a Monster: that attack inflicts +2 to the total final bonus damage.",
-      "equipacion": ["Line", "Elite", "Hero"],
-      "valor": 2
     },
     {
       "id": "cortina-de-humo",
       "nombre": "Smoke Screen",
-      "descripcion": "During its activation, the unit may use this item, consuming its action: it counts as in cover until the end of the turn.",
-      "equipacion": ["Line", "Elite"],
+      "descripcion": "During its activation, the unit may use this item, consuming 1 action: it counts as being in cover until the end of the turn.",
       "valor": 2
     },
     {
       "id": "estimulante",
       "nombre": "Stimulant",
-      "descripcion": "When activated: +3\" to its movement during that activation (also when Charging or Running).",
-      "equipacion": ["Line", "Elite", "Hero"],
+      "descripcion": "On activation: +3\" to its movement during that activation (also when Charging or Running).",
       "valor": 1
     },
     {
       "id": "bengala-de-despliegue",
       "nombre": "Deployment Flare",
-      "descripcion": "When deployed: the unit deploys as if it had Vanguard (within 9\" of an allied post).",
-      "equipacion": ["Line", "Elite", "Hero"],
+      "descripcion": "When deploying, the unit may do so as if it had Vanguard, within 9\" or less of an allied command post.",
       "valor": 2
     },
     {
       "id": "blindaje-reactivo",
       "nombre": "Reactive Armour",
       "descripcion": "If it suffers damage from an attack: reduce it by 1D3.",
-      "equipacion": ["Vehicle"],
       "valor": 2
-    },
-    {
-      "id": "grunido",
-      "nombre": "Roar",
-      "descripcion": "During its activation, the unit may use this item, consuming its action: all units within 3\", allied and enemy, including those locked in combat, are returned to their nearest command posts.",
-      "equipacion": ["Monster"],
-      "valor": 3
     }
   ]
 }

@@ -6,19 +6,14 @@ import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import reglamentoEnMd from '../data/english/rulebook.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
 import misionesEnMd from '../data/english/missions.md?raw'
-import legadoData from '../data/factions/jsonFaccionesES/legado.json'
-import legadoEnData from '../data/factions/jsonFaccionesEN/legado.en.json'
-import caosData from '../data/factions/jsonFaccionesES/caos.json'
-import caosEnData from '../data/factions/jsonFaccionesEN/caos.en.json'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
-import { normalizeFaction } from '../features/generator/generatorUtils.js'
+import { buildHeroEntry, buildUnitEntry } from '../features/generator/catalogUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
 import damage5Token from '../images/tokens/damage-5-red.svg'
 import damage10Token from '../images/tokens/damage-10-red.svg'
-import stateReadyToken from '../images/tokens/preparado-blue.svg'
 import conquestBlueToken from '../images/tokens/conquista-blue.svg'
 import conquestGreenToken from '../images/tokens/conquista-green.svg'
 import conquestRedToken from '../images/tokens/conquista-red.svg'
@@ -40,15 +35,7 @@ import coverImage from '../images/webimagen/imagen_13.webp'
 import vehicleMonsterMeleeImage from '../images/webimagen/imagen_14.webp'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
 import fichasMisionesImg from '../images/fichas/misiones.png'
-import unitTypeLineIcon from '../images/units_icons/dominion/line.png'
-import unitTypeEliteIcon from '../images/units_icons/dominion/elite.png'
-import unitTypeVehicleIcon from '../images/units_icons/dominion/vehicle.png'
-import unitTypeMonsterIcon from '../images/units_icons/dominion/monster.png'
-import unitTypeHeroIcon from '../images/units_icons/dominion/hero.png'
-import unitTypeLinePastIcon from '../images/units_icons/kingdom/line.png'
-import unitTypeElitePastIcon from '../images/units_icons/kingdom/elite.png'
-import unitTypeVehiclePastIcon from '../images/units_icons/kingdom/vehicle.png'
-import unitTypeHeroPastIcon from '../images/units_icons/kingdom/hero.png'
+import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'missions', 'tokens']
@@ -96,85 +83,33 @@ const getRulesAssetPlaceholders = () => {
 }
 
 const RULES_UNIT_TYPE_ICONS = [
-  { id: 'line', imageSrc: unitTypeLineIcon, pastImageSrc: unitTypeLinePastIcon, labelEs: 'Línea', labelEn: 'Line', sectionHeadings: ['1 unidades de linea', '1 line units'] },
-  { id: 'elite', imageSrc: unitTypeEliteIcon, pastImageSrc: unitTypeElitePastIcon, labelEs: 'Élite', labelEn: 'Elite', sectionHeadings: ['2 unidades de elite', '2 elite units'] },
-  { id: 'vehicle', imageSrc: unitTypeVehicleIcon, pastImageSrc: unitTypeVehiclePastIcon, labelEs: 'Vehículo', labelEn: 'Vehicle', sectionHeadings: ['3 vehiculos', '3 vehicles'] },
-  { id: 'monster', imageSrc: unitTypeMonsterIcon, labelEs: 'Monstruo', labelEn: 'Monster', sectionHeadings: ['4 monstruos', '4 monsters'] },
-  { id: 'hero', imageSrc: unitTypeHeroIcon, pastImageSrc: unitTypeHeroPastIcon, labelEs: 'Héroe', labelEn: 'Hero', sectionHeadings: ['5 heroes', '5 heroes'] },
-]
+  { id: 'choque', labelEs: 'Choque', labelEn: 'Shock' },
+  { id: 'elite', labelEs: 'Élite', labelEn: 'Elite' },
+  { id: 'especialista', labelEs: 'Especialistas', labelEn: 'Specialists' },
+  { id: 'comando', labelEs: 'Comando', labelEn: 'Commando' },
+  { id: 'asaltante', labelEs: 'Asaltante', labelEn: 'Raider' },
+  { id: 'monstruo', labelEs: 'Monstruos', labelEn: 'Monsters' },
+  { id: 'vehiculo', labelEs: 'Vehículos', labelEn: 'Vehicles' },
+  { id: 'artilleria', labelEs: 'Artillería', labelEn: 'Artillery' },
+  { id: 'heroe', labelEs: 'Héroes', labelEn: 'Heroes' },
+].map((unitType) => ({ ...unitType, imageSrc: getUnitClassBadgeSrc(unitType.id) }))
 
-const RULES_EXAMPLE_FACTIONS = {
-  es: {
-    legado: normalizeFaction(legadoData, 0, 'legado'),
-    caos: normalizeFaction(caosData, 1, 'caos'),
-  },
-  en: {
-    legado: normalizeFaction(legadoEnData, 0, 'legado'),
-    caos: normalizeFaction(caosEnData, 1, 'caos'),
-  },
-}
-
-const getRulesExampleFactionSet = (lang = 'es') => RULES_EXAMPLE_FACTIONS[lang] || RULES_EXAMPLE_FACTIONS.es
-
-const getRulesExampleUnit = (lang = 'es') => {
-  const units = getRulesExampleFactionSet(lang).legado.unidades || []
-  const preferredName = lang === 'en' ? 'Eternal Guardians' : 'Guardianes Eternos'
-  return units.find((unit) => unit.nombre === preferredName) || units[0]
-}
-
-const getRulesExampleHero = (lang = 'es') => {
-  const units = getRulesExampleFactionSet(lang).caos.unidades || []
-  const preferredName = lang === 'en' ? 'Demonic Cyborg' : 'cyborg demoniaco'
-  return units.find((unit) => unit.nombre === preferredName) || units.find((unit) => {
-    const normalizedType = String(unit.tipo || '')
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-    return normalizedType.includes('hero') || normalizedType.includes('heroe')
-  })
-}
+// Fichas de ejemplo del reglamento, tomadas del catálogo.
+const RULES_EXAMPLE_UNIT = { unidadId: 'elite', roleId: 'asalto' }
+const RULES_EXAMPLE_HERO_ID = 'heroe-1'
 
 function RulesFichaSlot({ type, lang }) {
-  if (type === 'unit') {
-    const unit = getRulesExampleUnit(lang)
-    if (!unit) return null
-    return (
-      <div className="rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-unit">
-        <UnitFichaCard
-          unit={{
-            ...unit,
-            escuadra_display: `${unit.escuadra_min}/${unit.escuadra_max}`,
-          }}
-          factionId="legado"
-          imageDataUrl=""
-          gameMode="escaramuza"
-          eraLabel={lang === 'en' ? 'Future' : 'Futuro'}
-          lang={lang}
-          showLayoutToolbar={false}
-        />
-      </div>
-    )
-  }
+  const entry = type === 'hero'
+    ? buildHeroEntry(RULES_EXAMPLE_HERO_ID)
+    : buildUnitEntry(RULES_EXAMPLE_UNIT.unidadId, RULES_EXAMPLE_UNIT.roleId)
 
-  if (type === 'hero') {
-    const unit = getRulesExampleHero(lang)
-    if (!unit) return null
-    return (
-      <div className="rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-hero">
-        <UnitFichaCard
-          unit={unit}
-          factionId="caos"
-          imageDataUrl=""
-          gameMode="escaramuza"
-          eraLabel={lang === 'en' ? 'Future' : 'Futuro'}
-          lang={lang}
-          showLayoutToolbar={false}
-        />
-      </div>
-    )
-  }
+  if (!entry) return null
 
-  return null
+  return (
+    <div className={`rules-profile-image-row rules-ficha-card-example rules-ficha-card-example-${type}`}>
+      <UnitFichaCard entry={entry} imageDataUrl="" gameMode="escaramuza" lang={lang} />
+    </div>
+  )
 }
 
 const renderRulesHtmlWithFichaSlots = (html, lang) => {
@@ -238,7 +173,6 @@ const TOKEN_DEFINITIONS = [
   { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
   { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage5Token },
   { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage10Token },
-  { id: 'state_ready', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateReady', diameterMm: 32, previewSize: 'medium', imageSrc: stateReadyToken },
   { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
   { id: 'state_activation_green', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivatedGreen', diameterMm: 32, previewSize: 'medium', imageSrc: activationGreenToken },
   { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
@@ -281,7 +215,7 @@ function Reglamento() {
   const [tokenInputValues, setTokenInputValues] = useState(buildInitialTokenInputValues)
   const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
-  const [isSpecialtyTableOpen, setIsSpecialtyTableOpen] = useState(false)
+  const [openTableModal, setOpenTableModal] = useState(null)
   const [showMisionFichaModal, setShowMisionFichaModal] = useState(false)
   const [activeMissionFicha, setActiveMissionFicha] = useState(null)
   const modeParam = searchParams.get('mode')
@@ -326,12 +260,12 @@ function Reglamento() {
   const printCoverCreditLabel = lang === 'en' ? 'by alvidi' : 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
 
-  const { renderedHtml, tocItems, documentHeading } = useMemo(() => {
+  const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, weaponAbilityTableHtml } = useMemo(() => {
     if (isTokensMode) {
-      return { renderedHtml: '', tocItems: [], documentHeading: null }
+      return { renderedHtml: '', tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '' }
     }
     if (typeof window === 'undefined') {
-      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null }
+      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '' }
     }
     const parser = new DOMParser()
     const doc = parser.parseFromString(rulesHtml, 'text/html')
@@ -343,38 +277,53 @@ function Reglamento() {
       table.parentNode?.insertBefore(wrapper, table)
       wrapper.appendChild(table)
     })
+    let specialtyTableHtml = ''
+    let weaponAbilityTableHtml = ''
+
+    const extractTableIntoModalTrigger = ({
+      headingTags,
+      matchesHeading,
+      modalKey,
+      triggerLabel,
+    }) => {
+      const heading = Array.from(doc.querySelectorAll(headingTags)).find((candidate) =>
+        matchesHeading(normalizeHeadingText(candidate.textContent)),
+      )
+      if (!heading) return ''
+
+      let sibling = heading.nextElementSibling
+      while (sibling && !/^H[1-3]$/.test(sibling.tagName)) {
+        if (sibling.classList.contains('rules-table-scroll')) {
+          const tableHtml = sibling.outerHTML
+
+          const trigger = doc.createElement('button')
+          trigger.type = 'button'
+          trigger.className = 'rules-table-modal-trigger'
+          trigger.dataset.rulesTableModal = modalKey
+          trigger.textContent = triggerLabel
+
+          sibling.replaceWith(trigger)
+          return tableHtml
+        }
+        sibling = sibling.nextElementSibling
+      }
+      return ''
+    }
+
     if (rulesMode === 'rules') {
-      const specialtyHeading = Array.from(doc.querySelectorAll('h3')).find((heading) => {
-        const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'especialidad' || normalized === 'specialty'
+      specialtyTableHtml = extractTableIntoModalTrigger({
+        headingTags: 'h3',
+        matchesHeading: (normalized) => normalized === 'habilidad de unidad' || normalized === 'unit ability',
+        modalKey: 'specialty',
+        triggerLabel: lang === 'en' ? 'View specialty table' : 'Ver tabla de especialidades',
       })
 
-      if (specialtyHeading) {
-        let sibling = specialtyHeading.nextElementSibling
-        while (sibling && !/^H[1-3]$/.test(sibling.tagName)) {
-          if (sibling.classList.contains('rules-table-scroll')) {
-            const details = doc.createElement('section')
-            details.className = `rules-specialty-details${isSpecialtyTableOpen ? ' is-open' : ''}`
-
-            const summary = doc.createElement('button')
-            summary.type = 'button'
-            summary.className = 'rules-specialty-summary'
-            summary.dataset.rulesSpecialtyToggle = 'true'
-            summary.setAttribute('aria-expanded', String(isSpecialtyTableOpen))
-            summary.textContent = lang === 'en' ? 'View specialty table' : 'Ver tabla de especialidades'
-
-            const panel = doc.createElement('div')
-            panel.className = 'rules-specialty-panel'
-
-            sibling.parentNode?.insertBefore(details, sibling)
-            details.appendChild(summary)
-            details.appendChild(panel)
-            panel.appendChild(sibling)
-            break
-          }
-          sibling = sibling.nextElementSibling
-        }
-      }
+      weaponAbilityTableHtml = extractTableIntoModalTrigger({
+        headingTags: 'h1',
+        matchesHeading: (normalized) => normalized === 'habilidades de armas' || normalized === 'weapon abilities',
+        modalKey: 'weaponAbility',
+        triggerLabel: lang === 'en' ? 'View weapon abilities table' : 'Ver tabla de habilidades de arma',
+      })
     }
     Array.from(doc.querySelectorAll('img')).forEach((image) => {
       const src = image.getAttribute('src') || ''
@@ -405,11 +354,13 @@ function Reglamento() {
         gallery.className = 'rules-unit-type-gallery'
 
         RULES_UNIT_TYPE_ICONS.forEach((unitType) => {
+          if (!unitType.imageSrc) return
+
           const item = doc.createElement('article')
           item.className = 'rules-unit-type-gallery-item'
 
           const mark = doc.createElement('div')
-          mark.className = `rules-unit-type-gallery-mark${unitType.pastImageSrc ? ' has-era-variants' : ''}`
+          mark.className = 'rules-unit-type-gallery-mark'
 
           const image = doc.createElement('img')
           image.className = 'rules-unit-type-gallery-image'
@@ -417,15 +368,6 @@ function Reglamento() {
           image.alt = ''
           image.loading = 'lazy'
           mark.appendChild(image)
-
-          if (unitType.pastImageSrc) {
-            const pastImage = doc.createElement('img')
-            pastImage.className = 'rules-unit-type-gallery-image'
-            pastImage.src = unitType.pastImageSrc
-            pastImage.alt = ''
-            pastImage.loading = 'lazy'
-            mark.appendChild(pastImage)
-          }
 
           const label = doc.createElement('p')
           label.className = 'rules-unit-type-gallery-label'
@@ -446,42 +388,6 @@ function Reglamento() {
         insertionTarget.parentNode?.insertBefore(gallery, insertionTarget.nextSibling)
       }
 
-      RULES_UNIT_TYPE_ICONS.forEach((unitType) => {
-        const sectionHeading = Array.from(doc.querySelectorAll('h2, h3')).find((heading) =>
-          unitType.sectionHeadings.includes(normalizeHeadingText(heading.textContent)),
-        )
-        if (!sectionHeading || sectionHeading.nextElementSibling?.classList.contains('rules-unit-type-section-badge')) return
-
-        const badge = doc.createElement('div')
-        badge.className = `rules-unit-type-section-badge unit-type-${unitType.id}`
-
-        const mark = doc.createElement('div')
-        mark.className = `rules-unit-type-section-mark${unitType.pastImageSrc ? ' has-era-variants' : ''}`
-
-        const image = doc.createElement('img')
-        image.className = 'rules-unit-type-section-image'
-        image.src = unitType.imageSrc
-        image.alt = ''
-        image.loading = 'lazy'
-        mark.appendChild(image)
-
-        if (unitType.pastImageSrc) {
-          const pastImage = doc.createElement('img')
-          pastImage.className = 'rules-unit-type-section-image'
-          pastImage.src = unitType.pastImageSrc
-          pastImage.alt = ''
-          pastImage.loading = 'lazy'
-          mark.appendChild(pastImage)
-        }
-
-        const label = doc.createElement('span')
-        label.className = 'rules-unit-type-section-label'
-        label.textContent = lang === 'en' ? unitType.labelEn : unitType.labelEs
-
-        badge.appendChild(mark)
-        badge.appendChild(label)
-        sectionHeading.parentNode?.insertBefore(badge, sectionHeading.nextSibling)
-      })
 
       const commandHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
@@ -656,63 +562,6 @@ function Reglamento() {
         }
       }
 
-      const unitStatesHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
-        const normalized = normalizeHeadingText(heading.textContent)
-        return normalized.includes('estados de unidad') || normalized.includes('unit states')
-      })
-      const unitStatesHeading = unitStatesHeadings.at(-1)
-      if (unitStatesHeading) {
-        const sectionNodes = []
-        let sibling = unitStatesHeading.nextElementSibling
-        while (sibling && sibling.tagName !== 'H1') {
-          sectionNodes.push(sibling)
-          sibling = sibling.nextElementSibling
-        }
-
-        const stateTokenConfigs = [
-          {
-            matcher: ['token de escudo', 'shield token'],
-            label: t('rules.tokens.types.stateReady'),
-            imageSrc: stateReadyToken,
-          },
-        ]
-
-        stateTokenConfigs.forEach((token) => {
-          const tokenParagraph = sectionNodes.find((node) => {
-            if (node.tagName !== 'P') return false
-            const normalized = normalizeHeadingText(node.textContent)
-            return token.matcher.some((value) => normalized.includes(value))
-          })
-
-          if (!tokenParagraph?.parentNode) return
-
-          const stateGallery = doc.createElement('div')
-          stateGallery.className = 'rules-state-gallery'
-
-          const item = doc.createElement('article')
-          item.className = 'rules-state-gallery-item'
-
-          const mark = doc.createElement('div')
-          mark.className = 'rules-state-gallery-mark'
-
-          const image = doc.createElement('img')
-          image.className = 'rules-state-gallery-image'
-          image.src = token.imageSrc
-          image.alt = ''
-          image.loading = 'lazy'
-
-          const label = doc.createElement('p')
-          label.className = 'rules-state-gallery-label'
-          label.textContent = token.label
-
-          mark.appendChild(image)
-          item.appendChild(mark)
-          item.appendChild(label)
-          stateGallery.appendChild(item)
-          tokenParagraph.parentNode.insertBefore(stateGallery, tokenParagraph.nextSibling)
-        })
-      }
-
       const woundsHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
         return normalized === 'vidas' || normalized === 'wounds'
@@ -802,17 +651,17 @@ function Reglamento() {
       if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy')
     })
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
-    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading }
-  }, [t, lang, rulesHtml, isTokensMode, rulesMode, isSpecialtyTableOpen])
+    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, weaponAbilityTableHtml }
+  }, [t, lang, rulesHtml, isTokensMode, rulesMode])
 
   useEffect(() => {
     if (!contentRef.current) return undefined
 
     const handleRulesClick = (event) => {
-      const toggle = event.target.closest('[data-rules-specialty-toggle="true"]')
-      if (toggle && contentRef.current?.contains(toggle)) {
+      const trigger = event.target.closest('[data-rules-table-modal]')
+      if (trigger && contentRef.current?.contains(trigger)) {
         event.preventDefault()
-        setIsSpecialtyTableOpen((current) => !current)
+        setOpenTableModal(trigger.dataset.rulesTableModal)
       }
     }
 
@@ -1386,11 +1235,8 @@ function Reglamento() {
             border-radius: 0;
             background: #ffffff;
           }
-          .rules-pdf-sheet .rules-html .rules-specialty-summary {
+          .rules-pdf-sheet .rules-html .rules-table-modal-trigger {
             display: none;
-          }
-          .rules-pdf-sheet .rules-html .rules-specialty-panel {
-            display: block;
           }
           .rules-pdf-sheet .rules-html table {
             width: 100%;
@@ -1475,40 +1321,7 @@ function Reglamento() {
             text-transform: uppercase;
             letter-spacing: 0.04em;
           }
-          .rules-pdf-sheet .rules-html .rules-unit-type-section-badge {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            margin: 0 0 12px;
-            padding: 0;
-            break-inside: avoid;
-          }
-          .rules-pdf-sheet .rules-html .rules-unit-type-section-mark {
-            width: 76px;
-            height: 36px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-          }
-          .rules-pdf-sheet .rules-html .rules-unit-type-section-image {
-            display: block;
-            width: 34px;
-            height: 34px;
-            object-fit: contain;
-          }
-          .rules-pdf-sheet .rules-html .rules-unit-type-section-mark.has-era-variants .rules-unit-type-section-image {
-            width: 34px;
-            height: 34px;
-          }
-          .rules-pdf-sheet .rules-html .rules-unit-type-section-label {
-            font-size: 10px;
-            font-weight: 700;
-            line-height: 1;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-          }
-          .rules-pdf-sheet .rules-html .rules-flag-gallery {
+.rules-pdf-sheet .rules-html .rules-flag-gallery {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 14px;
@@ -1568,37 +1381,7 @@ function Reglamento() {
             text-transform: uppercase;
             letter-spacing: 0.04em;
           }
-          .rules-pdf-sheet .rules-html .rules-state-gallery {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin: 14px 0 18px;
-            padding: 14px;
-            border: 1px solid #d7d7d7;
-            background: #ffffff;
-          }
-          .rules-pdf-sheet .rules-html .rules-state-gallery-item {
-            display: grid;
-            justify-items: center;
-            gap: 8px;
-            text-align: center;
-          }
-          .rules-pdf-sheet .rules-html .rules-state-gallery-mark {
-            width: 72px;
-          }
-          .rules-pdf-sheet .rules-html .rules-state-gallery-image {
-            display: block;
-            width: 100%;
-            height: auto;
-          }
-          .rules-pdf-sheet .rules-html .rules-state-gallery-label {
-            margin: 0;
-            font-size: 11px;
-            line-height: 1.25;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-          }
-          .rules-pdf-sheet .rules-html .rules-damage-gallery {
+.rules-pdf-sheet .rules-html .rules-damage-gallery {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 14px;
@@ -1801,8 +1584,15 @@ function Reglamento() {
           slot.replaceWith(liveSlot.cloneNode(true))
         }
       })
-      captureRoot.querySelectorAll('.rules-specialty-details').forEach((details) => {
-        details.classList.add('is-open')
+      captureRoot.querySelectorAll('[data-rules-table-modal]').forEach((trigger) => {
+        const key = trigger.dataset.rulesTableModal
+        const tableHtml = key === 'specialty' ? specialtyTableHtml : key === 'weaponAbility' ? weaponAbilityTableHtml : ''
+        if (!tableHtml) return
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = tableHtml
+        if (wrapper.firstElementChild) {
+          trigger.replaceWith(wrapper.firstElementChild)
+        }
       })
       const pdfSheetPadding = 38
       const pdfInnerWidth = 1040 - pdfSheetPadding * 2
@@ -2460,6 +2250,37 @@ function Reglamento() {
               >×</button>
             </div>
             <MissionFichaCard ficha={activeMissionFicha} isItem={Boolean(activeMissionFicha?.misionLabel)} />
+          </div>
+        </div>,
+        document.body,
+      )}
+      {openTableModal && typeof document !== 'undefined' && createPortal(
+        <div
+          className="rules-table-modal-overlay"
+          onClick={() => setOpenTableModal(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="rules-table-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="rules-table-modal-header">
+              <h2>
+                {openTableModal === 'specialty'
+                  ? (lang === 'en' ? 'Specialty table' : 'Tabla de especialidades')
+                  : (lang === 'en' ? 'Weapon abilities table' : 'Tabla de habilidades de arma')}
+              </h2>
+              <button
+                type="button"
+                className="mision-ficha-modal-close"
+                onClick={() => setOpenTableModal(null)}
+                aria-label="Cerrar"
+              >×</button>
+            </div>
+            <div
+              className="rules-html rules-table-modal-body"
+              dangerouslySetInnerHTML={{
+                __html: openTableModal === 'specialty' ? specialtyTableHtml : weaponAbilityTableHtml,
+              }}
+            />
           </div>
         </div>,
         document.body,

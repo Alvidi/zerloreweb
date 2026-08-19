@@ -3,79 +3,44 @@
     {
       "id": "granada",
       "nombre": "Granada",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1). Una sola granada por unidad, tenga las miniaturas que tenga.",
-      "equipacion": ["Línea"],
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1). Una sola granada por unidad, tenga las miniaturas que tenga.",
       "valor": 3
     },
     {
       "id": "botiquin",
       "nombre": "Botiquín",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción, para recuperar 3 Vidas perdidas.",
-      "equipacion": ["Línea", "Élite", "Héroe"],
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción, para recuperar 3 Vidas perdidas.",
       "valor": 2
     },
     {
       "id": "escudo",
       "nombre": "Escudo",
-      "descripcion": "Cuando la unidad sea declarada objetivo de un ataque (a distancia o cuerpo a cuerpo), antes de tirar ningún dado: ignora todo el daño de ese ataque. Si el ataque tenía Explosiva, no hay explosión.",
-      "equipacion": ["Línea", "Héroe"],
+      "descripcion": "Cuando la unidad sea declarada objetivo de un ataque (a distancia o cuerpo a cuerpo), antes de tirar ningún dado: ignora todo el daño de ese ataque.",
       "valor": 4
-    },
-    {
-      "id": "anti-vehiculo",
-      "nombre": "Anti-Vehículo",
-      "descripcion": "Declara al atacar a un Vehículo: ese ataque inflige +2 al daño extra total final.",
-      "equipacion": ["Línea", "Élite", "Héroe"],
-      "valor": 2
-    },
-    {
-      "id": "anti-heroe",
-      "nombre": "Anti-Héroe",
-      "descripcion": "Declara al atacar a un Héroe: ese ataque inflige +2 al daño extra total final.",
-      "equipacion": ["Línea", "Élite", "Héroe"],
-      "valor": 2
-    },
-    {
-      "id": "anti-monstruo",
-      "nombre": "Anti-Monstruo",
-      "descripcion": "Declara al atacar a un Monstruo: ese ataque inflige +2 al daño extra total final.",
-      "equipacion": ["Línea", "Élite", "Héroe"],
-      "valor": 2
     },
     {
       "id": "cortina-de-humo",
       "nombre": "Cortina de humo",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción: cuenta como en cobertura hasta el final del turno.",
-      "equipacion": ["Línea", "Élite"],
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción: cuenta como en cobertura hasta el final del turno.",
       "valor": 2
     },
     {
       "id": "estimulante",
       "nombre": "Estimulante",
       "descripcion": "Al activarse: +3\" a su movimiento durante esa activación (también al Cargar o Correr).",
-      "equipacion": ["Línea", "Élite", "Héroe"],
       "valor": 1
     },
     {
       "id": "bengala-de-despliegue",
       "nombre": "Bengala de despliegue",
-      "descripcion": "Al desplegar: la unidad se despliega como si tuviera Avanzadilla (a 9\" de un puesto aliado).",
-      "equipacion": ["Línea", "Élite", "Héroe"],
+      "descripcion": "Al desplegarse, la unidad puede hacerlo como si tuviera Avanzadilla, a 9\" o menos de un puesto de mando aliado.",
       "valor": 2
     },
     {
       "id": "blindaje-reactivo",
       "nombre": "Blindaje reactivo",
       "descripcion": "Si recibe daño de un ataque: redúcelo en 1D3.",
-      "equipacion": ["Vehículo"],
       "valor": 2
-    },
-    {
-      "id": "grunido",
-      "nombre": "Gruñido",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo su acción: todas las unidades a 3\", tanto aliadas como enemigas, incluidas las que están trabadas, son devueltas a sus puestos de mando más cercanos.",
-      "equipacion": ["Monstruo"],
-      "valor": 3
     }
   ]
 }

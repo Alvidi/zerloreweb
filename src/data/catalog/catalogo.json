@@ -1,0 +1,1149 @@
+{
+  "roles": [
+    {
+      "id": "asalto",
+      "nombre": "Asalto",
+      "descripcion": "El arma de cuerpo a cuerpo es poderosa y la de distancia es mediocre."
+    },
+    {
+      "id": "equilibrado",
+      "nombre": "Equilibrado",
+      "descripcion": "Ambas armas, distancia y cuerpo a cuerpo, están equiparadas."
+    },
+    {
+      "id": "disparo",
+      "nombre": "Disparo",
+      "descripcion": "El arma a distancia es poderosa y la de cuerpo a cuerpo es mediocre."
+    }
+  ],
+  "ventaja_clase": {
+    "escaramuza": 1,
+    "gran_batalla": 1
+  },
+  "heroes": [
+    {
+      "id": "heroe-1",
+      "numero": 1,
+      "nombre": "General de Campo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 18
+      },
+      "habilidad_faccion": "Durante el turno, si este héroe dispara contra una unidad enemiga, todas las unidades aliadas que disparen contra esa unidad ganan la habilidad de arma Directo en cualquier arma.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Perforante"
+          ]
+        },
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "24\"",
+          "precision": "3+",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-2",
+      "numero": 2,
+      "nombre": "El Iluminado",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 20
+      },
+      "habilidad_faccion": "Una unidad que ya se activó y está a 6\" de este héroe puede volver a activarse inmediatamente.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "18\"",
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-3",
+      "numero": 3,
+      "nombre": "El Conquistador",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "velocidad": "+2\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 16
+      },
+      "habilidad_faccion": "Los puestos de mando bajo tu control cuentan como cobertura para tus unidades.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "4",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Brutal 5+"
+          ]
+        },
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "12\"",
+          "precision": "5+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-4",
+      "numero": 4,
+      "nombre": "Gran Caudillo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 17
+      },
+      "habilidad_faccion": "Las unidades enemigas a 7\" o menos de unidades aliadas no pueden declarar Cargar.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D3+2",
+          "distancia": null,
+          "precision": null,
+          "danio": "4",
+          "danio_critico": "6",
+          "habilidades_arma": [
+            "Brutal 4+"
+          ]
+        },
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "6\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-5",
+      "numero": 5,
+      "nombre": "El Nigromante",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 19
+      },
+      "habilidad_faccion": "Cuando una unidad aliada de Choque, Especialista, Élite o Asaltante es destruida, deja la miniatura donde cayó y tira 1D6: con 5 o 6 revive en el mismo sitio con la mitad de sus Vidas (redondeando hacia arriba); si no, se retira.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "18\"",
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Directo",
+            "Inestable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-6",
+      "numero": 6,
+      "nombre": "Cazarrecompensas",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 15
+      },
+      "habilidad_faccion": "Cuando dos o más unidades aliadas ataquen cuerpo a cuerpo al mismo objetivo en el mismo turno, todas obtienen +1D en esos ataques.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Anti-Héroe"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "24\"",
+          "precision": "4+",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Anti-Héroe"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-7",
+      "numero": 7,
+      "nombre": "Mago Alquimista",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 16
+      },
+      "habilidad_faccion": "Una vez por turno, en la Fase de Iniciativa, una sola unidad aliada en contacto con un puesto de mando puede teletransportarse a otro puesto de mando que controles. No puede estar trabada.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "1D6+1",
+          "distancia": "12\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Explosiva 1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-8",
+      "numero": 8,
+      "nombre": "Místico",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 15
+      },
+      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, se pueden intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Alcance"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "18\"",
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        }
+      }
+    }
+  ],
+  "unidades": [
+    {
+      "id": "choque",
+      "clase": "Choque",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 4,
+        "velocidad": "+2\"",
+        "salvacion": "5+",
+        "escuadra": {
+          "min": 5,
+          "max": 10
+        },
+        "valor": 2
+      },
+      "fuerte_contra": [
+        "Especialista"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Miliciano",
+          "habilidad": "Guardia",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "12\"",
+              "precision": "4+",
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Guerrillero",
+          "habilidad": "Certero",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "18\"",
+              "precision": "4+",
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Bárbaro",
+          "habilidad": "Carga brutal",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "6\"",
+              "precision": "4+",
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "elite",
+      "clase": "Élite",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 3,
+          "max": 5
+        },
+        "valor": 6
+      },
+      "fuerte_contra": [
+        "Choque",
+        "Asaltante"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Veterano",
+          "habilidad": "Resistente",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "3D",
+              "distancia": null,
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ]
+            },
+            "disparo": {
+              "ataques": "3D",
+              "distancia": "18\"",
+              "precision": "4+",
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Perforante"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Devastador",
+          "habilidad": "Tirador",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "3D",
+              "distancia": "24\"",
+              "precision": "3+",
+              "danio": "4",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Paladín",
+          "habilidad": "Berserker",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "3D",
+              "distancia": null,
+              "precision": null,
+              "danio": "4",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "12\"",
+              "precision": "5+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "especialista",
+      "clase": "Especialista",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 5,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "valor": 3
+      },
+      "fuerte_contra": [
+        "Élite",
+        "Vehículo"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Zapador",
+          "habilidad": "Soporte",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D6+1",
+              "distancia": "6\"",
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Directo"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Cazatanques",
+          "habilidad": "Preparado",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "24\"",
+              "precision": "3+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Anti-Monstruo",
+                "Anti-Vehículo"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Verdugo",
+          "habilidad": "Capturador",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Anti-Asaltante",
+                "Anti-Comando",
+                "Anti-Especialista"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "12\"",
+              "precision": "5+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "comando",
+      "clase": "Comando",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 6,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "valor": 4
+      },
+      "fuerte_contra": [
+        "Héroe",
+        "Monstruo"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Infiltrador",
+          "habilidad": "Contragolpe",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "3D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Anti-Élite"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D3+1",
+              "distancia": "12\"",
+              "precision": "1D6",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Errática"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Francotirador",
+          "habilidad": "Bloqueo de refuerzos",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "32\"",
+              "precision": "4+",
+              "danio": "5",
+              "danio_critico": "7",
+              "habilidades_arma": [
+                "Anti-Héroe",
+                "Inestable"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Asesino",
+          "habilidad": "Avanzadilla",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "3D",
+              "distancia": null,
+              "precision": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 4+",
+                "Anti-Héroe"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "6\"",
+              "precision": "5+",
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "asaltante",
+      "clase": "Asaltante",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 5,
+        "velocidad": "+6\"",
+        "salvacion": "5+",
+        "escuadra": {
+          "min": 3,
+          "max": 6
+        },
+        "valor": 4
+      },
+      "fuerte_contra": [
+        "Artillería"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Lancero",
+          "habilidad": "Vuelo",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Alcance"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "12\"",
+              "precision": "4+",
+              "danio": "2",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Explosiva 1"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Incendiario",
+          "habilidad": "Vuelo",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "1",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D6",
+              "distancia": "6\"",
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Directo"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Depredador",
+          "habilidad": "Vuelo",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D3+2",
+              "distancia": null,
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "6\"",
+              "precision": "5+",
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "monstruo",
+      "clase": "Monstruo",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 10
+      },
+      "fuerte_contra": [
+        "Comando",
+        "Asaltante"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Bestia",
+          "habilidad": "Porrazo",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D6+1",
+              "distancia": null,
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "12\"",
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Directo"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Coloso",
+          "habilidad": "Terror",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D3",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "3D",
+              "distancia": null,
+              "precision": null,
+              "danio": "4",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Directo",
+                "Anti-Especialista",
+                "Anti-Comando"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Titán",
+          "habilidad": "Anclado",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D6+2",
+              "distancia": null,
+              "precision": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 5+"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D",
+              "distancia": "12\"",
+              "precision": "5+",
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "vehiculo",
+      "clase": "Vehículo",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 14,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 10
+      },
+      "fuerte_contra": [
+        "Choque",
+        "Élite",
+        "Comando",
+        "Asaltante"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Blindado",
+          "habilidad": "¡Boom!",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "3D",
+              "distancia": null,
+              "precision": null,
+              "danio": "4",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "3D",
+              "distancia": "24\"",
+              "precision": "4+",
+              "danio": "4",
+              "danio_critico": "4",
+              "habilidades_arma": [
+                "Anti-Vehículo"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Cazacarros",
+          "habilidad": "Cobertura móvil",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "32\"",
+              "precision": "4+",
+              "danio": "5",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Ángulo muerto",
+                "Explosiva 2"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Arrollador",
+          "habilidad": "Atropello",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "4D",
+              "distancia": null,
+              "precision": null,
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Anti-Choque"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D6+1",
+              "distancia": "18\"",
+              "precision": "1D6",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Errática"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "artilleria",
+      "clase": "Artillería",
+      "perfil": {
+        "movimiento": "-",
+        "vidas": 8,
+        "velocidad": "-",
+        "salvacion": "5+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 8
+      },
+      "fuerte_contra": [
+        "Choque",
+        "Élite",
+        "Especialista",
+        "Comando",
+        "Monstruo",
+        "Vehículo",
+        "Héroe",
+        "Asaltante"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Obús",
+          "habilidad": "Atrincherado",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D6+1",
+              "distancia": "32\"",
+              "precision": "5+",
+              "danio": "5",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Parabólica",
+                "Explosiva 2"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Asedio",
+          "habilidad": "Atrincherado",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D6+3",
+              "distancia": "32\"",
+              "precision": "4+",
+              "danio": "6",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Parabólica",
+                "Explosiva 3"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Batería",
+          "habilidad": "Avance complicado",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "2D",
+              "distancia": null,
+              "precision": null,
+              "danio": "3",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Perforante"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D3+2",
+              "distancia": "24\"",
+              "precision": "5+",
+              "danio": "5",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Explosiva 1",
+                "Anti-Vehículo"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,50 +1,43 @@
-import { getUnitTypeToken } from './generatorUtils.js'
-
-const badgeModules = import.meta.glob('../../images/units_icons/*/*.png', {
+// Iconos de clase (uno por clase, sin eras). Los ficheros que falten
+// simplemente no producen badge.
+const badgeModules = import.meta.glob('../../images/units_icons/*.png', {
   eager: true,
   query: '?url',
   import: 'default',
 })
 
-const badgeByEraAndType = Object.entries(badgeModules).reduce((badges, [path, src]) => {
-  const match = path.match(/units_icons\/([^/]+)\/([^/]+)\.png$/)
+// El fichero de Monstruo está en disco como "mosntruo.png".
+const FILENAME_ALIASES = {
+  mosntruo: 'monstruo',
+}
+
+const badgeByClass = Object.entries(badgeModules).reduce((badges, [path, src]) => {
+  const match = path.match(/units_icons\/([^/]+)\.png$/)
   if (!match) return badges
-  const [, era, type] = match
-  const normalizedType = type === 'heroe' ? 'hero' : type
-  if (!badges[era]) badges[era] = {}
-  badges[era][normalizedType] = src
+  const raw = match[1]
+  badges[FILENAME_ALIASES[raw] || raw] = src
   return badges
 }, {})
 
-const normalizeEraToken = (era = '') => {
-  if (Array.isArray(era)) {
-    return era.map(normalizeEraToken).find(Boolean) || ''
-  }
-  if (era && typeof era === 'object') {
-    return normalizeEraToken(era.token || era.label || era.nombre || era.name || '')
-  }
-
-  const normalized = String(era || '')
+export const getUnitClassToken = (value = '') => {
+  const normalized = String(value || '')
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[̀-ͯ]/g, '')
+    .trim()
 
-  if (normalized.includes('primal')) return 'primal'
-  if (normalized.includes('kingdom') || normalized.includes('pasado') || normalized.includes('past')) return 'kingdom'
-  if (normalized.includes('ascension')) return 'ascension'
-  if (normalized.includes('dominion') || normalized.includes('futuro') || normalized.includes('future')) return 'dominion'
+  if (normalized.startsWith('choque') || normalized.startsWith('shock')) return 'choque'
+  if (normalized.startsWith('elite')) return 'elite'
+  if (normalized.startsWith('especialista') || normalized.startsWith('specialist')) return 'especialista'
+  if (normalized.startsWith('comando') || normalized.startsWith('commando')) return 'comando'
+  if (normalized.startsWith('asaltante') || normalized.startsWith('raider')) return 'asaltante'
+  if (normalized.startsWith('monstruo') || normalized.startsWith('monster')) return 'monstruo'
+  if (normalized.startsWith('vehiculo') || normalized.startsWith('vehicle')) return 'vehiculo'
+  if (normalized.startsWith('artilleria') || normalized.startsWith('artillery')) return 'artilleria'
+  if (normalized.startsWith('heroe') || normalized.startsWith('hero')) return 'heroe'
   return ''
 }
 
-export const getUnitTypeBadgeSrc = (type, era = '') => {
-  const typeToken = getUnitTypeToken(type)
-  const eraToken = normalizeEraToken(era)
-  const preferredEraBadges = badgeByEraAndType[eraToken] || {}
-  const fallbackEraBadges = badgeByEraAndType.dominion || badgeByEraAndType.kingdom || {}
+export const getUnitClassBadgeSrc = (value = '') => badgeByClass[getUnitClassToken(value)] || ''
 
-  return preferredEraBadges[typeToken]
-    || fallbackEraBadges[typeToken]
-    || preferredEraBadges.line
-    || fallbackEraBadges.line
-    || ''
-}
+export const hasUnitClassBadge = (value = '') => Boolean(getUnitClassBadgeSrc(value))
