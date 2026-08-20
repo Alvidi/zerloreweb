@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
-import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
+import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
 import itemIcon from '../images/units_icons/equipamiento.png'
 import objetosData from '../data/items/objetos.json'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
@@ -271,7 +271,7 @@ function RolePicker({ value, onChange, label, names = null }) {
  * y sus controles de añadir y quitar. Pulsar el nombre selecciona el rol
  * que se usa al ver la ficha.
  */
-function RoleRoster({ counts, names, onAdd, onRemove, addLabel, removeLabel, disabled = false }) {
+function RoleRoster({ counts, names, onAdd, onRemove, addLabel, removeLabel, countSuffix, disabled = false }) {
   return (
     <div className="unit-role-roster">
       {ROLES.map((role) => {
@@ -292,7 +292,7 @@ function RoleRoster({ counts, names, onAdd, onRemove, addLabel, removeLabel, dis
               onRemove={() => onRemove(role.id)}
               addLabel={`${addLabel} ${role.nombre}`}
               removeLabel={`${removeLabel} ${role.nombre}`}
-              format={(value) => (value > 0 ? `×${value}` : '0')}
+              format={(value) => (value > 0 ? `×${value} ${countSuffix}` : '0')}
             />
           </div>
         )
@@ -317,7 +317,9 @@ function Generador() {
   const [pendingSquadRoleId, setPendingSquadRoleId] = useState(DEFAULT_ROLE_ID)
   const [pendingSquadSize, setPendingSquadSize] = useState(1)
   const [imageCropDraft, setImageCropDraft] = useState(null)
-  const [isArmyPrintPreviewOpen, setIsArmyPrintPreviewOpen] = useState(false)
+  // Qué PDF se está montando ahora mismo: 'ejercito', 'roster' o ninguno.
+  const [printJob, setPrintJob] = useState(null)
+  const isArmyPrintPreviewOpen = printJob !== null
   const [armyDownloadError, setArmyDownloadError] = useState('')
   const [showItemFichaModal, setShowItemFichaModal] = useState(false)
   const [activeItemFicha, setActiveItemFicha] = useState(null)
@@ -325,10 +327,12 @@ function Generador() {
   const armySheetRefs = useRef(new Map())
   const armyCardRefs = useRef(new Map())
   const armyExportStageRef = useRef(null)
-  const modalCardRef = useRef(null)
   const selectionCounterRef = useRef(0)
 
   const activeItems = objetosData.objetos
+
+  // En Escaramuza cada añadido es una miniatura; en Gran Batalla, una escuadra.
+  const countSuffix = gameMode === 'escuadra' ? t('generator.countSquads') : t('generator.countUnits')
 
   const getRoleFor = (unidadId) => roleByUnidad[unidadId] || DEFAULT_ROLE_ID
 
@@ -389,15 +393,52 @@ function Generador() {
     return Array.from(groups.values())
   }, [gameMode, armyUnitEntries])
 
-  const armyExportEntries = useMemo(() => {
-    if (!armyUnitGroups) return armyEntries
-    return [
-      ...armyHeroEntries,
-      ...armyUnitGroups.map(({ item, count, totalValue }) => ({ ...item, _count: count, total: totalValue })),
-    ]
-  }, [armyUnitGroups, armyEntries, armyHeroEntries])
+  /** Los objetos comprados también llevan su ficha al PDF, una por objeto. */
+  const armyExportItems = useMemo(
+    () => activeItems
+      .filter((item) => (selectedItems[item.id] || 0) > 0)
+      .map((item) => ({ uid: `objeto-${item.id}`, kind: 'objeto', item, count: selectedItems[item.id] })),
+    [activeItems, selectedItems],
+  )
 
-  const armyExportPages = useMemo(() => chunkItems(armyExportEntries, CARDS_PER_PAGE), [armyExportEntries])
+  const armyExportEntries = useMemo(() => {
+    const unidades = armyUnitGroups
+      ? [
+          ...armyHeroEntries,
+          ...armyUnitGroups.map(({ item, count, totalValue }) => ({ ...item, _count: count, total: totalValue })),
+        ]
+      : armyEntries
+    return [...unidades, ...armyExportItems]
+  }, [armyUnitGroups, armyEntries, armyHeroEntries, armyExportItems])
+
+  /**
+   * Roster completo: los 8 héroes, las 8 clases con sus 3 sets de armas y todos
+   * los objetos. No depende del ejército montado ni del modo de juego — es el
+   * mazo entero para quien quiera imprimirlo de una vez con sus alternativas.
+   */
+  const rosterExportEntries = useMemo(() => {
+    const heroes = HEROES
+      .map((hero) => ({ uid: `roster-heroe-${hero.id}`, kind: 'heroe', entry: buildHeroEntry(hero.id) }))
+      .filter((item) => item.entry)
+    const unidades = UNIDADES.flatMap((unidad) => ROLES
+      .map((role) => ({
+        uid: `roster-unidad-${unidad.id}-${role.id}`,
+        kind: 'unidad',
+        entry: buildUnitEntry(unidad.id, role.id),
+      }))
+      .filter((item) => item.entry))
+    const objetos = objetosData.objetos.map((item) => ({
+      uid: `roster-objeto-${item.id}`,
+      kind: 'objeto',
+      item,
+      count: 0,
+    }))
+    return [...heroes, ...unidades, ...objetos]
+  }, [])
+
+  const exportEntries = printJob === 'roster' ? rosterExportEntries : armyExportEntries
+
+  const armyExportPages = useMemo(() => chunkItems(exportEntries, CARDS_PER_PAGE), [exportEntries])
 
   const unitCountByKey = useMemo(() => {
     const counts = new Map()
@@ -525,18 +566,7 @@ function Generador() {
   }
 
   const openItemFicha = (item) => {
-    setActiveItemFicha({
-      number: String(item.valor),
-      title: item.nombre,
-      flavor: '',
-      // Notion ya no restringe objetos por clase: cualquier unidad puede equiparlos.
-      summary: 'Cualquier unidad',
-      copy: item.descripcion,
-      meta: '',
-      misionLabel: 'OBJETO',
-      valorLabel: 'VALOR',
-      objetivoLabel: 'Equipación',
-    })
+    setActiveItemFicha(item)
     setShowItemFichaModal(true)
   }
 
@@ -624,13 +654,19 @@ function Generador() {
 
   // ── Exportación a PDF del ejército ──────────────────────────────────────
   const handleDownloadArmyPdf = () => {
-    if (!armyEntries.length || isArmyPrintPreviewOpen) return
+    if (!armyExportEntries.length || isArmyPrintPreviewOpen) return
     if (armyHeroEntries.length !== 1) {
       setArmyDownloadError(t('generator.requiredHero'))
       return
     }
     setArmyDownloadError('')
-    setIsArmyPrintPreviewOpen(true)
+    setPrintJob('ejercito')
+  }
+
+  const handleDownloadRosterPdf = () => {
+    if (isArmyPrintPreviewOpen) return
+    setArmyDownloadError('')
+    setPrintJob('roster')
   }
 
   useEffect(() => {
@@ -665,7 +701,7 @@ function Generador() {
       }
 
       if (!capturedPageCanvases.length) {
-        if (!cancelled) setIsArmyPrintPreviewOpen(false)
+        if (!cancelled) setPrintJob(null)
         return
       }
 
@@ -673,22 +709,25 @@ function Generador() {
       const pageWidth = doc.internal.pageSize.getWidth()
       const pageHeight = doc.internal.pageSize.getHeight()
 
+      // Las páginas van en JPEG de calidad alta, no en PNG: el roster completo son
+      // 20 folios y en PNG el archivo se iba a ~80 MB. A esta resolución la pérdida
+      // no se aprecia ni en pantalla ni impreso.
       capturedPageCanvases.forEach((canvas, index) => {
         if (index > 0) doc.addPage()
-        doc.addImage(canvas, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'FAST')
+        doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pageWidth, pageHeight, undefined, 'FAST')
       })
 
-      doc.save('zerolore-ejercito.pdf')
-      if (!cancelled) setIsArmyPrintPreviewOpen(false)
+      doc.save(printJob === 'roster' ? 'zerolore-roster-completo.pdf' : 'zerolore-ejercito.pdf')
+      if (!cancelled) setPrintJob(null)
     }
 
     renderArmyPdf().catch((error) => {
       console.error('[generator] Army PDF export failed', error)
-      if (!cancelled) setIsArmyPrintPreviewOpen(false)
+      if (!cancelled) setPrintJob(null)
     })
 
     return () => { cancelled = true }
-  }, [isArmyPrintPreviewOpen, armyExportPages])
+  }, [isArmyPrintPreviewOpen, printJob, armyExportPages])
 
   const setArmySheetRef = (pageKey, node) => {
     if (!pageKey) return
@@ -744,27 +783,6 @@ function Generador() {
     setOpenArmyUid('')
   }
 
-  const handleDownloadModalFicha = async () => {
-    if (!modalCardRef.current || !previewItem) return
-    if (document.fonts?.ready) await document.fonts.ready
-    const canvas = await modalCardRef.current.captureAsCanvas()
-    if (!canvas) return
-    const { jsPDF } = await import('jspdf')
-    const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' })
-    const pageW = doc.internal.pageSize.getWidth()
-    const pageH = doc.internal.pageSize.getHeight()
-    const margin = 8
-    const cardAspect = FICHA_CARD_W / FICHA_CARD_H
-    let imgW = pageW - margin * 2
-    let imgH = imgW / cardAspect
-    if (imgH > pageH - margin * 2) {
-      imgH = pageH - margin * 2
-      imgW = imgH * cardAspect
-    }
-    doc.addImage(canvas, 'PNG', (pageW - imgW) / 2, (pageH - imgH) / 2, imgW, imgH, undefined, 'FAST')
-    doc.save(`zerolore_${previewItem.entry.nombre || 'unidad'}.pdf`)
-  }
-
   const pendingUnidad = pendingSquadUnidadId ? getUnidad(pendingSquadUnidadId) : null
 
   return (
@@ -800,6 +818,21 @@ function Generador() {
                 <span>{t('generator.currentArmy')}:</span>
                 <span className="generator-section-tab-count">{currentArmyTotalValue} {t('generator.valueUnit')}</span>
               </button>
+
+              {/* Descarga del mazo entero, para quien no quiera montar ejército. */}
+              <div className="generator-roster-download">
+                <button
+                  type="button"
+                  className="ghost small"
+                  onClick={handleDownloadRosterPdf}
+                  disabled={isArmyPrintPreviewOpen}
+                  aria-busy={printJob === 'roster' ? 'true' : 'false'}
+                  title={t('generator.rosterHint').replace('{count}', String(rosterExportEntries.length))}
+                >
+                  {printJob === 'roster' ? <SpinnerIcon /> : null}
+                  <span>{printJob === 'roster' ? t('generator.preparingPdf') : t('generator.downloadRoster')}</span>
+                </button>
+              </div>
             </div>
 
             {activeGeneratorSection === 'units' ? (
@@ -896,6 +929,7 @@ function Generador() {
                               <RoleRoster
                                 counts={roleCounts}
                                 names={roleNames}
+                                countSuffix={countSuffix}
                                 disabled={unitDisabled}
                                 addLabel={t('generator.add')}
                                 removeLabel={t('generator.delete')}
@@ -1050,7 +1084,7 @@ function Generador() {
                                     ? <span className="unit-role-flavour"> · {item.squadSize} {t('generator.squadLabel')}</span>
                                     : null}
                                 </span>
-                                <span className="unit-role-count">×{count}</span>
+                                <span className="unit-role-count">×{count} {countSuffix}</span>
                               </div>
                             </div>
                           )}
@@ -1111,10 +1145,10 @@ function Generador() {
                     className="primary small"
                     onClick={handleDownloadArmyPdf}
                     disabled={!armyEntries.length || isArmyPrintPreviewOpen}
-                    aria-busy={isArmyPrintPreviewOpen ? 'true' : 'false'}
+                    aria-busy={printJob === 'ejercito' ? 'true' : 'false'}
                   >
-                    {isArmyPrintPreviewOpen ? <SpinnerIcon /> : null}
-                    <span>{isArmyPrintPreviewOpen ? t('generator.preparingPdf') : t('generator.downloadArmy')}</span>
+                    {printJob === 'ejercito' ? <SpinnerIcon /> : null}
+                    <span>{printJob === 'ejercito' ? t('generator.preparingPdf') : t('generator.downloadArmy')}</span>
                   </button>
                   <button type="button" className="ghost small" onClick={handleResetCurrentArmy}>
                     {t('generator.resetArmy')}
@@ -1189,15 +1223,11 @@ function Generador() {
                 />
               ) : <span />}
               <div className="unit-preview-modal-actions">
-                <button type="button" className="ghost small" onClick={handleDownloadModalFicha}>
-                  Descargar PDF
-                </button>
                 <button type="button" className="ghost small" onClick={closePreview} aria-label={t('generator.close')}>✕</button>
               </div>
             </div>
             <div className="unit-preview-modal-card">
               <UnitFichaCard
-                ref={modalCardRef}
                 entry={previewItem.entry}
                 imageDataUrl={previewItem.imageDataUrl}
                 gameMode={gameMode}
@@ -1220,12 +1250,20 @@ function Generador() {
               {pageEntries.map((item, cardIndex) => (
                 <div key={`army-export-${item.uid}`} className="army-export-sheet-slot" data-army-export-slot={item.uid}>
                   <div className="army-export-card-host">
-                    <UnitFichaCard
-                      ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
-                      entry={item.entry}
-                      imageDataUrl={item.imageDataUrl}
-                      gameMode={gameMode}
-                    />
+                    {item.kind === 'objeto' ? (
+                      <ItemFichaCard
+                        ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
+                        item={item.item}
+                        count={item.count}
+                      />
+                    ) : (
+                      <UnitFichaCard
+                        ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
+                        entry={item.entry}
+                        imageDataUrl={item.imageDataUrl}
+                        gameMode={gameMode}
+                      />
+                    )}
                   </div>
                 </div>
               ))}
@@ -1307,7 +1345,7 @@ function Generador() {
                 aria-label={t('generator.close')}
               >×</button>
             </div>
-            <MissionFichaCard ficha={activeItemFicha} isItem />
+            <ItemFichaCard item={activeItemFicha} count={selectedItems[activeItemFicha.id] || 0} />
           </div>
         </div>,
         document.body,

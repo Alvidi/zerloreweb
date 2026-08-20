@@ -1267,6 +1267,7 @@ button {
 
 .unit-card-header-actions {
   display: grid;
+  align-content: start;
   gap: 8px;
   flex-shrink: 0;
 }
@@ -1356,6 +1357,43 @@ button {
   align-items: flex-end;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+/* Roster completo: pegado a la pestaña del ejército y separado por una línea. */
+.generator-roster-download {
+  display: flex;
+  align-items: center;
+  padding-left: 14px;
+  margin-left: 6px;
+  border-left: 1px solid var(--line);
+}
+
+.generator-roster-download .ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.generator-roster-download .ghost svg {
+  width: 15px;
+  height: 15px;
+  animation: rules-pdf-spin 0.7s linear infinite;
+}
+
+@media (max-width: 820px) {
+  .generator-roster-download {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: 10px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .generator-roster-download .ghost {
+    width: 100%;
+  }
 }
 
 .generator-section-tab {
@@ -1819,6 +1857,7 @@ button {
 
 .army-actions {
   display: flex;
+  align-items: center;
   gap: 10px;
   flex-wrap: wrap;
   padding-top: 14px;
@@ -2180,9 +2219,14 @@ button {
   padding: 2px 0 4px;
 }
 
-.ghost.small {
+/* Todos los botones de acción comparten geometría: mismo alto, mismo radio y
+   mismo cuerpo de letra. Solo cambia el relleno (primary lleva el dorado). */
+.ghost.small,
+.primary.small {
   padding: 10px 16px;
   font-size: 0.75rem;
+  line-height: 1;
+  border-radius: 4px;
 }
 
 .ghost.tiny {
@@ -2263,12 +2307,36 @@ button {
 }
 
 @media (max-width: 620px) {
+  /* La barra no cabe en una fila: el selector de rol pasa a ocupar su propio
+     renglón a lo ancho y las acciones quedan debajo. */
   .unit-preview-modal-bar {
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
 
-  .unit-preview-era-picker {
-    grid-template-columns: repeat(2, minmax(72px, 1fr));
+  .unit-preview-modal-bar .unit-role-picker {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .unit-preview-modal-bar .unit-role-btn {
+    padding: 8px 4px;
+  }
+
+  .unit-preview-modal-actions {
+    justify-content: flex-end;
+  }
+
+  /* La ficha mide 1536 px: encajada en 350 px el texto se queda en 5 px y no
+     hay quien la lea. Se le da un ancho mínimo legible y se navega en
+     horizontal, como una hoja de datos de mesa. */
+  .unit-preview-modal-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .unit-preview-modal-card .ficha-wrapper {
+    min-width: 900px;
   }
 }
 
@@ -3790,24 +3858,27 @@ mark {
   font-size: 0.82rem;
 }
 
+/* Mismo botón que los "Ver ficha" del generador. */
 .rules-html .rules-mission-view-btn {
   align-self: start;
   margin-top: 4px;
-  padding: 5px 14px;
-  border-radius: 999px;
+  padding: 10px 16px;
+  border-radius: 4px;
   background: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
+  border: 1px solid var(--line);
+  color: var(--text-main);
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .rules-html .rules-mission-view-btn:hover {
-  background: var(--accent);
-  color: #1a1a1a;
+  border-color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* ── Modal ficha misión — mismo patrón que unit-preview-modal ── */
@@ -6921,7 +6992,8 @@ mark {
 }
 
 .unit-role-count {
-  min-width: 22px;
+  min-width: 58px;
+  padding: 0 4px;
   text-align: center;
   font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
@@ -7034,3 +7106,53 @@ mark {
 /* El hueco entre líneas de estos paneles lo daba `gap`; en flujo de bloque
    se consigue con márgenes. */
 
+
+/* En móvil los pasos de + y − necesitan una zona de toque mayor */
+@media (max-width: 620px) {
+  .unit-role-step {
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+  }
+
+  .unit-role-count {
+    min-width: 58px;
+  }
+}
+
+/* Tablas del reglamento en móvil.
+   El envoltorio ya permite scroll horizontal, pero la tabla iba a `width: 100%`
+   con `table-layout: fixed`, así que nunca desbordaba: con 4 columnas cada una
+   se quedaba en 75 px y las palabras se partían por la mitad. Se les da un
+   ancho mínimo según el número de columnas y se navega en horizontal. */
+@media (max-width: 620px) {
+  .rules-html .rules-table-scroll table:has(td:nth-child(3)),
+  .rules-table-modal-body .rules-table-scroll table:has(td:nth-child(3)) {
+    min-width: 480px;
+  }
+
+  .rules-html .rules-table-scroll table:has(td:nth-child(4)),
+  .rules-table-modal-body .rules-table-scroll table:has(td:nth-child(4)) {
+    min-width: 640px;
+  }
+}
+
+/* La ficha de misión mide 1537 px de ancho: encajada en 350 px la descripción
+   baja a unos 8 px. Mismo criterio que la ficha de unidad: ancho mínimo
+   legible y navegación horizontal. */
+@media (max-width: 620px) {
+  .mision-ficha-modal-content {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mision-ficha-modal-content .ficha-wrapper {
+    min-width: 620px;
+  }
+}
+
+/* Ficha de objeto: el panel blanco ocupa casi toda la tarjeta, así que la
+   descripción respira más que en la habilidad de una unidad. */
+.ficha2-item-description {
+  line-height: 1.4;
+}

@@ -1,6 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import fichasMisionesImg from '../../../images/fichas/misiones.png'
-import fichasItemImg from '../../../images/fichas/ficha_item.png'
 
 // ── AutoFitText: reduce el font-size hasta que el contenido quepa en la caja ──
 function useAutoFitBox({ maxFontSize, minFontSize = 7, step = 0.5, dependencyKey = '' }) {
@@ -44,7 +43,6 @@ function AutoFitText({ as = 'div', className, style, children, maxFontSize, minF
 const CARD_W = 1537
 const CARD_H = 1023
 const MISSION_STORAGE_KEY = 'zerolore.rules.mission-ficha-layout.v1'
-const ITEM_STORAGE_KEY = 'zerolore.rules.item-ficha-layout.v1'
 const LAYOUT_EVENT = 'zerolore:mission-ficha-layout-updated'
 const DEV_KEY = 'zerolore.generator.layout-dev'
 
@@ -59,16 +57,6 @@ const DEFAULT_GUIDES = [
   { label: 'PUNTOS',       x: 50,  y: 900, w: 648, h: 70  },
 ]
 
-const DEFAULT_ITEM_GUIDES = [
-  { label: 'MISION',       x: 31,  y: 186, w: 190, h: 54  },
-  { label: 'VALOR_LABEL',  x: 510, y: 186, w: 116, h: 54  },
-  { label: 'NUMERO',       x: 634, y: 186, w: 88,  h: 57  },
-  { label: 'TITULO',       x: 169, y: 70,  w: 547, h: 70  },
-  { label: 'LORE',         x: 48,  y: 282, w: 645, h: 55  },
-  { label: 'OBJETIVO',     x: 50,  y: 345, w: 641, h: 130 },
-  { label: 'DESCRIPCION',  x: 50,  y: 488, w: 645, h: 397 },
-  { label: 'PUNTOS',       x: 50,  y: 900, w: 648, h: 70  },
-]
 
 const clamp = (guide) => ({
   ...guide,
@@ -128,9 +116,9 @@ const resizeOrMove = (guide, interaction, pos) => {
   return clamp({ ...guide, x: interaction.originX + dx, y: interaction.originY + dy })
 }
 
-const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLayout = false, isItem = false }, ref) {
-  const storageKey = isItem ? ITEM_STORAGE_KEY : MISSION_STORAGE_KEY
-  const guideDefaults = isItem ? DEFAULT_ITEM_GUIDES : DEFAULT_GUIDES
+const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLayout = false }, ref) {
+  const storageKey = MISSION_STORAGE_KEY
+  const guideDefaults = DEFAULT_GUIDES
   const wrapperRef = useRef(null)
   const cardRef    = useRef(null)
   const latestRef  = useRef(null)
@@ -317,7 +305,7 @@ const MissionFichaCard = forwardRef(function MissionFichaCard({ ficha, disableLa
         onMouseUp={handleMouseUp}
       >
         {/* Plantilla */}
-        <img src={isItem ? fichasItemImg : fichasMisionesImg} className="ficha-template-img" alt="" aria-hidden="true" />
+        <img src={fichasMisionesImg} className="ficha-template-img" alt="" aria-hidden="true" />
 
         {/* Capa de texto */}
         <div className="ficha-data-layer">

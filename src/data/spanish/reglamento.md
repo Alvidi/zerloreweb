@@ -684,7 +684,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 
 # Equipamiento
 
-Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al montar la lista y se asigna a una unidad concreta al desplegar. El catálogo completo de objetos, con su coste, se encuentra en su propia sección.
+Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al montar la lista y se asigna a una unidad concreta al desplegar. El catálogo completo de objetos, con su coste y qué unidades pueden equipar cada uno, se encuentra en su propia sección.
 
 - Cada unidad puede equipar **un solo objeto**.
 - Un ejército puede repetir objetos, con un **máximo de 3 copias del mismo objeto**. *(Ejemplo: puedes equipar una granada a tres unidades distintas, pero no una cuarta granada.)*
@@ -692,6 +692,8 @@ Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al m
 - Los ataques y efectos generados por un objeto (como la Granada) **no se benefician de modificadores de acciones ni de especialidades** (Moverse, Disparar, Certero, Tirador…): hacen exactamente lo que dice su carta.
 - **Momento de uso:** cada objeto indica en su carta **cuándo** puede usarse ("al activarse", "al ser declarada objetivo", "al desplegar"…). Si ese momento pasa sin declararlo, el objeto **no puede aplicarse retroactivamente** *(ver Acciones olvidadas, en Consideraciones generales)*.
 - Tras usarse, el objeto se descarta.
+
+**Manejo en mesa:** los objetos funcionan como una **baraja de cartas**. Cada jugador coge las cartas de los objetos que ha comprado y las coloca junto a las unidades que los llevan equipados. Al usar un objeto, se descarta su carta. Así queda siempre a la vista quién lleva qué y qué queda por gastar, sin necesidad de anotarlo.
 
 ---
 

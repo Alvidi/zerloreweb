@@ -755,7 +755,7 @@
       ],
       "roles": {
         "equilibrado": {
-          "nombre": "Lancero",
+          "nombre": "Médico",
           "habilidad": "Vuelo",
           "armas": {
             "cuerpo_a_cuerpo": {
@@ -763,7 +763,7 @@
               "distancia": null,
               "precision": null,
               "danio": "2",
-              "danio_critico": "4",
+              "danio_critico": "2",
               "habilidades_arma": [
                 "Alcance"
               ]
@@ -773,7 +773,7 @@
               "distancia": "12\"",
               "precision": "4+",
               "danio": "2",
-              "danio_critico": "4",
+              "danio_critico": "2",
               "habilidades_arma": [
                 "Explosiva 1"
               ]

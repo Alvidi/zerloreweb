@@ -204,6 +204,8 @@ function WeaponRow({ weapon, y, h }) {
 
 const CAPTURE_MARK = 'data-ficha2-capture'
 
+const CAPTURE_DECOR_BOXES = ['.ficha2-weapon-abilities-divider']
+
 const CAPTURE_TEXT_BOXES = [
   '.ficha2-name',
   '.ficha2-tag',
@@ -242,9 +244,18 @@ const alignTextBoxesForCapture = (liveCard, clonedDoc) => {
       const lineHeight = Number.isFinite(parsedLineHeight) ? parsedLineHeight : fontSize * 1.2
       const top = parseFloat(liveNode.style.top) || 0
 
+      const shift = lineHeight / 2
       clonedNode.style.overflow = 'visible'
       clonedNode.style.height = 'auto'
-      clonedNode.style.top = `${top - lineHeight / 2}px`
+      clonedNode.style.top = `${top - shift}px`
+
+      // La compensación de arriba existe porque html2canvas pinta el texto medio
+      // interlineado por debajo de su caja. Los elementos decorativos sin texto sí
+      // los pinta en su sitio, así que hay que devolverlos abajo o suben de más y
+      // acaban cruzando el párrafo anterior.
+      clonedNode.querySelectorAll(CAPTURE_DECOR_BOXES.join(',')).forEach((decor) => {
+        decor.style.transform = `translateY(${shift}px)`
+      })
     })
   })
 }

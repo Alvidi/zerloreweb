@@ -861,8 +861,23 @@ function Reglamento() {
           return lines
         }
 
-        const drawFit = (ctx, text, g, { family = '"Space Grotesk"', color = '#222', maxSz = 22, minSz = 8, weight = '400', style = '', align = 'center', shadow = false } = {}) => {
+        // Las fuentes y los tamaños replican los de la ficha en pantalla
+        // (.mission-* en App.css): Cinzel para títulos y etiquetas, Inter para el
+        // cuerpo. Si aquí se cambia una, el PDF deja de parecerse a la web.
+        const FONT_TITLE = 'Cinzel, serif'
+        const FONT_BODY = 'Inter, system-ui, sans-serif'
+        const LINE_RATIO = 1.4
+        const LABEL_RATIO = 0.75
+        const LABEL_GAP = 6
+
+        const setFont = (ctx, { sz, family, weight = '400', style = '', tracking = 0 }) => {
+          ctx.font = [style, weight, `${sz}px`, family].filter(Boolean).join(' ')
+          try { ctx.letterSpacing = `${sz * tracking}px` } catch { /* navegador sin letterSpacing */ }
+        }
+
+        const drawFit = (ctx, text, g, { family = FONT_BODY, color = '#1a1a1a', maxSz = 22, minSz = 8, weight = '400', style = '', align = 'center', shadow = false, tracking = 0, lineRatio = LINE_RATIO, upper = false } = {}) => {
           if (!text || !g) return
+          const value = upper ? String(text).toLocaleUpperCase('es-ES') : text
           ctx.save()
           if (shadow) { ctx.shadowColor = 'rgba(0,0,0,0.85)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 1; ctx.shadowOffsetY = 1 }
           ctx.fillStyle = color
@@ -871,12 +886,12 @@ function Reglamento() {
           let sz = maxSz
           let lines = []
           while (sz >= minSz) {
-            ctx.font = [style, weight, `${sz}px`, family].filter(Boolean).join(' ')
-            lines = wrapTextC(ctx, text, g.w - 4)
-            if (lines.length * sz * 1.35 <= g.h) break
+            setFont(ctx, { sz, family, weight, style, tracking })
+            lines = wrapTextC(ctx, value, g.w - 4)
+            if (lines.length * sz * lineRatio <= g.h) break
             sz = Math.max(minSz, sz - 0.5)
           }
-          const lineH = sz * 1.35
+          const lineH = sz * lineRatio
           const totalH = lines.length * lineH
           const startY = g.y + g.h / 2 - totalH / 2 + lineH / 2
           const x = align === 'center' ? g.x + g.w / 2 : g.x + 2
@@ -884,13 +899,45 @@ function Reglamento() {
           ctx.restore()
         }
 
-        const drawLabel = (ctx, text, g, offsetY = 16) => {
+        /**
+         * Bloque etiqueta + texto (Objetivo, Descripción, Puntos). En la web es una
+         * columna flex centrada dentro del recuadro, así que aquí se mide el bloque
+         * entero —etiqueta, hueco y líneas— y se centra igual, en vez de clavar la
+         * etiqueta arriba y centrar el cuerpo por separado.
+         */
+        const drawField = (ctx, label, text, g, { color = '#1a1a1a', family = FONT_BODY, weight = '400', maxSz = 26, minSz = 16 } = {}) => {
+          if (!g) return
           ctx.save()
-          ctx.fillStyle = '#8b6914'
-          ctx.font = '700 24px Rajdhani'
           ctx.textAlign = 'center'
           ctx.textBaseline = 'middle'
-          ctx.fillText(text, g.x + g.w / 2, g.y + offsetY)
+          const x = g.x + g.w / 2
+
+          let sz = maxSz
+          let lines = []
+          let labelH = 0
+          let blockH = 0
+          while (sz >= minSz) {
+            setFont(ctx, { sz, family, weight })
+            lines = text ? wrapTextC(ctx, text, g.w - 4) : []
+            labelH = label ? sz * LABEL_RATIO * LINE_RATIO : 0
+            blockH = labelH + (label && lines.length ? LABEL_GAP : 0) + lines.length * sz * LINE_RATIO
+            if (blockH <= g.h) break
+            sz = Math.max(minSz, sz - 0.5)
+          }
+
+          let cursor = g.y + g.h / 2 - blockH / 2
+          if (label) {
+            const labelSz = sz * LABEL_RATIO
+            setFont(ctx, { sz: labelSz, family: FONT_TITLE, weight: '700', tracking: 0.1 })
+            ctx.fillStyle = '#8b6914'
+            ctx.fillText(String(label).toLocaleUpperCase('es-ES'), x, cursor + labelH / 2)
+            cursor += labelH + (lines.length ? LABEL_GAP : 0)
+          }
+
+          setFont(ctx, { sz, family, weight })
+          ctx.fillStyle = color
+          const lineH = sz * LINE_RATIO
+          lines.forEach((l, i) => ctx.fillText(l, x, cursor + lineH / 2 + i * lineH))
           ctx.restore()
         }
 
@@ -941,11 +988,15 @@ function Reglamento() {
         })()
 
         // ── cargar fuentes + imagen plantilla ───────────────────────────────
+        // Una fuente solo se descarga cuando se usa, y el canvas no la espera:
+        // hay que pedir cada familia/peso que se vaya a pintar o sale la de sistema.
         await Promise.allSettled([
           document.fonts.load('700 42px Cinzel'),
-          document.fonts.load('700 20px Rajdhani'),
-          document.fonts.load('400 20px "Space Grotesk"'),
-          document.fonts.load('600 20px "Space Grotesk"'),
+          document.fonts.load('600 26px Cinzel'),
+          document.fonts.load('700 20px Cinzel'),
+          document.fonts.load('400 26px Inter'),
+          document.fonts.load('300 20px Inter'),
+          document.fonts.load('italic 300 20px Inter'),
         ])
 
         const templateImg = await new Promise((res) => {
@@ -988,37 +1039,25 @@ function Reglamento() {
             ctx.drawImage(templateImg, 0, 0, 1537, 1023)
 
             // MISIÓN
-            drawFit(ctx, 'MISIÓN', guideMap.MISION, { family: 'Rajdhani', color: '#ffffff', maxSz: 22, minSz: 12, weight: '700', shadow: true })
+            drawFit(ctx, 'MISIÓN', guideMap.MISION, { family: FONT_TITLE, color: '#ffffff', maxSz: 22, minSz: 12, weight: '700', tracking: 0.15, shadow: true })
 
             // NUMERO
-            if (m.number) drawFit(ctx, m.number, guideMap.NUMERO, { family: 'Cinzel', color: '#ffffff', maxSz: 36, minSz: 18, weight: '700', shadow: true })
+            if (m.number) drawFit(ctx, m.number, guideMap.NUMERO, { family: FONT_TITLE, color: '#ffffff', maxSz: 36, minSz: 18, weight: '700', shadow: true })
 
             // TITULO
-            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: 'Cinzel', color: '#ffffff', maxSz: 48, minSz: 18, weight: '700', shadow: true })
+            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: FONT_TITLE, color: '#ffffff', maxSz: 48, minSz: 18, weight: '700', tracking: 0.05, lineRatio: 1.1, upper: true, shadow: true })
 
             // LORE
-            if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: '"Space Grotesk"', color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic' })
+            if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: FONT_BODY, color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic', lineRatio: 1.35 })
 
             // OBJETIVO
-            if (guideMap.OBJETIVO) {
-              const g = guideMap.OBJETIVO
-              drawLabel(ctx, 'OBJETIVO', g)
-              if (m.summary) drawFit(ctx, m.summary, { ...g, y: g.y + 36, h: g.h - 36 }, { maxSz: 28, minSz: 10 })
-            }
+            drawField(ctx, 'Objetivo', m.summary, guideMap.OBJETIVO)
 
             // DESCRIPCION
-            if (guideMap.DESCRIPCION) {
-              const g = guideMap.DESCRIPCION
-              drawLabel(ctx, 'DESCRIPCIÓN', g)
-              if (m.copy) drawFit(ctx, m.copy, { ...g, y: g.y + 36, h: g.h - 36 }, { maxSz: 28, minSz: 10 })
-            }
+            drawField(ctx, 'Descripción', m.copy, guideMap.DESCRIPCION)
 
             // PUNTOS
-            if (guideMap.PUNTOS) {
-              const g = guideMap.PUNTOS
-              drawLabel(ctx, 'PUNTOS', g)
-              if (m.meta) drawFit(ctx, m.meta, { ...g, y: g.y + 36, h: g.h - 36 }, { color: '#7a5810', maxSz: 28, minSz: 10, weight: '600' })
-            }
+            drawField(ctx, 'Puntos', m.meta, guideMap.PUNTOS, { family: FONT_TITLE, color: '#7a5810', weight: '600' })
 
             doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', x, y, cardW, cardH)
           }
@@ -2245,7 +2284,7 @@ function Reglamento() {
                 aria-label="Cerrar"
               >×</button>
             </div>
-            <MissionFichaCard ficha={activeMissionFicha} isItem={Boolean(activeMissionFicha?.misionLabel)} />
+            <MissionFichaCard ficha={activeMissionFicha} />
           </div>
         </div>,
         document.body,
