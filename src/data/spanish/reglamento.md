@@ -1,6 +1,6 @@
 # Reglamento ZeroLore
 
-ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de facciones, armas y especialidades de unidades, y ve añadiendo estos conceptos a medida que te familiarices con el juego.
+ZeroLore está diseñado para ser flexible, modular y adaptable. Si es la primera vez que juegas, empieza por hacerte con las bases de las unidades antes de saltar a habilidades de Héroe, armas y especialidades de unidades, y ve añadiendo estos conceptos a medida que te familiarices con el juego.
 
 **Este reglamento proporciona una base sólida, pero los jugadores son libres de crear escenarios, campañas y reglas adicionales manteniendo la estructura fundamental del sistema.**
 
@@ -50,7 +50,7 @@ A lo largo de la partida se realizan distintos tipos de tirada: **Iniciativa**, 
 
 ### Prioridad de reglas
 
-En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las de este reglamento base y se aplican a todas las unidades, y luego las reglas que tienen las unidades: especialidad de unidad (las habilidades escritas en la ficha de una unidad), habilidades de arma y habilidades de facción.
+En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las de este reglamento base y se aplican a todas las unidades, y luego las reglas que tienen las unidades: especialidad de unidad (las habilidades escritas en la ficha de una unidad), habilidades de arma y habilidades de Héroe.
 
 Cuando una regla contradiga o modifique una regla del reglamento, **las reglas de la ficha de unidad siempre tienen prioridad**.
 
@@ -291,9 +291,14 @@ El combate cuerpo a cuerpo ocurre cuando dos unidades se encuentran **en contact
 
 ## Cargar
 
-La unidad consume **2 acciones** y puede desplazarse hasta su **Movimiento + Velocidad** hacia una unidad enemiga. Si entra en contacto de peana, realiza inmediatamente un ataque cuerpo a cuerpo gratuito.
+La unidad consume **2 acciones** y puede desplazarse hasta su **Movimiento + Velocidad** hacia una unidad enemiga.
 
-Si no alcanza al objetivo, termina su movimiento donde haya llegado y su activación termina.
+Si el movimiento le permite alcanzar al objetivo, coloca la miniatura en contacto de peana y lanza **1D6**:
+
+- Con un resultado de **3+**, la carga tiene éxito: ambas unidades quedan **trabadas** y la unidad atacante realiza inmediatamente un **ataque cuerpo a cuerpo gratuito**.
+- Con un resultado de **1 o 2**, la carga se frena: retira la miniatura hasta **1" del objetivo**, sin trabar y sin atacar. Su activación termina.
+
+Si no alcanza al objetivo con su movimiento, termina donde haya llegado y su activación termina, sin efectuar la tirada.
 
 **Aclaración:** cualquier movimiento que termine en contacto de peana con una unidad enemiga es una **carga**. No es posible entrar en contacto mediante la acción Moverse ni al Correr.
 
@@ -451,7 +456,7 @@ Las unidades se despliegan en contacto con un puesto de mando que controles. Si 
 
 Al inicio de la partida, cada jugador despliega libremente sus unidades desde Reserva en los puestos de mando que controle.
 
-Cada jugador tira **1D6** — el resultado más alto despliega primero. Los jugadores se alternan desplegando unidad por unidad hasta que ambos decidan no desplegar más.
+Cada jugador tira **1D6** — el resultado más alto despliega primero. **La primera unidad que debe desplegar cada jugador es su Héroe.** A partir de ahí, los jugadores se alternan desplegando unidad por unidad hasta que ambos decidan no desplegar más.
 
 Las unidades que no se desplieguen en este momento permanecen en **Reserva** y podrán desplegarse en turnos posteriores de forma gratuita.
 
@@ -470,13 +475,13 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 | **Asaltante** | Unidades que se plantan rápidamente en cualquier zona del mapa. | Puede sortear obstáculos o subirlos de manera diagonal. Puede conquistar puestos y objetivos. | Artillería |
 | **Monstruos** | Criaturas de enorme poder y resistencia, difíciles de detener. | No puede conquistar ni tomar objetivos. Puede disparar y ser disparada estando trabada en CaC. No juega en Escaramuza. | Comando, Asaltante |
 | **Vehículos** | Máquinas de guerra blindadas, potentes pero incapaces de tomar posiciones. | No puede conquistar ni tomar objetivos. Puede disparar y ser disparada estando trabada en CaC. No juega en Escaramuza. | Choque, Élite, Comando, Asaltante |
-| **Artillería** | Piezas de asedio inmóviles que castigan a larga distancia. | No puede conquistar ni tomar objetivos. No puede moverse. No juega en Escaramuza. | Choque, Élite, Especialistas, Comando, Monstruos, Vehículos, Héroes, Asaltante |
-| **Héroes** | Figuras únicas que lideran el ejército y le otorgan su habilidad de facción. | Tienen habilidades especiales que afectan al ejército. | — (sin ventaja de clase) |
+| **Artillería** | Piezas de asedio inmóviles que castigan a larga distancia. | No puede conquistar ni tomar objetivos. No puede moverse. No juega en Escaramuza. | Choque, Élite, Especialistas, Comando, Monstruos |
+| **Héroes** | Figuras únicas que lideran el ejército y le otorgan su habilidad de Héroe. | Tienen habilidades especiales que afectan al ejército. | — (sin ventaja de clase) |
 
 ### Reglas especiales de los héroes
 
 - **El Héroe es obligatorio en partida.** Todo ejército debe incluir exactamente un Héroe.
-- **Habilidad de facción.** Cada Héroe porta una habilidad que afecta a todas las unidades aliadas mientras esté en el campo de batalla. Esta habilidad se indica en su ficha. **Si el Héroe es eliminado, la habilidad de facción se pierde** para el resto de la partida.
+- **Habilidad de Héroe.** Cada Héroe dispone de una habilidad propia. Su ficha indica **cuándo** puede usarse y **con qué frecuencia**. **Si el Héroe es eliminado, su habilidad deja de estar disponible** para el resto de la partida.
 - En modo Gran Batalla, el **Héroe debe unirse obligatoriamente a una escuadra antes del despliegue**.
 - Mientras forme parte de una escuadra, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente — el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer: solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
 
@@ -645,7 +650,7 @@ Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Sal
 - **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
 - **Precisión máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
 
-## Habilidades de armas y especialidades de unidades
+## Habilidades de armas y habilidades de unidades
 
 - Una especialidad de unidad se aplica siempre que la unidad esté en juego.
 - Las habilidades de arma solo se aplican cuando esa arma se utiliza.
@@ -667,7 +672,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | Fiable | Esta arma no tiene reglas especiales. |
 | Ángulo muerto | Esta arma no puede disparar por debajo de la mitad de su rango. |
 | Brutal X+ | Los impactos de esta arma se consideran críticos con un resultado natural de **X+** en la tirada de ataque. |
-| Perforante | Cada impacto crítico de esta arma empeora en **1** la Salvación realizada contra ese impacto. Este efecto no es acumulable. |
+| Perforante | Los impactos de esta arma empeoran en **1** la Salvación realizada contra ellos. |
 | Inestable | Tras resolver el ataque, lanza 1D6. Con un resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
 | Multiuso | Esta arma puede utilizarse para realizar la acción Disparar aunque la unidad esté trabada en combate cuerpo a cuerpo. |
 | Directo | Esta arma impacta directamente y no utiliza Precisión; por tanto, no se ve afectada por modificadores a la Precisión. |
@@ -697,15 +702,15 @@ Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al m
 
 ---
 
-# Habilidades de facción
+# Habilidades de Héroe
 
-**Cada Héroe porta su propia habilidad de facción**, que define el estilo de juego del ejército mientras el Héroe esté en el campo de batalla.
+**Cada Héroe porta su propia habilidad de Héroe**, un efecto potente que define el estilo de juego de su ejército.
 
-- La habilidad de facción se aplica automáticamente a todas las unidades aliadas — no requiere activación ni gasto de acciones.
-- Si el Héroe es eliminado, la habilidad se pierde para el resto de la partida.
-- La habilidad de facción de cada Héroe se indica en su ficha de unidad.
+- Cada habilidad indica en la ficha del Héroe **cuándo puede usarse** y **con qué frecuencia** (una vez por partida, una vez por turno, de forma permanente…). No consume acciones, salvo que su ficha indique lo contrario.
+- **Si el Héroe es eliminado, su habilidad deja de estar disponible** para el resto de la partida. Los efectos ya resueltos se mantienen.
+- La habilidad de cada Héroe se indica en su ficha de unidad.
 
-Elegir qué Héroe llevar es la primera gran decisión estratégica de la partida.
+Elegir qué Héroe llevar —y sobre todo **cuándo usar su habilidad**— es una de las grandes decisiones estratégicas de la partida.
 
 ---
 

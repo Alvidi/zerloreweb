@@ -51,7 +51,7 @@ export const getAbilityDescription = (ability) => {
     return `Los impactos se consideran críticos con un resultado natural de ${value || 'X'}+.`
   }
   if (abilityId === WEAPON_ABILITY_IDS.piercing) {
-    return 'Los impactos críticos empeoran la Salvación del objetivo en 1.'
+    return 'Los impactos de esta arma empeoran en 1 la Salvación realizada contra ellos.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.unstable) {
     return 'Tras resolver el ataque, lanza 1D6. Con resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso.'

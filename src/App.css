@@ -6807,6 +6807,21 @@ mark {
 
 /* La columna de habilidades es texto, no cifras: se lee mejor en la de cuerpo.
    Las palabras no se parten: si no caben, el ajuste automático baja el cuerpo. */
+/* Ventaja de clase dentro de la celda de Daño: más pequeña y en otro color,
+   para que no compita con el valor de daño. */
+.ficha2-cell-bonus {
+  display: block;
+  margin-top: 0.18em;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.5em;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #8a2622;
+  white-space: normal;
+}
+
 .ficha2-cell-habilidades {
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;

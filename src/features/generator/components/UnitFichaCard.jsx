@@ -82,14 +82,6 @@ const formatEscuadra = (escuadra) => {
   return `${min}/${max}`
 }
 
-/** "A", "A y B", "A, B y C". */
-const formatList = (values) => {
-  const items = values.filter(Boolean)
-  if (items.length <= 1) return items.join('')
-  const last = items[items.length - 1]
-  return `${items.slice(0, -1).join(', ')} y ${last}`
-}
-
 const abilityList = (weapon) =>
   (Array.isArray(weapon?.habilidades_arma) ? weapon.habilidades_arma : []).filter(Boolean)
 
@@ -178,7 +170,7 @@ function FitBox({ className, rect, children, maxFontSize, minFontSize = 8, fitKe
 
 const box = (rect) => ({ left: rect.x, top: rect.y, width: rect.w, height: rect.h })
 
-function WeaponRow({ weapon, y, h }) {
+function WeaponRow({ weapon, y, h, fuerteContra = [], ventajaBonus = 1 }) {
   if (!weapon) return null
   const values = {
     ataques: text(weapon.ataques),
@@ -188,6 +180,10 @@ function WeaponRow({ weapon, y, h }) {
     habilidades: abilityList(weapon).map((a) => getAbilityLabel(a)).join('\n') || '-',
   }
 
+  // La ventaja de clase se lee en la propia columna de Daño, debajo del valor:
+  // es donde se aplica, así que es donde hay que verla al resolver el ataque.
+  const bonus = fuerteContra.length ? `+${ventajaBonus} ${fuerteContra.join(', ')}` : ''
+
   return WEAPON_COLUMNS.map((column) => (
     <FitBox
       key={`${y}-${column.key}`}
@@ -195,9 +191,12 @@ function WeaponRow({ weapon, y, h }) {
       rect={{ x: column.x, y, w: column.w, h }}
       maxFontSize={column.key === 'habilidades' ? 20 : 30}
       minFontSize={column.key === 'habilidades' ? 6 : 9}
-      fitKey={values[column.key]}
+      fitKey={column.key === 'danio' ? `${values.danio}|${bonus}` : values[column.key]}
     >
       {values[column.key]}
+      {column.key === 'danio' && bonus ? (
+        <span className="ficha2-cell-bonus">{bonus}</span>
+      ) : null}
     </FitBox>
   ))
 }
@@ -205,6 +204,9 @@ function WeaponRow({ weapon, y, h }) {
 const CAPTURE_MARK = 'data-ficha2-capture'
 
 const CAPTURE_DECOR_BOXES = ['.ficha2-weapon-abilities-divider']
+
+// Texto que va dentro de una caja pero con otro cuerpo de letra.
+const CAPTURE_SUBTEXT_BOXES = ['.ficha2-cell-bonus']
 
 const CAPTURE_TEXT_BOXES = [
   '.ficha2-name',
@@ -249,12 +251,31 @@ const alignTextBoxesForCapture = (liveCard, clonedDoc) => {
       clonedNode.style.height = 'auto'
       clonedNode.style.top = `${top - shift}px`
 
-      // La compensación de arriba existe porque html2canvas pinta el texto medio
-      // interlineado por debajo de su caja. Los elementos decorativos sin texto sí
-      // los pinta en su sitio, así que hay que devolverlos abajo o suben de más y
-      // acaban cruzando el párrafo anterior.
+      // La compensación de arriba está calculada con la interlínea de la caja, pero
+      // html2canvas desplaza cada línea según SU propia interlínea. Lo que va dentro
+      // con otro cuerpo de letra —o sin texto, como el separador— queda subido de
+      // más, así que se le devuelve la diferencia.
+      const compensateChild = (liveChild, clonedChild) => {
+        if (!clonedChild) return
+        let ownHalf = 0
+        if (liveChild) {
+          const childStyles = window.getComputedStyle(liveChild)
+          const childFontSize = parseFloat(childStyles.fontSize) || 0
+          const parsedChildLineHeight = parseFloat(childStyles.lineHeight)
+          ownHalf = (Number.isFinite(parsedChildLineHeight) ? parsedChildLineHeight : childFontSize * 1.2) / 2
+        }
+        clonedChild.style.transform = `translateY(${shift - ownHalf}px)`
+      }
+
+      // El separador no lleva texto: se le devuelve la compensación entera.
       clonedNode.querySelectorAll(CAPTURE_DECOR_BOXES.join(',')).forEach((decor) => {
-        decor.style.transform = `translateY(${shift}px)`
+        compensateChild(null, decor)
+      })
+
+      const liveSubtexts = Array.from(liveNode.querySelectorAll(CAPTURE_SUBTEXT_BOXES.join(',')))
+      const clonedSubtexts = Array.from(clonedNode.querySelectorAll(CAPTURE_SUBTEXT_BOXES.join(',')))
+      liveSubtexts.forEach((liveChild, childIndex) => {
+        compensateChild(liveChild, clonedSubtexts[childIndex])
       })
     })
   })
@@ -337,7 +358,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
     escuadra: formatEscuadra(perfil.escuadra),
   }
 
-  // Los héroes llevan habilidad de facción (texto libre); el resto, una
+  // Los héroes llevan habilidad de Héroe (texto libre); el resto, una
   // habilidad de unidad con nombre y descripción propios.
   const isHero = Boolean(entry.habilidad_faccion)
   // El título de la ficha es el nombre de rol (Infiltrador, Bárbaro…);
@@ -350,7 +371,7 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
   const ventajaBonus = getVentajaClase(gameMode)
 
   const abilityName = isHero
-    ? 'Habilidad de facción'
+    ? 'Habilidad de Héroe'
     : (entry.habilidad || '')
   const abilityDescription = isHero
     ? entry.habilidad_faccion
@@ -444,8 +465,8 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
           {abilityDescription ? <span>{abilityDescription}</span> : null}
         </FitBox>
 
-        <WeaponRow weapon={shooting} y={LAYOUT.shooting.y} h={LAYOUT.shooting.h} />
-        <WeaponRow weapon={melee} y={LAYOUT.melee.y} h={LAYOUT.melee.h} />
+        <WeaponRow weapon={shooting} y={LAYOUT.shooting.y} h={LAYOUT.shooting.h} fuerteContra={fuerteContra} ventajaBonus={ventajaBonus} />
+        <WeaponRow weapon={melee} y={LAYOUT.melee.y} h={LAYOUT.melee.h} fuerteContra={fuerteContra} ventajaBonus={ventajaBonus} />
 
         <FitBox
           className="ficha2-weapon-abilities"
@@ -454,11 +475,6 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
           minFontSize={9}
           fitKey={`${fuerteContra.join(',')}|${weaponAbilityGroups.map((group) => group.notes.map((note) => note.label).join(',')).join('|')}`}
         >
-          {fuerteContra.length ? (
-            <p className="ficha2-ability-advantage">
-              +{ventajaBonus} al daño total contra: {formatList(fuerteContra)}
-            </p>
-          ) : null}
           {weaponAbilityGroups.map((group, index) => (
             <div key={group.key} className="ficha2-weapon-abilities-group">
               {index > 0 ? <span className="ficha2-weapon-abilities-divider" aria-hidden="true" /> : null}

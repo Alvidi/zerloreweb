@@ -31,6 +31,11 @@ const EXPORT_PAGE_H = 1754  // A4 vertical (folio) ~297mm × 5.9px/mm
 const EXPORT_MARGIN = 46    // ~8mm de margen
 const EXPORT_GAP = 24       // ~4mm entre fichas
 const CARDS_PER_PAGE = 2
+// Las fichas de objeto se imprimen al tamaño de las cartas de misión (132×88 mm),
+// no al de datasheet: llevan mucho menos texto y así caben 3 por folio.
+const ITEM_CARDS_PER_PAGE = 3
+const EXPORT_ITEM_CARD_W_MM = 132
+const EXPORT_PX_PER_MM = EXPORT_PAGE_W / 210
 const EXPORT_RASTER_SCALE = 2
 
 // ─── Utilidades de imagen ─────────────────────────────────────────────────
@@ -123,7 +128,7 @@ const waitForPrintReady = async (elements = []) => {
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve))))
 }
 
-const renderExportPageCanvas = async (cardCanvases, scale = EXPORT_RASTER_SCALE) => {
+const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale = EXPORT_RASTER_SCALE } = {}) => {
   const pageCanvas = document.createElement('canvas')
   pageCanvas.width = EXPORT_PAGE_W * scale
   pageCanvas.height = EXPORT_PAGE_H * scale
@@ -134,15 +139,21 @@ const renderExportPageCanvas = async (cardCanvases, scale = EXPORT_RASTER_SCALE)
   ctx.fillStyle = '#f8f5ed'
   ctx.fillRect(0, 0, EXPORT_PAGE_W, EXPORT_PAGE_H)
 
-  // 2 fichas por folio, apiladas: cada una queda a ~195×130 mm, tamaño de
-  // datasheet, que es lo que se lee cómodo en mesa.
+  // Unidades y héroes: 2 por folio a ~195×130 mm, tamaño de datasheet, que es lo
+  // que se lee cómodo en mesa. Objetos: 3 por folio a 132×88 mm, el mismo tamaño
+  // que las cartas de misión.
+  const isItemPage = variant === 'objeto'
   const cols = 1
-  const rows = 2
+  const rows = isItemPage ? ITEM_CARDS_PER_PAGE : 2
   const gap = EXPORT_GAP
+  const aspect = FICHA_CARD_W / FICHA_CARD_H
   const availableWidth = EXPORT_PAGE_W - EXPORT_MARGIN * 2
   const availableHeight = EXPORT_PAGE_H - EXPORT_MARGIN * 2 - gap * (rows - 1)
-  const cardHeight = Math.floor(Math.min(availableHeight / rows, availableWidth / (FICHA_CARD_W / FICHA_CARD_H)))
-  const cardWidth = Math.round(cardHeight * (FICHA_CARD_W / FICHA_CARD_H))
+  const targetWidth = isItemPage
+    ? Math.min(availableWidth, Math.round(EXPORT_ITEM_CARD_W_MM * EXPORT_PX_PER_MM))
+    : availableWidth
+  const cardHeight = Math.floor(Math.min(availableHeight / rows, targetWidth / aspect))
+  const cardWidth = Math.round(cardHeight * aspect)
   const marginX = Math.round((EXPORT_PAGE_W - cols * cardWidth - gap * (cols - 1)) / 2)
   const marginY = Math.round((EXPORT_PAGE_H - rows * cardHeight - gap * (rows - 1)) / 2)
 
@@ -331,8 +342,15 @@ function Generador() {
 
   const activeItems = objetosData.objetos
 
-  // En Escaramuza cada añadido es una miniatura; en Gran Batalla, una escuadra.
-  const countSuffix = gameMode === 'escuadra' ? t('generator.countSquads') : t('generator.countUnits')
+  /**
+   * En Escaramuza cada añadido es una miniatura; en Gran Batalla, una escuadra —
+   * salvo Monstruos, Vehículos y Artillería, que van de una en una (escuadra 1/1)
+   * y por tanto siguen contándose como unidades.
+   */
+  const getCountSuffix = (perfil) => {
+    const esEscuadra = gameMode === 'escuadra' && (perfil?.escuadra?.max ?? 1) > 1
+    return esEscuadra ? t('generator.countSquads') : t('generator.countUnits')
+  }
 
   const getRoleFor = (unidadId) => roleByUnidad[unidadId] || DEFAULT_ROLE_ID
 
@@ -438,7 +456,18 @@ function Generador() {
 
   const exportEntries = printJob === 'roster' ? rosterExportEntries : armyExportEntries
 
-  const armyExportPages = useMemo(() => chunkItems(exportEntries, CARDS_PER_PAGE), [exportEntries])
+  /**
+   * Los folios no mezclan tamaños: primero las páginas de unidades y héroes
+   * (2 por folio) y luego las de objetos (3 por folio, tamaño carta de misión).
+   */
+  const armyExportPages = useMemo(() => {
+    const grandes = exportEntries.filter((item) => item.kind !== 'objeto')
+    const objetos = exportEntries.filter((item) => item.kind === 'objeto')
+    return [
+      ...chunkItems(grandes, CARDS_PER_PAGE).map((entries) => ({ variant: 'unidad', entries })),
+      ...chunkItems(objetos, ITEM_CARDS_PER_PAGE).map((entries) => ({ variant: 'objeto', entries })),
+    ]
+  }, [exportEntries])
 
   const unitCountByKey = useMemo(() => {
     const counts = new Map()
@@ -689,15 +718,15 @@ function Generador() {
 
       // Las capturas van en serie, no en paralelo: cada una marca su ficha en el
       // DOM para poder ajustarla al rasterizar, y solapándolas se pisaban entre sí.
-      for (const [pageIndex, pageEntries] of armyExportPages.entries()) {
+      for (const [pageIndex, page] of armyExportPages.entries()) {
         const cardCanvases = []
-        for (const [cardIndex, item] of pageEntries.entries()) {
+        for (const [cardIndex, item] of page.entries.entries()) {
           const cardKey = `unit-${pageIndex}-${item.uid || cardIndex}`
           const canvas = await armyCardRefs.current.get(cardKey)?.captureAsCanvas?.()
           if (!canvas) throw new Error(`Missing export card capture: ${cardKey}`)
           cardCanvases.push(canvas)
         }
-        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
+        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases, { variant: page.variant }))
       }
 
       if (!capturedPageCanvases.length) {
@@ -929,7 +958,7 @@ function Generador() {
                               <RoleRoster
                                 counts={roleCounts}
                                 names={roleNames}
-                                countSuffix={countSuffix}
+                                countSuffix={getCountSuffix(unidad.perfil)}
                                 disabled={unitDisabled}
                                 addLabel={t('generator.add')}
                                 removeLabel={t('generator.delete')}
@@ -1084,7 +1113,7 @@ function Generador() {
                                     ? <span className="unit-role-flavour"> · {item.squadSize} {t('generator.squadLabel')}</span>
                                     : null}
                                 </span>
-                                <span className="unit-role-count">×{count} {countSuffix}</span>
+                                <span className="unit-role-count">×{count} {getCountSuffix(item.entry.perfil)}</span>
                               </div>
                             </div>
                           )}
@@ -1241,13 +1270,13 @@ function Generador() {
       {/* Escenario oculto para la exportación a PDF */}
       {isArmyPrintPreviewOpen ? (
         <div ref={armyExportStageRef} className="army-export-stage army-export-stage-hidden" aria-hidden="true">
-          {armyExportPages.map((pageEntries, pageIndex) => (
+          {armyExportPages.map((page, pageIndex) => (
             <div
               key={`army-export-page-${pageIndex}`}
               ref={(node) => setArmySheetRef(`page-${pageIndex}`, node)}
               className="army-export-sheet army-export-sheet-cards"
             >
-              {pageEntries.map((item, cardIndex) => (
+              {page.entries.map((item, cardIndex) => (
                 <div key={`army-export-${item.uid}`} className="army-export-sheet-slot" data-army-export-slot={item.uid}>
                   <div className="army-export-card-host">
                     {item.kind === 'objeto' ? (

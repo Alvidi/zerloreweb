@@ -41,6 +41,18 @@
       "nombre": "Blindaje reactivo",
       "descripcion": "Si recibe daño de un ataque: redúcelo en 1D3.",
       "valor": 2
+    },
+    {
+      "id": "municion-certera",
+      "nombre": "Munición certera",
+      "descripcion": "Tras resolver la tirada de Precisión de un ataque a distancia: repite todos los dados fallados. Se aplican los nuevos resultados.",
+      "valor": 2
+    },
+    {
+      "id": "salvavidas",
+      "nombre": "Salvavidas",
+      "descripcion": "Tras resolver una tirada de Salvación: repite todos los dados de Salvación fallados contra ese ataque. Se aplican los nuevos resultados.",
+      "valor": 3
     }
   ]
 }

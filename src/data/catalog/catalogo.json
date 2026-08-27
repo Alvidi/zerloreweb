@@ -24,67 +24,28 @@
     {
       "id": "heroe-1",
       "numero": 1,
-      "nombre": "General de Campo",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 10,
-        "velocidad": "+4\"",
-        "salvacion": "3+",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 18
-      },
-      "habilidad_faccion": "Durante el turno, si este héroe dispara contra una unidad enemiga, todas las unidades aliadas que disparen contra esa unidad ganan la habilidad de arma Directo en cualquier arma.",
-      "armas": {
-        "cuerpo_a_cuerpo": {
-          "ataques": "3D",
-          "distancia": null,
-          "precision": null,
-          "danio": "3",
-          "danio_critico": "4",
-          "habilidades_arma": [
-            "Perforante"
-          ]
-        },
-        "disparo": {
-          "ataques": "3D",
-          "distancia": "24\"",
-          "precision": "3+",
-          "danio": "3",
-          "danio_critico": "5",
-          "habilidades_arma": [
-            "Fiable"
-          ]
-        }
-      }
-    },
-    {
-      "id": "heroe-2",
-      "numero": 2,
-      "nombre": "El Iluminado",
+      "nombre": "Oráculo",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
-        "velocidad": "+4\"",
+        "velocidad": "+2\"",
         "salvacion": "4+",
         "escuadra": {
           "min": 1,
           "max": 1
         },
-        "valor": 20
+        "valor": 15
       },
-      "habilidad_faccion": "Una unidad que ya se activó y está a 6\" de este héroe puede volver a activarse inmediatamente.",
+      "habilidad_faccion": "Una vez por partida, durante la Fase de Iniciativa: todas tus unidades recuperan 1D3 Vidas perdidas, sin superar su máximo.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
           "distancia": null,
           "precision": null,
-          "danio": "2",
+          "danio": "3",
           "danio_critico": "4",
           "habilidades_arma": [
-            "Fiable"
+            "Alcance"
           ]
         },
         "disparo": {
@@ -100,48 +61,9 @@
       }
     },
     {
-      "id": "heroe-3",
-      "numero": 3,
-      "nombre": "El Conquistador",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 12,
-        "velocidad": "+2\"",
-        "salvacion": "3+",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16
-      },
-      "habilidad_faccion": "Los puestos de mando bajo tu control cuentan como cobertura para tus unidades.",
-      "armas": {
-        "cuerpo_a_cuerpo": {
-          "ataques": "3D",
-          "distancia": null,
-          "precision": null,
-          "danio": "4",
-          "danio_critico": "5",
-          "habilidades_arma": [
-            "Brutal 5+"
-          ]
-        },
-        "disparo": {
-          "ataques": "1D",
-          "distancia": "12\"",
-          "precision": "5+",
-          "danio": "2",
-          "danio_critico": "3",
-          "habilidades_arma": [
-            "Fiable"
-          ]
-        }
-      }
-    },
-    {
-      "id": "heroe-4",
-      "numero": 4,
-      "nombre": "Gran Caudillo",
+      "id": "heroe-2",
+      "numero": 2,
+      "nombre": "Mariscal de campo",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -151,15 +73,54 @@
           "min": 1,
           "max": 1
         },
-        "valor": 17
+        "valor": 16
       },
-      "habilidad_faccion": "Las unidades enemigas a 7\" o menos de unidades aliadas no pueden declarar Cargar.",
+      "habilidad_faccion": "Una vez por partida, durante la Fase de Iniciativa: durante este turno, tus unidades de Choque y Especialista suman +1D3 al daño total de cada ataque que inflija daño.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "24\"",
+          "precision": "3+",
+          "danio": "4",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Brutal 5+"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-3",
+      "numero": 3,
+      "nombre": "Señor de la Guerra",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 20
+      },
+      "habilidad_faccion": "Una vez por partida, cuando todas las unidades de ambos jugadores se hayan activado y antes del Fin de Turno: todas tus unidades de Choque se reactivan, recuperando 1 acción.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D3+2",
           "distancia": null,
           "precision": null,
-          "danio": "4",
+          "danio": "5",
           "danio_critico": "6",
           "habilidades_arma": [
             "Brutal 4+"
@@ -178,9 +139,9 @@
       }
     },
     {
-      "id": "heroe-5",
-      "numero": 5,
-      "nombre": "El Nigromante",
+      "id": "heroe-4",
+      "numero": 4,
+      "nombre": "Nigromante",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
@@ -192,24 +153,24 @@
         },
         "valor": 19
       },
-      "habilidad_faccion": "Cuando una unidad aliada de Choque, Especialista, Élite o Asaltante es destruida, deja la miniatura donde cayó y tira 1D6: con 5 o 6 revive en el mismo sitio con la mitad de sus Vidas (redondeando hacia arriba); si no, se retira.",
+      "habilidad_faccion": "Una vez por partida, al final del turno: cada unidad tuya destruida durante este turno hace un chequeo de 1D6. Con 5 o 6 vuelve al campo donde cayó con la mitad de sus Vidas (redondeando hacia arriba). Si cayó trabada, se coloca a 1\" de la unidad con la que combatía.",
       "armas": {
         "cuerpo_a_cuerpo": {
-          "ataques": "2D",
+          "ataques": "1D",
           "distancia": null,
           "precision": null,
-          "danio": "2",
-          "danio_critico": "4",
+          "danio": "1",
+          "danio_critico": "2",
           "habilidades_arma": [
             "Fiable"
           ]
         },
         "disparo": {
           "ataques": "2D",
-          "distancia": "18\"",
+          "distancia": "24\"",
           "precision": null,
-          "danio": "3",
-          "danio_critico": "5",
+          "danio": "4",
+          "danio_critico": "6",
           "habilidades_arma": [
             "Directo",
             "Inestable"
@@ -218,86 +179,8 @@
       }
     },
     {
-      "id": "heroe-6",
-      "numero": 6,
-      "nombre": "Cazarrecompensas",
-      "perfil": {
-        "movimiento": "7\"",
-        "vidas": 8,
-        "velocidad": "+4\"",
-        "salvacion": "4+",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 15
-      },
-      "habilidad_faccion": "Cuando dos o más unidades aliadas ataquen cuerpo a cuerpo al mismo objetivo en el mismo turno, todas obtienen +1D en esos ataques.",
-      "armas": {
-        "cuerpo_a_cuerpo": {
-          "ataques": "3D",
-          "distancia": null,
-          "precision": null,
-          "danio": "3",
-          "danio_critico": "5",
-          "habilidades_arma": [
-            "Anti-Héroe"
-          ]
-        },
-        "disparo": {
-          "ataques": "2D",
-          "distancia": "24\"",
-          "precision": "4+",
-          "danio": "3",
-          "danio_critico": "5",
-          "habilidades_arma": [
-            "Anti-Héroe"
-          ]
-        }
-      }
-    },
-    {
-      "id": "heroe-7",
-      "numero": 7,
-      "nombre": "Mago Alquimista",
-      "perfil": {
-        "movimiento": "5\"",
-        "vidas": 8,
-        "velocidad": "+2\"",
-        "salvacion": "4+",
-        "escuadra": {
-          "min": 1,
-          "max": 1
-        },
-        "valor": 16
-      },
-      "habilidad_faccion": "Una vez por turno, en la Fase de Iniciativa, una sola unidad aliada en contacto con un puesto de mando puede teletransportarse a otro puesto de mando que controles. No puede estar trabada.",
-      "armas": {
-        "cuerpo_a_cuerpo": {
-          "ataques": "2D",
-          "distancia": null,
-          "precision": null,
-          "danio": "2",
-          "danio_critico": "3",
-          "habilidades_arma": [
-            "Fiable"
-          ]
-        },
-        "disparo": {
-          "ataques": "1D6+1",
-          "distancia": "12\"",
-          "precision": "4+",
-          "danio": "2",
-          "danio_critico": "4",
-          "habilidades_arma": [
-            "Explosiva 1"
-          ]
-        }
-      }
-    },
-    {
-      "id": "heroe-8",
-      "numero": 8,
+      "id": "heroe-5",
+      "numero": 5,
       "nombre": "Místico",
       "perfil": {
         "movimiento": "5\"",
@@ -308,16 +191,16 @@
           "min": 1,
           "max": 1
         },
-        "valor": 15
+        "valor": 17
       },
-      "habilidad_faccion": "Una vez por turno, durante la Fase de Iniciativa y antes de cualquier activación, se pueden intercambiar las posiciones de dos unidades aliadas cualesquiera en el campo, siempre que ninguna esté trabada.",
+      "habilidad_faccion": "Una vez por partida, durante la Fase de Iniciativa: todas tus unidades que no estén trabadas se pueden teletransportar a puestos de mando bajo tu control, colocándose en contacto con ellos. Pueden repartirse entre puestos distintos.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
           "distancia": null,
           "precision": null,
-          "danio": "2",
-          "danio_critico": "3",
+          "danio": "3",
+          "danio_critico": "4",
           "habilidades_arma": [
             "Alcance"
           ]
@@ -326,7 +209,7 @@
           "ataques": "2D",
           "distancia": "18\"",
           "precision": null,
-          "danio": "2",
+          "danio": "3",
           "danio_critico": "4",
           "habilidades_arma": [
             "Directo"
@@ -755,7 +638,7 @@
       ],
       "roles": {
         "equilibrado": {
-          "nombre": "Médico",
+          "nombre": "Lancero",
           "habilidad": "Vuelo",
           "armas": {
             "cuerpo_a_cuerpo": {
@@ -895,7 +778,7 @@
             },
             "disparo": {
               "ataques": "3D",
-              "distancia": null,
+              "distancia": "18\"",
               "precision": null,
               "danio": "4",
               "danio_critico": "5",
@@ -1056,10 +939,7 @@
         "Élite",
         "Especialista",
         "Comando",
-        "Monstruo",
-        "Vehículo",
-        "Héroe",
-        "Asaltante"
+        "Monstruo"
       ],
       "roles": {
         "equilibrado": {
