@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import misionesMd from '../data/spanish/misiones.md?raw'
+import guerraTotalMd from '../data/spanish/guerra-total.md?raw'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import { buildHeroEntry, buildUnitEntry } from '../features/generator/catalogUtils.js'
@@ -36,7 +37,7 @@ import fichasMisionesImg from '../images/fichas/misiones.png'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['rules', 'missions', 'tokens']
+const RULES_MODES = ['rules', 'missions', 'total-war', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
@@ -223,6 +224,9 @@ function Reglamento() {
     if (rulesMode === 'missions') {
       return misionesMd
     }
+    if (rulesMode === 'total-war') {
+      return guerraTotalMd
+    }
     return reglamentoMd
   }, [rulesMode])
   const tokenOptions = useMemo(
@@ -244,6 +248,7 @@ function Reglamento() {
     () => [
       { id: 'rules', label: t('rules.modeRules') },
       { id: 'missions', label: t('rules.modeMissions') },
+      { id: 'total-war', label: t('rules.modeTotalWar') },
       { id: 'tokens', label: t('rules.modeTokens') },
     ],
     [t],
@@ -254,7 +259,10 @@ function Reglamento() {
     }
     return marked(replaceRulesAssetPlaceholders(activeMarkdown, lang))
   }, [activeMarkdown, isTokensMode, lang])
-  const printCoverSectionLabel = rulesMode === 'missions' ? t('rules.modeMissions') : t('rules.modeRules')
+  const printCoverSectionLabel = {
+    missions: t('rules.modeMissions'),
+    'total-war': t('rules.modeTotalWar'),
+  }[rulesMode] || t('rules.modeRules')
   const printCoverCreditLabel = 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
 
@@ -631,18 +639,22 @@ function Reglamento() {
       })
       .filter((item) => item.title)
     const firstHeading = doc.querySelector('h1')
-    const documentHeading = rulesMode === 'missions'
-      ? {
-        id: 'mission-basic',
-        title: t('rules.modeMissions'),
-      }
+    // Misiones y Guerra Total arrancan con texto, no con un título: el encabezado
+    // del documento lo pone el propio modo y su primer <h1> es ya una sección.
+    const ownHeadingModes = ['missions', 'total-war']
+    const modeHeadings = {
+      missions: { id: 'mission-basic', title: t('rules.modeMissions') },
+      'total-war': { id: 'guerra-total', title: t('rules.modeTotalWar') },
+    }
+    const documentHeading = ownHeadingModes.includes(rulesMode)
+      ? modeHeadings[rulesMode]
       : firstHeading
         ? {
           id: firstHeading.getAttribute('id') || '',
           title: firstHeading.textContent?.trim() || '',
         }
         : null
-    if (firstHeading && rulesMode !== 'missions') {
+    if (firstHeading && !ownHeadingModes.includes(rulesMode)) {
       firstHeading.remove()
     }
     Array.from(doc.querySelectorAll('img')).forEach((img) => {
@@ -1889,7 +1901,10 @@ function Reglamento() {
         }
       }
 
-      const filename = rulesMode === 'missions' ? 'zerolore-misiones-es.pdf' : 'zerolore-reglamento-es.pdf'
+      const filename = {
+        missions: 'zerolore-misiones-es.pdf',
+        'total-war': 'zerolore-guerra-total-es.pdf',
+      }[rulesMode] || 'zerolore-reglamento-es.pdf'
 
       doc.save(filename)
     } finally {

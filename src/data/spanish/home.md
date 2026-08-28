@@ -36,7 +36,7 @@ Completamente gratuito
 
 #### body
 
-Reglamento, facciones, creador de ejércitos y tokens. Todo sin coste.
+Reglamento, fichas de unidades, creador de ejércitos y tokens. Todo sin coste.
 
 ### fast
 
@@ -72,11 +72,11 @@ Escaramuza o grandes batallas
 
 #### title
 
-Facciones genéricas
+Héroes y unidades genéricas
 
 #### body
 
-Facciones diseñadas para que cualquier miniatura encaje. Adapta tus modelos, no al revés.
+Héroes y clases de unidad diseñados para que cualquier miniatura encaje. Adapta tus modelos, no al revés.
 
 ## toolkit
 
@@ -90,7 +90,7 @@ Todo lo que necesitas, en un solo sitio
 
 ### body
 
-Reglamento completo, fichas de facciones, creador de ejércitos y tokens imprimibles. Sin registros, sin pagos, sin trampa.
+Reglamento completo, fichas de unidades, creador de ejércitos y tokens imprimibles. Sin registros, sin pagos, sin trampa.
 
 ### cta
 

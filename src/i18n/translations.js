@@ -37,6 +37,7 @@ export const translations = {
       modeLabel: 'Sección',
       modeRules: 'Reglamento',
       modeMissions: 'Misiones',
+      modeTotalWar: 'Guerra Total',
       modeTokens: 'Tokens',
       modeItems: 'Equipamiento',
       tokens: {
