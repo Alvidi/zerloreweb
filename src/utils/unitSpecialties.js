@@ -47,6 +47,15 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Vuelo', description: 'Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse.' },
   },
   {
+    es: { name: 'Fuego de supresión', description: 'Las unidades enemigas que reciban daño de esta unidad no pueden Correr ni Cargar durante su siguiente activación.' },
+  },
+  {
+    es: { name: 'Emplazado', description: 'Si esta unidad no se ha movido durante esta activación, gana +1 dado en sus ataques a distancia.' },
+  },
+  {
+    es: { name: 'Fuego defensivo', description: 'Cuando una unidad enemiga declara Cargar contra esta unidad, antes de resolver la carga esta unidad puede disparar contra ella con su arma a distancia. No consume acción.' },
+  },
+  {
     es: { name: 'Porrazo', description: 'En su activación, esta unidad puede realizar la acción Destrabarse sin efectuar el chequeo. Puede hacerlo aunque esté trabada con una unidad con Anclado.' },
   },
   {

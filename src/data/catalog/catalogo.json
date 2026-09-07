@@ -432,7 +432,8 @@
       },
       "fuerte_contra": [
         "Élite",
-        "Vehículo"
+        "Vehículo",
+        "Armas Pesadas"
       ],
       "roles": {
         "equilibrado": {
@@ -534,7 +535,8 @@
       },
       "fuerte_contra": [
         "Héroe",
-        "Monstruo"
+        "Monstruo",
+        "Armas Pesadas"
       ],
       "roles": {
         "equilibrado": {
@@ -711,6 +713,108 @@
               "danio_critico": "1",
               "habilidades_arma": [
                 "Fiable"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "armas-pesadas",
+      "clase": "Armas Pesadas",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 5,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 2,
+          "max": 4
+        },
+        "valor": 5
+      },
+      "fuerte_contra": [
+        "Choque",
+        "Asaltante",
+        "Especialista",
+        "Héroe"
+      ],
+      "roles": {
+        "equilibrado": {
+          "nombre": "Ametralladora",
+          "habilidad": "Fuego de supresión",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "2",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "4D",
+              "distancia": "18\"",
+              "precision": "4+",
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Anti-Choque"
+              ]
+            }
+          }
+        },
+        "disparo": {
+          "nombre": "Mortero",
+          "habilidad": "Emplazado",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "1",
+              "danio_critico": "1",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "2D",
+              "distancia": "24\"",
+              "precision": "5+",
+              "danio": "3",
+              "danio_critico": "5",
+              "habilidades_arma": [
+                "Parabólica",
+                "Explosiva 1"
+              ]
+            }
+          }
+        },
+        "asalto": {
+          "nombre": "Metralla",
+          "habilidad": "Fuego defensivo",
+          "armas": {
+            "cuerpo_a_cuerpo": {
+              "ataques": "1D",
+              "distancia": null,
+              "precision": null,
+              "danio": "2",
+              "danio_critico": "3",
+              "habilidades_arma": [
+                "Fiable"
+              ]
+            },
+            "disparo": {
+              "ataques": "1D3+2",
+              "distancia": "6\"",
+              "precision": "3+",
+              "danio": "4",
+              "danio_critico": "6",
+              "habilidades_arma": [
+                "Brutal 4+"
               ]
             }
           }

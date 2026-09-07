@@ -1596,6 +1596,10 @@ button {
   color: var(--class-asaltante);
 }
 
+.unit-type-armas-pesadas {
+  color: var(--class-armas-pesadas);
+}
+
 .unit-type-monstruo {
   color: var(--class-monstruo);
 }
@@ -7078,6 +7082,7 @@ mark {
 .ficha2-tag.unit-type-especialista { color: var(--class-especialista); }
 .ficha2-tag.unit-type-comando { color: var(--class-comando); }
 .ficha2-tag.unit-type-asaltante { color: var(--class-asaltante); }
+.ficha2-tag.unit-type-armas-pesadas { color: var(--class-armas-pesadas); }
 .ficha2-tag.unit-type-monstruo { color: var(--class-monstruo); }
 .ficha2-tag.unit-type-vehiculo { color: var(--class-vehiculo); }
 .ficha2-tag.unit-type-artilleria { color: var(--class-artilleria); }

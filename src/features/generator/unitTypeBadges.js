@@ -6,9 +6,10 @@ const badgeModules = import.meta.glob('../../images/units_icons/*.png', {
   import: 'default',
 })
 
-// El fichero de Monstruo está en disco como "mosntruo.png".
+// Algunos ficheros no se llaman igual que el token de su clase.
 const FILENAME_ALIASES = {
   mosntruo: 'monstruo',
+  arma_pesada: 'armas-pesadas',
 }
 
 const badgeByClass = Object.entries(badgeModules).reduce((badges, [path, src]) => {
@@ -31,6 +32,7 @@ export const getUnitClassToken = (value = '') => {
   if (normalized.startsWith('especialista') || normalized.startsWith('specialist')) return 'especialista'
   if (normalized.startsWith('comando') || normalized.startsWith('commando')) return 'comando'
   if (normalized.startsWith('asaltante') || normalized.startsWith('raider')) return 'asaltante'
+  if (normalized.startsWith('armas pesadas') || normalized.startsWith('armas-pesadas')) return 'armas-pesadas'
   if (normalized.startsWith('monstruo') || normalized.startsWith('monster')) return 'monstruo'
   if (normalized.startsWith('vehiculo') || normalized.startsWith('vehicle')) return 'vehiculo'
   if (normalized.startsWith('artilleria') || normalized.startsWith('artillery')) return 'artilleria'

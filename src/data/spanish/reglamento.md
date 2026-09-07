@@ -470,9 +470,10 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 | --- | --- | --- | --- |
 | **Choque** | Unidades básicas que van al frente de batalla siendo carne de cañón. | Puede conquistar puestos y objetivos. | Especialista |
 | **Élite** | Infantería pesada, lista para resistir y causar grandes daños. | Puede conquistar puestos y objetivos. | Choque, Asaltante |
-| **Especialistas** | Infantería equipada con armamento especializado para cazar objetivos concretos. | Puede conquistar puestos y objetivos. | Élite, Vehículos |
-| **Comando** | Asesinos de élite encargados de eliminar héroes y objetivos de alto valor. | Puede conquistar puestos y objetivos. | Héroe, Monstruo |
+| **Especialistas** | Infantería equipada con armamento especializado para cazar objetivos concretos. | Puede conquistar puestos y objetivos. | Élite, Vehículos, Armas Pesadas |
+| **Comando** | Asesinos de élite encargados de eliminar héroes y objetivos de alto valor. | Puede conquistar puestos y objetivos. | Héroe, Monstruo, Armas Pesadas |
 | **Asaltante** | Unidades que se plantan rápidamente en cualquier zona del mapa. | Puede sortear obstáculos o subirlos de manera diagonal. Puede conquistar puestos y objetivos. | Artillería |
+| **Armas Pesadas** | Equipos de infantería lentos que portan armamento de gran calibre. | Puede conquistar puestos y objetivos. | Choque, Asaltante, Especialista, Héroe |
 | **Monstruos** | Criaturas de enorme poder y resistencia, difíciles de detener. | No puede conquistar ni tomar objetivos. Puede disparar y ser disparada estando trabada en CaC. No juega en Escaramuza. | Comando, Asaltante |
 | **Vehículos** | Máquinas de guerra blindadas, potentes pero incapaces de tomar posiciones. | No puede conquistar ni tomar objetivos. Puede disparar y ser disparada estando trabada en CaC. No juega en Escaramuza. | Choque, Élite, Comando, Asaltante |
 | **Artillería** | Piezas de asedio inmóviles que castigan a larga distancia. | No puede conquistar ni tomar objetivos. No puede moverse. No juega en Escaramuza. | Choque, Élite, Especialistas, Comando, Monstruos |
@@ -507,7 +508,7 @@ El perfil de una unidad contiene los siguientes valores:
 
 Define el **rol funcional** de la unidad dentro del ejército.
 
-Determina si puede capturar objetivos y qué reglas especiales puede aplicar según su tipo (Choque, Élite, Especialista, Comando, Asaltante, Monstruo, Vehículo, Artillería, Héroe).
+Determina si puede capturar objetivos y qué reglas especiales puede aplicar según su tipo (Choque, Élite, Especialista, Comando, Asaltante, Armas Pesadas, Monstruo, Vehículo, Artillería, Héroe).
 
 ### Movimiento
 
@@ -548,9 +549,10 @@ Incluye comportamientos especiales listados abajo; estas reglas se aplican siemp
 | **Especialistas** | **Soporte:** En su activación, en lugar de actuar, puede curar a una unidad aliada a **6" o menos**: esa unidad recupera **1D3 Vidas** perdidas. | **Preparado:** La **primera vez cada turno** que esta unidad sea atacada a distancia, tras resolver el ataque puede **disparar de inmediato** con su arma a distancia contra el atacante, si está en alcance y línea de visión. No consume acción. | **Capturador:** Esta unidad cuenta como el doble de su Valor al controlar o disputar puestos de mando. |
 | **Comando** | **Contragolpe:** La **primera vez cada turno** que esta unidad sea atacada en cuerpo a cuerpo —aunque no sea su activación—, responde de inmediato con un **ataque cuerpo a cuerpo gratuito** contra el atacante. No consume acción. | **Bloqueo de refuerzos:** Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos. | **Avanzadilla:** Puede ser desplegada a **9"** de un puesto de mando aliado. |
 | **Asaltante** | **Vuelo:** Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse. | **Vuelo:** Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse. | **Vuelo:** Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse. |
+| **Armas Pesadas** | **Fuego de supresión:** Las unidades enemigas que reciban daño de esta unidad no pueden **Correr ni Cargar** durante su siguiente activación. | **Emplazado:** Si esta unidad no se ha movido durante esta activación, gana **+1 dado** en sus ataques a distancia. | **Fuego defensivo:** Cuando una unidad enemiga declara **Cargar** contra esta unidad, antes de resolver la carga esta unidad puede **disparar** contra ella con su arma a distancia. No consume acción. |
 | **Monstruos** | **Porrazo:** En su activación, esta unidad puede realizar la acción **Destrabarse** sin efectuar el chequeo. Puede hacerlo aunque esté trabada con una unidad con **Anclado**. | **Terror:** Las unidades enemigas a **12" o menos** de esta unidad no pueden disparar a esta unidad. | **Anclado:** Las unidades enemigas trabadas con esta unidad no pueden realizar la acción **Destrabarse**. |
 | **Vehículos** | **¡Boom!:** Cuando esta unidad muere, explota afectando a las unidades a **6"** de ella, infligiendo **1D6** de daño. | **Cobertura móvil:** Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo. | **Atropello:** Durante su **carga**, si traba a una unidad enemiga dicha unidad recibe automáticamente **1D3** de daño. |
-| **Artillería** | **Atrincherado:** No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada. | **Atrincherado:** No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada. | **Avance complicado:** Puede moverse un máximo de **3"**, pero reduce en **-2** el ataque total. |
+| **Artillería** | **Atrincherado:** No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada. | **Atrincherado:** No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada. | **Avance complicado:** Puede moverse un máximo de **3"**, pero si lo hace reduce en **-2** el ataque total. |
 | **Héroes** | Habilidad especial. | Habilidad especial. | Habilidad especial. |
 
 ### Escuadras

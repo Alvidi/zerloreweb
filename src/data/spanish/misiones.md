@@ -275,4 +275,12 @@ Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 15 pts</p>
 </div>
 
+<div class="rules-mission-card" data-number="32">
+<div class="rules-mission-card-header"><h3 class="rules-mission-card-title">32 - Rompe trincheras</h3><button class="rules-mission-view-btn" type="button" data-number="32" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
+<p class="rules-mission-card-flavor"><em>"Romper el bloqueo."</em></p>
+<p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad de Armas Pesadas enemiga</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Elimina por completo una unidad enemiga de clase Armas Pesadas. Vale cualquier fuente de daño. Derribar a los mejores del rival cuesta sangre, pero paga bien.</p>
+<p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 15 pts</p>
+</div>
+
 </div>

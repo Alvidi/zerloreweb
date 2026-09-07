@@ -7,6 +7,7 @@ Guerra Total utiliza las mismas reglas que el reglamento principal, con las sigu
 - Se colocan entre **6 y 8 puestos de mando** en la mesa, repartidos entre ambos jugadores antes de empezar. Uno de los puestos de cada jugador es su **Cuartel General**.
 - **Los puestos no se conquistan** ni cambian de dueño durante la partida: solo sirven para desplegar unidades. La única excepción es el **Cuartel General**.
 - Los jugadores acuerdan el **valor total** de cada ejército y el **número de turnos** que durará la partida.
+- Los jugadores acuerdan el **modo de juego**: **Escaramuza** (cada miniatura actúa por separado) o **Gran Batalla** (escuadras). Recuerda que en Escaramuza no pueden incluirse Vehículos, Monstruos ni Artillería.
 - **No se juegan misiones.**
 
 # Despliegue inicial
