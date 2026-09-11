@@ -25,7 +25,7 @@ Una **escuadra** es una unidad compuesta por varias miniaturas que comparten act
 
 En modo Gran Batalla, cada miniatura de una escuadra debe mantenerse a **1" o menos de al menos otra miniatura de la misma escuadra**, formando un grupo coherente. Mientras esa cadena no se rompa, la escuadra puede adoptar la formación que quieras: en línea, en cuña o agrupada.
 
-![Miniatura individual frente a una escuadra]({{miniatureVsSquadImage}})
+{{squadCoherenceDiagram}}
 
 > A lo largo del reglamento, cuando una regla mencione **"unidad"**, se aplica igualmente a **"escuadra"** en modo Gran Batalla, salvo que se indique lo contrario.
 
@@ -89,7 +89,7 @@ Todas las distancias se miden en pulgadas (").
 - Las distancias pueden medirse en cualquier momento de la partida.
 - En caso de duda, cualquiera de los jugadores puede solicitar una **remedición precisa**, y el resultado se aplica de forma definitiva.
 
-![Medición de peana a peana con regla]({{measurementImage}})
+{{measurementDiagram}}
 
 ### Línea de visión
 
@@ -102,7 +102,7 @@ Para que una unidad pueda atacar a distancia a otra, debe tener **línea de visi
 
 Las reglas de cobertura se detallan más adelante en el reglamento.
 
-![Ejemplo de línea de visión clara y bloqueada]({{lineOfSightImage}})
+{{lineOfSightDiagram}}
 
 ### La regla de oro
 
@@ -125,7 +125,7 @@ Cada turno se compone de las siguientes fases:
 2. **Fase de Activaciones**
 3. **Fin de Turno**
 
-![Diagrama del flujo del turno con iniciativa, activaciones alternas y reinicio]({{turnStructureImage}})
+{{turnStructureDiagram}}
 
 ## 1. Fase de Iniciativa
 
@@ -151,7 +151,7 @@ Activar una unidad significa:
 
 Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
 
-![Unidad con el token de activación gris y naranja]({{activationImage}})
+{{activationDiagram}}
 
 ## 3. Fin de Turno
 
@@ -210,7 +210,7 @@ Para trepar:
 
 **Vehículos y Monstruos en altura.** Los **Vehículos no pueden subir** a estructuras, plataformas ni pisos elevados: se mueven solo a nivel de suelo. Los **Monstruos sí pueden subir**, siempre que **quepan físicamente en el espacio** al que acceden. Si la miniatura no entra en esa planta o plataforma —por ejemplo, su cabeza choca con el piso superior de un edificio de varias plantas—, no puede colocarse ahí.
 
-![Unidad trepando un obstáculo y alcanzando una posición elevada]({{climbingImage}})
+{{climbingDiagram}}
 
 ---
 
@@ -240,7 +240,7 @@ Todo ataque a distancia se resuelve siguiendo siempre esta secuencia:
 4. Tirar salvaciones por parte del defensor.
 5. Aplicar daño.
 
-![Diagrama numerado de la secuencia de disparo]({{rangedAttackSequenceImage}})
+{{rangedSequenceDiagram}}
 
 ## 1. Elegir objetivo
 
@@ -306,7 +306,7 @@ Una unidad puede Cargar contra una unidad ya trabada en combate. Tras la carga, 
 
 *Ejemplo: tus Cruzados (Movimiento 5", Velocidad +2") tienen una unidad enemiga a 6". Declaran Cargar, se mueven 7" y entran en contacto: atacan gratis. El defensor responderá en su propia activación.*
 
-![Unidad realizando una carga]({{sprintImage}})
+{{chargeDiagram}}
 
 ## Atacar cuerpo a cuerpo
 
@@ -322,7 +322,7 @@ Mientras siga trabada, una unidad solo puede usar las acciones **Atacar cuerpo a
 
 Las unidades permanecen trabadas hasta que una sea eliminada o consiga Destrabarse.
 
-![Dos unidades trabadas en contacto de peana]({{lockedUnitsImage}})
+{{lockedUnitsDiagram}}
 
 ## Destrabarse
 
@@ -342,6 +342,8 @@ El combate cuerpo a cuerpo se resuelve siguiendo esta secuencia:
 3. El defensor lanza tantos dados de **Salvación** como impactos haya recibido. Los impactos críticos se bloquean utilizando la Salvación normal, salvo que una regla indique lo contrario.
 4. Los impactos no bloqueados infligen el daño base o crítico del arma atacante.
 
+{{meleeSequenceDiagram}}
+
 Si el defensor sobrevive, podrá atacar en su propia activación usando su acción.
 
 ## Vehículos y monstruos en combate cuerpo a cuerpo
@@ -350,7 +352,7 @@ Los Vehículos y Monstruos no quedan bloqueados por estar trabados como el resto
 
 Además, estas unidades **pueden ser atacadas a distancia** aunque estén trabadas en combate cuerpo a cuerpo.
 
-![Vehículo trabado en combate cuerpo a cuerpo que puede disparar y ser atacado a distancia]({{vehicleMonsterMeleeImage}})
+{{vehicleMeleeDiagram}}
 
 ## Disparar a unidades trabadas
 
@@ -384,7 +386,7 @@ En Gran Batalla, aunque una escuadra pueda estar en contacto con varias escuadra
 
 En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad enemiga, **la escuadra entera se considera trabada** y todas sus miniaturas participan en el combate. Con que físicamente solo una miniatura de la escuadra esté en contacto de peana con el enemigo, toda la escuadra participa en el combate y realiza sus ataques de forma conjunta.
 
-![Combate cuerpo a cuerpo en escuadras con una miniatura en contacto y toda la escuadra participando]({{squadMeleeImage}})
+{{squadMeleeDiagram}}
 
 La acción de ataque se considera **consumida por toda la escuadra**.
 
@@ -403,6 +405,8 @@ Las coberturas modifican la defensa de las unidades atacadas. Para beneficiarse 
 **¿Qué se considera cobertura?**
 
 Un elemento de escenografía proporciona cobertura si su altura supera al menos la mitad de la miniatura que busca protegerse.
+
+{{coverDiagram}}
 
 **Cobertura**
 
@@ -432,7 +436,7 @@ Si el atacante tiene **línea de visión limpia a la unidad completa** — sin q
 
 Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse. Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del puesto de mando para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
 
-![Unidad capturando un puesto de mando con su banderilla de control]({{commandPostControlImage}})
+{{commandPostDiagram}}
 
 ## Cuartel General
 
@@ -491,6 +495,8 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 **Beneficio de la ventaja:** cuando una unidad ataca a una clase sobre la que tiene ventaja y el ataque inflige daño, suma **+1 al daño total final** del ataque.
 
 Se aplica igual en Escaramuza y en Gran Batalla.
+
+{{classAdvantageDiagram}}
 
 ---
 
@@ -651,6 +657,8 @@ Para evitar situaciones de inmortalidad o infalibilidad, los modificadores a Sal
 
 - **Salvación máxima:** ninguna unidad puede llegar a necesitar más de 6+ para salvar, independientemente de los modificadores acumulados. Un resultado de 1 siempre falla la salvación.
 - **Precisión máxima:** ninguna unidad puede llegar a necesitar más de 6+ para impactar, independientemente de los modificadores acumulados. Un resultado de 6 siempre impacta.
+
+{{modifiersDiagram}}
 
 ## Habilidades de armas y habilidades de unidades
 

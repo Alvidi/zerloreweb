@@ -4741,6 +4741,81 @@ mark {
   height: auto;
 }
 
+/* ─── Diagramas del reglamento (SVG en línea) ───────────────────────────
+   Son figuras autocontenidas con su propio fondo oscuro, como lo eran las
+   fotos que sustituyen, así que se ven igual en la web y en la hoja del PDF. */
+.rules-diagram {
+  /* Se sale del padding de .rules-html para ganar ancho: el SVG se dibuja a escala
+     y cada píxel de más hace el texto más legible. */
+  margin: 26px -40px;
+  padding: 18px 20px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: #12141b;
+}
+
+.rules-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rules-diagram figcaption {
+  margin-top: 12px;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8d94a3;
+}
+
+.rules-diagram .zl-step {
+  font-family: 'Cinzel', serif;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  fill: #e8e6e1;
+}
+
+.rules-diagram .zl-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15.5px;
+  fill: #a7b0c0;
+}
+
+.rules-diagram .zl-lab {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  fill: #d6be84;
+}
+
+.rules-diagram .zl-dim {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  fill: #e6c983;
+}
+
+.rules-diagram .zl-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  fill: #e8e6e1;
+  text-anchor: middle;
+}
+
+.rules-diagram .zl-mini {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
 .rules-html .rules-map-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

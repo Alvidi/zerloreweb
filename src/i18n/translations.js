@@ -36,8 +36,8 @@ export const translations = {
       sectionFallback: 'Sección',
       modeLabel: 'Sección',
       modeRules: 'Reglamento',
-      modeMissions: 'Misiones',
-      modeTotalWar: 'Guerra Total',
+      modeMissions: 'Modo de juego: Misiones',
+      modeTotalWar: 'Modo de juego: Guerra Total',
       modeTokens: 'Tokens',
       modeItems: 'Equipamiento',
       tokens: {

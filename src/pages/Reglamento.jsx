@@ -19,19 +19,7 @@ import conquestRedToken from '../images/tokens/conquista-red.svg'
 import conquestYellowToken from '../images/tokens/conquista-yellow.svg'
 import activationToken from '../images/tokens/activacion-gray.svg'
 import activationGreenToken from '../images/tokens/activacion-green.svg'
-import miniatureVsSquadImage from '../images/webimagen/imagen_1.webp'
-import measurementImage from '../images/webimagen/imagen_2.webp'
-import climbingImage from '../images/webimagen/imagen_3.webp'
-import lineOfSightImage from '../images/webimagen/imagen_4.webp'
-import sprintImage from '../images/webimagen/imagen_5.webp'
-import activationOverviewImage from '../images/webimagen/imagen_7.webp'
-import turnStructureImage from '../images/webimagen/imagen_8.webp'
-import commandPostControlImage from '../images/webimagen/imagen_9.webp'
-import rangedAttackSequenceImage from '../images/webimagen/imagen_10.webp'
-import lockedUnitsImage from '../images/webimagen/imagen_11.webp'
-import squadMeleeImage from '../images/webimagen/imagen_12.webp'
-import coverImage from '../images/webimagen/imagen_13.webp'
-import vehicleMonsterMeleeImage from '../images/webimagen/imagen_14.webp'
+import { RULES_DIAGRAMS } from '../features/rules/rulesDiagrams.js'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
 import fichasMisionesImg from '../images/fichas/misiones.png'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
@@ -63,19 +51,7 @@ const escapeHtml = (value) =>
 const RULES_PDF_KEEP_WITH_NEXT_TAGS = new Set(['H1', 'H2', 'H3'])
 const getRulesAssetPlaceholders = () => {
   return {
-    activationImage: activationOverviewImage,
-    climbingImage,
-    commandPostControlImage,
-    coverImage,
-    lineOfSightImage,
-    lockedUnitsImage,
-    measurementImage,
-    miniatureVsSquadImage,
-    rangedAttackSequenceImage,
-    sprintImage,
-    squadMeleeImage,
-    turnStructureImage,
-    vehicleMonsterMeleeImage,
+    ...RULES_DIAGRAMS,
     unitProfileImage: RULES_UNIT_PROFILE_SLOT_SRC,
     heroProfileImage: RULES_HERO_PROFILE_SLOT_SRC,
   }
@@ -87,6 +63,7 @@ const RULES_UNIT_TYPE_ICONS = [
   { id: 'especialista', label: 'Especialistas' },
   { id: 'comando', label: 'Comando' },
   { id: 'asaltante', label: 'Asaltante' },
+  { id: 'armas-pesadas', label: 'Armas Pesadas' },
   { id: 'monstruo', label: 'Monstruos' },
   { id: 'vehiculo', label: 'Vehículos' },
   { id: 'artilleria', label: 'Artillería' },
