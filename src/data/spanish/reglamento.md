@@ -442,9 +442,13 @@ Los puestos de mando son posiciones estratégicas repartidas por el campo de bat
 
 Funciona como un puesto de mando normal a efectos de control y despliegue, siempre tiene que haber un Cuartel General por jugador obligatorio.
 
+**Ocupar un puesto:** una unidad se considera dentro de un puesto de mando cuando **la mitad o más de su peana** está sobre él. En escuadras, cada miniatura se comprueba por separado.
+
 **Control al final de turno:**
 
 Al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto.
+
+**Unidades que no aportan Valor:** los **Vehículos, Monstruos y Artillería nunca aportan su Valor** al control de un puesto, aunque estén sobre él; pueden ocuparlo físicamente pero no lo conquistan ni lo defienden a efectos de control.
 
 **Unidades trabadas en CaC:** Las unidades de ambos bandos que estén en combate cuerpo a cuerpo dentro de un puesto de mando **no cuentan para el cálculo de control**. Se tratan como si no existiesen a efectos del puesto hasta que el combate se resuelva. En caso de empate, el puesto permanece bajo el control de quien lo tuviera.
 

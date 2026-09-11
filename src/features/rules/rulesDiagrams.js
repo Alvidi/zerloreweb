@@ -306,38 +306,52 @@ const cover = figure(
    control de quien lo tuviera."                                              */
 const commandPost = figure(
   'Cómo se decide el control de un puesto de mando',
-  'Cálculo del control de un puesto de mando por Valor',
-  400,
+  'Qué cuenta como estar dentro y cálculo del control por Valor',
+  600,
   `
   ${head('Control de un puesto de mando · al final del turno', 'Lo controla quien sume más Valor en él.')}
 
-  <rect x="0" y="76" width="${W}" height="256" rx="10" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.08)"/>
-  <text class="zl-mini" x="186" y="108" text-anchor="middle" fill="${C.dim}">Puesto de mando</text>
-  <circle cx="186" cy="210" r="78" fill="rgba(230,201,131,.05)" stroke="${C.dim}" stroke-width="1.5" stroke-dasharray="6 5"/>
-  ${base(186, 145, C.ally)}<text class="zl-val" x="220" y="140">2</text>
-  ${base(118, 246, C.ally)}<text class="zl-val" x="82" y="274">4</text>
-  ${base(264, 163, C.enemy)}<text class="zl-val" x="298" y="158">3</text>
-  ${base(186, 262, C.ally, 14)}${base(218, 262, C.enemy, 14)}
-  <circle cx="202" cy="262" r="6" fill="none" stroke="${C.soft}" stroke-width="1.6"/>
-  ${cap(202, 308, 'No cuentan · trabadas en CaC', C.soft)}
+  ${row(76, 150, {
+    tone: 'plain', ok: null, title: 'Qué cuenta como estar dentro',
+    lines: [
+      { t: 'La mitad o más de la peana sobre el puesto.' },
+      { t: 'En escuadras, cada miniatura por separado.' },
+    ],
+    draw: `
+      <rect x="30" y="120" width="94" height="84" rx="6" fill="rgba(230,201,131,.08)" stroke="none"/>
+      <line x1="124" y1="118" x2="124" y2="206" stroke="${C.dim}" stroke-width="1.5" stroke-dasharray="5 4"/>
+      ${base(114, 162, C.ally)}
+      <circle cx="150" cy="140" r="11" fill="#1d2a19" stroke="${C.ok}" stroke-width="2"/>
+      <text class="zl-mini" x="150" y="144" text-anchor="middle" fill="${C.ok}">SÍ</text>
+      ${cap(96, 224, 'Mitad o más', C.ok)}
 
-  <rect x="396" y="112" width="196" height="54" rx="8" fill="rgba(111,159,216,.1)" stroke="${C.ally}"/>
-  <circle cx="422" cy="139" r="9" fill="${C.ally}"/>
-  <text class="zl-body" x="442" y="136">2 + 4</text>
-  <text class="zl-val" x="570" y="148" text-anchor="end" font-size="26" fill="${C.ally}">6</text>
+      <rect x="230" y="120" width="94" height="84" rx="6" fill="rgba(230,201,131,.08)" stroke="none"/>
+      <line x1="324" y1="118" x2="324" y2="206" stroke="${C.dim}" stroke-width="1.5" stroke-dasharray="5 4"/>
+      ${base(336, 162, C.ally)}
+      <circle cx="366" cy="140" r="11" fill="#2a1a18" stroke="${C.ko}" stroke-width="2"/>
+      <text class="zl-mini" x="366" y="144" text-anchor="middle" fill="${C.ko}">NO</text>
+      ${cap(300, 224, 'Menos de la mitad', C.ko)}`,
+  })}
 
-  <rect x="396" y="180" width="196" height="54" rx="8" fill="rgba(192,107,94,.1)" stroke="${C.enemy}"/>
-  <circle cx="422" cy="207" r="9" fill="${C.enemy}"/>
-  <text class="zl-body" x="442" y="204">3</text>
-  <text class="zl-val" x="570" y="216" text-anchor="end" font-size="26" fill="${C.enemy}">3</text>
+  ${row(238, 230, {
+    tone: 'plain', ok: null, title: 'Quién suma y quién no',
+    lines: [
+      { t: 'Suma el Valor de las que estén dentro.' },
+      { t: 'Azul 2 + 4 = 6 · Rojo 3 → controla el azul.', cls: 'zl-lab', fill: C.ok },
+    ],
+    draw: `
+      <circle cx="186" cy="362" r="74" fill="rgba(230,201,131,.05)" stroke="${C.dim}" stroke-width="1.5" stroke-dasharray="6 5"/>
+      ${base(186, 306, C.ally)}<text class="zl-val" x="218" y="301">2</text>
+      ${base(124, 400, C.ally)}<text class="zl-val" x="90" y="428">4</text>
+      ${base(258, 322, C.enemy)}<text class="zl-val" x="290" y="317">3</text>
+      ${base(186, 414, C.ally, 14)}${base(218, 414, C.enemy, 14)}
+      <circle cx="202" cy="414" r="6" fill="none" stroke="${C.soft}" stroke-width="1.6"/>
+      ${cap(202, 452, 'Trabadas · no cuentan', C.soft)}`,
+  })}
 
-  <circle cx="630" cy="139" r="14" fill="#1d2a19" stroke="${C.ok}" stroke-width="2"/>
-  <text class="zl-mini" x="630" y="144" text-anchor="middle" fill="${C.ok}">SÍ</text>
-  <text class="zl-lab" x="654" y="145" fill="${C.ok}">Controla</text>
-  <text class="zl-lab" x="654" y="167" fill="${C.ok}">el azul</text>
+  ${note(480, 'No aportan Valor', 'Vehículos, Monstruos y Artillería, aunque estén encima.')}
 
-  <text class="zl-body" x="396" y="272">En caso de empate, el puesto sigue</text>
-  <text class="zl-body" x="396" y="298">bajo el control de quien lo tuviera.</text>`,
+  ${note(544, 'Empate', 'El puesto sigue bajo el control de quien lo tuviera.')}`,
 )
 
 
