@@ -1,21 +1,21 @@
-Un modo de juego directo y agresivo, sin gestión de objetivos ni misiones. Aquí solo importan dos cosas: **destruir al enemigo** o **tomar su Cuartel General**.
+El modo de juego **estándar** de ZeroLore: rápido, directo y sin componentes extra. Ideal para aprender a jugar o para echar una partida sin complicaciones.
 
-Guerra Total utiliza las mismas reglas que el reglamento principal, con las siguientes particularidades.
+Se juega con las reglas del reglamento principal.
 
 # Preparación
 
-- Se colocan entre **6 y 8 puestos de mando** en la mesa, repartidos entre ambos jugadores antes de empezar. Uno de los puestos de cada jugador es su **Cuartel General**.
-- **Los puestos no se conquistan** ni cambian de dueño durante la partida: solo sirven para desplegar unidades. La única excepción es el **Cuartel General**.
-- Los jugadores acuerdan el **valor total** de cada ejército y el **número de turnos** que durará la partida.
-- Los jugadores acuerdan el **modo de juego**: **Escaramuza** (cada miniatura actúa por separado) o **Gran Batalla** (escuadras). Recuerda que en Escaramuza no pueden incluirse Vehículos, Monstruos ni Artillería.
-- **No se juegan misiones.**
+Antes de empezar, los jugadores acuerdan:
 
-# Despliegue inicial
+- El **campo de batalla** y dónde van los **puestos de mando**. Cada jugador debe tener un **Cuartel General**.
+- El **valor total** de cada ejército y el **número de turnos** — recomendado: **5**.
+- El **modo**: **Escaramuza** (cada miniatura por separado) o **Gran Batalla** (escuadras).
 
-- Cada jugador despliega primero su **Héroe** y después el resto de sus unidades, ocupando sus puestos de mando.
-- Las unidades que no quepan permanecen en **Reserva** y podrán desplegarse en turnos posteriores desde cualquier puesto propio.
+# Puntuación
 
-# Condiciones de victoria
+- **5 puntos** por cada puesto de mando que controles al final de cada turno.
+- Los puntos del **Valor** de cada unidad enemiga que destruyas.
 
-- **Victoria inmediata — Cuartel General:** si un jugador toma el Cuartel General enemigo, gana la partida de inmediato. El control del Cuartel General se resuelve siguiendo las reglas normales de control de puestos de mando.
-- **Al agotarse los turnos:** gana el jugador que haya destruido más **valor** en unidades enemigas.
+# Victoria
+
+- Si tomas el **Cuartel General** enemigo, ganas de inmediato.
+- Al agotarse los turnos, gana quien tenga **más puntos**.
