@@ -132,7 +132,8 @@ Cada turno se compone de las siguientes fases:
 Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
 
 - Cada jugador tira **1D6**. El jugador o equipo con el resultado más alto **actúa primero** durante ese turno. En caso de empate, se repite la tirada.
-- Empezando por el jugador con mayor Iniciativa, cada jugador puede desplegar unidades desde Reserva en los puestos de mando que controle (gratuito).
+- Empezando por el jugador con mayor Iniciativa, cada jugador puede desplegar unidades desde Reserva en los puestos de mando que controle (gratuito), **una unidad por puesto**.
+- A continuación, en el mismo orden, cada jugador **declara si va a usar la habilidad de su Héroe** durante este turno *(ver Habilidades de Héroe)*.
 
 En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
 
@@ -458,6 +459,8 @@ Para desplegar una unidad en un puesto de mando, el puesto debe estar bajo contr
 
 Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, cada jugador puede desplegar unidades desde Reserva.
 
+Cada puesto de mando que controles permite desplegar **una sola unidad** por Fase de Iniciativa, salvo que una habilidad indique lo contrario.
+
 Las unidades se despliegan en contacto con un puesto de mando que controles. Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
 
 ## Despliegue inicial
@@ -490,15 +493,13 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 ### Reglas especiales de los héroes
 
 - **El Héroe es obligatorio en partida.** Todo ejército debe incluir exactamente un Héroe.
-- **Habilidad de Héroe.** Cada Héroe dispone de una habilidad propia. Su ficha indica **cuándo** puede usarse y **con qué frecuencia**. **Si el Héroe es eliminado, su habilidad deja de estar disponible** para el resto de la partida.
+- **Habilidad de Héroe.** Cada Héroe dispone de una habilidad propia que se declara en la Fase de Iniciativa *(ver Habilidades de Héroe)*.
 - En modo Gran Batalla, el **Héroe debe unirse obligatoriamente a una escuadra antes del despliegue**.
 - Mientras forme parte de una escuadra, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente — el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer: solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
 
 ### Ventaja de Clase
 
-**Beneficio de la ventaja:** cuando una unidad ataca a una clase sobre la que tiene ventaja y el ataque inflige daño, suma **+1 al daño total final** del ataque.
-
-Se aplica igual en Escaramuza y en Gran Batalla.
+Cuando una unidad ataca a una clase sobre la que tiene ventaja (ver la columna **Fuerte contra** en Tipos de unidad) y el ataque inflige daño, suma **+1 de daño adicional** al **daño total final** del ataque.
 
 {{classAdvantageDiagram}}
 
@@ -703,12 +704,12 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 
 # Equipamiento
 
-Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al montar la lista y se asigna a una unidad concreta al desplegar. El catálogo completo de objetos, con su coste y qué unidades pueden equipar cada uno, se encuentra en su propia sección.
+Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al montar la lista y se asigna a una unidad concreta al desplegar. El catálogo completo de objetos, con su coste, se encuentra en su propia sección.
 
 - Cada unidad puede equipar **un solo objeto**.
-- Un ejército puede repetir objetos, con un **máximo de 3 copias del mismo objeto**. *(Ejemplo: puedes equipar una granada a tres unidades distintas, pero no una cuarta granada.)*
+- Un ejército puede repetir objetos, con un **máximo de 3 copias del mismo objeto**. *(Ejemplo: puedes equipar un Explosivo a tres unidades distintas, pero no un cuarto Explosivo.)*
 - El objeto es **de la unidad, no de cada miniatura**: una escuadra usa el objeto una sola vez, tenga las miniaturas que tenga.
-- Los ataques y efectos generados por un objeto (como la Granada) **no se benefician de modificadores de acciones ni de especialidades** (Moverse, Disparar, Certero, Tirador…): hacen exactamente lo que dice su carta.
+- Los ataques y efectos generados por un objeto (como el Explosivo) **no se benefician de modificadores de acciones ni de especialidades** (Moverse, Disparar, Certero, Tirador…): hacen exactamente lo que dice su carta.
 - **Momento de uso:** cada objeto indica en su carta **cuándo** puede usarse ("al activarse", "al ser declarada objetivo", "al desplegar"…). Si ese momento pasa sin declararlo, el objeto **no puede aplicarse retroactivamente** *(ver Acciones olvidadas, en Consideraciones generales)*.
 - Tras usarse, el objeto se descarta.
 
@@ -718,13 +719,15 @@ Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al m
 
 # Habilidades de Héroe
 
-**Cada Héroe porta su propia habilidad de Héroe**, un efecto potente que define el estilo de juego de su ejército.
+Cada Héroe tiene una **habilidad de Héroe**: un poder potente que define el estilo de su ejército. La habilidad de cada Héroe se indica en su ficha.
 
-- Cada habilidad indica en la ficha del Héroe **cuándo puede usarse** y **con qué frecuencia** (una vez por partida, una vez por turno, de forma permanente…). No consume acciones, salvo que su ficha indique lo contrario.
-- **Si el Héroe es eliminado, su habilidad deja de estar disponible** para el resto de la partida. Los efectos ya resueltos se mantienen.
-- La habilidad de cada Héroe se indica en su ficha de unidad.
+- **Uso:** por defecto, se puede usar **una vez por partida**. No consume acciones.
+- **Declaración:** la habilidad se **declara siempre durante la Fase de Iniciativa**, para que ambos jugadores sepan desde el inicio del turno que está en juego. Su efecto se resuelve en el momento que indique su ficha (por ejemplo, al final del turno). Si no se declara en la Iniciativa, no puede usarse ese turno.
+- **Recarga:** algunos objetos o efectos permiten **recargar** la habilidad: vuelve a estar disponible para usarse de nuevo.
+- **Límite:** aunque se recargue, la habilidad **nunca puede usarse más de una vez en el mismo turno**.
+- **Si el Héroe es eliminado**, su habilidad deja de estar disponible para el resto de la partida. Los efectos ya resueltos se mantienen.
 
-Elegir qué Héroe llevar —y sobre todo **cuándo usar su habilidad**— es una de las grandes decisiones estratégicas de la partida.
+Elegir **cuándo** usar la habilidad —y si merece la pena pagar por recargarla— es una de las grandes decisiones estratégicas de la partida.
 
 ---
 

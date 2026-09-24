@@ -1,9 +1,9 @@
 {
   "objetos": [
     {
-      "id": "granada",
-      "nombre": "Granada",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1). Una sola granada por unidad, tenga las miniaturas que tenga.",
+      "id": "explosivo",
+      "nombre": "Explosivo",
+      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1). Un solo Explosivo por unidad, tenga las miniaturas que tenga.",
       "valor": 3
     },
     {
@@ -53,6 +53,13 @@
       "nombre": "Salvavidas",
       "descripcion": "Tras resolver una tirada de Salvación: repite todos los dados de Salvación fallados contra ese ataque. Se aplican los nuevos resultados.",
       "valor": 3
+    },
+    {
+      "id": "reliquia",
+      "nombre": "Reliquia",
+      "descripcion": "Solo puede equiparla el Héroe. Máximo 1 por ejército. Durante la Fase de Iniciativa, antes de declarar habilidades, descarta este objeto: la habilidad de tu Héroe se recarga y puede volver a usarse, respetando el límite de una vez por turno.",
+      "valor": 6,
+      "max_copias": 1
     }
   ]
 }

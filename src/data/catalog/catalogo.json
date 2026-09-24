@@ -22,6 +22,45 @@
   },
   "heroes": [
     {
+      "id": "heroe-10",
+      "numero": 10,
+      "nombre": "El Intendente",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+2\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 14
+      },
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, cada puesto de mando que controles permite desplegar hasta 2 unidades desde Reserva.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "24\"",
+          "precision": "4+",
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Explosiva 1"
+          ]
+        }
+      }
+    },
+    {
       "id": "heroe-1",
       "numero": 1,
       "nombre": "Oráculo",
@@ -36,7 +75,7 @@
         },
         "valor": 15
       },
-      "habilidad_faccion": "Una vez por partida, durante la Fase de Iniciativa: todas tus unidades recuperan 1D3 Vidas perdidas, sin superar su máximo.",
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: todas tus unidades recuperan 1D3 Vidas perdidas, sin superar su máximo.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
@@ -61,6 +100,45 @@
       }
     },
     {
+      "id": "heroe-7",
+      "numero": 7,
+      "nombre": "El Emboscador",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 15
+      },
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, tus unidades que estén en cobertura no pueden ser objetivo de una Carga.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "24\"",
+          "precision": "3+",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Perforante"
+          ]
+        }
+      }
+    },
+    {
       "id": "heroe-2",
       "numero": 2,
       "nombre": "Mariscal de campo",
@@ -75,7 +153,7 @@
         },
         "valor": 16
       },
-      "habilidad_faccion": "Una vez por partida, durante la Fase de Iniciativa: durante este turno, tus unidades de Choque y Especialista suman +1D3 al daño total de cada ataque que inflija daño.",
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, tus unidades de Choque y Especialista suman +1D3 al daño total de cada ataque que inflija daño.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D",
@@ -100,38 +178,116 @@
       }
     },
     {
-      "id": "heroe-3",
-      "numero": 3,
-      "nombre": "Señor de la Guerra",
+      "id": "heroe-8",
+      "numero": 8,
+      "nombre": "El Explorador",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "velocidad": "+6\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 16
+      },
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, tus unidades ganan +4\" de movimiento y pueden Correr y Disparar en la misma activación.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "18\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-5",
+      "numero": 5,
+      "nombre": "Místico",
       "perfil": {
         "movimiento": "5\"",
-        "vidas": 10,
-        "velocidad": "+4\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 17
+      },
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: todas tus unidades que no estén trabadas pueden teletransportarse a puestos de mando bajo tu control, colocándose en contacto con ellos. Pueden repartirse entre puestos distintos.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Alcance"
+          ]
+        },
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "18\"",
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-6",
+      "numero": 6,
+      "nombre": "El Bastión",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "velocidad": "+2\"",
         "salvacion": "3+",
         "escuadra": {
           "min": 1,
           "max": 1
         },
-        "valor": 20
+        "valor": 18
       },
-      "habilidad_faccion": "Una vez por partida, cuando todas las unidades de ambos jugadores se hayan activado y antes del Fin de Turno: todas tus unidades de Choque se reactivan, recuperando 1 acción.",
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, todas tus unidades en puestos de mando aliados son inmunes a los ataques a distancia.",
       "armas": {
         "cuerpo_a_cuerpo": {
-          "ataques": "1D3+2",
+          "ataques": "3D",
           "distancia": null,
           "precision": null,
-          "danio": "5",
-          "danio_critico": "6",
+          "danio": "4",
+          "danio_critico": "5",
           "habilidades_arma": [
-            "Brutal 4+"
+            "Perforante"
           ]
         },
         "disparo": {
           "ataques": "1D",
-          "distancia": "6\"",
+          "distancia": "12\"",
           "precision": "4+",
           "danio": "2",
-          "danio_critico": "3",
+          "danio_critico": "2",
           "habilidades_arma": [
             "Fiable"
           ]
@@ -153,7 +309,7 @@
         },
         "valor": 19
       },
-      "habilidad_faccion": "Una vez por partida, al final del turno: cada unidad tuya destruida durante este turno hace un chequeo de 1D6. Con 5 o 6 vuelve al campo donde cayó con la mitad de sus Vidas (redondeando hacia arriba). Si cayó trabada, se coloca a 1\" de la unidad con la que combatía.",
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa; se resuelve al final del turno: cada unidad tuya destruida durante este turno hace un chequeo de 1D6. Con 5 o 6 vuelve al campo donde cayó con la mitad de sus Vidas (redondeando hacia arriba). Si cayó trabada, se coloca a 1\" de la unidad con la que combatía.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D",
@@ -179,40 +335,79 @@
       }
     },
     {
-      "id": "heroe-5",
-      "numero": 5,
-      "nombre": "Místico",
+      "id": "heroe-9",
+      "numero": 9,
+      "nombre": "El Verdugo",
       "perfil": {
         "movimiento": "5\"",
-        "vidas": 8,
-        "velocidad": "+2\"",
-        "salvacion": "4+",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
         "escuadra": {
           "min": 1,
           "max": 1
         },
-        "valor": 17
+        "valor": 19
       },
-      "habilidad_faccion": "Una vez por partida, durante la Fase de Iniciativa: todas tus unidades que no estén trabadas se pueden teletransportar a puestos de mando bajo tu control, colocándose en contacto con ellos. Pueden repartirse entre puestos distintos.",
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, la primera unidad enemiga (que no sea Héroe) que quede con la mitad o menos de sus Vidas tras un ataque tuyo queda destruida.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
           "distancia": null,
           "precision": null,
-          "danio": "3",
-          "danio_critico": "4",
+          "danio": "5",
+          "danio_critico": "6",
           "habilidades_arma": [
-            "Alcance"
+            "Perforante"
           ]
         },
         "disparo": {
-          "ataques": "2D",
-          "distancia": "18\"",
-          "precision": null,
-          "danio": "3",
-          "danio_critico": "4",
+          "ataques": "1D",
+          "distancia": "6\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "2",
           "habilidades_arma": [
-            "Directo"
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-3",
+      "numero": 3,
+      "nombre": "Señor de la Guerra",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": {
+          "min": 1,
+          "max": 1
+        },
+        "valor": 20
+      },
+      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa; se resuelve cuando todas las unidades de ambos jugadores se hayan activado, antes del Fin de Turno: todas tus unidades de Choque se reactivan y recuperan 1 acción.",
+      "armas": {
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D3+2",
+          "distancia": null,
+          "precision": null,
+          "danio": "5",
+          "danio_critico": "6",
+          "habilidades_arma": [
+            "Brutal 4+"
+          ]
+        },
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "6\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
           ]
         }
       }

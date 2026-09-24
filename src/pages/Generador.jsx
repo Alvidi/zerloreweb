@@ -21,6 +21,8 @@ import {
 
 const MAX_UNIT_IMAGE_SIDE = 1600
 const MAX_ITEM_COPIES = 3   // el reglamento permite hasta 3 copias del mismo objeto
+/** Algunos objetos (como la Reliquia) tienen su propio límite por ejército. */
+const getItemMaxCopies = (item) => item?.max_copias ?? MAX_ITEM_COPIES
 const FICHA_CARD_W = 1536
 const FICHA_CARD_H = 1024
 const IMAGE_CROP_ASPECT_RATIO = 736 / 416   // ventana de arte de ficha2.png
@@ -578,7 +580,8 @@ function Generador() {
   const handleAddItem = (itemId) => {
     setSelectedItems((prev) => {
       const count = prev[itemId] || 0
-      if (count >= MAX_ITEM_COPIES) return prev
+      const item = activeItems.find((candidate) => candidate.id === itemId)
+      if (count >= getItemMaxCopies(item)) return prev
       return { ...prev, [itemId]: count + 1 }
     })
   }
@@ -1008,11 +1011,11 @@ function Generador() {
                               </div>
                               <div className="unit-item-stepper-row">
                                 <span className="unit-item-stepper-label">
-                                  {t('generator.max')} {MAX_ITEM_COPIES}
+                                  {t('generator.max')} {getItemMaxCopies(item)}
                                 </span>
                                 <CountStepper
                                   count={itemCount}
-                                  max={MAX_ITEM_COPIES}
+                                  max={getItemMaxCopies(item)}
                                   onAdd={() => handleAddItem(item.id)}
                                   onRemove={() => handleRemoveItem(item.id)}
                                   addLabel={`${t('generator.add')} ${item.nombre}`}
