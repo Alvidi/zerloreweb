@@ -16,7 +16,7 @@ Cada jugador monta después su ejército hasta el Valor acordado, teniendo en cu
 
 - Debe incluir **exactamente un Héroe**, cuya habilidad de Héroe define el estilo del ejército.
 - Para cada unidad debe elegir uno de sus tres **sets de armas** (Asalto, Equilibrado o Disparo), que se mantiene toda la partida.
-- Puede comprar **objetos** con Valor y asignarlos a sus unidades.
+- Puede comprar **objetos** con Valor. Los objetos son **cartas de un solo uso** que no se asignan a ninguna unidad: se juegan durante la partida en el momento que indique cada carta, respetando su límite de copias.
 
 La partida se puede ganar de dos maneras: por **victoria inmediata** —conquistando el CG enemigo o controlando todos los puestos de mando al final de un turno— o **por puntos**. ¿Cómo se consiguen puntos?
 
@@ -263,7 +263,7 @@ Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">30 - Momento decisivo</h3><button class="rules-mission-view-btn" type="button" data-number="30" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Ha llegado la hora."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Usa la habilidad de tu Héroe</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Activa la habilidad de tu Héroe en cualquier momento de la partida. Basta con usarla: no importa el resultado.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Declara y usa la habilidad de tu Héroe durante la Fase de Iniciativa de cualquier turno. Basta con usarla: no importa el resultado. Ojo: gastarla pronto por puntuar te deja sin ella en el momento decisivo.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 10 pts</p>
 </div>
 
@@ -279,7 +279,7 @@ Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">32 - Rompe trincheras</h3><button class="rules-mission-view-btn" type="button" data-number="32" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Romper el bloqueo."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Destruye una unidad de Armas Pesadas enemiga</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Elimina por completo una unidad enemiga de clase Armas Pesadas. Vale cualquier fuente de daño. Derribar a los mejores del rival cuesta sangre, pero paga bien.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Elimina por completo una unidad enemiga de clase Armas Pesadas. Vale cualquier fuente de daño. Callar una posición de fuego bien emplazada vale su peso en oro.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 15 pts</p>
 </div>
 

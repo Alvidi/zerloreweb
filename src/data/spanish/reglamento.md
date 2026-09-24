@@ -704,10 +704,10 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 
 # Equipamiento
 
-Los **objetos** son **cartas de un solo uso** que se compran con **Valor** al montar la lista. El catálogo completo, con su coste y su límite de copias, se encuentra en su propia sección.
+Los **objetos** son **cartas de un solo uso** que se compran con **Valor** al montar la lista. El catálogo completo, con su coste, se encuentra en su propia sección.
 
 - Los objetos **no se asignan a ninguna unidad al montar la lista**: se llevan como cartas y se juegan durante la partida sobre la unidad que quieras, siempre que cumpla los requisitos de la carta.
-- Cada carta indica **cuántas copias** puedes llevar de ese objeto en el mismo ejército.
+- Un ejército puede repetir objetos, con un **máximo de 3 copias del mismo objeto**, salvo que la carta indique otro límite.
 - **Momento de uso:** cada carta indica **cuándo** puede jugarse ("durante su activación", "al ser declarada objetivo", "al desplegar"…). Si ese momento pasa sin declararla, el objeto **no puede aplicarse retroactivamente** *(ver Acciones olvidadas, en Consideraciones generales)*.
 - Jugar una carta **no consume acciones**, salvo que la propia carta indique lo contrario.
 - El objeto afecta a **la unidad, no a cada miniatura**: una escuadra se beneficia del objeto una sola vez, tenga las miniaturas que tenga.
