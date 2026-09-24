@@ -5,6 +5,7 @@ import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
 import itemIcon from '../images/units_icons/equipamiento.png'
 import objetosData from '../data/items/objetos.json'
+import RoleIcon from '../features/generator/components/RoleIcon.jsx'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
 import {
   DEFAULT_ROLE_ID,
@@ -271,8 +272,9 @@ function RolePicker({ value, onChange, label, names = null }) {
           title={role.descripcion}
           onClick={() => onChange(role.id)}
         >
+          <RoleIcon roleId={role.id} />
           {role.nombre}
-          {names?.[role.id] ? <span className="unit-role-flavour"> ({names[role.id]})</span> : null}
+          {names?.[role.id] ? <span className="unit-role-flavour is-stacked">({names[role.id]})</span> : null}
         </button>
       ))}
     </div>
@@ -295,8 +297,9 @@ function RoleRoster({ counts, names, onAdd, onRemove, addLabel, removeLabel, cou
             className={`unit-role-row${count > 0 ? ' has-count' : ''}${disabled ? ' is-disabled' : ''}`}
           >
             <span className="unit-role-name is-static" title={role.descripcion}>
+              <RoleIcon roleId={role.id} />
               {role.nombre}
-              {names?.[role.id] ? <span className="unit-role-flavour"> ({names[role.id]})</span> : null}
+              {names?.[role.id] ? <span className="unit-role-flavour is-stacked">({names[role.id]})</span> : null}
             </span>
             <CountStepper
               count={count}
@@ -1110,6 +1113,7 @@ function Generador() {
                             <div className="unit-role-roster">
                               <div className="unit-role-row has-count">
                                 <span className="unit-role-name is-static">
+                                  <RoleIcon roleId={item.entry.roleId} />
                                   {item.entry.rol}
                                   {item.entry.nombreRol ? <span className="unit-role-flavour"> ({item.entry.nombreRol})</span> : null}
                                   {gameMode === 'escuadra'

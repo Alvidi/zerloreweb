@@ -704,16 +704,17 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 
 # Equipamiento
 
-Los **objetos** son equipamiento de un solo uso que se compra con **Valor** al montar la lista y se asigna a una unidad concreta al desplegar. El catálogo completo de objetos, con su coste, se encuentra en su propia sección.
+Los **objetos** son **cartas de un solo uso** que se compran con **Valor** al montar la lista. El catálogo completo, con su coste y su límite de copias, se encuentra en su propia sección.
 
-- Cada unidad puede equipar **un solo objeto**.
-- Un ejército puede repetir objetos, con un **máximo de 3 copias del mismo objeto**. *(Ejemplo: puedes equipar un Explosivo a tres unidades distintas, pero no un cuarto Explosivo.)*
-- El objeto es **de la unidad, no de cada miniatura**: una escuadra usa el objeto una sola vez, tenga las miniaturas que tenga.
+- Los objetos **no se asignan a ninguna unidad al montar la lista**: se llevan como cartas y se juegan durante la partida sobre la unidad que quieras, siempre que cumpla los requisitos de la carta.
+- Cada carta indica **cuántas copias** puedes llevar de ese objeto en el mismo ejército.
+- **Momento de uso:** cada carta indica **cuándo** puede jugarse ("durante su activación", "al ser declarada objetivo", "al desplegar"…). Si ese momento pasa sin declararla, el objeto **no puede aplicarse retroactivamente** *(ver Acciones olvidadas, en Consideraciones generales)*.
+- Jugar una carta **no consume acciones**, salvo que la propia carta indique lo contrario.
+- El objeto afecta a **la unidad, no a cada miniatura**: una escuadra se beneficia del objeto una sola vez, tenga las miniaturas que tenga.
 - Los ataques y efectos generados por un objeto (como el Explosivo) **no se benefician de modificadores de acciones ni de especialidades** (Moverse, Disparar, Certero, Tirador…): hacen exactamente lo que dice su carta.
-- **Momento de uso:** cada objeto indica en su carta **cuándo** puede usarse ("al activarse", "al ser declarada objetivo", "al desplegar"…). Si ese momento pasa sin declararlo, el objeto **no puede aplicarse retroactivamente** *(ver Acciones olvidadas, en Consideraciones generales)*.
-- Tras usarse, el objeto se descarta.
+- Tras usarse, la carta se **descarta**.
 
-**Manejo en mesa:** los objetos funcionan como una **baraja de cartas**. Cada jugador coge las cartas de los objetos que ha comprado y las coloca junto a las unidades que los llevan equipados. Al usar un objeto, se descarta su carta. Así queda siempre a la vista quién lleva qué y qué queda por gastar, sin necesidad de anotarlo.
+**Manejo en mesa:** los objetos funcionan como una **baraja de cartas**. Cada jugador tiene delante las cartas que ha comprado y las descarta al usarlas, así queda siempre a la vista qué le queda por gastar.
 
 ---
 

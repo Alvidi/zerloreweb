@@ -7122,11 +7122,42 @@ mark {
   letter-spacing: 0.05em;
 }
 
+/* Icono del set (Asalto / Equilibrado / Disparo): hereda el color del texto */
+.unit-role-icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin-right: 6px;
+  vertical-align: -2px;
+  opacity: 0.85;
+}
+
+.unit-role-row.has-count .unit-role-icon,
+.unit-role-btn.active .unit-role-icon {
+  opacity: 1;
+}
+
+.unit-role-btn .unit-role-icon {
+  margin-right: 4px;
+}
+
 .unit-role-flavour {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: none;
   opacity: 0.72;
+}
+
+/* El nombre de sabor del set va en su propia línea para que las cajas encajen */
+.unit-role-flavour.is-stacked {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.92em;
+  line-height: 1.15;
+}
+
+.unit-role-btn .unit-role-flavour.is-stacked {
+  margin-top: 2px;
 }
 
 /* Fila de contador en las tarjetas de objeto */
