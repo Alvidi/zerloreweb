@@ -69,7 +69,7 @@ export const getAbilityDescription = (ability) => {
     return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.reach) {
-    return 'Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad.'
+    return 'Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.erratic) {
     return 'Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma durante ese ataque.'

@@ -544,6 +544,39 @@ const lockedUnits = figure(
   })}`,
 )
 
+/* ── Trabado vs ataque suelto ───────────────────────────────────────────────
+   "Trabado: una unidad carga y entra en contacto físico... Ataque suelto: una unidad
+   ataca a un enemigo que esté a 1" o menos sin estar trabada con él".              */
+const meleeEngagement = figure(
+  'Combate trabado y ataque suelto',
+  'Diferencia entre atacar tras una carga y atacar a 1" o menos sin trabar',
+  380,
+  `
+  ${head('Dos formas de pelear en cuerpo a cuerpo', 'La diferencia está en si hay contacto físico o no.')}
+
+  ${row(76, 132, {
+    tone: 'plain', ok: null, title: 'Trabado · tras Cargar',
+    lines: [
+      { t: 'Contacto físico: ambas quedan trabadas' },
+      { t: 'y solo pueden Atacar CaC o Destrabarse.' },
+    ],
+    draw: `${base(120, 152, C.act)}${base(154, 152, C.enemy)}
+      <circle cx="137" cy="152" r="7" fill="none" stroke="${C.soft}" stroke-width="2"/>
+      ${cap(137, 192, 'peana con peana', C.soft)}`,
+  })}
+
+  ${row(220, 136, {
+    tone: 'plain', ok: null, title: 'Ataque suelto · a 1" o menos',
+    lines: [
+      { t: 'Sin contacto: ninguna queda trabada y las dos' },
+      { t: 'siguen libres para moverse, disparar o alejarse.' },
+    ],
+    draw: `${base(105, 296, C.act)}${base(185, 296, C.enemy)}
+      ${dim(122, 296, 168, 296, '1" o menos', -12)}
+      ${cap(145, 336, 'sin tocarse', C.soft)}`,
+  })}`,
+)
+
 /* ── Combate cuerpo a cuerpo en escuadras ───────────────────────────────────
    "En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad
    enemiga, la escuadra entera se considera trabada y todas sus miniaturas participan";
@@ -725,6 +758,7 @@ export const RULES_DIAGRAMS = {
   activationDiagram: activation,
   rangedSequenceDiagram: rangedSequence,
   climbingDiagram: climbing,
+  meleeEngagementDiagram: meleeEngagement,
   lockedUnitsDiagram: lockedUnits,
   squadMeleeDiagram: squadMelee,
   vehicleMeleeDiagram: vehicleMelee,

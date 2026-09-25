@@ -190,7 +190,7 @@ Las siguientes reglas se aplican siempre que una acción o regla permita desplaz
 Cuando una unidad se mueve, puede desplazarse hasta la distancia indicada por la acción o regla utilizada.
 
 - Las unidades pueden moverse en cualquier dirección.
-- No se puede mover una unidad a menos de **1" de una unidad enemiga**, salvo al Cargar.
+- No se puede terminar el movimiento en **contacto físico** con una unidad enemiga, salvo al Cargar. Sí es posible acercarse a 1" o menos.
 - El movimiento puede utilizarse para rodear obstáculos o posicionarse libremente en el campo de batalla.
 
 ## Correr
@@ -288,7 +288,12 @@ Cuando una unidad pierde todas sus Vidas, se retira del juego como destruida.
 
 # Combate cuerpo a cuerpo
 
-El combate cuerpo a cuerpo ocurre cuando dos unidades se encuentran **en contacto de peana**. En ese momento, ambas unidades quedan **trabadas en combate**.
+El combate cuerpo a cuerpo puede darse de dos formas:
+
+- **Trabado:** una unidad **carga** y entra en contacto físico con el enemigo. Ambas quedan **trabadas en combate** y no pueden separarse sin Destrabarse.
+- **Ataque suelto:** una unidad ataca a un enemigo que esté a **1" o menos** sin estar trabada con él. Es más lento de preparar (hay que acercarse un turno antes), pero **ninguna de las dos queda trabada**.
+
+{{meleeEngagementDiagram}}
 
 ## Cargar
 
@@ -311,13 +316,15 @@ Una unidad puede Cargar contra una unidad ya trabada en combate. Tras la carga, 
 
 ## Atacar cuerpo a cuerpo
 
-Una unidad trabada consume **2 acciones** para atacar con una de sus armas de cuerpo a cuerpo.
+La unidad consume **2 acciones** y ataca con un arma de cuerpo a cuerpo a una unidad enemiga con la que esté **trabada**, o que se encuentre a **1" o menos**.
+
+Atacar de esta forma a una unidad con la que no estás trabado **no traba a ninguna de las dos**: ambas siguen libres y pueden moverse, disparar o alejarse con normalidad en su activación.
 
 Si está trabada con varias unidades enemigas, elige una sola como objetivo, salvo que una regla indique lo contrario.
 
 ## Unidades trabadas
 
-Cuando dos unidades están en contacto de peana se consideran trabadas en combate cuerpo a cuerpo.
+Dos unidades quedan **trabadas** cuando están en **contacto físico**: peana con peana, o miniatura con miniatura si alguna no tiene peana (como un vehículo grande). Solo se puede llegar a ese contacto mediante una **carga**.
 
 Mientras siga trabada, una unidad solo puede usar las acciones **Atacar cuerpo a cuerpo** o **Destrabarse**, salvo que una regla indique lo contrario. Si logra Destrabarse, deja de estar trabada y su acción restante se rige por las reglas normales.
 
@@ -693,7 +700,7 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | Directo | Esta arma impacta directamente y no utiliza Precisión; por tanto, no se ve afectada por modificadores a la Precisión. |
 | Explosiva (X) | Si el objetivo sufre daño, el atacante elige hasta **X miniaturas adicionales**, aliadas o enemigas, a 3" de la miniatura impactada; cada una sufre el mismo daño directo. En una escuadra, su propietario lo asigna siguiendo las reglas normales de la escuadra. |
 | Parabólica | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**. |
-| Alcance | Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. |
+| Alcance | Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades. |
 | Errática | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma a distancia durante ese ataque. |
 | Barrido | Arma de cuerpo a cuerpo. Al atacar, en vez de elegir un objetivo, **ataca a TODAS las unidades enemigas trabadas con ella**. Resuelve el ataque por separado contra cada una. |
 | Anti-X | Esta arma inflige **1D3** de daño extra contra el tipo específico indicado, siempre y cuando el arma haga al menos 1 de daño al objetivo. |
