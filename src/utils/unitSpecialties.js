@@ -74,7 +74,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Atropello', description: 'Durante su carga, si traba a una unidad enemiga dicha unidad recibe automáticamente 1D3 de daño.' },
   },
   {
-    es: { name: 'Atrincherado', description: 'No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada.' },
+    es: { name: 'Atrincherado', description: 'No puede moverse.' },
   },
   {
     es: { name: 'Avance complicado', description: 'Puede moverse un máximo de 3", pero reduce en -2 el ataque total.' },

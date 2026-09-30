@@ -188,6 +188,7 @@ Las unidades en reserva aún no han entrado al campo de batalla.
 - La unidad desplegada entra **sin activar**: puede activarse más adelante en ese mismo turno.
 - Cada turno puedes desplegar como máximo **tantas unidades como puestos de mando controles**, repartidas entre los puestos que quieras.
 - Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
+- La unidad debe **caber físicamente** en contacto con el puesto. Si no hay espacio libre suficiente alrededor, no puede desplegarse ahí.
 - Algunas unidades disponen de **habilidades especiales de despliegue** indicadas en su ficha.
 
 *Cuantos más puestos domines, más rápido te llegan los refuerzos.*
@@ -576,7 +577,7 @@ Incluye comportamientos especiales listados abajo; estas reglas se aplican siemp
 | **Armas Pesadas** | **Fuego de supresión:** Las unidades enemigas que reciban daño de esta unidad no pueden **Correr ni Cargar** durante su siguiente activación. | **Emplazado:** Si esta unidad no se ha movido durante esta activación, gana **+1 dado** en sus ataques a distancia. | **Fuego defensivo:** Cuando una unidad enemiga declara **Cargar** contra esta unidad, antes de resolver la carga esta unidad puede **disparar** contra ella con su arma a distancia. No consume acción. |
 | **Monstruos** | **Porrazo:** En su activación, esta unidad puede realizar la acción **Destrabarse** sin efectuar el chequeo. Puede hacerlo aunque esté trabada con una unidad con **Anclado**. | **Terror:** Las unidades enemigas a **12" o menos** de esta unidad no pueden disparar a esta unidad. | **Anclado:** Las unidades enemigas trabadas con esta unidad no pueden realizar la acción **Destrabarse**. |
 | **Vehículos** | **¡Boom!:** Cuando esta unidad muere, explota afectando a las unidades a **6"** de ella, infligiendo **1D6** de daño. | **Cobertura móvil:** Las unidades aliadas a **3" o menos** de esta unidad cuentan como en cobertura contra ataques de Disparo. | **Atropello:** Durante su **carga**, si traba a una unidad enemiga dicha unidad recibe automáticamente **1D3** de daño. |
-| **Artillería** | **Atrincherado:** No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada. | **Atrincherado:** No puede moverse. Bloquea los refuerzos aliados en el puesto en el que sea desplegada. | **Avance complicado:** Puede moverse un máximo de **3"**, pero si lo hace reduce en **-2** el ataque total. |
+| **Artillería** | **Atrincherado:** No puede moverse. | **Atrincherado:** No puede moverse. | **Avance complicado:** Puede moverse un máximo de **3"**, pero si lo hace reduce en **-2** el ataque total. |
 | **Héroes** | Habilidad especial. | Habilidad especial. | Habilidad especial. |
 
 ### Escuadras
