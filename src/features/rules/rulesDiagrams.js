@@ -467,6 +467,162 @@ const rangedSequence = figure(
    la altura vertical que desea escalar, consumiendo movimiento"; "Las unidades con
    Vuelo pueden subir obstáculos de manera diagonal"; "Los Vehículos no pueden
    subir... Los Monstruos sí, siempre que quepan físicamente en el espacio."   */
+/* ── Acciones de una unidad ─────────────────────────────────────────────────
+   "dispone de 2 acciones"; "una misma acción no puede repetirse durante la
+   misma activación"; "una acción de coste 2 consume toda la activación".     */
+const actions = figure(
+  'Cómo se gastan las 2 acciones',
+  'Combinaciones válidas de acciones en una activación',
+  452,
+  `
+  ${head('Economía de acciones', 'Cada activación da 2 acciones. Se gastan de una en una.')}
+
+  ${row(76, 110, {
+    tone: 'ok', ok: true, title: 'Dos acciones de coste 1',
+    lines: [{ t: 'Moverse y luego Disparar, sin penalización.' }],
+    draw: `${chip(40, 112, 130, 'Moverse · 1', C.act)}
+      <text class="zl-lab" x="184" y="134" text-anchor="middle" fill="${C.soft}">+</text>
+      ${chip(198, 112, 130, 'Disparar · 1', C.act)}`,
+  })}
+
+  ${row(198, 110, {
+    tone: 'plain', ok: null, title: 'Una acción de coste 2',
+    lines: [{ t: 'Correr, Cargar y Atacar CaC se comen' }, { t: 'la activación entera.' }],
+    draw: `${chip(40, 234, 288, 'Correr · 2 acciones', C.dim)}
+      ${cap(184, 292, 'no queda nada más que hacer', C.soft)}`,
+  })}
+
+  ${row(320, 110, {
+    tone: 'ko', ok: false, title: 'La misma acción dos veces',
+    lines: [{ t: 'No se puede repetir una acción en la' }, { t: 'misma activación.' }],
+    draw: `${chip(40, 356, 130, 'Moverse · 1', C.soft)}
+      <text class="zl-lab" x="184" y="378" text-anchor="middle" fill="${C.soft}">+</text>
+      ${chip(198, 356, 130, 'Moverse · 1', C.soft)}
+      ${cross(263, 373, 13)}`,
+  })}`,
+)
+
+/* ── Daño en escuadra ───────────────────────────────────────────────────────
+   "el jugador poseedor decide qué miniatura recibe el daño... todo el daño se
+   aplica a esa miniatura hasta que es eliminada"; el sobrante pasa a otra.   */
+const squadDamage = figure(
+  'Cómo se reparte el daño en una escuadra',
+  'Todo el daño va a una miniatura hasta eliminarla, y el sobrante pasa a otra',
+  488,
+  `
+  ${head('Daño en una escuadra', 'El daño no se reparte: se concentra en la miniatura que elijas.')}
+
+  ${row(76, 150, {
+    tone: 'plain', ok: null, title: 'Elige quién lo recibe',
+    lines: [
+      { t: 'El dueño de la escuadra elige la miniatura' },
+      { t: 'y todo el daño del ataque va contra ella.' },
+    ],
+    draw: `${[60, 100, 140, 180, 220].map((x) => base(x, 172, C.ally, 15)).join('')}
+      <line x1="100" y1="124" x2="100" y2="152" stroke="${C.ko}" stroke-width="2.2" marker-end="url(#zl-shot)"/>
+      ${cap(100, 210, 'todo el daño aquí', C.ko)}`,
+  })}
+
+  ${row(238, 150, {
+    tone: 'plain', ok: null, title: 'Si cae y sobra daño',
+    lines: [
+      { t: 'Solo entonces se elige otra miniatura,' },
+      { t: 'y el daño restante continúa en ella.' },
+    ],
+    draw: `${[60, 100, 140, 180, 220].map((x) => base(x, 334, C.ally, 15)).join('')}
+      ${cross(100, 334, 12)}
+      <line x1="118" y1="334" x2="140" y2="334" stroke="${C.ko}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${cap(150, 372, 'el resto pasa aquí', C.ko)}`,
+  })}
+
+  ${note(416, 'Nunca se reparte', 'Un mismo ataque no se divide entre varias miniaturas.')}`,
+)
+
+/* ── Reserva y refuerzos ────────────────────────────────────────────────────
+   "en lugar de activar una unidad, un jugador puede desplegar una unidad desde
+   Reserva"; "entra sin activar"; "como máximo tantas unidades como puestos
+   de mando controles".                                                       */
+const reinforcements = figure(
+  'Cómo entran los refuerzos',
+  'Desplegar en lugar de activar, la unidad entra sin activar y el límite por turno',
+  516,
+  `
+  ${head('Reserva y refuerzos', 'Meter refuerzos ocupa tu turno, igual que activar una unidad.')}
+
+  ${row(76, 124, {
+    tone: 'plain', ok: null, title: 'Una cosa o la otra',
+    lines: [{ t: 'Cuando te toca, eliges: activas una unidad' }, { t: 'o despliegas refuerzos. Luego actúa el rival.' }],
+    draw: `${chip(40, 120, 150, 'Activar unidad', C.act)}
+      <text class="zl-lab" x="205" y="142" text-anchor="middle" fill="${C.soft}">o</text>
+      ${chip(220, 120, 160, 'Meter refuerzos', C.ok)}`,
+  })}
+
+  ${row(212, 124, {
+    tone: 'plain', ok: null, title: 'Entra sin activar',
+    lines: [{ t: 'La unidad recién desplegada conserva su' }, { t: 'activación: puede actuar en este mismo turno.' }],
+    draw: `<circle cx="100" cy="270" r="24" fill="#1b1d25" stroke="${C.soft}" stroke-width="2.5"/>
+      ${cap(100, 312, 'Sin activar', C.soft)}
+      <line x1="134" y1="270" x2="180" y2="270" stroke="${C.ok}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${chip(196, 253, 180, 'Se activa más tarde', C.ok)}`,
+  })}
+
+  ${row(348, 152, {
+    tone: 'plain', ok: null, title: 'Cuántos por turno',
+    lines: [
+      { t: 'Tantas unidades como puestos controles,' },
+      { t: 'repartidas entre los puestos que quieras.' },
+      { t: '3 puestos → hasta 3 refuerzos este turno.', cls: 'zl-lab', fill: C.ok },
+    ],
+    draw: `${[70, 160, 250].map((x) => `
+      <circle cx="${x}" cy="452" r="19" fill="none" stroke="${C.dim}" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <path d="M${x - 6} 446 l12 0 l0 5 l-12 0 z" fill="${C.act}"/>
+      ${base(x, 404, C.ally, 14)}
+      <line x1="${x}" y1="424" x2="${x}" y2="436" stroke="${C.ok}" stroke-width="1.8" marker-start="url(#zl-shot)"/>`).join('')}
+      ${cap(160, 486, 'un refuerzo por puesto controlado', C.soft)}`,
+  })}`,
+)
+
+/* ── Explosiva (X) ──────────────────────────────────────────────────────────
+   "Si el objetivo sufre daño, la explosión alcanza hasta X miniaturas adicionales
+   a 3\" de la impactada"; "se asignan primero a miniaturas enemigas y, si quedan
+   impactos por repartir, continúan con las aliadas".                          */
+const explosive = figure(
+  'Cómo salpica un arma Explosiva',
+  'La explosión solo salta si el objetivo sufre daño, y se reparte primero entre enemigos',
+  560,
+  `
+  ${head('Explosiva (X)', 'Primero el impacto tiene que hacer daño; después se reparte la explosión.')}
+
+  ${row(76, 118, {
+    tone: 'ko', ok: false, title: 'El objetivo no sufre daño',
+    lines: [{ t: 'Si salva el impacto o el daño queda en 0,' }, { t: 'la explosión no alcanza a nadie.' }],
+    draw: `${base(120, 148, C.enemy)}
+      ${cap(120, 186, 'salva el impacto', C.ko)}
+      ${base(210, 148, C.enemy, 14)}${base(262, 148, C.ally, 14)}
+      ${cap(236, 186, 'no les pasa nada', C.soft)}`,
+  })}
+
+  ${row(206, 212, {
+    tone: 'ok', ok: true, title: 'El objetivo sufre daño',
+    lines: [
+      { t: 'La explosión alcanza hasta X miniaturas más' },
+      { t: 'a 3" de la impactada, con el mismo daño directo.' },
+      { t: 'Primero enemigas; las aliadas, solo si sobran.', cls: 'zl-lab', fill: C.act },
+    ],
+    draw: `<circle cx="170" cy="312" r="66" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
+      ${base(170, 312, C.enemy)}
+      ${dim(170, 312, 236, 312, '3"', -8)}
+      ${base(126, 262, C.enemy, 14)}${step(126, 262, '1')}
+      ${base(212, 356, C.ally, 14)}${step(212, 356, '2')}
+      ${cap(170, 398, 'enemigas antes que aliadas', C.soft)}`,
+  })}
+
+  ${note(440, 'Quién elige', 'El daño lo asigna el dueño de las miniaturas alcanzadas.')}
+
+  ${note(504, 'Explosiva (2)', 'Hasta 2 miniaturas adicionales además del objetivo.')}`,
+)
+
+
 const climbing = figure(
   'Trepar obstáculos y la habilidad Vuelo',
   'Vista de perfil de una unidad trepando y de otra con Vuelo',
@@ -753,6 +909,10 @@ export const RULES_DIAGRAMS = {
   activationDiagram: activation,
   rangedSequenceDiagram: rangedSequence,
   climbingDiagram: climbing,
+  actionsDiagram: actions,
+  squadDamageDiagram: squadDamage,
+  reinforcementsDiagram: reinforcements,
+  explosiveDiagram: explosive,
   meleeEngagementDiagram: meleeEngagement,
   lockedUnitsDiagram: lockedUnits,
   squadMeleeDiagram: squadMelee,

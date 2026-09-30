@@ -63,7 +63,7 @@ export const getAbilityDescription = (ability) => {
     return 'Esta arma impacta directamente, no tiene precisión.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
-    return 'Si el objetivo sufre daño, elige hasta X miniaturas adicionales aliadas o enemigas a 3" de la miniatura impactada; cada una sufre el mismo daño directo. En una escuadra, su propietario lo asigna siguiendo las reglas normales de la escuadra.'
+    return 'Si el objetivo sufre daño, la explosión alcanza hasta X miniaturas adicionales a 3" de la impactada, que sufren el mismo daño directo. Se asignan primero a miniaturas enemigas y, si quedan impactos por repartir, continúan con las aliadas. En ambos casos, el propietario de las miniaturas afectadas decide cuáles reciben el daño, siguiendo las reglas normales de asignación en escuadra.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
     return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia.'

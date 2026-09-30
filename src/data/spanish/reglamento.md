@@ -191,6 +191,8 @@ Las unidades en reserva aún no han entrado al campo de batalla.
 - La unidad debe **caber físicamente** en contacto con el puesto. Si no hay espacio libre suficiente alrededor, no puede desplegarse ahí.
 - Algunas unidades disponen de **habilidades especiales de despliegue** indicadas en su ficha.
 
+{{reinforcementsDiagram}}
+
 *Cuantos más puestos domines, más rápido te llegan los refuerzos.*
 
 ---
@@ -212,6 +214,8 @@ Las acciones disponibles son:
 
 Una acción con coste de **2 acciones** consume toda la activación de la unidad. Moverse y Disparar son acciones independientes de coste 1: una unidad puede, por ejemplo, Moverse y luego Disparar en la misma activación **sin penalización**, salvo que una habilidad indique lo contrario.
 
+
+{{actionsDiagram}}
 ---
 
 # Reglas de movimiento
@@ -436,6 +440,8 @@ La acción de ataque se considera **consumida por toda la escuadra**.
 En caso de que una escuadra sufra daños, el jugador poseedor de la escuadra decide qué miniatura recibe el daño infligido. Todo el daño se aplica a esa miniatura hasta que es eliminada. No es posible distribuir el daño de un mismo ataque entre varias miniaturas mientras la miniatura elegida siga en pie.
 
 Si la miniatura elegida es eliminada y aún queda daño por asignar, el jugador debe elegir otra miniatura de la escuadra a la que aplicar el daño restante, siguiendo las mismas reglas.
+
+{{squadDamageDiagram}}
 
 ---
 
@@ -705,12 +711,14 @@ Cuando una unidad realiza un ataque, debe elegir una única arma válida de su p
 | Inestable | Tras resolver el ataque, lanza 1D6. Con un resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
 | Multiuso | Esta arma puede utilizarse para realizar la acción Disparar aunque la unidad esté trabada en combate cuerpo a cuerpo. |
 | Directo | Esta arma impacta directamente y no utiliza Precisión; por tanto, no se ve afectada por modificadores a la Precisión. |
-| Explosiva (X) | Si el objetivo sufre daño, el atacante elige hasta **X miniaturas adicionales**, aliadas o enemigas, a 3" de la miniatura impactada; cada una sufre el mismo daño directo. En una escuadra, su propietario lo asigna siguiendo las reglas normales de la escuadra. |
+| Explosiva (X) | Si el objetivo sufre daño, la explosión alcanza hasta **X miniaturas adicionales** a 3" de la impactada, que sufren el mismo daño directo. Se asignan **primero a miniaturas enemigas** y, si quedan impactos por repartir, continúan con las **aliadas**. En ambos casos, el **propietario de las miniaturas afectadas decide cuáles reciben el daño**, siguiendo las reglas normales de asignación en escuadra. |
 | Parabólica | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia**. |
 | Alcance | Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades. |
 | Errática | Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma a distancia durante ese ataque. |
 | Barrido | Arma de cuerpo a cuerpo. Al atacar, en vez de elegir un objetivo, **ataca a TODAS las unidades enemigas trabadas con ella**. Resuelve el ataque por separado contra cada una. |
 | Anti-X | Esta arma inflige **1D3** de daño extra contra el tipo específico indicado, siempre y cuando el arma haga al menos 1 de daño al objetivo. |
+
+{{explosiveDiagram}}
 
 **Nota:** Directo y Errática son habilidades exclusivas de las **armas a distancia**; no pueden aparecer en armas de cuerpo a cuerpo.
 
