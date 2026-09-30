@@ -66,7 +66,7 @@ ZeroLore puede jugarse de **2 a 4 jugadores**. Los formatos disponibles son:
 - **1vs1vs1** — todos contra todos de 3.
 - **1vs1vs1vs1** — todos contra todos de 4.
 
-En partidas de más de dos jugadores, el orden de activación se determina por iniciativa al inicio de cada turno, y aplica también a equipos.
+En partidas de más de dos jugadores, el orden de activación se fija al inicio de la partida y se mantiene durante toda ella, y aplica también a equipos.
 
 ### Modos de juego
 
@@ -115,34 +115,19 @@ ZeroLore está diseñado para ser flexible. Si durante una partida surge una sit
 
 # Estructura del turno de juego
 
-Una partida de ZeroLore se divide en **turnos**.
-
-Cada turno sigue siempre la misma estructura y se resuelve de forma ordenada para garantizar un flujo claro y equilibrado.
-
-Cada turno se compone de las siguientes fases:
-
-1. **Fase de Iniciativa**
-2. **Fase de Activaciones**
-3. **Fin de Turno**
+Una partida de ZeroLore se divide en **turnos**, y el flujo es sencillo: los jugadores **alternan activaciones** hasta que todas las unidades hayan actuado.
 
 {{turnStructureDiagram}}
 
-## 1. Fase de Iniciativa
+## Quién empieza
 
-Al comienzo de cada turno, ambos jugadores realizan la **tirada de Iniciativa**.
+Al comenzar la partida, cada jugador tira **1D6**: el resultado más alto decide quién actúa primero (en caso de empate, se repite). A partir de ahí, **se alterna quién abre cada turno**.
 
-- Cada jugador tira **1D6**. El jugador o equipo con el resultado más alto **actúa primero** durante ese turno. En caso de empate, se repite la tirada.
-- Empezando por el jugador con mayor Iniciativa, cada jugador puede desplegar unidades desde Reserva en los puestos de mando que controle (gratuito), **una unidad por puesto**.
-- A continuación, en el mismo orden, cada jugador **declara si va a usar la habilidad de su Héroe** durante este turno *(ver Habilidades de Héroe)*.
+En partidas de más de dos jugadores, esa misma tirada fija el orden para toda la partida.
 
-En partidas por equipos, los jugadores del mismo bando pueden tomarse un breve tiempo para coordinar su estrategia antes de continuar.
+## Activaciones
 
-## 2. Fase de Activaciones
-
-Después de la Fase de Iniciativa comienza la **Fase de Activaciones**.
-
-- El jugador que ganó la Iniciativa activa **primero**.
-- Los jugadores alternan activaciones, **una unidad cada vez**.
+Los jugadores alternan activaciones, **una unidad cada vez**.
 
 Activar una unidad significa:
 
@@ -152,19 +137,66 @@ Activar una unidad significa:
 
 Una vez una unidad ha sido activada, **no puede volver a activarse** durante ese turno. Para llevar el control de las activaciones, cada unidad se marca con el **token de activación** (cara naranja = activada, cara gris = sin activar). Al inicio de cada turno se voltean todos los tokens a la cara gris.
 
+**En lugar de activar una unidad**, un jugador puede **desplegar refuerzos** desde Reserva *(ver Puestos de mando y despliegue)*. Hacerlo consume su turno igual que una activación.
+
+Antes de su **primera activación del turno**, un jugador puede declarar en voz alta que usa la **habilidad de su Héroe** *(ver Habilidades de Héroe)*.
+
+En partidas por equipos, los jugadores del mismo bando pueden coordinarse brevemente antes de actuar.
+
 {{activationDiagram}}
 
-## 3. Fin de Turno
+## Fin del turno
 
-Cuando **todas las unidades de ambos jugadores** han sido activadas, el turno finaliza.
+Cuando **todas las unidades de ambos jugadores** han sido activadas, el turno termina: se resuelven los efectos que indiquen hacerlo al final del turno y se cuentan los puntos. La **puntuación, las condiciones de victoria y la preparación de la partida** se detallan en el documento de **Misiones**. Después se voltean los tokens y comienza un turno nuevo.
 
-Durante el Fin de Turno se terminan los efectos que indiquen resolverse al final del turno y se cuentan los puntos ganados según el modo de juego. La **puntuación, las condiciones de victoria y la preparación de la partida** se detallan en el documento de **Misiones**. Tras esto, comienza un nuevo turno empezando de nuevo por la Fase de Iniciativa.
+---
+
+# Puestos de mando y despliegue
+
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse. Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del puesto de mando para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
+
+## Cuartel General
+
+Funciona como un puesto de mando normal a efectos de control y despliegue, siempre tiene que haber un Cuartel General por jugador obligatorio.
+
+## Control de un puesto
+
+**Ocupar un puesto:** una unidad se considera dentro de un puesto de mando cuando **la mitad o más de su peana** está sobre él. En escuadras, cada miniatura se comprueba por separado.
+
+**Control al final de turno:** al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto.
+
+**Unidades que no aportan Valor:** los **Vehículos, Monstruos y Artillería nunca aportan su Valor** al control de un puesto, aunque estén sobre él; pueden ocuparlo físicamente pero no lo conquistan ni lo defienden a efectos de control.
+
+**Unidades trabadas en CaC:** las unidades de ambos bandos que estén en combate cuerpo a cuerpo dentro de un puesto de mando **no cuentan para el cálculo de control**. Se tratan como si no existiesen a efectos del puesto hasta que el combate se resuelva. En caso de empate, el puesto permanece bajo el control de quien lo tuviera.
+
+{{commandPostDiagram}}
+
+## Despliegue inicial
+
+Al inicio de la partida, cada jugador despliega libremente sus unidades desde Reserva en los puestos de mando que controle.
+
+Cada jugador tira **1D6** — el resultado más alto despliega primero. **La primera unidad que debe desplegar cada jugador es su Héroe.** A partir de ahí, los jugadores se alternan desplegando unidad por unidad hasta que ambos decidan no desplegar más.
+
+Las unidades que no se desplieguen en este momento permanecen en **Reserva**.
+
+## Reserva y refuerzos
+
+Las unidades en reserva aún no han entrado al campo de batalla.
+
+**Desplegar refuerzos.** Durante el turno, **en lugar de activar una unidad**, un jugador puede desplegar **una unidad desde Reserva** en un puesto de mando que controle, colocada en contacto con él. Hacerlo consume su turno, igual que una activación, y después actúa el siguiente jugador.
+
+- La unidad desplegada entra **sin activar**: puede activarse más adelante en ese mismo turno.
+- Cada turno puedes desplegar como máximo **tantas unidades como puestos de mando controles**, repartidas entre los puestos que quieras.
+- Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
+- Algunas unidades disponen de **habilidades especiales de despliegue** indicadas en su ficha.
+
+*Cuantos más puestos domines, más rápido te llegan los refuerzos.*
 
 ---
 
 # Acciones de una unidad
 
-Cada vez que una unidad es activada durante la Fase de Activaciones, dispone de **2 acciones**. Las acciones se resuelven de una en una: cada acción debe completarse antes de comenzar la siguiente, y una misma acción no puede repetirse durante la misma activación. La unidad puede renunciar a una o a ambas acciones.
+Cada vez que una unidad es activada, dispone de **2 acciones**. Las acciones se resuelven de una en una: cada acción debe completarse antes de comenzar la siguiente, y una misma acción no puede repetirse durante la misma activación. La unidad puede renunciar a una o a ambas acciones.
 
 Las acciones disponibles son:
 
@@ -440,46 +472,6 @@ Si el atacante tiene **línea de visión limpia a la unidad completa** — sin q
 
 ---
 
-# Puestos de mando y despliegue
-
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse. Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del puesto de mando para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
-
-{{commandPostDiagram}}
-
-## Cuartel General
-
-Funciona como un puesto de mando normal a efectos de control y despliegue, siempre tiene que haber un Cuartel General por jugador obligatorio.
-
-**Ocupar un puesto:** una unidad se considera dentro de un puesto de mando cuando **la mitad o más de su peana** está sobre él. En escuadras, cada miniatura se comprueba por separado.
-
-**Control al final de turno:**
-
-Al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más valor total en ese puesto.
-
-**Unidades que no aportan Valor:** los **Vehículos, Monstruos y Artillería nunca aportan su Valor** al control de un puesto, aunque estén sobre él; pueden ocuparlo físicamente pero no lo conquistan ni lo defienden a efectos de control.
-
-**Unidades trabadas en CaC:** Las unidades de ambos bandos que estén en combate cuerpo a cuerpo dentro de un puesto de mando **no cuentan para el cálculo de control**. Se tratan como si no existiesen a efectos del puesto hasta que el combate se resuelva. En caso de empate, el puesto permanece bajo el control de quien lo tuviera.
-
-Para desplegar una unidad en un puesto de mando, el puesto debe estar bajo control del jugador, y la unidad debe estar en contacto con él. Si el puesto está ocupado por unidades enemigas, aunque siga siendo propiedad por valor, no se puede desplegar en él. Las unidades que no puedan desplegarse en el turno inicial quedan en **reserva**. Algunas unidades disponen de habilidades especiales de despliegue indicadas en su ficha.
-
-## Reserva
-
-Las unidades en reserva aún no han entrado al campo de batalla. Durante la **Fase de Iniciativa** de cada turno, cada jugador puede desplegar unidades desde Reserva.
-
-Cada puesto de mando que controles permite desplegar **una sola unidad** por Fase de Iniciativa, salvo que una habilidad indique lo contrario.
-
-Las unidades se despliegan en contacto con un puesto de mando que controles. Si el puesto está ocupado por unidades enemigas, no puedes desplegar en él aunque sea tuyo.
-
-## Despliegue inicial
-
-Al inicio de la partida, cada jugador despliega libremente sus unidades desde Reserva en los puestos de mando que controle.
-
-Cada jugador tira **1D6** — el resultado más alto despliega primero. **La primera unidad que debe desplegar cada jugador es su Héroe.** A partir de ahí, los jugadores se alternan desplegando unidad por unidad hasta que ambos decidan no desplegar más.
-
-Las unidades que no se desplieguen en este momento permanecen en **Reserva** y podrán desplegarse en turnos posteriores de forma gratuita.
-
----
-
 # Tipos de unidad
 
 Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad define su **rol en el campo de batalla**, así como qué puede o no puede hacer dentro de la partida. Todas las unidades disponen, como mínimo, de **un ataque cuerpo a cuerpo** en su arsenal.
@@ -500,7 +492,7 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 ### Reglas especiales de los héroes
 
 - **El Héroe es obligatorio en partida.** Todo ejército debe incluir exactamente un Héroe.
-- **Habilidad de Héroe.** Cada Héroe dispone de una habilidad propia que se declara en la Fase de Iniciativa *(ver Habilidades de Héroe)*.
+- **Habilidad de Héroe.** Cada Héroe dispone de una habilidad propia que se declara antes de tu primera activación del turno *(ver Habilidades de Héroe)*.
 - En modo Gran Batalla, el **Héroe debe unirse obligatoriamente a una escuadra antes del despliegue**.
 - Mientras forme parte de una escuadra, sus valores de Movimiento, Salvación y Velocidad sustituyen a los de la escuadra. El héroe mantiene sus propias Vidas de forma independiente — el daño siempre se asigna primero al resto de miniaturas de la escuadra. El héroe es el último en caer: solo puede recibir daño cuando no queda ninguna otra miniatura en la escuadra.
 
@@ -509,6 +501,20 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 Cuando una unidad ataca a una clase sobre la que tiene ventaja (ver la columna **Fuerte contra** en Tipos de unidad) y el ataque inflige daño, suma **+1 de daño adicional** al **daño total final** del ataque.
 
 {{classAdvantageDiagram}}
+
+---
+
+# Habilidades de Héroe
+
+Cada Héroe tiene una **habilidad de Héroe**: un poder potente que define el estilo de su ejército. La habilidad de cada Héroe se indica en su ficha.
+
+- **Uso:** por defecto, se puede usar **una vez por partida**. No consume acciones.
+- **Declaración:** la habilidad se declara **antes de tu primera activación del turno**, en voz alta, para que ambos jugadores sepan que está en juego. Su efecto se resuelve en el momento que indique su ficha (por ejemplo, al final del turno). Si no se declara entonces, no puede usarse ese turno.
+- **Recarga:** algunos objetos o efectos permiten **recargar** la habilidad: vuelve a estar disponible para usarse de nuevo.
+- **Límite:** aunque se recargue, la habilidad **nunca puede usarse más de una vez en el mismo turno**.
+- **Si el Héroe es eliminado**, su habilidad deja de estar disponible para el resto de la partida. Los efectos ya resueltos se mantienen.
+
+Elegir **cuándo** usar la habilidad —y si merece la pena pagar por recargarla— es una de las grandes decisiones estratégicas de la partida.
 
 ---
 
@@ -565,7 +571,7 @@ Incluye comportamientos especiales listados abajo; estas reglas se aplican siemp
 | **Choque** | **Guardia:** Una vez por turno, cuando una unidad aliada **a 6" o menos** reciba daño, esta unidad puede recibir hasta 2 puntos de ese daño en su lugar. | **Certero:** Si esta unidad no se ha movido durante esta activación, mejora en **1** la Precisión de sus ataques a distancia (por ejemplo, de 4+ a 3+). | **Carga brutal:** Cuando esta unidad realiza una carga contra una unidad, gana **+1 dado de ataque CaC** durante ese combate. |
 | **Élite** | **Resistente:** La primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3**. | **Tirador:** Cuando esta unidad realiza la acción **Disparar**, repite sus tiradas fallidas de precisión. | **Berserker:** Las unidades enemigas que ataquen a esta unidad en CaC fallan sus ataques con resultados naturales de **1, 2 o 3**. |
 | **Especialistas** | **Soporte:** En su activación, en lugar de actuar, puede curar a una unidad aliada a **6" o menos**: esa unidad recupera **1D3 Vidas** perdidas. | **Preparado:** La **primera vez cada turno** que esta unidad sea atacada a distancia, tras resolver el ataque puede **disparar de inmediato** con su arma a distancia contra el atacante, si está en alcance y línea de visión. No consume acción. | **Capturador:** Esta unidad cuenta como el doble de su Valor al controlar o disputar puestos de mando. |
-| **Comando** | **Contragolpe:** La **primera vez cada turno** que esta unidad sea atacada en cuerpo a cuerpo —aunque no sea su activación—, responde de inmediato con un **ataque cuerpo a cuerpo gratuito** contra el atacante. No consume acción. | **Bloqueo de refuerzos:** Mientras esta unidad esté a **3" o menos** de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos. | **Avanzadilla:** Puede ser desplegada a **9"** de un puesto de mando aliado. |
+| **Comando** | **Contragolpe:** La **primera vez cada turno** que esta unidad sea atacada en cuerpo a cuerpo —aunque no sea su activación—, responde de inmediato con un **ataque cuerpo a cuerpo gratuito** contra el atacante. No consume acción. | **Tiro limpio:** Esta unidad puede realizar la acción **Disparar** contra unidades trabadas en combate cuerpo a cuerpo, ignorando la restricción normal. Elige a qué unidad del combate dispara. | **Avanzadilla:** Puede ser desplegada a **9"** de un puesto de mando aliado. |
 | **Asaltante** | **Vuelo:** Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse. | **Vuelo:** Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse. | **Vuelo:** Esta unidad ignora terreno y obstáculos durante el movimiento, y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse. |
 | **Armas Pesadas** | **Fuego de supresión:** Las unidades enemigas que reciban daño de esta unidad no pueden **Correr ni Cargar** durante su siguiente activación. | **Emplazado:** Si esta unidad no se ha movido durante esta activación, gana **+1 dado** en sus ataques a distancia. | **Fuego defensivo:** Cuando una unidad enemiga declara **Cargar** contra esta unidad, antes de resolver la carga esta unidad puede **disparar** contra ella con su arma a distancia. No consume acción. |
 | **Monstruos** | **Porrazo:** En su activación, esta unidad puede realizar la acción **Destrabarse** sin efectuar el chequeo. Puede hacerlo aunque esté trabada con una unidad con **Anclado**. | **Terror:** Las unidades enemigas a **12" o menos** de esta unidad no pueden disparar a esta unidad. | **Anclado:** Las unidades enemigas trabadas con esta unidad no pueden realizar la acción **Destrabarse**. |
@@ -722,22 +728,6 @@ Los **objetos** son **cartas de un solo uso** que se compran con **Valor** al mo
 - Tras usarse, la carta se **descarta**.
 
 **Manejo en mesa:** los objetos funcionan como una **baraja de cartas**. Cada jugador tiene delante las cartas que ha comprado y las descarta al usarlas, así queda siempre a la vista qué le queda por gastar.
-
----
-
-# Habilidades de Héroe
-
-Cada Héroe tiene una **habilidad de Héroe**: un poder potente que define el estilo de su ejército. La habilidad de cada Héroe se indica en su ficha.
-
-- **Uso:** por defecto, se puede usar **una vez por partida**. No consume acciones.
-- **Declaración:** la habilidad se **declara siempre durante la Fase de Iniciativa**, para que ambos jugadores sepan desde el inicio del turno que está en juego. Su efecto se resuelve en el momento que indique su ficha (por ejemplo, al final del turno). Si no se declara en la Iniciativa, no puede usarse ese turno.
-- **Recarga:** algunos objetos o efectos permiten **recargar** la habilidad: vuelve a estar disponible para usarse de nuevo.
-- **Límite:** aunque se recargue, la habilidad **nunca puede usarse más de una vez en el mismo turno**.
-- **Si el Héroe es eliminado**, su habilidad deja de estar disponible para el resto de la partida. Los efectos ya resueltos se mantienen.
-
-Elegir **cuándo** usar la habilidad —y si merece la pena pagar por recargarla— es una de las grandes decisiones estratégicas de la partida.
-
----
 
 ## Consideraciones generales
 

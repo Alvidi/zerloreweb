@@ -36,7 +36,7 @@
         },
         "valor": 14
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, cada puesto de mando que controles permite desplegar hasta 2 unidades desde Reserva.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: durante este turno, cada puesto de mando que controles permite desplegar hasta 2 unidades desde Reserva.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D",
@@ -75,7 +75,7 @@
         },
         "valor": 15
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: todas tus unidades recuperan 1D3 Vidas perdidas, sin superar su máximo.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: todas tus unidades recuperan 1D3 Vidas perdidas, sin superar su máximo.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
@@ -114,7 +114,7 @@
         },
         "valor": 15
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, tus unidades que estén en cobertura no pueden ser objetivo de una Carga.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: durante este turno, tus unidades que estén en cobertura no pueden ser objetivo de una Carga.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D",
@@ -153,7 +153,7 @@
         },
         "valor": 16
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, tus unidades de Choque y Especialista suman +1D3 al daño total de cada ataque que inflija daño.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: durante este turno, tus unidades de Choque y Especialista suman +1D3 al daño total de cada ataque que inflija daño.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D",
@@ -192,7 +192,7 @@
         },
         "valor": 16
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, tus unidades ganan +4\" de movimiento y pueden Correr y Disparar en la misma activación.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: durante este turno, tus unidades ganan +4\" de movimiento y pueden Correr y Disparar en la misma activación.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
@@ -231,7 +231,7 @@
         },
         "valor": 17
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: todas tus unidades que no estén trabadas pueden teletransportarse a puestos de mando bajo tu control, colocándose en contacto con ellos. Pueden repartirse entre puestos distintos.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: todas tus unidades que no estén trabadas pueden teletransportarse a puestos de mando bajo tu control, colocándose en contacto con ellos. Pueden repartirse entre puestos distintos.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
@@ -270,7 +270,7 @@
         },
         "valor": 18
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, todas tus unidades en puestos de mando aliados son inmunes a los ataques a distancia.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: durante este turno, todas tus unidades en puestos de mando aliados son inmunes a los ataques a distancia.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "3D",
@@ -309,7 +309,7 @@
         },
         "valor": 19
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa; se resuelve al final del turno: cada unidad tuya destruida durante este turno hace un chequeo de 1D6. Con 5 o 6 vuelve al campo donde cayó con la mitad de sus Vidas (redondeando hacia arriba). Si cayó trabada, se coloca a 1\" de la unidad con la que combatía.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno; se resuelve al final del turno: cada unidad tuya destruida durante este turno hace un chequeo de 1D6. Con 5 o 6 vuelve al campo donde cayó con la mitad de sus Vidas (redondeando hacia arriba). Si cayó trabada, se coloca a 1\" de la unidad con la que combatía.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D",
@@ -349,7 +349,7 @@
         },
         "valor": 19
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa: durante este turno, la primera unidad enemiga (que no sea Héroe) que quede con la mitad o menos de sus Vidas tras un ataque tuyo queda destruida.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno: durante este turno, la primera unidad enemiga (que no sea Héroe) que quede con la mitad o menos de sus Vidas tras un ataque tuyo queda destruida.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "2D",
@@ -388,7 +388,7 @@
         },
         "valor": 20
       },
-      "habilidad_faccion": "Una vez por partida. Se declara en la Fase de Iniciativa; se resuelve cuando todas las unidades de ambos jugadores se hayan activado, antes del Fin de Turno: todas tus unidades de Choque se reactivan y recuperan 1 acción.",
+      "habilidad_faccion": "Una vez por partida. Se declara antes de tu primera activación del turno; se resuelve cuando todas las unidades de ambos jugadores se hayan activado, antes del Fin de Turno: todas tus unidades de Choque se reactivan y recuperan 1 acción.",
       "armas": {
         "cuerpo_a_cuerpo": {
           "ataques": "1D3+2",
@@ -762,7 +762,7 @@
         },
         "disparo": {
           "nombre": "Francotirador",
-          "habilidad": "Bloqueo de refuerzos",
+          "habilidad": "Tiro limpio",
           "armas": {
             "cuerpo_a_cuerpo": {
               "ataques": "1D",

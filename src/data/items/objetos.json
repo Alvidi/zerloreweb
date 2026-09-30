@@ -1,15 +1,9 @@
 {
   "objetos": [
     {
-      "id": "explosivo",
-      "nombre": "Explosivo",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción: elige una unidad enemiga a 6\" o menos, que sufre 1D6 de daño directo (no se salva). Explosiva (1).",
-      "valor": 3
-    },
-    {
       "id": "botiquin",
       "nombre": "Botiquín",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción, para recuperar 3 Vidas perdidas.",
+      "descripcion": "Durante la activación de una unidad: recupera 3 Vidas perdidas.",
       "valor": 2
     },
     {
@@ -21,19 +15,19 @@
     {
       "id": "cortina-de-humo",
       "nombre": "Cortina de humo",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto, consumiendo 1 acción: cuenta como en cobertura hasta el final del turno.",
+      "descripcion": "Durante su activación, la unidad puede usar este objeto: cuenta como en cobertura hasta el final del turno.",
       "valor": 2
     },
     {
       "id": "estimulante",
       "nombre": "Estimulante",
-      "descripcion": "Al activarse: +3\" a su movimiento durante esa activación (también al Cargar o Correr).",
+      "descripcion": "Cuando una unidad declare Correr o Cargar: gana +3\" en ese desplazamiento.",
       "valor": 1
     },
     {
       "id": "bengala-de-despliegue",
       "nombre": "Bengala de despliegue",
-      "descripcion": "Al desplegarse, la unidad puede hacerlo como si tuviera Avanzadilla, a 9\" o menos de un puesto de mando aliado.",
+      "descripcion": "Este turno puedes desplegar una unidad extra desde Reserva, por encima de tu límite habitual de refuerzos.",
       "valor": 2
     },
     {
@@ -49,17 +43,24 @@
       "valor": 2
     },
     {
-      "id": "salvavidas",
-      "nombre": "Salvavidas",
-      "descripcion": "Tras resolver una tirada de Salvación: repite todos los dados de Salvación fallados contra ese ataque. Se aplican los nuevos resultados.",
+      "id": "otra-oportunidad",
+      "nombre": "Otra oportunidad",
+      "descripcion": "Tras resolver cualquier tirada de una unidad tuya (precisión, ataque, salvación, carga o destrabarse): repítela por completo. Se aplica el segundo resultado, aunque sea peor.",
       "valor": 3
     },
     {
       "id": "reliquia",
       "nombre": "Reliquia",
-      "descripcion": "Solo puede usarse sobre tu Héroe. Máximo 1 copia por ejército. Durante la Fase de Iniciativa, antes de declarar habilidades, descarta esta carta: la habilidad de tu Héroe se recarga y puede volver a usarse, respetando el límite de una vez por turno.",
+      "descripcion": "Solo puede usarse sobre tu Héroe. Máximo 1 copia por ejército. Antes de tu primera activación del turno, antes de declarar habilidades, descarta esta carta: la habilidad de tu Héroe se recarga y puede volver a usarse, respetando el límite de una vez por turno.",
       "valor": 6,
       "max_copias": 1
+    },
+    {
+      "id": "orden-urgente",
+      "nombre": "Orden urgente",
+      "descripcion": "Al activar una unidad, antes de realizar su primera acción: esa unidad dispone de 3 acciones en lugar de 2 durante esta activación. Se siguen aplicando las reglas normales: no puede repetir la misma acción en la misma activación. Máximo 2 copias.",
+      "valor": 4,
+      "max_copias": 2
     }
   ]
 }

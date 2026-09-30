@@ -23,7 +23,7 @@ La partida se puede ganar de dos maneras: por **victoria inmediata** —conquist
 1. **Conquistando puestos de mando** — cada puesto de mando proporciona **5 pts por turno**, incluido el CG.
 2. **Completando misiones** — cada misión completada proporciona puntos. Cada jugador lleva **4 misiones** a la batalla.
 
-Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**. En el primer turno, en la fase de iniciativa, una vez escogidas, cada jugador puede cambiar **las que quiera** una sola vez. A partir de ahí, en cada **Fase de Iniciativa** puede descartar **una única misión** y robar otra en su lugar. Las cartas descartadas vuelven a la baraja. Cuando una misión se completa, se anuncia a los jugadores, se comprueba, se retira de la baraja y se la queda el jugador que la completó.
+Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**. Al empezar la partida, una vez escogidas, cada jugador puede cambiar **las que quiera** una sola vez. A partir de ahí, **antes de su primera activación de cada turno**, puede descartar **una única misión** y robar otra en su lugar. Las cartas descartadas vuelven a la baraja. Cuando una misión se completa, se anuncia a los jugadores, se comprueba, se retira de la baraja y se la queda el jugador que la completó.
 
 <div class="rules-mission-grid">
 
@@ -263,7 +263,7 @@ Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">30 - Momento decisivo</h3><button class="rules-mission-view-btn" type="button" data-number="30" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Ha llegado la hora."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Usa la habilidad de tu Héroe</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Declara y usa la habilidad de tu Héroe durante la Fase de Iniciativa de cualquier turno. Basta con usarla: no importa el resultado. Ojo: gastarla pronto por puntuar te deja sin ella en el momento decisivo.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Declara y usa la habilidad de tu Héroe antes de tu primera activación de cualquier turno. Basta con usarla: no importa el resultado. Ojo: gastarla pronto por puntuar te deja sin ella en el momento decisivo.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 10 pts</p>
 </div>
 

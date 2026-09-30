@@ -38,7 +38,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Contragolpe', description: 'La primera vez cada turno que esta unidad sea atacada en cuerpo a cuerpo —aunque no sea su activación—, responde de inmediato con un ataque cuerpo a cuerpo gratuito contra el atacante. No consume acción.' },
   },
   {
-    es: { name: 'Bloqueo de refuerzos', description: 'Mientras esta unidad esté a 3" o menos de un puesto de mando enemigo, ese puesto de mando no puede desplegar refuerzos.' },
+    es: { name: 'Tiro limpio', description: 'Esta unidad puede realizar la acción Disparar contra unidades trabadas en combate cuerpo a cuerpo, ignorando la restricción normal. Elige a qué unidad del combate dispara.' },
   },
   {
     es: { name: 'Avanzadilla', description: 'Puede ser desplegada a 9" de un puesto de mando aliado.' },

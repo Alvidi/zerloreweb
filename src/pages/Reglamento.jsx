@@ -486,7 +486,7 @@ function Reglamento() {
 
       const activationHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
-        return normalized.includes('fase de activaciones') || normalized.includes('activation phase')
+        return normalized.includes('activaciones') || normalized.includes('activation')
       })
       const activationHeading = activationHeadings.at(-1)
       if (activationHeading) {

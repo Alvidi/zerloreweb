@@ -382,27 +382,27 @@ const measurement = figure(
 )
 
 /* ── Estructura del turno ───────────────────────────────────────────────────
-   "1. Fase de Iniciativa, 2. Fase de Activaciones, 3. Fin de Turno ... comienza
-   un nuevo turno empezando de nuevo por la Fase de Iniciativa."              */
+   "los jugadores alternan activaciones hasta que todas las unidades hayan
+   actuado"; "se alterna quién abre cada turno".                             */
 const turnStructure = figure(
-  'Las tres fases de un turno',
-  'Flujo del turno: iniciativa, activaciones y fin de turno',
+  'Cómo fluye un turno',
+  'Quién empieza, activaciones alternas y fin del turno',
   456,
   `
-  ${head('Estructura del turno', 'Cada turno sigue siempre las mismas tres fases.')}
+  ${head('Estructura del turno', 'Los jugadores alternan hasta que todas las unidades hayan actuado.')}
 
   ${row(76, 96, {
-    num: '1', title: 'Fase de Iniciativa',
-    lines: [{ t: 'Cada jugador tira 1D6; el más alto actúa' }, { t: 'primero. También se despliega desde Reserva.' }],
+    num: '1', title: 'Quién empieza',
+    lines: [{ t: '1D6 al comenzar la partida: el más alto abre.' }, { t: 'Después se alterna quién abre cada turno.' }],
   })}
 
   ${row(184, 96, {
-    num: '2', title: 'Fase de Activaciones',
-    lines: [{ t: 'Alternan activaciones, una unidad cada vez.' }, { t: 'Cada unidad dispone de hasta 2 acciones.' }],
+    num: '2', title: 'Activaciones alternas',
+    lines: [{ t: 'Una unidad cada vez, con hasta 2 acciones.' }, { t: 'En su lugar puedes desplegar refuerzos.' }],
   })}
 
   ${row(292, 96, {
-    num: '3', title: 'Fin de Turno',
+    num: '3', title: 'Fin del turno',
     lines: [{ t: 'Cuando todas las unidades se han activado.' }, { t: 'Se resuelven efectos y se cuentan puntos.' }],
   })}
 
@@ -410,11 +410,6 @@ const turnStructure = figure(
         stroke-dasharray="5 4" marker-end="url(#zl-dim)"/>
   <text class="zl-dim" x="${W / 2}" y="438" text-anchor="middle">y vuelve a empezar</text>`,
 )
-
-/* ── Token de activación ────────────────────────────────────────────────────
-   "cara naranja = activada, cara gris = sin activar"; "Una vez activada, no puede
-   volver a activarse durante ese turno"; "Al inicio de cada turno se voltean todos
-   los tokens a la cara gris."                                                */
 const activation = figure(
   'El token de activación',
   'Cómo se marca que una unidad ya se ha activado',
