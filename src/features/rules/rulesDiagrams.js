@@ -238,7 +238,7 @@ const charge = figure(
   })}
 
   ${row(228, 132, {
-    tone: 'ok', ok: true, title: '3+ · la carga prende',
+    tone: 'ok', ok: true, title: '2+ · la carga prende',
     lines: [{ t: 'Ambas quedan trabadas y la atacante hace' }, { t: '1 ataque cuerpo a cuerpo gratis.', cls: 'zl-lab', fill: C.ok }],
     draw: `${base(160, 306, C.act)}${base(194, 306, C.enemy)}
       <circle cx="177" cy="306" r="7" fill="none" stroke="${C.ok}" stroke-width="2"/>
@@ -246,7 +246,7 @@ const charge = figure(
   })}
 
   ${row(372, 132, {
-    tone: 'ko', ok: false, title: '1 o 2 · la carga se frena',
+    tone: 'ko', ok: false, title: '1 · la carga se frena',
     lines: [{ t: 'Retírala hasta 1" del objetivo. No traba,' }, { t: 'no ataca y su activación termina.', cls: 'zl-lab', fill: C.ko }],
     draw: `${base(130, 450, C.act)}${base(240, 450, C.enemy)}
       ${dim(149, 450, 221, 450, '1"', -12)}
@@ -383,32 +383,37 @@ const measurement = figure(
 
 /* ── Estructura del turno ───────────────────────────────────────────────────
    "los jugadores alternan activaciones hasta que todas las unidades hayan
-   actuado"; "se alterna quién abre cada turno".                             */
+   actuado"; "al comienzo de cada turno, cada jugador tira 1D6".             */
 const turnStructure = figure(
   'Cómo fluye un turno',
-  'Quién empieza, activaciones alternas y fin del turno',
-  456,
+  'Iniciativa, fase de despliegue, activaciones alternas y fin del turno',
+  564,
   `
-  ${head('Estructura del turno', 'Los jugadores alternan hasta que todas las unidades hayan actuado.')}
+  ${head('Estructura del turno', 'Se tira iniciativa, entran los refuerzos y se alterna hasta que todos actúen.')}
 
   ${row(76, 96, {
     num: '1', title: 'Quién empieza',
-    lines: [{ t: '1D6 al comenzar la partida: el más alto abre.' }, { t: 'Después se alterna quién abre cada turno.' }],
+    lines: [{ t: 'Cada turno, ambos tiran 1D6: el más alto' }, { t: 'actúa primero ese turno.' }],
   })}
 
   ${row(184, 96, {
-    num: '2', title: 'Activaciones alternas',
-    lines: [{ t: 'Una unidad cada vez, con hasta 2 acciones.' }, { t: 'En su lugar puedes desplegar refuerzos.' }],
+    num: '2', title: 'Fase de despliegue',
+    lines: [{ t: 'Entran refuerzos desde la Reserva, por' }, { t: 'puestos de mando y por Comandantes.' }],
   })}
 
   ${row(292, 96, {
-    num: '3', title: 'Fin del turno',
-    lines: [{ t: 'Cuando todas las unidades se han activado.' }, { t: 'Se resuelven efectos y se cuentan puntos.' }],
+    num: '3', title: 'Activaciones alternas',
+    lines: [{ t: 'Una unidad cada vez, con hasta 2 acciones,' }, { t: 'hasta que todas hayan actuado.' }],
   })}
 
-  <path d="M${W - 30} 392 L${W - 30} 414 L12 414 L12 124" fill="none" stroke="${C.dim}" stroke-width="1.4"
+  ${row(400, 96, {
+    num: '4', title: 'Fin del turno',
+    lines: [{ t: 'Se resuelven los efectos de fin de turno' }, { t: 'y se cuentan los puntos.' }],
+  })}
+
+  <path d="M${W - 30} 500 L${W - 30} 522 L12 522 L12 124" fill="none" stroke="${C.dim}" stroke-width="1.4"
         stroke-dasharray="5 4" marker-end="url(#zl-dim)"/>
-  <text class="zl-dim" x="${W / 2}" y="438" text-anchor="middle">y vuelve a empezar</text>`,
+  <text class="zl-dim" x="${W / 2}" y="546" text-anchor="middle">y vuelve a empezar</text>`,
 )
 const activation = figure(
   'El token de activación',
@@ -538,48 +543,82 @@ const squadDamage = figure(
   ${note(416, 'Nunca se reparte', 'Un mismo ataque no se divide entre varias miniaturas.')}`,
 )
 
-/* ── Reserva y refuerzos ────────────────────────────────────────────────────
-   "en lugar de activar una unidad, un jugador puede desplegar una unidad desde
-   Reserva"; "entra sin activar"; "como máximo tantas unidades como puestos
-   de mando controles".                                                       */
-const reinforcements = figure(
+/* ── Fase de despliegue ─────────────────────────────────────────────────────
+   "como máximo una unidad por cada puesto de mando que controle"; "cada
+   Comandante puede recibir una miniatura de su tipo desde la Reserva".       */
+const deploymentPhase = figure(
   'Cómo entran los refuerzos',
-  'Desplegar en lugar de activar, la unidad entra sin activar y el límite por turno',
-  516,
+  'Despliegue por puestos de mando y por Comandantes, antes de las activaciones',
+  524,
   `
-  ${head('Reserva y refuerzos', 'Meter refuerzos ocupa tu turno, igual que activar una unidad.')}
+  ${head('Fase de despliegue', 'Antes de la primera activación, entran unidades desde la Reserva.')}
 
-  ${row(76, 124, {
-    tone: 'plain', ok: null, title: 'Una cosa o la otra',
-    lines: [{ t: 'Cuando te toca, eliges: activas una unidad' }, { t: 'o despliegas refuerzos. Luego actúa el rival.' }],
-    draw: `${chip(40, 120, 150, 'Activar unidad', C.act)}
-      <text class="zl-lab" x="205" y="142" text-anchor="middle" fill="${C.soft}">o</text>
-      ${chip(220, 120, 160, 'Meter refuerzos', C.ok)}`,
-  })}
-
-  ${row(212, 124, {
-    tone: 'plain', ok: null, title: 'Entra sin activar',
-    lines: [{ t: 'La unidad recién desplegada conserva su' }, { t: 'activación: puede actuar en este mismo turno.' }],
-    draw: `<circle cx="100" cy="270" r="24" fill="#1b1d25" stroke="${C.soft}" stroke-width="2.5"/>
-      ${cap(100, 312, 'Sin activar', C.soft)}
-      <line x1="134" y1="270" x2="180" y2="270" stroke="${C.ok}" stroke-width="2" marker-end="url(#zl-shot)"/>
-      ${chip(196, 253, 180, 'Se activa más tarde', C.ok)}`,
-  })}
-
-  ${row(348, 152, {
-    tone: 'plain', ok: null, title: 'Cuántos por turno',
+  ${row(76, 140, {
+    tone: 'plain', ok: null, title: 'Por puestos de mando',
     lines: [
-      { t: 'Tantas unidades como puestos controles,' },
-      { t: 'repartidas entre los puestos que quieras.' },
-      { t: '3 puestos → hasta 3 refuerzos este turno.', cls: 'zl-lab', fill: C.ok },
+      { t: 'Una unidad por cada puesto que controles,' },
+      { t: 'colocada en contacto con él.' },
     ],
     draw: `${[70, 160, 250].map((x) => `
-      <circle cx="${x}" cy="452" r="19" fill="none" stroke="${C.dim}" stroke-width="1.6" stroke-dasharray="5 4"/>
-      <path d="M${x - 6} 446 l12 0 l0 5 l-12 0 z" fill="${C.act}"/>
-      ${base(x, 404, C.ally, 14)}
-      <line x1="${x}" y1="424" x2="${x}" y2="436" stroke="${C.ok}" stroke-width="1.8" marker-start="url(#zl-shot)"/>`).join('')}
-      ${cap(160, 486, 'un refuerzo por puesto controlado', C.soft)}`,
-  })}`,
+      <circle cx="${x}" cy="176" r="19" fill="none" stroke="${C.dim}" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <path d="M${x - 6} 170 l12 0 l0 5 l-12 0 z" fill="${C.act}"/>
+      ${base(x, 130, C.ally, 14)}
+      <line x1="${x}" y1="149" x2="${x}" y2="160" stroke="${C.ok}" stroke-width="1.8" marker-start="url(#zl-shot)"/>`).join('')}
+      ${cap(160, 208, '3 puestos → 3 refuerzos', C.soft)}`,
+  })}
+
+  ${row(228, 140, {
+    tone: 'plain', ok: null, title: 'Por Comandantes',
+    lines: [
+      { t: 'Cada Comandante en mesa recibe una' },
+      { t: 'miniatura de su tipo en su escuadra.' },
+    ],
+    draw: `${base(96, 300, C.act)}${cap(96, 338, 'Comandante', C.act)}
+      ${base(146, 300, C.ally, 14)}${base(180, 300, C.ally, 14)}
+      ${base(230, 300, C.ally, 14)}
+      <line x1="200" y1="300" x2="216" y2="300" stroke="${C.ok}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
+      ${cap(230, 338, 'se suma', C.ok)}`,
+  })}
+
+  ${note(392, 'Entran sin activar', 'Pueden activarse en ese mismo turno.')}
+
+  ${note(456, 'Tiene que caber', 'Si no hay hueco libre en contacto, no puede desplegarse ahí.')}`,
+)
+
+/* ── Comandantes y escuadras ────────────────────────────────────────────────
+   "cada Comandante puede llevar una escuadra de un único tipo de unidad";
+   "la escuadra usa el Movimiento y la Velocidad del Comandante".             */
+const commanderSquad = figure(
+  'Cómo se forma una escuadra',
+  'Un Comandante acompañado de miniaturas de un mismo tipo',
+  472,
+  `
+  ${head('Comandantes y escuadras', 'Solo un Comandante puede llevar escuadra, y de un único tipo.')}
+
+  ${row(76, 150, {
+    tone: 'plain', ok: null, title: 'Comandante + un solo tipo',
+    lines: [
+      { t: 'Tantas miniaturas como indique la columna' },
+      { t: 'Escuadra de ese tipo de unidad.' },
+    ],
+    draw: `${base(80, 150, C.act)}${cap(80, 192, 'Comandante', C.act)}
+      ${[136, 170, 204, 238].map((x) => base(x, 150, C.ally, 14)).join('')}
+      ${cap(187, 192, 'mismo tipo', C.ally)}`,
+  })}
+
+  ${row(238, 130, {
+    tone: 'plain', ok: null, title: 'Se mueve como su líder',
+    lines: [
+      { t: 'La escuadra usa el Movimiento y la Velocidad' },
+      { t: 'del Comandante, y se activa con él.' },
+    ],
+    draw: `${base(100, 306, C.act)}
+      ${[144, 178, 212].map((x) => base(x, 306, C.ally, 14)).join('')}
+      <line x1="80" y1="340" x2="232" y2="340" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="4 4"/>
+      ${cap(156, 360, 'una sola unidad', C.soft)}`,
+  })}
+
+  ${note(384, 'El último en caer', 'El Comandante no recibe daño mientras quede otra miniatura en pie.')}`,
 )
 
 /* ── Explosiva (X) ──────────────────────────────────────────────────────────
@@ -695,37 +734,69 @@ const lockedUnits = figure(
   })}`,
 )
 
-/* ── Trabado vs ataque suelto ───────────────────────────────────────────────
-   "Trabado: una unidad carga y entra en contacto físico... Ataque suelto: una unidad
-   ataca a un enemigo que esté a 1" o menos sin estar trabada con él".              */
+/* ── Cómo se entra en cuerpo a cuerpo ───────────────────────────────────────
+   "La única forma de entrar en combate cuerpo a cuerpo es mediante una carga";
+   "fuera de una carga, ninguna unidad puede acercarse a menos de 1\"".        */
 const meleeEngagement = figure(
-  'Combate trabado y ataque suelto',
-  'Diferencia entre atacar tras una carga y atacar a 1" o menos sin trabar',
+  'La única forma de trabar es cargando',
+  'Solo una carga lleva al contacto; moviéndote no puedes acercarte a menos de una pulgada',
   380,
   `
-  ${head('Dos formas de pelear en cuerpo a cuerpo', 'La diferencia está en si hay contacto físico o no.')}
+  ${head('Cómo se entra en cuerpo a cuerpo', 'Al contacto solo se llega cargando.')}
 
   ${row(76, 132, {
-    tone: 'plain', ok: null, title: 'Trabado · tras Cargar',
+    tone: 'ok', ok: true, title: 'Cargando',
     lines: [
-      { t: 'Contacto físico: ambas quedan trabadas' },
-      { t: 'y solo pueden Atacar CaC o Destrabarse.' },
+      { t: 'La carga lleva al contacto físico: ambas' },
+      { t: 'quedan trabadas hasta Destrabarse.' },
     ],
     draw: `${base(120, 152, C.act)}${base(154, 152, C.enemy)}
-      <circle cx="137" cy="152" r="7" fill="none" stroke="${C.soft}" stroke-width="2"/>
-      ${cap(137, 192, 'peana con peana', C.soft)}`,
+      <circle cx="137" cy="152" r="7" fill="none" stroke="${C.ok}" stroke-width="2"/>
+      ${cap(137, 192, 'peana con peana', C.ok)}`,
   })}
 
   ${row(220, 136, {
-    tone: 'plain', ok: null, title: 'Ataque suelto · a 1" o menos',
+    tone: 'ko', ok: false, title: 'Moviéndote',
     lines: [
-      { t: 'Sin contacto: ninguna queda trabada y las dos' },
-      { t: 'siguen libres para moverse, disparar o alejarse.' },
+      { t: 'Fuera de una carga no puedes acercarte' },
+      { t: 'a menos de 1" de una unidad enemiga.' },
     ],
     draw: `${base(105, 296, C.act)}${base(185, 296, C.enemy)}
-      ${dim(122, 296, 168, 296, '1" o menos', -12)}
-      ${cap(145, 336, 'sin tocarse', C.soft)}`,
+      ${dim(122, 296, 168, 296, '1" como mínimo', -12)}
+      ${cap(145, 336, 'nunca llegas a tocarla', C.soft)}`,
   })}`,
+)
+
+/* ── Titanes en cuerpo a cuerpo ─────────────────────────────────────────────
+   "un Titán solo puede quedar trabado con otro Titán"; frente al resto, ataca
+   gratis y se retira a 1\" sin que ninguna quede trabada.                     */
+const titanMelee = figure(
+  'El Titán y el cuerpo a cuerpo',
+  'Solo se traba con otro Titán; contra el resto ataca y se separa',
+  448,
+  `
+  ${head('Titanes en cuerpo a cuerpo', 'Un Titán solo queda trabado con otro Titán.')}
+
+  ${row(76, 132, {
+    tone: 'ok', ok: true, title: 'Titán contra Titán',
+    lines: [{ t: 'Se traban entre ellos y combaten con las' }, { t: 'reglas normales de combate trabado.' }],
+    draw: `${base(118, 150, C.act, 22)}${base(166, 150, C.enemy, 22)}
+      <circle cx="142" cy="150" r="8" fill="none" stroke="${C.ok}" stroke-width="2"/>
+      ${cap(142, 194, 'trabados', C.ok)}`,
+  })}
+
+  ${row(220, 136, {
+    tone: 'plain', ok: null, title: 'Titán contra cualquier otra',
+    lines: [
+      { t: 'La carga prende y hay ataque gratuito, pero' },
+      { t: 'nadie queda trabado: luego se separan a 1".' },
+    ],
+    draw: `${base(104, 296, C.act, 22)}${base(186, 296, C.enemy, 14)}
+      ${dim(126, 296, 172, 296, 'se retira a 1"', -12)}
+      ${cap(145, 338, 'sin trabar', C.soft)}`,
+  })}
+
+  ${note(372, 'Siempre a tiro', 'Al no quedar trabado, puede ser disparado aunque tenga enemigos en contacto.')}`,
 )
 
 /* ── Combate cuerpo a cuerpo en escuadras ───────────────────────────────────
@@ -737,7 +808,7 @@ const squadMelee = figure(
   'Una miniatura en contacto traba a toda la escuadra',
   400,
   `
-  ${head('Cuerpo a cuerpo en escuadras · Gran Batalla', 'Basta con que una miniatura toque al enemigo.')}
+  ${head('Atacar con una escuadra', 'Basta con que una miniatura toque al enemigo.')}
 
   ${row(76, 150, {
     tone: 'plain', ok: null, title: 'Traba la escuadra entera',
@@ -753,8 +824,8 @@ const squadMelee = figure(
   })}
 
   ${row(238, 136, {
-    tone: 'plain', ok: null, title: 'Un solo objetivo',
-    lines: [{ t: 'Aunque toque a varias escuadras enemigas,' }, { t: 'debe elegir una única como objetivo.' }],
+    tone: 'plain', ok: null, title: 'Dos ataques, un objetivo',
+    lines: [{ t: 'Primero atacan las miniaturas y después el' }, { t: 'Comandante, los dos al mismo objetivo.' }],
     draw: `${base(120, 322, C.ally)}
       ${base(154, 300, C.enemy)}${base(154, 346, C.enemy)}
       <line x1="140" y1="312" x2="146" y2="306" stroke="${C.act}" stroke-width="2.5" marker-end="url(#zl-shot)"/>
@@ -875,11 +946,11 @@ const modifiers = figure(
    inflige daño, suma +1 al daño total final del ataque. Se aplica igual en
    Escaramuza y en Gran Batalla."                                             */
 const classAdvantage = figure(
-  'Cómo se aplica la Ventaja de Clase',
-  'La ventaja de clase suma +1 al daño total del ataque',
+  'Cómo se aplica la Ventaja de tipo',
+  'La ventaja de tipo suma +1 al daño total del ataque',
   330,
   `
-  ${head('Ventaja de Clase', 'Cada clase tiene su presa: mira la columna Fuerte contra en Tipos de unidad.')}
+  ${head('Ventaja de tipo', 'Cada tipo tiene su presa: mira la columna Fuerte contra en Tipos de unidad.')}
 
   ${row(76, 132, {
     tone: 'ok', ok: true, title: 'El ataque ya ha hecho daño',
@@ -895,7 +966,7 @@ const classAdvantage = figure(
 
   ${note(220, 'Una sola vez', 'Al daño total del ataque, no a cada impacto.')}
 
-  ${note(284, 'Los Héroes', 'No tienen ventaja de clase sobre nadie.')}`,
+  ${note(284, 'El Comandante', 'No tiene ventaja sobre nadie, y nadie la tiene sobre él.')}`,
 )
 
 export const RULES_DIAGRAMS = {
@@ -911,7 +982,9 @@ export const RULES_DIAGRAMS = {
   climbingDiagram: climbing,
   actionsDiagram: actions,
   squadDamageDiagram: squadDamage,
-  reinforcementsDiagram: reinforcements,
+  deploymentPhaseDiagram: deploymentPhase,
+  commanderSquadDiagram: commanderSquad,
+  titanMeleeDiagram: titanMelee,
   explosiveDiagram: explosive,
   meleeEngagementDiagram: meleeEngagement,
   lockedUnitsDiagram: lockedUnits,

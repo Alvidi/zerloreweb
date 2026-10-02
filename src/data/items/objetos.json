@@ -3,64 +3,114 @@
     {
       "id": "botiquin",
       "nombre": "Botiquín",
-      "descripcion": "Durante la activación de una unidad: recupera 3 Vidas perdidas.",
+      "descripcion": "La unidad recupera 3 Vidas perdidas.",
+      "accion": "2",
       "valor": 2
     },
     {
-      "id": "escudo",
-      "nombre": "Escudo",
-      "descripcion": "Cuando la unidad sea declarada objetivo de un ataque (a distancia o cuerpo a cuerpo), antes de tirar ningún dado: ignora todo el daño de ese ataque.",
+      "id": "teletransporte",
+      "nombre": "Teletransporte",
+      "descripcion": "La unidad se teletransporta a un puesto de mando aliado a elección del jugador, colocada en contacto con él.",
+      "accion": "2",
       "valor": 4
     },
     {
-      "id": "cortina-de-humo",
-      "nombre": "Cortina de humo",
-      "descripcion": "Durante su activación, la unidad puede usar este objeto: cuenta como en cobertura hasta el final del turno.",
-      "valor": 2
+      "id": "transmision",
+      "nombre": "Transmisión",
+      "descripcion": "La unidad intercambia su posición con otra unidad aliada que no esté trabada.",
+      "accion": "2",
+      "valor": 3
     },
     {
       "id": "estimulante",
       "nombre": "Estimulante",
-      "descripcion": "Cuando una unidad declare Correr o Cargar: gana +3\" en ese desplazamiento.",
-      "valor": 1
+      "descripcion": "Se juega al activar la unidad. Dispone de 3 acciones en esta activación, sin poder repetir acción.",
+      "accion": "No gasta acción",
+      "valor": 5
     },
     {
-      "id": "bengala-de-despliegue",
-      "nombre": "Bengala de despliegue",
-      "descripcion": "Este turno puedes desplegar una unidad extra desde Reserva, por encima de tu límite habitual de refuerzos.",
+      "id": "segunda-oportunidad",
+      "nombre": "Segunda oportunidad",
+      "descripcion": "Una unidad aliada sin activar renuncia a sus dos acciones para dárselas a otra unidad aliada que ya se haya activado este turno. Cuenta como la activación de la unidad que las cede.",
+      "accion": "2",
+      "valor": 4
+    },
+    {
+      "id": "carga-ciega",
+      "nombre": "Carga ciega",
+      "descripcion": "La carga tiene éxito sin tirar el chequeo, pero el ataque gratuito falla con resultados de 1, 2 o 3.",
+      "accion": "2",
       "valor": 2
     },
     {
-      "id": "blindaje-reactivo",
-      "nombre": "Blindaje reactivo",
-      "descripcion": "Si recibe daño de un ataque: redúcelo en 1D3.",
+      "id": "super-disparo",
+      "nombre": "Super disparo",
+      "descripcion": "La unidad suma 1D3 dados de ataque a distancia en ese ataque.",
+      "accion": "2",
+      "valor": 4
+    },
+    {
+      "id": "super-golpe",
+      "nombre": "Super golpe",
+      "descripcion": "La unidad suma 1D3 dados de ataque cuerpo a cuerpo en ese ataque.",
+      "accion": "No gasta acción",
+      "valor": 5
+    },
+    {
+      "id": "sin-presion",
+      "nombre": "Sin presión",
+      "descripcion": "La unidad se destraba automáticamente, sin tirar el chequeo.",
+      "accion": "No gasta acción",
       "valor": 2
     },
     {
-      "id": "municion-certera",
-      "nombre": "Munición certera",
-      "descripcion": "Tras resolver la tirada de Precisión de un ataque a distancia: repite todos los dados fallados. Se aplican los nuevos resultados.",
-      "valor": 2
-    },
-    {
-      "id": "otra-oportunidad",
-      "nombre": "Otra oportunidad",
-      "descripcion": "Tras resolver cualquier tirada de una unidad tuya (precisión, ataque, salvación, carga o destrabarse): repítela por completo. Se aplica el segundo resultado, aunque sea peor.",
+      "id": "inmolarse",
+      "nombre": "Inmolarse",
+      "descripcion": "La unidad queda destruida y explota: hasta 3 miniaturas a 3\" o menos sufren 1D6 de daño directo que no puede salvarse, asignado como en Explosiva.",
+      "accion": "2",
       "valor": 3
     },
     {
-      "id": "reliquia",
-      "nombre": "Reliquia",
-      "descripcion": "Solo puede usarse sobre tu Héroe. Máximo 1 copia por ejército. Antes de tu primera activación del turno, antes de declarar habilidades, descarta esta carta: la habilidad de tu Héroe se recarga y puede volver a usarse, respetando el límite de una vez por turno.",
-      "valor": 6,
-      "max_copias": 1
+      "id": "cambio-de-objetivo",
+      "nombre": "Cambio de objetivo",
+      "descripcion": "Una unidad trabada, en lugar de atacar cuerpo a cuerpo, puede Disparar a otra unidad enemiga a su alcance que no sea con la que está trabada.",
+      "accion": "2",
+      "valor": 3
     },
     {
-      "id": "orden-urgente",
-      "nombre": "Orden urgente",
-      "descripcion": "Al activar una unidad, antes de realizar su primera acción: esa unidad dispone de 3 acciones en lugar de 2 durante esta activación. Se siguen aplicando las reglas normales: no puede repetir la misma acción en la misma activación. Máximo 2 copias.",
-      "valor": 4,
-      "max_copias": 2
+      "id": "reroll",
+      "nombre": "Reroll",
+      "descripcion": "Repite todos los dados de una tirada propia; el resultado anterior se descarta.",
+      "accion": "No gasta acción",
+      "valor": 3
+    },
+    {
+      "id": "refuerzos",
+      "nombre": "Refuerzos",
+      "descripcion": "Un Comandante puede recibir una miniatura adicional para su escuadra.",
+      "accion": "2",
+      "valor": 3
+    },
+    {
+      "id": "vuelta-a-la-reserva",
+      "nombre": "Vuelta a la Reserva",
+      "descripcion": "El Comandante devuelve una unidad a la Reserva; si está dañada, recupera todas sus Vidas.",
+      "accion": "2",
+      "valor": 4
+    },
+    {
+      "id": "sin-reparos",
+      "nombre": "Sin reparos",
+      "descripcion": "Da la habilidad Directo al arma a distancia durante ese ataque.",
+      "accion": "No gasta acción",
+      "valor": 4
+    },
+    {
+      "id": "golpe-letal",
+      "nombre": "Golpe letal",
+      "descripcion": "Da la habilidad Anti al arma de cuerpo a cuerpo durante ese ataque.",
+      "accion": "No gasta acción",
+      "valor": 4
     }
   ]
 }

@@ -16,12 +16,23 @@
   --accent-soft: rgba(200, 170, 104, 0.18);
   --metal: #a7b0c0;
   /* Colores de clase, tomados de los iconos de units_icons/ */
-  --class-choque: #c3c7ce;
+  --class-choque: #bf9e7c;
   --class-elite: #a893d8;
   --class-especialista: #9cce58;
   --class-comando: #5684d1;
   --class-asaltante: #f06f9f;
   --class-armas-pesadas: #4fc7c0;
+  --class-milicia: #8a8a8a;
+  --class-infanteria: #eac440;
+  --class-exploradores: #5a8fd8;
+  --class-alado: #f06f9f;
+  --class-mistico: #b050ff;
+  --class-demonio: #6fe03c;
+  --class-juggernaut: #a893d8;
+  --class-vehiculo-ligero: #ffb05c;
+  --class-vehiculo-pesado: #ff8c28;
+  --class-titan: #d64040;
+  --class-comandante: #ff28a3;
   --class-monstruo: #ef3838;
   --class-vehiculo: #ff8c28;
   --class-artilleria: #d88a4f;

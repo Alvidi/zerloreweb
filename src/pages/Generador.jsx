@@ -1,21 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
 import itemIcon from '../images/units_icons/equipamiento.png'
 import objetosData from '../data/items/objetos.json'
-import RoleIcon from '../features/generator/components/RoleIcon.jsx'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
 import {
-  DEFAULT_ROLE_ID,
-  HEROES,
-  ROLES,
-  buildHeroEntry,
-  buildUnitEntry,
-  clampSquadSize,
   UNIDADES,
-  isUnidadAllowedInGameMode,
+  buildUnitEntry,
   getEntryValue,
   getUnidad,
 } from '../features/generator/catalogUtils.js'
@@ -33,11 +26,14 @@ const EXPORT_PAGE_W = 1240  // A4 vertical (folio) ~210mm × 5.9px/mm
 const EXPORT_PAGE_H = 1754  // A4 vertical (folio) ~297mm × 5.9px/mm
 const EXPORT_MARGIN = 46    // ~8mm de margen
 const EXPORT_GAP = 24       // ~4mm entre fichas
-const CARDS_PER_PAGE = 2
-// Las fichas de objeto se imprimen al tamaño de las cartas de misión (132×88 mm),
-// no al de datasheet: llevan mucho menos texto y así caben 3 por folio.
-const ITEM_CARDS_PER_PAGE = 3
-const EXPORT_ITEM_CARD_W_MM = 132
+// Todas las fichas se imprimen a tamaño carta (~95 mm de ancho, parecido a una
+// carta de Magic), no a tamaño datasheet: así caben 8 unidades por folio en una
+// rejilla de 2×4 y 6 objetos en 2×3.
+const EXPORT_CARD_W_MM = 95
+const CARDS_PER_PAGE = 8
+const CARD_COLUMNS = 2
+const ITEM_CARDS_PER_PAGE = 6
+const ITEM_CARD_COLUMNS = 2
 const EXPORT_PX_PER_MM = EXPORT_PAGE_W / 210
 const EXPORT_RASTER_SCALE = 2
 
@@ -142,19 +138,18 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
   ctx.fillStyle = '#f8f5ed'
   ctx.fillRect(0, 0, EXPORT_PAGE_W, EXPORT_PAGE_H)
 
-  // Unidades y héroes: 2 por folio a ~195×130 mm, tamaño de datasheet, que es lo
-  // que se lee cómodo en mesa. Objetos: 3 por folio a 132×88 mm, el mismo tamaño
-  // que las cartas de misión.
+  // Todas las fichas van a tamaño carta: unidades en rejilla 2×4 y objetos en 2×3.
   const isItemPage = variant === 'objeto'
-  const cols = 1
-  const rows = isItemPage ? ITEM_CARDS_PER_PAGE : 2
+  const cols = isItemPage ? ITEM_CARD_COLUMNS : CARD_COLUMNS
+  const rows = Math.ceil((isItemPage ? ITEM_CARDS_PER_PAGE : CARDS_PER_PAGE) / cols)
   const gap = EXPORT_GAP
   const aspect = FICHA_CARD_W / FICHA_CARD_H
-  const availableWidth = EXPORT_PAGE_W - EXPORT_MARGIN * 2
+  const availableWidth = EXPORT_PAGE_W - EXPORT_MARGIN * 2 - gap * (cols - 1)
   const availableHeight = EXPORT_PAGE_H - EXPORT_MARGIN * 2 - gap * (rows - 1)
-  const targetWidth = isItemPage
-    ? Math.min(availableWidth, Math.round(EXPORT_ITEM_CARD_W_MM * EXPORT_PX_PER_MM))
-    : availableWidth
+  const targetWidth = Math.min(
+    availableWidth / cols,
+    Math.round(EXPORT_CARD_W_MM * EXPORT_PX_PER_MM),
+  )
   const cardHeight = Math.floor(Math.min(availableHeight / rows, targetWidth / aspect))
   const cardWidth = Math.round(cardHeight * aspect)
   const marginX = Math.round((EXPORT_PAGE_W - cols * cardWidth - gap * (cols - 1)) / 2)
@@ -167,6 +162,41 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
   })
 
   return pageCanvas
+}
+
+/**
+ * El nombre del tipo encoge hasta caber en su hueco: se mide el texto y se baja
+ * el tamaño de letra mientras desborde, así nunca se parte ni se sale.
+ */
+function UnitTypeTitle({ nombre, className }) {
+  const ref = useRef(null)
+
+  useLayoutEffect(() => {
+    const node = ref.current
+    if (!node) return undefined
+
+    const fit = () => {
+      const maxSize = 13.1   // 0.82rem, el tamaño por defecto de la etiqueta
+      let size = maxSize
+      node.style.fontSize = `${size}px`
+      while (size > 8 && node.scrollWidth > node.clientWidth + 1) {
+        size -= 0.5
+        node.style.fontSize = `${size}px`
+      }
+    }
+
+    fit()
+    if (typeof ResizeObserver === 'undefined') return undefined
+    const observer = new ResizeObserver(fit)
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [nombre])
+
+  return (
+    <div ref={ref} className={className}>
+      {nombre}
+    </div>
+  )
 }
 
 // ─── Componentes auxiliares ───────────────────────────────────────────────
@@ -201,35 +231,6 @@ function GameModeIcon({ mode }) {
   )
 }
 
-function GameModePicker({ value, onChange, t }) {
-  const options = [
-    { value: 'escaramuza', label: t('generator.skirmish') },
-    { value: 'escuadra', label: t('generator.squad') },
-  ]
-
-  return (
-    <div className="field field-game-mode">
-      <span>{t('generator.gameMode')}</span>
-      <div className="game-mode-picker" role="radiogroup" aria-label={t('generator.gameMode')}>
-        {options.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            className={`game-mode-card${option.value === value ? ' active' : ''}`}
-            onClick={() => onChange(option.value)}
-            role="radio"
-            aria-checked={option.value === value}
-          >
-            <span className="game-mode-card-icon"><GameModeIcon mode={option.value} /></span>
-            <span className="game-mode-card-label">{option.label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-/** Contador con + y − reutilizable (roles y objetos). */
 function CountStepper({ count, onAdd, onRemove, addLabel, removeLabel, max = null, disabled = false, format = null }) {
   const atMax = max !== null && count >= max
   return (
@@ -260,78 +261,15 @@ function CountStepper({ count, onAdd, onRemove, addLabel, removeLabel, max = nul
 }
 
 /** Selector de rol simple (barra de 3 botones), usado en el modal de ficha. */
-function RolePicker({ value, onChange, label, names = null }) {
-  return (
-    <div className="unit-role-picker" role="radiogroup" aria-label={label}>
-      {ROLES.map((role) => (
-        <button
-          key={role.id}
-          type="button"
-          className={`unit-role-btn unit-role-${role.id}${value === role.id ? ' active' : ''}`}
-          aria-pressed={value === role.id}
-          title={role.descripcion}
-          onClick={() => onChange(role.id)}
-        >
-          <RoleIcon roleId={role.id} />
-          {role.nombre}
-          {names?.[role.id] ? <span className="unit-role-flavour is-stacked">({names[role.id]})</span> : null}
-        </button>
-      ))}
-    </div>
-  )
-}
-
-/**
- * Caja de roles de la tarjeta de unidad: una fila por rol con su contador
- * y sus controles de añadir y quitar. Pulsar el nombre selecciona el rol
- * que se usa al ver la ficha.
- */
-function RoleRoster({ counts, names, onAdd, onRemove, addLabel, removeLabel, countSuffix, disabled = false }) {
-  return (
-    <div className="unit-role-roster">
-      {ROLES.map((role) => {
-        const count = counts?.[role.id] || 0
-        return (
-          <div
-            key={role.id}
-            className={`unit-role-row${count > 0 ? ' has-count' : ''}${disabled ? ' is-disabled' : ''}`}
-          >
-            <span className="unit-role-name is-static" title={role.descripcion}>
-              <RoleIcon roleId={role.id} />
-              {role.nombre}
-              {names?.[role.id] ? <span className="unit-role-flavour is-stacked">({names[role.id]})</span> : null}
-            </span>
-            <CountStepper
-              count={count}
-              disabled={disabled}
-              onAdd={() => onAdd(role.id)}
-              onRemove={() => onRemove(role.id)}
-              addLabel={`${addLabel} ${role.nombre}`}
-              removeLabel={`${removeLabel} ${role.nombre}`}
-              format={(value) => (value > 0 ? `×${value} ${countSuffix}` : '0')}
-            />
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
 // ─── Página ───────────────────────────────────────────────────────────────
 function Generador() {
   const { t } = useI18n()
 
-  const [gameMode, setGameMode] = useState('escaramuza')
-  const [selectedHeroId, setSelectedHeroId] = useState('')
-  const [roleByUnidad, setRoleByUnidad] = useState({})
   const [armySelections, setArmySelections] = useState([])
   const [selectedItems, setSelectedItems] = useState({})
   const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
   const [openCatalogKey, setOpenCatalogKey] = useState('')
   const [openArmyUid, setOpenArmyUid] = useState('')
-  const [pendingSquadUnidadId, setPendingSquadUnidadId] = useState('')
-  const [pendingSquadRoleId, setPendingSquadRoleId] = useState(DEFAULT_ROLE_ID)
-  const [pendingSquadSize, setPendingSquadSize] = useState(1)
   const [imageCropDraft, setImageCropDraft] = useState(null)
   // Qué PDF se está montando ahora mismo: 'ejercito', 'roster' o ninguno.
   const [printJob, setPrintJob] = useState(null)
@@ -347,48 +285,31 @@ function Generador() {
 
   const activeItems = objetosData.objetos
 
-  /**
-   * En Escaramuza cada añadido es una miniatura; en Gran Batalla, una escuadra —
-   * salvo Monstruos, Vehículos y Artillería, que van de una en una (escuadra 1/1)
-   * y por tanto siguen contándose como unidades.
-   */
-  const getCountSuffix = (perfil) => {
-    const esEscuadra = gameMode === 'escuadra' && (perfil?.escuadra?.max ?? 1) > 1
-    return esEscuadra ? t('generator.countSquads') : t('generator.countUnits')
-  }
-
-  const getRoleFor = (unidadId) => roleByUnidad[unidadId] || DEFAULT_ROLE_ID
-
   /** Entradas del ejército resueltas contra el catálogo. */
   const armyEntries = useMemo(
     () =>
       armySelections
         .map((selection) => {
-          const entry = selection.kind === 'heroe'
-            ? buildHeroEntry(selection.heroId)
-            : buildUnitEntry(selection.unidadId, selection.roleId)
+          const entry = buildUnitEntry(selection.unidadId)
           if (!entry) return null
-          const squadSize = clampSquadSize(selection.squadSize, entry, gameMode)
           return {
             uid: selection.selectionId,
-            kind: selection.kind,
+            kind: 'unidad',
             entry,
-            squadSize,
             imageDataUrl: selection.imageDataUrl || '',
-            total: getEntryValue(entry, squadSize, gameMode),
+            total: getEntryValue(entry),
           }
         })
         .filter(Boolean),
-    [armySelections, gameMode],
+    [armySelections],
   )
 
-  const armyHeroEntries = useMemo(() => armyEntries.filter((item) => item.kind === 'heroe'), [armyEntries])
-  const armyUnitEntries = useMemo(() => armyEntries.filter((item) => item.kind === 'unidad'), [armyEntries])
+  const armyUnitEntries = armyEntries
 
   const selectedItemsTotalValue = useMemo(
     () => Object.entries(selectedItems).reduce((sum, [itemId, count]) => {
       const item = activeItems.find((candidate) => candidate.id === itemId)
-      return sum + (item ? item.valor * count : 0)
+      return sum + (Number(item?.valor) || 0) * count
     }, 0),
     [selectedItems, activeItems],
   )
@@ -398,12 +319,11 @@ function Generador() {
     [armyEntries, selectedItemsTotalValue],
   )
 
-  /** En Escaramuza se agrupan las unidades idénticas (misma clase y rol). */
+  /** Se agrupan en la lista las unidades idénticas (mismo tipo y misma escuadra). */
   const armyUnitGroups = useMemo(() => {
-    if (gameMode !== 'escaramuza') return null
     const groups = new Map()
     for (const item of armyUnitEntries) {
-      const key = `${item.entry.unidadId}::${item.entry.roleId}`
+      const key = item.entry.unidadId
       if (groups.has(key)) {
         const group = groups.get(key)
         group.count += 1
@@ -414,7 +334,7 @@ function Generador() {
       }
     }
     return Array.from(groups.values())
-  }, [gameMode, armyUnitEntries])
+  }, [armyUnitEntries])
 
   /** Los objetos comprados también llevan su ficha al PDF, una por objeto. */
   const armyExportItems = useMemo(
@@ -425,38 +345,29 @@ function Generador() {
   )
 
   const armyExportEntries = useMemo(() => {
-    const unidades = armyUnitGroups
-      ? [
-          ...armyHeroEntries,
-          ...armyUnitGroups.map(({ item, count, totalValue }) => ({ ...item, _count: count, total: totalValue })),
-        ]
-      : armyEntries
+    const unidades = armyUnitGroups.map(({ item, count, totalValue }) => ({ ...item, _count: count, total: totalValue }))
     return [...unidades, ...armyExportItems]
-  }, [armyUnitGroups, armyEntries, armyHeroEntries, armyExportItems])
+  }, [armyUnitGroups, armyExportItems])
 
   /**
-   * Roster completo: los 8 héroes, las 8 clases con sus 3 sets de armas y todos
-   * los objetos. No depende del ejército montado ni del modo de juego — es el
-   * mazo entero para quien quiera imprimirlo de una vez con sus alternativas.
+   * Roster completo: los 17 tipos de unidad y todos los objetos. No depende del
+   * ejército montado — es el mazo entero para quien quiera imprimirlo de una vez.
    */
   const rosterExportEntries = useMemo(() => {
-    const heroes = HEROES
-      .map((hero) => ({ uid: `roster-heroe-${hero.id}`, kind: 'heroe', entry: buildHeroEntry(hero.id) }))
-      .filter((item) => item.entry)
-    const unidades = UNIDADES.flatMap((unidad) => ROLES
-      .map((role) => ({
-        uid: `roster-unidad-${unidad.id}-${role.id}`,
+    const unidades = UNIDADES
+      .map((unidad) => ({
+        uid: `roster-unidad-${unidad.id}`,
         kind: 'unidad',
-        entry: buildUnitEntry(unidad.id, role.id),
+        entry: buildUnitEntry(unidad.id),
       }))
-      .filter((item) => item.entry))
+      .filter((item) => item.entry)
     const objetos = objetosData.objetos.map((item) => ({
       uid: `roster-objeto-${item.id}`,
       kind: 'objeto',
       item,
       count: 0,
     }))
-    return [...heroes, ...unidades, ...objetos]
+    return [...unidades, ...objetos]
   }, [])
 
   const exportEntries = printJob === 'roster' ? rosterExportEntries : armyExportEntries
@@ -474,11 +385,10 @@ function Generador() {
     ]
   }, [exportEntries])
 
-  const unitCountByKey = useMemo(() => {
+  const unitCountById = useMemo(() => {
     const counts = new Map()
     for (const item of armyUnitEntries) {
-      const key = `${item.entry.unidadId}::${item.entry.roleId}`
-      counts.set(key, (counts.get(key) || 0) + 1)
+      counts.set(item.entry.unidadId, (counts.get(item.entry.unidadId) || 0) + 1)
     }
     return counts
   }, [armyUnitEntries])
@@ -490,32 +400,8 @@ function Generador() {
     )
   }
 
-  const handleGameModeChange = (nextMode) => {
-    setGameMode(nextMode)
-    setArmySelections((current) => current.filter((selection) => selection.kind === 'heroe'))
-    setSelectedItems({})
-    setOpenCatalogKey('')
-    setOpenArmyUid('')
-    setPendingSquadUnidadId('')
-    setArmyDownloadError('')
-  }
-
-  const handleSelectHero = (heroId) => {
-    setSelectedHeroId(heroId)
-    selectionCounterRef.current += 1
-    const heroSelection = {
-      selectionId: `heroe-${selectionCounterRef.current}`,
-      kind: 'heroe',
-      heroId,
-      squadSize: 1,
-      imageDataUrl: '',
-    }
-    // El héroe es único: sustituye al anterior y conserva el resto del ejército.
-    setArmySelections((current) => [heroSelection, ...current.filter((selection) => selection.kind !== 'heroe')])
-    setArmyDownloadError('')
-  }
-
-  const addUnitSelection = (unidadId, roleId, squadSize) => {
+  const handleAddUnit = (unidadId) => {
+    if (!getUnidad(unidadId)) return
     selectionCounterRef.current += 1
     setArmySelections((current) => [
       ...current,
@@ -523,59 +409,23 @@ function Generador() {
         selectionId: `unidad-${selectionCounterRef.current}`,
         kind: 'unidad',
         unidadId,
-        roleId,
-        squadSize,
         imageDataUrl: '',
       },
     ])
     setArmyDownloadError('')
   }
 
-  const handleAddUnit = (unidadId, roleId = getRoleFor(unidadId)) => {
-    const unidad = getUnidad(unidadId)
-    if (!unidad) return
-    if (!selectedHeroId) {
-      setArmyDownloadError(t('generator.chooseHeroFirst'))
-      return
-    }
-    if (gameMode !== 'escuadra') {
-      addUnitSelection(unidadId, roleId, 1)
-      return
-    }
-    const { min, max } = unidad.perfil.escuadra
-    if (min === max) {
-      addUnitSelection(unidadId, roleId, min)
-      return
-    }
-    setPendingSquadUnidadId(unidadId)
-    setPendingSquadRoleId(roleId)
-    setPendingSquadSize(min)
-  }
-
-  /** Quita la última unidad añadida de esa clase y rol. */
-  const handleRemoveUnitByRole = (unidadId, roleId) => {
+  /** Quita la última unidad añadida de ese tipo. */
+  const handleRemoveUnit = (unidadId) => {
     setArmySelections((current) => {
-      const index = current.map((selection) => (
-        selection.kind === 'unidad' && selection.unidadId === unidadId && selection.roleId === roleId
-      )).lastIndexOf(true)
+      const index = current.map((selection) => selection.unidadId === unidadId).lastIndexOf(true)
       if (index === -1) return current
       return current.filter((_, position) => position !== index)
     })
   }
 
-  const handleConfirmSquadSize = () => {
-    if (!pendingSquadUnidadId) return
-    addUnitSelection(pendingSquadUnidadId, pendingSquadRoleId, pendingSquadSize)
-    setPendingSquadUnidadId('')
-  }
-
-  const handleRemoveArmyEntry = (selectionId) => {
-    setArmySelections((current) => current.filter((selection) => selection.selectionId !== selectionId))
-  }
-
   const handleResetCurrentArmy = () => {
     setArmySelections([])
-    setSelectedHeroId('')
     setSelectedItems({})
     setArmyDownloadError('')
   }
@@ -683,17 +533,13 @@ function Generador() {
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
     const previousOverflow = document.body.style.overflow
-    if (imageCropDraft || pendingSquadUnidadId) document.body.style.overflow = 'hidden'
+    if (imageCropDraft) document.body.style.overflow = 'hidden'
     return () => { document.body.style.overflow = previousOverflow }
-  }, [imageCropDraft, pendingSquadUnidadId])
+  }, [imageCropDraft])
 
   // ── Exportación a PDF del ejército ──────────────────────────────────────
   const handleDownloadArmyPdf = () => {
     if (!armyExportEntries.length || isArmyPrintPreviewOpen) return
-    if (armyHeroEntries.length !== 1) {
-      setArmyDownloadError(t('generator.requiredHero'))
-      return
-    }
     setArmyDownloadError('')
     setPrintJob('ejercito')
   }
@@ -780,45 +626,15 @@ function Generador() {
   const previewItem = useMemo(() => {
     if (openArmyUid) return armyEntries.find((item) => item.uid === openArmyUid) || null
     if (!openCatalogKey) return null
-    if (openCatalogKey.startsWith('heroe:')) {
-      const entry = buildHeroEntry(openCatalogKey.slice(6))
-      return entry ? { uid: openCatalogKey, kind: 'heroe', entry, squadSize: 1, imageDataUrl: '' } : null
-    }
-    const unidadId = openCatalogKey.slice(7)
-    const entry = buildUnitEntry(unidadId, roleByUnidad[unidadId] || DEFAULT_ROLE_ID)
+    const entry = buildUnitEntry(openCatalogKey.slice(7))
     if (!entry) return null
-    return {
-      uid: openCatalogKey,
-      kind: 'unidad',
-      entry,
-      squadSize: clampSquadSize(entry.perfil.escuadra.min, entry, gameMode),
-      imageDataUrl: '',
-    }
-  }, [openArmyUid, openCatalogKey, armyEntries, roleByUnidad, gameMode])
-
-  /** Cambia el rol desde el modal: en el catálogo o en la unidad ya añadida. */
-  const handlePreviewRoleChange = (nextRole) => {
-    if (!previewItem || previewItem.kind !== 'unidad') return
-    if (openArmyUid) {
-      updateSelection(openArmyUid, { roleId: nextRole })
-      return
-    }
-    setRoleByUnidad((current) => ({ ...current, [previewItem.entry.unidadId]: nextRole }))
-  }
-
-  const previewRoleNames = useMemo(() => {
-    if (previewItem?.kind !== 'unidad') return null
-    const unidad = getUnidad(previewItem.entry.unidadId)
-    if (!unidad) return null
-    return Object.fromEntries(ROLES.map((role) => [role.id, unidad.roles[role.id]?.nombre || '']))
-  }, [previewItem])
+    return { uid: openCatalogKey, kind: 'unidad', entry, imageDataUrl: '' }
+  }, [openArmyUid, openCatalogKey, armyEntries])
 
   const closePreview = () => {
     setOpenCatalogKey('')
     setOpenArmyUid('')
   }
-
-  const pendingUnidad = pendingSquadUnidadId ? getUnidad(pendingSquadUnidadId) : null
 
   return (
     <section className="section generator-page reveal" id="generador">
@@ -831,8 +647,6 @@ function Generador() {
       <div className="generator-layout reveal">
         <div className="generator-main">
           <div className="manual-panel">
-            <GameModePicker value={gameMode} onChange={handleGameModeChange} t={t} />
-
             <div className="generator-section-tabs" role="tablist" aria-label={t('generator.sectionTabs')}>
               <button
                 type="button"
@@ -872,43 +686,49 @@ function Generador() {
 
             {activeGeneratorSection === 'units' ? (
               <div className="generator-subsection generator-listing-field">
-                {/* Paso 1 — Héroe */}
                 <div className="unit-list-section">
-                  <p className="unit-list-section-label">{t('generator.heroes')}</p>
+                  <p className="unit-list-section-label">{t('generator.units')}</p>
                   <div className="unit-list">
-                    {HEROES.map((hero) => {
-                      const isSelected = selectedHeroId === hero.id
+                    {UNIDADES.map((unidad) => {
+                      const count = unitCountById.get(unidad.id) || 0
                       return (
-                        <article className={`unit-card${isSelected ? ' is-selected' : ''}`} key={hero.id}>
+                        <article
+                          className={`unit-card${count > 0 ? ' is-in-army' : ''}`}
+                          key={unidad.id}
+                        >
                           <div className="unit-card-header">
                             <div className="unit-card-summary">
                               <span className="unit-card-thumb-wrap" aria-hidden="true">
                                 <span className="unit-card-thumb-frame">
                                   <span className="unit-card-thumb-canvas">
-                                    {getUnitClassBadgeSrc('heroe') ? (
-                                      <img className="unit-card-thumb fallback" src={getUnitClassBadgeSrc('heroe')} alt="" />
+                                    {getUnitClassBadgeSrc(unidad.id) ? (
+                                      <img className="unit-card-thumb fallback" src={getUnitClassBadgeSrc(unidad.id)} alt="" />
                                     ) : null}
                                   </span>
                                 </span>
                               </span>
                               <div className="unit-card-heading">
-                                <div className="unit-card-title-row"><h4>{hero.nombre}</h4></div>
-                                <div className="unit-card-type unit-type-heroe">{t('generator.heroes')}</div>
-                                <div className="unit-card-inline-value">{hero.perfil.valor} {t('generator.valueUnit')}</div>
+                                <UnitTypeTitle
+                                  nombre={unidad.nombre}
+                                  className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}
+                                />
+                                <div className="unit-card-inline-value">{unidad.perfil.valor} {t('generator.valueUnit')}</div>
                               </div>
                             </div>
                             <div className="unit-card-header-actions">
-                              <button type="button" className="ghost small" onClick={() => setOpenCatalogKey(`heroe:${hero.id}`)}>
+                              <button type="button" className="ghost small" onClick={() => setOpenCatalogKey(`unidad:${unidad.id}`)}>
                                 {t('generator.viewCard')}
                               </button>
-                              <button
-                                type="button"
-                                className="ghost small"
-                                disabled={isSelected}
-                                onClick={() => handleSelectHero(hero.id)}
-                              >
-                                {isSelected ? t('generator.chosenHeroButton') : t('generator.chooseHeroButton')}
-                              </button>
+                              <div className="unit-add-controls">
+                                <CountStepper
+                                  count={count}
+                                  onAdd={() => handleAddUnit(unidad.id)}
+                                  onRemove={() => handleRemoveUnit(unidad.id)}
+                                  addLabel={`${t('generator.add')} ${unidad.nombre}`}
+                                  removeLabel={`${t('generator.delete')} ${unidad.nombre}`}
+                                  format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
+                                />
+                              </div>
                             </div>
                           </div>
                         </article>
@@ -916,70 +736,6 @@ function Generador() {
                     })}
                   </div>
                 </div>
-
-                {/* Paso 2 — Unidades, solo tras elegir héroe */}
-                {selectedHeroId ? (
-                  <>
-                    <hr className="generator-items-divider" />
-                    <div className="unit-list-section">
-                      <p className="unit-list-section-label">{t('generator.units')}</p>
-                      <div className="unit-list">
-                        {UNIDADES.map((unidad) => {
-                          const unitDisabled = !isUnidadAllowedInGameMode(unidad.id, gameMode)
-                          const roleNames = Object.fromEntries(
-                            ROLES.map((role) => [role.id, unidad.roles[role.id]?.nombre || '']),
-                          )
-                          const roleCounts = Object.fromEntries(
-                            ROLES.map((role) => [role.id, unitCountByKey.get(`${unidad.id}::${role.id}`) || 0]),
-                          )
-                          const count = Object.values(roleCounts).reduce((sum, value) => sum + value, 0)
-                          return (
-                            <article
-                              className={`unit-card${count > 0 ? ' is-in-army' : ''}${unitDisabled ? ' is-disabled' : ''}`}
-                              key={unidad.id}
-                              title={unitDisabled ? t('generator.unitUnavailableInMode') : undefined}
-                            >
-                              <div className="unit-card-header">
-                                <div className="unit-card-summary">
-                                  <span className="unit-card-thumb-wrap" aria-hidden="true">
-                                    <span className="unit-card-thumb-frame">
-                                      <span className="unit-card-thumb-canvas">
-                                        {getUnitClassBadgeSrc(unidad.id) ? (
-                                          <img className="unit-card-thumb fallback" src={getUnitClassBadgeSrc(unidad.id)} alt="" />
-                                        ) : null}
-                                      </span>
-                                    </span>
-                                  </span>
-                                  <div className="unit-card-heading">
-                                    <div className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}>{unidad.clase}</div>
-                                    <div className="unit-card-inline-value">{unidad.perfil.valor} {t('generator.valueUnit')}</div>
-                                  </div>
-                                </div>
-                                <div className="unit-card-header-actions">
-                                  <button type="button" className="ghost small" onClick={() => setOpenCatalogKey(`unidad:${unidad.id}`)}>
-                                    {t('generator.viewCard')}
-                                  </button>
-                                </div>
-                              </div>
-                              <RoleRoster
-                                counts={roleCounts}
-                                names={roleNames}
-                                countSuffix={getCountSuffix(unidad.perfil)}
-                                disabled={unitDisabled}
-                                addLabel={t('generator.add')}
-                                removeLabel={t('generator.delete')}
-                                onAdd={(nextRole) => {
-                                  // El + fija además el rol que se abrirá al ver la ficha.
-                                  setRoleByUnidad((current) => ({ ...current, [unidad.id]: nextRole }))
-                                  handleAddUnit(unidad.id, nextRole)
-                                }}
-                                onRemove={(nextRole) => handleRemoveUnitByRole(unidad.id, nextRole)}
-                              />
-                            </article>
-                          )
-                        })}
-                      </div>
-                    </div>
 
                     <hr className="generator-items-divider" />
                     <div className="unit-list-section">
@@ -1003,37 +759,33 @@ function Generador() {
                                       <h4>{item.nombre}</h4>
                                     </div>
                                     <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
-                                    <div className="unit-card-inline-value">{item.valor} {t('generator.valueUnit')}</div>
+                                    <div className="unit-card-inline-value">
+                                      {item.valor === null ? '—' : `${item.valor} ${t('generator.valueUnit')}`}
+                                    </div>
                                   </div>
                                 </div>
                                 <div className="unit-card-header-actions">
                                   <button type="button" className="ghost small" onClick={() => openItemFicha(item)}>
                                     {t('generator.viewCard')}
                                   </button>
+                                  <div className="unit-add-controls">
+                                    <CountStepper
+                                      count={itemCount}
+                                      max={getItemMaxCopies(item)}
+                                      onAdd={() => handleAddItem(item.id)}
+                                      onRemove={() => handleRemoveItem(item.id)}
+                                      addLabel={`${t('generator.add')} ${item.nombre}`}
+                                      removeLabel={`${t('generator.delete')} ${item.nombre}`}
+                                      format={(value) => (value > 0 ? `×${value}` : '0')}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="unit-item-stepper-row">
-                                <span className="unit-item-stepper-label">
-                                  {t('generator.max')} {getItemMaxCopies(item)}
-                                </span>
-                                <CountStepper
-                                  count={itemCount}
-                                  max={getItemMaxCopies(item)}
-                                  onAdd={() => handleAddItem(item.id)}
-                                  onRemove={() => handleRemoveItem(item.id)}
-                                  addLabel={`${t('generator.add')} ${item.nombre}`}
-                                  removeLabel={`${t('generator.delete')} ${item.nombre}`}
-                                />
                               </div>
                             </article>
                           )
                         })}
                       </div>
                     </div>
-                  </>
-                ) : (
-                  <p className="empty-state">{t('generator.chooseHeroFirst')}</p>
-                )}
               </div>
             ) : null}
 
@@ -1047,26 +799,25 @@ function Generador() {
                 </div>
 
                 {[
-                  { key: 'hero', label: t('generator.requiredHeroSlot'), rows: armyHeroEntries.map((item) => ({ item, count: 1, removeUid: item.uid })) },
                   {
                     key: 'units',
                     label: t('generator.units'),
-                    rows: armyUnitGroups
-                      ? armyUnitGroups.map(({ item, count, totalValue, uids }) => ({ item: { ...item, total: totalValue }, count, removeUid: uids.at(-1) }))
-                      : armyUnitEntries.map((item) => ({ item, count: 1, removeUid: item.uid })),
+                    rows: armyUnitGroups.map(({ item, count, totalValue }) => (
+                      { item: { ...item, total: totalValue }, count }
+                    )),
                   },
                 ].map((section) => section.rows.length ? (
                   <div className="army-modal-section" key={`current-army-${section.key}`}>
                     <p className="army-modal-section-label">{section.label}</p>
                     <div className="army-list army-list-compact">
-                      {section.rows.map(({ item, count, removeUid }) => (
+                      {section.rows.map(({ item, count }) => (
                         <article key={`army-row-${item.uid}`} className="unit-card army-unit">
                           <div className="unit-card-header army-unit-header">
                             <div className="unit-card-summary army-unit-summary">
                               <div className="unit-card-thumb-wrap army-unit-image-wrap">
                                 <img
                                   className={`unit-card-thumb army-unit-thumb${item.imageDataUrl ? '' : ' fallback'}`}
-                                  src={item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId || 'heroe')}
+                                  src={item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId)}
                                   alt={item.entry.clase}
                                 />
                                 <input
@@ -1089,9 +840,10 @@ function Generador() {
                                 ) : null}
                               </div>
                               <div className="unit-card-heading">
-                                <div className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(item.entry.unidadId || 'heroe')}`}>
-                                  {item.kind === 'heroe' ? item.entry.nombre : item.entry.clase}
-                                </div>
+                                <UnitTypeTitle
+                                  nombre={item.entry.nombre}
+                                  className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(item.entry.unidadId)}`}
+                                />
                                 <div className="unit-card-inline-value">{item.total} {t('generator.valueUnit')}</div>
                               </div>
                             </div>
@@ -1102,28 +854,18 @@ function Generador() {
                               <button type="button" className="ghost small" onClick={() => setOpenArmyUid(item.uid)}>
                                 {t('generator.viewCard')}
                               </button>
-                              {item.kind === 'heroe' ? (
-                                <button type="button" className="ghost small" onClick={() => handleRemoveArmyEntry(removeUid)}>
-                                  {t('generator.delete')}
-                                </button>
-                              ) : null}
-                            </div>
-                          </div>
-                          {item.kind === 'heroe' ? null : (
-                            <div className="unit-role-roster">
-                              <div className="unit-role-row has-count">
-                                <span className="unit-role-name is-static">
-                                  <RoleIcon roleId={item.entry.roleId} />
-                                  {item.entry.rol}
-                                  {item.entry.nombreRol ? <span className="unit-role-flavour"> ({item.entry.nombreRol})</span> : null}
-                                  {gameMode === 'escuadra'
-                                    ? <span className="unit-role-flavour"> · {item.squadSize} {t('generator.squadLabel')}</span>
-                                    : null}
-                                </span>
-                                <span className="unit-role-count">×{count} {getCountSuffix(item.entry.perfil)}</span>
+                              <div className="unit-add-controls">
+                                <CountStepper
+                                  count={count}
+                                  onAdd={() => handleAddUnit(item.entry.unidadId)}
+                                  onRemove={() => handleRemoveUnit(item.entry.unidadId)}
+                                  addLabel={`${t('generator.add')} ${item.entry.nombre}`}
+                                  removeLabel={`${t('generator.delete')} ${item.entry.nombre}`}
+                                  format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
+                                />
                               </div>
                             </div>
-                          )}
+                          </div>
                         </article>
                       ))}
                     </div>
@@ -1149,19 +891,26 @@ function Generador() {
                                     {count > 1 ? <span className="army-unit-count-badge">×{count}</span> : null}
                                   </div>
                                   <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
-                                  <div className="unit-card-inline-value">{item.valor * count} {t('generator.valueUnit')}</div>
+                                  <div className="unit-card-inline-value">
+                                    {item.valor === null ? '—' : `${item.valor * count} ${t('generator.valueUnit')}`}
+                                  </div>
                                 </div>
                               </div>
                               <div className="unit-card-header-actions army-unit-actions">
                                 <button type="button" className="ghost small" onClick={() => openItemFicha(item)}>
                                   {t('generator.viewCard')}
                                 </button>
-                              </div>
-                            </div>
-                            <div className="unit-role-roster">
-                              <div className="unit-role-row has-count">
-                                <span className="unit-role-name is-static">{t('rules.modeItems')}</span>
-                                <span className="unit-role-count">×{count}</span>
+                                <div className="unit-add-controls">
+                                  <CountStepper
+                                    count={count}
+                                    max={getItemMaxCopies(item)}
+                                    onAdd={() => handleAddItem(item.id)}
+                                    onRemove={() => handleRemoveItem(item.id)}
+                                    addLabel={`${t('generator.add')} ${item.nombre}`}
+                                    removeLabel={`${t('generator.delete')} ${item.nombre}`}
+                                    format={(value) => (value > 0 ? `×${value}` : '0')}
+                                  />
+                                </div>
                               </div>
                             </div>
                           </article>
@@ -1200,64 +949,12 @@ function Generador() {
         </div>
       </div>
 
-      {/* Modal de tamaño de escuadra */}
-      {pendingUnidad && typeof document !== 'undefined' ? createPortal(
-        (() => {
-          const { min, max } = pendingUnidad.perfil.escuadra
-          const sizeOptions = Array.from({ length: Math.max(1, max - min + 1) }, (_, index) => min + index)
-          return (
-            <div className="unit-modal" role="dialog" aria-modal="true" aria-label={t('generator.squadSize')} onClick={() => setPendingSquadUnidadId('')}>
-              <div className="unit-modal-card squad-size-modal-card" onClick={(event) => event.stopPropagation()}>
-                <div className="unit-modal-header">
-                  <div>
-                    <p className="eyebrow">{t('generator.squadLabel')}</p>
-                    <h3>{pendingUnidad.clase}</h3>
-                    <p className="unit-modal-subtitle">
-                      {t('generator.squadSizeModalSubtitle').replace('{min}', String(min)).replace('{max}', String(max))}
-                    </p>
-                  </div>
-                  <button type="button" className="ghost tiny" onClick={() => setPendingSquadUnidadId('')}>{t('generator.close')}</button>
-                </div>
-                <div className="squad-size-options" role="radiogroup" aria-label={t('generator.squadSize')}>
-                  {sizeOptions.map((size) => (
-                    <button
-                      key={`squad-size-${size}`}
-                      type="button"
-                      className={`squad-size-option${pendingSquadSize === size ? ' active' : ''}`}
-                      aria-pressed={pendingSquadSize === size}
-                      onClick={() => setPendingSquadSize(size)}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-                <p className="squad-size-total-preview">
-                  <span>{pendingUnidad.perfil.valor * pendingSquadSize}</span> {t('generator.valueUnit')}
-                </p>
-                <div className="unit-modal-footer">
-                  <button type="button" className="ghost small" onClick={() => setPendingSquadUnidadId('')}>{t('generator.cancel')}</button>
-                  <button type="button" className="primary small" onClick={handleConfirmSquadSize}>{t('generator.add')}</button>
-                </div>
-              </div>
-            </div>
-          )
-        })(),
-        document.body,
-      ) : null}
-
       {/* Modal de ficha */}
       {previewItem && typeof document !== 'undefined' ? createPortal(
         <div className="unit-preview-modal" role="dialog" aria-modal="true" aria-label={previewItem.entry.nombre} onClick={closePreview}>
           <div className="unit-preview-modal-inner" onClick={(event) => event.stopPropagation()}>
             <div className="unit-preview-modal-bar">
-              {previewItem.kind === 'unidad' ? (
-                <RolePicker
-                  value={previewItem.entry.roleId}
-                  names={previewRoleNames}
-                  label={t('generator.chooseRole')}
-                  onChange={handlePreviewRoleChange}
-                />
-              ) : <span />}
+              <span className="unit-preview-modal-title">{previewItem.entry.nombre}</span>
               <div className="unit-preview-modal-actions">
                 <button type="button" className="ghost small" onClick={closePreview} aria-label={t('generator.close')}>✕</button>
               </div>
@@ -1266,7 +963,6 @@ function Generador() {
               <UnitFichaCard
                 entry={previewItem.entry}
                 imageDataUrl={previewItem.imageDataUrl}
-                gameMode={gameMode}
               />
             </div>
           </div>
@@ -1297,7 +993,6 @@ function Generador() {
                         ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
                         entry={item.entry}
                         imageDataUrl={item.imageDataUrl}
-                        gameMode={gameMode}
                       />
                     )}
                   </div>

@@ -106,6 +106,7 @@ export const translations = {
       countUnits: 'uni.',
       countSquads: 'squ.',
       noUnitsYet: 'No hay unidades añadidas aún.',
+      noSquad: 'Sin escuadra',
       squadLabel: 'Escuadra',
       unit: 'Unidad',
       delete: 'Eliminar',

@@ -24,22 +24,49 @@ export const getUnitClassToken = (value = '') => {
   const normalized = String(value || '')
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .trim()
 
-  if (normalized.startsWith('choque') || normalized.startsWith('shock')) return 'choque'
+  if (normalized.startsWith('milicia')) return 'milicia'
+  if (normalized.startsWith('infanteria')) return 'infanteria'
+  if (normalized.startsWith('choque')) return 'choque'
   if (normalized.startsWith('elite')) return 'elite'
-  if (normalized.startsWith('especialista') || normalized.startsWith('specialist')) return 'especialista'
-  if (normalized.startsWith('comando') || normalized.startsWith('commando')) return 'comando'
-  if (normalized.startsWith('asaltante') || normalized.startsWith('raider')) return 'asaltante'
+  if (normalized.startsWith('especialista')) return 'especialista'
+  if (normalized.startsWith('exploradores')) return 'exploradores'
+  if (normalized.startsWith('alado')) return 'alado'
   if (normalized.startsWith('armas pesadas') || normalized.startsWith('armas-pesadas')) return 'armas-pesadas'
-  if (normalized.startsWith('monstruo') || normalized.startsWith('monster')) return 'monstruo'
-  if (normalized.startsWith('vehiculo') || normalized.startsWith('vehicle')) return 'vehiculo'
-  if (normalized.startsWith('artilleria') || normalized.startsWith('artillery')) return 'artilleria'
-  if (normalized.startsWith('heroe') || normalized.startsWith('hero')) return 'heroe'
+  if (normalized.startsWith('mistico')) return 'mistico'
+  if (normalized.startsWith('demonio')) return 'demonio'
+  if (normalized.startsWith('juggernaut')) return 'juggernaut'
+  if (normalized.startsWith('monstruo')) return 'monstruo'
+  if (normalized.startsWith('vehiculo ligero') || normalized.startsWith('vehiculo-ligero')) return 'vehiculo-ligero'
+  if (normalized.startsWith('vehiculo pesado') || normalized.startsWith('vehiculo-pesado')) return 'vehiculo-pesado'
+  if (normalized.startsWith('vehiculo')) return 'vehiculo-ligero'
+  if (normalized.startsWith('artilleria')) return 'artilleria'
+  if (normalized.startsWith('titan')) return 'titan'
+  if (normalized.startsWith('comandante')) return 'comandante'
   return ''
 }
 
-export const getUnitClassBadgeSrc = (value = '') => badgeByClass[getUnitClassToken(value)] || ''
+/**
+ * Mientras no haya arte propia para los tipos nuevos, se reutiliza el icono
+ * más cercano. Al añadir <tipo>.png en images/units_icons/ el alias sobra.
+ */
+const BADGE_FALLBACKS = {
+  exploradores: 'comando',
+  alado: 'asaltante',
+  mistico: 'psiquico',
+  juggernaut: 'elite',
+  'vehiculo-ligero': 'vehiculo',
+  'vehiculo-pesado': 'vehiculo',
+  titan: 'monstruo',
+  comandante: 'heroe',
+}
+
+export const getUnitClassBadgeSrc = (value = '') => {
+  const token = getUnitClassToken(value)
+  if (!token) return ''
+  return badgeByClass[token] || badgeByClass[BADGE_FALLBACKS[token]] || ''
+}
 
 export const hasUnitClassBadge = (value = '') => Boolean(getUnitClassBadgeSrc(value))

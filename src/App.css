@@ -1275,8 +1275,9 @@ button {
 .unit-list .unit-card .unit-card-header {
   align-items: flex-start;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(88px, auto);
+  grid-template-columns: minmax(0, 1fr) minmax(128px, auto);
 }
+
 
 .unit-list .unit-card .unit-card-summary {
   align-items: flex-start;
@@ -1288,7 +1289,7 @@ button {
   display: grid;
   grid-template-columns: 1fr;
   gap: 6px;
-  min-width: 88px;
+  min-width: 128px;
 }
 
 .unit-list .unit-card .unit-card-header-actions .ghost.small {
@@ -1598,6 +1599,54 @@ button {
 
 .unit-type-armas-pesadas {
   color: var(--class-armas-pesadas);
+}
+
+.unit-type-milicia {
+  color: var(--class-milicia);
+}
+
+.unit-type-infanteria {
+  color: var(--class-infanteria);
+}
+
+.unit-type-exploradores {
+  color: var(--class-exploradores);
+}
+
+.unit-type-alado {
+  color: var(--class-alado);
+}
+
+.unit-type-mistico {
+  color: var(--class-mistico);
+}
+
+.unit-type-juggernaut {
+  color: var(--class-juggernaut);
+}
+
+.unit-type-vehiculo-ligero {
+  color: var(--class-vehiculo-ligero);
+}
+
+.unit-type-vehiculo-pesado {
+  color: var(--class-vehiculo-pesado);
+}
+
+.unit-type-titan {
+  color: var(--class-titan);
+}
+
+.unit-type-comandante {
+  color: var(--class-comandante);
+}
+
+.unit-type-demonio {
+  color: var(--class-demonio);
+}
+
+.unit-type-psiquico {
+  color: var(--class-psiquico);
 }
 
 .unit-type-monstruo {
@@ -7189,6 +7238,18 @@ mark {
 .ficha2-tag.unit-type-comando { color: var(--class-comando); }
 .ficha2-tag.unit-type-asaltante { color: var(--class-asaltante); }
 .ficha2-tag.unit-type-armas-pesadas { color: var(--class-armas-pesadas); }
+.ficha2-tag.unit-type-milicia { color: var(--class-milicia); }
+.ficha2-tag.unit-type-infanteria { color: var(--class-infanteria); }
+.ficha2-tag.unit-type-exploradores { color: var(--class-exploradores); }
+.ficha2-tag.unit-type-alado { color: var(--class-alado); }
+.ficha2-tag.unit-type-mistico { color: var(--class-mistico); }
+.ficha2-tag.unit-type-juggernaut { color: var(--class-juggernaut); }
+.ficha2-tag.unit-type-vehiculo-ligero { color: var(--class-vehiculo-ligero); }
+.ficha2-tag.unit-type-vehiculo-pesado { color: var(--class-vehiculo-pesado); }
+.ficha2-tag.unit-type-titan { color: var(--class-titan); }
+.ficha2-tag.unit-type-comandante { color: var(--class-comandante); }
+.ficha2-tag.unit-type-demonio { color: var(--class-demonio); }
+.ficha2-tag.unit-type-psiquico { color: var(--class-psiquico); }
 .ficha2-tag.unit-type-monstruo { color: var(--class-monstruo); }
 .ficha2-tag.unit-type-vehiculo { color: var(--class-vehiculo); }
 .ficha2-tag.unit-type-artilleria { color: var(--class-artilleria); }
@@ -7281,4 +7342,106 @@ mark {
    descripción respira más que en la habilidad de una unidad. */
 .ficha2-item-description {
   line-height: 1.4;
+}
+
+/* Contador de unidades y objetos: siempre en una sola línea */
+/* El contador va en la misma columna que Ver ficha, justo debajo */
+.unit-add-controls {
+  display: flex;
+  justify-content: center;
+  padding: 3px 4px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(8, 10, 14, 0.55);
+}
+
+.unit-add-controls .unit-role-stepper {
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+
+.unit-add-controls .unit-role-count {
+  min-width: 0;
+  padding: 0 4px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.unit-add-count {
+  color: var(--accent);
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.unit-add-remove {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-soft, #9aa1ae);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.unit-add-remove:hover {
+  color: var(--text-main);
+  border-color: rgba(215, 198, 154, 0.5);
+}
+
+.unit-add-button {
+  white-space: nowrap;
+}
+
+.unit-role-row > .unit-role-count:only-child {
+  margin-left: auto;
+}
+
+.unit-preview-modal-title {
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Nombres largos (Exploradores, Juggernaut…): encogen en vez de partirse */
+.unit-card-type-title {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: manual;
+}
+
+.unit-card-type-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Coste en acciones al pie de la ficha de objeto */
+.ficha2-item-accion {
+  display: block;
+  width: 70%;
+  margin: 0.9em auto 0;
+  padding-top: 0.5em;
+  color: #6b5a3a;
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  border-top: 2px solid rgba(107, 90, 58, 0.4);
+}
+
+/* Ventaja de tipo en la ficha: +1 y +2, cada uno en su línea */
+.ficha2-cell-bonus-line {
+  display: block;
+  white-space: nowrap;
 }

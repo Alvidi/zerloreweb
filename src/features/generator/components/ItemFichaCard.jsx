@@ -202,8 +202,8 @@ const ItemFichaCard = forwardRef(function ItemFichaCard({ item, count = 1 }, ref
           </FitBox>
         ) : null}
 
-        <FitBox className="ficha2-valor" rect={LAYOUT.valor} maxFontSize={34} fitKey={String(item.valor)}>
-          {item.valor}
+        <FitBox className="ficha2-valor" rect={LAYOUT.valor} maxFontSize={34} fitKey={String(item.valor ?? '—')}>
+          {item.valor ?? '—'}
         </FitBox>
 
         <FitBox
@@ -211,9 +211,17 @@ const ItemFichaCard = forwardRef(function ItemFichaCard({ item, count = 1 }, ref
           rect={LAYOUT.description}
           maxFontSize={40}
           minFontSize={10}
-          fitKey={item.descripcion}
+          fitKey={`${item.descripcion}|${item.accion ?? ''}`}
         >
           <span>{item.descripcion}</span>
+          {/* Coste en acciones de jugar la carta, bajo la descripción */}
+          {item.accion ? (
+            <span className="ficha2-item-accion">
+              {/^\d+$/.test(String(item.accion))
+                ? `${item.accion} ${Number(item.accion) === 1 ? 'acción' : 'acciones'}`
+                : item.accion}
+            </span>
+          ) : null}
         </FitBox>
       </div>
     </div>

@@ -66,7 +66,7 @@ export const getAbilityDescription = (ability) => {
     return 'Si el objetivo sufre daño, la explosión alcanza hasta X miniaturas adicionales a 3" de la impactada, que sufren el mismo daño directo. Se asignan primero a miniaturas enemigas y, si quedan impactos por repartir, continúan con las aliadas. En ambos casos, el propietario de las miniaturas afectadas decide cuáles reciben el daño, siguiendo las reglas normales de asignación en escuadra.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
-    return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia.'
+    return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y no estén cubiertos.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.reach) {
     return 'Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades.'
@@ -79,7 +79,9 @@ export const getAbilityDescription = (ability) => {
   }
   if (abilityId === WEAPON_ABILITY_IDS.anti) {
     const target = getAntiTargetLabel(raw)
-    return `Esta arma inflige 1D3 de daño extra contra ${target || 'el tipo indicado'}, siempre que haga al menos 1 de daño al objetivo.`
+    return target
+      ? `Esta arma inflige 1D3 de daño extra contra ${target}.`
+      : 'Esta arma inflige 1D3 de daño extra contra el tipo de unidad al que tenga ventaja.'
   }
 
   return ''

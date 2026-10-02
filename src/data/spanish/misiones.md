@@ -263,7 +263,7 @@ Las misiones se roban de la baraja de misiones; cada jugador tiene siempre **4**
 <div class="rules-mission-card-header"><h3 class="rules-mission-card-title">30 - Momento decisivo</h3><button class="rules-mission-view-btn" type="button" data-number="30" onclick="window.__zeroloreOpenMissionFicha(this)">Ver ficha</button></div>
 <p class="rules-mission-card-flavor"><em>"Ha llegado la hora."</em></p>
 <p class="rules-mission-card-summary"><span class="rules-mission-label">Objetivo:</span> Usa la habilidad de tu Héroe</p>
-<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Declara y usa la habilidad de tu Héroe antes de tu primera activación de cualquier turno. Basta con usarla: no importa el resultado. Ojo: gastarla pronto por puntuar te deja sin ella en el momento decisivo.</p>
+<p class="rules-mission-card-copy"><span class="rules-mission-label">Descripción:</span> Usa la habilidad de tu Héroe activándolo en cualquier turno. Basta con usarla: no importa el resultado. Ojo: gastarla pronto por puntuar te deja sin ella en el momento decisivo.</p>
 <p class="rules-mission-card-meta"><span class="rules-mission-label">Puntos:</span> 10 pts</p>
 </div>
 
