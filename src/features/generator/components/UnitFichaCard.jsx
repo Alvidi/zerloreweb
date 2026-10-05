@@ -172,7 +172,22 @@ const formatVentaja = (fuerteContra) => fuerteContra
   .join('\n')
 
 function WeaponRow({ weapon, y, h, fuerteContra = [] }) {
-  if (!weapon) return null
+  // Hay unidades sin arma a distancia: la fila se deja marcada con un guion
+  // en cada columna para que no parezca que falta un dato.
+  if (!weapon) {
+    return WEAPON_COLUMNS.map((column) => (
+      <FitBox
+        key={`${y}-${column.key}-empty`}
+        className={`ficha2-cell ficha2-cell-${column.key} is-empty`}
+        rect={{ x: column.x, y, w: column.w, h }}
+        maxFontSize={30}
+        minFontSize={9}
+        fitKey="—"
+      >
+        —
+      </FitBox>
+    ))
+  }
   const values = {
     ataques: text(weapon.ataques),
     distancia: text(weapon.distancia),
@@ -421,18 +436,23 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
           {text(displayName, '')}
         </FitBox>
 
-        <FitBox
-          className={`ficha2-tag unit-type-${getUnitClassToken(entry.unidadId)}`}
-          rect={LAYOUT.clase}
-          maxFontSize={26}
-          fitKey={entry.clase}
-        >
-          {text(entry.clase, '')}
-        </FitBox>
-
-        <FitBox className="ficha2-tag" rect={LAYOUT.rol} maxFontSize={26} fitKey={abilityName}>
-          {text(abilityName, '')}
-        </FitBox>
+        {/* Las dos pastillas bajo el nombre llevan la ventaja de tipo, cada una
+            teñida con el color del tipo al que gana. */}
+        {[LAYOUT.clase, LAYOUT.rol].map((rect, index) => {
+          const ventaja = fuerteContra[index]
+          const etiqueta = ventaja ? `+${ventaja.bonus} ${ventaja.tipo}` : '—'
+          return (
+            <FitBox
+              key={`ventaja-${index}`}
+              className={`ficha2-tag${ventaja ? ` unit-type-${getUnitClassToken(ventaja.tipo)}` : ''}`}
+              rect={rect}
+              maxFontSize={26}
+              fitKey={etiqueta}
+            >
+              {etiqueta}
+            </FitBox>
+          )
+        })}
 
         <FitBox className="ficha2-valor" rect={LAYOUT.valor} maxFontSize={34} fitKey={String(perfil.valor)}>
           {text(perfil.valor)}

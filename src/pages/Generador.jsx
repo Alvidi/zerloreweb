@@ -26,11 +26,12 @@ const EXPORT_PAGE_W = 1240  // A4 vertical (folio) ~210mm × 5.9px/mm
 const EXPORT_PAGE_H = 1754  // A4 vertical (folio) ~297mm × 5.9px/mm
 const EXPORT_MARGIN = 46    // ~8mm de margen
 const EXPORT_GAP = 24       // ~4mm entre fichas
-// Todas las fichas se imprimen a tamaño carta (~95 mm de ancho, parecido a una
-// carta de Magic), no a tamaño datasheet: así caben 8 unidades por folio en una
-// rejilla de 2×4 y 6 objetos en 2×3.
+// Las fichas de unidad son apaisadas, así que en un A4 vertical se imprimen
+// giradas 90°: 4 por folio en una rejilla de 2×2 que aprovecha el alto de la
+// hoja (~139 mm de lado largo). Hay que girar el folio para leerlas.
+// Los objetos siguen a tamaño carta (~95 mm), 6 por folio en 2×3.
 const EXPORT_CARD_W_MM = 95
-const CARDS_PER_PAGE = 8
+const CARDS_PER_PAGE = 4
 const CARD_COLUMNS = 2
 const ITEM_CARDS_PER_PAGE = 6
 const ITEM_CARD_COLUMNS = 2
@@ -138,7 +139,8 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
   ctx.fillStyle = '#f8f5ed'
   ctx.fillRect(0, 0, EXPORT_PAGE_W, EXPORT_PAGE_H)
 
-  // Todas las fichas van a tamaño carta: unidades en rejilla 2×4 y objetos en 2×3.
+  // Los objetos van rectos a tamaño carta; las unidades, giradas 90° para que
+  // 4 llenen el folio en vez de quedarse en la mitad de arriba.
   const isItemPage = variant === 'objeto'
   const cols = isItemPage ? ITEM_CARD_COLUMNS : CARD_COLUMNS
   const rows = Math.ceil((isItemPage ? ITEM_CARDS_PER_PAGE : CARDS_PER_PAGE) / cols)
@@ -146,19 +148,40 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
   const aspect = FICHA_CARD_W / FICHA_CARD_H
   const availableWidth = EXPORT_PAGE_W - EXPORT_MARGIN * 2 - gap * (cols - 1)
   const availableHeight = EXPORT_PAGE_H - EXPORT_MARGIN * 2 - gap * (rows - 1)
-  const targetWidth = Math.min(
-    availableWidth / cols,
-    Math.round(EXPORT_CARD_W_MM * EXPORT_PX_PER_MM),
-  )
-  const cardHeight = Math.floor(Math.min(availableHeight / rows, targetWidth / aspect))
-  const cardWidth = Math.round(cardHeight * aspect)
-  const marginX = Math.round((EXPORT_PAGE_W - cols * cardWidth - gap * (cols - 1)) / 2)
-  const marginY = Math.round((EXPORT_PAGE_H - rows * cardHeight - gap * (rows - 1)) / 2)
+
+  // Hueco que ocupa cada ficha sobre el papel. Girada, el lado largo de la
+  // ficha es el alto del hueco, así que la proporción se invierte.
+  let slotWidth
+  let slotHeight
+  if (isItemPage) {
+    slotWidth = Math.min(availableWidth / cols, Math.round(EXPORT_CARD_W_MM * EXPORT_PX_PER_MM))
+    slotHeight = Math.floor(Math.min(availableHeight / rows, slotWidth / aspect))
+    slotWidth = Math.round(slotHeight * aspect)
+  } else {
+    slotWidth = Math.floor(Math.min(availableWidth / cols, availableHeight / rows / aspect))
+    slotHeight = Math.round(slotWidth * aspect)
+  }
+
+  const marginX = Math.round((EXPORT_PAGE_W - cols * slotWidth - gap * (cols - 1)) / 2)
+  const marginY = Math.round((EXPORT_PAGE_H - rows * slotHeight - gap * (rows - 1)) / 2)
 
   cardCanvases.forEach((cardCanvas, index) => {
     const col = index % cols
     const row = Math.floor(index / cols)
-    ctx.drawImage(cardCanvas, marginX + col * (cardWidth + gap), marginY + row * (cardHeight + gap), cardWidth, cardHeight)
+    const x = marginX + col * (slotWidth + gap)
+    const y = marginY + row * (slotHeight + gap)
+
+    if (isItemPage) {
+      ctx.drawImage(cardCanvas, x, y, slotWidth, slotHeight)
+      return
+    }
+
+    // Girada: se dibuja centrada en su hueco con el alto y el ancho cambiados.
+    ctx.save()
+    ctx.translate(x + slotWidth / 2, y + slotHeight / 2)
+    ctx.rotate(-Math.PI / 2)
+    ctx.drawImage(cardCanvas, -slotHeight / 2, -slotWidth / 2, slotHeight, slotWidth)
+    ctx.restore()
   })
 
   return pageCanvas
@@ -271,7 +294,7 @@ function Generador() {
   const [openCatalogKey, setOpenCatalogKey] = useState('')
   const [openArmyUid, setOpenArmyUid] = useState('')
   const [imageCropDraft, setImageCropDraft] = useState(null)
-  // Qué PDF se está montando ahora mismo: 'ejercito', 'roster' o ninguno.
+  // Qué PDF se está montando: 'ejercito', 'catalogo-unidades', 'catalogo-objetos' o ninguno.
   const [printJob, setPrintJob] = useState(null)
   const isArmyPrintPreviewOpen = printJob !== null
   const [armyDownloadError, setArmyDownloadError] = useState('')
@@ -350,31 +373,39 @@ function Generador() {
   }, [armyUnitGroups, armyExportItems])
 
   /**
-   * Roster completo: los 17 tipos de unidad y todos los objetos. No depende del
-   * ejército montado — es el mazo entero para quien quiera imprimirlo de una vez.
+   * Catálogo completo, al margen del ejército montado. Van por separado porque
+   * las dos descargas son independientes: fichas de unidad y cartas de objeto.
    */
-  const rosterExportEntries = useMemo(() => {
-    const unidades = UNIDADES
+  const catalogUnitEntries = useMemo(
+    () => UNIDADES
       .map((unidad) => ({
-        uid: `roster-unidad-${unidad.id}`,
+        uid: `catalogo-unidad-${unidad.id}`,
         kind: 'unidad',
         entry: buildUnitEntry(unidad.id),
       }))
-      .filter((item) => item.entry)
-    const objetos = objetosData.objetos.map((item) => ({
-      uid: `roster-objeto-${item.id}`,
+      .filter((item) => item.entry),
+    [],
+  )
+
+  const catalogItemEntries = useMemo(
+    () => objetosData.objetos.map((item) => ({
+      uid: `catalogo-objeto-${item.id}`,
       kind: 'objeto',
       item,
       count: 0,
-    }))
-    return [...unidades, ...objetos]
-  }, [])
+    })),
+    [],
+  )
 
-  const exportEntries = printJob === 'roster' ? rosterExportEntries : armyExportEntries
+  const exportEntries = printJob === 'catalogo-unidades'
+    ? catalogUnitEntries
+    : printJob === 'catalogo-objetos'
+      ? catalogItemEntries
+      : armyExportEntries
 
   /**
-   * Los folios no mezclan tamaños: primero las páginas de unidades y héroes
-   * (2 por folio) y luego las de objetos (3 por folio, tamaño carta de misión).
+   * Los folios no mezclan tamaños: primero las páginas de unidades
+   * (8 por folio) y luego las de objetos (6 por folio).
    */
   const armyExportPages = useMemo(() => {
     const grandes = exportEntries.filter((item) => item.kind !== 'objeto')
@@ -544,10 +575,10 @@ function Generador() {
     setPrintJob('ejercito')
   }
 
-  const handleDownloadRosterPdf = () => {
+  const handleDownloadCatalogPdf = (job) => {
     if (isArmyPrintPreviewOpen) return
     setArmyDownloadError('')
-    setPrintJob('roster')
+    setPrintJob(job)
   }
 
   useEffect(() => {
@@ -598,7 +629,12 @@ function Generador() {
         doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pageWidth, pageHeight, undefined, 'FAST')
       })
 
-      doc.save(printJob === 'roster' ? 'zerolore-roster-completo.pdf' : 'zerolore-ejercito.pdf')
+      const fileName = printJob === 'catalogo-unidades'
+        ? 'zerolore-unidades.pdf'
+        : printJob === 'catalogo-objetos'
+          ? 'zerolore-equipamiento.pdf'
+          : 'zerolore-ejercito.pdf'
+      doc.save(fileName)
       if (!cancelled) setPrintJob(null)
     }
 
@@ -668,26 +704,25 @@ function Generador() {
                 <span className="generator-section-tab-count">{currentArmyTotalValue} {t('generator.valueUnit')}</span>
               </button>
 
-              {/* Descarga del mazo entero, para quien no quiera montar ejército. */}
-              <div className="generator-roster-download">
-                <button
-                  type="button"
-                  className="ghost small"
-                  onClick={handleDownloadRosterPdf}
-                  disabled={isArmyPrintPreviewOpen}
-                  aria-busy={printJob === 'roster' ? 'true' : 'false'}
-                  title={t('generator.rosterHint').replace('{count}', String(rosterExportEntries.length))}
-                >
-                  {printJob === 'roster' ? <SpinnerIcon /> : null}
-                  <span>{printJob === 'roster' ? t('generator.preparingPdf') : t('generator.downloadRoster')}</span>
-                </button>
-              </div>
             </div>
 
             {activeGeneratorSection === 'units' ? (
               <div className="generator-subsection generator-listing-field">
                 <div className="unit-list-section">
-                  <p className="unit-list-section-label">{t('generator.units')}</p>
+                  <div className="unit-list-section-head">
+                    <p className="unit-list-section-label">{t('generator.units')}</p>
+                    <button
+                      type="button"
+                      className="ghost small unit-list-section-download"
+                      onClick={() => handleDownloadCatalogPdf('catalogo-unidades')}
+                      disabled={isArmyPrintPreviewOpen}
+                      aria-busy={printJob === 'catalogo-unidades' ? 'true' : 'false'}
+                      title={t('generator.unitsPdfHint').replace('{count}', String(catalogUnitEntries.length))}
+                    >
+                      {printJob === 'catalogo-unidades' ? <SpinnerIcon /> : null}
+                      <span>{printJob === 'catalogo-unidades' ? t('generator.preparingPdf') : t('generator.downloadUnits')}</span>
+                    </button>
+                  </div>
                   <div className="unit-list">
                     {UNIDADES.map((unidad) => {
                       const count = unitCountById.get(unidad.id) || 0
@@ -731,6 +766,9 @@ function Generador() {
                               </div>
                             </div>
                           </div>
+                          {unidad.descripcion ? (
+                            <p className="unit-card-blurb">{unidad.descripcion}</p>
+                          ) : null}
                         </article>
                       )
                     })}
@@ -739,7 +777,20 @@ function Generador() {
 
                     <hr className="generator-items-divider" />
                     <div className="unit-list-section">
-                      <p className="unit-list-section-label">{t('rules.modeItems')}</p>
+                      <div className="unit-list-section-head">
+                        <p className="unit-list-section-label">{t('rules.modeItems')}</p>
+                        <button
+                          type="button"
+                          className="ghost small unit-list-section-download"
+                          onClick={() => handleDownloadCatalogPdf('catalogo-objetos')}
+                          disabled={isArmyPrintPreviewOpen}
+                          aria-busy={printJob === 'catalogo-objetos' ? 'true' : 'false'}
+                          title={t('generator.itemsPdfHint').replace('{count}', String(catalogItemEntries.length))}
+                        >
+                          {printJob === 'catalogo-objetos' ? <SpinnerIcon /> : null}
+                          <span>{printJob === 'catalogo-objetos' ? t('generator.preparingPdf') : t('generator.downloadItems')}</span>
+                        </button>
+                      </div>
                       <div className="unit-list">
                         {activeItems.map((item) => {
                           const itemCount = selectedItems[item.id] || 0
@@ -954,7 +1005,6 @@ function Generador() {
         <div className="unit-preview-modal" role="dialog" aria-modal="true" aria-label={previewItem.entry.nombre} onClick={closePreview}>
           <div className="unit-preview-modal-inner" onClick={(event) => event.stopPropagation()}>
             <div className="unit-preview-modal-bar">
-              <span className="unit-preview-modal-title">{previewItem.entry.nombre}</span>
               <div className="unit-preview-modal-actions">
                 <button type="button" className="ghost small" onClick={closePreview} aria-label={t('generator.close')}>✕</button>
               </div>

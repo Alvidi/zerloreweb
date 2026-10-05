@@ -134,18 +134,19 @@ const head = (title, sub) => `
    "cada miniatura de una escuadra debe mantenerse a 1" o menos de al menos otra
    miniatura de la misma escuadra... en línea, en cuña o agrupada."            */
 const squadCoherence = figure(
-  'Coherencia de escuadra en Gran Batalla',
+  'Coherencia de escuadra',
   'Formaciones válidas de una escuadra y un caso con la cadena rota',
-  664,
+  728,
   `
-  ${head('Coherencia de escuadra · Gran Batalla', 'Cada miniatura debe estar a 1" o menos de al menos otra de la misma escuadra.')}
+  ${head('Coherencia de escuadra', 'Cada miniatura a 1" o menos de otra, y alguna a 1" o menos del Comandante.')}
 
   ${row(76, 124, {
     tone: 'ok', ok: true, title: 'En línea',
     lines: [{ t: 'Mientras cada eslabón mida 1" o menos,' }, { t: 'la cadena aguanta.' }],
-    draw: `${[0, 1, 2, 3].map((i) => base(70 + i * 48, 148, C.ally)).join('')}
+    draw: `${base(70, 148, C.act)}${[1, 2, 3].map((i) => base(70 + i * 48, 148, C.ally)).join('')}
       ${[0, 1, 2].map((i) => `<line x1="${87 + i * 48}" y1="148" x2="${101 + i * 48}" y2="148" stroke="${C.ally}" stroke-width="1.6" stroke-dasharray="3 3"/>`).join('')}
-      <text class="zl-dim" x="142" y="185" text-anchor="middle">cada enlace ≤ 1"</text>`,
+      ${cap(70, 185, 'Comandante', C.act)}
+      <text class="zl-dim" x="180" y="185" text-anchor="middle">cada enlace ≤ 1"</text>`,
   })}
 
   ${row(212, 136, {
@@ -172,7 +173,9 @@ const squadCoherence = figure(
       <line x1="217" y1="580" x2="221" y2="580" stroke="${C.ally}" stroke-width="1.6" stroke-dasharray="3 3"/>
       ${base(360, 580, C.ally)}
       ${dim(256, 580, 342, 580, 'más de 1"')}`,
-  })}`,
+  })}
+
+  ${note(660, 'Y el Comandante', 'Al menos una miniatura de la escuadra tiene que estar a 1" o menos de él.')}`,
 )
 
 /* ── Línea de visión ────────────────────────────────────────────────────────
@@ -224,7 +227,7 @@ const lineOfSight = figure(
 const charge = figure(
   'La acción Cargar y su tirada de 1D6',
   'Secuencia de la acción Cargar con sus dos resultados',
-  530,
+  618,
   `
   ${head('Cargar', 'Consume 2 acciones. Se mueve hasta Movimiento + Velocidad hacia el objetivo.')}
 
@@ -238,7 +241,7 @@ const charge = figure(
   })}
 
   ${row(228, 132, {
-    tone: 'ok', ok: true, title: '2+ · la carga prende',
+    tone: 'ok', ok: true, title: '3+ · la carga prende',
     lines: [{ t: 'Ambas quedan trabadas y la atacante hace' }, { t: '1 ataque cuerpo a cuerpo gratis.', cls: 'zl-lab', fill: C.ok }],
     draw: `${base(160, 306, C.act)}${base(194, 306, C.enemy)}
       <circle cx="177" cy="306" r="7" fill="none" stroke="${C.ok}" stroke-width="2"/>
@@ -246,12 +249,16 @@ const charge = figure(
   })}
 
   ${row(372, 132, {
-    tone: 'ko', ok: false, title: '1 · la carga se frena',
+    tone: 'ko', ok: false, title: '1 o 2 · la carga se frena',
     lines: [{ t: 'Retírala hasta 1" del objetivo. No traba,' }, { t: 'no ataca y su activación termina.', cls: 'zl-lab', fill: C.ko }],
     draw: `${base(130, 450, C.act)}${base(240, 450, C.enemy)}
       ${dim(149, 450, 221, 450, '1"', -12)}
       ${cap(185, 488, 'Sin trabar', C.ko)}`,
-  })}`,
+  })}
+
+  ${note(512, 'Carga larga', 'El Asaltante recorre 3" más al Cargar.')}
+
+  ${note(556, 'Fuego de contención', 'El Tirador al que cargas te dispara antes de que te muevas.')}`,
 )
 
 /* ── Cobertura ──────────────────────────────────────────────────────────────
@@ -467,11 +474,10 @@ const rangedSequence = figure(
   <text class="zl-body" x="456" y="266">si el impacto fue crítico.</text>`,
 )
 
-/* ── Trepar y Vuelo ─────────────────────────────────────────────────────────
+/* ── Trepar ─────────────────────────────────────────────────────────────────
    "mover hasta tocar la base del obstáculo con su peana. A continuación, se mide
-   la altura vertical que desea escalar, consumiendo movimiento"; "Las unidades con
-   Vuelo pueden subir obstáculos de manera diagonal"; "Los Vehículos no pueden
-   subir... Los Monstruos sí, siempre que quepan físicamente en el espacio."   */
+   la altura vertical que desea escalar, consumiendo movimiento"; "Los Vehículos
+   no pueden subir... Los Monstruos sí, siempre que quepan físicamente."       */
 /* ── Acciones de una unidad ─────────────────────────────────────────────────
    "dispone de 2 acciones"; "una misma acción no puede repetirse durante la
    misma activación"; "una acción de coste 2 consume toda la activación".     */
@@ -540,7 +546,7 @@ const squadDamage = figure(
       ${cap(150, 372, 'el resto pasa aquí', C.ko)}`,
   })}
 
-  ${note(416, 'Nunca se reparte', 'Un mismo ataque no se divide entre varias miniaturas.')}`,
+  ${note(416, 'Un único total', 'Todo el daño del ataque se suma y se asigna de una en una.')}`,
 )
 
 /* ── Fase de despliegue ─────────────────────────────────────────────────────
@@ -607,10 +613,10 @@ const commanderSquad = figure(
   })}
 
   ${row(238, 130, {
-    tone: 'plain', ok: null, title: 'Se mueve como su líder',
+    tone: 'plain', ok: null, title: 'Se mueve como su escuadra',
     lines: [
-      { t: 'La escuadra usa el Movimiento y la Velocidad' },
-      { t: 'del Comandante, y se activa con él.' },
+      { t: 'El Comandante usa el Movimiento y la Velocidad' },
+      { t: 'de las unidades que comanda, y se activa con ellas.' },
     ],
     draw: `${base(100, 306, C.act)}
       ${[144, 178, 212].map((x) => base(x, 306, C.ally, 14)).join('')}
@@ -621,51 +627,91 @@ const commanderSquad = figure(
   ${note(384, 'El último en caer', 'El Comandante no recibe daño mientras quede otra miniatura en pie.')}`,
 )
 
-/* ── Explosiva (X) ──────────────────────────────────────────────────────────
-   "Si el objetivo sufre daño, la explosión alcanza hasta X miniaturas adicionales
-   a 3\" de la impactada"; "se asignan primero a miniaturas enemigas y, si quedan
-   impactos por repartir, continúan con las aliadas".                          */
+/* ── Explosiva ─────────────────────────────────────────────────────────────
+   "El ataque se resuelve con normalidad contra la unidad objetivo, incluida su
+   salvación. El daño final que reciba el objetivo lo sufren también todas las
+   miniaturas enemigas a 3" o menos de la miniatura impactada, sin tirar
+   salvación adicional. No hay fuego amigo."                                   */
+/* ── Maestro ────────────────────────────────────────────────────────────────
+   "Los ataques CaC con esta arma solo fallan con un resultado de 1. Si el
+   objetivo hace fallar con 1, 2 o 3 (por cobertura o Berserker), con Maestro
+   solo falla con 1 o 2."                                                      */
+const master = figure(
+  'Cómo funciona un arma Maestro',
+  'Qué resultados fallan con un arma Maestro, con y sin defensa que empeore la tirada',
+  440,
+  `
+  ${head('Maestro', 'Arma de cuerpo a cuerpo: casi todos los dados impactan.')}
+
+  ${row(76, 124, {
+    tone: 'plain', ok: null, title: 'Lo normal en CaC',
+    lines: [{ t: 'Sin Maestro, los 1 y los 2 fallan siempre.' }],
+    draw: `${[1, 2, 3, 4, 5, 6].map((n, i) => `
+      <rect x="${40 + i * 46}" y="118" width="38" height="38" rx="8"
+            fill="${n <= 2 ? 'rgba(201,88,79,.12)' : 'rgba(127,191,106,.12)'}"
+            stroke="${n <= 2 ? C.ko : C.ok}" stroke-width="1.6"/>
+      <text class="zl-lab" x="${59 + i * 46}" y="143" text-anchor="middle" fill="${n <= 2 ? C.ko : C.ok}">${n}</text>`).join('')}
+      ${cap(70, 180, 'fallan', C.ko)}`,
+  })}
+
+  ${row(212, 124, {
+    tone: 'ok', ok: true, title: 'Con Maestro',
+    lines: [{ t: 'Solo falla el 1. Todo lo demás impacta.' }],
+    draw: `${[1, 2, 3, 4, 5, 6].map((n, i) => `
+      <rect x="${40 + i * 46}" y="254" width="38" height="38" rx="8"
+            fill="${n === 1 ? 'rgba(201,88,79,.12)' : 'rgba(127,191,106,.12)'}"
+            stroke="${n === 1 ? C.ko : C.ok}" stroke-width="1.6"/>
+      <text class="zl-lab" x="${59 + i * 46}" y="279" text-anchor="middle" fill="${n === 1 ? C.ko : C.ok}">${n}</text>`).join('')}
+      ${cap(59, 316, 'falla', C.ko)}`,
+  })}
+
+  ${note(348, 'Si te hacen fallar', 'Cobertura o Berserker fallan con 1, 2 o 3; con Maestro, solo con 1 o 2.')}
+
+  ${note(392, 'Solo cuerpo a cuerpo', 'Maestro no se aplica a las armas a distancia.')}`,
+)
+
 const explosive = figure(
   'Cómo salpica un arma Explosiva',
-  'La explosión solo salta si el objetivo sufre daño, y se reparte primero entre enemigos',
-  560,
+  'El daño que acaba sufriendo el objetivo lo repiten todas las miniaturas enemigas a 3"',
+  520,
   `
-  ${head('Explosiva (X)', 'Primero el impacto tiene que hacer daño; después se reparte la explosión.')}
+  ${head('Explosiva', 'Primero se resuelve el ataque entero; después salpica el daño final.')}
 
-  ${row(76, 118, {
+  ${row(76, 124, {
     tone: 'ko', ok: false, title: 'El objetivo no sufre daño',
-    lines: [{ t: 'Si salva el impacto o el daño queda en 0,' }, { t: 'la explosión no alcanza a nadie.' }],
-    draw: `${base(120, 148, C.enemy)}
-      ${cap(120, 186, 'salva el impacto', C.ko)}
-      ${base(210, 148, C.enemy, 14)}${base(262, 148, C.ally, 14)}
-      ${cap(236, 186, 'no les pasa nada', C.soft)}`,
+    lines: [{ t: 'Si salva el impacto o el daño queda en 0,' }, { t: 'no hay nada que salpicar.' }],
+    draw: `${base(120, 152, C.enemy)}
+      ${cap(120, 192, 'salva el impacto', C.ko)}
+      ${base(212, 152, C.enemy, 14)}${base(264, 152, C.enemy, 14)}
+      ${cap(238, 192, 'no les pasa nada', C.soft)}`,
   })}
 
-  ${row(206, 212, {
+  ${row(212, 206, {
     tone: 'ok', ok: true, title: 'El objetivo sufre daño',
     lines: [
-      { t: 'La explosión alcanza hasta X miniaturas más' },
-      { t: 'a 3" de la impactada, con el mismo daño directo.' },
-      { t: 'Primero enemigas; las aliadas, solo si sobran.', cls: 'zl-lab', fill: C.act },
+      { t: 'Ese daño final, el que le queda tras salvar,' },
+      { t: 'lo sufren también todas las miniaturas' },
+      { t: 'enemigas a 3" o menos. Ellas no salvan.' },
     ],
-    draw: `<circle cx="170" cy="312" r="66" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
-      ${base(170, 312, C.enemy)}
-      ${dim(170, 312, 236, 312, '3"', -8)}
-      ${base(126, 262, C.enemy, 14)}${step(126, 262, '1')}
-      ${base(212, 356, C.ally, 14)}${step(212, 356, '2')}
-      ${cap(170, 398, 'enemigas antes que aliadas', C.soft)}`,
+    draw: `<circle cx="168" cy="310" r="64" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
+      ${base(168, 310, C.enemy)}
+      ${dim(168, 310, 232, 310, '3"', -8)}
+      ${base(126, 268, C.enemy, 14)}
+      ${base(208, 350, C.enemy, 14)}
+      ${base(206, 268, C.ally, 14)}
+      ${cap(168, 398, 'el mismo daño para las tres', C.ko)}`,
   })}
 
-  ${note(440, 'Quién elige', 'El daño lo asigna el dueño de las miniaturas alcanzadas.')}
+  ${note(434, 'Sin salvación', 'Las miniaturas salpicadas no tiran salvación por ese daño.')}
 
-  ${note(504, 'Explosiva (2)', 'Hasta 2 miniaturas adicionales además del objetivo.')}`,
+  ${note(476, 'No hay fuego amigo', 'La aliada del dibujo está dentro del radio y no recibe nada.')}`,
 )
 
 
 const climbing = figure(
-  'Trepar obstáculos y la habilidad Vuelo',
-  'Vista de perfil de una unidad trepando y de otra con Vuelo',
-  440,
+  'Trepar obstáculos',
+  'Vista de perfil de una unidad trepando un obstáculo',
+  300,
   `
   ${head('Trepar · vista de perfil', 'El movimiento se gasta en horizontal y también en vertical.')}
 
@@ -683,22 +729,12 @@ const climbing = figure(
       ${pawn(230, 130, C.act)}`,
   })}
 
-  ${row(238, 118, {
-    tone: 'plain', ok: null, title: 'Vuelo',
-    lines: [{ t: 'Sube en diagonal, sin tocar la base primero.' }],
-    draw: `${ground(40, 360, 340)}
-      <rect x="200" y="276" width="110" height="64" fill="url(#zl-hatch)" stroke="rgba(255,255,255,.28)"/>
-      ${pawn(90, 340, C.ally)}
-      <line x1="106" y1="326" x2="236" y2="270" stroke="${C.ally}" stroke-width="2" marker-end="url(#zl-shot)"/>
-      ${pawn(260, 276, C.ally)}`,
-  })}
-
-  ${note(368, 'Vehículos y Monstruos', 'Los Vehículos no suben. Los Monstruos sí, si caben.')}`,
+  ${note(238, 'Vehículos y Monstruos', 'Los Vehículos no suben. Los Monstruos sí, si caben.')}`,
 )
 
 /* ── Unidades trabadas y Destrabarse ────────────────────────────────────────
    "Mientras siga trabada, una unidad solo puede usar las acciones Atacar cuerpo a
-   cuerpo o Destrabarse"; "Con 4+ deja de estar trabada... Con 1, 2 o 3 pierde
+   cuerpo o Destrabarse"; "Con 3+ deja de estar trabada... Con 1 o 2 pierde
    todas sus acciones y su activación termina."                               */
 const lockedUnits = figure(
   'Unidades trabadas y la acción Destrabarse',
@@ -717,7 +753,7 @@ const lockedUnits = figure(
   })}
 
   ${row(212, 118, {
-    tone: 'ok', ok: true, title: 'Destrabarse con 4+',
+    tone: 'ok', ok: true, title: 'Destrabarse con 3+',
     lines: [{ t: 'Deja de estar trabada y usa su acción restante' }, { t: 'con normalidad, a más de 1" de todo enemigo.' }],
     draw: `${base(100, 280, C.act)}${base(230, 280, C.enemy)}
       <line x1="119" y1="280" x2="208" y2="280" stroke="${C.ok}" stroke-width="2"
@@ -726,7 +762,7 @@ const lockedUnits = figure(
   })}
 
   ${row(348, 118, {
-    tone: 'ko', ok: false, title: 'Destrabarse con 1, 2 o 3',
+    tone: 'ko', ok: false, title: 'Destrabarse con 1 o 2',
     lines: [{ t: 'No se libera: pierde todas sus acciones' }, { t: 'y su activación termina de inmediato.' }],
     draw: `${base(140, 416, C.act)}${base(174, 416, C.enemy)}
       <circle cx="157" cy="416" r="7" fill="none" stroke="${C.ko}" stroke-width="2"/>
@@ -767,36 +803,38 @@ const meleeEngagement = figure(
   })}`,
 )
 
-/* ── Titanes en cuerpo a cuerpo ─────────────────────────────────────────────
-   "un Titán solo puede quedar trabado con otro Titán"; frente al resto, ataca
-   gratis y se retira a 1\" sin que ninguna quede trabada.                     */
+/* ── Superioridad ───────────────────────────────────────────────────────────
+   "Solo puede cargar contra otro Titán, y solo otro Titán puede trabarlo. Si le
+   carga una unidad de otro tipo, esa unidad resuelve su carga y su ataque con
+   normalidad y a continuación se retira 1\" del Titán."                        */
 const titanMelee = figure(
-  'El Titán y el cuerpo a cuerpo',
-  'Solo se traba con otro Titán; contra el resto ataca y se separa',
+  'Superioridad: el Titán y el cuerpo a cuerpo',
+  'Solo carga y se traba con otro Titán; al resto les deja atacar y los aparta',
   448,
   `
-  ${head('Titanes en cuerpo a cuerpo', 'Un Titán solo queda trabado con otro Titán.')}
+  ${head('Superioridad', 'Un Titán solo carga contra otro Titán, y solo otro Titán puede trabarlo.')}
 
   ${row(76, 132, {
     tone: 'ok', ok: true, title: 'Titán contra Titán',
-    lines: [{ t: 'Se traban entre ellos y combaten con las' }, { t: 'reglas normales de combate trabado.' }],
+    lines: [{ t: 'Es la única carga que puede declarar, y la' }, { t: 'única que lo deja trabado.' }],
     draw: `${base(118, 150, C.act, 22)}${base(166, 150, C.enemy, 22)}
       <circle cx="142" cy="150" r="8" fill="none" stroke="${C.ok}" stroke-width="2"/>
       ${cap(142, 194, 'trabados', C.ok)}`,
   })}
 
   ${row(220, 136, {
-    tone: 'plain', ok: null, title: 'Titán contra cualquier otra',
+    tone: 'plain', ok: null, title: 'Le carga otra unidad',
     lines: [
-      { t: 'La carga prende y hay ataque gratuito, pero' },
-      { t: 'nadie queda trabado: luego se separan a 1".' },
+      { t: 'Resuelve su carga y su ataque con normalidad,' },
+      { t: 'y después se retira 1" del Titán. Nadie queda trabado.' },
     ],
-    draw: `${base(104, 296, C.act, 22)}${base(186, 296, C.enemy, 14)}
-      ${dim(126, 296, 172, 296, 'se retira a 1"', -12)}
-      ${cap(145, 338, 'sin trabar', C.soft)}`,
+    draw: `${base(104, 296, C.enemy, 14)}${base(196, 296, C.act, 22)}
+      <line x1="120" y1="296" x2="168" y2="296" stroke="${C.enemy}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${dim(118, 332, 170, 332, 'se retira 1"', -10)}
+      ${cap(104, 266, 'carga', C.enemy)}`,
   })}
 
-  ${note(372, 'Siempre a tiro', 'Al no quedar trabado, puede ser disparado aunque tenga enemigos en contacto.')}`,
+  ${note(372, 'Nunca trabado', 'Como no queda trabado, sigue usando sus acciones y sigue a tiro.')}`,
 )
 
 /* ── Combate cuerpo a cuerpo en escuadras ───────────────────────────────────
@@ -833,34 +871,76 @@ const squadMelee = figure(
   })}`,
 )
 
-/* ── Vehículos y Monstruos trabados ─────────────────────────────────────────
-   "pueden usar sus acciones con libertad: Disparar, Atacar cuerpo a cuerpo, o
-   cualquier combinación"; "pueden ser atacadas a distancia aunque estén trabadas". */
-const vehicleMelee = figure(
-  'Vehículos y Monstruos en combate cuerpo a cuerpo',
-  'Excepciones de Vehículos y Monstruos al estar trabados',
-  380,
+/* ── Mover una escuadra ─────────────────────────────────────────────────────
+   "Una escuadra siempre se mueve desde el Comandante... mueve primero al
+   Comandante hasta su posición final y después coloca el resto a su alrededor,
+   respetando la coherencia. Ninguna miniatura puede quedar más lejos de lo que
+   le permitiría su propio movimiento."                                        */
+const squadMovement = figure(
+  'Cómo se mueve una escuadra',
+  'Primero el Comandante y después el resto de miniaturas a su alrededor',
+  440,
   `
-  ${head('Vehículos y Monstruos trabados', 'No quedan bloqueados como el resto de unidades.')}
+  ${head('Mover una escuadra', 'La escuadra se mueve desde el Comandante, no miniatura a miniatura.')}
 
-  ${row(76, 132, {
-    tone: 'ok', ok: true, title: 'Siguen usando sus acciones',
-    lines: [{ t: 'Disparar, Atacar cuerpo a cuerpo o cualquier' }, { t: 'combinación. El jugador decide.' }],
-    draw: `${base(110, 158, C.act, 24)}${base(154, 158, C.enemy)}
-      <circle cx="133" cy="158" r="7" fill="none" stroke="${C.soft}" stroke-width="2"/>
-      <line x1="140" y1="176" x2="330" y2="196" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
-      ${cap(110, 200, 'Vehículo', C.act)}`,
+  ${row(76, 150, {
+    num: '1', title: 'Mueve el Comandante',
+    lines: [
+      { t: 'Llévalo hasta su posición final con el' },
+      { t: 'Movimiento de las unidades que comanda.' },
+    ],
+    draw: `${base(80, 156, C.act)}
+      ${[124, 158, 192].map((x) => base(x, 156, C.ally, 14)).join('')}
+      <line x1="98" y1="180" x2="250" y2="180" stroke="${C.act}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${base(268, 156, C.act)}
+      ${cap(268, 204, 'posición final', C.act)}`,
   })}
 
-  ${row(220, 132, {
-    tone: 'ko', ok: false, title: 'Y pueden ser disparados',
-    lines: [{ t: 'Es la excepción: el resto de unidades trabadas' }, { t: 'no pueden ser atacadas a distancia.' }],
-    draw: `${base(110, 302, C.act, 24)}${base(154, 302, C.enemy)}
-      <circle cx="133" cy="302" r="7" fill="none" stroke="${C.soft}" stroke-width="2"/>
-      ${base(320, 264, C.enemy)}
-      <line x1="303" y1="272" x2="140" y2="292" stroke="${C.ko}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
-      ${cap(110, 344, 'Vehículo', C.act)}`,
+  ${row(238, 150, {
+    num: '2', title: 'Coloca el resto alrededor',
+    lines: [
+      { t: 'Respetando la coherencia, y sin que nadie' },
+      { t: 'recorra más de su propio Movimiento.' },
+    ],
+    draw: `${base(170, 318, C.act)}
+      ${[[214, 296], [214, 340], [248, 318]].map(([x, y]) => base(x, y, C.ally, 14)).join('')}
+      <circle cx="170" cy="318" r="62" fill="none" stroke="${C.dim}" stroke-width="1.2" stroke-dasharray="5 4"/>
+      ${cap(170, 366, 'en coherencia', C.soft)}`,
   })}`,
+)
+
+/* ── Disparar a Vehículos y Monstruos trabados ─────────────────────────────
+   "La excepción son los Vehículos y Monstruos, que sí pueden ser atacados a
+   distancia aunque estén trabados."                                           */
+const vehicleMelee = figure(
+  'Disparar a unidades trabadas',
+  'Quién puede recibir disparos mientras está en combate cuerpo a cuerpo',
+  440,
+  `
+  ${head('Disparar a unidades trabadas', 'Las unidades en combate están a salvo del fuego externo… con una excepción.')}
+
+  ${row(76, 134, {
+    tone: 'ko', ok: false, title: 'Regla general',
+    lines: [{ t: 'Una unidad trabada no puede ser atacada' }, { t: 'a distancia desde fuera del combate.' }],
+    draw: `${base(100, 152, C.ally)}${base(144, 152, C.enemy)}
+      <circle cx="122" cy="152" r="7" fill="none" stroke="${C.soft}" stroke-width="2"/>
+      ${base(300, 122, C.enemy, 14)}
+      <line x1="284" y1="128" x2="176" y2="146" stroke="${C.ko}" stroke-width="1.8" stroke-dasharray="5 4"/>
+      ${cross(230, 138, 9)}
+      ${cap(122, 194, 'trabadas', C.soft)}`,
+  })}
+
+  ${row(222, 134, {
+    tone: 'ok', ok: true, title: 'Vehículos y Monstruos',
+    lines: [{ t: 'Son la excepción: sí pueden ser atacados' }, { t: 'a distancia aunque estén trabados.' }],
+    draw: `${base(104, 298, C.act, 24)}${base(152, 298, C.enemy)}
+      <circle cx="129" cy="298" r="7" fill="none" stroke="${C.soft}" stroke-width="2"/>
+      ${base(300, 266, C.enemy, 14)}
+      <line x1="284" y1="272" x2="180" y2="290" stroke="${C.ok}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
+      ${cap(104, 344, 'Vehículo o Monstruo', C.act)}`,
+  })}
+
+  ${note(368, 'Y al revés', 'Con Fuego de apoyo o un arma Multiuso, una unidad trabada sí puede Disparar.')}`,
 )
 
 /* ── Resolución del combate cuerpo a cuerpo ─────────────────────────────────
@@ -941,10 +1021,10 @@ const modifiers = figure(
   ${note(348, 'Topes', 'Nunca más de 6+. El 1 siempre falla; el 6 siempre impacta.')}`,
 )
 
-/* ── Ventaja de Clase ───────────────────────────────────────────────────────
-   "cuando una unidad ataca a una clase sobre la que tiene ventaja y el ataque
-   inflige daño, suma +1 al daño total final del ataque. Se aplica igual en
-   Escaramuza y en Gran Batalla."                                             */
+/* ── Ventaja de tipo ────────────────────────────────────────────────────────
+   "cuando una unidad ataca a un tipo sobre el que tiene ventaja y el ataque
+   inflige daño, suma el +1 o +2 de daño indicado en Fuerte contra al daño
+   total final del ataque"; el Comandante queda fuera en ambos sentidos.      */
 const classAdvantage = figure(
   'Cómo se aplica la Ventaja de tipo',
   'La ventaja de tipo suma +1 al daño total del ataque',
@@ -982,10 +1062,12 @@ export const RULES_DIAGRAMS = {
   climbingDiagram: climbing,
   actionsDiagram: actions,
   squadDamageDiagram: squadDamage,
+  squadMovementDiagram: squadMovement,
   deploymentPhaseDiagram: deploymentPhase,
   commanderSquadDiagram: commanderSquad,
   titanMeleeDiagram: titanMelee,
   explosiveDiagram: explosive,
+  masterDiagram: master,
   meleeEngagementDiagram: meleeEngagement,
   lockedUnitsDiagram: lockedUnits,
   squadMeleeDiagram: squadMelee,

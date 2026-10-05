@@ -1,15 +1,5 @@
 import { getWeaponAbilityId, WEAPON_ABILITY_IDS } from './weaponAbilities.js'
 
-const parseAbilityNumber = (raw) => {
-  const text = String(raw || '')
-  const plusMatch = text.match(/(\d+)\s*\+/)
-  if (plusMatch) return plusMatch[1]
-  const signedMatch = text.match(/[+-]\s*\d+/)
-  if (signedMatch) return signedMatch[0].replace(/\s+/g, '')
-  const numMatch = text.match(/\d+/)
-  return numMatch ? numMatch[0] : null
-}
-
 const parseAbilityStateVariants = (raw) => {
   const match = String(raw || '').trim().match(/^(.+?)\s*\(([^()]*)\)$/)
   if (!match) return null
@@ -19,14 +9,6 @@ const parseAbilityStateVariants = (raw) => {
   if (!getWeaponAbilityId(normal) || !getWeaponAbilityId(transformed)) return null
 
   return { normal, transformed }
-}
-
-const getAntiTargetLabel = (rawAbility) => {
-  const target = String(rawAbility || '')
-    .trim()
-    .replace(/^anti[\s-]*/i, '')
-    .trim()
-  return target
 }
 
 export const getAbilityDescription = (ability) => {
@@ -39,7 +21,6 @@ export const getAbilityDescription = (ability) => {
     return `Forma normal: ${normalDescription} Forma Monstruo: ${transformedDescription}`
   }
   const abilityId = getWeaponAbilityId(raw)
-  const value = parseAbilityNumber(raw)
 
   if (abilityId === WEAPON_ABILITY_IDS.reliable) {
     return 'Esta arma no tiene reglas especiales.'
@@ -48,7 +29,7 @@ export const getAbilityDescription = (ability) => {
     return 'Esta arma no puede disparar por debajo de la mitad de su rango.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.brutal) {
-    return `Los impactos se consideran críticos con un resultado natural de ${value || 'X'}+.`
+    return 'Los impactos de esta arma se consideran críticos con un resultado natural de 5+ en la tirada de ataque.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.piercing) {
     return 'Los impactos de esta arma empeoran en 1 la Salvación realizada contra ellos.'
@@ -63,25 +44,16 @@ export const getAbilityDescription = (ability) => {
     return 'Esta arma impacta directamente, no tiene precisión.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
-    return 'Si el objetivo sufre daño, la explosión alcanza hasta X miniaturas adicionales a 3" de la impactada, que sufren el mismo daño directo. Se asignan primero a miniaturas enemigas y, si quedan impactos por repartir, continúan con las aliadas. En ambos casos, el propietario de las miniaturas afectadas decide cuáles reciben el daño, siguiendo las reglas normales de asignación en escuadra.'
+    return 'El ataque se resuelve con normalidad contra la unidad objetivo, incluida su salvación. El daño final que reciba el objetivo lo sufren también todas las miniaturas enemigas a 3" o menos de la miniatura impactada, sin tirar salvación adicional. No hay fuego amigo.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
-    return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y no estén cubiertos.'
+    return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo no esté en cobertura.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.reach) {
     return 'Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades.'
   }
-  if (abilityId === WEAPON_ABILITY_IDS.erratic) {
-    return 'Antes de resolver el ataque, lanza 1D6: el resultado es la Precisión del arma durante ese ataque.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.sweep) {
-    return 'Arma de cuerpo a cuerpo. Al atacar, en vez de elegir un objetivo, esta arma ataca a todas las unidades enemigas trabadas con ella. Resuelve el ataque por separado contra cada una.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.anti) {
-    const target = getAntiTargetLabel(raw)
-    return target
-      ? `Esta arma inflige 1D3 de daño extra contra ${target}.`
-      : 'Esta arma inflige 1D3 de daño extra contra el tipo de unidad al que tenga ventaja.'
+  if (abilityId === WEAPON_ABILITY_IDS.master) {
+    return 'Los ataques CaC con esta arma solo fallan con un resultado de 1. Si el objetivo hace fallar con 1, 2 o 3 (por cobertura o Berserker), con Maestro solo falla con 1 o 2.'
   }
 
   return ''

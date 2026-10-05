@@ -58,16 +58,15 @@ const getRulesAssetPlaceholders = () => {
 
 const RULES_UNIT_TYPE_ICONS = [
   { id: 'milicia', label: 'Milicia' },
-  { id: 'infanteria', label: 'Infantería' },
+  { id: 'tirador', label: 'Tirador' },
   { id: 'choque', label: 'Choque' },
-  { id: 'elite', label: 'Élite' },
-  { id: 'especialista', label: 'Especialista' },
-  { id: 'exploradores', label: 'Exploradores' },
-  { id: 'alado', label: 'Alado' },
-  { id: 'armas-pesadas', label: 'Armas Pesadas' },
-  { id: 'mistico', label: 'Místico' },
-  { id: 'demonio', label: 'Demonio' },
   { id: 'juggernaut', label: 'Juggernaut' },
+  { id: 'exterminador', label: 'Exterminador' },
+  { id: 'explorador', label: 'Explorador' },
+  { id: 'asaltante', label: 'Asaltante' },
+  { id: 'armas-pesadas', label: 'Armas Pesadas' },
+  { id: 'psiquico', label: 'Psíquico' },
+  { id: 'demonio', label: 'Demonio' },
   { id: 'monstruo', label: 'Monstruo' },
   { id: 'vehiculo-ligero', label: 'Vehículo ligero' },
   { id: 'vehiculo-pesado', label: 'Vehículo pesado' },
@@ -77,7 +76,7 @@ const RULES_UNIT_TYPE_ICONS = [
 ].map((unitType) => ({ ...unitType, imageSrc: getUnitClassBadgeSrc(unitType.id) }))
 
 // Fichas de ejemplo del reglamento, tomadas del catálogo.
-const RULES_EXAMPLE_UNIT_ID = 'elite'
+const RULES_EXAMPLE_UNIT_ID = 'juggernaut'
 const RULES_EXAMPLE_COMMANDER_ID = 'comandante'
 
 function RulesFichaSlot({ type, lang }) {
@@ -242,12 +241,12 @@ function Reglamento() {
   const printCoverCreditLabel = 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
 
-  const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, weaponAbilityTableHtml } = useMemo(() => {
+  const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, weaponAbilityTableHtml, unitTypeTableHtml } = useMemo(() => {
     if (isTokensMode) {
-      return { renderedHtml: '', tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '' }
+      return { renderedHtml: '', tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '', unitTypeTableHtml: '' }
     }
     if (typeof window === 'undefined') {
-      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '' }
+      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '', unitTypeTableHtml: '' }
     }
     const parser = new DOMParser()
     const doc = parser.parseFromString(rulesHtml, 'text/html')
@@ -261,6 +260,7 @@ function Reglamento() {
     })
     let specialtyTableHtml = ''
     let weaponAbilityTableHtml = ''
+    let unitTypeTableHtml = ''
 
     const extractTableIntoModalTrigger = ({
       headingTags,
@@ -305,6 +305,13 @@ function Reglamento() {
         matchesHeading: (normalized) => normalized === 'habilidades de armas' || normalized === 'weapon abilities',
         modalKey: 'weaponAbility',
         triggerLabel: 'Ver tabla de habilidades de arma',
+      })
+
+      unitTypeTableHtml = extractTableIntoModalTrigger({
+        headingTags: 'h1',
+        matchesHeading: (normalized) => normalized === 'tipos de unidad' || normalized === 'unit types',
+        modalKey: 'unitType',
+        triggerLabel: 'Ver tabla de tipos de unidad',
       })
     }
     Array.from(doc.querySelectorAll('img')).forEach((image) => {
@@ -636,7 +643,7 @@ function Reglamento() {
       if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy')
     })
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
-    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, weaponAbilityTableHtml }
+    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, weaponAbilityTableHtml, unitTypeTableHtml }
   }, [t, rulesHtml, isTokensMode, rulesMode])
 
   useEffect(() => {
@@ -1610,7 +1617,11 @@ function Reglamento() {
       })
       captureRoot.querySelectorAll('[data-rules-table-modal]').forEach((trigger) => {
         const key = trigger.dataset.rulesTableModal
-        const tableHtml = key === 'specialty' ? specialtyTableHtml : key === 'weaponAbility' ? weaponAbilityTableHtml : ''
+        const tableHtml = key === 'specialty'
+          ? specialtyTableHtml
+          : key === 'weaponAbility'
+            ? weaponAbilityTableHtml
+            : key === 'unitType' ? unitTypeTableHtml : ''
         if (!tableHtml) return
         const wrapper = document.createElement('div')
         wrapper.innerHTML = tableHtml
@@ -2290,7 +2301,9 @@ function Reglamento() {
               <h2>
                 {openTableModal === 'specialty'
                   ? 'Tabla de especialidades'
-                  : 'Tabla de habilidades de arma'}
+                  : openTableModal === 'unitType'
+                    ? 'Tabla de tipos de unidad'
+                    : 'Tabla de habilidades de arma'}
               </h2>
               <button
                 type="button"
@@ -2302,7 +2315,11 @@ function Reglamento() {
             <div
               className="rules-html rules-table-modal-body"
               dangerouslySetInnerHTML={{
-                __html: openTableModal === 'specialty' ? specialtyTableHtml : weaponAbilityTableHtml,
+                __html: openTableModal === 'specialty'
+                  ? specialtyTableHtml
+                  : openTableModal === 'unitType'
+                    ? unitTypeTableHtml
+                    : weaponAbilityTableHtml,
               }}
             />
           </div>

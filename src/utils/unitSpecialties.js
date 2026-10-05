@@ -8,10 +8,10 @@ const normalizeKey = (value) =>
 
 const UNIT_SPECIALTIES = [
   {
-    es: { name: 'Capturador', description: 'Esta unidad cuenta como el doble de su Valor al controlar o disputar puestos de mando.' },
+    es: { name: 'Alimañas', description: 'Esta unidad no tiene habilidad especial.' },
   },
   {
-    es: { name: 'Certero', description: 'Si esta unidad no se ha movido durante esta activación, mejora en 1 la Precisión de sus ataques a distancia (por ejemplo, de 4+ a 3+).' },
+    es: { name: 'Fuego de contención', description: 'Cuando un enemigo le declara una carga, puede dispararle antes de que se mueva.' },
   },
   {
     es: { name: 'Carga brutal', description: 'Cuando esta unidad realiza una carga, gana +1 dado de ataque CaC durante ese combate.' },
@@ -20,13 +20,13 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Resistente', description: 'La primera vez cada turno que esta unidad reciba daño, reduce ese daño en 1D3.' },
   },
   {
-    es: { name: 'Soporte', description: 'En su activación, en lugar de actuar, puede curar a una unidad aliada a 6" o menos: esa unidad recupera 1D3 Vidas perdidas.' },
+    es: { name: 'Berserker', description: 'Las unidades enemigas que ataquen a esta unidad en CaC fallan con resultados naturales de 1, 2 o 3.' },
   },
   {
-    es: { name: 'Avanzadilla', description: 'Puede desplegarse a 9" de un puesto de mando aliado.' },
+    es: { name: 'Avanzadilla', description: 'Puede desplegarse a 9" de un puesto de mando aliado. No puede ir con Comandantes.' },
   },
   {
-    es: { name: 'Vuelo', description: 'Esta unidad ignora terreno y obstáculos durante el movimiento y puede ascender diagonalmente sin coste adicional. No puede acabar su movimiento sobre otras miniaturas o zonas donde no pueda sostenerse.' },
+    es: { name: 'Carga larga', description: 'Al realizar la acción Cargar, esta unidad puede desplazarse 3" adicionales.' },
   },
   {
     es: { name: 'Emplazado', description: 'Si esta unidad no se ha movido durante esta activación, gana +1 dado en sus ataques a distancia.' },
@@ -38,25 +38,22 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Regeneración', description: 'Al final de cada turno, si esta unidad sigue en el campo de batalla, recupera 1D3 Vidas perdidas.' },
   },
   {
-    es: { name: 'Berserker', description: 'Las unidades enemigas que ataquen a esta unidad en CaC fallan con resultados naturales de 1, 2 o 3.' },
-  },
-  {
     es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden realizar la acción Destrabarse.' },
   },
   {
     es: { name: 'Atropello', description: 'Durante su carga, si traba a una unidad enemiga, esa unidad recibe automáticamente 1D3 de daño.' },
   },
   {
-    es: { name: 'Cobertura móvil', description: 'Las unidades aliadas a 3" o menos de esta unidad cuentan como en cobertura contra ataques a distancia.' },
+    es: { name: 'Fuego de apoyo', description: 'Esta unidad puede realizar la acción Disparar aunque esté trabada en combate cuerpo a cuerpo.' },
   },
   {
     es: { name: 'Atrincherado', description: 'Esta unidad no puede moverse.' },
   },
   {
-    es: { name: 'Terror', description: 'Las unidades enemigas a 12" o menos de esta unidad no pueden dispararle.' },
+    es: { name: 'Superioridad', description: 'Solo puede cargar contra otro Titán, y solo otro Titán puede trabarlo. Si le carga una unidad de otro tipo, esa unidad resuelve su carga y su ataque con normalidad y a continuación se retira 1" del Titán.' },
   },
   {
-    es: { name: 'Refuerzos', description: 'Durante la fase de despliegue, esta unidad funciona como un puesto de mando para su propia escuadra: puede recibir una miniatura de su tipo desde la Reserva, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas.' },
+    es: { name: 'Refuerzos', description: 'Durante la fase de despliegue, esta unidad puede recibir una miniatura de su tipo desde la Reserva, siempre que no esté trabada en CaC, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas.' },
   },
 ]
 

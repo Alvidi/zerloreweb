@@ -10,6 +10,8 @@ const badgeModules = import.meta.glob('../../images/units_icons/*.png', {
 const FILENAME_ALIASES = {
   mosntruo: 'monstruo',
   arma_pesada: 'armas-pesadas',
+  'vehiculo ligero': 'vehiculo-ligero',
+  'vehiculo pesado': 'vehiculo-pesado',
 }
 
 const badgeByClass = Object.entries(badgeModules).reduce((badges, [path, src]) => {
@@ -28,16 +30,15 @@ export const getUnitClassToken = (value = '') => {
     .trim()
 
   if (normalized.startsWith('milicia')) return 'milicia'
-  if (normalized.startsWith('infanteria')) return 'infanteria'
+  if (normalized.startsWith('tirador')) return 'tirador'
   if (normalized.startsWith('choque')) return 'choque'
-  if (normalized.startsWith('elite')) return 'elite'
-  if (normalized.startsWith('especialista')) return 'especialista'
-  if (normalized.startsWith('exploradores')) return 'exploradores'
-  if (normalized.startsWith('alado')) return 'alado'
-  if (normalized.startsWith('armas pesadas') || normalized.startsWith('armas-pesadas')) return 'armas-pesadas'
-  if (normalized.startsWith('mistico')) return 'mistico'
-  if (normalized.startsWith('demonio')) return 'demonio'
   if (normalized.startsWith('juggernaut')) return 'juggernaut'
+  if (normalized.startsWith('exterminador')) return 'exterminador'
+  if (normalized.startsWith('explorador')) return 'explorador'
+  if (normalized.startsWith('asaltante')) return 'asaltante'
+  if (normalized.startsWith('armas pesadas') || normalized.startsWith('armas-pesadas')) return 'armas-pesadas'
+  if (normalized.startsWith('psiquico')) return 'psiquico'
+  if (normalized.startsWith('demonio')) return 'demonio'
   if (normalized.startsWith('monstruo')) return 'monstruo'
   if (normalized.startsWith('vehiculo ligero') || normalized.startsWith('vehiculo-ligero')) return 'vehiculo-ligero'
   if (normalized.startsWith('vehiculo pesado') || normalized.startsWith('vehiculo-pesado')) return 'vehiculo-pesado'
@@ -53,12 +54,10 @@ export const getUnitClassToken = (value = '') => {
  * más cercano. Al añadir <tipo>.png en images/units_icons/ el alias sobra.
  */
 const BADGE_FALLBACKS = {
-  exploradores: 'comando',
-  alado: 'asaltante',
-  mistico: 'psiquico',
+  tirador: 'infanteria',
+  explorador: 'comando',
   juggernaut: 'elite',
-  'vehiculo-ligero': 'vehiculo',
-  'vehiculo-pesado': 'vehiculo',
+  exterminador: 'elite',
   titan: 'monstruo',
   comandante: 'heroe',
 }

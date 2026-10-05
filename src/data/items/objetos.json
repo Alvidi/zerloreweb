@@ -59,14 +59,14 @@
     {
       "id": "sin-presion",
       "nombre": "Sin presión",
-      "descripcion": "La unidad se destraba automáticamente, sin tirar el chequeo.",
+      "descripcion": "La unidad se destraba automáticamente, sin tirar el chequeo ni gastar acción.",
       "accion": "No gasta acción",
       "valor": 2
     },
     {
       "id": "inmolarse",
       "nombre": "Inmolarse",
-      "descripcion": "La unidad queda destruida y explota: hasta 3 miniaturas a 3\" o menos sufren 1D6 de daño directo que no puede salvarse, asignado como en Explosiva.",
+      "descripcion": "La unidad queda destruida y explota: todas las miniaturas enemigas a 3\" o menos sufren 1D6 de daño directo, sin tirar salvación.",
       "accion": "2",
       "valor": 3
     },
@@ -106,9 +106,9 @@
       "valor": 4
     },
     {
-      "id": "golpe-letal",
-      "nombre": "Golpe letal",
-      "descripcion": "Da la habilidad Anti al arma de cuerpo a cuerpo durante ese ataque.",
+      "id": "anti",
+      "nombre": "Anti",
+      "descripcion": "Suma 1D3 de daño al ataque contra las unidades sobre las que tenga ventaja.",
       "accion": "No gasta acción",
       "valor": 4
     }
