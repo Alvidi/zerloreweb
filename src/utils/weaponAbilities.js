@@ -1,36 +1,30 @@
 export const WEAPON_ABILITY_IDS = {
-  reliable:      'reliable',
-  deadAngle:     'deadAngle',
-  brutal:        'brutal',
-  piercing:      'piercing',
-  unstable:      'unstable',
-  gunslinger:    'gunslinger',
-  direct:        'direct',
-  explosive:     'explosive',
-  parabolicShot: 'parabolicShot',
-  reach:         'reach',
-  master:        'master',
+  reliable:    'reliable',
+  brutal:      'brutal',
+  piercing:    'piercing',
+  criticalHit: 'criticalHit',
+  direct:      'direct',
+  relentless:  'relentless',
+  explosive:   'explosive',
+  preciseShot: 'preciseShot',
 }
 
 export const normalizeAbilityText = (value) =>
   String(value || '')
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')
     .trim()
 
 const WEAPON_ABILITY_DEFINITIONS = [
-  { id: WEAPON_ABILITY_IDS.reliable,      aliases: ['fiable', 'reliable'],                                              conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.deadAngle,     aliases: ['angulo muerto', 'dead angle'],                                     conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.brutal,        aliases: ['brutal'],                                                           conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.piercing,      aliases: ['perforante', 'piercing'],                                           conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.unstable,      aliases: ['inestable', 'unstable'],                                            conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.gunslinger,    aliases: ['multiuso', 'multiusos', 'multi-use', 'multi use', 'multiuse'],      conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.direct,        aliases: ['directo', 'straight', 'direct'],                                   conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.explosive,     aliases: ['explosiva', 'explosive'],                                           conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.parabolicShot, aliases: ['parabolica', 'disparo parabolico', 'arcing', 'parabolic shot', 'indirect fire'], conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.reach,         aliases: ['alcance', 'reach'],                                                 conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.master,        aliases: ['maestro', 'master'],                                                conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.reliable,    aliases: ['fiable', 'reliable'],                        conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.brutal,      aliases: ['brutal'],                                    conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.piercing,    aliases: ['perforante', 'piercing'],                    conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.criticalHit, aliases: ['golpe critico', 'critical hit'],             conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.direct,      aliases: ['directo', 'direct'],                         conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.relentless,  aliases: ['implacable', 'relentless'],                  conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.explosive,   aliases: ['explosiva', 'explosive'],                    conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.preciseShot, aliases: ['disparo certero', 'precise shot'],           conditionKey: null },
 ]
 
 const definitionById = new Map(WEAPON_ABILITY_DEFINITIONS.map((definition) => [definition.id, definition]))

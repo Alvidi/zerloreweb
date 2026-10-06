@@ -15,29 +15,23 @@
   --accent: #d7c69a;
   --accent-soft: rgba(200, 170, 104, 0.18);
   --metal: #a7b0c0;
-  /* Colores de clase, tomados de los iconos de units_icons/ */
+  /* Colores de clase, muestreados de los iconos de units_icons/ */
   --class-milicia: #8a8a8a;
-  --class-tirador: #eac440;
-  --class-choque: #bf9e7c;
-  --class-juggernaut: #a893d8;
-  --class-exterminador: #c86bd8;
-  --class-explorador: #5684d1;
-  --class-asaltante: #f06f9f;
-  --class-armas-pesadas: #4fc7c0;
-  --class-psiquico: #b050ff;
-  --class-demonio: #6fe03c;
-  --class-monstruo: #ef3838;
-  --class-vehiculo-ligero: #fd7802;
+  --class-tirador: #9c86b6;
+  --class-choque: #3167b8;
+  --class-juggernaut: #bf9e7c;
+  --class-exterminador: #7a95dd;
+  --class-explorador: #7ca134;
+  --class-asaltante: #f57aa4;
+  --class-armas-pesadas: #56c4fb;
+  --class-psiquico: #ae4afb;
+  --class-demonio: #6afa3f;
+  --class-monstruo: #d41d1e;
+  --class-vehiculo-ligero: #fd7902;
   --class-vehiculo-pesado: #c8a983;
-  --class-artilleria: #d88a4f;
-  --class-titan: #d64040;
-  --class-comandante: #ff28a3;
-  /* Iconos heredados que aún se reutilizan como respaldo */
-  --class-infanteria: #eac440;
-  --class-elite: #a893d8;
-  --class-comando: #5684d1;
-  --class-vehiculo: #ff8c28;
-  --class-heroe: #ff28a3;
+  --class-artilleria: #96592c;
+  --class-titan: #808ed0;
+  --class-comandante: #e90c86;
   --class-equipment: #f1c636;
   --line: rgba(255, 255, 255, 0.12);
   --glow: rgba(214, 190, 132, 0.32);

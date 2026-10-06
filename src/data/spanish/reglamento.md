@@ -81,7 +81,7 @@ En ZeroLore existen dos tipos de reglas: las **reglas generales**, que son las d
 
 Cuando una regla propia de una unidad contradiga o modifique una regla del reglamento, **la regla de la unidad siempre tiene prioridad**.
 
-*Ejemplo: el reglamento dice que una unidad trabada no puede disparar. Si un arma tiene la habilidad Multiuso, esa regla especial permite disparar aunque estés trabado — y eso manda.*
+*Ejemplo: el reglamento dice que una unidad trabada no puede disparar. El Vehículo pesado tiene la habilidad Fuego de apoyo, que le permite disparar aunque esté trabado — y eso manda.*
 
 ## La regla de oro
 
@@ -214,21 +214,21 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad defin
 | Tipo | Descripción | Habilidad | Fuerte contra |
 | --- | --- | --- | --- |
 | **Milicia** | Tropa numerosa y barata, sacrificable. No destaca contra nada. | **Alimañas:** esta unidad no tiene habilidad especial. | — |
-| **Tirador** | Buen disparo, flojo en cuerpo a cuerpo. | **Fuego de contención:** cuando un enemigo le declara una carga, puede dispararle antes de que se mueva. | — |
-| **Choque** | Infantería que busca el cuerpo a cuerpo. | **Carga brutal:** cuando esta unidad realiza una carga, gana **+1 dado de ataque CaC** durante ese combate. | — |
+| **Tirador** | Infantería versátil a distancia, pero menos experimentada en CaC. | **Bloqueo:** esta unidad bloquea el ataque gratuito de las cargas enemigas realizadas contra ella. | — |
+| **Choque** | Infantería versátil a CaC, pero menos experimentada en Disparo. | **Carga brutal:** cuando esta unidad realiza una carga, gana **+1 dado de ataque CaC** durante ese ataque gratuito. | — |
 | **Juggernaut** | Élite de disparo, muy blindada. Correcta en cuerpo a cuerpo. | **Resistente:** la primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3**. | +1 Tirador · +2 Choque |
-| **Exterminador** | Élite de cuerpo a cuerpo. | **Berserker:** las unidades enemigas que ataquen a esta unidad en CaC fallan con resultados naturales de **1, 2 o 3**. | +1 Choque · +2 Tirador |
-| **Explorador** | Se adelanta al resto del ejército. | **Avanzadilla:** puede desplegarse a **9"** de un puesto de mando aliado. No puede ir con Comandantes. | +1 Monstruo · +2 Demonio |
-| **Asaltante** | Unidades rápidas, algo mejores en cuerpo a cuerpo. | **Carga larga:** al realizar la acción **Cargar**, esta unidad puede desplazarse **3" adicionales**. | +1 Artillería · +2 Armas Pesadas |
+| **Exterminador** | Élite de CaC, muy blindada. Correcta en Disparo. | **Berserker:** las unidades enemigas que ataquen a esta unidad en CaC fallan con resultados naturales de **1, 2 o 3**. | +1 Choque · +2 Tirador |
+| **Explorador** | Infantería solitaria y rápida para hacerse con objetivos. Se adelanta al resto del ejército. | **Avanzadilla:** puede desplegarse a **9"** de un puesto de mando aliado. No puede ir con Comandantes. | +1 Monstruo · +2 Demonio |
+| **Asaltante** | Unidades muy rápidas, algo destacables en cuerpo a cuerpo. | **Carga larga:** al realizar la acción **Cargar**, esta unidad puede desplazarse **3" adicionales**. | +1 Artillería · +2 Armas Pesadas |
 | **Armas Pesadas** | Equipos de fuego lentos y potentes. | **Emplazado:** si esta unidad no se ha movido durante esta activación, gana **+1 dado** en sus ataques a distancia. | +1 Juggernaut · +2 Vehículo ligero |
-| **Psíquico** | Frágiles, con ataques a distancia muy dañinos e inestables. | **Mente abierta:** los ataques de esta unidad **ignoran la cobertura** del objetivo. | +1 Juggernaut · +2 Exterminador |
-| **Demonio** | Criaturas que se recomponen. | **Regeneración:** al final de cada turno, si esta unidad sigue en el campo de batalla, recupera **1D3 Vidas** perdidas. | +1 Psíquico · +2 Milicia |
+| **Psíquico** | Frágiles, con ataques a distancia muy poderosos. | **Poder mental:** ignora cualquier cobertura en la que esté la unidad objetivo. También puede atacar sin línea de visión, pero en ese caso debe tirar un dado: si saca **1, 2 o 3**, esta unidad recibe **1D3 de daño** directo. | +1 Juggernaut · +2 Exterminador |
+| **Demonio** | Unidades CaC persistentes. Regresan al campo de batalla si no se neutralizan. | **Regeneración:** si una unidad Demonio muere, regresa a la Reserva con todas las Vidas y lista para volver a ser desplegada. | +1 Psíquico · +2 Milicia |
 | **Monstruo** | Criatura enorme que solo lucha cuerpo a cuerpo. | **Anclado:** las unidades enemigas trabadas con esta unidad no pueden realizar la acción **Destrabarse**. | +1 Demonio · +2 Milicia |
-| **Vehículo ligero** | Unidad rápida y móvil. | **Atropello:** durante su **carga**, si traba a una unidad enemiga, esa unidad recibe automáticamente **1D3** de daño. | +1 Explorador · +2 Asaltante |
-| **Vehículo pesado** | Blindado de primera línea. | **Fuego de apoyo:** esta unidad puede realizar la acción **Disparar** aunque esté trabada en combate cuerpo a cuerpo. | +1 Monstruo · +2 Armas Pesadas |
-| **Artillería** | Fuego de largo alcance, inmóvil. | **Atrincherado:** esta unidad no puede moverse. | — |
-| **Titán** | La mayor amenaza del campo de batalla. | **Superioridad:** Solo puede cargar contra otro Titán, y solo otro Titán puede trabarlo. Si le carga una unidad de otro tipo, esa unidad resuelve su carga y su ataque con normalidad y a continuación se retira 1" del Titán. | — |
-| **Comandante** | Líder de escuadra, competente en disparo y cuerpo a cuerpo. | **Refuerzos:** durante la fase de despliegue, esta unidad puede recibir **una miniatura** de su tipo desde la Reserva, siempre que no esté trabada en CaC, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas *(ver ficha Unidad)*. | — |
+| **Vehículo ligero** | Unidad rápida y móvil. Perfecta para alcanzar ubicaciones estratégicas. | **Atropello:** durante su **carga**, si traba a una unidad enemiga, esa unidad recibe automáticamente **1D3** de daño. | +1 Explorador · +2 Asaltante |
+| **Vehículo pesado** | Blindado de primera línea. Pesado y poderoso. | **Fuego de apoyo:** esta unidad puede realizar la acción **Disparar** aunque esté trabada en combate cuerpo a cuerpo. | +1 Monstruo · +2 Armas Pesadas |
+| **Artillería** | Potente fuego de largo alcance. No puede moverse de donde es desplegada. | **Fuego indirecto:** esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia** y el objetivo **no esté en cobertura**. Esta unidad no puede moverse. | — |
+| **Titán** | La mayor amenaza que existe en el campo de batalla. | **Superioridad:** solo puede cargar contra otro Titán, y solo otro Titán puede trabarlo. Si le carga una unidad de otro tipo, esa unidad resuelve su carga y su ataque con normalidad y a continuación se retira 1" del Titán. | — |
+| **Comandante** | Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia. | **Refuerzos:** durante la fase de despliegue, esta unidad puede recibir **una miniatura** del tipo que comande, desde la Reserva, siempre que no esté trabada en CaC, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas *(ver ficha Unidad)*. | — |
 
 ## Ventaja de tipo
 
@@ -391,7 +391,7 @@ Las unidades pueden realizar **ataques a distancia** contra objetivos válidos u
 
 La unidad consume **1 acción** y realiza un ataque a distancia.
 
-Una unidad trabada no puede realizar esta acción, salvo que una regla se lo permita, como el arma **Multiuso** o la habilidad **Fuego de apoyo** del Vehículo pesado.
+Una unidad trabada no puede realizar esta acción, salvo que una regla se lo permita, como la habilidad **Fuego de apoyo** del Vehículo pesado.
 
 Para atacar a distancia, la unidad debe:
 
@@ -522,7 +522,7 @@ Si no alcanza al objetivo con su movimiento, termina donde haya llegado y su act
 
 Una unidad puede Cargar contra una unidad ya trabada en combate. Tras la carga, todas las unidades involucradas se consideran trabadas en el mismo combate.
 
-*Ejemplo: tu escuadra de Choque (Movimiento 5", Velocidad +2") tiene una unidad enemiga a 6". Declara Cargar y se mueve 7" hasta tocarla; con un 2+ en el dado la carga prende, queda trabada y ataca gratis. El defensor responderá en su propia activación.*
+*Ejemplo: tu escuadra de Choque (Movimiento 5", Velocidad +2") tiene una unidad enemiga a 6". Declara Cargar y se mueve 7" hasta tocarla; con un 3+ en el dado la carga prende, queda trabada y ataca gratis. El defensor responderá en su propia activación.*
 
 {{chargeDiagram}}
 
@@ -584,8 +584,9 @@ Solo un **Comandante** puede formar una escuadra.
 
 - Al montar la lista, cada Comandante puede llevar una escuadra de **un único tipo de unidad**, con tantas miniaturas como indique el valor **Escuadra** de esa unidad.
 - El Comandante se **despliega junto a su escuadra completa**, como una sola unidad, y se activa con ella.
-- Mientras esté en escuadra, el Comandante usa el **Movimiento y la Velocidad de las unidades que comanda**.
+- Mientras lidere una escuadra, el Comandante usa el **Movimiento y la Velocidad del tipo de unidad que comanda**. Si se queda solo, vuelve a usar los suyos.
 - Las escuadras **no pueden formarse ni fusionarse durante la partida**, salvo mediante la habilidad **Refuerzos** del Comandante *(ver Tipos de unidad)*. Una unidad desplegada en solitario sigue sola toda la partida.
+- Si un Comandante pierde a **todas** las miniaturas de su escuadra, deja de estar ligado a ese tipo de unidad: la siguiente miniatura que reciba por **Refuerzos** puede ser de **cualquier tipo que pueda formar escuadra**, y desde ese momento su escuadra pasa a ser de ese tipo, con su tamaño máximo, su Movimiento y su Velocidad.
 
 {{commanderSquadDiagram}}
 
@@ -601,7 +602,7 @@ Si al menos una miniatura de una escuadra enemiga es visible desde el atacante, 
 
 ## Uso de armas en escuadras
 
-Cada miniatura utiliza las armas de su perfil. Al atacar, una escuadra con Comandante realiza **dos ataques separados**: primero el de las miniaturas de la escuadra, todas con el arma elegida, y después el del **Comandante** con su propia arma. Ambos ataques van dirigidos **al mismo objetivo**, salvo que una regla indique lo contrario.
+Cada miniatura utiliza las armas de su perfil. Al atacar, una escuadra con Comandante realiza **dos ataques separados**: primero el de las miniaturas de la escuadra y después el del **Comandante** con su propia arma. Ambos ataques van dirigidos **al mismo objetivo**, salvo que una regla indique lo contrario.
 
 {{squadMeleeDiagram}}
 
@@ -638,22 +639,19 @@ Cuando una unidad realiza un ataque, utiliza el arma de su perfil correspondient
 | Habilidad de arma | Descripción |
 | --- | --- |
 | Fiable | Esta arma no tiene reglas especiales. |
-| Ángulo muerto | Esta arma no puede disparar a objetivos que estén a menos de la mitad de su Distancia. |
 | Brutal | Los impactos de esta arma se consideran críticos con un resultado natural de **5+** en la tirada de ataque. |
 | Perforante | Los impactos de esta arma empeoran en **1** la Salvación realizada contra ellos. |
-| Inestable | Tras resolver el ataque, lanza 1D6. Con un resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso. |
-| Multiuso | Esta arma puede utilizarse para realizar la acción Disparar aunque la unidad esté trabada en combate cuerpo a cuerpo. |
-| Directo | Esta arma impacta directamente y no utiliza Precisión; por tanto, no se ve afectada por modificadores a la Precisión. |
-| Explosiva | El ataque se resuelve con normalidad contra la unidad objetivo, **incluida su salvación**. El daño final que reciba el objetivo lo sufren también todas las miniaturas **enemigas** a **3" o menos** de la miniatura impactada, sin tirar salvación adicional. No hay fuego amigo. |
-| Parabólica | Esta arma puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia** y el objetivo **no esté en cobertura**. |
-| Alcance | Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades. |
-| Maestro | Los ataques CaC con esta arma solo fallan con un resultado de **1**. Si el objetivo hace fallar con 1, 2 o 3 (por cobertura o Berserker), con Maestro solo falla con 1 o 2. |
+| Golpe crítico | Los **críticos** no pueden ser **salvados**. |
+| Directo | Todos los dados de ataque de esta arma impactan, sin necesidad de superar la Precisión. |
+| Implacable | Puede volver a tirar los dados de ataque que no hayan impactado: los que no superen la Precisión en disparo, o los que fallen en CaC. |
+| Explosiva | El ataque se resuelve con normalidad contra la unidad objetivo, **incluida su salvación**. Además, todas las miniaturas **enemigas** a **3" o menos** de la miniatura impactada sufren el **daño base** del arma, sin tirar salvación. No hay fuego amigo. |
+| Disparo certero | Si el objetivo está a la mitad o menos de la **Distancia** de esta arma, el ataque gana **+1 dado**. |
 
-**Nota:** Directo, Ángulo muerto y Parabólica son exclusivas de las **armas a distancia**; Alcance y Maestro, de las **armas de cuerpo a cuerpo**.
+**Nota:** Directo y Disparo certero son exclusivas de las **armas a distancia**.
 
 {{explosiveDiagram}}
 
-{{masterDiagram}}
+{{relentlessDiagram}}
 
 ---
 

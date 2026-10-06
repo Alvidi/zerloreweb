@@ -185,7 +185,7 @@ const squadCoherence = figure(
 const lineOfSight = figure(
   'Línea de visión: visible, bloqueada por escenografía y bloqueada por otra miniatura',
   'Tres casos de línea de visión',
-  520,
+  576,
   `
   ${head('Línea de visión', 'Las unidades ven en 360°: la orientación de la miniatura no limita nada.')}
 
@@ -216,7 +216,9 @@ const lineOfSight = figure(
       ${base(306, 446, C.enemy)}${cap(306, 480, 'Objetivo', C.enemy)}
       <line x1="83" y1="446" x2="162" y2="446" stroke="${C.ko}" stroke-width="1.8" stroke-dasharray="5 4"/>
       ${cross(186, 412, 9)}`,
-  })}`,
+  })}
+
+  ${note(512, 'Dos excepciones', 'Fuego indirecto (Artillería) y Poder mental (Psíquico) atacan sin línea de visión.')}`,
 )
 
 /* ── Cargar ─────────────────────────────────────────────────────────────────
@@ -258,7 +260,7 @@ const charge = figure(
 
   ${note(512, 'Carga larga', 'El Asaltante recorre 3" más al Cargar.')}
 
-  ${note(556, 'Fuego de contención', 'El Tirador al que cargas te dispara antes de que te muevas.')}`,
+  ${note(556, 'Bloqueo', 'El Tirador al que cargas te anula el ataque gratuito.')}`,
 )
 
 /* ── Cobertura ──────────────────────────────────────────────────────────────
@@ -268,7 +270,7 @@ const charge = figure(
 const cover = figure(
   'Cuándo hay cobertura y cuándo no',
   'Tres casos de cobertura',
-  520,
+  576,
   `
   ${head('Cobertura', 'Hacen falta dos cosas: peana en contacto con el elemento y que el elemento se interponga.')}
 
@@ -303,7 +305,9 @@ const cover = figure(
       ${base(300, 452, C.enemy)}${cap(300, 416, 'Objetivo', C.enemy)}
       ${wall(319, 432, 22, 40)}
       <line x1="83" y1="452" x2="280" y2="452" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>`,
-  })}`,
+  })}
+
+  ${note(512, 'Quién la ignora', 'El Psíquico con Poder mental, y los Vehículos, Monstruos y Titanes nunca se benefician.')}`,
 )
 
 /* ── Control de un puesto de mando ──────────────────────────────────────────
@@ -450,7 +454,7 @@ const activation = figure(
 const rangedSequence = figure(
   'La secuencia de un ataque a distancia',
   'Los cinco pasos de un ataque a distancia',
-  400,
+  404,
   `
   ${head('Secuencia de ataque a distancia', 'Siempre en este orden.')}
 
@@ -471,7 +475,9 @@ const rangedSequence = figure(
 
   ${step(430, 212, '5')}<text class="zl-lab" x="456" y="217">Aplicar daño</text>
   <text class="zl-body" x="456" y="242">Daño base, o daño crítico</text>
-  <text class="zl-body" x="456" y="266">si el impacto fue crítico.</text>`,
+  <text class="zl-body" x="456" y="266">si el impacto fue crítico.</text>
+
+  ${note(340, 'Habilidades que la cambian', 'Directo se salta el paso 3, Disparo certero suma un dado y Golpe crítico anula el 4.')}`,
 )
 
 /* ── Trepar ─────────────────────────────────────────────────────────────────
@@ -555,7 +561,7 @@ const squadDamage = figure(
 const deploymentPhase = figure(
   'Cómo entran los refuerzos',
   'Despliegue por puestos de mando y por Comandantes, antes de las activaciones',
-  524,
+  580,
   `
   ${head('Fase de despliegue', 'Antes de la primera activación, entran unidades desde la Reserva.')}
 
@@ -588,16 +594,20 @@ const deploymentPhase = figure(
 
   ${note(392, 'Entran sin activar', 'Pueden activarse en ese mismo turno.')}
 
-  ${note(456, 'Tiene que caber', 'Si no hay hueco libre en contacto, no puede desplegarse ahí.')}`,
+  ${note(456, 'Tiene que caber', 'Si no hay hueco libre en contacto, no puede desplegarse ahí.')}
+
+  ${note(520, 'El Demonio vuelve', 'Con Regeneración, al morir regresa a la Reserva entero y puede volver a entrar.')}`,
 )
 
 /* ── Comandantes y escuadras ────────────────────────────────────────────────
    "cada Comandante puede llevar una escuadra de un único tipo de unidad";
-   "la escuadra usa el Movimiento y la Velocidad del Comandante".             */
+   "mientras lidere una escuadra, el Comandante usa el Movimiento y la Velocidad
+   del tipo que comanda. Si se queda solo, vuelve a usar los suyos"; y al perder
+   a todas, la siguiente miniatura por Refuerzos puede ser de otro tipo.       */
 const commanderSquad = figure(
   'Cómo se forma una escuadra',
   'Un Comandante acompañado de miniaturas de un mismo tipo',
-  472,
+  574,
   `
   ${head('Comandantes y escuadras', 'Solo un Comandante puede llevar escuadra, y de un único tipo.')}
 
@@ -615,8 +625,8 @@ const commanderSquad = figure(
   ${row(238, 130, {
     tone: 'plain', ok: null, title: 'Se mueve como su escuadra',
     lines: [
-      { t: 'El Comandante usa el Movimiento y la Velocidad' },
-      { t: 'de las unidades que comanda, y se activa con ellas.' },
+      { t: 'Usa el Movimiento y la Velocidad del tipo que' },
+      { t: 'comanda. Si se queda solo, vuelve a los suyos.' },
     ],
     draw: `${base(100, 306, C.act)}
       ${[144, 178, 212].map((x) => base(x, 306, C.ally, 14)).join('')}
@@ -624,7 +634,21 @@ const commanderSquad = figure(
       ${cap(156, 360, 'una sola unidad', C.soft)}`,
   })}
 
-  ${note(384, 'El último en caer', 'El Comandante no recibe daño mientras quede otra miniatura en pie.')}`,
+  ${row(380, 130, {
+    tone: 'plain', ok: null, title: 'Si pierde a toda la escuadra',
+    lines: [
+      { t: 'Queda libre: la siguiente miniatura que reciba' },
+      { t: 'por Refuerzos puede ser de otro tipo, y la' },
+      { t: 'escuadra pasa a ser de ese tipo.' },
+    ],
+    draw: `${base(96, 448, C.act)}
+      ${[140, 174].map((x) => `${base(x, 448, C.ally, 14)}${cross(x, 448, 10)}`).join('')}
+      <line x1="196" y1="448" x2="224" y2="448" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="4 4"/>
+      ${base(250, 448, C.enemy, 14)}
+      ${cap(250, 486, 'otro tipo', C.soft)}`,
+  })}
+
+  ${note(526, 'El último en caer', 'El Comandante no recibe daño mientras quede otra miniatura en pie.')}`,
 )
 
 /* ── Explosiva ─────────────────────────────────────────────────────────────
@@ -632,79 +656,75 @@ const commanderSquad = figure(
    salvación. El daño final que reciba el objetivo lo sufren también todas las
    miniaturas enemigas a 3" o menos de la miniatura impactada, sin tirar
    salvación adicional. No hay fuego amigo."                                   */
-/* ── Maestro ────────────────────────────────────────────────────────────────
-   "Los ataques CaC con esta arma solo fallan con un resultado de 1. Si el
-   objetivo hace fallar con 1, 2 o 3 (por cobertura o Berserker), con Maestro
-   solo falla con 1 o 2."                                                      */
-const master = figure(
-  'Cómo funciona un arma Maestro',
-  'Qué resultados fallan con un arma Maestro, con y sin defensa que empeore la tirada',
-  440,
+/* ── Implacable ─────────────────────────────────────────────────────────────
+   "Puede volver a tirar los dados de ataque que no hayan impactado: los que no
+   superen la Precisión en disparo, o los que fallen en CaC."                  */
+const relentless = figure(
+  'Cómo funciona un arma Implacable',
+  'Los dados que no impactan se vuelven a tirar una vez',
+  420,
   `
-  ${head('Maestro', 'Arma de cuerpo a cuerpo: casi todos los dados impactan.')}
+  ${head('Implacable', 'Los fallos tienen una segunda oportunidad.')}
 
-  ${row(76, 124, {
-    tone: 'plain', ok: null, title: 'Lo normal en CaC',
-    lines: [{ t: 'Sin Maestro, los 1 y los 2 fallan siempre.' }],
-    draw: `${[1, 2, 3, 4, 5, 6].map((n, i) => `
+  ${row(76, 134, {
+    num: '1', title: 'Tira y aparta los fallos',
+    lines: [{ t: 'Los que no impactan se recogen; los que' }, { t: 'impactan se quedan como están.' }],
+    draw: `${[[1, false], [4, true], [2, false], [6, true], [5, true]].map(([n, ok], i) => `
       <rect x="${40 + i * 46}" y="118" width="38" height="38" rx="8"
-            fill="${n <= 2 ? 'rgba(201,88,79,.12)' : 'rgba(127,191,106,.12)'}"
-            stroke="${n <= 2 ? C.ko : C.ok}" stroke-width="1.6"/>
-      <text class="zl-lab" x="${59 + i * 46}" y="143" text-anchor="middle" fill="${n <= 2 ? C.ko : C.ok}">${n}</text>`).join('')}
-      ${cap(70, 180, 'fallan', C.ko)}`,
+            fill="${ok ? 'rgba(127,191,106,.12)' : 'rgba(201,88,79,.12)'}"
+            stroke="${ok ? C.ok : C.ko}" stroke-width="1.6"/>
+      <text class="zl-lab" x="${59 + i * 46}" y="143" text-anchor="middle" fill="${ok ? C.ok : C.ko}">${n}</text>`).join('')}
+      ${cap(105, 182, 'estos dos fallan', C.ko)}`,
   })}
 
-  ${row(212, 124, {
-    tone: 'ok', ok: true, title: 'Con Maestro',
-    lines: [{ t: 'Solo falla el 1. Todo lo demás impacta.' }],
-    draw: `${[1, 2, 3, 4, 5, 6].map((n, i) => `
-      <rect x="${40 + i * 46}" y="254" width="38" height="38" rx="8"
-            fill="${n === 1 ? 'rgba(201,88,79,.12)' : 'rgba(127,191,106,.12)'}"
-            stroke="${n === 1 ? C.ko : C.ok}" stroke-width="1.6"/>
-      <text class="zl-lab" x="${59 + i * 46}" y="279" text-anchor="middle" fill="${n === 1 ? C.ko : C.ok}">${n}</text>`).join('')}
-      ${cap(59, 316, 'falla', C.ko)}`,
+  ${row(224, 134, {
+    num: '2', title: 'Vuélvelos a tirar',
+    lines: [{ t: 'Solo una vez. Lo que salga ahora es' }, { t: 'definitivo, impacte o no.' }],
+    draw: `${[[3, true], [1, false]].map(([n, ok], i) => `
+      <rect x="${40 + i * 46}" y="266" width="38" height="38" rx="8"
+            fill="${ok ? 'rgba(127,191,106,.12)' : 'rgba(201,88,79,.12)'}"
+            stroke="${ok ? C.ok : C.ko}" stroke-width="1.6"/>
+      <text class="zl-lab" x="${59 + i * 46}" y="291" text-anchor="middle" fill="${ok ? C.ok : C.ko}">${n}</text>`).join('')}
+      ${cap(85, 330, 'uno se salva', C.ok)}`,
   })}
 
-  ${note(348, 'Si te hacen fallar', 'Cobertura o Berserker fallan con 1, 2 o 3; con Maestro, solo con 1 o 2.')}
-
-  ${note(392, 'Solo cuerpo a cuerpo', 'Maestro no se aplica a las armas a distancia.')}`,
+  ${note(372, 'Disparo y cuerpo a cuerpo', 'Vale en los dos: los que no superan la Precisión y los que fallan en CaC.')}`,
 )
 
 const explosive = figure(
   'Cómo salpica un arma Explosiva',
-  'El daño que acaba sufriendo el objetivo lo repiten todas las miniaturas enemigas a 3"',
-  520,
+  'El objetivo resuelve el ataque normal y las enemigas de alrededor sufren el daño base',
+  500,
   `
-  ${head('Explosiva', 'Primero se resuelve el ataque entero; después salpica el daño final.')}
+  ${head('Explosiva', 'Dos cosas distintas: el ataque al objetivo y la salpicadura.')}
 
-  ${row(76, 124, {
-    tone: 'ko', ok: false, title: 'El objetivo no sufre daño',
-    lines: [{ t: 'Si salva el impacto o el daño queda en 0,' }, { t: 'no hay nada que salpicar.' }],
-    draw: `${base(120, 152, C.enemy)}
-      ${cap(120, 192, 'salva el impacto', C.ko)}
-      ${base(212, 152, C.enemy, 14)}${base(264, 152, C.enemy, 14)}
-      ${cap(238, 192, 'no les pasa nada', C.soft)}`,
+  ${row(76, 118, {
+    num: '1', title: 'El objetivo, con normalidad',
+    lines: [{ t: 'Precisión, salvación y daño como siempre.' }],
+    draw: `${base(130, 148, C.enemy)}
+      <line x1="40" y1="148" x2="110" y2="148" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
+      ${cap(130, 190, 'salva si puede', C.soft)}`,
   })}
 
-  ${row(212, 206, {
-    tone: 'ok', ok: true, title: 'El objetivo sufre daño',
+  ${row(208, 206, {
+    num: '2', title: 'La salpicadura, el daño base',
     lines: [
-      { t: 'Ese daño final, el que le queda tras salvar,' },
-      { t: 'lo sufren también todas las miniaturas' },
-      { t: 'enemigas a 3" o menos. Ellas no salvan.' },
+      { t: 'Las enemigas a 3" o menos de la impactada' },
+      { t: 'sufren el daño base del arma, no el que' },
+      { t: 'acabe recibiendo el objetivo. Y sin salvar.' },
     ],
-    draw: `<circle cx="168" cy="310" r="64" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
-      ${base(168, 310, C.enemy)}
-      ${dim(168, 310, 232, 310, '3"', -8)}
-      ${base(126, 268, C.enemy, 14)}
-      ${base(208, 350, C.enemy, 14)}
-      ${base(206, 268, C.ally, 14)}
-      ${cap(168, 398, 'el mismo daño para las tres', C.ko)}`,
+    draw: `<circle cx="168" cy="306" r="64" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
+      ${base(168, 306, C.enemy)}
+      ${dim(168, 306, 232, 306, '3"', -8)}
+      ${base(126, 264, C.enemy, 14)}
+      ${base(208, 346, C.enemy, 14)}
+      ${base(206, 264, C.ally, 14)}
+      ${cap(168, 394, 'daño base para las dos enemigas', C.ko)}`,
   })}
 
-  ${note(434, 'Sin salvación', 'Las miniaturas salpicadas no tiran salvación por ese daño.')}
+  ${note(426, 'Sin salvación', 'Las miniaturas salpicadas no tiran salvación por ese daño.')}
 
-  ${note(476, 'No hay fuego amigo', 'La aliada del dibujo está dentro del radio y no recibe nada.')}`,
+  ${note(466, 'No hay fuego amigo', 'La aliada del dibujo está dentro del radio y no recibe nada.')}`,
 )
 
 
@@ -940,7 +960,7 @@ const vehicleMelee = figure(
       ${cap(104, 344, 'Vehículo o Monstruo', C.act)}`,
   })}
 
-  ${note(368, 'Y al revés', 'Con Fuego de apoyo o un arma Multiuso, una unidad trabada sí puede Disparar.')}`,
+  ${note(368, 'Y al revés', 'Con Fuego de apoyo, el Vehículo pesado sí puede Disparar estando trabado.')}`,
 )
 
 /* ── Resolución del combate cuerpo a cuerpo ─────────────────────────────────
@@ -950,7 +970,7 @@ const vehicleMelee = figure(
 const meleeSequence = figure(
   'La secuencia de un ataque cuerpo a cuerpo',
   'Los cuatro pasos de un ataque cuerpo a cuerpo',
-  480,
+  536,
   `
   ${head('Secuencia de combate cuerpo a cuerpo', 'Ojo: aquí no se usa Precisión. Los 1 y los 2 fallan siempre.')}
 
@@ -980,7 +1000,9 @@ const meleeSequence = figure(
   ${row(384, 76, {
     num: '4', title: 'Aplica el daño',
     lines: [{ t: 'Daño base, o crítico si el impacto lo fue.' }],
-  })}`,
+  })}
+
+  ${note(472, 'Habilidades que la cambian', 'Implacable repite los fallos del paso 2 y Golpe crítico anula el 3 en los críticos.')}`,
 )
 
 /* ── Modificadores ──────────────────────────────────────────────────────────
@@ -1067,7 +1089,7 @@ export const RULES_DIAGRAMS = {
   commanderSquadDiagram: commanderSquad,
   titanMeleeDiagram: titanMelee,
   explosiveDiagram: explosive,
-  masterDiagram: master,
+  relentlessDiagram: relentless,
   meleeEngagementDiagram: meleeEngagement,
   lockedUnitsDiagram: lockedUnits,
   squadMeleeDiagram: squadMelee,

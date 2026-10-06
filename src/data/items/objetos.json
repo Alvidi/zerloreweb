@@ -24,16 +24,9 @@
     {
       "id": "estimulante",
       "nombre": "Estimulante",
-      "descripcion": "Se juega al activar la unidad. Dispone de 3 acciones en esta activación, sin poder repetir acción.",
+      "descripcion": "Activa de nuevo una unidad que previamente se activó.",
       "accion": "No gasta acción",
       "valor": 5
-    },
-    {
-      "id": "segunda-oportunidad",
-      "nombre": "Segunda oportunidad",
-      "descripcion": "Una unidad aliada sin activar renuncia a sus dos acciones para dárselas a otra unidad aliada que ya se haya activado este turno. Cuenta como la activación de la unidad que las cede.",
-      "accion": "2",
-      "valor": 4
     },
     {
       "id": "carga-ciega",
@@ -45,30 +38,23 @@
     {
       "id": "super-disparo",
       "nombre": "Super disparo",
-      "descripcion": "La unidad suma 1D3 dados de ataque a distancia en ese ataque.",
+      "descripcion": "La unidad suma +1D3 al número de ataques a distancia en ese ataque.",
       "accion": "2",
       "valor": 4
     },
     {
       "id": "super-golpe",
       "nombre": "Super golpe",
-      "descripcion": "La unidad suma 1D3 dados de ataque cuerpo a cuerpo en ese ataque.",
+      "descripcion": "La unidad suma +1D3 dados al número de ataques cuerpo a cuerpo en ese ataque.",
       "accion": "No gasta acción",
       "valor": 5
     },
     {
       "id": "sin-presion",
       "nombre": "Sin presión",
-      "descripcion": "La unidad se destraba automáticamente, sin tirar el chequeo ni gastar acción.",
+      "descripcion": "La unidad se destraba automáticamente, sin tirar el chequeo ni gastar acción. Puede destrabarse incluso de una unidad con Anclado.",
       "accion": "No gasta acción",
       "valor": 2
-    },
-    {
-      "id": "inmolarse",
-      "nombre": "Inmolarse",
-      "descripcion": "La unidad queda destruida y explota: todas las miniaturas enemigas a 3\" o menos sufren 1D6 de daño directo, sin tirar salvación.",
-      "accion": "2",
-      "valor": 3
     },
     {
       "id": "cambio-de-objetivo",
@@ -99,16 +85,30 @@
       "valor": 4
     },
     {
-      "id": "sin-reparos",
-      "nombre": "Sin reparos",
-      "descripcion": "Da la habilidad Directo al arma a distancia durante ese ataque.",
+      "id": "balas-directas",
+      "nombre": "Balas directas",
+      "descripcion": "Da la habilidad Directo al arma a distancia en el ataque.",
       "accion": "No gasta acción",
       "valor": 4
     },
     {
       "id": "anti",
       "nombre": "Anti",
-      "descripcion": "Suma 1D3 de daño al ataque contra las unidades sobre las que tenga ventaja.",
+      "descripcion": "Suma 1D3 de daño al daño total final del ataque contra las unidades sobre las que tenga ventaja.",
+      "accion": "No gasta acción",
+      "valor": 4
+    },
+    {
+      "id": "pistola-oculta",
+      "nombre": "Pistola oculta",
+      "descripcion": "Puede usar su arma a distancia estando trabada en combate cuerpo a cuerpo, para atacar a la unidad con la que combate.",
+      "accion": "2",
+      "valor": 3
+    },
+    {
+      "id": "habilidad-en-armas",
+      "nombre": "Habilidad en armas",
+      "descripcion": "Ganas la habilidad de arma Golpe crítico en tu ataque.",
       "accion": "No gasta acción",
       "valor": 4
     }

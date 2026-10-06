@@ -26,7 +26,7 @@ Antes de empezar, los jugadores acuerdan:
 Cada jugador coge de manera aleatoria **2 misiones** del mazo de misiones. Puede descartarlas al inicio del siguiente turno.
 
 | Misión | Objetivo | Puntos |
-|---|---|---|
+| --- | --- | --- |
 | Control y captura | Controla más puestos que el rival al final del turno. | 10 pts |
 | A las puertas | Ten una unidad a 6" o menos de un puesto de mando enemigo al final del turno. | 15 pts |
 | Primera sangre | Sé el primero en destruir una unidad enemiga en el turno. | 5 pts |
@@ -35,5 +35,7 @@ Cada jugador coge de manera aleatoria **2 misiones** del mazo de misiones. Puede
 | Carga épica | Destruye a una unidad enemiga con el ataque gratuito de una carga. | 10 pts |
 | Reconquista | Conquista un puesto de mando que controlaba el enemigo. | 15 pts |
 | Táctica relámpago | Al final del turno, ten una unidad a 6" o menos del Cuartel General enemigo **sin estar trabada**. | 25 pts |
-| Rompe la Piedra | Destruye una unidad enemiga que sea **Fuerte contra** el tipo de la unidad que la destruye. | 5 pts |
+| Rompe la Piedra | Vence a una unidad sobre la que tengas ventaja de tipo. | 5 pts |
+| En contra de todo | Vence a una unidad sobre la que tengas desventaja de tipo. | 10 pts |
 | Decapitación | Destruye un Comandante enemigo. | 15 pts |
+| Siempre equipado | Utiliza 2 equipamientos en el mismo turno. | 15 pts |

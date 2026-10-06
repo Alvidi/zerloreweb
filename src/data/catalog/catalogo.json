@@ -10,7 +10,7 @@
         "velocidad": "+2\"",
         "salvacion": "5+",
         "escuadra": 12,
-        "valor": 3
+        "valor": 4
       },
       "habilidad": "Alimañas",
       "fuerte_contra": [],
@@ -40,7 +40,7 @@
     {
       "id": "tirador",
       "nombre": "Tirador",
-      "descripcion": "Buen disparo, flojo en cuerpo a cuerpo.",
+      "descripcion": "Infantería versátil a distancia, pero menos experimentada en CaC.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 5,
@@ -49,7 +49,7 @@
         "escuadra": 5,
         "valor": 5
       },
-      "habilidad": "Fuego de contención",
+      "habilidad": "Bloqueo",
       "fuerte_contra": [],
       "armas": {
         "disparo": {
@@ -59,7 +59,7 @@
           "danio": "1",
           "danio_critico": "2",
           "habilidades_arma": [
-            "Fiable"
+            "Disparo certero"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -77,14 +77,14 @@
     {
       "id": "choque",
       "nombre": "Choque",
-      "descripcion": "Infantería que busca el cuerpo a cuerpo.",
+      "descripcion": "Infantería versátil a CaC, pero menos experimentada en Disparo.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
         "velocidad": "+4\"",
         "salvacion": "4+",
         "escuadra": 5,
-        "valor": 5
+        "valor": 7
       },
       "habilidad": "Carga brutal",
       "fuerte_contra": [],
@@ -97,7 +97,7 @@
           "danio": "2",
           "danio_critico": "3",
           "habilidades_arma": [
-            "Maestro"
+            "Implacable"
           ]
         }
       }
@@ -112,7 +112,7 @@
         "velocidad": "+2\"",
         "salvacion": "3+",
         "escuadra": 3,
-        "valor": 12
+        "valor": 11
       },
       "habilidad": "Resistente",
       "fuerte_contra": [
@@ -133,8 +133,7 @@
           "danio": "3",
           "danio_critico": "4",
           "habilidades_arma": [
-            "Perforante",
-            "Ángulo muerto"
+            "Perforante"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -152,7 +151,7 @@
     {
       "id": "exterminador",
       "nombre": "Exterminador",
-      "descripcion": "Élite de cuerpo a cuerpo.",
+      "descripcion": "Élite de CaC, muy blindada. Correcta en Disparo.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -181,7 +180,7 @@
           "danio": "3",
           "danio_critico": "4",
           "habilidades_arma": [
-            "Maestro",
+            "Implacable",
             "Brutal"
           ]
         }
@@ -190,7 +189,7 @@
     {
       "id": "explorador",
       "nombre": "Explorador",
-      "descripcion": "Se adelanta al resto del ejército.",
+      "descripcion": "Infantería solitaria y rápida para hacerse con objetivos. Se adelanta al resto del ejército.",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 5,
@@ -218,7 +217,8 @@
           "danio": "1",
           "danio_critico": "3",
           "habilidades_arma": [
-            "Brutal"
+            "Brutal",
+            "Implacable"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -236,14 +236,14 @@
     {
       "id": "asaltante",
       "nombre": "Asaltante",
-      "descripcion": "Unidades rápidas, algo mejores en cuerpo a cuerpo.",
+      "descripcion": "Unidades muy rápidas, algo destacables en cuerpo a cuerpo.",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 6,
         "velocidad": "+6\"",
         "salvacion": "4+",
         "escuadra": 3,
-        "valor": 7
+        "valor": 8
       },
       "habilidad": "Carga larga",
       "fuerte_contra": [
@@ -264,7 +264,7 @@
           "danio": "1",
           "danio_critico": "2",
           "habilidades_arma": [
-            "Multiuso"
+            "Fiable"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -274,7 +274,7 @@
           "danio": "2",
           "danio_critico": "3",
           "habilidades_arma": [
-            "Alcance"
+            "Golpe crítico"
           ]
         }
       }
@@ -289,7 +289,7 @@
         "velocidad": "+2\"",
         "salvacion": "4+",
         "escuadra": 3,
-        "valor": 8
+        "valor": 11
       },
       "habilidad": "Emplazado",
       "fuerte_contra": [
@@ -328,16 +328,16 @@
     {
       "id": "psiquico",
       "nombre": "Psíquico",
-      "descripcion": "Frágiles, con ataques a distancia muy dañinos e inestables.",
+      "descripcion": "Frágiles, con ataques a distancia muy poderosos.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
         "velocidad": "+2\"",
         "salvacion": "5+",
         "escuadra": 3,
-        "valor": 8
+        "valor": 9
       },
-      "habilidad": "Mente abierta",
+      "habilidad": "Poder mental",
       "fuerte_contra": [
         {
           "tipo": "Juggernaut",
@@ -354,10 +354,9 @@
           "distancia": "18\"",
           "precision": "—",
           "danio": "3",
-          "danio_critico": "4",
+          "danio_critico": "5",
           "habilidades_arma": [
-            "Directo",
-            "Inestable"
+            "Directo"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -375,14 +374,14 @@
     {
       "id": "demonio",
       "nombre": "Demonio",
-      "descripcion": "Criaturas que se recomponen.",
+      "descripcion": "Unidades CaC persistentes. Regresan al campo de batalla si no se neutralizan.",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 8,
         "velocidad": "+4\"",
         "salvacion": "5+",
         "escuadra": 5,
-        "valor": 8
+        "valor": 13
       },
       "habilidad": "Regeneración",
       "fuerte_contra": [
@@ -404,8 +403,7 @@
           "danio": "3",
           "danio_critico": "4",
           "habilidades_arma": [
-            "Perforante",
-            "Inestable"
+            "Perforante"
           ]
         }
       }
@@ -442,8 +440,7 @@
           "danio": "3",
           "danio_critico": "4",
           "habilidades_arma": [
-            "Brutal",
-            "Perforante"
+            "Brutal"
           ]
         }
       }
@@ -451,14 +448,14 @@
     {
       "id": "vehiculo-ligero",
       "nombre": "Vehículo ligero",
-      "descripcion": "Unidad rápida y móvil.",
+      "descripcion": "Unidad rápida y móvil. Perfecta para alcanzar ubicaciones estratégicas.",
       "perfil": {
         "movimiento": "7\"",
         "vidas": 14,
         "velocidad": "+6\"",
         "salvacion": "4+",
         "escuadra": null,
-        "valor": 15
+        "valor": 13
       },
       "habilidad": "Atropello",
       "fuerte_contra": [
@@ -478,7 +475,9 @@
           "precision": "4+",
           "danio": "2",
           "danio_critico": "4",
-          "habilidades_arma": []
+          "habilidades_arma": [
+            "Golpe crítico"
+          ]
         },
         "cuerpo_a_cuerpo": {
           "ataques": "1D3",
@@ -495,14 +494,14 @@
     {
       "id": "vehiculo-pesado",
       "nombre": "Vehículo pesado",
-      "descripcion": "Blindado de primera línea.",
+      "descripcion": "Blindado de primera línea. Pesado y poderoso.",
       "perfil": {
         "movimiento": "3\"",
         "vidas": 18,
         "velocidad": "+2\"",
         "salvacion": "3+",
         "escuadra": null,
-        "valor": 22
+        "valor": 20
       },
       "habilidad": "Fuego de apoyo",
       "fuerte_contra": [
@@ -541,7 +540,7 @@
     {
       "id": "artilleria",
       "nombre": "Artillería",
-      "descripcion": "Fuego de largo alcance, inmóvil.",
+      "descripcion": "Potente fuego de largo alcance. No puede moverse de donde es desplegada.",
       "perfil": {
         "movimiento": "—",
         "vidas": 14,
@@ -550,7 +549,7 @@
         "escuadra": null,
         "valor": 18
       },
-      "habilidad": "Atrincherado",
+      "habilidad": "Fuego indirecto",
       "fuerte_contra": [],
       "armas": {
         "disparo": {
@@ -560,7 +559,6 @@
           "danio": "4",
           "danio_critico": "6",
           "habilidades_arma": [
-            "Parabólica",
             "Explosiva"
           ]
         },
@@ -579,14 +577,14 @@
     {
       "id": "titan",
       "nombre": "Titán",
-      "descripcion": "La mayor amenaza del campo de batalla.",
+      "descripcion": "La mayor amenaza que existe en el campo de batalla.",
       "perfil": {
         "movimiento": "3\"",
         "vidas": 20,
         "velocidad": "+4\"",
         "salvacion": "3+",
         "escuadra": null,
-        "valor": 35
+        "valor": 45
       },
       "habilidad": "Superioridad",
       "fuerte_contra": [],
@@ -609,15 +607,15 @@
           "danio": "4",
           "danio_critico": "6",
           "habilidades_arma": [
-            "Maestro"
+            "Implacable"
           ]
         }
       }
     },
     {
-      "id": "comandante",
-      "nombre": "Comandante",
-      "descripcion": "Líder de escuadra, competente en disparo y cuerpo a cuerpo.",
+      "id": "comandante-disparo",
+      "nombre": "Comandante (disparo)",
+      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
@@ -630,9 +628,111 @@
       "fuerte_contra": [],
       "armas": {
         "disparo": {
+          "ataques": "3D",
+          "distancia": "24\"",
+          "precision": "3+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Perforante"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "comandante-cac",
+      "nombre": "Comandante (CaC)",
+      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 14
+      },
+      "habilidad": "Refuerzos",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": "4D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Implacable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "comandante-psiquico",
+      "nombre": "Comandante (psíquico)",
+      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "velocidad": "+4\"",
+        "salvacion": "5+",
+        "escuadra": null,
+        "valor": 11
+      },
+      "habilidad": "Refuerzos",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "1D3",
+          "distancia": "18\"",
+          "precision": "—",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "comandante-acorazado",
+      "nombre": "Comandante (acorazado)",
+      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 14,
+        "velocidad": "+3\"",
+        "salvacion": "3+",
+        "escuadra": null,
+        "valor": 15
+      },
+      "habilidad": "Refuerzos",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
           "ataques": "2D",
           "distancia": "18\"",
-          "precision": "3+",
+          "precision": "4+",
           "danio": "1",
           "danio_critico": "2",
           "habilidades_arma": [
@@ -640,11 +740,11 @@
           ]
         },
         "cuerpo_a_cuerpo": {
-          "ataques": "3D",
+          "ataques": "2D",
           "distancia": null,
           "precision": null,
-          "danio": "2",
-          "danio_critico": "3",
+          "danio": "1",
+          "danio_critico": "2",
           "habilidades_arma": [
             "Perforante"
           ]

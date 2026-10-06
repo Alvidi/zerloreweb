@@ -1171,7 +1171,8 @@ button {
   flex-wrap: wrap;
 }
 
-.unit-list-section-download {
+.unit-list-section-download,
+.generator-army-download {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1503,6 +1504,12 @@ button {
   gap: 12px;
 }
 
+/* Reserva dos líneas de título para que las tarjetas de objeto midan igual,
+   aunque solo un par de nombres lleguen a partirse. */
+.unit-card-title-row h4 {
+  min-height: calc(2 * 1.25em);
+}
+
 .army-unit-count-badge {
   font-size: 0.85rem;
   font-weight: 700;
@@ -1649,26 +1656,6 @@ button {
 
 .unit-type-comandante {
   color: var(--class-comandante);
-}
-
-.unit-type-infanteria {
-  color: var(--class-infanteria);
-}
-
-.unit-type-elite {
-  color: var(--class-elite);
-}
-
-.unit-type-comando {
-  color: var(--class-comando);
-}
-
-.unit-type-vehiculo {
-  color: var(--class-vehiculo);
-}
-
-.unit-type-heroe {
-  color: var(--class-heroe);
 }
 
 .unit-type-equipment {
@@ -3908,14 +3895,48 @@ mark {
   flex: 0 0 auto;
 }
 
-.rules-download-button {
+/* Estilo único para todas las descargas de la web: reglamento, misiones,
+   tokens, unidades, equipamiento y ejército. */
+.rules-download-button,
+.rules-tokens-footer button,
+.unit-list-section-download,
+.generator-army-download {
   flex: 0 0 auto;
-  padding: 9px 14px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--accent);
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   line-height: 1;
-  text-transform: none;
-  letter-spacing: 0.02em;
-  font-size: 0.82rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.rules-download-button:hover:not(:disabled),
+.rules-tokens-footer button:hover:not(:disabled),
+.unit-list-section-download:hover:not(:disabled),
+.generator-army-download:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* El de misiones va en línea, colgado del encabezado de su sección. */
+.rules-missions-download {
+  margin-left: 14px;
+  vertical-align: middle;
+}
+
+.rules-download-button:disabled,
+.rules-tokens-footer button:disabled,
+.unit-list-section-download:disabled,
+.generator-army-download:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
 /* Mismo botón que los "Ver ficha" del generador. */
@@ -7255,11 +7276,6 @@ mark {
 .ficha2-tag.unit-type-artilleria { color: var(--class-artilleria); }
 .ficha2-tag.unit-type-titan { color: var(--class-titan); }
 .ficha2-tag.unit-type-comandante { color: var(--class-comandante); }
-.ficha2-tag.unit-type-infanteria { color: var(--class-infanteria); }
-.ficha2-tag.unit-type-elite { color: var(--class-elite); }
-.ficha2-tag.unit-type-comando { color: var(--class-comando); }
-.ficha2-tag.unit-type-vehiculo { color: var(--class-vehiculo); }
-.ficha2-tag.unit-type-heroe { color: var(--class-heroe); }
 
 /* En el ejército actual el rol no se puede seleccionar: es solo una etiqueta */
 .unit-role-name.is-static {
@@ -7407,6 +7423,26 @@ mark {
 
 .unit-role-row > .unit-role-count:only-child {
   margin-left: auto;
+}
+
+/* La especialidad del Comandante, en su línea, entre el nombre y el Valor. */
+.unit-card-specialty {
+  margin-top: 1px;
+  color: var(--text-muted);
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Los objetos describen un efecto completo: necesitan una línea más. */
+.unit-card-blurb.is-item {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  min-height: calc(3 * 1.4em + 9px);
 }
 
 /* Nombres largos (Exploradores, Juggernaut…): encogen en vez de partirse */

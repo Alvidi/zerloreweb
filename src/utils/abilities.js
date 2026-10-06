@@ -25,37 +25,27 @@ export const getAbilityDescription = (ability) => {
   if (abilityId === WEAPON_ABILITY_IDS.reliable) {
     return 'Esta arma no tiene reglas especiales.'
   }
-  if (abilityId === WEAPON_ABILITY_IDS.deadAngle) {
-    return 'Esta arma no puede disparar por debajo de la mitad de su rango.'
-  }
   if (abilityId === WEAPON_ABILITY_IDS.brutal) {
     return 'Los impactos de esta arma se consideran críticos con un resultado natural de 5+ en la tirada de ataque.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.piercing) {
     return 'Los impactos de esta arma empeoran en 1 la Salvación realizada contra ellos.'
   }
-  if (abilityId === WEAPON_ABILITY_IDS.unstable) {
-    return 'Tras resolver el ataque, lanza 1D6. Con resultado de 1 o 2, la unidad que porta esta arma sufre el mismo daño que infligió al objetivo. Si el ataque no causó daño, no hay retroceso.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.gunslinger) {
-    return 'Esta arma puede disparar aunque la unidad esté trabada en combate cuerpo a cuerpo.'
+  if (abilityId === WEAPON_ABILITY_IDS.criticalHit) {
+    return 'Los críticos no pueden ser salvados.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.direct) {
-    return 'Esta arma impacta directamente, no tiene precisión.'
+    return 'Todos los dados de ataque de esta arma impactan, sin necesidad de superar la Precisión.'
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.relentless) {
+    return 'Puede volver a tirar los dados de ataque que no hayan impactado: los que no superen la Precisión en disparo, o los que fallen en CaC.'
   }
   if (abilityId === WEAPON_ABILITY_IDS.explosive) {
-    return 'El ataque se resuelve con normalidad contra la unidad objetivo, incluida su salvación. El daño final que reciba el objetivo lo sufren también todas las miniaturas enemigas a 3" o menos de la miniatura impactada, sin tirar salvación adicional. No hay fuego amigo.'
+    return 'El ataque se resuelve con normalidad contra la unidad objetivo, incluida su salvación. Además, todas las miniaturas enemigas a 3" o menos de la miniatura impactada sufren el daño base del arma, sin tirar salvación. No hay fuego amigo.'
   }
-  if (abilityId === WEAPON_ABILITY_IDS.parabolicShot) {
-    return 'Puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo no esté en cobertura.'
+  if (abilityId === WEAPON_ABILITY_IDS.preciseShot) {
+    return 'Si el objetivo está a la mitad o menos de la Distancia de esta arma, el ataque gana +1 dado.'
   }
-  if (abilityId === WEAPON_ABILITY_IDS.reach) {
-    return 'Esta arma CaC puede usarse contra cualquier unidad enemiga a 3" o menos, esté o no trabada con esta unidad. Atacar así no traba a las unidades.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.master) {
-    return 'Los ataques CaC con esta arma solo fallan con un resultado de 1. Si el objetivo hace fallar con 1, 2 o 3 (por cobertura o Berserker), con Maestro solo falla con 1 o 2.'
-  }
-
   return ''
 }
 

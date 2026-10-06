@@ -14,9 +14,6 @@ import {
 } from '../features/generator/catalogUtils.js'
 
 const MAX_UNIT_IMAGE_SIDE = 1600
-const MAX_ITEM_COPIES = 3   // el reglamento permite hasta 3 copias del mismo objeto
-/** Algunos objetos (como la Reliquia) tienen su propio límite por ejército. */
-const getItemMaxCopies = (item) => item?.max_copias ?? MAX_ITEM_COPIES
 const FICHA_CARD_W = 1536
 const FICHA_CARD_H = 1024
 const IMAGE_CROP_ASPECT_RATIO = 736 / 416   // ventana de arte de ficha2.png
@@ -191,6 +188,12 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
  * El nombre del tipo encoge hasta caber en su hueco: se mide el texto y se baja
  * el tamaño de letra mientras desborde, así nunca se parte ni se sale.
  */
+/** "Comandante (acorazado)" → { base: 'Comandante', especialidad: 'acorazado' }. */
+const splitNombreUnidad = (nombre) => {
+  const match = String(nombre || '').match(/^(.*?)\s*\(([^)]+)\)\s*$/)
+  return match ? { base: match[1], especialidad: match[2] } : { base: nombre, especialidad: '' }
+}
+
 function UnitTypeTitle({ nombre, className }) {
   const ref = useRef(null)
 
@@ -461,13 +464,10 @@ function Generador() {
     setArmyDownloadError('')
   }
 
+  // Sin tope: los objetos son cartas de un solo uso que se descartan al jugarlas,
+  // así que lo único que limita cuántas llevas es el Valor del ejército.
   const handleAddItem = (itemId) => {
-    setSelectedItems((prev) => {
-      const count = prev[itemId] || 0
-      const item = activeItems.find((candidate) => candidate.id === itemId)
-      if (count >= getItemMaxCopies(item)) return prev
-      return { ...prev, [itemId]: count + 1 }
-    })
+    setSelectedItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }))
   }
 
   const handleRemoveItem = (itemId) => {
@@ -713,7 +713,7 @@ function Generador() {
                     <p className="unit-list-section-label">{t('generator.units')}</p>
                     <button
                       type="button"
-                      className="ghost small unit-list-section-download"
+                      className="unit-list-section-download"
                       onClick={() => handleDownloadCatalogPdf('catalogo-unidades')}
                       disabled={isArmyPrintPreviewOpen}
                       aria-busy={printJob === 'catalogo-unidades' ? 'true' : 'false'}
@@ -743,10 +743,22 @@ function Generador() {
                                 </span>
                               </span>
                               <div className="unit-card-heading">
-                                <UnitTypeTitle
-                                  nombre={unidad.nombre}
-                                  className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}
-                                />
+                                {(() => {
+                                  // La especialidad va en su propia línea: así el nombre
+                                  // no tiene que encogerse para que quepa entre paréntesis.
+                                  const { base, especialidad } = splitNombreUnidad(unidad.nombre)
+                                  return (
+                                    <>
+                                      <UnitTypeTitle
+                                        nombre={base}
+                                        className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}
+                                      />
+                                      {especialidad ? (
+                                        <div className="unit-card-specialty">{especialidad}</div>
+                                      ) : null}
+                                    </>
+                                  )
+                                })()}
                                 <div className="unit-card-inline-value">{unidad.perfil.valor} {t('generator.valueUnit')}</div>
                               </div>
                             </div>
@@ -781,7 +793,7 @@ function Generador() {
                         <p className="unit-list-section-label">{t('rules.modeItems')}</p>
                         <button
                           type="button"
-                          className="ghost small unit-list-section-download"
+                          className="unit-list-section-download"
                           onClick={() => handleDownloadCatalogPdf('catalogo-objetos')}
                           disabled={isArmyPrintPreviewOpen}
                           aria-busy={printJob === 'catalogo-objetos' ? 'true' : 'false'}
@@ -822,7 +834,6 @@ function Generador() {
                                   <div className="unit-add-controls">
                                     <CountStepper
                                       count={itemCount}
-                                      max={getItemMaxCopies(item)}
                                       onAdd={() => handleAddItem(item.id)}
                                       onRemove={() => handleRemoveItem(item.id)}
                                       addLabel={`${t('generator.add')} ${item.nombre}`}
@@ -832,6 +843,9 @@ function Generador() {
                                   </div>
                                 </div>
                               </div>
+                              {item.descripcion ? (
+                                <p className="unit-card-blurb is-item">{item.descripcion}</p>
+                              ) : null}
                             </article>
                           )
                         })}
@@ -954,7 +968,6 @@ function Generador() {
                                 <div className="unit-add-controls">
                                   <CountStepper
                                     count={count}
-                                    max={getItemMaxCopies(item)}
                                     onAdd={() => handleAddItem(item.id)}
                                     onRemove={() => handleRemoveItem(item.id)}
                                     addLabel={`${t('generator.add')} ${item.nombre}`}
@@ -978,7 +991,7 @@ function Generador() {
                 <div className="army-actions">
                   <button
                     type="button"
-                    className="primary small"
+                    className="generator-army-download"
                     onClick={handleDownloadArmyPdf}
                     disabled={!armyEntries.length || isArmyPrintPreviewOpen}
                     aria-busy={printJob === 'ejercito' ? 'true' : 'false'}

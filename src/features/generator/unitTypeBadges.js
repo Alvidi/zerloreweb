@@ -9,7 +9,9 @@ const badgeModules = import.meta.glob('../../images/units_icons/*.png', {
 // Algunos ficheros no se llaman igual que el token de su clase.
 const FILENAME_ALIASES = {
   mosntruo: 'monstruo',
-  arma_pesada: 'armas-pesadas',
+  extermiandor: 'exterminador',
+  juggernait: 'juggernaut',
+  armas_pesadas: 'armas-pesadas',
   'vehiculo ligero': 'vehiculo-ligero',
   'vehiculo pesado': 'vehiculo-pesado',
 }
@@ -49,23 +51,10 @@ export const getUnitClassToken = (value = '') => {
   return ''
 }
 
-/**
- * Mientras no haya arte propia para los tipos nuevos, se reutiliza el icono
- * más cercano. Al añadir <tipo>.png en images/units_icons/ el alias sobra.
- */
-const BADGE_FALLBACKS = {
-  tirador: 'infanteria',
-  explorador: 'comando',
-  juggernaut: 'elite',
-  exterminador: 'elite',
-  titan: 'monstruo',
-  comandante: 'heroe',
-}
-
 export const getUnitClassBadgeSrc = (value = '') => {
   const token = getUnitClassToken(value)
   if (!token) return ''
-  return badgeByClass[token] || badgeByClass[BADGE_FALLBACKS[token]] || ''
+  return badgeByClass[token] || ''
 }
 
 export const hasUnitClassBadge = (value = '') => Boolean(getUnitClassBadgeSrc(value))
