@@ -119,7 +119,7 @@ const alignTextBoxesForCapture = (liveCard, clonedDoc) => {
  * Ficha de objeto. Comparte tipografías y estilos con la ficha de unidad
  * (Cinzel para lo titular, Inter para el cuerpo) sobre su propia plantilla.
  */
-const ItemFichaCard = forwardRef(function ItemFichaCard({ item, count = 1 }, ref) {
+const ItemFichaCard = forwardRef(function ItemFichaCard({ item, count = 1, hideValue = false }, ref) {
   const wrapperRef = useRef(null)
   const cardRef = useRef(null)
 
@@ -202,8 +202,8 @@ const ItemFichaCard = forwardRef(function ItemFichaCard({ item, count = 1 }, ref
           </FitBox>
         ) : null}
 
-        <FitBox className="ficha2-valor" rect={LAYOUT.valor} maxFontSize={34} fitKey={String(item.valor ?? '—')}>
-          {item.valor ?? '—'}
+        <FitBox className="ficha2-valor" rect={LAYOUT.valor} maxFontSize={34} fitKey={hideValue ? '—' : String(item.valor ?? '—')}>
+          {hideValue ? '—' : (item.valor ?? '—')}
         </FitBox>
 
         <FitBox

@@ -1200,6 +1200,24 @@ button {
   text-transform: uppercase;
 }
 
+/* Coliseo: "Añadir imagen" es un label con un input dentro, y "Elegir héroe"
+   usa el botón de descarga pero en pequeño, bajo los otros dos. */
+.coliseo-image-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.coliseo-image-button input {
+  display: none;
+}
+
+.coliseo-pick-button {
+  width: 100%;
+  justify-content: center;
+}
+
 /* Descripción breve del tipo: de un vistazo se sabe qué es cada unidad.
    Se recorta a dos líneas para que todas las tarjetas midan lo mismo. */
 .unit-card-blurb {
@@ -1494,6 +1512,9 @@ button {
   min-width: 0;
   flex: 1;
   display: grid;
+  /* La columna no puede crecer con el texto: si no, un nombre largo se sale
+     de la tarjeta y se mete debajo del botón. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 2px;
 }
 
@@ -1502,12 +1523,15 @@ button {
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
 }
 
-/* Reserva dos líneas de título para que las tarjetas de objeto midan igual,
-   aunque solo un par de nombres lleguen a partirse. */
+/* El nombre del objeto encoge hasta caber en una línea, así la etiqueta de
+   debajo queda siempre a la misma altura en todas las tarjetas. */
 .unit-card-title-row h4 {
-  min-height: calc(2 * 1.25em);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .army-unit-count-badge {

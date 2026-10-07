@@ -1,8 +1,11 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
+import { useImageCrop } from '../features/generator/imageCrop.js'
+import ImageCropModal from '../features/generator/components/ImageCropModal.jsx'
+import FitTitle from '../features/generator/components/FitTitle.jsx'
 import itemIcon from '../images/units_icons/equipamiento.png'
 import objetosData from '../data/items/objetos.json'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
@@ -13,12 +16,8 @@ import {
   getUnidad,
 } from '../features/generator/catalogUtils.js'
 
-const MAX_UNIT_IMAGE_SIDE = 1600
 const FICHA_CARD_W = 1536
 const FICHA_CARD_H = 1024
-const IMAGE_CROP_ASPECT_RATIO = 736 / 416   // ventana de arte de ficha2.png
-const IMAGE_CROP_VIEWPORT_WIDTH = 360
-const IMAGE_CROP_VIEWPORT_HEIGHT = Math.round(IMAGE_CROP_VIEWPORT_WIDTH / IMAGE_CROP_ASPECT_RATIO)
 const EXPORT_PAGE_W = 1240  // A4 vertical (folio) ~210mm × 5.9px/mm
 const EXPORT_PAGE_H = 1754  // A4 vertical (folio) ~297mm × 5.9px/mm
 const EXPORT_MARGIN = 46    // ~8mm de margen
@@ -35,70 +34,12 @@ const ITEM_CARD_COLUMNS = 2
 const EXPORT_PX_PER_MM = EXPORT_PAGE_W / 210
 const EXPORT_RASTER_SCALE = 2
 
-// ─── Utilidades de imagen ─────────────────────────────────────────────────
-const readFileAsDataUrl = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '')
-    reader.onerror = reject
-    reader.readAsDataURL(file)
-  })
-
-const loadImageFromDataUrl = (dataUrl) =>
-  new Promise((resolve, reject) => {
-    const image = new Image()
-    image.onload = () => resolve(image)
-    image.onerror = reject
-    image.crossOrigin = 'anonymous'
-    image.src = dataUrl
-  })
-
-const clampCropOffsets = ({ offsetX, offsetY, zoom, imageWidth, imageHeight }) => {
-  if (!imageWidth || !imageHeight) return { offsetX: 0, offsetY: 0 }
-
-  const baseScale = Math.max(IMAGE_CROP_VIEWPORT_WIDTH / imageWidth, IMAGE_CROP_VIEWPORT_HEIGHT / imageHeight)
-  const maxOffsetX = Math.max(0, (imageWidth * baseScale * zoom - IMAGE_CROP_VIEWPORT_WIDTH) / 2)
-  const maxOffsetY = Math.max(0, (imageHeight * baseScale * zoom - IMAGE_CROP_VIEWPORT_HEIGHT) / 2)
-
-  return {
-    offsetX: Math.min(maxOffsetX, Math.max(-maxOffsetX, offsetX)),
-    offsetY: Math.min(maxOffsetY, Math.max(-maxOffsetY, offsetY)),
-  }
+/** "Comandante (acorazado)" → { base: 'Comandante', especialidad: 'acorazado' }. */
+const splitNombreUnidad = (nombre) => {
+  const match = String(nombre || '').match(/^(.*?)\s*\(([^)]+)\)\s*$/)
+  return match ? { base: match[1], especialidad: match[2] } : { base: nombre, especialidad: '' }
 }
 
-const createCroppedImageDataUrl = async (sourceDataUrl, cropState) => {
-  const image = await loadImageFromDataUrl(sourceDataUrl)
-  const imageWidth = image.naturalWidth || image.width || 1
-  const imageHeight = image.naturalHeight || image.height || 1
-  const baseScale = Math.max(IMAGE_CROP_VIEWPORT_WIDTH / imageWidth, IMAGE_CROP_VIEWPORT_HEIGHT / imageHeight)
-  const scale = baseScale * cropState.zoom
-  const outputWidth = MAX_UNIT_IMAGE_SIDE
-  const outputHeight = Math.round(outputWidth / IMAGE_CROP_ASPECT_RATIO)
-  const outputScale = outputWidth / IMAGE_CROP_VIEWPORT_WIDTH
-  const drawWidth = imageWidth * scale * outputScale
-  const drawHeight = imageHeight * scale * outputScale
-
-  const canvas = document.createElement('canvas')
-  canvas.width = outputWidth
-  canvas.height = outputHeight
-  const ctx = canvas.getContext('2d')
-  if (!ctx) throw new Error('Canvas context unavailable')
-
-  ctx.imageSmoothingEnabled = true
-  ctx.imageSmoothingQuality = 'high'
-  ctx.clearRect(0, 0, outputWidth, outputHeight)
-  ctx.drawImage(
-    image,
-    (outputWidth - drawWidth) / 2 + cropState.offsetX * outputScale,
-    (outputHeight - drawHeight) / 2 + cropState.offsetY * outputScale,
-    drawWidth,
-    drawHeight,
-  )
-
-  return canvas.toDataURL('image/png')
-}
-
-// ─── Utilidades de exportación ────────────────────────────────────────────
 const chunkItems = (items, size) => {
   if (!Array.isArray(items) || size <= 0) return []
   const chunks = []
@@ -184,46 +125,6 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
   return pageCanvas
 }
 
-/**
- * El nombre del tipo encoge hasta caber en su hueco: se mide el texto y se baja
- * el tamaño de letra mientras desborde, así nunca se parte ni se sale.
- */
-/** "Comandante (acorazado)" → { base: 'Comandante', especialidad: 'acorazado' }. */
-const splitNombreUnidad = (nombre) => {
-  const match = String(nombre || '').match(/^(.*?)\s*\(([^)]+)\)\s*$/)
-  return match ? { base: match[1], especialidad: match[2] } : { base: nombre, especialidad: '' }
-}
-
-function UnitTypeTitle({ nombre, className }) {
-  const ref = useRef(null)
-
-  useLayoutEffect(() => {
-    const node = ref.current
-    if (!node) return undefined
-
-    const fit = () => {
-      const maxSize = 13.1   // 0.82rem, el tamaño por defecto de la etiqueta
-      let size = maxSize
-      node.style.fontSize = `${size}px`
-      while (size > 8 && node.scrollWidth > node.clientWidth + 1) {
-        size -= 0.5
-        node.style.fontSize = `${size}px`
-      }
-    }
-
-    fit()
-    if (typeof ResizeObserver === 'undefined') return undefined
-    const observer = new ResizeObserver(fit)
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [nombre])
-
-  return (
-    <div ref={ref} className={className}>
-      {nombre}
-    </div>
-  )
-}
 
 // ─── Componentes auxiliares ───────────────────────────────────────────────
 function SpinnerIcon() {
@@ -296,11 +197,11 @@ function Generador() {
   const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
   const [openCatalogKey, setOpenCatalogKey] = useState('')
   const [openArmyUid, setOpenArmyUid] = useState('')
-  const [imageCropDraft, setImageCropDraft] = useState(null)
   // Qué PDF se está montando: 'ejercito', 'catalogo-unidades', 'catalogo-objetos' o ninguno.
   const [printJob, setPrintJob] = useState(null)
   const isArmyPrintPreviewOpen = printJob !== null
   const [armyDownloadError, setArmyDownloadError] = useState('')
+  const imageCrop = useImageCrop((selectionId, imageDataUrl) => updateSelection(selectionId, { imageDataUrl }))
   const [showItemFichaModal, setShowItemFichaModal] = useState(false)
   const [activeItemFicha, setActiveItemFicha] = useState(null)
 
@@ -487,86 +388,8 @@ function Generador() {
   }
 
   // ── Imagen ──────────────────────────────────────────────────────────────
-  const handleArmyUnitImageChange = (item, event) => {
-    const file = event.target.files?.[0]
-    if (!file) return
-    readFileAsDataUrl(file)
-      .then(async (sourceDataUrl) => {
-        if (!sourceDataUrl) return
-        const image = await loadImageFromDataUrl(sourceDataUrl)
-        setImageCropDraft({
-          selectionId: item.uid,
-          unitName: item.entry.nombre,
-          sourceDataUrl,
-          imageWidth: image.naturalWidth || image.width || 1,
-          imageHeight: image.naturalHeight || image.height || 1,
-          zoom: 1,
-          offsetX: 0,
-          offsetY: 0,
-        })
-      })
-      .catch(() => {})
-    event.target.value = ''
-  }
-
-  const handleImageCropZoomChange = (nextZoom) => {
-    setImageCropDraft((prev) => {
-      if (!prev) return prev
-      const zoom = Math.min(3, Math.max(1, Number(nextZoom) || 1))
-      return { ...prev, zoom, ...clampCropOffsets({ ...prev, zoom }) }
-    })
-  }
-
-  const handleImageCropPointerDown = (event) => {
-    if (!imageCropDraft) return
-    event.preventDefault()
-    const startX = event.clientX
-    const startY = event.clientY
-    const startOffsetX = imageCropDraft.offsetX
-    const startOffsetY = imageCropDraft.offsetY
-
-    const handlePointerMove = (moveEvent) => {
-      setImageCropDraft((prev) => {
-        if (!prev) return prev
-        return {
-          ...prev,
-          ...clampCropOffsets({
-            offsetX: startOffsetX + (moveEvent.clientX - startX),
-            offsetY: startOffsetY + (moveEvent.clientY - startY),
-            zoom: prev.zoom,
-            imageWidth: prev.imageWidth,
-            imageHeight: prev.imageHeight,
-          }),
-        }
-      })
-    }
-
-    const handlePointerUp = () => {
-      window.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('pointerup', handlePointerUp)
-    }
-
-    window.addEventListener('pointermove', handlePointerMove)
-    window.addEventListener('pointerup', handlePointerUp)
-  }
-
-  const handleConfirmImageCrop = () => {
-    if (!imageCropDraft) return
-    createCroppedImageDataUrl(imageCropDraft.sourceDataUrl, imageCropDraft)
-      .then((result) => {
-        updateSelection(imageCropDraft.selectionId, { imageDataUrl: result })
-        setImageCropDraft(null)
-      })
-      .catch(() => {})
-  }
-
-  // ── Bloqueo de scroll con modales abiertos ──────────────────────────────
-  useEffect(() => {
-    if (typeof document === 'undefined') return undefined
-    const previousOverflow = document.body.style.overflow
-    if (imageCropDraft) document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = previousOverflow }
-  }, [imageCropDraft])
+  const handleArmyUnitImageChange = (item, event) =>
+    imageCrop.startFromFileInput(item.uid, item.entry.nombre, event)
 
   // ── Exportación a PDF del ejército ──────────────────────────────────────
   const handleDownloadArmyPdf = () => {
@@ -749,10 +572,9 @@ function Generador() {
                                   const { base, especialidad } = splitNombreUnidad(unidad.nombre)
                                   return (
                                     <>
-                                      <UnitTypeTitle
-                                        nombre={base}
-                                        className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}
-                                      />
+                                      <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}>
+                                        {base}
+                                      </FitTitle>
                                       {especialidad ? (
                                         <div className="unit-card-specialty">{especialidad}</div>
                                       ) : null}
@@ -819,7 +641,7 @@ function Generador() {
                                   </span>
                                   <div className="unit-card-heading">
                                     <div className="unit-card-title-row">
-                                      <h4>{item.nombre}</h4>
+                                      <FitTitle as="h4" maxFontSize={16} minFontSize={10}>{item.nombre}</FitTitle>
                                     </div>
                                     <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
                                     <div className="unit-card-inline-value">
@@ -1067,60 +889,7 @@ function Generador() {
       ) : null}
 
       {/* Modal de recorte de imagen */}
-      {imageCropDraft && typeof document !== 'undefined' ? createPortal(
-        <div className="unit-modal" role="dialog" aria-modal="true" onClick={() => setImageCropDraft(null)}>
-          <div className="unit-modal-card image-crop-modal-card" onClick={(event) => event.stopPropagation()}>
-            <div className="unit-modal-header">
-              <div>
-                <p className="eyebrow">{imageCropDraft.unitName}</p>
-                <h3>{t('generator.cropImageTitle')}</h3>
-                <p className="unit-modal-subtitle">{t('generator.cropImageHint')}</p>
-              </div>
-              <button type="button" className="ghost small" onClick={() => setImageCropDraft(null)}>{t('generator.close')}</button>
-            </div>
-            <div className="unit-modal-body image-crop-modal-body">
-              <div
-                className="image-crop-stage"
-                onPointerDown={handleImageCropPointerDown}
-                role="presentation"
-                style={{ width: `${IMAGE_CROP_VIEWPORT_WIDTH}px`, height: `${IMAGE_CROP_VIEWPORT_HEIGHT}px` }}
-              >
-                <img
-                  src={imageCropDraft.sourceDataUrl}
-                  alt={imageCropDraft.unitName}
-                  className="image-crop-stage-image"
-                  draggable="false"
-                  style={{
-                    width: `${imageCropDraft.imageWidth}px`,
-                    height: `${imageCropDraft.imageHeight}px`,
-                    transform: `translate(calc(-50% + ${imageCropDraft.offsetX}px), calc(-50% + ${imageCropDraft.offsetY}px)) scale(${Math.max(
-                      IMAGE_CROP_VIEWPORT_WIDTH / imageCropDraft.imageWidth,
-                      IMAGE_CROP_VIEWPORT_HEIGHT / imageCropDraft.imageHeight,
-                    ) * imageCropDraft.zoom})`,
-                  }}
-                />
-                <div className="image-crop-frame" aria-hidden="true" />
-              </div>
-              <label className="field image-crop-zoom-field">
-                <span>{t('generator.zoom')}</span>
-                <input
-                  type="range"
-                  min="1"
-                  max="3"
-                  step="0.01"
-                  value={imageCropDraft.zoom}
-                  onChange={(event) => handleImageCropZoomChange(event.target.value)}
-                />
-              </label>
-              <div className="image-crop-actions">
-                <button type="button" className="ghost small" onClick={() => setImageCropDraft(null)}>{t('generator.cancel')}</button>
-                <button type="button" className="primary" onClick={handleConfirmImageCrop}>{t('generator.confirmCropImage')}</button>
-              </div>
-            </div>
-          </div>
-        </div>,
-        document.body,
-      ) : null}
+      <ImageCropModal crop={imageCrop} />
 
       {/* Modal de ficha de objeto */}
       {showItemFichaModal && activeItemFicha && typeof document !== 'undefined' ? createPortal(

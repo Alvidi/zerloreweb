@@ -111,6 +111,13 @@
       "descripcion": "Ganas la habilidad de arma Golpe crítico en tu ataque.",
       "accion": "No gasta acción",
       "valor": 4
+    },
+    {
+      "id": "botas-ligeras",
+      "nombre": "Botas ligeras",
+      "descripcion": "Da +3\" de Velocidad.",
+      "accion": "No gasta acción",
+      "valor": 3
     }
   ]
 }

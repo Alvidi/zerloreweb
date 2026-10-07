@@ -144,7 +144,7 @@ Indica el resultado mínimo necesario en **1D6** para bloquear un impacto recibi
 
 ### Habilidad de unidad
 
-Regla especial propia del tipo de unidad *(ver columna Habilidad en Tipos de unidad)*. Se aplica siempre que la unidad esté en juego, salvo que se indique lo contrario.
+Regla especial propia del tipo de unidad *(ver Unidades, Armas y Equipamiento)*. Se aplica siempre que la unidad esté en juego, salvo que se indique lo contrario.
 
 ### Escuadra
 
@@ -211,28 +211,11 @@ Reglas especiales que solo afectan a esta arma concreta.
 
 Todas las unidades de ZeroLore pertenecen a un **tipo**. El tipo de unidad define su **rol en el campo de batalla**, así como qué puede o no puede hacer dentro de la partida. Todas las unidades disponen de **un ataque cuerpo a cuerpo** en su arsenal.
 
-| Tipo | Descripción | Habilidad | Fuerte contra |
-| --- | --- | --- | --- |
-| **Milicia** | Tropa numerosa y barata, sacrificable. No destaca contra nada. | **Alimañas:** esta unidad no tiene habilidad especial. | — |
-| **Tirador** | Infantería versátil a distancia, pero menos experimentada en CaC. | **Bloqueo:** esta unidad bloquea el ataque gratuito de las cargas enemigas realizadas contra ella. | — |
-| **Choque** | Infantería versátil a CaC, pero menos experimentada en Disparo. | **Carga brutal:** cuando esta unidad realiza una carga, gana **+1 dado de ataque CaC** durante ese ataque gratuito. | — |
-| **Juggernaut** | Élite de disparo, muy blindada. Correcta en cuerpo a cuerpo. | **Resistente:** la primera vez cada turno que esta unidad reciba daño, reduce ese daño en **1D3**. | +1 Tirador · +2 Choque |
-| **Exterminador** | Élite de CaC, muy blindada. Correcta en Disparo. | **Berserker:** las unidades enemigas que ataquen a esta unidad en CaC fallan con resultados naturales de **1, 2 o 3**. | +1 Choque · +2 Tirador |
-| **Explorador** | Infantería solitaria y rápida para hacerse con objetivos. Se adelanta al resto del ejército. | **Avanzadilla:** puede desplegarse a **9"** de un puesto de mando aliado. No puede ir con Comandantes. | +1 Monstruo · +2 Demonio |
-| **Asaltante** | Unidades muy rápidas, algo destacables en cuerpo a cuerpo. | **Carga larga:** al realizar la acción **Cargar**, esta unidad puede desplazarse **3" adicionales**. | +1 Artillería · +2 Armas Pesadas |
-| **Armas Pesadas** | Equipos de fuego lentos y potentes. | **Emplazado:** si esta unidad no se ha movido durante esta activación, gana **+1 dado** en sus ataques a distancia. | +1 Juggernaut · +2 Vehículo ligero |
-| **Psíquico** | Frágiles, con ataques a distancia muy poderosos. | **Poder mental:** ignora cualquier cobertura en la que esté la unidad objetivo. También puede atacar sin línea de visión, pero en ese caso debe tirar un dado: si saca **1, 2 o 3**, esta unidad recibe **1D3 de daño** directo. | +1 Juggernaut · +2 Exterminador |
-| **Demonio** | Unidades CaC persistentes. Regresan al campo de batalla si no se neutralizan. | **Regeneración:** si una unidad Demonio muere, regresa a la Reserva con todas las Vidas y lista para volver a ser desplegada. | +1 Psíquico · +2 Milicia |
-| **Monstruo** | Criatura enorme que solo lucha cuerpo a cuerpo. | **Anclado:** las unidades enemigas trabadas con esta unidad no pueden realizar la acción **Destrabarse**. | +1 Demonio · +2 Milicia |
-| **Vehículo ligero** | Unidad rápida y móvil. Perfecta para alcanzar ubicaciones estratégicas. | **Atropello:** durante su **carga**, si traba a una unidad enemiga, esa unidad recibe automáticamente **1D3** de daño. | +1 Explorador · +2 Asaltante |
-| **Vehículo pesado** | Blindado de primera línea. Pesado y poderoso. | **Fuego de apoyo:** esta unidad puede realizar la acción **Disparar** aunque esté trabada en combate cuerpo a cuerpo. | +1 Monstruo · +2 Armas Pesadas |
-| **Artillería** | Potente fuego de largo alcance. No puede moverse de donde es desplegada. | **Fuego indirecto:** esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su **Distancia** y el objetivo **no esté en cobertura**. Esta unidad no puede moverse. | — |
-| **Titán** | La mayor amenaza que existe en el campo de batalla. | **Superioridad:** solo puede cargar contra otro Titán, y solo otro Titán puede trabarlo. Si le carga una unidad de otro tipo, esa unidad resuelve su carga y su ataque con normalidad y a continuación se retira 1" del Titán. | — |
-| **Comandante** | Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia. | **Refuerzos:** durante la fase de despliegue, esta unidad puede recibir **una miniatura** del tipo que comande, desde la Reserva, siempre que no esté trabada en CaC, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas *(ver ficha Unidad)*. | — |
+Cada tipo tiene además una **habilidad de unidad** propia y puede tener **ventaja** sobre otros tipos. La descripción de cada tipo, su habilidad y su ventaja se encuentran en el documento **Unidades, Armas y Equipamiento**.
 
 ## Ventaja de tipo
 
-Cuando una unidad ataca a un tipo de unidad sobre el que tiene ventaja (ver la columna **Fuerte contra**) y el ataque inflige daño, suma **+1 o +2 de daño adicional** al **daño total final** del ataque, según indique su ficha.
+Cuando una unidad ataca a un tipo de unidad sobre el que tiene ventaja (ver la columna **Ventaja** en **Unidades, Armas y Equipamiento**) y el ataque inflige daño, suma **+1 o +2 de daño adicional** al **daño total final** del ataque, según indique su ficha.
 
 El **Comandante** no tiene ventaja de tipo contra ninguna unidad, y ninguna unidad la tiene contra él.
 
@@ -587,6 +570,9 @@ Solo un **Comandante** puede formar una escuadra.
 - Mientras lidere una escuadra, el Comandante usa el **Movimiento y la Velocidad del tipo de unidad que comanda**. Si se queda solo, vuelve a usar los suyos.
 - Las escuadras **no pueden formarse ni fusionarse durante la partida**, salvo mediante la habilidad **Refuerzos** del Comandante *(ver Tipos de unidad)*. Una unidad desplegada en solitario sigue sola toda la partida.
 - Si un Comandante pierde a **todas** las miniaturas de su escuadra, deja de estar ligado a ese tipo de unidad: la siguiente miniatura que reciba por **Refuerzos** puede ser de **cualquier tipo que pueda formar escuadra**, y desde ese momento su escuadra pasa a ser de ese tipo, con su tamaño máximo, su Movimiento y su Velocidad.
+- La excepción es el **Vehículo ligero**: con su habilidad **Vehículo autosuficiente** puede formar escuadra sin Comandante *(ver Unidades, Armas y Equipamiento)*.
+
+{{selfSufficientDiagram}}
 
 {{commanderSquadDiagram}}
 

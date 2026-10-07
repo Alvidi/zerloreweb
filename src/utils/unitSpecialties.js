@@ -11,7 +11,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Alimañas', description: 'Esta unidad no tiene habilidad especial.' },
   },
   {
-    es: { name: 'Bloqueo', description: 'Esta unidad bloquea el ataque gratuito de las cargas enemigas realizadas contra ella.' },
+    es: { name: 'Atrincherado', description: 'Mientras esta unidad esté en cobertura, mejora en 1 la Precisión de sus ataques a distancia.' },
   },
   {
     es: { name: 'Carga brutal', description: 'Cuando esta unidad realiza una carga, gana +1 dado de ataque CaC durante ese ataque gratuito.' },
@@ -26,7 +26,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Avanzadilla', description: 'Puede desplegarse a 9" de un puesto de mando aliado. No puede ir con Comandantes.' },
   },
   {
-    es: { name: 'Carga larga', description: 'Al realizar la acción Cargar, esta unidad puede desplazarse 3" adicionales.' },
+    es: { name: 'Brinco', description: 'Esta unidad puede ascender en diagonal al moverse, sin necesidad de tocar la base del obstáculo. No puede terminar su movimiento sobre otras miniaturas ni en lugares donde no pueda sostenerse.' },
   },
   {
     es: { name: 'Emplazado', description: 'Si esta unidad no se ha movido durante esta activación, gana +1 dado en sus ataques a distancia.' },
@@ -35,22 +35,22 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Poder mental', description: 'Ignora cualquier cobertura en la que esté la unidad objetivo. También puede atacar sin línea de visión, pero en ese caso debe tirar un dado: si saca 1, 2 o 3, esta unidad recibe 1D3 de daño directo.' },
   },
   {
-    es: { name: 'Regeneración', description: 'Si una unidad Demonio muere, regresa a la Reserva con todas las Vidas y lista para volver a ser desplegada.' },
+    es: { name: 'Regeneración', description: 'Si esta unidad muere, regresa a la Reserva con todas sus Vidas y lista para volver a ser desplegada.' },
   },
   {
     es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden realizar la acción Destrabarse.' },
   },
   {
-    es: { name: 'Atropello', description: 'Durante su carga, si traba a una unidad enemiga, esa unidad recibe automáticamente 1D3 de daño.' },
+    es: { name: 'Vehículo autosuficiente', description: 'Estas unidades pueden formar una escuadra sin Comandante. Al desplegarla, elige una miniatura como líder: la escuadra se mueve desde ella y mantiene la coherencia a su alrededor. Si el líder cae, elige otra. El daño se asigna libremente entre las miniaturas de la escuadra.' },
   },
   {
-    es: { name: 'Fuego de apoyo', description: 'Esta unidad puede realizar la acción Disparar aunque esté trabada en combate cuerpo a cuerpo.' },
+    es: { name: 'Fuego de apoyo', description: 'Esta unidad puede realizar la acción Disparar a otra unidad, aunque esté trabada en combate cuerpo a cuerpo.' },
   },
   {
     es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo no esté en cobertura. Esta unidad no puede moverse.' },
   },
   {
-    es: { name: 'Superioridad', description: 'Solo puede cargar contra otro Titán, y solo otro Titán puede trabarlo. Si le carga una unidad de otro tipo, esa unidad resuelve su carga y su ataque con normalidad y a continuación se retira 1" del Titán.' },
+    es: { name: 'Superioridad', description: 'Solo puede cargar contra otro Titán y ser trabada por otro Titán. Si otro tipo de unidad la carga, esta procede de manera normal con su carga y ataque, y a continuación se retira 1" de ella.' },
   },
   {
     es: { name: 'Refuerzos', description: 'Durante la fase de despliegue, esta unidad puede recibir una miniatura del tipo que comande, desde la Reserva, siempre que no esté trabada en CaC, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas.' },

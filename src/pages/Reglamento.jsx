@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import guerraTotalMd from '../data/spanish/guerra-total.md?raw'
+import coliseoMd from '../data/spanish/coliseo.md?raw'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import { buildUnitEntry } from '../features/generator/catalogUtils.js'
@@ -24,7 +25,7 @@ import fichasMisionesImg from '../images/fichas/misiones.png'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['rules', 'total-war', 'tokens']
+const RULES_MODES = ['rules', 'total-war', 'coliseo', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
@@ -205,6 +206,9 @@ function Reglamento() {
     if (rulesMode === 'total-war') {
       return guerraTotalMd
     }
+    if (rulesMode === 'coliseo') {
+      return coliseoMd
+    }
     return reglamentoMd
   }, [rulesMode])
   const tokenOptions = useMemo(
@@ -226,6 +230,7 @@ function Reglamento() {
     () => [
       { id: 'rules', label: t('rules.modeRules') },
       { id: 'total-war', label: t('rules.modeTotalWar') },
+      { id: 'coliseo', label: t('rules.modeColiseo') },
       { id: 'tokens', label: t('rules.modeTokens') },
     ],
     [t],
@@ -238,6 +243,7 @@ function Reglamento() {
   }, [activeMarkdown, isTokensMode, lang])
   const printCoverSectionLabel = {
     'total-war': t('rules.modeTotalWar'),
+    coliseo: t('rules.modeColiseo'),
   }[rulesMode] || t('rules.modeRules')
   const printCoverCreditLabel = 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
@@ -652,9 +658,10 @@ function Reglamento() {
     const firstHeading = doc.querySelector('h1')
     // Misiones y Guerra Total arrancan con texto, no con un título: el encabezado
     // del documento lo pone el propio modo y su primer <h1> es ya una sección.
-    const ownHeadingModes = ['total-war']
+    const ownHeadingModes = ['total-war', 'coliseo']
     const modeHeadings = {
       'total-war': { id: 'guerra-total', title: t('rules.modeTotalWar') },
+      coliseo: { id: 'coliseo', title: t('rules.modeColiseo') },
     }
     const documentHeading = ownHeadingModes.includes(rulesMode)
       ? modeHeadings[rulesMode]
@@ -1934,6 +1941,7 @@ function Reglamento() {
 
       const filename = {
         'total-war': 'zerolore-guerra-total-es.pdf',
+        coliseo: 'zerolore-coliseo-es.pdf',
       }[rulesMode] || 'zerolore-reglamento-es.pdf'
 
       doc.save(filename)

@@ -31,6 +31,14 @@ export const SEO_BY_LANG = {
         'Consulta unidades, habilidades de faccion y fichas listas para descargar en ZeroLore.',
       pageType: 'WebApplication',
     },
+    '/coliseo': {
+      title: 'Coliseo | ZeroLore',
+      description:
+        'Heroes y equipamiento del modo de juego Coliseo de ZeroLore, listos para imprimir.',
+      summary:
+        'Consulta los perfiles de Heroe del Coliseo y descarga sus fichas y las cartas de equipamiento.',
+      pageType: 'WebApplication',
+    },
     '/derechos-de-autor': {
       title: 'Derechos de autor | ZeroLore',
       description:
@@ -42,7 +50,7 @@ export const SEO_BY_LANG = {
   },
 }
 
-export const ROUTE_PATHS = ['/', '/reglamento', '/generador', '/derechos-de-autor']
+export const ROUTE_PATHS = ['/', '/reglamento', '/generador', '/coliseo', '/derechos-de-autor']
 
 export const LOCALE_BY_LANG = {
   es: 'es_ES',

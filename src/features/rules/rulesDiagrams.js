@@ -106,10 +106,37 @@ const pawn = (x, y, color, h = 26) => `
   <circle cx="${x}" cy="${y - h + 7}" r="3.2" fill="${color}"/>`
 
 /** Banda corta: etiqueta y texto en la misma línea, sin dibujo. */
-const note = (y, title, text) => `
+/**
+ * Banda corta: etiqueta y texto en la misma línea. El texto arranca en x=250 y
+ * solo le quedan ~510 unidades hasta el borde, así que si no cabe se parte en
+ * dos renglones en vez de salirse del viewBox y verse cortado.
+ */
+const NOTE_TEXT_X = 250
+const NOTE_MAX_CHARS = 62
+
+const splitNoteText = (text) => {
+  const value = String(text || '')
+  if (value.length <= NOTE_MAX_CHARS) return [value]
+
+  const words = value.split(' ')
+  const lines = ['', '']
+  let index = 0
+  words.forEach((word) => {
+    const candidate = lines[index] ? `${lines[index]} ${word}` : word
+    if (index === 0 && candidate.length > NOTE_MAX_CHARS) index = 1
+    lines[index] = lines[index] ? `${lines[index]} ${word}` : word
+  })
+  return lines.filter(Boolean)
+}
+
+const note = (y, title, text) => {
+  const lines = splitNoteText(text)
+  const firstY = lines.length > 1 ? y + 23 : y + 32
+  return `
   <rect x="0" y="${y}" width="${W}" height="52" rx="10" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.08)"/>
   <text class="zl-lab" x="22" y="${y + 32}">${title}</text>
-  <text class="zl-body" x="250" y="${y + 32}">${text}</text>`
+  ${lines.map((line, index) => `<text class="zl-body" x="${NOTE_TEXT_X}" y="${firstY + index * 19}">${line}</text>`).join('')}`
+}
 
 /**
  * El markdown corta un bloque HTML en cuanto encuentra una línea en blanco, así que
@@ -229,7 +256,7 @@ const lineOfSight = figure(
 const charge = figure(
   'La acción Cargar y su tirada de 1D6',
   'Secuencia de la acción Cargar con sus dos resultados',
-  618,
+  530,
   `
   ${head('Cargar', 'Consume 2 acciones. Se mueve hasta Movimiento + Velocidad hacia el objetivo.')}
 
@@ -258,9 +285,7 @@ const charge = figure(
       ${cap(185, 488, 'Sin trabar', C.ko)}`,
   })}
 
-  ${note(512, 'Carga larga', 'El Asaltante recorre 3" más al Cargar.')}
-
-  ${note(556, 'Bloqueo', 'El Tirador al que cargas te anula el ataque gratuito.')}`,
+`,
 )
 
 /* ── Cobertura ──────────────────────────────────────────────────────────────
@@ -270,7 +295,7 @@ const charge = figure(
 const cover = figure(
   'Cuándo hay cobertura y cuándo no',
   'Tres casos de cobertura',
-  576,
+  640,
   `
   ${head('Cobertura', 'Hacen falta dos cosas: peana en contacto con el elemento y que el elemento se interponga.')}
 
@@ -307,7 +332,9 @@ const cover = figure(
       <line x1="83" y1="452" x2="280" y2="452" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>`,
   })}
 
-  ${note(512, 'Quién la ignora', 'El Psíquico con Poder mental, y los Vehículos, Monstruos y Titanes nunca se benefician.')}`,
+  ${note(512, 'Quién la ignora', 'El Psíquico con Poder mental, y los Vehículos, Monstruos y Titanes nunca se benefician.')}
+
+  ${note(576, 'Atrincherado', 'El Tirador en cobertura mejora en 1 la Precisión de sus disparos.')}`,
 )
 
 /* ── Control de un puesto de mando ──────────────────────────────────────────
@@ -490,32 +517,32 @@ const rangedSequence = figure(
 const actions = figure(
   'Cómo se gastan las 2 acciones',
   'Combinaciones válidas de acciones en una activación',
-  452,
+  462,
   `
   ${head('Economía de acciones', 'Cada activación da 2 acciones. Se gastan de una en una.')}
 
   ${row(76, 110, {
     tone: 'ok', ok: true, title: 'Dos acciones de coste 1',
     lines: [{ t: 'Moverse y luego Disparar, sin penalización.' }],
-    draw: `${chip(40, 112, 130, 'Moverse · 1', C.act)}
-      <text class="zl-lab" x="184" y="134" text-anchor="middle" fill="${C.soft}">+</text>
-      ${chip(198, 112, 130, 'Disparar · 1', C.act)}`,
+    draw: `${chip(40, 122, 130, 'Moverse · 1', C.act)}
+      <text class="zl-lab" x="184" y="144" text-anchor="middle" fill="${C.soft}">+</text>
+      ${chip(198, 122, 130, 'Disparar · 1', C.act)}`,
   })}
 
   ${row(198, 110, {
     tone: 'plain', ok: null, title: 'Una acción de coste 2',
     lines: [{ t: 'Correr, Cargar y Atacar CaC se comen' }, { t: 'la activación entera.' }],
-    draw: `${chip(40, 234, 288, 'Correr · 2 acciones', C.dim)}
-      ${cap(184, 292, 'no queda nada más que hacer', C.soft)}`,
+    draw: `${chip(40, 244, 288, 'Correr · 2 acciones', C.dim)}
+      ${cap(184, 302, 'no queda nada más que hacer', C.soft)}`,
   })}
 
   ${row(320, 110, {
     tone: 'ko', ok: false, title: 'La misma acción dos veces',
     lines: [{ t: 'No se puede repetir una acción en la' }, { t: 'misma activación.' }],
-    draw: `${chip(40, 356, 130, 'Moverse · 1', C.soft)}
-      <text class="zl-lab" x="184" y="378" text-anchor="middle" fill="${C.soft}">+</text>
-      ${chip(198, 356, 130, 'Moverse · 1', C.soft)}
-      ${cross(263, 373, 13)}`,
+    draw: `${chip(40, 366, 130, 'Moverse · 1', C.soft)}
+      <text class="zl-lab" x="184" y="388" text-anchor="middle" fill="${C.soft}">+</text>
+      ${chip(198, 366, 130, 'Moverse · 1', C.soft)}
+      ${cross(263, 383, 13)}`,
   })}`,
 )
 
@@ -694,7 +721,7 @@ const relentless = figure(
 const explosive = figure(
   'Cómo salpica un arma Explosiva',
   'El objetivo resuelve el ataque normal y las enemigas de alrededor sufren el daño base',
-  500,
+  526,
   `
   ${head('Explosiva', 'Dos cosas distintas: el ataque al objetivo y la salpicadura.')}
 
@@ -729,9 +756,9 @@ const explosive = figure(
 
 
 const climbing = figure(
-  'Trepar obstáculos',
-  'Vista de perfil de una unidad trepando un obstáculo',
-  300,
+  'Trepar obstáculos y la habilidad Brinco',
+  'Vista de perfil de una unidad trepando y de otra con Brinco',
+  440,
   `
   ${head('Trepar · vista de perfil', 'El movimiento se gasta en horizontal y también en vertical.')}
 
@@ -749,7 +776,17 @@ const climbing = figure(
       ${pawn(230, 130, C.act)}`,
   })}
 
-  ${note(238, 'Vehículos y Monstruos', 'Los Vehículos no suben. Los Monstruos sí, si caben.')}`,
+  ${row(238, 118, {
+    tone: 'plain', ok: null, title: 'Brinco',
+    lines: [{ t: 'El Asaltante sube en diagonal, sin tocar la' }, { t: 'base del obstáculo primero.' }],
+    draw: `${ground(40, 360, 340)}
+      <rect x="200" y="276" width="110" height="64" fill="url(#zl-hatch)" stroke="rgba(255,255,255,.28)"/>
+      ${pawn(90, 340, C.ally)}
+      <line x1="106" y1="326" x2="236" y2="270" stroke="${C.ally}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${pawn(260, 276, C.ally)}`,
+  })}
+
+  ${note(368, 'Vehículos y Monstruos', 'Los Vehículos no suben. Los Monstruos sí, si caben.')}`,
 )
 
 /* ── Unidades trabadas y Destrabarse ────────────────────────────────────────
@@ -845,8 +882,9 @@ const titanMelee = figure(
   ${row(220, 136, {
     tone: 'plain', ok: null, title: 'Le carga otra unidad',
     lines: [
-      { t: 'Resuelve su carga y su ataque con normalidad,' },
-      { t: 'y después se retira 1" del Titán. Nadie queda trabado.' },
+      { t: 'Resuelve su carga y su ataque con normalidad' },
+      { t: 'y después se retira 1" del Titán.' },
+      { t: 'Nadie queda trabado.' },
     ],
     draw: `${base(104, 296, C.enemy, 14)}${base(196, 296, C.act, 22)}
       <line x1="120" y1="296" x2="168" y2="296" stroke="${C.enemy}" stroke-width="2" marker-end="url(#zl-shot)"/>
@@ -889,6 +927,41 @@ const squadMelee = figure(
       <line x1="140" y1="312" x2="146" y2="306" stroke="${C.act}" stroke-width="2.5" marker-end="url(#zl-shot)"/>
       ${cap(228, 305, 'elige este', C.act)}`,
   })}`,
+)
+
+/* ── Vehículo autosuficiente ────────────────────────────────────────────────
+   "estas unidades pueden formar una escuadra sin Comandante. Al desplegarla,
+   elige una miniatura como líder: la escuadra se mueve desde ella y mantiene la
+   coherencia a su alrededor. Si el líder cae, elige otra. El daño se asigna
+   libremente entre las miniaturas de la escuadra."                            */
+const selfSufficient = figure(
+  'Escuadras de Vehículo ligero sin Comandante',
+  'El líder hace de Comandante y el daño se reparte libremente',
+  480,
+  `
+  ${head('Vehículo autosuficiente', 'La única escuadra que se monta sin Comandante.')}
+
+  ${row(76, 140, {
+    num: '1', title: 'Elige un líder al desplegar',
+    lines: [
+      { t: 'Hace de Comandante: la escuadra se mueve' },
+      { t: 'desde él y guarda coherencia a su alrededor.' },
+    ],
+    draw: `${base(96, 152, C.act)}${cap(96, 196, 'líder', C.act)}
+      ${[146, 190].map((x) => base(x, 152, C.ally, 14)).join('')}
+      <circle cx="96" cy="152" r="48" fill="none" stroke="${C.dim}" stroke-width="1.2" stroke-dasharray="5 4"/>`,
+  })}
+
+  ${row(232, 140, {
+    num: '2', title: 'Si el líder cae, elige otro',
+    lines: [{ t: 'La escuadra sigue en juego y pasa a moverse' }, { t: 'desde la miniatura que elijas.' }],
+    draw: `${base(96, 308, C.ally, 14)}${cross(96, 308, 11)}
+      <line x1="120" y1="308" x2="146" y2="308" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="4 4"/>
+      ${base(176, 308, C.act)}${cap(176, 352, 'nuevo líder', C.act)}
+      ${base(226, 308, C.ally, 14)}`,
+  })}
+
+  ${note(392, 'Y el daño va suelto', 'Aquí no hay Comandante al que proteger: se asigna libremente entre las miniaturas.')}`,
 )
 
 /* ── Mover una escuadra ─────────────────────────────────────────────────────
@@ -1071,6 +1144,66 @@ const classAdvantage = figure(
   ${note(284, 'El Comandante', 'No tiene ventaja sobre nadie, y nadie la tiene sobre él.')}`,
 )
 
+/* ── Coliseo: el peso del botín ─────────────────────────────────────────────
+   "por cada 2 orbes que tengas en tu lado de la mesa, tu Héroe empeora en 1 su
+   Salvación, hasta un máximo de 6+".                                          */
+const orbWeight = figure(
+  'Cómo penalizan los orbes en Coliseo',
+  'Cada dos orbes empeoran en uno la Salvación del Héroe',
+  368,
+  `
+  ${head('El peso del botín', 'Cuanto más acumulas, más fácil es tumbarte.')}
+
+  ${row(76, 150, {
+    tone: 'plain', ok: null, title: 'Cada 2 orbes, −1 a la Salvación',
+    lines: [{ t: 'Se cuenta por los orbes de tu lado de la mesa,' }, { t: 'no por los que haya en la arena.' }],
+    draw: `${[['0–1', '4+', C.ok], ['2–3', '5+', C.act], ['4+', '6+', C.ko]].map(([orbes, salv, color], i) => `
+      <rect x="${44 + i * 112}" y="126" width="96" height="78" rx="10"
+            fill="rgba(255,255,255,.03)" stroke="${color}" stroke-width="1.6"/>
+      <text class="zl-mini" x="${92 + i * 112}" y="152" text-anchor="middle" fill="${C.soft}">${orbes} orbes</text>
+      <text class="zl-val" x="${92 + i * 112}" y="186" text-anchor="middle" fill="${color}">${salv}</text>`).join('')}`,
+  })}
+
+  ${note(258, 'Tope en 6+', 'Por muchos orbes que acumules, la Salvación nunca empeora más.')}
+
+  ${note(306, 'Solo el Héroe', 'Los gladiadores no recogen orbes ni cargan con su peso.')}`,
+)
+
+/* ── Coliseo: muerte y botín ────────────────────────────────────────────────
+   "el jugador que lo mató se queda con todos sus orbes"; "vuelve al final del
+   turno en su punto de origen, con todas sus Vidas y sin orbes"; "nadie queda
+   eliminado de la partida".                                                   */
+const heroRespawn = figure(
+  'Qué pasa cuando cae un Héroe en Coliseo',
+  'Los orbes pasan a quien lo mató y el Héroe vuelve a su esquina',
+  444,
+  `
+  ${head('Muerte y botín', 'Nadie queda eliminado: caer solo cuesta el botín.')}
+
+  ${row(76, 134, {
+    num: '1', title: 'Sus orbes cambian de dueño',
+    lines: [{ t: 'Todos los orbes del Héroe caído pasan al' }, { t: 'jugador que lo destruyó.' }],
+    draw: `${base(100, 152, C.enemy)}${cross(100, 152, 13)}
+      <line x1="128" y1="152" x2="200" y2="152" stroke="${C.act}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${[224, 252, 280].map((x) => `<circle cx="${x}" cy="152" r="9" fill="none" stroke="${C.dim}" stroke-width="2"/>`).join('')}
+      ${cap(252, 190, 'al que lo mató', C.act)}`,
+  })}
+
+  ${row(222, 134, {
+    num: '2', title: 'Vuelve a su esquina',
+    lines: [
+      { t: 'Al final del turno reaparece en su punto de' },
+      { t: 'origen, con todas sus Vidas y sin orbes.' },
+    ],
+    draw: `<rect x="48" y="272" width="76" height="76" rx="8" fill="rgba(255,255,255,.03)" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="5 4"/>
+      ${base(86, 310, C.act)}
+      <line x1="150" y1="310" x2="116" y2="310" stroke="${C.ok}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${cap(86, 366, 'punto de origen', C.soft)}`,
+  })}
+
+  ${note(386, 'Sin gladiadores', 'Los gladiadores que cayeran con él no regresan.')}`,
+)
+
 export const RULES_DIAGRAMS = {
   squadCoherenceDiagram: squadCoherence,
   lineOfSightDiagram: lineOfSight,
@@ -1085,6 +1218,7 @@ export const RULES_DIAGRAMS = {
   actionsDiagram: actions,
   squadDamageDiagram: squadDamage,
   squadMovementDiagram: squadMovement,
+  selfSufficientDiagram: selfSufficient,
   deploymentPhaseDiagram: deploymentPhase,
   commanderSquadDiagram: commanderSquad,
   titanMeleeDiagram: titanMelee,
@@ -1097,4 +1231,6 @@ export const RULES_DIAGRAMS = {
   meleeSequenceDiagram: meleeSequence,
   modifiersDiagram: modifiers,
   classAdvantageDiagram: classAdvantage,
+  orbWeightDiagram: orbWeight,
+  heroRespawnDiagram: heroRespawn,
 }

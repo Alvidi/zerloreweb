@@ -1,0 +1,337 @@
+{
+  "heroes": [
+    {
+      "id": "justador",
+      "nombre": "Justador",
+      "icono": "tirador",
+      "descripcion": "Defensor de posición. Dispara mejor desde cobertura y se defiende bien de cerca.",
+      "habilidad": "Atrincherado",
+      "habilidad_descripcion": "Mientras este Héroe esté en cobertura, mejora en 1 la Precisión de sus ataques a distancia.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "24\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "lancero",
+      "nombre": "Lancero",
+      "icono": "choque",
+      "descripcion": "Especialista en la carga. Golpea fuerte al entrar en combate.",
+      "habilidad": "Carga brutal",
+      "habilidad_descripcion": "Cuando este Héroe realiza una carga, gana +1 dado de ataque CaC durante ese ataque gratuito.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "12\"",
+          "precision": "4+",
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Perforante"
+          ]
+        }
+      }
+    },
+    {
+      "id": "coloso",
+      "nombre": "Coloso",
+      "icono": "juggernaut",
+      "descripcion": "Lento y blindado. No persigue a nadie, pero alcanza toda la arena con su cañón.",
+      "habilidad": "Resistente",
+      "habilidad_descripcion": "La primera vez cada turno que este Héroe reciba daño, reduce ese daño en 1D3.",
+      "perfil": {
+        "movimiento": "3\"",
+        "vidas": 14,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "32\"",
+          "precision": "4+",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Brutal"
+          ]
+        }
+      }
+    },
+    {
+      "id": "carnicero",
+      "nombre": "Carnicero",
+      "icono": "exterminador",
+      "descripcion": "El mayor daño de la arena en cuerpo a cuerpo, pero cae fácil bajo el fuego enemigo.",
+      "habilidad": "Berserker",
+      "habilidad_descripcion": "Los enemigos que ataquen a este Héroe en CaC fallan con resultados naturales de 1, 2 o 3.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "5+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": "4D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "acrobata",
+      "nombre": "Acróbata",
+      "icono": "asaltante",
+      "descripcion": "El más rápido de la arena. Llega antes a los orbes y escapa por las alturas.",
+      "habilidad": "Brinco",
+      "habilidad_descripcion": "Este Héroe puede ascender en diagonal al moverse, sin necesidad de tocar la base del obstáculo. No puede terminar su movimiento sobre otras miniaturas ni en lugares donde no pueda sostenerse.",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 8,
+        "velocidad": "+6\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "6\"",
+          "precision": "4+",
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Disparo certero"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Golpe crítico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "carcelero",
+      "nombre": "Carcelero",
+      "icono": "monstruo",
+      "descripcion": "Atrapa a sus rivales y no les deja escapar. Aguanta mucho castigo.",
+      "habilidad": "Anclado",
+      "habilidad_descripcion": "Los enemigos trabados con este Héroe no pueden realizar la acción Destrabarse.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Implacable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cazador",
+      "nombre": "Cazador",
+      "icono": "armas-pesadas",
+      "descripcion": "Tirador de precisión. Devastador si se queda quieto, inútil de cerca.",
+      "habilidad": "Emplazado",
+      "habilidad_descripcion": "Si este Héroe no se ha movido durante esta activación, gana +1 dado en sus ataques a distancia.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "24\"",
+          "precision": "3+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "1",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "oraculo",
+      "nombre": "Oráculo",
+      "icono": "psiquico",
+      "descripcion": "Frágil, pero alcanza a quien se esconde. Su poder se vuelve contra él.",
+      "habilidad": "Poder mental",
+      "habilidad_descripcion": "Ignora cualquier cobertura en la que esté el objetivo. También puede atacar sin línea de visión, pero en ese caso debe tirar un dado: si saca 1, 2 o 3, este Héroe recibe 1D3 de daño directo.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+4\"",
+        "salvacion": "5+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "1D3",
+          "distancia": "18\"",
+          "precision": "—",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sitiador",
+      "nombre": "Sitiador",
+      "icono": "artilleria",
+      "descripcion": "Ataca desde detrás de la escenografía, sin exponerse. Nadie está a salvo de él.",
+      "habilidad": "Fuego indirecto",
+      "habilidad_descripcion": "Este Héroe puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo no esté en cobertura.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": null
+      },
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": {
+          "ataques": "1D3+1",
+          "distancia": "24\"",
+          "precision": "4+",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    }
+  ]
+}

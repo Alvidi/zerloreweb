@@ -387,7 +387,8 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
   const fuerteContra = Array.isArray(entry.fuerteContra) ? entry.fuerteContra : []
 
   const abilityName = entry.habilidad || ''
-  const abilityDescription = resolveUnitSpecialtyDescription(entry.habilidad)
+  // Los Héroes del Coliseo traen su propia redacción, que no es la de la unidad.
+  const abilityDescription = entry.habilidadDescripcion || resolveUnitSpecialtyDescription(entry.habilidad)
 
   // Las habilidades se agrupan por arma: primero las de disparo, luego las de
   // cuerpo a cuerpo, separadas por una línea.

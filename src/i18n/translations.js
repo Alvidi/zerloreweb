@@ -4,6 +4,7 @@ export const translations = {
       home: 'Home',
       rules: 'Reglamento',
       generator: 'Ejércitos',
+      coliseo: 'Coliseo',
       discord: 'Discord',
       youtube: 'YouTube',
       instagram: 'Instagram',
@@ -38,6 +39,7 @@ export const translations = {
       modeRules: 'Reglamento',
       modeMissions: 'Modo de juego: Misiones',
       modeTotalWar: 'Modo de juego: Guerra Total',
+      modeColiseo: 'Modo de juego: Coliseo',
       modeTokens: 'Tokens',
       modeItems: 'Equipamiento',
       tokens: {
@@ -73,6 +75,13 @@ export const translations = {
           commandCircle6Yellow: 'Puesto de mando circular 6" - equipo amarillo',
         },
       },
+    },
+    coliseo: {
+      title: 'Héroes y equipamiento de la arena.',
+      subtitle: 'Elige tu campeón, ponle cara y descarga su ficha. En Coliseo los Héroes no se compran: se eligen.',
+      heroes: 'Héroes',
+      downloadHeroes: 'Descargar héroes',
+      pickHero: 'Elegir héroe',
     },
     generator: {
       eyebrow: 'Ejércitos',

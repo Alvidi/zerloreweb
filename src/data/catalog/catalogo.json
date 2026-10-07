@@ -49,7 +49,7 @@
         "escuadra": 5,
         "valor": 5
       },
-      "habilidad": "Bloqueo",
+      "habilidad": "Atrincherado",
       "fuerte_contra": [],
       "armas": {
         "disparo": {
@@ -245,7 +245,7 @@
         "escuadra": 3,
         "valor": 8
       },
-      "habilidad": "Carga larga",
+      "habilidad": "Brinco",
       "fuerte_contra": [
         {
           "tipo": "Artillería",
@@ -454,10 +454,10 @@
         "vidas": 14,
         "velocidad": "+6\"",
         "salvacion": "4+",
-        "escuadra": null,
+        "escuadra": 3,
         "valor": 13
       },
-      "habilidad": "Atropello",
+      "habilidad": "Vehículo autosuficiente",
       "fuerte_contra": [
         {
           "tipo": "Explorador",
@@ -615,7 +615,7 @@
     {
       "id": "comandante-disparo",
       "nombre": "Comandante (disparo)",
-      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "descripcion": "Lidera y crea escuadras. Competente a distancia.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
@@ -652,7 +652,7 @@
     {
       "id": "comandante-cac",
       "nombre": "Comandante (CaC)",
-      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "descripcion": "Lidera y crea escuadras. Especializado en cuerpo a cuerpo.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -680,7 +680,7 @@
     {
       "id": "comandante-psiquico",
       "nombre": "Comandante (psíquico)",
-      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "descripcion": "Lidera y crea escuadras. Frágil, con un ataque muy poderoso.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
@@ -717,7 +717,7 @@
     {
       "id": "comandante-acorazado",
       "nombre": "Comandante (acorazado)",
-      "descripcion": "Lidera y crea escuadras. Cuenta con varios perfiles a elegir según tu estrategia.",
+      "descripcion": "Lidera y crea escuadras. Muy resistente, con ataques moderados.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 14,
