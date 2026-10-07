@@ -134,7 +134,7 @@ Representa la cantidad total de daño que la unidad puede sufrir antes de ser de
 
 - Cada punto de daño reduce las Vidas de la unidad.
 - Cuando las Vidas llegan a **0**, la unidad se retira del juego como destruida.
-- El daño recibido se puede llevar el control usando los **tokens de daño** (-1, -3, -5, -10), colocándolos junto a la miniatura para indicar las Vidas perdidas.
+- El daño recibido se puede llevar el control con **marcadores de daño**, una hoja de registro o cualquier sistema que prefieran los jugadores.
 
 ### Salvación
 
@@ -215,7 +215,11 @@ Cada tipo tiene además una **habilidad de unidad** propia y puede tener **venta
 
 ## Ventaja de tipo
 
-Cuando una unidad ataca a un tipo de unidad sobre el que tiene ventaja (ver la columna **Ventaja** en **Unidades, Armas y Equipamiento**) y el ataque inflige daño, suma **+1 o +2 de daño adicional** al **daño total final** del ataque, según indique su ficha.
+Cuando una unidad ataca a un tipo de unidad sobre el que tiene ventaja (ver la columna **Ventaja** en **Unidades, Armas y Equipamiento**) y el ataque inflige daño, suma el **+1 o +2** indicado al **daño total del ataque**.
+
+La ventaja se aplica **una sola vez por ataque**, nunca por miniatura ni por impacto, y da igual que ataque una miniatura en solitario o una escuadra entera. Si el ataque no inflige ningún daño, no se suma nada.
+
+*Ejemplo: una escuadra de 5 Choques ataca a un Tirador, sobre el que tiene ventaja +2. Resuelve sus 15 dados y, tras las salvaciones, el Tirador recibe 7 de daño. Al total se le suma +2 una sola vez: 9 de daño. No se suma +2 por cada miniatura de la escuadra.*
 
 El **Comandante** no tiene ventaja de tipo contra ninguna unidad, y ninguna unidad la tiene contra él.
 
@@ -239,7 +243,7 @@ En partidas de más de dos jugadores, esa tirada fija el orden de activación de
 
 Tras la tirada de iniciativa, y antes de la primera activación, se resuelve la **fase de despliegue**. Siguiendo el orden de iniciativa, cada jugador puede desplegar unidades desde su **Reserva**:
 
-- **En puestos de mando:** como máximo **una unidad por cada puesto de mando que controle**, colocada en contacto con él.
+- **En puestos de mando:** **una sola unidad por cada puesto de mando que controle**, colocada en contacto con él o dentro de su área. Nunca más de una por puesto y turno, aunque haya sitio de sobra.
 - **En escuadras:** cada Comandante puede recibir refuerzos para su escuadra *(ver habilidad Refuerzos)*.
 
 Condiciones:
@@ -274,7 +278,13 @@ Cuando **todas las unidades de ambos jugadores** han sido activadas, el turno te
 
 # Puestos de mando y despliegue
 
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Se representan en mesa con el **token de puesto de mando** (círculo o cuadrado). Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse. Cuando un jugador conquista un puesto de mando, coloca el **token de banderilla** de su color encima del puesto de mando para indicar el control. Si el rival lo reconquista, sustituye la banderilla por la suya.
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse.
+
+**Cómo representarlos.** Un puesto de mando puede ser cualquier cosa que los jugadores acuerden: un token, una moneda, un marcador, un edificio o una zona delimitada del tablero. Lo único importante es que **ambos jugadores tengan claro dónde empieza y dónde acaba** antes de empezar la partida.
+
+Si se usa un área en lugar de un punto, los jugadores acuerdan su tamaño al montar la mesa. Como referencia, un círculo de unas **3" de radio** funciona bien.
+
+Para indicar quién controla cada puesto basta con colocar al lado algo que lo identifique: una banderilla, un dado del color de cada jugador o cualquier marcador. Si el rival lo reconquista, se sustituye por el suyo.
 
 ## Cuartel General
 
@@ -282,7 +292,7 @@ Cada jugador tiene obligatoriamente un **Cuartel General**. Funciona como un pue
 
 ## Control de un puesto
 
-**Ocupar un puesto:** una unidad se considera dentro de un puesto de mando cuando **la mitad o más de su peana** está sobre él. En escuadras, cada miniatura se comprueba por separado.
+**Ocupar un puesto:** una unidad se considera dentro de un puesto de mando cuando **la mitad o más de su peana** está dentro del área del puesto, o en contacto con él si se representa con un marcador. En escuadras, cada miniatura se comprueba por separado.
 
 **Control al final de turno:** al final de cada turno, si hay unidades de ambos jugadores en un mismo puesto de mando, el control lo obtiene el jugador cuyas unidades sumen más Valor total en ese puesto.
 
@@ -294,7 +304,7 @@ Cada jugador tiene obligatoriamente un **Cuartel General**. Funciona como un pue
 
 ## Despliegue inicial
 
-Al inicio de la partida, cada jugador despliega desde su Reserva **como máximo una unidad por cada puesto de mando que controle**, colocada en contacto con él.
+Al inicio de la partida, cada jugador despliega desde su Reserva **una sola unidad por cada puesto de mando que controle**, colocada en contacto con él o dentro de su área.
 
 Cada jugador tira **1D6** — el resultado más alto despliega primero. Los jugadores se alternan desplegando unidad por unidad hasta completar su despliegue.
 
@@ -570,10 +580,6 @@ Solo un **Comandante** puede formar una escuadra.
 - Mientras lidere una escuadra, el Comandante usa el **Movimiento y la Velocidad del tipo de unidad que comanda**. Si se queda solo, vuelve a usar los suyos.
 - Las escuadras **no pueden formarse ni fusionarse durante la partida**, salvo mediante la habilidad **Refuerzos** del Comandante *(ver Tipos de unidad)*. Una unidad desplegada en solitario sigue sola toda la partida.
 - Si un Comandante pierde a **todas** las miniaturas de su escuadra, deja de estar ligado a ese tipo de unidad: la siguiente miniatura que reciba por **Refuerzos** puede ser de **cualquier tipo que pueda formar escuadra**, y desde ese momento su escuadra pasa a ser de ese tipo, con su tamaño máximo, su Movimiento y su Velocidad.
-- La excepción es el **Vehículo ligero**: con su habilidad **Vehículo autosuficiente** puede formar escuadra sin Comandante *(ver Unidades, Armas y Equipamiento)*.
-
-{{selfSufficientDiagram}}
-
 {{commanderSquadDiagram}}
 
 ## Mover una escuadra

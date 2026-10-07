@@ -457,7 +457,7 @@
         "escuadra": 3,
         "valor": 13
       },
-      "habilidad": "Vehículo autosuficiente",
+      "habilidad": "Transporte",
       "fuerte_contra": [
         {
           "tipo": "Explorador",

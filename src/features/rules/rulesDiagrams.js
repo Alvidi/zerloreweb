@@ -929,41 +929,6 @@ const squadMelee = figure(
   })}`,
 )
 
-/* ── Vehículo autosuficiente ────────────────────────────────────────────────
-   "estas unidades pueden formar una escuadra sin Comandante. Al desplegarla,
-   elige una miniatura como líder: la escuadra se mueve desde ella y mantiene la
-   coherencia a su alrededor. Si el líder cae, elige otra. El daño se asigna
-   libremente entre las miniaturas de la escuadra."                            */
-const selfSufficient = figure(
-  'Escuadras de Vehículo ligero sin Comandante',
-  'El líder hace de Comandante y el daño se reparte libremente',
-  480,
-  `
-  ${head('Vehículo autosuficiente', 'La única escuadra que se monta sin Comandante.')}
-
-  ${row(76, 140, {
-    num: '1', title: 'Elige un líder al desplegar',
-    lines: [
-      { t: 'Hace de Comandante: la escuadra se mueve' },
-      { t: 'desde él y guarda coherencia a su alrededor.' },
-    ],
-    draw: `${base(96, 152, C.act)}${cap(96, 196, 'líder', C.act)}
-      ${[146, 190].map((x) => base(x, 152, C.ally, 14)).join('')}
-      <circle cx="96" cy="152" r="48" fill="none" stroke="${C.dim}" stroke-width="1.2" stroke-dasharray="5 4"/>`,
-  })}
-
-  ${row(232, 140, {
-    num: '2', title: 'Si el líder cae, elige otro',
-    lines: [{ t: 'La escuadra sigue en juego y pasa a moverse' }, { t: 'desde la miniatura que elijas.' }],
-    draw: `${base(96, 308, C.ally, 14)}${cross(96, 308, 11)}
-      <line x1="120" y1="308" x2="146" y2="308" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="4 4"/>
-      ${base(176, 308, C.act)}${cap(176, 352, 'nuevo líder', C.act)}
-      ${base(226, 308, C.ally, 14)}`,
-  })}
-
-  ${note(392, 'Y el daño va suelto', 'Aquí no hay Comandante al que proteger: se asigna libremente entre las miniaturas.')}`,
-)
-
 /* ── Mover una escuadra ─────────────────────────────────────────────────────
    "Una escuadra siempre se mueve desde el Comandante... mueve primero al
    Comandante hasta su posición final y después coloca el resto a su alrededor,
@@ -1118,20 +1083,20 @@ const modifiers = figure(
 
 /* ── Ventaja de tipo ────────────────────────────────────────────────────────
    "cuando una unidad ataca a un tipo sobre el que tiene ventaja y el ataque
-   inflige daño, suma el +1 o +2 de daño indicado en Fuerte contra al daño
-   total final del ataque"; el Comandante queda fuera en ambos sentidos.      */
+   inflige daño, suma el +1 o +2 indicado al daño total del ataque"; se aplica
+   una sola vez por ataque y el Comandante queda fuera en ambos sentidos.     */
 const classAdvantage = figure(
   'Cómo se aplica la Ventaja de tipo',
   'La ventaja de tipo suma +1 al daño total del ataque',
   330,
   `
-  ${head('Ventaja de tipo', 'Cada tipo tiene su presa: mira la columna Fuerte contra en Tipos de unidad.')}
+  ${head('Ventaja de tipo', 'Cada tipo tiene su presa: mira la columna Ventaja en Unidades, Armas y Equipamiento.')}
 
   ${row(76, 132, {
     tone: 'ok', ok: true, title: 'El ataque ya ha hecho daño',
     lines: [
       { t: 'Solo entonces se suma.' },
-      { t: '+1 al daño total final del ataque.', cls: 'zl-lab', fill: C.ok },
+      { t: '+1 al daño total del ataque.', cls: 'zl-lab', fill: C.ok },
     ],
     draw: `${base(70, 158, C.act)}${cap(70, 192, 'Atacante', C.act)}
       ${base(230, 158, C.enemy)}${cap(230, 192, 'Su presa', C.enemy)}
@@ -1139,7 +1104,7 @@ const classAdvantage = figure(
       <text class="zl-dim" x="149" y="146" text-anchor="middle">daño + 1</text>`,
   })}
 
-  ${note(220, 'Una sola vez', 'Al daño total del ataque, no a cada impacto.')}
+  ${note(220, 'Una sola vez', 'Al daño total del ataque: ni por impacto ni por miniatura, aunque ataque una escuadra entera.')}
 
   ${note(284, 'El Comandante', 'No tiene ventaja sobre nadie, y nadie la tiene sobre él.')}`,
 )
@@ -1218,7 +1183,6 @@ export const RULES_DIAGRAMS = {
   actionsDiagram: actions,
   squadDamageDiagram: squadDamage,
   squadMovementDiagram: squadMovement,
-  selfSufficientDiagram: selfSufficient,
   deploymentPhaseDiagram: deploymentPhase,
   commanderSquadDiagram: commanderSquad,
   titanMeleeDiagram: titanMelee,

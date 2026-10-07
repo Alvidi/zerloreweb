@@ -41,7 +41,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden realizar la acción Destrabarse.' },
   },
   {
-    es: { name: 'Vehículo autosuficiente', description: 'Estas unidades pueden formar una escuadra sin Comandante. Al desplegarla, elige una miniatura como líder: la escuadra se mueve desde ella y mantiene la coherencia a su alrededor. Si el líder cae, elige otra. El daño se asigna libremente entre las miniaturas de la escuadra.' },
+    es: { name: 'Transporte', description: 'Durante la fase de despliegue, una unidad aliada puede desplegarse desde la Reserva en contacto con este vehículo, igual que si fuera un puesto de mando. Solo una unidad por turno, y nunca Vehículos, Monstruos, Artillería ni Titanes.' },
   },
   {
     es: { name: 'Fuego de apoyo', description: 'Esta unidad puede realizar la acción Disparar a otra unidad, aunque esté trabada en combate cuerpo a cuerpo.' },
