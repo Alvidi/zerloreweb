@@ -133,6 +133,7 @@ export const translations = {
       cancel: 'Cancelar',
       confirmCropImage: 'Usar imagen',
       viewCard: 'Ver ficha',
+      specialty: 'Especialidad',
       confirm: 'Confirmar',
       units: 'Unidades',
     },

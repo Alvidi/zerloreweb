@@ -48,6 +48,7 @@ export const getUnitClassToken = (value = '') => {
   if (normalized.startsWith('artilleria')) return 'artilleria'
   if (normalized.startsWith('titan')) return 'titan'
   if (normalized.startsWith('comandante')) return 'comandante'
+  if (normalized.startsWith('estandarte')) return 'estandarte'
   return ''
 }
 

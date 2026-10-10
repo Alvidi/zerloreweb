@@ -46,6 +46,18 @@ export const getAbilityDescription = (ability) => {
   if (abilityId === WEAPON_ABILITY_IDS.preciseShot) {
     return 'Si el objetivo está a la mitad o menos de la Distancia de esta arma, el ataque gana +1 dado.'
   }
+  if (abilityId === WEAPON_ABILITY_IDS.conquest) {
+    return 'Aporta a la escuadra: +3 al Valor de la escuadra.'
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.rally) {
+    return 'Aporta a la escuadra: Refuerzos dobles, trae 2 miniaturas por turno.'
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.assault) {
+    return 'Aporta a la escuadra: la carga de la escuadra no tira chequeo.'
+  }
+  if (abilityId === WEAPON_ABILITY_IDS.march) {
+    return 'Aporta a la escuadra: +3" de Movimiento a la escuadra.'
+  }
   return ''
 }
 

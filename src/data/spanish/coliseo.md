@@ -8,7 +8,7 @@ Se juega con las reglas del reglamento principal, con las excepciones que se ind
 
 - **De 4 a 10 jugadores.** Con menos de 4, la partida se convierte en un duelo eterno.
 - El campo de batalla debe ser **pequeño**, con escenografía abundante y sin zonas muertas.
-- Cada jugador elige un **Héroe** de entre los perfiles predefinidos y lo despliega en su propia **esquina de la arena**, que será su **punto de origen** durante toda la partida.
+- Cada jugador elige un **Héroe** de entre los perfiles predefinidos *(ver Unidades, Armas y Equipamiento)* y lo despliega en su propia **esquina de la arena**, que será su **punto de origen** durante toda la partida.
 - Colocad los **orbes** repartidos por la arena. Como referencia, **dos por jugador**.
 - **Turnos recomendados: 10.**
 

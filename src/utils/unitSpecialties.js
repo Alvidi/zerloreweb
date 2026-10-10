@@ -55,6 +55,9 @@ const UNIT_SPECIALTIES = [
   {
     es: { name: 'Refuerzos', description: 'Durante la fase de despliegue, esta unidad puede recibir una miniatura del tipo que comande, desde la Reserva, siempre que no esté trabada en CaC, colocada en coherencia con la escuadra. La escuadra nunca puede superar su número máximo de miniaturas.' },
   },
+  {
+    es: { name: 'Abanderado', description: 'Esta unidad no ataca, solo puede ir con un Comandante en escuadra y copia las estadísticas de este excepto el ataque.' },
+  },
 ]
 
 const buildSpecialtyLookup = (specialties) => {

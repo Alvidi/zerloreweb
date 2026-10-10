@@ -40,6 +40,59 @@ const splitNombreUnidad = (nombre) => {
   return match ? { base: match[1], especialidad: match[2] } : { base: nombre, especialidad: '' }
 }
 
+/**
+ * Junta en una sola tarjeta las unidades que comparten nombre base:
+ * "Comandante (disparo)", "Comandante (CaC)"… → familia "Comandante" con una
+ * variante por especialidad. Las que no llevan paréntesis quedan solas. Así,
+ * una especialidad nueva en el catálogo aparece como un chip más sin tocar código.
+ */
+const UNIT_FAMILIES = (() => {
+  const families = new Map()
+  for (const unidad of UNIDADES) {
+    const { base, especialidad } = splitNombreUnidad(unidad.nombre)
+    if (!families.has(base)) families.set(base, { key: base, base, variants: [] })
+    families.get(base).variants.push({ unidad, especialidad })
+  }
+  return Array.from(families.values())
+})()
+
+const FAMILY_BY_UNIT_ID = new Map(
+  UNIT_FAMILIES.flatMap((family) => family.variants.map((variant) => [variant.unidad.id, family])),
+)
+
+const capitalize = (text) => (text ? text.charAt(0).toUpperCase() + text.slice(1) : text)
+
+/** Un chip por especialidad de la familia; el contador dice cuántas llevas de cada una. */
+function VariantChips({ family, selectedId, counts, onSelect, label, className = '', maxFontSize = 10.9 }) {
+  // Siempre en una línea: si no caben, encoge la fila entera (los chips miden en em).
+  return (
+    <FitTitle
+      className={`unit-variant-chips ${className}`.trim()}
+      maxFontSize={maxFontSize}
+      minFontSize={7}
+      role="group"
+      aria-label={label}
+    >
+      {family.variants.map((variant) => {
+        const isActive = variant.unidad.id === selectedId
+        const variantCount = counts.get(variant.unidad.id) || 0
+        return (
+          <button
+            key={variant.unidad.id}
+            type="button"
+            className={`unit-variant-chip${isActive ? ' is-active' : ''}`}
+            aria-pressed={isActive ? 'true' : 'false'}
+            onClick={() => onSelect(variant.unidad.id)}
+          >
+            {capitalize(variant.especialidad)}
+            {variantCount > 0 ? <span className="unit-variant-chip-count">×{variantCount}</span> : null}
+          </button>
+        )
+      })}
+    </FitTitle>
+  )
+}
+
 const chunkItems = (items, size) => {
   if (!Array.isArray(items) || size <= 0) return []
   const chunks = []
@@ -196,6 +249,7 @@ function Generador() {
   const [selectedItems, setSelectedItems] = useState({})
   const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
   const [openCatalogKey, setOpenCatalogKey] = useState('')
+  const [variantByFamily, setVariantByFamily] = useState({})   // familia → id de la variante elegida
   const [openArmyUid, setOpenArmyUid] = useState('')
   // Qué PDF se está montando: 'ejercito', 'catalogo-unidades', 'catalogo-objetos' o ninguno.
   const [printJob, setPrintJob] = useState(null)
@@ -338,10 +392,13 @@ function Generador() {
   const handleAddUnit = (unidadId) => {
     if (!getUnidad(unidadId)) return
     selectionCounterRef.current += 1
+    // El id se fija aquí, no dentro del updater: si se leyera ahí, varios
+    // clics seguidos (que React agrupa) acabarían con el mismo id.
+    const selectionId = `unidad-${selectionCounterRef.current}`
     setArmySelections((current) => [
       ...current,
       {
-        selectionId: `unidad-${selectionCounterRef.current}`,
+        selectionId,
         kind: 'unidad',
         unidadId,
         imageDataUrl: '',
@@ -490,6 +547,18 @@ function Generador() {
     return { uid: openCatalogKey, kind: 'unidad', entry, imageDataUrl: '' }
   }, [openArmyUid, openCatalogKey, armyEntries])
 
+  const selectVariant = (family, unidadId) => {
+    setVariantByFamily((prev) => ({ ...prev, [family.key]: unidadId }))
+    if (openCatalogKey && FAMILY_BY_UNIT_ID.get(openCatalogKey.slice(7)) === family) {
+      setOpenCatalogKey(`unidad:${unidadId}`)
+    }
+  }
+
+  // Solo en la ficha del catálogo: la de una unidad del ejército ya tiene su perfil elegido.
+  const previewFamily = previewItem && !openArmyUid
+    ? FAMILY_BY_UNIT_ID.get(previewItem.entry.unidadId) || null
+    : null
+
   const closePreview = () => {
     setOpenCatalogKey('')
     setOpenArmyUid('')
@@ -547,12 +616,16 @@ function Generador() {
                     </button>
                   </div>
                   <div className="unit-list">
-                    {UNIDADES.map((unidad) => {
+                    {UNIT_FAMILIES.map((family) => {
+                      const selected = family.variants.find((variant) => variant.unidad.id === variantByFamily[family.key])
+                        || family.variants[0]
+                      const { unidad } = selected
                       const count = unitCountById.get(unidad.id) || 0
+                      const familyCount = family.variants.reduce((sum, variant) => sum + (unitCountById.get(variant.unidad.id) || 0), 0)
                       return (
                         <article
-                          className={`unit-card${count > 0 ? ' is-in-army' : ''}`}
-                          key={unidad.id}
+                          className={`unit-card${familyCount > 0 ? ' is-in-army' : ''}`}
+                          key={family.key}
                         >
                           <div className="unit-card-header">
                             <div className="unit-card-summary">
@@ -566,22 +639,15 @@ function Generador() {
                                 </span>
                               </span>
                               <div className="unit-card-heading">
-                                {(() => {
-                                  // La especialidad va en su propia línea: así el nombre
-                                  // no tiene que encogerse para que quepa entre paréntesis.
-                                  const { base, especialidad } = splitNombreUnidad(unidad.nombre)
-                                  return (
-                                    <>
-                                      <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}>
-                                        {base}
-                                      </FitTitle>
-                                      {especialidad ? (
-                                        <div className="unit-card-specialty">{especialidad}</div>
-                                      ) : null}
-                                    </>
-                                  )
-                                })()}
-                                <div className="unit-card-inline-value">{unidad.perfil.valor} {t('generator.valueUnit')}</div>
+                                <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}>
+                                  {family.base}
+                                </FitTitle>
+                                {family.variants.length === 1 && selected.especialidad ? (
+                                  <div className="unit-card-specialty">{selected.especialidad}</div>
+                                ) : null}
+                                <div className="unit-card-inline-value">
+                                  {unidad.perfil.valor === null ? '—' : `${unidad.perfil.valor} ${t('generator.valueUnit')}`}
+                                </div>
                               </div>
                             </div>
                             <div className="unit-card-header-actions">
@@ -600,8 +666,19 @@ function Generador() {
                               </div>
                             </div>
                           </div>
+                          {family.variants.length > 1 ? (
+                            <VariantChips
+                              family={family}
+                              selectedId={unidad.id}
+                              counts={unitCountById}
+                              onSelect={(unidadId) => selectVariant(family, unidadId)}
+                              label={`${t('generator.specialty')} · ${family.base}`}
+                            />
+                          ) : null}
                           {unidad.descripcion ? (
-                            <p className="unit-card-blurb">{unidad.descripcion}</p>
+                            <FitTitle as="p" axis="y" className="unit-card-blurb is-fit" maxFontSize={12.16} minFontSize={9}>
+                              {unidad.descripcion}
+                            </FitTitle>
                           ) : null}
                         </article>
                       )
@@ -727,11 +804,23 @@ function Generador() {
                                 ) : null}
                               </div>
                               <div className="unit-card-heading">
-                                <UnitTypeTitle
-                                  nombre={item.entry.nombre}
-                                  className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(item.entry.unidadId)}`}
-                                />
-                                <div className="unit-card-inline-value">{item.total} {t('generator.valueUnit')}</div>
+                                {(() => {
+                                  // Mismo tratamiento que en la lista de unidades.
+                                  const { base, especialidad } = splitNombreUnidad(item.entry.nombre)
+                                  return (
+                                    <>
+                                      <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(item.entry.unidadId)}`}>
+                                        {base}
+                                      </FitTitle>
+                                      {especialidad ? (
+                                        <div className="unit-card-specialty">{especialidad}</div>
+                                      ) : null}
+                                    </>
+                                  )
+                                })()}
+                                <div className="unit-card-inline-value">
+                                  {item.entry.perfil.valor === null ? '—' : `${item.total} ${t('generator.valueUnit')}`}
+                                </div>
                               </div>
                             </div>
                             <div className="unit-card-header-actions army-unit-actions">
@@ -840,6 +929,17 @@ function Generador() {
         <div className="unit-preview-modal" role="dialog" aria-modal="true" aria-label={previewItem.entry.nombre} onClick={closePreview}>
           <div className="unit-preview-modal-inner" onClick={(event) => event.stopPropagation()}>
             <div className="unit-preview-modal-bar">
+              {previewFamily && previewFamily.variants.length > 1 ? (
+                <VariantChips
+                  family={previewFamily}
+                  selectedId={previewItem.entry.unidadId}
+                  counts={unitCountById}
+                  onSelect={(unidadId) => selectVariant(previewFamily, unidadId)}
+                  label={`${t('generator.specialty')} · ${previewFamily.base}`}
+                  className="unit-preview-variant-chips"
+                  maxFontSize={12.5}
+                />
+              ) : null}
               <div className="unit-preview-modal-actions">
                 <button type="button" className="ghost small" onClick={closePreview} aria-label={t('generator.close')}>✕</button>
               </div>

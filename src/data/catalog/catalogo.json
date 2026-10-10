@@ -615,7 +615,7 @@
     {
       "id": "comandante-disparo",
       "nombre": "Comandante (disparo)",
-      "descripcion": "Lidera y crea escuadras. Competente a distancia.",
+      "descripcion": "Lidera y crea escuadras.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 8,
@@ -652,7 +652,7 @@
     {
       "id": "comandante-cac",
       "nombre": "Comandante (CaC)",
-      "descripcion": "Lidera y crea escuadras. Especializado en cuerpo a cuerpo.",
+      "descripcion": "Lidera y crea escuadras.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 10,
@@ -680,7 +680,7 @@
     {
       "id": "comandante-psiquico",
       "nombre": "Comandante (psíquico)",
-      "descripcion": "Lidera y crea escuadras. Frágil, con un ataque muy poderoso.",
+      "descripcion": "Lidera y crea escuadras.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 6,
@@ -717,7 +717,7 @@
     {
       "id": "comandante-acorazado",
       "nombre": "Comandante (acorazado)",
-      "descripcion": "Lidera y crea escuadras. Muy resistente, con ataques moderados.",
+      "descripcion": "Lidera y crea escuadras.",
       "perfil": {
         "movimiento": "5\"",
         "vidas": 14,
@@ -747,6 +747,118 @@
           "danio_critico": "2",
           "habilidades_arma": [
             "Perforante"
+          ]
+        }
+      }
+    },
+    {
+      "id": "estandarte-conquista",
+      "nombre": "Estandarte (conquista)",
+      "descripcion": "Acompaña al Comandante y refuerza a su escuadra con una de sus variantes. Uno por escuadra.",
+      "perfil": {
+        "movimiento": null,
+        "vidas": null,
+        "velocidad": null,
+        "salvacion": null,
+        "escuadra": null,
+        "valor": 6
+      },
+      "habilidad": "Abanderado",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": null,
+          "distancia": null,
+          "precision": null,
+          "danio": null,
+          "danio_critico": null,
+          "habilidades_arma": [
+            "Conquista"
+          ]
+        }
+      }
+    },
+    {
+      "id": "estandarte-reunion",
+      "nombre": "Estandarte (reunión)",
+      "descripcion": "Acompaña al Comandante y refuerza a su escuadra con una de sus variantes. Uno por escuadra.",
+      "perfil": {
+        "movimiento": null,
+        "vidas": null,
+        "velocidad": null,
+        "salvacion": null,
+        "escuadra": null,
+        "valor": 8
+      },
+      "habilidad": "Abanderado",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": null,
+          "distancia": null,
+          "precision": null,
+          "danio": null,
+          "danio_critico": null,
+          "habilidades_arma": [
+            "Reunión"
+          ]
+        }
+      }
+    },
+    {
+      "id": "estandarte-asalto",
+      "nombre": "Estandarte (asalto)",
+      "descripcion": "Acompaña al Comandante y refuerza a su escuadra con una de sus variantes. Uno por escuadra.",
+      "perfil": {
+        "movimiento": null,
+        "vidas": null,
+        "velocidad": null,
+        "salvacion": null,
+        "escuadra": null,
+        "valor": 7
+      },
+      "habilidad": "Abanderado",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": null,
+          "distancia": null,
+          "precision": null,
+          "danio": null,
+          "danio_critico": null,
+          "habilidades_arma": [
+            "Asalto"
+          ]
+        }
+      }
+    },
+    {
+      "id": "estandarte-marcha",
+      "nombre": "Estandarte (marcha)",
+      "descripcion": "Acompaña al Comandante y refuerza a su escuadra con una de sus variantes. Uno por escuadra.",
+      "perfil": {
+        "movimiento": null,
+        "vidas": null,
+        "velocidad": null,
+        "salvacion": null,
+        "escuadra": null,
+        "valor": 7
+      },
+      "habilidad": "Abanderado",
+      "fuerte_contra": [],
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": null,
+          "distancia": null,
+          "precision": null,
+          "danio": null,
+          "danio_critico": null,
+          "habilidades_arma": [
+            "Marcha"
           ]
         }
       }

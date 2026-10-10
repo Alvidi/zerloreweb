@@ -99,8 +99,8 @@
       "valor": 4
     },
     {
-      "id": "pistola-oculta",
-      "nombre": "Pistola oculta",
+      "id": "arma-oculta",
+      "nombre": "Arma oculta",
       "descripcion": "Puede usar su arma a distancia estando trabada en combate cuerpo a cuerpo, para atacar a la unidad con la que combate.",
       "accion": "2",
       "valor": 3
