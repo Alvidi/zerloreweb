@@ -2,18 +2,17 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/I18nContext.jsx'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
-import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
 import { useImageCrop } from '../features/generator/imageCrop.js'
 import ImageCropModal from '../features/generator/components/ImageCropModal.jsx'
 import FitTitle from '../features/generator/components/FitTitle.jsx'
-import itemIcon from '../images/units_icons/equipamiento.png'
-import objetosData from '../data/items/objetos.json'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
 import {
+  HEROES,
   UNIDADES,
   buildUnitEntry,
   getEntryValue,
   getUnidad,
+  isHeroe,
 } from '../features/generator/catalogUtils.js'
 
 const FICHA_CARD_W = 1536
@@ -22,19 +21,14 @@ const EXPORT_PAGE_W = 1240  // A4 vertical (folio) ~210mm × 5.9px/mm
 const EXPORT_PAGE_H = 1754  // A4 vertical (folio) ~297mm × 5.9px/mm
 const EXPORT_MARGIN = 46    // ~8mm de margen
 const EXPORT_GAP = 24       // ~4mm entre fichas
-// Las fichas de unidad son apaisadas, así que en un A4 vertical se imprimen
-// giradas 90°: 4 por folio en una rejilla de 2×2 que aprovecha el alto de la
-// hoja (~139 mm de lado largo). Hay que girar el folio para leerlas.
-// Los objetos siguen a tamaño carta (~95 mm), 6 por folio en 2×3.
-const EXPORT_CARD_W_MM = 95
+// Las fichas son apaisadas, así que en un A4 vertical se imprimen giradas 90°:
+// 4 por folio en una rejilla de 2×2 que aprovecha el alto de la hoja (~139 mm
+// de lado largo). Hay que girar el folio para leerlas.
 const CARDS_PER_PAGE = 4
 const CARD_COLUMNS = 2
-const ITEM_CARDS_PER_PAGE = 6
-const ITEM_CARD_COLUMNS = 2
-const EXPORT_PX_PER_MM = EXPORT_PAGE_W / 210
 const EXPORT_RASTER_SCALE = 2
 
-/** "Comandante (acorazado)" → { base: 'Comandante', especialidad: 'acorazado' }. */
+/** "Nombre (especialidad)" → { base: 'Nombre', especialidad: 'especialidad' }. */
 const splitNombreUnidad = (nombre) => {
   const match = String(nombre || '').match(/^(.*?)\s*\(([^)]+)\)\s*$/)
   return match ? { base: match[1], especialidad: match[2] } : { base: nombre, especialidad: '' }
@@ -42,7 +36,7 @@ const splitNombreUnidad = (nombre) => {
 
 /**
  * Junta en una sola tarjeta las unidades que comparten nombre base:
- * "Comandante (disparo)", "Comandante (CaC)"… → familia "Comandante" con una
+ * "Nombre (una)", "Nombre (otra)"… → familia "Nombre" con una
  * variante por especialidad. Las que no llevan paréntesis quedan solas. Así,
  * una especialidad nueva en el catálogo aparece como un chip más sin tocar código.
  */
@@ -119,7 +113,7 @@ const waitForPrintReady = async (elements = []) => {
   await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve))))
 }
 
-const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale = EXPORT_RASTER_SCALE } = {}) => {
+const renderExportPageCanvas = async (cardCanvases, { scale = EXPORT_RASTER_SCALE } = {}) => {
   const pageCanvas = document.createElement('canvas')
   pageCanvas.width = EXPORT_PAGE_W * scale
   pageCanvas.height = EXPORT_PAGE_H * scale
@@ -130,11 +124,9 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
   ctx.fillStyle = '#f8f5ed'
   ctx.fillRect(0, 0, EXPORT_PAGE_W, EXPORT_PAGE_H)
 
-  // Los objetos van rectos a tamaño carta; las unidades, giradas 90° para que
-  // 4 llenen el folio en vez de quedarse en la mitad de arriba.
-  const isItemPage = variant === 'objeto'
-  const cols = isItemPage ? ITEM_CARD_COLUMNS : CARD_COLUMNS
-  const rows = Math.ceil((isItemPage ? ITEM_CARDS_PER_PAGE : CARDS_PER_PAGE) / cols)
+  // Giradas 90° para que 4 llenen el folio en vez de quedarse en la mitad de arriba.
+  const cols = CARD_COLUMNS
+  const rows = Math.ceil(CARDS_PER_PAGE / cols)
   const gap = EXPORT_GAP
   const aspect = FICHA_CARD_W / FICHA_CARD_H
   const availableWidth = EXPORT_PAGE_W - EXPORT_MARGIN * 2 - gap * (cols - 1)
@@ -142,16 +134,8 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
 
   // Hueco que ocupa cada ficha sobre el papel. Girada, el lado largo de la
   // ficha es el alto del hueco, así que la proporción se invierte.
-  let slotWidth
-  let slotHeight
-  if (isItemPage) {
-    slotWidth = Math.min(availableWidth / cols, Math.round(EXPORT_CARD_W_MM * EXPORT_PX_PER_MM))
-    slotHeight = Math.floor(Math.min(availableHeight / rows, slotWidth / aspect))
-    slotWidth = Math.round(slotHeight * aspect)
-  } else {
-    slotWidth = Math.floor(Math.min(availableWidth / cols, availableHeight / rows / aspect))
-    slotHeight = Math.round(slotWidth * aspect)
-  }
+  const slotWidth = Math.floor(Math.min(availableWidth / cols, availableHeight / rows / aspect))
+  const slotHeight = Math.round(slotWidth * aspect)
 
   const marginX = Math.round((EXPORT_PAGE_W - cols * slotWidth - gap * (cols - 1)) / 2)
   const marginY = Math.round((EXPORT_PAGE_H - rows * slotHeight - gap * (rows - 1)) / 2)
@@ -161,11 +145,6 @@ const renderExportPageCanvas = async (cardCanvases, { variant = 'unidad', scale 
     const row = Math.floor(index / cols)
     const x = marginX + col * (slotWidth + gap)
     const y = marginY + row * (slotHeight + gap)
-
-    if (isItemPage) {
-      ctx.drawImage(cardCanvas, x, y, slotWidth, slotHeight)
-      return
-    }
 
     // Girada: se dibuja centrada en su hueco con el alto y el ancho cambiados.
     ctx.save()
@@ -246,25 +225,20 @@ function Generador() {
   const { t } = useI18n()
 
   const [armySelections, setArmySelections] = useState([])
-  const [selectedItems, setSelectedItems] = useState({})
-  const [activeGeneratorSection, setActiveGeneratorSection] = useState('units')
+  const [activeGeneratorSection, setActiveGeneratorSection] = useState('heroes')
   const [openCatalogKey, setOpenCatalogKey] = useState('')
   const [variantByFamily, setVariantByFamily] = useState({})   // familia → id de la variante elegida
   const [openArmyUid, setOpenArmyUid] = useState('')
-  // Qué PDF se está montando: 'ejercito', 'catalogo-unidades', 'catalogo-objetos' o ninguno.
+  // Qué PDF se está montando: 'ejercito', 'catalogo-heroes', 'catalogo-unidades' o ninguno.
   const [printJob, setPrintJob] = useState(null)
   const isArmyPrintPreviewOpen = printJob !== null
   const [armyDownloadError, setArmyDownloadError] = useState('')
   const imageCrop = useImageCrop((selectionId, imageDataUrl) => updateSelection(selectionId, { imageDataUrl }))
-  const [showItemFichaModal, setShowItemFichaModal] = useState(false)
-  const [activeItemFicha, setActiveItemFicha] = useState(null)
 
   const armySheetRefs = useRef(new Map())
   const armyCardRefs = useRef(new Map())
   const armyExportStageRef = useRef(null)
   const selectionCounterRef = useRef(0)
-
-  const activeItems = objetosData.objetos
 
   /** Entradas del ejército resueltas contra el catálogo. */
   const armyEntries = useMemo(
@@ -287,18 +261,14 @@ function Generador() {
 
   const armyUnitEntries = armyEntries
 
-  const selectedItemsTotalValue = useMemo(
-    () => Object.entries(selectedItems).reduce((sum, [itemId, count]) => {
-      const item = activeItems.find((candidate) => candidate.id === itemId)
-      return sum + (Number(item?.valor) || 0) * count
-    }, 0),
-    [selectedItems, activeItems],
+  const currentArmyTotalValue = useMemo(
+    () => armyEntries.reduce((sum, item) => sum + item.total, 0),
+    [armyEntries],
   )
 
-  const currentArmyTotalValue = useMemo(
-    () => armyEntries.reduce((sum, item) => sum + item.total, 0) + selectedItemsTotalValue,
-    [armyEntries, selectedItemsTotalValue],
-  )
+  // Sin Héroe no hay ejército: es lo primero que se elige y hace falta para descargar.
+  const chosenHeroId = armySelections.find((selection) => isHeroe(selection.unidadId))?.unidadId || ''
+  const armyHasHero = Boolean(chosenHeroId)
 
   /** Se agrupan en la lista las unidades idénticas (mismo tipo y misma escuadra). */
   const armyUnitGroups = useMemo(() => {
@@ -317,62 +287,31 @@ function Generador() {
     return Array.from(groups.values())
   }, [armyUnitEntries])
 
-  /** Los objetos comprados también llevan su ficha al PDF, una por objeto. */
-  const armyExportItems = useMemo(
-    () => activeItems
-      .filter((item) => (selectedItems[item.id] || 0) > 0)
-      .map((item) => ({ uid: `objeto-${item.id}`, kind: 'objeto', item, count: selectedItems[item.id] })),
-    [activeItems, selectedItems],
+  // En el PDF del ejército van primero los Héroes, como al montar la lista.
+  const armyExportEntries = useMemo(
+    () => armyUnitGroups
+      .map(({ item, count, totalValue }) => ({ ...item, _count: count, total: totalValue }))
+      .sort((a, b) => Number(isHeroe(b.entry.unidadId)) - Number(isHeroe(a.entry.unidadId))),
+    [armyUnitGroups],
   )
 
-  const armyExportEntries = useMemo(() => {
-    const unidades = armyUnitGroups.map(({ item, count, totalValue }) => ({ ...item, _count: count, total: totalValue }))
-    return [...unidades, ...armyExportItems]
-  }, [armyUnitGroups, armyExportItems])
-
-  /**
-   * Catálogo completo, al margen del ejército montado. Van por separado porque
-   * las dos descargas son independientes: fichas de unidad y cartas de objeto.
-   */
-  const catalogUnitEntries = useMemo(
-    () => UNIDADES
-      .map((unidad) => ({
-        uid: `catalogo-unidad-${unidad.id}`,
-        kind: 'unidad',
-        entry: buildUnitEntry(unidad.id),
-      }))
-      .filter((item) => item.entry),
-    [],
-  )
-
-  const catalogItemEntries = useMemo(
-    () => objetosData.objetos.map((item) => ({
-      uid: `catalogo-objeto-${item.id}`,
-      kind: 'objeto',
-      item,
-      count: 0,
-    })),
-    [],
-  )
+  /** Catálogo completo, al margen del ejército montado: una descarga para Héroes y otra para unidades. */
+  const buildCatalogEntries = (list) => list
+    .map((unidad) => ({ uid: `catalogo-${unidad.id}`, kind: 'unidad', entry: buildUnitEntry(unidad.id) }))
+    .filter((item) => item.entry)
+  const catalogHeroEntries = useMemo(() => buildCatalogEntries(HEROES), [])
+  const catalogUnitEntries = useMemo(() => buildCatalogEntries(UNIDADES), [])
 
   const exportEntries = printJob === 'catalogo-unidades'
     ? catalogUnitEntries
-    : printJob === 'catalogo-objetos'
-      ? catalogItemEntries
+    : printJob === 'catalogo-heroes'
+      ? catalogHeroEntries
       : armyExportEntries
 
-  /**
-   * Los folios no mezclan tamaños: primero las páginas de unidades
-   * (8 por folio) y luego las de objetos (6 por folio).
-   */
-  const armyExportPages = useMemo(() => {
-    const grandes = exportEntries.filter((item) => item.kind !== 'objeto')
-    const objetos = exportEntries.filter((item) => item.kind === 'objeto')
-    return [
-      ...chunkItems(grandes, CARDS_PER_PAGE).map((entries) => ({ variant: 'unidad', entries })),
-      ...chunkItems(objetos, ITEM_CARDS_PER_PAGE).map((entries) => ({ variant: 'objeto', entries })),
-    ]
-  }, [exportEntries])
+  const armyExportPages = useMemo(
+    () => chunkItems(exportEntries, CARDS_PER_PAGE).map((entries) => ({ entries })),
+    [exportEntries],
+  )
 
   const unitCountById = useMemo(() => {
     const counts = new Map()
@@ -407,6 +346,25 @@ function Generador() {
     setArmyDownloadError('')
   }
 
+  /**
+   * El Héroe no se suma como las unidades: se elige. Solo hay uno; elegir otro
+   * lo sustituye y volver a pulsar el elegido lo quita.
+   */
+  const handleChooseHero = (heroId) => {
+    if (!getUnidad(heroId)) return
+    if (chosenHeroId === heroId) {
+      setArmySelections((current) => current.filter((selection) => !isHeroe(selection.unidadId)))
+      return
+    }
+    selectionCounterRef.current += 1
+    const selectionId = `unidad-${selectionCounterRef.current}`
+    setArmySelections((current) => [
+      { selectionId, kind: 'unidad', unidadId: heroId, imageDataUrl: '' },
+      ...current.filter((selection) => !isHeroe(selection.unidadId)),
+    ])
+    setArmyDownloadError('')
+  }
+
   /** Quita la última unidad añadida de ese tipo. */
   const handleRemoveUnit = (unidadId) => {
     setArmySelections((current) => {
@@ -418,30 +376,7 @@ function Generador() {
 
   const handleResetCurrentArmy = () => {
     setArmySelections([])
-    setSelectedItems({})
     setArmyDownloadError('')
-  }
-
-  // Sin tope: los objetos son cartas de un solo uso que se descartan al jugarlas,
-  // así que lo único que limita cuántas llevas es el Valor del ejército.
-  const handleAddItem = (itemId) => {
-    setSelectedItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }))
-  }
-
-  const handleRemoveItem = (itemId) => {
-    setSelectedItems((prev) => {
-      const count = prev[itemId] || 0
-      if (count <= 1) {
-        const { [itemId]: _removed, ...rest } = prev
-        return rest
-      }
-      return { ...prev, [itemId]: count - 1 }
-    })
-  }
-
-  const openItemFicha = (item) => {
-    setActiveItemFicha(item)
-    setShowItemFichaModal(true)
   }
 
   // ── Imagen ──────────────────────────────────────────────────────────────
@@ -450,7 +385,7 @@ function Generador() {
 
   // ── Exportación a PDF del ejército ──────────────────────────────────────
   const handleDownloadArmyPdf = () => {
-    if (!armyExportEntries.length || isArmyPrintPreviewOpen) return
+    if (!armyExportEntries.length || !armyHasHero || isArmyPrintPreviewOpen) return
     setArmyDownloadError('')
     setPrintJob('ejercito')
   }
@@ -489,7 +424,7 @@ function Generador() {
           if (!canvas) throw new Error(`Missing export card capture: ${cardKey}`)
           cardCanvases.push(canvas)
         }
-        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases, { variant: page.variant }))
+        capturedPageCanvases.push(await renderExportPageCanvas(cardCanvases))
       }
 
       if (!capturedPageCanvases.length) {
@@ -509,11 +444,10 @@ function Generador() {
         doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pageWidth, pageHeight, undefined, 'FAST')
       })
 
-      const fileName = printJob === 'catalogo-unidades'
-        ? 'zerolore-unidades.pdf'
-        : printJob === 'catalogo-objetos'
-          ? 'zerolore-equipamiento.pdf'
-          : 'zerolore-ejercito.pdf'
+      const fileName = {
+        'catalogo-unidades': 'zerolore-unidades.pdf',
+        'catalogo-heroes': 'zerolore-heroes.pdf',
+      }[printJob] || 'zerolore-ejercito.pdf'
       doc.save(fileName)
       if (!cancelled) setPrintJob(null)
     }
@@ -564,6 +498,76 @@ function Generador() {
     setOpenArmyUid('')
   }
 
+  const renderCatalogDownload = (job, label, hint) => (
+    <button
+      type="button"
+      className="unit-list-section-download"
+      onClick={() => handleDownloadCatalogPdf(job)}
+      disabled={isArmyPrintPreviewOpen}
+      aria-busy={printJob === job ? 'true' : 'false'}
+      title={hint}
+    >
+      {printJob === job ? <SpinnerIcon /> : null}
+      <span>{printJob === job ? t('generator.preparingPdf') : label}</span>
+    </button>
+  )
+
+  /** Tarjeta del catálogo, la misma para Héroes y unidades. */
+  const renderCatalogCard = ({ unidad, cardKey, title, subline, isInArmy, chips = null, action = null }) => {
+    const count = unitCountById.get(unidad.id) || 0
+    const badgeSrc = getUnitClassBadgeSrc(unidad.id)
+    return (
+      <article className={`unit-card${isInArmy ? ' is-in-army' : ''}`} key={cardKey}>
+        <div className="unit-card-header">
+          <div className="unit-card-summary">
+            <span className="unit-card-thumb-wrap" aria-hidden="true">
+              <span className="unit-card-thumb-frame">
+                <span className="unit-card-thumb-canvas">
+                  {badgeSrc ? <img className="unit-card-thumb fallback" src={badgeSrc} alt="" /> : null}
+                </span>
+              </span>
+            </span>
+            <div className="unit-card-heading">
+              <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}>
+                {title}
+              </FitTitle>
+              {/* "Héroe / Fuego pesado" no cabe a tamaño normal: encoge en vez de cortarse. */}
+              {subline ? (
+                <FitTitle className="unit-card-specialty" maxFontSize={10.88} minFontSize={7}>{subline}</FitTitle>
+              ) : null}
+              <div className="unit-card-inline-value">
+                {unidad.perfil.valor === null ? '—' : `${unidad.perfil.valor} ${t('generator.valueUnit')}`}
+              </div>
+            </div>
+          </div>
+          <div className="unit-card-header-actions">
+            <button type="button" className="ghost small" onClick={() => setOpenCatalogKey(`unidad:${unidad.id}`)}>
+              {t('generator.viewCard')}
+            </button>
+            <div className="unit-add-controls">
+              {action || (
+                <CountStepper
+                  count={count}
+                  onAdd={() => handleAddUnit(unidad.id)}
+                  onRemove={() => handleRemoveUnit(unidad.id)}
+                  addLabel={`${t('generator.add')} ${unidad.nombre}`}
+                  removeLabel={`${t('generator.delete')} ${unidad.nombre}`}
+                  format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+        {chips}
+        {unidad.descripcion ? (
+          <FitTitle as="p" axis="y" className="unit-card-blurb is-fit" maxFontSize={12.16} minFontSize={9}>
+            {unidad.descripcion}
+          </FitTitle>
+        ) : null}
+      </article>
+    )
+  }
+
   return (
     <section className="section generator-page reveal" id="generador">
       <div className="section-head reveal">
@@ -576,6 +580,15 @@ function Generador() {
         <div className="generator-main">
           <div className="manual-panel">
             <div className="generator-section-tabs" role="tablist" aria-label={t('generator.sectionTabs')}>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeGeneratorSection === 'heroes'}
+                className={`generator-section-tab${activeGeneratorSection === 'heroes' ? ' active' : ''}`}
+                onClick={() => setActiveGeneratorSection('heroes')}
+              >
+                {t('generator.heroes')}
+              </button>
               <button
                 type="button"
                 role="tab"
@@ -598,158 +611,75 @@ function Generador() {
 
             </div>
 
+            {activeGeneratorSection === 'heroes' ? (
+              <div className="generator-subsection generator-listing-field">
+                <div className="unit-list-section">
+                  <div className="unit-list-section-head">
+                    <p className="unit-list-section-label">{t('generator.heroes')}</p>
+                    {renderCatalogDownload('catalogo-heroes', t('generator.downloadHeroes'),
+                      t('generator.heroesPdfHint').replace('{count}', String(catalogHeroEntries.length)))}
+                  </div>
+                  <p className="unit-list-section-hint">{t('generator.heroesHint')}</p>
+                  <div className="unit-list">
+                    {HEROES.map((heroe) => {
+                      const isChosen = chosenHeroId === heroe.id
+                      return renderCatalogCard({
+                        unidad: heroe,
+                        cardKey: heroe.id,
+                        title: heroe.nombre,
+                        // "Héroe, Fuego pesado" → "Héroe / Fuego pesado": los dos roles.
+                        subline: heroe.rol.split(',').map((rol) => rol.trim()).join(' / '),
+                        isInArmy: isChosen,
+                        action: (
+                          <button
+                            type="button"
+                            className={`hero-pick-button${isChosen ? ' is-chosen' : ''}`}
+                            aria-pressed={isChosen ? 'true' : 'false'}
+                            onClick={() => handleChooseHero(heroe.id)}
+                          >
+                            {isChosen ? t('generator.heroChosen') : t('generator.chooseHero')}
+                          </button>
+                        ),
+                      })
+                    })}
+                  </div>
+                </div>
+              </div>
+            ) : null}
+
             {activeGeneratorSection === 'units' ? (
               <div className="generator-subsection generator-listing-field">
                 <div className="unit-list-section">
                   <div className="unit-list-section-head">
                     <p className="unit-list-section-label">{t('generator.units')}</p>
-                    <button
-                      type="button"
-                      className="unit-list-section-download"
-                      onClick={() => handleDownloadCatalogPdf('catalogo-unidades')}
-                      disabled={isArmyPrintPreviewOpen}
-                      aria-busy={printJob === 'catalogo-unidades' ? 'true' : 'false'}
-                      title={t('generator.unitsPdfHint').replace('{count}', String(catalogUnitEntries.length))}
-                    >
-                      {printJob === 'catalogo-unidades' ? <SpinnerIcon /> : null}
-                      <span>{printJob === 'catalogo-unidades' ? t('generator.preparingPdf') : t('generator.downloadUnits')}</span>
-                    </button>
+                    {renderCatalogDownload('catalogo-unidades', t('generator.downloadUnits'),
+                      t('generator.unitsPdfHint').replace('{count}', String(catalogUnitEntries.length)))}
                   </div>
                   <div className="unit-list">
                     {UNIT_FAMILIES.map((family) => {
                       const selected = family.variants.find((variant) => variant.unidad.id === variantByFamily[family.key])
                         || family.variants[0]
-                      const { unidad } = selected
-                      const count = unitCountById.get(unidad.id) || 0
-                      const familyCount = family.variants.reduce((sum, variant) => sum + (unitCountById.get(variant.unidad.id) || 0), 0)
-                      return (
-                        <article
-                          className={`unit-card${familyCount > 0 ? ' is-in-army' : ''}`}
-                          key={family.key}
-                        >
-                          <div className="unit-card-header">
-                            <div className="unit-card-summary">
-                              <span className="unit-card-thumb-wrap" aria-hidden="true">
-                                <span className="unit-card-thumb-frame">
-                                  <span className="unit-card-thumb-canvas">
-                                    {getUnitClassBadgeSrc(unidad.id) ? (
-                                      <img className="unit-card-thumb fallback" src={getUnitClassBadgeSrc(unidad.id)} alt="" />
-                                    ) : null}
-                                  </span>
-                                </span>
-                              </span>
-                              <div className="unit-card-heading">
-                                <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(unidad.id)}`}>
-                                  {family.base}
-                                </FitTitle>
-                                {family.variants.length === 1 && selected.especialidad ? (
-                                  <div className="unit-card-specialty">{selected.especialidad}</div>
-                                ) : null}
-                                <div className="unit-card-inline-value">
-                                  {unidad.perfil.valor === null ? '—' : `${unidad.perfil.valor} ${t('generator.valueUnit')}`}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="unit-card-header-actions">
-                              <button type="button" className="ghost small" onClick={() => setOpenCatalogKey(`unidad:${unidad.id}`)}>
-                                {t('generator.viewCard')}
-                              </button>
-                              <div className="unit-add-controls">
-                                <CountStepper
-                                  count={count}
-                                  onAdd={() => handleAddUnit(unidad.id)}
-                                  onRemove={() => handleRemoveUnit(unidad.id)}
-                                  addLabel={`${t('generator.add')} ${unidad.nombre}`}
-                                  removeLabel={`${t('generator.delete')} ${unidad.nombre}`}
-                                  format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          {family.variants.length > 1 ? (
-                            <VariantChips
-                              family={family}
-                              selectedId={unidad.id}
-                              counts={unitCountById}
-                              onSelect={(unidadId) => selectVariant(family, unidadId)}
-                              label={`${t('generator.specialty')} · ${family.base}`}
-                            />
-                          ) : null}
-                          {unidad.descripcion ? (
-                            <FitTitle as="p" axis="y" className="unit-card-blurb is-fit" maxFontSize={12.16} minFontSize={9}>
-                              {unidad.descripcion}
-                            </FitTitle>
-                          ) : null}
-                        </article>
-                      )
+                      return renderCatalogCard({
+                        unidad: selected.unidad,
+                        cardKey: family.key,
+                        title: family.base,
+                        subline: family.variants.length === 1 && selected.especialidad
+                          ? selected.especialidad
+                          : selected.unidad.rol,
+                        isInArmy: family.variants.some((variant) => (unitCountById.get(variant.unidad.id) || 0) > 0),
+                        chips: family.variants.length > 1 ? (
+                          <VariantChips
+                            family={family}
+                            selectedId={selected.unidad.id}
+                            counts={unitCountById}
+                            onSelect={(unidadId) => selectVariant(family, unidadId)}
+                            label={`${t('generator.specialty')} · ${family.base}`}
+                          />
+                        ) : null,
+                      })
                     })}
                   </div>
                 </div>
-
-                    <hr className="generator-items-divider" />
-                    <div className="unit-list-section">
-                      <div className="unit-list-section-head">
-                        <p className="unit-list-section-label">{t('rules.modeItems')}</p>
-                        <button
-                          type="button"
-                          className="unit-list-section-download"
-                          onClick={() => handleDownloadCatalogPdf('catalogo-objetos')}
-                          disabled={isArmyPrintPreviewOpen}
-                          aria-busy={printJob === 'catalogo-objetos' ? 'true' : 'false'}
-                          title={t('generator.itemsPdfHint').replace('{count}', String(catalogItemEntries.length))}
-                        >
-                          {printJob === 'catalogo-objetos' ? <SpinnerIcon /> : null}
-                          <span>{printJob === 'catalogo-objetos' ? t('generator.preparingPdf') : t('generator.downloadItems')}</span>
-                        </button>
-                      </div>
-                      <div className="unit-list">
-                        {activeItems.map((item) => {
-                          const itemCount = selectedItems[item.id] || 0
-                          return (
-                            <article key={item.id} className={`unit-card${itemCount > 0 ? ' is-in-army' : ''}`}>
-                              <div className="unit-card-header">
-                                <div className="unit-card-summary">
-                                  <span className="unit-card-thumb-wrap" aria-hidden="true">
-                                    <span className="unit-card-thumb-frame">
-                                      <span className="unit-card-thumb-canvas">
-                                        <img className="unit-card-thumb fallback" src={itemIcon} alt="" />
-                                      </span>
-                                    </span>
-                                  </span>
-                                  <div className="unit-card-heading">
-                                    <div className="unit-card-title-row">
-                                      <FitTitle as="h4" maxFontSize={16} minFontSize={10}>{item.nombre}</FitTitle>
-                                    </div>
-                                    <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
-                                    <div className="unit-card-inline-value">
-                                      {item.valor === null ? '—' : `${item.valor} ${t('generator.valueUnit')}`}
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="unit-card-header-actions">
-                                  <button type="button" className="ghost small" onClick={() => openItemFicha(item)}>
-                                    {t('generator.viewCard')}
-                                  </button>
-                                  <div className="unit-add-controls">
-                                    <CountStepper
-                                      count={itemCount}
-                                      onAdd={() => handleAddItem(item.id)}
-                                      onRemove={() => handleRemoveItem(item.id)}
-                                      addLabel={`${t('generator.add')} ${item.nombre}`}
-                                      removeLabel={`${t('generator.delete')} ${item.nombre}`}
-                                      format={(value) => (value > 0 ? `×${value}` : '0')}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              {item.descripcion ? (
-                                <p className="unit-card-blurb is-item">{item.descripcion}</p>
-                              ) : null}
-                            </article>
-                          )
-                        })}
-                      </div>
-                    </div>
               </div>
             ) : null}
 
@@ -763,14 +693,14 @@ function Generador() {
                 </div>
 
                 {[
-                  {
-                    key: 'units',
-                    label: t('generator.units'),
-                    rows: armyUnitGroups.map(({ item, count, totalValue }) => (
-                      { item: { ...item, total: totalValue }, count }
-                    )),
-                  },
-                ].map((section) => section.rows.length ? (
+                  { key: 'heroes', label: t('generator.heroes'), onlyHeroes: true },
+                  { key: 'units', label: t('generator.units'), onlyHeroes: false },
+                ].map((section) => ({
+                  ...section,
+                  rows: armyUnitGroups
+                    .filter(({ item }) => isHeroe(item.entry.unidadId) === section.onlyHeroes)
+                    .map(({ item, count, totalValue }) => ({ item: { ...item, total: totalValue }, count })),
+                })).map((section) => section.rows.length ? (
                   <div className="army-modal-section" key={`current-army-${section.key}`}>
                     <p className="army-modal-section-label">{section.label}</p>
                     <div className="army-list army-list-compact">
@@ -779,11 +709,14 @@ function Generador() {
                           <div className="unit-card-header army-unit-header">
                             <div className="unit-card-summary army-unit-summary">
                               <div className="unit-card-thumb-wrap army-unit-image-wrap">
-                                <img
-                                  className={`unit-card-thumb army-unit-thumb${item.imageDataUrl ? '' : ' fallback'}`}
-                                  src={item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId)}
-                                  alt={item.entry.clase}
-                                />
+                                {/* Sin imagen propia ni icono de tipo (los Héroes aún no lo tienen) no se pinta nada. */}
+                                {item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId) ? (
+                                  <img
+                                    className={`unit-card-thumb army-unit-thumb${item.imageDataUrl ? '' : ' fallback'}`}
+                                    src={item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId)}
+                                    alt={item.entry.clase}
+                                  />
+                                ) : null}
                                 <input
                                   id={`army-unit-image-${item.uid}`}
                                   type="file"
@@ -831,14 +764,20 @@ function Generador() {
                                 {t('generator.viewCard')}
                               </button>
                               <div className="unit-add-controls">
-                                <CountStepper
-                                  count={count}
-                                  onAdd={() => handleAddUnit(item.entry.unidadId)}
-                                  onRemove={() => handleRemoveUnit(item.entry.unidadId)}
-                                  addLabel={`${t('generator.add')} ${item.entry.nombre}`}
-                                  removeLabel={`${t('generator.delete')} ${item.entry.nombre}`}
-                                  format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
-                                />
+                                {isHeroe(item.entry.unidadId) ? (
+                                  <button type="button" className="hero-pick-button is-chosen" onClick={() => handleChooseHero(item.entry.unidadId)}>
+                                    {t('generator.removeHero')}
+                                  </button>
+                                ) : (
+                                  <CountStepper
+                                    count={count}
+                                    onAdd={() => handleAddUnit(item.entry.unidadId)}
+                                    onRemove={() => handleRemoveUnit(item.entry.unidadId)}
+                                    addLabel={`${t('generator.add')} ${item.entry.nombre}`}
+                                    removeLabel={`${t('generator.delete')} ${item.entry.nombre}`}
+                                    format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
+                                  />
+                                )}
                               </div>
                             </div>
                           </div>
@@ -848,55 +787,18 @@ function Generador() {
                   </div>
                 ) : null)}
 
-                {Object.keys(selectedItems).length > 0 ? (
-                  <div className="army-modal-section">
-                    <p className="army-modal-section-label">{t('rules.modeItems')}</p>
-                    <div className="army-list army-list-compact">
-                      {activeItems.filter((item) => (selectedItems[item.id] || 0) > 0).map((item) => {
-                        const count = selectedItems[item.id]
-                        return (
-                          <article key={item.id} className="unit-card army-unit">
-                            <div className="unit-card-header army-unit-header">
-                              <div className="unit-card-summary army-unit-summary">
-                                <div className="unit-card-thumb-wrap army-unit-image-wrap">
-                                  <img className="unit-card-thumb fallback" src={itemIcon} alt="" />
-                                </div>
-                                <div className="unit-card-heading">
-                                  <div className="unit-card-title-row">
-                                    <h4>{item.nombre}</h4>
-                                    {count > 1 ? <span className="army-unit-count-badge">×{count}</span> : null}
-                                  </div>
-                                  <div className="unit-card-type unit-type-equipment">{t('rules.modeItems')}</div>
-                                  <div className="unit-card-inline-value">
-                                    {item.valor === null ? '—' : `${item.valor * count} ${t('generator.valueUnit')}`}
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="unit-card-header-actions army-unit-actions">
-                                <button type="button" className="ghost small" onClick={() => openItemFicha(item)}>
-                                  {t('generator.viewCard')}
-                                </button>
-                                <div className="unit-add-controls">
-                                  <CountStepper
-                                    count={count}
-                                    onAdd={() => handleAddItem(item.id)}
-                                    onRemove={() => handleRemoveItem(item.id)}
-                                    addLabel={`${t('generator.add')} ${item.nombre}`}
-                                    removeLabel={`${t('generator.delete')} ${item.nombre}`}
-                                    format={(value) => (value > 0 ? `×${value}` : '0')}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </article>
-                        )
-                      })}
-                    </div>
-                  </div>
+                {!armyEntries.length ? (
+                  <p className="empty-state">{t('generator.noUnitsYet')}</p>
                 ) : null}
 
-                {!armyEntries.length && !Object.keys(selectedItems).length ? (
-                  <p className="empty-state">{t('generator.noUnitsYet')}</p>
+                {/* Sin Héroe no se descarga: se avisa justo donde se intenta. */}
+                {armyEntries.length && !armyHasHero ? (
+                  <p className="army-hero-hint" role="status">
+                    {t('generator.needsHero')}{' '}
+                    <button type="button" className="army-hero-hint-link" onClick={() => setActiveGeneratorSection('heroes')}>
+                      {t('generator.goToHeroes')}
+                    </button>
+                  </p>
                 ) : null}
 
                 <div className="army-actions">
@@ -904,7 +806,7 @@ function Generador() {
                     type="button"
                     className="generator-army-download"
                     onClick={handleDownloadArmyPdf}
-                    disabled={!armyEntries.length || isArmyPrintPreviewOpen}
+                    disabled={!armyEntries.length || !armyHasHero || isArmyPrintPreviewOpen}
                     aria-busy={printJob === 'ejercito' ? 'true' : 'false'}
                   >
                     {printJob === 'ejercito' ? <SpinnerIcon /> : null}
@@ -967,19 +869,11 @@ function Generador() {
               {page.entries.map((item, cardIndex) => (
                 <div key={`army-export-${item.uid}`} className="army-export-sheet-slot" data-army-export-slot={item.uid}>
                   <div className="army-export-card-host">
-                    {item.kind === 'objeto' ? (
-                      <ItemFichaCard
-                        ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
-                        item={item.item}
-                        count={item.count}
-                      />
-                    ) : (
-                      <UnitFichaCard
-                        ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
-                        entry={item.entry}
-                        imageDataUrl={item.imageDataUrl}
-                      />
-                    )}
+                    <UnitFichaCard
+                      ref={(node) => setArmyCardRef(`unit-${pageIndex}-${item.uid || cardIndex}`, node)}
+                      entry={item.entry}
+                      imageDataUrl={item.imageDataUrl}
+                    />
                   </div>
                 </div>
               ))}
@@ -991,28 +885,6 @@ function Generador() {
       {/* Modal de recorte de imagen */}
       <ImageCropModal crop={imageCrop} />
 
-      {/* Modal de ficha de objeto */}
-      {showItemFichaModal && activeItemFicha && typeof document !== 'undefined' ? createPortal(
-        <div
-          className="mision-ficha-modal-overlay"
-          onClick={() => { setShowItemFichaModal(false); setActiveItemFicha(null) }}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="mision-ficha-modal-content" onClick={(event) => event.stopPropagation()}>
-            <div className="mision-ficha-modal-bar">
-              <button
-                type="button"
-                className="mision-ficha-modal-close"
-                onClick={() => { setShowItemFichaModal(false); setActiveItemFicha(null) }}
-                aria-label={t('generator.close')}
-              >×</button>
-            </div>
-            <ItemFichaCard item={activeItemFicha} count={selectedItems[activeItemFicha.id] || 0} />
-          </div>
-        </div>,
-        document.body,
-      ) : null}
     </section>
   )
 }

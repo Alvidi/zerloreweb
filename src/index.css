@@ -25,15 +25,14 @@
   --class-asaltante: #f57aa4;
   --class-armas-pesadas: #56c4fb;
   --class-psiquico: #ae4afb;
-  --class-demonio: #6afa3f;
   --class-monstruo: #d41d1e;
   --class-vehiculo-ligero: #fd7902;
   --class-vehiculo-pesado: #c8a983;
   --class-artilleria: #96592c;
   --class-titan: #808ed0;
-  --class-comandante: #e90c86;
-  --class-estandarte: #2fb8a6;
-  --class-equipment: #f1c636;
+  --class-capitan: #68a080;
+  --class-soporte: #e05050;
+  --class-heroe: #e90c86;
   --line: rgba(255, 255, 255, 0.12);
   --glow: rgba(214, 190, 132, 0.32);
   --max-width: 1200px;

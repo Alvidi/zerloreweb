@@ -1,0 +1,481 @@
+{
+  "heroes": [
+    {
+      "id": "heroe-sacerdotisa",
+      "nombre": "Sacerdotisa",
+      "rol": "Héroe, Especial",
+      "descripcion": "Guía espiritual que devuelve a la batalla a los que caen a su lado.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 7,
+        "velocidad": "+2\"",
+        "salvacion": "5+",
+        "escuadra": null,
+        "valor": 15
+      },
+      "habilidad": "Levantar a los caídos",
+      "habilidad_descripcion": "Si una unidad aliada de rol Soldado, Movilidad o Especial muere a 6\" o menos de este Héroe, tira 1D6. Con 4+ vuelve en el mismo sitio con 1 Vida. No puede levantarse dos veces.",
+      "armas": {
+        "disparo": {
+          "ataques": "1D3",
+          "distancia": "18\"",
+          "precision": "—",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-nigromante",
+      "nombre": "Nigromante",
+      "rol": "Héroe, Especial",
+      "descripcion": "Señor de los muertos. Sus tropas nunca se acaban.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 7,
+        "velocidad": "+2\"",
+        "salvacion": "5+",
+        "escuadra": null,
+        "valor": 20
+      },
+      "habilidad": "Horda eterna",
+      "habilidad_descripcion": "Las unidades aliadas de rol Soldado que mueren vuelven a la Reserva tal y como empezaron.",
+      "armas": {
+        "disparo": {
+          "ataques": "1D3",
+          "distancia": "18\"",
+          "precision": "—",
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-archimago",
+      "nombre": "Archimago",
+      "rol": "Héroe, Especial",
+      "descripcion": "Maestro arcano que dobla el espacio a su antojo.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "velocidad": "+2\"",
+        "salvacion": "5+",
+        "escuadra": null,
+        "valor": 16
+      },
+      "habilidad": "Teleportación",
+      "habilidad_descripcion": "Este Héroe gasta 2 acciones para intercambiar su posición con una unidad aliada de rol Soldado, Movilidad, Élite o Especial. Ninguna de las dos puede estar trabada.",
+      "armas": {
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "24\"",
+          "precision": "—",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Directo"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-guardian",
+      "nombre": "Guardián",
+      "rol": "Héroe, Élite",
+      "descripcion": "Muralla viviente que atrae todos los golpes.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 12,
+        "velocidad": "+2\"",
+        "salvacion": "3+",
+        "escuadra": null,
+        "valor": 17
+      },
+      "habilidad": "Tanque",
+      "habilidad_descripcion": "Los ataques enemigos contra unidades aliadas a 6\" o menos de este Héroe deben dirigirse a él, si puede ser objetivo.",
+      "armas": {
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "12\"",
+          "precision": "4+",
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-mariscal-de-hierro",
+      "nombre": "Mariscal de Hierro",
+      "rol": "Héroe, Pesado",
+      "descripcion": "Comandante de blindados que dirige la ofensiva desde su torreta.",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 14,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": null,
+        "valor": 26
+      },
+      "habilidad": "Victoria sobre ruedas",
+      "habilidad_descripcion": "Las unidades aliadas de rol Pesado pueden controlar puestos de mando.",
+      "armas": {
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "32\"",
+          "precision": "4+",
+          "danio": "3",
+          "danio_critico": "5",
+          "habilidades_arma": [
+            "Perforante"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D3",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-caudillo",
+      "nombre": "Caudillo",
+      "rol": "Héroe, Soldado",
+      "descripcion": "Líder de primera línea que arrastra a los suyos a la carga.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 6,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 13
+      },
+      "habilidad": "Grito de guerra",
+      "habilidad_descripcion": "Cuando este Héroe carga con éxito, una unidad aliada a 6\" o menos puede unirse al combate. Queda trabada, pero no ataca.",
+      "armas": {
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "12\"",
+          "precision": "4+",
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "4D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Brutal"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-ingeniero-de-asedio",
+      "nombre": "Ingeniero de Asedio",
+      "rol": "Héroe, Fuego pesado",
+      "descripcion": "Experto en asedio que hace avanzar los cañones.",
+      "perfil": {
+        "movimiento": "4\"",
+        "vidas": 8,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 14
+      },
+      "habilidad": "Esfuerzo",
+      "habilidad_descripcion": "Las unidades aliadas de rol Fuego pesado ganan +3\" de Movimiento, y la Artillería puede moverse 3\".",
+      "armas": {
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "32\"",
+          "precision": "4+",
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Perforante"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "1D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-martir",
+      "nombre": "Mártir",
+      "rol": "Héroe, Élite",
+      "descripcion": "Se sacrifica para que sus hermanos no fallen.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 10,
+        "velocidad": "+3\"",
+        "salvacion": "3+",
+        "escuadra": null,
+        "valor": 17
+      },
+      "habilidad": "Otra oportunidad",
+      "habilidad_descripcion": "Este Héroe puede perder 1 Vida para repetir un dado de cualquier tirada suya o de una unidad aliada de rol Soldado o Élite.",
+      "armas": {
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "24\"",
+          "precision": "3+",
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-centinela",
+      "nombre": "Centinela",
+      "rol": "Héroe, Soldado",
+      "descripcion": "Defensora incansable de los puestos de mando.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 7,
+        "velocidad": "+2\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 12
+      },
+      "habilidad": "Baluarte",
+      "habilidad_descripcion": "Las unidades aliadas dentro de un puesto de mando que controles están en cobertura.",
+      "armas": {
+        "disparo": {
+          "ataques": "3D",
+          "distancia": "24\"",
+          "precision": "4+",
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Disparo certero"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-cazadora",
+      "nombre": "Cazadora",
+      "rol": "Héroe, Movilidad",
+      "descripcion": "Rastreadora que marca a sus presas para el resto del ejército.",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 6,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 12
+      },
+      "habilidad": "Marcado",
+      "habilidad_descripcion": "Cuando este Héroe dispara a una unidad, los demás ataques a distancia contra ella mejoran en 1 la Precisión hasta el final del turno.",
+      "armas": {
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "36\"",
+          "precision": "3+",
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Brutal",
+            "Implacable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-segador",
+      "nombre": "Segador",
+      "rol": "Héroe, Especial",
+      "descripcion": "Recolector de almas: cada enemigo que cae abre paso a uno de los suyos.",
+      "perfil": {
+        "movimiento": "5\"",
+        "vidas": 8,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 16
+      },
+      "habilidad": "Cosecha de almas",
+      "habilidad_descripcion": "Cuando una unidad enemiga muere a 6\" o menos de este Héroe, puedes desplegar en ese punto una unidad aliada de rol Soldado desde tu Reserva.",
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "3",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Golpe crítico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-picaro",
+      "nombre": "Pícaro",
+      "rol": "Héroe, Movilidad",
+      "descripcion": "Asesino que se mueve sin ser visto.",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 5,
+        "velocidad": "+6\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 12
+      },
+      "habilidad": "Sombras",
+      "habilidad_descripcion": "Las unidades aliadas de rol Movilidad no pueden ser objetivo de disparos a más de 12\".",
+      "armas": {
+        "disparo": {
+          "ataques": "1D",
+          "distancia": "12\"",
+          "precision": "3+",
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "3D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Golpe crítico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-maestro-de-esgrima",
+      "nombre": "Maestro de Esgrima",
+      "rol": "Héroe, Élite",
+      "descripcion": "Espadachín legendario que convierte cada carga enemiga en un error.",
+      "perfil": {
+        "movimiento": "6\"",
+        "vidas": 9,
+        "velocidad": "+4\"",
+        "salvacion": "3+",
+        "escuadra": null,
+        "valor": 19
+      },
+      "habilidad": "Contraataque",
+      "habilidad_descripcion": "Cuando una unidad aliada a 6\" o menos de este Héroe recibe una carga con éxito, hace un ataque cuerpo a cuerpo gratuito después del enemigo.",
+      "armas": {
+        "disparo": null,
+        "cuerpo_a_cuerpo": {
+          "ataques": "4D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "4",
+          "habilidades_arma": [
+            "Golpe crítico"
+          ]
+        }
+      }
+    }
+  ]
+}

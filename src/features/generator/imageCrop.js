@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-// Recorte de la imagen que va en la ventana de arte de la ficha. Lo usan tanto
-// el generador de ejércitos como el Coliseo, así que vive aquí y no en la página.
+// Recorte de la imagen que va en la ventana de arte de la ficha. Vive aparte
+// de la página del generador para que esta no crezca más.
 export const MAX_UNIT_IMAGE_SIDE = 1600
 export const IMAGE_CROP_ASPECT_RATIO = 736 / 416   // ventana de arte de ficha2.png
 export const IMAGE_CROP_VIEWPORT_WIDTH = 360

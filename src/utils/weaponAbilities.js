@@ -5,13 +5,8 @@ export const WEAPON_ABILITY_IDS = {
   criticalHit: 'criticalHit',
   direct:      'direct',
   relentless:  'relentless',
-  explosive:   'explosive',
   preciseShot: 'preciseShot',
-  // Lo que aporta cada Estandarte a su escuadra va en la columna de su arma.
-  conquest:    'conquest',
-  rally:       'rally',
-  assault:     'assault',
-  march:       'march',
+  overflow:    'overflow',
 }
 
 export const normalizeAbilityText = (value) =>
@@ -28,12 +23,8 @@ const WEAPON_ABILITY_DEFINITIONS = [
   { id: WEAPON_ABILITY_IDS.criticalHit, aliases: ['golpe critico', 'critical hit'],             conditionKey: null },
   { id: WEAPON_ABILITY_IDS.direct,      aliases: ['directo', 'direct'],                         conditionKey: null },
   { id: WEAPON_ABILITY_IDS.relentless,  aliases: ['implacable', 'relentless'],                  conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.explosive,   aliases: ['explosiva', 'explosive'],                    conditionKey: null },
   { id: WEAPON_ABILITY_IDS.preciseShot, aliases: ['disparo certero', 'precise shot'],           conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.conquest,    aliases: ['conquista'],                                 conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.rally,       aliases: ['reunion'],                                   conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.assault,     aliases: ['asalto'],                                    conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.march,       aliases: ['marcha'],                                    conditionKey: null },
+  { id: WEAPON_ABILITY_IDS.overflow,    aliases: ['desbordante', 'overflow'],                   conditionKey: null },
 ]
 
 const definitionById = new Map(WEAPON_ABILITY_DEFINITIONS.map((definition) => [definition.id, definition]))

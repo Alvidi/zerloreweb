@@ -10,7 +10,7 @@ export const SEO_BY_LANG = {
     '/': {
       title: 'ZeroLore | Wargame de Miniaturas',
       description:
-        'ZeroLore es un wargame de miniaturas para crear partidas, facciones y escenarios propios.',
+        'ZeroLore es un wargame de miniaturas para crear partidas, ejércitos y escenarios propios.',
       summary:
         'Explora ZeroLore, consulta el reglamento y prepara tus ejercitos para partidas de escaramuza y gran batalla.',
       pageType: 'WebSite',
@@ -26,17 +26,9 @@ export const SEO_BY_LANG = {
     '/generador': {
       title: 'Ejércitos | ZeroLore',
       description:
-        'Explora facciones, unidades y habilidades de ZeroLore y descarga tu ejercito listo para imprimir.',
+        'Elige tu Héroe, monta tus unidades y descarga tu ejército de ZeroLore listo para imprimir.',
       summary:
-        'Consulta unidades, habilidades de faccion y fichas listas para descargar en ZeroLore.',
-      pageType: 'WebApplication',
-    },
-    '/coliseo': {
-      title: 'Coliseo | ZeroLore',
-      description:
-        'Heroes y equipamiento del modo de juego Coliseo de ZeroLore, listos para imprimir.',
-      summary:
-        'Consulta los perfiles de Heroe del Coliseo y descarga sus fichas y las cartas de equipamiento.',
+        'Consulta Héroes, unidades y sus fichas listas para descargar en ZeroLore.',
       pageType: 'WebApplication',
     },
     '/derechos-de-autor': {
@@ -50,7 +42,7 @@ export const SEO_BY_LANG = {
   },
 }
 
-export const ROUTE_PATHS = ['/', '/reglamento', '/generador', '/coliseo', '/derechos-de-autor']
+export const ROUTE_PATHS = ['/', '/reglamento', '/generador', '/derechos-de-autor']
 
 export const LOCALE_BY_LANG = {
   es: 'es_ES',

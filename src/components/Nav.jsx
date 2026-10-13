@@ -47,7 +47,6 @@ function Nav() {
         <Link to="/">{t('nav.home')}</Link>
         <Link to="/reglamento">{t('nav.rules')}</Link>
         <Link to="/generador">{t('nav.generator')}</Link>
-        <Link to="/coliseo">{t('nav.coliseo')}</Link>
         {socialLinks.map((social) => (
           <a
             key={social.key}

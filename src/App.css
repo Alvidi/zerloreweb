@@ -1200,24 +1200,6 @@ button {
   text-transform: uppercase;
 }
 
-/* Coliseo: "Añadir imagen" es un label con un input dentro, y "Elegir héroe"
-   usa el botón de descarga pero en pequeño, bajo los otros dos. */
-.coliseo-image-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.coliseo-image-button input {
-  display: none;
-}
-
-.coliseo-pick-button {
-  width: 100%;
-  justify-content: center;
-}
-
 /* Descripción breve del tipo: de un vistazo se sabe qué es cada unidad.
    Se recorta a dos líneas para que todas las tarjetas midan lo mismo. */
 .unit-card-blurb {
@@ -1654,10 +1636,6 @@ button {
   color: var(--class-psiquico);
 }
 
-.unit-type-demonio {
-  color: var(--class-demonio);
-}
-
 .unit-type-monstruo {
   color: var(--class-monstruo);
 }
@@ -1678,17 +1656,18 @@ button {
   color: var(--class-titan);
 }
 
-.unit-type-comandante {
-  color: var(--class-comandante);
+.unit-type-capitan {
+  color: var(--class-capitan);
 }
 
-.unit-type-estandarte {
-  color: var(--class-estandarte);
+.unit-type-soporte {
+  color: var(--class-soporte);
 }
 
-.unit-type-equipment {
-  color: var(--class-equipment);
+.unit-type-heroe {
+  color: var(--class-heroe);
 }
+
 
 .unit-value {
   color: var(--accent);
@@ -7293,7 +7272,7 @@ mark {
   text-transform: uppercase;
 }
 
-/* La etiqueta de clase de la ficha se pinta con el color de su clase */
+/* Las pastillas de la ficha llevan el Rol; la de "Héroe" va con su color */
 .ficha2-tag.unit-type-milicia { color: var(--class-milicia); }
 .ficha2-tag.unit-type-tirador { color: var(--class-tirador); }
 .ficha2-tag.unit-type-choque { color: var(--class-choque); }
@@ -7303,14 +7282,12 @@ mark {
 .ficha2-tag.unit-type-asaltante { color: var(--class-asaltante); }
 .ficha2-tag.unit-type-armas-pesadas { color: var(--class-armas-pesadas); }
 .ficha2-tag.unit-type-psiquico { color: var(--class-psiquico); }
-.ficha2-tag.unit-type-demonio { color: var(--class-demonio); }
 .ficha2-tag.unit-type-monstruo { color: var(--class-monstruo); }
 .ficha2-tag.unit-type-vehiculo-ligero { color: var(--class-vehiculo-ligero); }
 .ficha2-tag.unit-type-vehiculo-pesado { color: var(--class-vehiculo-pesado); }
 .ficha2-tag.unit-type-artilleria { color: var(--class-artilleria); }
 .ficha2-tag.unit-type-titan { color: var(--class-titan); }
-.ficha2-tag.unit-type-comandante { color: var(--class-comandante); }
-.ficha2-tag.unit-type-estandarte { color: var(--class-estandarte); }
+.ficha2-tag.unit-type-heroe { color: var(--class-heroe); }
 
 /* En el ejército actual el rol no se puede seleccionar: es solo una etiqueta */
 .unit-role-name.is-static {
@@ -7460,7 +7437,7 @@ mark {
   margin-left: auto;
 }
 
-/* La especialidad del Comandante, en su línea, entre el nombre y el Valor. */
+/* La línea bajo el nombre (rol o especialidad), entre el nombre y el Valor. */
 .unit-card-specialty {
   margin-top: 1px;
   color: var(--text-muted);
@@ -7473,7 +7450,7 @@ mark {
   white-space: nowrap;
 }
 
-/* Especialidades de una misma unidad (p. ej. Comandante): una tarjeta, un chip
+/* Especialidades de una misma unidad ("Nombre (especialidad)"): una tarjeta, un chip
    por variante. Si caben, en una línea; si no, saltan a la siguiente. */
 .unit-variant-chips {
   display: flex;
@@ -7524,6 +7501,68 @@ mark {
 .unit-variant-chip-count {
   color: var(--text-main);
   font-weight: 700;
+}
+
+/* El Héroe no lleva contador: se elige con un botón que se queda marcado. */
+.hero-pick-button {
+  min-width: 108px;
+  padding: 7px 14px;
+  border: 1px solid color-mix(in srgb, var(--class-heroe) 55%, var(--line));
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-main);
+  font-family: 'Rajdhani', 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.hero-pick-button:hover {
+  border-color: var(--class-heroe);
+}
+
+.hero-pick-button:focus-visible {
+  outline: 2px solid var(--class-heroe);
+  outline-offset: 2px;
+}
+
+.hero-pick-button.is-chosen {
+  border-color: var(--class-heroe);
+  background: color-mix(in srgb, var(--class-heroe) 22%, transparent);
+  color: var(--text-main);
+}
+
+.army-hero-hint-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-main);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.unit-list-section-hint {
+  margin: -4px 0 12px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Sin Héroe no se descarga: el aviso va justo encima del botón. */
+.army-hero-hint {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--class-heroe) 55%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--class-heroe) 10%, transparent);
+  color: var(--class-heroe);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 /* En la ficha abierta los chips van a la izquierda de la barra, frente al ✕,

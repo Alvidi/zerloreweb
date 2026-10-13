@@ -4,10 +4,9 @@ import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import guerraTotalMd from '../data/spanish/guerra-total.md?raw'
-import coliseoMd from '../data/spanish/coliseo.md?raw'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
-import { buildUnitEntry } from '../features/generator/catalogUtils.js'
+import { UNIDADES, buildUnitEntry } from '../features/generator/catalogUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import damage1Token from '../images/tokens/damage-1-red.svg'
 import damage3Token from '../images/tokens/damage-3-red.svg'
@@ -25,7 +24,7 @@ import fichasMisionesImg from '../images/fichas/misiones.png'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['rules', 'total-war', 'coliseo', 'tokens']
+const RULES_MODES = ['rules', 'total-war', 'tokens']
 const TOKEN_LIMIT = 20
 const ZEROLORE_LOGO_ASPECT = 624 / 388
 const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
@@ -57,31 +56,16 @@ const getRulesAssetPlaceholders = () => {
   }
 }
 
-const RULES_UNIT_TYPE_ICONS = [
-  { id: 'milicia', label: 'Milicia' },
-  { id: 'tirador', label: 'Tirador' },
-  { id: 'choque', label: 'Choque' },
-  { id: 'juggernaut', label: 'Juggernaut' },
-  { id: 'exterminador', label: 'Exterminador' },
-  { id: 'explorador', label: 'Explorador' },
-  { id: 'asaltante', label: 'Asaltante' },
-  { id: 'armas-pesadas', label: 'Armas Pesadas' },
-  { id: 'psiquico', label: 'Psíquico' },
-  { id: 'demonio', label: 'Demonio' },
-  { id: 'monstruo', label: 'Monstruo' },
-  { id: 'vehiculo-ligero', label: 'Vehículo ligero' },
-  { id: 'vehiculo-pesado', label: 'Vehículo pesado' },
-  { id: 'artilleria', label: 'Artillería' },
-  { id: 'titan', label: 'Titán' },
-  { id: 'comandante', label: 'Comandante' },
-].map((unitType) => ({ ...unitType, imageSrc: getUnitClassBadgeSrc(unitType.id) }))
+// Mismo orden que el catálogo, que es el de Notion.
+const RULES_UNIT_TYPE_ICONS = UNIDADES
+  .map((unidad) => ({ id: unidad.id, label: unidad.nombre, imageSrc: getUnitClassBadgeSrc(unidad.id) }))
 
 // Fichas de ejemplo del reglamento, tomadas del catálogo.
 const RULES_EXAMPLE_UNIT_ID = 'juggernaut'
-const RULES_EXAMPLE_COMMANDER_ID = 'comandante-disparo'
+const RULES_EXAMPLE_HERO_ID = 'heroe-guardian'
 
 function RulesFichaSlot({ type, lang }) {
-  const entry = buildUnitEntry(type === 'hero' ? RULES_EXAMPLE_COMMANDER_ID : RULES_EXAMPLE_UNIT_ID)
+  const entry = buildUnitEntry(type === 'hero' ? RULES_EXAMPLE_HERO_ID : RULES_EXAMPLE_UNIT_ID)
 
   if (!entry) return null
 
@@ -206,9 +190,6 @@ function Reglamento() {
     if (rulesMode === 'total-war') {
       return guerraTotalMd
     }
-    if (rulesMode === 'coliseo') {
-      return coliseoMd
-    }
     return reglamentoMd
   }, [rulesMode])
   const tokenOptions = useMemo(
@@ -230,7 +211,6 @@ function Reglamento() {
     () => [
       { id: 'rules', label: t('rules.modeRules') },
       { id: 'total-war', label: t('rules.modeTotalWar') },
-      { id: 'coliseo', label: t('rules.modeColiseo') },
       { id: 'tokens', label: t('rules.modeTokens') },
     ],
     [t],
@@ -243,7 +223,6 @@ function Reglamento() {
   }, [activeMarkdown, isTokensMode, lang])
   const printCoverSectionLabel = {
     'total-war': t('rules.modeTotalWar'),
-    coliseo: t('rules.modeColiseo'),
   }[rulesMode] || t('rules.modeRules')
   const printCoverCreditLabel = 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
@@ -658,10 +637,9 @@ function Reglamento() {
     const firstHeading = doc.querySelector('h1')
     // Misiones y Guerra Total arrancan con texto, no con un título: el encabezado
     // del documento lo pone el propio modo y su primer <h1> es ya una sección.
-    const ownHeadingModes = ['total-war', 'coliseo']
+    const ownHeadingModes = ['total-war']
     const modeHeadings = {
       'total-war': { id: 'guerra-total', title: t('rules.modeTotalWar') },
-      coliseo: { id: 'coliseo', title: t('rules.modeColiseo') },
     }
     const documentHeading = ownHeadingModes.includes(rulesMode)
       ? modeHeadings[rulesMode]
@@ -988,11 +966,20 @@ function Reglamento() {
 
         // ── misiones secundarias, leídas de la tabla de Guerra Total ────────
         const tabla = contentRef.current?.querySelector('[data-rules-missions-table]')
+        // Las columnas se buscan por su cabecera, no por su posición: así una
+        // columna nueva en Notion no descoloca los Puntos.
+        const cabeceras = Array.from(tabla?.querySelectorAll('thead th') || [])
+          .map((th) => normalizeHeadingText(th.textContent))
+        const columna = (nombre) => cabeceras.findIndex((cabecera) => cabecera.startsWith(nombre))
+        const [colTitulo, colObjetivo, colTipo, colPuntos] = ['mision', 'objetivo', 'tipo', 'puntos'].map(columna)
         const missions = Array.from(tabla?.querySelectorAll('tbody tr') || [])
           .map((fila, index) => {
             const celdas = Array.from(fila.querySelectorAll('td')).map((td) => td.textContent?.trim() || '')
-            const [title, summary, meta] = celdas
-            return title ? { title, flavor: '', summary, copy: '', meta, number: String(index + 1) } : null
+            const celda = (col) => (col >= 0 ? celdas[col] || '' : '')
+            const title = celda(colTitulo)
+            return title
+              ? { title, flavor: '', summary: celda(colObjetivo), copy: '', meta: celda(colPuntos), tipo: celda(colTipo), number: String(index + 1) }
+              : null
           })
           .filter(Boolean)
         if (!missions.length) return
@@ -1081,8 +1068,10 @@ function Reglamento() {
             // TITULO
             if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: FONT_TITLE, color: '#ffffff', maxSz: 66, minSz: 18, weight: '700', tracking: 0.05, lineRatio: 1.1, upper: true, shadow: true })
 
-            // LORE
+            // LORE — las misiones de Guerra Total no traen frase de ambientación;
+            // ese hueco lo ocupa su tipo (Puesto de mando, Eliminación…) como etiqueta.
             if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: FONT_BODY, color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic', lineRatio: 1.35 })
+            else if (m.tipo) drawFit(ctx, m.tipo, guideMap.LORE, { family: FONT_TITLE, color: '#8b6914', maxSz: 26, minSz: 12, weight: '700', tracking: 0.12, upper: true })
 
             // OBJETIVO — si la misión no trae descripción, se queda con el hueco
             // de las dos cajas: así el texto se lee grande en vez de quedarse
@@ -1941,7 +1930,6 @@ function Reglamento() {
 
       const filename = {
         'total-war': 'zerolore-guerra-total-es.pdf',
-        coliseo: 'zerolore-coliseo-es.pdf',
       }[rulesMode] || 'zerolore-reglamento-es.pdf'
 
       doc.save(filename)

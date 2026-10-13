@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { getAbilityDescription, getAbilityLabel } from '../../../utils/abilities.js'
 import { resolveUnitSpecialtyDescription } from '../../../utils/unitSpecialties.js'
-import { getUnitClassBadgeSrc, getUnitClassToken } from '../unitTypeBadges.js'
+import { getUnitClassBadgeSrc } from '../unitTypeBadges.js'
 
 
 import fichaTemplate from '../../../images/fichas/ficha2.png'
@@ -70,7 +70,7 @@ const formatDanio = (weapon) => {
 }
 
 /**
- * Escuadra: cuántas miniaturas de este tipo pueden acompañar a un Comandante.
+ * Escuadra: cuántas miniaturas de este tipo pueden formar escuadra con un Capitán.
  * Un guion indica que la unidad no puede formar parte de una escuadra.
  */
 const formatEscuadra = (escuadra) => {
@@ -166,12 +166,10 @@ function FitBox({ className, rect, children, maxFontSize, minFontSize = 8, fitKe
 
 const box = (rect) => ({ left: rect.x, top: rect.y, width: rect.w, height: rect.h })
 
-/** "+1 Especialista" y "+2 Místico", cada uno en su línea. */
-const formatVentaja = (fuerteContra) => fuerteContra
-  .map((ventaja) => `+${ventaja.bonus} ${ventaja.tipo}`)
-  .join('\n')
+/** "Héroe, Especial" → ['Héroe', 'Especial']; "Soldado" → ['Soldado']. */
+const splitRol = (rol) => String(rol || '').split(',').map((part) => part.trim()).filter(Boolean)
 
-function WeaponRow({ weapon, y, h, fuerteContra = [] }) {
+function WeaponRow({ weapon, y, h }) {
   // Hay unidades sin arma a distancia: la fila se deja marcada con un guion
   // en cada columna para que no parezca que falta un dato.
   if (!weapon) {
@@ -196,10 +194,6 @@ function WeaponRow({ weapon, y, h, fuerteContra = [] }) {
     habilidades: abilityList(weapon).map((a) => getAbilityLabel(a)).join('\n') || '-',
   }
 
-  // La ventaja de tipo se lee en la propia columna de Daño, debajo del valor:
-  // es donde se aplica, así que es donde hay que verla al resolver el ataque.
-  const bonus = formatVentaja(fuerteContra)
-
   return WEAPON_COLUMNS.map((column) => (
     <FitBox
       key={`${y}-${column.key}`}
@@ -207,18 +201,9 @@ function WeaponRow({ weapon, y, h, fuerteContra = [] }) {
       rect={{ x: column.x, y, w: column.w, h }}
       maxFontSize={column.key === 'habilidades' ? 20 : 30}
       minFontSize={column.key === 'habilidades' ? 6 : 9}
-      fitKey={column.key === 'danio' ? `${values.danio}|${bonus}` : values[column.key]}
+      fitKey={values[column.key]}
     >
       {values[column.key]}
-      {column.key === 'danio' && fuerteContra.length ? (
-        <span className="ficha2-cell-bonus">
-          {fuerteContra.map((ventaja) => (
-            <span key={`${y}-${ventaja.tipo}`} className="ficha2-cell-bonus-line">
-              +{ventaja.bonus} {ventaja.tipo}
-            </span>
-          ))}
-        </span>
-      ) : null}
     </FitBox>
   ))
 }
@@ -383,11 +368,10 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
   const displayName = entry.nombre
   const classBadgeSrc = getUnitClassBadgeSrc(entry.unidadId)
 
-  // Ventaja de tipo: daño extra contra los tipos sobre los que manda.
-  const fuerteContra = Array.isArray(entry.fuerteContra) ? entry.fuerteContra : []
+  const roles = splitRol(entry.rol)
 
   const abilityName = entry.habilidad || ''
-  // Los Héroes del Coliseo traen su propia redacción, que no es la de la unidad.
+  // Los Héroes traen la redacción de su habilidad de ejército en el propio perfil.
   const abilityDescription = entry.habilidadDescripcion || resolveUnitSpecialtyDescription(entry.habilidad)
 
   // Las habilidades se agrupan por arma: primero las de disparo, luego las de
@@ -437,15 +421,14 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
           {text(displayName, '')}
         </FitBox>
 
-        {/* Las dos pastillas bajo el nombre llevan la ventaja de tipo, cada una
-            teñida con el color del tipo al que gana. */}
+        {/* Las dos pastillas bajo el nombre llevan el Rol. Un Héroe tiene dos
+            ("Héroe" y su rol de combate); una unidad, uno y un guion. */}
         {[LAYOUT.clase, LAYOUT.rol].map((rect, index) => {
-          const ventaja = fuerteContra[index]
-          const etiqueta = ventaja ? `+${ventaja.bonus} ${ventaja.tipo}` : '—'
+          const etiqueta = roles[index] || '—'
           return (
             <FitBox
-              key={`ventaja-${index}`}
-              className={`ficha2-tag${ventaja ? ` unit-type-${getUnitClassToken(ventaja.tipo)}` : ''}`}
+              key={`rol-${index}`}
+              className={`ficha2-tag${etiqueta === 'Héroe' ? ' unit-type-heroe' : ''}`}
               rect={rect}
               maxFontSize={26}
               fitKey={etiqueta}
@@ -483,15 +466,15 @@ const UnitFichaCard = forwardRef(function UnitFichaCard(
           {abilityDescription ? <span>{abilityDescription}</span> : null}
         </FitBox>
 
-        <WeaponRow weapon={shooting} y={LAYOUT.shooting.y} h={LAYOUT.shooting.h} fuerteContra={fuerteContra} />
-        <WeaponRow weapon={melee} y={LAYOUT.melee.y} h={LAYOUT.melee.h} fuerteContra={fuerteContra} />
+        <WeaponRow weapon={shooting} y={LAYOUT.shooting.y} h={LAYOUT.shooting.h} />
+        <WeaponRow weapon={melee} y={LAYOUT.melee.y} h={LAYOUT.melee.h} />
 
         <FitBox
           className="ficha2-weapon-abilities"
           rect={LAYOUT.weaponAbilities}
           maxFontSize={22}
           minFontSize={9}
-          fitKey={`${formatVentaja(fuerteContra)}|${weaponAbilityGroups.map((group) => group.notes.map((note) => note.label).join(',')).join('|')}`}
+          fitKey={`${weaponAbilityGroups.map((group) => group.notes.map((note) => note.label).join(',')).join('|')}`}
         >
           {weaponAbilityGroups.map((group, index) => (
             <div key={group.key} className="ficha2-weapon-abilities-group">

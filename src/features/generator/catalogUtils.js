@@ -1,8 +1,16 @@
 import catalogo from '../../data/catalog/catalogo.json'
+import heroesData from '../../data/catalog/heroes.json'
 
 export const UNIDADES = catalogo.unidades
 
-export const getUnidad = (unidadId) => UNIDADES.find((unidad) => unidad.id === unidadId) || null
+/** Héroes de ejército: cada lista lleva al menos uno y se eligen antes que el resto. */
+export const HEROES = heroesData.heroes
+
+const BY_ID = new Map([...HEROES, ...UNIDADES].map((unidad) => [unidad.id, unidad]))
+
+export const getUnidad = (unidadId) => BY_ID.get(unidadId) || null
+
+export const isHeroe = (unidadId) => String(unidadId || '').startsWith('heroe-')
 
 /**
  * Entrada plana que consume la ficha: perfil, habilidad y las 2 armas.
@@ -13,13 +21,15 @@ export const buildUnitEntry = (unidadId) => {
   if (!unidad) return null
 
   return {
-    kind: 'unidad',
+    kind: isHeroe(unidad.id) ? 'heroe' : 'unidad',
     unidadId: unidad.id,
     nombre: unidad.nombre,
     clase: unidad.nombre,
+    rol: unidad.rol || '',
     habilidad: unidad.habilidad,
+    // Los Héroes traen la redacción de su habilidad de ejército en el propio perfil.
+    habilidadDescripcion: unidad.habilidad_descripcion || '',
     perfil: unidad.perfil,
-    fuerteContra: unidad.fuerte_contra || [],
     armas: unidad.armas,
   }
 }

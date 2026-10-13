@@ -165,14 +165,14 @@ const squadCoherence = figure(
   'Formaciones válidas de una escuadra y un caso con la cadena rota',
   728,
   `
-  ${head('Coherencia de escuadra', 'Cada miniatura a 1" o menos de otra, y alguna a 1" o menos del Comandante.')}
+  ${head('Coherencia de escuadra', 'Cada miniatura a 1" o menos de otra, y alguna a 1" o menos del Capitán.')}
 
   ${row(76, 124, {
     tone: 'ok', ok: true, title: 'En línea',
     lines: [{ t: 'Mientras cada eslabón mida 1" o menos,' }, { t: 'la cadena aguanta.' }],
     draw: `${base(70, 148, C.act)}${[1, 2, 3].map((i) => base(70 + i * 48, 148, C.ally)).join('')}
       ${[0, 1, 2].map((i) => `<line x1="${87 + i * 48}" y1="148" x2="${101 + i * 48}" y2="148" stroke="${C.ally}" stroke-width="1.6" stroke-dasharray="3 3"/>`).join('')}
-      ${cap(70, 185, 'Comandante', C.act)}
+      ${cap(70, 185, 'Capitán', C.act)}
       <text class="zl-dim" x="180" y="185" text-anchor="middle">cada enlace ≤ 1"</text>`,
   })}
 
@@ -202,13 +202,13 @@ const squadCoherence = figure(
       ${dim(256, 580, 342, 580, 'más de 1"')}`,
   })}
 
-  ${note(660, 'Y el Comandante', 'Al menos una miniatura de la escuadra tiene que estar a 1" o menos de él.')}`,
+  ${note(660, 'Y el Capitán', 'Al menos una miniatura de la escuadra tiene que estar a 1" o menos de él.')}`,
 )
 
 /* ── Línea de visión ────────────────────────────────────────────────────────
-   "tiene línea de visión si puede verse cualquier parte de la miniatura objetivo";
-   "si una miniatura (aliada o enemiga) o un elemento de escenografía bloquea
-   completamente la visión, el objetivo no puede ser atacado a distancia."     */
+   "tiene línea de visión si puede ver cualquier parte de la miniatura objetivo";
+   "la escenografía de bloqueo, aunque asome parte de la miniatura, y otra
+   miniatura, aliada o enemiga, que tape por completo al objetivo".           */
 const lineOfSight = figure(
   'Línea de visión: visible, bloqueada por escenografía y bloqueada por otra miniatura',
   'Tres casos de línea de visión',
@@ -226,8 +226,8 @@ const lineOfSight = figure(
   })}
 
   ${row(220, 132, {
-    tone: 'ko', ok: false, title: 'La tapa la escenografía',
-    lines: [{ t: 'No se ve ninguna parte del objetivo.' }, { t: 'No puede ser atacado.', cls: 'zl-lab', fill: C.ko }],
+    tone: 'ko', ok: false, title: 'Escenografía de bloqueo',
+    lines: [{ t: 'Corta la visión aunque asome una parte.' }, { t: 'No puede ser atacado.', cls: 'zl-lab', fill: C.ko }],
     draw: `${base(66, 302, C.act)}${cap(66, 336, 'Atacante', C.act)}
       ${wall(158, 262, 32, 84)}
       ${base(300, 302, C.enemy)}${cap(300, 336, 'Objetivo', C.enemy)}
@@ -252,7 +252,8 @@ const lineOfSight = figure(
    "Si el movimiento le permite alcanzar al objetivo, coloca la miniatura en
    contacto de peana y lanza 1D6: con 3+ ... con 1 o 2 ... retira la miniatura
    hasta 1" del objetivo, sin trabar y sin atacar."
-   El ejemplo de Movimiento 5" + Velocidad +2" y enemigo a 6" es el del reglamento. */
+   El ejemplo del Choque (Movimiento 5" + Velocidad +4") con el enemigo a 6" es
+   el del reglamento.                                                          */
 const charge = figure(
   'La acción Cargar y su tirada de 1D6',
   'Secuencia de la acción Cargar con sus dos resultados',
@@ -262,11 +263,11 @@ const charge = figure(
 
   ${row(76, 140, {
     tone: 'plain', ok: null, title: '1 · Declara y mueve',
-    lines: [{ t: 'Movimiento 5" + Velocidad +2" = 7"' }, { t: 'Alcanza el contacto de peana.', cls: 'zl-lab' }],
-    draw: `${base(66, 170, C.act)}${cap(66, 204, 'Activa', C.act)}
-      ${base(320, 170, C.enemy)}${cap(320, 204, 'Objetivo', C.enemy)}
-      <line x1="85" y1="170" x2="300" y2="170" stroke="${C.act}" stroke-width="2.5" marker-end="url(#zl-shot)"/>
-      ${dim(66, 136, 320, 136, 'Objetivo a 6"')}`,
+    lines: [{ t: 'Movimiento 5" + Velocidad +4" = 9"' }, { t: 'Alcanza el contacto de peana.', cls: 'zl-lab' }],
+    draw: `${base(66, 178, C.act)}${cap(66, 210, 'Activa', C.act)}
+      ${base(320, 178, C.enemy)}${cap(320, 210, 'Objetivo', C.enemy)}
+      <line x1="85" y1="178" x2="300" y2="178" stroke="${C.act}" stroke-width="2.5" marker-end="url(#zl-shot)"/>
+      ${dim(66, 146, 320, 146, 'Objetivo a 6"')}`,
   })}
 
   ${row(228, 132, {
@@ -289,15 +290,15 @@ const charge = figure(
 )
 
 /* ── Cobertura ──────────────────────────────────────────────────────────────
-   "la unidad debe estar con su peana en contacto directo con el elemento";
-   "Si el atacante tiene línea de visión limpia a la unidad completa ... no hay
-   cobertura, aunque la unidad esté en contacto físico con dicho elemento."    */
+   Escenografía de cobertura: "la peana en contacto con el elemento, y este tiene
+   que quedar entre ella y el atacante"; "una escuadra se beneficia si la mitad
+   o más de sus integrantes están en ella".                                   */
 const cover = figure(
   'Cuándo hay cobertura y cuándo no',
   'Tres casos de cobertura',
-  640,
+  704,
   `
-  ${head('Cobertura', 'Hacen falta dos cosas: peana en contacto con el elemento y que el elemento se interponga.')}
+  ${head('Escenografía de cobertura', 'Hacen falta dos cosas: peana en contacto con el elemento y que el elemento se interponga.')}
 
   ${row(76, 132, {
     tone: 'ok', ok: true, title: 'Hay cobertura',
@@ -321,10 +322,10 @@ const cover = figure(
   })}
 
   ${row(364, 132, {
-    tone: 'ko', ok: false, title: 'Tiro limpio',
+    tone: 'ko', ok: false, title: 'No queda en medio',
     lines: [
-      { t: 'Ve la unidad completa sin que el elemento' },
-      { t: 'se interponga: no hay cobertura.' },
+      { t: 'Si el elemento no está entre ella y el' },
+      { t: 'atacante, no hay cobertura.' },
     ],
     draw: `${base(66, 452, C.act)}${cap(66, 486, 'Atacante', C.act)}
       ${base(300, 452, C.enemy)}${cap(300, 416, 'Objetivo', C.enemy)}
@@ -332,9 +333,11 @@ const cover = figure(
       <line x1="83" y1="452" x2="280" y2="452" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>`,
   })}
 
-  ${note(512, 'Quién la ignora', 'El Psíquico con Poder mental, y los Vehículos, Monstruos y Titanes nunca se benefician.')}
+  ${note(512, 'Quién no la tiene', 'Poder mental la ignora. Vehículos, Monstruos, Artillería y Titanes nunca la tienen.')}
 
-  ${note(576, 'Atrincherado', 'El Tirador en cobertura mejora en 1 la Precisión de sus disparos.')}`,
+  ${note(576, 'Escuadras', 'Tienen cobertura si la mitad o más de sus integrantes están en ella.')}
+
+  ${note(640, 'Atrincherado', 'El Tirador en cobertura mejora en 1 la Precisión de sus disparos.')}`,
 )
 
 /* ── Control de un puesto de mando ──────────────────────────────────────────
@@ -352,8 +355,8 @@ const commandPost = figure(
   ${row(76, 150, {
     tone: 'plain', ok: null, title: 'Qué cuenta como estar dentro',
     lines: [
-      { t: 'La mitad o más de la peana sobre el puesto.' },
-      { t: 'En escuadras, cada miniatura por separado.' },
+      { t: 'La mitad o más de la peana en su área.' },
+      { t: 'Una escuadra suma a quienes estén dentro.' },
     ],
     draw: `
       <rect x="30" y="120" width="94" height="84" rx="6" fill="rgba(230,201,131,.08)" stroke="none"/>
@@ -387,7 +390,7 @@ const commandPost = figure(
       ${cap(202, 452, 'Trabadas · no cuentan', C.soft)}`,
   })}
 
-  ${note(480, 'No aportan Valor', 'Vehículos, Monstruos y Artillería, aunque estén encima.')}
+  ${note(480, 'No aportan Valor', 'Vehículos, Monstruos, Artillería y Titanes, aunque estén encima.')}
 
   ${note(544, 'Empate', 'El puesto sigue bajo el control de quien lo tuviera.')}`,
 )
@@ -420,51 +423,55 @@ const measurement = figure(
 )
 
 /* ── Estructura del turno ───────────────────────────────────────────────────
-   "los jugadores alternan activaciones hasta que todas las unidades hayan
-   actuado"; "al comienzo de cada turno, cada jugador tira 1D6".             */
+   "Al comienzo de la partida, cada jugador tira 1D6... Ese orden se mantiene
+   durante toda la partida"; "cada jugador juega su fase: activa todas sus
+   unidades"; al final del turno se calcula el control y llega el despliegue. */
 const turnStructure = figure(
   'Cómo fluye un turno',
-  'Iniciativa, fase de despliegue, activaciones alternas y fin del turno',
+  'Orden de juego, fase de cada jugador, fin del turno y fase de despliegue',
   564,
   `
-  ${head('Estructura del turno', 'Se tira iniciativa, entran los refuerzos y se alterna hasta que todos actúen.')}
+  ${head('Estructura del turno', 'Cada jugador juega su fase entera; al final del turno entran refuerzos.')}
 
   ${row(76, 96, {
     num: '1', title: 'Quién empieza',
-    lines: [{ t: 'Cada turno, ambos tiran 1D6: el más alto' }, { t: 'actúa primero ese turno.' }],
+    lines: [{ t: 'Al inicio de la partida se tira 1D6: el' }, { t: 'más alto juega primero toda la partida.' }],
   })}
 
   ${row(184, 96, {
-    num: '2', title: 'Fase de despliegue',
-    lines: [{ t: 'Entran refuerzos desde la Reserva, por' }, { t: 'puestos de mando y por Comandantes.' }],
+    num: '2', title: 'Fase de cada jugador',
+    lines: [{ t: 'Activa todas sus unidades, una tras otra.' }, { t: 'Después le toca al rival.' }],
   })}
 
   ${row(292, 96, {
-    num: '3', title: 'Activaciones alternas',
-    lines: [{ t: 'Una unidad cada vez, con hasta 2 acciones,' }, { t: 'hasta que todas hayan actuado.' }],
+    num: '3', title: 'Fin del turno',
+    lines: [{ t: 'Efectos de fin de turno, control de los' }, { t: 'puestos de mando y puntos.' }],
   })}
 
   ${row(400, 96, {
-    num: '4', title: 'Fin del turno',
-    lines: [{ t: 'Se resuelven los efectos de fin de turno' }, { t: 'y se cuentan los puntos.' }],
+    num: '4', title: 'Fase de despliegue',
+    lines: [{ t: 'Una unidad desde la Reserva por cada' }, { t: 'puesto de mando que controles.' }],
   })}
 
-  <path d="M${W - 30} 500 L${W - 30} 522 L12 522 L12 124" fill="none" stroke="${C.dim}" stroke-width="1.4"
+  <path d="M${W - 30} 500 L${W - 30} 522 L12 522 L12 232" fill="none" stroke="${C.dim}" stroke-width="1.4"
         stroke-dasharray="5 4" marker-end="url(#zl-dim)"/>
-  <text class="zl-dim" x="${W / 2}" y="546" text-anchor="middle">y vuelve a empezar</text>`,
+  <text class="zl-dim" x="${W / 2}" y="546" text-anchor="middle">siguiente turno, de nuevo desde la fase de cada jugador</text>`,
 )
+/* ── Activar una unidad ─────────────────────────────────────────────────────
+   "Una unidad activada no puede volver a activarse ese turno. Para llevar el
+   control, se puede marcar con cualquier elemento."                          */
 const activation = figure(
-  'El token de activación',
+  'Cómo marcar una unidad activada',
   'Cómo se marca que una unidad ya se ha activado',
   300,
   `
   ${head('Activar una unidad', 'Hasta 2 acciones. Una vez activada, no vuelve a activarse en ese turno.')}
 
   ${row(76, 132, {
-    tone: 'plain', ok: null, title: 'El token lleva la cuenta',
+    tone: 'plain', ok: null, title: 'Márcala al activarla',
     lines: [
-      { t: 'Cara gris: aún no se ha activado.' },
-      { t: 'Cara naranja: ya lo hizo, no repite turno.' },
+      { t: 'Vale cualquier elemento; por ejemplo, un' },
+      { t: 'token que se gira cuando ya ha actuado.' },
     ],
     draw: `<circle cx="110" cy="158" r="26" fill="#1b1d25" stroke="${C.soft}" stroke-width="2.5"/>
       ${cap(110, 200, 'Sin activar', C.soft)}
@@ -473,7 +480,7 @@ const activation = figure(
       ${cap(240, 200, 'Activada', '#e08b2d')}`,
   })}
 
-  ${note(220, 'Al empezar el turno', 'Se voltean todos los tokens a la cara gris.')}`,
+  ${note(220, 'Una vez por turno', 'Una unidad activada no puede volver a activarse ese turno.')}`,
 )
 
 /* ── Secuencia de ataque a distancia ────────────────────────────────────────
@@ -531,7 +538,7 @@ const actions = figure(
 
   ${row(198, 110, {
     tone: 'plain', ok: null, title: 'Una acción de coste 2',
-    lines: [{ t: 'Correr, Cargar y Atacar CaC se comen' }, { t: 'la activación entera.' }],
+    lines: [{ t: 'Correr, Cargar, Atacar CaC y Destrabarse' }, { t: 'se comen la activación entera.' }],
     draw: `${chip(40, 244, 288, 'Correr · 2 acciones', C.dim)}
       ${cap(184, 302, 'no queda nada más que hacer', C.soft)}`,
   })}
@@ -583,20 +590,22 @@ const squadDamage = figure(
 )
 
 /* ── Fase de despliegue ─────────────────────────────────────────────────────
-   "como máximo una unidad por cada puesto de mando que controle"; "cada
-   Comandante puede recibir una miniatura de su tipo desde la Reserva".       */
+   "Al final de cada turno, una vez calculado el control de los puestos... una
+   sola unidad por cada puesto de mando que controle"; "si no está trabado, el
+   Capitán puede recibir una miniatura de su tipo"; "se activan a partir del
+   turno siguiente".                                                           */
 const deploymentPhase = figure(
   'Cómo entran los refuerzos',
-  'Despliegue por puestos de mando y por Comandantes, antes de las activaciones',
-  580,
+  'Despliegue por puestos de mando y por Capitanes, al final del turno',
+  520,
   `
-  ${head('Fase de despliegue', 'Antes de la primera activación, entran unidades desde la Reserva.')}
+  ${head('Fase de despliegue', 'Al final del turno, ya calculado el control, entran unidades desde la Reserva.')}
 
   ${row(76, 140, {
     tone: 'plain', ok: null, title: 'Por puestos de mando',
     lines: [
       { t: 'Una unidad por cada puesto que controles,' },
-      { t: 'colocada en contacto con él.' },
+      { t: 'en contacto con él o dentro de su área.' },
     ],
     draw: `${[70, 160, 250].map((x) => `
       <circle cx="${x}" cy="176" r="19" fill="none" stroke="${C.dim}" stroke-width="1.6" stroke-dasharray="5 4"/>
@@ -607,53 +616,52 @@ const deploymentPhase = figure(
   })}
 
   ${row(228, 140, {
-    tone: 'plain', ok: null, title: 'Por Comandantes',
+    tone: 'plain', ok: null, title: 'Por Capitanes',
     lines: [
-      { t: 'Cada Comandante en mesa recibe una' },
+      { t: 'Si no está trabado, el Capitán recibe una' },
       { t: 'miniatura de su tipo en su escuadra.' },
     ],
-    draw: `${base(96, 300, C.act)}${cap(96, 338, 'Comandante', C.act)}
+    draw: `${base(96, 300, C.act)}${cap(96, 338, 'Capitán', C.act)}
       ${base(146, 300, C.ally, 14)}${base(180, 300, C.ally, 14)}
       ${base(230, 300, C.ally, 14)}
       <line x1="200" y1="300" x2="216" y2="300" stroke="${C.ok}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
       ${cap(230, 338, 'se suma', C.ok)}`,
   })}
 
-  ${note(392, 'Entran sin activar', 'Pueden activarse en ese mismo turno.')}
+  ${note(392, 'Actúan el turno siguiente', 'Las unidades que entran ahora no se activan hasta el próximo turno.')}
 
-  ${note(456, 'Tiene que caber', 'Si no hay hueco libre en contacto, no puede desplegarse ahí.')}
-
-  ${note(520, 'El Demonio vuelve', 'Con Regeneración, al morir regresa a la Reserva entero y puede volver a entrar.')}`,
+  ${note(456, 'Tiene que caber', 'Si no hay hueco libre en contacto, no puede desplegarse ahí.')}`,
 )
 
-/* ── Comandantes y escuadras ────────────────────────────────────────────────
-   "cada Comandante puede llevar una escuadra de un único tipo de unidad";
-   "mientras lidere una escuadra, el Comandante usa el Movimiento y la Velocidad
-   del tipo que comanda. Si se queda solo, vuelve a usar los suyos"; y al perder
-   a todas, la siguiente miniatura por Refuerzos puede ser de otro tipo.       */
-const commanderSquad = figure(
+/* ── Capitanes y escuadras ───────────────────────────────────────────────────
+   "cada Capitán puede llevar una escuadra de un único tipo de unidad, con hasta
+   el número de miniaturas que indique su valor Escuadra. El Capitán no cuenta";
+   "usa el perfil completo de la unidad que acompaña"; "si pierde a todos sus
+   integrantes, sigue en juego con el mismo perfil... solo puede recibir
+   miniaturas de ese mismo tipo"; "el Capitán es siempre el último".          */
+const captainSquad = figure(
   'Cómo se forma una escuadra',
-  'Un Comandante acompañado de miniaturas de un mismo tipo',
-  574,
+  'Un Capitán acompañado de miniaturas de un mismo tipo',
+  548,
   `
-  ${head('Comandantes y escuadras', 'Solo un Comandante puede llevar escuadra, y de un único tipo.')}
+  ${head('Capitanes y escuadras', 'Solo un Capitán puede llevar escuadra, y de un único tipo.')}
 
   ${row(76, 150, {
-    tone: 'plain', ok: null, title: 'Comandante + un solo tipo',
+    tone: 'plain', ok: null, title: 'Capitán + un solo tipo',
     lines: [
-      { t: 'Tantas miniaturas como indique la columna' },
-      { t: 'Escuadra de ese tipo de unidad.' },
+      { t: 'Hasta el número de la columna Escuadra.' },
+      { t: 'El Capitán no cuenta para ese máximo.' },
     ],
-    draw: `${base(80, 150, C.act)}${cap(80, 192, 'Comandante', C.act)}
+    draw: `${base(80, 150, C.act)}${cap(80, 192, 'Capitán', C.act)}
       ${[136, 170, 204, 238].map((x) => base(x, 150, C.ally, 14)).join('')}
       ${cap(187, 192, 'mismo tipo', C.ally)}`,
   })}
 
   ${row(238, 130, {
-    tone: 'plain', ok: null, title: 'Se mueve como su escuadra',
+    tone: 'plain', ok: null, title: 'Usa el perfil de su escuadra',
     lines: [
-      { t: 'Usa el Movimiento y la Velocidad del tipo que' },
-      { t: 'comanda. Si se queda solo, vuelve a los suyos.' },
+      { t: 'Movimiento, Velocidad, Vidas, Salvación' },
+      { t: 'y armas: es un integrante más.' },
     ],
     draw: `${base(100, 306, C.act)}
       ${[144, 178, 212].map((x) => base(x, 306, C.ally, 14)).join('')}
@@ -661,31 +669,20 @@ const commanderSquad = figure(
       ${cap(156, 360, 'una sola unidad', C.soft)}`,
   })}
 
-  ${row(380, 130, {
+  ${row(380, 104, {
     tone: 'plain', ok: null, title: 'Si pierde a toda la escuadra',
     lines: [
-      { t: 'Queda libre: la siguiente miniatura que reciba' },
-      { t: 'por Refuerzos puede ser de otro tipo, y la' },
-      { t: 'escuadra pasa a ser de ese tipo.' },
+      { t: 'Sigue en juego con el mismo perfil. Por' },
+      { t: 'Refuerzos solo recibe ese mismo tipo.' },
     ],
-    draw: `${base(96, 448, C.act)}
-      ${[140, 174].map((x) => `${base(x, 448, C.ally, 14)}${cross(x, 448, 10)}`).join('')}
-      <line x1="196" y1="448" x2="224" y2="448" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="4 4"/>
-      ${base(250, 448, C.enemy, 14)}
-      ${cap(250, 486, 'otro tipo', C.soft)}`,
   })}
 
-  ${note(526, 'El último en caer', 'El Comandante no recibe daño mientras quede otra miniatura en pie.')}`,
+  ${note(496, 'El último en caer', 'El Capitán es siempre el último en recibir daño.')}`,
 )
 
-/* ── Explosiva ─────────────────────────────────────────────────────────────
-   "El ataque se resuelve con normalidad contra la unidad objetivo, incluida su
-   salvación. El daño final que reciba el objetivo lo sufren también todas las
-   miniaturas enemigas a 3" o menos de la miniatura impactada, sin tirar
-   salvación adicional. No hay fuego amigo."                                   */
 /* ── Implacable ─────────────────────────────────────────────────────────────
-   "Puede volver a tirar los dados de ataque que no hayan impactado: los que no
-   superen la Precisión en disparo, o los que fallen en CaC."                  */
+   "Puede volver a tirar los dados que no hayan impactado."; en disparo son los
+   que no superan la Precisión y en CaC los 1 y 2.                            */
 const relentless = figure(
   'Cómo funciona un arma Implacable',
   'Los dados que no impactan se vuelven a tirar una vez',
@@ -718,42 +715,45 @@ const relentless = figure(
   ${note(372, 'Disparo y cuerpo a cuerpo', 'Vale en los dos: los que no superan la Precisión y los que fallan en CaC.')}`,
 )
 
-const explosive = figure(
-  'Cómo salpica un arma Explosiva',
-  'El objetivo resuelve el ataque normal y las enemigas de alrededor sufren el daño base',
-  526,
+/* ── Desbordante ────────────────────────────────────────────────────────────
+   "Si este ataque destruye a la unidad objetivo y sobra daño, el atacante puede
+   aplicar ese sobrante a otra unidad enemiga a 3" o menos de la última
+   miniatura eliminada del objetivo."                                          */
+const overflow = figure(
+  'Cómo funciona un arma Desbordante',
+  'El daño que sobra al destruir al objetivo puede pasar a otra unidad enemiga cercana',
+  490,
   `
-  ${head('Explosiva', 'Dos cosas distintas: el ataque al objetivo y la salpicadura.')}
+  ${head('Desbordante', 'El daño que sobra al destruir al objetivo no se pierde.')}
 
   ${row(76, 118, {
-    num: '1', title: 'El objetivo, con normalidad',
-    lines: [{ t: 'Precisión, salvación y daño como siempre.' }],
-    draw: `${base(130, 148, C.enemy)}
-      <line x1="40" y1="148" x2="110" y2="148" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
-      ${cap(130, 190, 'salva si puede', C.soft)}`,
+    num: '1', title: 'Destruye al objetivo',
+    lines: [{ t: 'Le quedaban 2 Vidas y recibe 5 de daño:' }, { t: 'cae y sobran 3.' }],
+    draw: `${base(130, 148, C.enemy)}${cross(130, 148, 12)}
+      <line x1="40" y1="148" x2="108" y2="148" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
+      ${cap(130, 186, 'sobran 3', C.ko)}`,
   })}
 
   ${row(208, 206, {
-    num: '2', title: 'La salpicadura, el daño base',
+    num: '2', title: 'El sobrante salta',
     lines: [
-      { t: 'Las enemigas a 3" o menos de la impactada' },
-      { t: 'sufren el daño base del arma, no el que' },
-      { t: 'acabe recibiendo el objetivo. Y sin salvar.' },
+      { t: 'Puedes aplicarlo a otra unidad enemiga' },
+      { t: 'a 3" o menos de la última miniatura' },
+      { t: 'eliminada del objetivo.' },
     ],
-    draw: `<circle cx="168" cy="306" r="64" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
-      ${base(168, 306, C.enemy)}
-      ${dim(168, 306, 232, 306, '3"', -8)}
-      ${base(126, 264, C.enemy, 14)}
-      ${base(208, 346, C.enemy, 14)}
-      ${base(206, 264, C.ally, 14)}
-      ${cap(168, 394, 'daño base para las dos enemigas', C.ko)}`,
+    draw: `<circle cx="150" cy="318" r="64" fill="rgba(201,88,79,.06)" stroke="${C.ko}" stroke-width="1.5" stroke-dasharray="6 5"/>
+      ${base(150, 318, C.enemy)}${cross(150, 318, 11)}
+      ${dim(86, 318, 150, 318, '3"', -8)}
+      ${base(182, 272, C.enemy, 14)}
+      <line x1="160" y1="302" x2="173" y2="285" stroke="${C.ko}" stroke-width="2" marker-end="url(#zl-shot)"/>
+      ${cap(250, 276, 'recibe los 3', C.ko)}
+      ${base(300, 318, C.enemy, 14)}
+      ${cap(300, 352, 'más lejos: no', C.soft)}
+      ${cap(150, 402, 'última eliminada', C.soft)}`,
   })}
 
-  ${note(426, 'Sin salvación', 'Las miniaturas salpicadas no tiran salvación por ese daño.')}
-
-  ${note(466, 'No hay fuego amigo', 'La aliada del dibujo está dentro del radio y no recibe nada.')}`,
+  ${note(426, 'Solo si sobra', 'Si el objetivo no cae, o cae justo, el ataque no desborda.')}`,
 )
-
 
 const climbing = figure(
   'Trepar obstáculos y la habilidad Brinco',
@@ -790,13 +790,14 @@ const climbing = figure(
 )
 
 /* ── Unidades trabadas y Destrabarse ────────────────────────────────────────
-   "Mientras siga trabada, una unidad solo puede usar las acciones Atacar cuerpo a
-   cuerpo o Destrabarse"; "Con 3+ deja de estar trabada... Con 1 o 2 pierde
-   todas sus acciones y su activación termina."                               */
+   "Mientras siga trabada, una unidad solo puede Atacar cuerpo a cuerpo o
+   Destrabarse"; "Con 3+ deja de estar trabada y puede moverse gratis hasta su
+   Movimiento... Con 1 o 2 no consigue liberarse"; "si no existe una posición
+   válida... permanece trabada".                                               */
 const lockedUnits = figure(
   'Unidades trabadas y la acción Destrabarse',
   'Qué puede hacer una unidad trabada y cómo se destraba',
-  480,
+  544,
   `
   ${head('Unidades trabadas', 'En contacto de peana quedan trabadas hasta que una caiga o consiga Destrabarse.')}
 
@@ -811,7 +812,7 @@ const lockedUnits = figure(
 
   ${row(212, 118, {
     tone: 'ok', ok: true, title: 'Destrabarse con 3+',
-    lines: [{ t: 'Deja de estar trabada y usa su acción restante' }, { t: 'con normalidad, a más de 1" de todo enemigo.' }],
+    lines: [{ t: 'Se libera y se mueve gratis hasta su' }, { t: 'Movimiento, a más de 1" de todo enemigo.' }],
     draw: `${base(100, 280, C.act)}${base(230, 280, C.enemy)}
       <line x1="119" y1="280" x2="208" y2="280" stroke="${C.ok}" stroke-width="2"
             stroke-dasharray="5 4" marker-start="url(#zl-shot)"/>
@@ -820,11 +821,13 @@ const lockedUnits = figure(
 
   ${row(348, 118, {
     tone: 'ko', ok: false, title: 'Destrabarse con 1 o 2',
-    lines: [{ t: 'No se libera: pierde todas sus acciones' }, { t: 'y su activación termina de inmediato.' }],
+    lines: [{ t: 'No se libera y su activación termina.' }, { t: 'Destrabarse ya gastó las 2 acciones.' }],
     draw: `${base(140, 416, C.act)}${base(174, 416, C.enemy)}
       <circle cx="157" cy="416" r="7" fill="none" stroke="${C.ko}" stroke-width="2"/>
       ${cap(157, 456, 'sigue trabada', C.ko)}`,
-  })}`,
+  })}
+
+  ${note(480, 'Sin sitio libre', 'Si no hay posición válida a más de 1" de todo enemigo, sigue trabada.')}`,
 )
 
 /* ── Cómo se entra en cuerpo a cuerpo ───────────────────────────────────────
@@ -889,28 +892,29 @@ const titanMelee = figure(
     draw: `${base(104, 296, C.enemy, 14)}${base(196, 296, C.act, 22)}
       <line x1="120" y1="296" x2="168" y2="296" stroke="${C.enemy}" stroke-width="2" marker-end="url(#zl-shot)"/>
       ${dim(118, 332, 170, 332, 'se retira 1"', -10)}
-      ${cap(104, 266, 'carga', C.enemy)}`,
+      ${cap(62, 300, 'carga', C.enemy)}`,
   })}
 
   ${note(372, 'Nunca trabado', 'Como no queda trabado, sigue usando sus acciones y sigue a tiro.')}`,
 )
 
-/* ── Combate cuerpo a cuerpo en escuadras ───────────────────────────────────
-   "En cuanto una miniatura de la escuadra entra en contacto de peana con una unidad
-   enemiga, la escuadra entera se considera trabada y todas sus miniaturas participan";
-   "al realizar un ataque cuerpo a cuerpo debe elegir una única escuadra objetivo". */
-const squadMelee = figure(
-  'Combate cuerpo a cuerpo en escuadras',
-  'Una miniatura en contacto traba a toda la escuadra',
-  400,
+/* ── Atacar con una escuadra ────────────────────────────────────────────────
+   "todos sus integrantes, Capitán incluido, suman sus dados en un solo ataque
+   contra el mismo objetivo. A distancia, solo aportan dados los integrantes que
+   tengan línea de visión y alcance. Si una carga alcanza a un integrante y tiene
+   éxito, toda la escuadra queda trabada".                                     */
+const squadAttack = figure(
+  'Cómo ataca una escuadra',
+  'Todos los integrantes suman sus dados en un solo ataque',
+  450,
   `
-  ${head('Atacar con una escuadra', 'Basta con que una miniatura toque al enemigo.')}
+  ${head('Atacar con una escuadra', 'Todos los integrantes, Capitán incluido, atacan juntos.')}
 
   ${row(76, 150, {
     tone: 'plain', ok: null, title: 'Traba la escuadra entera',
     lines: [
-      { t: 'Con una sola miniatura en contacto, todas' },
-      { t: 'participan y atacan de forma conjunta.' },
+      { t: 'Si una carga alcanza a un integrante y' },
+      { t: 'tiene éxito, toda la escuadra queda trabada.' },
     ],
     draw: `${base(100, 130, C.ally)}${base(100, 172, C.ally)}${base(140, 151, C.ally)}
       ${base(180, 151, C.ally)}
@@ -920,32 +924,33 @@ const squadMelee = figure(
   })}
 
   ${row(238, 136, {
-    tone: 'plain', ok: null, title: 'Dos ataques, un objetivo',
-    lines: [{ t: 'Primero atacan las miniaturas y después el' }, { t: 'Comandante, los dos al mismo objetivo.' }],
-    draw: `${base(120, 322, C.ally)}
-      ${base(154, 300, C.enemy)}${base(154, 346, C.enemy)}
-      <line x1="140" y1="312" x2="146" y2="306" stroke="${C.act}" stroke-width="2.5" marker-end="url(#zl-shot)"/>
-      ${cap(228, 305, 'elige este', C.act)}`,
-  })}`,
+    tone: 'plain', ok: null, title: 'Un solo ataque',
+    lines: [{ t: 'Todos suman sus dados en un único ataque' }, { t: 'contra el mismo objetivo.' }],
+    draw: `${base(80, 296, C.ally, 14)}${base(80, 340, C.ally, 14)}${base(114, 318, C.act, 14)}
+      <line x1="132" y1="318" x2="228" y2="318" stroke="${C.act}" stroke-width="2.5" marker-end="url(#zl-shot)"/>
+      ${base(250, 318, C.enemy)}
+      ${cap(97, 362, 'Capitán incluido', C.act)}`,
+  })}
+
+  ${note(386, 'A distancia', 'Solo aportan dados los integrantes con línea de visión y alcance.')}`,
 )
 
 /* ── Mover una escuadra ─────────────────────────────────────────────────────
-   "Una escuadra siempre se mueve desde el Comandante... mueve primero al
-   Comandante hasta su posición final y después coloca el resto a su alrededor,
-   respetando la coherencia. Ninguna miniatura puede quedar más lejos de lo que
-   le permitiría su propio movimiento."                                        */
+   "La escuadra se mueve desde el Capitán: primero se mueve él y después el resto
+   se coloca a su alrededor, en coherencia. Ninguna miniatura puede quedar más
+   lejos de lo que le permitiría su propio movimiento."                       */
 const squadMovement = figure(
   'Cómo se mueve una escuadra',
-  'Primero el Comandante y después el resto de miniaturas a su alrededor',
+  'Primero el Capitán y después el resto de miniaturas a su alrededor',
   440,
   `
-  ${head('Mover una escuadra', 'La escuadra se mueve desde el Comandante, no miniatura a miniatura.')}
+  ${head('Mover una escuadra', 'La escuadra se mueve desde el Capitán, no miniatura a miniatura.')}
 
   ${row(76, 150, {
-    num: '1', title: 'Mueve el Comandante',
+    num: '1', title: 'Mueve el Capitán',
     lines: [
-      { t: 'Llévalo hasta su posición final con el' },
-      { t: 'Movimiento de las unidades que comanda.' },
+      { t: 'Llévalo hasta su posición final con su' },
+      { t: 'Movimiento, que es el de la escuadra.' },
     ],
     draw: `${base(80, 156, C.act)}
       ${[124, 158, 192].map((x) => base(x, 156, C.ally, 14)).join('')}
@@ -1045,8 +1050,8 @@ const meleeSequence = figure(
 
 /* ── Modificadores ──────────────────────────────────────────────────────────
    "+1 al valor de Precisión: el número necesario sube — es peor para el atacante";
-   "-1 ... es una ventaja"; "ninguna unidad puede llegar a necesitar más de 6+";
-   "Un resultado de 1 siempre falla la salvación. Un resultado de 6 siempre impacta." */
+   "-1 ... es una ventaja"; "lo peor que puede quedar es 6+: un 6 siempre
+   funciona. Y... lo mejor que puede quedar es 2+: un 1 siempre falla."        */
 const modifiers = figure(
   'Cómo funcionan los modificadores',
   'Escala de 3+, 4+ y 5+ y dirección de los modificadores',
@@ -1078,95 +1083,7 @@ const modifiers = figure(
       <text class="zl-dim" x="337" y="312" text-anchor="middle" fill="${C.ko}">+1 · peor</text>`,
   })}
 
-  ${note(348, 'Topes', 'Nunca más de 6+. El 1 siempre falla; el 6 siempre impacta.')}`,
-)
-
-/* ── Ventaja de tipo ────────────────────────────────────────────────────────
-   "cuando una unidad ataca a un tipo sobre el que tiene ventaja y el ataque
-   inflige daño, suma el +1 o +2 indicado al daño total del ataque"; se aplica
-   una sola vez por ataque y el Comandante queda fuera en ambos sentidos.     */
-const classAdvantage = figure(
-  'Cómo se aplica la Ventaja de tipo',
-  'La ventaja de tipo suma +1 al daño total del ataque',
-  330,
-  `
-  ${head('Ventaja de tipo', 'Cada tipo tiene su presa: mira la columna Ventaja en Unidades, Armas y Equipamiento.')}
-
-  ${row(76, 132, {
-    tone: 'ok', ok: true, title: 'El ataque ya ha hecho daño',
-    lines: [
-      { t: 'Solo entonces se suma.' },
-      { t: '+1 al daño total del ataque.', cls: 'zl-lab', fill: C.ok },
-    ],
-    draw: `${base(70, 158, C.act)}${cap(70, 192, 'Atacante', C.act)}
-      ${base(230, 158, C.enemy)}${cap(230, 192, 'Su presa', C.enemy)}
-      <line x1="88" y1="158" x2="210" y2="158" stroke="${C.ink}" stroke-width="1.8" marker-end="url(#zl-shot)"/>
-      <text class="zl-dim" x="149" y="146" text-anchor="middle">daño + 1</text>`,
-  })}
-
-  ${note(220, 'Una sola vez', 'Al daño total del ataque: ni por impacto ni por miniatura, aunque ataque una escuadra entera.')}
-
-  ${note(284, 'El Comandante', 'No tiene ventaja sobre nadie, y nadie la tiene sobre él.')}`,
-)
-
-/* ── Coliseo: el peso del botín ─────────────────────────────────────────────
-   "por cada 2 orbes que tengas en tu lado de la mesa, tu Héroe empeora en 1 su
-   Salvación, hasta un máximo de 6+".                                          */
-const orbWeight = figure(
-  'Cómo penalizan los orbes en Coliseo',
-  'Cada dos orbes empeoran en uno la Salvación del Héroe',
-  368,
-  `
-  ${head('El peso del botín', 'Cuanto más acumulas, más fácil es tumbarte.')}
-
-  ${row(76, 150, {
-    tone: 'plain', ok: null, title: 'Cada 2 orbes, −1 a la Salvación',
-    lines: [{ t: 'Se cuenta por los orbes de tu lado de la mesa,' }, { t: 'no por los que haya en la arena.' }],
-    draw: `${[['0–1', '4+', C.ok], ['2–3', '5+', C.act], ['4+', '6+', C.ko]].map(([orbes, salv, color], i) => `
-      <rect x="${44 + i * 112}" y="126" width="96" height="78" rx="10"
-            fill="rgba(255,255,255,.03)" stroke="${color}" stroke-width="1.6"/>
-      <text class="zl-mini" x="${92 + i * 112}" y="152" text-anchor="middle" fill="${C.soft}">${orbes} orbes</text>
-      <text class="zl-val" x="${92 + i * 112}" y="186" text-anchor="middle" fill="${color}">${salv}</text>`).join('')}`,
-  })}
-
-  ${note(258, 'Tope en 6+', 'Por muchos orbes que acumules, la Salvación nunca empeora más.')}
-
-  ${note(306, 'Solo el Héroe', 'Los gladiadores no recogen orbes ni cargan con su peso.')}`,
-)
-
-/* ── Coliseo: muerte y botín ────────────────────────────────────────────────
-   "el jugador que lo mató se queda con todos sus orbes"; "vuelve al final del
-   turno en su punto de origen, con todas sus Vidas y sin orbes"; "nadie queda
-   eliminado de la partida".                                                   */
-const heroRespawn = figure(
-  'Qué pasa cuando cae un Héroe en Coliseo',
-  'Los orbes pasan a quien lo mató y el Héroe vuelve a su esquina',
-  444,
-  `
-  ${head('Muerte y botín', 'Nadie queda eliminado: caer solo cuesta el botín.')}
-
-  ${row(76, 134, {
-    num: '1', title: 'Sus orbes cambian de dueño',
-    lines: [{ t: 'Todos los orbes del Héroe caído pasan al' }, { t: 'jugador que lo destruyó.' }],
-    draw: `${base(100, 152, C.enemy)}${cross(100, 152, 13)}
-      <line x1="128" y1="152" x2="200" y2="152" stroke="${C.act}" stroke-width="2" marker-end="url(#zl-shot)"/>
-      ${[224, 252, 280].map((x) => `<circle cx="${x}" cy="152" r="9" fill="none" stroke="${C.dim}" stroke-width="2"/>`).join('')}
-      ${cap(252, 190, 'al que lo mató', C.act)}`,
-  })}
-
-  ${row(222, 134, {
-    num: '2', title: 'Vuelve a su esquina',
-    lines: [
-      { t: 'Al final del turno reaparece en su punto de' },
-      { t: 'origen, con todas sus Vidas y sin orbes.' },
-    ],
-    draw: `<rect x="48" y="272" width="76" height="76" rx="8" fill="rgba(255,255,255,.03)" stroke="${C.dim}" stroke-width="1.4" stroke-dasharray="5 4"/>
-      ${base(86, 310, C.act)}
-      <line x1="150" y1="310" x2="116" y2="310" stroke="${C.ok}" stroke-width="2" marker-end="url(#zl-shot)"/>
-      ${cap(86, 366, 'punto de origen', C.soft)}`,
-  })}
-
-  ${note(386, 'Sin gladiadores', 'Los gladiadores que cayeran con él no regresan.')}`,
+  ${note(348, 'Topes', 'Lo peor es 6+ y lo mejor 2+: un 6 siempre funciona y un 1 siempre falla.')}`,
 )
 
 export const RULES_DIAGRAMS = {
@@ -1184,17 +1101,14 @@ export const RULES_DIAGRAMS = {
   squadDamageDiagram: squadDamage,
   squadMovementDiagram: squadMovement,
   deploymentPhaseDiagram: deploymentPhase,
-  commanderSquadDiagram: commanderSquad,
+  captainSquadDiagram: captainSquad,
   titanMeleeDiagram: titanMelee,
-  explosiveDiagram: explosive,
+  overflowDiagram: overflow,
   relentlessDiagram: relentless,
   meleeEngagementDiagram: meleeEngagement,
   lockedUnitsDiagram: lockedUnits,
-  squadMeleeDiagram: squadMelee,
+  squadAttackDiagram: squadAttack,
   vehicleMeleeDiagram: vehicleMelee,
   meleeSequenceDiagram: meleeSequence,
   modifiersDiagram: modifiers,
-  classAdvantageDiagram: classAdvantage,
-  orbWeightDiagram: orbWeight,
-  heroRespawnDiagram: heroRespawn,
 }

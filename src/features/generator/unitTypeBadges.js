@@ -14,6 +14,10 @@ const FILENAME_ALIASES = {
   armas_pesadas: 'armas-pesadas',
   'vehiculo ligero': 'vehiculo-ligero',
   'vehiculo pesado': 'vehiculo-pesado',
+  // Iconos heredados: el Capitán lleva el del antiguo Estandarte y los Héroes el
+  // del antiguo Comandante.
+  estandarte: 'capitan',
+  comandante: 'heroe',
 }
 
 const badgeByClass = Object.entries(badgeModules).reduce((badges, [path, src]) => {
@@ -40,15 +44,16 @@ export const getUnitClassToken = (value = '') => {
   if (normalized.startsWith('asaltante')) return 'asaltante'
   if (normalized.startsWith('armas pesadas') || normalized.startsWith('armas-pesadas')) return 'armas-pesadas'
   if (normalized.startsWith('psiquico')) return 'psiquico'
-  if (normalized.startsWith('demonio')) return 'demonio'
   if (normalized.startsWith('monstruo')) return 'monstruo'
   if (normalized.startsWith('vehiculo ligero') || normalized.startsWith('vehiculo-ligero')) return 'vehiculo-ligero'
   if (normalized.startsWith('vehiculo pesado') || normalized.startsWith('vehiculo-pesado')) return 'vehiculo-pesado'
   if (normalized.startsWith('vehiculo')) return 'vehiculo-ligero'
   if (normalized.startsWith('artilleria')) return 'artilleria'
   if (normalized.startsWith('titan')) return 'titan'
-  if (normalized.startsWith('comandante')) return 'comandante'
-  if (normalized.startsWith('estandarte')) return 'estandarte'
+  if (normalized.startsWith('capitan')) return 'capitan'
+  if (normalized.startsWith('soporte')) return 'soporte'
+  // Los Héroes comparten color e icono.
+  if (normalized.startsWith('heroe')) return 'heroe'
   return ''
 }
 
