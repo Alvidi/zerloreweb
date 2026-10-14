@@ -1,0 +1,116 @@
+{
+  "objetos": [
+    {
+      "id": "botiquin",
+      "nombre": "Botiquín",
+      "descripcion": "La unidad gana 3 de vida.",
+      "accion": "2 acciones",
+      "valor": 2
+    },
+    {
+      "id": "vuelta-a-reserva",
+      "nombre": "Vuelta a reserva",
+      "descripcion": "Puedes regresar la unidad a la reserva; si estaba dañada, recupera todas sus unidades.",
+      "accion": "Fase de despliegue",
+      "valor": 3
+    },
+    {
+      "id": "refuerzos",
+      "nombre": "Refuerzos",
+      "descripcion": "Puedes sacar un refuerzo extra en una escuadra o en un puesto de mando.",
+      "accion": "Fase de despliegue",
+      "valor": 3
+    },
+    {
+      "id": "explosivo",
+      "nombre": "Explosivo",
+      "descripcion": "Lanzas un explosivo a 6\" y hace 1D6 con habilidad Directo y Desbordante.",
+      "accion": "1 acción",
+      "valor": 2
+    },
+    {
+      "id": "canon-inestable",
+      "nombre": "Cañón inestable",
+      "descripcion": "Una unidad enemiga a 12\" o menos recibe 2D6 de daño sin salvación. Después tira 1D6: con 1, 2 o 3, tu unidad sufre el mismo daño.",
+      "accion": "1 acción",
+      "valor": 4
+    },
+    {
+      "id": "bomba-de-humo",
+      "nombre": "Bomba de humo",
+      "descripcion": "Te destrabas automáticamente de una unidad sin perder acciones de Destrabarse.",
+      "accion": "Sin acciones",
+      "valor": 2
+    },
+    {
+      "id": "anti-soldado",
+      "nombre": "Anti-Soldado",
+      "descripcion": "Si el ataque inflige al menos 1 de daño a una unidad de rol Soldado, suma 1D3 al daño final.",
+      "accion": "Sin acciones",
+      "valor": 1
+    },
+    {
+      "id": "anti-elite",
+      "nombre": "Anti-Élite",
+      "descripcion": "Si el ataque inflige al menos 1 de daño a una unidad de rol Élite, suma 1D3 al daño final.",
+      "accion": "Sin acciones",
+      "valor": 1
+    },
+    {
+      "id": "anti-movilidad",
+      "nombre": "Anti-Movilidad",
+      "descripcion": "Si el ataque inflige al menos 1 de daño a una unidad de rol Movilidad, suma 1D3 al daño final.",
+      "accion": "Sin acciones",
+      "valor": 1
+    },
+    {
+      "id": "anti-pesado",
+      "nombre": "Anti-Pesado",
+      "descripcion": "Si el ataque inflige al menos 1 de daño a una unidad de rol Pesado, suma 1D3 al daño final.",
+      "accion": "Sin acciones",
+      "valor": 1
+    },
+    {
+      "id": "anti-fuego-pesado",
+      "nombre": "Anti-Fuego pesado",
+      "descripcion": "Si el ataque inflige al menos 1 de daño a una unidad de rol Fuego pesado, suma 1D3 al daño final.",
+      "accion": "Sin acciones",
+      "valor": 1
+    },
+    {
+      "id": "anti-especial",
+      "nombre": "Anti-Especial",
+      "descripcion": "Si el ataque inflige al menos 1 de daño a una unidad de rol Especial, suma 1D3 al daño final.",
+      "accion": "Sin acciones",
+      "valor": 1
+    },
+    {
+      "id": "despliegue-explorador",
+      "nombre": "Despliegue explorador",
+      "descripcion": "Puede desplegarse a 9\" de un puesto de mando aliado.",
+      "accion": "Fase de despliegue",
+      "valor": 2
+    },
+    {
+      "id": "cargador-extra",
+      "nombre": "Cargador extra",
+      "descripcion": "La unidad puede Disparar dos veces en esta activación, a la misma o distinta unidad.",
+      "accion": "2 acciones",
+      "valor": 2
+    },
+    {
+      "id": "hacha-grande",
+      "nombre": "Hacha grande",
+      "descripcion": "El ataque cuerpo a cuerpo acierta con 1 y 2.",
+      "accion": "Sin acciones",
+      "valor": 2
+    },
+    {
+      "id": "cadena",
+      "nombre": "Cadena",
+      "descripcion": "Agarra a una unidad a 6\" y la traba en combate. Funciona como una carga.",
+      "accion": "2 acciones",
+      "valor": 2
+    }
+  ]
+}

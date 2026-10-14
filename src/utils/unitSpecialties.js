@@ -32,7 +32,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden realizar la acción Destrabarse.' },
   },
   {
-    es: { name: 'Transporte', description: 'Durante la fase de despliegue, una unidad aliada puede desplegarse desde la Reserva en contacto con este vehículo, igual que si fuera un puesto de mando. Solo una unidad por turno, y nunca Vehículos, Monstruos, Artillería, Armas pesadas ni Titanes.' },
+    es: { name: 'Transporte', description: 'Durante la fase de despliegue, una unidad aliada puede desplegarse desde la Reserva en contacto con este vehículo, igual que si fuera un puesto de mando. Solo una unidad en la partida, y nunca Vehículos, Monstruos, Artillería, Armas pesadas ni Titanes.' },
   },
   {
     es: { name: 'Fuego de apoyo', description: 'Esta unidad puede realizar la acción Disparar a otra unidad, aunque esté trabada en combate cuerpo a cuerpo.' },
@@ -41,7 +41,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Superioridad', description: 'Solo puede cargar contra otro Titán y ser trabada por otro Titán. Si otro tipo de unidad la carga, esta procede de manera normal con su carga y ataque, a continuación se retira 1" de ella.' },
   },
   {
-    es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo no esté en cobertura. Esta unidad no puede moverse.' },
+    es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo cubierto. Esta unidad no puede moverse.' },
   },
   {
     es: { name: 'Emplazado', description: 'Si esta unidad no se ha movido durante esta activación, gana +1 dado en sus ataques a distancia.' },

@@ -201,10 +201,10 @@
         "velocidad": "+4\"",
         "salvacion": "4+",
         "escuadra": null,
-        "valor": 13
+        "valor": 16
       },
       "habilidad": "Grito de guerra",
-      "habilidad_descripcion": "Cuando este Héroe carga con éxito, una unidad aliada a 6\" o menos puede unirse al combate. Queda trabada, pero no ataca.",
+      "habilidad_descripcion": "Las unidades aliadas pueden Atacar cuerpo a cuerpo a enemigos a 3\" o menos sin estar trabadas.",
       "armas": {
         "disparo": {
           "ataques": "1D",
@@ -473,6 +473,44 @@
           "danio_critico": "4",
           "habilidades_arma": [
             "Golpe crítico"
+          ]
+        }
+      }
+    },
+    {
+      "id": "heroe-heraldo",
+      "nombre": "Heraldo",
+      "rol": "Héroe, Movilidad",
+      "descripcion": "Siempre llega antes que nadie. Cuando el enemigo despierta, ya está ahí.",
+      "perfil": {
+        "movimiento": "7\"",
+        "vidas": 6,
+        "velocidad": "+4\"",
+        "salvacion": "4+",
+        "escuadra": null,
+        "valor": 14
+      },
+      "habilidad": "Primero en golpear",
+      "habilidad_descripcion": "Tu ejército juega siempre primero. Si este Héroe muere, se vuelve a tirar el dado para decidir el orden del resto de la partida. Si los dos ejércitos tienen esta habilidad, se tira con normalidad.",
+      "armas": {
+        "disparo": {
+          "ataques": "2D",
+          "distancia": "18\"",
+          "precision": "3+",
+          "danio": "1",
+          "danio_critico": "2",
+          "habilidades_arma": [
+            "Fiable"
+          ]
+        },
+        "cuerpo_a_cuerpo": {
+          "ataques": "2D",
+          "distancia": null,
+          "precision": null,
+          "danio": "2",
+          "danio_critico": "3",
+          "habilidades_arma": [
+            "Fiable"
           ]
         }
       }

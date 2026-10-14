@@ -241,6 +241,9 @@ function Reglamento() {
       if (table.parentElement?.classList.contains('rules-table-scroll')) return
       const wrapper = doc.createElement('div')
       wrapper.className = 'rules-table-scroll'
+      // La tabla de misiones se lee mejor en móvil como tarjetas (ver App.css).
+      const headers = Array.from(table.querySelectorAll('th')).map((th) => th.textContent.trim().toLowerCase())
+      if (headers.includes('misión') && headers.includes('puntos')) wrapper.classList.add('rules-table-missions')
       table.parentNode?.insertBefore(wrapper, table)
       wrapper.appendChild(table)
     })

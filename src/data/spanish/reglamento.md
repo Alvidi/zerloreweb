@@ -122,7 +122,7 @@ Todas las unidades de ZeroLore pertenecen a un **tipo**, que define su papel en 
 
 Una **escuadra** es un grupo de miniaturas del mismo tipo que actúan como **una sola unidad**. Solo un **Capitán** puede formar una escuadra; las unidades sin Capitán juegan siempre en solitario.
 
-*(Las escuadras son opcionales. Si los jugadores lo prefieren, pueden jugar sin Capitanes, solo con unidades individuales.)*
+**Capitanes opcionales.** Antes de la partida, los jugadores acuerdan si se juega con Capitanes. Sin ellos, cada unidad es una sola miniatura y la partida es una escaramuza más rápida. Con ellos entran las escuadras y los ejércitos crecen.
 
 ### Formar una escuadra
 
@@ -228,7 +228,7 @@ Hay dos excepciones. Los **Vehículos, Monstruos, Artillería y Titanes nunca ap
 
 ## Despliegue inicial
 
-Al inicio de la partida, cada jugador tira **1D6** y el resultado más alto despliega primero. Después se alternan, unidad por unidad, desplegando desde su Reserva **una sola unidad por cada puesto de mando que controle**, en contacto con él o dentro de su área. Las que no se desplieguen se quedan en **Reserva**.
+Los jugadores despliegan en el **orden de juego**: primero uno y después el otro. Cada uno saca de su Reserva **una sola unidad por cada puesto de mando que controle**, en contacto con él o dentro de su área. Las que no se desplieguen se quedan en **Reserva**.
 
 El número de puestos de mando y su colocación los determina la misión o el modo de juego.
 
@@ -256,6 +256,14 @@ Cada vez que una unidad se activa, dispone de **2 acciones**. Se resuelven de un
 Las acciones de coste 2 consumen toda la activación. Moverse y Disparar cuestan 1 cada una, así que una unidad puede moverse y después disparar en la misma activación **sin ninguna penalización**, salvo que una habilidad diga lo contrario.
 
 {{actionsDiagram}}
+
+---
+
+# Equipamiento
+
+El equipamiento son acciones especiales que el ejército compra antes de la partida, pagando el **Valor** que indique cada una. No pertenece a ninguna unidad: **cualquier unidad aliada**, incluido el Héroe, puede usarlo. Cada equipamiento indica **cuándo se usa**: algunos cuestan acciones durante la activación de una unidad y otros se usan en un momento concreto, como al recibir un ataque o en la fase de despliegue.
+
+Cada equipamiento se usa **una sola vez**. Después se descarta y no puede volver a utilizarse.
 
 ---
 

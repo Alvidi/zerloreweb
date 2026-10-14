@@ -1468,6 +1468,32 @@ button {
   white-space: nowrap;
 }
 
+/* En móvil, las cuatro pestañas en una rejilla de 2×2 del mismo tamaño; el
+   Valor del ejército baja a una segunda línea para que quepa. */
+@media (max-width: 560px) {
+  .generator-section-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .generator-section-tab {
+    padding: 11px 8px 9px;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  .generator-section-tab-army-label,
+  .generator-section-tab-count {
+    display: block;
+  }
+
+  .generator-section-tab-count {
+    margin-top: 4px;
+  }
+}
+
 .generator-download-button {
   min-width: 230px;
   display: inline-flex;
@@ -1666,6 +1692,17 @@ button {
 
 .unit-type-heroe {
   color: var(--class-heroe);
+}
+
+.unit-type-equipment {
+  color: var(--class-equipment);
+}
+
+/* Línea que nunca salta: si no cabe, FitTitle le baja la letra. */
+.unit-card-oneline {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 
@@ -7355,6 +7392,76 @@ mark {
   .rules-html .rules-table-scroll table:has(td:nth-child(4)),
   .rules-table-modal-body .rules-table-scroll table:has(td:nth-child(4)) {
     min-width: 640px;
+  }
+}
+
+/* La tabla de misiones de Guerra Total, en móvil, como una tarjeta por misión:
+   nombre y puntos arriba, el objetivo debajo y el tipo al pie. Fuera del PDF,
+   que se monta en este mismo documento con su propio estilo. */
+@media (max-width: 620px) {
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) {
+    border: 0;
+    background: none;
+    overflow: visible;
+  }
+
+  /* Mismo :has() que la regla de las tablas de 4 columnas, para ganarle el min-width. */
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) table:has(td:nth-child(4)) {
+    display: block;
+    min-width: 0;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) thead {
+    display: none;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    row-gap: 6px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) td {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) td:nth-child(1) {
+    color: var(--text-main);
+    font-weight: 700;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) td:nth-child(4) {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) td:nth-child(2),
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) td:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .rules-html .rules-table-missions:not(.rules-pdf-sheet *) td:nth-child(3) {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 }
 
