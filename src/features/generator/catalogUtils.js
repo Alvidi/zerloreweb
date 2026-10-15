@@ -39,6 +39,3 @@ export const buildUnitEntry = (unidadId) => {
  * aquí cada miniatura suma su propio Valor.
  */
 export const getEntryValue = (entry) => Number(entry?.perfil?.valor) || 0
-
-export const getArmyTotalValue = (armyEntries = []) =>
-  armyEntries.reduce((total, item) => total + getEntryValue(item.entry), 0)

@@ -8,52 +8,52 @@ const normalizeKey = (value) =>
 
 const UNIT_SPECIALTIES = [
   {
-    es: { name: 'Alimañas', description: 'Esta unidad no tiene habilidad especial.' },
+    es: { name: 'Poca pericia', description: 'Esta unidad no tiene habilidad especial.' },
   },
   {
     es: { name: 'Atrincherado', description: 'Mientras esta unidad esté en cobertura, mejora en 1 la Precisión de sus ataques a distancia.' },
   },
   {
-    es: { name: 'Carga brutal', description: 'Cuando esta unidad realiza una carga, gana +1 dado de ataque CaC durante ese ataque gratuito.' },
+    es: { name: 'Empujón', description: 'Después de resolver los ataques cuerpo a cuerpo, si el objetivo sobrevive, puedes alejarlo hasta 3" en línea recta desde los Infantes, siempre que haya espacio.' },
   },
   {
-    es: { name: 'Resistente', description: 'La primera vez cada turno que esta unidad reciba daño, reduce ese daño en 1D3.' },
+    es: { name: 'Contra-disparo', description: 'Una vez por turno, cuando una unidad enemiga le dispara y sobrevive, puede dispararle de vuelta si la tiene a su alcance y en línea de visión. Este disparo no gana el dado extra de Pesada.' },
   },
   {
-    es: { name: 'Berserker', description: 'Las unidades enemigas que ataquen a esta unidad en CaC fallan con resultados naturales de 1, 2 o 3.' },
+    es: { name: 'Cadena', description: 'Ocupa toda la activación. Una unidad enemiga a 6" o menos es arrastrada hasta el contacto y recibe su ataque cuerpo a cuerpo. Después, el Paladín se separa 1".' },
   },
   {
-    es: { name: 'Avanzadilla', description: 'Puede desplegarse a 9" de un puesto de mando aliado. No puede ir con Capitanes.' },
+    es: { name: 'Avanzadilla', description: 'Puede desplegarse a 9" de un puesto de mando aliado. Esta unidad no puede formar parte de una escuadra.' },
   },
   {
     es: { name: 'Brinco', description: 'Esta unidad puede ascender en diagonal al moverse, sin necesidad de tocar la base del obstáculo. No puede terminar su movimiento sobre otras miniaturas ni en lugares donde no pueda sostenerse.' },
   },
   {
-    es: { name: 'Anclado', description: 'Las unidades enemigas trabadas con esta unidad no pueden realizar la acción Destrabarse.' },
+    es: { name: 'Pisotón', description: 'Después de su ataque cuerpo a cuerpo, cada otra unidad enemiga a 3" o menos del Monstruo recibe 1 impacto, que puede bloquear con su Defensa.' },
   },
   {
-    es: { name: 'Transporte', description: 'Durante la fase de despliegue, una unidad aliada puede desplegarse desde la Reserva en contacto con este vehículo, igual que si fuera un puesto de mando. Solo una unidad en la partida, y nunca Vehículos, Monstruos, Artillería, Armas pesadas ni Titanes.' },
+    es: { name: 'Transporte', description: 'Durante la fase de despliegue, una unidad aliada puede desplegarse desde la Reserva en contacto con este vehículo, igual que si fuera un puesto de mando. Solo una unidad en la partida, y nunca unidades de rol Pesado ni Fuego pesado.' },
   },
   {
-    es: { name: 'Fuego de apoyo', description: 'Esta unidad puede realizar la acción Disparar a otra unidad, aunque esté trabada en combate cuerpo a cuerpo.' },
+    es: { name: 'Arma secundaria', description: 'Puede disparar dos veces en su activación, a la misma o a distinta unidad. El segundo disparo usa 1D3 ataques en lugar de 1D6.' },
   },
   {
-    es: { name: 'Superioridad', description: 'Solo puede cargar contra otro Titán y ser trabada por otro Titán. Si otro tipo de unidad la carga, esta procede de manera normal con su carga y ataque, a continuación se retira 1" de ella.' },
+    es: { name: 'Arsenal', description: 'Puede disparar dos veces en su activación, a la misma o a distinta unidad.' },
   },
   {
-    es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Distancia y el objetivo cubierto. Esta unidad no puede moverse.' },
+    es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Alcance, salvo que el objetivo esté dentro o debajo de escenografía de bloqueo. Esta unidad no puede moverse.' },
   },
   {
-    es: { name: 'Emplazado', description: 'Si esta unidad no se ha movido durante esta activación, gana +1 dado en sus ataques a distancia.' },
+    es: { name: 'Supresión', description: 'La unidad a la que dispara empeora en 1 la Precisión de sus ataques hasta el final del turno.' },
   },
   {
     es: { name: 'Escuadras', description: 'El Capitán se despliega con una escuadra de un solo tipo de unidad y pasa a ser un integrante más, con el mismo perfil. En cada fase de despliegue puede unirse a la escuadra una miniatura más de ese tipo.' },
   },
   {
-    es: { name: 'Curación', description: 'Gasta 2 acciones. Una unidad aliada a 3" o menos recupera 1D3 Vidas. No puede curar si está trabada en cuerpo a cuerpo. No puede curarse a sí misma.' },
+    es: { name: 'Curación', description: 'Ocupa toda la activación. Una unidad aliada a 3" o menos recupera 1 Vida. No puede curarse a sí misma.' },
   },
   {
-    es: { name: 'Poder mental', description: 'Ignora cualquier cobertura en la que esté la unidad objetivo. También puede atacar sin línea de visión, pero en ese caso debe tirar un dado: si saca 1, 2 o 3, esta unidad recibe 1D3 de daño directo.' },
+    es: { name: 'Telequinesis', description: 'Ocupa toda la activación y mueve una unidad enemiga a 12" o menos hasta 3". No puede dejarla a menos de 1" de otra unidad.' },
   },
 ]
 
@@ -73,13 +73,8 @@ export const getUnitSpecialtyEntry = (value) => {
   return key ? UNIT_SPECIALTY_LOOKUP.get(key) || null : null
 }
 
-export const getUnitSpecialtyName = (value) =>
-  getUnitSpecialtyEntry(value)?.es?.name || ''
-
 export const getUnitSpecialtyDescription = (value) =>
   getUnitSpecialtyEntry(value)?.es?.description || ''
 
 export const resolveUnitSpecialtyDescription = (value) =>
   getUnitSpecialtyDescription(value) || String(value || '').trim()
-
-export const UNIT_SPECIALTIES_LIST = UNIT_SPECIALTIES

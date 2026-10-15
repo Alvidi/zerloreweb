@@ -1,78 +1,42 @@
 export const WEAPON_ABILITY_IDS = {
   reliable:    'reliable',
-  brutal:      'brutal',
   piercing:    'piercing',
   criticalHit: 'criticalHit',
+  burst:       'burst',
+  sure:        'sure',
   direct:      'direct',
   relentless:  'relentless',
   preciseShot: 'preciseShot',
-  overflow:    'overflow',
+  heavy:       'heavy',
 }
 
 export const normalizeAbilityText = (value) =>
   String(value || '')
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[̀-ͯ]/g, '')
     .trim()
 
-const WEAPON_ABILITY_DEFINITIONS = [
-  { id: WEAPON_ABILITY_IDS.reliable,    aliases: ['fiable', 'reliable'],                        conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.brutal,      aliases: ['brutal'],                                    conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.piercing,    aliases: ['perforante', 'piercing'],                    conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.criticalHit, aliases: ['golpe critico', 'critical hit'],             conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.direct,      aliases: ['directo', 'direct'],                         conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.relentless,  aliases: ['implacable', 'relentless'],                  conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.preciseShot, aliases: ['disparo certero', 'precise shot'],           conditionKey: null },
-  { id: WEAPON_ABILITY_IDS.overflow,    aliases: ['desbordante', 'overflow'],                   conditionKey: null },
+// Se compara el nombre entero, no el comienzo, para que "Certera" y
+// "Disparo certero" no se confundan.
+const ALIASES = [
+  [WEAPON_ABILITY_IDS.reliable, ['fiable', 'reliable']],
+  [WEAPON_ABILITY_IDS.piercing, ['perforante', 'piercing']],
+  [WEAPON_ABILITY_IDS.criticalHit, ['golpe critico', 'critical hit']],
+  [WEAPON_ABILITY_IDS.burst, ['rafaga', 'burst']],
+  [WEAPON_ABILITY_IDS.sure, ['certera', 'sure']],
+  [WEAPON_ABILITY_IDS.direct, ['directo', 'direct']],
+  [WEAPON_ABILITY_IDS.relentless, ['implacable', 'relentless']],
+  [WEAPON_ABILITY_IDS.preciseShot, ['disparo certero', 'precise shot']],
+  [WEAPON_ABILITY_IDS.heavy, ['pesada', 'heavy']],
 ]
 
-const definitionById = new Map(WEAPON_ABILITY_DEFINITIONS.map((definition) => [definition.id, definition]))
+const ID_BY_ALIAS = new Map(ALIASES.flatMap(([id, aliases]) => aliases.map((alias) => [alias, id])))
 
-export const getWeaponAbilityDefinition = (abilityId) => definitionById.get(abilityId) || null
-
-const matchesAlias = (normalizedText, aliases) =>
-  aliases.some((alias) => normalizedText.startsWith(normalizeAbilityText(alias)))
-
-export const getWeaponAbilityId = (rawAbility) => {
-  const normalized = normalizeAbilityText(rawAbility)
-  const definition = WEAPON_ABILITY_DEFINITIONS.find((item) => matchesAlias(normalized, item.aliases))
-  return definition?.id || null
+/** "Perforante 2" → nombre "perforante" y valor 2; las demás no llevan número. */
+export const parseWeaponAbility = (rawAbility) => {
+  const match = normalizeAbilityText(rawAbility).match(/^(.*?)\s*(\d+)?$/)
+  return { name: match[1], value: match[2] ? Number(match[2]) : null }
 }
 
-export const parseWeaponAbility = (rawAbility) => ({
-  id: getWeaponAbilityId(rawAbility),
-  raw: String(rawAbility || '').trim(),
-  normalized: normalizeAbilityText(rawAbility),
-})
-
-const getWeaponAbilityEntries = (weapon) => {
-  if (Array.isArray(weapon?.abilityEntries) && weapon.abilityEntries.length > 0) {
-    return weapon.abilityEntries
-  }
-  return (weapon?.abilities || []).map((rawAbility) => parseWeaponAbility(rawAbility))
-}
-
-export const findWeaponAbilityRaw = (weapon, abilityId) => {
-  const entry = getWeaponAbilityEntries(weapon).find((item) => item.id === abilityId)
-  return entry?.raw || null
-}
-
-export const hasWeaponAbilityId = (weapon, abilityId) => Boolean(findWeaponAbilityRaw(weapon, abilityId))
-
-export const getWeaponAbilityNumericValue = (weapon, abilityId, fallback = 0) => {
-  const raw = findWeaponAbilityRaw(weapon, abilityId)
-  if (!raw) return fallback
-  const num = String(raw).match(/[+-]?\s*\d+/)
-  if (!num) return fallback
-  const parsed = Number.parseInt(num[0].replace(/\s+/g, ''), 10)
-  return Number.isFinite(parsed) ? parsed : fallback
-}
-
-export const getWeaponAbilityConditionKey = (rawAbility) => {
-  const abilityId = getWeaponAbilityId(rawAbility)
-  if (!abilityId) return null
-  return getWeaponAbilityDefinition(abilityId)?.conditionKey || null
-}
-
-export const isWeaponAbilityRule = (ruleText) => Boolean(getWeaponAbilityId(ruleText))
+export const getWeaponAbilityId = (rawAbility) => ID_BY_ALIAS.get(parseWeaponAbility(rawAbility).name) || null

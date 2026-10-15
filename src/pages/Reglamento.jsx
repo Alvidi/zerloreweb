@@ -8,16 +8,9 @@ import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import { UNIDADES, buildUnitEntry } from '../features/generator/catalogUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
-import damage1Token from '../images/tokens/damage-1-red.svg'
-import damage3Token from '../images/tokens/damage-3-red.svg'
-import damage5Token from '../images/tokens/damage-5-red.svg'
-import damage10Token from '../images/tokens/damage-10-red.svg'
-import conquestBlueToken from '../images/tokens/conquista-blue.svg'
-import conquestGreenToken from '../images/tokens/conquista-green.svg'
-import conquestRedToken from '../images/tokens/conquista-red.svg'
-import conquestYellowToken from '../images/tokens/conquista-yellow.svg'
-import activationToken from '../images/tokens/activacion-gray.svg'
-import activationGreenToken from '../images/tokens/activacion-green.svg'
+import zeroloreLogoSvg from '../images/zeroloreLogo.svg?raw'
+import { commandPostSvg, conquestTokenSvg, livesTokenSvg } from '../features/cards/tokenArt.js'
+import { rasterizeSvgMarkup, useCardFonts } from '../features/cards/cardKit.js'
 import { RULES_DIAGRAMS } from '../features/rules/rulesDiagrams.js'
 import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
 import fichasMisionesImg from '../images/fichas/misiones.png'
@@ -26,7 +19,6 @@ import { useI18n } from '../i18n/I18nContext.jsx'
 
 const RULES_MODES = ['rules', 'total-war', 'tokens']
 const TOKEN_LIMIT = 20
-const ZEROLORE_LOGO_ASPECT = 624 / 388
 const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
 const RULES_HERO_PROFILE_SLOT_SRC = 'rules-hero-profile-slot'
 
@@ -61,8 +53,8 @@ const RULES_UNIT_TYPE_ICONS = UNIDADES
   .map((unidad) => ({ id: unidad.id, label: unidad.nombre, imageSrc: getUnitClassBadgeSrc(unidad.id) }))
 
 // Fichas de ejemplo del reglamento, tomadas del catálogo.
-const RULES_EXAMPLE_UNIT_ID = 'juggernaut'
-const RULES_EXAMPLE_HERO_ID = 'heroe-guardian'
+const RULES_EXAMPLE_UNIT_ID = 'bastion'
+const RULES_EXAMPLE_HERO_ID = 'heroe-guardian-campeon'
 
 function RulesFichaSlot({ type, lang }) {
   const entry = buildUnitEntry(type === 'hero' ? RULES_EXAMPLE_HERO_ID : RULES_EXAMPLE_UNIT_ID)
@@ -132,27 +124,24 @@ const replaceRulesAssetPlaceholders = (markdown, lang = 'es') =>
     markdown,
   )
 
+// El logo va dentro del SVG del puesto de mando como data URL: un SVG pintado
+// como imagen no puede cargar ficheros externos.
+const LOGO_DATA_URL = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(zeroloreLogoSvg)}`
+const COMMAND_POST_SVG = commandPostSvg('gray', { logoHref: LOGO_DATA_URL })
+
+// Tokens vectoriales (ver features/cards/tokenArt.js). Cada uno lleva su SVG,
+// que se pinta tal cual en pantalla y se pasa a imagen para el PDF.
 const TOKEN_DEFINITIONS = [
-  { id: 'damage_1', category: 'damage', labelKey: 'rules.tokens.types.damage1', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage1Token },
-  { id: 'damage_3', category: 'damage', labelKey: 'rules.tokens.types.damage3', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage3Token },
-  { id: 'damage_5', category: 'damage', labelKey: 'rules.tokens.types.damage5', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage5Token },
-  { id: 'damage_10', category: 'damage', labelKey: 'rules.tokens.types.damage10', diameterMm: 21.25, previewSize: 'medium', imageSrc: damage10Token },
-  { id: 'state_activation', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivated', diameterMm: 32, previewSize: 'medium', imageSrc: activationToken },
-  { id: 'state_activation_green', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateActivatedGreen', diameterMm: 32, previewSize: 'medium', imageSrc: activationGreenToken },
-  { id: 'state_conquest_blue', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestBlue', diameterMm: 32, previewSize: 'medium', imageSrc: conquestBlueToken },
-  { id: 'state_conquest_red', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestRed', diameterMm: 32, previewSize: 'medium', imageSrc: conquestRedToken },
-  { id: 'state_conquest_green', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestGreen', diameterMm: 32, previewSize: 'medium', imageSrc: conquestGreenToken },
-  { id: 'state_conquest_yellow', category: 'state', shape: 'circle', labelKey: 'rules.tokens.types.stateConquestYellow', diameterMm: 32, previewSize: 'medium', imageSrc: conquestYellowToken },
-  { id: 'command_circle_3', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
-  { id: 'command_circle_6', category: 'command', shape: 'circle', commandColor: 'orange', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_circle_3_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle3Blue', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
-  { id: 'command_circle_6_blue', category: 'command', shape: 'circle', commandColor: 'blue', labelKey: 'rules.tokens.types.commandCircle6Blue', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_circle_3_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle3Red', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
-  { id: 'command_circle_6_red', category: 'command', shape: 'circle', commandColor: 'red', labelKey: 'rules.tokens.types.commandCircle6Red', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_circle_3_green', category: 'command', shape: 'circle', commandColor: 'green', labelKey: 'rules.tokens.types.commandCircle3Green', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
-  { id: 'command_circle_6_green', category: 'command', shape: 'circle', commandColor: 'green', labelKey: 'rules.tokens.types.commandCircle6Green', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
-  { id: 'command_circle_3_yellow', category: 'command', shape: 'circle', commandColor: 'yellow', labelKey: 'rules.tokens.types.commandCircle3Yellow', diameterMm: 76.2, previewSize: 'large', imageSrc: '' },
-  { id: 'command_circle_6_yellow', category: 'command', shape: 'circle', commandColor: 'yellow', labelKey: 'rules.tokens.types.commandCircle6Yellow', diameterMm: 152.4, previewSize: 'xlarge', imageSrc: '' },
+  ...[1, 3, 5, 10].map((amount) => ({
+    id: `lives_${amount}`, category: 'lives', labelKey: `rules.tokens.types.lives${amount}`, diameterMm: 21.25, previewSize: 'medium',
+    svg: livesTokenSvg(amount),
+  })),
+  ...['blue', 'red', 'green', 'yellow'].map((team) => ({
+    id: `state_conquest_${team}`, category: 'state', labelKey: `rules.tokens.types.stateConquest${team[0].toUpperCase()}${team.slice(1)}`, diameterMm: 32, previewSize: 'medium',
+    svg: conquestTokenSvg(team),
+  })),
+  { id: 'command_circle_3', category: 'command', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', svg: COMMAND_POST_SVG },
+  { id: 'command_circle_6', category: 'command', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', svg: COMMAND_POST_SVG },
 ]
 
 const buildInitialTokenCounts = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, 0]))
@@ -170,6 +159,8 @@ const normalizeTokenInputValue = (value) => {
 
 function Reglamento() {
   const { t, lang } = useI18n()
+  // Los tokens de Vidas llevan texto con la fuente de las cartas.
+  useCardFonts()
   const [searchParams, setSearchParams] = useSearchParams()
   const contentRef = useRef(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -196,7 +187,6 @@ function Reglamento() {
     () =>
       TOKEN_DEFINITIONS.map((token) => ({
         ...token,
-        imageSrc: token.imageSrc,
         label: t(token.labelKey),
         primaryText: token.primaryText || t(token.labelKey),
         secondaryText: token.secondaryKey ? t(token.secondaryKey) : '',
@@ -289,8 +279,9 @@ function Reglamento() {
         triggerLabel: 'Ver tabla de especialidades',
       })
 
+      // "Habilidades de armas" es ahora una sección de "Perfiles de unidad".
       weaponAbilityTableHtml = extractTableIntoModalTrigger({
-        headingTags: 'h1',
+        headingTags: 'h1, h2',
         matchesHeading: (normalized) => normalized === 'habilidades de armas' || normalized === 'weapon abilities',
         modalKey: 'weaponAbility',
         triggerLabel: 'Ver tabla de habilidades de arma',
@@ -396,7 +387,7 @@ function Reglamento() {
 
       const commandHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
         const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'puestos de mando y despliegue' || normalized === 'command posts and deployment'
+        return normalized === 'puestos de mando' || normalized === 'command posts'
       })
       const commandHeading = commandHeadings.at(-1)
       if (commandHeading) {
@@ -404,40 +395,20 @@ function Reglamento() {
         gallery.className = 'rules-command-gallery'
 
         ;[
-          {
-            label: t('rules.tokens.types.commandCircle3'),
-            shapeClass: 'command-circle',
-          },
-          {
-            label: t('rules.tokens.types.commandCircle6'),
-            shapeClass: 'command-circle',
-          },
-        ].forEach((token) => {
+          t('rules.tokens.types.commandCircle3'),
+          t('rules.tokens.types.commandCircle6'),
+        ].forEach((labelText) => {
           const item = doc.createElement('article')
           item.className = 'rules-command-gallery-item'
 
           const mark = doc.createElement('div')
-          mark.className = 'rules-command-gallery-mark'
-
-          const preview = doc.createElement('div')
-          preview.className = `rules-token-preview command ${token.shapeClass}`
-
-          const logoBox = doc.createElement('span')
-          logoBox.className = 'rules-token-command-logo-box'
-
-          const logo = doc.createElement('img')
-          logo.className = 'rules-token-command-logo-mark'
-          logo.src = zeroLoreLogo
-          logo.alt = ''
-          logo.loading = 'lazy'
+          mark.className = 'rules-command-gallery-mark rules-token-svg'
+          mark.innerHTML = COMMAND_POST_SVG
 
           const label = doc.createElement('p')
           label.className = 'rules-command-gallery-label'
-          label.textContent = token.label
+          label.textContent = labelText
 
-          logoBox.appendChild(logo)
-          preview.appendChild(logoBox)
-          mark.appendChild(preview)
           item.appendChild(mark)
           item.appendChild(label)
           gallery.appendChild(item)
@@ -462,41 +433,18 @@ function Reglamento() {
           const flagGallery = doc.createElement('div')
           flagGallery.className = 'rules-flag-gallery'
 
-          ;[
-            {
-              label: t('rules.tokens.types.stateConquestBlue'),
-              imageSrc: conquestBlueToken,
-            },
-            {
-              label: t('rules.tokens.types.stateConquestRed'),
-              imageSrc: conquestRedToken,
-            },
-            {
-              label: t('rules.tokens.types.stateConquestGreen'),
-              imageSrc: conquestGreenToken,
-            },
-            {
-              label: t('rules.tokens.types.stateConquestYellow'),
-              imageSrc: conquestYellowToken,
-            },
-          ].forEach((token) => {
+          ;['blue', 'red', 'green', 'yellow'].forEach((team) => {
             const item = doc.createElement('article')
             item.className = 'rules-flag-gallery-item'
 
             const mark = doc.createElement('div')
-            mark.className = 'rules-flag-gallery-mark'
-
-            const image = doc.createElement('img')
-            image.className = 'rules-flag-gallery-image'
-            image.src = token.imageSrc
-            image.alt = ''
-            image.loading = 'lazy'
+            mark.className = 'rules-flag-gallery-mark rules-token-svg'
+            mark.innerHTML = conquestTokenSvg(team, { id: `gallery-${team}` })
 
             const label = doc.createElement('p')
             label.className = 'rules-flag-gallery-label'
-            label.textContent = token.label
+            label.textContent = t(`rules.tokens.types.stateConquest${team[0].toUpperCase()}${team.slice(1)}`)
 
-            mark.appendChild(image)
             item.appendChild(mark)
             item.appendChild(label)
             flagGallery.appendChild(item)
@@ -506,123 +454,6 @@ function Reglamento() {
         }
       }
 
-      const activationHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
-        const normalized = normalizeHeadingText(heading.textContent)
-        return normalized.includes('activaciones') || normalized.includes('activation')
-      })
-      const activationHeading = activationHeadings.at(-1)
-      if (activationHeading) {
-        const sectionNodes = []
-        let sibling = activationHeading.nextElementSibling
-        while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
-          sectionNodes.push(sibling)
-          sibling = sibling.nextElementSibling
-        }
-
-        const tokenParagraph = sectionNodes.find((node) => {
-          if (node.tagName !== 'P') return false
-          const paragraph = node
-          const normalized = normalizeHeadingText(paragraph.textContent)
-          return normalized.includes('token de activacion') || normalized.includes('activation token')
-        })
-        const imageParagraph = sectionNodes.find((node) => node.tagName === 'P' && node.querySelector('img'))
-
-        if (tokenParagraph?.parentNode && !imageParagraph) {
-          const activationGallery = doc.createElement('div')
-          activationGallery.className = 'rules-activation-gallery'
-
-          ;[
-            {
-              label: t('rules.tokens.types.stateActivated'),
-              imageSrc: activationToken,
-            },
-            {
-              label: t('rules.tokens.types.stateActivatedGreen'),
-              imageSrc: activationGreenToken,
-            },
-          ].forEach((token) => {
-            const item = doc.createElement('article')
-            item.className = 'rules-activation-gallery-item'
-
-            const mark = doc.createElement('div')
-            mark.className = 'rules-activation-gallery-mark'
-
-            const image = doc.createElement('img')
-            image.className = 'rules-activation-gallery-image'
-            image.src = token.imageSrc
-            image.alt = ''
-            image.loading = 'lazy'
-
-            const label = doc.createElement('p')
-            label.className = 'rules-activation-gallery-label'
-            label.textContent = token.label
-
-            mark.appendChild(image)
-            item.appendChild(mark)
-            item.appendChild(label)
-            activationGallery.appendChild(item)
-          })
-
-          tokenParagraph.parentNode.insertBefore(activationGallery, tokenParagraph.nextSibling)
-        }
-      }
-
-      const woundsHeadings = Array.from(doc.querySelectorAll('h1, h2, h3')).filter((heading) => {
-        const normalized = normalizeHeadingText(heading.textContent)
-        return normalized === 'vidas' || normalized === 'wounds'
-      })
-      const woundsHeading = woundsHeadings.at(-1)
-      if (woundsHeading) {
-        const sectionNodes = []
-        let sibling = woundsHeading.nextElementSibling
-        while (sibling && !['H1', 'H2', 'H3'].includes(sibling.tagName)) {
-          sectionNodes.push(sibling)
-          sibling = sibling.nextElementSibling
-        }
-
-        const tokenListItem = sectionNodes.find((node) => {
-          if (node.tagName !== 'UL') return false
-          return Array.from(node.querySelectorAll('li')).some((item) => {
-            const normalized = normalizeHeadingText(item.textContent)
-            return normalized.includes('tokens de dano') || normalized.includes('damage tokens')
-          })
-        })
-
-        if (tokenListItem?.parentNode) {
-          const damageGallery = doc.createElement('div')
-          damageGallery.className = 'rules-damage-gallery'
-
-          ;[
-            { label: t('rules.tokens.types.damage1'), imageSrc: damage1Token },
-            { label: t('rules.tokens.types.damage3'), imageSrc: damage3Token },
-            { label: t('rules.tokens.types.damage5'), imageSrc: damage5Token },
-            { label: t('rules.tokens.types.damage10'), imageSrc: damage10Token },
-          ].forEach((token) => {
-            const item = doc.createElement('article')
-            item.className = 'rules-damage-gallery-item'
-
-            const mark = doc.createElement('div')
-            mark.className = 'rules-damage-gallery-mark'
-
-            const image = doc.createElement('img')
-            image.className = 'rules-damage-gallery-image'
-            image.src = token.imageSrc
-            image.alt = ''
-            image.loading = 'lazy'
-
-            const label = doc.createElement('p')
-            label.className = 'rules-damage-gallery-label'
-            label.textContent = token.label
-
-            mark.appendChild(image)
-            item.appendChild(mark)
-            item.appendChild(label)
-            damageGallery.appendChild(item)
-          })
-
-          tokenListItem.parentNode.insertBefore(damageGallery, tokenListItem.nextSibling)
-        }
-      }
     }
     const headings = Array.from(doc.querySelectorAll('h1, h2, h3'))
     const toc = headings
@@ -791,30 +622,6 @@ function Reglamento() {
       [tokenId]: String(tokenCounts[tokenId] || 0),
     }))
   }
-
-  const loadImageAsDataUrl = (src, options = {}) =>
-    new Promise((resolve, reject) => {
-      const { rasterSizePx } = options
-      const img = new Image()
-      img.onload = () => {
-        const sourceWidth = Math.max(1, Math.round(img.naturalWidth || img.width || 1))
-        const sourceHeight = Math.max(1, Math.round(img.naturalHeight || img.height || 1))
-        const maxSourceSide = Math.max(sourceWidth, sourceHeight)
-        const scale = rasterSizePx && maxSourceSide > 0 ? rasterSizePx / maxSourceSide : 1
-        const outputWidth = Math.max(1, Math.round(sourceWidth * scale))
-        const outputHeight = Math.max(1, Math.round(sourceHeight * scale))
-        const canvas = document.createElement('canvas')
-        canvas.width = outputWidth
-        canvas.height = outputHeight
-        const ctx = canvas.getContext('2d')
-        ctx.imageSmoothingEnabled = true
-        ctx.imageSmoothingQuality = 'high'
-        ctx.drawImage(img, 0, 0, outputWidth, outputHeight)
-        resolve(canvas.toDataURL('image/png'))
-      }
-      img.onerror = reject
-      img.src = src
-    })
 
   const loadMonochromeImageAsDataUrl = (src, color = '#000000', options = {}) =>
     new Promise((resolve, reject) => {
@@ -1345,7 +1152,7 @@ function Reglamento() {
             gap: 10px;
             text-align: center;
           }
-          .rules-pdf-sheet .rules-html .rules-command-gallery-mark .rules-token-preview {
+          .rules-pdf-sheet .rules-html .rules-command-gallery-mark {
             width: 86px;
             height: 86px;
           }
@@ -1413,73 +1220,14 @@ function Reglamento() {
           }
           .rules-pdf-sheet .rules-html .rules-flag-gallery-mark {
             width: 72px;
+            height: 72px;
           }
-          .rules-pdf-sheet .rules-html .rules-flag-gallery-image {
+          .rules-pdf-sheet .rules-html .rules-token-svg svg {
             display: block;
             width: 100%;
-            height: auto;
+            height: 100%;
           }
           .rules-pdf-sheet .rules-html .rules-flag-gallery-label {
-            margin: 0;
-            font-size: 11px;
-            line-height: 1.25;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-          }
-          .rules-pdf-sheet .rules-html .rules-activation-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin: 14px 0 18px;
-            padding: 14px;
-            border: 1px solid #d7d7d7;
-            background: #ffffff;
-          }
-          .rules-pdf-sheet .rules-html .rules-activation-gallery-item {
-            display: grid;
-            justify-items: center;
-            gap: 8px;
-            text-align: center;
-          }
-          .rules-pdf-sheet .rules-html .rules-activation-gallery-mark {
-            width: 72px;
-          }
-          .rules-pdf-sheet .rules-html .rules-activation-gallery-image {
-            display: block;
-            width: 100%;
-            height: auto;
-          }
-          .rules-pdf-sheet .rules-html .rules-activation-gallery-label {
-            margin: 0;
-            font-size: 11px;
-            line-height: 1.25;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-          }
-.rules-pdf-sheet .rules-html .rules-damage-gallery {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 14px;
-            margin: 14px 0 18px;
-            padding: 14px;
-            border: 1px solid #d7d7d7;
-            background: #ffffff;
-          }
-          .rules-pdf-sheet .rules-html .rules-damage-gallery-item {
-            display: grid;
-            justify-items: center;
-            gap: 8px;
-            text-align: center;
-          }
-          .rules-pdf-sheet .rules-html .rules-damage-gallery-mark {
-            width: 60px;
-          }
-          .rules-pdf-sheet .rules-html .rules-damage-gallery-image {
-            display: block;
-            width: 100%;
-            height: auto;
-          }
-          .rules-pdf-sheet .rules-html .rules-damage-gallery-label {
             margin: 0;
             font-size: 11px;
             line-height: 1.25;
@@ -1961,72 +1709,19 @@ function Reglamento() {
       const tokenCellPadding = 6
       const maxX = pageWidth - margin
       const maxY = pageHeight - margin
-      const fallbackTextColor = [244, 244, 244]
-      const logoDataUrl = await loadImageAsDataUrl(zeroLoreLogo).catch(() => null)
+      // Unos 12 px por milímetro: nítido impreso incluso en el puesto de mando de 6".
+      const usedTokens = tokenOptions.filter((token) => (tokenCounts[token.id] || 0) > 0)
       const tokenImageDataById = Object.fromEntries(
-        await Promise.all(
-          tokenOptions.map(async (token) => {
-            if (!token.imageSrc) return [token.id, null]
-            return [token.id, await loadImageAsDataUrl(token.imageSrc).catch(() => null)]
-          }),
-        ),
+        await Promise.all(usedTokens.map(async (token) => {
+          const sizePx = Math.min(2048, Math.round(token.diameterMm * 12))
+          const canvas = await rasterizeSvgMarkup(token.svg, { width: 200, height: 200, scale: sizePx / 200 }).catch(() => null)
+          return [token.id, canvas ? canvas.toDataURL('image/png') : null]
+        })),
       )
 
       let cursorX = margin
       let cursorY = margin
       let rowHeight = 0
-
-      const drawCenteredText = (text, centerX, y, fontSize, fontStyle = 'bold') => {
-        doc.setFont('helvetica', fontStyle)
-        doc.setFontSize(fontSize)
-        doc.text(text, centerX, y, { align: 'center' })
-      }
-
-      const getCommandPalette = (commandColor = 'orange') => {
-        if (commandColor === 'blue') {
-          return {
-            accent: [86, 154, 255],
-            outerGlow: [189, 223, 255],
-            dashed: [170, 212, 255],
-            centerFill: [18, 28, 48],
-            showInteriorDetails: true,
-          }
-        }
-        if (commandColor === 'red') {
-          return {
-            accent: [219, 78, 78],
-            outerGlow: [255, 204, 204],
-            dashed: [255, 182, 182],
-            centerFill: [44, 18, 18],
-            showInteriorDetails: true,
-          }
-        }
-        if (commandColor === 'green') {
-          return {
-            accent: [73, 190, 106],
-            outerGlow: [198, 246, 210],
-            dashed: [170, 232, 187],
-            centerFill: [16, 38, 24],
-            showInteriorDetails: true,
-          }
-        }
-        if (commandColor === 'yellow') {
-          return {
-            accent: [222, 178, 63],
-            outerGlow: [255, 236, 174],
-            dashed: [246, 216, 134],
-            centerFill: [44, 34, 16],
-            showInteriorDetails: true,
-          }
-        }
-        return {
-          accent: [170, 176, 188],
-          outerGlow: [212, 216, 224],
-          dashed: [188, 194, 203],
-          centerFill: [22, 27, 38],
-          showInteriorDetails: true,
-        }
-      }
 
       const drawTokenCell = (token, x, y, cellSize) => {
         const centerX = x + cellSize / 2
@@ -2046,62 +1741,7 @@ function Reglamento() {
 
         const tokenImage = tokenImageDataById[token.id]
         if (tokenImage) {
-          doc.addImage(
-            tokenImage,
-            'PNG',
-            centerX - radius,
-            centerY - radius,
-            token.diameterMm,
-            token.diameterMm,
-            undefined,
-            'FAST',
-          )
-          return
-        }
-
-        if (token.category === 'command') {
-          const commandPalette = getCommandPalette(token.commandColor)
-          const borderGrow = 0.7
-
-          doc.setFillColor(10, 12, 18)
-          doc.setDrawColor(...commandPalette.accent)
-          doc.setLineWidth(Math.max(1.6, token.diameterMm * 0.04))
-
-          doc.circle(centerX, centerY, radius + borderGrow, 'FD')
-          if (commandPalette.showInteriorDetails) {
-            doc.setDrawColor(...commandPalette.outerGlow)
-            doc.setLineWidth(Math.max(0.7, token.diameterMm * 0.012))
-            doc.circle(centerX, centerY, token.diameterMm * 0.43, 'S')
-            doc.setDrawColor(...commandPalette.dashed)
-            doc.setLineWidth(Math.max(0.48, token.diameterMm * 0.009))
-            doc.setLineDashPattern([1.1, 1.6], 0)
-            doc.circle(centerX, centerY, token.diameterMm * 0.33, 'S')
-            doc.setLineDashPattern([], 0)
-            doc.setFillColor(...commandPalette.centerFill)
-            doc.circle(centerX, centerY, token.diameterMm * 0.24, 'F')
-          }
-
-          const maxLogoW = Math.min(token.diameterMm * 0.72, 90)
-          let logoW = Math.max(18, maxLogoW)
-          let logoH = logoW / ZEROLORE_LOGO_ASPECT
-          const maxLogoH = token.diameterMm * 0.5
-          if (logoH > maxLogoH) {
-            logoH = maxLogoH
-            logoW = logoH * ZEROLORE_LOGO_ASPECT
-          }
-          if (logoDataUrl) {
-            doc.addImage(logoDataUrl, 'PNG', centerX - logoW / 2, centerY - logoH / 2, logoW, logoH)
-          } else {
-            doc.setTextColor(...fallbackTextColor)
-            drawCenteredText('ZL', centerX, centerY + 2, Math.max(16, token.diameterMm * 0.26))
-          }
-        } else {
-          doc.setFillColor(12, 13, 18)
-          doc.setDrawColor(172, 172, 172)
-          doc.setLineWidth(1.2)
-          doc.circle(centerX, centerY, radius, 'FD')
-          doc.setTextColor(...fallbackTextColor)
-          drawCenteredText('?', centerX, centerY + Math.max(2, token.diameterMm * 0.07), Math.max(14, token.diameterMm * 0.36))
+          doc.addImage(tokenImage, 'PNG', centerX - radius, centerY - radius, token.diameterMm, token.diameterMm, undefined, 'FAST')
         }
       }
 
@@ -2164,20 +1804,10 @@ function Reglamento() {
                 <h4>{token.label}</h4>
                 <div className="rules-token-preview-wrap" aria-hidden="true">
                   <div
-                    className={`rules-token-preview ${token.category} ${token.previewSize} ${token.imageSrc ? 'has-image' : ''} ${token.category === 'command' ? `command-${token.shape || 'circle'} command-${token.commandColor || 'orange'}` : ''}`}
+                    className={`rules-token-preview rules-token-svg ${token.previewSize}`}
                     data-token-preview={token.id}
-                  >
-                    {token.imageSrc && (
-                      <img className="rules-token-preview-image" src={token.imageSrc} alt="" />
-                    )}
-                    {token.category === 'command' && (
-                      <>
-                        <span className="rules-token-command-logo-box">
-                          <img className="rules-token-command-logo-mark" src={zeroLoreLogo} alt="" />
-                        </span>
-                      </>
-                    )}
-                  </div>
+                    dangerouslySetInnerHTML={{ __html: token.svg }}
+                  />
                 </div>
                 <label className="rules-token-input">
                   <span>{t('rules.tokens.quantity')}</span>

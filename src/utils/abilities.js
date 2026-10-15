@@ -1,52 +1,22 @@
-import { getWeaponAbilityId, WEAPON_ABILITY_IDS } from './weaponAbilities.js'
+import { getWeaponAbilityId, parseWeaponAbility, WEAPON_ABILITY_IDS } from './weaponAbilities.js'
 
-const parseAbilityStateVariants = (raw) => {
-  const match = String(raw || '').trim().match(/^(.+?)\s*\(([^()]*)\)$/)
-  if (!match) return null
-
-  const normal = match[1].trim()
-  const transformed = match[2].trim()
-  if (!getWeaponAbilityId(normal) || !getWeaponAbilityId(transformed)) return null
-
-  return { normal, transformed }
+// Mismos textos que la tabla de Habilidades de armas del reglamento.
+const DESCRIPTIONS = {
+  [WEAPON_ABILITY_IDS.reliable]: 'Esta arma no tiene reglas especiales.',
+  [WEAPON_ABILITY_IDS.criticalHit]: 'Los impactos con un 6 no se pueden bloquear con la Defensa.',
+  [WEAPON_ABILITY_IDS.burst]: 'Cada impacto con un 6 añade 1 dado de ataque más, que se tira en ese momento. Si vuelve a salir un 6, se sigue añadiendo.',
+  [WEAPON_ABILITY_IDS.sure]: 'Ignora la cobertura: el objetivo no mejora su Defensa por estar cubierto.',
+  [WEAPON_ABILITY_IDS.direct]: 'Todos los dados impactan, sin tirar Precisión.',
+  [WEAPON_ABILITY_IDS.relentless]: 'Puede volver a tirar una vez los dados que no hayan impactado.',
+  [WEAPON_ABILITY_IDS.preciseShot]: 'Si el objetivo está a la mitad o menos del Alcance del arma, el ataque gana 1 dado de ataque más.',
+  [WEAPON_ABILITY_IDS.heavy]: 'Si la unidad no se ha movido en esta activación, el ataque gana 1 dado de ataque más.',
 }
 
 export const getAbilityDescription = (ability) => {
-  if (!ability) return ''
-  const raw = String(ability).trim()
-  const variants = parseAbilityStateVariants(raw)
-  if (variants) {
-    const normalDescription = getAbilityDescription(variants.normal)
-    const transformedDescription = getAbilityDescription(variants.transformed)
-    return `Forma normal: ${normalDescription} Forma Monstruo: ${transformedDescription}`
-  }
-  const abilityId = getWeaponAbilityId(raw)
-
-  if (abilityId === WEAPON_ABILITY_IDS.reliable) {
-    return 'Esta arma no tiene reglas especiales.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.brutal) {
-    return 'Los impactos de esta arma son críticos con un resultado natural de 5+.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.piercing) {
-    return 'Los impactos de esta arma empeoran en 1 la Salvación del objetivo.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.criticalHit) {
-    return 'Los críticos no pueden salvarse.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.direct) {
-    return 'Todos los dados impactan, sin tirar Precisión. Los 6 siguen siendo críticos.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.relentless) {
-    return 'Puede volver a tirar los dados que no hayan impactado.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.preciseShot) {
-    return 'Si el objetivo está a la mitad o menos de la Distancia del arma, el ataque gana +1 dado.'
-  }
-  if (abilityId === WEAPON_ABILITY_IDS.overflow) {
-    return 'Si este ataque destruye a la unidad objetivo y sobra daño, el atacante puede aplicar ese sobrante a otra unidad enemiga a 3" o menos de la última miniatura eliminada del objetivo.'
-  }
-  return ''
+  const id = getWeaponAbilityId(ability)
+  // Perforante lleva su valor: "Perforante 2" empeora en 2 la Defensa.
+  if (id === WEAPON_ABILITY_IDS.piercing) return `Empeora en ${parseWeaponAbility(ability).value || 1} la Defensa del objetivo.`
+  return DESCRIPTIONS[id] || ''
 }
 
 export const formatAbilityLabel = (label) => {
@@ -62,13 +32,4 @@ export const formatAbilityLabel = (label) => {
     .join(' ')
 }
 
-export const getAbilityLabel = (ability) => {
-  if (!ability) return ''
-  const raw = String(ability).trim()
-  const variants = parseAbilityStateVariants(raw)
-  if (variants) {
-    return `${getAbilityLabel(variants.normal)} (${getAbilityLabel(variants.transformed)})`
-  }
-  return formatAbilityLabel(raw)
-}
-
+export const getAbilityLabel = (ability) => formatAbilityLabel(ability)

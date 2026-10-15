@@ -1,45 +1,19 @@
-// Iconos de clase (uno por clase, sin eras). Los ficheros que falten
-// simplemente no producen badge.
-const badgeModules = import.meta.glob('../../images/units_icons/*.png', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-})
+import { unitIconDataUrl } from '../cards/unitIcons.js'
 
-// Algunos ficheros no se llaman igual que el token de su clase.
-const FILENAME_ALIASES = {
-  mosntruo: 'monstruo',
-  extermiandor: 'exterminador',
-  juggernait: 'juggernaut',
-  armas_pesadas: 'armas-pesadas',
-  'vehiculo ligero': 'vehiculo-ligero',
-  'vehiculo pesado': 'vehiculo-pesado',
-  // Iconos heredados: el Capitán lleva el del antiguo Estandarte y los Héroes el
-  // del antiguo Comandante.
-  estandarte: 'capitan',
-  comandante: 'heroe',
-}
-
-const badgeByClass = Object.entries(badgeModules).reduce((badges, [path, src]) => {
-  const match = path.match(/units_icons\/([^/]+)\.png$/)
-  if (!match) return badges
-  const raw = match[1]
-  badges[FILENAME_ALIASES[raw] || raw] = src
-  return badges
-}, {})
-
+/** Clase de una unidad a partir de su id o su nombre ("heroe-centinela" → "heroe"). */
 export const getUnitClassToken = (value = '') => {
   const normalized = String(value || '')
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[̀-ͯ]/g, '')
     .trim()
 
   if (normalized.startsWith('milicia')) return 'milicia'
-  if (normalized.startsWith('tirador')) return 'tirador'
-  if (normalized.startsWith('choque')) return 'choque'
-  if (normalized.startsWith('juggernaut')) return 'juggernaut'
-  if (normalized.startsWith('exterminador')) return 'exterminador'
+  if (normalized.startsWith('alimanas')) return 'alimanas'
+  if (normalized.startsWith('hostigadores')) return 'hostigadores'
+  if (normalized.startsWith('infantes')) return 'infantes'
+  if (normalized.startsWith('bastion')) return 'bastion'
+  if (normalized.startsWith('paladin')) return 'paladin'
   if (normalized.startsWith('explorador')) return 'explorador'
   if (normalized.startsWith('asaltante')) return 'asaltante'
   if (normalized.startsWith('armas pesadas') || normalized.startsWith('armas-pesadas')) return 'armas-pesadas'
@@ -47,20 +21,18 @@ export const getUnitClassToken = (value = '') => {
   if (normalized.startsWith('monstruo')) return 'monstruo'
   if (normalized.startsWith('vehiculo ligero') || normalized.startsWith('vehiculo-ligero')) return 'vehiculo-ligero'
   if (normalized.startsWith('vehiculo pesado') || normalized.startsWith('vehiculo-pesado')) return 'vehiculo-pesado'
-  if (normalized.startsWith('vehiculo')) return 'vehiculo-ligero'
   if (normalized.startsWith('artilleria')) return 'artilleria'
   if (normalized.startsWith('titan')) return 'titan'
   if (normalized.startsWith('capitan')) return 'capitan'
   if (normalized.startsWith('soporte')) return 'soporte'
   // Los Héroes comparten color e icono.
   if (normalized.startsWith('heroe')) return 'heroe'
+  if (normalized.startsWith('equipamiento')) return 'equipamiento'
   return ''
 }
 
+/** Icono vectorial de la clase, como data URL para un <img>. */
 export const getUnitClassBadgeSrc = (value = '') => {
   const token = getUnitClassToken(value)
-  if (!token) return ''
-  return badgeByClass[token] || ''
+  return token ? unitIconDataUrl(token) : ''
 }
-
-export const hasUnitClassBadge = (value = '') => Boolean(getUnitClassBadgeSrc(value))

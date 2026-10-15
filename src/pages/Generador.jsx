@@ -6,7 +6,6 @@ import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
 import { useImageCrop } from '../features/generator/imageCrop.js'
 import ImageCropModal from '../features/generator/components/ImageCropModal.jsx'
 import FitTitle from '../features/generator/components/FitTitle.jsx'
-import itemIcon from '../images/units_icons/equipamiento.png'
 import objetosData from '../data/items/objetos.json'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
 import {
@@ -17,6 +16,8 @@ import {
   getUnidad,
   isHeroe,
 } from '../features/generator/catalogUtils.js'
+
+const itemIcon = getUnitClassBadgeSrc('equipamiento')
 
 const FICHA_CARD_W = 1536
 const FICHA_CARD_H = 1024
@@ -191,28 +192,6 @@ function SpinnerIcon() {
   )
 }
 
-function GameModeIcon({ mode }) {
-  if (mode === 'escuadra') {
-    return (
-      <svg viewBox="0 0 64 40" aria-hidden="true">
-        <circle className="game-mode-icon-stroke" cx="15" cy="15" r="5" />
-        <circle className="game-mode-icon-stroke" cx="49" cy="15" r="5" />
-        <path className="game-mode-icon-stroke" d="M8 33c0-5.4 3.2-8.5 7-8.5s7 3.1 7 8.5" />
-        <path className="game-mode-icon-stroke" d="M42 33c0-5.4 3.2-8.5 7-8.5s7 3.1 7 8.5" />
-        <circle className="game-mode-icon-stroke" cx="32" cy="10" r="7" />
-        <path className="game-mode-icon-stroke" d="M22 35c0-7.6 4.8-12 10-12s10 4.4 10 12" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 64 40" aria-hidden="true">
-      <circle className="game-mode-icon-stroke" cx="32" cy="11" r="7" />
-      <path className="game-mode-icon-stroke" d="M22 34c0-8 5.5-13 10-13s10 5 10 13" />
-    </svg>
-  )
-}
-
 function CountStepper({ count, onAdd, onRemove, addLabel, removeLabel, max = null, disabled = false, format = null }) {
   const atMax = max !== null && count >= max
   return (
@@ -242,7 +221,11 @@ function CountStepper({ count, onAdd, onRemove, addLabel, removeLabel, max = nul
   )
 }
 
-/** Selector de rol simple (barra de 3 botones), usado en el modal de ficha. */
+// Un Héroe con esta habilidad es la única unidad de su ejército. Se mira la
+// habilidad y no el id, que cambia cada vez que el Héroe cambia de nombre.
+const ONLY_UNIT_ABILITY = 'Todo para uno'
+const isOnlyUnitHero = (heroId) => getUnidad(heroId)?.habilidad === ONLY_UNIT_ABILITY
+
 // ─── Página ───────────────────────────────────────────────────────────────
 function Generador() {
   const { t } = useI18n()
@@ -302,6 +285,8 @@ function Generador() {
   // Sin Héroe no hay ejército: es lo primero que se elige y hace falta para descargar.
   const chosenHeroId = armySelections.find((selection) => isHeroe(selection.unidadId))?.unidadId || ''
   const armyHasHero = Boolean(chosenHeroId)
+  // Ese Héroe es la única unidad de su ejército: el resto del Valor va a Equipamiento.
+  const heroAllowsUnits = !isOnlyUnitHero(chosenHeroId)
 
   /** Se agrupan en la lista las unidades idénticas (mismo tipo y misma escuadra). */
   const armyUnitGroups = useMemo(() => {
@@ -380,7 +365,7 @@ function Generador() {
   }
 
   const handleAddUnit = (unidadId) => {
-    if (!getUnidad(unidadId)) return
+    if (!getUnidad(unidadId) || !heroAllowsUnits) return
     selectionCounterRef.current += 1
     // El id se fija aquí, no dentro del updater: si se leyera ahí, varios
     // clics seguidos (que React agrupa) acabarían con el mismo id.
@@ -409,9 +394,10 @@ function Generador() {
     }
     selectionCounterRef.current += 1
     const selectionId = `unidad-${selectionCounterRef.current}`
+    const keepsUnits = !isOnlyUnitHero(heroId)
     setArmySelections((current) => [
       { selectionId, kind: 'unidad', unidadId: heroId, imageDataUrl: '' },
-      ...current.filter((selection) => !isHeroe(selection.unidadId)),
+      ...current.filter((selection) => !isHeroe(selection.unidadId) && keepsUnits),
     ])
     setArmyDownloadError('')
   }
@@ -623,6 +609,7 @@ function Generador() {
                   addLabel={`${t('generator.add')} ${unidad.nombre}`}
                   removeLabel={`${t('generator.delete')} ${unidad.nombre}`}
                   format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
+                  disabled={!heroAllowsUnits}
                 />
               )}
             </div>
@@ -734,6 +721,7 @@ function Generador() {
                     {renderCatalogDownload('catalogo-unidades', t('generator.downloadUnits'),
                       t('generator.unitsPdfHint').replace('{count}', String(catalogUnitEntries.length)))}
                   </div>
+                  {!heroAllowsUnits ? <p className="unit-list-section-hint">{t('generator.supremeHint')}</p> : null}
                   <div className="unit-list">
                     {UNIT_FAMILIES.map((family) => {
                       const selected = family.variants.find((variant) => variant.unidad.id === variantByFamily[family.key])
@@ -789,8 +777,9 @@ function Generador() {
                                   <FitTitle as="h4" maxFontSize={16} minFontSize={8}>{item.nombre}</FitTitle>
                                 </div>
                                 {/* Cuándo se usa: en una línea, encoge si no cabe ("Fase de despliegue"). */}
+                                {/* Si Notion no dice cuándo, la línea queda vacía pero ocupa su sitio: todas las tarjetas miden igual. */}
                                 <FitTitle className="unit-card-type unit-type-equipment unit-card-oneline" maxFontSize={12.8} minFontSize={8}>
-                                  {item.accion}
+                                  {item.accion || '\u00a0'}
                                 </FitTitle>
                                 <div className="unit-card-inline-value">
                                   {item.valor === null ? '—' : `${item.valor} ${t('generator.valueUnit')}`}

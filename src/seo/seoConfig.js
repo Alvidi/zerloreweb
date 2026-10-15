@@ -20,7 +20,7 @@ export const SEO_BY_LANG = {
       description:
         'Consulta el reglamento de ZeroLore: sistema rapido, brutal y cinematografico para tus partidas.',
       summary:
-        'Lee las reglas base, acciones, combate, estados, puestos de mando y habilidades estrategicas de ZeroLore.',
+        'Lee las reglas base, opciones de activación, combate, puestos de mando, Héroes y equipamiento de ZeroLore.',
       pageType: 'Article',
     },
     '/generador': {

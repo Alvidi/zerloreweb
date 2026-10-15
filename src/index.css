@@ -11,16 +11,16 @@
   -webkit-font-smoothing: antialiased;
   --bg-1: #0c0c10;
   --bg-2: #14151c;
-  --bg-3: #1b1f2a;
   --accent: #d7c69a;
   --accent-soft: rgba(200, 170, 104, 0.18);
   --metal: #a7b0c0;
-  /* Colores de clase, muestreados de los iconos de units_icons/ */
+  /* Colores de clase: los mismos que CLASS_COLORS en features/cards/unitIcons.js */
   --class-milicia: #8a8a8a;
-  --class-tirador: #9c86b6;
-  --class-choque: #3167b8;
-  --class-juggernaut: #bf9e7c;
-  --class-exterminador: #7a95dd;
+  --class-alimanas: #5fb3a1;
+  --class-hostigadores: #9c86b6;
+  --class-infantes: #3167b8;
+  --class-bastion: #bf9e7c;
+  --class-paladin: #7a95dd;
   --class-explorador: #7ca134;
   --class-asaltante: #f57aa4;
   --class-armas-pesadas: #56c4fb;
@@ -35,7 +35,6 @@
   --class-heroe: #e90c86;
   --class-equipment: #f1c636;
   --line: rgba(255, 255, 255, 0.12);
-  --glow: rgba(214, 190, 132, 0.32);
   --max-width: 1200px;
   --page-gutter: clamp(20px, 6vw, 64px);
   --text-main: #ffffff;
