@@ -884,6 +884,12 @@ function Generador() {
                                 <div className="unit-card-inline-value">
                                   {item.entry.perfil.valor === null ? '—' : `${item.total} ${t('generator.valueUnit')}`}
                                 </div>
+                                {/* Lo básico del perfil, para no tener que abrir la ficha. */}
+                                <div className="army-unit-stats">
+                                  <span>MOV <b>{item.entry.perfil.movimiento}</b></span>
+                                  <span>VIDAS <b>{item.entry.perfil.vidas}</b></span>
+                                  <span>DEF <b>{item.entry.perfil.defensa}</b></span>
+                                </div>
                               </div>
                             </div>
                             <div className="unit-card-header-actions army-unit-actions">
@@ -935,6 +941,11 @@ function Generador() {
                                   <div className="unit-card-inline-value">
                                     {item.valor === null ? '—' : `${item.valor * count} ${t('generator.valueUnit')}`}
                                   </div>
+                                  {item.accion ? (
+                                    <div className="army-unit-stats">
+                                      <span>{item.accion}</span>
+                                    </div>
+                                  ) : null}
                                 </div>
                               </div>
                               <div className="unit-card-header-actions army-unit-actions">
