@@ -128,7 +128,7 @@ Todas las unidades de ZeroLore pertenecen a un **tipo** (Hostigadores, Monstruo,
 
 Cada tipo pertenece a un **rol**, que agrupa unidades con una función parecida. Algunas reglas, como las de los Héroes o el Equipamiento, nombran un rol en lugar de cada tipo.
 
-- **Soldado:** la base del ejército, numerosa y barata. *Milicia, Noveles tiradores, Hostigadores, Infantes.*
+- **Soldado:** la base del ejército, numerosa y barata. *Milicia, Alimañas, Hostigadores, Infantes.*
 - **Élite:** pocas, muy blindadas y muy fiables. *Bastión, Paladín.*
 - **Movilidad:** rápidas, para llegar antes que nadie a los objetivos. *Explorador, Asaltante.*
 - **Pesado:** criaturas y vehículos enormes. *Monstruo, Vehículo ligero, Vehículo pesado, Titán.*

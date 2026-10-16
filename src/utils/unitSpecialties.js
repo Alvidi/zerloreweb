@@ -17,7 +17,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Empujón', description: 'Después de resolver los ataques cuerpo a cuerpo, si el objetivo sobrevive, puedes alejarlo hasta 3" en línea recta desde los Infantes, siempre que haya espacio.' },
   },
   {
-    es: { name: 'Contra-disparo', description: 'Una vez por turno, cuando una unidad enemiga le dispara y sobrevive, puede dispararle de vuelta si la tiene a su alcance y en línea de visión. Este disparo no gana el dado extra de Pesada.' },
+    es: { name: 'Contra-disparo', description: 'Una vez por turno, cuando la primera unidad enemiga le dispara y sobrevive, puede dispararle de vuelta si la tiene a su alcance y en línea de visión. Este disparo no gana el dado extra de Pesada.' },
   },
   {
     es: { name: 'Cadena', description: 'Ocupa toda la activación. Una unidad enemiga a 6" o menos es arrastrada hasta el contacto y recibe su ataque cuerpo a cuerpo. Después, el Paladín se separa 1".' },
@@ -42,6 +42,9 @@ const UNIT_SPECIALTIES = [
   },
   {
     es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Alcance, salvo que el objetivo esté dentro o debajo de escenografía de bloqueo. Esta unidad no puede moverse.' },
+  },
+  {
+    es: { name: 'Fuego de apoyo', description: 'Una vez por turno, cuando otra unidad aliada situada a 6" o menos dispare durante su activación, esta unidad puede abrir fuego contra el mismo objetivo, siempre que esté a su alcance y en línea de visión. Puede hacerlo aunque ya se haya activado.' },
   },
   {
     es: { name: 'Escuadras', description: 'El Capitán se despliega con una escuadra de un solo tipo de unidad y pasa a ser un integrante más, con el mismo perfil. En cada fase de despliegue puede unirse a la escuadra una miniatura más de ese tipo.' },

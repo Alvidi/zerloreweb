@@ -311,7 +311,8 @@
           "alcance": "32\"",
           "precision": "4+",
           "habilidades_arma": [
-            "Perforante 2"
+            "Perforante 2",
+            "Ráfaga"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -400,7 +401,7 @@
         "escuadra": 3,
         "valor": 11
       },
-      "habilidad": "",
+      "habilidad": "Fuego de apoyo",
       "armas": {
         "disparo": {
           "ataques": "1D6",
