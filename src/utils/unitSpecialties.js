@@ -29,7 +29,7 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Brinco', description: 'Esta unidad puede ascender en diagonal al moverse, sin necesidad de tocar la base del obstáculo. No puede terminar su movimiento sobre otras miniaturas ni en lugares donde no pueda sostenerse.' },
   },
   {
-    es: { name: 'Pisotón', description: 'Después de su ataque cuerpo a cuerpo, cada otra unidad enemiga a 3" o menos del Monstruo recibe 1 impacto, que puede bloquear con su Defensa.' },
+    es: { name: 'Furia creciente', description: 'Gana 1 dado de ataque por cada Vida que haya perdido, con un máximo de +3.' },
   },
   {
     es: { name: 'Transporte', description: 'Durante la fase de despliegue, una unidad aliada puede desplegarse desde la Reserva en contacto con este vehículo, igual que si fuera un puesto de mando. Solo una unidad en la partida, y nunca unidades de rol Pesado ni Fuego pesado.' },
@@ -42,9 +42,6 @@ const UNIT_SPECIALTIES = [
   },
   {
     es: { name: 'Fuego indirecto', description: 'Esta unidad puede atacar a objetivos sin línea de visión directa, siempre que estén dentro de su Alcance, salvo que el objetivo esté dentro o debajo de escenografía de bloqueo. Esta unidad no puede moverse.' },
-  },
-  {
-    es: { name: 'Supresión', description: 'La unidad a la que dispara empeora en 1 la Precisión de sus ataques hasta el final del turno.' },
   },
   {
     es: { name: 'Escuadras', description: 'El Capitán se despliega con una escuadra de un solo tipo de unidad y pasa a ser un integrante más, con el mismo perfil. En cada fase de despliegue puede unirse a la escuadra una miniatura más de ese tipo.' },

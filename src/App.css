@@ -1421,10 +1421,6 @@ button {
   height: auto;
 }
 
-.army-export-stage .ficha-layout-toolbar {
-  display: none;
-}
-
 .army-export-card-host {
   width: 100%;
 }
@@ -2629,100 +2625,6 @@ mark {
 }
 
 /* ── Texto sobre ficha de misión (coordenadas en píxeles sobre 1537×1023) ── */
-.mission-abs {
-  position: absolute;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  box-sizing: border-box;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.mission-mision-label {
-  font-family: 'Cinzel', serif;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-}
-
-.mission-numero {
-  font-family: 'Cinzel', serif;
-  font-size: 36px;
-  font-weight: 700;
-  color: #fff;
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-}
-
-.mission-titulo {
-  font-family: 'Cinzel', serif;
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.1;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-}
-
-.mission-lore {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 20px;
-  font-style: italic;
-  font-weight: 300;
-  color: #444;
-  line-height: 1.35;
-  text-align: center;
-}
-
-.mission-objetivo,
-.mission-descripcion,
-.mission-puntos {
-  font-family: 'Inter', system-ui, sans-serif;
-  line-height: 1.4;
-  color: #1a1a1a;
-  text-align: center;
-  gap: 6px;
-}
-
-.mission-objetivo p,
-.mission-descripcion p,
-.mission-puntos p {
-  margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 1em;
-  line-height: 1.4;
-  color: #1a1a1a;
-  text-align: center;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.mission-puntos p {
-  font-family: 'Cinzel', serif;
-  color: #7a5810;
-  font-weight: 600;
-}
-
-.mission-field-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.75em;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #8b6914;
-  display: block;
-  text-align: center;
-}
 
 .rules-mode-switch .ghost {
   display: inline-flex;
@@ -4255,43 +4157,6 @@ mark {
   outline: none;
 }
 
-.ficha-layout-toolbar {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  z-index: 6;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  flex-wrap: wrap;
-  pointer-events: none;
-}
-
-.ficha-layout-toggle,
-.ficha-layout-readouts {
-  pointer-events: auto;
-}
-
-.ficha-layout-toggle.active {
-  border-color: #e0bf77;
-  color: var(--text-main);
-  background: rgba(224, 191, 119, 0.12);
-}
-
-.ficha-layout-readouts {
-  display: grid;
-  gap: 4px;
-  padding: 8px 12px;
-  border: 1px solid rgba(224, 191, 119, 0.38);
-  background: rgba(7, 9, 14, 0.86);
-  color: #f3ead2;
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: 0.03em;
-}
-
 /* Card a tamaño nativo — se escala con JS transform: scale() */
 .ficha-card {
   position: absolute;
@@ -4301,127 +4166,9 @@ mark {
   /* width & height se ponen inline desde JSX */
 }
 
-.ficha-card.is-layout-mode {
-  cursor: crosshair;
-}
-
 /* Capa 2: plantilla WebP encima de la imagen */
-.ficha-template-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  display: block;
-}
 
 /* Capa 3: datos de texto, por encima del template */
-.ficha-data-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.ficha-layout-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.ficha-layout-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(224, 191, 119, 0.16) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(224, 191, 119, 0.16) 1px, transparent 1px);
-  background-size: 76.85px 51.15px;
-}
-
-.ficha-layout-guide-box {
-  position: absolute;
-  border: 2px solid rgba(116, 209, 255, 0.88);
-  background: rgba(116, 209, 255, 0.09);
-  box-shadow: inset 0 0 0 1px rgba(7, 9, 14, 0.55);
-  pointer-events: auto;
-  cursor: grab;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ficha-layout-guide-box span {
-  color: #74d1ff;
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.08em;
-  text-shadow: 0 1px 4px rgba(7, 9, 14, 0.95);
-  pointer-events: none;
-  user-select: none;
-}
-
-.ficha-layout-guide-box.dragging {
-  border-color: rgba(255, 94, 94, 0.95);
-  background: rgba(255, 94, 94, 0.12);
-  cursor: grabbing;
-}
-
-.ficha-layout-resize {
-  position: absolute;
-  border: 0;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 0;
-  pointer-events: auto;
-}
-
-.ficha-layout-resize-side {
-  top: 50%;
-  right: -4px;
-  width: 8px;
-  height: 28px;
-  transform: translateY(-50%);
-  cursor: ew-resize;
-}
-
-.ficha-layout-resize-corner {
-  right: -4px;
-  bottom: -4px;
-  width: 10px;
-  height: 10px;
-  cursor: nwse-resize;
-}
-
-.ficha-layout-crosshair {
-  position: absolute;
-  background: rgba(255, 94, 94, 0.95);
-}
-
-.ficha-layout-crosshair-x {
-  left: 0;
-  right: 0;
-  height: 1px;
-}
-
-.ficha-layout-crosshair-y {
-  top: 0;
-  bottom: 0;
-  width: 1px;
-}
-
-.ficha-layout-locked-point {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  margin-left: -5px;
-  margin-top: -5px;
-  border-radius: 999px;
-  border: 2px solid #fff;
-  background: #ff5e5e;
-  box-shadow: 0 0 0 2px rgba(7, 9, 14, 0.66);
-}
 
 /* ── Toggle VER/OCULTAR FICHA en el listado ─────────────── */
 .unit-card-ficha-toggle {

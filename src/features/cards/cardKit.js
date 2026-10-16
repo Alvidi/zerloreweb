@@ -156,7 +156,7 @@ export const wrapText = (text, maxWidth, font) => {
  * posición, listas para pintarse, y dónde van los separadores entre grupos.
  */
 export const layoutTextBlocks = (blocks, box, {
-  maxBody = 26, minBody = 13, titleRatio = 1.12, gap = 10, blockGap = 20, lineHeight = 1.36,
+  maxBody = 26, minBody = 13, titleRatio = 1.12, gap = 10, blockGap = 20, lineHeight = 1.36, verticalAlign = 'center',
 } = {}) => {
   for (let size = maxBody; size >= minBody; size -= 0.5) {
     const titleSize = size * titleRatio
@@ -177,7 +177,7 @@ export const layoutTextBlocks = (blocks, box, {
 
     const items = []
     const dividers = []
-    let y = box.y + Math.max(0, (box.h - total) / 2)
+    let y = box.y + (verticalAlign === 'start' ? 0 : Math.max(0, (box.h - total) / 2))
     prepared.forEach((block, index) => {
       if (index) {
         if (block.newGroup) {

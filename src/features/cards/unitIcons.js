@@ -16,21 +16,42 @@ export const CLASS_COLORS = {
   alimanas: '#5fb3a1',
   hostigadores: '#9c86b6',
   infantes: '#3167b8',
-  bastion: '#bf9e7c',
+  bastion: '#8ca5b5',
   paladin: '#7a95dd',
   explorador: '#7ca134',
   asaltante: '#f57aa4',
   monstruo: '#d41d1e',
   'vehiculo-ligero': '#fd7902',
-  'vehiculo-pesado': '#c8a983',
+  'vehiculo-pesado': '#8e9b58',
   titan: '#808ed0',
   artilleria: '#96592c',
   'armas-pesadas': '#56c4fb',
   capitan: '#68a080',
   soporte: '#e05050',
-  psiquico: '#ae4afb',
-  heroe: '#e90c86',
-  equipamiento: '#f1c636',
+  psiquico: '#e90c86',
+  heroe: '#d5aa50',
+  equipamiento: '#39b7b3',
+  mision: '#9782bd',
+}
+
+// Los colores de clase se mantienen; la ficha adapta sus tonos a cada fondo.
+const mixCardColor = (from, to, amount) => {
+  const channels = [1, 3, 5].map((offset) => {
+    const start = parseInt(from.slice(offset, offset + 2), 16)
+    const end = parseInt(to.slice(offset, offset + 2), 16)
+    return Math.round(start + (end - start) * amount).toString(16).padStart(2, '0')
+  })
+  return `#${channels.join('')}`
+}
+
+export const getCardPalette = (token) => {
+  const base = CLASS_COLORS[token] || '#c9a35c'
+  return {
+    border: mixCardColor(base, '#ffffff', 0.18),
+    highlight: mixCardColor(base, '#ffffff', 0.38),
+    onPaper: mixCardColor(base, '#14161c', 0.32),
+    header: mixCardColor(base, '#0b0b0e', 0.88),
+  }
 }
 
 // Marco: cuadrado con esquinas a 45° y muescas en el centro de cada lado.

@@ -82,11 +82,11 @@ Cada unidad lleva las armas indicadas en su perfil: un arma a distancia y un arm
 
 ## Perfiles de armas
 
-Cada arma, a distancia o cuerpo a cuerpo, tiene el mismo perfil de cuatro valores, que indica cómo se resuelve su ataque.
+Cada arma tiene un perfil que indica cómo se resuelve su ataque: Ataques, Precisión y Habilidades del arma. Las armas a distancia también tienen Alcance.
 
 **Ataques:** número de dados que se lanzan; cada dado es un disparo o golpe independiente. En las cartas se indica como **1D**, **2D**, **3D**…: 1D es un dado, 2D son dos dados, y así sucesivamente. Si pone **1D3**, **1D6** o **2D6**, el número de dados es variable: primero se tira ese dado para saber cuántos ataques hace la unidad esa vez. Si además lleva un número sumado, como **1D6+1** o **2D6+3**, ese número se suma al resultado. *Por ejemplo, con 2D6+3, si sacas un 7, la unidad hace 10 ataques.*
 
-**Alcance:** distancia máxima en pulgadas a la que puede atacar. Las armas cuerpo a cuerpo indican **CaC**: solo atacan a una unidad con la que estén en contacto tras cargar.
+**Alcance:** distancia máxima en pulgadas a la que puede atacar un arma a distancia. Las armas cuerpo a cuerpo no tienen este valor: atacan al llegar al contacto tras cargar, salvo que una regla propia permita hacerlo de otra forma.
 
 **Precisión:** resultado mínimo en cada dado para impactar.
 
@@ -202,9 +202,9 @@ Si pierde a todos sus integrantes, el Capitán sigue en juego como una unidad m�
 El equipamiento son ventajas de un solo uso que el ejército compra antes de la partida, pagando el **Valor** que indique cada una. No pertenece a ninguna unidad: **cualquier unidad aliada**, incluido el Héroe, puede usarlo. Cada equipamiento indica en su **Momento** cuándo se usa:
 
 - **Fase de despliegue:** se usa durante la fase de despliegue.
-- **En lugar de disparar:** la unidad lo usa al Avanzar, en vez de hacer su ataque a distancia.
+- **Ocupa la activación:** la unidad lo usa en lugar de Avanzar, Correr o Cargar. Esa activación no puede hacer nada más.
 - **Al disparar, Al cargar, Al atacar cuerpo a cuerpo o Al atacar:** se añade al ataque de la unidad en el momento de hacerlo. "Al atacar" sirve tanto a distancia como cuerpo a cuerpo.
-- **Al recibir un disparo:** se usa cuando una unidad enemiga dispara a la unidad, aunque sea la fase del rival.
+- **Al recibir un ataque:** se usa cuando una unidad enemiga ataca a la unidad, a distancia o cuerpo a cuerpo, aunque sea la fase del rival.
 
 Cada equipamiento se usa **una sola vez**. Después se descarta y no puede volver a utilizarse.
 

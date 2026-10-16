@@ -4,7 +4,7 @@
       "id": "botiquin",
       "nombre": "Botiquín",
       "descripcion": "Una unidad aliada recupera 1D3 Vidas.",
-      "accion": "Activación",
+      "accion": "Ocupa la activación",
       "valor": 2
     },
     {
@@ -25,7 +25,7 @@
       "id": "bomba-de-humo",
       "nombre": "Bomba de humo",
       "descripcion": "Úsala cuando una unidad enemiga dispare a esta unidad: el disparo falla.",
-      "accion": "Al recibir un disparo",
+      "accion": "Al recibir un ataque",
       "valor": 2
     },
     {
@@ -108,8 +108,8 @@
     {
       "id": "contraataque",
       "nombre": "Contraataque",
-      "descripcion": "Puede devolver el ataque en el mismo turno del enemigo cuando una unidad es atacada.",
-      "accion": "Al atacar el enemigo",
+      "descripcion": "Cuando una unidad enemiga ataca a esta unidad y sobrevive, puede atacarla de vuelta con su arma (a distancia o cuerpo a cuerpo, la que corresponda), aunque ya se haya activado.",
+      "accion": "Al recibir un ataque",
       "valor": 3
     }
   ]

@@ -851,11 +851,7 @@ const climbing = figure(
 )
 
 /* ── Momento del equipamiento ───────────────────────────────────────────────
-   "Fase de despliegue"; "En lugar de disparar: la unidad lo usa al Avanzar, en
-   vez de hacer su ataque a distancia"; "Al disparar, Al cargar, Al atacar
-   cuerpo a cuerpo o Al atacar: se añade al ataque... Al atacar sirve tanto a
-   distancia como cuerpo a cuerpo"; "Al recibir un disparo: ... aunque sea la
-   fase del rival". Los ejemplos son cartas de la tabla de Equipamiento.      */
+   Los momentos y ejemplos siguen la tabla de equipamiento y el reglamento. */
 const equipmentTiming = figure(
   'Cuándo se usa cada equipamiento',
   'Los Momentos del equipamiento en el orden en que aparecen durante el turno',
@@ -869,8 +865,8 @@ const equipmentTiming = figure(
   })}
 
   ${row(184, 96, {
-    num: '2', title: 'En lugar de disparar',
-    lines: [{ t: 'Al Avanzar, la unidad lo usa en vez de' }, { t: 'hacer su ataque a distancia.' }],
+    num: '2', title: 'Ocupa la activación',
+    lines: [{ t: 'En lugar de Avanzar, Correr o Cargar.' }, { t: 'No hace nada más. Ej.: Botiquín.', fill: C.soft }],
   })}
 
   ${row(292, 96, {
@@ -884,8 +880,8 @@ const equipmentTiming = figure(
   })}
 
   ${row(508, 96, {
-    num: '5', title: 'Al recibir un disparo',
-    lines: [{ t: 'Cuando te disparan, aunque sea la fase' }, { t: 'del rival. Ej.: Bomba de humo.' }],
+    num: '5', title: 'Al recibir un ataque',
+    lines: [{ t: 'Cuando te atacan, aunque sea la fase' }, { t: 'del rival. Ej.: Contraataque.' }],
   })}`,
 )
 

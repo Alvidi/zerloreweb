@@ -5,15 +5,14 @@ import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import guerraTotalMd from '../data/spanish/guerra-total.md?raw'
 import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
-import MissionFichaCard from '../features/rules/components/MissionFichaCard.jsx'
 import { UNIDADES, buildUnitEntry } from '../features/generator/catalogUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import zeroloreLogoSvg from '../images/zeroloreLogo.svg?raw'
 import { commandPostSvg, conquestTokenSvg, livesTokenSvg } from '../features/cards/tokenArt.js'
-import { rasterizeSvgMarkup, useCardFonts } from '../features/cards/cardKit.js'
+import { CARD_H, CARD_W, loadCardFonts, rasterizeSvgMarkup, useCardFonts } from '../features/cards/cardKit.js'
+import { missionCardSvg } from '../features/cards/missionCard.js'
 import { RULES_DIAGRAMS } from '../features/rules/rulesDiagrams.js'
 import rulesHeaderImage from '../images/webimagen/home-worlds.webp'
-import fichasMisionesImg from '../images/fichas/misiones.png'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
@@ -172,8 +171,6 @@ function Reglamento() {
   const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
   const [isGeneratingMissionsPdf, setIsGeneratingMissionsPdf] = useState(false)
   const [openTableModal, setOpenTableModal] = useState(null)
-  const [showMisionFichaModal, setShowMisionFichaModal] = useState(false)
-  const [activeMissionFicha, setActiveMissionFicha] = useState(null)
   const modeParam = searchParams.get('mode')
   const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'rules'
   const isTokensMode = rulesMode === 'tokens'
@@ -525,32 +522,6 @@ function Reglamento() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [renderedHtml])
 
-  useEffect(() => {
-    const extractMissionNumber = (title) => title.match(/^(\d+)\s*-\s*/)?.[1] || ''
-    const stripLabel = (el) => {
-      if (!el) return ''
-      const label = el.querySelector('.rules-mission-label')
-      const full = el.textContent?.trim() || ''
-      const labelText = label?.textContent?.trim() || ''
-      return labelText ? full.replace(labelText, '').trim() : full
-    }
-    window.__zeroloreOpenMissionFicha = (btn) => {
-      const card = btn.closest('.rules-mission-card')
-      if (!card) return
-      const title = card.querySelector('.rules-mission-card-title')?.textContent?.trim() || ''
-      setActiveMissionFicha({
-        title: title.replace(/^\d+\s*-\s*/, ''),
-        flavor: card.querySelector('.rules-mission-card-flavor')?.textContent?.trim().replace(/^["""]/g, '').replace(/["""']$/g, '').trim() || '',
-        summary: stripLabel(card.querySelector('.rules-mission-card-summary')),
-        copy: stripLabel(card.querySelector('.rules-mission-card-copy')),
-        meta: stripLabel(card.querySelector('.rules-mission-card-meta')),
-        number: extractMissionNumber(title) || btn.dataset.number || '',
-      })
-      setShowMisionFichaModal(true)
-    }
-    return () => { delete window.__zeroloreOpenMissionFicha }
-  }, [setActiveMissionFicha, setShowMisionFichaModal])
-
   // Scroll spy para resaltar sección activa
   useEffect(() => {
     const handleScroll = () => {
@@ -673,238 +644,62 @@ function Reglamento() {
     )
   }
 
-  // Las misiones secundarias se imprimen como mazo de cartas, con la misma
-  // plantilla y las mismas posiciones que las fichas de misión de siempre.
+  // Las misiones secundarias se imprimen como mazo de cartas vectoriales, del
+  // mismo estilo que las de equipamiento (ver features/cards/missionCard.js).
   const handleDownloadMissionsPdf = async () => {
     if (typeof window === 'undefined' || isGeneratingMissionsPdf) return
     setIsGeneratingMissionsPdf(true)
     try {
-
-        // ── helpers canvas ──────────────────────────────────────────────────
-        const wrapTextC = (ctx, text, maxW) => {
-          const words = String(text).split(/\s+/)
-          const lines = []
-          let line = ''
-          for (const word of words) {
-            const test = line ? `${line} ${word}` : word
-            if (line && ctx.measureText(test).width > maxW) { lines.push(line); line = word }
-            else line = test
-          }
-          if (line) lines.push(line)
-          return lines
-        }
-
-        // Las fuentes y los tamaños replican los de la ficha en pantalla
-        // (.mission-* en App.css): Cinzel para títulos y etiquetas, Inter para el
-        // cuerpo. Si aquí se cambia una, el PDF deja de parecerse a la web.
-        const FONT_TITLE = 'Cinzel, serif'
-        const FONT_BODY = 'Inter, system-ui, sans-serif'
-        const LINE_RATIO = 1.4
-        const LABEL_RATIO = 0.75
-        const LABEL_GAP = 6
-
-        const setFont = (ctx, { sz, family, weight = '400', style = '', tracking = 0 }) => {
-          ctx.font = [style, weight, `${sz}px`, family].filter(Boolean).join(' ')
-          try { ctx.letterSpacing = `${sz * tracking}px` } catch { /* navegador sin letterSpacing */ }
-        }
-
-        const drawFit = (ctx, text, g, { family = FONT_BODY, color = '#1a1a1a', maxSz = 22, minSz = 8, weight = '400', style = '', align = 'center', shadow = false, tracking = 0, lineRatio = LINE_RATIO, upper = false } = {}) => {
-          if (!text || !g) return
-          const value = upper ? String(text).toLocaleUpperCase('es-ES') : text
-          ctx.save()
-          if (shadow) { ctx.shadowColor = 'rgba(0,0,0,0.85)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 1; ctx.shadowOffsetY = 1 }
-          ctx.fillStyle = color
-          ctx.textAlign = align === 'center' ? 'center' : 'left'
-          ctx.textBaseline = 'middle'
-          let sz = maxSz
-          let lines = []
-          while (sz >= minSz) {
-            setFont(ctx, { sz, family, weight, style, tracking })
-            lines = wrapTextC(ctx, value, g.w - 4)
-            if (lines.length * sz * lineRatio <= g.h) break
-            sz = Math.max(minSz, sz - 0.5)
-          }
-          const lineH = sz * lineRatio
-          const totalH = lines.length * lineH
-          const startY = g.y + g.h / 2 - totalH / 2 + lineH / 2
-          const x = align === 'center' ? g.x + g.w / 2 : g.x + 2
-          lines.forEach((l, i) => ctx.fillText(l, x, startY + i * lineH))
-          ctx.restore()
-        }
-
-        /**
-         * Bloque etiqueta + texto (Objetivo, Descripción, Puntos). En la web es una
-         * columna flex centrada dentro del recuadro, así que aquí se mide el bloque
-         * entero —etiqueta, hueco y líneas— y se centra igual, en vez de clavar la
-         * etiqueta arriba y centrar el cuerpo por separado.
-         */
-        const drawField = (ctx, label, text, g, { color = '#1a1a1a', family = FONT_BODY, weight = '400', maxSz = 52, minSz = 16 } = {}) => {
-          if (!g) return
-          ctx.save()
-          ctx.textAlign = 'center'
-          ctx.textBaseline = 'middle'
-          const x = g.x + g.w / 2
-
-          let sz = maxSz
-          let lines = []
-          let labelH = 0
-          let blockH = 0
-          while (sz >= minSz) {
-            setFont(ctx, { sz, family, weight })
-            lines = text ? wrapTextC(ctx, text, g.w - 4) : []
-            labelH = label ? sz * LABEL_RATIO * LINE_RATIO : 0
-            blockH = labelH + (label && lines.length ? LABEL_GAP : 0) + lines.length * sz * LINE_RATIO
-            if (blockH <= g.h) break
-            sz = Math.max(minSz, sz - 0.5)
-          }
-
-          let cursor = g.y + g.h / 2 - blockH / 2
-          if (label) {
-            const labelSz = sz * LABEL_RATIO
-            setFont(ctx, { sz: labelSz, family: FONT_TITLE, weight: '700', tracking: 0.1 })
-            ctx.fillStyle = '#8b6914'
-            ctx.fillText(String(label).toLocaleUpperCase('es-ES'), x, cursor + labelH / 2)
-            cursor += labelH + (lines.length ? LABEL_GAP : 0)
-          }
-
-          setFont(ctx, { sz, family, weight })
-          ctx.fillStyle = color
-          const lineH = sz * LINE_RATIO
-          lines.forEach((l, i) => ctx.fillText(l, x, cursor + lineH / 2 + i * lineH))
-          ctx.restore()
-        }
-
-        // ── misiones secundarias, leídas de la tabla de Guerra Total ────────
-        const tabla = contentRef.current?.querySelector('[data-rules-missions-table]')
-        // Las columnas se buscan por su cabecera, no por su posición: así una
-        // columna nueva en Notion no descoloca los Puntos.
-        const cabeceras = Array.from(tabla?.querySelectorAll('thead th') || [])
-          .map((th) => normalizeHeadingText(th.textContent))
-        const columna = (nombre) => cabeceras.findIndex((cabecera) => cabecera.startsWith(nombre))
-        const [colTitulo, colObjetivo, colTipo, colPuntos] = ['mision', 'objetivo', 'tipo', 'puntos'].map(columna)
-        const missions = Array.from(tabla?.querySelectorAll('tbody tr') || [])
-          .map((fila, index) => {
-            const celdas = Array.from(fila.querySelectorAll('td')).map((td) => td.textContent?.trim() || '')
-            const celda = (col) => (col >= 0 ? celdas[col] || '' : '')
-            const title = celda(colTitulo)
-            return title
-              ? { title, flavor: '', summary: celda(colObjetivo), copy: '', meta: celda(colPuntos), tipo: celda(colTipo), number: String(index + 1) }
-              : null
-          })
-          .filter(Boolean)
-        if (!missions.length) return
-
-        // ── leer posiciones guardadas en localStorage (mismo storage que layout mode) ──
-        const GUIDE_DEFAULTS = [
-          { label: 'MISION',      x: 31,  y: 186, w: 190, h: 54  },
-          { label: 'NUMERO',      x: 634, y: 186, w: 88,  h: 57  },
-          { label: 'TITULO',      x: 172, y: 77,  w: 538, h: 70  },   // entre el logo y el bisel derecho de la banda
-          { label: 'LORE',        x: 48,  y: 282, w: 645, h: 55  },
-          { label: 'OBJETIVO',    x: 50,  y: 345, w: 641, h: 130 },
-          { label: 'DESCRIPCION', x: 50,  y: 488, w: 645, h: 397 },
-          { label: 'PUNTOS',      x: 50,  y: 900, w: 648, h: 70  },
-        ]
-        const guideMap = (() => {
-          try {
-            const raw = localStorage.getItem('zerolore.rules.mission-ficha-layout.v1')
-            const saved = raw ? JSON.parse(raw) : []
-            const savedMap = new Map(Array.isArray(saved) ? saved.filter(g => g?.label).map(g => [g.label, g]) : [])
-            return Object.fromEntries(
-              GUIDE_DEFAULTS.map(def => {
-                const s = savedMap.get(def.label)
-                return [def.label, s ? { ...def, x: s.x ?? def.x, y: s.y ?? def.y, w: s.w ?? def.w, h: s.h ?? def.h } : def]
-              })
-            )
-          } catch { return Object.fromEntries(GUIDE_DEFAULTS.map(g => [g.label, g])) }
-        })()
-
-        // ── cargar fuentes + imagen plantilla ───────────────────────────────
-        // Una fuente solo se descarga cuando se usa, y el canvas no la espera:
-        // hay que pedir cada familia/peso que se vaya a pintar o sale la de sistema.
-        await Promise.allSettled([
-          document.fonts.load('700 42px Cinzel'),
-          document.fonts.load('600 26px Cinzel'),
-          document.fonts.load('700 20px Cinzel'),
-          document.fonts.load('400 26px Inter'),
-          document.fonts.load('300 20px Inter'),
-          document.fonts.load('italic 300 20px Inter'),
-        ])
-
-        const templateImg = await new Promise((res) => {
-          const i = new Image()
-          i.onload = () => res(i)
-          i.onerror = () => res(null)
-          i.src = fichasMisionesImg
+      // ── misiones secundarias, leídas de la tabla de Guerra Total ────────
+      const tabla = contentRef.current?.querySelector('[data-rules-missions-table]')
+      // Las columnas se buscan por su cabecera, no por su posición: así una
+      // columna nueva en Notion no descoloca los Puntos.
+      const cabeceras = Array.from(tabla?.querySelectorAll('thead th') || [])
+        .map((th) => normalizeHeadingText(th.textContent))
+      const columna = (nombre) => cabeceras.findIndex((cabecera) => cabecera.startsWith(nombre))
+      const [colTitulo, colObjetivo, colTipo, colPuntos] = ['mision', 'objetivo', 'tipo', 'puntos'].map(columna)
+      const missions = Array.from(tabla?.querySelectorAll('tbody tr') || [])
+        .map((fila) => {
+          const celdas = Array.from(fila.querySelectorAll('td')).map((td) => td.textContent?.trim() || '')
+          const celda = (col) => (col >= 0 ? celdas[col] || '' : '')
+          const title = celda(colTitulo)
+          return title ? { title, summary: celda(colObjetivo), tipo: celda(colTipo), meta: celda(colPuntos) } : null
         })
-        if (!templateImg) { setIsGeneratingRulesPdf(false); return }
+        .filter(Boolean)
+      if (!missions.length) return
 
-        // ── generar PDF ─────────────────────────────────────────────────────
-        // Tamaño magic: plegada ~66×88mm → desplegar = 132×88mm. A4 landscape = 4 cartas (2×2)
-        const { jsPDF } = await import('jspdf')
-        const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' })
-        const PW = doc.internal.pageSize.getWidth()   // 297mm
-        const PH = doc.internal.pageSize.getHeight()  // 210mm
-        const cols = 2
-        const rows = 2
-        const cardsPerPage = cols * rows
-        const gap = 4
-        const cardH = 88
-        const cardW = cardH * (1537 / 1023)  // ~132mm
-        const marginX = (PW - cols * cardW - gap * (cols - 1)) / 2
-        const marginY = (PH - rows * cardH - gap * (rows - 1)) / 2
+      // Las cartas miden el texto con sus fuentes: hay que tenerlas antes de montarlas.
+      await loadCardFonts()
 
-        for (let i = 0; i < missions.length; i += cardsPerPage) {
-          if (i > 0) doc.addPage()
-          for (let j = 0; j < cardsPerPage && i + j < missions.length; j++) {
-            const m = missions[i + j]
-            const col = j % cols
-            const row = Math.floor(j / cols)
-            const x = marginX + col * (cardW + gap)
-            const y = marginY + row * (cardH + gap)
-            const canvas = document.createElement('canvas')
-            canvas.width = 1537
-            canvas.height = 1023
-            const ctx = canvas.getContext('2d')
+      // ── generar PDF ─────────────────────────────────────────────────────
+      // Tamaño magic: plegada ~66×88mm → desplegar = 132×88mm. A4 landscape = 4 cartas (2×2)
+      const { jsPDF } = await import('jspdf')
+      const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape' })
+      const PW = doc.internal.pageSize.getWidth()   // 297mm
+      const PH = doc.internal.pageSize.getHeight()  // 210mm
+      const cols = 2
+      const rows = 2
+      const cardsPerPage = cols * rows
+      const gap = 4
+      const cardH = 88
+      const cardW = cardH * (CARD_W / CARD_H)  // ~132mm
+      const marginX = (PW - cols * cardW - gap * (cols - 1)) / 2
+      const marginY = (PH - rows * cardH - gap * (rows - 1)) / 2
 
-            // Fondo
-            ctx.drawImage(templateImg, 0, 0, 1537, 1023)
-
-            // MISIÓN
-            drawFit(ctx, 'MISIÓN', guideMap.MISION, { family: FONT_TITLE, color: '#ffffff', maxSz: 34, minSz: 12, weight: '700', tracking: 0.15, shadow: true })
-
-            // NUMERO
-            if (m.number) drawFit(ctx, m.number, guideMap.NUMERO, { family: FONT_TITLE, color: '#ffffff', maxSz: 36, minSz: 18, weight: '700', shadow: true })
-
-            // TITULO
-            if (m.title) drawFit(ctx, m.title, guideMap.TITULO, { family: FONT_TITLE, color: '#ffffff', maxSz: 66, minSz: 18, weight: '700', tracking: 0.05, lineRatio: 1.1, upper: true, shadow: true })
-
-            // LORE — las misiones de Guerra Total no traen frase de ambientación;
-            // ese hueco lo ocupa su tipo (Puesto de mando, Eliminación…) como etiqueta.
-            if (m.flavor) drawFit(ctx, `"${m.flavor}"`, guideMap.LORE, { family: FONT_BODY, color: '#444', maxSz: 20, minSz: 10, weight: '300', style: 'italic', lineRatio: 1.35 })
-            else if (m.tipo) drawFit(ctx, m.tipo, guideMap.LORE, { family: FONT_TITLE, color: '#8b6914', maxSz: 26, minSz: 12, weight: '700', tracking: 0.12, upper: true })
-
-            // OBJETIVO — si la misión no trae descripción, se queda con el hueco
-            // de las dos cajas: así el texto se lee grande en vez de quedarse
-            // pequeño arriba con medio cuerpo de carta en blanco.
-            const objetivoBox = m.copy
-              ? guideMap.OBJETIVO
-              : {
-                ...guideMap.OBJETIVO,
-                h: (guideMap.DESCRIPCION.y + guideMap.DESCRIPCION.h) - guideMap.OBJETIVO.y,
-              }
-            drawField(ctx, 'Objetivo', m.summary, objetivoBox)
-
-            // DESCRIPCION
-            if (m.copy) drawField(ctx, 'Descripción', m.copy, guideMap.DESCRIPCION)
-
-            // PUNTOS
-            drawField(ctx, 'Puntos', m.meta, guideMap.PUNTOS, { family: FONT_TITLE, color: '#7a5810', weight: '600', maxSz: 44 })
-
-            doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', x, y, cardW, cardH)
-          }
+      for (let i = 0; i < missions.length; i += cardsPerPage) {
+        if (i > 0) doc.addPage()
+        for (let j = 0; j < cardsPerPage && i + j < missions.length; j++) {
+          const col = j % cols
+          const row = Math.floor(j / cols)
+          const x = marginX + col * (cardW + gap)
+          const y = marginY + row * (cardH + gap)
+          const markup = missionCardSvg(missions[i + j], { logoHref: LOGO_DATA_URL, id: `mision-${i + j}` })
+          const canvas = await rasterizeSvgMarkup(markup, { scale: 1 })
+          if (canvas) doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', x, y, cardW, cardH)
         }
+      }
 
-        doc.save('zerolore-misiones-fichas.pdf')
+      doc.save('zerolore-misiones-fichas.pdf')
     } finally {
       setIsGeneratingMissionsPdf(false)
     }
@@ -1943,27 +1738,6 @@ function Reglamento() {
         >
           ↑
         </button>
-      )}
-      {showMisionFichaModal && activeMissionFicha && typeof document !== 'undefined' && createPortal(
-        <div
-          className="mision-ficha-modal-overlay"
-          onClick={() => { setShowMisionFichaModal(false); setActiveMissionFicha(null) }}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="mision-ficha-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="mision-ficha-modal-bar">
-              <button
-                type="button"
-                className="mision-ficha-modal-close"
-                onClick={() => { setShowMisionFichaModal(false); setActiveMissionFicha(null) }}
-                aria-label="Cerrar"
-              >×</button>
-            </div>
-            <MissionFichaCard ficha={activeMissionFicha} />
-          </div>
-        </div>,
-        document.body,
       )}
       {openTableModal && typeof document !== 'undefined' && createPortal(
         <div

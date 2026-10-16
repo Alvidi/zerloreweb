@@ -247,7 +247,7 @@
         "escuadra": null,
         "valor": 17
       },
-      "habilidad": "Pisotón",
+      "habilidad": "Furia creciente",
       "armas": {
         "disparo": null,
         "cuerpo_a_cuerpo": {
@@ -400,7 +400,7 @@
         "escuadra": 3,
         "valor": 11
       },
-      "habilidad": "Supresión",
+      "habilidad": "",
       "armas": {
         "disparo": {
           "ataques": "1D6",
