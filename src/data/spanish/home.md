@@ -2,19 +2,39 @@
 
 ### eyebrow
 
-Wargame de miniaturas
+El wargame para todas tus miniaturas
 
 ### title
 
-El campo de batalla es tuyo.
+Tus miniaturas.
+
+### title_accent
+
+Tu universo.
 
 ### subtitle
 
-ZeroLore es el wargame que funciona con TODO lo que ya tienes. Sin comprar nada nuevo. Sin estudiar reglamentos interminables. Sin atarte. Descárgalo gratis y juega hoy.
+Reúne las miniaturas que te gustan, juega con reglas sencillas y cuenta tu propia historia. De cualquier época. De cualquier mundo.
 
 ### primary_cta
 
-Empieza a jugar ya →
+Leer el reglamento
+
+### secondary_cta
+
+Crear mi ejército
+
+### note
+
+Todo gratis. Sin registro. Con las miniaturas que ya tienes.
+
+### motion_pause
+
+Pausar animación
+
+### motion_play
+
+Activar animación
 
 ## pillars
 
@@ -22,98 +42,70 @@ Empieza a jugar ya →
 
 #### title
 
-Agnóstico total
+Cualquier miniatura.
 
 #### body
 
-Warhammer, Star Wars, Señor de los Anillos, lo que tengas. Cualquier miniatura tiene cabida.
-
-### free
-
-#### title
-
-Completamente gratuito
-
-#### body
-
-Reglamento, fichas de unidades, creador de ejércitos y tokens. Todo sin coste.
+Fantasía, ciencia ficción, historia o una mezcla de todo. Dale un lugar en la mesa a las miniaturas que ya tienes.
 
 ### fast
 
 #### title
 
-Aprende en minutos
+Reglas sencillas.
 
 #### body
 
-Reglas claras y directas. Sin excepciones infinitas ni consultar el manual cada turno.
+Un sistema fácil de aprender, con espacio para la estrategia. Menos consultas al manual y más juego en la mesa.
 
 ### universe
 
 #### title
 
-Crea tu propio universo
+Tu propia historia.
 
 #### body
 
-Diseña tus campañas, tus misiones, tu lore. ZeroLore es el sistema, tú pones la historia.
+Imagina tu mundo, da nombre a tus héroes y crea tus propias temáticas y narrativas. Tú decides por qué luchan.
 
-### scale
+## overview
 
-#### title
+### title
 
-Escaramuza o grandes batallas
-
-#### body
-
-¿Partida rápida con pocos modelos? ¿Batalla épica con escuadras? El mismo reglamento, tú eliges la escala.
-
-### factions
-
-#### title
-
-Héroes y unidades genéricas
-
-#### body
-
-Héroes y clases de unidad diseñados para que cualquier miniatura encaje. Adapta tus modelos, no al revés.
+Una mesa. Infinitos mundos.
 
 ## toolkit
 
 ### eyebrow
 
-Todo en un solo sitio
+Tu próxima partida empieza aquí
 
 ### title
 
-Todo lo que necesitas, en un solo sitio
+De la vitrina a la mesa.
 
 ### body
 
-Reglamento completo, fichas de unidades, creador de ejércitos y tokens imprimibles. Sin registros, sin pagos, sin trampa.
+Elige un héroe, monta tu ejército y descarga sus fichas. El reglamento y los tokens también están aquí. Todo gratuito.
 
 ### cta
 
-Crea tu ejercito →
+Preparar mi ejército
 
 ## join
 
-### eyebrow
-
-Comunidad
-
 ### title
 
-Únete a nuestro grupo
+Comparte tu universo.
 
 ### subtitle
 
-Entra al Discord de ZeroLore, comparte listas y recibe novedades.
+Enséñanos tus ejércitos, comparte historias y ayúdanos a hacer crecer ZeroLore.
 
 ### email_text
 
-Si tienes cualquier duda, quieres comentarnos algo o simplemente ponerte en contacto con nosotros, mándanos un mail a
+Contactar por email
 
 ### button
 
-Únete por Discord
+Únete al Discord

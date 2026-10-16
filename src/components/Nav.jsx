@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import zeroloreLogo from '../images/zeroloreLogo.svg'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
@@ -44,9 +44,9 @@ function Nav() {
         <span>ZeroLore</span>
       </Link>
       <div className="nav-links">
-        <Link to="/">{t('nav.home')}</Link>
-        <Link to="/reglamento">{t('nav.rules')}</Link>
-        <Link to="/generador">{t('nav.generator')}</Link>
+        <NavLink to="/" end>{t('nav.home')}</NavLink>
+        <NavLink to="/reglamento">{t('nav.rules')}</NavLink>
+        <NavLink to="/generador">{t('nav.generator')}</NavLink>
         {socialLinks.map((social) => (
           <a
             key={social.key}
@@ -83,9 +83,9 @@ function Nav() {
       />
       <div className={`nav-mobile-panel ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="nav-mobile-panel-links">
-          <Link to="/" onClick={closeMobileMenu}>{t('nav.home')}</Link>
-          <Link to="/reglamento" onClick={closeMobileMenu}>{t('nav.rules')}</Link>
-          <Link to="/generador" onClick={closeMobileMenu}>{t('nav.generator')}</Link>
+          <NavLink to="/" end onClick={closeMobileMenu}>{t('nav.home')}</NavLink>
+          <NavLink to="/reglamento" onClick={closeMobileMenu}>{t('nav.rules')}</NavLink>
+          <NavLink to="/generador" onClick={closeMobileMenu}>{t('nav.generator')}</NavLink>
           {socialLinks.map((social) => (
             <a
               key={social.key}

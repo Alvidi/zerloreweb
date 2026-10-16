@@ -8,11 +8,11 @@ export const SOCIAL_IMAGE_ALT = 'ZeroLore logo'
 export const SEO_BY_LANG = {
   es: {
     '/': {
-      title: 'ZeroLore | Wargame de Miniaturas',
+      title: 'ZeroLore | Tus miniaturas. Tu universo.',
       description:
-        'ZeroLore es un wargame de miniaturas para crear partidas, ejércitos y escenarios propios.',
+        'Un wargame gratuito para cualquier miniatura y cualquier época. Reglas sencillas, tus propios ejércitos y libertad para crear tu universo.',
       summary:
-        'Explora ZeroLore, consulta el reglamento y prepara tus ejercitos para partidas de escaramuza y gran batalla.',
+        'Juega con las miniaturas que ya tienes. Consulta el reglamento gratuito, prepara tu ejército y cuenta tu propia historia.',
       pageType: 'WebSite',
     },
     '/reglamento': {

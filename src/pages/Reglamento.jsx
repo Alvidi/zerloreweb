@@ -12,7 +12,7 @@ import zeroloreLogoSvg from '../images/zeroloreLogo.svg?raw'
 import { commandPostSvg, conquestTokenSvg, livesTokenSvg } from '../features/cards/tokenArt.js'
 import { rasterizeSvgMarkup, useCardFonts } from '../features/cards/cardKit.js'
 import { RULES_DIAGRAMS } from '../features/rules/rulesDiagrams.js'
-import rulesHeaderImage from '../images/webimagen/cabecera2.webp'
+import rulesHeaderImage from '../images/webimagen/home-worlds.webp'
 import fichasMisionesImg from '../images/fichas/misiones.png'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
@@ -1093,7 +1093,8 @@ function Reglamento() {
           .rules-pdf-sheet .rules-html .rules-hero-banner {
             position: relative;
             width: 100%;
-            margin: 0 0 30px;
+            height: 220px;
+            margin: 0 0 22px;
             overflow: hidden;
             border: 1px solid #d8c777;
             border-radius: 0;
@@ -1104,6 +1105,7 @@ function Reglamento() {
             width: 100%;
             height: auto;
             display: block;
+            transform: none;
           }
           .rules-pdf-sheet .rules-html ul,
           .rules-pdf-sheet .rules-html ol {
