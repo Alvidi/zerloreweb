@@ -422,24 +422,6 @@
       }
     },
     {
-      "id": "capitan",
-      "nombre": "Capitán",
-      "rol": "Especial",
-      "descripcion": "Puede crear escuadras con el mismo tipo de unidad.",
-      "perfil": {
-        "movimiento": null,
-        "vidas": null,
-        "defensa": null,
-        "escuadra": null,
-        "valor": 2
-      },
-      "habilidad": "Escuadras",
-      "armas": {
-        "disparo": null,
-        "cuerpo_a_cuerpo": null
-      }
-    },
-    {
       "id": "soporte",
       "nombre": "Soporte",
       "rol": "Especial",

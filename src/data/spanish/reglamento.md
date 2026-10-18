@@ -12,7 +12,7 @@ Antes de empezar, conviene aclarar algunos conceptos que se usan a lo largo de t
 
 ## Miniaturas y unidades
 
-Cada **unidad** es una sola miniatura: un combatiente, una criatura o un vehículo, salvo las **escuadras**, que agrupan varias miniaturas en una sola unidad *(ver Capitanes y escuadras)*. Es el elemento básico del juego: se despliega, se activa y combate por su cuenta.
+Cada **unidad** es una sola miniatura: un combatiente, una criatura o un vehículo, salvo las **escuadras**, que agrupan varias miniaturas en una sola unidad *(ver Escuadras)*. Es el elemento básico del juego: se despliega, se activa y combate por su cuenta.
 
 ## Medición de distancias
 
@@ -72,7 +72,7 @@ Cada unidad tiene un **perfil** que define sus capacidades en el campo de batall
 
 **Habilidad de unidad.** Regla especial propia del tipo de unidad *(ver pestaña Ejércitos)*. Se aplica siempre que la unidad esté en juego, salvo que se indique lo contrario.
 
-**Escuadra.** Número máximo de miniaturas de ese tipo que pueden formar una escuadra con un **Capitán** *(ver Capitanes y escuadras)*. Un **–** indica que la unidad no puede formar parte de una escuadra.
+**Escuadra.** Número máximo de miniaturas de ese tipo que pueden formar una escuadra *(ver Escuadras)*. Un **–** indica que la unidad no puede formar parte de una escuadra.
 
 **Valor.** Coste en puntos de la unidad. Sirve para equilibrar los enfrentamientos y determinar el tamaño de los ejércitos, y también para calcular quién controla un puesto de mando cuando hay varias unidades en él.
 
@@ -133,7 +133,7 @@ Cada tipo pertenece a un **rol**, que agrupa unidades con una función parecida.
 - **Movilidad:** rápidas, para llegar antes que nadie a los objetivos. *Explorador, Asaltante.*
 - **Pesado:** criaturas y vehículos enormes. *Monstruo, Vehículo ligero, Vehículo pesado, Titán.*
 - **Fuego pesado:** armas grandes y lentas, de largo alcance. *Artillería, Armas Pesadas.*
-- **Especial:** unidades con una función única. *Capitán, Soporte, Psíquico.*
+- **Especial:** unidades con una función única. *Soporte, Psíquico.*
 
 **Pesado y Fuego pesado.** Por su tamaño, estas unidades tienen tres límites:
 
@@ -147,31 +147,61 @@ Cada ejército lleva **un único Héroe**, obligatorio, y es lo primero que se e
 
 La habilidad del Héroe funciona desde que se despliega. Si el Héroe es destruido, su habilidad **desaparece por completo** durante el resto de la partida, salvo que la propia habilidad diga lo contrario.
 
-## Capitanes y escuadras
+## Escuadras
 
-Una **escuadra** es un grupo de miniaturas del mismo tipo que actúan como **una sola unidad**. Solo un **Capitán** puede formar una escuadra; las unidades sin Capitán juegan siempre en solitario.
+Una **escuadra** es un grupo de miniaturas del mismo tipo que actúan como **una sola unidad**. Un Héroe puede unirse a ella *(ver Héroes en escuadras)*.
 
-**Capitanes opcionales.** Antes de la partida, los jugadores acuerdan si se juega con Capitanes. Sin ellos, cada unidad es una sola miniatura y la partida es una escaramuza más rápida. Con ellos entran las escuadras y los ejércitos crecen.
+**Modo de escuadras opcional.** Antes de la partida, los jugadores acuerdan si se juega con este modo. Sin él, cada unidad es una sola miniatura, una opción adecuada para jugar con pocas miniaturas. Con él, las unidades cuyo perfil permita formar escuadras pueden desplegarse agrupadas o empezar solas y formar una escuadra al recibir Refuerzos.
 
 ### Formar una escuadra
 
-Al montar la lista, cada Capitán puede llevar una escuadra de **un único tipo de unidad**, con hasta el número de miniaturas que indique su valor **Escuadra**. El Capitán no cuenta para ese máximo: con Escuadra 5, la escuadra tiene 5 miniaturas más el Capitán.
+Al montar la lista, puedes agrupar miniaturas de **un único tipo de unidad** en una escuadra, hasta el número que indique su valor **Escuadra**. Cada miniatura paga su Valor. La escuadra puede **desplegarse completa desde un puesto de mando** en una sola fase de despliegue y cuenta como **una sola unidad** para desplegarse y activarse.
 
-El Capitán **usa el perfil completo de la unidad que acompaña** (Movimiento, Vidas, Defensa y armas), así que a todos los efectos es un integrante más. Capitán y escuadra se despliegan juntos, ocupando un solo puesto de mando, y se activan juntos como una sola unidad.
+Una escuadra funciona como **una sola unidad**: sus integrantes **suman sus dados de ataque**, pero su **habilidad de unidad se aplica una sola vez al conjunto**, sin multiplicarse por el número de miniaturas. Por ejemplo, una escuadra de tres Psíquicos usa Telequinesis una sola vez durante su activación.
 
-Una escuadra es **una sola unidad** a todos los efectos: su habilidad de unidad se aplica una sola vez a toda la escuadra, salvo que indique lo contrario. Las escuadras no pueden formarse, dividirse ni fusionarse durante la partida, salvo mediante Refuerzos.
+Las escuadras no pueden formarse, dividirse ni fusionarse durante la partida, salvo mediante Refuerzos.
+
+### El Capitán de la escuadra
+
+Al desplegar una escuadra o formarla mediante Refuerzos, elige una de sus miniaturas como **Capitán**. Esta miniatura sirve de referencia para mover la escuadra y mantener la coherencia. Ser Capitán no cambia su perfil, su rol ni sus habilidades.
+
+Se recomienda elegir una miniatura con algún detalle que permita reconocerla fácilmente, como una pose diferente o una marca en la peana. Esa diferencia es únicamente visual.
+
+El Capitán es el último de los integrantes de su tipo en recibir impactos no bloqueados. Si la escuadra incluye un Héroe, primero debe eliminarse toda su escolta, incluido el Capitán, y los impactos sobrantes de ese ataque no pasan al Héroe *(ver Héroes en escuadras)*.
 
 {{captainSquadDiagram}}
+
+### Héroes en escuadras
+
+Si se juega con el modo de escuadras, un **Héroe** puede formar parte de una escuadra de **su mismo rol**. Al montar la lista, indica qué escuadra lo acompaña: todos sus acompañantes deben ser de **un único tipo de unidad** cuyo perfil permita formar escuadras. El Héroe conserva su propio perfil y sus habilidades. Cada integrante conserva las restricciones de su rol. El conjunto forma **una sola unidad** y comparte una misma activación.
+
+El Héroe **no cuenta para el máximo de Escuadra** de sus acompañantes: se añade a ellos. Por ejemplo, una unidad con Escuadra 5 puede formar un grupo de **cinco acompañantes más el Héroe**, seis miniaturas en total.
+
+Si el Héroe usa una habilidad que **ocupa toda la activación**, la consume para **toda la escuadra**: ninguno de sus integrantes puede realizar otras acciones durante esa activación.
+
+El Héroe puede **desplegarse acompañado por toda su escuadra desde el primer turno**. El conjunto cuenta como una sola unidad a efectos del despliegue inicial. Mientras el Héroe forme parte de ella, **todos los integrantes utilizan el Movimiento del Héroe** *(ver Mover una escuadra)*.
+
+Al atacar, primero se resuelve por completo el ataque de los acompañantes y después el del Héroe, **contra el mismo objetivo**. Cada uno utiliza las armas y la Precisión de su propio perfil; los dados del Héroe se resuelven por separado.
+
+Mientras quede algún acompañante, los ataques se resuelven contra la **escolta**, utilizando su Defensa. Deben ser eliminados todos los acompañantes, incluido el Capitán, antes de poder atacar al Héroe. Si un ataque elimina al último acompañante, los **impactos no bloqueados sobrantes se pierden: no pasan al Héroe**. El Héroe podrá recibir **ataques posteriores**, que se resuelven con su propio perfil y su propia Defensa.
+
+{{heroSquadDiagram}}
 
 ### Coherencia
 
 Cada integrante debe estar a **1" o menos de al menos otro integrante**, y al menos uno de ellos a **1" o menos del Capitán**. Mientras esa cadena no se rompa, la escuadra puede adoptar la formación que quiera.
 
+Si una baja rompe la coherencia, recoloca inmediatamente otra miniatura superviviente de la escuadra en el lugar de la que ha sido retirada para recuperar la coherencia. Esta recolocación no consume Movimiento.
+
+Si la escuadra queda reducida a **una sola miniatura**, no necesita mantener coherencia.
+
 {{squadCoherenceDiagram}}
 
 ### Mover una escuadra
 
-La escuadra se mueve **desde el Capitán**: primero se mueve él y después el resto se coloca a su alrededor, en coherencia. Ninguna miniatura puede quedar más lejos de lo que le permitiría su propio movimiento. Al Correr o Cargar, se tira **un solo dado** para toda la escuadra.
+La escuadra se mueve **desde el Capitán (la miniatura elegida como Capitán de la escuadra)**: primero se mueve él y después el resto se coloca a su alrededor, en coherencia. Todos sus integrantes utilizan el Movimiento de su tipo de unidad. **Si incluye un Héroe, todos utilizan el Movimiento del Héroe en lugar del suyo.** Ninguna miniatura puede desplazarse más de lo permitido por ese valor común.
+
+Al Correr o Cargar, se tira **un solo 1D6** para toda la escuadra y se suma al Movimiento que esté utilizando.
 
 {{squadMovementDiagram}}
 
@@ -179,23 +209,27 @@ La escuadra se mueve **desde el Capitán**: primero se mueve él y después el r
 
 Para elegir a una escuadra como objetivo basta con que **uno de sus integrantes** sea visible y esté al alcance.
 
-Cuando la escuadra ataca, todos sus integrantes, Capitán incluido, suman sus dados en **un solo ataque** contra el mismo objetivo. A distancia, solo aportan dados los integrantes que tengan línea de visión y alcance. Cuando una escuadra carga, basta con que un integrante llegue al contacto: todos sus integrantes, Capitán incluido, suman sus dados al ataque cuerpo a cuerpo. Después, **toda la escuadra** se separa 1" del defensor.
+Cuando la escuadra ataca, sus integrantes del mismo tipo suman sus dados en **un solo ataque** contra el mismo objetivo. Las habilidades de las armas se aplican a ese ataque conjunto, sin multiplicar su efecto por el número de integrantes. Por ejemplo, el dado adicional de **Pesada** o **Disparo certero** se añade una sola vez al ataque de la escuadra cuando se cumplen sus condiciones. Si incluye un Héroe, este resuelve su ataque después y por separado *(ver Héroes en escuadras)*. A distancia, solo pueden atacar los integrantes que tengan línea de visión y alcance. Cuando una escuadra carga, basta con que un integrante llegue al contacto: todos sus integrantes pueden participar en el ataque cuerpo a cuerpo, resolviendo el ataque del Héroe por separado. Después de resolver todos los ataques, **toda la escuadra** se separa 1" del defensor.
 
 {{squadAttackDiagram}}
 
 ### Vidas en escuadras
 
-Los impactos no bloqueados de un ataque se suman en un **único total**, que el defensor va asignando: elige una miniatura, le quita Vidas hasta eliminarla y, si sobran, elige la siguiente, hasta agotar el total. Los impactos **no pueden repartirse** entre varias miniaturas mientras la elegida siga en pie, y el **Capitán** es siempre el **último en recibirlos**.
+Los impactos no bloqueados de un ataque se suman en un **único total**, que el defensor va asignando entre las miniaturas del mismo tipo: elige una, le quita Vidas hasta eliminarla y, si sobran, elige la siguiente, hasta agotar el total o eliminar a todas. Los impactos **no pueden repartirse** entre varias miniaturas mientras la elegida siga en pie. El **Capitán** es el **último de los integrantes de su tipo en recibirlos**.
+
+Si la escuadra incluye un Héroe, los impactos de ese ataque solo se asignan a sus acompañantes. Si todos son eliminados, los sobrantes se pierden y **no pasan al Héroe**. Los siguientes ataques contra el Héroe se resuelven con su propio perfil *(ver Héroes en escuadras)*.
 
 {{squadDamageDiagram}}
 
 ### Refuerzos
 
-En la fase de despliegue, el Capitán puede recibir **una miniatura** de su tipo desde la Reserva, colocada en coherencia y sin superar el máximo de la escuadra.
+Si se juega con el modo de escuadras, durante cada **fase de despliegue** cada escuadra puede recibir **una sola miniatura de su mismo tipo desde la Reserva**, esté donde esté en el campo de batalla. **No necesita estar en un puesto de mando.** El refuerzo debe caber físicamente, colocarse en coherencia y no superar el máximo de **Escuadra**.
 
-### Capitán sin escuadra
+Estos refuerzos se incorporan a una unidad que ya está en el campo de batalla y **no consumen la salida de ningún puesto de mando**. Los puestos se utilizan para desplegar unidades nuevas.
 
-Si pierde a todos sus integrantes, el Capitán sigue en juego como una unidad más, **con el mismo perfil**, hasta ser destruido. Mediante Refuerzos solo puede recibir miniaturas de ese mismo tipo.
+Una unidad que se desplegó sola también puede recibir este refuerzo si su perfil permite formar escuadras: al llegar la segunda miniatura, ambas forman una escuadra y se elige su Capitán. Aunque una escuadra quede reducida a una sola miniatura, sigue siendo una escuadra y puede recibir Refuerzos.
+
+Las **escuadras con Héroe** siguen estas mismas reglas: pueden recibir **un solo refuerzo por fase de despliegue**, del mismo tipo que los acompañantes elegidos al montar la lista y del mismo rol que el Héroe. Si únicamente queda el Héroe, puede volver a recibir acompañantes de ese mismo tipo desde la Reserva en las mismas condiciones.
 
 ## Equipamiento
 
@@ -216,7 +250,7 @@ Cada equipamiento se usa **una sola vez**. Después se descarta y no puede volve
 
 ## Puestos de mando
 
-Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Además de ser objetivos a conquistar, son los únicos puntos desde donde las unidades pueden desplegarse. El número de puestos y su colocación los determina la misión o el modo de juego.
+Los puestos de mando son posiciones estratégicas repartidas por el campo de batalla. Además de ser objetivos a conquistar, son los puntos desde donde se despliegan unidades nuevas, salvo que una habilidad indique otra cosa. Los Refuerzos que se incorporan a una escuadra ya desplegada no necesitan un puesto de mando *(ver Refuerzos)*. El número de puestos y su colocación los determina la misión o el modo de juego.
 
 Un puesto de mando puede ser cualquier cosa que los jugadores acuerden: un token, una moneda, un edificio o una zona delimitada del tablero. Lo único importante es que **todos tengan claro dónde empieza y dónde acaba** antes de empezar. Si se usa un área, los jugadores acuerdan su tamaño al montar la mesa; como referencia, un círculo de unas **3" de radio** funciona bien. Para indicar quién controla cada puesto basta con colocar al lado una banderilla, un dado del color del jugador o cualquier marcador, que se sustituye cuando el rival lo reconquista.
 
@@ -248,13 +282,13 @@ Al comienzo de la partida, cada jugador tira **1D6** y el resultado más alto ju
 
 ## Reserva
 
-**Todas las unidades empiezan la partida en la Reserva**, fuera del campo de batalla. Van entrando durante la **fase de despliegue** de cada turno, por los puestos de mando que controles *(ver Fase de despliegue)*. Algunas tienen habilidades especiales de despliegue, como **Avanzadilla**.
+**Todas las unidades empiezan la partida en la Reserva**, fuera del campo de batalla. Van entrando durante la **fase de despliegue** de cada turno: las unidades nuevas, por los puestos de mando que controles; los Refuerzos, directamente en las escuadras ya desplegadas *(ver Fase de despliegue y Refuerzos)*. Algunas tienen habilidades especiales de despliegue, como **Avanzadilla**.
 
-*Cuantos más puestos domines, más rápido te llegan los refuerzos.*
+*Cuantos más puestos domines, más unidades nuevas puedes desplegar.*
 
 ## Despliegue inicial
 
-La fase de despliegue del primer turno es el **despliegue inicial**. Funciona igual que cualquier otra, con una excepción: **la primera unidad en salir es siempre el Héroe**.
+La fase de despliegue del primer turno es el **despliegue inicial**. Funciona igual que cualquier otra, con una excepción: **la primera unidad en salir es siempre el Héroe**. Si se juega con el modo de escuadras, puede salir acompañado por **toda su escuadra** desde ese primer despliegue. El Héroe y sus acompañantes cuentan juntos como **una sola unidad desplegada**.
 
 ---
 
@@ -267,6 +301,8 @@ Una partida de ZeroLore se divide en **turnos**. Cada turno empieza con la **fas
 ## Fase de despliegue
 
 Al comienzo de cada turno, siguiendo el orden de juego, cada jugador puede sacar de su **Reserva** **una sola unidad por cada puesto de mando que controle**, colocada en contacto con él o dentro de su área. Nunca más de una por puesto y turno, aunque haya sitio de sobra.
+
+Además, si se juega con el modo de escuadras, cada escuadra puede recibir **un refuerzo desde la Reserva**, en cualquier posición del campo de batalla y sin consumir la salida de un puesto *(ver Refuerzos)*.
 
 No se puede desplegar en un puesto ocupado por unidades enemigas, y la unidad tiene que **caber físicamente** junto al puesto: si no hay espacio, no puede entrar por ahí. Las unidades desplegadas **pueden activarse ese mismo turno**, y las que no se desplieguen siguen en Reserva.
 
@@ -356,7 +392,7 @@ La **única forma de atacar cuerpo a cuerpo es Cargar**. Fuera de una carga, nin
 
 ### Cargar
 
-Primero elige la unidad enemiga a la que carga y después tira **1D6**: puede desplazarse hasta su **Movimiento + el resultado** hacia ella. No tiene que usar toda la distancia: si el enemigo está cerca, le basta con llegar. Si alcanza al objetivo, coloca su peana en contacto y lo ataca con su arma de cuerpo a cuerpo. Si no llega, se queda donde haya llegado y su activación termina.
+Primero elige la unidad enemiga a la que carga y después tira **1D6**: puede desplazarse hasta su **Movimiento + el resultado** hacia ella. No tiene que usar toda la distancia: si el enemigo está cerca, le basta con llegar. Si alcanza al objetivo, coloca su peana en contacto y lo ataca con su arma de cuerpo a cuerpo. Si no llega, la **carga es fallida**: la unidad avanza hacia el objetivo hasta donde le permita su distancia de carga, se queda allí **sin atacar** y su activación termina.
 
 ### Ataque cuerpo a cuerpo
 

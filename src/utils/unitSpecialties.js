@@ -47,9 +47,6 @@ const UNIT_SPECIALTIES = [
     es: { name: 'Fuego de apoyo', description: 'Una vez por turno, cuando otra unidad aliada situada a 6" o menos dispare durante su activación, esta unidad puede abrir fuego contra el mismo objetivo, siempre que esté a su alcance y en línea de visión. Puede hacerlo aunque ya se haya activado.' },
   },
   {
-    es: { name: 'Escuadras', description: 'El Capitán se despliega con una escuadra de un solo tipo de unidad y pasa a ser un integrante más, con el mismo perfil. En cada fase de despliegue puede unirse a la escuadra una miniatura más de ese tipo.' },
-  },
-  {
     es: { name: 'Curación', description: 'Ocupa toda la activación. Una unidad aliada a 3" o menos recupera 1 Vida. No puede curarse a sí misma.' },
   },
   {

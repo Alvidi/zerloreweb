@@ -214,12 +214,12 @@ function Reglamento() {
   const printCoverCreditLabel = 'por alvidi'
   const shouldShowRulesHeader = rulesMode === 'rules'
 
-  const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, weaponAbilityTableHtml, unitTypeTableHtml } = useMemo(() => {
+  const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, unitTypeTableHtml } = useMemo(() => {
     if (isTokensMode) {
-      return { renderedHtml: '', tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '', unitTypeTableHtml: '' }
+      return { renderedHtml: '', tocItems: [], documentHeading: null, specialtyTableHtml: '', unitTypeTableHtml: '' }
     }
     if (typeof window === 'undefined') {
-      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null, specialtyTableHtml: '', weaponAbilityTableHtml: '', unitTypeTableHtml: '' }
+      return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null, specialtyTableHtml: '', unitTypeTableHtml: '' }
     }
     const parser = new DOMParser()
     const doc = parser.parseFromString(rulesHtml, 'text/html')
@@ -235,7 +235,6 @@ function Reglamento() {
       wrapper.appendChild(table)
     })
     let specialtyTableHtml = ''
-    let weaponAbilityTableHtml = ''
     let unitTypeTableHtml = ''
 
     const extractTableIntoModalTrigger = ({
@@ -274,14 +273,6 @@ function Reglamento() {
         matchesHeading: (normalized) => normalized === 'habilidad de unidad' || normalized === 'unit ability',
         modalKey: 'specialty',
         triggerLabel: 'Ver tabla de especialidades',
-      })
-
-      // "Habilidades de armas" es ahora una sección de "Perfiles de unidad".
-      weaponAbilityTableHtml = extractTableIntoModalTrigger({
-        headingTags: 'h1, h2',
-        matchesHeading: (normalized) => normalized === 'habilidades de armas' || normalized === 'weapon abilities',
-        modalKey: 'weaponAbility',
-        triggerLabel: 'Ver tabla de habilidades de arma',
       })
 
       unitTypeTableHtml = extractTableIntoModalTrigger({
@@ -487,7 +478,7 @@ function Reglamento() {
       if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy')
     })
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
-    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, weaponAbilityTableHtml, unitTypeTableHtml }
+    return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, unitTypeTableHtml }
   }, [t, rulesHtml, isTokensMode, rulesMode])
 
   useEffect(() => {
@@ -1208,9 +1199,7 @@ function Reglamento() {
         const key = trigger.dataset.rulesTableModal
         const tableHtml = key === 'specialty'
           ? specialtyTableHtml
-          : key === 'weaponAbility'
-            ? weaponAbilityTableHtml
-            : key === 'unitType' ? unitTypeTableHtml : ''
+          : key === 'unitType' ? unitTypeTableHtml : ''
         if (!tableHtml) return
         const wrapper = document.createElement('div')
         wrapper.innerHTML = tableHtml
@@ -1751,9 +1740,7 @@ function Reglamento() {
               <h2>
                 {openTableModal === 'specialty'
                   ? 'Tabla de especialidades'
-                  : openTableModal === 'unitType'
-                    ? 'Tabla de tipos de unidad'
-                    : 'Tabla de habilidades de arma'}
+                  : 'Tabla de tipos de unidad'}
               </h2>
               <button
                 type="button"
@@ -1767,9 +1754,7 @@ function Reglamento() {
               dangerouslySetInnerHTML={{
                 __html: openTableModal === 'specialty'
                   ? specialtyTableHtml
-                  : openTableModal === 'unitType'
-                    ? unitTypeTableHtml
-                    : weaponAbilityTableHtml,
+                  : unitTypeTableHtml,
               }}
             />
           </div>
