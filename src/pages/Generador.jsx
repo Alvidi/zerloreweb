@@ -6,6 +6,9 @@ import ItemFichaCard from '../features/generator/components/ItemFichaCard.jsx'
 import { useImageCrop } from '../features/generator/imageCrop.js'
 import ImageCropModal from '../features/generator/components/ImageCropModal.jsx'
 import FitTitle from '../features/generator/components/FitTitle.jsx'
+import ArmyTemplates from '../features/generator/components/ArmyTemplates.jsx'
+import { getArmyTemplates } from '../features/generator/armyTemplates.js'
+import { useArmyDraft } from '../features/generator/ArmyDraftContext.jsx'
 import objetosData from '../data/items/objetos.json'
 import { getUnitClassBadgeSrc, getUnitClassToken } from '../features/generator/unitTypeBadges.js'
 import {
@@ -230,10 +233,8 @@ const isOnlyUnitHero = (heroId) => getUnidad(heroId)?.habilidad === ONLY_UNIT_AB
 function Generador() {
   const { t } = useI18n()
 
-  const [armySelections, setArmySelections] = useState([])
-  const [selectedItems, setSelectedItems] = useState({})   // id de objeto → número de cartas
+  const { armySelections, setArmySelections, selectedItems, setSelectedItems, activeGeneratorSection, setActiveGeneratorSection, selectionCounterRef } = useArmyDraft()
   const [activeItemFicha, setActiveItemFicha] = useState(null)
-  const [activeGeneratorSection, setActiveGeneratorSection] = useState('heroes')
   const [openCatalogKey, setOpenCatalogKey] = useState('')
   const [variantByFamily, setVariantByFamily] = useState({})   // familia → id de la variante elegida
   const [openArmyUid, setOpenArmyUid] = useState('')
@@ -246,7 +247,6 @@ function Generador() {
   const armySheetRefs = useRef(new Map())
   const armyCardRefs = useRef(new Map())
   const armyExportStageRef = useRef(null)
-  const selectionCounterRef = useRef(0)
 
   /** Entradas del ejército resueltas contra el catálogo. */
   const armyEntries = useMemo(
@@ -411,6 +411,24 @@ function Generador() {
     })
   }
 
+  const handleApplyTemplate = (proposal) => {
+    if (!proposal) return
+    // Resuelve otra vez tropas y equipo con los datos actuales del catálogo.
+    const currentProposal = ['balanced', 'shooting', 'assault', 'vehicles']
+      .flatMap((style) => getArmyTemplates(style, proposal.budget))
+      .find((candidate) => candidate.key === proposal.key)
+    if (!currentProposal) return
+    const selections = currentProposal.units.flatMap(({ unit, count }) => Array.from({ length: count }, () => ({
+      selectionId: `unidad-${++selectionCounterRef.current}`,
+      kind: 'unidad', unidadId: unit.id, imageDataUrl: '',
+    })))
+    setArmySelections(selections)
+    setSelectedItems(Object.fromEntries(currentProposal.equipment.map(({ item, count }) => [item.id, count])))
+    setArmyDownloadError('')
+    setOpenArmyUid('')
+    setActiveGeneratorSection('army')
+  }
+
   const handleResetCurrentArmy = () => {
     setArmySelections([])
     setSelectedItems({})
@@ -568,8 +586,8 @@ function Generador() {
     </button>
   )
 
-  /** Tarjeta del catálogo, la misma para Héroes y unidades. */
-  const renderCatalogCard = ({ unidad, cardKey, title, subline, isInArmy, chips = null, action = null }) => {
+  /** La misma tarjeta para el catálogo y el ejército actual. */
+  const renderCatalogCard = ({ unidad, cardKey, title, subline, isInArmy, chips = null, action = null, imageDataUrl = '', imageControls = null, onViewCard = null }) => {
     const count = unitCountById.get(unidad.id) || 0
     const badgeSrc = getUnitClassBadgeSrc(unidad.id)
     return (
@@ -579,7 +597,9 @@ function Generador() {
             <span className="unit-card-thumb-wrap" aria-hidden="true">
               <span className="unit-card-thumb-frame">
                 <span className="unit-card-thumb-canvas">
-                  {badgeSrc ? <img className="unit-card-thumb fallback" src={badgeSrc} alt="" /> : null}
+                  {imageDataUrl || badgeSrc ? (
+                    <img className={`unit-card-thumb${imageDataUrl ? '' : ' fallback'}`} src={imageDataUrl || badgeSrc} alt="" />
+                  ) : null}
                 </span>
               </span>
             </span>
@@ -597,7 +617,7 @@ function Generador() {
             </div>
           </div>
           <div className="unit-card-header-actions">
-            <button type="button" className="ghost small" onClick={() => setOpenCatalogKey(`unidad:${unidad.id}`)}>
+            <button type="button" className="ghost small" onClick={onViewCard || (() => setOpenCatalogKey(`unidad:${unidad.id}`))}>
               {t('generator.viewCard')}
             </button>
             <div className="unit-add-controls">
@@ -621,6 +641,7 @@ function Generador() {
             {unidad.descripcion}
           </FitTitle>
         ) : null}
+        {imageControls}
       </article>
     )
   }
@@ -637,6 +658,8 @@ function Generador() {
         <div className="generator-main">
           <div className="manual-panel">
             <div className="generator-section-tabs" role="tablist" aria-label={t('generator.sectionTabs')}>
+              <button type="button" role="tab" aria-selected={activeGeneratorSection === 'templates'} className={`generator-section-tab${activeGeneratorSection === 'templates' ? ' active' : ''}`} onClick={() => setActiveGeneratorSection('templates')}>Plantillas</button>
+              <span className="generator-tab-separator" aria-hidden="true">|</span>
               <button
                 type="button"
                 role="tab"
@@ -664,6 +687,7 @@ function Generador() {
               >
                 {t('generator.items')}
               </button>
+              <span className="generator-tab-separator" aria-hidden="true">|</span>
               <button
                 type="button"
                 role="tab"
@@ -676,6 +700,15 @@ function Generador() {
               </button>
 
             </div>
+
+            {activeGeneratorSection === 'templates' && (
+              <ArmyTemplates
+                onApply={handleApplyTemplate}
+                hasArmy={armySelections.length > 0 || Object.keys(selectedItems).length > 0}
+                onViewUnit={(unidadId) => setOpenCatalogKey(`unidad:${unidadId}`)}
+                onViewEquipment={setActiveItemFicha}
+              />
+            )}
 
             {activeGeneratorSection === 'heroes' ? (
               <div className="generator-subsection generator-listing-field">
@@ -829,96 +862,51 @@ function Generador() {
                   ...section,
                   rows: armyUnitGroups
                     .filter(({ item }) => isHeroe(item.entry.unidadId) === section.onlyHeroes)
-                    .map(({ item, count, totalValue }) => ({ item: { ...item, total: totalValue }, count })),
+                    .map(({ item, count }) => ({ item, count })),
                 })).map((section) => section.rows.length ? (
                   <div className="army-modal-section" key={`current-army-${section.key}`}>
                     <p className="army-modal-section-label">{section.label}</p>
-                    <div className="army-list army-list-compact">
-                      {section.rows.map(({ item, count }) => (
-                        <article key={`army-row-${item.uid}`} className="unit-card army-unit">
-                          <div className="unit-card-header army-unit-header">
-                            <div className="unit-card-summary army-unit-summary">
-                              <div className="unit-card-thumb-wrap army-unit-image-wrap">
-                                {/* Sin imagen propia ni icono de tipo (los Héroes aún no lo tienen) no se pinta nada. */}
-                                {item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId) ? (
-                                  <img
-                                    className={`unit-card-thumb army-unit-thumb${item.imageDataUrl ? '' : ' fallback'}`}
-                                    src={item.imageDataUrl || getUnitClassBadgeSrc(item.entry.unidadId)}
-                                    alt={item.entry.clase}
-                                  />
-                                ) : null}
-                                <input
-                                  id={`army-unit-image-${item.uid}`}
-                                  type="file"
-                                  accept="image/*"
-                                  className="unit-image-input"
-                                  onChange={(event) => handleArmyUnitImageChange(item, event)}
-                                />
-                                {item.imageDataUrl ? (
-                                  <button
-                                    type="button"
-                                    className="unit-image-clear"
-                                    onClick={() => updateSelection(item.uid, { imageDataUrl: '' })}
-                                    aria-label={t('generator.removeImage')}
-                                    title={t('generator.removeImage')}
-                                  >
-                                    ×
-                                  </button>
-                                ) : null}
-                              </div>
-                              <div className="unit-card-heading">
-                                {(() => {
-                                  // Mismo tratamiento que en la lista de unidades.
-                                  const { base, especialidad } = splitNombreUnidad(item.entry.nombre)
-                                  return (
-                                    <>
-                                      <FitTitle className={`unit-card-type unit-card-type-title unit-type-${getUnitClassToken(item.entry.unidadId)}`}>
-                                        {base}
-                                      </FitTitle>
-                                      {especialidad ? (
-                                        <div className="unit-card-specialty">{especialidad}</div>
-                                      ) : null}
-                                    </>
-                                  )
-                                })()}
-                                <div className="unit-card-inline-value">
-                                  {item.entry.perfil.valor === null ? '—' : `${item.total} ${t('generator.valueUnit')}`}
-                                </div>
-                                {/* Lo básico del perfil, para no tener que abrir la ficha. */}
-                                <div className="army-unit-stats">
-                                  <span>MOV <b>{item.entry.perfil.movimiento}</b></span>
-                                  <span>VIDAS <b>{item.entry.perfil.vidas}</b></span>
-                                  <span>DEF <b>{item.entry.perfil.defensa}</b></span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="unit-card-header-actions army-unit-actions">
+                    <div className="unit-list">
+                      {section.rows.map(({ item }) => {
+                        const unidad = getUnidad(item.entry.unidadId)
+                        const { base, especialidad } = splitNombreUnidad(unidad.nombre)
+                        return renderCatalogCard({
+                          unidad,
+                          cardKey: `army-row-${item.uid}`,
+                          title: base,
+                          subline: especialidad || unidad.rol.split(',').map((role) => role.trim()).join(' / '),
+                          imageDataUrl: item.imageDataUrl,
+                          onViewCard: () => setOpenArmyUid(item.uid),
+                          action: isHeroe(unidad.id) ? (
+                            <button type="button" className="hero-pick-button is-chosen" onClick={() => handleChooseHero(unidad.id)}>
+                              {t('generator.removeHero')}
+                            </button>
+                          ) : null,
+                          imageControls: (
+                            <div className="army-card-image-controls">
+                              <input
+                                id={`army-unit-image-${item.uid}`}
+                                type="file"
+                                accept="image/*"
+                                className="unit-image-input"
+                                onChange={(event) => handleArmyUnitImageChange(item, event)}
+                              />
                               <label htmlFor={`army-unit-image-${item.uid}`} className="ghost small army-unit-image-button">
                                 {item.imageDataUrl ? t('generator.changeImage') : t('generator.addImage')}
                               </label>
-                              <button type="button" className="ghost small" onClick={() => setOpenArmyUid(item.uid)}>
-                                {t('generator.viewCard')}
-                              </button>
-                              <div className="unit-add-controls">
-                                {isHeroe(item.entry.unidadId) ? (
-                                  <button type="button" className="hero-pick-button is-chosen" onClick={() => handleChooseHero(item.entry.unidadId)}>
-                                    {t('generator.removeHero')}
-                                  </button>
-                                ) : (
-                                  <CountStepper
-                                    count={count}
-                                    onAdd={() => handleAddUnit(item.entry.unidadId)}
-                                    onRemove={() => handleRemoveUnit(item.entry.unidadId)}
-                                    addLabel={`${t('generator.add')} ${item.entry.nombre}`}
-                                    removeLabel={`${t('generator.delete')} ${item.entry.nombre}`}
-                                    format={(value) => (value > 0 ? `×${value} ${t('generator.countUnits')}` : '0')}
-                                  />
-                                )}
-                              </div>
+                              {item.imageDataUrl ? (
+                                <button
+                                  type="button"
+                                  className="ghost small"
+                                  onClick={() => updateSelection(item.uid, { imageDataUrl: '' })}
+                                >
+                                  {t('generator.removeImage')}
+                                </button>
+                              ) : null}
                             </div>
-                          </div>
-                        </article>
-                      ))}
+                          ),
+                        })
+                      })}
                     </div>
                   </div>
                 ) : null)}

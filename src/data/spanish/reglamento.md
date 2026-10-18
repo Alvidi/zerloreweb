@@ -101,7 +101,7 @@ Algunas armas tienen una habilidad que cambia cómo se resuelven sus ataques. Si
 | Habilidad | Descripción |
 | --- | --- |
 | Fiable | Esta arma no tiene reglas especiales. |
-| Perforante 1 o 2 | Empeora en 1 o 2 la Defensa del objetivo. |
+| Perforante | Empeora en 1 la Defensa del objetivo. |
 | Golpe crítico | Los impactos con un 6 no se pueden bloquear con la Defensa. |
 | Ráfaga | Cada impacto con un 6 añade 1 dado de ataque más, que se tira en ese momento. Si vuelve a salir un 6, se sigue añadiendo. |
 | Certera | Ignora la cobertura: el objetivo no mejora su Defensa por estar cubierto. |

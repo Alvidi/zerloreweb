@@ -61,7 +61,7 @@ export const translations = {
     generator: {
       eyebrow: 'Ejércitos',
       title: 'Héroes, unidades y fichas para tus minis.',
-      subtitle: 'Elige tu héroe, monta tus unidades escogiendo su rol, añade imágenes a sus fichas y descarga tu ejército listo para imprimir.',
+      subtitle: 'Parte de una plantilla o elige tu Héroe y crea tu propia lista. Personaliza las fichas y descarga tu ejército listo para imprimir.',
       factionUnits: 'Unidades',
       heroes: 'Héroes',
       sectionTabs: 'Secciones de ejército',

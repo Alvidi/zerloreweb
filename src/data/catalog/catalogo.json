@@ -166,7 +166,7 @@
           "alcance": null,
           "precision": "3+",
           "habilidades_arma": [
-            "Perforante 1"
+            "Perforante"
           ]
         }
       }
@@ -311,7 +311,7 @@
           "alcance": "32\"",
           "precision": "4+",
           "habilidades_arma": [
-            "Perforante 2",
+            "Perforante",
             "Ráfaga"
           ]
         },
@@ -344,7 +344,7 @@
           "alcance": "32\"",
           "precision": "4+",
           "habilidades_arma": [
-            "Perforante 2"
+            "Perforante"
           ]
         },
         "cuerpo_a_cuerpo": {
@@ -352,7 +352,7 @@
           "alcance": null,
           "precision": "3+",
           "habilidades_arma": [
-            "Perforante 1"
+            "Perforante"
           ]
         }
       }

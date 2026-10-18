@@ -4,6 +4,7 @@ import './App.css'
 import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
 import SeoManager from './components/SeoManager.jsx'
+import { ArmyDraftProvider } from './features/generator/ArmyDraftContext.jsx'
 
 const Home = lazy(() => import('./pages/Home.jsx'))
 const Generador = lazy(() => import('./pages/Generador.jsx'))
@@ -14,7 +15,7 @@ function Layout() {
   return (
     <main className="app">
       <Nav />
-      <Outlet />
+      <ArmyDraftProvider><Outlet /></ArmyDraftProvider>
       <Footer />
     </main>
   )
@@ -32,6 +33,7 @@ function App() {
             {/* Coliseo se retiró: los enlaces antiguos van a Ejércitos, donde están los Héroes. */}
             <Route path="/coliseo" element={<Navigate to="/generador" replace />} />
             <Route path="/reglamento" element={<Reglamento />} />
+            <Route path="/batalla" element={<Navigate to="/generador" replace />} />
             <Route path="/derechos-de-autor" element={<DerechosAutor />} />
           </Route>
         </Routes>

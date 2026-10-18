@@ -172,3 +172,16 @@ Antes de cerrar:
 - Cambios en un solo idioma.
 - Nombres de habilidad no mapeados al `effectKey`.
 - No ejecutar auditoria tras sync de reglamento.
+
+## 11) Organización de la web — 18/10/2026
+
+- Notion solo se modifica cuando Alberto lo pide expresamente. Las plantillas y los cambios de interfaz se mantienen en el código; no se guardan automáticamente en Notion.
+- `/reglamento` muestra exclusivamente el reglamento. La pestaña Tokens se ha retirado; sus ilustraciones dentro del reglamento se conservan.
+- Batalla se ha retirado por indicación de Alberto para centrarnos en las plantillas. Se conserva `src/data/spanish/guerra-total.md` y el soporte del documento para retomarlo más adelante.
+- `/batalla` redirige a Ejércitos; no tiene página ni entrada de navegación. `/reglamento` muestra las reglas generales, también con parámetros antiguos.
+- Ejércitos incorpora dos plantillas de inicio por estilo para 70, 150 y 200 de Valor (70 por defecto). A 70, 150 y 200 se incluyen exactamente tres, cuatro y cinco tipos de tropa, respectivamente, más un Héroe y dos tipos de Equipamiento. Se repiten miniaturas de los perfiles principales y se añaden apoyos relacionados con la estrategia. El plan de cada tamaño explica la función de esos apoyos. Se eligen composiciones completas; no se mezclan paquetes que añadan perfiles sueltos. Los costes de tropas y equipo se leen del catálogo, se suman juntos y se filtran propuestas incompletas o que excedan el Valor seleccionado. Al aplicarlas también se carga el Equipamiento en el borrador y en la exportación existente. No constituyen una garantía de equilibrio en mesa. Las cantidades son miniaturas, sin imponer ni multiplicar habilidades de escuadra.
+- `ArmyDraftProvider` conserva miniaturas, imágenes, equipamiento y pestaña durante la navegación dentro de la app. Recargar o cerrar la página sigue reiniciando el borrador; no se añaden datos a localStorage.
+- Los escenarios preparados y sus reglas especiales siguen pendientes de diseño con Alberto.
+- Idioma: el sitio sigue configurado solo en español (`I18nContext`). La traducción inglesa de la nueva interfaz y las plantillas queda pendiente junto con el resto del contenido hasta reactivar EN.
+- Sincronización solicitada el 18/10: Perforante queda sin niveles, con efecto fijo de empeorar en 1 la Defensa. Se retiraron las diez referencias numeradas de la tabla activa de unidades y Héroes en Notion, se sincronizaron los catálogos y la tabla del reglamento web, y se eliminó el código que interpretaba niveles. Los demás perfiles, costes y el Equipamiento ya coincidían con la fuente; se conservan las correcciones editoriales y las ilustraciones de la web.
+- Validación de esta entrega: `npm run lint`, `npm run build` y `git diff --check` completados sin errores. Vista local de las plantillas actualizada. La compilación local mantiene el aviso existente de URL pública ausente para los artefactos SEO.

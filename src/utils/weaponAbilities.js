@@ -33,10 +33,4 @@ const ALIASES = [
 
 const ID_BY_ALIAS = new Map(ALIASES.flatMap(([id, aliases]) => aliases.map((alias) => [alias, id])))
 
-/** "Perforante 2" → nombre "perforante" y valor 2; las demás no llevan número. */
-export const parseWeaponAbility = (rawAbility) => {
-  const match = normalizeAbilityText(rawAbility).match(/^(.*?)\s*(\d+)?$/)
-  return { name: match[1], value: match[2] ? Number(match[2]) : null }
-}
-
-export const getWeaponAbilityId = (rawAbility) => ID_BY_ALIAS.get(parseWeaponAbility(rawAbility).name) || null
+export const getWeaponAbilityId = (rawAbility) => ID_BY_ALIAS.get(normalizeAbilityText(rawAbility)) || null

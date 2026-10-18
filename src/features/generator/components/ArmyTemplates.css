@@ -1,0 +1,46 @@
+.army-templates { padding: 30px 24px; }
+.army-templates-heading { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-bottom: 24px; }
+.army-templates-heading .eyebrow { font-size: 11px; margin: 0 0 8px; }
+.army-templates-heading h3 { margin: 0 0 8px; font: 600 clamp(20px, 2.6vw, 28px) 'Cinzel', serif; }
+.army-templates-heading p:last-child { color: var(--text-muted); font-size: 14px; margin: 0; }
+.army-budget { display: grid; gap: 8px; color: var(--text-muted); font-size: 12px; min-width: 140px; }
+.army-budget select { color: #e9dfcd; background: #171e28; padding: 10px 12px; border: 1px solid #695b3d; border-radius: 7px; font: inherit; font-size: 15px; }
+.army-style-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.army-style-option { display: flex; align-items: center; gap: 10px; text-align: left; background: rgba(255,255,255,.02); border: 1px solid rgba(214,190,132,.15); border-radius: 10px; color: var(--text-main); padding: 16px 12px; cursor: pointer; }
+.army-style-option:hover { background: rgba(214,190,132,.06); }
+.army-style-option.is-selected { border-color: #b39b68; background: rgba(214,190,132,.09); }
+.army-style-option img { width: 36px; height: 36px; object-fit: contain; }
+.army-style-option strong { display: block; font: 600 18px 'Rajdhani', sans-serif; margin-bottom: 4px; }
+.army-style-option small { display: block; font: 11px/1.5 'Inter', sans-serif; color: var(--text-muted); }
+.army-proposal { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 32px; align-items: start; }
+.army-template-label { color: #d6be84; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.army-proposal-plan h4 { font: 600 24px 'Rajdhani', sans-serif; margin: 12px 0; }
+.army-proposal-plan > p { font-size: 14px; line-height: 1.75; }
+.army-proposal-plan > .army-template-note { color: var(--text-muted); font-size: 12px; }
+.army-equipment-heading { margin: 20px 0 0; color: #b6c9d5; font: 600 16px 'Rajdhani', sans-serif; }
+.army-proposal-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+.army-proposal-section-heading h5 { margin: 0; color: var(--text-muted); font: 600 12px 'Inter', sans-serif; }
+.army-proposal-section-heading > span { color: var(--text-muted); font-size: 12px; }
+.army-proposal-equipment-heading { border-top: 1px solid rgba(214,190,132,.12); padding-top: 16px; }
+.army-proposal-equipment-heading h5 { color: #b6c9d5; }
+.army-template-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.army-template-actions button { font-size: 13px; }
+.army-template-replace { margin-top: 14px; padding: 12px; border: 1px solid #8b6951; border-radius: 8px; font-size: 13px; }
+.army-proposal-list { background: rgba(8,12,18,.45); border: 1px solid rgba(214,190,132,.18); border-radius: 12px; padding: 18px 20px; }
+.army-proposal-total { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(214,190,132,.2); }
+.army-proposal-total > span { font-size: 13px; color: var(--text-muted); }
+.army-proposal-total strong { font: 600 26px 'Rajdhani', sans-serif; color: #e4d3ad; }
+.army-proposal-total small { font-size: 14px; font-weight: 400; }
+.army-proposal-list ul { list-style: none; margin: 12px 0; padding: 0; }
+.army-proposal-list li { margin: 0; padding: 0; font-size: 13px; }
+.army-proposal-entry { display: grid; grid-template-columns: 26px 32px minmax(0, 1fr) auto; gap: 10px; align-items: center; width: 100%; min-height: 54px; padding: 8px 4px; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--text-main); font: inherit; text-align: left; cursor: pointer; }
+.army-proposal-entry:hover { background: rgba(214,190,132,.06); border-color: rgba(214,190,132,.2); }
+.army-proposal-entry:focus-visible { outline: 2px solid #d6be84; outline-offset: 2px; }
+.army-proposal-entry-name { display: grid; gap: 3px; }
+.army-proposal-entry-name small { color: var(--text-muted); font-size: 10px; }
+.army-proposal-entry:hover .army-proposal-entry-name small { color: #d6be84; }
+.army-proposal-list li img { width: 26px; height: 26px; object-fit: contain; }
+.army-proposal-count, .army-proposal-cost { color: #d6be84; font-variant-numeric: tabular-nums; }
+.army-proposal-list > p { color: var(--text-muted); font-size: 12px; padding-top: 10px; margin-bottom: 0; border-top: 1px solid rgba(214,190,132,.12); }
+@media (max-width: 950px) { .army-style-options { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 650px) { .army-templates { padding: 22px 12px; } .army-templates-heading { align-items: start; flex-direction: column; gap: 18px; } .army-proposal { grid-template-columns: 1fr; gap: 24px; } .army-style-option { padding: 12px 8px; } .army-style-option img { width: 28px; height: 28px; } .army-proposal-list { padding: 14px; } }

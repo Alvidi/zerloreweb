@@ -867,6 +867,16 @@ button {
   flex-wrap: wrap;
 }
 
+.generator-tab-separator {
+  align-self: center;
+  padding-inline: 4px;
+  color: rgba(200, 170, 104, 0.55);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  user-select: none;
+}
+
 .generator-section-tab,
 .rules-mode-switch .ghost {
   min-height: 44px;
@@ -912,9 +922,13 @@ button {
   white-space: nowrap;
 }
 
-/* En móvil, las cuatro pestañas en una rejilla de 2×2 del mismo tamaño; el
+/* En móvil, las pestañas en una rejilla de dos columnas del mismo tamaño; el
    Valor del ejército baja a una segunda línea para que quepa. */
 @media (max-width: 560px) {
+  .generator-tab-separator {
+    display: none;
+  }
+
   .generator-section-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -4720,4 +4734,18 @@ mark {
 .unit-card-type-title {
   white-space: nowrap;
   overflow: hidden;
+}
+
+
+/* La tarjeta de Ejército actual comparte el catálogo; solo añade la imagen propia. */
+.army-card-image-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.army-card-image-controls .army-unit-image-button {
+  width: auto;
 }

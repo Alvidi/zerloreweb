@@ -1,8 +1,9 @@
-import { getWeaponAbilityId, parseWeaponAbility, WEAPON_ABILITY_IDS } from './weaponAbilities.js'
+import { getWeaponAbilityId, WEAPON_ABILITY_IDS } from './weaponAbilities.js'
 
 // Mismos textos que la tabla de Habilidades de armas del reglamento.
 const DESCRIPTIONS = {
   [WEAPON_ABILITY_IDS.reliable]: 'Esta arma no tiene reglas especiales.',
+  [WEAPON_ABILITY_IDS.piercing]: 'Empeora en 1 la Defensa del objetivo.',
   [WEAPON_ABILITY_IDS.criticalHit]: 'Los impactos con un 6 no se pueden bloquear con la Defensa.',
   [WEAPON_ABILITY_IDS.burst]: 'Cada impacto con un 6 añade 1 dado de ataque más, que se tira en ese momento. Si vuelve a salir un 6, se sigue añadiendo.',
   [WEAPON_ABILITY_IDS.sure]: 'Ignora la cobertura: el objetivo no mejora su Defensa por estar cubierto.',
@@ -14,8 +15,6 @@ const DESCRIPTIONS = {
 
 export const getAbilityDescription = (ability) => {
   const id = getWeaponAbilityId(ability)
-  // Perforante lleva su valor: "Perforante 2" empeora en 2 la Defensa.
-  if (id === WEAPON_ABILITY_IDS.piercing) return `Empeora en ${parseWeaponAbility(ability).value || 1} la Defensa del objetivo.`
   return DESCRIPTIONS[id] || ''
 }
 

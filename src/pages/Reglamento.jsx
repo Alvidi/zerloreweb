@@ -1,6 +1,5 @@
 import { useMemo, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useSearchParams } from 'react-router-dom'
 import { marked } from 'marked'
 import reglamentoMd from '../data/spanish/reglamento.md?raw'
 import guerraTotalMd from '../data/spanish/guerra-total.md?raw'
@@ -8,7 +7,7 @@ import UnitFichaCard from '../features/generator/components/UnitFichaCard.jsx'
 import { UNIDADES, buildUnitEntry } from '../features/generator/catalogUtils.js'
 import zeroLoreLogo from '../images/zeroloreLogoToken.png'
 import zeroloreLogoSvg from '../images/zeroloreLogo.svg?raw'
-import { commandPostSvg, conquestTokenSvg, livesTokenSvg } from '../features/cards/tokenArt.js'
+import { commandPostSvg, conquestTokenSvg } from '../features/cards/tokenArt.js'
 import { CARD_H, CARD_W, loadCardFonts, rasterizeSvgMarkup, useCardFonts } from '../features/cards/cardKit.js'
 import { missionCardSvg } from '../features/cards/missionCard.js'
 import { RULES_DIAGRAMS } from '../features/rules/rulesDiagrams.js'
@@ -16,8 +15,6 @@ import rulesHeaderImage from '../images/webimagen/home-worlds.webp'
 import { getUnitClassBadgeSrc } from '../features/generator/unitTypeBadges.js'
 import { useI18n } from '../i18n/I18nContext.jsx'
 
-const RULES_MODES = ['rules', 'total-war', 'tokens']
-const TOKEN_LIMIT = 20
 const RULES_UNIT_PROFILE_SLOT_SRC = 'rules-unit-profile-slot'
 const RULES_HERO_PROFILE_SLOT_SRC = 'rules-hero-profile-slot'
 
@@ -128,86 +125,21 @@ const replaceRulesAssetPlaceholders = (markdown, lang = 'es') =>
 const LOGO_DATA_URL = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(zeroloreLogoSvg)}`
 const COMMAND_POST_SVG = commandPostSvg('gray', { logoHref: LOGO_DATA_URL })
 
-// Tokens vectoriales (ver features/cards/tokenArt.js). Cada uno lleva su SVG,
-// que se pinta tal cual en pantalla y se pasa a imagen para el PDF.
-const TOKEN_DEFINITIONS = [
-  ...[1, 3, 5, 10].map((amount) => ({
-    id: `lives_${amount}`, category: 'lives', labelKey: `rules.tokens.types.lives${amount}`, diameterMm: 21.25, previewSize: 'medium',
-    svg: livesTokenSvg(amount),
-  })),
-  ...['blue', 'red', 'green', 'yellow'].map((team) => ({
-    id: `state_conquest_${team}`, category: 'state', labelKey: `rules.tokens.types.stateConquest${team[0].toUpperCase()}${team.slice(1)}`, diameterMm: 32, previewSize: 'medium',
-    svg: conquestTokenSvg(team),
-  })),
-  { id: 'command_circle_3', category: 'command', labelKey: 'rules.tokens.types.commandCircle3', diameterMm: 76.2, previewSize: 'large', svg: COMMAND_POST_SVG },
-  { id: 'command_circle_6', category: 'command', labelKey: 'rules.tokens.types.commandCircle6', diameterMm: 152.4, previewSize: 'xlarge', svg: COMMAND_POST_SVG },
-]
-
-const buildInitialTokenCounts = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, 0]))
-const buildInitialTokenInputValues = () => Object.fromEntries(TOKEN_DEFINITIONS.map((token) => [token.id, '0']))
-const clampTokenCount = (value) => {
-  const parsed = Number.parseInt(value, 10)
-  if (!Number.isFinite(parsed)) return 0
-  return Math.max(0, Math.min(TOKEN_LIMIT, parsed))
-}
-const normalizeTokenInputValue = (value) => {
-  const digitsOnly = String(value || '').replace(/\D+/g, '')
-  if (!digitsOnly) return ''
-  return String(clampTokenCount(digitsOnly))
-}
-
-function Reglamento() {
+export function RulesDocument({ rulesMode = 'rules', embedded = false }) {
   const { t, lang } = useI18n()
-  // Los tokens de Vidas llevan texto con la fuente de las cartas.
   useCardFonts()
-  const [searchParams, setSearchParams] = useSearchParams()
   const contentRef = useRef(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [activeSection, setActiveSection] = useState('')
   const [showBackToTop, setShowBackToTop] = useState(false)
-  const [tokenCounts, setTokenCounts] = useState(buildInitialTokenCounts)
-  const [tokenInputValues, setTokenInputValues] = useState(buildInitialTokenInputValues)
-  const [isGeneratingTokensPdf, setIsGeneratingTokensPdf] = useState(false)
   const [isGeneratingRulesPdf, setIsGeneratingRulesPdf] = useState(false)
   const [isGeneratingMissionsPdf, setIsGeneratingMissionsPdf] = useState(false)
   const [openTableModal, setOpenTableModal] = useState(null)
-  const modeParam = searchParams.get('mode')
-  const rulesMode = RULES_MODES.includes(modeParam) ? modeParam : 'rules'
-  const isTokensMode = rulesMode === 'tokens'
-  const activeMarkdown = useMemo(() => {
-    if (rulesMode === 'total-war') {
-      return guerraTotalMd
-    }
-    return reglamentoMd
-  }, [rulesMode])
-  const tokenOptions = useMemo(
-    () =>
-      TOKEN_DEFINITIONS.map((token) => ({
-        ...token,
-        label: t(token.labelKey),
-        primaryText: token.primaryText || t(token.labelKey),
-        secondaryText: token.secondaryKey ? t(token.secondaryKey) : '',
-      })),
-    [t],
+  const activeMarkdown = rulesMode === 'total-war' ? guerraTotalMd : reglamentoMd
+  const rulesHtml = useMemo(
+    () => marked(replaceRulesAssetPlaceholders(activeMarkdown, lang)),
+    [activeMarkdown, lang],
   )
-  const totalTokenCount = useMemo(
-    () => tokenOptions.reduce((acc, token) => acc + (tokenCounts[token.id] || 0), 0),
-    [tokenCounts, tokenOptions],
-  )
-  const modeOptions = useMemo(
-    () => [
-      { id: 'rules', label: t('rules.modeRules') },
-      { id: 'total-war', label: t('rules.modeTotalWar') },
-      { id: 'tokens', label: t('rules.modeTokens') },
-    ],
-    [t],
-  )
-  const rulesHtml = useMemo(() => {
-    if (isTokensMode) {
-      return ''
-    }
-    return marked(replaceRulesAssetPlaceholders(activeMarkdown, lang))
-  }, [activeMarkdown, isTokensMode, lang])
   const printCoverSectionLabel = {
     'total-war': t('rules.modeTotalWar'),
   }[rulesMode] || t('rules.modeRules')
@@ -215,9 +147,6 @@ function Reglamento() {
   const shouldShowRulesHeader = rulesMode === 'rules'
 
   const { renderedHtml, tocItems, documentHeading, specialtyTableHtml, unitTypeTableHtml } = useMemo(() => {
-    if (isTokensMode) {
-      return { renderedHtml: '', tocItems: [], documentHeading: null, specialtyTableHtml: '', unitTypeTableHtml: '' }
-    }
     if (typeof window === 'undefined') {
       return { renderedHtml: rulesHtml, tocItems: [], documentHeading: null, specialtyTableHtml: '', unitTypeTableHtml: '' }
     }
@@ -447,7 +376,9 @@ function Reglamento() {
     const toc = headings
       .map((heading, index) => {
         const level = Number(heading.tagName.replace('H', ''))
-        const title = heading.textContent?.trim() || `${t('rules.sectionFallback')} ${index + 1}`
+        const headingLabel = heading.cloneNode(true)
+        headingLabel.querySelectorAll('button').forEach((button) => button.remove())
+        const title = headingLabel.textContent?.trim() || `${t('rules.sectionFallback')} ${index + 1}`
         let id = heading.getAttribute('id')
         if (!id) {
           id = `section-${index + 1}`
@@ -479,7 +410,7 @@ function Reglamento() {
     })
     const bodyHtml = doc.body ? doc.body.innerHTML : rulesHtml
     return { renderedHtml: bodyHtml, tocItems: toc, documentHeading, specialtyTableHtml, unitTypeTableHtml }
-  }, [t, rulesHtml, isTokensMode, rulesMode])
+  }, [t, rulesHtml, rulesMode])
 
   useEffect(() => {
     if (!contentRef.current) return undefined
@@ -552,38 +483,6 @@ function Reglamento() {
     const q = normalizeHeadingText(searchTerm)
     return tocItems.filter((item) => normalizeHeadingText(item.title).includes(q))
   }, [tocItems, searchTerm])
-
-  // Dispara captura PDF cuando el stage de exportación está montado
-  const setMode = (nextMode) => {
-    setSearchTerm('')
-    setActiveSection('')
-    const nextParams = new URLSearchParams(searchParams)
-    if (nextMode === 'rules') {
-      nextParams.delete('mode')
-    } else {
-      nextParams.set('mode', nextMode)
-    }
-    setSearchParams(nextParams, { replace: true })
-  }
-
-  const setTokenCount = (tokenId, value) => {
-    const normalizedValue = normalizeTokenInputValue(value)
-    setTokenCounts((prev) => ({
-      ...prev,
-      [tokenId]: normalizedValue === '' ? 0 : clampTokenCount(normalizedValue),
-    }))
-    setTokenInputValues((prev) => ({
-      ...prev,
-      [tokenId]: normalizedValue,
-    }))
-  }
-
-  const finalizeTokenInput = (tokenId) => {
-    setTokenInputValues((prev) => ({
-      ...prev,
-      [tokenId]: String(tokenCounts[tokenId] || 0),
-    }))
-  }
 
   const loadMonochromeImageAsDataUrl = (src, color = '#000000', options = {}) =>
     new Promise((resolve, reject) => {
@@ -697,7 +596,7 @@ function Reglamento() {
   }
 
   const handleDownloadPdf = async () => {
-    if (typeof window === 'undefined' || isTokensMode || isGeneratingRulesPdf) return
+    if (typeof window === 'undefined' || isGeneratingRulesPdf) return
 
     setIsGeneratingRulesPdf(true)
 
@@ -1476,166 +1375,16 @@ function Reglamento() {
     }
   }
 
-  const generateTokensPdf = async () => {
-    if (isGeneratingTokensPdf) return
-
-    const selectedTokens = tokenOptions
-      .flatMap((token) => Array.from({ length: tokenCounts[token.id] || 0 }, () => token))
-      .sort((a, b) => b.diameterMm - a.diameterMm)
-
-    if (!selectedTokens.length) return
-    setIsGeneratingTokensPdf(true)
-    try {
-      const { jsPDF } = await import('jspdf')
-      const doc = new jsPDF({ unit: 'mm', format: 'a4' })
-      const pageWidth = doc.internal.pageSize.getWidth()
-      const pageHeight = doc.internal.pageSize.getHeight()
-      const margin = 10
-      const gap = 4
-      const tokenCellPadding = 6
-      const maxX = pageWidth - margin
-      const maxY = pageHeight - margin
-      // Unos 12 px por milímetro: nítido impreso incluso en el puesto de mando de 6".
-      const usedTokens = tokenOptions.filter((token) => (tokenCounts[token.id] || 0) > 0)
-      const tokenImageDataById = Object.fromEntries(
-        await Promise.all(usedTokens.map(async (token) => {
-          const sizePx = Math.min(2048, Math.round(token.diameterMm * 12))
-          const canvas = await rasterizeSvgMarkup(token.svg, { width: 200, height: 200, scale: sizePx / 200 }).catch(() => null)
-          return [token.id, canvas ? canvas.toDataURL('image/png') : null]
-        })),
-      )
-
-      let cursorX = margin
-      let cursorY = margin
-      let rowHeight = 0
-
-      const drawTokenCell = (token, x, y, cellSize) => {
-        const centerX = x + cellSize / 2
-        const centerY = y + cellSize / 2
-        const radius = token.diameterMm / 2
-
-        doc.setLineWidth(0.35)
-        doc.setDrawColor(172, 172, 172)
-        doc.setLineDashPattern([1.3, 1.3], 0)
-        doc.rect(x, y, cellSize, cellSize)
-        doc.setLineDashPattern([], 0)
-        doc.setFillColor(172, 172, 172)
-        doc.rect(x - 0.6, y - 0.6, 1.2, 1.2, 'F')
-        doc.rect(x + cellSize - 0.6, y - 0.6, 1.2, 1.2, 'F')
-        doc.rect(x - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
-        doc.rect(x + cellSize - 0.6, y + cellSize - 0.6, 1.2, 1.2, 'F')
-
-        const tokenImage = tokenImageDataById[token.id]
-        if (tokenImage) {
-          doc.addImage(tokenImage, 'PNG', centerX - radius, centerY - radius, token.diameterMm, token.diameterMm, undefined, 'FAST')
-        }
-      }
-
-      selectedTokens.forEach((token) => {
-        const cellSize = token.diameterMm + tokenCellPadding * 2
-        if (cursorX + cellSize > maxX + 0.01) {
-          cursorX = margin
-          cursorY += rowHeight + gap
-          rowHeight = 0
-        }
-        if (cursorY + cellSize > maxY + 0.01) {
-          doc.addPage()
-          cursorX = margin
-          cursorY = margin
-          rowHeight = 0
-        }
-        drawTokenCell(token, cursorX, cursorY, cellSize)
-        cursorX += cellSize + gap
-        rowHeight = Math.max(rowHeight, cellSize)
-      })
-
-      doc.save('zerolore_tokens_es.pdf')
-    } finally {
-      setIsGeneratingTokensPdf(false)
-    }
-  }
-
+  const Container = embedded ? 'div' : 'section'
   return (
-    <section className="section rules-page" id="reglamento">
-      <div className="section-head reveal">
-        <p className="eyebrow">{t('rules.eyebrow')}</p>
-        <h2>{t('rules.title')}</h2>
-        <p>
-          {t('rules.intro')}
-        </p>
-        <div className="rules-head-actions">
-          <div className="rules-mode-switch" role="tablist" aria-label={t('rules.modeLabel')}>
-            {modeOptions.map((mode) => (
-              <button
-                key={mode.id}
-                type="button"
-                className={`ghost ${rulesMode === mode.id ? 'active' : ''}`}
-                onClick={() => setMode(mode.id)}
-              >
-                {mode.label}
-              </button>
-            ))}
-          </div>
+    <Container className={embedded ? 'rules-document-embedded' : 'section rules-page'} id={embedded ? 'guerra-total-reglas' : 'reglamento'}>
+      {!embedded && (
+        <div className="section-head reveal">
+          <p className="eyebrow">{t('rules.eyebrow')}</p>
+          <h2>{t('rules.title')}</h2>
+          <p>{t('rules.intro')}</p>
         </div>
-      </div>
-      {isTokensMode ? (
-        <div className="rules-tokens reveal">
-          <div className="rules-tokens-head">
-            <h3>{t('rules.tokens.title')}</h3>
-            <p>{t('rules.tokens.intro')}</p>
-          </div>
-          <div className="rules-tokens-grid">
-            {tokenOptions.map((token) => (
-              <article key={token.id} className="rules-token-card">
-                <h4>{token.label}</h4>
-                <div className="rules-token-preview-wrap" aria-hidden="true">
-                  <div
-                    className={`rules-token-preview rules-token-svg ${token.previewSize}`}
-                    data-token-preview={token.id}
-                    dangerouslySetInnerHTML={{ __html: token.svg }}
-                  />
-                </div>
-                <label className="rules-token-input">
-                  <span>{t('rules.tokens.quantity')}</span>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    min="0"
-                    max={String(TOKEN_LIMIT)}
-                    step="1"
-                    value={tokenInputValues[token.id] ?? '0'}
-                    onChange={(event) => setTokenCount(token.id, event.target.value)}
-                    onBlur={() => finalizeTokenInput(token.id)}
-                    onFocus={(event) => event.target.select()}
-                    aria-label={`${token.label} ${t('rules.tokens.quantity')}`}
-                  />
-                </label>
-              </article>
-            ))}
-          </div>
-          <div className="rules-tokens-footer">
-            <span>
-              {t('rules.tokens.selected')}: {totalTokenCount}
-            </span>
-            <button
-              type="button"
-              className="primary"
-              onClick={generateTokensPdf}
-              disabled={!totalTokenCount || isGeneratingTokensPdf}
-              aria-busy={isGeneratingTokensPdf}
-            >
-              {isGeneratingTokensPdf ? (
-                <span className="rules-pdf-button-content">
-                  <span className="rules-pdf-spinner" aria-hidden="true" />
-                  {t('rules.tokens.generatingPdf')}
-                </span>
-              ) : (
-                t('rules.tokens.generatePdf')
-              )}
-            </button>
-          </div>
-        </div>
-      ) : (
+      )}
         <div className="rules-layout">
           <aside className="rules-toc reveal">
             <div className="rules-toc-header">
@@ -1716,7 +1465,6 @@ function Reglamento() {
             </div>
           </div>
         </div>
-      )}
       {showBackToTop && (
         <button
           type="button"
@@ -1761,8 +1509,12 @@ function Reglamento() {
         </div>,
         document.body,
       )}
-    </section>
+    </Container>
   )
+}
+
+function Reglamento() {
+  return <RulesDocument />
 }
 
 export default Reglamento
